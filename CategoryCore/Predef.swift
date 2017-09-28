@@ -27,8 +27,3 @@ public func <<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (
     return f >> g
 }
 
-infix operator |> : AdditionPrecedence
-
-public func |><A, B>(_ a : A, _ f : (A) -> B) -> B {
-    return f(a)
-}
