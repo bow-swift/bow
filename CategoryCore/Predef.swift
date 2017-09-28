@@ -26,3 +26,9 @@ func >><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C
 func <<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
     return f >> g
 }
+
+infix operator |> : AdditionPrecedence
+
+func |><A, B>(_ a : A, _ f : (A) -> B) -> B {
+    return f(a)
+}
