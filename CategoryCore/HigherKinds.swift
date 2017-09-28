@@ -8,37 +8,8 @@
 
 import Foundation
 
-protocol HK {
-    associatedtype Witness
-    associatedtype DataType
-}
-
-protocol HK2 {
-    associatedtype Witness
-    associatedtype DataType1
-    associatedtype DataType2
-}
-
-protocol HK3 {
-    associatedtype Witness
-    associatedtype DataType1
-    associatedtype DataType2
-    associatedtype DataType3
-}
-
-protocol HK4 {
-    associatedtype Witness
-    associatedtype DataType1
-    associatedtype DataType2
-    associatedtype DataType3
-    associatedtype DataType4
-}
-
-protocol HK5 {
-    associatedtype Witness
-    associatedtype DataType1
-    associatedtype DataType2
-    associatedtype DataType3
-    associatedtype DataType4
-    associatedtype DataType5
-}
+public class HK<F, A> {}
+typealias HK2<F, A, B> = HK<HK<F, A>, B>
+typealias HK3<F, A, B, C> = HK<HK2<F, A, B>, C>
+typealias HK4<F, A, B, C, D> = HK<HK3<F, A, B, C>, D>
+typealias HK5<F, A, B, C, D, E> = HK<HK4<F, A, B, C, D>, E>

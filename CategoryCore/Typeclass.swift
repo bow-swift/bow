@@ -8,4 +8,4 @@
 
 import Foundation
 
-protocol Typeclass {}
+public protocol Typeclass {}
