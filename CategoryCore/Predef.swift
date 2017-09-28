@@ -15,3 +15,14 @@ func id<A>(_ a : A) -> A {
 func compose<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
     return { x in g(f(x)) }
 }
+
+infix operator >> : AdditionPrecedence
+infix operator << : AdditionPrecedence
+
+func >><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
+    return compose(f, g)
+}
+
+func <<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
+    return f >> g
+}
