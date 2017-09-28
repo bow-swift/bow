@@ -1,0 +1,15 @@
+PODS:
+  - Nimble (7.0.2)
+  - SwiftCheck (0.8.1)
+
+DEPENDENCIES:
+  - Nimble (~> 7.0.2)
+  - SwiftCheck (~> 0.7)
+
+SPEC CHECKSUMS:
+  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
+  SwiftCheck: 21e3889c5a4da12b1cb007edfe3d9ac89287a473
+
+PODFILE CHECKSUM: 13bafa2eef9c93c79e4fc4aecf90be512e236228
+
+COCOAPODS: 1.3.1
