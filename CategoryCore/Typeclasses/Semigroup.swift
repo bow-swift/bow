@@ -11,7 +11,7 @@ import Foundation
 public protocol Semigroup : Typeclass {
     associatedtype A
     
-    func combine(a : A, b : A) -> A
+    func combine(_ a : A, _ b : A) -> A
 }
 
 public extension Semigroup {
