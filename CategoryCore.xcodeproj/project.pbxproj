@@ -30,6 +30,7 @@
 		11DFBEC21F7E4F2B00A4C96D /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */; };
 		11DFBEC41F7E561200A4C96D /* MonadWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEC31F7E561200A4C96D /* MonadWriter.swift */; };
 		11DFBEC61F7E58F000A4C96D /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEC51F7E58F000A4C96D /* Comonad.swift */; };
+		11DFBEC81F7E59CE00A4C96D /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEC71F7E59CE00A4C96D /* Bimonad.swift */; };
 		2C7F025A5DC5E8EA6512C351 /* Pods_CategoryCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */; };
 		32DAE1E5C9883C2915034D10 /* Pods_CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D0559E20353D68F8F4A88B /* Pods_CategoryCore.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadState.swift; sourceTree = "<group>"; };
 		11DFBEC31F7E561200A4C96D /* MonadWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadWriter.swift; sourceTree = "<group>"; };
 		11DFBEC51F7E58F000A4C96D /* Comonad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comonad.swift; sourceTree = "<group>"; };
+		11DFBEC71F7E59CE00A4C96D /* Bimonad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bimonad.swift; sourceTree = "<group>"; };
 		1B877B259CE89D23582908A7 /* Pods-CategoryCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCore/Pods-CategoryCore.debug.xcconfig"; sourceTree = "<group>"; };
 		4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CategoryCoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C527B6280DD859273C8D41 /* Pods-CategoryCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCoreTests/Pods-CategoryCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				11CEEA4A1F7D4F00003EB472 /* Applicative.swift */,
 				11DFBEB71F7E454300A4C96D /* ApplicativeError.swift */,
+				11DFBEC71F7E59CE00A4C96D /* Bimonad.swift */,
 				11DFBEC51F7E58F000A4C96D /* Comonad.swift */,
 				11DFBEB31F7E412200A4C96D /* Eq.swift */,
 				11CEEA481F7D474D003EB472 /* Functor.swift */,
@@ -401,6 +404,7 @@
 				11CEEA491F7D474D003EB472 /* Functor.swift in Sources */,
 				11DFBEB41F7E412200A4C96D /* Eq.swift in Sources */,
 				11DFBEC61F7E58F000A4C96D /* Comonad.swift in Sources */,
+				11DFBEC81F7E59CE00A4C96D /* Bimonad.swift in Sources */,
 				11CEEA4B1F7D4F00003EB472 /* Applicative.swift in Sources */,
 				11DFBEB61F7E426900A4C96D /* Order.swift in Sources */,
 				11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */,
