@@ -13,11 +13,6 @@ public protocol Functor : Typeclass {
     
     func map<A, B>(_ fa : HK<F, A>, _ f : (A) -> B) -> HK<F, B>
     func lift<A, B>(_ f : (A) -> B) -> (HK<F, A>) -> HK<F, B>
-    func void<A>(_ fa : HK<F, A>) -> HK<F, ()>
-    func fproduct<A, B>(_ fa : HK<F, A>, _ f : (A) -> B) -> HK<F, (A, B)>
-    func `as`<A, B>(_ fa : HK<F, A>, _ b : B) -> HK<F, B>
-    func tupleLeft<A, B>(_ fa : HK<F, A>, _ b : B) -> HK<F, (B, A)>
-    func tupleRight<A, B>(_ fa : HK<F, A>, _ b : B) -> HK<F, (A, B)>
 }
 
 public extension Functor {
