@@ -27,6 +27,7 @@
 		11DFBEBC1F7E4A4E00A4C96D /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEBB1F7E4A4E00A4C96D /* FunctorFilter.swift */; };
 		11DFBEBE1F7E4BFE00A4C96D /* MonadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEBD1F7E4BFE00A4C96D /* MonadFilter.swift */; };
 		11DFBEC01F7E4DBC00A4C96D /* MonadReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEBF1F7E4DBC00A4C96D /* MonadReader.swift */; };
+		11DFBEC21F7E4F2B00A4C96D /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */; };
 		2C7F025A5DC5E8EA6512C351 /* Pods_CategoryCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */; };
 		32DAE1E5C9883C2915034D10 /* Pods_CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D0559E20353D68F8F4A88B /* Pods_CategoryCore.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		11DFBEBB1F7E4A4E00A4C96D /* FunctorFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctorFilter.swift; sourceTree = "<group>"; };
 		11DFBEBD1F7E4BFE00A4C96D /* MonadFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadFilter.swift; sourceTree = "<group>"; };
 		11DFBEBF1F7E4DBC00A4C96D /* MonadReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadReader.swift; sourceTree = "<group>"; };
+		11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadState.swift; sourceTree = "<group>"; };
 		1B877B259CE89D23582908A7 /* Pods-CategoryCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCore/Pods-CategoryCore.debug.xcconfig"; sourceTree = "<group>"; };
 		4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CategoryCoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C527B6280DD859273C8D41 /* Pods-CategoryCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCoreTests/Pods-CategoryCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				11DFBEB91F7E493C00A4C96D /* MonadError.swift */,
 				11DFBEBD1F7E4BFE00A4C96D /* MonadFilter.swift */,
 				11DFBEBF1F7E4DBC00A4C96D /* MonadReader.swift */,
+				11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */,
 				11DFBEB11F7E3FA100A4C96D /* Monoid.swift */,
 				11DFBEB51F7E426900A4C96D /* Order.swift */,
 				11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */,
@@ -395,6 +398,7 @@
 				11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */,
 				11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */,
 				11DFBEBC1F7E4A4E00A4C96D /* FunctorFilter.swift in Sources */,
+				11DFBEC21F7E4F2B00A4C96D /* MonadState.swift in Sources */,
 				11DFBEB81F7E454300A4C96D /* ApplicativeError.swift in Sources */,
 				11CEEA421F7D37FC003EB472 /* PartialApplication.swift in Sources */,
 				11CEEA461F7D46BB003EB472 /* Typeclass.swift in Sources */,
