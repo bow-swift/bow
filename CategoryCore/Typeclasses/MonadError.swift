@@ -11,9 +11,9 @@ import Foundation
 public protocol MonadError : Monad, ApplicativeError {}
 
 public extension MonadError {
-    public func ensure<A>(_ fa : HK<F, A>, error : () -> E, predicate : (A) -> Bool) -> HK<F, A> {
+    public func ensure<A>(_ fa : HK<F, A>, error : @escaping () -> E, predicate : @escaping (A) -> Bool) -> HK<F, A> {
         return flatMap(fa, { a in
-            predicate(a) ? pure(a) : raiseError(error())
+            predicate(a) ? self.pure(a) : self.raiseError(error())
         })
     }
 }

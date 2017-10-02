@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Monad : Applicative {
-    func flatMap<A, B>(_ fa : HK<F, A>, _ f : (A) -> HK<F, B>) -> HK<F, B>
+    func flatMap<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> HK<F, B>) -> HK<F, B>
 }
 
 public extension Monad {

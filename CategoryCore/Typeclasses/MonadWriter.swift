@@ -18,14 +18,14 @@ public protocol MonadWriter : Monad {
 
 public extension MonadWriter {
     public func tell(_ w : W) -> HK<F, ()> {
-        return writer((w, ()))
+        return self.writer((w, ()))
     }
     
-    public func listens<A, B>(_ fa : HK<F, A>, _ f : (W) -> B) -> HK<F, (B, A)> {
-        return map(listen(fa), { pair in (f(pair.0), pair.1) })
+    public func listens<A, B>(_ fa : HK<F, A>, _ f : @escaping (W) -> B) -> HK<F, (B, A)> {
+        return map(self.listen(fa), { pair in (f(pair.0), pair.1) })
     }
     
-    public func censor<A>(_ fa : HK<F, A>, _ f : (W) -> W) -> HK<F, A> {
-        return flatMap(listen(fa), { pair in writer((f(pair.0), pair.1)) })
+    public func censor<A>(_ fa : HK<F, A>, _ f : @escaping (W) -> W) -> HK<F, A> {
+        return self.flatMap(self.listen(fa), { pair in self.writer((f(pair.0), pair.1)) })
     }
 }

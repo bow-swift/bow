@@ -18,7 +18,7 @@ public extension Applicative {
         return self.ap(fb, self.map(fa, { (a : A) in { (b : B) in (a, b) }}))
     }
     
-    public func map2<A, B, Z>(_ fa : HK<F, A>, _ fb : HK<F, B>, _ f : (A, B) -> Z) -> HK<F, Z> {
+    public func map2<A, B, Z>(_ fa : HK<F, A>, _ fb : HK<F, B>, _ f : @escaping (A, B) -> Z) -> HK<F, Z> {
         return map(product(fa, fb), f)
     }
 }

@@ -16,7 +16,7 @@ public protocol MonadReader : Monad {
 }
 
 public extension MonadReader {
-    public func reader<A>(_ f : (D) -> A) -> HK<F, A> {
+    public func reader<A>(_ f : @escaping (D) -> A) -> HK<F, A> {
         return self.map(ask(), f)
     }
 }

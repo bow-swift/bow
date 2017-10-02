@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Comonad : Functor {
-    func coflatMap<A, B>(_ fa : HK<F, A>, _ f : (HK<F, A>) -> B) -> HK<F, B>
+    func coflatMap<A, B>(_ fa : HK<F, A>, _ f : @escaping (HK<F, A>) -> B) -> HK<F, B>
     func extract<A>(_ fa : HK<F, A>) -> A
 }
 

@@ -11,8 +11,8 @@ import Foundation
 public protocol Functor : Typeclass {
     associatedtype F
     
-    func map<A, B>(_ fa : HK<F, A>, _ f : (A) -> B) -> HK<F, B>
-    func lift<A, B>(_ f : (A) -> B) -> (HK<F, A>) -> HK<F, B>
+    func map<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> B) -> HK<F, B>
+    func lift<A, B>(_ f : @escaping (A) -> B) -> (HK<F, A>) -> HK<F, B>
 }
 
 public extension Functor {
@@ -20,7 +20,7 @@ public extension Functor {
         return self.map(fa, {_ in })
     }
     
-    public func fproduct<A, B>(_ fa : HK<F, A>, _ f : (A) -> B) -> HK<F, (A, B)> {
+    public func fproduct<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> B) -> HK<F, (A, B)> {
         return self.map(fa, { a in (a, f(a)) })
     }
     

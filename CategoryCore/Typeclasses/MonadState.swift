@@ -16,18 +16,18 @@ public protocol MonadState : Monad {
 }
 
 public extension MonadState {
-    public func state<A>(_ f : (S) -> (S, A)) -> HK<F, A> {
+    public func state<A>(_ f : @escaping (S) -> (S, A)) -> HK<F, A> {
         return self.flatMap(self.get(), { s in
             let result = f(s)
             return self.map(self.set(result.0), { _ in result.1 })
         })
     }
     
-    public func modify(_ f : (S) -> S) -> HK<F, ()> {
+    public func modify(_ f : @escaping (S) -> S) -> HK<F, ()> {
         return self.flatMap(self.get(), { s in self.set(f(s))})
     }
     
-    public func inspect<A>(_ f : (S) -> A) -> HK<F, A> {
+    public func inspect<A>(_ f : @escaping (S) -> A) -> HK<F, A> {
         return self.map(self.get(), f)
     }
 }

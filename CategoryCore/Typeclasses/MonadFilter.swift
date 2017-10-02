@@ -13,12 +13,12 @@ public protocol MonadFilter : Monad, FunctorFilter {
 }
 
 public extension MonadFilter {
-    public func mapFilter<A, B>(_ fa: HK<F, A>, _ f: (A) -> B?) -> HK<F, B> {
+    public func mapFilter<A, B>(_ fa: HK<F, A>, _ f: @escaping (A) -> B?) -> HK<F, B> {
         return flatMap(fa, { a in
             if let b = f(a) {
-                return pure(b)
+                return self.pure(b)
             } else {
-                return empty()
+                return self.empty()
             }
         })
     }
