@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
 		11CEEA2D1F7D10A3003EB472 /* CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CEEA231F7D10A3003EB472 /* CategoryCore.framework */; };
 		11CEEA321F7D10A3003EB472 /* CategoryCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */; };
 		11CEEA341F7D10A3003EB472 /* CategoryCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEEA261F7D10A3003EB472 /* CategoryCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		11CEEA231F7D10A3003EB472 /* CategoryCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CategoryCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11CEEA261F7D10A3003EB472 /* CategoryCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCore.h; sourceTree = "<group>"; };
 		11CEEA271F7D10A3003EB472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11C526841F825DC100DC15CF /* Arrow */ = {
+			isa = PBXGroup;
+			children = (
+				11C526851F825DF400DC15CF /* Function0.swift */,
+			);
+			path = Arrow;
+			sourceTree = "<group>";
+		};
 		11CEEA191F7D10A3003EB472 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 				11CEEA411F7D37FC003EB472 /* PartialApplication.swift */,
 				11CEEA3D1F7D1403003EB472 /* Predef.swift */,
 				11CEEA451F7D46BB003EB472 /* Typeclass.swift */,
+				11C526841F825DC100DC15CF /* Arrow */,
 				11CEEA471F7D473B003EB472 /* Typeclasses */,
 			);
 			path = CategoryCore;
@@ -167,10 +178,10 @@
 				11DFBEC11F7E4F2B00A4C96D /* MonadState.swift */,
 				11DFBEC31F7E561200A4C96D /* MonadWriter.swift */,
 				11DFBEB11F7E3FA100A4C96D /* Monoid.swift */,
+				11DFBECB1F7E6B3E00A4C96D /* MonoidK.swift */,
 				11DFBEB51F7E426900A4C96D /* Order.swift */,
 				11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */,
 				11DFBEC91F7E5AEF00A4C96D /* SemigroupK.swift */,
-				11DFBECB1F7E6B3E00A4C96D /* MonoidK.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -400,6 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11C526861F825DF400DC15CF /* Function0.swift in Sources */,
 				11CEEA441F7D45FE003EB472 /* HigherKinds.swift in Sources */,
 				11DFBEC01F7E4DBC00A4C96D /* MonadReader.swift in Sources */,
 				11DFBEC41F7E561200A4C96D /* MonadWriter.swift in Sources */,
