@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
+		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11CEEA2D1F7D10A3003EB472 /* CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CEEA231F7D10A3003EB472 /* CategoryCore.framework */; };
 		11CEEA321F7D10A3003EB472 /* CategoryCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */; };
 		11CEEA341F7D10A3003EB472 /* CategoryCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEEA261F7D10A3003EB472 /* CategoryCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
+		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11CEEA231F7D10A3003EB472 /* CategoryCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CategoryCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11CEEA261F7D10A3003EB472 /* CategoryCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCore.h; sourceTree = "<group>"; };
 		11CEEA271F7D10A3003EB472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				11C526851F825DF400DC15CF /* Function0.swift */,
+				11C526871F82707E00DC15CF /* FunctionK.swift */,
 			);
 			path = Arrow;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				11DFBEB61F7E426900A4C96D /* Order.swift in Sources */,
 				11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */,
 				11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */,
+				11C526881F82707E00DC15CF /* FunctionK.swift in Sources */,
 				11DFBEBC1F7E4A4E00A4C96D /* FunctorFilter.swift in Sources */,
 				11DFBEC21F7E4F2B00A4C96D /* MonadState.swift in Sources */,
 				11DFBEB81F7E454300A4C96D /* ApplicativeError.swift in Sources */,
