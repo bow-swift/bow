@@ -13,7 +13,7 @@ public class Function0F {}
 public class Function0<A> : HK<Function0F, A> {
     fileprivate let f : () -> A
     
-    init(_ f : @escaping () -> A) {
+    public init(_ f : @escaping () -> A) {
         self.f = f
     }
     
