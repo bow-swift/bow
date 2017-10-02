@@ -11,6 +11,7 @@
 		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11C5268A1F8271B500DC15CF /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526891F8271B500DC15CF /* Function1.swift */; };
 		11C5268C1F82812F00DC15CF /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5268B1F82812F00DC15CF /* Kleisli.swift */; };
+		11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5268D1F829FEA00DC15CF /* Cokleisli.swift */; };
 		11CEEA2D1F7D10A3003EB472 /* CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CEEA231F7D10A3003EB472 /* CategoryCore.framework */; };
 		11CEEA321F7D10A3003EB472 /* CategoryCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */; };
 		11CEEA341F7D10A3003EB472 /* CategoryCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEEA261F7D10A3003EB472 /* CategoryCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -56,6 +57,7 @@
 		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11C526891F8271B500DC15CF /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
 		11C5268B1F82812F00DC15CF /* Kleisli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kleisli.swift; sourceTree = "<group>"; };
+		11C5268D1F829FEA00DC15CF /* Cokleisli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cokleisli.swift; sourceTree = "<group>"; };
 		11CEEA231F7D10A3003EB472 /* CategoryCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CategoryCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11CEEA261F7D10A3003EB472 /* CategoryCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCore.h; sourceTree = "<group>"; };
 		11CEEA271F7D10A3003EB472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				11C526891F8271B500DC15CF /* Function1.swift */,
 				11C526871F82707E00DC15CF /* FunctionK.swift */,
 				11C5268B1F82812F00DC15CF /* Kleisli.swift */,
+				11C5268D1F829FEA00DC15CF /* Cokleisli.swift */,
 			);
 			path = Arrow;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				11CEEA401F7D30B5003EB472 /* Curry.swift in Sources */,
 				11CEEA491F7D474D003EB472 /* Functor.swift in Sources */,
 				11DFBEB41F7E412200A4C96D /* Eq.swift in Sources */,
+				11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */,
 				11DFBEC61F7E58F000A4C96D /* Comonad.swift in Sources */,
 				11DFBEC81F7E59CE00A4C96D /* Bimonad.swift in Sources */,
 				11CEEA4B1F7D4F00003EB472 /* Applicative.swift in Sources */,
