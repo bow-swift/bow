@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		115858D81F84D6C400875227 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D71F84D6C400875227 /* Const.swift */; };
+		115858DA1F84DA8C00875227 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D91F84DA8C00875227 /* Id.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
 		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11C5268A1F8271B500DC15CF /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526891F8271B500DC15CF /* Function1.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		115858D71F84D6C400875227 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		115858D91F84DA8C00875227 /* Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11C526891F8271B500DC15CF /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
@@ -213,10 +215,11 @@
 		11E17DDD1F8399C900CA5A3F /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				115858D71F84D6C400875227 /* Const.swift */,
 				11E17DE41F83D10500CA5A3F /* Either.swift */,
+				115858D91F84DA8C00875227 /* Id.swift */,
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11E17DDE1F839A6000CA5A3F /* Maybe.swift */,
-				115858D71F84D6C400875227 /* Const.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */,
 				11C526881F82707E00DC15CF /* FunctionK.swift in Sources */,
 				11DFBEBC1F7E4A4E00A4C96D /* FunctorFilter.swift in Sources */,
+				115858DA1F84DA8C00875227 /* Id.swift in Sources */,
 				11DFBEC21F7E4F2B00A4C96D /* MonadState.swift in Sources */,
 				11DFBEB81F7E454300A4C96D /* ApplicativeError.swift in Sources */,
 				11E17DE31F83A9D200CA5A3F /* BooleanFunctions.swift in Sources */,
