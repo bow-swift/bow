@@ -10,6 +10,7 @@
 		115858D81F84D6C400875227 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D71F84D6C400875227 /* Const.swift */; };
 		115858DA1F84DA8C00875227 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D91F84DA8C00875227 /* Id.swift */; };
 		115858DC1F84DED100875227 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858DB1F84DED100875227 /* Eval.swift */; };
+		115858DE1F84FC6B00875227 /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858DD1F84FC6B00875227 /* Try.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
 		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11C5268A1F8271B500DC15CF /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526891F8271B500DC15CF /* Function1.swift */; };
@@ -63,6 +64,7 @@
 		115858D71F84D6C400875227 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		115858D91F84DA8C00875227 /* Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		115858DB1F84DED100875227 /* Eval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
+		115858DD1F84FC6B00875227 /* Try.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Try.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11C526891F8271B500DC15CF /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				115858D91F84DA8C00875227 /* Id.swift */,
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11E17DDE1F839A6000CA5A3F /* Maybe.swift */,
+				115858DD1F84FC6B00875227 /* Try.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				11CEEA401F7D30B5003EB472 /* Curry.swift in Sources */,
 				11CEEA491F7D474D003EB472 /* Functor.swift in Sources */,
 				11DFBEB41F7E412200A4C96D /* Eq.swift in Sources */,
+				115858DE1F84FC6B00875227 /* Try.swift in Sources */,
 				11E17DE71F83DB8200CA5A3F /* Ior.swift in Sources */,
 				11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */,
 				11DFBEC61F7E58F000A4C96D /* Comonad.swift in Sources */,

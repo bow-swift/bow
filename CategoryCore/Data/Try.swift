@@ -1,0 +1,138 @@
+//
+//  Try.swift
+//  CategoryCore
+//
+//  Created by Tomás Ruiz López on 4/10/17.
+//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
+//
+
+import Foundation
+
+public enum TryError : Error {
+    case illegalState
+    case predicateError(String)
+    case unsupportedOperation(String)
+}
+
+public class TryF {}
+
+public class Try<A> : HK<TryF, A> {
+    public static func success(_ value : A) -> Try<A> {
+        return Success<A>(value)
+    }
+    
+    public static func failure(_ error : Error) -> Try<A> {
+        return Failure<A>(error)
+    }
+    
+    public static func pure(_ value : A) -> Try<A> {
+        return success(value)
+    }
+    
+    public static func raise(_ error : Error) -> Try<A> {
+        return failure(error)
+    }
+    
+    public static func invoke(_ f : () throws -> A) -> Try<A> {
+        do {
+            let result = try f()
+            return success(result)
+        } catch let error {
+            return failure(error)
+        }
+    }
+    
+    public func fold<B>(_ fe : (Error) -> B, _ fa : (A) throws -> B) -> B {
+        switch self {
+            case is Failure<A>:
+                return fe((self as! Failure).error)
+            case is Success<A>:
+                do {
+                    return try fa((self as! Success).value)
+                } catch let error {
+                    return fe(error)
+                }
+            default:
+                fatalError("Try must only have Success or Failure cases")
+        }
+    }
+    
+    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+        return fold(constF(b),
+                    { a in f(b, a) })
+    }
+    
+    public func foldR<B>(_ lb : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fold(constF(lb),
+                    { a in f(a, lb) })
+    }
+    
+    public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, Try<B>> where Appl : Applicative, Appl.F == G {
+        return fold({ _ in applicative.pure(Try<B>.raise(TryError.illegalState)) },
+                    { a in applicative.map(f(a), { b in Try<B>.invoke{ b } }) })
+    }
+    
+    public func map<B>(_ f : @escaping (A) -> B) -> Try<B> {
+        return fold(Try<B>.raise, f >> Try<B>.pure)
+    }
+    
+    public func flatMap<B>(_ f : (A) -> Try<B>) -> Try<B> {
+        return fold(Try<B>.raise, f)
+    }
+    
+    public func ap<B>(_ ff : Try<(A) -> B>) -> Try<B> {
+        return ff.flatMap(map)
+    }
+    
+    public func filter(_ predicate : (A) -> Bool) -> Try<A> {
+        return fold(Try.raise,
+                    { a in predicate(a) ?
+                        Try<A>.pure(a) :
+                        Try<A>.raise(TryError.predicateError("Predicate does not hold for \(a)"))
+                    })
+    }
+    
+    public func failed() -> Try<Error> {
+        return fold(Try<Error>.success,
+                    { _ in Try<Error>.failure(TryError.unsupportedOperation("Success.failed"))})
+    }
+    
+    public func getOrElse(_ defaultValue : A) -> A {
+        return fold(constF(defaultValue), id)
+    }
+    
+    public func recoverWith(_ f : (Error) -> Try<A>) -> Try<A> {
+        return fold(f, Try.success)
+    }
+    
+    public func recover(_ f : @escaping (Error) -> A) -> Try<A> {
+        return fold(f >> Try.success, Try.success)
+    }
+    
+    public func transform(failure : (Error) -> Try<A>, success : (A) -> Try<A>) -> Try<A> {
+        return fold(failure, { _ in flatMap(success) })
+    }
+}
+
+class Success<A> : Try<A> {
+    fileprivate let value : A
+    
+    init(_ value : A) {
+        self.value = value
+    }
+}
+
+class Failure<A> : Try<A> {
+    fileprivate let error : Error
+    
+    init(_ error : Error) {
+        self.error = error
+    }
+}
+
+extension Try : CustomStringConvertible {
+    public var description : String {
+        return fold({ error in "Failure(\(error))" },
+                    { value in "Success(\(value))" })
+    }
+}
