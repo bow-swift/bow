@@ -17,6 +17,11 @@ public class Id<A> : HK<IdF, A> {
         return Id<A>(a)
     }
     
+    public static func tailRecM<B>(_ a : (A), _ f : (A) -> Id<Either<A, B>>) -> Id<B> {
+        return f(a).value.fold({ left in tailRecM(left, f)},
+                               Id<B>.pure)
+    }
+    
     public init(_ value : A) {
         self.value = value
     }
