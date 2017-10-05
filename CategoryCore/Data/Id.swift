@@ -81,6 +81,10 @@ extension Id {
     public static func comonad() -> IdComonad {
         return IdComonad()
     }
+    
+    public static func bimonad() -> IdBimonad {
+        return IdBimonad()
+    }
 }
 
 public class IdFunctor : Functor {
@@ -112,6 +116,16 @@ public class IdMonad : IdApplicative, Monad {
 }
 
 public class IdComonad : IdFunctor, Comonad {
+    public func coflatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (HK<IdF, A>) -> B) -> HK<IdF, B> {
+        return (fa as! Id<A>).coflatMap(f as (Id<A>) -> B)
+    }
+    
+    public func extract<A>(_ fa: HK<IdF, A>) -> A {
+        return (fa as! Id<A>).extract()
+    }
+}
+
+public class IdBimonad : IdMonad, Bimonad {
     public func coflatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (HK<IdF, A>) -> B) -> HK<IdF, B> {
         return (fa as! Id<A>).coflatMap(f as (Id<A>) -> B)
     }
