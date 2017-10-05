@@ -13,6 +13,15 @@ public class Function0F {}
 public class Function0<A> : HK<Function0F, A> {
     fileprivate let f : () -> A
     
+    public static func loop<B>(_ a : A, _ f : (A) -> HK<Function0F, Either<A, B>>) -> B {
+        let result = (f(a) as! Function0<Either<A, B>>).extract()
+        return result.fold({ a in loop(a, f) }, id)
+    }
+    
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> HK<Function0F, Either<A, B>>) -> Function0<B> {
+        return Function0<B>({ loop(a, f) })
+    }
+    
     public init(_ f : @escaping () -> A) {
         self.f = f
     }
@@ -65,6 +74,10 @@ public class Function0Instances : Functor, Applicative, Monad, Comonad, Bimonad 
     public func flatMap<A, B>(_ fa: HK<Function0Instances.F, A>, _ f: @escaping (A) -> HK<Function0Instances.F, B>) -> HK<Function0Instances.F, B> {
         let funA = fa as! Function0<A>
         return f(funA.invoke())
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<Function0F, Either<A, B>>) -> HK<Function0F, B> {
+        return Function0.tailRecM(a, f)
     }
     
     public func coflatMap<A, B>(_ fa: HK<Function0Instances.F, A>, _ f: @escaping (HK<Function0Instances.F, A>) -> B) -> HK<Function0Instances.F, B> {
