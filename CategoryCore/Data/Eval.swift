@@ -52,6 +52,13 @@ public class Eval<A> : HK<EvalF, A> {
         return Now<Int>(1)
     }
     
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Eval<Either<A, B>>) -> Eval<B> {
+        return f(a).flatMap{ either in
+            either.fold({ a in tailRecM(a, f) },
+                        Eval<B>.pure)
+        }
+    }
+    
     public func value() -> A {
         fatalError("Must be implemented by subclass")
     }
