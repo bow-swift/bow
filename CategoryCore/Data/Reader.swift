@@ -9,8 +9,8 @@
 import Foundation
 
 public class Reader<D, A> : ReaderT<IdF, D, A> {
-    public static func pure(_ run : @escaping (D) -> A) -> Reader<D, A> {
-        return Reader(run)
+    public static func pure(_ a : A) -> Reader<D, A> {
+        return Kleisli.pure(a, Id<A>.applicative()) as! Reader<D, A>
     }
     
     public static func ask() -> Reader<D, D> {
