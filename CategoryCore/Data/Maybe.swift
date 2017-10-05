@@ -31,6 +31,15 @@ public class Maybe<A> : HK<MaybeF, A> {
         }
     }
     
+    public static func tailRecM<B>(_ a : A, _ f : (A) -> Maybe<Either<A, B>>) -> Maybe<B> {
+        return f(a).fold(constF(Maybe<B>.none()),
+                         { either in
+                            either.fold({ left in tailRecM(left, f) },
+                                        Maybe<B>.some)
+                         }
+        )
+    }
+    
     public var isEmpty : Bool {
         return fold({ true },
                     { _ in false })
