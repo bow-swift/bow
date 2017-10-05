@@ -50,6 +50,10 @@ public extension Applicative {
         return map(product(fa, fb), f)
     }
     
+    public func map2Eval<A, B, Z>(_ fa : HK<F, A>, _ fb : Eval<HK<F, B>>, _ f : @escaping (A, B) -> Z) -> Eval<HK<F, Z>> {
+        return fb.map{ fc in self.map2(fa, fc, f) }
+    }
+    
     public func tupled<A, B>(_ a : HK<F, A>,
                              _ b : HK<F, B>) -> HK<F, (A, B)> {
         return product(a, b)
