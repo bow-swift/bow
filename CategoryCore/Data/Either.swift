@@ -42,6 +42,10 @@ public class Either<A, B> : HK2<EitherF, A, B> {
         return fold(constF(c), { b in f(c, b) })
     }
     
+    public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
+        return fold(constF(c), { b in f(b, c) })
+    }
+    
     public func swap() -> Either<B, A> {
         return fold(Either<B, A>.right, Either<B, A>.left)
     }
