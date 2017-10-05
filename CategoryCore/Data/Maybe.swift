@@ -113,6 +113,10 @@ public class Maybe<A> : HK<MaybeF, A> {
         return fold({ defaultValue }, id)
     }
     
+    public func orElse(_ defaultValue : Maybe<A>) -> Maybe<A> {
+        return fold(constF(defaultValue), Maybe.some)
+    }
+    
     public func toOption() -> A? {
         return fold({ nil }, id)
     }
