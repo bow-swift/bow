@@ -30,6 +30,26 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                                       { b in Maybe.some(Ior.both(a, b))})})
     }
     
+    public static func loop<C, SemiG>(_ v : Ior<C, Either<A, B>>, _ f : @escaping (A) -> Ior<C, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
+        return v.fold(Ior<C, B>.left,
+                      { right in
+                         right.fold({ a in loop(f(a), f, semigroup) },
+                                    Ior<C, B>.right)
+                      },
+                      { left, right in
+                        right.fold({ a in
+                                      f(a).fold({ aLeft in Ior<C, B>.left(semigroup.combine(aLeft, left)) },
+                                                { aRight in loop(Ior<C, Either<A, B>>.both(left, aRight), f, semigroup) },
+                                                { aLeft, aRight in loop(Ior<C, Either<A, B>>.both(semigroup.combine(left, aLeft), aRight), f, semigroup)})
+                                   },
+                                   { b in Ior<C, B>.both(left, b)})
+                      })
+    }
+    
+    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> Ior<C, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
+        return loop(f(a), f, semigroup)
+    }
+    
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C, _ fab : (A, B) -> C) -> C {
         switch self {
             case is IorLeft<A, B>:
