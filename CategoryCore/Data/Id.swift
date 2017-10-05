@@ -69,6 +69,10 @@ extension Id {
     public static func functor() -> IdFunctor {
         return IdFunctor()
     }
+    
+    public static func applicative() -> IdApplicative {
+        return IdApplicative()
+    }
 }
 
 public class IdFunctor : Functor {
@@ -80,5 +84,15 @@ public class IdFunctor : Functor {
     
     public func lift<A, B>(_ f: @escaping (A) -> B) -> (HK<IdF, A>) -> HK<IdF, B> {
         return { idA in (idA as! Id<A>).map(f) }
+    }
+}
+
+public class IdApplicative : IdFunctor, Applicative {
+    public func pure<A>(_ a: A) -> HK<IdF, A> {
+        return Id.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<IdF, A>, _ ff: HK<IdF, (A) -> B>) -> HK<IdF, B> {
+        return (fa as! Id<A>).ap(ff as! Id<(A) -> B>)
     }
 }
