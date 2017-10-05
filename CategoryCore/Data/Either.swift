@@ -19,6 +19,14 @@ public class Either<A, B> : HK2<EitherF, A, B> {
         return Right<A, B>(b)
     }
     
+    public static func tailRecM<C>(_ a : A, _ f : (A) -> Either<C, Either<A, B>>) -> Either<C, B> {
+        return f(a).fold(Either<C, B>.left,
+                         { either in
+                            either.fold({ left in tailRecM(left, f)},
+                                        Either<C, B>.right)
+                         })
+    }
+    
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C) -> C {
         switch self {
             case is Left<A, B>:
