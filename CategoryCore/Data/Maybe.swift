@@ -78,6 +78,11 @@ public class Maybe<A> : HK<MaybeF, A> {
                     { a in f(b, a) })
     }
     
+    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return self.fold(constF(b),
+                         { a in f(a, b) })
+    }
+    
     public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, Maybe<B>> where Appl : Applicative, Appl.F == G {
         return fold({ applicative.pure(Maybe<B>.none()) },
                     { a in applicative.map(f(a), Maybe<B>.some)})
