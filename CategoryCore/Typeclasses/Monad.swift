@@ -10,6 +10,7 @@ import Foundation
 
 public protocol Monad : Applicative {
     func flatMap<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> HK<F, B>) -> HK<F, B>
+    func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK<F, Either<A, B>>) -> HK<F, B>
 }
 
 public extension Monad {
