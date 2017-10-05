@@ -13,6 +13,23 @@ public class Function1F {}
 public class Function1<I, O> : HK2<Function1F, I, O> {
     private let f : (I) -> O
     
+    public static func ask<I>() -> Function1<I, I> {
+        return Function1<I, I>({ (a : I) in a })
+    }
+    
+    public static func pure<I, A>(_ a : A) -> Function1<I, A> {
+        return Function1<I, A>({ _ in a })
+    }
+    
+    private static func step<A, B>(_ a : A, _ t : I, _ f : (A) -> HK2<Function1F, I, Either<A, B>>) -> B {
+        let af = (f(a) as! Function1<I, Either<A, B>>).f(t)
+        return af.fold({ a in step(a, t, f) }, id)
+    }
+    
+    public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK2<Function1F, I, Either<A, B>>) -> Function1<I, B> {
+        return Function1<I, B>({ t in step(a, t, f) })
+    }
+    
     public init(_ f : @escaping (I) -> O) {
         self.f = f
     }
@@ -32,13 +49,5 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
     
     public func local(_ g : @escaping (I) -> I) -> Function1<I, O> {
         return Function1<I, O>(g >> self.f)
-    }
-    
-    public static func ask<I>() -> Function1<I, I> {
-        return Function1<I, I>({ (a : I) in a })
-    }
-    
-    public static func pure<I, A>(_ a : A) -> Function1<I, A> {
-        return Function1<I, A>({ _ in a })
     }
 }
