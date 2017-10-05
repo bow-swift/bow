@@ -82,6 +82,12 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                     { _, b in f(c, b) })
     }
     
+    public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
+        return fold(constF(c),
+                    { b in f(b, c) },
+                    { _, b in f(b, c) })
+    }
+    
     public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, Ior<A, C>> where Appl : Applicative, Appl.F == G {
         return fold({ a in applicative.pure(Ior<A, C>.left(a)) },
                     { b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) },
