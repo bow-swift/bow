@@ -73,6 +73,10 @@ extension Id {
     public static func applicative() -> IdApplicative {
         return IdApplicative()
     }
+    
+    public static func monad() -> IdMonad {
+        return IdMonad()
+    }
 }
 
 public class IdFunctor : Functor {
@@ -94,5 +98,11 @@ public class IdApplicative : IdFunctor, Applicative {
     
     public func ap<A, B>(_ fa: HK<IdF, A>, _ ff: HK<IdF, (A) -> B>) -> HK<IdF, B> {
         return (fa as! Id<A>).ap(ff as! Id<(A) -> B>)
+    }
+}
+
+public class IdMonad : IdApplicative, Monad {
+    public func flatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> HK<IdF, B>) -> HK<IdF, B> {
+        return (fa as! Id<A>).flatMap(f as! (A) -> Id<B>)
     }
 }
