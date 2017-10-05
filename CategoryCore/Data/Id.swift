@@ -37,6 +37,10 @@ public class Id<A> : HK<IdF, A> {
         return f(b, value)
     }
     
+    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return f(value, b)
+    }
+    
     public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, Id<B>> where Appl : Applicative, Appl.F == G {
         return applicative.map(f(self.value), Id<B>.init)
     }
