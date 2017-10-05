@@ -42,6 +42,14 @@ public class Try<A> : HK<TryF, A> {
         }
     }
     
+    public static func tailRecM<B>(_ a : A, _ f : (A) -> Try<Either<A, B>>) -> Try<B> {
+        return f(a).fold(Try<B>.raise,
+                         { either in
+                            either.fold({ a in tailRecM(a, f)},
+                                        Try<B>.pure)
+                         })
+    }
+    
     public func fold<B>(_ fe : (Error) -> B, _ fa : (A) throws -> B) -> B {
         switch self {
             case is Failure<A>:
