@@ -17,9 +17,10 @@ public class Id<A> : HK<IdF, A> {
         return Id<A>(a)
     }
     
-    public static func tailRecM<B>(_ a : (A), _ f : (A) -> Id<Either<A, B>>) -> Id<B> {
-        return f(a).value.fold({ left in tailRecM(left, f)},
-                               Id<B>.pure)
+    public static func tailRecM<B>(_ a : (A), _ f : (A) -> HK<IdF, Either<A, B>>) -> Id<B> {
+        return (f(a) as! Id<Either<A, B>>).value
+            .fold({ left in tailRecM(left, f)},
+                  Id<B>.pure)
     }
     
     public init(_ value : A) {
@@ -112,6 +113,10 @@ public class IdApplicative : IdFunctor, Applicative {
 public class IdMonad : IdApplicative, Monad {
     public func flatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> HK<IdF, B>) -> HK<IdF, B> {
         return (fa as! Id<A>).flatMap(f as! (A) -> Id<B>)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<IdF, Either<A, B>>) -> HK<IdF, B> {
+        return Id.tailRecM(a, f)
     }
 }
 
