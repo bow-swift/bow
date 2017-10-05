@@ -8,10 +8,18 @@
 
 import Foundation
 
-public typealias Coreader<F, A, B> = Cokleisli<F, A, B>
+public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
 
 public class Cokleisli<F, A, B> : HK2<F, A, B> {
-    private let run : (HK<F, A>) -> B
+    internal let run : (HK<F, A>) -> B
+    
+    public static func pure(_ b : B) -> Cokleisli<F, A, B> {
+        return Cokleisli<F, A, B>({ _ in b })
+    }
+    
+    public static func ask<Comon>(_ comonad : Comon) -> Cokleisli<F, B, B> where Comon : Comonad, Comon.F == F {
+        return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
+    }
     
     public init(_ run : @escaping (HK<F, A>) -> B) {
         self.run = run
@@ -47,13 +55,5 @@ public class Cokleisli<F, A, B> : HK2<F, A, B> {
     
     public func flatMap<C>(_ f : @escaping (B) -> Cokleisli<F, A, C>) -> Cokleisli<F, A, C> {
         return Cokleisli<F, A, C>({ fa in f(self.run(fa)).run(fa) })
-    }
-    
-    public static func pure(_ b : B) -> Cokleisli<F, A, B> {
-        return Cokleisli<F, A, B>({ _ in b })
-    }
-    
-    public static func ask<Comon>(_ comonad : Comon) -> Cokleisli<F, B, B> where Comon : Comonad, Comon.F == F {
-        return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
     }
 }
