@@ -8,7 +8,9 @@
 
 import Foundation
 
-public class StateT<F, S, A> : HK2<F, S, A> {
+public class StateTF {}
+
+public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     private let runF : HK<F, (S) -> HK<F, (S,A)>>
     
     public static func lift<Mon>(_ fa : HK<F, A>, _ monad : Mon) -> StateT<F, S, A> where Mon : Monad, Mon.F == F {
