@@ -33,6 +33,7 @@
 		11CEEA461F7D46BB003EB472 /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA451F7D46BB003EB472 /* Typeclass.swift */; };
 		11CEEA491F7D474D003EB472 /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA481F7D474D003EB472 /* Functor.swift */; };
 		11CEEA4B1F7D4F00003EB472 /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA4A1F7D4F00003EB472 /* Applicative.swift */; };
+		11DA37E11F8B6FEC002030FF /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E01F8B6FEC002030FF /* Foldable.swift */; };
 		11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAD1F7E36DE00A4C96D /* Monad.swift */; };
 		11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */; };
 		11DFBEB21F7E3FA100A4C96D /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEB11F7E3FA100A4C96D /* Monoid.swift */; };
@@ -97,6 +98,7 @@
 		11CEEA451F7D46BB003EB472 /* Typeclass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typeclass.swift; sourceTree = "<group>"; };
 		11CEEA481F7D474D003EB472 /* Functor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functor.swift; sourceTree = "<group>"; };
 		11CEEA4A1F7D4F00003EB472 /* Applicative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicative.swift; sourceTree = "<group>"; };
+		11DA37E01F8B6FEC002030FF /* Foldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foldable.swift; sourceTree = "<group>"; };
 		11DFBEAD1F7E36DE00A4C96D /* Monad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monad.swift; sourceTree = "<group>"; };
 		11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
 		11DFBEB11F7E3FA100A4C96D /* Monoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				11DFBEC71F7E59CE00A4C96D /* Bimonad.swift */,
 				11DFBEC51F7E58F000A4C96D /* Comonad.swift */,
 				11DFBEB31F7E412200A4C96D /* Eq.swift */,
+				11DA37E01F8B6FEC002030FF /* Foldable.swift */,
 				11CEEA481F7D474D003EB472 /* Functor.swift */,
 				11DFBEBB1F7E4A4E00A4C96D /* FunctorFilter.swift */,
 				11DFBEAD1F7E36DE00A4C96D /* Monad.swift */,
@@ -506,6 +509,7 @@
 				11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */,
 				117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */,
 				11C5268A1F8271B500DC15CF /* Function1.swift in Sources */,
+				11DA37E11F8B6FEC002030FF /* Foldable.swift in Sources */,
 				115858E41F86516B00875227 /* Coreader.swift in Sources */,
 				11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */,
 				11C526881F82707E00DC15CF /* FunctionK.swift in Sources */,
