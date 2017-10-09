@@ -8,6 +8,9 @@
 
 import Foundation
 
+public typealias Unit = ()
+public let unit : Unit = ()
+
 public func id<A>(_ a : A) -> A {
     return a
 }
