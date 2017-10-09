@@ -232,9 +232,12 @@
 				11DFBEC31F7E561200A4C96D /* MonadWriter.swift */,
 				11DFBEB11F7E3FA100A4C96D /* Monoid.swift */,
 				11DFBECB1F7E6B3E00A4C96D /* MonoidK.swift */,
+				11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */,
 				11DFBEB51F7E426900A4C96D /* Order.swift */,
+				11DA37E21F8BAF83002030FF /* Reducible.swift */,
 				11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */,
 				11DFBEC91F7E5AEF00A4C96D /* SemigroupK.swift */,
+				11DA37E61F8BBBFE002030FF /* Traverse.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -251,14 +254,11 @@
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11E17DDE1F839A6000CA5A3F /* Maybe.swift */,
 				117BBA9C1F8772FE00196DB7 /* MaybeT.swift */,
-				11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */,
 				115858E11F86441400875227 /* Reader.swift */,
-				11DA37E21F8BAF83002030FF /* Reducible.swift */,
 				117BBA981F876C9200196DB7 /* State.swift */,
 				115858E51F86769500875227 /* StateT.swift */,
 				115858DD1F84FC6B00875227 /* Try.swift */,
 				115858DF1F851D1200875227 /* Validated.swift */,
-				11DA37E61F8BBBFE002030FF /* Traverse.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
