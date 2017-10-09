@@ -37,6 +37,7 @@
 		11DA37E31F8BAF83002030FF /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E21F8BAF83002030FF /* Reducible.swift */; };
 		11DA37E51F8BB421002030FF /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */; };
 		11DA37E71F8BBBFE002030FF /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E61F8BBBFE002030FF /* Traverse.swift */; };
+		11DA37E91F8BCD19002030FF /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E81F8BCD19002030FF /* TraverseFilter.swift */; };
 		11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAD1F7E36DE00A4C96D /* Monad.swift */; };
 		11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */; };
 		11DFBEB21F7E3FA100A4C96D /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEB11F7E3FA100A4C96D /* Monoid.swift */; };
@@ -105,6 +106,7 @@
 		11DA37E21F8BAF83002030FF /* Reducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducible.swift; sourceTree = "<group>"; };
 		11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyReducible.swift; sourceTree = "<group>"; };
 		11DA37E61F8BBBFE002030FF /* Traverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traverse.swift; sourceTree = "<group>"; };
+		11DA37E81F8BCD19002030FF /* TraverseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseFilter.swift; sourceTree = "<group>"; };
 		11DFBEAD1F7E36DE00A4C96D /* Monad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monad.swift; sourceTree = "<group>"; };
 		11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
 		11DFBEB11F7E3FA100A4C96D /* Monoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */,
 				11DFBEC91F7E5AEF00A4C96D /* SemigroupK.swift */,
 				11DA37E61F8BBBFE002030FF /* Traverse.swift */,
+				11DA37E81F8BCD19002030FF /* TraverseFilter.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C526861F825DF400DC15CF /* Function0.swift in Sources */,
+				11DA37E91F8BCD19002030FF /* TraverseFilter.swift in Sources */,
 				11CEEA441F7D45FE003EB472 /* HigherKinds.swift in Sources */,
 				11E17DDF1F839A6000CA5A3F /* Maybe.swift in Sources */,
 				11DFBEC01F7E4DBC00A4C96D /* MonadReader.swift in Sources */,
