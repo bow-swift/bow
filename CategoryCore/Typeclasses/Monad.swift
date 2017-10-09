@@ -42,4 +42,7 @@ public extension Monad {
         return self.flatMap(fa, { a in self.map(f(a), { b in (a, b) }) })
     }
     
+    public func ifM<B>(_ fa : HK<F, Bool>, _ ifTrue : @escaping () -> HK<F, B>, _ ifFalse : @escaping () -> HK<F, B>) -> HK<F, B> {
+        return flatMap(fa, { a in a ? ifTrue() : ifFalse() })
+    }
 }
