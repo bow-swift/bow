@@ -23,14 +23,18 @@ public extension Monad {
     }
     
     public func followedBy<A, B>(_ fa : HK<F, A>, _ fb : HK<F, B>) -> HK<F, B> {
-        return flatMap(fa, { _ in fb })
+        return self.flatMap(fa, { _ in fb })
     }
     
     public func followedByEval<A, B>(_ fa : HK<F, A>, _ fb : Eval<HK<F, B>>) -> HK<F, B> {
-        return flatMap(fa, { _ in fb.value() })
+        return self.flatMap(fa, { _ in fb.value() })
     }
     
     public func forEffect<A, B>(_ fa : HK<F, A>, _ fb : HK<F, B>) -> HK<F, A> {
         return self.flatMap(fa, { a in self.map(fb, { _ in a })})
+    }
+    
+    public func forEffectEval<A, B>(_ fa : HK<F, A>, _ fb : Eval<HK<F, B>>) -> HK<F, A> {
+        return self.flatMap(fa, { a in self.map(fb.value(), constF(a)) })
     }
 }
