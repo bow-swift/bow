@@ -38,6 +38,7 @@
 		11DA37E51F8BB421002030FF /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */; };
 		11DA37E71F8BBBFE002030FF /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E61F8BBBFE002030FF /* Traverse.swift */; };
 		11DA37E91F8BCD19002030FF /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E81F8BCD19002030FF /* TraverseFilter.swift */; };
+		11DA37EB1F8BD097002030FF /* Bifoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37EA1F8BD097002030FF /* Bifoldable.swift */; };
 		11DFBEAE1F7E36DE00A4C96D /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAD1F7E36DE00A4C96D /* Monad.swift */; };
 		11DFBEB01F7E3D2800A4C96D /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */; };
 		11DFBEB21F7E3FA100A4C96D /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DFBEB11F7E3FA100A4C96D /* Monoid.swift */; };
@@ -107,6 +108,7 @@
 		11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyReducible.swift; sourceTree = "<group>"; };
 		11DA37E61F8BBBFE002030FF /* Traverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traverse.swift; sourceTree = "<group>"; };
 		11DA37E81F8BCD19002030FF /* TraverseFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseFilter.swift; sourceTree = "<group>"; };
+		11DA37EA1F8BD097002030FF /* Bifoldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifoldable.swift; sourceTree = "<group>"; };
 		11DFBEAD1F7E36DE00A4C96D /* Monad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monad.swift; sourceTree = "<group>"; };
 		11DFBEAF1F7E3D2800A4C96D /* Semigroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroup.swift; sourceTree = "<group>"; };
 		11DFBEB11F7E3FA100A4C96D /* Monoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			children = (
 				11CEEA4A1F7D4F00003EB472 /* Applicative.swift */,
 				11DFBEB71F7E454300A4C96D /* ApplicativeError.swift */,
+				11DA37EA1F8BD097002030FF /* Bifoldable.swift */,
 				11DFBEC71F7E59CE00A4C96D /* Bimonad.swift */,
 				11DFBEC51F7E58F000A4C96D /* Comonad.swift */,
 				11DFBEB31F7E412200A4C96D /* Eq.swift */,
@@ -507,6 +510,7 @@
 				11DFBECC1F7E6B3E00A4C96D /* MonoidK.swift in Sources */,
 				11DFBEBA1F7E493C00A4C96D /* MonadError.swift in Sources */,
 				115858E01F851D1200875227 /* Validated.swift in Sources */,
+				11DA37EB1F8BD097002030FF /* Bifoldable.swift in Sources */,
 				11CEEA401F7D30B5003EB472 /* Curry.swift in Sources */,
 				11CEEA491F7D474D003EB472 /* Functor.swift in Sources */,
 				11DFBEB41F7E412200A4C96D /* Eq.swift in Sources */,
