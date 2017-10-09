@@ -24,6 +24,10 @@ public extension ApplicativeError {
         return handleErrorWith(map(fa, Either<E, A>.right), { e in pure(Either<E, A>.left(e)) })
     }
     
+    public func fromEither<A>(_ fea : Either<E, A>) -> HK<F, A> {
+        return fea.fold(raiseError, pure)
+    }
+    
     public func catchError<A>(_ f : () throws -> A, recover : (Error) -> E) -> HK<F, A> {
         do {
             return pure(try f())
