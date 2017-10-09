@@ -35,4 +35,12 @@ public extension ApplicativeError {
             return raiseError(recover(error))
         }
     }
+    
+    public func catchError<A>(_ f : () throws -> A) -> HK<F, A> where Self.E == Error {
+        do {
+            return pure(try f())
+        } catch {
+            return raiseError(error)
+        }
+    }
 }
