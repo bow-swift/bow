@@ -8,6 +8,7 @@
 
 import Foundation
 
+public typealias EitherPartial<A> = HK<EitherF, A>
 public class EitherF {}
 
 public class Either<A, B> : HK2<EitherF, A, B> {
@@ -19,12 +20,16 @@ public class Either<A, B> : HK2<EitherF, A, B> {
         return Right<A, B>(b)
     }
     
-    public static func tailRecM<C>(_ a : A, _ f : (A) -> Either<C, Either<A, B>>) -> Either<C, B> {
-        return f(a).fold(Either<C, B>.left,
-                         { either in
-                            either.fold({ left in tailRecM(left, f)},
-                                        Either<C, B>.right)
-                         })
+    public static func pure(_ b : B) -> Either<A, B> {
+        return right(b)
+    }
+    
+    public static func tailRecM<C>(_ a : A, _ f : (A) -> HK<EitherPartial<C>, Either<A, B>>) -> Either<C, B> {
+        return (f(a) as! Either<C, Either<A, B>>).fold(Either<C, B>.left,
+            { either in
+                either.fold({ left in tailRecM(left, f)},
+                            Either<C, B>.right)
+            })
     }
     
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C) -> C {
@@ -127,3 +132,40 @@ extension Either : CustomStringConvertible {
                     { b in "Right(\(b))"})
     }
 }
+
+public extension Either {
+    public static func functor<C>() -> EitherApplicative<C> {
+        return EitherApplicative<C>()
+    }
+    
+    public static func applicative<C>() -> EitherApplicative<C> {
+        return EitherApplicative<C>()
+    }
+    
+    public static func monad<C>() -> EitherMonad<C> {
+        return EitherMonad<C>()
+    }
+}
+
+public class EitherApplicative<C> : Applicative {
+    public typealias F = EitherPartial<C>
+    
+    public func pure<A>(_ a: A) -> HK<HK<EitherF, C>, A> {
+        return Either<C, A>.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ ff: HK<HK<EitherF, C>, (A) -> B>) -> HK<HK<EitherF, C>, B> {
+        return (fa as! Either<C, A>).ap(ff as! Either<C, (A) -> B>)
+    }
+}
+
+public class EitherMonad<C> : EitherApplicative<C>, Monad {
+    public func flatMap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (A) -> HK<HK<EitherF, C>, B>) -> HK<HK<EitherF, C>, B> {
+        return (fa as! Either<C, A>).flatMap({ eca in f(eca) as! Either<C, B> })
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<EitherF, C>, Either<A, B>>) -> HK<HK<EitherF, C>, B> {
+        return Either<A, B>.tailRecM(a, f)
+    }
+}
+
