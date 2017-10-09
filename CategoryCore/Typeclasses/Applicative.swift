@@ -14,6 +14,10 @@ public protocol Applicative : Functor {
 }
 
 public extension Applicative {
+    public func map<A, B>(_ fa: HK<F, A>, _ f: @escaping (A) -> B) -> HK<F, B> {
+        return ap(fa, pure(f))
+    }
+    
     public func product<A, B>(_ fa : HK<F, A>, _ fb : HK<F, B>) -> HK<F, (A, B)> {
         return self.ap(fb, self.map(fa, { (a : A) in { (b : B) in (a, b) }}))
     }
