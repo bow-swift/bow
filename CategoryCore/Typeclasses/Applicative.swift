@@ -125,5 +125,81 @@ public extension Applicative {
                                                   _ j : HK<F, J>) -> HK<F, (A, B, C, D, E, G, H, I, J)> {
         return product(product(product(product(product(product(product(product(a, b), c), d), e), g), h), i), j)
     }
+    
+    func map<A, B, Z>(_ a : HK<F, A>,
+                      _ b : HK<F, B>,
+                      _ f : @escaping (A, B) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b), f)
+    }
+    
+    func map<A, B, C, Z>(_ a : HK<F, A>,
+                         _ b : HK<F, B>,
+                         _ c : HK<F, C>,
+                         _ f : @escaping (A, B, C) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c), f)
+    }
+    
+    func map<A, B, C, D, Z>(_ a : HK<F, A>,
+                            _ b : HK<F, B>,
+                            _ c : HK<F, C>,
+                            _ d : HK<F, D>,
+                            _ f : @escaping (A, B, C, D) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d), f)
+    }
+    
+    func map<A, B, C, D, E, Z>(_ a : HK<F, A>,
+                               _ b : HK<F, B>,
+                               _ c : HK<F, C>,
+                               _ d : HK<F, D>,
+                               _ e : HK<F, E>,
+                               _ f : @escaping (A, B, C, D, E) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d, e), f)
+    }
+    
+    func map<A, B, C, D, E, G, Z>(_ a : HK<F, A>,
+                                  _ b : HK<F, B>,
+                                  _ c : HK<F, C>,
+                                  _ d : HK<F, D>,
+                                  _ e : HK<F, E>,
+                                  _ g : HK<F, G>,
+                                  _ f : @escaping (A, B, C, D, E, G) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d, e, g), f)
+    }
+    
+    func map<A, B, C, D, E, G, H, Z>(_ a : HK<F, A>,
+                                     _ b : HK<F, B>,
+                                     _ c : HK<F, C>,
+                                     _ d : HK<F, D>,
+                                     _ e : HK<F, E>,
+                                     _ g : HK<F, G>,
+                                     _ h : HK<F, H>,
+                                     _ f : @escaping (A, B, C, D, E, G, H) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d, e, g, h), f)
+    }
+    
+    func map<A, B, C, D, E, G, H, I, Z>(_ a : HK<F, A>,
+                                        _ b : HK<F, B>,
+                                        _ c : HK<F, C>,
+                                        _ d : HK<F, D>,
+                                        _ e : HK<F, E>,
+                                        _ g : HK<F, G>,
+                                        _ h : HK<F, H>,
+                                        _ i : HK<F, I>,
+                                        _ f : @escaping (A, B, C, D, E, G, H, I) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d, e, g, h, i), f)
+    }
+    
+    func map<A, B, C, D, E, G, H, I, J, Z>(_ a : HK<F, A>,
+                                           _ b : HK<F, B>,
+                                           _ c : HK<F, C>,
+                                           _ d : HK<F, D>,
+                                           _ e : HK<F, E>,
+                                           _ g : HK<F, G>,
+                                           _ h : HK<F, H>,
+                                           _ i : HK<F, I>,
+                                           _ j : HK<F, J>,
+                                           _ f : @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> HK<F, Z> {
+        return map(tupled(a, b, c, d, e, g, h, i, j), f)
+    }
 }
 
