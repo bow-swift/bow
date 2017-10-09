@@ -23,6 +23,10 @@ public class Maybe<A> : HK<MaybeF, A> {
         return some(a)
     }
     
+    public static func empty() -> Maybe<A> {
+        return None()
+    }
+    
     public static func fromOption(_ a : A?) -> Maybe<A> {
         if let a = a {
             return some(a)
