@@ -37,4 +37,9 @@ public extension Monad {
     public func forEffectEval<A, B>(_ fa : HK<F, A>, _ fb : Eval<HK<F, B>>) -> HK<F, A> {
         return self.flatMap(fa, { a in self.map(fb.value(), constF(a)) })
     }
+    
+    public func mproduct<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> HK<F, B>) -> HK<F, (A, B)> {
+        return self.flatMap(fa, { a in self.map(f(a), { b in (a, b) }) })
+    }
+    
 }
