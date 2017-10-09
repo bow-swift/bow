@@ -12,10 +12,13 @@ public protocol Functor : Typeclass {
     associatedtype F
     
     func map<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> B) -> HK<F, B>
-    func lift<A, B>(_ f : @escaping (A) -> B) -> (HK<F, A>) -> HK<F, B>
 }
 
 public extension Functor {
+    public func lift<A, B>(_ f : @escaping (A) -> B) -> (HK<F, A>) -> HK<F, B> {
+        return { fa in self.map(fa, f) }
+    }
+    
     public func void<A>(_ fa : HK<F, A>) -> HK<F, ()> {
         return self.map(fa, {_ in })
     }
