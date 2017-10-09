@@ -63,10 +63,6 @@ public class Function0Instances : Functor, Applicative, Monad, Comonad, Bimonad 
         return Function0(funA.f >> f)
     }
     
-    public func lift<A, B>(_ f: @escaping (A) -> B) -> (HK<Function0F, A>) -> HK<Function0F, B> {
-        return { fa in self.map(fa, f) }
-    }
-    
     public func pure<A>(_ a: A) -> HK<Function0Instances.F, A> {
         return Function0({ a })
     }

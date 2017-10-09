@@ -94,10 +94,6 @@ public class IdFunctor : Functor {
     public func map<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> B) -> HK<IdF, B> {
         return (fa as! Id<A>).map(f)
     }
-    
-    public func lift<A, B>(_ f: @escaping (A) -> B) -> (HK<IdF, A>) -> HK<IdF, B> {
-        return { idA in (idA as! Id<A>).map(f) }
-    }
 }
 
 public class IdApplicative : IdFunctor, Applicative {
