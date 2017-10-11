@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HK<F, A> {}
+open class HK<F, A> {}
 public typealias HK2<F, A, B> = HK<HK<F, A>, B>
 public typealias HK3<F, A, B, C> = HK<HK2<F, A, B>, C>
 public typealias HK4<F, A, B, C, D> = HK<HK3<F, A, B, C>, D>
