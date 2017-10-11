@@ -37,6 +37,7 @@
 		11CEEA4B1F7D4F00003EB472 /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA4A1F7D4F00003EB472 /* Applicative.swift */; };
 		11D5CED51F8E10DC00ED007E /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CED41F8E10DC00ED007E /* NonEmptyList.swift */; };
 		11D5CED71F8E364C00ED007E /* ListKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CED61F8E364C00ED007E /* ListKW.swift */; };
+		11D5CEDA1F8E46DA00ED007E /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CED91F8E46DA00ED007E /* Yoneda.swift */; };
 		11DA37E11F8B6FEC002030FF /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E01F8B6FEC002030FF /* Foldable.swift */; };
 		11DA37E31F8BAF83002030FF /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E21F8BAF83002030FF /* Reducible.swift */; };
 		11DA37E51F8BB421002030FF /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */; };
@@ -114,6 +115,7 @@
 		11CEEA4A1F7D4F00003EB472 /* Applicative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Applicative.swift; sourceTree = "<group>"; };
 		11D5CED41F8E10DC00ED007E /* NonEmptyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyList.swift; sourceTree = "<group>"; };
 		11D5CED61F8E364C00ED007E /* ListKW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListKW.swift; sourceTree = "<group>"; };
+		11D5CED91F8E46DA00ED007E /* Yoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yoneda.swift; sourceTree = "<group>"; };
 		11DA37E01F8B6FEC002030FF /* Foldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foldable.swift; sourceTree = "<group>"; };
 		11DA37E21F8BAF83002030FF /* Reducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducible.swift; sourceTree = "<group>"; };
 		11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyReducible.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				11CEEA451F7D46BB003EB472 /* Typeclass.swift */,
 				11C526841F825DC100DC15CF /* Arrow */,
 				11E17DDD1F8399C900CA5A3F /* Data */,
+				11D5CED81F8E46C700ED007E /* Free */,
 				11CEEA471F7D473B003EB472 /* Typeclasses */,
 			);
 			path = CategoryCore;
@@ -263,6 +266,14 @@
 				11DA37E81F8BCD19002030FF /* TraverseFilter.swift */,
 			);
 			path = Typeclasses;
+			sourceTree = "<group>";
+		};
+		11D5CED81F8E46C700ED007E /* Free */ = {
+			isa = PBXGroup;
+			children = (
+				11D5CED91F8E46DA00ED007E /* Yoneda.swift */,
+			);
+			path = Free;
 			sourceTree = "<group>";
 		};
 		11E17DDD1F8399C900CA5A3F /* Data */ = {
@@ -525,6 +536,7 @@
 				11DFBEBE1F7E4BFE00A4C96D /* MonadFilter.swift in Sources */,
 				11CEEA3E1F7D1403003EB472 /* Predef.swift in Sources */,
 				11D5CED51F8E10DC00ED007E /* NonEmptyList.swift in Sources */,
+				11D5CEDA1F8E46DA00ED007E /* Yoneda.swift in Sources */,
 				117BBA991F876C9200196DB7 /* State.swift in Sources */,
 				11C5268C1F82812F00DC15CF /* Kleisli.swift in Sources */,
 				11DA37EF1F8BD34E002030FF /* Inject.swift in Sources */,
