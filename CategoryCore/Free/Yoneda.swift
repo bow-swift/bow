@@ -26,6 +26,10 @@ open class Yoneda<F, A> : HK<YonedaF, A> {
     public func map<B, Func>(_ ff : @escaping (A) -> B, _ functor : Func) -> Yoneda<F, B> where Func : Functor, Func.F == F {
         return YonedaDefault(self, ff)
     }
+    
+    public func toCoyoneda() -> Coyoneda<F, A, A> {
+        return Coyoneda<F, A, A>.apply(lower(), id)
+    }
 }
 
 fileprivate class YonedaDefault<F, A, B> : Yoneda<F, B> {

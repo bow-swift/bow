@@ -273,8 +273,8 @@
 		11D5CED81F8E46C700ED007E /* Free */ = {
 			isa = PBXGroup;
 			children = (
-				11D5CED91F8E46DA00ED007E /* Yoneda.swift */,
 				11D5CEDD1F8F55EB00ED007E /* Coyoneda.swift */,
+				11D5CED91F8E46DA00ED007E /* Yoneda.swift */,
 			);
 			path = Free;
 			sourceTree = "<group>";
