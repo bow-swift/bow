@@ -39,6 +39,7 @@
 		11D5CED71F8E364C00ED007E /* ListKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CED61F8E364C00ED007E /* ListKW.swift */; };
 		11D5CEDA1F8E46DA00ED007E /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CED91F8E46DA00ED007E /* Yoneda.swift */; };
 		11D5CEDE1F8F55EB00ED007E /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CEDD1F8F55EB00ED007E /* Coyoneda.swift */; };
+		11D5CEE01F8F5C1900ED007E /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D5CEDF1F8F5C1900ED007E /* MapKW.swift */; };
 		11DA37E11F8B6FEC002030FF /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E01F8B6FEC002030FF /* Foldable.swift */; };
 		11DA37E31F8BAF83002030FF /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E21F8BAF83002030FF /* Reducible.swift */; };
 		11DA37E51F8BB421002030FF /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */; };
@@ -118,6 +119,7 @@
 		11D5CED61F8E364C00ED007E /* ListKW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListKW.swift; sourceTree = "<group>"; };
 		11D5CED91F8E46DA00ED007E /* Yoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yoneda.swift; sourceTree = "<group>"; };
 		11D5CEDD1F8F55EB00ED007E /* Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coyoneda.swift; sourceTree = "<group>"; };
+		11D5CEDF1F8F5C1900ED007E /* MapKW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKW.swift; sourceTree = "<group>"; };
 		11DA37E01F8B6FEC002030FF /* Foldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foldable.swift; sourceTree = "<group>"; };
 		11DA37E21F8BAF83002030FF /* Reducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducible.swift; sourceTree = "<group>"; };
 		11DA37E41F8BB421002030FF /* NonEmptyReducible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyReducible.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				115858D91F84DA8C00875227 /* Id.swift */,
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11D5CED61F8E364C00ED007E /* ListKW.swift */,
+				11D5CEDF1F8F5C1900ED007E /* MapKW.swift */,
 				11E17DDE1F839A6000CA5A3F /* Maybe.swift */,
 				117BBA9C1F8772FE00196DB7 /* MaybeT.swift */,
 				11D5CED41F8E10DC00ED007E /* NonEmptyList.swift */,
@@ -556,6 +559,7 @@
 				115858DE1F84FC6B00875227 /* Try.swift in Sources */,
 				11E17DE71F83DB8200CA5A3F /* Ior.swift in Sources */,
 				11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */,
+				11D5CEE01F8F5C1900ED007E /* MapKW.swift in Sources */,
 				11DFBEC61F7E58F000A4C96D /* Comonad.swift in Sources */,
 				11DA37E71F8BBBFE002030FF /* Traverse.swift in Sources */,
 				115858E61F86769500875227 /* StateT.swift in Sources */,
