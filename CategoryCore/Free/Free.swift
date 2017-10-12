@@ -1,0 +1,156 @@
+//
+//  Free.swift
+//  CategoryCore
+//
+//  Created by Tomás Ruiz López on 12/10/17.
+//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
+//
+
+import Foundation
+
+public class FreeF {}
+public typealias FreePartial<S> = HK<FreeF, S>
+
+public class Free<S, A> : HK2<FreeF, S, A> {
+    
+    public static func pure(_ a : A) -> Free<S, A> {
+        return Pure(a)
+    }
+    
+    public static func liftF(_ fa : HK<S, A>) -> Free<S, A> {
+        return Suspend(fa)
+    }
+    
+    public static func deferFree(_ value : @escaping () -> Free<S, A>) -> Free<S, A> {
+        return Free<S, Unit>.pure(unit).flatMap { _ in value() }
+    }
+    
+    internal static func functionKF() -> FunctionKFree<S> {
+        return FunctionKFree<S>()
+    }
+    
+    internal static func applicativeF<Appl>(_ applicative : Appl) -> ApplicativeFreePartial<S, Appl> where Appl : Applicative, Appl.F == FreePartial<S> {
+        return ApplicativeFreePartial(applicative)
+    }
+    
+    public func transform<B, S, O, FuncK>(_ f : @escaping (A) -> B, _ fs : FuncK) -> Free<O, B> where FuncK : FunctionK, FuncK.F == S, FuncK.G == O {
+        fatalError("Free.transform must be implemented by subclass")
+    }
+    
+    public func map<B>(_ f : @escaping (A) -> B) -> Free<S, B> {
+        return flatMap { a in Free<S, B>.pure(f(a)) }
+    }
+    
+    public func ap<B>(_ ff : Free<S, (A) -> B>) -> Free<S, B> {
+        return ff.flatMap(map)
+    }
+    
+    public func flatMap<B>(_ f : @escaping (A) -> Free<S, B>) -> Free<S, B> {
+        return FlatMapped<S, B, A>(self, f)
+    }
+    
+    public func step() -> Free<S, A> {
+        if self is FlatMapped<S, A, Any> && (self as! FlatMapped<S, A, A>).c is FlatMapped<S, A, A> {
+            let flatMappedSelf = self as! FlatMapped<S, A, A>
+            let g = flatMappedSelf.f
+            let flatMappedC = flatMappedSelf.c as! FlatMapped<S, A, A>
+            let c = flatMappedC.c
+            let f = flatMappedC.f
+            return c.flatMap { cc in f(cc).flatMap(g) }.step()
+        } else if self is FlatMapped<S, A, Any> && (self as! FlatMapped<S, A, A>).c is Pure<S, A> {
+            let flatMappedSelf = self as! FlatMapped<S, A, A>
+            let flatMappedC = flatMappedSelf.c as! Pure<S, A>
+            let a = flatMappedC.a
+            let f = flatMappedSelf.f
+            return f(a).step()
+        } else {
+            return self
+        }
+    }
+    
+    public func foldMap<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> HK<M, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
+        return monad.tailRecM(self) { freeSA in
+            let x = freeSA.step()
+            switch x {
+                case is Pure<S, A>:
+                    return monad.pure(Either.right((x as! Pure<S, A>).a))
+                case is Suspend<S, A>:
+                    return monad.map(f.invoke((x as! Suspend<S, A>).a), { a in Either.right(a) })
+                case is FlatMapped<S, A, A>:
+                    let g = (x as! FlatMapped<S, A, A>).f
+                    let c = (x as! FlatMapped<S, A, A>).c
+                    return monad.map(c.foldMap(f, monad), { cc in Either.left(g(cc)) })
+                default:
+                    fatalError("Free must not have other subclasses than Pure, Suspend or FlatMapped")
+            }
+        }
+    }
+    
+    public func run<Mon>(_ monad : Mon) -> HK<S, A> where Mon : Monad, Mon.F == S {
+        return self.foldMap(IdFunctionK<S>.id, monad)
+    }
+}
+
+fileprivate class Pure<S, A> : Free<S, A> {
+    fileprivate let a : A
+    
+    init(_ a : A) {
+        self.a = a
+    }
+    
+    override public func transform<B, S, O, FuncK>(_ f: @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
+        return Free<O, B>.pure(f(a))
+    }
+}
+
+fileprivate class Suspend<S, A> : Free<S, A> {
+    fileprivate let a : HK<S, A>
+    
+    init(_ a : HK<S, A>) {
+        self.a = a
+    }
+    
+    override public func transform<B, S, O, FuncK>(_ f: @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
+        return Free<O, A>.liftF(fs.invoke(a as! HK<S, A>)).map(f)
+    }
+}
+
+fileprivate class FlatMapped<S, A, C> : Free<S, A> {
+    fileprivate let c : Free<S, C>
+    fileprivate let f : (C) -> Free<S, A>
+    
+    init(_ c : Free<S, C>, _ f : @escaping (C) -> Free<S, A>) {
+        self.c = c
+        self.f = f
+    }
+    
+    override public func transform<B, S, O, FuncK>(_ fm : @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
+        return FlatMapped<O, B, C>(c.transform(id, fs), { _ in self.c.flatMap(self.f).transform(fm, fs) })
+    }
+}
+
+internal class FunctionKFree<S> : FunctionK {
+    typealias F = S
+    typealias G = FreePartial<S>
+    
+    func invoke<A>(_ fa: HK<S, A>) -> HK<HK<FreeF, S>, A> {
+        return Free.liftF(fa)
+    }
+}
+
+internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applicative, Appl.F == FreePartial<S> {
+    typealias F = FreePartial<S>
+    private let applicative : Appl
+    
+    init(_ applicative : Appl) {
+        self.applicative = applicative
+    }
+    
+    func pure<A>(_ a: A) -> HK<HK<FreeF, S>, A> {
+        return Free.pure(a)
+    }
+
+    func ap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ ff: HK<HK<FreeF, S>, (A) -> B>) -> HK<HK<FreeF, S>, B> {
+        return applicative.ap(fa, ff)
+    }
+}
