@@ -296,3 +296,31 @@ fileprivate class FlatmapDefault<A, B> : Compute<A> {
         return f(s as! B)
     }
 }
+
+public extension HK where F == EvalF {
+    public func ev() -> Eval<A> {
+        return self as! Eval<A>
+    }
+}
+
+public extension Eval {
+    public static func functor() -> EvalApplicative {
+        return EvalApplicative()
+    }
+    
+    public static func applicative() -> EvalApplicative {
+        return EvalApplicative()
+    }
+}
+
+public class EvalApplicative : Applicative {
+    public typealias F = EvalF
+    
+    public func pure<A>(_ a: A) -> HK<F, A> {
+        return Eval<A>.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<F, A>, _ ff: HK<F, (A) -> B>) -> HK<F, B> {
+        return fa.ev().ap(ff.ev())
+    }
+}
