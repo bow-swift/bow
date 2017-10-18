@@ -9,11 +9,12 @@
 import Foundation
 
 public class ConstF {}
+public typealias ConstPartial<A> = HK<ConstF, A>
 
 public class Const<A, T> : HK2<ConstF, A, T> {
     private let value : A
     
-    public static func pure(a : A) -> Const<A, T> {
+    public static func pure(_ a : A) -> Const<A, T> {
         return Const<A, T>(a)
     }
     
