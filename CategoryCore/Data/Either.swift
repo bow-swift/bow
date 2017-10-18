@@ -100,7 +100,7 @@ public class Either<A, B> : HK2<EitherF, A, B> {
                         Either<A, B>.left(defaultValue) })
     }
 
-    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, Either<A, C>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, HK<EitherPartial<A>, C>> where Appl : Applicative, Appl.F == G {
         return fold({ a in applicative.pure(Either<A, C>.left(a)) },
                     { b in applicative.map(f(b), { c in Either<A, C>.right(c) }) })
     }
@@ -145,6 +145,22 @@ public extension Either {
     public static func monad<C>() -> EitherMonad<C> {
         return EitherMonad<C>()
     }
+    
+    public static func monadError<C>() -> EitherMonadError<C> {
+        return EitherMonadError<C>()
+    }
+    
+    public static func foldable<C>() -> EitherFoldable<C> {
+        return EitherFoldable<C>()
+    }
+    
+    public static func traverse<C>() -> EitherTraverse<C> {
+        return EitherTraverse<C>()
+    }
+    
+    public static func semigroupK<C>() -> EitherSemigroupK<C> {
+        return EitherSemigroupK<C>()
+    }
 }
 
 public class EitherApplicative<C> : Applicative {
@@ -169,3 +185,43 @@ public class EitherMonad<C> : EitherApplicative<C>, Monad {
     }
 }
 
+public class EitherMonadError<C> : EitherMonad<C>, MonadError {
+    public typealias E = C
+    
+    public func raiseError<A>(_ e: C) -> HK<HK<EitherF, C>, A> {
+        return Either<C, A>.left(e)
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<HK<EitherF, C>, A>, _ f: (C) -> HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
+        let fca = fa as! Either<C, A>
+        return fca.fold(f, constF(fca))
+    }
+}
+
+public class EitherFoldable<C> : Foldable {
+    public typealias F = EitherPartial<C>
+    
+    public func foldL<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+        let fca = fa as! Either<C, A>
+        return fca.foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        let fca = fa as! Either<C, A>
+        return fca.foldR(b, f)
+    }
+}
+
+public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: HK<HK<EitherF, C>, A>, _ f: (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<EitherF, C>, B>> where G == Appl.F, Appl : Applicative {
+        return (fa as! Either<C, A>).traverse(f, applicative)
+    }
+}
+
+public class EitherSemigroupK<C> : SemigroupK {
+    public typealias F = EitherPartial<C>
+    
+    public func combineK<A>(_ x: HK<HK<EitherF, C>, A>, _ y: HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
+        return (x as! Either<C, A>).combineK(y as! Either<C, A>)
+    }
+}
