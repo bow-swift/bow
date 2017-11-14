@@ -228,6 +228,7 @@
 				11C526841F825DC100DC15CF /* Arrow */,
 				11E17DDD1F8399C900CA5A3F /* Data */,
 				11D5CED81F8E46C700ED007E /* Free */,
+				11E797011FBAE8FB00E1DC41 /* Transformers */,
 				11CEEA471F7D473B003EB472 /* Typeclasses */,
 			);
 			path = CategoryCore;
@@ -294,23 +295,30 @@
 				11A33F1F1F8D04EA00310A16 /* Coproduct.swift */,
 				115858E31F86516B00875227 /* Coreader.swift */,
 				11E17DE41F83D10500CA5A3F /* Either.swift */,
-				117BBA9E1F8790B400196DB7 /* EitherT.swift */,
 				115858DB1F84DED100875227 /* Eval.swift */,
 				115858D91F84DA8C00875227 /* Id.swift */,
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11D5CED61F8E364C00ED007E /* ListKW.swift */,
 				11D5CEDF1F8F5C1900ED007E /* MapKW.swift */,
 				11E17DDE1F839A6000CA5A3F /* Maybe.swift */,
-				117BBA9C1F8772FE00196DB7 /* MaybeT.swift */,
 				11D5CED41F8E10DC00ED007E /* NonEmptyList.swift */,
 				115858E11F86441400875227 /* Reader.swift */,
 				117BBA981F876C9200196DB7 /* State.swift */,
-				115858E51F86769500875227 /* StateT.swift */,
 				115858DD1F84FC6B00875227 /* Try.swift */,
 				115858DF1F851D1200875227 /* Validated.swift */,
-				11A33F1D1F8CCC7E00310A16 /* WriterT.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		11E797011FBAE8FB00E1DC41 /* Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				117BBA9E1F8790B400196DB7 /* EitherT.swift */,
+				117BBA9C1F8772FE00196DB7 /* MaybeT.swift */,
+				115858E51F86769500875227 /* StateT.swift */,
+				11A33F1D1F8CCC7E00310A16 /* WriterT.swift */,
+			);
+			path = Transformers;
 			sourceTree = "<group>";
 		};
 		7164944C633BAF22609D88DC /* Frameworks */ = {
