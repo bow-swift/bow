@@ -144,3 +144,51 @@ extension Try : CustomStringConvertible {
                     { value in "Success(\(value))" })
     }
 }
+
+public extension HK where F == TryF {
+    public func ev() -> Try<A> {
+        return self as! Try<A>
+    }
+}
+
+public extension Try {
+    public static func functor() -> TryFunctor {
+        return TryFunctor()
+    }
+    
+    public static func applicative() -> TryApplicative {
+        return TryApplicative()
+    }
+    
+    public static func monad() -> TryMonad {
+        return TryMonad()
+    }
+}
+
+public class TryFunctor : Functor {
+    public typealias F = TryF
+    
+    public func map<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> B) -> HK<TryF, B> {
+        return fa.ev().map(f)
+    }
+}
+
+public class TryApplicative : TryFunctor, Applicative {
+    public func pure<A>(_ a: A) -> HK<TryF, A> {
+        return Try<A>.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<TryF, A>, _ ff: HK<TryF, (A) -> B>) -> HK<TryF, B> {
+        return fa.ev().ap(ff.ev())
+    }
+}
+
+public class TryMonad : TryApplicative, Monad {
+    public func flatMap<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> HK<TryF, B>) -> HK<TryF, B> {
+        return fa.ev().flatMap({ a in f(a).ev() })
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<TryF, Either<A, B>>) -> HK<TryF, B> {
+        return Try<A>.tailRecM(a, { a in f(a).ev() })
+    }
+}
