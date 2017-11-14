@@ -114,11 +114,19 @@ public class Maybe<A> : HK<MaybeF, A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return fold({ defaultValue }, id)
+        return getOrElse(constF(defaultValue))
+    }
+    
+    public func getOrElse(_ defaultValue : () -> A) -> A {
+        return fold(defaultValue, id)
     }
     
     public func orElse(_ defaultValue : Maybe<A>) -> Maybe<A> {
-        return fold(constF(defaultValue), Maybe.some)
+        return orElse(constF(defaultValue))
+    }
+    
+    public func orElse(_ defaultValue : () -> Maybe<A>) -> Maybe<A> {
+        return fold(defaultValue, Maybe.some)
     }
     
     public func toOption() -> A? {
@@ -141,4 +149,55 @@ extension Maybe : CustomStringConvertible {
         return fold({ "None" },
                     { a in "Some(\(a))" })
     }
+}
+
+public extension HK where F == MaybeF {
+    public func ev() -> Maybe<A> {
+        return self as! Maybe<A>
+    }
+}
+
+public extension Maybe {
+    public static func functor() -> MaybeFunctor {
+        return MaybeFunctor()
+    }
+    
+    public static func applicative() -> MaybeApplicative {
+        return MaybeApplicative()
+    }
+    
+    public static func monad() -> MaybeMonad {
+        return MaybeMonad()
+    }
+}
+
+public class MaybeFunctor : Functor {
+    public typealias F = MaybeF
+    
+    public func map<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> B) -> HK<MaybeF, B> {
+        return fa.ev().map(f)
+    }
+}
+
+public class MaybeApplicative : MaybeFunctor, Applicative {
+    public func pure<A>(_ a: A) -> HK<MaybeF, A> {
+        return Maybe.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<MaybeF, A>, _ ff: HK<MaybeF, (A) -> B>) -> HK<MaybeF, B> {
+        return fa.ev().ap(ff.ev())
+    }
+}
+
+public class MaybeMonad : MaybeApplicative, Monad {
+    public func flatMap<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> HK<MaybeF, B>) -> HK<MaybeF, B> {
+        return fa.ev().flatMap(f as! (A) -> Maybe<B>)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<MaybeF, Either<A, B>>) -> HK<MaybeF, B> {
+        let g = { a in f(a) as! Maybe<Either<A, B>> }
+        return Maybe<A>.tailRecM(a, g)
+    }
+    
+    
 }
