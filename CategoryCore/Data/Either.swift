@@ -161,6 +161,10 @@ public extension Either {
     public static func semigroupK<C>() -> EitherSemigroupK<C> {
         return EitherSemigroupK<C>()
     }
+    
+    public static func eq<EqL, EqR>(_ eql : EqL, _ eqr : EqR) -> EitherEq<A, B, EqL, EqR> {
+        return EitherEq<A, B, EqL, EqR>(eql, eqr)
+    }
 }
 
 public class EitherApplicative<C> : Applicative {
@@ -223,5 +227,21 @@ public class EitherSemigroupK<C> : SemigroupK {
     
     public func combineK<A>(_ x: HK<HK<EitherF, C>, A>, _ y: HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
         return (x as! Either<C, A>).combineK(y as! Either<C, A>)
+    }
+}
+
+public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+    public typealias A = Either<L, R>
+    private let eql : EqL
+    private let eqr : EqR
+    
+    public init(_ eql : EqL, _ eqr : EqR) {
+        self.eql = eql
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Either<L, R>, _ b: Either<L, R>) -> Bool {
+        return a.fold({ aLeft  in b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
+                      { aRight in b.fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }
 }
