@@ -38,6 +38,20 @@ public class IntProductMonoid : IntProductSemigroup, Monoid {
     }
 }
 
+public class IntEq : Eq {
+    public typealias A = Int
+    
+    public func eqv(_ a: Int, _ b: Int) -> Bool {
+        return a == b
+    }
+}
+
+public class IntOrder : IntEq, Order {
+    public func compare(_ a: Int, _ b: Int) -> Int {
+        return a - b
+    }
+}
+
 public extension Int {
     public static var sumMonoid : IntSumMonoid {
         return IntSumMonoid()
@@ -45,6 +59,10 @@ public extension Int {
     
     public static var productMonoid : IntProductMonoid {
         return IntProductMonoid()
+    }
+    
+    public static var order : IntOrder {
+        return IntOrder()
     }
 }
 
@@ -78,6 +96,20 @@ public class Int8ProductMonoid : Int8ProductSemigroup, Monoid {
     }
 }
 
+public class Int8Eq : Eq {
+    public typealias A = Int8
+    
+    public func eqv(_ a: Int8, _ b: Int8) -> Bool {
+        return a == b
+    }
+}
+
+public class Int8Order : Int8Eq, Order {
+    public func compare(_ a: Int8, _ b: Int8) -> Int {
+        return Int(a) - Int(b)
+    }
+}
+
 public extension Int8 {
     public static var sumMonoid : Int8SumMonoid {
         return Int8SumMonoid()
@@ -85,6 +117,10 @@ public extension Int8 {
     
     public static var productMonoid : Int8ProductMonoid {
         return Int8ProductMonoid()
+    }
+    
+    public static var order : Int8Order {
+        return Int8Order()
     }
 }
 
@@ -118,6 +154,20 @@ public class Int16ProductMonoid : Int16ProductSemigroup, Monoid {
     }
 }
 
+public class Int16Eq : Eq {
+    public typealias A = Int16
+    
+    public func eqv(_ a: Int16, _ b: Int16) -> Bool {
+        return a == b
+    }
+}
+
+public class Int16Order : Int16Eq, Order {
+    public func compare(_ a: Int16, _ b: Int16) -> Int {
+        return Int(a) - Int(b)
+    }
+}
+
 public extension Int16 {
     public static var sumMonoid : Int16SumMonoid {
         return Int16SumMonoid()
@@ -125,6 +175,10 @@ public extension Int16 {
     
     public static var productMonoid : Int16ProductMonoid {
         return Int16ProductMonoid()
+    }
+    
+    public static var order : Int16Order {
+        return Int16Order()
     }
 }
 
@@ -158,6 +212,20 @@ public class Int32ProductMonoid : Int32ProductSemigroup, Monoid {
     }
 }
 
+public class Int32Eq : Eq {
+    public typealias A = Int32
+    
+    public func eqv(_ a: Int32, _ b: Int32) -> Bool {
+        return a == b
+    }
+}
+
+public class Int32Order : Int32Eq, Order {
+    public func compare(_ a: Int32, _ b: Int32) -> Int {
+        return Int(a) - Int(b)
+    }
+}
+
 public extension Int32 {
     public static var sumMonoid : Int32SumMonoid {
         return Int32SumMonoid()
@@ -165,6 +233,10 @@ public extension Int32 {
     
     public static var productMonoid : Int32ProductMonoid {
         return Int32ProductMonoid()
+    }
+    
+    public static var order : Int32Order {
+        return Int32Order()
     }
 }
 
@@ -198,6 +270,20 @@ public class Int64ProductMonoid : Int64ProductSemigroup, Monoid {
     }
 }
 
+public class Int64Eq : Eq {
+    public typealias A = Int64
+    
+    public func eqv(_ a: Int64, _ b: Int64) -> Bool {
+        return a == b
+    }
+}
+
+public class Int64Order : Int64Eq, Order {
+    public func compare(_ a: Int64, _ b: Int64) -> Int {
+        return Int(a) - Int(b)
+    }
+}
+
 public extension Int64 {
     public static var sumMonoid : Int64SumMonoid {
         return Int64SumMonoid()
@@ -205,6 +291,10 @@ public extension Int64 {
     
     public static var productMonoid : Int64ProductMonoid {
         return Int64ProductMonoid()
+    }
+    
+    public static var order : Int64Order {
+        return Int64Order()
     }
 }
 
@@ -238,6 +328,26 @@ public class UIntProductMonoid : UIntProductSemigroup, Monoid {
     }
 }
 
+public class UIntEq : Eq {
+    public typealias A = UInt
+    
+    public func eqv(_ a: UInt, _ b: UInt) -> Bool {
+        return a == b
+    }
+}
+
+public class UIntOrder : UIntEq, Order {
+    public func compare(_ a: UInt, _ b: UInt) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension UInt {
     public static var sumMonoid : UIntSumMonoid {
         return UIntSumMonoid()
@@ -245,6 +355,10 @@ public extension UInt {
     
     public static var productMonoid : UIntProductMonoid {
         return UIntProductMonoid()
+    }
+    
+    public static var order : UIntOrder {
+        return UIntOrder()
     }
 }
 
@@ -278,6 +392,26 @@ public class UInt8ProductMonoid : UInt8ProductSemigroup, Monoid {
     }
 }
 
+public class UInt8Eq : Eq {
+    public typealias A = UInt8
+    
+    public func eqv(_ a: UInt8, _ b: UInt8) -> Bool {
+        return a == b
+    }
+}
+
+public class UInt8Order : UInt8Eq, Order {
+    public func compare(_ a: UInt8, _ b: UInt8) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension UInt8 {
     public static var sumMonoid : UInt8SumMonoid {
         return UInt8SumMonoid()
@@ -285,6 +419,10 @@ public extension UInt8 {
     
     public static var productMonoid : UInt8ProductMonoid {
         return UInt8ProductMonoid()
+    }
+    
+    public static var order : UInt8Order {
+        return UInt8Order()
     }
 }
 
@@ -318,6 +456,26 @@ public class UInt16ProductMonoid : UInt16ProductSemigroup, Monoid {
     }
 }
 
+public class UInt16Eq : Eq {
+    public typealias A = UInt16
+    
+    public func eqv(_ a: UInt16, _ b: UInt16) -> Bool {
+        return a == b
+    }
+}
+
+public class UInt16Order : UInt16Eq, Order {
+    public func compare(_ a: UInt16, _ b: UInt16) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension UInt16 {
     public static var sumMonoid : UInt16SumMonoid {
         return UInt16SumMonoid()
@@ -326,9 +484,13 @@ public extension UInt16 {
     public static var productMonoid : UInt16ProductMonoid {
         return UInt16ProductMonoid()
     }
+    
+    public static var order : UInt16Order {
+        return UInt16Order()
+    }
 }
 
-// Int32
+// UInt32
 
 public class UInt32SumSemigroup : Semigroup {
     public typealias A = UInt32
@@ -358,6 +520,26 @@ public class UInt32ProductMonoid : UInt32ProductSemigroup, Monoid {
     }
 }
 
+public class UInt32Eq : Eq {
+    public typealias A = UInt32
+    
+    public func eqv(_ a: UInt32, _ b: UInt32) -> Bool {
+        return a == b
+    }
+}
+
+public class UInt32Order : UInt32Eq, Order {
+    public func compare(_ a: UInt32, _ b: UInt32) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension UInt32 {
     public static var sumMonoid : UInt32SumMonoid {
         return UInt32SumMonoid()
@@ -365,6 +547,10 @@ public extension UInt32 {
     
     public static var productMonoid : UInt32ProductMonoid {
         return UInt32ProductMonoid()
+    }
+    
+    public static var order : UInt32Order {
+        return UInt32Order()
     }
 }
 
@@ -398,6 +584,26 @@ public class UInt64ProductMonoid : UInt64ProductSemigroup, Monoid {
     }
 }
 
+public class UInt64Eq : Eq {
+    public typealias A = UInt64
+    
+    public func eqv(_ a: UInt64, _ b: UInt64) -> Bool {
+        return a == b
+    }
+}
+
+public class UInt64Order : UInt64Eq, Order {
+    public func compare(_ a: UInt64, _ b: UInt64) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension UInt64 {
     public static var sumMonoid : UInt64SumMonoid {
         return UInt64SumMonoid()
@@ -405,6 +611,10 @@ public extension UInt64 {
     
     public static var productMonoid : UInt64ProductMonoid {
         return UInt64ProductMonoid()
+    }
+    
+    public static var order : UInt64Order {
+        return UInt64Order()
     }
 }
 
@@ -438,6 +648,26 @@ public class FloatProductMonoid : FloatProductSemigroup, Monoid {
     }
 }
 
+public class FloatEq : Eq {
+    public typealias A = Float
+    
+    public func eqv(_ a: Float, _ b: Float) -> Bool {
+        return a == b
+    }
+}
+
+public class FloatOrder : FloatEq, Order {
+    public func compare(_ a: Float, _ b: Float) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension Float {
     public static var sumMonoid : FloatSumMonoid {
         return FloatSumMonoid()
@@ -445,6 +675,10 @@ public extension Float {
     
     public static var productMonoid : FloatProductMonoid {
         return FloatProductMonoid()
+    }
+    
+    public static var order : FloatOrder {
+        return FloatOrder()
     }
 }
 
@@ -478,6 +712,26 @@ public class DoubleProductMonoid : DoubleProductSemigroup, Monoid {
     }
 }
 
+public class DoubleEq : Eq {
+    public typealias A = Double
+    
+    public func eqv(_ a: Double, _ b: Double) -> Bool {
+        return a == b
+    }
+}
+
+public class DoubleOrder : DoubleEq, Order {
+    public func compare(_ a: Double, _ b: Double) -> Int {
+        if a < b {
+            return -1
+        } else if a > b {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
 public extension Double {
     public static var sumMonoid : DoubleSumMonoid {
         return DoubleSumMonoid()
@@ -485,5 +739,9 @@ public extension Double {
     
     public static var productMonoid : DoubleProductMonoid {
         return DoubleProductMonoid()
+    }
+    
+    public static var order : DoubleOrder {
+        return DoubleOrder()
     }
 }
