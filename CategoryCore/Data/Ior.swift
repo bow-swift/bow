@@ -9,6 +9,7 @@
 import Foundation
 
 public class IorF {}
+public typealias IorPartial<A> = HK<IorF, A>
 
 public class Ior<A, B> : HK2<IorF, A, B> {
     public static func left(_ a : A) -> Ior<A, B> {
@@ -30,11 +31,14 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                                       { b in Maybe.some(Ior.both(a, b))})})
     }
     
-    public static func loop<C, SemiG>(_ v : Ior<C, Either<A, B>>, _ f : @escaping (A) -> Ior<C, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
-        return v.fold(Ior<C, B>.left,
+    public static func loop<C, SemiG>(_ v : Ior<C, Either<A, B>>,
+                                      _ f : @escaping (A) -> Ior<C, Either<A, B>>,
+                                      _ semigroup : SemiG) -> Ior<C, B>
+        where SemiG : Semigroup, SemiG.A == C {
+        return v.fold({ left in Ior<C, B>.left(left) },
                       { right in
-                         right.fold({ a in loop(f(a), f, semigroup) },
-                                    Ior<C, B>.right)
+                        right.fold({ a in loop(f(a), f, semigroup) },
+                                   { b in Ior<C, B>.right(b) })
                       },
                       { left, right in
                         right.fold({ a in
@@ -46,8 +50,9 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                       })
     }
     
-    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> Ior<C, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
-        return loop(f(a), f, semigroup)
+    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> HK<IorPartial<C>, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
+        let g = { (a : A) in f(a) as! Ior<C, Either<A, B>> }
+        return loop(f(a) as! Ior<C, Either<A, B>>, g, semigroup)
     }
     
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C, _ fab : (A, B) -> C) -> C {
@@ -193,5 +198,54 @@ extension Ior : CustomStringConvertible {
         return fold({ a in "Left(\(a))" },
                     { b in "Right(\(b))" },
                     { a, b in "Both(\(a),\(b))" })
+    }
+}
+
+public extension Ior {
+    public static func functor<L>() -> IorFunctor<L> {
+        return IorFunctor<L>()
+    }
+    
+    public static func applicative<L, SemiG>(_ semigroup : SemiG) -> IorApplicative<L, SemiG> {
+        return IorApplicative<L, SemiG>(semigroup)
+    }
+    
+    public static func monad<L, SemiG>(_ semigroup : SemiG) -> IorMonad<L, SemiG> {
+        return IorMonad<L, SemiG>(semigroup)
+    }
+}
+
+public class IorFunctor<L> : Functor {
+    public typealias F = IorPartial<L>
+    
+    public func map<A, B>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> B) -> HK<HK<IorF, L>, B> {
+        return (fa as! Ior<L, A>).map(f)
+    }
+}
+
+public class IorApplicative<L, SemiG> : IorFunctor<L>, Applicative where SemiG : Semigroup, SemiG.A == L {
+    fileprivate let semigroup : SemiG
+    
+    public init(_ semigroup : SemiG) {
+        self.semigroup = semigroup
+    }
+    
+    public func pure<A>(_ a: A) -> HK<HK<IorF, L>, A> {
+        return Ior<L, A>.right(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<IorF, L>, A>, _ ff: HK<HK<IorF, L>, (A) -> B>) -> HK<HK<IorF, L>, B> {
+        return (fa as! Ior<L, A>).ap(ff as! Ior<L, (A) -> B>, semigroup)
+    }
+}
+
+public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : Semigroup, SemiG.A == L{
+    
+    public func flatMap<A, B>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> HK<HK<IorF, L>, B>) -> HK<HK<IorF, L>, B> {
+        return (fa as! Ior<L, A>).flatMap(f as! ((A) -> Ior<L, B>), self.semigroup)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<IorF, L>, Either<A, B>>) -> HK<HK<IorF, L>, B> {
+        return Ior.tailRecM(a, f, self.semigroup)
     }
 }
