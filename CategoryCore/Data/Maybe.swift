@@ -169,6 +169,22 @@ public extension Maybe {
     public static func monad() -> MaybeMonad {
         return MaybeMonad()
     }
+    
+    public static func semigroup<SemiG>(_ semigroup : SemiG) -> MaybeSemigroup<A, SemiG> {
+        return MaybeSemigroup<A, SemiG>(semigroup)
+    }
+    
+    public static func monoid<SemiG>(_ semigroup : SemiG) -> MaybeMonoid<A, SemiG> {
+        return MaybeMonoid<A, SemiG>(semigroup)
+    }
+    
+    public static func monadError() -> MaybeMonadError {
+        return MaybeMonadError()
+    }
+    
+    public static func eq<EqA>(_ eqa : EqA) -> MaybeEq<A, EqA> {
+        return MaybeEq<A, EqA>(eqa)
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -198,6 +214,53 @@ public class MaybeMonad : MaybeApplicative, Monad {
         let g = { a in f(a) as! Maybe<Either<A, B>> }
         return Maybe<A>.tailRecM(a, g)
     }
+}
+
+public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
+    public typealias A = Maybe<R>
+    private let semigroup : SemiG
     
+    public init(_ semigroup : SemiG) {
+        self.semigroup = semigroup
+    }
     
+    public func combine(_ a: Maybe<R>, _ b: Maybe<R>) -> Maybe<R> {
+        return a.fold(constF(b),
+                      { aSome in b.fold(constF(a),
+                                        { bSome in Maybe.some(semigroup.combine(aSome, bSome)) })
+                      })
+    }
+}
+
+public class MaybeMonoid<R, SemiG> : MaybeSemigroup<R, SemiG>, Monoid where SemiG : Semigroup, SemiG.A == R {
+    public var empty : Maybe<R> {
+        return Maybe<R>.none()
+    }
+}
+
+public class MaybeMonadError : MaybeMonad, MonadError {
+    public typealias E = Unit
+    
+    public func raiseError<A>(_ e: Unit) -> HK<MaybeF, A> {
+        return Maybe<A>.none()
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<MaybeF, A>, _ f: (Unit) -> HK<MaybeF, A>) -> HK<MaybeF, A> {
+        return fa.ev().orElse(f(unit).ev())
+    }
+}
+
+public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+    public typealias A = Maybe<R>
+    
+    private let eqr : EqR
+    
+    public init(_ eqr : EqR) {
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Maybe<R>, _ b: Maybe<R>) -> Bool {
+        return a.fold({ b.fold(constF(true), constF(false)) },
+                      { aSome in b.fold(constF(false), { bSome in eqr.eqv(aSome, bSome) })})
+    }
 }
