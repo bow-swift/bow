@@ -72,6 +72,7 @@
 		11E17DE51F83D10500CA5A3F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E17DE41F83D10500CA5A3F /* Either.swift */; };
 		11E17DE71F83DB8200CA5A3F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E17DE61F83DB8200CA5A3F /* Ior.swift */; };
 		11E797041FBAEAF500E1DC41 /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E797031FBAEAF500E1DC41 /* NumberInstances.swift */; };
+		11E797061FBB09B000E1DC41 /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E797051FBB09B000E1DC41 /* StringInstances.swift */; };
 		2C7F025A5DC5E8EA6512C351 /* Pods_CategoryCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */; };
 		32DAE1E5C9883C2915034D10 /* Pods_CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D0559E20353D68F8F4A88B /* Pods_CategoryCore.framework */; };
 /* End PBXBuildFile section */
@@ -155,6 +156,7 @@
 		11E17DE41F83D10500CA5A3F /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		11E17DE61F83DB8200CA5A3F /* Ior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		11E797031FBAEAF500E1DC41 /* NumberInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInstances.swift; sourceTree = "<group>"; };
+		11E797051FBB09B000E1DC41 /* StringInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInstances.swift; sourceTree = "<group>"; };
 		1B877B259CE89D23582908A7 /* Pods-CategoryCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCore/Pods-CategoryCore.debug.xcconfig"; sourceTree = "<group>"; };
 		4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CategoryCoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88C527B6280DD859273C8D41 /* Pods-CategoryCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCoreTests/Pods-CategoryCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				11E797031FBAEAF500E1DC41 /* NumberInstances.swift */,
+				11E797051FBB09B000E1DC41 /* StringInstances.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				11CEEA441F7D45FE003EB472 /* HigherKinds.swift in Sources */,
 				11E17DDF1F839A6000CA5A3F /* Maybe.swift in Sources */,
 				11DFBEC01F7E4DBC00A4C96D /* MonadReader.swift in Sources */,
+				11E797061FBB09B000E1DC41 /* StringInstances.swift in Sources */,
 				11DFBEC41F7E561200A4C96D /* MonadWriter.swift in Sources */,
 				11DA37E31F8BAF83002030FF /* Reducible.swift in Sources */,
 				11DFBEBE1F7E4BFE00A4C96D /* MonadFilter.swift in Sources */,
