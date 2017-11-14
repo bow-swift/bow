@@ -22,8 +22,30 @@ public class StringConcatMonoid : StringConcatSemigroup, Monoid {
     }
 }
 
+public class StringEq : Eq {
+    public typealias A = String
+    
+    public func eqv(_ a: String, _ b: String) -> Bool {
+        return a == b
+    }
+}
+
+public class StringOrder : StringEq, Order {
+    public func compare(_ a: String, _ b: String) -> Int {
+        switch a.compare(b) {
+        case .orderedAscending: return -1
+        case .orderedDescending: return 1
+        case .orderedSame: return 0
+        }
+    }
+}
+
 public extension String {
     public static var concatMonoid : StringConcatMonoid {
         return StringConcatMonoid()
+    }
+    
+    public static var order : StringOrder {
+        return StringOrder()
     }
 }
