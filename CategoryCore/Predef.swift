@@ -35,11 +35,11 @@ func constF<A, B, C, D, E>(_ a : A) -> (B, C, D, E) -> A {
     return { _, _, _, _ in a }
 }
 
-public func compose<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
+public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
     return { g(f()) }
 }
 
-public func compose<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
+public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
     return { x in g(f(x)) }
 }
 
@@ -47,11 +47,11 @@ infix operator >> : AdditionPrecedence
 infix operator << : AdditionPrecedence
 
 public func >><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
-    return compose(f, g)
+    return andThen(f, g)
 }
 
 public func >><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
-    return compose(f, g)
+    return andThen(f, g)
 }
 
 public func <<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
