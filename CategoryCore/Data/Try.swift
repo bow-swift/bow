@@ -163,6 +163,14 @@ public extension Try {
     public static func monad() -> TryMonad {
         return TryMonad()
     }
+    
+    public static func monadError() -> TryMonadError {
+        return TryMonadError()
+    }
+    
+    public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
+        return TryEq<A, EqA>(eqa)
+    }
 }
 
 public class TryFunctor : Functor {
@@ -190,5 +198,31 @@ public class TryMonad : TryApplicative, Monad {
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<TryF, Either<A, B>>) -> HK<TryF, B> {
         return Try<A>.tailRecM(a, { a in f(a).ev() })
+    }
+}
+
+public class TryMonadError : TryMonad, MonadError {
+    public typealias E = Error
+    
+    public func raiseError<A>(_ e: Error) -> HK<TryF, A> {
+        return Try<A>.failure(e)
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: (Error) -> HK<TryF, A>) -> HK<TryF, A> {
+        return fa.ev().recoverWith({ e in f(e).ev() })
+    }
+}
+
+public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+    public typealias A = Try<R>
+    private let eqr : EqR
+    
+    public init(_ eqr : EqR) {
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Try<R>, _ b: Try<R>) -> Bool {
+        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
+                      { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
     }
 }
