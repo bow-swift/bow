@@ -35,6 +35,14 @@ func constF<A, B, C, D, E>(_ a : A) -> (B, C, D, E) -> A {
     return { _, _, _, _ in a }
 }
 
+public func compose<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
+    return andThen(f, g)
+}
+
+public func compose<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
+    return andThen(f, g)
+}
+
 public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
     return { g(f()) }
 }
