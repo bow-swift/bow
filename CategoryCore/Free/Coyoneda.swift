@@ -10,6 +10,7 @@ import Foundation
 
 public class CoyonedaF {}
 public typealias AnyFunc = (AnyObject) -> AnyObject
+public typealias CoyonedaPartial<F, P> = HK2<CoyonedaF, F, P>
 
 public class Coyoneda<F, P, A> : HK3<CoyonedaF, F, P, A> {
     private let pivot : HK<F, P>
@@ -57,5 +58,19 @@ fileprivate class YonedaFromCoyoneda<F, A, Func> : Yoneda<F, A> where Func : Fun
     
     override public func apply<B>(_ f: @escaping (A) -> B) -> HK<F, B> {
         return map(f, functor).lower()
+    }
+}
+
+public extension Coyoneda {
+    public static func functor() -> CoyonedaFunctor<F, P> {
+        return CoyonedaFunctor<F, P>()
+    }
+}
+
+public class CoyonedaFunctor<G, P> : Functor {
+    public typealias F = CoyonedaPartial<G, P>
+    
+    public func map<A, B>(_ fa: HK<HK<HK<CoyonedaF, G>, P>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<CoyonedaF, G>, P>, B> {
+        return (fa as! Coyoneda<G, P, A>).map(f)
     }
 }
