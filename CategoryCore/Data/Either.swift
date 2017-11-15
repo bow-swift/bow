@@ -134,32 +134,32 @@ extension Either : CustomStringConvertible {
 }
 
 public extension Either {
-    public static func functor<C>() -> EitherApplicative<C> {
-        return EitherApplicative<C>()
+    public static func functor() -> EitherApplicative<A> {
+        return EitherApplicative<A>()
     }
     
-    public static func applicative<C>() -> EitherApplicative<C> {
-        return EitherApplicative<C>()
+    public static func applicative() -> EitherApplicative<A> {
+        return EitherApplicative<A>()
     }
     
-    public static func monad<C>() -> EitherMonad<C> {
-        return EitherMonad<C>()
+    public static func monad() -> EitherMonad<A> {
+        return EitherMonad<A>()
     }
     
-    public static func monadError<C>() -> EitherMonadError<C> {
-        return EitherMonadError<C>()
+    public static func monadError() -> EitherMonadError<A> {
+        return EitherMonadError<A>()
     }
     
-    public static func foldable<C>() -> EitherFoldable<C> {
-        return EitherFoldable<C>()
+    public static func foldable() -> EitherFoldable<A> {
+        return EitherFoldable<A>()
     }
     
-    public static func traverse<C>() -> EitherTraverse<C> {
-        return EitherTraverse<C>()
+    public static func traverse() -> EitherTraverse<A> {
+        return EitherTraverse<A>()
     }
     
-    public static func semigroupK<C>() -> EitherSemigroupK<C> {
-        return EitherSemigroupK<C>()
+    public static func semigroupK() -> EitherSemigroupK<A> {
+        return EitherSemigroupK<A>()
     }
     
     public static func eq<EqL, EqR>(_ eql : EqL, _ eqr : EqR) -> EitherEq<A, B, EqL, EqR> {
