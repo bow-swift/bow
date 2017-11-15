@@ -9,9 +9,22 @@
 import Foundation
 
 public class EitherTF {}
+public typealias EitherTPartial<F, A> = HK2<EitherTF, F, A>
 
 public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
-    private let value : HK<F, Either<A, B>>
+    fileprivate let value : HK<F, Either<A, B>>
+    
+    public static func tailRecM<C, Mon>(_ a : A, _ f : @escaping (A) -> EitherT<F, C, Either<A, B>>, _ monad : Mon) -> EitherT<F, C, B> where Mon : Monad, Mon.F == F {
+        return EitherT<F, C, B>(monad.tailRecM(a, { a in
+            monad.map(f(a).value, { recursionControl in
+                recursionControl.fold({ left in Either.right(Either.left(left)) },
+                                      { right in
+                                        right.fold({ a in Either.left(a) },
+                                                   { b in Either.right(Either.right(b)) })
+                })
+            })
+        }))
+    }
     
     public static func left<Appl>(_ a : A, _ applicative : Appl) -> EitherT<F, A, B> where Appl : Applicative, Appl.F == F {
         return EitherT(applicative.pure(Either<A, B>.left(a)))
@@ -91,33 +104,97 @@ public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
     }
 }
 
+public extension EitherT {
+    public static func functor<Func>(_ functor : Func) -> EitherTFunctor<F, A, Func> {
+        return EitherTFunctor<F, A, Func>(functor)
+    }
+    
+    public static func applicative<Mon>(_ monad : Mon) -> EitherTApplicative<F, A, Mon> {
+        return EitherTApplicative<F, A, Mon>(monad)
+    }
+    
+    public static func monad<Mon>(_ monad : Mon) -> EitherTMonad<F, A, Mon> {
+        return EitherTMonad<F, A, Mon>(monad)
+    }
+    
+    public static func monadError<Mon>(_ monad : Mon) -> EitherTMonadError<F, A, Mon> {
+        return EitherTMonadError<F, A, Mon>(monad)
+    }
+    
+    public static func semigroupK<Mon>(_ monad : Mon) -> EitherTSemigroupK<F, A, Mon> {
+        return EitherTSemigroupK<F, A, Mon>(monad)
+    }
+}
 
+public class EitherTFunctor<G, M, Func> : Functor where Func : Functor, Func.F == G {
+    public typealias F = EitherTPartial<G, M>
+    
+    private let functor : Func
+    
+    public init(_ functor : Func) {
+        self.functor = functor
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<EitherTF, G>, M>, B> {
+        return (fa as! EitherT<G, M, A>).map(f, functor)
+    }
+}
 
+public class EitherTApplicative<G, M, Mon> : EitherTFunctor<G, M, Mon>, Applicative where Mon : Monad, Mon.F == G {
+    
+    fileprivate let monad : Mon
+    
+    override public init(_ monad : Mon) {
+        self.monad = monad
+        super.init(monad)
+    }
+    
+    public func pure<A>(_ a: A) -> HK<HK<HK<EitherTF, G>, M>, A> {
+        return EitherT<G, M, A>.pure(a, monad)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ ff: HK<HK<HK<EitherTF, G>, M>, (A) -> B>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+        return (fa as! EitherT<G, M, A>).ap(ff as! EitherT<G, M, (A) -> B>, monad)
+    }
+}
 
+public class EitherTMonad<G, M, Mon> : EitherTApplicative<G, M, Mon>, Monad where Mon : Monad, Mon.F == G {
+    
+    public func flatMap<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (A) -> HK<HK<HK<EitherTF, G>, M>, B>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+        return (fa as! EitherT<G, M, A>).flatMap({ a in f(a) as! EitherT<G, M, B>}, self.monad)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<EitherTF, G>, M>, Either<A, B>>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+        return EitherT.tailRecM(a, { a in f(a) as! EitherT<G, M, Either<A, B>> }, self.monad)
+    }
+}
 
+public class EitherTMonadError<G, M, Mon> : EitherTMonad<G, M, Mon>, MonadError where Mon : Monad, Mon.F == G {
+    public typealias E = M
+    
+    public func raiseError<A>(_ e: M) -> HK<HK<HK<EitherTF, G>, M>, A> {
+        return EitherT(monad.pure(Either.left(e)))
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (M) -> HK<HK<HK<EitherTF, G>, M>, A>) -> HK<HK<HK<EitherTF, G>, M>, A> {
+        
+        return EitherT<G, M, A>(monad.flatMap((fa as! EitherT<G, M, A>).value, { either in
+            either.fold({ left in (f(left) as! EitherT<G, M, A>).value },
+                        { right in self.monad.pure(Either<M, A>.right(right)) })
+        }))
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public class EitherTSemigroupK<G, M, Mon> : SemigroupK where Mon : Monad, Mon.F == G {
+    public typealias F = EitherTPartial<G, M>
+    
+    private let monad : Mon
+    
+    public init(_ monad : Mon) {
+        self.monad = monad
+    }
+    
+    public func combineK<A>(_ x: HK<HK<HK<EitherTF, G>, M>, A>, _ y: HK<HK<HK<EitherTF, G>, M>, A>) -> HK<HK<HK<EitherTF, G>, M>, A> {
+        return (x as! EitherT<G, M, A>).combineK(y as! EitherT<G, M, A>, monad)
+    }
+}
