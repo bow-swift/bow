@@ -11,7 +11,7 @@ import Foundation
 public class IdF {}
 
 public class Id<A> : HK<IdF, A> {
-    private let value : A
+    public let value : A
     
     public static func pure(_ a : A) -> Id<A> {
         return Id<A>(a)
