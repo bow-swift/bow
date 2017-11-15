@@ -9,6 +9,7 @@
 import Foundation
 
 public class ValidatedF {}
+public typealias ValidatedPartial<E> = HK<ValidatedF, E>
 
 public class Validated<E, A> : HK2<ValidatedF, E, A> {
     public static func valid(_ value : A) -> Validated<E, A> {
@@ -124,7 +125,7 @@ public class Validated<E, A> : HK2<ValidatedF, E, A> {
         return fold(f, Validated.valid)
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, Validated<E, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK2<ValidatedF, E, B>> where Appl : Applicative, Appl.F == G {
         return fold(Validated<E, B>.invalid >> applicative.pure,
                     { a in applicative.map(f(a), Validated<E, B>.valid) })
     }
@@ -156,5 +157,119 @@ extension Validated : CustomStringConvertible {
     public var description : String {
         return fold({ e in "Invalid(\(e))" },
                     { a in "Valid(\(a)" })
+    }
+}
+
+public extension Validated {
+    public static func functor() -> ValidatedFunctor<E> {
+        return ValidatedFunctor<E>()
+    }
+    
+    public static func applicative<SemiG>(_ semigroup : SemiG) -> ValidatedApplicative<E, SemiG> {
+        return ValidatedApplicative<E, SemiG>(semigroup)
+    }
+    
+    public static func applicativeError<SemiG>(_ semigroup : SemiG) -> ValidatedApplicativeError<E, SemiG> {
+        return ValidatedApplicativeError<E, SemiG>(semigroup)
+    }
+    
+    public static func foldable() -> ValidatedFoldable<E> {
+        return ValidatedFoldable<E>()
+    }
+    
+    public static func traverse() -> ValidatedTraverse<E> {
+        return ValidatedTraverse<E>()
+    }
+    
+    public static func semigroupK<SemiG>(_ semigroup : SemiG) -> ValidatedSemigroupK<E, SemiG> {
+        return ValidatedSemigroupK<E, SemiG>(semigroup)
+    }
+    
+    public static func eq<EqE, EqA>(_ eqe : EqE, _ eqa : EqA) -> ValidatedEq<E, A, EqE, EqA> {
+        return ValidatedEq<E, A, EqE, EqA>(eqe, eqa)
+    }
+}
+
+public class ValidatedFunctor<R> : Functor {
+    public typealias F = ValidatedPartial<R>
+    
+    public func map<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: @escaping (A) -> B) -> HK<HK<ValidatedF, R>, B> {
+        return (fa as! Validated<R, A>).map(f)
+    }
+}
+
+public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative where SemiG : Semigroup, SemiG.A == R {
+    private let semigroup : SemiG
+    
+    public init(_ semigroup : SemiG) {
+        self.semigroup = semigroup
+    }
+    
+    public func pure<A>(_ a: A) -> HK<HK<ValidatedF, R>, A> {
+        return Validated<R, A>.valid(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ ff: HK<HK<ValidatedF, R>, (A) -> B>) -> HK<HK<ValidatedF, R>, B> {
+        return (fa as! Validated<R, A>).ap(ff as! Validated<R, (A) -> B>, semigroup)
+    }
+}
+
+public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG>, ApplicativeError where SemiG : Semigroup, SemiG.A == R {
+    public typealias E = R
+    
+    public func raiseError<A>(_ e: R) -> HK<HK<ValidatedF, R>, A> {
+        return Validated<R, A>.invalid(e)
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: (R) -> HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
+        return (fa as! Validated<R, A>).handleLeftWith({ r in f(r) as! Validated<R, A> })
+    }
+}
+
+public class ValidatedFoldable<R> : Foldable {
+    public typealias F = ValidatedPartial<R>
+    
+    public func foldL<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+        return (fa as! Validated<R, A>).foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return (fa as! Validated<R, A>).foldR(b, f)
+    }
+}
+
+public class ValidatedTraverse<R> : ValidatedFoldable<R>, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ValidatedF, R>, B>> where G == Appl.F, Appl : Applicative {
+        return (fa as! Validated<R, A>).traverse(f, applicative)
+    }
+}
+
+public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup, SemiG.A == R {
+    public typealias F = ValidatedPartial<R>
+    
+    private let semigroup : SemiG
+    
+    public init(_ semigroup : SemiG) {
+        self.semigroup = semigroup
+    }
+    
+    public func combineK<A>(_ x: HK<HK<ValidatedF, R>, A>, _ y: HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
+        return (x as! Validated<R, A>).combineK(y as! Validated<R, A>, semigroup)
+    }
+}
+
+public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+    public typealias A = Validated<L, R>
+    private let eql : EqL
+    private let eqr : EqR
+    
+    public init(_ eql : EqL, _ eqr : EqR) {
+        self.eql = eql
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Validated<L, R>, _ b: Validated<L, R>) -> Bool {
+        return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constF(false))},
+                      { aValid in b.fold(constF(false), { bValid in eqr.eqv(aValid, bValid) })})
     }
 }
