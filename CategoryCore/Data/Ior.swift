@@ -269,13 +269,13 @@ public class IorFoldable<L> : Foldable {
         return (fa as! Ior<L, A>).foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return (fa as! Ior<L, A>).foldR(b, f)
     }
 }
 
 public class IorTraverse<L> : IorFoldable<L>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<HK<IorF, L>, A>, _ f: (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<IorF, L>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<IorF, L>, B>> where G == Appl.F, Appl : Applicative {
         return (fa as! Ior<L, A>).traverse(f, applicative)
     }
 }

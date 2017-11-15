@@ -12,7 +12,7 @@ public protocol Foldable : Typeclass {
     associatedtype F
     
     func foldL<A, B>(_ fa : HK<F, A>, _ b : B, _ f : (B, A) -> B) -> B
-    func foldR<A, B>(_ fa : HK<F, A>, _ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B>
+    func foldR<A, B>(_ fa : HK<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 
 public extension Foldable {
@@ -52,7 +52,7 @@ public extension Foldable {
         return foldL(fa, monoid.empty, { b, a in monoid.combine(b, f(a)) })
     }
     
-    public func traverse_<G, A, B, Appl>(_ applicative : Appl, _ fa : HK<F, A>, _ f : (A) -> HK<G, B>) -> HK<G, Unit> where Appl : Applicative, Appl.F == G {
+    public func traverse_<G, A, B, Appl>(_ applicative : Appl, _ fa : HK<F, A>, _ f : @escaping (A) -> HK<G, B>) -> HK<G, Unit> where Appl : Applicative, Appl.F == G {
         return foldR(fa, Eval.always({ applicative.pure(unit) }), { a, acc in
             applicative.map2Eval(f(a), acc, { _, _ in unit })
         }).value()
@@ -62,19 +62,19 @@ public extension Foldable {
         return traverse_(applicative, fga, id)
     }
     
-    public func find<A>(_ fa : HK<F, A>, _ f : (A) -> Bool) -> Maybe<A> {
+    public func find<A>(_ fa : HK<F, A>, _ f : @escaping (A) -> Bool) -> Maybe<A> {
         return foldR(fa, Eval.now(Maybe.none()), { a, lb in
             f(a) ? Eval.now(Maybe.some(a)) : lb
         }).value()
     }
     
-    public func exists<A>(_ fa : HK<F, A>, _ predicate : (A) -> Bool) -> Bool {
+    public func exists<A>(_ fa : HK<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldR(fa, Eval<Bool>.False, { a, lb in
             predicate(a) ? Eval<Bool>.True : lb
         }).value()
     }
     
-    public func forall<A>(_ fa : HK<F, A>, _ predicate : (A) -> Bool) -> Bool {
+    public func forall<A>(_ fa : HK<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldR(fa, Eval<Bool>.True, { a, lb in
             predicate(a) ? lb : Eval<Bool>.False
         }).value()

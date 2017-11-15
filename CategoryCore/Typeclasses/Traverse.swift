@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Traverse : Functor, Foldable {
-    func traverse<G, A, B, Appl>(_ fa : HK<F, A>, _ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<F, B>> where Appl : Applicative, Appl.F == G
+    func traverse<G, A, B, Appl>(_ fa : HK<F, A>, _ f : @escaping (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<F, B>> where Appl : Applicative, Appl.F == G
 }
 
 public extension Traverse {
@@ -21,7 +21,7 @@ public extension Traverse {
         return traverse(fga, id, applicative)
     }
     
-    public func flatTraverse<Appl, Mon, G, A, B>(_ fa : HK<F, A>, _ f : (A) -> HK<G, HK<F, B>>, _ applicative : Appl, _ monad : Mon) -> HK<G, HK<F, B>> where Appl : Applicative, Appl.F == G, Mon : Monad, Mon.F == F {
+    public func flatTraverse<Appl, Mon, G, A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> HK<G, HK<F, B>>, _ applicative : Appl, _ monad : Mon) -> HK<G, HK<F, B>> where Appl : Applicative, Appl.F == G, Mon : Monad, Mon.F == F {
         return applicative.map(traverse(fa, f, applicative), monad.flatten)
     }
 }

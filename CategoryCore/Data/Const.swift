@@ -140,13 +140,13 @@ public class ConstFoldable<R> : Foldable {
         return b
     }
     
-    public func foldR<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return b
     }
 }
 
 public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
         return (fa as! Const<R, A>).traverse(f, applicative)
     }
 }

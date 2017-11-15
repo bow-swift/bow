@@ -47,7 +47,7 @@ public class Coproduct<F, G, A> : HK3<CoproductF, F, G, A> {
                         { ga in foldableG.foldR(ga, b, f) })
     }
     
-    public func traverse<B, H, Appl, TravF, TravG>(_ f : (A) -> HK<H, B>, _ applicative : Appl, _ traverseF : TravF, _ traverseG : TravG) -> HK<H, Coproduct<F, G, B>> where Appl : Applicative, Appl.F == H, TravF : Traverse, TravF.F == F, TravG : Traverse, TravG.F == G {
+    public func traverse<B, H, Appl, TravF, TravG>(_ f : @escaping (A) -> HK<H, B>, _ applicative : Appl, _ traverseF : TravF, _ traverseG : TravG) -> HK<H, Coproduct<F, G, B>> where Appl : Applicative, Appl.F == H, TravF : Traverse, TravF.F == F, TravG : Traverse, TravG.F == G {
         return run.fold({ fa in applicative.map(traverseF.traverse(fa, f, applicative), { fb in
             Coproduct<F, G, B>(Either.left(fb)) } ) },
                         { ga in applicative.map(traverseG.traverse(ga, f, applicative), { gb in Coproduct<F, G, B>(Either.right(gb)) } ) })

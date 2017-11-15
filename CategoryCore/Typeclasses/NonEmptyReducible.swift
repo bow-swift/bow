@@ -46,17 +46,17 @@ public extension NonEmptyReducible {
         return monoid.combine(a, foldable().fold(monoid, ga))
     }
     
-    public func find<A>(_ fa: HK<F, A>, _ f: (A) -> Bool) -> Maybe<A> {
+    public func find<A>(_ fa: HK<F, A>, _ f: @escaping (A) -> Bool) -> Maybe<A> {
         let (a, ga) = split(fa)
         return f(a) ? Maybe.some(a) : foldable().find(ga, f)
     }
     
-    public func exists<A>(_ fa: HK<F, A>, _ predicate: (A) -> Bool) -> Bool {
+    public func exists<A>(_ fa: HK<F, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
         let (a, ga) = split(fa)
         return predicate(a) || foldable().exists(ga, predicate)
     }
     
-    public func forall<A>(_ fa: HK<F, A>, _ predicate: (A) -> Bool) -> Bool {
+    public func forall<A>(_ fa: HK<F, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
         let (a, ga) = split(fa)
         return predicate(a) && foldable().forall(ga, predicate)
     }
