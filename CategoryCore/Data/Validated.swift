@@ -221,7 +221,7 @@ public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG
         return Validated<R, A>.invalid(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: (R) -> HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
+    public func handleErrorWith<A>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: @escaping (R) -> HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
         return (fa as! Validated<R, A>).handleLeftWith({ r in f(r) as! Validated<R, A> })
     }
 }

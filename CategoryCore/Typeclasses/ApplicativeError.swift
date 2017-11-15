@@ -12,16 +12,16 @@ public protocol ApplicativeError : Applicative {
     associatedtype E
     
     func raiseError<A>(_ e : E) -> HK<F, A>
-    func handleErrorWith<A>(_ fa : HK<F, A>, _ f : (E) -> HK<F, A>) -> HK<F, A>
+    func handleErrorWith<A>(_ fa : HK<F, A>, _ f : @escaping (E) -> HK<F, A>) -> HK<F, A>
 }
 
 public extension ApplicativeError {
-    public func handleError<A>(_ fa : HK<F, A>, _ f : (E) -> A) -> HK<F, A> {
-        return handleErrorWith(fa, { a in pure(f(a)) })
+    public func handleError<A>(_ fa : HK<F, A>, _ f : @escaping (E) -> A) -> HK<F, A> {
+        return handleErrorWith(fa, { a in self.pure(f(a)) })
     }
     
     public func attempt<A>(_ fa : HK<F, A>) -> HK<F, Either<E, A>> {
-        return handleErrorWith(map(fa, Either<E, A>.right), { e in pure(Either<E, A>.left(e)) })
+        return handleErrorWith(map(fa, Either<E, A>.right), { e in self.pure(Either<E, A>.left(e)) })
     }
     
     public func fromEither<A>(_ fea : Either<E, A>) -> HK<F, A> {

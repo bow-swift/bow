@@ -196,7 +196,7 @@ public class EitherMonadError<C> : EitherMonad<C>, MonadError {
         return Either<C, A>.left(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<EitherF, C>, A>, _ f: (C) -> HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
+    public func handleErrorWith<A>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (C) -> HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
         let fca = fa as! Either<C, A>
         return fca.fold(f, constF(fca))
     }

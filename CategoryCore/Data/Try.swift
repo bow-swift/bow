@@ -208,7 +208,7 @@ public class TryMonadError : TryMonad, MonadError {
         return Try<A>.failure(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: (Error) -> HK<TryF, A>) -> HK<TryF, A> {
+    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: @escaping (Error) -> HK<TryF, A>) -> HK<TryF, A> {
         return fa.ev().recoverWith({ e in f(e).ev() })
     }
 }

@@ -245,7 +245,7 @@ public class MaybeMonadError : MaybeMonad, MonadError {
         return Maybe<A>.none()
     }
     
-    public func handleErrorWith<A>(_ fa: HK<MaybeF, A>, _ f: (Unit) -> HK<MaybeF, A>) -> HK<MaybeF, A> {
+    public func handleErrorWith<A>(_ fa: HK<MaybeF, A>, _ f: @escaping (Unit) -> HK<MaybeF, A>) -> HK<MaybeF, A> {
         return fa.ev().orElse(f(unit).ev())
     }
 }
