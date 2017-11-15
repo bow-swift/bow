@@ -8,7 +8,9 @@
 
 import Foundation
 
-public class MaybeT<F, A> : HK<F, Maybe<A>> {
+public class MaybeTF {}
+
+public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
     private let value : HK<F, Maybe<A>>
     
     public static func pure<Appl>(_ a : A, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
@@ -84,8 +86,12 @@ public class MaybeT<F, A> : HK<F, Maybe<A>> {
     }
     
     public func orElse<Mon>(_ defaultValue : MaybeT<F, A>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
-        return MaybeT(monad.flatMap(value, { maybe in
-            maybe.fold({ defaultValue  },
+        return orElseF(defaultValue.value, monad)
+    }
+    
+    public func orElseF<Mon>(_ defaultValue : HK<F, Maybe<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
+        return MaybeT<F, A>(monad.flatMap(value, { maybe in
+            maybe.fold(constF(defaultValue),
                        { _ in monad.pure(maybe) }) }))
     }
     
@@ -101,22 +107,3 @@ public class MaybeT<F, A> : HK<F, Maybe<A>> {
         return MaybeT<F, B>(functor.map(value, { maybe in maybe.flatMap(f) }))
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
