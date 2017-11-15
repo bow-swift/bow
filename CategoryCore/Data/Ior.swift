@@ -93,7 +93,7 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                     { _, b in f(b, c) })
     }
     
-    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, Ior<A, C>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, HK2<IorF, A, C>> where Appl : Applicative, Appl.F == G {
         return fold({ a in applicative.pure(Ior<A, C>.left(a)) },
                     { b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) },
                     { _, b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) })
@@ -202,16 +202,28 @@ extension Ior : CustomStringConvertible {
 }
 
 public extension Ior {
-    public static func functor<L>() -> IorFunctor<L> {
-        return IorFunctor<L>()
+    public static func functor() -> IorFunctor<A> {
+        return IorFunctor<A>()
     }
     
-    public static func applicative<L, SemiG>(_ semigroup : SemiG) -> IorApplicative<L, SemiG> {
-        return IorApplicative<L, SemiG>(semigroup)
+    public static func applicative<SemiG>(_ semigroup : SemiG) -> IorApplicative<A, SemiG> {
+        return IorApplicative<A, SemiG>(semigroup)
     }
     
-    public static func monad<L, SemiG>(_ semigroup : SemiG) -> IorMonad<L, SemiG> {
-        return IorMonad<L, SemiG>(semigroup)
+    public static func monad<SemiG>(_ semigroup : SemiG) -> IorMonad<A, SemiG> {
+        return IorMonad<A, SemiG>(semigroup)
+    }
+    
+    public static func foldable() -> IorFoldable<A> {
+        return IorFoldable<A>()
+    }
+    
+    public static func traverse() -> IorTraverse<A> {
+        return IorTraverse<A>()
+    }
+    
+    public static func eq<EqA, EqB>(_ eqa : EqA, _ eqb : EqB) -> IorEq<A, B, EqA, EqB> {
+        return IorEq<A, B, EqA, EqB>(eqa, eqb)
     }
 }
 
@@ -249,3 +261,48 @@ public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : 
         return Ior.tailRecM(a, f, self.semigroup)
     }
 }
+
+public class IorFoldable<L> : Foldable {
+    public typealias F = IorPartial<L>
+    
+    public func foldL<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+        return (fa as! Ior<L, A>).foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return (fa as! Ior<L, A>).foldR(b, f)
+    }
+}
+
+public class IorTraverse<L> : IorFoldable<L>, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: HK<HK<IorF, L>, A>, _ f: (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<IorF, L>, B>> where G == Appl.F, Appl : Applicative {
+        return (fa as! Ior<L, A>).traverse(f, applicative)
+    }
+}
+
+public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+    public typealias A = Ior<L, R>
+    
+    private let eql : EqL
+    private let eqr : EqR
+    
+    public init(_ eql : EqL, _ eqr : EqR) {
+        self.eql = eql
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Ior<L, R>, _ b: Ior<L, R>) -> Bool {
+        return a.fold({ aLeft in
+            b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false), constF(false))
+        },
+                      { aRight in
+            b.fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }, constF(false))
+        },
+                      { aLeft, aRight in
+            b.fold(constF(false), constF(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
+        })
+    }
+}
+
+
+
