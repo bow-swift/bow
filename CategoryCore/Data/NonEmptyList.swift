@@ -95,6 +95,16 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
         return tail.reduce(f(b, head), f)
     }
     
+    public func foldR<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return ListKW<A>.foldable().foldR(self.all().k(), b, f)
+    }
+    
+    public func traverse<G, B, Appl>(_ f : @escaping (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<NonEmptyListF, B>> where Appl : Applicative, Appl.F == G {
+        return applicative.map2Eval(f(self.head),
+                                    Eval<HK<G, HK<ListKWF, B>>>.always({ ListKW<A>.traverse().traverse(ListKW<A>(self.tail), f, applicative) }),
+                                    { (a : B, b : HK<ListKWF, B>) in NonEmptyList<B>(head: a, tail: b.ev().asArray) }).value()
+    }
+    
     public func coflatMap<B>(_ f : @escaping (NonEmptyList<A>) -> B) -> NonEmptyList<B> {
         func consume(_ list : [A], _ buf : [B] = []) -> [B] {
             if list.isEmpty {
@@ -132,3 +142,153 @@ extension NonEmptyList : CustomStringConvertible {
         return "NonEmptyList(\(self.all())"
     }
 }
+
+public extension HK where F == NonEmptyListF {
+    public func ev() -> NonEmptyList<A> {
+        return self as! NonEmptyList<A>
+    }
+}
+
+public extension NonEmptyList {
+    public static func functor() -> NonEmptyListFunctor {
+        return NonEmptyListFunctor()
+    }
+    
+    public static func applicative() -> NonEmptyListApplicative {
+        return NonEmptyListApplicative()
+    }
+    
+    public static func monad() -> NonEmptyListMonad {
+        return NonEmptyListMonad()
+    }
+    
+    public static func comonad() -> NonEmptyListBimonad {
+        return NonEmptyListBimonad()
+    }
+    
+    public static func bimonad() -> NonEmptyListBimonad {
+        return NonEmptyListBimonad()
+    }
+    
+    public static func foldable() -> NonEmptyListFoldable {
+        return NonEmptyListFoldable()
+    }
+    
+    public static func traverse() -> NonEmptyListTraverse {
+        return NonEmptyListTraverse()
+    }
+    
+    public static func semigroup() -> NonEmptyListSemigroup<A> {
+        return NonEmptyListSemigroup<A>()
+    }
+    
+    public static func semigroupK() -> NonEmptyListSemigroupK {
+        return NonEmptyListSemigroupK()
+    }
+    
+    public static func eq<EqA>(_ eqa : EqA) -> NonEmptyListEq<A, EqA> {
+        return NonEmptyListEq<A, EqA>(eqa)
+    }
+}
+
+public class NonEmptyListFunctor : Functor {
+    public typealias F = NonEmptyListF
+    
+    public func map<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> B) -> HK<NonEmptyListF, B> {
+        return (fa as! NonEmptyList<A>).map(f)
+    }
+}
+
+public class NonEmptyListApplicative : NonEmptyListFunctor, Applicative {
+    
+    public func pure<A>(_ a: A) -> HK<NonEmptyListF, A> {
+        return NonEmptyList.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<NonEmptyListF, A>, _ ff: HK<NonEmptyListF, (A) -> B>) -> HK<NonEmptyListF, B> {
+        return fa.ev().ap(ff.ev())
+    }
+}
+
+public class NonEmptyListMonad : NonEmptyListApplicative, Monad {
+    
+    public func flatMap<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> HK<NonEmptyListF, B>) -> HK<NonEmptyListF, B> {
+        return fa.ev().flatMap({ a in f(a).ev() })
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<NonEmptyListF, Either<A, B>>) -> HK<NonEmptyListF, B> {
+        return NonEmptyList.tailRecM(a, f)
+    }
+}
+
+public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
+    public func coflatMap<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (HK<NonEmptyListF, A>) -> B) -> HK<NonEmptyListF, B> {
+        return fa.ev().coflatMap(f)
+    }
+    
+    public func extract<A>(_ fa: HK<NonEmptyListF, A>) -> A {
+        return fa.ev().extract()
+    }
+}
+
+public class NonEmptyListFoldable : Foldable {
+    public typealias F = NonEmptyListF
+    
+    public func foldL<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: B, _ f: (B, A) -> B) -> B {
+        return fa.ev().foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.ev().foldR(b, f)
+    }
+}
+
+public class NonEmptyListTraverse : NonEmptyListFoldable, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<NonEmptyListF, B>> where G == Appl.F, Appl : Applicative {
+        return fa.ev().traverse(f, applicative)
+    }
+}
+
+public class NonEmptyListSemigroupK : SemigroupK {
+    public typealias F = NonEmptyListF
+    
+    public func combineK<A>(_ x: HK<NonEmptyListF, A>, _ y: HK<NonEmptyListF, A>) -> HK<NonEmptyListF, A> {
+        return x.ev().combineK(y.ev())
+    }
+}
+
+public class NonEmptyListSemigroup<R> : Semigroup {
+    public typealias A = NonEmptyList<R>
+    
+    public func combine(_ a: NonEmptyList<R>, _ b: NonEmptyList<R>) -> NonEmptyList<R> {
+        return a + b
+    }
+}
+
+public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+    public typealias A = NonEmptyList<R>
+    
+    private let eqr : EqR
+    
+    public init(_ eqr : EqR) {
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: NonEmptyList<R>, _ b: NonEmptyList<R>) -> Bool {
+        if a.count != b.count {
+            return false
+        } else {
+            return zip(a.all(), b.all()).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
