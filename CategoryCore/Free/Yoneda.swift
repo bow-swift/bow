@@ -9,8 +9,9 @@
 import Foundation
 
 public class YonedaF {}
+public typealias YonedaPartial<F> = HK<YonedaF, F>
 
-open class Yoneda<F, A> : HK<YonedaF, A> {
+open class Yoneda<F, A> : HK2<YonedaF, F, A> {
     public static func apply<Func>(_ fa : HK<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
         return YonedaFunctor<F, A, Func>(fa, functor)
     }
@@ -60,3 +61,22 @@ fileprivate class YonedaFunctor<F, A, Func> : Yoneda<F, A> where Func : Functor,
     }
 }
 
+public extension Yoneda {
+    public static func functor<Func>(_ functor : Func) -> YonedaFunctorInstance<F, Func> {
+        return YonedaFunctorInstance<F, Func>(functor)
+    }
+}
+
+public class YonedaFunctorInstance<G, Func> : Functor where Func : Functor, Func.F == G {
+    public typealias F = YonedaPartial<G>
+    
+    private let functor : Func
+    
+    public init(_ functor : Func) {
+        self.functor = functor
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<YonedaF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<YonedaF, G>, B> {
+        return (fa as! Yoneda<G, A>).map(f, functor)
+    }
+}
