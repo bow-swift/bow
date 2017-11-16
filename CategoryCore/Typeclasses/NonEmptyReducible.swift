@@ -17,7 +17,7 @@ public protocol NonEmptyReducible : Reducible {
 }
 
 public extension NonEmptyReducible {
-    public func foldL<A, B>(_ fa: HK<F, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<F, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         let (a, ga) = split(fa)
         return foldable().foldL(ga, f(b, a), f)
     }
@@ -26,7 +26,7 @@ public extension NonEmptyReducible {
         return Eval<(A, HK<G, A>)>.always({ self.split(fa) }).flatMap{ (a, ga) in f(a, self.foldable().foldR(ga, b, f)) }
     }
     
-    public func reduceLeftTo<A, B>(_ fa: HK<F, A>, _ f: (A) -> B, _ g: (B, A) -> B) -> B {
+    public func reduceLeftTo<A, B>(_ fa: HK<F, A>, _ f: (A) -> B, _ g: @escaping (B, A) -> B) -> B {
         let (a, ga) = split(fa)
         return foldable().foldL(ga, f(a), { b, a in g(b, a) })
     }

@@ -143,7 +143,7 @@ public class IdBimonad : IdMonad, Bimonad {
 public class IdFoldable : Foldable {
     public typealias F = IdF
     
-    public func foldL<A, B>(_ fa: HK<IdF, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<IdF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.ev().foldL(b, f)
     }
     

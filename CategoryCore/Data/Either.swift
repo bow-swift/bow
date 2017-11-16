@@ -205,7 +205,7 @@ public class EitherMonadError<C> : EitherMonad<C>, MonadError {
 public class EitherFoldable<C> : Foldable {
     public typealias F = EitherPartial<C>
     
-    public func foldL<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         let fca = fa as! Either<C, A>
         return fca.foldL(b, f)
     }

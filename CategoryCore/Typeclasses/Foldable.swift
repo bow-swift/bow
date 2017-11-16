@@ -11,7 +11,7 @@ import Foundation
 public protocol Foldable : Typeclass {
     associatedtype F
     
-    func foldL<A, B>(_ fa : HK<F, A>, _ b : B, _ f : (B, A) -> B) -> B
+    func foldL<A, B>(_ fa : HK<F, A>, _ b : B, _ f : @escaping (B, A) -> B) -> B
     func foldR<A, B>(_ fa : HK<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 

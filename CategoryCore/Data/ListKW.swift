@@ -201,7 +201,7 @@ public class ListKWMonad : ListKWApplicative, Monad {
 public class ListKWFoldable : Foldable {
     public typealias F = ListKWF
     
-    public func foldL<A, B>(_ fa: HK<ListKWF, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<ListKWF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.ev().foldL(b, f)
     }
     

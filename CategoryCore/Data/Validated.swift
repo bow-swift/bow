@@ -229,7 +229,7 @@ public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG
 public class ValidatedFoldable<R> : Foldable {
     public typealias F = ValidatedPartial<R>
     
-    public func foldL<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return (fa as! Validated<R, A>).foldL(b, f)
     }
     

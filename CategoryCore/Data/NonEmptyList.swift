@@ -234,7 +234,7 @@ public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
 public class NonEmptyListFoldable : Foldable {
     public typealias F = NonEmptyListF
     
-    public func foldL<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.ev().foldL(b, f)
     }
     

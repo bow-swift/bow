@@ -265,7 +265,7 @@ public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : 
 public class IorFoldable<L> : Foldable {
     public typealias F = IorPartial<L>
     
-    public func foldL<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: B, _ f: (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return (fa as! Ior<L, A>).foldL(b, f)
     }
     
