@@ -152,7 +152,7 @@ public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
 }
 
 public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
-    public func traverseFilter<A, B, G, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: (A) -> HK<G, Maybe<B>>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverseFilter<A, B, G, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, Maybe<B>>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
         return (fa as! Const<R, A>).traverseFilter(f, applicative)
     }
 }

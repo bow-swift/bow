@@ -231,7 +231,7 @@ public class ListKWMonoidK : ListKWSemigroupK, MonoidK {
 }
 
 public class ListKWFunctorFilter : ListKWFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: (A) -> Maybe<B>) -> HK<ListKWF, B> {
+    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<ListKWF, B> {
         return fa.ev().mapFilter(f)
     }
 }
@@ -241,7 +241,7 @@ public class ListKWMonadFilter : ListKWMonad, MonadFilter {
         return ListKW<A>.empty()
     }
     
-    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: (A) -> Maybe<B>) -> HK<ListKWF, B> {
+    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<ListKWF, B> {
         return fa.ev().mapFilter(f)
     }
 }
