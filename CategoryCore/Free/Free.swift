@@ -154,3 +154,71 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
         return applicative.ap(fa, ff)
     }
 }
+
+public extension Free {
+    public static func functor() -> FreeFunctor<S> {
+        return FreeFunctor<S>()
+    }
+    
+    public static func applicative() -> FreeApplicativeInstance<S> {
+        return FreeApplicativeInstance<S>()
+    }
+    
+    public static func monad() -> FreeMonad<S> {
+        return FreeMonad<S>()
+    }
+    
+    public static func eq<G, FuncK, Mon, EqGB>(_ functionK : FuncK, _ monad : Mon, _ eq : EqGB) -> FreeEq<S, G, A, FuncK, Mon, EqGB> {
+        return FreeEq<S, G, A, FuncK, Mon, EqGB>(functionK, monad, eq)
+    }
+}
+
+public class FreeFunctor<S> : Functor {
+    public typealias F = FreePartial<S>
+    
+    public func map<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<FreeF, S>, B> {
+        return (fa as! Free<S, A>).map(f)
+    }
+}
+
+public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
+    public func pure<A>(_ a: A) -> HK<HK<FreeF, S>, A> {
+        return Free.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ ff: HK<HK<FreeF, S>, (A) -> B>) -> HK<HK<FreeF, S>, B> {
+        return (fa as! Free<S, A>).ap(ff as! Free<S, (A) -> B>)
+    }
+}
+
+public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
+    public func flatMap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> HK<HK<FreeF, S>, B>) -> HK<HK<FreeF, S>, B> {
+        return (fa as! Free<S, A>).flatMap({ a in f(a) as! Free<S, B> })
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<FreeF, S>, Either<A, B>>) -> HK<HK<FreeF, S>, B> {
+        return flatMap(f(a)) { either in
+            either.fold({ left in self.tailRecM(left, f) },
+                        { right in self.pure(right) })
+        }
+    }
+}
+
+public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == HK<G, B> {
+    public typealias A = HK<FreePartial<F>, B>
+    
+    private let functionK : FuncKFG
+    private let monad : MonG
+    private let eq : EqGB
+    
+    public init(_ functionK : FuncKFG, _ monad : MonG, _ eq : EqGB) {
+        self.functionK = functionK
+        self.monad = monad
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<HK<FreeF, F>, B>, _ b: HK<HK<FreeF, F>, B>) -> Bool {
+        return eq.eqv((a as! Free<F, B>).foldMap(functionK, monad),
+                      (b as! Free<F, B>).foldMap(functionK, monad))
+    }
+}
