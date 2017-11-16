@@ -9,6 +9,7 @@
 import Foundation
 
 public class CoproductF {}
+public typealias CoproductPartial<F, G> = HK2<CoproductF, F, G>
 
 public class Coproduct<F, G, A> : HK3<CoproductF, F, G, A> {
     private let run : Either<HK<F, A>, HK<G, A>>
@@ -47,9 +48,124 @@ public class Coproduct<F, G, A> : HK3<CoproductF, F, G, A> {
                         { ga in foldableG.foldR(ga, b, f) })
     }
     
-    public func traverse<B, H, Appl, TravF, TravG>(_ f : @escaping (A) -> HK<H, B>, _ applicative : Appl, _ traverseF : TravF, _ traverseG : TravG) -> HK<H, Coproduct<F, G, B>> where Appl : Applicative, Appl.F == H, TravF : Traverse, TravF.F == F, TravG : Traverse, TravG.F == G {
+    public func traverse<B, H, Appl, TravF, TravG>(_ f : @escaping (A) -> HK<H, B>, _ applicative : Appl, _ traverseF : TravF, _ traverseG : TravG) -> HK<H, HK3<CoproductF, F, G, B>> where Appl : Applicative, Appl.F == H, TravF : Traverse, TravF.F == F, TravG : Traverse, TravG.F == G {
         return run.fold({ fa in applicative.map(traverseF.traverse(fa, f, applicative), { fb in
             Coproduct<F, G, B>(Either.left(fb)) } ) },
                         { ga in applicative.map(traverseG.traverse(ga, f, applicative), { gb in Coproduct<F, G, B>(Either.right(gb)) } ) })
     }
 }
+
+public extension Coproduct {
+    public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> CoproductFunctor<F, G, FuncF, FuncG> {
+        return CoproductFunctor<F, G, FuncF, FuncG>(functorF, functorG)
+    }
+    
+    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> CoproductComonad<F, G, ComonF, ComonG> {
+        return CoproductComonad<F, G, ComonF, ComonG>(comonadF, comonadG)
+    }
+    
+    public static func foldable<FoldF, FoldG>(_ foldableF : FoldF, _ foldableG : FoldG) -> CoproductFoldable<F, G, FoldF, FoldG> {
+        return CoproductFoldable<F, G, FoldF, FoldG>(foldableF, foldableG)
+    }
+    
+    public static func traverse<TravF, TravG>(_ traverseF : TravF, _ traverseG : TravG) -> CoproductTraverse<F, G, TravF, TravG>{
+        return CoproductTraverse<F, G, TravF, TravG>(traverseF, traverseG)
+    }
+}
+
+public class CoproductFunctor<G, H, FuncG, FuncH> : Functor where FuncG : Functor, FuncG.F == G, FuncH : Functor, FuncH.F == H {
+    public typealias F = CoproductPartial<G, H>
+    
+    private let functorG : FuncG
+    private let functorH : FuncH
+    
+    public init(_ functorG : FuncG, _ functorH : FuncH) {
+        self.functorG = functorG
+        self.functorH = functorH
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<CoproductF, G>, H>, B> {
+        return (fa as! Coproduct<G, H, A>).map(functorG, functorH, f)
+    }
+}
+
+public class CoproductComonad<G, H, ComonG, ComonH> : CoproductFunctor<G, H, ComonG, ComonH>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
+    
+    private let comonadG : ComonG
+    private let comonadH : ComonH
+    
+    override public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+        self.comonadG = comonadG
+        self.comonadH = comonadH
+        super.init(comonadG, comonadH)
+    }
+    
+    public func coflatMap<A, B>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>, _ f: @escaping (HK<HK<HK<CoproductF, G>, H>, A>) -> B) -> HK<HK<HK<CoproductF, G>, H>, B> {
+        return (fa as! Coproduct<G, H, A>).coflatMap(comonadG, comonadH, f)
+    }
+    
+    public func extract<A>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>) -> A {
+        return (fa as! Coproduct<G, H, A>).extract(comonadG, comonadH)
+    }
+}
+
+public class CoproductFoldable<G, H, FoldG, FoldH> : Foldable where FoldG : Foldable, FoldG.F == G, FoldH : Foldable, FoldH.F == H {
+    public typealias F = CoproductPartial<G, H>
+    
+    private let foldableG : FoldG
+    private let foldableH : FoldH
+    
+    public init(_ foldableG : FoldG, _ foldableH : FoldH) {
+        self.foldableG = foldableG
+        self.foldableH = foldableH
+    }
+    
+    public func foldL<A, B>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return (fa as! Coproduct<G, H, A>).foldL(b, f, foldableG, foldableH)
+    }
+    
+    public func foldR<A, B>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return (fa as! Coproduct<G, H, A>).foldR(b, f, foldableG, foldableH)
+    }
+}
+
+public class CoproductTraverse<G, H, TravG, TravH> : CoproductFoldable<G, H, TravG, TravH>, Traverse where TravG : Traverse, TravG.F == G, TravH : Traverse, TravH.F == H {
+    
+    private let traverseG : TravG
+    private let traverseH : TravH
+    
+    override public init(_ traverseG : TravG, _ traverseH : TravH) {
+        self.traverseG = traverseG
+        self.traverseH = traverseH
+        super.init(traverseG, traverseH)
+    }
+    
+    public func traverse<I, A, B, Appl>(_ fa: HK<HK<HK<CoproductF, G>, H>, A>, _ f: @escaping (A) -> HK<I, B>, _ applicative: Appl) -> HK<I, HK<HK<HK<CoproductF, G>, H>, B>> where I == Appl.F, Appl : Applicative {
+        return (fa as! Coproduct<G, H, A>).traverse(f, applicative, traverseG, traverseH)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
