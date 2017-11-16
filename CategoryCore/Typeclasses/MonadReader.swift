@@ -12,7 +12,7 @@ public protocol MonadReader : Monad {
     associatedtype D
     
     func ask() -> HK<F, D>
-    func local<A>(_ f : (D) -> D, _ fa : HK<F, A>) -> HK<F, A>
+    func local<A>(_ f : @escaping (D) -> D, _ fa : HK<F, A>) -> HK<F, A>
 }
 
 public extension MonadReader {

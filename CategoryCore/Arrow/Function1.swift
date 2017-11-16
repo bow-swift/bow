@@ -9,6 +9,7 @@
 import Foundation
 
 public class Function1F {}
+public typealias Function1Partial<I> = HK<Function1F, I>
 
 public class Function1<I, O> : HK2<Function1F, I, O> {
     private let f : (I) -> O
@@ -26,7 +27,7 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
         return af.fold({ a in step(a, t, f) }, id)
     }
     
-    public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK2<Function1F, I, Either<A, B>>) -> Function1<I, B> {
+    public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK2<Function1F, I, Either<A, B>>) -> HK2<Function1F, I, B> {
         return Function1<I, B>({ t in step(a, t, f) })
     }
     
@@ -51,3 +52,86 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
         return Function1<I, O>(g >> self.f)
     }
 }
+
+public extension Function1 {
+    public static func functor() -> Function1Functor<I> {
+        return Function1Functor<I>()
+    }
+    
+    public static func applicative() -> Function1Applicative<I> {
+        return Function1Applicative<I>()
+    }
+    
+    public static func monad() -> Function1Monad<I> {
+        return Function1Monad<I>()
+    }
+    
+    public static func reader() -> Function1MonadReader<I> {
+        return Function1MonadReader<I>()
+    }
+}
+
+public class Function1Functor<I> : Functor {
+    public typealias F = Function1Partial<I>
+    
+    public func map<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> B) -> HK<HK<Function1F, I>, B> {
+        return (fa as! Function1<I, A>).map(f)
+    }
+}
+
+public class Function1Applicative<I> : Function1Functor<I>, Applicative {
+    public func pure<A>(_ a: A) -> HK<HK<Function1F, I>, A> {
+        return Function1<I, A>.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ ff: HK<HK<Function1F, I>, (A) -> B>) -> HK<HK<Function1F, I>, B> {
+        return (fa as! Function1<I, A>).ap(ff as! Function1<I, (A) -> B>)
+    }
+}
+
+public class Function1Monad<I> : Function1Applicative<I>, Monad {
+    public func flatMap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> HK<HK<Function1F, I>, B>) -> HK<HK<Function1F, I>, B> {
+        return (fa as! Function1<I, A>).flatMap({ a in f(a) as! Function1<I, B>})
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<Function1F, I>, Either<A, B>>) -> HK<HK<Function1F, I>, B> {
+        return Function1<I, A>.tailRecM(a, f)
+    }
+}
+
+public class Function1MonadReader<I> : Function1Monad<I>, MonadReader {
+    public typealias D = I
+    
+    public func ask() -> HK<HK<Function1F, I>, I> {
+        return Function1<I, I>.ask()
+    }
+    
+    public func local<A>(_ f: @escaping (I) -> I, _ fa: HK<HK<Function1F, I>, A>) -> HK<HK<Function1F, I>, A> {
+        return (fa as! Function1<I, A>).local(f)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
