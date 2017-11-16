@@ -10,6 +10,7 @@ import Foundation
 
 public class CofreeF {}
 public typealias CofreeEval<S, A> = HK<S, Cofree<S, A>>
+public typealias CofreePartial<S> = HK<CofreeF, S>
 
 public class Cofree<S, A> : HK2<CofreeF, S, A> {
     private let head : A
@@ -84,5 +85,40 @@ public class Cofree<S, A> : HK2<CofreeF, S, A> {
             return Eval.now(folded)
         }
         return monad.flatten(inclusion.invoke(loop(self)))
+    }
+}
+
+public extension Cofree {
+    public static func functor<Func>(_ functor : Func) -> CofreeFunctor<S, Func> {
+        return CofreeFunctor<S, Func>(functor)
+    }
+    
+    public static func comonad<Func>(_ functor : Func) -> CofreeComonad<S, Func> {
+        return CofreeComonad<S, Func>(functor)
+    }
+}
+
+public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S {
+    public typealias F = CofreePartial<S>
+    
+    fileprivate let functor : Func
+    
+    public init(_ functor : Func) {
+        self.functor = functor
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<CofreeF, S>, B> {
+        return (fa as! Cofree<S, A>).map(f, functor)
+    }
+}
+
+public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
+    
+    public func coflatMap<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (HK<HK<CofreeF, S>, A>) -> B) -> HK<HK<CofreeF, S>, B> {
+        return (fa as! Cofree<S, A>).coflatMap(f, functor)
+    }
+    
+    public func extract<A>(_ fa: HK<HK<CofreeF, S>, A>) -> A {
+        return (fa as! Cofree<S, A>).extract()
     }
 }
