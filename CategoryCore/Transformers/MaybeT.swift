@@ -9,6 +9,7 @@
 import Foundation
 
 public class MaybeTF {}
+public typealias MaybeTPartial<F> = HK<MaybeTF, F>
 
 public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
     private let value : HK<F, Maybe<A>>
@@ -23,6 +24,16 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
     
     public static func fromMaybe<Appl>(_ maybe : Maybe<A>, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
         return MaybeT(applicative.pure(maybe))
+    }
+    
+    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> HK2<MaybeTF, F, Either<A, B>>, _ monad : MonF) -> HK2<MaybeTF, F, B> where MonF : Monad, MonF.F == F {
+        
+        return MaybeT<F, B>(monad.tailRecM(a, { aa in
+            monad.map((f(aa) as! MaybeT<F, Either<A, B>>).value, { maybe in
+                maybe.fold({ Either<A, Maybe<B>>.right(Maybe<B>.none())},
+                           { either in either.map(Maybe<B>.some) })
+            })
+        }))
     }
     
     public init(_ value : HK<F, Maybe<A>>) {
@@ -105,5 +116,101 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
     
     public func mapFilter<B, Func>(_ f : @escaping (A) -> Maybe<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
         return MaybeT<F, B>(functor.map(value, { maybe in maybe.flatMap(f) }))
+    }
+}
+
+public extension MaybeT {
+    public static func functor<FuncF>(_ functor : FuncF) -> MaybeTFunctor<F, FuncF> {
+        return MaybeTFunctor<F, FuncF>(functor)
+    }
+    
+    public static func functorFilter<FuncF>(_ functor : FuncF) -> MaybeTFunctorFilter<F, FuncF> {
+        return MaybeTFunctorFilter<F, FuncF>(functor)
+    }
+    
+    public static func applicative<MonF>(_ monad : MonF) -> MaybeTApplicative<F, MonF> {
+        return MaybeTApplicative<F, MonF>(monad)
+    }
+    
+    public static func monad<MonF>(_ monad : MonF) -> MaybeTMonad<F, MonF> {
+        return MaybeTMonad<F, MonF>(monad)
+    }
+    
+    public static func semigroupK<MonF>(_ monad : MonF) -> MaybeTSemigroupK<F, MonF> {
+        return MaybeTSemigroupK<F, MonF>(monad)
+    }
+    
+    public static func monoidK<MonF>(_ monad : MonF) -> MaybeTMonoidK<F, MonF> {
+        return MaybeTMonoidK<F, MonF>(monad)
+    }
+}
+
+public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+    public typealias F = MaybeTPartial<G>
+    
+    fileprivate let functor : FuncG
+    
+    public init(_ functor : FuncG) {
+        self.functor = functor
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<MaybeTF, G>, B> {
+        return (fa as! MaybeT<G, A>).map(f, functor)
+    }
+}
+
+public class MaybeTFunctorFilter<G, FuncG> : MaybeTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
+    
+    public func mapFilter<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<HK<MaybeTF, G>, B> {
+        return (fa as! MaybeT<G, A>).mapFilter(f, functor)
+    }
+}
+
+public class MaybeTApplicative<G, MonG> : MaybeTFunctor<G, MonG>, Applicative where MonG : Monad, MonG.F == G {
+    
+    fileprivate let monad : MonG
+    
+    override public init(_ monad : MonG) {
+        self.monad = monad
+        super.init(monad)
+    }
+    
+    public func pure<A>(_ a: A) -> HK<HK<MaybeTF, G>, A> {
+        return MaybeT.pure(a, monad)
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ ff: HK<HK<MaybeTF, G>, (A) -> B>) -> HK<HK<MaybeTF, G>, B> {
+        return (fa as! MaybeT<G, A>).ap(ff as! MaybeT<G, (A) -> B>, monad)
+    }
+}
+
+public class MaybeTMonad<G, MonG> : MaybeTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
+    
+    public func flatMap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, B>) -> HK<HK<MaybeTF, G>, B> {
+        return (fa as! MaybeT<G, A>).flatMap({ a in f(a) as! MaybeT<G, B> }, monad)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, Either<A, B>>) -> HK<HK<MaybeTF, G>, B> {
+        return MaybeT.tailRecM(a, f, monad)
+    }
+}
+
+public class MaybeTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F == G {
+    public typealias F = MaybeTPartial<G>
+    
+    fileprivate let monad : MonG
+    
+    public init(_ monad : MonG) {
+        self.monad = monad
+    }
+    
+    public func combineK<A>(_ x: HK<HK<MaybeTF, G>, A>, _ y: HK<HK<MaybeTF, G>, A>) -> HK<HK<MaybeTF, G>, A> {
+        return (x as! MaybeT<G, A>).orElse(y as! MaybeT<G, A>, monad)
+    }
+}
+
+public class MaybeTMonoidK<G, MonG> : MaybeTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
+    public func emptyK<A>() -> HK<HK<MaybeTF, G>, A> {
+        return MaybeT(monad.pure(Maybe.none()))
     }
 }
