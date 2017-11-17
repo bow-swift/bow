@@ -22,6 +22,10 @@ public class Function0<A> : HK<Function0F, A> {
         return Function0<B>({ loop(a, f) })
     }
     
+    public static func ev(_ fa : HK<Function0F, A>) -> Function0<A> {
+        return fa.ev()
+    }
+    
     public init(_ f : @escaping () -> A) {
         self.f = f
     }
@@ -52,6 +56,12 @@ public class Function0<A> : HK<Function0F, A> {
     
     public static func pure(_ a : A) -> Function0<A> {
         return Function0Instances().pure(a) as! Function0<A>
+    }
+}
+
+public extension HK where F == Function0F {
+    public func ev() -> Function0<A> {
+        return self as! Function0<A>
     }
 }
 
