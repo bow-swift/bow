@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11026E541FBEFD8C006D7557 /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11026E531FBEFD8C006D7557 /* FlatmapOperator.swift */; };
 		11198A1F1F90AA5300C79947 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11198A1E1F90AA5300C79947 /* Cofree.swift */; };
 		115858D81F84D6C400875227 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D71F84D6C400875227 /* Const.swift */; };
 		115858DA1F84DA8C00875227 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115858D91F84DA8C00875227 /* Id.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11026E531FBEFD8C006D7557 /* FlatmapOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatmapOperator.swift; sourceTree = "<group>"; };
 		11198A1E1F90AA5300C79947 /* Cofree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cofree.swift; sourceTree = "<group>"; };
 		115858D71F84D6C400875227 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		115858D91F84DA8C00875227 /* Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				115858E31F86516B00875227 /* Coreader.swift */,
 				11E17DE41F83D10500CA5A3F /* Either.swift */,
 				115858DB1F84DED100875227 /* Eval.swift */,
+				11026E531FBEFD8C006D7557 /* FlatmapOperator.swift */,
 				115858D91F84DA8C00875227 /* Id.swift */,
 				11E17DE61F83DB8200CA5A3F /* Ior.swift */,
 				11D5CED61F8E364C00ED007E /* ListKW.swift */,
@@ -601,6 +604,7 @@
 				11CEEA401F7D30B5003EB472 /* Curry.swift in Sources */,
 				11CEEA491F7D474D003EB472 /* Functor.swift in Sources */,
 				11DFBEB41F7E412200A4C96D /* Eq.swift in Sources */,
+				11026E541FBEFD8C006D7557 /* FlatmapOperator.swift in Sources */,
 				115858DE1F84FC6B00875227 /* Try.swift in Sources */,
 				11E17DE71F83DB8200CA5A3F /* Ior.swift in Sources */,
 				11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */,
