@@ -25,11 +25,15 @@ public class Either<A, B> : HK2<EitherF, A, B> {
     }
     
     public static func tailRecM<C>(_ a : A, _ f : (A) -> HK<EitherPartial<C>, Either<A, B>>) -> Either<C, B> {
-        return (f(a) as! Either<C, Either<A, B>>).fold(Either<C, B>.left,
+        return Either<C, Either<A, B>>.ev(f(a)).fold(Either<C, B>.left,
             { either in
                 either.fold({ left in tailRecM(left, f)},
                             Either<C, B>.right)
             })
+    }
+    
+    public static func ev(_ fa : HK2<EitherF, A, B>) -> Either<A, B> {
+        return fa as! Either<A, B>
     }
     
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C) -> C {
@@ -175,13 +179,13 @@ public class EitherApplicative<C> : Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ ff: HK<HK<EitherF, C>, (A) -> B>) -> HK<HK<EitherF, C>, B> {
-        return (fa as! Either<C, A>).ap(ff as! Either<C, (A) -> B>)
+        return Either.ev(fa).ap(Either.ev(ff))
     }
 }
 
 public class EitherMonad<C> : EitherApplicative<C>, Monad {
     public func flatMap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (A) -> HK<HK<EitherF, C>, B>) -> HK<HK<EitherF, C>, B> {
-        return (fa as! Either<C, A>).flatMap({ eca in f(eca) as! Either<C, B> })
+        return Either.ev(fa).flatMap({ eca in Either.ev(f(eca)) })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<EitherF, C>, Either<A, B>>) -> HK<HK<EitherF, C>, B> {
@@ -197,8 +201,7 @@ public class EitherMonadError<C> : EitherMonad<C>, MonadError {
     }
     
     public func handleErrorWith<A>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (C) -> HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
-        let fca = fa as! Either<C, A>
-        return fca.fold(f, constF(fca))
+        return Either.ev(fa).fold(f, constF(Either.ev(fa)))
     }
 }
 
@@ -206,19 +209,17 @@ public class EitherFoldable<C> : Foldable {
     public typealias F = EitherPartial<C>
     
     public func foldL<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        let fca = fa as! Either<C, A>
-        return fca.foldL(b, f)
+        return Either.ev(fa).foldL(b, f)
     }
     
     public func foldR<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        let fca = fa as! Either<C, A>
-        return fca.foldR(b, f)
+        return Either.ev(fa).foldR(b, f)
     }
 }
 
 public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<EitherF, C>, B>> where G == Appl.F, Appl : Applicative {
-        return (fa as! Either<C, A>).traverse(f, applicative)
+        return Either.ev(fa).traverse(f, applicative)
     }
 }
 
@@ -226,7 +227,7 @@ public class EitherSemigroupK<C> : SemigroupK {
     public typealias F = EitherPartial<C>
     
     public func combineK<A>(_ x: HK<HK<EitherF, C>, A>, _ y: HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
-        return (x as! Either<C, A>).combineK(y as! Either<C, A>)
+        return Either.ev(x).combineK(Either.ev(y))
     }
 }
 
