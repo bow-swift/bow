@@ -42,6 +42,10 @@ public class ListKW<A> : HK<ListKWF, A> {
         return ListKW<B>(go([], f, f(a).ev()))
     }
     
+    public static func ev(_ fa : HK<ListKWF, A>) -> ListKW<A> {
+        return fa.ev()
+    }
+    
     public init(_ list : [A]) {
         self.list = list
     }
