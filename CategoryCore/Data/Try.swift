@@ -50,6 +50,10 @@ public class Try<A> : HK<TryF, A> {
                          })
     }
     
+    public static func ev(_ fa : HK<TryF, A>) -> Try<A> {
+        return fa.ev()
+    }
+    
     public func fold<B>(_ fe : (Error) -> B, _ fa : (A) throws -> B) -> B {
         switch self {
             case is Failure<A>:
