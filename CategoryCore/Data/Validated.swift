@@ -32,6 +32,10 @@ public class Validated<E, A> : HK2<ValidatedF, E, A> {
         return m.fold(ifNone >> Validated<E, A>.invalid, Validated<E, A>.valid)
     }
     
+    public static func ev(_ fa : HK2<ValidatedF, E, A>) -> Validated<E, A> {
+        return fa as! Validated<E, A>
+    }
+    
     public func fold<C>(_ fe : (E) -> C, _ fa : (A) -> C) -> C {
         switch(self) {
             case is Invalid<E, A>:
@@ -194,7 +198,7 @@ public class ValidatedFunctor<R> : Functor {
     public typealias F = ValidatedPartial<R>
     
     public func map<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: @escaping (A) -> B) -> HK<HK<ValidatedF, R>, B> {
-        return (fa as! Validated<R, A>).map(f)
+        return Validated.ev(fa).map(f)
     }
 }
 
@@ -210,7 +214,7 @@ public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative w
     }
     
     public func ap<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ ff: HK<HK<ValidatedF, R>, (A) -> B>) -> HK<HK<ValidatedF, R>, B> {
-        return (fa as! Validated<R, A>).ap(ff as! Validated<R, (A) -> B>, semigroup)
+        return Validated.ev(fa).ap(Validated.ev(ff), semigroup)
     }
 }
 
@@ -222,7 +226,7 @@ public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG
     }
     
     public func handleErrorWith<A>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: @escaping (R) -> HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
-        return (fa as! Validated<R, A>).handleLeftWith({ r in f(r) as! Validated<R, A> })
+        return Validated.ev(fa).handleLeftWith({ r in Validated.ev(f(r)) })
     }
 }
 
@@ -230,17 +234,17 @@ public class ValidatedFoldable<R> : Foldable {
     public typealias F = ValidatedPartial<R>
     
     public func foldL<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return (fa as! Validated<R, A>).foldL(b, f)
+        return Validated.ev(fa).foldL(b, f)
     }
     
     public func foldR<A, B>(_ fa: HK<HK<ValidatedF, R>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return (fa as! Validated<R, A>).foldR(b, f)
+        return Validated.ev(fa).foldR(b, f)
     }
 }
 
 public class ValidatedTraverse<R> : ValidatedFoldable<R>, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<HK<ValidatedF, R>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ValidatedF, R>, B>> where G == Appl.F, Appl : Applicative {
-        return (fa as! Validated<R, A>).traverse(f, applicative)
+        return Validated.ev(fa).traverse(f, applicative)
     }
 }
 
@@ -254,7 +258,7 @@ public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup,
     }
     
     public func combineK<A>(_ x: HK<HK<ValidatedF, R>, A>, _ y: HK<HK<ValidatedF, R>, A>) -> HK<HK<ValidatedF, R>, A> {
-        return (x as! Validated<R, A>).combineK(y as! Validated<R, A>, semigroup)
+        return Validated.ev(x).combineK(Validated.ev(y), semigroup)
     }
 }
 
