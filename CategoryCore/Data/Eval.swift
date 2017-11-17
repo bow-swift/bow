@@ -59,6 +59,10 @@ public class Eval<A> : HK<EvalF, A> {
         }
     }
     
+    public static func ev(_ fa : HK<EvalF, A>) -> Eval<A> {
+        return fa.ev()
+    }
+    
     public func value() -> A {
         fatalError("Must be implemented by subclass")
     }
