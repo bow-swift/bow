@@ -45,4 +45,145 @@ public extension Monad {
     public func ifM<B>(_ fa : HK<F, Bool>, _ ifTrue : @escaping () -> HK<F, B>, _ ifFalse : @escaping () -> HK<F, B>) -> HK<F, B> {
         return flatMap(fa, { a in a ? ifTrue() : ifFalse() })
     }
+    
+    // Binding
+    
+    public func binding<B, C>(_ f : () -> HK<F, B>,
+                              _ fb : @escaping (B) -> HK<F, C>) -> HK<F, C> {
+        return flatMap(f(), fb)
+    }
+    
+    public func binding<B, C, D>(_ f : () -> HK<F, B>,
+                                 _ fb : @escaping (B) -> HK<F, C>,
+                                 _ fc : @escaping (B, C) -> HK<F, D>) -> HK<F, D> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                fc(b, c)
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E>(_ f : () -> HK<F, B>,
+                                    _ fb : @escaping (B) -> HK<F, C>,
+                                    _ fc : @escaping (B, C) -> HK<F, D>,
+                                    _ fd : @escaping (B, C, D) -> HK<F, E>) -> HK<F, E> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    fd(b, c, d)
+                })
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E, G>(_ f : () -> HK<F, B>,
+                                       _ fb : @escaping (B) -> HK<F, C>,
+                                       _ fc : @escaping (B, C) -> HK<F, D>,
+                                       _ fd : @escaping (B, C, D) -> HK<F, E>,
+                                       _ fe : @escaping (B, C, D, E) -> HK<F, G>) -> HK<F, G> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    self.flatMap(fd(b, c, d), { e in
+                        fe(b, c, d, e)
+                    })
+                })
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E, G, H>(_ f : () -> HK<F, B>,
+                                          _ fb : @escaping (B) -> HK<F, C>,
+                                          _ fc : @escaping (B, C) -> HK<F, D>,
+                                          _ fd : @escaping (B, C, D) -> HK<F, E>,
+                                          _ fe : @escaping (B, C, D, E) -> HK<F, G>,
+                                          _ fg : @escaping (B, C, D, E, G) -> HK<F, H>) -> HK<F, H> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    self.flatMap(fd(b, c, d), { e in
+                        self.flatMap(fe(b, c, d, e), { g in
+                            fg(b, c, d, e, g)
+                        })
+                    })
+                })
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E, G, H, I>(_ f : () -> HK<F, B>,
+                                             _ fb : @escaping (B) -> HK<F, C>,
+                                             _ fc : @escaping (B, C) -> HK<F, D>,
+                                             _ fd : @escaping (B, C, D) -> HK<F, E>,
+                                             _ fe : @escaping (B, C, D, E) -> HK<F, G>,
+                                             _ fg : @escaping (B, C, D, E, G) -> HK<F, H>,
+                                             _ fh : @escaping (B, C, D, E, G, H) -> HK<F, I>) -> HK<F, I> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    self.flatMap(fd(b, c, d), { e in
+                        self.flatMap(fe(b, c, d, e), { g in
+                            self.flatMap(fg(b, c, d, e, g), { h in
+                                fh(b, c, d, e, g, h)
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E, G, H, I, J>(_ f : () -> HK<F, B>,
+                                                _ fb : @escaping (B) -> HK<F, C>,
+                                                _ fc : @escaping (B, C) -> HK<F, D>,
+                                                _ fd : @escaping (B, C, D) -> HK<F, E>,
+                                                _ fe : @escaping (B, C, D, E) -> HK<F, G>,
+                                                _ fg : @escaping (B, C, D, E, G) -> HK<F, H>,
+                                                _ fh : @escaping (B, C, D, E, G, H) -> HK<F, I>,
+                                                _ fi : @escaping (B, C, D, E, G, H, I) -> HK<F, J>) -> HK<F, J> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    self.flatMap(fd(b, c, d), { e in
+                        self.flatMap(fe(b, c, d, e), { g in
+                            self.flatMap(fg(b, c, d, e, g), { h in
+                                self.flatMap(fh(b, c, d, e, g, h), { i in
+                                    fi(b, c, d, e, g, h, i)
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }
+    
+    public func binding<B, C, D, E, G, H, I, J, K>(_ f : () -> HK<F, B>,
+                                                   _ fb : @escaping (B) -> HK<F, C>,
+                                                   _ fc : @escaping (B, C) -> HK<F, D>,
+                                                   _ fd : @escaping (B, C, D) -> HK<F, E>,
+                                                   _ fe : @escaping (B, C, D, E) -> HK<F, G>,
+                                                   _ fg : @escaping (B, C, D, E, G) -> HK<F, H>,
+                                                   _ fh : @escaping (B, C, D, E, G, H) -> HK<F, I>,
+                                                   _ fi : @escaping (B, C, D, E, G, H, I) -> HK<F, J>,
+                                                   _ fj : @escaping (B, C, D, E, G, H, I, J) -> HK<F, K>) -> HK<F, K> {
+        return flatMap(f(), { b in
+            self.flatMap(fb(b), { c in
+                self.flatMap(fc(b, c), { d in
+                    self.flatMap(fd(b, c, d), { e in
+                        self.flatMap(fe(b, c, d, e), { g in
+                            self.flatMap(fg(b, c, d, e, g), { h in
+                                self.flatMap(fh(b, c, d, e, g, h), { i in
+                                    self.flatMap(fi(b, c, d, e, g, h, i), { j in
+                                        fj(b, c, d, e, g, h, i, j)
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }
 }
+
