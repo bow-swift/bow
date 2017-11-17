@@ -46,7 +46,7 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
     
     private static func go<B>(_  buf : [B], _ f : @escaping (A) -> HK<NonEmptyListF, Either<A, B>>, _ v : NonEmptyList<Either<A, B>>) -> [B] {
         let head = v.head
-        return head.fold({ a in go(buf, f, (f(a) as! NonEmptyList<Either<A, B>>) + v.tail) },
+        return head.fold({ a in go(buf, f, f(a).ev() + v.tail) },
                   { b in
                     let newBuf = buf + [b]
                     let x = NonEmptyList<Either<A, B>>.fromArray(v.tail)
@@ -56,7 +56,11 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> HK<NonEmptyListF, Either<A, B>>) -> NonEmptyList<B> {
-        return NonEmptyList<B>.fromArrayUnsafe(go([], f, f(a) as! NonEmptyList<Either<A, B>>))
+        return NonEmptyList<B>.fromArrayUnsafe(go([], f, f(a).ev()))
+    }
+    
+    public static func ev(_ fa : HK<NonEmptyListF, A>) -> NonEmptyList<A> {
+        return fa.ev()
     }
     
     public init(head : A, tail : [A]) {
@@ -195,7 +199,7 @@ public class NonEmptyListFunctor : Functor {
     public typealias F = NonEmptyListF
     
     public func map<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> B) -> HK<NonEmptyListF, B> {
-        return (fa as! NonEmptyList<A>).map(f)
+        return fa.ev().map(f)
     }
 }
 
