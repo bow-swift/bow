@@ -24,6 +24,10 @@ public class Cofree<S, A> : HK2<CofreeF, S, A> {
         return Cofree(a, Eval.later({ functor.map(f(a), { inA in create(inA, f, functor) }) }))
     }
     
+    public static func ev(_ fa : HK2<CofreeF, S, A>) -> Cofree<S, A> {
+        return fa as! Cofree<S, A>
+    }
+    
     public init(_ head : A, _ tail : Eval<CofreeEval<S, A>>) {
         self.head = head
         self.tail = tail
@@ -108,17 +112,17 @@ public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S 
     }
     
     public func map<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<CofreeF, S>, B> {
-        return (fa as! Cofree<S, A>).map(f, functor)
+        return Cofree.ev(fa).map(f, functor)
     }
 }
 
 public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
     
     public func coflatMap<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (HK<HK<CofreeF, S>, A>) -> B) -> HK<HK<CofreeF, S>, B> {
-        return (fa as! Cofree<S, A>).coflatMap(f, functor)
+        return Cofree.ev(fa).coflatMap(f, functor)
     }
     
     public func extract<A>(_ fa: HK<HK<CofreeF, S>, A>) -> A {
-        return (fa as! Cofree<S, A>).extract()
+        return Cofree.ev(fa).extract()
     }
 }
