@@ -18,6 +18,10 @@ public class Const<A, T> : HK2<ConstF, A, T> {
         return Const<A, T>(a)
     }
     
+    public static func ev(_ fa : HK2<ConstF, A, T>) -> Const<A, T>{
+        return fa as! Const<A, T>
+    }
+    
     public init(_ value : A) {
         self.value = value
     }
@@ -87,7 +91,7 @@ public class ConstFunctor<R> : Functor {
     public typealias F = ConstPartial<R>
     
     public func map<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> B) -> HK<HK<ConstF, R>, B> {
-        return (fa as! Const<R, A>).retag()
+        return Const.ev(fa).retag()
     }
 }
 
@@ -103,7 +107,7 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
     }
     
     public func ap<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ ff: HK<HK<ConstF, R>, (A) -> B>) -> HK<HK<ConstF, R>, B> {
-        return (fa as! Const<R, A>).ap(ff as! Const<R, (A) -> B>, monoid)
+        return Const.ev(fa).ap(Const.ev(ff), monoid)
     }
 }
 
@@ -147,13 +151,13 @@ public class ConstFoldable<R> : Foldable {
 
 public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
-        return (fa as! Const<R, A>).traverse(f, applicative)
+        return Const.ev(fa).traverse(f, applicative)
     }
 }
 
 public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
     public func traverseFilter<A, B, G, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, Maybe<B>>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
-        return (fa as! Const<R, A>).traverseFilter(f, applicative)
+        return Const.ev(fa).traverseFilter(f, applicative)
     }
 }
 
