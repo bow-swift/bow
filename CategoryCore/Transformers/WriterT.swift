@@ -33,6 +33,14 @@ public class WriterT<F, W, A> : HK3<WriterTF, F, W, A> {
     public static func put<Appl>(_ a : A, _ w : W, _ applicative : Appl) -> WriterT<F, W, A> where Appl : Applicative, Appl.F == F {
         return WriterT.putT(applicative.pure(a), w, applicative)
     }
+    
+    public static func putT2<Func>(_ vf : HK<F, A>, _ w : W, _ functor : Func) -> WriterT<F, W, A> where Func : Functor, Func.F == F {
+        return WriterT(functor.map(vf, { v in (w, v) }))
+    }
+    
+    public static func put2<Appl>(_ a : A, _ w : W, _ applicative : Appl) -> WriterT<F, W, A> where Appl : Applicative, Appl.F == F {
+        return WriterT.putT2(applicative.pure(a), w, applicative)
+    }
 
     public static func tell<Appl>(_ l : W, _ applicative : Appl) -> WriterT<F, W, Unit> where Appl : Applicative, Appl.F == F {
         return WriterT<F, W, Unit>.put(unit, l, applicative)
@@ -61,6 +69,10 @@ public class WriterT<F, W, A> : HK3<WriterTF, F, W, A> {
                             { b in Either<A, (W, B)>.right((pair.0, b)) })
             })
         }))
+    }
+    
+    fileprivate static func ev(_ fa : HK3<WriterTF, F, W, A>) -> WriterT<F, W, A> {
+        return fa as! WriterT<F, W, A>
     }
     
     public init(_ value : HK<F, (W, A)>) {
@@ -129,5 +141,142 @@ public class WriterT<F, W, A> : HK3<WriterTF, F, W, A> {
     
     public func reset<Mono, Mon>(_ monoid : Mono, _ monad : Mon) -> WriterT<F, W, A> where Mono : Monoid, Mono.A == W, Mon : Monad, Mon.F == F {
         return mapAcc(constF(monoid.empty), monad)
+    }
+}
+
+public extension WriterT {
+    public static func functor<FuncF>(_ functor : FuncF) -> WriterTFunctor<F, W, FuncF> {
+        return WriterTFunctor<F, W, FuncF>(functor)
+    }
+    
+    public static func applicative<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTApplicative<F, W, MonF, MonoW> {
+        return WriterTApplicative<F, W, MonF, MonoW>(monad, monoid)
+    }
+    
+    public static func monad<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTMonad<F, W, MonF, MonoW> {
+        return WriterTMonad<F, W, MonF, MonoW>(monad, monoid)
+    }
+    
+    public static func monadFilter<MonFilF, MonoW>(_ monad : MonFilF, _ monoid : MonoW) -> WriterTMonadFilter<F, W, MonFilF, MonoW> {
+        return WriterTMonadFilter<F, W, MonFilF, MonoW>(monad, monoid)
+    }
+    
+    public static func semigroupK<SemiKF>(_ semigroupK : SemiKF) -> WriterTSemigroupK<F, W, SemiKF> {
+        return WriterTSemigroupK<F, W, SemiKF>(semigroupK)
+    }
+
+    public static func monoidK<MonoKF>(_ monoidK : MonoKF) -> WriterTMonoidK<F, W, MonoKF> {
+        return WriterTMonoidK<F, W, MonoKF>(monoidK)
+    }
+    
+    public static func writer<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTMonadWriter<F, W, MonF, MonoW> {
+        return WriterTMonadWriter<F, W, MonF, MonoW>(monad, monoid)
+    }
+}
+
+public class WriterTFunctor<G, W, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+    public typealias F = WriterTPartial<G, W>
+    
+    private let functor : FuncG
+    
+    public init(_ functor : FuncG) {
+        self.functor = functor
+    }
+    
+    public func map<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<WriterTF, G>, W>, B> {
+        return (fa as! WriterT<G, W, A>).map(f, functor)
+    }
+}
+
+public class WriterTApplicative<G, W, MonG, MonoW> : WriterTFunctor<G, W, MonG>, Applicative where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
+    
+    fileprivate let monad : MonG
+    fileprivate let monoid : MonoW
+    
+    public init(_ monad : MonG, _ monoid : MonoW) {
+        self.monad = monad
+        self.monoid = monoid
+        super.init(monad)
+    }
+    
+    public func pure<A>(_ a: A) -> HK<HK<HK<WriterTF, G>, W>, A> {
+        return WriterT(monad.pure((monoid.empty, a)))
+    }
+    
+    public func ap<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ ff: HK<HK<HK<WriterTF, G>, W>, (A) -> B>) -> HK<HK<HK<WriterTF, G>, W>, B> {
+        return (fa as! WriterT<G, W, A>).ap(ff as! WriterT<G, W, (A) -> B>, monoid, monad)
+    }
+}
+
+public class WriterTMonad<G, W, MonG, MonoW> : WriterTApplicative<G, W, MonG, MonoW>, Monad where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
+    
+    public func flatMap<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ f: @escaping (A) -> HK<HK<HK<WriterTF, G>, W>, B>) -> HK<HK<HK<WriterTF, G>, W>, B> {
+        return (fa as! WriterT<G, W, A>).flatMap({ a in f(a) as! WriterT<G, W, B> }, monoid, monad)
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<WriterTF, G>, W>, Either<A, B>>) -> HK<HK<HK<WriterTF, G>, W>, B> {
+        return WriterT.tailRecM(a, f, monad)
+    }
+}
+
+public class WriterTMonadFilter<G, W, MonFilG, MonoW> : WriterTMonad<G, W, MonFilG, MonoW>, MonadFilter where MonFilG : MonadFilter, MonFilG.F == G, MonoW : Monoid, MonoW.A == W {
+    
+    private let monadFilter : MonFilG
+    
+    override public init(_ monadFilter : MonFilG, _ monoid : MonoW) {
+        self.monadFilter = monadFilter
+        super.init(monadFilter, monoid)
+    }
+    
+    public func empty<A>() -> HK<HK<HK<WriterTF, G>, W>, A> {
+        return WriterT(monadFilter.empty())
+    }
+}
+
+public class WriterTSemigroupK<G, W, SemiKG> : SemigroupK where SemiKG : SemigroupK, SemiKG.F == G {
+    public typealias F = WriterTPartial<G, W>
+    
+    private let semigroupK : SemiKG
+    
+    public init(_ semigroupK : SemiKG) {
+        self.semigroupK = semigroupK
+    }
+    
+    public func combineK<A>(_ x: HK<HK<HK<WriterTF, G>, W>, A>, _ y: HK<HK<HK<WriterTF, G>, W>, A>) -> HK<HK<HK<WriterTF, G>, W>, A> {
+        return (x as! WriterT<G, W, A>).combineK(y as! WriterT<G, W, A>, semigroupK)
+    }
+}
+
+public class WriterTMonoidK<G, W, MonoKG> : WriterTSemigroupK<G, W, MonoKG>, MonoidK where MonoKG : MonoidK, MonoKG.F == G {
+    
+    private let monoidK : MonoKG
+    
+    override public init(_ monoidK : MonoKG) {
+        self.monoidK = monoidK
+        super.init(monoidK)
+    }
+    
+    public func emptyK<A>() -> HK<HK<HK<WriterTF, G>, W>, A> {
+        return WriterT(monoidK.emptyK())
+    }
+}
+
+public class WriterTMonadWriter<G, V, MonG, MonoW> : WriterTMonad<G, V, MonG, MonoW>, MonadWriter where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == V {
+    public typealias W = V
+    
+    public func writer<A>(_ aw: (V, A)) -> HK<HK<HK<WriterTF, G>, V>, A> {
+        return WriterT.put2(aw.1, aw.0, monad)
+    }
+    
+    public func listen<A>(_ fa: HK<HK<HK<WriterTF, G>, V>, A>) -> HK<HK<HK<WriterTF, G>, V>, (V, A)> {
+        return WriterT(monad.flatMap((fa as! WriterT<G, V, A>).content(self.monad), { a in
+            self.monad.map((fa as! WriterT<G, V, A>).write(self.monad), { l in
+                (l, (l, a))
+            })
+        }))
+    }
+    
+    public func pass<A>(_ fa: HK<HK<HK<WriterTF, G>, V>, ((V) -> V, A)>) -> HK<HK<HK<WriterTF, G>, V>, A> {
+        return WriterT<G, V, A>.pass(WriterT.ev(fa), monad)
     }
 }
