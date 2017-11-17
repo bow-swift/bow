@@ -8,9 +8,10 @@
 
 import Foundation
 
+public class CokleisliF {}
 public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
 
-public class Cokleisli<F, A, B> : HK2<F, A, B> {
+public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
     internal let run : (HK<F, A>) -> B
     
     public static func pure(_ b : B) -> Cokleisli<F, A, B> {
