@@ -22,6 +22,10 @@ public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
         return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
     }
     
+    public static func ev(_ fa : HK3<CokleisliF, F, A, B>) -> Cokleisli<F, A, B> {
+        return fa as! Cokleisli<F, A, B>
+    }
+    
     public init(_ run : @escaping (HK<F, A>) -> B) {
         self.run = run
     }
