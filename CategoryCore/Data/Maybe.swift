@@ -44,6 +44,10 @@ public class Maybe<A> : HK<MaybeF, A> {
         )
     }
     
+    public static func ev(_ fa : HK<MaybeF, A>) -> Maybe<A> {
+        return fa.ev()
+    }
+    
     public var isEmpty : Bool {
         return fold({ true },
                     { _ in false })
@@ -207,12 +211,11 @@ public class MaybeApplicative : MaybeFunctor, Applicative {
 
 public class MaybeMonad : MaybeApplicative, Monad {
     public func flatMap<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> HK<MaybeF, B>) -> HK<MaybeF, B> {
-        return fa.ev().flatMap(f as! (A) -> Maybe<B>)
+        return fa.ev().flatMap({ a in f(a).ev() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<MaybeF, Either<A, B>>) -> HK<MaybeF, B> {
-        let g = { a in f(a) as! Maybe<Either<A, B>> }
-        return Maybe<A>.tailRecM(a, g)
+        return Maybe<A>.tailRecM(a, { a in f(a).ev() })
     }
 }
 
