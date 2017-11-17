@@ -18,7 +18,7 @@ public class Id<A> : HK<IdF, A> {
     }
     
     public static func tailRecM<B>(_ a : (A), _ f : (A) -> HK<IdF, Either<A, B>>) -> Id<B> {
-        return (Id<Either<A, B>>.ev(f(a)).value
+        return Id<Either<A, B>>.ev(f(a)).value
             .fold({ left in tailRecM(left, f)},
                   Id<B>.pure)
     }
