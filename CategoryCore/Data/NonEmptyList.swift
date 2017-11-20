@@ -270,7 +270,7 @@ public class NonEmptyListSemigroup<R> : Semigroup {
 }
 
 public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = NonEmptyList<R>
+    public typealias A = HK<NonEmptyListF, R>
     
     private let eqr : EqR
     
@@ -278,7 +278,9 @@ public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: NonEmptyList<R>, _ b: NonEmptyList<R>) -> Bool {
+    public func eqv(_ a: HK<NonEmptyListF, R>, _ b: HK<NonEmptyListF, R>) -> Bool {
+        let a = NonEmptyList.ev(a)
+        let b = NonEmptyList.ev(b)
         if a.count != b.count {
             return false
         } else {

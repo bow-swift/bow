@@ -29,6 +29,7 @@
 		115AF8E71FC2F92D003F2565 /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8E61FC2F92D003F2565 /* IorTest.swift */; };
 		115AF8E91FC300F5003F2565 /* ListKWTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8E81FC300F5003F2565 /* ListKWTest.swift */; };
 		115AF8EB1FC301DD003F2565 /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EA1FC301DD003F2565 /* MaybeTest.swift */; };
+		115AF8ED1FC302CA003F2565 /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */; };
 		117BBA991F876C9200196DB7 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA981F876C9200196DB7 /* State.swift */; };
 		117BBA9D1F8772FE00196DB7 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9C1F8772FE00196DB7 /* MaybeT.swift */; };
 		117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9E1F8790B400196DB7 /* EitherT.swift */; };
@@ -125,6 +126,7 @@
 		115AF8E61FC2F92D003F2565 /* IorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IorTest.swift; sourceTree = "<group>"; };
 		115AF8E81FC300F5003F2565 /* ListKWTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListKWTest.swift; sourceTree = "<group>"; };
 		115AF8EA1FC301DD003F2565 /* MaybeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTest.swift; sourceTree = "<group>"; };
+		115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyListTest.swift; sourceTree = "<group>"; };
 		117BBA981F876C9200196DB7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		117BBA9C1F8772FE00196DB7 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
 		117BBA9E1F8790B400196DB7 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				115AF8E61FC2F92D003F2565 /* IorTest.swift */,
 				115AF8E81FC300F5003F2565 /* ListKWTest.swift */,
 				115AF8EA1FC301DD003F2565 /* MaybeTest.swift */,
+				115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				115AF8E11FC2EA75003F2565 /* IdTest.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
 				115AF8CF1FC2CEF9003F2565 /* PredefTest.swift in Sources */,
+				115AF8ED1FC302CA003F2565 /* NonEmptyListTest.swift in Sources */,
 				115AF8E91FC300F5003F2565 /* ListKWTest.swift in Sources */,
 				115AF8EB1FC301DD003F2565 /* MaybeTest.swift in Sources */,
 				115AF8DB1FC2E043003F2565 /* CurryTest.swift in Sources */,
