@@ -254,7 +254,7 @@ public class MaybeMonadError : MaybeMonad, MonadError {
 }
 
 public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Maybe<R>
+    public typealias A = HK<MaybeF, R>
     
     private let eqr : EqR
     
@@ -262,7 +262,9 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Maybe<R>, _ b: Maybe<R>) -> Bool {
+    public func eqv(_ a: HK<MaybeF, R>, _ b: HK<MaybeF, R>) -> Bool {
+        let a = Maybe.ev(a)
+        let b = Maybe.ev(b)
         return a.fold({ b.fold(constF(true), constF(false)) },
                       { aSome in b.fold(constF(false), { bSome in eqr.eqv(aSome, bSome) })})
     }
