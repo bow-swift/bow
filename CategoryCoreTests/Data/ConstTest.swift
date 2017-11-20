@@ -19,4 +19,7 @@ class ConstTest: XCTestCase {
         FunctorLaws<HK<ConstF, Int>>.check(functor: Const<Int, Int>.functor(), generator: Const<Int, Int>.pure, eq: Const<Int, Int>.eq(Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Const<Int, Int>.eq(Int.order), generator: self.generator)
+    }
 }
