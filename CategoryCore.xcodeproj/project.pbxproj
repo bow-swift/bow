@@ -31,6 +31,7 @@
 		115AF8EB1FC301DD003F2565 /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EA1FC301DD003F2565 /* MaybeTest.swift */; };
 		115AF8ED1FC302CA003F2565 /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */; };
 		115AF8EF1FC303F8003F2565 /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EE1FC303F8003F2565 /* TryTest.swift */; };
+		115AF8F11FC30503003F2565 /* EqLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8F01FC30503003F2565 /* EqLaws.swift */; };
 		117BBA991F876C9200196DB7 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA981F876C9200196DB7 /* State.swift */; };
 		117BBA9D1F8772FE00196DB7 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9C1F8772FE00196DB7 /* MaybeT.swift */; };
 		117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9E1F8790B400196DB7 /* EitherT.swift */; };
@@ -129,6 +130,7 @@
 		115AF8EA1FC301DD003F2565 /* MaybeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTest.swift; sourceTree = "<group>"; };
 		115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyListTest.swift; sourceTree = "<group>"; };
 		115AF8EE1FC303F8003F2565 /* TryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryTest.swift; sourceTree = "<group>"; };
+		115AF8F01FC30503003F2565 /* EqLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqLaws.swift; sourceTree = "<group>"; };
 		117BBA981F876C9200196DB7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		117BBA9C1F8772FE00196DB7 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
 		117BBA9E1F8790B400196DB7 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		115AF8DE1FC2EA3D003F2565 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				115AF8F01FC30503003F2565 /* EqLaws.swift */,
 				115AF8DC1FC2E595003F2565 /* FunctorLaws.swift */,
 			);
 			path = Typeclasses;
@@ -721,6 +724,7 @@
 				115AF8E91FC300F5003F2565 /* ListKWTest.swift in Sources */,
 				115AF8EB1FC301DD003F2565 /* MaybeTest.swift in Sources */,
 				115AF8DB1FC2E043003F2565 /* CurryTest.swift in Sources */,
+				115AF8F11FC30503003F2565 /* EqLaws.swift in Sources */,
 				115AF8DD1FC2E595003F2565 /* FunctorLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
