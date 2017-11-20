@@ -11,19 +11,15 @@ import SwiftCheck
 @testable import CategoryCore
 
 class IdTest: XCTestCase {
-    var functor : IdFunctor {
-        return Id<Int>.functor()
-    }
-    
     var generator : (Int) -> HK<IdF, Int> {
         return { a in Id<Int>.pure(a) }
     }
     
-    var eq : IdEq<Int> {
-        return Id<Int>.eq()
+    func testFunctorLaws() {
+        FunctorLaws<IdF>.check(functor: Id<Int>.functor(), generator: self.generator, eq: Id<Int>.eq(Int.order))
     }
     
-    func testFunctorLaws() {
-        FunctorLaws<IdF>.check(functor: self.functor, generator: self.generator, eq: self.eq)
+    func testEqLaws() {
+        EqLaws<HK<IdF, Int>>.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
     }
 }
