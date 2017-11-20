@@ -29,7 +29,6 @@
 		11C5268C1F82812F00DC15CF /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5268B1F82812F00DC15CF /* Kleisli.swift */; };
 		11C5268E1F829FEA00DC15CF /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5268D1F829FEA00DC15CF /* Cokleisli.swift */; };
 		11CEEA2D1F7D10A3003EB472 /* CategoryCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11CEEA231F7D10A3003EB472 /* CategoryCore.framework */; };
-		11CEEA321F7D10A3003EB472 /* CategoryCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */; };
 		11CEEA341F7D10A3003EB472 /* CategoryCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 11CEEA261F7D10A3003EB472 /* CategoryCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11CEEA3E1F7D1403003EB472 /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA3D1F7D1403003EB472 /* Predef.swift */; };
 		11CEEA401F7D30B5003EB472 /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEEA3F1F7D30B5003EB472 /* Curry.swift */; };
@@ -117,7 +116,6 @@
 		11CEEA261F7D10A3003EB472 /* CategoryCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCore.h; sourceTree = "<group>"; };
 		11CEEA271F7D10A3003EB472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11CEEA2C1F7D10A3003EB472 /* CategoryCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CategoryCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoreTests.swift; sourceTree = "<group>"; };
 		11CEEA331F7D10A3003EB472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11CEEA3D1F7D1403003EB472 /* Predef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predef.swift; sourceTree = "<group>"; };
 		11CEEA3F1F7D30B5003EB472 /* Curry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 		11CEEA301F7D10A3003EB472 /* CategoryCoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				11CEEA311F7D10A3003EB472 /* CategoryCoreTests.swift */,
 				11CEEA331F7D10A3003EB472 /* Info.plist */,
 			);
 			path = CategoryCoreTests;
@@ -654,7 +651,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11CEEA321F7D10A3003EB472 /* CategoryCoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
