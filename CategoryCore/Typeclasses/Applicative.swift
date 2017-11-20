@@ -23,31 +23,31 @@ public extension Applicative {
     }
     
     public func product<A, B, Z>(_ fa : HK<F, (A, B)>, _ fz : HK<F, Z>) -> HK<F, (A, B, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, b) })
     }
     
     public func product<A, B, C, Z>(_ fa : HK<F, (A, B, C)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, b) })
     }
     
     public func product<A, B, C, D, Z>(_ fa : HK<F, (A, B, C, D)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, D, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, b) })
     }
     
     public func product<A, B, C, D, E, Z>(_ fa : HK<F, (A, B, C, D, E)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, D, E, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, b) })
     }
     
     public func product<A, B, C, D, E, G, Z>(_ fa : HK<F, (A, B, C, D, E, G)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, D, E, G, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, b) })
     }
     
     public func product<A, B, C, D, E, G, H, Z>(_ fa : HK<F, (A, B, C, D, E, G, H)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, D, E, G, H, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, a.6, b) })
     }
     
     public func product<A, B, C, D, E, G, H, I, Z>(_ fa : HK<F, (A, B, C, D, E, G, H, I)>, _ fz : HK<F, Z>) -> HK<F, (A, B, C, D, E, G, H, I, Z)> {
-        return self.product(fa, fz)
+        return self.map(self.product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, a.6, a.7, b) })
     }
     
     public func map2<A, B, Z>(_ fa : HK<F, A>, _ fb : HK<F, B>, _ f : @escaping (A, B) -> Z) -> HK<F, Z> {
