@@ -18,4 +18,8 @@ class EitherTest: XCTestCase {
     func testFunctorLaws() {
         FunctorLaws<EitherPartial<Int>>.check(functor: Either<Int, Int>.functor(), generator: self.generator, eq: Either<Int, Int>.eq(Int.order, Int.order))
     }
+    
+    func testEqLaws() {
+        EqLaws.check(eq: Either<Int, Int>.eq(Int.order, Int.order), generator: self.generator)
+    }
 }
