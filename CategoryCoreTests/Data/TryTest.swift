@@ -19,4 +19,7 @@ class TryTest: XCTestCase {
         FunctorLaws<TryF>.check(functor: Try<Int>.functor(), generator: self.generator, eq: Try<Int>.eq(Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Try.eq(Int.order), generator: self.generator)
+    }
 }
