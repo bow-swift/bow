@@ -19,4 +19,7 @@ class NonEmptyListTest: XCTestCase {
         FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: NonEmptyList<Int>.eq(Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: NonEmptyList.eq(Int.order), generator: self.generator)
+    }
 }
