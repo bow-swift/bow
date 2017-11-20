@@ -15,11 +15,15 @@ class IdTest: XCTestCase {
         return { a in Id<Int>.pure(a) }
     }
     
+    func testEqLaws() {
+        EqLaws<HK<IdF, Int>>.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<IdF>.check(functor: Id<Int>.functor(), generator: self.generator, eq: Id<Int>.eq(Int.order))
     }
     
-    func testEqLaws() {
-        EqLaws<HK<IdF, Int>>.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
+    func testApplicativeLaws() {
+        ApplicativeLaws<IdF>.check(applicative: Id<Int>.applicative(), eq: Id.eq(Int.order))
     }
 }
