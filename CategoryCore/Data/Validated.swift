@@ -29,7 +29,7 @@ public class Validated<E, A> : HK2<ValidatedF, E, A> {
     }
     
     public static func fromMaybe(_ m : Maybe<A>, ifNone : @escaping () -> E) -> Validated<E, A> {
-        return m.fold(ifNone >> Validated<E, A>.invalid, Validated<E, A>.valid)
+        return m.fold(ifNone >>> Validated<E, A>.invalid, Validated<E, A>.valid)
     }
     
     public static func ev(_ fa : HK2<ValidatedF, E, A>) -> Validated<E, A> {
@@ -76,8 +76,8 @@ public class Validated<E, A> : HK2<ValidatedF, E, A> {
     }
     
     public func bimap<EE, AA>(_ fe : @escaping (E) -> EE, _ fa : @escaping (A) -> AA) -> Validated<EE, AA> {
-        return fold(fe >> Validated<EE, AA>.invalid,
-                    fa >> Validated<EE, AA>.valid)
+        return fold(fe >>> Validated<EE, AA>.invalid,
+                    fa >>> Validated<EE, AA>.valid)
     }
     
     public func map<B>(_ f : @escaping (A) -> B) -> Validated<E, B> {
@@ -130,7 +130,7 @@ public class Validated<E, A> : HK2<ValidatedF, E, A> {
     }
     
     public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK2<ValidatedF, E, B>> where Appl : Applicative, Appl.F == G {
-        return fold(Validated<E, B>.invalid >> applicative.pure,
+        return fold(Validated<E, B>.invalid >>> applicative.pure,
                     { a in applicative.map(f(a), Validated<E, B>.valid) })
     }
     

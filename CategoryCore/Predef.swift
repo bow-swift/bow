@@ -51,22 +51,22 @@ public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C)
     return { x in g(f(x)) }
 }
 
-infix operator >> : AdditionPrecedence
-infix operator << : AdditionPrecedence
+infix operator >>> : AdditionPrecedence
+infix operator <<< : AdditionPrecedence
 
-public func >><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
+public func >>><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
     return andThen(f, g)
 }
 
-public func >><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
+public func >>><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
     return andThen(f, g)
 }
 
-public func <<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
-    return f >> g
+public func <<<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
+    return f >>> g
 }
 
-public func <<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
-    return f >> g
+public func <<<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
+    return f >>> g
 }
 

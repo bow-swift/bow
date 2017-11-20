@@ -85,7 +85,7 @@ public class Try<A> : HK<TryF, A> {
     }
     
     public func map<B>(_ f : @escaping (A) -> B) -> Try<B> {
-        return fold(Try<B>.raise, f >> Try<B>.pure)
+        return fold(Try<B>.raise, f >>> Try<B>.pure)
     }
     
     public func flatMap<B>(_ f : (A) -> Try<B>) -> Try<B> {
@@ -118,7 +118,7 @@ public class Try<A> : HK<TryF, A> {
     }
     
     public func recover(_ f : @escaping (Error) -> A) -> Try<A> {
-        return fold(f >> Try.success, Try.success)
+        return fold(f >>> Try.success, Try.success)
     }
     
     public func transform(failure : (Error) -> Try<A>, success : (A) -> Try<A>) -> Try<A> {

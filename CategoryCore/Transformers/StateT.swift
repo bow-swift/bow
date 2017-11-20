@@ -47,7 +47,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     public func transform<B, Func>(_ f : @escaping (S, A) -> (S, B), _ functor : Func) -> StateT<F, S, B> where Func : Functor, Func.F == F {
         return StateT<F, S, B>(
             functor.map(runF, { sfsa in
-                sfsa >> { fsa in functor.map(fsa, f) }
+                sfsa >>> { fsa in functor.map(fsa, f) }
             })
         )
     }
@@ -58,7 +58,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     
     public func map2<B, Z, Mon>(_ sb : StateT<F, S, B>, _ f : @escaping (A, B) -> Z, _ monad : Mon) -> StateT<F, S, Z> where Mon : Monad, Mon.F == F {
         return StateT<F, S, Z>(monad.map2(runF, sb.runF, { ssa, ssb in
-            ssa >> { fsa in
+            ssa >>> { fsa in
                 monad.flatMap(fsa) { (s, a) in
                     monad.map(ssb(s), { (s, b) in (s, f(a, b)) })
                 }
@@ -68,7 +68,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     
     public func map2Eval<B, Z, Mon>(_ esb : Eval<StateT<F, S, B>>, _ f : @escaping (A, B) -> Z, _ monad : Mon) -> Eval<StateT<F, S, Z>> where Mon : Monad, Mon.F == F {
         return monad.map2Eval(runF, esb.map{ sb in sb.runF }){ ssa, ssb in
-            ssa >> { fsa in
+            ssa >>> { fsa in
                 monad.flatMap(fsa) { (s, a) in
                     monad.map(ssb(s)) { (s, b) in (s, f(a, b)) }
                 }
@@ -87,7 +87,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     public func flatMap<B, Mon>(_ f : @escaping (A) -> StateT<F, S, B>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
         return StateT<F, S, B>(
             monad.map(runF) { sfsa in
-                sfsa >> { fsa in
+                sfsa >>> { fsa in
                     monad.flatMap(fsa) { (s, a) in
                         f(a).run(s, monad)
                     }
@@ -99,7 +99,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     public func flatMapF<B, Mon>(_ f : @escaping (A) -> HK<F, B>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
         return StateT<F, S, B>(
             monad.map(runF) { sfsa in
-                sfsa >> { fsa in
+                sfsa >>> { fsa in
                     monad.flatMap(fsa) { (s, a) in
                         monad.map(f(a), { b in (s, b) })
                     }

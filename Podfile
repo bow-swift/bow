@@ -9,7 +9,7 @@ target 'CategoryCore' do
 
   target 'CategoryCoreTests' do
     inherit! :search_paths
-    pod 'SwiftCheck', '~> 0.7'
+    pod 'SwiftCheck', '~> 0.9.1'
     pod 'Nimble', '~> 7.0.2'
   end
 

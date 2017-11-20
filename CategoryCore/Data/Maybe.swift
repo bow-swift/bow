@@ -106,7 +106,7 @@ public class Maybe<A> : HK<MaybeF, A> {
     }
     
     public func filterNot(_ predicate : @escaping (A) -> Bool) -> Maybe<A> {
-        return filter(predicate >> not)
+        return filter(predicate >>> not)
     }
     
     public func exists(_ predicate : (A) -> Bool) -> Bool {

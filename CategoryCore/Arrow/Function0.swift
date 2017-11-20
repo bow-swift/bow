@@ -92,7 +92,7 @@ public class Function0Functor : Functor {
     
     public func map<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> B) -> HK<Function0F, B> {
         let funA = fa as! Function0<A>
-        return Function0(funA.f >> f)
+        return Function0(funA.f >>> f)
     }
 }
 

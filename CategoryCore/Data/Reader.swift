@@ -18,7 +18,7 @@ public class Reader<D, A> : ReaderT<IdF, D, A> {
     }
     
     public init(_ run : @escaping (D) -> A) {
-        super.init(run >> Id<A>.pure)
+        super.init(run >>> Id<A>.pure)
     }
     
     public func map<B>(_ f : @escaping (A) -> B) -> Reader<D, B> {

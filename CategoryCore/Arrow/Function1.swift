@@ -39,7 +39,7 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
     }
     
     public func map<B>(_ g : @escaping (O) -> B) -> Function1<I, B> {
-        return Function1<I, B>(self.f >> g)
+        return Function1<I, B>(self.f >>> g)
     }
     
     public func flatMap<B>(_ g : @escaping (O) -> Function1<I, B>) -> Function1<I, B> {
@@ -52,7 +52,7 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
     }
     
     public func local(_ g : @escaping (I) -> I) -> Function1<I, O> {
-        return Function1<I, O>(g >> self.f)
+        return Function1<I, O>(g >>> self.f)
     }
 }
 
