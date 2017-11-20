@@ -77,5 +77,13 @@ class PredefTest : XCTestCase {
             let x3 = g(x2)
             return x3 == compose(g, f)(x1)
         }
+        
+        property("Function composition is associative") <- forAll() { (a : Int, b : Int, c : Int, x : Int) in
+            let f : (Int) -> Int = constF(a)
+            let g : (Int) -> Int = constF(b)
+            let h : (Int) -> Int = constF(c)
+            
+            return ((h <<< g) <<< f)(x) == (h <<< (g <<< f))(x)
+        }
     }
 }
