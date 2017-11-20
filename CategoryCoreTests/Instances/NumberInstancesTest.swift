@@ -160,4 +160,124 @@ class NumberInstancesTest: XCTestCase {
             return SemigroupLaws.check(semigroup: UInt64.productMonoid, a: a, b: b, c: c, eq: UInt64.order)
         }
     }
+    
+    func testIntMonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Int) in
+            return MonoidLaws.check(monoid: Int.sumMonoid, a: a, eq: Int.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Int) in
+            return MonoidLaws.check(monoid: Int.productMonoid, a: a, eq: Int.order)
+        }
+    }
+    
+    func testInt8MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Int8) in
+            return MonoidLaws.check(monoid: Int8.sumMonoid, a: a, eq: Int8.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Int8) in
+            return MonoidLaws.check(monoid: Int8.productMonoid, a: a, eq: Int8.order)
+        }
+    }
+    
+    func testInt16MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Int16) in
+            return MonoidLaws.check(monoid: Int16.sumMonoid, a: a, eq: Int16.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Int16) in
+            return MonoidLaws.check(monoid: Int16.productMonoid, a: a, eq: Int16.order)
+        }
+    }
+    
+    func testInt32MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Int32) in
+            return MonoidLaws.check(monoid: Int32.sumMonoid, a: a, eq: Int32.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Int32) in
+            return MonoidLaws.check(monoid: Int32.productMonoid, a: a, eq: Int32.order)
+        }
+    }
+    
+    func testInt64MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Int64) in
+            return MonoidLaws.check(monoid: Int64.sumMonoid, a: a, eq: Int64.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Int64) in
+            return MonoidLaws.check(monoid: Int64.productMonoid, a: a, eq: Int64.order)
+        }
+    }
+    
+    func testUIntMonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : UInt) in
+            return MonoidLaws.check(monoid: UInt.sumMonoid, a: a, eq: UInt.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : UInt) in
+            return MonoidLaws.check(monoid: UInt.productMonoid, a: a, eq: UInt.order)
+        }
+    }
+    
+    func testUInt8MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : UInt8) in
+            return MonoidLaws.check(monoid: UInt8.sumMonoid, a: a, eq: UInt8.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : UInt8) in
+            return MonoidLaws.check(monoid: UInt8.productMonoid, a: a, eq: UInt8.order)
+        }
+    }
+    
+    func testUInt16MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : UInt16) in
+            return MonoidLaws.check(monoid: UInt16.sumMonoid, a: a, eq: UInt16.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : UInt16) in
+            return MonoidLaws.check(monoid: UInt16.productMonoid, a: a, eq: UInt16.order)
+        }
+    }
+    
+    func testUInt32MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : UInt32) in
+            return MonoidLaws.check(monoid: UInt32.sumMonoid, a: a, eq: UInt32.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : UInt32) in
+            return MonoidLaws.check(monoid: UInt32.productMonoid, a: a, eq: UInt32.order)
+        }
+    }
+    
+    func testUInt64MonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : UInt64) in
+            return MonoidLaws.check(monoid: UInt64.sumMonoid, a: a, eq: UInt64.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : UInt64) in
+            return MonoidLaws.check(monoid: UInt64.productMonoid, a: a, eq: UInt64.order)
+        }
+    }
+    
+    func testFloatMonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Float) in
+            return MonoidLaws.check(monoid: Float.sumMonoid, a: a, eq: Float.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Float) in
+            return MonoidLaws.check(monoid: Float.productMonoid, a: a, eq: Float.order)
+        }
+    }
+    
+    func testDoubleMonoidLaws() {
+        property("Sum Monoid laws") <- forAll { (a : Double) in
+            return MonoidLaws.check(monoid: Double.sumMonoid, a: a, eq: Double.order)
+        }
+        
+        property("Product Monoid laws") <- forAll { (a : Double) in
+            return MonoidLaws.check(monoid: Double.productMonoid, a: a, eq: Double.order)
+        }
+    }
 }
