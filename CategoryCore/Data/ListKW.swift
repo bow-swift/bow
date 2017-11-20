@@ -275,7 +275,7 @@ public class ListKWMonoid<R> : ListKWSemigroup<R>, Monoid {
 }
 
 public class ListKWEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = ListKW<R>
+    public typealias A = HK<ListKWF, R>
     
     private let eqr : EqR
     
@@ -283,7 +283,9 @@ public class ListKWEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: ListKW<R>, _ b: ListKW<R>) -> Bool {
+    public func eqv(_ a: HK<ListKWF, R>, _ b: HK<ListKWF, R>) -> Bool {
+        let a = ListKW.ev(a)
+        let b = ListKW.ev(b)
         if a.list.count != b.list.count {
             return false
         } else {
