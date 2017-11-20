@@ -15,12 +15,15 @@ class MaybeTest: XCTestCase {
         return { a in Maybe.pure(a) }
     }
     
-    func testFunctorLaws() {
-        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: Maybe<Int>.eq(Int.order))
-    }
-    
     func testEqLaws() {
         EqLaws.check(eq: Maybe.eq(Int.order), generator: self.generator)
     }
     
+    func testFunctorLaws() {
+        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: Maybe<Int>.eq(Int.order))
+    }
+    
+    func testApplicativeLaws() {
+        ApplicativeLaws<MaybeF>.check(applicative: Maybe<Int>.applicative(), eq: Maybe.eq(Int.order))
+    }
 }
