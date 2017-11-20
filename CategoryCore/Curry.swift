@@ -55,12 +55,3 @@ func curry<A, B, C, D, E, F, G, H>(_ fun : @escaping (A, B, C, D, E, F, G) -> H)
 func uncurry<A, B, C, D, E, F, G, H>(_ fun : @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> H) -> (A, B, C, D, E, F, G) -> H {
     return { a, b, c, d, e, f, g in fun(a)(b)(c)(d)(e)(f)(g) }
 }
-
-func curry<A, B, C, D, E, F, G, H, I>(_ fun : @escaping (A, B, C, D, E, F, G, H) -> I) -> (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I {
-    return { a in { b in { c in { d in { e in { f in { g in { h in fun(a,b,c,d,e,f,g,h) } } } } } } } }
-}
-
-func uncurry<A, B, C, D, E, F, G, H, I>(_ fun : @escaping (A) -> (B) -> (C) -> (D) -> (E) -> (F) -> (G) -> (H) -> I) -> (A, B, C, D, E, F, G, H) -> I {
-    return { a, b, c, d, e, f, g, h in fun(a)(b)(c)(d)(e)(f)(g)(h) }
-}
-
