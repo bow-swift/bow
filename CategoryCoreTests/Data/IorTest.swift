@@ -14,11 +14,15 @@ class IorTest: XCTestCase {
         return { a in Ior<Int, Int>.right(a) }
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Ior.eq(Int.order, Int.order), generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<IorPartial<Int>>.check(functor: Ior<Int, Int>.functor(), generator: self.generator, eq: Ior<Int, Int>.eq(Int.order, Int.order))
     }
     
-    func testEqLaws() {
-        EqLaws.check(eq: Ior.eq(Int.order, Int.order), generator: self.generator)
+    func testApplicativeLaws() {
+        ApplicativeLaws<IorPartial<Int>>.check(applicative: Ior<Int, Int>.applicative(Int.sumMonoid), eq: Ior.eq(Int.order, Int.order))
     }
 }
