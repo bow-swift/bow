@@ -1,0 +1,24 @@
+//
+//  SemigroupLaws.swift
+//  CategoryCoreTests
+//
+//  Created by Tomás Ruiz López on 20/11/17.
+//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
+//
+
+import Foundation
+import SwiftCheck
+@testable import CategoryCore
+
+class SemigroupLaws<A> {
+    
+    public static func check<Semi, EqA>(semigroup : Semi, a : A, b : A, c : A, eq : EqA) -> Bool where Semi : Semigroup, Semi.A == A, EqA : Eq, EqA.A == A {
+        return associativity(semigroup: semigroup, a: a, b: b, c: c, eq: eq)
+    }
+    
+    private static func associativity<Semi, EqA>(semigroup : Semi, a : A, b : A, c : A, eq : EqA) -> Bool where Semi : Semigroup, Semi.A == A, EqA : Eq, EqA.A == A {
+        return eq.eqv(semigroup.combine(semigroup.combine(a, b), c),
+                      semigroup.combine(a, semigroup.combine(b, c)))
+    }
+    
+}
