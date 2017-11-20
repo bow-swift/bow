@@ -284,7 +284,7 @@ public class IorTraverse<L> : IorFoldable<L>, Traverse {
 }
 
 public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = Ior<L, R>
+    public typealias A = HK2<IorF, L, R>
     
     private let eql : EqL
     private let eqr : EqR
@@ -294,7 +294,9 @@ public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, Eq
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Ior<L, R>, _ b: Ior<L, R>) -> Bool {
+    public func eqv(_ a: HK2<IorF, L, R>, _ b: HK2<IorF, L, R>) -> Bool {
+        let a = Ior.ev(a)
+        let b = Ior.ev(b)
         return a.fold({ aLeft in
             b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false), constF(false))
         },
