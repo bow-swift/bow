@@ -72,7 +72,7 @@ public class Int8SumSemigroup : Semigroup {
     public typealias A = Int8
     
     public func combine(_ a : Int8, _ b : Int8) -> Int8 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -86,7 +86,7 @@ public class Int8ProductSemigroup : Semigroup {
     public typealias A = Int8
     
     public func combine(_ a : Int8, _ b : Int8) -> Int8 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -130,7 +130,7 @@ public class Int16SumSemigroup : Semigroup {
     public typealias A = Int16
     
     public func combine(_ a : Int16, _ b : Int16) -> Int16 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -144,7 +144,7 @@ public class Int16ProductSemigroup : Semigroup {
     public typealias A = Int16
     
     public func combine(_ a : Int16, _ b : Int16) -> Int16 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -188,7 +188,7 @@ public class Int32SumSemigroup : Semigroup {
     public typealias A = Int32
     
     public func combine(_ a : Int32, _ b : Int32) -> Int32 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -202,7 +202,7 @@ public class Int32ProductSemigroup : Semigroup {
     public typealias A = Int32
     
     public func combine(_ a : Int32, _ b : Int32) -> Int32 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -246,7 +246,7 @@ public class Int64SumSemigroup : Semigroup {
     public typealias A = Int64
     
     public func combine(_ a : Int64, _ b : Int64) -> Int64 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -260,7 +260,7 @@ public class Int64ProductSemigroup : Semigroup {
     public typealias A = Int64
     
     public func combine(_ a : Int64, _ b : Int64) -> Int64 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -368,7 +368,7 @@ public class UInt8SumSemigroup : Semigroup {
     public typealias A = UInt8
     
     public func combine(_ a : UInt8, _ b : UInt8) -> UInt8 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -382,7 +382,7 @@ public class UInt8ProductSemigroup : Semigroup {
     public typealias A = UInt8
     
     public func combine(_ a : UInt8, _ b : UInt8) -> UInt8 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -432,7 +432,7 @@ public class UInt16SumSemigroup : Semigroup {
     public typealias A = UInt16
     
     public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -446,7 +446,7 @@ public class UInt16ProductSemigroup : Semigroup {
     public typealias A = UInt16
     
     public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -496,7 +496,7 @@ public class UInt32SumSemigroup : Semigroup {
     public typealias A = UInt32
     
     public func combine(_ a : UInt32, _ b : UInt32) -> UInt32 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -510,7 +510,7 @@ public class UInt32ProductSemigroup : Semigroup {
     public typealias A = UInt32
     
     public func combine(_ a : UInt32, _ b : UInt32) -> UInt32 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -560,7 +560,7 @@ public class UInt64SumSemigroup : Semigroup {
     public typealias A = UInt64
     
     public func combine(_ a : UInt64, _ b : UInt64) -> UInt64 {
-        return a + b
+        return a.addingReportingOverflow(b).partialValue
     }
 }
 
@@ -574,7 +574,7 @@ public class UInt64ProductSemigroup : Semigroup {
     public typealias A = UInt64
     
     public func combine(_ a : UInt64, _ b : UInt64) -> UInt64 {
-        return a * b
+        return a.multipliedReportingOverflow(by: b).partialValue
     }
 }
 
@@ -652,7 +652,7 @@ public class FloatEq : Eq {
     public typealias A = Float
     
     public func eqv(_ a: Float, _ b: Float) -> Bool {
-        return a == b
+        return a.isEqual(to: b)
     }
 }
 
@@ -716,7 +716,7 @@ public class DoubleEq : Eq {
     public typealias A = Double
     
     public func eqv(_ a: Double, _ b: Double) -> Bool {
-        return a == b
+        return a.isEqual(to: b)
     }
 }
 

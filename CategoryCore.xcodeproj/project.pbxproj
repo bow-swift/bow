@@ -33,6 +33,8 @@
 		115AF8EF1FC303F8003F2565 /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8EE1FC303F8003F2565 /* TryTest.swift */; };
 		115AF8F11FC30503003F2565 /* EqLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8F01FC30503003F2565 /* EqLaws.swift */; };
 		115AF8F31FC30C04003F2565 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8F21FC30C04003F2565 /* ApplicativeLaws.swift */; };
+		115AF8F51FC31AD3003F2565 /* SemigroupLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */; };
+		115AF8F81FC31C2D003F2565 /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AF8F71FC31C2D003F2565 /* NumberInstancesTest.swift */; };
 		117BBA991F876C9200196DB7 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA981F876C9200196DB7 /* State.swift */; };
 		117BBA9D1F8772FE00196DB7 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9C1F8772FE00196DB7 /* MaybeT.swift */; };
 		117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9E1F8790B400196DB7 /* EitherT.swift */; };
@@ -133,6 +135,8 @@
 		115AF8EE1FC303F8003F2565 /* TryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryTest.swift; sourceTree = "<group>"; };
 		115AF8F01FC30503003F2565 /* EqLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqLaws.swift; sourceTree = "<group>"; };
 		115AF8F21FC30C04003F2565 /* ApplicativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicativeLaws.swift; sourceTree = "<group>"; };
+		115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupLaws.swift; sourceTree = "<group>"; };
+		115AF8F71FC31C2D003F2565 /* NumberInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInstancesTest.swift; sourceTree = "<group>"; };
 		117BBA981F876C9200196DB7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		117BBA9C1F8772FE00196DB7 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
 		117BBA9E1F8790B400196DB7 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 				115AF8F21FC30C04003F2565 /* ApplicativeLaws.swift */,
 				115AF8F01FC30503003F2565 /* EqLaws.swift */,
 				115AF8DC1FC2E595003F2565 /* FunctorLaws.swift */,
+				115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -246,6 +251,14 @@
 				115AF8EE1FC303F8003F2565 /* TryTest.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		115AF8F61FC31C12003F2565 /* Instances */ = {
+			isa = PBXGroup;
+			children = (
+				115AF8F71FC31C2D003F2565 /* NumberInstancesTest.swift */,
+			);
+			path = Instances;
 			sourceTree = "<group>";
 		};
 		11C526841F825DC100DC15CF /* Arrow */ = {
@@ -312,6 +325,7 @@
 				115AF8D51FC2DC82003F2565 /* PartialApplicationTest.swift */,
 				115AF8CE1FC2CEF9003F2565 /* PredefTest.swift */,
 				115AF8DF1FC2EA4D003F2565 /* Data */,
+				115AF8F61FC31C12003F2565 /* Instances */,
 				115AF8DE1FC2EA3D003F2565 /* Typeclasses */,
 			);
 			path = CategoryCoreTests;
@@ -715,9 +729,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				115AF8F51FC31AD3003F2565 /* SemigroupLaws.swift in Sources */,
 				115AF8E31FC2F5B5003F2565 /* ConstTest.swift in Sources */,
 				115AF8D61FC2DC82003F2565 /* PartialApplicationTest.swift in Sources */,
 				115AF8F31FC30C04003F2565 /* ApplicativeLaws.swift in Sources */,
+				115AF8F81FC31C2D003F2565 /* NumberInstancesTest.swift in Sources */,
 				115AF8E71FC2F92D003F2565 /* IorTest.swift in Sources */,
 				115AF8D41FC2DAFC003F2565 /* BooleanFunctionsTest.swift in Sources */,
 				115AF8EF1FC303F8003F2565 /* TryTest.swift in Sources */,
