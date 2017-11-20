@@ -162,14 +162,14 @@ public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
 }
 
 public class ConstEq<R, S, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Const<R, S>
+    public typealias A = HK2<ConstF, R, S>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Const<R, S>, _ b: Const<R, S>) -> Bool {
-        return eqr.eqv(a.value, b.value)
+    public func eqv(_ a: HK2<ConstF, R, S>, _ b: HK2<ConstF, R, S>) -> Bool {
+        return eqr.eqv(Const.ev(a).value, Const.ev(b).value)
     }
 }
