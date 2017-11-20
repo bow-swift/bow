@@ -106,6 +106,12 @@ extension Id {
     }
 }
 
+public extension Id where A : Equatable {
+    public static func eq() -> IdEq<A> {
+        return IdEq<A>()
+    }
+}
+
 public class IdFunctor : Functor {
     public typealias F = IdF
     
@@ -159,5 +165,13 @@ public class IdFoldable : Foldable {
 public class IdTraverse : IdFoldable, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<IdF, B>> where G == Appl.F, Appl : Applicative {
         return fa.ev().traverse(f, applicative)
+    }
+}
+
+public class IdEq<B> : Eq where B : Equatable {
+    public typealias A = HK<IdF, B>
+    
+    public func eqv(_ a: HK<IdF, B>, _ b: HK<IdF, B>) -> Bool {
+        return Id.ev(a).value == Id.ev(b).value
     }
 }
