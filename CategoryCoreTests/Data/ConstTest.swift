@@ -15,11 +15,15 @@ class ConstTest: XCTestCase {
         return { a in Const<Int, Int>.pure(a) }
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Const<Int, Int>.eq(Int.order), generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<HK<ConstF, Int>>.check(functor: Const<Int, Int>.functor(), generator: Const<Int, Int>.pure, eq: Const<Int, Int>.eq(Int.order))
     }
     
-    func testEqLaws() {
-        EqLaws.check(eq: Const<Int, Int>.eq(Int.order), generator: self.generator)
+    func testApplicativeLaws() {
+        ApplicativeLaws<HK<ConstF, Int>>.check(applicative: Const<Int, Int>.applicative(Int.sumMonoid), eq: Const<Int, Int>.eq(Int.order))
     }
 }
