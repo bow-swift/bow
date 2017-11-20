@@ -232,7 +232,7 @@ public class EitherSemigroupK<C> : SemigroupK {
 }
 
 public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = Either<L, R>
+    public typealias A = HK2<EitherF, L, R>
     private let eql : EqL
     private let eqr : EqR
     
@@ -241,8 +241,8 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Either<L, R>, _ b: Either<L, R>) -> Bool {
-        return a.fold({ aLeft  in b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
-                      { aRight in b.fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
+    public func eqv(_ a: HK2<EitherF, L, R>, _ b: HK2<EitherF, L, R>) -> Bool {
+        return Either.ev(a).fold({ aLeft  in Either.ev(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
+                                 { aRight in Either.ev(b).fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }
 }
