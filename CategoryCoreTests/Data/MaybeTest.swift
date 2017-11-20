@@ -19,4 +19,8 @@ class MaybeTest: XCTestCase {
         FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: Maybe<Int>.eq(Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Maybe.eq(Int.order), generator: self.generator)
+    }
+    
 }
