@@ -19,4 +19,8 @@ class ListKWTest: XCTestCase {
         FunctorLaws<ListKWF>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: ListKW<Int>.eq(Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: ListKW.eq(Int.order), generator: self.generator)
+    }
+    
 }
