@@ -15,11 +15,15 @@ class TryTest: XCTestCase {
         return { a in Try.pure(a) }
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Try.eq(Int.order), generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<TryF>.check(functor: Try<Int>.functor(), generator: self.generator, eq: Try<Int>.eq(Int.order))
     }
     
-    func testEqLaws() {
-        EqLaws.check(eq: Try.eq(Int.order), generator: self.generator)
+    func testApplicativeLaws() {
+        ApplicativeLaws<TryF>.check(applicative: Try<Int>.applicative(), eq: Try.eq(Int.order))
     }
 }
