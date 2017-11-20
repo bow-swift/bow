@@ -16,7 +16,7 @@ class IdTest: XCTestCase {
     }
     
     func testEqLaws() {
-        EqLaws<HK<IdF, Int>>.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
+        EqLaws.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
     }
     
     func testFunctorLaws() {
