@@ -104,11 +104,9 @@ extension Id {
     public static func traverse() -> IdTraverse {
         return IdTraverse()
     }
-}
 
-public extension Id where A : Equatable {
-    public static func eq() -> IdEq<A> {
-        return IdEq<A>()
+    public static func eq<EqA>(_ eqa : EqA) -> IdEq<A, EqA> {
+        return IdEq<A, EqA>(eqa)
     }
 }
 
@@ -168,10 +166,16 @@ public class IdTraverse : IdFoldable, Traverse {
     }
 }
 
-public class IdEq<B> : Eq where B : Equatable {
+public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
     public typealias A = HK<IdF, B>
     
+    private let eqb : EqB
+    
+    public init(_ eqb : EqB) {
+        self.eqb = eqb
+    }
+    
     public func eqv(_ a: HK<IdF, B>, _ b: HK<IdF, B>) -> Bool {
-        return Id.ev(a).value == Id.ev(b).value
+        return eqb.eqv(Id.ev(a).value, Id.ev(b).value)
     }
 }
