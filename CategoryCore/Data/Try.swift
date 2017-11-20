@@ -218,14 +218,16 @@ public class TryMonadError : TryMonad, MonadError {
 }
 
 public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Try<R>
+    public typealias A = HK<TryF, R>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Try<R>, _ b: Try<R>) -> Bool {
+    public func eqv(_ a: HK<TryF, R>, _ b: HK<TryF, R>) -> Bool {
+        let a = Try.ev(a)
+        let b = Try.ev(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
                       { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
     }
