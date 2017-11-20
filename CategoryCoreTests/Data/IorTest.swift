@@ -18,4 +18,7 @@ class IorTest: XCTestCase {
         FunctorLaws<IorPartial<Int>>.check(functor: Ior<Int, Int>.functor(), generator: self.generator, eq: Ior<Int, Int>.eq(Int.order, Int.order))
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Ior.eq(Int.order, Int.order), generator: self.generator)
+    }
 }
