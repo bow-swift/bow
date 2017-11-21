@@ -47,6 +47,7 @@
 		119267551FC44B1400E0E677 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267541FC44B1400E0E677 /* Tuple.swift */; };
 		119267571FC44C1500E0E677 /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267561FC44C1500E0E677 /* TupleTest.swift */; };
 		1192675A1FC44ECD00E0E677 /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267591FC44ECD00E0E677 /* Function0Test.swift */; };
+		1192675C1FC454BD00E0E677 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192675B1FC454BD00E0E677 /* Function1Test.swift */; };
 		11A33F1E1F8CCC7E00310A16 /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1D1F8CCC7E00310A16 /* WriterT.swift */; };
 		11A33F201F8D04EA00310A16 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1F1F8D04EA00310A16 /* Coproduct.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
@@ -158,6 +159,7 @@
 		119267541FC44B1400E0E677 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		119267561FC44C1500E0E677 /* TupleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTest.swift; sourceTree = "<group>"; };
 		119267591FC44ECD00E0E677 /* Function0Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0Test.swift; sourceTree = "<group>"; };
+		1192675B1FC454BD00E0E677 /* Function1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1Test.swift; sourceTree = "<group>"; };
 		11A33F1D1F8CCC7E00310A16 /* WriterT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterT.swift; sourceTree = "<group>"; };
 		11A33F1F1F8D04EA00310A16 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				119267591FC44ECD00E0E677 /* Function0Test.swift */,
+				1192675B1FC454BD00E0E677 /* Function1Test.swift */,
 			);
 			path = Arrow;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				119267571FC44C1500E0E677 /* TupleTest.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
 				115AF8CF1FC2CEF9003F2565 /* PredefTest.swift in Sources */,
+				1192675C1FC454BD00E0E677 /* Function1Test.swift in Sources */,
 				115AF8FC1FC329E9003F2565 /* MonoidLaws.swift in Sources */,
 				115AF8FA1FC328F6003F2565 /* StringInstancesTest.swift in Sources */,
 				115AF8ED1FC302CA003F2565 /* NonEmptyListTest.swift in Sources */,
