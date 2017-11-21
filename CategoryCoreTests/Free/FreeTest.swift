@@ -12,8 +12,20 @@ import XCTest
 fileprivate class OpsF {}
 
 fileprivate class Ops<A> : HK<OpsF, A> {
-    static func ev(_ fa : HK<OpsF, A>) -> Ops<A> {
+    fileprivate static func ev(_ fa : HK<OpsF, A>) -> Ops<A> {
         return fa as! Ops<A>
+    }
+    
+    fileprivate static func value(_ n : Int) -> Free<OpsF, Int> {
+        return Free.liftF(Value(n))
+    }
+    
+    fileprivate static func add(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
+        return Free.liftF(Add(a, b))
+    }
+    
+    fileprivate static func subtract(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
+        return Free.liftF(Subtract(a, b))
     }
 }
 
@@ -45,21 +57,11 @@ fileprivate class Subtract : Ops<Int> {
     }
 }
 
-fileprivate func value(_ n : Int) -> Free<OpsF, Int> {
-    return Free.liftF(Value(n))
-}
 
-fileprivate func add(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
-    return Free.liftF(Add(a, b))
-}
 
-fileprivate func subtract(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
-    return Free.liftF(Subtract(a, b))
-}
-
-fileprivate let program = Free.ev(Free<OpsF, Int>.monad().binding({ value(10) },
-                                                                  { value in add(value, 10) },
-                                                                  { _ , added in subtract(added, 50) }))
+fileprivate let program = Free.ev(Free<OpsF, Int>.monad().binding({ Ops<Any>.value(10) },
+                                                                  { value in Ops<Any>.add(value, 10) },
+                                                                  { _ , added in Ops<Any>.subtract(added, 50) }))
 
 fileprivate class MaybeInterpreter : FunctionK {
     fileprivate typealias F = OpsF
@@ -100,5 +102,15 @@ class FreeTest: XCTestCase {
         let y = program.foldMap(IdInterpreter(), Id<Int>.monad())
         XCTAssertTrue(Maybe.eq(Int.order).eqv(x, Maybe.some(-30)))
         XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))
+    }
+    
+    fileprivate var generator : (Int) -> HK2<FreeF, OpsF, Int> {
+        return { a in Ops<Any>.value(a) }
+    }
+    
+    fileprivate let eq = Free<OpsF, Int>.eq(IdInterpreter(), Id<Int>.monad(), Id<Int>.eq(Int.order))
+    
+    func testEqLaws() {
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
 }
