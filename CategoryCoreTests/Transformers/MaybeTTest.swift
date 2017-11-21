@@ -21,4 +21,7 @@ class MaybeTTest: XCTestCase {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
+    func testFunctorLaws() {
+        FunctorLaws<MaybeTPartial<IdF>>.check(functor: MaybeT<IdF, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq)
+    }
 }
