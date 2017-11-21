@@ -12,6 +12,10 @@ public class ValidatedF {}
 public typealias ValidatedPartial<E> = HK<ValidatedF, E>
 
 public class Validated<E, A> : HK2<ValidatedF, E, A> {
+    public static func pure(_ value : A) -> Validated<E, A> {
+        return Valid(value)
+    }
+    
     public static func valid(_ value : A) -> Validated<E, A> {
         return Valid(value)
     }
@@ -263,7 +267,7 @@ public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup,
 }
 
 public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = Validated<L, R>
+    public typealias A = HK2<ValidatedF, L, R>
     private let eql : EqL
     private let eqr : EqR
     
@@ -272,7 +276,9 @@ public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : 
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Validated<L, R>, _ b: Validated<L, R>) -> Bool {
+    public func eqv(_ a: HK2<ValidatedF, L, R>, _ b: HK2<ValidatedF, L, R>) -> Bool {
+        let a = Validated.ev(a)
+        let b = Validated.ev(b)
         return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constF(false))},
                       { aValid in b.fold(constF(false), { bValid in eqr.eqv(aValid, bValid) })})
     }
