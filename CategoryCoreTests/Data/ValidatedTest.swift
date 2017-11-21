@@ -25,4 +25,7 @@ class ValidatedTest: XCTestCase {
         FunctorLaws<ValidatedPartial<Int>>.check(functor: Validated<Int, Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
+    func testApplicativeLaws() {
+        ApplicativeLaws<ValidatedPartial<Int>>.check(applicative: Validated<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
+    }
 }
