@@ -39,4 +39,10 @@ class ListKWTest: XCTestCase {
         }
     }
     
+    func testMonoidLaws() {
+        property("ListKW monoid laws") <- forAll() { (a : Int) in
+            return MonoidLaws<HK<ListKWF, Int>>.check(monoid: ListKW<Int>.monoid(), a: ListKW<Int>.pure(a), eq: ListKW<Int>.eq(Int.order))
+        }
+    }
+    
 }
