@@ -37,4 +37,13 @@ class ConstTest: XCTestCase {
                 eq: Const<Int, Int>.eq(Int.order))
         }
     }
+    
+    func testMonoidLaws() {
+        property("Const monoid laws") <- forAll { (a : Int) in
+            return MonoidLaws<HK2<ConstF, Int, Int>>.check(
+                monoid: Const<Int, Int>.monoid(Int.sumMonoid),
+                a: Const<Int, Int>.pure(a),
+                eq: Const<Int, Int>.eq(Int.order))
+        }
+    }
 }
