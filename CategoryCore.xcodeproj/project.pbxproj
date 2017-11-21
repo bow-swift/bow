@@ -43,6 +43,9 @@
 		1192674D1FC4291300E0E677 /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674C1FC4291300E0E677 /* EitherTTest.swift */; };
 		1192674F1FC43AD300E0E677 /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674E1FC43AD300E0E677 /* MaybeTTest.swift */; };
 		119267511FC4411D00E0E677 /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267501FC4411D00E0E677 /* StateTTest.swift */; };
+		119267531FC44A7B00E0E677 /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267521FC44A7B00E0E677 /* WriterTTest.swift */; };
+		119267551FC44B1400E0E677 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267541FC44B1400E0E677 /* Tuple.swift */; };
+		119267571FC44C1500E0E677 /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267561FC44C1500E0E677 /* TupleTest.swift */; };
 		11A33F1E1F8CCC7E00310A16 /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1D1F8CCC7E00310A16 /* WriterT.swift */; };
 		11A33F201F8D04EA00310A16 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1F1F8D04EA00310A16 /* Coproduct.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
@@ -150,6 +153,9 @@
 		1192674C1FC4291300E0E677 /* EitherTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTTest.swift; sourceTree = "<group>"; };
 		1192674E1FC43AD300E0E677 /* MaybeTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTTest.swift; sourceTree = "<group>"; };
 		119267501FC4411D00E0E677 /* StateTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTTest.swift; sourceTree = "<group>"; };
+		119267521FC44A7B00E0E677 /* WriterTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterTTest.swift; sourceTree = "<group>"; };
+		119267541FC44B1400E0E677 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		119267561FC44C1500E0E677 /* TupleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTest.swift; sourceTree = "<group>"; };
 		11A33F1D1F8CCC7E00310A16 /* WriterT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterT.swift; sourceTree = "<group>"; };
 		11A33F1F1F8D04EA00310A16 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 				115AF8EA1FC301DD003F2565 /* MaybeTest.swift */,
 				115AF8EC1FC302CA003F2565 /* NonEmptyListTest.swift */,
 				115AF8EE1FC303F8003F2565 /* TryTest.swift */,
+				119267561FC44C1500E0E677 /* TupleTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -279,6 +286,7 @@
 				1192674C1FC4291300E0E677 /* EitherTTest.swift */,
 				1192674E1FC43AD300E0E677 /* MaybeTTest.swift */,
 				119267501FC4411D00E0E677 /* StateTTest.swift */,
+				119267521FC44A7B00E0E677 /* WriterTTest.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -419,6 +427,7 @@
 				117BBA981F876C9200196DB7 /* State.swift */,
 				115858DD1F84FC6B00875227 /* Try.swift */,
 				115858DF1F851D1200875227 /* Validated.swift */,
+				119267541FC44B1400E0E677 /* Tuple.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -678,6 +687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				119267551FC44B1400E0E677 /* Tuple.swift in Sources */,
 				11C526861F825DF400DC15CF /* Function0.swift in Sources */,
 				11026E561FBF006F006D7557 /* KleisliOperator.swift in Sources */,
 				11DA37E91F8BCD19002030FF /* TraverseFilter.swift in Sources */,
@@ -752,6 +762,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				119267531FC44A7B00E0E677 /* WriterTTest.swift in Sources */,
 				115AF8F51FC31AD3003F2565 /* SemigroupLaws.swift in Sources */,
 				115AF8E31FC2F5B5003F2565 /* ConstTest.swift in Sources */,
 				115AF8D61FC2DC82003F2565 /* PartialApplicationTest.swift in Sources */,
@@ -763,6 +774,7 @@
 				115AF8EF1FC303F8003F2565 /* TryTest.swift in Sources */,
 				115AF8E11FC2EA75003F2565 /* IdTest.swift in Sources */,
 				119267511FC4411D00E0E677 /* StateTTest.swift in Sources */,
+				119267571FC44C1500E0E677 /* TupleTest.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
 				115AF8CF1FC2CEF9003F2565 /* PredefTest.swift in Sources */,
 				115AF8FC1FC329E9003F2565 /* MonoidLaws.swift in Sources */,
