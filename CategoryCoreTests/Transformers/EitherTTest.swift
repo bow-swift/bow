@@ -14,11 +14,16 @@ class EitherTTest: XCTestCase {
         return { a in EitherT.pure(a, Id<Int>.applicative()) }
     }
     
+    var eq = EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor())
+    
     func testFunctorLaws() {
         FunctorLaws<EitherTPartial<IdF, Int>>.check(
-            functor: EitherT<IdF, Int, Int>.functor(Id<Int>.functor()),
+            functor: EitherT<IdF, Int, Int>.functor(Id<Any>.functor()),
             generator: self.generator,
-            eq: EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor()))
+            eq: self.eq)
     }
     
+    func testApplicativeLaws() {
+        ApplicativeLaws<EitherTPartial<IdF, Int>>.check(applicative: EitherT<IdF, Int, Int>.applicative(Id<Any>.monad()), eq: self.eq)
+    }
 }
