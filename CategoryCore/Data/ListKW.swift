@@ -261,15 +261,15 @@ public class ListKWMonadCombine : ListKWMonadFilter, MonadCombine {
 }
 
 public class ListKWSemigroup<R> : Semigroup {
-    public typealias A = ListKW<R>
+    public typealias A = HK<ListKWF, R>
     
-    public func combine(_ a: ListKW<R>, _ b: ListKW<R>) -> ListKW<R> {
-        return a + b
+    public func combine(_ a: HK<ListKWF, R>, _ b: HK<ListKWF, R>) -> HK<ListKWF, R> {
+        return ListKW.ev(a) + ListKW.ev(b)
     }
 }
 
 public class ListKWMonoid<R> : ListKWSemigroup<R>, Monoid {
-    public var empty: ListKW<R> {
+    public var empty: HK<ListKWF, R> {
         return ListKW<R>.empty()
     }
 }
