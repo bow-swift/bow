@@ -16,6 +16,10 @@ class EitherTTest: XCTestCase {
     
     var eq = EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor())
     
+    func testEqLaws() {
+        EqLaws.check(eq: self.eq, generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<EitherTPartial<IdF, Int>>.check(
             functor: EitherT<IdF, Int, Int>.functor(Id<Any>.functor()),
