@@ -25,4 +25,8 @@ class WriterTTest: XCTestCase {
         FunctorLaws<WriterTPartial<IdF, Int>>.check(functor: WriterT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq)
     }
     
+    func testApplicativeLaws() {
+        ApplicativeLaws<WriterTPartial<IdF, Int>>.check(applicative: WriterT<IdF, Int, Int>.applicative(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
+    }
+    
 }
