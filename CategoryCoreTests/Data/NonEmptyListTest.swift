@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftCheck
 @testable import CategoryCore
 
 class NonEmptyListTest: XCTestCase {
@@ -25,5 +26,16 @@ class NonEmptyListTest: XCTestCase {
     
     func testApplicativeLaws() {
         ApplicativeLaws<NonEmptyListF>.check(applicative: NonEmptyList<Int>.applicative(), eq: NonEmptyList.eq(Int.order))
+    }
+    
+    func testSemigroupLaws() {
+        property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws<HK<NonEmptyListF, Int>>.check(
+                    semigroup: NonEmptyList<Int>.semigroup(),
+                    a: NonEmptyList<Int>.pure(a),
+                    b: NonEmptyList<Int>.pure(b),
+                    c: NonEmptyList<Int>.pure(c),
+                    eq: NonEmptyList<Int>.eq(Int.order))
+        }
     }
 }

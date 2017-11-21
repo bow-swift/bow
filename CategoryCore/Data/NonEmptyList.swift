@@ -262,10 +262,10 @@ public class NonEmptyListSemigroupK : SemigroupK {
 }
 
 public class NonEmptyListSemigroup<R> : Semigroup {
-    public typealias A = NonEmptyList<R>
+    public typealias A = HK<NonEmptyListF, R>
     
-    public func combine(_ a: NonEmptyList<R>, _ b: NonEmptyList<R>) -> NonEmptyList<R> {
-        return a + b
+    public func combine(_ a: HK<NonEmptyListF, R>, _ b: HK<NonEmptyListF, R>) -> HK<NonEmptyListF, R> {
+        return NonEmptyList.ev(a) + NonEmptyList.ev(b)
     }
 }
 
