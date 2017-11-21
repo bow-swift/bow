@@ -38,4 +38,13 @@ class MaybeTest: XCTestCase {
                 eq: Maybe.eq(Int.order))
         }
     }
+    
+    func testMonoidLaws() {
+        property("Maybe monoid laws") <- forAll { (a : Int) in
+            return MonoidLaws<HK<MaybeF, Int>>.check(
+                monoid: Maybe<Int>.monoid(Int.sumMonoid),
+                a: Maybe.pure(a),
+                eq: Maybe.eq(Int.order))
+        }
+    }
 }
