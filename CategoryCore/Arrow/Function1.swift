@@ -54,6 +54,10 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
     public func local(_ g : @escaping (I) -> I) -> Function1<I, O> {
         return Function1<I, O>(g >>> self.f)
     }
+    
+    public func invoke(_ value : I) -> O {
+        return f(value)
+    }
 }
 
 public extension Function1 {
