@@ -24,4 +24,8 @@ class Function0Test: XCTestCase {
     func testFunctorLaws() {
         FunctorLaws<Function0F>.check(functor: Function0<Int>.functor(), generator: self.generator, eq: self.eq)
     }
+    
+    func testApplicativeLaws() {
+        ApplicativeLaws<Function0F>.check(applicative: Function0<Int>.applicative(), eq: self.eq)
+    }
 }
