@@ -12,7 +12,7 @@ public class WriterTF {}
 public typealias WriterTPartial<F, W> = HK2<WriterTF, F, W>
 
 public class WriterT<F, W, A> : HK3<WriterTF, F, W, A> {
-    private let value : HK<F, (W, A)>
+    fileprivate let value : HK<F, (W, A)>
     
     public static func pure<Mono, Appl>(_ a : A, _ monoid : Mono, _ applicative : Appl) -> WriterT<F, W, A> where Mono : Monoid, Mono.A == W, Appl : Applicative, Appl.F == F {
         return WriterT(applicative.pure((monoid.empty, a)))
@@ -172,6 +172,10 @@ public extension WriterT {
     public static func writer<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTMonadWriter<F, W, MonF, MonoW> {
         return WriterTMonadWriter<F, W, MonF, MonoW>(monad, monoid)
     }
+    
+    public static func eq<EqF>(_ eq : EqF) -> WriterTEq<F, W, A, EqF> {
+        return WriterTEq<F, W, A, EqF>(eq)
+    }
 }
 
 public class WriterTFunctor<G, W, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
@@ -280,3 +284,27 @@ public class WriterTMonadWriter<G, V, MonG, MonoW> : WriterTMonad<G, V, MonG, Mo
         return WriterT<G, V, A>.pass(WriterT.ev(fa), monad)
     }
 }
+
+public class WriterTEq<F, W, B, EqF> : Eq where EqF : Eq, EqF.A == HK<F, (W, B)> {
+    public typealias A = HK3<WriterTF, F, W, B>
+    
+    private let eq : EqF
+    
+    public init(_ eq : EqF) {
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<HK<HK<WriterTF, F>, W>, B>, _ b: HK<HK<HK<WriterTF, F>, W>, B>) -> Bool {
+        let a = WriterT.ev(a)
+        let b = WriterT.ev(b)
+        return eq.eqv(a.value, b.value)
+    }
+}
+
+
+
+
+
+
+
+
