@@ -21,4 +21,8 @@ class ValidatedTest: XCTestCase {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
+    func testFunctorLaws() {
+        FunctorLaws<ValidatedPartial<Int>>.check(functor: Validated<Int, Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
 }
