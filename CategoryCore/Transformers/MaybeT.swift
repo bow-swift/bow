@@ -12,7 +12,7 @@ public class MaybeTF {}
 public typealias MaybeTPartial<F> = HK<MaybeTF, F>
 
 public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
-    private let value : HK<F, Maybe<A>>
+    fileprivate let value : HK<F, Maybe<A>>
     
     public static func pure<Appl>(_ a : A, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
         return MaybeT(applicative.pure(Maybe.pure(a)))
@@ -147,6 +147,10 @@ public extension MaybeT {
     public static func monoidK<MonF>(_ monad : MonF) -> MaybeTMonoidK<F, MonF> {
         return MaybeTMonoidK<F, MonF>(monad)
     }
+    
+    public static func eq<EqA, Func>(_ eq : EqA, _ functor : Func) -> MaybeTEq<F, A, EqA, Func> {
+        return MaybeTEq<F, A, EqA, Func>(eq, functor)
+    }
 }
 
 public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
@@ -216,5 +220,24 @@ public class MaybeTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F =
 public class MaybeTMonoidK<G, MonG> : MaybeTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
     public func emptyK<A>() -> HK<HK<MaybeTF, G>, A> {
         return MaybeT(monad.pure(Maybe.none()))
+    }
+}
+
+public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == HK<F, HK<MaybeF, B>>, Func : Functor, Func.F == F {
+    public typealias A = HK2<MaybeTF, F, B>
+    
+    private let eq : EqF
+    private let functor : Func
+    
+    public init(_ eq : EqF, _ functor : Func) {
+        self.eq = eq
+        self.functor = functor
+    }
+    
+    public func eqv(_ a: HK<HK<MaybeTF, F>, B>, _ b: HK<HK<MaybeTF, F>, B>) -> Bool {
+        let a = MaybeT.ev(a)
+        let b = MaybeT.ev(b)
+        return eq.eqv(functor.map(a.value, { aa in aa as HK<MaybeF, B> }),
+                      functor.map(b.value, { bb in bb as HK<MaybeF, B> }))
     }
 }
