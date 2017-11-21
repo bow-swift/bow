@@ -85,6 +85,10 @@ public extension Function0 {
     public static func bimonad() -> Function0Bimonad {
         return Function0Bimonad()
     }
+    
+    public static func eq<EqA>(_ eq : EqA) -> Function0Eq<A, EqA> {
+        return Function0Eq<A, EqA>(eq)
+    }
 }
 
 public class Function0Functor : Functor {
@@ -120,3 +124,16 @@ public class Function0Bimonad : Function0Monad, Bimonad {
     }
 }
 
+public class Function0Eq<B, EqB> : Eq where EqB : Eq, EqB.A == B{
+    public typealias A = HK<Function0F, B>
+    
+    private let eq : EqB
+    
+    public init(_ eq : EqB) {
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<Function0F, B>, _ b: HK<Function0F, B>) -> Bool {
+        return eq.eqv(a.ev().extract(), b.ev().extract())
+    }
+}
