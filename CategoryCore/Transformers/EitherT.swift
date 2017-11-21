@@ -128,6 +128,10 @@ public extension EitherT {
     public static func semigroupK<Mon>(_ monad : Mon) -> EitherTSemigroupK<F, A, Mon> {
         return EitherTSemigroupK<F, A, Mon>(monad)
     }
+    
+    public static func eq<EqA, Func>(_ eq : EqA, _ functor : Func) -> EitherTEq<F, A, B, EqA, Func> {
+        return EitherTEq<F, A, B, EqA, Func>(eq, functor)
+    }
 }
 
 public class EitherTFunctor<G, M, Func> : Functor where Func : Functor, Func.F == G {
@@ -200,5 +204,24 @@ public class EitherTSemigroupK<G, M, Mon> : SemigroupK where Mon : Monad, Mon.F 
     
     public func combineK<A>(_ x: HK<HK<HK<EitherTF, G>, M>, A>, _ y: HK<HK<HK<EitherTF, G>, M>, A>) -> HK<HK<HK<EitherTF, G>, M>, A> {
         return EitherT.ev(x).combineK(EitherT.ev(y), monad)
+    }
+}
+
+public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == HK<F, HK2<EitherF, L, R>>, Func : Functor, Func.F == F {
+    public typealias A = HK3<EitherTF, F, L, R>
+    
+    private let eq : EqA
+    private let functor : Func
+    
+    public init(_ eq : EqA, _ functor : Func) {
+        self.eq = eq
+        self.functor = functor
+    }
+    
+    public func eqv(_ a: HK<HK<HK<EitherTF, F>, L>, R>, _ b: HK<HK<HK<EitherTF, F>, L>, R>) -> Bool {
+        let a = EitherT.ev(a)
+        let b = EitherT.ev(b)
+        return eq.eqv(functor.map(a.value, { a in a as HK2<EitherF, L, R> }),
+                      functor.map(b.value, { b in b as HK2<EitherF, L, R> }))
     }
 }
