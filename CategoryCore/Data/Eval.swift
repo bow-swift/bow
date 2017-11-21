@@ -315,6 +315,10 @@ public extension Eval {
     public static func applicative() -> EvalApplicative {
         return EvalApplicative()
     }
+    
+    public static func eq<EqA>(_ eq : EqA) -> EvalEq<A, EqA> {
+        return EvalEq<A, EqA>(eq)
+    }
 }
 
 public class EvalApplicative : Applicative {
@@ -326,5 +330,19 @@ public class EvalApplicative : Applicative {
     
     public func ap<A, B>(_ fa: HK<F, A>, _ ff: HK<F, (A) -> B>) -> HK<F, B> {
         return fa.ev().ap(ff.ev())
+    }
+}
+
+public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
+    public typealias A = HK<EvalF, B>
+    
+    private let eq : EqB
+    
+    public init(_ eq : EqB) {
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<EvalF, B>, _ b: HK<EvalF, B>) -> Bool {
+        return eq.eqv(a.ev().value(), b.ev().value())
     }
 }
