@@ -44,6 +44,7 @@
 		117BBA991F876C9200196DB7 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA981F876C9200196DB7 /* State.swift */; };
 		117BBA9D1F8772FE00196DB7 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9C1F8772FE00196DB7 /* MaybeT.swift */; };
 		117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9E1F8790B400196DB7 /* EitherT.swift */; };
+		1187ECD61FC475000049FA00 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1187ECD51FC475000049FA00 /* FreeTest.swift */; };
 		1192674D1FC4291300E0E677 /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674C1FC4291300E0E677 /* EitherTTest.swift */; };
 		1192674F1FC43AD300E0E677 /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674E1FC43AD300E0E677 /* MaybeTTest.swift */; };
 		119267511FC4411D00E0E677 /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267501FC4411D00E0E677 /* StateTTest.swift */; };
@@ -160,6 +161,7 @@
 		117BBA981F876C9200196DB7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		117BBA9C1F8772FE00196DB7 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
 		117BBA9E1F8790B400196DB7 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
+		1187ECD51FC475000049FA00 /* FreeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTest.swift; sourceTree = "<group>"; };
 		1192674C1FC4291300E0E677 /* EitherTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTTest.swift; sourceTree = "<group>"; };
 		1192674E1FC43AD300E0E677 /* MaybeTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTTest.swift; sourceTree = "<group>"; };
 		119267501FC4411D00E0E677 /* StateTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTTest.swift; sourceTree = "<group>"; };
@@ -295,6 +297,14 @@
 			path = Instances;
 			sourceTree = "<group>";
 		};
+		1187ECD41FC474D30049FA00 /* Free */ = {
+			isa = PBXGroup;
+			children = (
+				1187ECD51FC475000049FA00 /* FreeTest.swift */,
+			);
+			path = Free;
+			sourceTree = "<group>";
+		};
 		1192674B1FC428F600E0E677 /* Transformers */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +391,7 @@
 				115AF8CE1FC2CEF9003F2565 /* PredefTest.swift */,
 				119267581FC44EB700E0E677 /* Arrow */,
 				115AF8DF1FC2EA4D003F2565 /* Data */,
+				1187ECD41FC474D30049FA00 /* Free */,
 				115AF8F61FC31C12003F2565 /* Instances */,
 				1192674B1FC428F600E0E677 /* Transformers */,
 				115AF8DE1FC2EA3D003F2565 /* Typeclasses */,
@@ -805,6 +816,7 @@
 				1138ABFA1FC467F60015B49F /* KleisliTest.swift in Sources */,
 				119267571FC44C1500E0E677 /* TupleTest.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
+				1187ECD61FC475000049FA00 /* FreeTest.swift in Sources */,
 				115AF8CF1FC2CEF9003F2565 /* PredefTest.swift in Sources */,
 				1192675C1FC454BD00E0E677 /* Function1Test.swift in Sources */,
 				115AF8FC1FC329E9003F2565 /* MonoidLaws.swift in Sources */,
