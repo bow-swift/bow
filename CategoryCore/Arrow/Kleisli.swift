@@ -76,6 +76,10 @@ public class Kleisli<F, D, A> : HK3<KleisliF, F, D, A> {
     public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> HK3<KleisliF, F, D, Either<A, B>>, _ monad : MonF) -> HK3<KleisliF, F, D, B> where MonF : Monad, MonF.F == F {
         return Kleisli<F, D, B>({ b in monad.tailRecM(a, { a in Kleisli<F, D, Either<A, B>>.ev(f(a)).run(b) })})
     }
+    
+    public func invoke(_ value : D) -> HK<F, A> {
+        return run(value)
+    }
 }
 
 public extension Kleisli {
