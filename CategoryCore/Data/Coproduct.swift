@@ -12,7 +12,7 @@ public class CoproductF {}
 public typealias CoproductPartial<F, G> = HK2<CoproductF, F, G>
 
 public class Coproduct<F, G, A> : HK3<CoproductF, F, G, A> {
-    private let run : Either<HK<F, A>, HK<G, A>>
+    fileprivate let run : Either<HK<F, A>, HK<G, A>>
     
     public static func ev(_ fa : HK3<CoproductF, F, G, A>) -> Coproduct<F, G, A> {
         return fa as! Coproduct<F, G, A>
@@ -74,6 +74,10 @@ public extension Coproduct {
     
     public static func traverse<TravF, TravG>(_ traverseF : TravF, _ traverseG : TravG) -> CoproductTraverse<F, G, TravF, TravG>{
         return CoproductTraverse<F, G, TravF, TravG>(traverseF, traverseG)
+    }
+    
+    public static func eq<EqA>(_ eq : EqA) -> CoproductEq<F, G, A, EqA> {
+        return CoproductEq<F, G, A, EqA>(eq)
     }
 }
 
@@ -149,27 +153,18 @@ public class CoproductTraverse<G, H, TravG, TravH> : CoproductFoldable<G, H, Tra
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public class CoproductEq<F, G, B, EqB> : Eq where EqB : Eq, EqB.A == HK2<EitherF, HK<F, B>, HK<G, B>>{
+    public typealias A = HK3<CoproductF, F, G, B>
+    
+    private let eq : EqB
+    
+    public init(_ eq : EqB) {
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<HK<HK<CoproductF, F>, G>, B>, _ b: HK<HK<HK<CoproductF, F>, G>, B>) -> Bool {
+        let a = Coproduct.ev(a)
+        let b = Coproduct.ev(b)
+        return eq.eqv(a.run, b.run)
+    }
+}
