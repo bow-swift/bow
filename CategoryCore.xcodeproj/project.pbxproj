@@ -46,6 +46,7 @@
 		119267531FC44A7B00E0E677 /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267521FC44A7B00E0E677 /* WriterTTest.swift */; };
 		119267551FC44B1400E0E677 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267541FC44B1400E0E677 /* Tuple.swift */; };
 		119267571FC44C1500E0E677 /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267561FC44C1500E0E677 /* TupleTest.swift */; };
+		1192675A1FC44ECD00E0E677 /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119267591FC44ECD00E0E677 /* Function0Test.swift */; };
 		11A33F1E1F8CCC7E00310A16 /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1D1F8CCC7E00310A16 /* WriterT.swift */; };
 		11A33F201F8D04EA00310A16 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33F1F1F8D04EA00310A16 /* Coproduct.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
@@ -156,6 +157,7 @@
 		119267521FC44A7B00E0E677 /* WriterTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterTTest.swift; sourceTree = "<group>"; };
 		119267541FC44B1400E0E677 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		119267561FC44C1500E0E677 /* TupleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTest.swift; sourceTree = "<group>"; };
+		119267591FC44ECD00E0E677 /* Function0Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0Test.swift; sourceTree = "<group>"; };
 		11A33F1D1F8CCC7E00310A16 /* WriterT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterT.swift; sourceTree = "<group>"; };
 		11A33F1F1F8D04EA00310A16 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
@@ -291,6 +293,14 @@
 			path = Transformers;
 			sourceTree = "<group>";
 		};
+		119267581FC44EB700E0E677 /* Arrow */ = {
+			isa = PBXGroup;
+			children = (
+				119267591FC44ECD00E0E677 /* Function0Test.swift */,
+			);
+			path = Arrow;
+			sourceTree = "<group>";
+		};
 		11C526841F825DC100DC15CF /* Arrow */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +364,7 @@
 				115AF8DA1FC2E043003F2565 /* CurryTest.swift */,
 				115AF8D51FC2DC82003F2565 /* PartialApplicationTest.swift */,
 				115AF8CE1FC2CEF9003F2565 /* PredefTest.swift */,
+				119267581FC44EB700E0E677 /* Arrow */,
 				115AF8DF1FC2EA4D003F2565 /* Data */,
 				115AF8F61FC31C12003F2565 /* Instances */,
 				1192674B1FC428F600E0E677 /* Transformers */,
@@ -784,6 +795,7 @@
 				115AF8EB1FC301DD003F2565 /* MaybeTest.swift in Sources */,
 				115AF8DB1FC2E043003F2565 /* CurryTest.swift in Sources */,
 				115AF8F11FC30503003F2565 /* EqLaws.swift in Sources */,
+				1192675A1FC44ECD00E0E677 /* Function0Test.swift in Sources */,
 				1192674F1FC43AD300E0E677 /* MaybeTTest.swift in Sources */,
 				115AF8DD1FC2E595003F2565 /* FunctorLaws.swift in Sources */,
 			);
