@@ -23,4 +23,7 @@ class Function1Test: XCTestCase {
         FunctorLaws<Function1Partial<Int>>.check(functor: Function1<Int, Int>.functor(), generator: { a in Function1<Int, Int>.pure(a) }, eq: Function1PointEq())
     }
     
+    func testApplicativeLaws() {
+        ApplicativeLaws<Function1Partial<Int>>.check(applicative: Function1<Int, Int>.applicative(), eq: Function1PointEq())
+    }
 }
