@@ -29,4 +29,7 @@ class KleisliTest: XCTestCase {
         FunctorLaws<KleisliPartial<IdF, Int>>.check(functor: Kleisli<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: KleisliPointEq())
     }
     
+    func testApplicativeLaws() {
+        ApplicativeLaws<KleisliPartial<IdF, Int>>.check(applicative: Kleisli<IdF, Int, Int>.applicative(Id<Any>.applicative()), eq: KleisliPointEq())
+    }
 }
