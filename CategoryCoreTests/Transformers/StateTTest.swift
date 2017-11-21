@@ -26,7 +26,11 @@ class StateTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<StateTPartial<IdF, Int>>.check(functor: StateT<IdF, Int, ()>.functor(Id<Any>.functor()), generator: self.generator, eq: StateTUnitEq())
+        FunctorLaws<StateTPartial<IdF, Int>>.check(functor: StateT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: StateTUnitEq())
+    }
+    
+    func testApplicativeLaws() {
+        ApplicativeLaws<StateTPartial<IdF, Int>>.check(applicative: StateT<IdF, Int, Int>.applicative(Id<Any>.monad()), eq: StateTUnitEq())
     }
     
 }
