@@ -112,15 +112,15 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
 }
 
 public class ConstSemigroup<R, S, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
-    public typealias A = Const<R, S>
+    public typealias A = HK2<ConstF, R, S>
     private let semigroup : SemiG
     
     public init(_ semigroup : SemiG) {
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Const<R, S>, _ b: Const<R, S>) -> Const<R, S> {
-        return a.combine(b, semigroup)
+    public func combine(_ a: HK2<ConstF, R, S>, _ b: HK2<ConstF, R, S>) -> HK2<ConstF, R, S> {
+        return Const.ev(a).combine(Const.ev(b), semigroup)
     }
 }
 
@@ -132,7 +132,7 @@ public class ConstMonoid<R, S, Mono> : ConstSemigroup<R, S, Mono>, Monoid where 
         super.init(monoid)
     }
     
-    public var empty: Const<R, S> {
+    public var empty: HK2<ConstF, R, S> {
         return Const(monoid.empty)
     }
 }

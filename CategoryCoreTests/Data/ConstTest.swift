@@ -26,4 +26,15 @@ class ConstTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<HK<ConstF, Int>>.check(applicative: Const<Int, Int>.applicative(Int.sumMonoid), eq: Const<Int, Int>.eq(Int.order))
     }
+    
+    func testSemigroupLaws() {
+        property("Const semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws<HK2<ConstF, Int, Int>>.check(
+                semigroup: Const<Int, Int>.semigroup(Int.sumMonoid),
+                a: Const<Int, Int>.pure(a),
+                b: Const<Int, Int>.pure(b),
+                c: Const<Int, Int>.pure(c),
+                eq: Const<Int, Int>.eq(Int.order))
+        }
+    }
 }
