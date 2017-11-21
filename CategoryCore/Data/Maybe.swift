@@ -220,14 +220,16 @@ public class MaybeMonad : MaybeApplicative, Monad {
 }
 
 public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
-    public typealias A = Maybe<R>
+    public typealias A = HK<MaybeF, R>
     private let semigroup : SemiG
     
     public init(_ semigroup : SemiG) {
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Maybe<R>, _ b: Maybe<R>) -> Maybe<R> {
+    public func combine(_ a: HK<MaybeF, R>, _ b: HK<MaybeF, R>) -> HK<MaybeF, R> {
+        let a = Maybe.ev(a)
+        let b = Maybe.ev(b)
         return a.fold(constF(b),
                       { aSome in b.fold(constF(a),
                                         { bSome in Maybe.some(semigroup.combine(aSome, bSome)) })
@@ -236,7 +238,7 @@ public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG
 }
 
 public class MaybeMonoid<R, SemiG> : MaybeSemigroup<R, SemiG>, Monoid where SemiG : Semigroup, SemiG.A == R {
-    public var empty : Maybe<R> {
+    public var empty : HK<MaybeF, R>{
         return Maybe<R>.none()
     }
 }

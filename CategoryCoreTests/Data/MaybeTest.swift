@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftCheck
 @testable import CategoryCore
 
 class MaybeTest: XCTestCase {
@@ -25,5 +26,16 @@ class MaybeTest: XCTestCase {
     
     func testApplicativeLaws() {
         ApplicativeLaws<MaybeF>.check(applicative: Maybe<Int>.applicative(), eq: Maybe.eq(Int.order))
+    }
+    
+    func testSemigroupLaws() {
+        property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws<HK<MaybeF, Int>>.check(
+                semigroup: Maybe<Int>.semigroup(Int.sumMonoid),
+                a: Maybe.pure(a),
+                b: Maybe.pure(b),
+                c: Maybe.pure(c),
+                eq: Maybe.eq(Int.order))
+        }
     }
 }
