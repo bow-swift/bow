@@ -21,4 +21,8 @@ class WriterTTest: XCTestCase {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
+    func testFunctorLaws() {
+        FunctorLaws<WriterTPartial<IdF, Int>>.check(functor: WriterT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq)
+    }
+    
 }
