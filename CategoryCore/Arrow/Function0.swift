@@ -11,10 +11,10 @@ import Foundation
 public class Function0F {}
 
 public class Function0<A> : HK<Function0F, A> {
-    fileprivate let f : () -> A
+    private let f : () -> A
     
     public static func pure(_ a : A) -> Function0<A> {
-        return Function0.applicative().pure(a) as! Function0<A>
+        return Function0({ a })
     }
     
     public static func loop<B>(_ a : A, _ f : (A) -> HK<Function0F, Either<A, B>>) -> B {
@@ -39,15 +39,15 @@ public class Function0<A> : HK<Function0F, A> {
     }
     
     public func map<B>(_ f : @escaping (A) -> B) -> Function0<B> {
-        return Function0.functor().map(self, f).ev()
+        return Function0<B>(self.f >>> f)
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Function0<B>) -> Function0<B> {
-        return Function0.monad().flatMap(self, f).ev()
+        return f(self.f())
     }
     
     public func coflatMap<B>(_ f : @escaping (Function0<A>) -> B) -> Function0<B> {
-        return Function0.comonad().coflatMap(self, f as! (HK<Function0F, A>) -> B).ev()
+        return Function0<B>({ f(self) })
     }
     
     public func ap<B>(_ ff : Function0<(A) -> B>) -> Function0<B> {
@@ -55,7 +55,7 @@ public class Function0<A> : HK<Function0F, A> {
     }
     
     public func extract() -> A {
-        return Function0.comonad().extract(self)
+        return f()
     }
 }
 
@@ -95,18 +95,17 @@ public class Function0Functor : Functor {
     public typealias F = Function0F
     
     public func map<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> B) -> HK<Function0F, B> {
-        let funA = fa as! Function0<A>
-        return Function0(funA.f >>> f)
+        return fa.ev().map(f)
     }
 }
 
 public class Function0Monad : Function0Functor, Monad {
     public func pure<A>(_ a: A) -> HK<F, A> {
-        return Function0({ a })
+        return Function0.pure(a)
     }
     
     public func flatMap<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> HK<Function0F, B>) -> HK<Function0F, B> {
-        return f(fa.ev().invoke())
+        return fa.ev().flatMap({ a in f(a).ev() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<Function0F, Either<A, B>>) -> HK<Function0F, B> {
@@ -116,11 +115,11 @@ public class Function0Monad : Function0Functor, Monad {
 
 public class Function0Bimonad : Function0Monad, Bimonad {
     public func coflatMap<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (HK<Function0F, A>) -> B) -> HK<Function0F, B> {
-        return Function0({ f(fa) })
+        return fa.ev().coflatMap(f)
     }
     
     public func extract<A>(_ fa: HK<Function0F, A>) -> A {
-        return fa.ev().invoke()
+        return fa.ev().extract()
     }
 }
 
