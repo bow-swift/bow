@@ -28,6 +28,10 @@ class ListKWTest: XCTestCase {
         ApplicativeLaws<ListKWF>.check(applicative: ListKW<Int>.applicative(), eq: ListKW<Int>.eq(Int.order))
     }
     
+    func testMonadLaws() {
+        MonadLaws<ListKWF>.check(monad: ListKW<Int>.monad(), eq: ListKW<Int>.eq(Int.order))
+    }
+    
     func testSemigroupLaws() {
         property("ListKW semigroup laws") <- forAll() { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<HK<ListKWF, Int>>.check(
