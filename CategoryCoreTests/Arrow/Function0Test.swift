@@ -28,4 +28,8 @@ class Function0Test: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<Function0F>.check(applicative: Function0<Int>.applicative(), eq: self.eq)
     }
+    
+    func testMonadLaws() {
+        MonadLaws<Function0F>.check(monad: Function0<Int>.monad(), eq: self.eq)
+    }
 }
