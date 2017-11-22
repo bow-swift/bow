@@ -121,4 +121,8 @@ class FreeTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<FreePartial<OpsF>>.check(applicative: Free<OpsF, Int>.applicative(), eq: self.eq)
     }
+    
+    func testMonadLaws() {
+        MonadLaws<FreePartial<OpsF>>.check(monad: Free<OpsF, Int>.monad(), eq: self.eq)
+    }
 }
