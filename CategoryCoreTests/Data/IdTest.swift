@@ -26,4 +26,8 @@ class IdTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<IdF>.check(applicative: Id<Int>.applicative(), eq: Id.eq(Int.order))
     }
+    
+    func testMonadLaws() {
+        MonadLaws<IdF>.check(monad: Id<Int>.monad(), eq: Id.eq(Int.order))
+    }
 }
