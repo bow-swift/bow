@@ -28,6 +28,10 @@ class NonEmptyListTest: XCTestCase {
         ApplicativeLaws<NonEmptyListF>.check(applicative: NonEmptyList<Int>.applicative(), eq: NonEmptyList.eq(Int.order))
     }
     
+    func testMonadLaws() {
+        MonadLaws<NonEmptyListF>.check(monad: NonEmptyList<Int>.monad(), eq: NonEmptyList.eq(Int.order))
+    }
+    
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<HK<NonEmptyListF, Int>>.check(
