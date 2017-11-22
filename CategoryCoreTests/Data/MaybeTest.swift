@@ -10,6 +10,14 @@ import XCTest
 import SwiftCheck
 @testable import CategoryCore
 
+class UnitEq : Eq {
+    typealias A = ()
+    
+    func eqv(_ a: (), _ b: ()) -> Bool {
+        return true
+    }
+}
+
 class MaybeTest: XCTestCase {
     
     var generator : (Int) -> HK<MaybeF, Int> {
@@ -30,6 +38,10 @@ class MaybeTest: XCTestCase {
     
     func testMonadLaws() {
         MonadLaws<MaybeF>.check(monad: Maybe<Int>.monad(), eq: Maybe.eq(Int.order))
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<MaybeF, CategoryCore.Unit>.check(applicativeError: Maybe<Int>.monadError(), eq: Maybe.eq(Int.order), eqEither: Maybe.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
     }
     
     func testSemigroupLaws() {
