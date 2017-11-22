@@ -29,4 +29,7 @@ class WriterTTest: XCTestCase {
         ApplicativeLaws<WriterTPartial<IdF, Int>>.check(applicative: WriterT<IdF, Int, Int>.applicative(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
     }
     
+    func testMonadLaws() {
+        MonadLaws<WriterTPartial<IdF, Int>>.check(monad: WriterT<IdF, Int, Int>.monad(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
+    }
 }
