@@ -44,6 +44,10 @@ class MaybeTest: XCTestCase {
         ApplicativeErrorLaws<MaybeF, CategoryCore.Unit>.check(applicativeError: Maybe<Int>.monadError(), eq: Maybe.eq(Int.order), eqEither: Maybe.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
     }
     
+    func testMonadErrorLaws() {
+        MonadErrorLaws<MaybeF, CategoryCore.Unit>.check(monadError: Maybe<Int>.monadError(), eq: Maybe.eq(Int.order), gen: { () })
+    }
+    
     func testSemigroupLaws() {
         property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<HK<MaybeF, Int>>.check(
