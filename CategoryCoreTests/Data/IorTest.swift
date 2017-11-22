@@ -25,4 +25,8 @@ class IorTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<IorPartial<Int>>.check(applicative: Ior<Int, Int>.applicative(Int.sumMonoid), eq: Ior.eq(Int.order, Int.order))
     }
+    
+    func testMonadLaws() {
+        MonadLaws<IorPartial<Int>>.check(monad: Ior<Int, Int>.monad(Int.sumMonoid), eq: Ior.eq(Int.order, Int.order))
+    }
 }
