@@ -30,4 +30,11 @@ class EitherTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: Either<Int, Int>.eq(Int.order, Int.order))
     }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<EitherPartial<CategoryError>>.check(
+            applicativeError: Either<CategoryError, Int>.monadError(),
+            eq: Either.eq(CategoryError.eq, Int.order),
+            eqEither: Either.eq(CategoryError.eq, Either.eq(CategoryError.eq, Int.order)))
+    }
 }
