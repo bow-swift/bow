@@ -30,4 +30,8 @@ class TryTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<TryF>.check(monad: Try<Int>.monad(), eq: Try.eq(Int.order))
     }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<TryF, CategoryError>.check(applicativeError: Try<Int>.monadError(), eq: Try.eq(Int.order), eqEither: Try.eq(Either.eq(CategoryError.eq, Int.order)), gen: { CategoryError.arbitrary.generate })
+    }
 }

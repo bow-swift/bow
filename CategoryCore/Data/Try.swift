@@ -168,8 +168,8 @@ public extension Try {
         return TryMonad()
     }
     
-    public static func monadError() -> TryMonadError {
-        return TryMonadError()
+    public static func monadError<E>() -> TryMonadError<E> {
+        return TryMonadError<E>()
     }
     
     public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
@@ -205,15 +205,15 @@ public class TryMonad : TryApplicative, Monad {
     }
 }
 
-public class TryMonadError : TryMonad, MonadError {
-    public typealias E = Error
+public class TryMonadError<C> : TryMonad, MonadError where C : Error{
+    public typealias E = C
     
-    public func raiseError<A>(_ e: Error) -> HK<TryF, A> {
+    public func raiseError<A>(_ e: C) -> HK<TryF, A> {
         return Try<A>.failure(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: @escaping (Error) -> HK<TryF, A>) -> HK<TryF, A> {
-        return fa.ev().recoverWith({ e in f(e).ev() })
+    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: @escaping (C) -> HK<TryF, A>) -> HK<TryF, A> {
+        return fa.ev().recoverWith({ e in f(e as! C).ev() })
     }
 }
 
