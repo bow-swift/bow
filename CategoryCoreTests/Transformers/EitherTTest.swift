@@ -34,4 +34,12 @@ class EitherTTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<EitherTPartial<IdF, Int>>.check(monad: EitherT<IdF, Int, Int>.monad(Id<Any>.monad()), eq: self.eq)
     }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<EitherTPartial<MaybeF, ()>, ()>.check(
+            applicativeError: EitherT<MaybeF, (), Int>.monadError(Maybe<Int>.monadError()),
+            eq: EitherT<MaybeF, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
+            eqEither: EitherT.eq(Maybe.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Maybe<Any>.functor()),
+            gen: { () })
+    }
 }
