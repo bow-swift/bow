@@ -44,6 +44,7 @@
 		117BBA991F876C9200196DB7 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA981F876C9200196DB7 /* State.swift */; };
 		117BBA9D1F8772FE00196DB7 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9C1F8772FE00196DB7 /* MaybeT.swift */; };
 		117BBA9F1F8790B400196DB7 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117BBA9E1F8790B400196DB7 /* EitherT.swift */; };
+		117EC5DA1FC57F490073318B /* MonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117EC5D91FC57F490073318B /* MonadLaws.swift */; };
 		1187ECD61FC475000049FA00 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1187ECD51FC475000049FA00 /* FreeTest.swift */; };
 		1192674D1FC4291300E0E677 /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674C1FC4291300E0E677 /* EitherTTest.swift */; };
 		1192674F1FC43AD300E0E677 /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1192674E1FC43AD300E0E677 /* MaybeTTest.swift */; };
@@ -161,6 +162,7 @@
 		117BBA981F876C9200196DB7 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		117BBA9C1F8772FE00196DB7 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
 		117BBA9E1F8790B400196DB7 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
+		117EC5D91FC57F490073318B /* MonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadLaws.swift; sourceTree = "<group>"; };
 		1187ECD51FC475000049FA00 /* FreeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTest.swift; sourceTree = "<group>"; };
 		1192674C1FC4291300E0E677 /* EitherTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTTest.swift; sourceTree = "<group>"; };
 		1192674E1FC43AD300E0E677 /* MaybeTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTTest.swift; sourceTree = "<group>"; };
@@ -263,8 +265,9 @@
 				115AF8F21FC30C04003F2565 /* ApplicativeLaws.swift */,
 				115AF8F01FC30503003F2565 /* EqLaws.swift */,
 				115AF8DC1FC2E595003F2565 /* FunctorLaws.swift */,
-				115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */,
+				117EC5D91FC57F490073318B /* MonadLaws.swift */,
 				115AF8FB1FC329E9003F2565 /* MonoidLaws.swift */,
+				115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -815,6 +818,7 @@
 				1138ABF81FC458810015B49F /* CoproductTest.swift in Sources */,
 				1138ABFA1FC467F60015B49F /* KleisliTest.swift in Sources */,
 				119267571FC44C1500E0E677 /* TupleTest.swift in Sources */,
+				117EC5DA1FC57F490073318B /* MonadLaws.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
 				1187ECD61FC475000049FA00 /* FreeTest.swift in Sources */,
 				115AF8CF1FC2CEF9003F2565 /* PredefTest.swift in Sources */,
