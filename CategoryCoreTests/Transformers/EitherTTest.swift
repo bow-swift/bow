@@ -42,4 +42,11 @@ class EitherTTest: XCTestCase {
             eqEither: EitherT.eq(Maybe.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Maybe<Any>.functor()),
             gen: { () })
     }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<EitherTPartial<MaybeF, ()>, ()>.check(
+            monadError: EitherT<MaybeF, (), Int>.monadError(Maybe<Int>.monadError()),
+            eq: EitherT<MaybeF, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
+            gen: { () })
+    }
 }
