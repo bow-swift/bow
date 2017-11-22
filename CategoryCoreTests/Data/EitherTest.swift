@@ -40,6 +40,6 @@ class EitherTest: XCTestCase {
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<EitherPartial<CategoryError>>.check(monadError: Either<CategoryError, Int>.monadError(), eq: Either.eq(CategoryError.eq, Int.order))
+        MonadErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(monadError: Either<CategoryError, Int>.monadError(), eq: Either.eq(CategoryError.eq, Int.order), gen: { CategoryError.arbitrary.generate })
     }
 }
