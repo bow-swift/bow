@@ -26,4 +26,8 @@ class Function1Test: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<Function1Partial<Int>>.check(applicative: Function1<Int, Int>.applicative(), eq: Function1PointEq())
     }
+    
+    func testMonadLaws() {
+        MonadLaws<Function1Partial<Int>>.check(monad: Function1<Int, Int>.monad(), eq: Function1PointEq())
+    }
 }
