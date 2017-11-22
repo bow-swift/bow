@@ -32,4 +32,8 @@ class KleisliTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<KleisliPartial<IdF, Int>>.check(applicative: Kleisli<IdF, Int, Int>.applicative(Id<Any>.applicative()), eq: KleisliPointEq())
     }
+    
+    func testMonadLaws() {
+        MonadLaws<KleisliPartial<IdF, Int>>.check(monad: Kleisli<IdF, Int, Int>.monad(Id<Any>.monad()), eq: KleisliPointEq())
+    }
 }
