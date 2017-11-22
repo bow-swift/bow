@@ -26,4 +26,8 @@ class EitherTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<EitherPartial<Int>>.check(applicative: Either<Int, Int>.applicative(), eq: Either<Int, Int>.eq(Int.order, Int.order))
     }
+    
+    func testMonadLaws() {
+        MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: Either<Int, Int>.eq(Int.order, Int.order))
+    }
 }
