@@ -54,14 +54,14 @@ public class Free<S, A> : HK2<FreeF, S, A> {
     }
     
     public func step() -> Free<S, A> {
-        if self is FlatMapped<S, A, Any> && (self as! FlatMapped<S, A, A>).c is FlatMapped<S, A, A> {
+        if self is FlatMapped<S, A, A> && (self as! FlatMapped<S, A, A>).c is FlatMapped<S, A, A> {
             let flatMappedSelf = self as! FlatMapped<S, A, A>
             let g = flatMappedSelf.f
             let flatMappedC = flatMappedSelf.c as! FlatMapped<S, A, A>
             let c = flatMappedC.c
             let f = flatMappedC.f
             return c.flatMap { cc in f(cc).flatMap(g) }.step()
-        } else if self is FlatMapped<S, A, Any> && (self as! FlatMapped<S, A, A>).c is Pure<S, A> {
+        } else if self is FlatMapped<S, A, A> && (self as! FlatMapped<S, A, A>).c is Pure<S, A> {
             let flatMappedSelf = self as! FlatMapped<S, A, A>
             let flatMappedC = flatMappedSelf.c as! Pure<S, A>
             let a = flatMappedC.a
@@ -74,20 +74,12 @@ public class Free<S, A> : HK2<FreeF, S, A> {
     
     public func foldMap<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> HK<M, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
         return monad.tailRecM(self) { freeSA in
-            let x = freeSA.step()
-            switch x {
-                case is Pure<S, A>:
-                    return monad.pure(Either.right((x as! Pure<S, A>).a))
-                case is Suspend<S, A>:
-                    return monad.map(f.invoke((x as! Suspend<S, A>).a), { a in Either.right(a) })
-                case is FlatMapped<S, A, A>:
-                    let g = (x as! FlatMapped<S, A, A>).f
-                    let c = (x as! FlatMapped<S, A, A>).c
-                    return monad.map(c.foldMap(f, monad), { cc in Either.left(g(cc)) })
-                default:
-                    fatalError("Free must not have other subclasses than Pure, Suspend or FlatMapped")
-            }
+            return freeSA.step().foldMapChild(f, monad)
         }
+    }
+    
+    fileprivate func foldMapChild<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> HK<M, Either<Free<S, A>,A>> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
+        fatalError("foldMapChild must be implemented by subclasses")
     }
     
     public func run<Mon>(_ monad : Mon) -> HK<S, A> where Mon : Monad, Mon.F == S {
@@ -102,6 +94,10 @@ fileprivate class Pure<S, A> : Free<S, A> {
         self.a = a
     }
     
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+        return monad.pure(Either.right(self.a))
+    }
+    
     override public func transform<B, S, O, FuncK>(_ f: @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
         return Free<O, B>.pure(f(a))
     }
@@ -112,6 +108,10 @@ fileprivate class Suspend<S, A> : Free<S, A> {
     
     init(_ a : HK<S, A>) {
         self.a = a
+    }
+    
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+        return monad.map(f.invoke(self.a), { a in Either.right(a) })
     }
     
     override public func transform<B, S, O, FuncK>(_ f: @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
@@ -126,6 +126,12 @@ fileprivate class FlatMapped<S, A, C> : Free<S, A> {
     init(_ c : Free<S, C>, _ f : @escaping (C) -> Free<S, A>) {
         self.c = c
         self.f = f
+    }
+    
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+        let g = self.f
+        let c = self.c
+        return monad.map(c.foldMap(f, monad), { cc in Either.left(g(cc)) })
     }
     
     override public func transform<B, S, O, FuncK>(_ fm : @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {

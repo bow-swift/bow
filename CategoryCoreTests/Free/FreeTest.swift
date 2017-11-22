@@ -117,4 +117,8 @@ class FreeTest: XCTestCase {
     func testFunctorLaws() {
         FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq)
     }
+    
+    func testApplicativeLaws() {
+        ApplicativeLaws<FreePartial<OpsF>>.check(applicative: Free<OpsF, Int>.applicative(), eq: self.eq)
+    }
 }
