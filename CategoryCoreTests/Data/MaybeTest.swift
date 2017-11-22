@@ -28,6 +28,10 @@ class MaybeTest: XCTestCase {
         ApplicativeLaws<MaybeF>.check(applicative: Maybe<Int>.applicative(), eq: Maybe.eq(Int.order))
     }
     
+    func testMonadLaws() {
+        MonadLaws<MaybeF>.check(monad: Maybe<Int>.monad(), eq: Maybe.eq(Int.order))
+    }
+    
     func testSemigroupLaws() {
         property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<HK<MaybeF, Int>>.check(
