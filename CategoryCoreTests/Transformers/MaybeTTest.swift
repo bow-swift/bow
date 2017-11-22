@@ -28,4 +28,8 @@ class MaybeTTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<MaybeTPartial<IdF>>.check(applicative: MaybeT<IdF, Int>.applicative(Id<Any>.monad()), eq: self.eq)
     }
+    
+    func testMonadLaws() {
+        MonadLaws<MaybeTPartial<IdF>>.check(monad: MaybeT<IdF, Int>.monad(Id<Any>.monad()), eq: self.eq)
+    }
 }
