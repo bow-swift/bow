@@ -33,4 +33,7 @@ class StateTTest: XCTestCase {
         ApplicativeLaws<StateTPartial<IdF, Int>>.check(applicative: StateT<IdF, Int, Int>.applicative(Id<Any>.monad()), eq: StateTUnitEq())
     }
     
+    func testMonadLaws() {
+        MonadLaws<StateTPartial<IdF, Int>>.check(monad: StateT<IdF, Int, Int>.monad(Id<Any>.monad()), eq: StateTUnitEq())
+    }
 }
