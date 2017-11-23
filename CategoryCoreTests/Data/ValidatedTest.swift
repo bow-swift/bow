@@ -15,7 +15,7 @@ class ValidatedTest: XCTestCase {
         return { a in Validated<Int, Int>.pure(a) }
     }
     
-    var eq = Validated<Int, Int>.eq(Int.order, Int.order)
+    let eq = Validated.eq(Int.order, Int.order)
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
@@ -27,5 +27,9 @@ class ValidatedTest: XCTestCase {
     
     func testApplicativeLaws() {
         ApplicativeLaws<ValidatedPartial<Int>>.check(applicative: Validated<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
+    }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<ValidatedPartial<Int>>.check(semigroupK: Validated<Int, Int>.semigroupK(Int.sumMonoid), generator: self.generator, eq: self.eq)
     }
 }
