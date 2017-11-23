@@ -15,20 +15,22 @@ class EitherTest: XCTestCase {
         return { a in Either.pure(a) }
     }
     
+    let eq = Either.eq(Int.order, Int.order)
+    
     func testEqLaws() {
-        EqLaws.check(eq: Either<Int, Int>.eq(Int.order, Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherPartial<Int>>.check(functor: Either<Int, Int>.functor(), generator: self.generator, eq: Either<Int, Int>.eq(Int.order, Int.order))
+        FunctorLaws<EitherPartial<Int>>.check(functor: Either<Int, Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<EitherPartial<Int>>.check(applicative: Either<Int, Int>.applicative(), eq: Either<Int, Int>.eq(Int.order, Int.order))
+        ApplicativeLaws<EitherPartial<Int>>.check(applicative: Either<Int, Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: Either<Int, Int>.eq(Int.order, Int.order))
+        MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
@@ -41,5 +43,9 @@ class EitherTest: XCTestCase {
     
     func testMonadErrorLaws() {
         MonadErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(monadError: Either<CategoryError, Int>.monadError(), eq: Either.eq(CategoryError.eq, Int.order), gen: { CategoryError.arbitrary.generate })
+    }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<EitherPartial<Int>>.check(semigroupK: Either<Int, Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
 }
