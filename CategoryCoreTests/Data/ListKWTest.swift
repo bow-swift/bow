@@ -16,20 +16,22 @@ class ListKWTest: XCTestCase {
         return { a in ListKW<Int>.pure(a) }
     }
     
+    let eq = ListKW.eq(Int.order)
+    
     func testEqLaws() {
-        EqLaws.check(eq: ListKW.eq(Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ListKWF>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: ListKW<Int>.eq(Int.order))
+        FunctorLaws<ListKWF>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ListKWF>.check(applicative: ListKW<Int>.applicative(), eq: ListKW<Int>.eq(Int.order))
+        ApplicativeLaws<ListKWF>.check(applicative: ListKW<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<ListKWF>.check(monad: ListKW<Int>.monad(), eq: ListKW<Int>.eq(Int.order))
+        MonadLaws<ListKWF>.check(monad: ListKW<Int>.monad(), eq: self.eq)
     }
     
     func testSemigroupLaws() {
@@ -39,13 +41,17 @@ class ListKWTest: XCTestCase {
                 a: ListKW<Int>.pure(a),
                 b: ListKW<Int>.pure(b),
                 c: ListKW<Int>.pure(c),
-                eq: ListKW<Int>.eq(Int.order))
+                eq: self.eq)
         }
+    }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws.check(semigroupK: ListKW<Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
     
     func testMonoidLaws() {
         property("ListKW monoid laws") <- forAll() { (a : Int) in
-            return MonoidLaws<HK<ListKWF, Int>>.check(monoid: ListKW<Int>.monoid(), a: ListKW<Int>.pure(a), eq: ListKW<Int>.eq(Int.order))
+            return MonoidLaws<HK<ListKWF, Int>>.check(monoid: ListKW<Int>.monoid(), a: ListKW<Int>.pure(a), eq: self.eq)
         }
     }
     
