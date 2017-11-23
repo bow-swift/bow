@@ -21,6 +21,29 @@ class KleisliTest: XCTestCase {
         }
     }
     
+    class KleisliUnitEq : Eq {
+        typealias A = HK3<KleisliF, MaybeF, (), Int>
+        
+        func eqv(_ a: HK<HK<HK<KleisliF, MaybeF>, ()>, Int>, _ b: HK<HK<HK<KleisliF, MaybeF>, ()>, Int>) -> Bool {
+            let a = Kleisli.ev(a)
+            let b = Kleisli.ev(b)
+            return Maybe.eq(Int.order).eqv(a.invoke(()),
+                                           b.invoke(()))
+        }
+    }
+    
+    class KleisliEitherEq : Eq {
+        typealias A = HK3<KleisliF, MaybeF, (), HK2<EitherF, (), Int>>
+        
+        func eqv(_ a: HK<HK<HK<KleisliF, MaybeF>, ()>, HK2<EitherF, (), Int>>,
+                 _ b: HK<HK<HK<KleisliF, MaybeF>, ()>, HK2<EitherF, (), Int>>) -> Bool {
+            let a = Kleisli.ev(a)
+            let b = Kleisli.ev(b)
+            return Maybe.eq(Either.eq(UnitEq(), Int.order)).eqv(a.invoke(()),
+                                                                b.invoke(()))
+        }
+    }
+    
     var generator : (Int) -> HK3<KleisliF, IdF, Int, Int> {
         return { a in Kleisli.pure(a, Id<Int>.applicative()) }
     }
@@ -35,5 +58,13 @@ class KleisliTest: XCTestCase {
     
     func testMonadLaws() {
         MonadLaws<KleisliPartial<IdF, Int>>.check(monad: Kleisli<IdF, Int, Int>.monad(Id<Any>.monad()), eq: KleisliPointEq())
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<KleisliPartial<MaybeF, ()>, ()>.check(
+            applicativeError: Kleisli<MaybeF, (), Int>.monadError(Maybe<Any>.monadError()),
+            eq: KleisliUnitEq(),
+            eqEither: KleisliEitherEq(),
+            gen: { () })
     }
 }
