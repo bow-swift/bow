@@ -16,20 +16,22 @@ class NonEmptyListTest: XCTestCase {
         return { a in NonEmptyList.pure(a) }
     }
     
+    let eq = NonEmptyList.eq(Int.order)
+    
     func testEqLaws() {
-        EqLaws.check(eq: NonEmptyList.eq(Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: NonEmptyList<Int>.eq(Int.order))
+        FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<NonEmptyListF>.check(applicative: NonEmptyList<Int>.applicative(), eq: NonEmptyList.eq(Int.order))
+        ApplicativeLaws<NonEmptyListF>.check(applicative: NonEmptyList<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<NonEmptyListF>.check(monad: NonEmptyList<Int>.monad(), eq: NonEmptyList.eq(Int.order))
+        MonadLaws<NonEmptyListF>.check(monad: NonEmptyList<Int>.monad(), eq: self.eq)
     }
     
     func testSemigroupLaws() {
@@ -39,7 +41,11 @@ class NonEmptyListTest: XCTestCase {
                     a: NonEmptyList<Int>.pure(a),
                     b: NonEmptyList<Int>.pure(b),
                     c: NonEmptyList<Int>.pure(c),
-                    eq: NonEmptyList<Int>.eq(Int.order))
+                    eq: self.eq)
         }
+    }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<NonEmptyListF>.check(semigroupK: NonEmptyList<Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
 }
