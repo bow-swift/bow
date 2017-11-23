@@ -32,4 +32,11 @@ class WriterTTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<WriterTPartial<IdF, Int>>.check(monad: WriterT<IdF, Int, Int>.monad(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
     }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<WriterTPartial<ListKWF, Int>>.check(
+            semigroupK: WriterT<ListKWF, Int, Int>.semigroupK(ListKW<Int>.semigroupK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
+            eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+    }
 }
