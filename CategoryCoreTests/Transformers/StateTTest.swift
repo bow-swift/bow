@@ -42,6 +42,17 @@ class StateTTest: XCTestCase {
         }
     }
     
+    class StateTListKWEq : Eq {
+        public typealias A = HK3<StateTF, ListKWF, Int, Int>
+        
+        public func eqv(_ a: HK3<StateTF, ListKWF, Int, Int>,
+                        _ b: HK3<StateTF, ListKWF, Int, Int>) -> Bool {
+            let x = StateT.ev(a).runM(1, ListKW<Any>.monad())
+            let y = StateT.ev(b).runM(1, ListKW<Any>.monad())
+            return ListKW.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
+        }
+    }
+    
     var generator : (Int) -> HK3<StateTF, IdF, Int, Int> {
         return { a in StateT.lift(Id<Int>.pure(a), Id<Any>.monad()) }
     }
@@ -71,5 +82,12 @@ class StateTTest: XCTestCase {
             monadError: StateT<MaybeF, (), Int>.monadError(Maybe<Any>.monadError()),
             eq: StateTUnitEq(),
             gen: { () })
+    }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<StateTPartial<ListKWF, Int>>.check(
+            semigroupK: StateT<ListKWF, Int, Int>.semigroupK(ListKW<Int>.monad(), ListKW<Int>.semigroupK()),
+            generator: { (a : Int) in StateT<ListKWF, Int, Int>.applicative(ListKW<Int>.monad()).pure(a) },
+            eq: StateTListKWEq())
     }
 }
