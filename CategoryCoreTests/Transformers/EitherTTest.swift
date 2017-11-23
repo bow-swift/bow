@@ -49,4 +49,8 @@ class EitherTTest: XCTestCase {
             eq: EitherT<MaybeF, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
             gen: { () })
     }
+    
+    func testSemigroupKLaws() {
+        SemigroupKLaws<EitherTPartial<IdF, Int>>.check(semigroupK: EitherT<IdF, Int, Int>.semigroupK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
+    }
 }
