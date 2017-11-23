@@ -65,4 +65,11 @@ class StateTTest: XCTestCase {
             eqEither: StateTEitherEq(),
             gen: { () })
     }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<StateTPartial<MaybeF, ()>, ()>.check(
+            monadError: StateT<MaybeF, (), Int>.monadError(Maybe<Any>.monadError()),
+            eq: StateTUnitEq(),
+            gen: { () })
+    }
 }
