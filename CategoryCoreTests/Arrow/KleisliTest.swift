@@ -67,4 +67,11 @@ class KleisliTest: XCTestCase {
             eqEither: KleisliEitherEq(),
             gen: { () })
     }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<KleisliPartial<MaybeF, ()>, ()>.check(
+            monadError: Kleisli<MaybeF, (), Int>.monadError(Maybe<Any>.monadError()),
+            eq: KleisliUnitEq(),
+            gen: { ()})
+    }
 }
