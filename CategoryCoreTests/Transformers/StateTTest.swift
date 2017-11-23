@@ -11,7 +11,7 @@ import XCTest
 
 class StateTTest: XCTestCase {
     
-    class StateTUnitEq : Eq {
+    class StateTPointEq : Eq {
         public typealias A = HK3<StateTF, IdF, Int, Int>
         
         public func eqv(_ a: HK3<StateTF, IdF, Int, Int>, _ b: HK3<StateTF, IdF, Int, Int>) -> Bool {
@@ -21,19 +21,48 @@ class StateTTest: XCTestCase {
         }
     }
     
+    class StateTUnitEq : Eq {
+        public typealias A = HK3<StateTF, MaybeF, (), Int>
+        
+        public func eqv(_ a: HK3<StateTF, MaybeF, (), Int>, _ b: HK3<StateTF, MaybeF, (), Int>) -> Bool {
+            let x = StateT.ev(a).runM((), Maybe<Any>.monad())
+            let y = StateT.ev(b).runM((), Maybe<Any>.monad())
+            return Maybe.eq(Tuple.eq(UnitEq(), Int.order)).eqv(x, y)
+        }
+    }
+    
+    class StateTEitherEq : Eq {
+        public typealias A = HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>
+        
+        public func eqv(_ a: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>,
+                        _ b: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>) -> Bool {
+            let x = StateT.ev(a).runM((), Maybe<Any>.monad())
+            let y = StateT.ev(b).runM((), Maybe<Any>.monad())
+            return Maybe.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)
+        }
+    }
+    
     var generator : (Int) -> HK3<StateTF, IdF, Int, Int> {
         return { a in StateT.lift(Id<Int>.pure(a), Id<Any>.monad()) }
     }
     
     func testFunctorLaws() {
-        FunctorLaws<StateTPartial<IdF, Int>>.check(functor: StateT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: StateTUnitEq())
+        FunctorLaws<StateTPartial<IdF, Int>>.check(functor: StateT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: StateTPointEq())
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<StateTPartial<IdF, Int>>.check(applicative: StateT<IdF, Int, Int>.applicative(Id<Any>.monad()), eq: StateTUnitEq())
+        ApplicativeLaws<StateTPartial<IdF, Int>>.check(applicative: StateT<IdF, Int, Int>.applicative(Id<Any>.monad()), eq: StateTPointEq())
     }
     
     func testMonadLaws() {
-        MonadLaws<StateTPartial<IdF, Int>>.check(monad: StateT<IdF, Int, Int>.monad(Id<Any>.monad()), eq: StateTUnitEq())
+        MonadLaws<StateTPartial<IdF, Int>>.check(monad: StateT<IdF, Int, Int>.monad(Id<Any>.monad()), eq: StateTPointEq())
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<StateTPartial<MaybeF, ()>, ()>.check(
+            applicativeError: StateT<MaybeF, (), Int>.monadError(Maybe<Any>.monadError()),
+            eq: StateTUnitEq(),
+            eqEither: StateTEitherEq(),
+            gen: { () })
     }
 }
