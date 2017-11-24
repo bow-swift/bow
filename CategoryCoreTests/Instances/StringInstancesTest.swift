@@ -16,6 +16,10 @@ class StringInstancesTest: XCTestCase {
         EqLaws.check(eq: String.order, generator: id)
     }
     
+    func testOrderLaws() {
+        OrderLaws.check(order: String.order, generator: id)
+    }
+    
     func testSemigroupLaws() {
         property("String concatenation semigroup") <- forAll { (a : String, b : String, c : String) in
             return SemigroupLaws.check(semigroup: String.concatMonoid, a: a, b: b, c: c, eq: String.order)
