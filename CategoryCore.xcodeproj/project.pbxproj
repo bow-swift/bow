@@ -110,6 +110,7 @@
 		11E17DE71F83DB8200CA5A3F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E17DE61F83DB8200CA5A3F /* Ior.swift */; };
 		11E797041FBAEAF500E1DC41 /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E797031FBAEAF500E1DC41 /* NumberInstances.swift */; };
 		11E797061FBB09B000E1DC41 /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E797051FBB09B000E1DC41 /* StringInstances.swift */; };
+		11E798F01FC812AB00F2D72F /* MonoidKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E798EF1FC812AB00F2D72F /* MonoidKLaws.swift */; };
 		11FF01D01FBC7F4C00D7EB84 /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF01CF1FBC7F4C00D7EB84 /* Composed.swift */; };
 		11FF01D21FBC801800D7EB84 /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF01D11FBC801800D7EB84 /* ComposedFoldable.swift */; };
 		2C7F025A5DC5E8EA6512C351 /* Pods_CategoryCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D90A61992D74CD4C877E207 /* Pods_CategoryCoreTests.framework */; };
@@ -234,6 +235,7 @@
 		11E17DE61F83DB8200CA5A3F /* Ior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		11E797031FBAEAF500E1DC41 /* NumberInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInstances.swift; sourceTree = "<group>"; };
 		11E797051FBB09B000E1DC41 /* StringInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringInstances.swift; sourceTree = "<group>"; };
+		11E798EF1FC812AB00F2D72F /* MonoidKLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoidKLaws.swift; sourceTree = "<group>"; };
 		11FF01CF1FBC7F4C00D7EB84 /* Composed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composed.swift; sourceTree = "<group>"; };
 		11FF01D11FBC801800D7EB84 /* ComposedFoldable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposedFoldable.swift; sourceTree = "<group>"; };
 		1B877B259CE89D23582908A7 /* Pods-CategoryCore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CategoryCore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CategoryCore/Pods-CategoryCore.debug.xcconfig"; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				115AF8DC1FC2E595003F2565 /* FunctorLaws.swift */,
 				11A9B1AC1FC5AB3E003112C1 /* MonadErrorLaws.swift */,
 				117EC5D91FC57F490073318B /* MonadLaws.swift */,
+				11E798EF1FC812AB00F2D72F /* MonoidKLaws.swift */,
 				115AF8FB1FC329E9003F2565 /* MonoidLaws.swift */,
 				11A9B1AE1FC6C952003112C1 /* SemigroupKLaws.swift */,
 				115AF8F41FC31AD3003F2565 /* SemigroupLaws.swift */,
@@ -827,6 +830,7 @@
 				119267511FC4411D00E0E677 /* StateTTest.swift in Sources */,
 				1138ABF81FC458810015B49F /* CoproductTest.swift in Sources */,
 				1138ABFA1FC467F60015B49F /* KleisliTest.swift in Sources */,
+				11E798F01FC812AB00F2D72F /* MonoidKLaws.swift in Sources */,
 				119267571FC44C1500E0E677 /* TupleTest.swift in Sources */,
 				117EC5DA1FC57F490073318B /* MonadLaws.swift in Sources */,
 				115AF8E51FC2F7F4003F2565 /* EitherTest.swift in Sources */,
