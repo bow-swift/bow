@@ -40,4 +40,8 @@ class MaybeTTest: XCTestCase {
     func testMonoidKLaws() {
         MonoidKLaws<MaybeTPartial<IdF>>.check(monoidK: MaybeT<IdF, Int>.monoidK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
     }
+    
+    func testFunctorFilterLaws() {
+        FunctorFilterLaws<MaybeTPartial<IdF>>.check(functorFilter: MaybeT<IdF, Int>.functorFilter(Id<Any>.functor()), generator: self.generator, eq: self.eq)
+    }
 }
