@@ -21,6 +21,16 @@ class StateTTest: XCTestCase {
         }
     }
     
+    class StateTIdUnitEq : Eq {
+        public typealias A = HK3<StateTF, IdF, Int, ()>
+        
+        public func eqv(_ a: HK3<StateTF, IdF, Int, ()>, _ b: HK3<StateTF, IdF, Int, ()>) -> Bool {
+            let x = StateT.ev(a).runM(1, Id<Any>.monad())
+            let y = StateT.ev(b).runM(1, Id<Any>.monad())
+            return Id.eq(Tuple.eq(Int.order, UnitEq())).eqv(x, y)
+        }
+    }
+    
     class StateTUnitEq : Eq {
         public typealias A = HK3<StateTF, MaybeF, (), Int>
         
@@ -89,5 +99,12 @@ class StateTTest: XCTestCase {
             semigroupK: StateT<ListKWF, Int, Int>.semigroupK(ListKW<Int>.monad(), ListKW<Int>.semigroupK()),
             generator: { (a : Int) in StateT<ListKWF, Int, Int>.applicative(ListKW<Int>.monad()).pure(a) },
             eq: StateTListKWEq())
+    }
+    
+    func testMonadStateLaws() {
+        MonadStateLaws<StateTPartial<IdF, Int>>.check(
+            monadState: StateT<IdF, Int, Int>.monadState(Id<Any>.monad()),
+            eq: StateTPointEq(),
+            eqUnit: StateTIdUnitEq())
     }
 }
