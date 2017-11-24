@@ -62,4 +62,8 @@ class ListKWTest: XCTestCase {
     func testFunctorFilterLaws() {
         FunctorFilterLaws<ListKWF>.check(functorFilter: ListKW<Int>.functorFilter(), generator: self.generator, eq: self.eq)
     }
+    
+    func testMonadFilterLaws() {
+        MonadFilterLaws<ListKWF>.check(monadFilter: ListKW<Int>.monadFilter(), generator: self.generator, eq: self.eq)
+    }
 }
