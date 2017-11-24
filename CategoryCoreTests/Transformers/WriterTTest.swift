@@ -39,4 +39,11 @@ class WriterTTest: XCTestCase {
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
             eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
     }
+    
+    func testMonoidKLaws() {
+        MonoidKLaws<WriterTPartial<ListKWF, Int>>.check(
+            monoidK: WriterT<ListKWF, Int, Int>.monoidK(ListKW<Int>.monoidK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
+            eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+    }
 }
