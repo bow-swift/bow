@@ -13,19 +13,9 @@ public protocol MonadFilter : Monad, FunctorFilter {
 }
 
 public extension MonadFilter {
-    public func mapFilter<A, B>(_ fa: HK<F, A>, _ f: @escaping (A) -> B?) -> HK<F, B> {
-        return flatMap(fa, { a in
-            if let b = f(a) {
-                return self.pure(b)
-            } else {
-                return self.empty()
-            }
-        })
-    }
-    
     public func mapFilter<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> Maybe<B>) -> HK<F, B>{
         return flatMap(fa, { a in
-            f(a).fold(constF(self.empty()), { b in self.pure(b) })
+            f(a).fold(self.empty, self.pure)
         })
     }
 }
