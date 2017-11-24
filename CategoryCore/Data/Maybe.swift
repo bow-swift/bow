@@ -197,6 +197,10 @@ public extension Maybe {
     public static func functorFilter() -> MaybeFunctorFilter {
         return MaybeFunctorFilter()
     }
+    
+    public static func monadFilter() -> MaybeMonadFilter {
+        return MaybeMonadFilter()
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -283,5 +287,11 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
 public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
     public func mapFilter<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<MaybeF, B> {
         return fa.ev().mapFilter(f)
+    }
+}
+
+public class MaybeMonadFilter : MaybeMonad, MonadFilter {
+    public func empty<A>() -> HK<MaybeF, A> {
+        return Maybe.empty()
     }
 }
