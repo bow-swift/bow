@@ -59,4 +59,7 @@ class ListKWTest: XCTestCase {
         MonoidKLaws.check(monoidK: ListKW<Int>.monoidK(), generator: self.generator, eq: self.eq)
     }
     
+    func testFunctorFilterLaws() {
+        FunctorFilterLaws<ListKWF>.check(functorFilter: ListKW<Int>.functorFilter(), generator: self.generator, eq: self.eq)
+    }
 }
