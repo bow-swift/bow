@@ -46,4 +46,11 @@ class WriterTTest: XCTestCase {
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
             eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
     }
+    
+    func testFunctorFilterLaws() {
+        FunctorFilterLaws<WriterTPartial<MaybeF, Int>>.check(
+            functorFilter: WriterT<MaybeF, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
+            eq: WriterT<MaybeF, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
+    }
 }
