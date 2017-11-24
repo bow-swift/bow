@@ -36,4 +36,8 @@ class MaybeTTest: XCTestCase {
     func testSemigroupKLaws() {
         SemigroupKLaws<MaybeTPartial<IdF>>.check(semigroupK: MaybeT<IdF, Int>.semigroupK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
     }
+    
+    func testMonoidKLaws() {
+        MonoidKLaws<MaybeTPartial<IdF>>.check(monoidK: MaybeT<IdF, Int>.monoidK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
+    }
 }
