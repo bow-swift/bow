@@ -24,20 +24,22 @@ class MaybeTest: XCTestCase {
         return { a in Maybe.pure(a) }
     }
     
+    let eq = Maybe.eq(Int.order)
+    
     func testEqLaws() {
-        EqLaws.check(eq: Maybe.eq(Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: Maybe<Int>.eq(Int.order))
+        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<MaybeF>.check(applicative: Maybe<Int>.applicative(), eq: Maybe.eq(Int.order))
+        ApplicativeLaws<MaybeF>.check(applicative: Maybe<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<MaybeF>.check(monad: Maybe<Int>.monad(), eq: Maybe.eq(Int.order))
+        MonadLaws<MaybeF>.check(monad: Maybe<Int>.monad(), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
@@ -45,7 +47,7 @@ class MaybeTest: XCTestCase {
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<MaybeF, CategoryCore.Unit>.check(monadError: Maybe<Int>.monadError(), eq: Maybe.eq(Int.order), gen: { () })
+        MonadErrorLaws<MaybeF, CategoryCore.Unit>.check(monadError: Maybe<Int>.monadError(), eq: self.eq, gen: { () })
     }
     
     func testSemigroupLaws() {
@@ -55,7 +57,7 @@ class MaybeTest: XCTestCase {
                 a: Maybe.pure(a),
                 b: Maybe.pure(b),
                 c: Maybe.pure(c),
-                eq: Maybe.eq(Int.order))
+                eq: self.eq)
         }
     }
     
@@ -64,7 +66,11 @@ class MaybeTest: XCTestCase {
             return MonoidLaws<HK<MaybeF, Int>>.check(
                 monoid: Maybe<Int>.monoid(Int.sumMonoid),
                 a: Maybe.pure(a),
-                eq: Maybe.eq(Int.order))
+                eq: self.eq)
         }
+    }
+    
+    func testFunctorFilterLaws() {
+        FunctorFilterLaws<MaybeF>.check(functorFilter: Maybe<Int>.functorFilter(), generator: self.generator, eq: self.eq)
     }
 }
