@@ -16,6 +16,10 @@ class NumberInstancesTest: XCTestCase {
         EqLaws.check(eq: Int.order, generator: id)
     }
     
+    func testIntOrderLaws() {
+        OrderLaws.check(order: Int.order, generator: id)
+    }
+    
     func testInt8EqLaws() {
         EqLaws.check(eq: Int8.order, generator: id)
     }
