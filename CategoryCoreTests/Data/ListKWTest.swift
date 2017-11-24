@@ -55,4 +55,8 @@ class ListKWTest: XCTestCase {
         }
     }
     
+    func testMonoidKLaws() {
+        MonoidKLaws.check(monoidK: ListKW<Int>.monoidK(), generator: self.generator, eq: self.eq)
+    }
+    
 }
