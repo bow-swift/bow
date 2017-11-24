@@ -24,46 +24,89 @@ class NumberInstancesTest: XCTestCase {
         EqLaws.check(eq: Int8.order, generator: id)
     }
     
+    func testInt8OrderLaws() {
+        OrderLaws.check(order: Int8.order, generator: id)
+    }
+    
     func testInt16EqLaws() {
         EqLaws.check(eq: Int16.order, generator: id)
+    }
+    
+    func testInt16OrderLaws() {
+        OrderLaws.check(order: Int16.order, generator: id)
     }
     
     func testInt32EqLaws() {
         EqLaws.check(eq: Int32.order, generator: id)
     }
     
+    func testInt32OrderLaws() {
+        OrderLaws.check(order: Int32.order, generator: id)
+    }
+    
     func testInt64EqLaws() {
         EqLaws.check(eq: Int64.order, generator: id)
+    }
+    
+    func testInt64OrderLaws() {
+        OrderLaws.check(order: Int64.order, generator: id)
     }
     
     func testUIntEqLaws() {
         EqLaws.check(eq: Int.order, generator: id)
     }
     
+    func testUIntOrderLaws() {
+        OrderLaws.check(order: UInt.order, generator: id)
+    }
+    
     func testUInt8EqLaws() {
         EqLaws.check(eq: Int8.order, generator: id)
+    }
+    
+    func testUInt8OrderLaws() {
+        OrderLaws.check(order: UInt8.order, generator: id)
     }
     
     func testUInt16EqLaws() {
         EqLaws.check(eq: Int16.order, generator: id)
     }
     
+    func testUInt16OrderLaws() {
+        OrderLaws.check(order: UInt16.order, generator: id)
+    }
+    
     func testUInt32EqLaws() {
         EqLaws.check(eq: Int32.order, generator: id)
+    }
+    
+    func testUInt32OrderLaws() {
+        OrderLaws.check(order: UInt32.order, generator: id)
     }
     
     func testUInt64EqLaws() {
         EqLaws.check(eq: Int64.order, generator: id)
     }
     
+    func testUInt64OrderLaws() {
+        OrderLaws.check(order: UInt64.order, generator: id)
+    }
+    
     func testFloatEqLaws() {
         EqLaws.check(eq: Float.order, generator: id)
+    }
+    
+    func testFloatOrderLaws() {
+        OrderLaws.check(order: Float.order, generator: id)
     }
     
     func testDoubleEqLaws() {
         EqLaws.check(eq: Double.order, generator: id)
     }
     
+    func testDoubleOrderLaws() {
+        OrderLaws.check(order: Double.order, generator: id)
+    }
     
     func testIntSemigroupLaws() {
         property("Sum semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
