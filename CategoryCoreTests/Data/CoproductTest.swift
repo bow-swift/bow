@@ -24,4 +24,8 @@ class CoproductTest: XCTestCase {
     func testFunctorLaws() {
         FunctorLaws<CoproductPartial<IdF, IdF>>.check(functor: Coproduct<IdF, IdF, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: self.generator, eq: self.eq)
     }
+    
+    func testComonadLaws() {
+        ComonadLaws<CoproductPartial<IdF, IdF>>.check(comonad: Coproduct<IdF, IdF, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: self.generator, eq: self.eq)
+    }
 }
