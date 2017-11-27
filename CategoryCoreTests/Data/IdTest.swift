@@ -15,19 +15,25 @@ class IdTest: XCTestCase {
         return { a in Id<Int>.pure(a) }
     }
     
+    let eq = Id<Int>.eq(Int.order)
+    
     func testEqLaws() {
-        EqLaws.check(eq: Id<Int>.eq(Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IdF>.check(functor: Id<Int>.functor(), generator: self.generator, eq: Id<Int>.eq(Int.order))
+        FunctorLaws<IdF>.check(functor: Id<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<IdF>.check(applicative: Id<Int>.applicative(), eq: Id.eq(Int.order))
+        ApplicativeLaws<IdF>.check(applicative: Id<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<IdF>.check(monad: Id<Int>.monad(), eq: Id.eq(Int.order))
+        MonadLaws<IdF>.check(monad: Id<Int>.monad(), eq: self.eq)
+    }
+    
+    func testComonadLaws() {
+        ComonadLaws<IdF>.check(comonad: Id<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
 }
