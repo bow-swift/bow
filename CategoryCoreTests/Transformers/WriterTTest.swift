@@ -60,4 +60,13 @@ class WriterTTest: XCTestCase {
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
             eq: WriterT<MaybeF, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
     }
+    
+    func testMonadWriterLaws() {
+        MonadWriterLaws<WriterTPartial<IdF, Int>, Int>.check(
+            monadWriter: WriterT<IdF, Int, Int>.writer(Id<Int>.monad(), Int.sumMonoid),
+            monoid: Int.sumMonoid,
+            eq: self.eq,
+            eqUnit: WriterT.eq(Id.eq(Tuple.eq(Int.order, UnitEq()))),
+            eqTuple: WriterT.eq(Id.eq(Tuple.eq(Int.order, TupleEq(Int.order, Int.order)))))
+    }
 }
