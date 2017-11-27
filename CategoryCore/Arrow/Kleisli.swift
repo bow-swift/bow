@@ -13,7 +13,7 @@ public typealias ReaderT<F, D, A> = Kleisli<F, D, A>
 public typealias KleisliPartial<F, D> = HK2<KleisliF, F, D>
 
 public class Kleisli<F, D, A> : HK3<KleisliF, F, D, A> {
-    private let run : (D) -> HK<F, A>
+    internal let run : (D) -> HK<F, A>
     
     public static func ev(_ fa : HK3<KleisliF, F, D, A>) -> Kleisli<F, D, A> {
         return fa as! Kleisli<F, D, A>

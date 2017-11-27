@@ -22,30 +22,34 @@ public class Reader<D, A> : ReaderT<IdF, D, A> {
     }
     
     public func map<B>(_ f : @escaping (A) -> B) -> Reader<D, B> {
-        return self.map(f, Id<A>.functor()) as! Reader<D, B>
+        return toReader(self.map(f, Id<A>.functor()))
     }
     
     public func ap<B>(_ ff : Reader<D, (A) -> B>) -> Reader<D, B> {
-        return self.ap(ff, Id<A>.applicative()) as! Reader<D, B>
+        return toReader(self.ap(ff, Id<A>.applicative()))
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Reader<D, B>) -> Reader<D, B> {
-        return self.flatMap(f, Id<A>.monad()) as! Reader<D, B>
+        return toReader(self.flatMap(f, Id<A>.monad()))
     }
     
     public func zip<B>(_ other : Reader<D, B>) -> Reader<D, (A, B)> {
-        return self.zip(other, Id<A>.monad()) as! Reader<D, (A, B)>
+        return toReader(self.zip(other, Id<A>.monad()))
     }
     
     public func andThen<B>(_ other : Reader<A, B>) -> Reader<D, B> {
-        return self.andThen(other, Id<A>.monad()) as! Reader<D, B>
+        return toReader(self.andThen(other, Id<A>.monad()))
     }
     
     public func andThen<B>(_ f : @escaping (A) -> Id<B>) -> Reader<D, B> {
-        return self.andThen(f, Id<A>.monad()) as! Reader<D, B>
+        return toReader(self.andThen(f, Id<A>.monad()))
     }
     
     public func andThen<B>(_ other : Id<B>) -> Reader<D, B> {
-        return self.andThen(other, Id<A>.monad()) as! Reader<D, B>
+        return toReader(self.andThen(other, Id<A>.monad()))
+    }
+    
+    private func toReader<B>(_ x : Kleisli<IdF, D, B>) -> Reader<D, B> {
+        return Reader<D, B>({ (d : D) in x.run(d).ev().value })
     }
 }
