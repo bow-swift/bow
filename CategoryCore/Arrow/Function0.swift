@@ -51,7 +51,7 @@ public class Function0<A> : HK<Function0F, A> {
     }
     
     public func ap<B>(_ ff : Function0<(A) -> B>) -> Function0<B> {
-        return Function0.applicative().ap(self, ff).ev()
+        return Function0<B>(f >>> ff.f())
     }
     
     public func extract() -> A {
@@ -70,8 +70,8 @@ public extension Function0 {
         return Function0Functor()
     }
     
-    public static func applicative() -> Function0Monad {
-        return Function0Monad()
+    public static func applicative() -> Function0Applicative {
+        return Function0Applicative()
     }
     
     public static func monad() -> Function0Monad {
@@ -99,11 +99,17 @@ public class Function0Functor : Functor {
     }
 }
 
-public class Function0Monad : Function0Functor, Monad {
-    public func pure<A>(_ a: A) -> HK<F, A> {
+public class Function0Applicative : Function0Functor, Applicative {
+    public func pure<A>(_ a: A) -> HK<Function0Applicative.F, A> {
         return Function0.pure(a)
     }
     
+    public func ap<A, B>(_ fa: HK<Function0Applicative.F, A>, _ ff: HK<Function0Applicative.F, (A) -> B>) -> HK<Function0Applicative.F, B> {
+        return Function0.ev(fa).ap(Function0.ev(ff))
+    }
+}
+
+public class Function0Monad : Function0Applicative, Monad {
     public func flatMap<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> HK<Function0F, B>) -> HK<Function0F, B> {
         return fa.ev().flatMap({ a in f(a).ev() })
     }
