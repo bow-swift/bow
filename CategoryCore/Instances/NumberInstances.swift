@@ -342,9 +342,8 @@ public class UIntOrder : UIntEq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -406,9 +405,8 @@ public class UInt8Order : UInt8Eq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -470,9 +468,8 @@ public class UInt16Order : UInt16Eq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -534,9 +531,8 @@ public class UInt32Order : UInt32Eq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -598,9 +594,8 @@ public class UInt64Order : UInt64Eq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -662,9 +657,8 @@ public class FloatOrder : FloatEq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
@@ -726,9 +720,8 @@ public class DoubleOrder : DoubleEq, Order {
             return -1
         } else if a > b {
             return 1
-        } else {
-            return 0
         }
+        return 0
     }
 }
 
