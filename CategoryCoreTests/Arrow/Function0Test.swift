@@ -32,4 +32,8 @@ class Function0Test: XCTestCase {
     func testMonadLaws() {
         MonadLaws<Function0F>.check(monad: Function0<Int>.monad(), eq: self.eq)
     }
+    
+    func testComonadLaws() {
+        ComonadLaws<Function0F>.check(comonad: Function0<Int>.comonad(), generator: self.generator, eq: self.eq)
+    }
 }
