@@ -34,6 +34,10 @@ class NonEmptyListTest: XCTestCase {
         MonadLaws<NonEmptyListF>.check(monad: NonEmptyList<Int>.monad(), eq: self.eq)
     }
     
+    func testComonadLaws() {
+        ComonadLaws<NonEmptyListF>.check(comonad: NonEmptyList<Int>.comonad(), generator: self.generator, eq: self.eq)
+    }
+    
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<HK<NonEmptyListF, Int>>.check(
