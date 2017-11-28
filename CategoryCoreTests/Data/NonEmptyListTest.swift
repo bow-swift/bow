@@ -17,13 +17,14 @@ class NonEmptyListTest: XCTestCase {
     }
     
     let eq = NonEmptyList.eq(Int.order)
+    let eqUnit = NonEmptyList.eq(UnitEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq)
+        FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

@@ -16,13 +16,14 @@ class ValidatedTest: XCTestCase {
     }
     
     let eq = Validated.eq(Int.order, Int.order)
+    let eqUnit = Validated.eq(Int.order, UnitEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ValidatedPartial<Int>>.check(functor: Validated<Int, Int>.functor(), generator: self.generator, eq: self.eq)
+        FunctorLaws<ValidatedPartial<Int>>.check(functor: Validated<Int, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

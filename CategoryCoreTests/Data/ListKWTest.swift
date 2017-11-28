@@ -17,13 +17,14 @@ class ListKWTest: XCTestCase {
     }
     
     let eq = ListKW.eq(Int.order)
+    let eqUnit = ListKW.eq(UnitEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ListKWF>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: self.eq)
+        FunctorLaws<ListKWF>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

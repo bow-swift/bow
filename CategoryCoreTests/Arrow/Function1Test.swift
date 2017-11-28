@@ -19,8 +19,16 @@ class Function1Test: XCTestCase {
         }
     }
     
+    class Function1UnitPointEq : Eq {
+        typealias A = HK2<Function1F, Int, ()>
+        
+        func eqv(_ a: HK<HK<Function1F, Int>, ()>, _ b: HK<HK<Function1F, Int>, ()>) -> Bool {
+            return Function1.ev(a).invoke(1) == Function1.ev(b).invoke(1)
+        }
+    }
+    
     func testFunctorLaws() {
-        FunctorLaws<Function1Partial<Int>>.check(functor: Function1<Int, Int>.functor(), generator: { a in Function1<Int, Int>.pure(a) }, eq: Function1PointEq())
+        FunctorLaws<Function1Partial<Int>>.check(functor: Function1<Int, Int>.functor(), generator: { a in Function1<Int, Int>.pure(a) }, eq: Function1PointEq(), eqUnit: Function1UnitPointEq())
     }
     
     func testApplicativeLaws() {

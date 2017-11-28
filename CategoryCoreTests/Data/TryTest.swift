@@ -15,27 +15,30 @@ class TryTest: XCTestCase {
         return { a in Try.pure(a) }
     }
     
+    let eq = Try.eq(Int.order)
+    let eqUnit = Try.eq(UnitEq())
+    
     func testEqLaws() {
         EqLaws.check(eq: Try.eq(Int.order), generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<TryF>.check(functor: Try<Int>.functor(), generator: self.generator, eq: Try<Int>.eq(Int.order))
+        FunctorLaws<TryF>.check(functor: Try<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<TryF>.check(applicative: Try<Int>.applicative(), eq: Try.eq(Int.order))
+        ApplicativeLaws<TryF>.check(applicative: Try<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<TryF>.check(monad: Try<Int>.monad(), eq: Try.eq(Int.order))
+        MonadLaws<TryF>.check(monad: Try<Int>.monad(), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<TryF, CategoryError>.check(applicativeError: Try<Int>.monadError(), eq: Try.eq(Int.order), eqEither: Try.eq(Either.eq(CategoryError.eq, Int.order)), gen: { CategoryError.arbitrary.generate })
+        ApplicativeErrorLaws<TryF, CategoryError>.check(applicativeError: Try<Int>.monadError(), eq: self.eq, eqEither: Try.eq(Either.eq(CategoryError.eq, Int.order)), gen: { CategoryError.arbitrary.generate })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<TryF, CategoryError>.check(monadError: Try<Int>.monadError(), eq: Try.eq(Int.order), gen: { CategoryError.arbitrary.generate })
+        MonadErrorLaws<TryF, CategoryError>.check(monadError: Try<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
 }

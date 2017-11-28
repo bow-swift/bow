@@ -14,19 +14,22 @@ class IorTest: XCTestCase {
         return { a in Ior<Int, Int>.right(a) }
     }
     
+    let eq = Ior.eq(Int.order, Int.order)
+    let eqUnit = Ior.eq(Int.order, UnitEq())
+    
     func testEqLaws() {
-        EqLaws.check(eq: Ior.eq(Int.order, Int.order), generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IorPartial<Int>>.check(functor: Ior<Int, Int>.functor(), generator: self.generator, eq: Ior<Int, Int>.eq(Int.order, Int.order))
+        FunctorLaws<IorPartial<Int>>.check(functor: Ior<Int, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<IorPartial<Int>>.check(applicative: Ior<Int, Int>.applicative(Int.sumMonoid), eq: Ior.eq(Int.order, Int.order))
+        ApplicativeLaws<IorPartial<Int>>.check(applicative: Ior<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<IorPartial<Int>>.check(monad: Ior<Int, Int>.monad(Int.sumMonoid), eq: Ior.eq(Int.order, Int.order))
+        MonadLaws<IorPartial<Int>>.check(monad: Ior<Int, Int>.monad(Int.sumMonoid), eq: self.eq)
     }
 }

@@ -16,13 +16,14 @@ class CoproductTest: XCTestCase {
     }
     
     var eq = Coproduct.eq(Either.eq(Id.eq(Int.order), Id.eq(Int.order)))
+    var eqUnit = Coproduct.eq(Either.eq(Id.eq(UnitEq()), Id.eq(UnitEq())))
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<CoproductPartial<IdF, IdF>>.check(functor: Coproduct<IdF, IdF, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: self.generator, eq: self.eq)
+        FunctorLaws<CoproductPartial<IdF, IdF>>.check(functor: Coproduct<IdF, IdF, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testComonadLaws() {

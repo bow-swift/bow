@@ -14,7 +14,8 @@ class EitherTTest: XCTestCase {
         return { a in EitherT.pure(a, Id<Int>.applicative()) }
     }
     
-    var eq = EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor())
+    let eq = EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor())
+    let eqUnit = EitherT.eq(Id.eq(Either.eq(Int.order, UnitEq())), Id<Any>.functor())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
@@ -24,7 +25,8 @@ class EitherTTest: XCTestCase {
         FunctorLaws<EitherTPartial<IdF, Int>>.check(
             functor: EitherT<IdF, Int, Int>.functor(Id<Any>.functor()),
             generator: self.generator,
-            eq: self.eq)
+            eq: self.eq,
+            eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

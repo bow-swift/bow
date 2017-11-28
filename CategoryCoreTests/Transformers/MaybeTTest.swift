@@ -15,14 +15,15 @@ class MaybeTTest: XCTestCase {
         return { a in MaybeT<IdF, Int>.pure(a, Id<Any>.applicative()) }
     }
     
-    var eq = MaybeT.eq(Id.eq(Maybe.eq(Int.order)), Id<Any>.functor())
+    let eq = MaybeT.eq(Id.eq(Maybe.eq(Int.order)), Id<Any>.functor())
+    let eqUnit = MaybeT.eq(Id.eq(Maybe.eq(UnitEq())), Id<Any>.functor())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<MaybeTPartial<IdF>>.check(functor: MaybeT<IdF, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq)
+        FunctorLaws<MaybeTPartial<IdF>>.check(functor: MaybeT<IdF, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

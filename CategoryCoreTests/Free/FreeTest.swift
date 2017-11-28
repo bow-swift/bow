@@ -108,14 +108,15 @@ class FreeTest: XCTestCase {
         return { a in Ops<Any>.value(a) }
     }
     
-    fileprivate let eq = Free<OpsF, Int>.eq(IdInterpreter(), Id<Int>.monad(), Id<Int>.eq(Int.order))
+    fileprivate let eq = Free<OpsF, Int>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(Int.order))
+    fileprivate let eqUnit = Free<OpsF, ()>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(UnitEq()))
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq)
+        FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

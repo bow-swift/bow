@@ -25,13 +25,14 @@ class MaybeTest: XCTestCase {
     }
     
     let eq = Maybe.eq(Int.order)
+    let eqUnit = Maybe.eq(UnitEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
+        FunctorLaws<MaybeF>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {

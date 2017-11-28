@@ -32,6 +32,17 @@ class KleisliTest: XCTestCase {
         }
     }
     
+    class KleisliIntUnitEq : Eq {
+        typealias A = HK3<KleisliF, IdF, Int, ()>
+        
+        func eqv(_ a: HK<HK<HK<KleisliF, IdF>, Int>, ()>, _ b: HK<HK<HK<KleisliF, IdF>, Int>, ()>) -> Bool {
+            let a = Kleisli.ev(a)
+            let b = Kleisli.ev(b)
+            return Id.eq(UnitEq()).eqv(a.invoke(1),
+                                       b.invoke(1))
+        }
+    }
+    
     class KleisliEitherEq : Eq {
         typealias A = HK3<KleisliF, MaybeF, (), HK2<EitherF, (), Int>>
         
@@ -49,7 +60,7 @@ class KleisliTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<KleisliPartial<IdF, Int>>.check(functor: Kleisli<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: KleisliPointEq())
+        FunctorLaws<KleisliPartial<IdF, Int>>.check(functor: Kleisli<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: KleisliPointEq(), eqUnit: KleisliIntUnitEq())
     }
     
     func testApplicativeLaws() {
