@@ -326,6 +326,10 @@ public extension IO {
     public static func asyncContext() -> IOAsyncContext {
         return IOAsyncContext()
     }
+    
+    public static func monadError() -> IOMonadError {
+        return IOMonadError()
+    }
 }
 
 public class IOFunctor : Functor {
@@ -361,5 +365,17 @@ public class IOAsyncContext : AsyncContext {
     
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> HK<IOF, A> {
         return IO.runAsync(fa)
+    }
+}
+
+public class IOMonadError : IOMonad, MonadError {
+    public typealias E = Error
+    
+    public func raiseError<A>(_ e: Error) -> HK<IOF, A> {
+        return IO.raiseError(e)
+    }
+    
+    public func handleErrorWith<A>(_ fa: HK<IOF, A>, _ f: @escaping (Error) -> HK<IOF, A>) -> HK<IOF, A> {
+        return fa.ev().handleErrorWith(f)
     }
 }
