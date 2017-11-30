@@ -115,7 +115,7 @@ public class Either<A, B> : HK2<EitherF, A, B> {
 }
 
 class Left<A, B> : Either<A, B> {
-    fileprivate let a : A
+    let a : A
     
     init(_ a : A) {
         self.a = a
@@ -123,7 +123,7 @@ class Left<A, B> : Either<A, B> {
 }
 
 class Right<A, B> : Either<A, B> {
-    fileprivate let b : B
+    let b : B
     
     init(_ b : B) {
         self.b = b
