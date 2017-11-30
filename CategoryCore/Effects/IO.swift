@@ -304,4 +304,50 @@ fileprivate class BindAsync<E, A> : IO<A> {
     }
 }
 
+public extension HK where F == IOF {
+    public func ev() -> IO<A> {
+        return self as! IO<A>
+    }
+}
 
+public extension IO {
+    public static func functor() -> IOFunctor {
+        return IOFunctor()
+    }
+    
+    public static func applicative() -> IOApplicative {
+        return IOApplicative()
+    }
+    
+    public static func monad() -> IOMonad {
+        return IOMonad()
+    }
+}
+
+public class IOFunctor : Functor {
+    public typealias F = IOF
+    
+    public func map<A, B>(_ fa: HK<IOF, A>, _ f: @escaping (A) -> B) -> HK<IOF, B> {
+        return IO.ev(fa).map(f)
+    }
+}
+
+public class IOApplicative : IOFunctor, Applicative {
+    public func pure<A>(_ a: A) -> HK<IOF, A> {
+        return IO.pure(a)
+    }
+    
+    public func ap<A, B>(_ fa: HK<IOF, A>, _ ff: HK<IOF, (A) -> B>) -> HK<IOF, B> {
+        return fa.ev().ap(ff.ev())
+    }
+}
+
+public class IOMonad : IOApplicative, Monad {
+    public func flatMap<A, B>(_ fa: HK<IOF, A>, _ f: @escaping (A) -> HK<IOF, B>) -> HK<IOF, B> {
+        return fa.ev().flatMap({ a in f(a).ev() })
+    }
+    
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<IOF, Either<A, B>>) -> HK<IOF, B> {
+        return IO.tailRecM(a, f)
+    }
+}
