@@ -14,10 +14,10 @@ public typealias Callback<A> = (Either<Error, A>) -> Unit
 public protocol AsyncContext : Typeclass {
     associatedtype F
     
-    func runAsync<A>(_ fa : Proc<A>) -> HK<F, A>
+    func runAsync<A>(_ fa : @escaping Proc<A>) -> HK<F, A>
 }
 
-public func runAsync<F, A, AsyncC>(_ asyncContext : AsyncC, _ f : () throws -> A) -> HK<F, A> where AsyncC : AsyncContext, AsyncC.F == F {
+public func runAsync<F, A, AsyncC>(_ asyncContext : AsyncC, _ f : @escaping () throws -> A) -> HK<F, A> where AsyncC : AsyncContext, AsyncC.F == F {
     return asyncContext.runAsync { callback in
         do {
             callback(Either<Error, A>.right(try f()))
@@ -27,6 +27,6 @@ public func runAsync<F, A, AsyncC>(_ asyncContext : AsyncC, _ f : () throws -> A
     }
 }
 
-public func runAsyncUnsafe<F, A, AsyncC>(_ asyncContext : AsyncC, _ f : () -> Either<Error, A>) -> HK<F, A> where AsyncC : AsyncContext, AsyncC.F == F {
+public func runAsyncUnsafe<F, A, AsyncC>(_ asyncContext : AsyncC, _ f : @escaping () -> Either<Error, A>) -> HK<F, A> where AsyncC : AsyncContext, AsyncC.F == F {
     return asyncContext.runAsync { callback in callback(f()) }
 }

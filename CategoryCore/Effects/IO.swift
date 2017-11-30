@@ -322,6 +322,10 @@ public extension IO {
     public static func monad() -> IOMonad {
         return IOMonad()
     }
+    
+    public static func asyncContext() -> IOAsyncContext {
+        return IOAsyncContext()
+    }
 }
 
 public class IOFunctor : Functor {
@@ -349,5 +353,13 @@ public class IOMonad : IOApplicative, Monad {
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<IOF, Either<A, B>>) -> HK<IOF, B> {
         return IO.tailRecM(a, f)
+    }
+}
+
+public class IOAsyncContext : AsyncContext {
+    public typealias F = IOF
+    
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> HK<IOF, A> {
+        return IO.runAsync(fa)
     }
 }
