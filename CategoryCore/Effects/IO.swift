@@ -128,6 +128,18 @@ public class IO<A> : HK<IOF, A> {
     public func handleErrorWith(_ f : @escaping (Error) -> HK<IOF, A>) -> IO<A> {
         return attempt().flatMap{ either in IO.ev(either.fold(f, IO<A>.pure)) }
     }
+    
+    public func unsafeRunSync() -> A {
+        return unsafeRunTimed().fold({ fatalError("IO execution should yield a valid result") }, id)
+    }
+    
+    public func unsafeRunTimed() -> Maybe<A> {
+        return unsafeStep().unsafeRunTimedTotal()
+    }
+    
+    internal func unsafeRunTimedTotal() -> Maybe<A> {
+        fatalError("unsafeRunTimedTotal must be implemented by subclasses")
+    }
 }
 
 fileprivate class Pure<A> : IO<A> {
@@ -156,6 +168,10 @@ fileprivate class Pure<A> : IO<A> {
     override func unsafeRunAsyncTotal(_ callback: @escaping (Either<Error, A>) -> Unit) throws {
         callback(Either.right(a))
     }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
+        return Maybe.some(a)
+    }
 }
 
 fileprivate class RaiseError<A> : IO<A> {
@@ -179,6 +195,10 @@ fileprivate class RaiseError<A> : IO<A> {
     
     override func unsafeRunAsyncTotal(_ callback: @escaping (Either<Error, A>) -> Unit) throws {
         callback(Either.left(error))
+    }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
+        return Maybe.none()
     }
 }
 
@@ -206,6 +226,10 @@ fileprivate class Suspend<A> : IO<A> {
     }
     
     override func unsafeRunAsyncTotal(_ callback: @escaping (Either<Error, A>) -> Unit) throws {
+        fatalError("Unreachable code")
+    }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
         fatalError("Unreachable code")
     }
 }
@@ -239,6 +263,10 @@ fileprivate class BindSuspend<E, A> : IO<A> {
     override func unsafeRunAsyncTotal(_ callback: @escaping (Either<Error, A>) -> Unit) throws {
         fatalError("Unreachable code")
     }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
+        fatalError("Unreachable code")
+    }
 }
 
 fileprivate class Async<A> : IO<A> {
@@ -262,6 +290,10 @@ fileprivate class Async<A> : IO<A> {
     
     override func unsafeRunAsyncTotal(_ callback: @escaping (Either<Error, A>) -> Unit) throws {
         try cont(callback)
+    }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
+        return Effects.unsafeResync(self)
     }
 }
 
@@ -302,6 +334,10 @@ fileprivate class BindAsync<E, A> : IO<A> {
             }
         })
     }
+    
+    override func unsafeRunTimedTotal() -> Maybe<A> {
+        return Effects.unsafeResync(self)
+    }
 }
 
 public extension HK where F == IOF {
@@ -337,6 +373,10 @@ public extension IO {
     
     public static func monoid<Mono>(_ monoid : Mono) -> IOMonoid<A, Mono> {
         return IOMonoid<A, Mono>(monoid)
+    }
+    
+    public static func eq<EqA>(_ eq : EqA) -> IOEq<A, EqA> {
+        return IOEq<A, EqA>(eq)
     }
 }
 
@@ -412,5 +452,19 @@ public class IOMonoid<B, Mono> : IOSemigroup<B, Mono>, Monoid where Mono : Monoi
     
     public var empty: HK<IOF, B> {
         return IO.pure(monoid.empty)
+    }
+}
+
+public class IOEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
+    public typealias A = HK<IOF, B>
+    
+    private let eq : EqB
+    
+    public init(_ eq : EqB) {
+        self.eq = eq
+    }
+    
+    public func eqv(_ a: HK<IOF, B>, _ b: HK<IOF, B>) -> Bool {
+        return eq.eqv(a.ev().unsafeRunSync(), b.ev().unsafeRunSync())
     }
 }
