@@ -15,8 +15,11 @@ class IOTest: XCTestCase {
     let eq = IO.eq(Int.order)
     let eqUnit = IO.eq(UnitEq())
     
+    func testEqLaws() {
+        EqLaws.check(eq: self.eq, generator: self.generator)
+    }
+    
     func testFunctorLaws() {
         FunctorLaws<IOF>.check(functor: IO<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
-    
 }
