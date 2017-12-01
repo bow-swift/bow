@@ -330,6 +330,14 @@ public extension IO {
     public static func monadError() -> IOMonadError {
         return IOMonadError()
     }
+    
+    public static func semigroup<SemiG>(_ semigroup : SemiG) -> IOSemigroup<A, SemiG> {
+        return IOSemigroup<A, SemiG>(semigroup)
+    }
+    
+    public static func monoid<Mono>(_ monoid : Mono) -> IOMonoid<A, Mono> {
+        return IOMonoid<A, Mono>(monoid)
+    }
 }
 
 public class IOFunctor : Functor {
@@ -377,5 +385,32 @@ public class IOMonadError : IOMonad, MonadError {
     
     public func handleErrorWith<A>(_ fa: HK<IOF, A>, _ f: @escaping (Error) -> HK<IOF, A>) -> HK<IOF, A> {
         return fa.ev().handleErrorWith(f)
+    }
+}
+
+public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
+    public typealias A = HK<IOF, B>
+    
+    private let semigroup : SemiG
+    
+    public init(_ semigroup : SemiG) {
+        self.semigroup = semigroup
+    }
+    
+    public func combine(_ a: HK<IOF, B>, _ b: HK<IOF, B>) -> HK<IOF, B> {
+        return a.ev().flatMap { aa in b.ev().map { bb in self.semigroup.combine(aa, bb) } }
+    }
+}
+
+public class IOMonoid<B, Mono> : IOSemigroup<B, Mono>, Monoid where Mono : Monoid, Mono.A == B {
+    private let monoid : Mono
+    
+    override public init(_ monoid : Mono) {
+        self.monoid = monoid
+        super.init(monoid)
+    }
+    
+    public var empty: HK<IOF, B> {
+        return IO.pure(monoid.empty)
     }
 }
