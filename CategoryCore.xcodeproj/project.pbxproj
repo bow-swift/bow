@@ -62,6 +62,7 @@
 		11A9B1AF1FC6C952003112C1 /* SemigroupKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9B1AE1FC6C952003112C1 /* SemigroupKLaws.swift */; };
 		11AA55701FCC266D00748112 /* MonadWriterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA556F1FCC266D00748112 /* MonadWriterLaws.swift */; };
 		11AA55721FCC2E9D00748112 /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AA55711FCC2E9D00748112 /* KleisliOperatorTest.swift */; };
+		11BA36831FD151CF00ECF12A /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA36821FD151CF00ECF12A /* IOTest.swift */; };
 		11BCA06C1FCEB06900B67CE6 /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */; };
 		11BCA06E1FCEB24200B67CE6 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06D1FCEB24200B67CE6 /* IO.swift */; };
 		11BCA0701FCEB3AD00B67CE6 /* AndThen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06F1FCEB3AD00B67CE6 /* AndThen.swift */; };
@@ -196,6 +197,7 @@
 		11A9B1AE1FC6C952003112C1 /* SemigroupKLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupKLaws.swift; sourceTree = "<group>"; };
 		11AA556F1FCC266D00748112 /* MonadWriterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadWriterLaws.swift; sourceTree = "<group>"; };
 		11AA55711FCC2E9D00748112 /* KleisliOperatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KleisliOperatorTest.swift; sourceTree = "<group>"; };
+		11BA36821FD151CF00ECF12A /* IOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTest.swift; sourceTree = "<group>"; };
 		11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContext.swift; sourceTree = "<group>"; };
 		11BCA06D1FCEB24200B67CE6 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
 		11BCA06F1FCEB3AD00B67CE6 /* AndThen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndThen.swift; sourceTree = "<group>"; };
@@ -372,6 +374,14 @@
 			path = Arrow;
 			sourceTree = "<group>";
 		};
+		11BA36811FD151AD00ECF12A /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				11BA36821FD151CF00ECF12A /* IOTest.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
 		11BCA06A1FCEB03800B67CE6 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +460,7 @@
 				115AF8CE1FC2CEF9003F2565 /* PredefTest.swift */,
 				119267581FC44EB700E0E677 /* Arrow */,
 				115AF8DF1FC2EA4D003F2565 /* Data */,
+				11BA36811FD151AD00ECF12A /* Effects */,
 				1187ECD41FC474D30049FA00 /* Free */,
 				115AF8F61FC31C12003F2565 /* Instances */,
 				1192674B1FC428F600E0E677 /* Transformers */,
@@ -874,6 +885,7 @@
 				1192674D1FC4291300E0E677 /* EitherTTest.swift in Sources */,
 				11E798F21FC815A700F2D72F /* MonadStateLaws.swift in Sources */,
 				115AF8E71FC2F92D003F2565 /* IorTest.swift in Sources */,
+				11BA36831FD151CF00ECF12A /* IOTest.swift in Sources */,
 				117EC5DE1FC5933E0073318B /* ApplicativeErrorLaws.swift in Sources */,
 				115AF8D41FC2DAFC003F2565 /* BooleanFunctionsTest.swift in Sources */,
 				11E798FA1FC84F5E00F2D72F /* OrderLaws.swift in Sources */,
