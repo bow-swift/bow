@@ -21,4 +21,17 @@ class Effects {
             }
         }
     }
+    
+    static func unsafeResync<A>(_ io : IO<A>) -> Maybe<A> {
+        var ref = Maybe<Either<Error, A>>.none()
+        io.unsafeRunAsync { result in
+            ref = Maybe.some(result)
+        }
+        
+        while(ref.isEmpty) {}
+        
+        return ref.fold(constF(Maybe.none()),
+                        { either in either.fold(constF(Maybe.none()),
+                                                Maybe.some) })
+    }
 }
