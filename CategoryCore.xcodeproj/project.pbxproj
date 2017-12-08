@@ -65,6 +65,7 @@
 		11BA36831FD151CF00ECF12A /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA36821FD151CF00ECF12A /* IOTest.swift */; };
 		11BCA06C1FCEB06900B67CE6 /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */; };
 		11BCA06E1FCEB24200B67CE6 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06D1FCEB24200B67CE6 /* IO.swift */; };
+		11C480201FDAAC6D00CD3225 /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C4801F1FDAAC6D00CD3225 /* AsyncContextLaws.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
 		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11C5268A1F8271B500DC15CF /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526891F8271B500DC15CF /* Function1.swift */; };
@@ -197,6 +198,7 @@
 		11BA36821FD151CF00ECF12A /* IOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTest.swift; sourceTree = "<group>"; };
 		11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContext.swift; sourceTree = "<group>"; };
 		11BCA06D1FCEB24200B67CE6 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
+		11C4801F1FDAAC6D00CD3225 /* AsyncContextLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContextLaws.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11C526891F8271B500DC15CF /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 		11BA36811FD151AD00ECF12A /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				11C4801F1FDAAC6D00CD3225 /* AsyncContextLaws.swift */,
 				11BA36821FD151CF00ECF12A /* IOTest.swift */,
 			);
 			path = Effects;
@@ -876,6 +879,7 @@
 				11BA36831FD151CF00ECF12A /* IOTest.swift in Sources */,
 				117EC5DE1FC5933E0073318B /* ApplicativeErrorLaws.swift in Sources */,
 				115AF8D41FC2DAFC003F2565 /* BooleanFunctionsTest.swift in Sources */,
+				11C480201FDAAC6D00CD3225 /* AsyncContextLaws.swift in Sources */,
 				11E798FA1FC84F5E00F2D72F /* OrderLaws.swift in Sources */,
 				11E798F81FC83E9700F2D72F /* MonadFilterLaws.swift in Sources */,
 				115AF8EF1FC303F8003F2565 /* TryTest.swift in Sources */,
