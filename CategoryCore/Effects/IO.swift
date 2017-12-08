@@ -273,7 +273,7 @@ fileprivate class Async<A> : IO<A> {
             result = Pure<Either<Error, A>>(Either<Error, A>.left(error))
         }
         
-        while(result != nil) {}
+        while(result == nil) {}
         
         return result!
     }

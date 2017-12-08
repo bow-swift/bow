@@ -64,4 +64,8 @@ class IOTest: XCTestCase {
             MonoidLaws<HK<IOF, Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
         }
     }
+    
+    func testAsyncContextLaws() {
+        AsyncContextLaws<IOF>.check(asyncContext: IO<Int>.asyncContext(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
+    }
 }
