@@ -12,9 +12,21 @@ import SwiftCheck
 
 class IOTest: XCTestCase {
     
+    class ErrorEq : Eq {
+        typealias A = Error
+        
+        func eqv(_ a: Error, _ b: Error) -> Bool {
+            if let a = a as? CategoryError, let b = b as? CategoryError {
+                return CategoryError.eq.eqv(a, b)
+            } else {
+                return false
+            }
+        }
+    }
+    
     let generator = { (a : Int) in IO.pure(a) }
-    let eq = IO.eq(Int.order)
-    let eqUnit = IO.eq(UnitEq())
+    let eq = IO.eq(Int.order, ErrorEq())
+    let eqUnit = IO.eq(UnitEq(), ErrorEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
@@ -30,6 +42,10 @@ class IOTest: XCTestCase {
     
     func testMonadLaws() {
         MonadLaws<IOF>.check(monad: IO<Int>.monad(), eq: self.eq)
+    }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<IOF, Error>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
     
     func testSemigroupLaws() {
