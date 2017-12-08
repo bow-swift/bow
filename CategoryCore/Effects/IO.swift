@@ -39,6 +39,10 @@ public class IO<A> : HK<IOF, A> {
         }
     }
     
+    public static func runAsync(_ proc : @escaping Proc<A>) -> IO<A> {
+        return Async(proc)
+    }
+    
     public func unsafePerformIO() throws -> A {
         fatalError("Implement in subclasses")
     }
@@ -146,6 +150,42 @@ fileprivate class Join<A> : IO<A> {
     }
 }
 
+fileprivate class Async<A> : IO<A> {
+    let f : Proc<A>
+    
+    init(_ f : @escaping Proc<A>) {
+        self.f = f
+    }
+    
+    override func attempt() -> IO<Either<Error, A>> {
+        var result : IO<Either<Error, A>>?
+        
+        do {
+            let callback : Callback<A> = { either in
+                result = Pure<Either<Error, A>>(either)
+            }
+            try f(callback)
+        } catch {
+            result = Pure<Either<Error, A>>(Either<Error, A>.left(error))
+        }
+        
+        while(result != nil) {}
+        
+        return result!
+    }
+    
+    override func unsafePerformIO() throws -> A {
+        let result = attempt()
+        let either = try result.unsafePerformIO()
+        
+        if either.isLeft {
+            throw (either as! Left).a
+        } else {
+            return (either as! Right).b
+        }
+    }
+}
+
 public extension HK where F == IOF {
     public func ev() -> IO<A> {
         return self as! IO<A>
@@ -165,9 +205,9 @@ public extension IO {
         return IOMonad()
     }
     
-    /*public static func asyncContext() -> IOAsyncContext {
+    public static func asyncContext() -> IOAsyncContext {
         return IOAsyncContext()
-    }*/
+    }
     
     public static func monadError() -> IOMonadError {
         return IOMonadError()
@@ -214,13 +254,13 @@ public class IOMonad : IOApplicative, Monad {
     }
 }
 
-/*public class IOAsyncContext : AsyncContext {
+public class IOAsyncContext : AsyncContext {
     public typealias F = IOF
     
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> HK<IOF, A> {
         return IO.runAsync(fa)
     }
-}*/
+}
 
 public class IOMonadError : IOMonad, MonadError {
     public typealias E = Error
