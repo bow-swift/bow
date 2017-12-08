@@ -65,9 +65,6 @@
 		11BA36831FD151CF00ECF12A /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA36821FD151CF00ECF12A /* IOTest.swift */; };
 		11BCA06C1FCEB06900B67CE6 /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */; };
 		11BCA06E1FCEB24200B67CE6 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06D1FCEB24200B67CE6 /* IO.swift */; };
-		11BCA0701FCEB3AD00B67CE6 /* AndThen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA06F1FCEB3AD00B67CE6 /* AndThen.swift */; };
-		11BCA0721FCECB3E00B67CE6 /* Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA0711FCECB3E00B67CE6 /* Effects.swift */; };
-		11BCA0761FCECD7400B67CE6 /* Synchronization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BCA0751FCECD7400B67CE6 /* Synchronization.swift */; };
 		11C526861F825DF400DC15CF /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526851F825DF400DC15CF /* Function0.swift */; };
 		11C526881F82707E00DC15CF /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526871F82707E00DC15CF /* FunctionK.swift */; };
 		11C5268A1F8271B500DC15CF /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C526891F8271B500DC15CF /* Function1.swift */; };
@@ -200,9 +197,6 @@
 		11BA36821FD151CF00ECF12A /* IOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTest.swift; sourceTree = "<group>"; };
 		11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContext.swift; sourceTree = "<group>"; };
 		11BCA06D1FCEB24200B67CE6 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
-		11BCA06F1FCEB3AD00B67CE6 /* AndThen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AndThen.swift; sourceTree = "<group>"; };
-		11BCA0711FCECB3E00B67CE6 /* Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effects.swift; sourceTree = "<group>"; };
-		11BCA0751FCECD7400B67CE6 /* Synchronization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronization.swift; sourceTree = "<group>"; };
 		11C526851F825DF400DC15CF /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		11C526871F82707E00DC15CF /* FunctionK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionK.swift; sourceTree = "<group>"; };
 		11C526891F8271B500DC15CF /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
@@ -385,11 +379,8 @@
 		11BCA06A1FCEB03800B67CE6 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				11BCA06F1FCEB3AD00B67CE6 /* AndThen.swift */,
 				11BCA06B1FCEB06900B67CE6 /* AsyncContext.swift */,
-				11BCA0711FCECB3E00B67CE6 /* Effects.swift */,
 				11BCA06D1FCEB24200B67CE6 /* IO.swift */,
-				11BCA0751FCECD7400B67CE6 /* Synchronization.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -802,7 +793,6 @@
 				11CEEA441F7D45FE003EB472 /* HigherKinds.swift in Sources */,
 				11E17DDF1F839A6000CA5A3F /* Maybe.swift in Sources */,
 				11DFBEC01F7E4DBC00A4C96D /* MonadReader.swift in Sources */,
-				11BCA0761FCECD7400B67CE6 /* Synchronization.swift in Sources */,
 				11E797061FBB09B000E1DC41 /* StringInstances.swift in Sources */,
 				11DFBEC41F7E561200A4C96D /* MonadWriter.swift in Sources */,
 				11DA37E31F8BAF83002030FF /* Reducible.swift in Sources */,
@@ -811,7 +801,6 @@
 				11FF01D01FBC7F4C00D7EB84 /* Composed.swift in Sources */,
 				11D5CED51F8E10DC00ED007E /* NonEmptyList.swift in Sources */,
 				11D5CEDA1F8E46DA00ED007E /* Yoneda.swift in Sources */,
-				11BCA0721FCECB3E00B67CE6 /* Effects.swift in Sources */,
 				117BBA991F876C9200196DB7 /* State.swift in Sources */,
 				11C5268C1F82812F00DC15CF /* Kleisli.swift in Sources */,
 				11DA37EF1F8BD34E002030FF /* Inject.swift in Sources */,
@@ -862,7 +851,6 @@
 				11E17DE31F83A9D200CA5A3F /* BooleanFunctions.swift in Sources */,
 				11CEEA421F7D37FC003EB472 /* PartialApplication.swift in Sources */,
 				11CEEA461F7D46BB003EB472 /* Typeclass.swift in Sources */,
-				11BCA0701FCEB3AD00B67CE6 /* AndThen.swift in Sources */,
 				11DFBEB21F7E3FA100A4C96D /* Monoid.swift in Sources */,
 				115858D81F84D6C400875227 /* Const.swift in Sources */,
 				11D5CEE21F8F6F3600ED007E /* Free.swift in Sources */,
