@@ -20,7 +20,11 @@ public class IO<A> : HK<IOF, A> {
         return Pure(a)
     }
     
-    public static func suspend(_ f : @escaping () -> IO<A>) -> IO<A> {
+    public static func invoke(_ f : @escaping () throws -> A) -> IO<A> {
+        return suspend({ try Pure(f()) })
+    }
+    
+    public static func suspend(_ f : @escaping () throws -> IO<A>) -> IO<A> {
         return Pure<Unit>(()).flatMap(f)
     }
     
@@ -51,7 +55,7 @@ public class IO<A> : HK<IOF, A> {
         }
     }
     
-    public func map<B>(_ f : @escaping (A) -> B) -> IO<B> {
+    public func map<B>(_ f : @escaping (A) throws -> B) -> IO<B> {
         return FMap(f, self)
     }
     
@@ -59,7 +63,7 @@ public class IO<A> : HK<IOF, A> {
         return ff.flatMap(self.map)
     }
     
-    public func flatMap<B>(_ f : @escaping (A) -> IO<B>) -> IO<B> {
+    public func flatMap<B>(_ f : @escaping (A) throws -> IO<B>) -> IO<B> {
         return Join(self.map(f))
     }
     
@@ -101,10 +105,10 @@ fileprivate class RaiseError<A> : IO<A> {
 }
 
 fileprivate class FMap<A, B> : IO<B> {
-    let f : (A) -> B
+    let f : (A) throws -> B
     let action : IO<A>
     
-    init(_ f : @escaping (A) -> B, _ action : IO<A>) {
+    init(_ f : @escaping (A) throws -> B, _ action : IO<A>) {
         self.f = f
         self.action = action
     }
@@ -118,7 +122,7 @@ fileprivate class FMap<A, B> : IO<B> {
     }
     
     override func unsafePerformIO() throws -> B {
-        return f(try action.unsafePerformIO())
+        return try f(try action.unsafePerformIO())
     }
 }
 
