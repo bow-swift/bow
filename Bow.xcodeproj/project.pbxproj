@@ -6,24 +6,317 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		"Bow::BowPackageTests::ProductTarget" /* BowPackageTests */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = OBJ_453 /* Build configuration list for PBXAggregateTarget "BowPackageTests" */;
-			buildPhases = (
-			);
-			dependencies = (
-				OBJ_456 /* PBXTargetDependency */,
-			);
-			name = BowPackageTests;
-			productName = BowPackageTests;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		OBJ_228 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_234 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_198 /* Package.swift */; };
-		OBJ_240 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_217 /* Package.swift */; };
+		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
+		D6D624452068141800739E2D /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Function1Test.swift */; };
+		D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* KleisliOperatorTest.swift */; };
+		D6D624472068141800739E2D /* KleisliTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* KleisliTest.swift */; };
+		D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* BooleanFunctionsTest.swift */; };
+		D6D624492068141800739E2D /* CurryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* CurryTest.swift */; };
+		D6D6244A2068141800739E2D /* ConstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* ConstTest.swift */; };
+		D6D6244B2068141800739E2D /* CoproductTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* CoproductTest.swift */; };
+		D6D6244C2068141800739E2D /* EitherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* EitherTest.swift */; };
+		D6D6244D2068141800739E2D /* EvalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* EvalTest.swift */; };
+		D6D6244E2068141800739E2D /* IdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IdTest.swift */; };
+		D6D6244F2068141800739E2D /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* IorTest.swift */; };
+		D6D624502068141800739E2D /* ListKWTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ListKWTest.swift */; };
+		D6D624512068141800739E2D /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MaybeTest.swift */; };
+		D6D624522068141800739E2D /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NonEmptyListTest.swift */; };
+		D6D624532068141800739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
+		D6D624542068141800739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
+		D6D624552068141800739E2D /* ValidatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ValidatedTest.swift */; };
+		D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncContextLaws.swift */; };
+		D6D624572068141800739E2D /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* IOTest.swift */; };
+		D6D624582068141800739E2D /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FreeTest.swift */; };
+		D6D624592068141800739E2D /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* NumberInstancesTest.swift */; };
+		D6D6245A2068141800739E2D /* StringInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* StringInstancesTest.swift */; };
+		D6D6245B2068141800739E2D /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* PartialApplicationTest.swift */; };
+		D6D6245C2068141800739E2D /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* PredefTest.swift */; };
+		D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* EitherTTest.swift */; };
+		D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MaybeTTest.swift */; };
+		D6D6245F2068141800739E2D /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* StateTTest.swift */; };
+		D6D624602068141800739E2D /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* WriterTTest.swift */; };
+		D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ApplicativeErrorLaws.swift */; };
+		D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* ApplicativeLaws.swift */; };
+		D6D624632068141800739E2D /* ComonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* ComonadLaws.swift */; };
+		D6D624642068141800739E2D /* EqLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* EqLaws.swift */; };
+		D6D624652068141800739E2D /* FunctorFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* FunctorFilterLaws.swift */; };
+		D6D624662068141800739E2D /* FunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_130 /* FunctorLaws.swift */; };
+		D6D624672068141800739E2D /* MonadErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* MonadErrorLaws.swift */; };
+		D6D624682068141800739E2D /* MonadFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* MonadFilterLaws.swift */; };
+		D6D624692068141800739E2D /* MonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* MonadLaws.swift */; };
+		D6D6246A2068141800739E2D /* MonadStateLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* MonadStateLaws.swift */; };
+		D6D6246B2068141800739E2D /* MonadWriterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_135 /* MonadWriterLaws.swift */; };
+		D6D6246C2068141800739E2D /* MonoidKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* MonoidKLaws.swift */; };
+		D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* MonoidLaws.swift */; };
+		D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* OrderLaws.swift */; };
+		D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* SemigroupKLaws.swift */; };
+		D6D624702068141800739E2D /* SemigroupLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* SemigroupLaws.swift */; };
+		D6D6247F206814C800739E2D /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68A5208206811C6008DA945 /* Nimble.framework */; };
+		D6D62480206814C800739E2D /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68A520A206811C6008DA945 /* SwiftCheck.framework */; };
+		D6D62481206814CE00739E2D /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5208206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6D62482206814CE00739E2D /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A520A206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6D624D32068178800739E2D /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cokleisli.swift */; };
+		D6D624D42068178800739E2D /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Function0.swift */; };
+		D6D624D52068178800739E2D /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function1.swift */; };
+		D6D624D62068178800739E2D /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* FunctionK.swift */; };
+		D6D624D72068178800739E2D /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Kleisli.swift */; };
+		D6D624D82068178800739E2D /* KleisliOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* KleisliOperator.swift */; };
+		D6D624D92068178800739E2D /* BooleanFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* BooleanFunctions.swift */; };
+		D6D624DA2068178800739E2D /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Curry.swift */; };
+		D6D624DB2068178800739E2D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Const.swift */; };
+		D6D624DC2068178800739E2D /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Coproduct.swift */; };
+		D6D624DD2068178800739E2D /* Coreader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Coreader.swift */; };
+		D6D624DE2068178800739E2D /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Either.swift */; };
+		D6D624DF2068178800739E2D /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Eval.swift */; };
+		D6D624E02068178800739E2D /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* FlatmapOperator.swift */; };
+		D6D624E12068178800739E2D /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
+		D6D624E22068178800739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
+		D6D624E32068178800739E2D /* ListKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListKW.swift */; };
+		D6D624E42068178800739E2D /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6D624E52068178800739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
+		D6D624E72068178800739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
+		D6D624E82068178800739E2D /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
+		D6D624E92068178800739E2D /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
+		D6D624EA2068178800739E2D /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
+		D6D624EB2068178800739E2D /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
+		D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6D624ED2068178800739E2D /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
+		D6D624EE2068178800739E2D /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
+		D6D624EF2068178800739E2D /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
+		D6D624F02068178800739E2D /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Free.swift */; };
+		D6D624F12068178800739E2D /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Yoneda.swift */; };
+		D6D624F22068178800739E2D /* HigherKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* HigherKinds.swift */; };
+		D6D624F32068178800739E2D /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* NumberInstances.swift */; };
+		D6D624F42068178800739E2D /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* StringInstances.swift */; };
+		D6D624F52068178800739E2D /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
+		D6D624F62068178800739E2D /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
+		D6D624F72068178800739E2D /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
+		D6D624F82068178800739E2D /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6D624F92068178800739E2D /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
+		D6D624FA2068178800739E2D /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
+		D6D624FB2068178800739E2D /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
+		D6D624FC2068178800739E2D /* Alternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Alternative.swift */; };
+		D6D624FD2068178800739E2D /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Applicative.swift */; };
+		D6D624FE2068178800739E2D /* ApplicativeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* ApplicativeError.swift */; };
+		D6D624FF2068178800739E2D /* Bifoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Bifoldable.swift */; };
+		D6D625002068178800739E2D /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Bimonad.swift */; };
+		D6D625012068178800739E2D /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Comonad.swift */; };
+		D6D625022068178800739E2D /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Composed.swift */; };
+		D6D625032068178800739E2D /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ComposedFoldable.swift */; };
+		D6D625042068178800739E2D /* Eq.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Eq.swift */; };
+		D6D625052068178800739E2D /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Foldable.swift */; };
+		D6D625062068178800739E2D /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Functor.swift */; };
+		D6D625072068178800739E2D /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* FunctorFilter.swift */; };
+		D6D625082068178800739E2D /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Inject.swift */; };
+		D6D625092068178800739E2D /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Monad.swift */; };
+		D6D6250A2068178800739E2D /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* MonadCombine.swift */; };
+		D6D6250B2068178800739E2D /* MonadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* MonadError.swift */; };
+		D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* MonadFilter.swift */; };
+		D6D6250D2068178800739E2D /* MonadReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* MonadReader.swift */; };
+		D6D6250E2068178800739E2D /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* MonadState.swift */; };
+		D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* MonadWriter.swift */; };
+		D6D625102068178800739E2D /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Monoid.swift */; };
+		D6D625112068178800739E2D /* MonoidK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* MonoidK.swift */; };
+		D6D625122068178800739E2D /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* NonEmptyReducible.swift */; };
+		D6D625132068178800739E2D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Order.swift */; };
+		D6D625142068178800739E2D /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Reducible.swift */; };
+		D6D625152068178800739E2D /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Semigroup.swift */; };
+		D6D625162068178800739E2D /* SemigroupK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* SemigroupK.swift */; };
+		D6D625172068178800739E2D /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* Traverse.swift */; };
+		D6D625182068178800739E2D /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* TraverseFilter.swift */; };
+		D6D62523206817A700739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
+		D6D62524206817A700739E2D /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Function1Test.swift */; };
+		D6D62525206817A700739E2D /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* KleisliOperatorTest.swift */; };
+		D6D62526206817A700739E2D /* KleisliTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_93 /* KleisliTest.swift */; };
+		D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* BooleanFunctionsTest.swift */; };
+		D6D62528206817A700739E2D /* CurryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* CurryTest.swift */; };
+		D6D62529206817A700739E2D /* ConstTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* ConstTest.swift */; };
+		D6D6252A206817A700739E2D /* CoproductTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* CoproductTest.swift */; };
+		D6D6252B206817A700739E2D /* EitherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* EitherTest.swift */; };
+		D6D6252C206817A700739E2D /* EvalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* EvalTest.swift */; };
+		D6D6252D206817A700739E2D /* IdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IdTest.swift */; };
+		D6D6252E206817A700739E2D /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* IorTest.swift */; };
+		D6D6252F206817A700739E2D /* ListKWTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ListKWTest.swift */; };
+		D6D62530206817A700739E2D /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MaybeTest.swift */; };
+		D6D62531206817A700739E2D /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NonEmptyListTest.swift */; };
+		D6D62532206817A700739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
+		D6D62533206817A700739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
+		D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ValidatedTest.swift */; };
+		D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncContextLaws.swift */; };
+		D6D62536206817A700739E2D /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* IOTest.swift */; };
+		D6D62537206817A700739E2D /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FreeTest.swift */; };
+		D6D62538206817A700739E2D /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* NumberInstancesTest.swift */; };
+		D6D62539206817A700739E2D /* StringInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* StringInstancesTest.swift */; };
+		D6D6253A206817A700739E2D /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* PartialApplicationTest.swift */; };
+		D6D6253B206817A700739E2D /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* PredefTest.swift */; };
+		D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* EitherTTest.swift */; };
+		D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MaybeTTest.swift */; };
+		D6D6253E206817A700739E2D /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* StateTTest.swift */; };
+		D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* WriterTTest.swift */; };
+		D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ApplicativeErrorLaws.swift */; };
+		D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* ApplicativeLaws.swift */; };
+		D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* ComonadLaws.swift */; };
+		D6D62543206817A700739E2D /* EqLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* EqLaws.swift */; };
+		D6D62544206817A700739E2D /* FunctorFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* FunctorFilterLaws.swift */; };
+		D6D62545206817A700739E2D /* FunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_130 /* FunctorLaws.swift */; };
+		D6D62546206817A700739E2D /* MonadErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* MonadErrorLaws.swift */; };
+		D6D62547206817A700739E2D /* MonadFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* MonadFilterLaws.swift */; };
+		D6D62548206817A700739E2D /* MonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* MonadLaws.swift */; };
+		D6D62549206817A700739E2D /* MonadStateLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* MonadStateLaws.swift */; };
+		D6D6254A206817A700739E2D /* MonadWriterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_135 /* MonadWriterLaws.swift */; };
+		D6D6254B206817A700739E2D /* MonoidKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* MonoidKLaws.swift */; };
+		D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* MonoidLaws.swift */; };
+		D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* OrderLaws.swift */; };
+		D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* SemigroupKLaws.swift */; };
+		D6D6254F206817A700739E2D /* SemigroupLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* SemigroupLaws.swift */; };
+		D6D6255D206817E800739E2D /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A522320681219008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6D6255E206817E800739E2D /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5203206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6D6255F206817F200739E2D /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68A5203206811C6008DA945 /* Nimble.framework */; };
+		D6D62560206817F200739E2D /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68A522320681219008DA945 /* SwiftCheck.framework */; };
+		D6D62564206841B300739E2D /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cokleisli.swift */; };
+		D6D62565206841B300739E2D /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Function0.swift */; };
+		D6D62566206841B300739E2D /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function1.swift */; };
+		D6D62567206841B300739E2D /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* FunctionK.swift */; };
+		D6D62568206841B300739E2D /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Kleisli.swift */; };
+		D6D62569206841B300739E2D /* KleisliOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* KleisliOperator.swift */; };
+		D6D6256A206841B300739E2D /* BooleanFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* BooleanFunctions.swift */; };
+		D6D6256B206841B300739E2D /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Curry.swift */; };
+		D6D6256C206841B300739E2D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Const.swift */; };
+		D6D6256D206841B300739E2D /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Coproduct.swift */; };
+		D6D6256E206841B300739E2D /* Coreader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Coreader.swift */; };
+		D6D6256F206841B300739E2D /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Either.swift */; };
+		D6D62570206841B300739E2D /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Eval.swift */; };
+		D6D62571206841B300739E2D /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* FlatmapOperator.swift */; };
+		D6D62572206841B300739E2D /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
+		D6D62573206841B300739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
+		D6D62574206841B300739E2D /* ListKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListKW.swift */; };
+		D6D62575206841B300739E2D /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6D62576206841B300739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
+		D6D62578206841B300739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
+		D6D62579206841B300739E2D /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
+		D6D6257A206841B300739E2D /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
+		D6D6257B206841B300739E2D /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
+		D6D6257C206841B300739E2D /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
+		D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6D6257E206841B300739E2D /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
+		D6D6257F206841B300739E2D /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
+		D6D62580206841B300739E2D /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
+		D6D62581206841B300739E2D /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Free.swift */; };
+		D6D62582206841B300739E2D /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Yoneda.swift */; };
+		D6D62583206841B300739E2D /* HigherKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* HigherKinds.swift */; };
+		D6D62584206841B300739E2D /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* NumberInstances.swift */; };
+		D6D62585206841B300739E2D /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* StringInstances.swift */; };
+		D6D62586206841B300739E2D /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
+		D6D62587206841B300739E2D /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
+		D6D62588206841B300739E2D /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
+		D6D62589206841B300739E2D /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6D6258A206841B300739E2D /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
+		D6D6258B206841B300739E2D /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
+		D6D6258C206841B300739E2D /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
+		D6D6258D206841B300739E2D /* Alternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Alternative.swift */; };
+		D6D6258E206841B300739E2D /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Applicative.swift */; };
+		D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* ApplicativeError.swift */; };
+		D6D62590206841B300739E2D /* Bifoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Bifoldable.swift */; };
+		D6D62591206841B300739E2D /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Bimonad.swift */; };
+		D6D62592206841B300739E2D /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Comonad.swift */; };
+		D6D62593206841B300739E2D /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Composed.swift */; };
+		D6D62594206841B300739E2D /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ComposedFoldable.swift */; };
+		D6D62595206841B300739E2D /* Eq.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Eq.swift */; };
+		D6D62596206841B300739E2D /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Foldable.swift */; };
+		D6D62597206841B300739E2D /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Functor.swift */; };
+		D6D62598206841B300739E2D /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* FunctorFilter.swift */; };
+		D6D62599206841B300739E2D /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Inject.swift */; };
+		D6D6259A206841B300739E2D /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Monad.swift */; };
+		D6D6259B206841B300739E2D /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* MonadCombine.swift */; };
+		D6D6259C206841B300739E2D /* MonadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* MonadError.swift */; };
+		D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* MonadFilter.swift */; };
+		D6D6259E206841B300739E2D /* MonadReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* MonadReader.swift */; };
+		D6D6259F206841B300739E2D /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* MonadState.swift */; };
+		D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* MonadWriter.swift */; };
+		D6D625A1206841B300739E2D /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Monoid.swift */; };
+		D6D625A2206841B300739E2D /* MonoidK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* MonoidK.swift */; };
+		D6D625A3206841B300739E2D /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* NonEmptyReducible.swift */; };
+		D6D625A4206841B300739E2D /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Order.swift */; };
+		D6D625A5206841B300739E2D /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Reducible.swift */; };
+		D6D625A6206841B300739E2D /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Semigroup.swift */; };
+		D6D625A7206841B300739E2D /* SemigroupK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* SemigroupK.swift */; };
+		D6D625A8206841B300739E2D /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* Traverse.swift */; };
+		D6D625A9206841B300739E2D /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* TraverseFilter.swift */; };
+		D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cokleisli.swift */; };
+		D6DBDE9B20684C38004F979F /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Function0.swift */; };
+		D6DBDE9C20684C38004F979F /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function1.swift */; };
+		D6DBDE9D20684C38004F979F /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* FunctionK.swift */; };
+		D6DBDE9E20684C38004F979F /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Kleisli.swift */; };
+		D6DBDE9F20684C38004F979F /* KleisliOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* KleisliOperator.swift */; };
+		D6DBDEA020684C38004F979F /* BooleanFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* BooleanFunctions.swift */; };
+		D6DBDEA120684C38004F979F /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Curry.swift */; };
+		D6DBDEA220684C38004F979F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Const.swift */; };
+		D6DBDEA320684C38004F979F /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Coproduct.swift */; };
+		D6DBDEA420684C38004F979F /* Coreader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Coreader.swift */; };
+		D6DBDEA520684C38004F979F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Either.swift */; };
+		D6DBDEA620684C38004F979F /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Eval.swift */; };
+		D6DBDEA720684C38004F979F /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* FlatmapOperator.swift */; };
+		D6DBDEA820684C38004F979F /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
+		D6DBDEA920684C38004F979F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
+		D6DBDEAA20684C38004F979F /* ListKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListKW.swift */; };
+		D6DBDEAB20684C38004F979F /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
+		D6DBDEAE20684C38004F979F /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
+		D6DBDEAF20684C38004F979F /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
+		D6DBDEB020684C38004F979F /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
+		D6DBDEB120684C38004F979F /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
+		D6DBDEB220684C38004F979F /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
+		D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6DBDEB420684C38004F979F /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
+		D6DBDEB520684C38004F979F /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
+		D6DBDEB620684C38004F979F /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
+		D6DBDEB720684C38004F979F /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Free.swift */; };
+		D6DBDEB820684C38004F979F /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Yoneda.swift */; };
+		D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* HigherKinds.swift */; };
+		D6DBDEBA20684C38004F979F /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* NumberInstances.swift */; };
+		D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* StringInstances.swift */; };
+		D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
+		D6DBDEBD20684C38004F979F /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
+		D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
+		D6DBDEBF20684C38004F979F /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6DBDEC020684C38004F979F /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
+		D6DBDEC120684C38004F979F /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
+		D6DBDEC220684C38004F979F /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
+		D6DBDEC320684C38004F979F /* Alternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Alternative.swift */; };
+		D6DBDEC420684C38004F979F /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Applicative.swift */; };
+		D6DBDEC520684C38004F979F /* ApplicativeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* ApplicativeError.swift */; };
+		D6DBDEC620684C38004F979F /* Bifoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Bifoldable.swift */; };
+		D6DBDEC720684C38004F979F /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Bimonad.swift */; };
+		D6DBDEC820684C38004F979F /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Comonad.swift */; };
+		D6DBDEC920684C38004F979F /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Composed.swift */; };
+		D6DBDECA20684C38004F979F /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ComposedFoldable.swift */; };
+		D6DBDECB20684C38004F979F /* Eq.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Eq.swift */; };
+		D6DBDECC20684C38004F979F /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Foldable.swift */; };
+		D6DBDECD20684C38004F979F /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Functor.swift */; };
+		D6DBDECE20684C38004F979F /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* FunctorFilter.swift */; };
+		D6DBDECF20684C38004F979F /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Inject.swift */; };
+		D6DBDED020684C38004F979F /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Monad.swift */; };
+		D6DBDED120684C38004F979F /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* MonadCombine.swift */; };
+		D6DBDED220684C38004F979F /* MonadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* MonadError.swift */; };
+		D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* MonadFilter.swift */; };
+		D6DBDED420684C38004F979F /* MonadReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* MonadReader.swift */; };
+		D6DBDED520684C38004F979F /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* MonadState.swift */; };
+		D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* MonadWriter.swift */; };
+		D6DBDED720684C38004F979F /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Monoid.swift */; };
+		D6DBDED820684C38004F979F /* MonoidK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* MonoidK.swift */; };
+		D6DBDED920684C38004F979F /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* NonEmptyReducible.swift */; };
+		D6DBDEDA20684C38004F979F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Order.swift */; };
+		D6DBDEDB20684C38004F979F /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Reducible.swift */; };
+		D6DBDEDC20684C38004F979F /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Semigroup.swift */; };
+		D6DBDEDD20684C38004F979F /* SemigroupK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* SemigroupK.swift */; };
+		D6DBDEDE20684C38004F979F /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* Traverse.swift */; };
+		D6DBDEDF20684C38004F979F /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* TraverseFilter.swift */; };
 		OBJ_246 /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
 		OBJ_247 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Function1Test.swift */; };
 		OBJ_248 /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* KleisliOperatorTest.swift */; };
@@ -69,75 +362,7 @@
 		OBJ_288 /* OrderLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* OrderLaws.swift */; };
 		OBJ_289 /* SemigroupKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* SemigroupKLaws.swift */; };
 		OBJ_290 /* SemigroupLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* SemigroupLaws.swift */; };
-		OBJ_292 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Nimble::Nimble::Product" /* Nimble.framework */; };
-		OBJ_293 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftCheck::SwiftCheck::Product" /* SwiftCheck.framework */; };
 		OBJ_294 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		OBJ_305 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_145 /* AdapterProtocols.swift */; };
-		OBJ_306 /* AssertionDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* AssertionDispatcher.swift */; };
-		OBJ_307 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_147 /* AssertionRecorder.swift */; };
-		OBJ_308 /* NMBExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_148 /* NMBExpectation.swift */; };
-		OBJ_309 /* NMBObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* NMBObjCMatcher.swift */; };
-		OBJ_310 /* NimbleEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_150 /* NimbleEnvironment.swift */; };
-		OBJ_311 /* NimbleXCTestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_151 /* NimbleXCTestHandler.swift */; };
-		OBJ_312 /* ExceptionCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_153 /* ExceptionCapture.swift */; };
-		OBJ_313 /* DSL+Wait.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_154 /* DSL+Wait.swift */; };
-		OBJ_314 /* DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_155 /* DSL.swift */; };
-		OBJ_315 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_156 /* Expectation.swift */; };
-		OBJ_316 /* ExpectationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_157 /* ExpectationMessage.swift */; };
-		OBJ_317 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_158 /* Expression.swift */; };
-		OBJ_318 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_159 /* FailureMessage.swift */; };
-		OBJ_319 /* AllPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_161 /* AllPass.swift */; };
-		OBJ_320 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_162 /* AsyncMatcherWrapper.swift */; };
-		OBJ_321 /* BeAKindOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_163 /* BeAKindOf.swift */; };
-		OBJ_322 /* BeAnInstanceOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_164 /* BeAnInstanceOf.swift */; };
-		OBJ_323 /* BeCloseTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_165 /* BeCloseTo.swift */; };
-		OBJ_324 /* BeEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_166 /* BeEmpty.swift */; };
-		OBJ_325 /* BeGreaterThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_167 /* BeGreaterThan.swift */; };
-		OBJ_326 /* BeGreaterThanOrEqualTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_168 /* BeGreaterThanOrEqualTo.swift */; };
-		OBJ_327 /* BeIdenticalTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_169 /* BeIdenticalTo.swift */; };
-		OBJ_328 /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_170 /* BeLessThan.swift */; };
-		OBJ_329 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_171 /* BeLessThanOrEqual.swift */; };
-		OBJ_330 /* BeLogical.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_172 /* BeLogical.swift */; };
-		OBJ_331 /* BeNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_173 /* BeNil.swift */; };
-		OBJ_332 /* BeVoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_174 /* BeVoid.swift */; };
-		OBJ_333 /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_175 /* BeginWith.swift */; };
-		OBJ_334 /* Contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_176 /* Contain.swift */; };
-		OBJ_335 /* ContainElementSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_177 /* ContainElementSatisfying.swift */; };
-		OBJ_336 /* EndWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_178 /* EndWith.swift */; };
-		OBJ_337 /* Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_179 /* Equal.swift */; };
-		OBJ_338 /* HaveCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_180 /* HaveCount.swift */; };
-		OBJ_339 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_181 /* Match.swift */; };
-		OBJ_340 /* MatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_182 /* MatchError.swift */; };
-		OBJ_341 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_183 /* MatcherFunc.swift */; };
-		OBJ_342 /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_184 /* MatcherProtocols.swift */; };
-		OBJ_343 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_185 /* PostNotification.swift */; };
-		OBJ_344 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_186 /* Predicate.swift */; };
-		OBJ_345 /* RaisesException.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_187 /* RaisesException.swift */; };
-		OBJ_346 /* SatisfyAnyOf.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_188 /* SatisfyAnyOf.swift */; };
-		OBJ_347 /* ThrowAssertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_189 /* ThrowAssertion.swift */; };
-		OBJ_348 /* ThrowError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_190 /* ThrowError.swift */; };
-		OBJ_349 /* ToSucceed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_191 /* ToSucceed.swift */; };
-		OBJ_350 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_193 /* Async.swift */; };
-		OBJ_351 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_194 /* Errors.swift */; };
-		OBJ_352 /* Functional.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_195 /* Functional.swift */; };
-		OBJ_353 /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_196 /* SourceLocation.swift */; };
-		OBJ_354 /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_197 /* Stringers.swift */; };
-		OBJ_360 /* Arbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_201 /* Arbitrary.swift */; };
-		OBJ_361 /* Cartesian.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_202 /* Cartesian.swift */; };
-		OBJ_362 /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_203 /* Check.swift */; };
-		OBJ_363 /* CoArbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_204 /* CoArbitrary.swift */; };
-		OBJ_364 /* Compose.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_205 /* Compose.swift */; };
-		OBJ_365 /* Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_206 /* Gen.swift */; };
-		OBJ_366 /* Lattice.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_207 /* Lattice.swift */; };
-		OBJ_367 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_208 /* Modifiers.swift */; };
-		OBJ_368 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_209 /* Property.swift */; };
-		OBJ_369 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_210 /* Random.swift */; };
-		OBJ_370 /* Rose.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_211 /* Rose.swift */; };
-		OBJ_371 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_212 /* State.swift */; };
-		OBJ_372 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_213 /* Test.swift */; };
-		OBJ_373 /* Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_214 /* Testable.swift */; };
-		OBJ_374 /* Witness.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_215 /* Witness.swift */; };
-		OBJ_375 /* WitnessedArbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_216 /* WitnessedArbitrary.swift */; };
 		OBJ_381 /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cokleisli.swift */; };
 		OBJ_382 /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Function0.swift */; };
 		OBJ_383 /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function1.swift */; };
@@ -211,20 +436,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D653FC432067C58D00535EF6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Nimble::Nimble";
-			remoteInfo = Nimble;
-		};
-		D653FC442067C58D00535EF6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftCheck::SwiftCheck";
-			remoteInfo = SwiftCheck;
-		};
 		D653FC452067C58D00535EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -232,19 +443,82 @@
 			remoteGlobalIDString = "Bow::Bow";
 			remoteInfo = Bow;
 		};
-		D653FC462067C58E00535EF6 /* PBXContainerItemProxy */ = {
+		D6D624422068141800739E2D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = "Bow::BowTests";
-			remoteInfo = BowTests;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		D6D62521206817A700739E2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D66B91BC2068080D001A5B64 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */,
+				D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D624762068141800739E2D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D6D62481206814CE00739E2D /* Nimble.framework in CopyFiles */,
+				D6D62482206814CE00739E2D /* SwiftCheck.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D62555206817A700739E2D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D6D6255D206817E800739E2D /* SwiftCheck.framework in CopyFiles */,
+				D6D6255E206817E800739E2D /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		"Nimble::Nimble::Product" /* Nimble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
+		D68A51FF206811C6008DA945 /* Nimble.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Nimble.framework.dSYM; sourceTree = "<group>"; };
+		D68A5200206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
+		D68A5201206811C6008DA945 /* SwiftCheck.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftCheck.framework.dSYM; sourceTree = "<group>"; };
+		D68A5203206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
+		D68A5204206811C6008DA945 /* Nimble.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Nimble.framework.dSYM; sourceTree = "<group>"; };
+		D68A5205206811C6008DA945 /* SwiftCheck.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftCheck.framework.dSYM; sourceTree = "<group>"; };
+		D68A5207206811C6008DA945 /* FA66BA08-28C4-3BB7-A0A6-62E5F30CEBC3.bcsymbolmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FA66BA08-28C4-3BB7-A0A6-62E5F30CEBC3.bcsymbolmap"; sourceTree = "<group>"; };
+		D68A5208206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
+		D68A5209206811C6008DA945 /* Nimble.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Nimble.framework.dSYM; sourceTree = "<group>"; };
+		D68A520A206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
+		D68A520B206811C6008DA945 /* SwiftCheck.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftCheck.framework.dSYM; sourceTree = "<group>"; };
+		D68A522320681219008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
+		D6D6247C2068141800739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D6251D2068178800739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D6255B206817A700739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D625AE206841B300739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6DBDE8B206846BE004F979F /* Bow-macOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-macOS copy-Info.plist"; path = "/Users/victorg/Documents/Personal/FunctionalHub/Swift/bow/Bow-macOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		D6DBDE9220684BEB004F979F /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6DBDE9420684BEB004F979F /* TestTVOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTVOS.h; sourceTree = "<group>"; };
+		D6DBDE9520684BEB004F979F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		OBJ_10 /* Cokleisli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cokleisli.swift; sourceTree = "<group>"; };
 		OBJ_100 /* EvalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalTest.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IdTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTest.swift; sourceTree = "<group>"; };
@@ -286,80 +560,12 @@
 		OBJ_139 /* SemigroupKLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupKLaws.swift; sourceTree = "<group>"; };
 		OBJ_14 /* Kleisli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kleisli.swift; sourceTree = "<group>"; };
 		OBJ_140 /* SemigroupLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupLaws.swift; sourceTree = "<group>"; };
-		OBJ_145 /* AdapterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdapterProtocols.swift; sourceTree = "<group>"; };
-		OBJ_146 /* AssertionDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionDispatcher.swift; sourceTree = "<group>"; };
-		OBJ_147 /* AssertionRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertionRecorder.swift; sourceTree = "<group>"; };
-		OBJ_148 /* NMBExpectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMBExpectation.swift; sourceTree = "<group>"; };
-		OBJ_149 /* NMBObjCMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMBObjCMatcher.swift; sourceTree = "<group>"; };
 		OBJ_15 /* KleisliOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KleisliOperator.swift; sourceTree = "<group>"; };
-		OBJ_150 /* NimbleEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleEnvironment.swift; sourceTree = "<group>"; };
-		OBJ_151 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleXCTestHandler.swift; sourceTree = "<group>"; };
-		OBJ_153 /* ExceptionCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionCapture.swift; sourceTree = "<group>"; };
-		OBJ_154 /* DSL+Wait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
-		OBJ_155 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
-		OBJ_156 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
-		OBJ_157 /* ExpectationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectationMessage.swift; sourceTree = "<group>"; };
-		OBJ_158 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
-		OBJ_159 /* FailureMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureMessage.swift; sourceTree = "<group>"; };
 		OBJ_16 /* BooleanFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanFunctions.swift; sourceTree = "<group>"; };
-		OBJ_161 /* AllPass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPass.swift; sourceTree = "<group>"; };
-		OBJ_162 /* AsyncMatcherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMatcherWrapper.swift; sourceTree = "<group>"; };
-		OBJ_163 /* BeAKindOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeAKindOf.swift; sourceTree = "<group>"; };
-		OBJ_164 /* BeAnInstanceOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeAnInstanceOf.swift; sourceTree = "<group>"; };
-		OBJ_165 /* BeCloseTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeCloseTo.swift; sourceTree = "<group>"; };
-		OBJ_166 /* BeEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeEmpty.swift; sourceTree = "<group>"; };
-		OBJ_167 /* BeGreaterThan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeGreaterThan.swift; sourceTree = "<group>"; };
-		OBJ_168 /* BeGreaterThanOrEqualTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeGreaterThanOrEqualTo.swift; sourceTree = "<group>"; };
-		OBJ_169 /* BeIdenticalTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeIdenticalTo.swift; sourceTree = "<group>"; };
 		OBJ_17 /* Curry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
-		OBJ_170 /* BeLessThan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeLessThan.swift; sourceTree = "<group>"; };
-		OBJ_171 /* BeLessThanOrEqual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeLessThanOrEqual.swift; sourceTree = "<group>"; };
-		OBJ_172 /* BeLogical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeLogical.swift; sourceTree = "<group>"; };
-		OBJ_173 /* BeNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeNil.swift; sourceTree = "<group>"; };
-		OBJ_174 /* BeVoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeVoid.swift; sourceTree = "<group>"; };
-		OBJ_175 /* BeginWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeginWith.swift; sourceTree = "<group>"; };
-		OBJ_176 /* Contain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contain.swift; sourceTree = "<group>"; };
-		OBJ_177 /* ContainElementSatisfying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainElementSatisfying.swift; sourceTree = "<group>"; };
-		OBJ_178 /* EndWith.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndWith.swift; sourceTree = "<group>"; };
-		OBJ_179 /* Equal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equal.swift; sourceTree = "<group>"; };
-		OBJ_180 /* HaveCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaveCount.swift; sourceTree = "<group>"; };
-		OBJ_181 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
-		OBJ_182 /* MatchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchError.swift; sourceTree = "<group>"; };
-		OBJ_183 /* MatcherFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherFunc.swift; sourceTree = "<group>"; };
-		OBJ_184 /* MatcherProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatcherProtocols.swift; sourceTree = "<group>"; };
-		OBJ_185 /* PostNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNotification.swift; sourceTree = "<group>"; };
-		OBJ_186 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
-		OBJ_187 /* RaisesException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaisesException.swift; sourceTree = "<group>"; };
-		OBJ_188 /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatisfyAnyOf.swift; sourceTree = "<group>"; };
-		OBJ_189 /* ThrowAssertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowAssertion.swift; sourceTree = "<group>"; };
 		OBJ_19 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
-		OBJ_190 /* ThrowError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrowError.swift; sourceTree = "<group>"; };
-		OBJ_191 /* ToSucceed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSucceed.swift; sourceTree = "<group>"; };
-		OBJ_193 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
-		OBJ_194 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		OBJ_195 /* Functional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functional.swift; sourceTree = "<group>"; };
-		OBJ_196 /* SourceLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLocation.swift; sourceTree = "<group>"; };
-		OBJ_197 /* Stringers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stringers.swift; sourceTree = "<group>"; };
-		OBJ_198 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/victorg/Documents/Personal/FunctionalHub/Swift/bow/.build/checkouts/Nimble--4242004824474893651/Package.swift"; sourceTree = "<group>"; };
 		OBJ_20 /* Coproduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
-		OBJ_201 /* Arbitrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arbitrary.swift; sourceTree = "<group>"; };
-		OBJ_202 /* Cartesian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cartesian.swift; sourceTree = "<group>"; };
-		OBJ_203 /* Check.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Check.swift; sourceTree = "<group>"; };
-		OBJ_204 /* CoArbitrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoArbitrary.swift; sourceTree = "<group>"; };
-		OBJ_205 /* Compose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compose.swift; sourceTree = "<group>"; };
-		OBJ_206 /* Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gen.swift; sourceTree = "<group>"; };
-		OBJ_207 /* Lattice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lattice.swift; sourceTree = "<group>"; };
-		OBJ_208 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
-		OBJ_209 /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		OBJ_21 /* Coreader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coreader.swift; sourceTree = "<group>"; };
-		OBJ_210 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
-		OBJ_211 /* Rose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rose.swift; sourceTree = "<group>"; };
-		OBJ_212 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		OBJ_213 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		OBJ_214 /* Testable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testable.swift; sourceTree = "<group>"; };
-		OBJ_215 /* Witness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Witness.swift; sourceTree = "<group>"; };
-		OBJ_216 /* WitnessedArbitrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WitnessedArbitrary.swift; sourceTree = "<group>"; };
-		OBJ_217 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/victorg/Documents/Personal/FunctionalHub/Swift/bow/.build/checkouts/SwiftCheck--6609442531415794310/Package.swift"; sourceTree = "<group>"; };
 		OBJ_22 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		OBJ_23 /* Eval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
 		OBJ_24 /* FlatmapOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatmapOperator.swift; sourceTree = "<group>"; };
@@ -429,31 +635,53 @@
 		OBJ_97 /* ConstTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstTest.swift; sourceTree = "<group>"; };
 		OBJ_98 /* CoproductTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoproductTest.swift; sourceTree = "<group>"; };
 		OBJ_99 /* EitherTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTest.swift; sourceTree = "<group>"; };
-		"SwiftCheck::SwiftCheck::Product" /* SwiftCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D6D624712068141800739E2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				D6D6247F206814C800739E2D /* Nimble.framework in Frameworks */,
+				D6D62480206814C800739E2D /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D625192068178800739E2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D62550206817A700739E2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				D6D6255F206817F200739E2D /* Nimble.framework in Frameworks */,
+				D6D62560206817F200739E2D /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D625AA206841B300739E2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6DBDE8E20684BEB004F979F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		OBJ_291 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_292 /* Nimble.framework in Frameworks */,
-				OBJ_293 /* SwiftCheck.framework in Frameworks */,
 				OBJ_294 /* Bow.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_355 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_376 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +695,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D68A51F9206811C6008DA945 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				D68A51FD206811C6008DA945 /* iOS */,
+				D68A5202206811C6008DA945 /* Mac */,
+				D68A5206206811C6008DA945 /* tvOS */,
+			);
+			name = Build;
+			path = Carthage/Build;
+			sourceTree = "<group>";
+		};
+		D68A51FD206811C6008DA945 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D68A51FE206811C6008DA945 /* Nimble.framework */,
+				D68A51FF206811C6008DA945 /* Nimble.framework.dSYM */,
+				D68A5200206811C6008DA945 /* SwiftCheck.framework */,
+				D68A5201206811C6008DA945 /* SwiftCheck.framework.dSYM */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		D68A5202206811C6008DA945 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D68A522320681219008DA945 /* SwiftCheck.framework */,
+				D68A5203206811C6008DA945 /* Nimble.framework */,
+				D68A5204206811C6008DA945 /* Nimble.framework.dSYM */,
+				D68A5205206811C6008DA945 /* SwiftCheck.framework.dSYM */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		D68A5206206811C6008DA945 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				D68A5207206811C6008DA945 /* FA66BA08-28C4-3BB7-A0A6-62E5F30CEBC3.bcsymbolmap */,
+				D68A5208206811C6008DA945 /* Nimble.framework */,
+				D68A5209206811C6008DA945 /* Nimble.framework.dSYM */,
+				D68A520A206811C6008DA945 /* SwiftCheck.framework */,
+				D68A520B206811C6008DA945 /* SwiftCheck.framework.dSYM */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		D6D623EF2068134800739E2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6DBDE9320684BEB004F979F /* TestTVOS */ = {
+			isa = PBXGroup;
+			children = (
+				D6DBDE9420684BEB004F979F /* TestTVOS.h */,
+				D6DBDE9520684BEB004F979F /* Info.plist */,
+			);
+			path = TestTVOS;
+			sourceTree = "<group>";
+		};
 		OBJ_109 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,102 +816,6 @@
 			path = Typeclasses;
 			sourceTree = "<group>";
 		};
-		OBJ_141 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_142 /* Nimble 7.0.3 */,
-				OBJ_199 /* SwiftCheck 0.9.1 */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		OBJ_142 /* Nimble 7.0.3 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_143 /* Nimble */,
-				OBJ_198 /* Package.swift */,
-			);
-			name = "Nimble 7.0.3";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_143 /* Nimble */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_144 /* Adapters */,
-				OBJ_154 /* DSL+Wait.swift */,
-				OBJ_155 /* DSL.swift */,
-				OBJ_156 /* Expectation.swift */,
-				OBJ_157 /* ExpectationMessage.swift */,
-				OBJ_158 /* Expression.swift */,
-				OBJ_159 /* FailureMessage.swift */,
-				OBJ_160 /* Matchers */,
-				OBJ_192 /* Utils */,
-			);
-			name = Nimble;
-			path = ".build/checkouts/Nimble--4242004824474893651/Sources/Nimble";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_144 /* Adapters */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_145 /* AdapterProtocols.swift */,
-				OBJ_146 /* AssertionDispatcher.swift */,
-				OBJ_147 /* AssertionRecorder.swift */,
-				OBJ_148 /* NMBExpectation.swift */,
-				OBJ_149 /* NMBObjCMatcher.swift */,
-				OBJ_150 /* NimbleEnvironment.swift */,
-				OBJ_151 /* NimbleXCTestHandler.swift */,
-				OBJ_152 /* NonObjectiveC */,
-			);
-			path = Adapters;
-			sourceTree = "<group>";
-		};
-		OBJ_152 /* NonObjectiveC */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_153 /* ExceptionCapture.swift */,
-			);
-			path = NonObjectiveC;
-			sourceTree = "<group>";
-		};
-		OBJ_160 /* Matchers */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_161 /* AllPass.swift */,
-				OBJ_162 /* AsyncMatcherWrapper.swift */,
-				OBJ_163 /* BeAKindOf.swift */,
-				OBJ_164 /* BeAnInstanceOf.swift */,
-				OBJ_165 /* BeCloseTo.swift */,
-				OBJ_166 /* BeEmpty.swift */,
-				OBJ_167 /* BeGreaterThan.swift */,
-				OBJ_168 /* BeGreaterThanOrEqualTo.swift */,
-				OBJ_169 /* BeIdenticalTo.swift */,
-				OBJ_170 /* BeLessThan.swift */,
-				OBJ_171 /* BeLessThanOrEqual.swift */,
-				OBJ_172 /* BeLogical.swift */,
-				OBJ_173 /* BeNil.swift */,
-				OBJ_174 /* BeVoid.swift */,
-				OBJ_175 /* BeginWith.swift */,
-				OBJ_176 /* Contain.swift */,
-				OBJ_177 /* ContainElementSatisfying.swift */,
-				OBJ_178 /* EndWith.swift */,
-				OBJ_179 /* Equal.swift */,
-				OBJ_180 /* HaveCount.swift */,
-				OBJ_181 /* Match.swift */,
-				OBJ_182 /* MatchError.swift */,
-				OBJ_183 /* MatcherFunc.swift */,
-				OBJ_184 /* MatcherProtocols.swift */,
-				OBJ_185 /* PostNotification.swift */,
-				OBJ_186 /* Predicate.swift */,
-				OBJ_187 /* RaisesException.swift */,
-				OBJ_188 /* SatisfyAnyOf.swift */,
-				OBJ_189 /* ThrowAssertion.swift */,
-				OBJ_190 /* ThrowError.swift */,
-				OBJ_191 /* ToSucceed.swift */,
-			);
-			path = Matchers;
-			sourceTree = "<group>";
-		};
 		OBJ_18 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,58 +840,16 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		OBJ_192 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_193 /* Async.swift */,
-				OBJ_194 /* Errors.swift */,
-				OBJ_195 /* Functional.swift */,
-				OBJ_196 /* SourceLocation.swift */,
-				OBJ_197 /* Stringers.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		OBJ_199 /* SwiftCheck 0.9.1 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_200 /* SwiftCheck */,
-				OBJ_217 /* Package.swift */,
-			);
-			name = "SwiftCheck 0.9.1";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_200 /* SwiftCheck */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_201 /* Arbitrary.swift */,
-				OBJ_202 /* Cartesian.swift */,
-				OBJ_203 /* Check.swift */,
-				OBJ_204 /* CoArbitrary.swift */,
-				OBJ_205 /* Compose.swift */,
-				OBJ_206 /* Gen.swift */,
-				OBJ_207 /* Lattice.swift */,
-				OBJ_208 /* Modifiers.swift */,
-				OBJ_209 /* Property.swift */,
-				OBJ_210 /* Random.swift */,
-				OBJ_211 /* Rose.swift */,
-				OBJ_212 /* State.swift */,
-				OBJ_213 /* Test.swift */,
-				OBJ_214 /* Testable.swift */,
-				OBJ_215 /* Witness.swift */,
-				OBJ_216 /* WitnessedArbitrary.swift */,
-			);
-			name = SwiftCheck;
-			path = ".build/checkouts/SwiftCheck--6609442531415794310/Sources/SwiftCheck";
-			sourceTree = SOURCE_ROOT;
-		};
 		OBJ_218 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"Bow::BowTests::Product" /* BowTests.xctest */,
-				"Nimble::Nimble::Product" /* Nimble.framework */,
-				"SwiftCheck::SwiftCheck::Product" /* SwiftCheck.framework */,
 				"Bow::Bow::Product" /* Bow.framework */,
+				D6D6247C2068141800739E2D /* BowTests.xctest */,
+				D6D6251D2068178800739E2D /* Bow.framework */,
+				D6D6255B206817A700739E2D /* BowTests.xctest */,
+				D6D625AE206841B300739E2D /* Bow.framework */,
+				D6DBDE9220684BEB004F979F /* Bow.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -732,16 +883,18 @@
 			path = Instances;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_87 /* Tests */,
-				OBJ_141 /* Dependencies */,
+				D6DBDE9320684BEB004F979F /* TestTVOS */,
 				OBJ_218 /* Products */,
+				D68A51F9206811C6008DA945 /* Build */,
+				D6D623EF2068134800739E2D /* Frameworks */,
+				D6DBDE8B206846BE004F979F /* Bow-macOS copy-Info.plist */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Transformers */ = {
@@ -921,12 +1074,12 @@
 			buildPhases = (
 				OBJ_245 /* Sources */,
 				OBJ_291 /* Frameworks */,
+				D66B91BB20680771001A5B64 /* ShellScript */,
+				D66B91BC2068080D001A5B64 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_295 /* PBXTargetDependency */,
-				OBJ_297 /* PBXTargetDependency */,
 				OBJ_299 /* PBXTargetDependency */,
 			);
 			name = BowTests;
@@ -934,78 +1087,91 @@
 			productReference = "Bow::BowTests::Product" /* BowTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		"Bow::SwiftPMPackageDescription" /* BowPackageDescription */ = {
+		D6D624402068141800739E2D /* BowTests-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_224 /* Build configuration list for PBXNativeTarget "BowPackageDescription" */;
+			buildConfigurationList = D6D624792068141800739E2D /* Build configuration list for PBXNativeTarget "BowTests-tvOS" */;
 			buildPhases = (
-				OBJ_227 /* Sources */,
+				D6D624432068141800739E2D /* Sources */,
+				D6D624712068141800739E2D /* Frameworks */,
+				D6D624752068141800739E2D /* ShellScript */,
+				D6D624762068141800739E2D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6D624412068141800739E2D /* PBXTargetDependency */,
+			);
+			name = "BowTests-tvOS";
+			productName = BowTests;
+			productReference = D6D6247C2068141800739E2D /* BowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D6D624D12068178800739E2D /* Bow-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6D6251A2068178800739E2D /* Build configuration list for PBXNativeTarget "Bow-macOS" */;
+			buildPhases = (
+				D6D624D22068178800739E2D /* Sources */,
+				D6D625192068178800739E2D /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = BowPackageDescription;
-			productName = BowPackageDescription;
+			name = "Bow-macOS";
+			productName = Bow;
+			productReference = D6D6251D2068178800739E2D /* Bow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"Nimble::Nimble" /* Nimble */ = {
+		D6D6251F206817A700739E2D /* BowTests-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_301 /* Build configuration list for PBXNativeTarget "Nimble" */;
+			buildConfigurationList = D6D62558206817A700739E2D /* Build configuration list for PBXNativeTarget "BowTests-macOS" */;
 			buildPhases = (
-				OBJ_304 /* Sources */,
-				OBJ_355 /* Frameworks */,
+				D6D62522206817A700739E2D /* Sources */,
+				D6D62550206817A700739E2D /* Frameworks */,
+				D6D62554206817A700739E2D /* ShellScript */,
+				D6D62555206817A700739E2D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6D62520206817A700739E2D /* PBXTargetDependency */,
+			);
+			name = "BowTests-macOS";
+			productName = BowTests;
+			productReference = D6D6255B206817A700739E2D /* BowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D6D62562206841B300739E2D /* Bow-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6D625AB206841B300739E2D /* Build configuration list for PBXNativeTarget "Bow-watchOS" */;
+			buildPhases = (
+				D6D62563206841B300739E2D /* Sources */,
+				D6D625AA206841B300739E2D /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Nimble;
-			productName = Nimble;
-			productReference = "Nimble::Nimble::Product" /* Nimble.framework */;
+			name = "Bow-watchOS";
+			productName = Bow;
+			productReference = D6D625AE206841B300739E2D /* Bow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		"Nimble::SwiftPMPackageDescription" /* NimblePackageDescription */ = {
+		D6DBDE9120684BEB004F979F /* Bow-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_230 /* Build configuration list for PBXNativeTarget "NimblePackageDescription" */;
+			buildConfigurationList = D6DBDE9720684BEB004F979F /* Build configuration list for PBXNativeTarget "Bow-tvOS" */;
 			buildPhases = (
-				OBJ_233 /* Sources */,
+				D6DBDE8D20684BEB004F979F /* Sources */,
+				D6DBDE8E20684BEB004F979F /* Frameworks */,
+				D6DBDE9020684BEB004F979F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = NimblePackageDescription;
-			productName = NimblePackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
-		"SwiftCheck::SwiftCheck" /* SwiftCheck */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_356 /* Build configuration list for PBXNativeTarget "SwiftCheck" */;
-			buildPhases = (
-				OBJ_359 /* Sources */,
-				OBJ_376 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftCheck;
-			productName = SwiftCheck;
-			productReference = "SwiftCheck::SwiftCheck::Product" /* SwiftCheck.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		"SwiftCheck::SwiftPMPackageDescription" /* SwiftCheckPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_236 /* Build configuration list for PBXNativeTarget "SwiftCheckPackageDescription" */;
-			buildPhases = (
-				OBJ_239 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftCheckPackageDescription;
-			productName = SwiftCheckPackageDescription;
+			name = "Bow-tvOS";
+			productName = TestTVOS;
+			productReference = D6DBDE9220684BEB004F979F /* Bow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -1015,6 +1181,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					D6DBDE9120684BEB004F979F = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 84PJ9JE3TM;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Bow" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1023,45 +1196,413 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_218 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				"Bow::SwiftPMPackageDescription" /* BowPackageDescription */,
-				"Nimble::SwiftPMPackageDescription" /* NimblePackageDescription */,
-				"SwiftCheck::SwiftPMPackageDescription" /* SwiftCheckPackageDescription */,
-				"Bow::BowTests" /* BowTests */,
-				"Nimble::Nimble" /* Nimble */,
-				"SwiftCheck::SwiftCheck" /* SwiftCheck */,
 				"Bow::Bow" /* Bow */,
-				"Bow::BowPackageTests::ProductTarget" /* BowPackageTests */,
+				D6D624D12068178800739E2D /* Bow-macOS */,
+				D6D62562206841B300739E2D /* Bow-watchOS */,
+				"Bow::BowTests" /* BowTests */,
+				D6D624402068141800739E2D /* BowTests-tvOS */,
+				D6D6251F206817A700739E2D /* BowTests-macOS */,
+				D6DBDE9120684BEB004F979F /* Bow-tvOS */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		D6DBDE9020684BEB004F979F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D66B91BB20680771001A5B64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		D6D624752068141800739E2D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftCheck.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		D6D62554206817A700739E2D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/SwiftCheck.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_227 /* Sources */ = {
+		D6D624432068141800739E2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_228 /* Package.swift in Sources */,
+				D6D624442068141800739E2D /* Function0Test.swift in Sources */,
+				D6D624452068141800739E2D /* Function1Test.swift in Sources */,
+				D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */,
+				D6D624472068141800739E2D /* KleisliTest.swift in Sources */,
+				D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */,
+				D6D624492068141800739E2D /* CurryTest.swift in Sources */,
+				D6D6244A2068141800739E2D /* ConstTest.swift in Sources */,
+				D6D6244B2068141800739E2D /* CoproductTest.swift in Sources */,
+				D6D6244C2068141800739E2D /* EitherTest.swift in Sources */,
+				D6D6244D2068141800739E2D /* EvalTest.swift in Sources */,
+				D6D6244E2068141800739E2D /* IdTest.swift in Sources */,
+				D6D6244F2068141800739E2D /* IorTest.swift in Sources */,
+				D6D624502068141800739E2D /* ListKWTest.swift in Sources */,
+				D6D624512068141800739E2D /* MaybeTest.swift in Sources */,
+				D6D624522068141800739E2D /* NonEmptyListTest.swift in Sources */,
+				D6D624532068141800739E2D /* TryTest.swift in Sources */,
+				D6D624542068141800739E2D /* TupleTest.swift in Sources */,
+				D6D624552068141800739E2D /* ValidatedTest.swift in Sources */,
+				D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */,
+				D6D624572068141800739E2D /* IOTest.swift in Sources */,
+				D6D624582068141800739E2D /* FreeTest.swift in Sources */,
+				D6D624592068141800739E2D /* NumberInstancesTest.swift in Sources */,
+				D6D6245A2068141800739E2D /* StringInstancesTest.swift in Sources */,
+				D6D6245B2068141800739E2D /* PartialApplicationTest.swift in Sources */,
+				D6D6245C2068141800739E2D /* PredefTest.swift in Sources */,
+				D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */,
+				D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */,
+				D6D6245F2068141800739E2D /* StateTTest.swift in Sources */,
+				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
+				D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */,
+				D6D624632068141800739E2D /* ComonadLaws.swift in Sources */,
+				D6D624642068141800739E2D /* EqLaws.swift in Sources */,
+				D6D624652068141800739E2D /* FunctorFilterLaws.swift in Sources */,
+				D6D624662068141800739E2D /* FunctorLaws.swift in Sources */,
+				D6D624672068141800739E2D /* MonadErrorLaws.swift in Sources */,
+				D6D624682068141800739E2D /* MonadFilterLaws.swift in Sources */,
+				D6D624692068141800739E2D /* MonadLaws.swift in Sources */,
+				D6D6246A2068141800739E2D /* MonadStateLaws.swift in Sources */,
+				D6D6246B2068141800739E2D /* MonadWriterLaws.swift in Sources */,
+				D6D6246C2068141800739E2D /* MonoidKLaws.swift in Sources */,
+				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
+				D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */,
+				D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */,
+				D6D624702068141800739E2D /* SemigroupLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_233 /* Sources */ = {
+		D6D624D22068178800739E2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_234 /* Package.swift in Sources */,
+				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
+				D6D624D42068178800739E2D /* Function0.swift in Sources */,
+				D6D624D52068178800739E2D /* Function1.swift in Sources */,
+				D6D624D62068178800739E2D /* FunctionK.swift in Sources */,
+				D6D624D72068178800739E2D /* Kleisli.swift in Sources */,
+				D6D624D82068178800739E2D /* KleisliOperator.swift in Sources */,
+				D6D624D92068178800739E2D /* BooleanFunctions.swift in Sources */,
+				D6D624DA2068178800739E2D /* Curry.swift in Sources */,
+				D6D624DB2068178800739E2D /* Const.swift in Sources */,
+				D6D624DC2068178800739E2D /* Coproduct.swift in Sources */,
+				D6D624DD2068178800739E2D /* Coreader.swift in Sources */,
+				D6D624DE2068178800739E2D /* Either.swift in Sources */,
+				D6D624DF2068178800739E2D /* Eval.swift in Sources */,
+				D6D624E02068178800739E2D /* FlatmapOperator.swift in Sources */,
+				D6D624E12068178800739E2D /* Id.swift in Sources */,
+				D6D624E22068178800739E2D /* Ior.swift in Sources */,
+				D6D624E32068178800739E2D /* ListKW.swift in Sources */,
+				D6D624E42068178800739E2D /* MapKW.swift in Sources */,
+				D6D624E52068178800739E2D /* Maybe.swift in Sources */,
+				D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */,
+				D6D624E72068178800739E2D /* Reader.swift in Sources */,
+				D6D624E82068178800739E2D /* State.swift in Sources */,
+				D6D624E92068178800739E2D /* Try.swift in Sources */,
+				D6D624EA2068178800739E2D /* Tuple.swift in Sources */,
+				D6D624EB2068178800739E2D /* Validated.swift in Sources */,
+				D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */,
+				D6D624ED2068178800739E2D /* IO.swift in Sources */,
+				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
+				D6D624EF2068178800739E2D /* Coyoneda.swift in Sources */,
+				D6D624F02068178800739E2D /* Free.swift in Sources */,
+				D6D624F12068178800739E2D /* Yoneda.swift in Sources */,
+				D6D624F22068178800739E2D /* HigherKinds.swift in Sources */,
+				D6D624F32068178800739E2D /* NumberInstances.swift in Sources */,
+				D6D624F42068178800739E2D /* StringInstances.swift in Sources */,
+				D6D624F52068178800739E2D /* PartialApplication.swift in Sources */,
+				D6D624F62068178800739E2D /* Predef.swift in Sources */,
+				D6D624F72068178800739E2D /* EitherT.swift in Sources */,
+				D6D624F82068178800739E2D /* MaybeT.swift in Sources */,
+				D6D624F92068178800739E2D /* StateT.swift in Sources */,
+				D6D624FA2068178800739E2D /* WriterT.swift in Sources */,
+				D6D624FB2068178800739E2D /* Typeclass.swift in Sources */,
+				D6D624FC2068178800739E2D /* Alternative.swift in Sources */,
+				D6D624FD2068178800739E2D /* Applicative.swift in Sources */,
+				D6D624FE2068178800739E2D /* ApplicativeError.swift in Sources */,
+				D6D624FF2068178800739E2D /* Bifoldable.swift in Sources */,
+				D6D625002068178800739E2D /* Bimonad.swift in Sources */,
+				D6D625012068178800739E2D /* Comonad.swift in Sources */,
+				D6D625022068178800739E2D /* Composed.swift in Sources */,
+				D6D625032068178800739E2D /* ComposedFoldable.swift in Sources */,
+				D6D625042068178800739E2D /* Eq.swift in Sources */,
+				D6D625052068178800739E2D /* Foldable.swift in Sources */,
+				D6D625062068178800739E2D /* Functor.swift in Sources */,
+				D6D625072068178800739E2D /* FunctorFilter.swift in Sources */,
+				D6D625082068178800739E2D /* Inject.swift in Sources */,
+				D6D625092068178800739E2D /* Monad.swift in Sources */,
+				D6D6250A2068178800739E2D /* MonadCombine.swift in Sources */,
+				D6D6250B2068178800739E2D /* MonadError.swift in Sources */,
+				D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */,
+				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
+				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
+				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
+				D6D625102068178800739E2D /* Monoid.swift in Sources */,
+				D6D625112068178800739E2D /* MonoidK.swift in Sources */,
+				D6D625122068178800739E2D /* NonEmptyReducible.swift in Sources */,
+				D6D625132068178800739E2D /* Order.swift in Sources */,
+				D6D625142068178800739E2D /* Reducible.swift in Sources */,
+				D6D625152068178800739E2D /* Semigroup.swift in Sources */,
+				D6D625162068178800739E2D /* SemigroupK.swift in Sources */,
+				D6D625172068178800739E2D /* Traverse.swift in Sources */,
+				D6D625182068178800739E2D /* TraverseFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_239 /* Sources */ = {
+		D6D62522206817A700739E2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_240 /* Package.swift in Sources */,
+				D6D62523206817A700739E2D /* Function0Test.swift in Sources */,
+				D6D62524206817A700739E2D /* Function1Test.swift in Sources */,
+				D6D62525206817A700739E2D /* KleisliOperatorTest.swift in Sources */,
+				D6D62526206817A700739E2D /* KleisliTest.swift in Sources */,
+				D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */,
+				D6D62528206817A700739E2D /* CurryTest.swift in Sources */,
+				D6D62529206817A700739E2D /* ConstTest.swift in Sources */,
+				D6D6252A206817A700739E2D /* CoproductTest.swift in Sources */,
+				D6D6252B206817A700739E2D /* EitherTest.swift in Sources */,
+				D6D6252C206817A700739E2D /* EvalTest.swift in Sources */,
+				D6D6252D206817A700739E2D /* IdTest.swift in Sources */,
+				D6D6252E206817A700739E2D /* IorTest.swift in Sources */,
+				D6D6252F206817A700739E2D /* ListKWTest.swift in Sources */,
+				D6D62530206817A700739E2D /* MaybeTest.swift in Sources */,
+				D6D62531206817A700739E2D /* NonEmptyListTest.swift in Sources */,
+				D6D62532206817A700739E2D /* TryTest.swift in Sources */,
+				D6D62533206817A700739E2D /* TupleTest.swift in Sources */,
+				D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */,
+				D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */,
+				D6D62536206817A700739E2D /* IOTest.swift in Sources */,
+				D6D62537206817A700739E2D /* FreeTest.swift in Sources */,
+				D6D62538206817A700739E2D /* NumberInstancesTest.swift in Sources */,
+				D6D62539206817A700739E2D /* StringInstancesTest.swift in Sources */,
+				D6D6253A206817A700739E2D /* PartialApplicationTest.swift in Sources */,
+				D6D6253B206817A700739E2D /* PredefTest.swift in Sources */,
+				D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */,
+				D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */,
+				D6D6253E206817A700739E2D /* StateTTest.swift in Sources */,
+				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
+				D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */,
+				D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */,
+				D6D62543206817A700739E2D /* EqLaws.swift in Sources */,
+				D6D62544206817A700739E2D /* FunctorFilterLaws.swift in Sources */,
+				D6D62545206817A700739E2D /* FunctorLaws.swift in Sources */,
+				D6D62546206817A700739E2D /* MonadErrorLaws.swift in Sources */,
+				D6D62547206817A700739E2D /* MonadFilterLaws.swift in Sources */,
+				D6D62548206817A700739E2D /* MonadLaws.swift in Sources */,
+				D6D62549206817A700739E2D /* MonadStateLaws.swift in Sources */,
+				D6D6254A206817A700739E2D /* MonadWriterLaws.swift in Sources */,
+				D6D6254B206817A700739E2D /* MonoidKLaws.swift in Sources */,
+				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
+				D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */,
+				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
+				D6D6254F206817A700739E2D /* SemigroupLaws.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6D62563206841B300739E2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
+				D6D62565206841B300739E2D /* Function0.swift in Sources */,
+				D6D62566206841B300739E2D /* Function1.swift in Sources */,
+				D6D62567206841B300739E2D /* FunctionK.swift in Sources */,
+				D6D62568206841B300739E2D /* Kleisli.swift in Sources */,
+				D6D62569206841B300739E2D /* KleisliOperator.swift in Sources */,
+				D6D6256A206841B300739E2D /* BooleanFunctions.swift in Sources */,
+				D6D6256B206841B300739E2D /* Curry.swift in Sources */,
+				D6D6256C206841B300739E2D /* Const.swift in Sources */,
+				D6D6256D206841B300739E2D /* Coproduct.swift in Sources */,
+				D6D6256E206841B300739E2D /* Coreader.swift in Sources */,
+				D6D6256F206841B300739E2D /* Either.swift in Sources */,
+				D6D62570206841B300739E2D /* Eval.swift in Sources */,
+				D6D62571206841B300739E2D /* FlatmapOperator.swift in Sources */,
+				D6D62572206841B300739E2D /* Id.swift in Sources */,
+				D6D62573206841B300739E2D /* Ior.swift in Sources */,
+				D6D62574206841B300739E2D /* ListKW.swift in Sources */,
+				D6D62575206841B300739E2D /* MapKW.swift in Sources */,
+				D6D62576206841B300739E2D /* Maybe.swift in Sources */,
+				D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */,
+				D6D62578206841B300739E2D /* Reader.swift in Sources */,
+				D6D62579206841B300739E2D /* State.swift in Sources */,
+				D6D6257A206841B300739E2D /* Try.swift in Sources */,
+				D6D6257B206841B300739E2D /* Tuple.swift in Sources */,
+				D6D6257C206841B300739E2D /* Validated.swift in Sources */,
+				D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */,
+				D6D6257E206841B300739E2D /* IO.swift in Sources */,
+				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
+				D6D62580206841B300739E2D /* Coyoneda.swift in Sources */,
+				D6D62581206841B300739E2D /* Free.swift in Sources */,
+				D6D62582206841B300739E2D /* Yoneda.swift in Sources */,
+				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
+				D6D62584206841B300739E2D /* NumberInstances.swift in Sources */,
+				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
+				D6D62586206841B300739E2D /* PartialApplication.swift in Sources */,
+				D6D62587206841B300739E2D /* Predef.swift in Sources */,
+				D6D62588206841B300739E2D /* EitherT.swift in Sources */,
+				D6D62589206841B300739E2D /* MaybeT.swift in Sources */,
+				D6D6258A206841B300739E2D /* StateT.swift in Sources */,
+				D6D6258B206841B300739E2D /* WriterT.swift in Sources */,
+				D6D6258C206841B300739E2D /* Typeclass.swift in Sources */,
+				D6D6258D206841B300739E2D /* Alternative.swift in Sources */,
+				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
+				D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */,
+				D6D62590206841B300739E2D /* Bifoldable.swift in Sources */,
+				D6D62591206841B300739E2D /* Bimonad.swift in Sources */,
+				D6D62592206841B300739E2D /* Comonad.swift in Sources */,
+				D6D62593206841B300739E2D /* Composed.swift in Sources */,
+				D6D62594206841B300739E2D /* ComposedFoldable.swift in Sources */,
+				D6D62595206841B300739E2D /* Eq.swift in Sources */,
+				D6D62596206841B300739E2D /* Foldable.swift in Sources */,
+				D6D62597206841B300739E2D /* Functor.swift in Sources */,
+				D6D62598206841B300739E2D /* FunctorFilter.swift in Sources */,
+				D6D62599206841B300739E2D /* Inject.swift in Sources */,
+				D6D6259A206841B300739E2D /* Monad.swift in Sources */,
+				D6D6259B206841B300739E2D /* MonadCombine.swift in Sources */,
+				D6D6259C206841B300739E2D /* MonadError.swift in Sources */,
+				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
+				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
+				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
+				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
+				D6D625A1206841B300739E2D /* Monoid.swift in Sources */,
+				D6D625A2206841B300739E2D /* MonoidK.swift in Sources */,
+				D6D625A3206841B300739E2D /* NonEmptyReducible.swift in Sources */,
+				D6D625A4206841B300739E2D /* Order.swift in Sources */,
+				D6D625A5206841B300739E2D /* Reducible.swift in Sources */,
+				D6D625A6206841B300739E2D /* Semigroup.swift in Sources */,
+				D6D625A7206841B300739E2D /* SemigroupK.swift in Sources */,
+				D6D625A8206841B300739E2D /* Traverse.swift in Sources */,
+				D6D625A9206841B300739E2D /* TraverseFilter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6DBDE8D20684BEB004F979F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
+				D6DBDE9B20684C38004F979F /* Function0.swift in Sources */,
+				D6DBDE9C20684C38004F979F /* Function1.swift in Sources */,
+				D6DBDE9D20684C38004F979F /* FunctionK.swift in Sources */,
+				D6DBDE9E20684C38004F979F /* Kleisli.swift in Sources */,
+				D6DBDE9F20684C38004F979F /* KleisliOperator.swift in Sources */,
+				D6DBDEA020684C38004F979F /* BooleanFunctions.swift in Sources */,
+				D6DBDEA120684C38004F979F /* Curry.swift in Sources */,
+				D6DBDEA220684C38004F979F /* Const.swift in Sources */,
+				D6DBDEA320684C38004F979F /* Coproduct.swift in Sources */,
+				D6DBDEA420684C38004F979F /* Coreader.swift in Sources */,
+				D6DBDEA520684C38004F979F /* Either.swift in Sources */,
+				D6DBDEA620684C38004F979F /* Eval.swift in Sources */,
+				D6DBDEA720684C38004F979F /* FlatmapOperator.swift in Sources */,
+				D6DBDEA820684C38004F979F /* Id.swift in Sources */,
+				D6DBDEA920684C38004F979F /* Ior.swift in Sources */,
+				D6DBDEAA20684C38004F979F /* ListKW.swift in Sources */,
+				D6DBDEAB20684C38004F979F /* MapKW.swift in Sources */,
+				D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */,
+				D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */,
+				D6DBDEAE20684C38004F979F /* Reader.swift in Sources */,
+				D6DBDEAF20684C38004F979F /* State.swift in Sources */,
+				D6DBDEB020684C38004F979F /* Try.swift in Sources */,
+				D6DBDEB120684C38004F979F /* Tuple.swift in Sources */,
+				D6DBDEB220684C38004F979F /* Validated.swift in Sources */,
+				D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */,
+				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
+				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
+				D6DBDEB620684C38004F979F /* Coyoneda.swift in Sources */,
+				D6DBDEB720684C38004F979F /* Free.swift in Sources */,
+				D6DBDEB820684C38004F979F /* Yoneda.swift in Sources */,
+				D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */,
+				D6DBDEBA20684C38004F979F /* NumberInstances.swift in Sources */,
+				D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */,
+				D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */,
+				D6DBDEBD20684C38004F979F /* Predef.swift in Sources */,
+				D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */,
+				D6DBDEBF20684C38004F979F /* MaybeT.swift in Sources */,
+				D6DBDEC020684C38004F979F /* StateT.swift in Sources */,
+				D6DBDEC120684C38004F979F /* WriterT.swift in Sources */,
+				D6DBDEC220684C38004F979F /* Typeclass.swift in Sources */,
+				D6DBDEC320684C38004F979F /* Alternative.swift in Sources */,
+				D6DBDEC420684C38004F979F /* Applicative.swift in Sources */,
+				D6DBDEC520684C38004F979F /* ApplicativeError.swift in Sources */,
+				D6DBDEC620684C38004F979F /* Bifoldable.swift in Sources */,
+				D6DBDEC720684C38004F979F /* Bimonad.swift in Sources */,
+				D6DBDEC820684C38004F979F /* Comonad.swift in Sources */,
+				D6DBDEC920684C38004F979F /* Composed.swift in Sources */,
+				D6DBDECA20684C38004F979F /* ComposedFoldable.swift in Sources */,
+				D6DBDECB20684C38004F979F /* Eq.swift in Sources */,
+				D6DBDECC20684C38004F979F /* Foldable.swift in Sources */,
+				D6DBDECD20684C38004F979F /* Functor.swift in Sources */,
+				D6DBDECE20684C38004F979F /* FunctorFilter.swift in Sources */,
+				D6DBDECF20684C38004F979F /* Inject.swift in Sources */,
+				D6DBDED020684C38004F979F /* Monad.swift in Sources */,
+				D6DBDED120684C38004F979F /* MonadCombine.swift in Sources */,
+				D6DBDED220684C38004F979F /* MonadError.swift in Sources */,
+				D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */,
+				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
+				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
+				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
+				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
+				D6DBDED820684C38004F979F /* MonoidK.swift in Sources */,
+				D6DBDED920684C38004F979F /* NonEmptyReducible.swift in Sources */,
+				D6DBDEDA20684C38004F979F /* Order.swift in Sources */,
+				D6DBDEDB20684C38004F979F /* Reducible.swift in Sources */,
+				D6DBDEDC20684C38004F979F /* Semigroup.swift in Sources */,
+				D6DBDEDD20684C38004F979F /* SemigroupK.swift in Sources */,
+				D6DBDEDE20684C38004F979F /* Traverse.swift in Sources */,
+				D6DBDEDF20684C38004F979F /* TraverseFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,86 +1655,6 @@
 				OBJ_288 /* OrderLaws.swift in Sources */,
 				OBJ_289 /* SemigroupKLaws.swift in Sources */,
 				OBJ_290 /* SemigroupLaws.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_304 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_305 /* AdapterProtocols.swift in Sources */,
-				OBJ_306 /* AssertionDispatcher.swift in Sources */,
-				OBJ_307 /* AssertionRecorder.swift in Sources */,
-				OBJ_308 /* NMBExpectation.swift in Sources */,
-				OBJ_309 /* NMBObjCMatcher.swift in Sources */,
-				OBJ_310 /* NimbleEnvironment.swift in Sources */,
-				OBJ_311 /* NimbleXCTestHandler.swift in Sources */,
-				OBJ_312 /* ExceptionCapture.swift in Sources */,
-				OBJ_313 /* DSL+Wait.swift in Sources */,
-				OBJ_314 /* DSL.swift in Sources */,
-				OBJ_315 /* Expectation.swift in Sources */,
-				OBJ_316 /* ExpectationMessage.swift in Sources */,
-				OBJ_317 /* Expression.swift in Sources */,
-				OBJ_318 /* FailureMessage.swift in Sources */,
-				OBJ_319 /* AllPass.swift in Sources */,
-				OBJ_320 /* AsyncMatcherWrapper.swift in Sources */,
-				OBJ_321 /* BeAKindOf.swift in Sources */,
-				OBJ_322 /* BeAnInstanceOf.swift in Sources */,
-				OBJ_323 /* BeCloseTo.swift in Sources */,
-				OBJ_324 /* BeEmpty.swift in Sources */,
-				OBJ_325 /* BeGreaterThan.swift in Sources */,
-				OBJ_326 /* BeGreaterThanOrEqualTo.swift in Sources */,
-				OBJ_327 /* BeIdenticalTo.swift in Sources */,
-				OBJ_328 /* BeLessThan.swift in Sources */,
-				OBJ_329 /* BeLessThanOrEqual.swift in Sources */,
-				OBJ_330 /* BeLogical.swift in Sources */,
-				OBJ_331 /* BeNil.swift in Sources */,
-				OBJ_332 /* BeVoid.swift in Sources */,
-				OBJ_333 /* BeginWith.swift in Sources */,
-				OBJ_334 /* Contain.swift in Sources */,
-				OBJ_335 /* ContainElementSatisfying.swift in Sources */,
-				OBJ_336 /* EndWith.swift in Sources */,
-				OBJ_337 /* Equal.swift in Sources */,
-				OBJ_338 /* HaveCount.swift in Sources */,
-				OBJ_339 /* Match.swift in Sources */,
-				OBJ_340 /* MatchError.swift in Sources */,
-				OBJ_341 /* MatcherFunc.swift in Sources */,
-				OBJ_342 /* MatcherProtocols.swift in Sources */,
-				OBJ_343 /* PostNotification.swift in Sources */,
-				OBJ_344 /* Predicate.swift in Sources */,
-				OBJ_345 /* RaisesException.swift in Sources */,
-				OBJ_346 /* SatisfyAnyOf.swift in Sources */,
-				OBJ_347 /* ThrowAssertion.swift in Sources */,
-				OBJ_348 /* ThrowError.swift in Sources */,
-				OBJ_349 /* ToSucceed.swift in Sources */,
-				OBJ_350 /* Async.swift in Sources */,
-				OBJ_351 /* Errors.swift in Sources */,
-				OBJ_352 /* Functional.swift in Sources */,
-				OBJ_353 /* SourceLocation.swift in Sources */,
-				OBJ_354 /* Stringers.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_359 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_360 /* Arbitrary.swift in Sources */,
-				OBJ_361 /* Cartesian.swift in Sources */,
-				OBJ_362 /* Check.swift in Sources */,
-				OBJ_363 /* CoArbitrary.swift in Sources */,
-				OBJ_364 /* Compose.swift in Sources */,
-				OBJ_365 /* Gen.swift in Sources */,
-				OBJ_366 /* Lattice.swift in Sources */,
-				OBJ_367 /* Modifiers.swift in Sources */,
-				OBJ_368 /* Property.swift in Sources */,
-				OBJ_369 /* Random.swift in Sources */,
-				OBJ_370 /* Rose.swift in Sources */,
-				OBJ_371 /* State.swift in Sources */,
-				OBJ_372 /* Test.swift in Sources */,
-				OBJ_373 /* Testable.swift in Sources */,
-				OBJ_374 /* Witness.swift in Sources */,
-				OBJ_375 /* WitnessedArbitrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,80 +1738,339 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_295 /* PBXTargetDependency */ = {
+		D6D624412068141800739E2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "Nimble::Nimble" /* Nimble */;
-			targetProxy = D653FC432067C58D00535EF6 /* PBXContainerItemProxy */;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = D6D624422068141800739E2D /* PBXContainerItemProxy */;
 		};
-		OBJ_297 /* PBXTargetDependency */ = {
+		D6D62520206817A700739E2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = "SwiftCheck::SwiftCheck" /* SwiftCheck */;
-			targetProxy = D653FC442067C58D00535EF6 /* PBXContainerItemProxy */;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = D6D62521206817A700739E2D /* PBXContainerItemProxy */;
 		};
 		OBJ_299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
 			targetProxy = D653FC452067C58D00535EF6 /* PBXContainerItemProxy */;
 		};
-		OBJ_456 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::BowTests" /* BowTests */;
-			targetProxy = D653FC462067C58E00535EF6 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_225 /* Debug */ = {
+		D6D6247A2068141800739E2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Carthage/Build/tvOS/**",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos11.2;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = BowTests;
 			};
 			name = Debug;
 		};
-		OBJ_226 /* Release */ = {
+		D6D6247B2068141800739E2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Carthage/Build/tvOS/**",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos11.2;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = BowTests;
 			};
 			name = Release;
 		};
-		OBJ_231 /* Debug */ = {
+		D6D6251B2068178800739E2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowmacOS";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Bow;
 			};
 			name = Debug;
 		};
-		OBJ_232 /* Release */ = {
+		D6D6251C2068178800739E2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowmacOS";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Bow;
 			};
 			name = Release;
 		};
-		OBJ_237 /* Debug */ = {
+		D6D62559206817A700739E2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Carthage/Build/Mac/**",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = BowTests;
 			};
 			name = Debug;
 		};
-		OBJ_238 /* Release */ = {
+		D6D6255A206817A700739E2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Carthage/Build/Mac/**",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.13;
+				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 4.0;
+				TARGET_NAME = BowTests;
+			};
+			name = Release;
+		};
+		D6D625AC206841B300739E2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowwatchOS";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos4.2;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Bow;
+			};
+			name = Debug;
+		};
+		D6D625AD206841B300739E2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowwatchOS";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos4.2;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SWIFT_VERSION = 4.0;
+				TARGET_NAME = Bow;
+			};
+			name = Release;
+		};
+		D6DBDE9820684BEB004F979F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 84PJ9JE3TM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TestTVOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.TestTVOS";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D6DBDE9920684BEB004F979F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 84PJ9JE3TM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TestTVOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.TestTVOS";
+				PRODUCT_MODULE_NAME = "$(PROJECT_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.2;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1360,13 +2080,18 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/BowTests_Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SDKROOT = iphoneos11.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = BowTests;
 			};
@@ -1378,13 +2103,18 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/BowTests_Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SDKROOT = iphoneos11.2;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = BowTests;
 			};
@@ -1412,111 +2142,25 @@
 			};
 			name = Debug;
 		};
-		OBJ_302 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/Nimble_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Nimble;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = Nimble;
-			};
-			name = Debug;
-		};
-		OBJ_303 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/Nimble_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Nimble;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = Nimble;
-			};
-			name = Release;
-		};
-		OBJ_357 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/SwiftCheck_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SwiftCheck;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = SwiftCheck;
-			};
-			name = Debug;
-		};
-		OBJ_358 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Bow.xcodeproj/SwiftCheck_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SwiftCheck;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGET_NAME = SwiftCheck;
-			};
-			name = Release;
-		};
 		OBJ_378 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Bow;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bow";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = Bow;
 			};
@@ -1528,17 +2172,19 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(SRCROOT)/Carthage/Build/iOS/**",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Bow;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bow";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.0;
 				TARGET_NAME = Bow;
 			};
@@ -1564,53 +2210,59 @@
 			};
 			name = Release;
 		};
-		OBJ_454 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		OBJ_455 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D6D624792068141800739E2D /* Build configuration list for PBXNativeTarget "BowTests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D6247A2068141800739E2D /* Debug */,
+				D6D6247B2068141800739E2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D6D6251A2068178800739E2D /* Build configuration list for PBXNativeTarget "Bow-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D6251B2068178800739E2D /* Debug */,
+				D6D6251C2068178800739E2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D6D62558206817A700739E2D /* Build configuration list for PBXNativeTarget "BowTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D62559206817A700739E2D /* Debug */,
+				D6D6255A206817A700739E2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D6D625AB206841B300739E2D /* Build configuration list for PBXNativeTarget "Bow-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D625AC206841B300739E2D /* Debug */,
+				D6D625AD206841B300739E2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D6DBDE9720684BEB004F979F /* Build configuration list for PBXNativeTarget "Bow-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6DBDE9820684BEB004F979F /* Debug */,
+				D6DBDE9920684BEB004F979F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		OBJ_2 /* Build configuration list for PBXProject "Bow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
 				OBJ_4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_224 /* Build configuration list for PBXNativeTarget "BowPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_225 /* Debug */,
-				OBJ_226 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_230 /* Build configuration list for PBXNativeTarget "NimblePackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_231 /* Debug */,
-				OBJ_232 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_236 /* Build configuration list for PBXNativeTarget "SwiftCheckPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_237 /* Debug */,
-				OBJ_238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1624,38 +2276,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_301 /* Build configuration list for PBXNativeTarget "Nimble" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_302 /* Debug */,
-				OBJ_303 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_356 /* Build configuration list for PBXNativeTarget "SwiftCheck" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_357 /* Debug */,
-				OBJ_358 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		OBJ_377 /* Build configuration list for PBXNativeTarget "Bow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				OBJ_378 /* Debug */,
 				OBJ_379 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_453 /* Build configuration list for PBXAggregateTarget "BowPackageTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_454 /* Debug */,
-				OBJ_455 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

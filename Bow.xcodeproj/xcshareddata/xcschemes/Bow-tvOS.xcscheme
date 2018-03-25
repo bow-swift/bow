@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "9999"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,37 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Nimble::Nimble"
-               BuildableName = "Nimble.framework"
-               BlueprintName = "Nimble"
-               ReferencedContainer = "container:Bow.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftCheck::SwiftCheck"
-               BuildableName = "SwiftCheck.framework"
-               BlueprintName = "SwiftCheck"
-               ReferencedContainer = "container:Bow.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Bow::Bow"
-               BuildableName = "Bow.framework"
-               BlueprintName = "Bow"
+               BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
+               BuildableName = "Bow_tvOS.framework"
+               BlueprintName = "Bow-tvOS"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,13 +33,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Bow::BowTests"
+               BlueprintIdentifier = "D6D624402068141800739E2D"
                BuildableName = "BowTests.xctest"
-               BlueprintName = "BowTests"
+               BlueprintName = "BowTests-tvOS"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
+            BuildableName = "Bow_tvOS.framework"
+            BlueprintName = "Bow-tvOS"
+            ReferencedContainer = "container:Bow.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -85,9 +66,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Nimble::Nimble"
-            BuildableName = "Nimble.framework"
-            BlueprintName = "Nimble"
+            BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
+            BuildableName = "Bow_tvOS.framework"
+            BlueprintName = "Bow-tvOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -100,6 +81,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
+            BuildableName = "Bow_tvOS.framework"
+            BlueprintName = "Bow-tvOS"
+            ReferencedContainer = "container:Bow.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
