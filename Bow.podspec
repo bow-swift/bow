@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.summary     = "Bow is a library for Typed Functional Programming in Swift."
   s.homepage    = "https://github.com/arrow-kt/bow"
   s.license     = { :type => "Copyright" }
-  s.authors     = { "Tomas Ruiz" => "truizlop@gmail.com" }
+  s.authors     = "The Bow authors"
 
   s.requires_arc = true
   s.osx.deployment_target = "10.9"
