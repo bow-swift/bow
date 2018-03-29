@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
-               BuildableName = "Bow_tvOS.framework"
+               BuildableName = "Bow.framework"
                BlueprintName = "Bow-tvOS"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
-            BuildableName = "Bow_tvOS.framework"
+            BuildableName = "Bow.framework"
             BlueprintName = "Bow-tvOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -67,7 +67,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
-            BuildableName = "Bow_tvOS.framework"
+            BuildableName = "Bow.framework"
             BlueprintName = "Bow-tvOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -85,7 +85,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6DBDE9120684BEB004F979F"
-            BuildableName = "Bow_tvOS.framework"
+            BuildableName = "Bow.framework"
             BlueprintName = "Bow-tvOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
