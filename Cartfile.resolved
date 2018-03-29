@@ -1,0 +1,3 @@
+github "Quick/Nimble" "v7.0.3"
+github "trill-lang/FileCheck" "0.0.6"
+github "typelift/SwiftCheck" "0.9.1"
