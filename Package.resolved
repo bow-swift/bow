@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FileCheck",
+        "repositoryURL": "https://github.com/trill-lang/FileCheck.git",
+        "state": {
+          "branch": null,
+          "revision": "34ea75a35780396a2cfa5019ec799879b48dd960",
+          "version": "0.0.6"
+        }
+      },
+      {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble",
+        "state": {
+          "branch": null,
+          "revision": "22800b0954c89344bb8c87f8ab93378076716fb7",
+          "version": "7.0.3"
+        }
+      },
+      {
+        "package": "SwiftCheck",
+        "repositoryURL": "https://github.com/typelift/SwiftCheck",
+        "state": {
+          "branch": null,
+          "revision": "df82fb889864945c64458f38846702af729b3ee4",
+          "version": "0.9.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

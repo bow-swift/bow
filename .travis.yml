@@ -1,0 +1,9 @@
+language: objective-c
+osx_image: xcode9.1
+
+before_install:
+  - carthage bootstrap
+
+script:
+  - set -o pipefail
+  - xcodebuild test -project Bow.xcodeproj -scheme Bow -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=11.1,name=iPhone X" | xcpretty -c
