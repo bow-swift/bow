@@ -515,10 +515,7 @@
 		D6D6251D2068178800739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D6255B206817A700739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D625AE206841B300739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6DBDE8B206846BE004F979F /* Bow-macOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-macOS copy-Info.plist"; path = "/Users/victorg/Documents/Personal/FunctionalHub/Swift/bow/Bow-macOS copy-Info.plist"; sourceTree = "<absolute>"; };
 		D6DBDE9220684BEB004F979F /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6DBDE9420684BEB004F979F /* TestTVOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTVOS.h; sourceTree = "<group>"; };
-		D6DBDE9520684BEB004F979F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		OBJ_10 /* Cokleisli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cokleisli.swift; sourceTree = "<group>"; };
 		OBJ_100 /* EvalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvalTest.swift; sourceTree = "<group>"; };
 		OBJ_101 /* IdTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTest.swift; sourceTree = "<group>"; };
@@ -747,15 +744,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D6DBDE9320684BEB004F979F /* TestTVOS */ = {
-			isa = PBXGroup;
-			children = (
-				D6DBDE9420684BEB004F979F /* TestTVOS.h */,
-				D6DBDE9520684BEB004F979F /* Info.plist */,
-			);
-			path = TestTVOS;
-			sourceTree = "<group>";
-		};
 		OBJ_109 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,11 +877,9 @@
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_87 /* Tests */,
-				D6DBDE9320684BEB004F979F /* TestTVOS */,
 				OBJ_218 /* Products */,
 				D68A51F9206811C6008DA945 /* Build */,
 				D6D623EF2068134800739E2D /* Frameworks */,
-				D6DBDE8B206846BE004F979F /* Bow-macOS copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1204,10 +1190,10 @@
 				"Bow::Bow" /* Bow */,
 				D6D624D12068178800739E2D /* Bow-macOS */,
 				D6D62562206841B300739E2D /* Bow-watchOS */,
+				D6DBDE9120684BEB004F979F /* Bow-tvOS */,
 				"Bow::BowTests" /* BowTests */,
 				D6D624402068141800739E2D /* BowTests-tvOS */,
 				D6D6251F206817A700739E2D /* BowTests-macOS */,
-				D6DBDE9120684BEB004F979F /* Bow-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -1989,11 +1975,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = TestTVOS/Info.plist;
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.TestTVOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowTVOS";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME)";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = appletvos;
@@ -2055,11 +2041,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = TestTVOS/Info.plist;
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.TestTVOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowTVOS";
 				PRODUCT_MODULE_NAME = "$(PROJECT_NAME)";
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = appletvos;
