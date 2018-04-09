@@ -1,5 +1,7 @@
 # Bow
 
+[![Build Status](https://travis-ci.org/arrow-kt/bow.svg?branch=master)](https://travis-ci.org/arrow-kt/bow)
+[![codecov](https://codecov.io/gh/arrow-kt/bow/branch/master/graph/badge.svg)](https://codecov.io/gh/arrow-kt/bow)
 [![Gitter](https://badges.gitter.im/arrow-kt/bow.svg)](https://gitter.im/arrow-kt/bow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Bow is a library for Typed Functional Programming in Swift.
@@ -19,6 +21,3 @@ After this, grab all the project dependencies running:
 `carthage bootstrap`
 
 Now, you can open `Bow.xcodeproj` with Xcode and run the test to see that everything is working.
-
-
-
