@@ -9,24 +9,25 @@
 import Foundation
 
 public class ForFunction0 {}
+public typealias Function0Of<A> = Kind<ForFunction0, A>
 
-public class Function0<A> : Kind<ForFunction0, A> {
+public class Function0<A> : Function0Of<A> {
     private let f : () -> A
     
     public static func pure(_ a : A) -> Function0<A> {
         return Function0({ a })
     }
     
-    public static func loop<B>(_ a : A, _ f : (A) -> Kind<ForFunction0, Either<A, B>>) -> B {
+    public static func loop<B>(_ a : A, _ f : (A) -> Function0Of<Either<A, B>>) -> B {
         let result = (f(a) as! Function0<Either<A, B>>).extract()
         return result.fold({ a in loop(a, f) }, id)
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Kind<ForFunction0, Either<A, B>>) -> Function0<B> {
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Function0Of<Either<A, B>>) -> Function0<B> {
         return Function0<B>({ loop(a, f) })
     }
     
-    public static func fix(_ fa : Kind<ForFunction0, A>) -> Function0<A> {
+    public static func fix(_ fa : Function0Of<A>) -> Function0<A> {
         return fa.fix()
     }
     
@@ -94,7 +95,7 @@ public extension Function0 {
 public class Function0Functor : Functor {
     public typealias F = ForFunction0
     
-    public func map<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> B) -> Kind<ForFunction0, B> {
+    public func map<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> B) -> Function0Of<B> {
         return fa.fix().map(f)
     }
 }
@@ -110,27 +111,27 @@ public class Function0Applicative : Function0Functor, Applicative {
 }
 
 public class Function0Monad : Function0Applicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> Kind<ForFunction0, B>) -> Kind<ForFunction0, B> {
+    public func flatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> Function0Of<B>) -> Function0Of<B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForFunction0, Either<A, B>>) -> Kind<ForFunction0, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Function0Of<Either<A, B>>) -> Function0Of<B> {
         return Function0.tailRecM(a, f)
     }
 }
 
 public class Function0Bimonad : Function0Monad, Bimonad {
-    public func coflatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (Kind<ForFunction0, A>) -> B) -> Kind<ForFunction0, B> {
+    public func coflatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (Function0Of<A>) -> B) -> Function0Of<B> {
         return fa.fix().coflatMap(f)
     }
     
-    public func extract<A>(_ fa: Kind<ForFunction0, A>) -> A {
+    public func extract<A>(_ fa: Function0Of<A>) -> A {
         return fa.fix().extract()
     }
 }
 
 public class Function0Eq<B, EqB> : Eq where EqB : Eq, EqB.A == B{
-    public typealias A = Kind<ForFunction0, B>
+    public typealias A = Function0Of<B>
     
     private let eq : EqB
     
@@ -138,7 +139,7 @@ public class Function0Eq<B, EqB> : Eq where EqB : Eq, EqB.A == B{
         self.eq = eq
     }
     
-    public func eqv(_ a: Kind<ForFunction0, B>, _ b: Kind<ForFunction0, B>) -> Bool {
+    public func eqv(_ a: Function0Of<B>, _ b: Function0Of<B>) -> Bool {
         return eq.eqv(a.fix().extract(), b.fix().extract())
     }
 }
