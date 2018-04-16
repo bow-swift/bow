@@ -75,7 +75,7 @@
 		D6D624E12068178800739E2D /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
 		D6D624E22068178800739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6D624E32068178800739E2D /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
-		D6D624E42068178800739E2D /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6D624E42068178800739E2D /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
 		D6D624E52068178800739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
 		D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6D624E72068178800739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
@@ -194,7 +194,7 @@
 		D6D62572206841B300739E2D /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
 		D6D62573206841B300739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6D62574206841B300739E2D /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
-		D6D62575206841B300739E2D /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6D62575206841B300739E2D /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
 		D6D62576206841B300739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
 		D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6D62578206841B300739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
@@ -264,7 +264,7 @@
 		D6DBDEA820684C38004F979F /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
 		D6DBDEA920684C38004F979F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6DBDEAA20684C38004F979F /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
-		D6DBDEAB20684C38004F979F /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		D6DBDEAB20684C38004F979F /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
 		D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
 		D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6DBDEAE20684C38004F979F /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
@@ -380,7 +380,7 @@
 		OBJ_395 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
 		OBJ_396 /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		OBJ_397 /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
-		OBJ_398 /* MapKW.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapKW.swift */; };
+		OBJ_398 /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
 		OBJ_399 /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
 		OBJ_400 /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		OBJ_401 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
@@ -569,7 +569,7 @@
 		OBJ_25 /* Id.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
 		OBJ_26 /* Ior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		OBJ_27 /* ListK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListK.swift; sourceTree = "<group>"; };
-		OBJ_28 /* MapKW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKW.swift; sourceTree = "<group>"; };
+		OBJ_28 /* MapK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapK.swift; sourceTree = "<group>"; };
 		OBJ_29 /* Maybe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maybe.swift; sourceTree = "<group>"; };
 		OBJ_30 /* NonEmptyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyList.swift; sourceTree = "<group>"; };
 		OBJ_31 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
@@ -816,7 +816,7 @@
 				OBJ_25 /* Id.swift */,
 				OBJ_26 /* Ior.swift */,
 				OBJ_27 /* ListK.swift */,
-				OBJ_28 /* MapKW.swift */,
+				OBJ_28 /* MapK.swift */,
 				OBJ_29 /* Maybe.swift */,
 				OBJ_30 /* NonEmptyList.swift */,
 				OBJ_31 /* Reader.swift */,
@@ -1330,7 +1330,7 @@
 				D6D624E12068178800739E2D /* Id.swift in Sources */,
 				D6D624E22068178800739E2D /* Ior.swift in Sources */,
 				D6D624E32068178800739E2D /* ListK.swift in Sources */,
-				D6D624E42068178800739E2D /* MapKW.swift in Sources */,
+				D6D624E42068178800739E2D /* MapK.swift in Sources */,
 				D6D624E52068178800739E2D /* Maybe.swift in Sources */,
 				D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */,
 				D6D624E72068178800739E2D /* Reader.swift in Sources */,
@@ -1459,7 +1459,7 @@
 				D6D62572206841B300739E2D /* Id.swift in Sources */,
 				D6D62573206841B300739E2D /* Ior.swift in Sources */,
 				D6D62574206841B300739E2D /* ListK.swift in Sources */,
-				D6D62575206841B300739E2D /* MapKW.swift in Sources */,
+				D6D62575206841B300739E2D /* MapK.swift in Sources */,
 				D6D62576206841B300739E2D /* Maybe.swift in Sources */,
 				D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */,
 				D6D62578206841B300739E2D /* Reader.swift in Sources */,
@@ -1536,7 +1536,7 @@
 				D6DBDEA820684C38004F979F /* Id.swift in Sources */,
 				D6DBDEA920684C38004F979F /* Ior.swift in Sources */,
 				D6DBDEAA20684C38004F979F /* ListK.swift in Sources */,
-				D6DBDEAB20684C38004F979F /* MapKW.swift in Sources */,
+				D6DBDEAB20684C38004F979F /* MapK.swift in Sources */,
 				D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */,
 				D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */,
 				D6DBDEAE20684C38004F979F /* Reader.swift in Sources */,
@@ -1665,7 +1665,7 @@
 				OBJ_395 /* Id.swift in Sources */,
 				OBJ_396 /* Ior.swift in Sources */,
 				OBJ_397 /* ListK.swift in Sources */,
-				OBJ_398 /* MapKW.swift in Sources */,
+				OBJ_398 /* MapK.swift in Sources */,
 				OBJ_399 /* Maybe.swift in Sources */,
 				OBJ_400 /* NonEmptyList.swift in Sources */,
 				OBJ_401 /* Reader.swift in Sources */,

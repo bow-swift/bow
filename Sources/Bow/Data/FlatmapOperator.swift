@@ -34,7 +34,7 @@ public func >>=<A, B>(_ fa : ListK<A>, _ f : @escaping (A) -> ListK<B>) -> ListK
     return fa.flatMap(f)
 }
 
-public func >>=<K, A, B>(_ fa : MapKW<K, A>, _ f : @escaping (A) -> MapKW<K, B>) -> MapKW<K, B> {
+public func >>=<K, A, B>(_ fa : MapK<K, A>, _ f : @escaping (A) -> MapK<K, B>) -> MapK<K, B> {
     return fa.flatMap(f)
 }
 
