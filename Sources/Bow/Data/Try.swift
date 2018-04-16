@@ -14,9 +14,9 @@ public enum TryError : Error {
     case unsupportedOperation(String)
 }
 
-public class TryF {}
+public class TryKind {}
 
-public class Try<A> : Kind<TryF, A> {
+public class Try<A> : Kind<TryKind, A> {
     public static func success(_ value : A) -> Try<A> {
         return Success<A>(value)
     }
@@ -50,7 +50,7 @@ public class Try<A> : Kind<TryF, A> {
                          })
     }
     
-    public static func fix(_ fa : Kind<TryF, A>) -> Try<A> {
+    public static func fix(_ fa : Kind<TryKind, A>) -> Try<A> {
         return fa.fix()
     }
     
@@ -149,7 +149,7 @@ extension Try : CustomStringConvertible {
     }
 }
 
-public extension Kind where F == TryF {
+public extension Kind where F == TryKind {
     public func fix() -> Try<A> {
         return self as! Try<A>
     }
@@ -178,29 +178,29 @@ public extension Try {
 }
 
 public class TryFunctor : Functor {
-    public typealias F = TryF
+    public typealias F = TryKind
     
-    public func map<A, B>(_ fa: Kind<TryF, A>, _ f: @escaping (A) -> B) -> Kind<TryF, B> {
+    public func map<A, B>(_ fa: Kind<TryKind, A>, _ f: @escaping (A) -> B) -> Kind<TryKind, B> {
         return fa.fix().map(f)
     }
 }
 
 public class TryApplicative : TryFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<TryF, A> {
+    public func pure<A>(_ a: A) -> Kind<TryKind, A> {
         return Try<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<TryF, A>, _ ff: Kind<TryF, (A) -> B>) -> Kind<TryF, B> {
+    public func ap<A, B>(_ fa: Kind<TryKind, A>, _ ff: Kind<TryKind, (A) -> B>) -> Kind<TryKind, B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class TryMonad : TryApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<TryF, A>, _ f: @escaping (A) -> Kind<TryF, B>) -> Kind<TryF, B> {
+    public func flatMap<A, B>(_ fa: Kind<TryKind, A>, _ f: @escaping (A) -> Kind<TryKind, B>) -> Kind<TryKind, B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<TryF, Either<A, B>>) -> Kind<TryF, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<TryKind, Either<A, B>>) -> Kind<TryKind, B> {
         return Try<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
@@ -208,24 +208,24 @@ public class TryMonad : TryApplicative, Monad {
 public class TryMonadError<C> : TryMonad, MonadError where C : Error{
     public typealias E = C
     
-    public func raiseError<A>(_ e: C) -> Kind<TryF, A> {
+    public func raiseError<A>(_ e: C) -> Kind<TryKind, A> {
         return Try<A>.failure(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<TryF, A>, _ f: @escaping (C) -> Kind<TryF, A>) -> Kind<TryF, A> {
+    public func handleErrorWith<A>(_ fa: Kind<TryKind, A>, _ f: @escaping (C) -> Kind<TryKind, A>) -> Kind<TryKind, A> {
         return fa.fix().recoverWith({ e in f(e as! C).fix() })
     }
 }
 
 public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind<TryF, R>
+    public typealias A = Kind<TryKind, R>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind<TryF, R>, _ b: Kind<TryF, R>) -> Bool {
+    public func eqv(_ a: Kind<TryKind, R>, _ b: Kind<TryKind, R>) -> Bool {
         let a = Try.fix(a)
         let b = Try.fix(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},

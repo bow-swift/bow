@@ -33,24 +33,24 @@ class IOTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IOF>.check(functor: IO<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<IOKind>.check(functor: IO<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<IOF>.check(applicative: IO<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<IOKind>.check(applicative: IO<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<IOF>.check(monad: IO<Int>.monad(), eq: self.eq)
+        MonadLaws<IOKind>.check(monad: IO<Int>.monad(), eq: self.eq)
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<IOF, Error>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
+        MonadErrorLaws<IOKind, Error>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
     
     func testSemigroupLaws() {
         property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            SemigroupLaws<Kind<IOF, Int>>.check(
+            SemigroupLaws<Kind<IOKind, Int>>.check(
                 semigroup: IO<Int>.semigroup(Int.sumMonoid),
                 a: IO.pure(a),
                 b: IO.pure(b),
@@ -61,11 +61,11 @@ class IOTest: XCTestCase {
     
     func testMonoidLaws() {
         property("Monoid laws") <- forAll { (a : Int) in
-            MonoidLaws<Kind<IOF, Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
+            MonoidLaws<Kind<IOKind, Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
         }
     }
     
     func testAsyncContextLaws() {
-        AsyncContextLaws<IOF>.check(asyncContext: IO<Int>.asyncContext(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
+        AsyncContextLaws<IOKind>.check(asyncContext: IO<Int>.asyncContext(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
     }
 }

@@ -65,14 +65,14 @@ fileprivate let program = Free.fix(Free<OpsF, Int>.monad().binding({ Ops<Any>.va
 
 fileprivate class MaybeInterpreter : FunctionK {
     fileprivate typealias F = OpsF
-    fileprivate typealias G = MaybeF
+    fileprivate typealias G = MaybeKind
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<MaybeF, A> {
+    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<MaybeKind, A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Maybe<Int>.some((op as! Value).a) as! Kind<MaybeF, A>
-        case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! Kind<MaybeF, A>
-        case is Subtract: return Maybe<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! Kind<MaybeF, A>
+        case is Value: return Maybe<Int>.some((op as! Value).a) as! Kind<MaybeKind, A>
+        case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! Kind<MaybeKind, A>
+        case is Subtract: return Maybe<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! Kind<MaybeKind, A>
         default:
             fatalError("No other options")
         }
@@ -81,14 +81,14 @@ fileprivate class MaybeInterpreter : FunctionK {
 
 fileprivate class IdInterpreter : FunctionK {
     fileprivate typealias F = OpsF
-    fileprivate typealias G = IdF
+    fileprivate typealias G = IdKind
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<IdF, A> {
+    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<IdKind, A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Id<Int>.pure((op as! Value).a) as! Kind<IdF, A>
-        case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! Kind<IdF, A>
-        case is Subtract: return Id<Int>.pure((op as! Subtract).a - (op as! Subtract).b) as! Kind<IdF, A>
+        case is Value: return Id<Int>.pure((op as! Value).a) as! Kind<IdKind, A>
+        case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! Kind<IdKind, A>
+        case is Subtract: return Id<Int>.pure((op as! Subtract).a - (op as! Subtract).b) as! Kind<IdKind, A>
         default:
             fatalError("No other options")
         }
@@ -104,7 +104,7 @@ class FreeTest: XCTestCase {
         XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))
     }
     
-    fileprivate var generator : (Int) -> Kind2<FreeF, OpsF, Int> {
+    fileprivate var generator : (Int) -> Kind2<FreeKind, OpsF, Int> {
         return { a in Ops<Any>.value(a) }
     }
     

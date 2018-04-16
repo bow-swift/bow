@@ -8,10 +8,10 @@
 
 import Foundation
 
-public typealias EitherPartial<A> = Kind<EitherF, A>
-public class EitherF {}
+public typealias EitherPartial<A> = Kind<EitherKind, A>
+public class EitherKind {}
 
-public class Either<A, B> : Kind2<EitherF, A, B> {
+public class Either<A, B> : Kind2<EitherKind, A, B> {
     public static func left(_ a : A) -> Either<A, B> {
         return Left<A, B>(a)
     }
@@ -32,7 +32,7 @@ public class Either<A, B> : Kind2<EitherF, A, B> {
             })
     }
     
-    public static func fix(_ fa : Kind2<EitherF, A, B>) -> Either<A, B> {
+    public static func fix(_ fa : Kind2<EitherKind, A, B>) -> Either<A, B> {
         return fa as! Either<A, B>
     }
     
@@ -174,21 +174,21 @@ public extension Either {
 public class EitherApplicative<C> : Applicative {
     public typealias F = EitherPartial<C>
     
-    public func pure<A>(_ a: A) -> Kind<Kind<EitherF, C>, A> {
+    public func pure<A>(_ a: A) -> Kind<Kind<EitherKind, C>, A> {
         return Either<C, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<Kind<EitherF, C>, A>, _ ff: Kind<Kind<EitherF, C>, (A) -> B>) -> Kind<Kind<EitherF, C>, B> {
+    public func ap<A, B>(_ fa: Kind<Kind<EitherKind, C>, A>, _ ff: Kind<Kind<EitherKind, C>, (A) -> B>) -> Kind<Kind<EitherKind, C>, B> {
         return Either.fix(fa).ap(Either.fix(ff))
     }
 }
 
 public class EitherMonad<C> : EitherApplicative<C>, Monad {
-    public func flatMap<A, B>(_ fa: Kind<Kind<EitherF, C>, A>, _ f: @escaping (A) -> Kind<Kind<EitherF, C>, B>) -> Kind<Kind<EitherF, C>, B> {
+    public func flatMap<A, B>(_ fa: Kind<Kind<EitherKind, C>, A>, _ f: @escaping (A) -> Kind<Kind<EitherKind, C>, B>) -> Kind<Kind<EitherKind, C>, B> {
         return Either.fix(fa).flatMap({ eca in Either.fix(f(eca)) })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<EitherF, C>, Either<A, B>>) -> Kind<Kind<EitherF, C>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<EitherKind, C>, Either<A, B>>) -> Kind<Kind<EitherKind, C>, B> {
         return Either<A, B>.tailRecM(a, f)
     }
 }
@@ -196,11 +196,11 @@ public class EitherMonad<C> : EitherApplicative<C>, Monad {
 public class EitherMonadError<C> : EitherMonad<C>, MonadError {
     public typealias E = C
     
-    public func raiseError<A>(_ e: C) -> Kind<Kind<EitherF, C>, A> {
+    public func raiseError<A>(_ e: C) -> Kind<Kind<EitherKind, C>, A> {
         return Either<C, A>.left(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<Kind<EitherF, C>, A>, _ f: @escaping (C) -> Kind<Kind<EitherF, C>, A>) -> Kind<Kind<EitherF, C>, A> {
+    public func handleErrorWith<A>(_ fa: Kind<Kind<EitherKind, C>, A>, _ f: @escaping (C) -> Kind<Kind<EitherKind, C>, A>) -> Kind<Kind<EitherKind, C>, A> {
         return Either.fix(fa).fold(f, constF(Either.fix(fa)))
     }
 }
@@ -208,17 +208,17 @@ public class EitherMonadError<C> : EitherMonad<C>, MonadError {
 public class EitherFoldable<C> : Foldable {
     public typealias F = EitherPartial<C>
     
-    public func foldL<A, B>(_ fa: Kind<Kind<EitherF, C>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: Kind<Kind<EitherKind, C>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return Either.fix(fa).foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<Kind<EitherF, C>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: Kind<Kind<EitherKind, C>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return Either.fix(fa).foldR(b, f)
     }
 }
 
 public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<Kind<EitherF, C>, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<Kind<EitherF, C>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<Kind<EitherKind, C>, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<Kind<EitherKind, C>, B>> where G == Appl.F, Appl : Applicative {
         return Either.fix(fa).traverse(f, applicative)
     }
 }
@@ -226,13 +226,13 @@ public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
 public class EitherSemigroupK<C> : SemigroupK {
     public typealias F = EitherPartial<C>
     
-    public func combineK<A>(_ x: Kind<Kind<EitherF, C>, A>, _ y: Kind<Kind<EitherF, C>, A>) -> Kind<Kind<EitherF, C>, A> {
+    public func combineK<A>(_ x: Kind<Kind<EitherKind, C>, A>, _ y: Kind<Kind<EitherKind, C>, A>) -> Kind<Kind<EitherKind, C>, A> {
         return Either.fix(x).combineK(Either.fix(y))
     }
 }
 
 public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = Kind2<EitherF, L, R>
+    public typealias A = Kind2<EitherKind, L, R>
     private let eql : EqL
     private let eqr : EqR
     
@@ -241,7 +241,7 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind2<EitherF, L, R>, _ b: Kind2<EitherF, L, R>) -> Bool {
+    public func eqv(_ a: Kind2<EitherKind, L, R>, _ b: Kind2<EitherKind, L, R>) -> Bool {
         return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
                                  { aRight in Either.fix(b).fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }

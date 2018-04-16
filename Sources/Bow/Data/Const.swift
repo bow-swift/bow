@@ -8,17 +8,17 @@
 
 import Foundation
 
-public class ConstF {}
-public typealias ConstPartial<A> = Kind<ConstF, A>
+public class ConstKind {}
+public typealias ConstPartial<A> = Kind<ConstKind, A>
 
-public class Const<A, T> : Kind2<ConstF, A, T> {
+public class Const<A, T> : Kind2<ConstKind, A, T> {
     public let value : A
     
     public static func pure(_ a : A) -> Const<A, T> {
         return Const<A, T>(a)
     }
     
-    public static func fix(_ fa : Kind2<ConstF, A, T>) -> Const<A, T>{
+    public static func fix(_ fa : Kind2<ConstKind, A, T>) -> Const<A, T>{
         return fa as! Const<A, T>
     }
     
@@ -30,11 +30,11 @@ public class Const<A, T> : Kind2<ConstF, A, T> {
         return Const<A, U>(value)
     }
     
-    public func traverse<F, U, Appl>(_ f : (T) -> Kind<F, U>, _ applicative : Appl) -> Kind<F, Kind2<ConstF, A, U>> where Appl : Applicative, Appl.F == F {
+    public func traverse<F, U, Appl>(_ f : (T) -> Kind<F, U>, _ applicative : Appl) -> Kind<F, Kind2<ConstKind, A, U>> where Appl : Applicative, Appl.F == F {
         return applicative.pure(retag())
     }
     
-    public func traverseFilter<F, U, Appl>(_ f : (T) -> Kind<F, Maybe<U>>, _ applicative : Appl) -> Kind<F, Kind2<ConstF, A, U>> where Appl : Applicative, Appl.F == F {
+    public func traverseFilter<F, U, Appl>(_ f : (T) -> Kind<F, Maybe<U>>, _ applicative : Appl) -> Kind<F, Kind2<ConstKind, A, U>> where Appl : Applicative, Appl.F == F {
         return applicative.pure(retag())
     }
     
@@ -90,7 +90,7 @@ public extension Const {
 public class ConstFunctor<R> : Functor {
     public typealias F = ConstPartial<R>
     
-    public func map<A, B>(_ fa: Kind<Kind<ConstF, R>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ConstF, R>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<ConstKind, R>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ConstKind, R>, B> {
         return Const.fix(fa).retag()
     }
 }
@@ -102,24 +102,24 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
         self.monoid = monoid
     }
     
-    public func pure<A>(_ a: A) -> Kind<Kind<ConstF, R>, A> {
+    public func pure<A>(_ a: A) -> Kind<Kind<ConstKind, R>, A> {
         return ConstMonoid(self.monoid).empty
     }
     
-    public func ap<A, B>(_ fa: Kind<Kind<ConstF, R>, A>, _ ff: Kind<Kind<ConstF, R>, (A) -> B>) -> Kind<Kind<ConstF, R>, B> {
+    public func ap<A, B>(_ fa: Kind<Kind<ConstKind, R>, A>, _ ff: Kind<Kind<ConstKind, R>, (A) -> B>) -> Kind<Kind<ConstKind, R>, B> {
         return Const.fix(fa).ap(Const.fix(ff), monoid)
     }
 }
 
 public class ConstSemigroup<R, S, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
-    public typealias A = Kind2<ConstF, R, S>
+    public typealias A = Kind2<ConstKind, R, S>
     private let semigroup : SemiG
     
     public init(_ semigroup : SemiG) {
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Kind2<ConstF, R, S>, _ b: Kind2<ConstF, R, S>) -> Kind2<ConstF, R, S> {
+    public func combine(_ a: Kind2<ConstKind, R, S>, _ b: Kind2<ConstKind, R, S>) -> Kind2<ConstKind, R, S> {
         return Const.fix(a).combine(Const.fix(b), semigroup)
     }
 }
@@ -132,7 +132,7 @@ public class ConstMonoid<R, S, Mono> : ConstSemigroup<R, S, Mono>, Monoid where 
         super.init(monoid)
     }
     
-    public var empty: Kind2<ConstF, R, S> {
+    public var empty: Kind2<ConstKind, R, S> {
         return Const(monoid.empty)
     }
 }
@@ -140,36 +140,36 @@ public class ConstMonoid<R, S, Mono> : ConstSemigroup<R, S, Mono>, Monoid where 
 public class ConstFoldable<R> : Foldable {
     public typealias F = ConstPartial<R>
     
-    public func foldL<A, B>(_ fa: Kind<Kind<ConstF, R>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: Kind<Kind<ConstKind, R>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return b
     }
     
-    public func foldR<A, B>(_ fa: Kind<Kind<ConstF, R>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: Kind<Kind<ConstKind, R>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return b
     }
 }
 
 public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<Kind<ConstF, R>, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<Kind<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<Kind<ConstKind, R>, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<Kind<ConstKind, R>, B>> where G == Appl.F, Appl : Applicative {
         return Const.fix(fa).traverse(f, applicative)
     }
 }
 
 public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
-    public func traverseFilter<A, B, G, Appl>(_ fa: Kind<Kind<ConstF, R>, A>, _ f: @escaping (A) -> Kind<G, Maybe<B>>, _ applicative: Appl) -> Kind<G, Kind<Kind<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverseFilter<A, B, G, Appl>(_ fa: Kind<Kind<ConstKind, R>, A>, _ f: @escaping (A) -> Kind<G, Maybe<B>>, _ applicative: Appl) -> Kind<G, Kind<Kind<ConstKind, R>, B>> where G == Appl.F, Appl : Applicative {
         return Const.fix(fa).traverseFilter(f, applicative)
     }
 }
 
 public class ConstEq<R, S, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind2<ConstF, R, S>
+    public typealias A = Kind2<ConstKind, R, S>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind2<ConstF, R, S>, _ b: Kind2<ConstF, R, S>) -> Bool {
+    public func eqv(_ a: Kind2<ConstKind, R, S>, _ b: Kind2<ConstKind, R, S>) -> Bool {
         return eqr.eqv(Const.fix(a).value, Const.fix(b).value)
     }
 }

@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class IOF {}
+public class IOKind {}
 
-public class IO<A> : Kind<IOF, A> {
+public class IO<A> : Kind<IOKind, A> {
     
-    public static func fix(_ fa : Kind<IOF, A>) -> IO<A> {
+    public static func fix(_ fa : Kind<IOKind, A>) -> IO<A> {
         return fa.fix()
     }
     
@@ -32,7 +32,7 @@ public class IO<A> : Kind<IOF, A> {
         return RaiseError(error)
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Kind<IOF, Either<A, B>>) -> IO<B> {
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Kind<IOKind, Either<A, B>>) -> IO<B> {
         return IO<Either<A, B>>.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO<B>.pure(b) })
@@ -175,7 +175,7 @@ public class IO<A> : Kind<IOF, A> {
         return Join(self.map(f))
     }
     
-    public func handleErrorWith(_ f : @escaping (Error) -> Kind<IOF, A>) -> IO<A> {
+    public func handleErrorWith(_ f : @escaping (Error) -> Kind<IOKind, A>) -> IO<A> {
         return attempt().flatMap{ either in either.fold({ e in f(e).fix() }, IO<A>.pure) }
     }
 }
@@ -290,7 +290,7 @@ fileprivate class Async<A> : IO<A> {
     }
 }
 
-public extension Kind where F == IOF {
+public extension Kind where F == IOKind {
     public func fix() -> IO<A> {
         return self as! IO<A>
     }
@@ -331,37 +331,37 @@ public extension IO {
 }
 
 public class IOFunctor : Functor {
-    public typealias F = IOF
+    public typealias F = IOKind
     
-    public func map<A, B>(_ fa: Kind<IOF, A>, _ f: @escaping (A) -> B) -> Kind<IOF, B> {
+    public func map<A, B>(_ fa: Kind<IOKind, A>, _ f: @escaping (A) -> B) -> Kind<IOKind, B> {
         return IO.fix(fa).map(f)
     }
 }
 
 public class IOApplicative : IOFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<IOF, A> {
+    public func pure<A>(_ a: A) -> Kind<IOKind, A> {
         return IO.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<IOF, A>, _ ff: Kind<IOF, (A) -> B>) -> Kind<IOF, B> {
+    public func ap<A, B>(_ fa: Kind<IOKind, A>, _ ff: Kind<IOKind, (A) -> B>) -> Kind<IOKind, B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class IOMonad : IOApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<IOF, A>, _ f: @escaping (A) -> Kind<IOF, B>) -> Kind<IOF, B> {
+    public func flatMap<A, B>(_ fa: Kind<IOKind, A>, _ f: @escaping (A) -> Kind<IOKind, B>) -> Kind<IOKind, B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IOF, Either<A, B>>) -> Kind<IOF, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IOKind, Either<A, B>>) -> Kind<IOKind, B> {
         return IO.tailRecM(a, f)
     }
 }
 
 public class IOAsyncContext : AsyncContext {
-    public typealias F = IOF
+    public typealias F = IOKind
     
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> Kind<IOF, A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> Kind<IOKind, A> {
         return IO.runAsync(fa)
     }
 }
@@ -369,17 +369,17 @@ public class IOAsyncContext : AsyncContext {
 public class IOMonadError : IOMonad, MonadError {
     public typealias E = Error
     
-    public func raiseError<A>(_ e: Error) -> Kind<IOF, A> {
+    public func raiseError<A>(_ e: Error) -> Kind<IOKind, A> {
         return IO.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<IOF, A>, _ f: @escaping (Error) -> Kind<IOF, A>) -> Kind<IOF, A> {
+    public func handleErrorWith<A>(_ fa: Kind<IOKind, A>, _ f: @escaping (Error) -> Kind<IOKind, A>) -> Kind<IOKind, A> {
         return fa.fix().handleErrorWith(f)
     }
 }
 
 public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
-    public typealias A = Kind<IOF, B>
+    public typealias A = Kind<IOKind, B>
     
     private let semigroup : SemiG
     
@@ -387,7 +387,7 @@ public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A 
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Kind<IOF, B>, _ b: Kind<IOF, B>) -> Kind<IOF, B> {
+    public func combine(_ a: Kind<IOKind, B>, _ b: Kind<IOKind, B>) -> Kind<IOKind, B> {
         return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
     }
 }
@@ -400,13 +400,13 @@ public class IOMonoid<B, Mono> : IOSemigroup<B, Mono>, Monoid where Mono : Monoi
         super.init(monoid)
     }
     
-    public var empty: Kind<IOF, B> {
+    public var empty: Kind<IOKind, B> {
         return IO.pure(monoid.empty)
     }
 }
 
 public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq, EqError.A == Error {
-    public typealias A = Kind<IOF, B>
+    public typealias A = Kind<IOKind, B>
     
     private let eq : EqB
     private let eqError : EqError
@@ -416,7 +416,7 @@ public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq
         self.eqError = eqError
     }
     
-    public func eqv(_ a: Kind<IOF, B>, _ b: Kind<IOF, B>) -> Bool {
+    public func eqv(_ a: Kind<IOKind, B>, _ b: Kind<IOKind, B>) -> Bool {
         var aValue, bValue : B?
         var aError, bError : Error?
         

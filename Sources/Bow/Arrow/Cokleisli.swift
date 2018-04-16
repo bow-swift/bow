@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class CokleisliF {}
+public class CokleisliKind {}
 public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
 
-public class Cokleisli<F, A, B> : Kind3<CokleisliF, F, A, B> {
+public class Cokleisli<F, A, B> : Kind3<CokleisliKind, F, A, B> {
     internal let run : (Kind<F, A>) -> B
     
     public static func pure(_ b : B) -> Cokleisli<F, A, B> {
@@ -22,7 +22,7 @@ public class Cokleisli<F, A, B> : Kind3<CokleisliF, F, A, B> {
         return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
     }
     
-    public static func fix(_ fa : Kind3<CokleisliF, F, A, B>) -> Cokleisli<F, A, B> {
+    public static func fix(_ fa : Kind3<CokleisliKind, F, A, B>) -> Cokleisli<F, A, B> {
         return fa as! Cokleisli<F, A, B>
     }
     

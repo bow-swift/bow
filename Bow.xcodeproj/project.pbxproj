@@ -949,18 +949,18 @@
 		OBJ_8 /* Bow */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* Arrow */,
 				OBJ_16 /* BooleanFunctions.swift */,
 				OBJ_17 /* Curry.swift */,
+				OBJ_44 /* HigherKinds.swift */,
+				OBJ_48 /* PartialApplication.swift */,
+				OBJ_49 /* Predef.swift */,
+				OBJ_55 /* Typeclass.swift */,
+				OBJ_9 /* Arrow */,
 				OBJ_18 /* Data */,
 				OBJ_36 /* Effects */,
 				OBJ_39 /* Free */,
-				OBJ_44 /* HigherKinds.swift */,
 				OBJ_45 /* Instances */,
-				OBJ_48 /* PartialApplication.swift */,
-				OBJ_49 /* Predef.swift */,
 				OBJ_50 /* Transformers */,
-				OBJ_55 /* Typeclass.swift */,
 				OBJ_56 /* Typeclasses */,
 			);
 			path = Bow;

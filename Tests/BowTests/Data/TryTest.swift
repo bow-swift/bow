@@ -11,7 +11,7 @@ import XCTest
 
 class TryTest: XCTestCase {
     
-    var generator : (Int) -> Kind<TryF, Int> {
+    var generator : (Int) -> Kind<TryKind, Int> {
         return { a in Try.pure(a) }
     }
     
@@ -23,22 +23,22 @@ class TryTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<TryF>.check(functor: Try<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<TryKind>.check(functor: Try<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<TryF>.check(applicative: Try<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<TryKind>.check(applicative: Try<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<TryF>.check(monad: Try<Int>.monad(), eq: self.eq)
+        MonadLaws<TryKind>.check(monad: Try<Int>.monad(), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<TryF, CategoryError>.check(applicativeError: Try<Int>.monadError(), eq: self.eq, eqEither: Try.eq(Either.eq(CategoryError.eq, Int.order)), gen: { CategoryError.arbitrary.generate })
+        ApplicativeErrorLaws<TryKind, CategoryError>.check(applicativeError: Try<Int>.monadError(), eq: self.eq, eqEither: Try.eq(Either.eq(CategoryError.eq, Int.order)), gen: { CategoryError.arbitrary.generate })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<TryF, CategoryError>.check(monadError: Try<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
+        MonadErrorLaws<TryKind, CategoryError>.check(monadError: Try<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
 }

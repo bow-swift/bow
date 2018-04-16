@@ -11,7 +11,7 @@ import SwiftCheck
 @testable import Bow
 
 class ConstTest: XCTestCase {
-    var generator : (Int) -> Kind<Kind<ConstF, Int>, Int> {
+    var generator : (Int) -> Kind<Kind<ConstKind, Int>, Int> {
         return { a in Const<Int, Int>.pure(a) }
     }
     
@@ -23,16 +23,16 @@ class ConstTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<Kind<ConstF, Int>>.check(functor: Const<Int, Int>.functor(), generator: Const<Int, Int>.pure, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<Kind<ConstKind, Int>>.check(functor: Const<Int, Int>.functor(), generator: Const<Int, Int>.pure, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<Kind<ConstF, Int>>.check(applicative: Const<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
+        ApplicativeLaws<Kind<ConstKind, Int>>.check(applicative: Const<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
     }
     
     func testSemigroupLaws() {
         property("Const semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<Kind2<ConstF, Int, Int>>.check(
+            return SemigroupLaws<Kind2<ConstKind, Int, Int>>.check(
                 semigroup: Const<Int, Int>.semigroup(Int.sumMonoid),
                 a: Const<Int, Int>.pure(a),
                 b: Const<Int, Int>.pure(b),
@@ -43,7 +43,7 @@ class ConstTest: XCTestCase {
     
     func testMonoidLaws() {
         property("Const monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws<Kind2<ConstF, Int, Int>>.check(
+            return MonoidLaws<Kind2<ConstKind, Int, Int>>.check(
                 monoid: Const<Int, Int>.monoid(Int.sumMonoid),
                 a: Const<Int, Int>.pure(a),
                 eq: self.eq)

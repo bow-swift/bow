@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class MaybeF {}
+public class MaybeKind {}
 
-public class Maybe<A> : Kind<MaybeF, A> {
+public class Maybe<A> : Kind<MaybeKind, A> {
     public static func some(_ a : A) -> Maybe<A> {
         return Some(a)
     }
@@ -44,7 +44,7 @@ public class Maybe<A> : Kind<MaybeF, A> {
         )
     }
     
-    public static func fix(_ fa : Kind<MaybeF, A>) -> Maybe<A> {
+    public static func fix(_ fa : Kind<MaybeKind, A>) -> Maybe<A> {
         return fa.fix()
     }
     
@@ -159,7 +159,7 @@ extension Maybe : CustomStringConvertible {
     }
 }
 
-public extension Kind where F == MaybeF {
+public extension Kind where F == MaybeKind {
     public func fix() -> Maybe<A> {
         return self as! Maybe<A>
     }
@@ -204,42 +204,42 @@ public extension Maybe {
 }
 
 public class MaybeFunctor : Functor {
-    public typealias F = MaybeF
+    public typealias F = MaybeKind
     
-    public func map<A, B>(_ fa: Kind<MaybeF, A>, _ f: @escaping (A) -> B) -> Kind<MaybeF, B> {
+    public func map<A, B>(_ fa: Kind<MaybeKind, A>, _ f: @escaping (A) -> B) -> Kind<MaybeKind, B> {
         return fa.fix().map(f)
     }
 }
 
 public class MaybeApplicative : MaybeFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<MaybeF, A> {
+    public func pure<A>(_ a: A) -> Kind<MaybeKind, A> {
         return Maybe.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<MaybeF, A>, _ ff: Kind<MaybeF, (A) -> B>) -> Kind<MaybeF, B> {
+    public func ap<A, B>(_ fa: Kind<MaybeKind, A>, _ ff: Kind<MaybeKind, (A) -> B>) -> Kind<MaybeKind, B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class MaybeMonad : MaybeApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<MaybeF, A>, _ f: @escaping (A) -> Kind<MaybeF, B>) -> Kind<MaybeF, B> {
+    public func flatMap<A, B>(_ fa: Kind<MaybeKind, A>, _ f: @escaping (A) -> Kind<MaybeKind, B>) -> Kind<MaybeKind, B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<MaybeF, Either<A, B>>) -> Kind<MaybeF, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<MaybeKind, Either<A, B>>) -> Kind<MaybeKind, B> {
         return Maybe<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
 
 public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
-    public typealias A = Kind<MaybeF, R>
+    public typealias A = Kind<MaybeKind, R>
     private let semigroup : SemiG
     
     public init(_ semigroup : SemiG) {
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Kind<MaybeF, R>, _ b: Kind<MaybeF, R>) -> Kind<MaybeF, R> {
+    public func combine(_ a: Kind<MaybeKind, R>, _ b: Kind<MaybeKind, R>) -> Kind<MaybeKind, R> {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
         return a.fold(constF(b),
@@ -250,7 +250,7 @@ public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG
 }
 
 public class MaybeMonoid<R, SemiG> : MaybeSemigroup<R, SemiG>, Monoid where SemiG : Semigroup, SemiG.A == R {
-    public var empty : Kind<MaybeF, R>{
+    public var empty : Kind<MaybeKind, R>{
         return Maybe<R>.none()
     }
 }
@@ -258,17 +258,17 @@ public class MaybeMonoid<R, SemiG> : MaybeSemigroup<R, SemiG>, Monoid where Semi
 public class MaybeMonadError : MaybeMonad, MonadError {
     public typealias E = Unit
     
-    public func raiseError<A>(_ e: Unit) -> Kind<MaybeF, A> {
+    public func raiseError<A>(_ e: Unit) -> Kind<MaybeKind, A> {
         return Maybe<A>.none()
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<MaybeF, A>, _ f: @escaping (Unit) -> Kind<MaybeF, A>) -> Kind<MaybeF, A> {
+    public func handleErrorWith<A>(_ fa: Kind<MaybeKind, A>, _ f: @escaping (Unit) -> Kind<MaybeKind, A>) -> Kind<MaybeKind, A> {
         return fa.fix().orElse(f(unit).fix())
     }
 }
 
 public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind<MaybeF, R>
+    public typealias A = Kind<MaybeKind, R>
     
     private let eqr : EqR
     
@@ -276,7 +276,7 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind<MaybeF, R>, _ b: Kind<MaybeF, R>) -> Bool {
+    public func eqv(_ a: Kind<MaybeKind, R>, _ b: Kind<MaybeKind, R>) -> Bool {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
         return a.fold({ b.fold(constF(true), constF(false)) },
@@ -285,13 +285,13 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
 }
 
 public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: Kind<MaybeF, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<MaybeF, B> {
+    public func mapFilter<A, B>(_ fa: Kind<MaybeKind, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<MaybeKind, B> {
         return fa.fix().mapFilter(f)
     }
 }
 
 public class MaybeMonadFilter : MaybeMonad, MonadFilter {
-    public func empty<A>() -> Kind<MaybeF, A> {
+    public func empty<A>() -> Kind<MaybeKind, A> {
         return Maybe.empty()
     }
 }

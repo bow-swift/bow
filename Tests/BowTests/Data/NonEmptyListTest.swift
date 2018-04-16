@@ -12,7 +12,7 @@ import SwiftCheck
 
 class NonEmptyListTest: XCTestCase {
     
-    var generator : (Int) -> Kind<NonEmptyListF, Int> {
+    var generator : (Int) -> Kind<NonEmptyListKind, Int> {
         return { a in NonEmptyList.pure(a) }
     }
     
@@ -24,24 +24,24 @@ class NonEmptyListTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<NonEmptyListF>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<NonEmptyListKind>.check(functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<NonEmptyListF>.check(applicative: NonEmptyList<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<NonEmptyListKind>.check(applicative: NonEmptyList<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<NonEmptyListF>.check(monad: NonEmptyList<Int>.monad(), eq: self.eq)
+        MonadLaws<NonEmptyListKind>.check(monad: NonEmptyList<Int>.monad(), eq: self.eq)
     }
     
     func testComonadLaws() {
-        ComonadLaws<NonEmptyListF>.check(comonad: NonEmptyList<Int>.comonad(), generator: self.generator, eq: self.eq)
+        ComonadLaws<NonEmptyListKind>.check(comonad: NonEmptyList<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
     
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<Kind<NonEmptyListF, Int>>.check(
+            return SemigroupLaws<Kind<NonEmptyListKind, Int>>.check(
                     semigroup: NonEmptyList<Int>.semigroup(),
                     a: NonEmptyList<Int>.pure(a),
                     b: NonEmptyList<Int>.pure(b),
@@ -51,6 +51,6 @@ class NonEmptyListTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<NonEmptyListF>.check(semigroupK: NonEmptyList<Int>.semigroupK(), generator: self.generator, eq: self.eq)
+        SemigroupKLaws<NonEmptyListKind>.check(semigroupK: NonEmptyList<Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
 }

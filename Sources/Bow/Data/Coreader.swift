@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Coreader<A, B> : CoreaderT<IdF, A, B> {
+public class Coreader<A, B> : CoreaderT<IdKind, A, B> {
     public init(_ run : @escaping (A) -> B) {
         super.init({ idA in run((idA as! Id<A>).extract()) })
     }

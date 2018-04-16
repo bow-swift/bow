@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class CoyonedaF {}
+public class CoyonedaKind {}
 public typealias AnyFunc = (AnyObject) -> AnyObject
-public typealias CoyonedaPartial<F, P> = Kind2<CoyonedaF, F, P>
+public typealias CoyonedaPartial<F, P> = Kind2<CoyonedaKind, F, P>
 
-public class Coyoneda<F, P, A> : Kind3<CoyonedaF, F, P, A> {
+public class Coyoneda<F, P, A> : Kind3<CoyonedaKind, F, P, A> {
     private let pivot : Kind<F, P>
     private let ks : [AnyFunc]
     
@@ -24,7 +24,7 @@ public class Coyoneda<F, P, A> : Kind3<CoyonedaF, F, P, A> {
         return Coyoneda<F, P, A>(fp, fs)
     }
     
-    public static func fix(_ fa : Kind3<CoyonedaF, F, P, A>) -> Coyoneda<F, P, A> {
+    public static func fix(_ fa : Kind3<CoyonedaKind, F, P, A>) -> Coyoneda<F, P, A> {
         return fa as! Coyoneda<F, P, A>
     }
     
@@ -74,7 +74,7 @@ public extension Coyoneda {
 public class CoyonedaFunctor<G, P> : Functor {
     public typealias F = CoyonedaPartial<G, P>
     
-    public func map<A, B>(_ fa: Kind<Kind<Kind<CoyonedaF, G>, P>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<Kind<CoyonedaF, G>, P>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<Kind<CoyonedaKind, G>, P>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<Kind<CoyonedaKind, G>, P>, B> {
         return Coyoneda.fix(fa).map(f)
     }
 }
