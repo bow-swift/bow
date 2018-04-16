@@ -10,7 +10,7 @@ import Foundation
 
 public class ListKWF {}
 
-public class ListKW<A> : HK<ListKWF, A> {
+public class ListKW<A> : Kind<ListKWF, A> {
     fileprivate let list : [A]
     
     public static func +(lhs : ListKW<A>, rhs : ListKW<A>) -> ListKW<A> {
@@ -25,7 +25,7 @@ public class ListKW<A> : HK<ListKWF, A> {
         return ListKW([])
     }
     
-    private static func go<B>(_ buf : [B], _ f : (A) -> HK<ListKWF, Either<A, B>>, _ v : ListKW<Either<A, B>>) -> [B] {
+    private static func go<B>(_ buf : [B], _ f : (A) -> Kind<ListKWF, Either<A, B>>, _ v : ListKW<Either<A, B>>) -> [B] {
         if !v.isEmpty {
             let head = v.list[0]
             return head.fold({ a in go(buf, f, ListKW<Either<A, B>>(f(a).fix().list + v.list.dropFirst())) },
@@ -38,11 +38,11 @@ public class ListKW<A> : HK<ListKWF, A> {
         }
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : (A) -> HK<ListKWF, Either<A, B>>) -> ListKW<B> {
+    public static func tailRecM<B>(_ a : A, _ f : (A) -> Kind<ListKWF, Either<A, B>>) -> ListKW<B> {
         return ListKW<B>(go([], f, f(a).fix()))
     }
     
-    public static func fix(_ fa : HK<ListKWF, A>) -> ListKW<A> {
+    public static func fix(_ fa : Kind<ListKWF, A>) -> ListKW<A> {
         return fa.fix()
     }
     
@@ -85,10 +85,10 @@ public class ListKW<A> : HK<ListKWF, A> {
         return Eval.deferEvaluation({ loop(self) })
     }
     
-    public func traverse<G, B, Appl>(_ f : @escaping (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<ListKWF, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<ListKWF, B>> where Appl : Applicative, Appl.F == G {
         let x = foldR(Eval.always({ applicative.pure(ListKW<B>([])) }),
                      { a, eval in applicative.map2Eval(f(a), eval, { x, y in ListKW<B>([x]) + y }) }).value()
-        return applicative.map(x, { a in a as HK<ListKWF, B> })
+        return applicative.map(x, { a in a as Kind<ListKWF, B> })
     }
     
     public func map2<B, Z>(_ fb : ListKW<B>, _ f : ((A, B)) -> Z) -> ListKW<Z> {
@@ -108,7 +108,7 @@ public class ListKW<A> : HK<ListKWF, A> {
     }
 }
 
-public extension HK where F == ListKWF {
+public extension Kind where F == ListKWF {
     public func fix() -> ListKW<A> {
         return self as! ListKW<A>
     }
@@ -177,27 +177,27 @@ public extension ListKW {
 public class ListKWFunctor : Functor {
     public typealias F = ListKWF
     
-    public func map<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> B) -> HK<ListKWF, B> {
+    public func map<A, B>(_ fa: Kind<ListKWF, A>, _ f: @escaping (A) -> B) -> Kind<ListKWF, B> {
         return fa.fix().map(f)
     }
 }
 
 public class ListKWApplicative : ListKWFunctor, Applicative {
-    public func pure<A>(_ a: A) -> HK<ListKWF, A> {
+    public func pure<A>(_ a: A) -> Kind<ListKWF, A> {
         return ListKW.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<ListKWF, A>, _ ff: HK<ListKWF, (A) -> B>) -> HK<ListKWF, B> {
+    public func ap<A, B>(_ fa: Kind<ListKWF, A>, _ ff: Kind<ListKWF, (A) -> B>) -> Kind<ListKWF, B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class ListKWMonad : ListKWApplicative, Monad {
-    public func flatMap<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> HK<ListKWF, B>) -> HK<ListKWF, B> {
+    public func flatMap<A, B>(_ fa: Kind<ListKWF, A>, _ f: @escaping (A) -> Kind<ListKWF, B>) -> Kind<ListKWF, B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<ListKWF, Either<A, B>>) -> HK<ListKWF, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ListKWF, Either<A, B>>) -> Kind<ListKWF, B> {
         return ListKW.tailRecM(a, f)
     }
 }
@@ -205,17 +205,17 @@ public class ListKWMonad : ListKWApplicative, Monad {
 public class ListKWFoldable : Foldable {
     public typealias F = ListKWF
     
-    public func foldL<A, B>(_ fa: HK<ListKWF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: Kind<ListKWF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: HK<ListKWF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: Kind<ListKWF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
     }
 }
 
 public class ListKWTraverse : ListKWFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<ListKWF, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<ListKWF, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ListKWF, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
     }
 }
@@ -223,59 +223,59 @@ public class ListKWTraverse : ListKWFoldable, Traverse {
 public class ListKWSemigroupK : SemigroupK {
     public typealias F = ListKWF
     
-    public func combineK<A>(_ x: HK<ListKWF, A>, _ y: HK<ListKWF, A>) -> HK<ListKWF, A> {
+    public func combineK<A>(_ x: Kind<ListKWF, A>, _ y: Kind<ListKWF, A>) -> Kind<ListKWF, A> {
         return x.fix().combineK(y.fix())
     }
 }
 
 public class ListKWMonoidK : ListKWSemigroupK, MonoidK {
-    public func emptyK<A>() -> HK<ListKWF, A> {
+    public func emptyK<A>() -> Kind<ListKWF, A> {
         return ListKW<A>.empty()
     }
 }
 
 public class ListKWFunctorFilter : ListKWFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<ListKWF, B> {
+    public func mapFilter<A, B>(_ fa: Kind<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<ListKWF, B> {
         return fa.fix().mapFilter(f)
     }
 }
 
 public class ListKWMonadFilter : ListKWMonad, MonadFilter {
-    public func empty<A>() -> HK<ListKWF, A> {
+    public func empty<A>() -> Kind<ListKWF, A> {
         return ListKW<A>.empty()
     }
     
-    public func mapFilter<A, B>(_ fa: HK<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<ListKWF, B> {
+    public func mapFilter<A, B>(_ fa: Kind<ListKWF, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<ListKWF, B> {
         return fa.fix().mapFilter(f)
     }
 }
 
 public class ListKWMonadCombine : ListKWMonadFilter, MonadCombine {
-    public func emptyK<A>() -> HK<ListKWF, A> {
+    public func emptyK<A>() -> Kind<ListKWF, A> {
         return ListKW<A>.empty()
     }
     
-    public func combineK<A>(_ x: HK<ListKWF, A>, _ y: HK<ListKWF, A>) -> HK<ListKWF, A> {
+    public func combineK<A>(_ x: Kind<ListKWF, A>, _ y: Kind<ListKWF, A>) -> Kind<ListKWF, A> {
         return x.fix().combineK(y.fix())
     }
 }
 
 public class ListKWSemigroup<R> : Semigroup {
-    public typealias A = HK<ListKWF, R>
+    public typealias A = Kind<ListKWF, R>
     
-    public func combine(_ a: HK<ListKWF, R>, _ b: HK<ListKWF, R>) -> HK<ListKWF, R> {
+    public func combine(_ a: Kind<ListKWF, R>, _ b: Kind<ListKWF, R>) -> Kind<ListKWF, R> {
         return ListKW.fix(a) + ListKW.fix(b)
     }
 }
 
 public class ListKWMonoid<R> : ListKWSemigroup<R>, Monoid {
-    public var empty: HK<ListKWF, R> {
+    public var empty: Kind<ListKWF, R> {
         return ListKW<R>.empty()
     }
 }
 
 public class ListKWEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = HK<ListKWF, R>
+    public typealias A = Kind<ListKWF, R>
     
     private let eqr : EqR
     
@@ -283,7 +283,7 @@ public class ListKWEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: HK<ListKWF, R>, _ b: HK<ListKWF, R>) -> Bool {
+    public func eqv(_ a: Kind<ListKWF, R>, _ b: Kind<ListKWF, R>) -> Bool {
         let a = ListKW.fix(a)
         let b = ListKW.fix(b)
         if a.list.count != b.list.count {

@@ -12,7 +12,7 @@ import SwiftCheck
 
 class NonEmptyListTest: XCTestCase {
     
-    var generator : (Int) -> HK<NonEmptyListF, Int> {
+    var generator : (Int) -> Kind<NonEmptyListF, Int> {
         return { a in NonEmptyList.pure(a) }
     }
     
@@ -41,7 +41,7 @@ class NonEmptyListTest: XCTestCase {
     
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<HK<NonEmptyListF, Int>>.check(
+            return SemigroupLaws<Kind<NonEmptyListF, Int>>.check(
                     semigroup: NonEmptyList<Int>.semigroup(),
                     a: NonEmptyList<Int>.pure(a),
                     b: NonEmptyList<Int>.pure(b),

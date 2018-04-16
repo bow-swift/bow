@@ -9,22 +9,22 @@
 import Foundation
 
 public class YonedaF {}
-public typealias YonedaPartial<F> = HK<YonedaF, F>
+public typealias YonedaPartial<F> = Kind<YonedaF, F>
 
-open class Yoneda<F, A> : HK2<YonedaF, F, A> {
-    public static func apply<Func>(_ fa : HK<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
+open class Yoneda<F, A> : Kind2<YonedaF, F, A> {
+    public static func apply<Func>(_ fa : Kind<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
         return YonedaFunctor<F, A, Func>(fa, functor)
     }
     
-    public static func fix(_ fa : HK2<YonedaF, F, A>) -> Yoneda<F, A> {
+    public static func fix(_ fa : Kind2<YonedaF, F, A>) -> Yoneda<F, A> {
         return fa as! Yoneda<F, A>
     }
     
-    public func apply<B>(_ f : @escaping (A) -> B) -> HK<F, B> {
+    public func apply<B>(_ f : @escaping (A) -> B) -> Kind<F, B> {
         fatalError("Apply must be implemented in subclass")
     }
 
-    public func lower() -> HK<F, A> {
+    public func lower() -> Kind<F, A> {
         return apply(id)
     }
     
@@ -46,21 +46,21 @@ fileprivate class YonedaDefault<F, A, B> : Yoneda<F, B> {
         self.ff = ff
     }
     
-    override public func apply<C>(_ f: @escaping (B) -> C) -> HK<F, C> {
+    override public func apply<C>(_ f: @escaping (B) -> C) -> Kind<F, C> {
         return yoneda.apply({ a in f(self.ff(a)) })
     }
 }
 
 fileprivate class YonedaFunctor<F, A, Func> : Yoneda<F, A> where Func : Functor, Func.F == F {
-    private let fa : HK<F, A>
+    private let fa : Kind<F, A>
     private let functor : Func
     
-    init(_ fa : HK<F, A>, _ functor : Func) {
+    init(_ fa : Kind<F, A>, _ functor : Func) {
         self.fa = fa
         self.functor = functor
     }
     
-    override public func apply<B>(_ f: @escaping (A) -> B) -> HK<F, B> {
+    override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         return functor.map(fa, f)
     }
 }
@@ -80,7 +80,7 @@ public class YonedaFunctorInstance<G, Func> : Functor where Func : Functor, Func
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<YonedaF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<YonedaF, G>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<YonedaF, G>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<YonedaF, G>, B> {
         return Yoneda.fix(fa).map(f, functor)
     }
 }

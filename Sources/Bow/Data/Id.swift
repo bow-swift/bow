@@ -10,20 +10,20 @@ import Foundation
 
 public class IdF {}
 
-public class Id<A> : HK<IdF, A> {
+public class Id<A> : Kind<IdF, A> {
     public let value : A
     
     public static func pure(_ a : A) -> Id<A> {
         return Id<A>(a)
     }
     
-    public static func tailRecM<B>(_ a : (A), _ f : (A) -> HK<IdF, Either<A, B>>) -> Id<B> {
+    public static func tailRecM<B>(_ a : (A), _ f : (A) -> Kind<IdF, Either<A, B>>) -> Id<B> {
         return Id<Either<A, B>>.fix(f(a)).value
             .fold({ left in tailRecM(left, f)},
                   Id<B>.pure)
     }
     
-    public static func fix(_ fa : HK<IdF, A>) -> Id<A> {
+    public static func fix(_ fa : Kind<IdF, A>) -> Id<A> {
         return fa.fix()
     }
     
@@ -51,7 +51,7 @@ public class Id<A> : HK<IdF, A> {
         return f(value, b)
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<IdF, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<IdF, B>> where Appl : Applicative, Appl.F == G {
         return applicative.map(f(self.value), Id<B>.init)
     }
     
@@ -64,7 +64,7 @@ public class Id<A> : HK<IdF, A> {
     }
 }
 
-public extension HK where F == IdF {
+public extension Kind where F == IdF {
     public func fix() -> Id<A> {
         return self as! Id<A>
     }
@@ -113,37 +113,37 @@ extension Id {
 public class IdFunctor : Functor {
     public typealias F = IdF
     
-    public func map<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> B) -> HK<IdF, B> {
+    public func map<A, B>(_ fa: Kind<IdF, A>, _ f: @escaping (A) -> B) -> Kind<IdF, B> {
         return fa.fix().map(f)
     }
 }
 
 public class IdApplicative : IdFunctor, Applicative {
-    public func pure<A>(_ a: A) -> HK<IdF, A> {
+    public func pure<A>(_ a: A) -> Kind<IdF, A> {
         return Id.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<IdF, A>, _ ff: HK<IdF, (A) -> B>) -> HK<IdF, B> {
+    public func ap<A, B>(_ fa: Kind<IdF, A>, _ ff: Kind<IdF, (A) -> B>) -> Kind<IdF, B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class IdMonad : IdApplicative, Monad {
-    public func flatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> HK<IdF, B>) -> HK<IdF, B> {
+    public func flatMap<A, B>(_ fa: Kind<IdF, A>, _ f: @escaping (A) -> Kind<IdF, B>) -> Kind<IdF, B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<IdF, Either<A, B>>) -> HK<IdF, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IdF, Either<A, B>>) -> Kind<IdF, B> {
         return Id.tailRecM(a, f)
     }
 }
 
 public class IdBimonad : IdMonad, Bimonad {
-    public func coflatMap<A, B>(_ fa: HK<IdF, A>, _ f: @escaping (HK<IdF, A>) -> B) -> HK<IdF, B> {
+    public func coflatMap<A, B>(_ fa: Kind<IdF, A>, _ f: @escaping (Kind<IdF, A>) -> B) -> Kind<IdF, B> {
         return fa.fix().coflatMap(f as (Id<A>) -> B)
     }
     
-    public func extract<A>(_ fa: HK<IdF, A>) -> A {
+    public func extract<A>(_ fa: Kind<IdF, A>) -> A {
         return fa.fix().extract()
     }
 }
@@ -151,23 +151,23 @@ public class IdBimonad : IdMonad, Bimonad {
 public class IdFoldable : Foldable {
     public typealias F = IdF
     
-    public func foldL<A, B>(_ fa: HK<IdF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: Kind<IdF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: HK<IdF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: Kind<IdF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
     }
 }
 
 public class IdTraverse : IdFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<IdF, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<IdF, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<IdF, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<IdF, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
     }
 }
 
 public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-    public typealias A = HK<IdF, B>
+    public typealias A = Kind<IdF, B>
     
     private let eqb : EqB
     
@@ -175,7 +175,7 @@ public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
         self.eqb = eqb
     }
     
-    public func eqv(_ a: HK<IdF, B>, _ b: HK<IdF, B>) -> Bool {
+    public func eqv(_ a: Kind<IdF, B>, _ b: Kind<IdF, B>) -> Bool {
         return eqb.eqv(Id.fix(a).value, Id.fix(b).value)
     }
 }

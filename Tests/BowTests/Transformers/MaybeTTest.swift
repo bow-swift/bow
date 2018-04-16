@@ -11,7 +11,7 @@ import XCTest
 
 class MaybeTTest: XCTestCase {
     
-    var generator : (Int) -> HK2<MaybeTF, IdF, Int> {
+    var generator : (Int) -> Kind2<MaybeTF, IdF, Int> {
         return { a in MaybeT<IdF, Int>.pure(a, Id<Any>.applicative()) }
     }
     

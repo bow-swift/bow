@@ -11,8 +11,8 @@ import Foundation
 public class CokleisliF {}
 public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
 
-public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
-    internal let run : (HK<F, A>) -> B
+public class Cokleisli<F, A, B> : Kind3<CokleisliF, F, A, B> {
+    internal let run : (Kind<F, A>) -> B
     
     public static func pure(_ b : B) -> Cokleisli<F, A, B> {
         return Cokleisli<F, A, B>({ _ in b })
@@ -22,11 +22,11 @@ public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
         return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
     }
     
-    public static func fix(_ fa : HK3<CokleisliF, F, A, B>) -> Cokleisli<F, A, B> {
+    public static func fix(_ fa : Kind3<CokleisliF, F, A, B>) -> Cokleisli<F, A, B> {
         return fa as! Cokleisli<F, A, B>
     }
     
-    public init(_ run : @escaping (HK<F, A>) -> B) {
+    public init(_ run : @escaping (Kind<F, A>) -> B) {
         self.run = run
     }
     
@@ -42,7 +42,7 @@ public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
         return Cokleisli<F, A, C>({ fa in f(self.run(fa)) })
     }
     
-    public func contramapValue<C>(_ f : @escaping (HK<F, C>) -> HK<F, A>) -> Cokleisli<F, C, B> {
+    public func contramapValue<C>(_ f : @escaping (Kind<F, C>) -> Kind<F, A>) -> Cokleisli<F, C, B> {
         return Cokleisli<F, C, B>({ fc in self.run(f(fc)) })
     }
     
@@ -50,7 +50,7 @@ public class Cokleisli<F, A, B> : HK3<CokleisliF, F, A, B> {
         return Cokleisli<F, D, B>({ fa in self.run(comonad.coflatMap(fa, a.run)) })
     }
     
-    public func andThen<C, Comon>(_ a : HK<F, C>, _ comonad : Comon) -> Cokleisli<F, A, C> where Comon : Comonad, Comon.F == F {
+    public func andThen<C, Comon>(_ a : Kind<F, C>, _ comonad : Comon) -> Cokleisli<F, A, C> where Comon : Comonad, Comon.F == F {
         return Cokleisli<F, A, C>({ _ in comonad.extract(a) })
     }
     

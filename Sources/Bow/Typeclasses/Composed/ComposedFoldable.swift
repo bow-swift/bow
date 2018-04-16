@@ -23,19 +23,19 @@ public extension ComposedFoldable {
         return BaseComposedFoldable<G, H, FoldG, FoldH>(foldableG, foldableH)
     }
     
-    public func foldL<A, B>(_ fa: HK<Nested<G, H>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: Kind<Nested<G, H>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return foldableG.foldL(unnest(fa), b, { bb, aa in self.foldableH.foldL(aa, bb, f) })
     }
     
-    public func foldR<A, B>(_ fa: HK<Nested<G, H>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: Kind<Nested<G, H>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return foldableG.foldR(unnest(fa), b, { aa, bb in self.foldableH.foldR(aa, bb, f) })
     }
     
-    public func foldLC<A, B>(_ fa : HK<G, HK<H, A>>, _ b : B, _ f : @escaping (B, A) -> B) -> B {
+    public func foldLC<A, B>(_ fa : Kind<G, Kind<H, A>>, _ b : B, _ f : @escaping (B, A) -> B) -> B {
         return foldL(nest(fa), b, f)
     }
     
-    public func foldRC<A, B>(_ fa : HK<G, HK<H, A>>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRC<A, B>(_ fa : Kind<G, Kind<H, A>>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return foldR(nest(fa), b, f)
     }
 }

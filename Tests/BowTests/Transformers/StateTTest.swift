@@ -12,9 +12,9 @@ import XCTest
 class StateTTest: XCTestCase {
     
     class StateTPointEq : Eq {
-        public typealias A = HK3<StateTF, IdF, Int, Int>
+        public typealias A = Kind3<StateTF, IdF, Int, Int>
         
-        public func eqv(_ a: HK3<StateTF, IdF, Int, Int>, _ b: HK3<StateTF, IdF, Int, Int>) -> Bool {
+        public func eqv(_ a: Kind3<StateTF, IdF, Int, Int>, _ b: Kind3<StateTF, IdF, Int, Int>) -> Bool {
             let x = StateT.fix(a).runM(1, Id<Any>.monad()).fix().value
             let y = StateT.fix(b).runM(1, Id<Any>.monad()).fix().value
             return x == y
@@ -22,9 +22,9 @@ class StateTTest: XCTestCase {
     }
     
     class StateTIdUnitEq : Eq {
-        public typealias A = HK3<StateTF, IdF, Int, ()>
+        public typealias A = Kind3<StateTF, IdF, Int, ()>
         
-        public func eqv(_ a: HK3<StateTF, IdF, Int, ()>, _ b: HK3<StateTF, IdF, Int, ()>) -> Bool {
+        public func eqv(_ a: Kind3<StateTF, IdF, Int, ()>, _ b: Kind3<StateTF, IdF, Int, ()>) -> Bool {
             let x = StateT.fix(a).runM(1, Id<Any>.monad())
             let y = StateT.fix(b).runM(1, Id<Any>.monad())
             return Id.eq(Tuple.eq(Int.order, UnitEq())).eqv(x, y)
@@ -32,9 +32,9 @@ class StateTTest: XCTestCase {
     }
     
     class StateTUnitEq : Eq {
-        public typealias A = HK3<StateTF, MaybeF, (), Int>
+        public typealias A = Kind3<StateTF, MaybeF, (), Int>
         
-        public func eqv(_ a: HK3<StateTF, MaybeF, (), Int>, _ b: HK3<StateTF, MaybeF, (), Int>) -> Bool {
+        public func eqv(_ a: Kind3<StateTF, MaybeF, (), Int>, _ b: Kind3<StateTF, MaybeF, (), Int>) -> Bool {
             let x = StateT.fix(a).runM((), Maybe<Any>.monad())
             let y = StateT.fix(b).runM((), Maybe<Any>.monad())
             return Maybe.eq(Tuple.eq(UnitEq(), Int.order)).eqv(x, y)
@@ -42,10 +42,10 @@ class StateTTest: XCTestCase {
     }
     
     class StateTEitherEq : Eq {
-        public typealias A = HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>
+        public typealias A = HK3<StateTF, MaybeF, (), Kind2<EitherF, (), Int>>
         
-        public func eqv(_ a: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>,
-                        _ b: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>) -> Bool {
+        public func eqv(_ a: HK3<StateTF, MaybeF, (), Kind2<EitherF, (), Int>>,
+                        _ b: HK3<StateTF, MaybeF, (), Kind2<EitherF, (), Int>>) -> Bool {
             let x = StateT.fix(a).runM((), Maybe<Any>.monad())
             let y = StateT.fix(b).runM((), Maybe<Any>.monad())
             return Maybe.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)
@@ -53,17 +53,17 @@ class StateTTest: XCTestCase {
     }
     
     class StateTListKWEq : Eq {
-        public typealias A = HK3<StateTF, ListKWF, Int, Int>
+        public typealias A = Kind3<StateTF, ListKWF, Int, Int>
         
-        public func eqv(_ a: HK3<StateTF, ListKWF, Int, Int>,
-                        _ b: HK3<StateTF, ListKWF, Int, Int>) -> Bool {
+        public func eqv(_ a: Kind3<StateTF, ListKWF, Int, Int>,
+                        _ b: Kind3<StateTF, ListKWF, Int, Int>) -> Bool {
             let x = StateT.fix(a).runM(1, ListKW<Any>.monad())
             let y = StateT.fix(b).runM(1, ListKW<Any>.monad())
             return ListKW.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
         }
     }
     
-    var generator : (Int) -> HK3<StateTF, IdF, Int, Int> {
+    var generator : (Int) -> Kind3<StateTF, IdF, Int, Int> {
         return { a in StateT.lift(Id<Int>.pure(a), Id<Any>.monad()) }
     }
     

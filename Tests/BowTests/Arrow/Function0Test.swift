@@ -11,7 +11,7 @@ import XCTest
 
 class Function0Test: XCTestCase {
     
-    var generator : (Int) -> HK<Function0F, Int> {
+    var generator : (Int) -> Kind<Function0F, Int> {
         return { a in Function0.pure(a) }
     }
     

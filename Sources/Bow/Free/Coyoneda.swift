@@ -10,25 +10,25 @@ import Foundation
 
 public class CoyonedaF {}
 public typealias AnyFunc = (AnyObject) -> AnyObject
-public typealias CoyonedaPartial<F, P> = HK2<CoyonedaF, F, P>
+public typealias CoyonedaPartial<F, P> = Kind2<CoyonedaF, F, P>
 
-public class Coyoneda<F, P, A> : HK3<CoyonedaF, F, P, A> {
-    private let pivot : HK<F, P>
+public class Coyoneda<F, P, A> : Kind3<CoyonedaF, F, P, A> {
+    private let pivot : Kind<F, P>
     private let ks : [AnyFunc]
     
-    public static func apply(_ fp : HK<F, P>, _ f : @escaping (P) -> A) -> Coyoneda<F, P, A> {
+    public static func apply(_ fp : Kind<F, P>, _ f : @escaping (P) -> A) -> Coyoneda<F, P, A> {
         return unsafeApply(fp, [f as! AnyFunc])
     }
     
-    public static func unsafeApply(_ fp : HK<F, P>, _ fs : [AnyFunc]) -> Coyoneda<F, P, A> {
+    public static func unsafeApply(_ fp : Kind<F, P>, _ fs : [AnyFunc]) -> Coyoneda<F, P, A> {
         return Coyoneda<F, P, A>(fp, fs)
     }
     
-    public static func fix(_ fa : HK3<CoyonedaF, F, P, A>) -> Coyoneda<F, P, A> {
+    public static func fix(_ fa : Kind3<CoyonedaF, F, P, A>) -> Coyoneda<F, P, A> {
         return fa as! Coyoneda<F, P, A>
     }
     
-    public init(_ pivot : HK<F, P>, _ ks : [AnyFunc]) {
+    public init(_ pivot : Kind<F, P>, _ ks : [AnyFunc]) {
         self.pivot = pivot
         self.ks = ks
     }
@@ -40,7 +40,7 @@ public class Coyoneda<F, P, A> : HK3<CoyonedaF, F, P, A> {
         }
     }
     
-    public func lower<Func>(_ functor : Func) -> HK<F, A> where Func : Functor, Func.F == F {
+    public func lower<Func>(_ functor : Func) -> Kind<F, A> where Func : Functor, Func.F == F {
         return functor.map(pivot, transform())
     }
     
@@ -60,7 +60,7 @@ fileprivate class YonedaFromCoyoneda<F, A, Func> : Yoneda<F, A> where Func : Fun
         self.functor = functor
     }
     
-    override public func apply<B>(_ f: @escaping (A) -> B) -> HK<F, B> {
+    override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         return map(f, functor).lower()
     }
 }
@@ -74,7 +74,7 @@ public extension Coyoneda {
 public class CoyonedaFunctor<G, P> : Functor {
     public typealias F = CoyonedaPartial<G, P>
     
-    public func map<A, B>(_ fa: HK<HK<HK<CoyonedaF, G>, P>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<CoyonedaF, G>, P>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<Kind<CoyonedaF, G>, P>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<Kind<CoyonedaF, G>, P>, B> {
         return Coyoneda.fix(fa).map(f)
     }
 }

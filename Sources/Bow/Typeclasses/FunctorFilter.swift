@@ -9,15 +9,15 @@
 import Foundation
 
 public protocol FunctorFilter : Functor {
-    func mapFilter<A, B>(_ fa : HK<F, A>, _ f : @escaping (A) -> Maybe<B>) -> HK<F, B>
+    func mapFilter<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Maybe<B>) -> Kind<F, B>
 }
 
 public extension FunctorFilter {
-    public func flattenOption<A>(_ fa : HK<F, Maybe<A>>) -> HK<F, A> {
+    public func flattenOption<A>(_ fa : Kind<F, Maybe<A>>) -> Kind<F, A> {
         return self.mapFilter(fa, id)
     }
     
-    public func filter<A>(_ fa : HK<F, A>, _ f : @escaping (A) -> Bool) -> HK<F, A> {
+    public func filter<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Kind<F, A> {
         return self.mapFilter(fa, { a in f(a) ? Maybe.some(a) : Maybe.none() })
     }
 }

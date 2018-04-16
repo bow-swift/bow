@@ -17,7 +17,7 @@ public protocol Inject : Typeclass {
 }
 
 public extension Inject {
-    public func invoke<A>(_ fa : HK<F, A>) -> HK<G, A> {
+    public func invoke<A>(_ fa : Kind<F, A>) -> Kind<G, A> {
         return inj().invoke(fa)
     }
 }

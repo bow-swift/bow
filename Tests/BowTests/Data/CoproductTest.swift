@@ -11,7 +11,7 @@ import XCTest
 
 class CoproductTest: XCTestCase {
     
-    var generator : (Int) -> HK3<CoproductF, IdF, IdF, Int> {
+    var generator : (Int) -> Kind3<CoproductF, IdF, IdF, Int> {
         return { a in Coproduct<IdF, IdF, Int>(Either.pure(Id.pure(a))) }
     }
     

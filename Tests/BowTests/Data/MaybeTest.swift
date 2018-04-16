@@ -20,7 +20,7 @@ class UnitEq : Eq {
 
 class MaybeTest: XCTestCase {
     
-    var generator : (Int) -> HK<MaybeF, Int> {
+    var generator : (Int) -> Kind<MaybeF, Int> {
         return { a in Maybe.pure(a) }
     }
     
@@ -53,7 +53,7 @@ class MaybeTest: XCTestCase {
     
     func testSemigroupLaws() {
         property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<HK<MaybeF, Int>>.check(
+            return SemigroupLaws<Kind<MaybeF, Int>>.check(
                 semigroup: Maybe<Int>.semigroup(Int.sumMonoid),
                 a: Maybe.pure(a),
                 b: Maybe.pure(b),
@@ -64,7 +64,7 @@ class MaybeTest: XCTestCase {
     
     func testMonoidLaws() {
         property("Maybe monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws<HK<MaybeF, Int>>.check(
+            return MonoidLaws<Kind<MaybeF, Int>>.check(
                 monoid: Maybe<Int>.monoid(Int.sumMonoid),
                 a: Maybe.pure(a),
                 eq: self.eq)

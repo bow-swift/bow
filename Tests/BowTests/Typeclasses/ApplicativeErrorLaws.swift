@@ -45,8 +45,8 @@ class ApplicativeErrorLaws<F, E> {
     
     static func check<ApplErr, EqF, EqEither>(applicativeError : ApplErr, eq : EqF, eqEither : EqEither, gen : @escaping () -> E) where
         ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E,
-        EqF : Eq, EqF.A == HK<F, Int>,
-        EqEither : Eq, EqEither.A == HK<F, HK2<EitherF, E, Int>> {
+        EqF : Eq, EqF.A == Kind<F, Int>,
+        EqEither : Eq, EqEither.A == Kind<F, HK2<EitherF, E, Int>> {
         handle(applicativeError, eq, gen)
         handleWith(applicativeError, eq, gen)
         handleWithPure(applicativeError, eq, gen)
@@ -57,7 +57,7 @@ class ApplicativeErrorLaws<F, E> {
         catchesSuccess(applicativeError, eq, gen)
     }
     
-    private static func handle<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func handle<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Applicative error handle") <- forAll { (a : Int) in
             let error = gen()
             let f = { (_ : E) in a }
@@ -66,7 +66,7 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func handleWith<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func handleWith<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Applicative error handle with") <- forAll { (a : Int) in
             let error = gen()
             let f = { (_ : E) in applicativeError.pure(a) }
@@ -75,7 +75,7 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func handleWithPure<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func handleWithPure<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Applicative error handle with pure") <- forAll { (a : Int) in
             let f = { (_ : E) in applicativeError.pure(a) }
             return eq.eqv(applicativeError.handleErrorWith(applicativeError.pure(a), f),
@@ -83,10 +83,10 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func attemptError<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, HK2<EitherF, E, Int>> {
+    private static func attemptError<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, HK2<EitherF, E, Int>> {
         property("Attempt error") <- forAll { (_ : Int) in
             let error = gen()
-            let a = applicativeError.attempt(applicativeError.raiseError(error)) as HK<F, Either<E, Int>>
+            let a = applicativeError.attempt(applicativeError.raiseError(error)) as Kind<F, Either<E, Int>>
             let b = applicativeError.pure(Either<E, Int>.left(error))
             
             return eq.eqv(applicativeError.map(a, { aa in aa as HK2<EitherF, E, Int> }),
@@ -94,9 +94,9 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func attemptSuccess<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, HK2<EitherF, E, Int>> {
+    private static func attemptSuccess<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, HK2<EitherF, E, Int>> {
         property("Attempt success") <- forAll { (a : Int) in
-            let x = applicativeError.attempt(applicativeError.pure(a)) as HK<F, Either<E, Int>>
+            let x = applicativeError.attempt(applicativeError.pure(a)) as Kind<F, Either<E, Int>>
             let y = applicativeError.pure(Either<E, Int>.right(a))
             
             return eq.eqv(applicativeError.map(x, { xx in xx as HK2<EitherF, E, Int> }),
@@ -104,18 +104,18 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func attemptFromEitherConsistentWithPure<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, HK2<EitherF, E, Int>> {
+    private static func attemptFromEitherConsistentWithPure<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, HK2<EitherF, E, Int>> {
         property("Attempt from either consistent with pure") <- forAll { (b : Int) in
             let a = gen()
             let either = arc4random_uniform(2) == 0 ? Either.left(a) : Either.right(b)
             let x = applicativeError.attempt(applicativeError.fromEither(either))
             let y = applicativeError.pure(either)
-            return eq.eqv(applicativeError.map(x, { xx in xx as HK2<EitherF, E, Int> }),
-                          applicativeError.map(y, { yy in yy as HK2<EitherF, E, Int> }))
+            return eq.eqv(applicativeError.map(x, { xx in xx as Kind2<EitherF, E, Int> }),
+                          applicativeError.map(y, { yy in yy as Kind2<EitherF, E, Int> }))
         }
     }
     
-    private static func catchesError<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func catchesError<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Catch") <- forAll { (_ : Int) in
             let error = gen()
             if error is Error {
@@ -128,7 +128,7 @@ class ApplicativeErrorLaws<F, E> {
         }
     }
     
-    private static func catchesSuccess<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func catchesSuccess<ApplErr, EqF>(_ applicativeError : ApplErr, _ eq : EqF, _ gen : @escaping () -> E) where ApplErr : ApplicativeError, ApplErr.F == F, ApplErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Catch") <- forAll { (a : Int) in
             let f : () throws -> Int = { return a }
             return eq.eqv(applicativeError.catchError(f, recover: { e in e as! E }),

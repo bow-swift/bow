@@ -9,10 +9,10 @@
 import Foundation
 
 public class MaybeTF {}
-public typealias MaybeTPartial<F> = HK<MaybeTF, F>
+public typealias MaybeTPartial<F> = Kind<MaybeTF, F>
 
-public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
-    fileprivate let value : HK<F, Maybe<A>>
+public class MaybeT<F, A> : Kind2<MaybeTF, F, A> {
+    fileprivate let value : Kind<F, Maybe<A>>
     
     public static func pure<Appl>(_ a : A, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
         return MaybeT(applicative.pure(Maybe.pure(a)))
@@ -26,7 +26,7 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
         return MaybeT(applicative.pure(maybe))
     }
     
-    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> HK2<MaybeTF, F, Either<A, B>>, _ monad : MonF) -> HK2<MaybeTF, F, B> where MonF : Monad, MonF.F == F {
+    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> Kind2<MaybeTF, F, Either<A, B>>, _ monad : MonF) -> Kind2<MaybeTF, F, B> where MonF : Monad, MonF.F == F {
         
         return MaybeT<F, B>(monad.tailRecM(a, { aa in
             monad.map(MaybeT<F, Either<A, B>>.fix(f(aa)).value, { maybe in
@@ -36,19 +36,19 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
         }))
     }
     
-    public static func fix(_ fa : HK2<MaybeTF, F, A>) -> MaybeT<F, A> {
+    public static func fix(_ fa : Kind2<MaybeTF, F, A>) -> MaybeT<F, A> {
         return fa as! MaybeT<F, A>
     }
     
-    public init(_ value : HK<F, Maybe<A>>) {
+    public init(_ value : Kind<F, Maybe<A>>) {
         self.value = value
     }
     
-    public func fold<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> HK<F, B> where Func : Functor, Func.F == F {
+    public func fold<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
         return functor.map(value, { maybe in maybe.fold(ifEmpty, f) })
     }
     
-    public func cata<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> HK<F, B> where Func : Functor, Func.F == F {
+    public func cata<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
         return fold(ifEmpty, f, functor)
     }
     
@@ -64,23 +64,23 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
         return flatMapF({ a in f(a).value }, monad)
     }
     
-    public func flatMapF<B, Mon>(_ f : @escaping (A) -> HK<F, Maybe<B>>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
+    public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, Maybe<B>>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
         return MaybeT<F, B>(monad.flatMap(value, { maybe in maybe.fold({ monad.pure(Maybe<B>.none()) }, f)}))
     }
     
-    public func liftF<B, Func>(_ fb : HK<F, B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
+    public func liftF<B, Func>(_ fb : Kind<F, B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
         return MaybeT<F, B>(functor.map(fb, { b in Maybe<B>.some(b) }))
     }
     
-    public func semiflatMap<B, Mon>(_ f : @escaping (A) -> HK<F, B>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
+    public func semiflatMap<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
         return flatMap({ maybe in self.liftF(f(maybe), monad)}, monad)
     }
     
-    public func getOrElse<Func>(_ defaultValue : A, _ functor : Func) -> HK<F, A> where Func : Functor, Func.F == F {
+    public func getOrElse<Func>(_ defaultValue : A, _ functor : Func) -> Kind<F, A> where Func : Functor, Func.F == F {
         return functor.map(value, { maybe in maybe.getOrElse(defaultValue) })
     }
     
-    public func getOrElseF<Mon>(_ defaultValue : HK<F, A>, _ monad : Mon) -> HK<F, A> where Mon : Monad, Mon.F == F {
+    public func getOrElseF<Mon>(_ defaultValue : Kind<F, A>, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
         return monad.flatMap(value, { maybe in maybe.fold(constF(defaultValue), monad.pure)})
     }
     
@@ -88,15 +88,15 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
         return MaybeT(functor.map(value, { maybe in maybe.filter(predicate) }))
     }
     
-    public func forall<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> HK<F, Bool> where Func : Functor, Func.F == F {
+    public func forall<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
         return functor.map(value, { maybe in maybe.forall(predicate) })
     }
     
-    public func isDefined<Func>(_ functor : Func) -> HK<F, Bool> where Func : Functor, Func.F == F {
+    public func isDefined<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
         return functor.map(value, { maybe in maybe.isDefined })
     }
     
-    public func isEmpty<Func>(_ functor : Func) -> HK<F, Bool> where Func : Functor, Func.F == F {
+    public func isEmpty<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
         return functor.map(value, { maybe in maybe.isEmpty })
     }
     
@@ -104,7 +104,7 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
         return orElseF(defaultValue.value, monad)
     }
     
-    public func orElseF<Mon>(_ defaultValue : HK<F, Maybe<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
+    public func orElseF<Mon>(_ defaultValue : Kind<F, Maybe<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
         return MaybeT<F, A>(monad.flatMap(value, { maybe in
             maybe.fold(constF(defaultValue),
                        { _ in monad.pure(maybe) }) }))
@@ -162,14 +162,14 @@ public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F ==
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<MaybeTF, G>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<MaybeTF, G>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<MaybeTF, G>, B> {
         return MaybeT.fix(fa).map(f, functor)
     }
 }
 
 public class MaybeTFunctorFilter<G, FuncG> : MaybeTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
     
-    public func mapFilter<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<HK<MaybeTF, G>, B> {
+    public func mapFilter<A, B>(_ fa: Kind<Kind<MaybeTF, G>, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<Kind<MaybeTF, G>, B> {
         return MaybeT.fix(fa).mapFilter(f, functor)
     }
 }
@@ -183,22 +183,22 @@ public class MaybeTApplicative<G, MonG> : MaybeTFunctor<G, MonG>, Applicative wh
         super.init(monad)
     }
     
-    public func pure<A>(_ a: A) -> HK<HK<MaybeTF, G>, A> {
+    public func pure<A>(_ a: A) -> Kind<Kind<MaybeTF, G>, A> {
         return MaybeT.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ ff: HK<HK<MaybeTF, G>, (A) -> B>) -> HK<HK<MaybeTF, G>, B> {
+    public func ap<A, B>(_ fa: Kind<Kind<MaybeTF, G>, A>, _ ff: Kind<Kind<MaybeTF, G>, (A) -> B>) -> Kind<Kind<MaybeTF, G>, B> {
         return MaybeT.fix(fa).ap(MaybeT.fix(ff), monad)
     }
 }
 
 public class MaybeTMonad<G, MonG> : MaybeTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
     
-    public func flatMap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, B>) -> HK<HK<MaybeTF, G>, B> {
+    public func flatMap<A, B>(_ fa: Kind<Kind<MaybeTF, G>, A>, _ f: @escaping (A) -> Kind<Kind<MaybeTF, G>, B>) -> Kind<Kind<MaybeTF, G>, B> {
         return MaybeT.fix(fa).flatMap({ a in MaybeT.fix(f(a)) }, monad)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, Either<A, B>>) -> HK<HK<MaybeTF, G>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<MaybeTF, G>, Either<A, B>>) -> Kind<Kind<MaybeTF, G>, B> {
         return MaybeT.tailRecM(a, f, monad)
     }
 }
@@ -212,19 +212,19 @@ public class MaybeTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F =
         self.monad = monad
     }
     
-    public func combineK<A>(_ x: HK<HK<MaybeTF, G>, A>, _ y: HK<HK<MaybeTF, G>, A>) -> HK<HK<MaybeTF, G>, A> {
+    public func combineK<A>(_ x: Kind<Kind<MaybeTF, G>, A>, _ y: Kind<Kind<MaybeTF, G>, A>) -> Kind<Kind<MaybeTF, G>, A> {
         return MaybeT.fix(x).orElse(MaybeT.fix(y), monad)
     }
 }
 
 public class MaybeTMonoidK<G, MonG> : MaybeTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
-    public func emptyK<A>() -> HK<HK<MaybeTF, G>, A> {
+    public func emptyK<A>() -> Kind<Kind<MaybeTF, G>, A> {
         return MaybeT(monad.pure(Maybe.none()))
     }
 }
 
-public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == HK<F, HK<MaybeF, B>>, Func : Functor, Func.F == F {
-    public typealias A = HK2<MaybeTF, F, B>
+public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, Kind<MaybeF, B>>, Func : Functor, Func.F == F {
+    public typealias A = Kind2<MaybeTF, F, B>
     
     private let eq : EqF
     private let functor : Func
@@ -234,10 +234,10 @@ public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == HK<F, HK<Ma
         self.functor = functor
     }
     
-    public func eqv(_ a: HK<HK<MaybeTF, F>, B>, _ b: HK<HK<MaybeTF, F>, B>) -> Bool {
+    public func eqv(_ a: Kind<Kind<MaybeTF, F>, B>, _ b: Kind<Kind<MaybeTF, F>, B>) -> Bool {
         let a = MaybeT.fix(a)
         let b = MaybeT.fix(b)
-        return eq.eqv(functor.map(a.value, { aa in aa as HK<MaybeF, B> }),
-                      functor.map(b.value, { bb in bb as HK<MaybeF, B> }))
+        return eq.eqv(functor.map(a.value, { aa in aa as Kind<MaybeF, B> }),
+                      functor.map(b.value, { bb in bb as Kind<MaybeF, B> }))
     }
 }

@@ -11,7 +11,7 @@ import XCTest
 
 class TryTest: XCTestCase {
     
-    var generator : (Int) -> HK<TryF, Int> {
+    var generator : (Int) -> Kind<TryF, Int> {
         return { a in Try.pure(a) }
     }
     

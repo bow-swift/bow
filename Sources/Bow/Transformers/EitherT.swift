@@ -9,10 +9,10 @@
 import Foundation
 
 public class EitherTF {}
-public typealias EitherTPartial<F, A> = HK2<EitherTF, F, A>
+public typealias EitherTPartial<F, A> = Kind2<EitherTF, F, A>
 
-public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
-    fileprivate let value : HK<F, Either<A, B>>
+public class EitherT<F, A, B> : Kind3<EitherTF, F, A, B> {
+    fileprivate let value : Kind<F, Either<A, B>>
     
     public static func tailRecM<C, Mon>(_ a : A, _ f : @escaping (A) -> EitherT<F, C, Either<A, B>>, _ monad : Mon) -> EitherT<F, C, B> where Mon : Monad, Mon.F == F {
         return EitherT<F, C, B>(monad.tailRecM(a, { a in
@@ -42,15 +42,15 @@ public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
         return EitherT(applicative.pure(either))
     }
     
-    public static func fix(_ fa : HK3<EitherTF, F, A, B>) -> EitherT<F, A, B> {
+    public static func fix(_ fa : Kind3<EitherTF, F, A, B>) -> EitherT<F, A, B> {
         return fa as! EitherT<F, A, B>
     }
     
-    public init(_ value : HK<F, Either<A, B>>) {
+    public init(_ value : Kind<F, Either<A, B>>) {
         self.value = value
     }
     
-    public func fold<C, Func>(_ fa : @escaping (A) -> C, _ fb : @escaping (B) -> C, _ functor : Func) -> HK<F, C> where Func : Functor, Func.F == F {
+    public func fold<C, Func>(_ fa : @escaping (A) -> C, _ fb : @escaping (B) -> C, _ functor : Func) -> Kind<F, C> where Func : Functor, Func.F == F {
         return functor.map(value) { either in either.fold(fa, fb) }
     }
     
@@ -58,7 +58,7 @@ public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
         return EitherT<F, A, C>(functor.map(value, { either in either.map(f) }))
     }
     
-    public func liftF<C, Func>(_ fc : HK<F, C>, _ functor : Func) -> EitherT<F, A, C> where Func : Functor, Func.F == F {
+    public func liftF<C, Func>(_ fc : Kind<F, C>, _ functor : Func) -> EitherT<F, A, C> where Func : Functor, Func.F == F {
         return EitherT<F, A, C>(functor.map(fc, Either<A, C>.right))
     }
     
@@ -70,22 +70,22 @@ public class EitherT<F, A, B> : HK3<EitherTF, F, A, B> {
         return flatMapF({ b in f(b).value }, monad)
     }
     
-    public func flatMapF<C, Mon>(_ f : @escaping (B) -> HK<F, Either<A, C>>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
+    public func flatMapF<C, Mon>(_ f : @escaping (B) -> Kind<F, Either<A, C>>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
         return EitherT<F, A, C>(monad.flatMap(value, { either in
             either.fold({ a in monad.pure(Either<A, C>.left(a)) },
                         { b in f(b) })
         }))
     }
     
-    public func cata<C, Func>(_ l : @escaping (A) -> C, _ r : @escaping (B) -> C, _ functor : Func) -> HK<F, C> where Func : Functor, Func.F == F {
+    public func cata<C, Func>(_ l : @escaping (A) -> C, _ r : @escaping (B) -> C, _ functor : Func) -> Kind<F, C> where Func : Functor, Func.F == F {
         return fold(l, r, functor)
     }
     
-    public func semiflatMap<C, Mon>(_ f : @escaping (B) -> HK<F, C>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
+    public func semiflatMap<C, Mon>(_ f : @escaping (B) -> Kind<F, C>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
         return flatMap({ b in self.liftF(f(b), monad) }, monad)
     }
     
-    public func exists<Func>(_ predicate : @escaping (B) -> Bool, _ functor : Func) -> HK<F, Bool> where Func : Functor, Func.F == F {
+    public func exists<Func>(_ predicate : @escaping (B) -> Bool, _ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
         return functor.map(value, { either in either.exists(predicate) })
     }
     
@@ -143,7 +143,7 @@ public class EitherTFunctor<G, M, Func> : Functor where Func : Functor, Func.F =
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<EitherTF, G>, M>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<Kind<EitherTF, G>, M>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<Kind<EitherTF, G>, M>, B> {
         return EitherT.fix(fa).map(f, functor)
     }
 }
@@ -157,22 +157,22 @@ public class EitherTApplicative<G, M, Mon> : EitherTFunctor<G, M, Mon>, Applicat
         super.init(monad)
     }
     
-    public func pure<A>(_ a: A) -> HK<HK<HK<EitherTF, G>, M>, A> {
+    public func pure<A>(_ a: A) -> Kind<Kind<Kind<EitherTF, G>, M>, A> {
         return EitherT<G, M, A>.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ ff: HK<HK<HK<EitherTF, G>, M>, (A) -> B>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+    public func ap<A, B>(_ fa: Kind<Kind<Kind<EitherTF, G>, M>, A>, _ ff: Kind<Kind<Kind<EitherTF, G>, M>, (A) -> B>) -> Kind<Kind<Kind<EitherTF, G>, M>, B> {
         return EitherT.fix(fa).ap(EitherT.fix(ff), monad)
     }
 }
 
 public class EitherTMonad<G, M, Mon> : EitherTApplicative<G, M, Mon>, Monad where Mon : Monad, Mon.F == G {
     
-    public func flatMap<A, B>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (A) -> HK<HK<HK<EitherTF, G>, M>, B>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+    public func flatMap<A, B>(_ fa: Kind<Kind<Kind<EitherTF, G>, M>, A>, _ f: @escaping (A) -> Kind<Kind<Kind<EitherTF, G>, M>, B>) -> Kind<Kind<Kind<EitherTF, G>, M>, B> {
         return EitherT.fix(fa).flatMap({ a in EitherT.fix(f(a)) }, self.monad)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<EitherTF, G>, M>, Either<A, B>>) -> HK<HK<HK<EitherTF, G>, M>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<Kind<EitherTF, G>, M>, Either<A, B>>) -> Kind<Kind<Kind<EitherTF, G>, M>, B> {
         return EitherT.tailRecM(a, { a in EitherT.fix(f(a)) }, self.monad)
     }
 }
@@ -180,11 +180,11 @@ public class EitherTMonad<G, M, Mon> : EitherTApplicative<G, M, Mon>, Monad wher
 public class EitherTMonadError<G, M, Mon> : EitherTMonad<G, M, Mon>, MonadError where Mon : Monad, Mon.F == G {
     public typealias E = M
     
-    public func raiseError<A>(_ e: M) -> HK<HK<HK<EitherTF, G>, M>, A> {
+    public func raiseError<A>(_ e: M) -> Kind<Kind<Kind<EitherTF, G>, M>, A> {
         return EitherT(monad.pure(Either.left(e)))
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<HK<EitherTF, G>, M>, A>, _ f: @escaping (M) -> HK<HK<HK<EitherTF, G>, M>, A>) -> HK<HK<HK<EitherTF, G>, M>, A> {
+    public func handleErrorWith<A>(_ fa: Kind<Kind<Kind<EitherTF, G>, M>, A>, _ f: @escaping (M) -> Kind<Kind<Kind<EitherTF, G>, M>, A>) -> Kind<Kind<Kind<EitherTF, G>, M>, A> {
         
         return EitherT<G, M, A>(monad.flatMap(EitherT.fix(fa).value, { either in
             either.fold({ left in EitherT.fix(f(left)).value },
@@ -202,13 +202,13 @@ public class EitherTSemigroupK<G, M, Mon> : SemigroupK where Mon : Monad, Mon.F 
         self.monad = monad
     }
     
-    public func combineK<A>(_ x: HK<HK<HK<EitherTF, G>, M>, A>, _ y: HK<HK<HK<EitherTF, G>, M>, A>) -> HK<HK<HK<EitherTF, G>, M>, A> {
+    public func combineK<A>(_ x: Kind<Kind<Kind<EitherTF, G>, M>, A>, _ y: Kind<Kind<Kind<EitherTF, G>, M>, A>) -> Kind<Kind<Kind<EitherTF, G>, M>, A> {
         return EitherT.fix(x).combineK(EitherT.fix(y), monad)
     }
 }
 
-public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == HK<F, HK2<EitherF, L, R>>, Func : Functor, Func.F == F {
-    public typealias A = HK3<EitherTF, F, L, R>
+public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == Kind<F, Kind2<EitherF, L, R>>, Func : Functor, Func.F == F {
+    public typealias A = Kind3<EitherTF, F, L, R>
     
     private let eq : EqA
     private let functor : Func
@@ -218,10 +218,10 @@ public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == HK<F, H
         self.functor = functor
     }
     
-    public func eqv(_ a: HK<HK<HK<EitherTF, F>, L>, R>, _ b: HK<HK<HK<EitherTF, F>, L>, R>) -> Bool {
+    public func eqv(_ a: Kind<Kind<Kind<EitherTF, F>, L>, R>, _ b: Kind<Kind<Kind<EitherTF, F>, L>, R>) -> Bool {
         let a = EitherT.fix(a)
         let b = EitherT.fix(b)
-        return eq.eqv(functor.map(a.value, { a in a as HK2<EitherF, L, R> }),
-                      functor.map(b.value, { b in b as HK2<EitherF, L, R> }))
+        return eq.eqv(functor.map(a.value, { a in a as Kind2<EitherF, L, R> }),
+                      functor.map(b.value, { b in b as Kind2<EitherF, L, R> }))
     }
 }

@@ -11,7 +11,7 @@ import XCTest
 
 class ValidatedTest: XCTestCase {
     
-    var generator : (Int) -> HK2<ValidatedF, Int, Int> {
+    var generator : (Int) -> Kind2<ValidatedF, Int, Int> {
         return { a in Validated<Int, Int>.pure(a) }
     }
     
