@@ -29,14 +29,14 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
     public static func tailRecM<B, Mon>(_ a : A, _ f : @escaping (A) -> HK<StateTPartial<F, S>, Either<A, B>>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
         return StateT<F, S, B>(monad.pure({ s in
             monad.tailRecM((s, a), { pair in
-                monad.map(StateT<F, S, Either<A, B>>.ev(f(pair.1)).runM(pair.0, monad), { sss, ab in
+                monad.map(StateT<F, S, Either<A, B>>.fix(f(pair.1)).runM(pair.0, monad), { sss, ab in
                     ab.bimap({ left in (sss, left) }, { right in (sss, right) })
                 })
             })
         }))
     }
     
-    public static func ev(_ fa : HK3<StateTF, F, S, A>) -> StateT<F, S, A> {
+    public static func fix(_ fa : HK3<StateTF, F, S, A>) -> StateT<F, S, A> {
         return fa as! StateT<F, S, A>
     }
     
@@ -171,7 +171,7 @@ public class StateTFunctor<G, S, FuncG> : Functor where FuncG : Functor, FuncG.F
     }
     
     public func map<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).map(f, functor)
+        return StateT.fix(fa).map(f, functor)
     }
 }
 
@@ -188,14 +188,14 @@ public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicat
     }
     
     public func ap<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ ff: HK<HK<HK<StateTF, G>, S>, (A) -> B>) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).ap(StateT.ev(ff), monad)
+        return StateT.fix(fa).ap(StateT.fix(ff), monad)
     }
 }
 
 public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad where MonG : Monad, MonG.F == G {
     
     public func flatMap<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (A) -> HK<HK<HK<StateTF, G>, S>, B>) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).flatMap({ a in StateT.ev(f(a)) }, monad)
+        return StateT.fix(fa).flatMap({ a in StateT.fix(f(a)) }, monad)
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<StateTF, G>, S>, Either<A, B>>) -> HK<HK<HK<StateTF, G>, S>, B> {
@@ -227,7 +227,7 @@ public class StateTSemigroupK<G, S, MonG, SemiKG> : SemigroupK where MonG : Mona
     }
     
     public func combineK<A>(_ x: HK<HK<HK<StateTF, G>, S>, A>, _ y: HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
-        return StateT.ev(x).combineK(StateT.ev(y), monad, semigroupK)
+        return StateT.fix(x).combineK(StateT.fix(y), monad, semigroupK)
     }
 }
 
@@ -240,7 +240,7 @@ public class StateTMonadCombine<G, S, MonComG> : StateTMonad<G, S, MonComG>, Mon
     }
     
     public func combineK<A>(_ x: HK<HK<HK<StateTF, G>, S>, A>, _ y: HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
-        return StateT.ev(x).combineK(StateT.ev(y), monadCombine, monadCombine)
+        return StateT.fix(x).combineK(StateT.fix(y), monadCombine, monadCombine)
     }
     
     public func empty<A>() -> HK<HK<HK<StateTF, G>, S>, A> {
@@ -272,8 +272,8 @@ public class StateTMonadError<G, S, Err, MonErrG> : StateTMonad<G, S, MonErrG>, 
     
     public func handleErrorWith<A>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (Err) -> HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
         return StateT<G, S, A>(monadError.pure({ s in
-            self.monadError.handleErrorWith(StateT.ev(fa).runM(s, self.monadError), { e in
-                StateT.ev(f(e)).runM(s, self.monadError)
+            self.monadError.handleErrorWith(StateT.fix(fa).runM(s, self.monadError), { e in
+                StateT.fix(f(e)).runM(s, self.monadError)
             })
         }))
     }

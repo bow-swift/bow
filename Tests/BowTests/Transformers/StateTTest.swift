@@ -15,8 +15,8 @@ class StateTTest: XCTestCase {
         public typealias A = HK3<StateTF, IdF, Int, Int>
         
         public func eqv(_ a: HK3<StateTF, IdF, Int, Int>, _ b: HK3<StateTF, IdF, Int, Int>) -> Bool {
-            let x = StateT.ev(a).runM(1, Id<Any>.monad()).fix().value
-            let y = StateT.ev(b).runM(1, Id<Any>.monad()).fix().value
+            let x = StateT.fix(a).runM(1, Id<Any>.monad()).fix().value
+            let y = StateT.fix(b).runM(1, Id<Any>.monad()).fix().value
             return x == y
         }
     }
@@ -25,8 +25,8 @@ class StateTTest: XCTestCase {
         public typealias A = HK3<StateTF, IdF, Int, ()>
         
         public func eqv(_ a: HK3<StateTF, IdF, Int, ()>, _ b: HK3<StateTF, IdF, Int, ()>) -> Bool {
-            let x = StateT.ev(a).runM(1, Id<Any>.monad())
-            let y = StateT.ev(b).runM(1, Id<Any>.monad())
+            let x = StateT.fix(a).runM(1, Id<Any>.monad())
+            let y = StateT.fix(b).runM(1, Id<Any>.monad())
             return Id.eq(Tuple.eq(Int.order, UnitEq())).eqv(x, y)
         }
     }
@@ -35,8 +35,8 @@ class StateTTest: XCTestCase {
         public typealias A = HK3<StateTF, MaybeF, (), Int>
         
         public func eqv(_ a: HK3<StateTF, MaybeF, (), Int>, _ b: HK3<StateTF, MaybeF, (), Int>) -> Bool {
-            let x = StateT.ev(a).runM((), Maybe<Any>.monad())
-            let y = StateT.ev(b).runM((), Maybe<Any>.monad())
+            let x = StateT.fix(a).runM((), Maybe<Any>.monad())
+            let y = StateT.fix(b).runM((), Maybe<Any>.monad())
             return Maybe.eq(Tuple.eq(UnitEq(), Int.order)).eqv(x, y)
         }
     }
@@ -46,8 +46,8 @@ class StateTTest: XCTestCase {
         
         public func eqv(_ a: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>,
                         _ b: HK3<StateTF, MaybeF, (), HK2<EitherF, (), Int>>) -> Bool {
-            let x = StateT.ev(a).runM((), Maybe<Any>.monad())
-            let y = StateT.ev(b).runM((), Maybe<Any>.monad())
+            let x = StateT.fix(a).runM((), Maybe<Any>.monad())
+            let y = StateT.fix(b).runM((), Maybe<Any>.monad())
             return Maybe.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)
         }
     }
@@ -57,8 +57,8 @@ class StateTTest: XCTestCase {
         
         public func eqv(_ a: HK3<StateTF, ListKWF, Int, Int>,
                         _ b: HK3<StateTF, ListKWF, Int, Int>) -> Bool {
-            let x = StateT.ev(a).runM(1, ListKW<Any>.monad())
-            let y = StateT.ev(b).runM(1, ListKW<Any>.monad())
+            let x = StateT.fix(a).runM(1, ListKW<Any>.monad())
+            let y = StateT.fix(b).runM(1, ListKW<Any>.monad())
             return ListKW.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
         }
     }
