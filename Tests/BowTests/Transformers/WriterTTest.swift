@@ -11,7 +11,7 @@ import XCTest
 
 class WriterTTest: XCTestCase {
     
-    var generator : (Int) -> Kind3<ForWriterT, ForId, Int, Int> {
+    var generator : (Int) -> WriterTOf<ForId, Int, Int> {
         return { a in WriterT.pure(a, Int.sumMonoid, Id<Any>.applicative()) }
     }
     
