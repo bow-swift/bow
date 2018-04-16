@@ -15,8 +15,9 @@ public enum TryError : Error {
 }
 
 public class ForTry {}
+public typealias TryOf<A> = Kind<ForTry, A>
 
-public class Try<A> : Kind<ForTry, A> {
+public class Try<A> : TryOf<A> {
     public static func success(_ value : A) -> Try<A> {
         return Success<A>(value)
     }
@@ -50,7 +51,7 @@ public class Try<A> : Kind<ForTry, A> {
                          })
     }
     
-    public static func fix(_ fa : Kind<ForTry, A>) -> Try<A> {
+    public static func fix(_ fa : TryOf<A>) -> Try<A> {
         return fa.fix()
     }
     
@@ -180,27 +181,27 @@ public extension Try {
 public class TryFunctor : Functor {
     public typealias F = ForTry
     
-    public func map<A, B>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> B) -> Kind<ForTry, B> {
+    public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
         return fa.fix().map(f)
     }
 }
 
 public class TryApplicative : TryFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<ForTry, A> {
+    public func pure<A>(_ a: A) -> TryOf<A> {
         return Try<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<ForTry, A>, _ ff: Kind<ForTry, (A) -> B>) -> Kind<ForTry, B> {
+    public func ap<A, B>(_ fa: TryOf<A>, _ ff: TryOf<(A) -> B>) -> TryOf<B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class TryMonad : TryApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<ForTry, B>) -> Kind<ForTry, B> {
+    public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForTry, Either<A, B>>) -> Kind<ForTry, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
         return Try<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
@@ -208,24 +209,24 @@ public class TryMonad : TryApplicative, Monad {
 public class TryMonadError<C> : TryMonad, MonadError where C : Error{
     public typealias E = C
     
-    public func raiseError<A>(_ e: C) -> Kind<ForTry, A> {
+    public func raiseError<A>(_ e: C) -> TryOf<A> {
         return Try<A>.failure(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<ForTry, A>, _ f: @escaping (C) -> Kind<ForTry, A>) -> Kind<ForTry, A> {
+    public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
         return fa.fix().recoverWith({ e in f(e as! C).fix() })
     }
 }
 
 public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind<ForTry, R>
+    public typealias A = TryOf<R>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind<ForTry, R>, _ b: Kind<ForTry, R>) -> Bool {
+    public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
         let a = Try.fix(a)
         let b = Try.fix(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},

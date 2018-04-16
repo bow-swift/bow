@@ -11,7 +11,7 @@ import XCTest
 
 class TryTest: XCTestCase {
     
-    var generator : (Int) -> Kind<ForTry, Int> {
+    var generator : (Int) -> TryOf<Int> {
         return { a in Try.pure(a) }
     }
     
