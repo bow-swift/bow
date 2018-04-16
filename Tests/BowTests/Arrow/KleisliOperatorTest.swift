@@ -67,7 +67,7 @@ class KleisliOperatorTest: XCTestCase {
         let f = { (x : Int) in Reader({ (_ : String) in x }) }
         let g = { (x : Int) in Reader({ (_ : String) in 2 * x }) }
         
-        expect((f >=> g)(5).invoke("Hello").ev().value).to(be(10))
+        expect((f >=> g)(5).invoke("Hello").fix().value).to(be(10))
     }
     
     func testKleisliForTry() {

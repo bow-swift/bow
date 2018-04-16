@@ -50,6 +50,6 @@ public class Reader<D, A> : ReaderT<IdF, D, A> {
     }
     
     private func toReader<B>(_ x : Kleisli<IdF, D, B>) -> Reader<D, B> {
-        return Reader<D, B>({ (d : D) in x.run(d).ev().value })
+        return Reader<D, B>({ (d : D) in x.run(d).fix().value })
     }
 }

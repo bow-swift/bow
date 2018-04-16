@@ -15,8 +15,8 @@ class StateTTest: XCTestCase {
         public typealias A = HK3<StateTF, IdF, Int, Int>
         
         public func eqv(_ a: HK3<StateTF, IdF, Int, Int>, _ b: HK3<StateTF, IdF, Int, Int>) -> Bool {
-            let x = StateT.ev(a).runM(1, Id<Any>.monad()).ev().value
-            let y = StateT.ev(b).runM(1, Id<Any>.monad()).ev().value
+            let x = StateT.ev(a).runM(1, Id<Any>.monad()).fix().value
+            let y = StateT.ev(b).runM(1, Id<Any>.monad()).fix().value
             return x == y
         }
     }

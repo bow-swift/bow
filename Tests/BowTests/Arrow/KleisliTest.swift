@@ -17,7 +17,7 @@ class KleisliTest: XCTestCase {
         func eqv(_ a: HK<HK<HK<KleisliF, IdF>, Int>, Int>, _ b: HK<HK<HK<KleisliF, IdF>, Int>, Int>) -> Bool {
             let a = Kleisli.ev(a)
             let b = Kleisli.ev(b)
-            return a.invoke(1).ev().value == b.invoke(1).ev().value
+            return a.invoke(1).fix().value == b.invoke(1).fix().value
         }
     }
     
