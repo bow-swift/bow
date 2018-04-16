@@ -37,7 +37,7 @@ public class MapKW<K : Hashable, A> : Kind2<MapKWKind, K, A> {
         if fb.isEmpty {
             return MapKW<K, Z>([:])
         } else {
-            return Dictionary<K, Z>(uniqueKeysWithValues: self.dictionary.flatMap{ k, a in
+            return Dictionary<K, Z>(uniqueKeysWithValues: self.dictionary.compactMap{ k, a in
                 fb.dictionary[k].map{ b in (k, f(a, b)) }
             }).k()
         }
@@ -52,7 +52,7 @@ public class MapKW<K : Hashable, A> : Kind2<MapKWKind, K, A> {
     }
     
     public func flatMap<B>(_ f : (A) -> MapKW<K, B>) -> MapKW<K, B> {
-        return Dictionary<K, B>(uniqueKeysWithValues: self.dictionary.flatMap { k, a in
+        return Dictionary<K, B>(uniqueKeysWithValues: self.dictionary.compactMap { k, a in
             f(a).dictionary[k].map{ v in (k, v) }
         }).k()
     }
