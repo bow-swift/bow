@@ -9,8 +9,9 @@
 import Foundation
 
 public class ForListK {}
+public typealias ListKOf<A> = Kind<ForListK, A>
 
-public class ListK<A> : Kind<ForListK, A> {
+public class ListK<A> : ListKOf<A> {
     fileprivate let list : [A]
     
     public static func +(lhs : ListK<A>, rhs : ListK<A>) -> ListK<A> {
@@ -25,7 +26,7 @@ public class ListK<A> : Kind<ForListK, A> {
         return ListK([])
     }
     
-    private static func go<B>(_ buf : [B], _ f : (A) -> Kind<ForListK, Either<A, B>>, _ v : ListK<Either<A, B>>) -> [B] {
+    private static func go<B>(_ buf : [B], _ f : (A) -> ListKOf<Either<A, B>>, _ v : ListK<Either<A, B>>) -> [B] {
         if !v.isEmpty {
             let head = v.list[0]
             return head.fold({ a in go(buf, f, ListK<Either<A, B>>(f(a).fix().list + v.list.dropFirst())) },
@@ -38,11 +39,11 @@ public class ListK<A> : Kind<ForListK, A> {
         }
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : (A) -> Kind<ForListK, Either<A, B>>) -> ListK<B> {
+    public static func tailRecM<B>(_ a : A, _ f : (A) -> ListKOf<Either<A, B>>) -> ListK<B> {
         return ListK<B>(go([], f, f(a).fix()))
     }
     
-    public static func fix(_ fa : Kind<ForListK, A>) -> ListK<A> {
+    public static func fix(_ fa : ListKOf<A>) -> ListK<A> {
         return fa.fix()
     }
     
@@ -85,10 +86,10 @@ public class ListK<A> : Kind<ForListK, A> {
         return Eval.deferEvaluation({ loop(self) })
     }
     
-    public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<ForListK, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, ListKOf<B>> where Appl : Applicative, Appl.F == G {
         let x = foldR(Eval.always({ applicative.pure(ListK<B>([])) }),
                      { a, eval in applicative.map2Eval(f(a), eval, { x, y in ListK<B>([x]) + y }) }).value()
-        return applicative.map(x, { a in a as Kind<ForListK, B> })
+        return applicative.map(x, { a in a as ListKOf<B> })
     }
     
     public func map2<B, Z>(_ fb : ListK<B>, _ f : ((A, B)) -> Z) -> ListK<Z> {
@@ -177,27 +178,27 @@ public extension ListK {
 public class ListKFunctor : Functor {
     public typealias F = ForListK
     
-    public func map<A, B>(_ fa: Kind<ForListK, A>, _ f: @escaping (A) -> B) -> Kind<ForListK, B> {
+    public func map<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> B) -> ListKOf<B> {
         return fa.fix().map(f)
     }
 }
 
 public class ListKApplicative : ListKFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<ForListK, A> {
+    public func pure<A>(_ a: A) -> ListKOf<A> {
         return ListK.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<ForListK, A>, _ ff: Kind<ForListK, (A) -> B>) -> Kind<ForListK, B> {
+    public func ap<A, B>(_ fa: ListKOf<A>, _ ff: ListKOf<(A) -> B>) -> ListKOf<B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class ListKMonad : ListKApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<ForListK, A>, _ f: @escaping (A) -> Kind<ForListK, B>) -> Kind<ForListK, B> {
+    public func flatMap<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> ListKOf<B>) -> ListKOf<B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForListK, Either<A, B>>) -> Kind<ForListK, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ListKOf<Either<A, B>>) -> ListKOf<B> {
         return ListK.tailRecM(a, f)
     }
 }
@@ -205,17 +206,17 @@ public class ListKMonad : ListKApplicative, Monad {
 public class ListKFoldable : Foldable {
     public typealias F = ForListK
     
-    public func foldL<A, B>(_ fa: Kind<ForListK, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: ListKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<ForListK, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: ListKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
     }
 }
 
 public class ListKTraverse : ListKFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<ForListK, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForListK, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: ListKOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ListKOf<B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
     }
 }
@@ -223,59 +224,59 @@ public class ListKTraverse : ListKFoldable, Traverse {
 public class ListKSemigroupK : SemigroupK {
     public typealias F = ForListK
     
-    public func combineK<A>(_ x: Kind<ForListK, A>, _ y: Kind<ForListK, A>) -> Kind<ForListK, A> {
+    public func combineK<A>(_ x: ListKOf<A>, _ y: ListKOf<A>) -> ListKOf<A> {
         return x.fix().combineK(y.fix())
     }
 }
 
 public class ListKMonoidK : ListKSemigroupK, MonoidK {
-    public func emptyK<A>() -> Kind<ForListK, A> {
+    public func emptyK<A>() -> ListKOf<A> {
         return ListK<A>.empty()
     }
 }
 
 public class ListKFunctorFilter : ListKFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: Kind<ForListK, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<ForListK, B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> Maybe<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
 
 public class ListKMonadFilter : ListKMonad, MonadFilter {
-    public func empty<A>() -> Kind<ForListK, A> {
+    public func empty<A>() -> ListKOf<A> {
         return ListK<A>.empty()
     }
     
-    public func mapFilter<A, B>(_ fa: Kind<ForListK, A>, _ f: @escaping (A) -> Maybe<B>) -> Kind<ForListK, B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> Maybe<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
 
 public class ListKMonadCombine : ListKMonadFilter, MonadCombine {
-    public func emptyK<A>() -> Kind<ForListK, A> {
+    public func emptyK<A>() -> ListKOf<A> {
         return ListK<A>.empty()
     }
     
-    public func combineK<A>(_ x: Kind<ForListK, A>, _ y: Kind<ForListK, A>) -> Kind<ForListK, A> {
+    public func combineK<A>(_ x: ListKOf<A>, _ y: ListKOf<A>) -> ListKOf<A> {
         return x.fix().combineK(y.fix())
     }
 }
 
 public class ListKSemigroup<R> : Semigroup {
-    public typealias A = Kind<ForListK, R>
+    public typealias A = ListKOf<R>
     
-    public func combine(_ a: Kind<ForListK, R>, _ b: Kind<ForListK, R>) -> Kind<ForListK, R> {
+    public func combine(_ a: ListKOf<R>, _ b: ListKOf<R>) -> ListKOf<R> {
         return ListK.fix(a) + ListK.fix(b)
     }
 }
 
 public class ListKMonoid<R> : ListKSemigroup<R>, Monoid {
-    public var empty: Kind<ForListK, R> {
+    public var empty: ListKOf<R> {
         return ListK<R>.empty()
     }
 }
 
 public class ListKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind<ForListK, R>
+    public typealias A = ListKOf<R>
     
     private let eqr : EqR
     
@@ -283,7 +284,7 @@ public class ListKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind<ForListK, R>, _ b: Kind<ForListK, R>) -> Bool {
+    public func eqv(_ a: ListKOf<R>, _ b: ListKOf<R>) -> Bool {
         let a = ListK.fix(a)
         let b = ListK.fix(b)
         if a.list.count != b.list.count {

@@ -12,7 +12,7 @@ import SwiftCheck
 
 class ListKTest: XCTestCase {
     
-    var generator : (Int) -> Kind<ForListK, Int> {
+    var generator : (Int) -> ListKOf<Int> {
         return { a in ListK<Int>.pure(a) }
     }
     
@@ -37,7 +37,7 @@ class ListKTest: XCTestCase {
     
     func testSemigroupLaws() {
         property("ListK semigroup laws") <- forAll() { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<Kind<ForListK, Int>>.check(
+            return SemigroupLaws<ListKOf<Int>>.check(
                 semigroup: ListK<Int>.semigroup(),
                 a: ListK<Int>.pure(a),
                 b: ListK<Int>.pure(b),
@@ -52,7 +52,7 @@ class ListKTest: XCTestCase {
     
     func testMonoidLaws() {
         property("ListK monoid laws") <- forAll() { (a : Int) in
-            return MonoidLaws<Kind<ForListK, Int>>.check(monoid: ListK<Int>.monoid(), a: ListK<Int>.pure(a), eq: self.eq)
+            return MonoidLaws<ListKOf<Int>>.check(monoid: ListK<Int>.monoid(), a: ListK<Int>.pure(a), eq: self.eq)
         }
     }
     

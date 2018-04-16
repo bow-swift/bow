@@ -105,8 +105,8 @@ public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<ForNonEmptyList, B>> where Appl : Applicative, Appl.F == G {
         return applicative.map2Eval(f(self.head),
-                                    Eval<Kind<G, Kind<ForListK, B>>>.always({ ListK<A>.traverse().traverse(ListK<A>(self.tail), f, applicative) }),
-                                    { (a : B, b : Kind<ForListK, B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
+                                    Eval<Kind<G, ListKOf<B>>>.always({ ListK<A>.traverse().traverse(ListK<A>(self.tail), f, applicative) }),
+                                    { (a : B, b : ListKOf<B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
     }
     
     public func coflatMap<B>(_ f : @escaping (NonEmptyList<A>) -> B) -> NonEmptyList<B> {
