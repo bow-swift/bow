@@ -15,8 +15,8 @@ class KleisliTest: XCTestCase {
         typealias A = HK3<KleisliF, IdF, Int, Int>
         
         func eqv(_ a: HK<HK<HK<KleisliF, IdF>, Int>, Int>, _ b: HK<HK<HK<KleisliF, IdF>, Int>, Int>) -> Bool {
-            let a = Kleisli.ev(a)
-            let b = Kleisli.ev(b)
+            let a = Kleisli.fix(a)
+            let b = Kleisli.fix(b)
             return a.invoke(1).fix().value == b.invoke(1).fix().value
         }
     }
@@ -25,8 +25,8 @@ class KleisliTest: XCTestCase {
         typealias A = HK3<KleisliF, MaybeF, (), Int>
         
         func eqv(_ a: HK<HK<HK<KleisliF, MaybeF>, ()>, Int>, _ b: HK<HK<HK<KleisliF, MaybeF>, ()>, Int>) -> Bool {
-            let a = Kleisli.ev(a)
-            let b = Kleisli.ev(b)
+            let a = Kleisli.fix(a)
+            let b = Kleisli.fix(b)
             return Maybe.eq(Int.order).eqv(a.invoke(()),
                                            b.invoke(()))
         }
@@ -36,8 +36,8 @@ class KleisliTest: XCTestCase {
         typealias A = HK3<KleisliF, IdF, Int, ()>
         
         func eqv(_ a: HK<HK<HK<KleisliF, IdF>, Int>, ()>, _ b: HK<HK<HK<KleisliF, IdF>, Int>, ()>) -> Bool {
-            let a = Kleisli.ev(a)
-            let b = Kleisli.ev(b)
+            let a = Kleisli.fix(a)
+            let b = Kleisli.fix(b)
             return Id.eq(UnitEq()).eqv(a.invoke(1),
                                        b.invoke(1))
         }
@@ -48,8 +48,8 @@ class KleisliTest: XCTestCase {
         
         func eqv(_ a: HK<HK<HK<KleisliF, MaybeF>, ()>, HK2<EitherF, (), Int>>,
                  _ b: HK<HK<HK<KleisliF, MaybeF>, ()>, HK2<EitherF, (), Int>>) -> Bool {
-            let a = Kleisli.ev(a)
-            let b = Kleisli.ev(b)
+            let a = Kleisli.fix(a)
+            let b = Kleisli.fix(b)
             return Maybe.eq(Either.eq(UnitEq(), Int.order)).eqv(a.invoke(()),
                                                                 b.invoke(()))
         }
