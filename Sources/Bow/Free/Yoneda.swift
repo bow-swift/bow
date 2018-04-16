@@ -16,7 +16,7 @@ open class Yoneda<F, A> : HK2<YonedaF, F, A> {
         return YonedaFunctor<F, A, Func>(fa, functor)
     }
     
-    public static func ev(_ fa : HK2<YonedaF, F, A>) -> Yoneda<F, A> {
+    public static func fix(_ fa : HK2<YonedaF, F, A>) -> Yoneda<F, A> {
         return fa as! Yoneda<F, A>
     }
     
@@ -81,6 +81,6 @@ public class YonedaFunctorInstance<G, Func> : Functor where Func : Functor, Func
     }
     
     public func map<A, B>(_ fa: HK<HK<YonedaF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<YonedaF, G>, B> {
-        return Yoneda.ev(fa).map(f, functor)
+        return Yoneda.fix(fa).map(f, functor)
     }
 }
