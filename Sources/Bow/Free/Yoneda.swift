@@ -9,14 +9,15 @@
 import Foundation
 
 public class ForYoneda {}
+public typealias YonedaOf<F, A> = Kind2<ForYoneda, F, A>
 public typealias YonedaPartial<F> = Kind<ForYoneda, F>
 
-open class Yoneda<F, A> : Kind2<ForYoneda, F, A> {
+open class Yoneda<F, A> : YonedaOf<F, A> {
     public static func apply<Func>(_ fa : Kind<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
         return YonedaFunctor<F, A, Func>(fa, functor)
     }
     
-    public static func fix(_ fa : Kind2<ForYoneda, F, A>) -> Yoneda<F, A> {
+    public static func fix(_ fa : YonedaOf<F, A>) -> Yoneda<F, A> {
         return fa as! Yoneda<F, A>
     }
     
@@ -80,7 +81,7 @@ public class YonedaFunctorInstance<G, Func> : Functor where Func : Functor, Func
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: Kind<Kind<ForYoneda, G>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ForYoneda, G>, B> {
+    public func map<A, B>(_ fa: YonedaOf<G, A>, _ f: @escaping (A) -> B) -> YonedaOf<G, B> {
         return Yoneda.fix(fa).map(f, functor)
     }
 }
