@@ -10,9 +10,10 @@ import Foundation
 
 public class ForCofree {}
 public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>
+public typealias CofreeOf<S, A> = Kind2<ForCofree, S, A>
 public typealias CofreePartial<S> = Kind<ForCofree, S>
 
-public class Cofree<S, A> : Kind2<ForCofree, S, A> {
+public class Cofree<S, A> : CofreeOf<S, A> {
     private let head : A
     private let tail : Eval<CofreeEval<S, A>>
     
@@ -24,7 +25,7 @@ public class Cofree<S, A> : Kind2<ForCofree, S, A> {
         return Cofree(a, Eval.later({ functor.map(f(a), { inA in create(inA, f, functor) }) }))
     }
     
-    public static func fix(_ fa : Kind2<ForCofree, S, A>) -> Cofree<S, A> {
+    public static func fix(_ fa : CofreeOf<S, A>) -> Cofree<S, A> {
         return fa as! Cofree<S, A>
     }
     
@@ -111,18 +112,18 @@ public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S 
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: Kind<Kind<ForCofree, S>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ForCofree, S>, B> {
+    public func map<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (A) -> B) -> CofreeOf<S, B> {
         return Cofree.fix(fa).map(f, functor)
     }
 }
 
 public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
     
-    public func coflatMap<A, B>(_ fa: Kind<Kind<ForCofree, S>, A>, _ f: @escaping (Kind<Kind<ForCofree, S>, A>) -> B) -> Kind<Kind<ForCofree, S>, B> {
+    public func coflatMap<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (CofreeOf<S, A>) -> B) -> CofreeOf<S, B> {
         return Cofree.fix(fa).coflatMap(f, functor)
     }
     
-    public func extract<A>(_ fa: Kind<Kind<ForCofree, S>, A>) -> A {
+    public func extract<A>(_ fa: CofreeOf<S, A>) -> A {
         return Cofree.fix(fa).extract()
     }
 }
