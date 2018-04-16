@@ -46,7 +46,7 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
     
     private static func go<B>(_  buf : [B], _ f : @escaping (A) -> HK<NonEmptyListF, Either<A, B>>, _ v : NonEmptyList<Either<A, B>>) -> [B] {
         let head = v.head
-        return head.fold({ a in go(buf, f, f(a).ev() + v.tail) },
+        return head.fold({ a in go(buf, f, f(a).fix() + v.tail) },
                   { b in
                     let newBuf = buf + [b]
                     let x = NonEmptyList<Either<A, B>>.fromArray(v.tail)
@@ -56,11 +56,11 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> HK<NonEmptyListF, Either<A, B>>) -> NonEmptyList<B> {
-        return NonEmptyList<B>.fromArrayUnsafe(go([], f, f(a).ev()))
+        return NonEmptyList<B>.fromArrayUnsafe(go([], f, f(a).fix()))
     }
     
-    public static func ev(_ fa : HK<NonEmptyListF, A>) -> NonEmptyList<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<NonEmptyListF, A>) -> NonEmptyList<A> {
+        return fa.fix()
     }
     
     public init(head : A, tail : [A]) {
@@ -148,7 +148,7 @@ extension NonEmptyList : CustomStringConvertible {
 }
 
 public extension HK where F == NonEmptyListF {
-    public func ev() -> NonEmptyList<A> {
+    public func fix() -> NonEmptyList<A> {
         return self as! NonEmptyList<A>
     }
 }
@@ -199,7 +199,7 @@ public class NonEmptyListFunctor : Functor {
     public typealias F = NonEmptyListF
     
     public func map<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> B) -> HK<NonEmptyListF, B> {
-        return fa.ev().map(f)
+        return fa.fix().map(f)
     }
 }
 
@@ -210,14 +210,14 @@ public class NonEmptyListApplicative : NonEmptyListFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<NonEmptyListF, A>, _ ff: HK<NonEmptyListF, (A) -> B>) -> HK<NonEmptyListF, B> {
-        return fa.ev().ap(ff.ev())
+        return fa.fix().ap(ff.fix())
     }
 }
 
 public class NonEmptyListMonad : NonEmptyListApplicative, Monad {
     
     public func flatMap<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> HK<NonEmptyListF, B>) -> HK<NonEmptyListF, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<NonEmptyListF, Either<A, B>>) -> HK<NonEmptyListF, B> {
@@ -227,11 +227,11 @@ public class NonEmptyListMonad : NonEmptyListApplicative, Monad {
 
 public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
     public func coflatMap<A, B>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (HK<NonEmptyListF, A>) -> B) -> HK<NonEmptyListF, B> {
-        return fa.ev().coflatMap(f)
+        return fa.fix().coflatMap(f)
     }
     
     public func extract<A>(_ fa: HK<NonEmptyListF, A>) -> A {
-        return fa.ev().extract()
+        return fa.fix().extract()
     }
 }
 
@@ -239,17 +239,17 @@ public class NonEmptyListFoldable : Foldable {
     public typealias F = NonEmptyListF
     
     public func foldL<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.ev().foldL(b, f)
+        return fa.fix().foldL(b, f)
     }
     
     public func foldR<A, B>(_ fa: HK<NonEmptyListF, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.ev().foldR(b, f)
+        return fa.fix().foldR(b, f)
     }
 }
 
 public class NonEmptyListTraverse : NonEmptyListFoldable, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<NonEmptyListF, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<NonEmptyListF, B>> where G == Appl.F, Appl : Applicative {
-        return fa.ev().traverse(f, applicative)
+        return fa.fix().traverse(f, applicative)
     }
 }
 
@@ -257,7 +257,7 @@ public class NonEmptyListSemigroupK : SemigroupK {
     public typealias F = NonEmptyListF
     
     public func combineK<A>(_ x: HK<NonEmptyListF, A>, _ y: HK<NonEmptyListF, A>) -> HK<NonEmptyListF, A> {
-        return x.ev().combineK(y.ev())
+        return x.fix().combineK(y.fix())
     }
 }
 
@@ -265,7 +265,7 @@ public class NonEmptyListSemigroup<R> : Semigroup {
     public typealias A = HK<NonEmptyListF, R>
     
     public func combine(_ a: HK<NonEmptyListF, R>, _ b: HK<NonEmptyListF, R>) -> HK<NonEmptyListF, R> {
-        return NonEmptyList.ev(a) + NonEmptyList.ev(b)
+        return NonEmptyList.fix(a) + NonEmptyList.fix(b)
     }
 }
 
@@ -279,8 +279,8 @@ public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
     
     public func eqv(_ a: HK<NonEmptyListF, R>, _ b: HK<NonEmptyListF, R>) -> Bool {
-        let a = NonEmptyList.ev(a)
-        let b = NonEmptyList.ev(b)
+        let a = NonEmptyList.fix(a)
+        let b = NonEmptyList.fix(b)
         if a.count != b.count {
             return false
         } else {
