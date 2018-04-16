@@ -12,8 +12,8 @@ public class IOF {}
 
 public class IO<A> : HK<IOF, A> {
     
-    public static func ev(_ fa : HK<IOF, A>) -> IO<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<IOF, A>) -> IO<A> {
+        return fa.fix()
     }
     
     public static func pure(_ a : A) -> IO<A> {
@@ -33,7 +33,7 @@ public class IO<A> : HK<IOF, A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> HK<IOF, Either<A, B>>) -> IO<B> {
-        return IO<Either<A, B>>.ev(f(a)).flatMap { either in
+        return IO<Either<A, B>>.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO<B>.pure(b) })
         }
@@ -46,7 +46,7 @@ public class IO<A> : HK<IOF, A> {
     public static func merge<B>(_ fa : @escaping () throws -> A,
                                 _ fb : @escaping () throws -> B) -> IO<(A, B)> {
         return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb)).ev()
+                                       IO<B>.invoke(fb)).fix()
     }
     
     public static func merge<B, C>(_ fa : @escaping () throws -> A,
@@ -54,7 +54,7 @@ public class IO<A> : HK<IOF, A> {
                                    _ fc : @escaping () throws -> C) -> IO<(A, B, C)> {
         return IO.applicative().tupled(IO<A>.invoke(fa),
                                        IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc)).ev()
+                                       IO<C>.invoke(fc)).fix()
     }
     
     public static func merge<B, C, D>(_ fa : @escaping () throws -> A,
@@ -64,7 +64,7 @@ public class IO<A> : HK<IOF, A> {
         return IO.applicative().tupled(IO<A>.invoke(fa),
                                        IO<B>.invoke(fb),
                                        IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd)).ev()
+                                       IO<D>.invoke(fd)).fix()
     }
     
     public static func merge<B, C, D, E>(_ fa : @escaping () throws -> A,
@@ -76,7 +76,7 @@ public class IO<A> : HK<IOF, A> {
                                        IO<B>.invoke(fb),
                                        IO<C>.invoke(fc),
                                        IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe)).ev()
+                                       IO<E>.invoke(fe)).fix()
     }
     
     public static func merge<B, C, D, E, F>(_ fa : @escaping () throws -> A,
@@ -90,7 +90,7 @@ public class IO<A> : HK<IOF, A> {
                                        IO<C>.invoke(fc),
                                        IO<D>.invoke(fd),
                                        IO<E>.invoke(fe),
-                                       IO<F>.invoke(ff)).ev()
+                                       IO<F>.invoke(ff)).fix()
     }
     
     public static func merge<B, C, D, E, F, G>(_ fa : @escaping () throws -> A,
@@ -106,7 +106,7 @@ public class IO<A> : HK<IOF, A> {
                                        IO<D>.invoke(fd),
                                        IO<E>.invoke(fe),
                                        IO<F>.invoke(ff),
-                                       IO<G>.invoke(fg)).ev()
+                                       IO<G>.invoke(fg)).fix()
     }
     
     public static func merge<B, C, D, E, F, G, H>(_ fa : @escaping () throws -> A,
@@ -124,7 +124,7 @@ public class IO<A> : HK<IOF, A> {
                                        IO<E>.invoke(fe),
                                        IO<F>.invoke(ff),
                                        IO<G>.invoke(fg),
-                                       IO<H>.invoke(fh)).ev()
+                                       IO<H>.invoke(fh)).fix()
     }
     
     public static func merge<B, C, D, E, F, G, H, I>(_ fa : @escaping () throws -> A,
@@ -144,7 +144,7 @@ public class IO<A> : HK<IOF, A> {
                                        IO<F>.invoke(ff),
                                        IO<G>.invoke(fg),
                                        IO<H>.invoke(fh),
-                                       IO<I>.invoke(fi)).ev()
+                                       IO<I>.invoke(fi)).fix()
     }
     
     public func unsafePerformIO() throws -> A {
@@ -176,7 +176,7 @@ public class IO<A> : HK<IOF, A> {
     }
     
     public func handleErrorWith(_ f : @escaping (Error) -> HK<IOF, A>) -> IO<A> {
-        return attempt().flatMap{ either in either.fold({ e in f(e).ev() }, IO<A>.pure) }
+        return attempt().flatMap{ either in either.fold({ e in f(e).fix() }, IO<A>.pure) }
     }
 }
 
@@ -291,7 +291,7 @@ fileprivate class Async<A> : IO<A> {
 }
 
 public extension HK where F == IOF {
-    public func ev() -> IO<A> {
+    public func fix() -> IO<A> {
         return self as! IO<A>
     }
 }
@@ -334,7 +334,7 @@ public class IOFunctor : Functor {
     public typealias F = IOF
     
     public func map<A, B>(_ fa: HK<IOF, A>, _ f: @escaping (A) -> B) -> HK<IOF, B> {
-        return IO.ev(fa).map(f)
+        return IO.fix(fa).map(f)
     }
 }
 
@@ -344,13 +344,13 @@ public class IOApplicative : IOFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<IOF, A>, _ ff: HK<IOF, (A) -> B>) -> HK<IOF, B> {
-        return fa.ev().ap(ff.ev())
+        return fa.fix().ap(ff.fix())
     }
 }
 
 public class IOMonad : IOApplicative, Monad {
     public func flatMap<A, B>(_ fa: HK<IOF, A>, _ f: @escaping (A) -> HK<IOF, B>) -> HK<IOF, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<IOF, Either<A, B>>) -> HK<IOF, B> {
@@ -374,7 +374,7 @@ public class IOMonadError : IOMonad, MonadError {
     }
     
     public func handleErrorWith<A>(_ fa: HK<IOF, A>, _ f: @escaping (Error) -> HK<IOF, A>) -> HK<IOF, A> {
-        return fa.ev().handleErrorWith(f)
+        return fa.fix().handleErrorWith(f)
     }
 }
 
@@ -388,7 +388,7 @@ public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A 
     }
     
     public func combine(_ a: HK<IOF, B>, _ b: HK<IOF, B>) -> HK<IOF, B> {
-        return a.ev().flatMap { aa in b.ev().map { bb in self.semigroup.combine(aa, bb) } }
+        return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
     }
 }
 
@@ -421,13 +421,13 @@ public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq
         var aError, bError : Error?
         
         do {
-            aValue = try a.ev().unsafePerformIO()
+            aValue = try a.fix().unsafePerformIO()
         } catch {
             aError = error
         }
         
         do {
-            bValue = try b.ev().unsafePerformIO()
+            bValue = try b.fix().unsafePerformIO()
         } catch {
             bError = error
         }
