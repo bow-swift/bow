@@ -64,14 +64,14 @@ public class WriterT<F, W, A> : HK3<WriterTF, F, W, A> {
     
     public static func tailRecM<B, Mon>(_ a : A, _ f : @escaping (A) -> HK<WriterTPartial<F, W>, Either<A, B>>, _ monad : Mon) -> WriterT<F, W, B> where Mon : Monad, Mon.F == F {
         return WriterT<F, W, B>(monad.tailRecM(a, { inA in
-            monad.map(WriterT<F, W, Either<A, B>>.ev(f(inA)).value, { pair in
+            monad.map(WriterT<F, W, Either<A, B>>.fix(f(inA)).value, { pair in
                 pair.1.fold(Either<A, (W, B)>.left,
                             { b in Either<A, (W, B)>.right((pair.0, b)) })
             })
         }))
     }
     
-    public static func ev(_ fa : HK3<WriterTF, F, W, A>) -> WriterT<F, W, A> {
+    public static func fix(_ fa : HK3<WriterTF, F, W, A>) -> WriterT<F, W, A> {
         return fa as! WriterT<F, W, A>
     }
     
@@ -188,7 +188,7 @@ public class WriterTFunctor<G, W, FuncG> : Functor where FuncG : Functor, FuncG.
     }
     
     public func map<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<WriterTF, G>, W>, B> {
-        return WriterT.ev(fa).map(f, functor)
+        return WriterT.fix(fa).map(f, functor)
     }
 }
 
@@ -208,14 +208,14 @@ public class WriterTApplicative<G, W, MonG, MonoW> : WriterTFunctor<G, W, MonG>,
     }
     
     public func ap<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ ff: HK<HK<HK<WriterTF, G>, W>, (A) -> B>) -> HK<HK<HK<WriterTF, G>, W>, B> {
-        return WriterT.ev(fa).ap(WriterT.ev(ff), monoid, monad)
+        return WriterT.fix(fa).ap(WriterT.fix(ff), monoid, monad)
     }
 }
 
 public class WriterTMonad<G, W, MonG, MonoW> : WriterTApplicative<G, W, MonG, MonoW>, Monad where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
     
     public func flatMap<A, B>(_ fa: HK<HK<HK<WriterTF, G>, W>, A>, _ f: @escaping (A) -> HK<HK<HK<WriterTF, G>, W>, B>) -> HK<HK<HK<WriterTF, G>, W>, B> {
-        return WriterT.ev(fa).flatMap({ a in WriterT.ev(f(a)) }, monoid, monad)
+        return WriterT.fix(fa).flatMap({ a in WriterT.fix(f(a)) }, monoid, monad)
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<WriterTF, G>, W>, Either<A, B>>) -> HK<HK<HK<WriterTF, G>, W>, B> {
@@ -247,7 +247,7 @@ public class WriterTSemigroupK<G, W, SemiKG> : SemigroupK where SemiKG : Semigro
     }
     
     public func combineK<A>(_ x: HK<HK<HK<WriterTF, G>, W>, A>, _ y: HK<HK<HK<WriterTF, G>, W>, A>) -> HK<HK<HK<WriterTF, G>, W>, A> {
-        return WriterT.ev(x).combineK(WriterT.ev(y), semigroupK)
+        return WriterT.fix(x).combineK(WriterT.fix(y), semigroupK)
     }
 }
 
@@ -273,15 +273,15 @@ public class WriterTMonadWriter<G, V, MonG, MonoW> : WriterTMonad<G, V, MonG, Mo
     }
     
     public func listen<A>(_ fa: HK<HK<HK<WriterTF, G>, V>, A>) -> HK<HK<HK<WriterTF, G>, V>, (V, A)> {
-        return WriterT(monad.flatMap(WriterT.ev(fa).content(self.monad), { a in
-            self.monad.map(WriterT.ev(fa).write(self.monad), { l in
+        return WriterT(monad.flatMap(WriterT.fix(fa).content(self.monad), { a in
+            self.monad.map(WriterT.fix(fa).write(self.monad), { l in
                 (l, (l, a))
             })
         }))
     }
     
     public func pass<A>(_ fa: HK<HK<HK<WriterTF, G>, V>, ((V) -> V, A)>) -> HK<HK<HK<WriterTF, G>, V>, A> {
-        return WriterT<G, V, A>.pass(WriterT.ev(fa), monad)
+        return WriterT<G, V, A>.pass(WriterT.fix(fa), monad)
     }
 }
 
@@ -295,8 +295,8 @@ public class WriterTEq<F, W, B, EqF> : Eq where EqF : Eq, EqF.A == HK<F, (W, B)>
     }
     
     public func eqv(_ a: HK<HK<HK<WriterTF, F>, W>, B>, _ b: HK<HK<HK<WriterTF, F>, W>, B>) -> Bool {
-        let a = WriterT.ev(a)
-        let b = WriterT.ev(b)
+        let a = WriterT.fix(a)
+        let b = WriterT.fix(b)
         return eq.eqv(a.value, b.value)
     }
 }
