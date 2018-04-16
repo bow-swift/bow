@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class EvalKind {}
+public class ForEval {}
 
-public class Eval<A> : Kind<EvalKind, A> {
+public class Eval<A> : Kind<ForEval, A> {
     
     public static func now(_ a : A) -> Eval<A> {
         return Now<A>(a)
@@ -59,7 +59,7 @@ public class Eval<A> : Kind<EvalKind, A> {
         }
     }
     
-    public static func fix(_ fa : Kind<EvalKind, A>) -> Eval<A> {
+    public static func fix(_ fa : Kind<ForEval, A>) -> Eval<A> {
         return fa.fix()
     }
     
@@ -301,7 +301,7 @@ fileprivate class FlatmapDefault<A, B> : Compute<A> {
     }
 }
 
-public extension Kind where F == EvalKind {
+public extension Kind where F == ForEval {
     public func fix() -> Eval<A> {
         return self as! Eval<A>
     }
@@ -322,7 +322,7 @@ public extension Eval {
 }
 
 public class EvalApplicative : Applicative {
-    public typealias F = EvalKind
+    public typealias F = ForEval
     
     public func pure<A>(_ a: A) -> Kind<F, A> {
         return Eval<A>.pure(a)
@@ -334,7 +334,7 @@ public class EvalApplicative : Applicative {
 }
 
 public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-    public typealias A = Kind<EvalKind, B>
+    public typealias A = Kind<ForEval, B>
     
     private let eq : EqB
     
@@ -342,7 +342,7 @@ public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
         self.eq = eq
     }
     
-    public func eqv(_ a: Kind<EvalKind, B>, _ b: Kind<EvalKind, B>) -> Bool {
+    public func eqv(_ a: Kind<ForEval, B>, _ b: Kind<ForEval, B>) -> Bool {
         return eq.eqv(a.fix().value(), b.fix().value())
     }
 }

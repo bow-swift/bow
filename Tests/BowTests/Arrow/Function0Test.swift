@@ -11,7 +11,7 @@ import XCTest
 
 class Function0Test: XCTestCase {
     
-    var generator : (Int) -> Kind<Function0Kind, Int> {
+    var generator : (Int) -> Kind<ForFunction0, Int> {
         return { a in Function0.pure(a) }
     }
     
@@ -23,18 +23,18 @@ class Function0Test: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<Function0Kind>.check(functor: Function0<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ForFunction0>.check(functor: Function0<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<Function0Kind>.check(applicative: Function0<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<ForFunction0>.check(applicative: Function0<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<Function0Kind>.check(monad: Function0<Int>.monad(), eq: self.eq)
+        MonadLaws<ForFunction0>.check(monad: Function0<Int>.monad(), eq: self.eq)
     }
     
     func testComonadLaws() {
-        ComonadLaws<Function0Kind>.check(comonad: Function0<Int>.comonad(), generator: self.generator, eq: self.eq)
+        ComonadLaws<ForFunction0>.check(comonad: Function0<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
 }

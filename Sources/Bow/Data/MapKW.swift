@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class MapKWKind {}
+public class ForMapKW {}
 
-public class MapKW<K : Hashable, A> : Kind2<MapKWKind, K, A> {
+public class MapKW<K : Hashable, A> : Kind2<ForMapKW, K, A> {
     private let dictionary : [K : A]
     
-    public static func fix(_ fa : Kind2<MapKWKind, K, A>) -> MapKW<K, A> {
+    public static func fix(_ fa : Kind2<ForMapKW, K, A>) -> MapKW<K, A> {
         return fa as! MapKW<K, A>
     }
     

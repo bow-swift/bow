@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class CofreeKind {}
+public class ForCofree {}
 public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>
-public typealias CofreePartial<S> = Kind<CofreeKind, S>
+public typealias CofreePartial<S> = Kind<ForCofree, S>
 
-public class Cofree<S, A> : Kind2<CofreeKind, S, A> {
+public class Cofree<S, A> : Kind2<ForCofree, S, A> {
     private let head : A
     private let tail : Eval<CofreeEval<S, A>>
     
@@ -24,7 +24,7 @@ public class Cofree<S, A> : Kind2<CofreeKind, S, A> {
         return Cofree(a, Eval.later({ functor.map(f(a), { inA in create(inA, f, functor) }) }))
     }
     
-    public static func fix(_ fa : Kind2<CofreeKind, S, A>) -> Cofree<S, A> {
+    public static func fix(_ fa : Kind2<ForCofree, S, A>) -> Cofree<S, A> {
         return fa as! Cofree<S, A>
     }
     
@@ -82,7 +82,7 @@ public class Cofree<S, A> : Kind2<CofreeKind, S, A> {
         return ev.flatMap { sb in folder(self.extract(), sb) }
     }
     
-    public func cataM<B, M, FuncK, Trav, Mon>(_ folder : @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion : FuncK, _ traverse : Trav, _ monad : Mon) -> Kind<M, B> where FuncK : FunctionK, FuncK.F == EvalKind, FuncK.G == M, Trav : Traverse, Trav.F == S, Mon : Monad, Mon.F == M {
+    public func cataM<B, M, FuncK, Trav, Mon>(_ folder : @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion : FuncK, _ traverse : Trav, _ monad : Mon) -> Kind<M, B> where FuncK : FunctionK, FuncK.F == ForEval, FuncK.G == M, Trav : Traverse, Trav.F == S, Mon : Monad, Mon.F == M {
         func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
             let looped = traverse.traverse(ev.tailForced(), { cof in  monad.flatten(inclusion.invoke(Eval.deferEvaluation({ loop(cof) }))) }, monad)
             let folded = monad.flatMap(looped, { fb in folder(ev.head, fb) })
@@ -111,18 +111,18 @@ public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S 
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: Kind<Kind<CofreeKind, S>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<CofreeKind, S>, B> {
+    public func map<A, B>(_ fa: Kind<Kind<ForCofree, S>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ForCofree, S>, B> {
         return Cofree.fix(fa).map(f, functor)
     }
 }
 
 public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
     
-    public func coflatMap<A, B>(_ fa: Kind<Kind<CofreeKind, S>, A>, _ f: @escaping (Kind<Kind<CofreeKind, S>, A>) -> B) -> Kind<Kind<CofreeKind, S>, B> {
+    public func coflatMap<A, B>(_ fa: Kind<Kind<ForCofree, S>, A>, _ f: @escaping (Kind<Kind<ForCofree, S>, A>) -> B) -> Kind<Kind<ForCofree, S>, B> {
         return Cofree.fix(fa).coflatMap(f, functor)
     }
     
-    public func extract<A>(_ fa: Kind<Kind<CofreeKind, S>, A>) -> A {
+    public func extract<A>(_ fa: Kind<Kind<ForCofree, S>, A>) -> A {
         return Cofree.fix(fa).extract()
     }
 }

@@ -10,7 +10,7 @@ import XCTest
 @testable import Bow
 
 class EitherTTest: XCTestCase {
-    var generator : (Int) -> Kind3<EitherTKind, IdKind, Int, Int> {
+    var generator : (Int) -> Kind3<ForEitherT, ForId, Int, Int> {
         return { a in EitherT.pure(a, Id<Int>.applicative()) }
     }
     
@@ -22,37 +22,37 @@ class EitherTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherTPartial<IdKind, Int>>.check(
-            functor: EitherT<IdKind, Int, Int>.functor(Id<Any>.functor()),
+        FunctorLaws<EitherTPartial<ForId, Int>>.check(
+            functor: EitherT<ForId, Int, Int>.functor(Id<Any>.functor()),
             generator: self.generator,
             eq: self.eq,
             eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<EitherTPartial<IdKind, Int>>.check(applicative: EitherT<IdKind, Int, Int>.applicative(Id<Any>.monad()), eq: self.eq)
+        ApplicativeLaws<EitherTPartial<ForId, Int>>.check(applicative: EitherT<ForId, Int, Int>.applicative(Id<Any>.monad()), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<EitherTPartial<IdKind, Int>>.check(monad: EitherT<IdKind, Int, Int>.monad(Id<Any>.monad()), eq: self.eq)
+        MonadLaws<EitherTPartial<ForId, Int>>.check(monad: EitherT<ForId, Int, Int>.monad(Id<Any>.monad()), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<EitherTPartial<MaybeKind, ()>, ()>.check(
-            applicativeError: EitherT<MaybeKind, (), Int>.monadError(Maybe<Int>.monadError()),
-            eq: EitherT<MaybeKind, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
+        ApplicativeErrorLaws<EitherTPartial<ForMaybe, ()>, ()>.check(
+            applicativeError: EitherT<ForMaybe, (), Int>.monadError(Maybe<Int>.monadError()),
+            eq: EitherT<ForMaybe, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
             eqEither: EitherT.eq(Maybe.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Maybe<Any>.functor()),
             gen: { () })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<EitherTPartial<MaybeKind, ()>, ()>.check(
-            monadError: EitherT<MaybeKind, (), Int>.monadError(Maybe<Int>.monadError()),
-            eq: EitherT<MaybeKind, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
+        MonadErrorLaws<EitherTPartial<ForMaybe, ()>, ()>.check(
+            monadError: EitherT<ForMaybe, (), Int>.monadError(Maybe<Int>.monadError()),
+            eq: EitherT<ForMaybe, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
             gen: { () })
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherTPartial<IdKind, Int>>.check(semigroupK: EitherT<IdKind, Int, Int>.semigroupK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
+        SemigroupKLaws<EitherTPartial<ForId, Int>>.check(semigroupK: EitherT<ForId, Int, Int>.semigroupK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
     }
 }

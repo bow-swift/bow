@@ -12,7 +12,7 @@ import SwiftCheck
 
 class ListKWTest: XCTestCase {
     
-    var generator : (Int) -> Kind<ListKWKind, Int> {
+    var generator : (Int) -> Kind<ForListKW, Int> {
         return { a in ListKW<Int>.pure(a) }
     }
     
@@ -24,20 +24,20 @@ class ListKWTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ListKWKind>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ForListKW>.check(functor: ListKW<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ListKWKind>.check(applicative: ListKW<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<ForListKW>.check(applicative: ListKW<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<ListKWKind>.check(monad: ListKW<Int>.monad(), eq: self.eq)
+        MonadLaws<ForListKW>.check(monad: ListKW<Int>.monad(), eq: self.eq)
     }
     
     func testSemigroupLaws() {
         property("ListKW semigroup laws") <- forAll() { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<Kind<ListKWKind, Int>>.check(
+            return SemigroupLaws<Kind<ForListKW, Int>>.check(
                 semigroup: ListKW<Int>.semigroup(),
                 a: ListKW<Int>.pure(a),
                 b: ListKW<Int>.pure(b),
@@ -52,7 +52,7 @@ class ListKWTest: XCTestCase {
     
     func testMonoidLaws() {
         property("ListKW monoid laws") <- forAll() { (a : Int) in
-            return MonoidLaws<Kind<ListKWKind, Int>>.check(monoid: ListKW<Int>.monoid(), a: ListKW<Int>.pure(a), eq: self.eq)
+            return MonoidLaws<Kind<ForListKW, Int>>.check(monoid: ListKW<Int>.monoid(), a: ListKW<Int>.pure(a), eq: self.eq)
         }
     }
     
@@ -61,10 +61,10 @@ class ListKWTest: XCTestCase {
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ListKWKind>.check(functorFilter: ListKW<Int>.functorFilter(), generator: self.generator, eq: self.eq)
+        FunctorFilterLaws<ForListKW>.check(functorFilter: ListKW<Int>.functorFilter(), generator: self.generator, eq: self.eq)
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ListKWKind>.check(monadFilter: ListKW<Int>.monadFilter(), generator: self.generator, eq: self.eq)
+        MonadFilterLaws<ForListKW>.check(monadFilter: ListKW<Int>.monadFilter(), generator: self.generator, eq: self.eq)
     }
 }

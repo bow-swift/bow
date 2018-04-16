@@ -11,7 +11,7 @@ import XCTest
 
 class EvalTest: XCTestCase {
     
-    var generator : (Int) -> Kind<EvalKind, Int> {
+    var generator : (Int) -> Kind<ForEval, Int> {
         return { a in Eval.pure(a) }
     }
     

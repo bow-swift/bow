@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class Reader<D, A> : ReaderT<IdKind, D, A> {
+public class Reader<D, A> : ReaderT<ForId, D, A> {
     public static func pure(_ a : A) -> Reader<D, A> {
         return Kleisli.pure(a, Id<A>.applicative()) as! Reader<D, A>
     }
     
     public static func ask() -> Reader<D, D> {
-        return Kleisli<IdKind, D, A>.ask(Id<A>.applicative()) as! Reader<D, D>
+        return Kleisli<ForId, D, A>.ask(Id<A>.applicative()) as! Reader<D, D>
     }
     
     public init(_ run : @escaping (D) -> A) {
@@ -49,7 +49,7 @@ public class Reader<D, A> : ReaderT<IdKind, D, A> {
         return toReader(self.andThen(other, Id<A>.monad()))
     }
     
-    private func toReader<B>(_ x : Kleisli<IdKind, D, B>) -> Reader<D, B> {
+    private func toReader<B>(_ x : Kleisli<ForId, D, B>) -> Reader<D, B> {
         return Reader<D, B>({ (d : D) in x.run(d).fix().value })
     }
 }

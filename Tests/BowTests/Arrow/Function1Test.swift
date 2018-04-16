@@ -12,17 +12,17 @@ import XCTest
 class Function1Test: XCTestCase {
     
     class Function1PointEq : Eq {
-        typealias A = Kind2<Function1Kind, Int, Int>
+        typealias A = Kind2<ForFunction1, Int, Int>
         
-        func eqv(_ a: Kind<Kind<Function1Kind, Int>, Int>, _ b: Kind<Kind<Function1Kind, Int>, Int>) -> Bool {
+        func eqv(_ a: Kind<Kind<ForFunction1, Int>, Int>, _ b: Kind<Kind<ForFunction1, Int>, Int>) -> Bool {
             return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
         }
     }
     
     class Function1UnitPointEq : Eq {
-        typealias A = Kind2<Function1Kind, Int, ()>
+        typealias A = Kind2<ForFunction1, Int, ()>
         
-        func eqv(_ a: Kind<Kind<Function1Kind, Int>, ()>, _ b: Kind<Kind<Function1Kind, Int>, ()>) -> Bool {
+        func eqv(_ a: Kind<Kind<ForFunction1, Int>, ()>, _ b: Kind<Kind<ForFunction1, Int>, ()>) -> Bool {
             return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
         }
     }
