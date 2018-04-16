@@ -9,10 +9,10 @@
 import Foundation
 
 public class ForNonEmptyList {}
-
+public typealias NonEmptyListOf<A> = Kind<ForNonEmptyList, A>
 public typealias Nel<A> = NonEmptyList<A>
 
-public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
+public class NonEmptyList<A> : NonEmptyListOf<A> {
     private let head : A
     private let tail : [A]
     
@@ -44,7 +44,7 @@ public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
         return of(a)
     }
     
-    private static func go<B>(_  buf : [B], _ f : @escaping (A) -> Kind<ForNonEmptyList, Either<A, B>>, _ v : NonEmptyList<Either<A, B>>) -> [B] {
+    private static func go<B>(_  buf : [B], _ f : @escaping (A) -> NonEmptyListOf<Either<A, B>>, _ v : NonEmptyList<Either<A, B>>) -> [B] {
         let head = v.head
         return head.fold({ a in go(buf, f, f(a).fix() + v.tail) },
                   { b in
@@ -55,11 +55,11 @@ public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
                   })
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Kind<ForNonEmptyList, Either<A, B>>) -> NonEmptyList<B> {
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> NonEmptyListOf<Either<A, B>>) -> NonEmptyList<B> {
         return NonEmptyList<B>.fromArrayUnsafe(go([], f, f(a).fix()))
     }
     
-    public static func fix(_ fa : Kind<ForNonEmptyList, A>) -> NonEmptyList<A> {
+    public static func fix(_ fa : NonEmptyListOf<A>) -> NonEmptyList<A> {
         return fa.fix()
     }
     
@@ -103,7 +103,7 @@ public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
         return ListK<A>.foldable().foldR(self.all().k(), b, f)
     }
     
-    public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<ForNonEmptyList, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, NonEmptyListOf<B>> where Appl : Applicative, Appl.F == G {
         return applicative.map2Eval(f(self.head),
                                     Eval<Kind<G, ListKOf<B>>>.always({ ListK<A>.traverse().traverse(ListK<A>(self.tail), f, applicative) }),
                                     { (a : B, b : ListKOf<B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
@@ -198,39 +198,39 @@ public extension NonEmptyList {
 public class NonEmptyListFunctor : Functor {
     public typealias F = ForNonEmptyList
     
-    public func map<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ f: @escaping (A) -> B) -> Kind<ForNonEmptyList, B> {
+    public func map<A, B>(_ fa: NonEmptyListOf<A>, _ f: @escaping (A) -> B) -> NonEmptyListOf<B> {
         return fa.fix().map(f)
     }
 }
 
 public class NonEmptyListApplicative : NonEmptyListFunctor, Applicative {
     
-    public func pure<A>(_ a: A) -> Kind<ForNonEmptyList, A> {
+    public func pure<A>(_ a: A) -> NonEmptyListOf<A> {
         return NonEmptyList.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ ff: Kind<ForNonEmptyList, (A) -> B>) -> Kind<ForNonEmptyList, B> {
+    public func ap<A, B>(_ fa: NonEmptyListOf<A>, _ ff: NonEmptyListOf<(A) -> B>) -> NonEmptyListOf<B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class NonEmptyListMonad : NonEmptyListApplicative, Monad {
     
-    public func flatMap<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ f: @escaping (A) -> Kind<ForNonEmptyList, B>) -> Kind<ForNonEmptyList, B> {
+    public func flatMap<A, B>(_ fa: NonEmptyListOf<A>, _ f: @escaping (A) -> NonEmptyListOf<B>) -> NonEmptyListOf<B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForNonEmptyList, Either<A, B>>) -> Kind<ForNonEmptyList, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> NonEmptyListOf<Either<A, B>>) -> NonEmptyListOf<B> {
         return NonEmptyList.tailRecM(a, f)
     }
 }
 
 public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
-    public func coflatMap<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ f: @escaping (Kind<ForNonEmptyList, A>) -> B) -> Kind<ForNonEmptyList, B> {
+    public func coflatMap<A, B>(_ fa: NonEmptyListOf<A>, _ f: @escaping (NonEmptyListOf<A>) -> B) -> NonEmptyListOf<B> {
         return fa.fix().coflatMap(f)
     }
     
-    public func extract<A>(_ fa: Kind<ForNonEmptyList, A>) -> A {
+    public func extract<A>(_ fa: NonEmptyListOf<A>) -> A {
         return fa.fix().extract()
     }
 }
@@ -238,17 +238,17 @@ public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
 public class NonEmptyListFoldable : Foldable {
     public typealias F = ForNonEmptyList
     
-    public func foldL<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: NonEmptyListOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<ForNonEmptyList, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: NonEmptyListOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
     }
 }
 
 public class NonEmptyListTraverse : NonEmptyListFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<ForNonEmptyList, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForNonEmptyList, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: NonEmptyListOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, NonEmptyListOf<B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
     }
 }
@@ -256,21 +256,21 @@ public class NonEmptyListTraverse : NonEmptyListFoldable, Traverse {
 public class NonEmptyListSemigroupK : SemigroupK {
     public typealias F = ForNonEmptyList
     
-    public func combineK<A>(_ x: Kind<ForNonEmptyList, A>, _ y: Kind<ForNonEmptyList, A>) -> Kind<ForNonEmptyList, A> {
+    public func combineK<A>(_ x: NonEmptyListOf<A>, _ y: NonEmptyListOf<A>) -> NonEmptyListOf<A> {
         return x.fix().combineK(y.fix())
     }
 }
 
 public class NonEmptyListSemigroup<R> : Semigroup {
-    public typealias A = Kind<ForNonEmptyList, R>
+    public typealias A = NonEmptyListOf<R>
     
-    public func combine(_ a: Kind<ForNonEmptyList, R>, _ b: Kind<ForNonEmptyList, R>) -> Kind<ForNonEmptyList, R> {
+    public func combine(_ a: NonEmptyListOf<R>, _ b: NonEmptyListOf<R>) -> NonEmptyListOf<R> {
         return NonEmptyList.fix(a) + NonEmptyList.fix(b)
     }
 }
 
 public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Kind<ForNonEmptyList, R>
+    public typealias A = NonEmptyListOf<R>
     
     private let eqr : EqR
     
@@ -278,7 +278,7 @@ public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind<ForNonEmptyList, R>, _ b: Kind<ForNonEmptyList, R>) -> Bool {
+    public func eqv(_ a: NonEmptyListOf<R>, _ b: NonEmptyListOf<R>) -> Bool {
         let a = NonEmptyList.fix(a)
         let b = NonEmptyList.fix(b)
         if a.count != b.count {
