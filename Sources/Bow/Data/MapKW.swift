@@ -13,7 +13,7 @@ public class MapKWF {}
 public class MapKW<K : Hashable, A> : HK2<MapKWF, K, A> {
     private let dictionary : [K : A]
     
-    public static func ev(_ fa : HK2<MapKWF, K, A>) -> MapKW<K, A> {
+    public static func fix(_ fa : HK2<MapKWF, K, A>) -> MapKW<K, A> {
         return fa as! MapKW<K, A>
     }
     
