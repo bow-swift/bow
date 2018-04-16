@@ -78,7 +78,7 @@ public class Cofree<S, A> : HK2<CofreeF, S, A> {
     }
     
     public func cata<B, Trav>(_ folder : @escaping (A, HK<S, B>) -> Eval<B>, _ traverse : Trav) -> Eval<B> where Trav : Traverse, Trav.F == S {
-        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).ev()
+        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).fix()
         return ev.flatMap { sb in folder(self.extract(), sb) }
     }
     

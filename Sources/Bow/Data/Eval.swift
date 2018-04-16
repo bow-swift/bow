@@ -59,8 +59,8 @@ public class Eval<A> : HK<EvalF, A> {
         }
     }
     
-    public static func ev(_ fa : HK<EvalF, A>) -> Eval<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<EvalF, A>) -> Eval<A> {
+        return fa.fix()
     }
     
     public func value() -> A {
@@ -302,7 +302,7 @@ fileprivate class FlatmapDefault<A, B> : Compute<A> {
 }
 
 public extension HK where F == EvalF {
-    public func ev() -> Eval<A> {
+    public func fix() -> Eval<A> {
         return self as! Eval<A>
     }
 }
@@ -329,7 +329,7 @@ public class EvalApplicative : Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<F, A>, _ ff: HK<F, (A) -> B>) -> HK<F, B> {
-        return fa.ev().ap(ff.ev())
+        return fa.fix().ap(ff.fix())
     }
 }
 
@@ -343,6 +343,6 @@ public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
     }
     
     public func eqv(_ a: HK<EvalF, B>, _ b: HK<EvalF, B>) -> Bool {
-        return eq.eqv(a.ev().value(), b.ev().value())
+        return eq.eqv(a.fix().value(), b.fix().value())
     }
 }
