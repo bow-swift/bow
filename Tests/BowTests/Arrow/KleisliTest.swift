@@ -44,10 +44,10 @@ class KleisliTest: XCTestCase {
     }
     
     class KleisliEitherEq : Eq {
-        typealias A = KleisliOf<ForMaybe, (), Kind2<ForEither, (), Int>>
+        typealias A = KleisliOf<ForMaybe, (), EitherOf<(), Int>>
         
-        func eqv(_ a: KleisliOf<ForMaybe, (), Kind2<ForEither, (), Int>>,
-                 _ b: KleisliOf<ForMaybe, (), Kind2<ForEither, (), Int>>) -> Bool {
+        func eqv(_ a: KleisliOf<ForMaybe, (), EitherOf<(), Int>>,
+                 _ b: KleisliOf<ForMaybe, (), EitherOf<(), Int>>) -> Bool {
             let a = Kleisli.fix(a)
             let b = Kleisli.fix(b)
             return Maybe.eq(Either.eq(UnitEq(), Int.order)).eqv(a.invoke(()),

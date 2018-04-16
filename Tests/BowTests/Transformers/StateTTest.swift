@@ -42,10 +42,10 @@ class StateTTest: XCTestCase {
     }
     
     class StateTEitherEq : Eq {
-        public typealias A = Kind3<ForStateT, ForMaybe, (), Kind2<ForEither, (), Int>>
+        public typealias A = Kind3<ForStateT, ForMaybe, (), EitherOf<(), Int>>
         
-        public func eqv(_ a: Kind3<ForStateT, ForMaybe, (), Kind2<ForEither, (), Int>>,
-                        _ b: Kind3<ForStateT, ForMaybe, (), Kind2<ForEither, (), Int>>) -> Bool {
+        public func eqv(_ a: Kind3<ForStateT, ForMaybe, (), EitherOf<(), Int>>,
+                        _ b: Kind3<ForStateT, ForMaybe, (), EitherOf<(), Int>>) -> Bool {
             let x = StateT.fix(a).runM((), Maybe<Any>.monad())
             let y = StateT.fix(b).runM((), Maybe<Any>.monad())
             return Maybe.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)

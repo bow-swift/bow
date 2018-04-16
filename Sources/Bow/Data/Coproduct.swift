@@ -154,7 +154,7 @@ public class CoproductTraverse<G, H, TravG, TravH> : CoproductFoldable<G, H, Tra
     }
 }
 
-public class CoproductEq<F, G, B, EqB> : Eq where EqB : Eq, EqB.A == Kind2<ForEither, Kind<F, B>, Kind<G, B>>{
+public class CoproductEq<F, G, B, EqB> : Eq where EqB : Eq, EqB.A == EitherOf<Kind<F, B>, Kind<G, B>>{
     public typealias A = CoproductOf<F, G, B>
     
     private let eq : EqB

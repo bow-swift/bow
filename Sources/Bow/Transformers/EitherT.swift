@@ -207,7 +207,7 @@ public class EitherTSemigroupK<G, M, Mon> : SemigroupK where Mon : Monad, Mon.F 
     }
 }
 
-public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == Kind<F, Kind2<ForEither, L, R>>, Func : Functor, Func.F == F {
+public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == Kind<F, EitherOf<L, R>>, Func : Functor, Func.F == F {
     public typealias A = Kind3<ForEitherT, F, L, R>
     
     private let eq : EqA
@@ -221,7 +221,7 @@ public class EitherTEq<F, L, R, EqA, Func> : Eq where EqA : Eq, EqA.A == Kind<F,
     public func eqv(_ a: Kind<Kind<Kind<ForEitherT, F>, L>, R>, _ b: Kind<Kind<Kind<ForEitherT, F>, L>, R>) -> Bool {
         let a = EitherT.fix(a)
         let b = EitherT.fix(b)
-        return eq.eqv(functor.map(a.value, { a in a as Kind2<ForEither, L, R> }),
-                      functor.map(b.value, { b in b as Kind2<ForEither, L, R> }))
+        return eq.eqv(functor.map(a.value, { a in a as EitherOf<L, R> }),
+                      functor.map(b.value, { b in b as EitherOf<L, R> }))
     }
 }

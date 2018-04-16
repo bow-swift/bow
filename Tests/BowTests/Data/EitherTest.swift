@@ -12,7 +12,7 @@ import Nimble
 
 class EitherTest: XCTestCase {
     
-    var generator : (Int) -> Kind2<ForEither, Int, Int> {
+    var generator : (Int) -> EitherOf<Int, Int> {
         return { a in Either.pure(a) }
     }
     
