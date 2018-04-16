@@ -9,11 +9,12 @@
 import Foundation
 
 public class ForMapK {}
+public typealias MapKOf<K, A> = Kind2<ForMapK, K, A>
 
-public class MapK<K : Hashable, A> : Kind2<ForMapK, K, A> {
+public class MapK<K : Hashable, A> : MapKOf<K, A> {
     private let dictionary : [K : A]
     
-    public static func fix(_ fa : Kind2<ForMapK, K, A>) -> MapK<K, A> {
+    public static func fix(_ fa : MapKOf<K, A>) -> MapK<K, A> {
         return fa as! MapK<K, A>
     }
     
