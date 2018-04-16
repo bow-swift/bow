@@ -12,7 +12,7 @@ import XCTest
 fileprivate class OpsF {}
 
 fileprivate class Ops<A> : HK<OpsF, A> {
-    fileprivate static func ev(_ fa : HK<OpsF, A>) -> Ops<A> {
+    fileprivate static func fix(_ fa : HK<OpsF, A>) -> Ops<A> {
         return fa as! Ops<A>
     }
     
@@ -68,7 +68,7 @@ fileprivate class MaybeInterpreter : FunctionK {
     fileprivate typealias G = MaybeF
     
     fileprivate func invoke<A>(_ fa: HK<OpsF, A>) -> HK<MaybeF, A> {
-        let op = Ops.ev(fa)
+        let op = Ops.fix(fa)
         switch op {
         case is Value: return Maybe<Int>.some((op as! Value).a) as! HK<MaybeF, A>
         case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! HK<MaybeF, A>
@@ -84,7 +84,7 @@ fileprivate class IdInterpreter : FunctionK {
     fileprivate typealias G = IdF
     
     fileprivate func invoke<A>(_ fa: HK<OpsF, A>) -> HK<IdF, A> {
-        let op = Ops.ev(fa)
+        let op = Ops.fix(fa)
         switch op {
         case is Value: return Id<Int>.pure((op as! Value).a) as! HK<IdF, A>
         case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! HK<IdF, A>
