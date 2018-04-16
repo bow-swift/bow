@@ -24,7 +24,7 @@ public class Coyoneda<F, P, A> : HK3<CoyonedaF, F, P, A> {
         return Coyoneda<F, P, A>(fp, fs)
     }
     
-    public static func ev(_ fa : HK3<CoyonedaF, F, P, A>) -> Coyoneda<F, P, A> {
+    public static func fix(_ fa : HK3<CoyonedaF, F, P, A>) -> Coyoneda<F, P, A> {
         return fa as! Coyoneda<F, P, A>
     }
     
@@ -75,6 +75,6 @@ public class CoyonedaFunctor<G, P> : Functor {
     public typealias F = CoyonedaPartial<G, P>
     
     public func map<A, B>(_ fa: HK<HK<HK<CoyonedaF, G>, P>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<CoyonedaF, G>, P>, B> {
-        return Coyoneda.ev(fa).map(f)
+        return Coyoneda.fix(fa).map(f)
     }
 }
