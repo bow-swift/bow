@@ -223,7 +223,7 @@ public class MaybeTMonoidK<G, MonG> : MaybeTSemigroupK<G, MonG>, MonoidK where M
     }
 }
 
-public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, Kind<ForMaybe, B>>, Func : Functor, Func.F == F {
+public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, MaybeOf<B>>, Func : Functor, Func.F == F {
     public typealias A = Kind2<ForMaybeT, F, B>
     
     private let eq : EqF
@@ -237,7 +237,7 @@ public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, Kin
     public func eqv(_ a: Kind<Kind<ForMaybeT, F>, B>, _ b: Kind<Kind<ForMaybeT, F>, B>) -> Bool {
         let a = MaybeT.fix(a)
         let b = MaybeT.fix(b)
-        return eq.eqv(functor.map(a.value, { aa in aa as Kind<ForMaybe, B> }),
-                      functor.map(b.value, { bb in bb as Kind<ForMaybe, B> }))
+        return eq.eqv(functor.map(a.value, { aa in aa as MaybeOf<B> }),
+                      functor.map(b.value, { bb in bb as MaybeOf<B> }))
     }
 }

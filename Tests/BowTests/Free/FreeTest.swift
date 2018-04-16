@@ -67,12 +67,12 @@ fileprivate class MaybeInterpreter : FunctionK {
     fileprivate typealias F = OpsF
     fileprivate typealias G = ForMaybe
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<ForMaybe, A> {
+    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> MaybeOf<A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Maybe<Int>.some((op as! Value).a) as! Kind<ForMaybe, A>
-        case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! Kind<ForMaybe, A>
-        case is Subtract: return Maybe<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! Kind<ForMaybe, A>
+        case is Value: return Maybe<Int>.some((op as! Value).a) as! MaybeOf<A>
+        case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! MaybeOf<A>
+        case is Subtract: return Maybe<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! MaybeOf<A>
         default:
             fatalError("No other options")
         }
