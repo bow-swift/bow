@@ -106,7 +106,7 @@ public class NonEmptyList<A> : HK<NonEmptyListF, A> {
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, HK<NonEmptyListF, B>> where Appl : Applicative, Appl.F == G {
         return applicative.map2Eval(f(self.head),
                                     Eval<HK<G, HK<ListKWF, B>>>.always({ ListKW<A>.traverse().traverse(ListKW<A>(self.tail), f, applicative) }),
-                                    { (a : B, b : HK<ListKWF, B>) in NonEmptyList<B>(head: a, tail: b.ev().asArray) }).value()
+                                    { (a : B, b : HK<ListKWF, B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
     }
     
     public func coflatMap<B>(_ f : @escaping (NonEmptyList<A>) -> B) -> NonEmptyList<B> {
