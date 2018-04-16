@@ -9,9 +9,10 @@
 import Foundation
 
 public class ForStateT {}
+public typealias StateTOf<F, S, A> = Kind3<ForStateT, F, S, A>
 public typealias StateTPartial<F, S> = Kind2<ForStateT, F, S>
 
-public class StateT<F, S, A> : Kind3<ForStateT, F, S, A> {
+public class StateT<F, S, A> : StateTOf<F, S, A> {
     private let runF : Kind<F, (S) -> Kind<F, (S,A)>>
     
     public static func lift<Mon>(_ fa : Kind<F, A>, _ monad : Mon) -> StateT<F, S, A> where Mon : Monad, Mon.F == F {
@@ -36,7 +37,7 @@ public class StateT<F, S, A> : Kind3<ForStateT, F, S, A> {
         }))
     }
     
-    public static func fix(_ fa : Kind3<ForStateT, F, S, A>) -> StateT<F, S, A> {
+    public static func fix(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
         return fa as! StateT<F, S, A>
     }
     
@@ -170,7 +171,7 @@ public class StateTFunctor<G, S, FuncG> : Functor where FuncG : Functor, FuncG.F
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<Kind<ForStateT, G>, S>, B> {
+    public func map<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> B) -> StateTOf<G, S, B> {
         return StateT.fix(fa).map(f, functor)
     }
 }
@@ -183,22 +184,22 @@ public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicat
         super.init(monad)
     }
     
-    public func pure<A>(_ a: A) -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func pure<A>(_ a: A) -> StateTOf<G, S, A> {
         return StateT(monad.pure({ s in self.monad.pure((s, a))}))
     }
     
-    public func ap<A, B>(_ fa: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ ff: Kind<Kind<Kind<ForStateT, G>, S>, (A) -> B>) -> Kind<Kind<Kind<ForStateT, G>, S>, B> {
+    public func ap<A, B>(_ fa: StateTOf<G, S, A>, _ ff: StateTOf<G, S, (A) -> B>) -> StateTOf<G, S, B> {
         return StateT.fix(fa).ap(StateT.fix(ff), monad)
     }
 }
 
 public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad where MonG : Monad, MonG.F == G {
     
-    public func flatMap<A, B>(_ fa: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ f: @escaping (A) -> Kind<Kind<Kind<ForStateT, G>, S>, B>) -> Kind<Kind<Kind<ForStateT, G>, S>, B> {
+    public func flatMap<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> StateTOf<G, S, B>) -> StateTOf<G, S, B> {
         return StateT.fix(fa).flatMap({ a in StateT.fix(f(a)) }, monad)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<Kind<ForStateT, G>, S>, Either<A, B>>) -> Kind<Kind<Kind<ForStateT, G>, S>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<G, S, Either<A, B>>) -> StateTOf<G, S, B> {
         return StateT.tailRecM(a, f, monad)
     }
 }
@@ -206,11 +207,11 @@ public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad wher
 public class StateTMonadState<G, R, MonG> : StateTMonad<G, R, MonG>, MonadState where MonG : Monad, MonG.F == G {
     public typealias S = R
     
-    public func get() -> Kind<Kind<Kind<ForStateT, G>, R>, R> {
+    public func get() -> StateTOf<G, R, R> {
         return StateT<G, R, R>.get(monad)
     }
     
-    public func set(_ s: R) -> Kind<Kind<Kind<ForStateT, G>, R>, ()> {
+    public func set(_ s: R) -> StateTOf<G, R, ()> {
         return StateT<G, R, Unit>.set(s, monad)
     }
 }
@@ -226,7 +227,7 @@ public class StateTSemigroupK<G, S, MonG, SemiKG> : SemigroupK where MonG : Mona
         self.semigroupK = semigroupK
     }
     
-    public func combineK<A>(_ x: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ y: Kind<Kind<Kind<ForStateT, G>, S>, A>) -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
         return StateT.fix(x).combineK(StateT.fix(y), monad, semigroupK)
     }
 }
@@ -239,15 +240,15 @@ public class StateTMonadCombine<G, S, MonComG> : StateTMonad<G, S, MonComG>, Mon
         super.init(monadCombine)
     }
     
-    public func combineK<A>(_ x: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ y: Kind<Kind<Kind<ForStateT, G>, S>, A>) -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
         return StateT.fix(x).combineK(StateT.fix(y), monadCombine, monadCombine)
     }
     
-    public func empty<A>() -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func empty<A>() -> StateTOf<G, S, A> {
         return liftT(monadCombine.empty())
     }
     
-    public func emptyK<A>() -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func emptyK<A>() -> StateTOf<G, S, A> {
         return liftT(monadCombine.empty())
     }
     
@@ -266,11 +267,11 @@ public class StateTMonadError<G, S, Err, MonErrG> : StateTMonad<G, S, MonErrG>, 
         super.init(monadError)
     }
     
-    public func raiseError<A>(_ e: Err) -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func raiseError<A>(_ e: Err) -> StateTOf<G, S, A> {
         return StateT<G, S, A>.lift(monadError.raiseError(e), monadError)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<Kind<Kind<ForStateT, G>, S>, A>, _ f: @escaping (Err) -> Kind<Kind<Kind<ForStateT, G>, S>, A>) -> Kind<Kind<Kind<ForStateT, G>, S>, A> {
+    public func handleErrorWith<A>(_ fa: StateTOf<G, S, A>, _ f: @escaping (Err) -> StateTOf<G, S, A>) -> StateTOf<G, S, A> {
         return StateT<G, S, A>(monadError.pure({ s in
             self.monadError.handleErrorWith(StateT.fix(fa).runM(s, self.monadError), { e in
                 StateT.fix(f(e)).runM(s, self.monadError)
