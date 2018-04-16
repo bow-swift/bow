@@ -9,8 +9,9 @@
 import Foundation
 
 public class ForEval {}
+public typealias EvalOf<A> = Kind<ForEval, A>
 
-public class Eval<A> : Kind<ForEval, A> {
+public class Eval<A> : EvalOf<A> {
     
     public static func now(_ a : A) -> Eval<A> {
         return Now<A>(a)
@@ -59,7 +60,7 @@ public class Eval<A> : Kind<ForEval, A> {
         }
     }
     
-    public static func fix(_ fa : Kind<ForEval, A>) -> Eval<A> {
+    public static func fix(_ fa : EvalOf<A>) -> Eval<A> {
         return fa.fix()
     }
     
@@ -334,7 +335,7 @@ public class EvalApplicative : Applicative {
 }
 
 public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-    public typealias A = Kind<ForEval, B>
+    public typealias A = EvalOf<B>
     
     private let eq : EqB
     
@@ -342,7 +343,7 @@ public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
         self.eq = eq
     }
     
-    public func eqv(_ a: Kind<ForEval, B>, _ b: Kind<ForEval, B>) -> Bool {
+    public func eqv(_ a: EvalOf<B>, _ b: EvalOf<B>) -> Bool {
         return eq.eqv(a.fix().value(), b.fix().value())
     }
 }
