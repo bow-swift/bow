@@ -26,8 +26,8 @@ public class Function0<A> : HK<Function0F, A> {
         return Function0<B>({ loop(a, f) })
     }
     
-    public static func ev(_ fa : HK<Function0F, A>) -> Function0<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<Function0F, A>) -> Function0<A> {
+        return fa.fix()
     }
     
     public init(_ f : @escaping () -> A) {
@@ -60,7 +60,7 @@ public class Function0<A> : HK<Function0F, A> {
 }
 
 public extension HK where F == Function0F {
-    public func ev() -> Function0<A> {
+    public func fix() -> Function0<A> {
         return self as! Function0<A>
     }
 }
@@ -95,7 +95,7 @@ public class Function0Functor : Functor {
     public typealias F = Function0F
     
     public func map<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> B) -> HK<Function0F, B> {
-        return fa.ev().map(f)
+        return fa.fix().map(f)
     }
 }
 
@@ -105,13 +105,13 @@ public class Function0Applicative : Function0Functor, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<Function0Applicative.F, A>, _ ff: HK<Function0Applicative.F, (A) -> B>) -> HK<Function0Applicative.F, B> {
-        return Function0.ev(fa).ap(Function0.ev(ff))
+        return Function0.fix(fa).ap(Function0.fix(ff))
     }
 }
 
 public class Function0Monad : Function0Applicative, Monad {
     public func flatMap<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (A) -> HK<Function0F, B>) -> HK<Function0F, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<Function0F, Either<A, B>>) -> HK<Function0F, B> {
@@ -121,11 +121,11 @@ public class Function0Monad : Function0Applicative, Monad {
 
 public class Function0Bimonad : Function0Monad, Bimonad {
     public func coflatMap<A, B>(_ fa: HK<Function0F, A>, _ f: @escaping (HK<Function0F, A>) -> B) -> HK<Function0F, B> {
-        return fa.ev().coflatMap(f)
+        return fa.fix().coflatMap(f)
     }
     
     public func extract<A>(_ fa: HK<Function0F, A>) -> A {
-        return fa.ev().extract()
+        return fa.fix().extract()
     }
 }
 
@@ -139,6 +139,6 @@ public class Function0Eq<B, EqB> : Eq where EqB : Eq, EqB.A == B{
     }
     
     public func eqv(_ a: HK<Function0F, B>, _ b: HK<Function0F, B>) -> Bool {
-        return eq.eqv(a.ev().extract(), b.ev().extract())
+        return eq.eqv(a.fix().extract(), b.fix().extract())
     }
 }
