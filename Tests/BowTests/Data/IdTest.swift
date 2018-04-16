@@ -11,7 +11,7 @@ import SwiftCheck
 @testable import Bow
 
 class IdTest: XCTestCase {
-    var generator : (Int) -> Kind<ForId, Int> {
+    var generator : (Int) -> IdOf<Int> {
         return { a in Id<Int>.pure(a) }
     }
     

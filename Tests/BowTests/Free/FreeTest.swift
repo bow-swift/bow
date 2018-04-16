@@ -83,12 +83,12 @@ fileprivate class IdInterpreter : FunctionK {
     fileprivate typealias F = OpsF
     fileprivate typealias G = ForId
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> Kind<ForId, A> {
+    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> IdOf<A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Id<Int>.pure((op as! Value).a) as! Kind<ForId, A>
-        case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! Kind<ForId, A>
-        case is Subtract: return Id<Int>.pure((op as! Subtract).a - (op as! Subtract).b) as! Kind<ForId, A>
+        case is Value: return Id<Int>.pure((op as! Value).a) as! IdOf<A>
+        case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! IdOf<A>
+        case is Subtract: return Id<Int>.pure((op as! Subtract).a - (op as! Subtract).b) as! IdOf<A>
         default:
             fatalError("No other options")
         }
