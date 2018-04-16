@@ -44,8 +44,8 @@ public class Maybe<A> : HK<MaybeF, A> {
         )
     }
     
-    public static func ev(_ fa : HK<MaybeF, A>) -> Maybe<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<MaybeF, A>) -> Maybe<A> {
+        return fa.fix()
     }
     
     public var isEmpty : Bool {
@@ -160,7 +160,7 @@ extension Maybe : CustomStringConvertible {
 }
 
 public extension HK where F == MaybeF {
-    public func ev() -> Maybe<A> {
+    public func fix() -> Maybe<A> {
         return self as! Maybe<A>
     }
 }
@@ -207,7 +207,7 @@ public class MaybeFunctor : Functor {
     public typealias F = MaybeF
     
     public func map<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> B) -> HK<MaybeF, B> {
-        return fa.ev().map(f)
+        return fa.fix().map(f)
     }
 }
 
@@ -217,17 +217,17 @@ public class MaybeApplicative : MaybeFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<MaybeF, A>, _ ff: HK<MaybeF, (A) -> B>) -> HK<MaybeF, B> {
-        return fa.ev().ap(ff.ev())
+        return fa.fix().ap(ff.fix())
     }
 }
 
 public class MaybeMonad : MaybeApplicative, Monad {
     public func flatMap<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> HK<MaybeF, B>) -> HK<MaybeF, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<MaybeF, Either<A, B>>) -> HK<MaybeF, B> {
-        return Maybe<A>.tailRecM(a, { a in f(a).ev() })
+        return Maybe<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
 
@@ -240,8 +240,8 @@ public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG
     }
     
     public func combine(_ a: HK<MaybeF, R>, _ b: HK<MaybeF, R>) -> HK<MaybeF, R> {
-        let a = Maybe.ev(a)
-        let b = Maybe.ev(b)
+        let a = Maybe.fix(a)
+        let b = Maybe.fix(b)
         return a.fold(constF(b),
                       { aSome in b.fold(constF(a),
                                         { bSome in Maybe.some(semigroup.combine(aSome, bSome)) })
@@ -263,7 +263,7 @@ public class MaybeMonadError : MaybeMonad, MonadError {
     }
     
     public func handleErrorWith<A>(_ fa: HK<MaybeF, A>, _ f: @escaping (Unit) -> HK<MaybeF, A>) -> HK<MaybeF, A> {
-        return fa.ev().orElse(f(unit).ev())
+        return fa.fix().orElse(f(unit).fix())
     }
 }
 
@@ -277,8 +277,8 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
     
     public func eqv(_ a: HK<MaybeF, R>, _ b: HK<MaybeF, R>) -> Bool {
-        let a = Maybe.ev(a)
-        let b = Maybe.ev(b)
+        let a = Maybe.fix(a)
+        let b = Maybe.fix(b)
         return a.fold({ b.fold(constF(true), constF(false)) },
                       { aSome in b.fold(constF(false), { bSome in eqr.eqv(aSome, bSome) })})
     }
@@ -286,7 +286,7 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
 
 public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
     public func mapFilter<A, B>(_ fa: HK<MaybeF, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<MaybeF, B> {
-        return fa.ev().mapFilter(f)
+        return fa.fix().mapFilter(f)
     }
 }
 
