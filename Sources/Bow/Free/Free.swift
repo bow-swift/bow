@@ -33,7 +33,7 @@ public class Free<S, A> : HK2<FreeF, S, A> {
         return ApplicativeFreePartial(applicative)
     }
     
-    public static func ev(_ fa : HK2<FreeF, S, A>) -> Free<S, A> {
+    public static func fix(_ fa : HK2<FreeF, S, A>) -> Free<S, A> {
         return fa as! Free<S, A>
     }
     
@@ -187,7 +187,7 @@ public class FreeFunctor<S> : Functor {
     public typealias F = FreePartial<S>
     
     public func map<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).map(f)
+        return Free.fix(fa).map(f)
     }
 }
 
@@ -197,13 +197,13 @@ public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ ff: HK<HK<FreeF, S>, (A) -> B>) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).ap(Free.ev(ff))
+        return Free.fix(fa).ap(Free.fix(ff))
     }
 }
 
 public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
     public func flatMap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> HK<HK<FreeF, S>, B>) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).flatMap({ a in Free.ev(f(a)) })
+        return Free.fix(fa).flatMap({ a in Free.fix(f(a)) })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<FreeF, S>, Either<A, B>>) -> HK<HK<FreeF, S>, B> {
@@ -228,7 +228,7 @@ public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK
     }
     
     public func eqv(_ a: HK<HK<FreeF, F>, B>, _ b: HK<HK<FreeF, F>, B>) -> Bool {
-        return eq.eqv(Free.ev(a).foldMap(functionK, monad),
-                      Free.ev(b).foldMap(functionK, monad))
+        return eq.eqv(Free.fix(a).foldMap(functionK, monad),
+                      Free.fix(b).foldMap(functionK, monad))
     }
 }

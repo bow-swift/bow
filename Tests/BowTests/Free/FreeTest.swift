@@ -59,7 +59,7 @@ fileprivate class Subtract : Ops<Int> {
 
 
 
-fileprivate let program = Free.ev(Free<OpsF, Int>.monad().binding({ Ops<Any>.value(10) },
+fileprivate let program = Free.fix(Free<OpsF, Int>.monad().binding({ Ops<Any>.value(10) },
                                                                   { value in Ops<Any>.add(value, 10) },
                                                                   { _ , added in Ops<Any>.subtract(added, 50) }))
 
