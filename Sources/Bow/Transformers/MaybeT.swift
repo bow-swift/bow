@@ -29,14 +29,14 @@ public class MaybeT<F, A> : HK2<MaybeTF, F, A> {
     public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> HK2<MaybeTF, F, Either<A, B>>, _ monad : MonF) -> HK2<MaybeTF, F, B> where MonF : Monad, MonF.F == F {
         
         return MaybeT<F, B>(monad.tailRecM(a, { aa in
-            monad.map(MaybeT<F, Either<A, B>>.ev(f(aa)).value, { maybe in
+            monad.map(MaybeT<F, Either<A, B>>.fix(f(aa)).value, { maybe in
                 maybe.fold({ Either<A, Maybe<B>>.right(Maybe<B>.none())},
                            { either in either.map(Maybe<B>.some) })
             })
         }))
     }
     
-    public static func ev(_ fa : HK2<MaybeTF, F, A>) -> MaybeT<F, A> {
+    public static func fix(_ fa : HK2<MaybeTF, F, A>) -> MaybeT<F, A> {
         return fa as! MaybeT<F, A>
     }
     
@@ -163,14 +163,14 @@ public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F ==
     }
     
     public func map<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> B) -> HK<HK<MaybeTF, G>, B> {
-        return MaybeT.ev(fa).map(f, functor)
+        return MaybeT.fix(fa).map(f, functor)
     }
 }
 
 public class MaybeTFunctorFilter<G, FuncG> : MaybeTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
     
     public func mapFilter<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> Maybe<B>) -> HK<HK<MaybeTF, G>, B> {
-        return MaybeT.ev(fa).mapFilter(f, functor)
+        return MaybeT.fix(fa).mapFilter(f, functor)
     }
 }
 
@@ -188,14 +188,14 @@ public class MaybeTApplicative<G, MonG> : MaybeTFunctor<G, MonG>, Applicative wh
     }
     
     public func ap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ ff: HK<HK<MaybeTF, G>, (A) -> B>) -> HK<HK<MaybeTF, G>, B> {
-        return MaybeT.ev(fa).ap(MaybeT.ev(ff), monad)
+        return MaybeT.fix(fa).ap(MaybeT.fix(ff), monad)
     }
 }
 
 public class MaybeTMonad<G, MonG> : MaybeTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
     
     public func flatMap<A, B>(_ fa: HK<HK<MaybeTF, G>, A>, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, B>) -> HK<HK<MaybeTF, G>, B> {
-        return MaybeT.ev(fa).flatMap({ a in MaybeT.ev(f(a)) }, monad)
+        return MaybeT.fix(fa).flatMap({ a in MaybeT.fix(f(a)) }, monad)
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<MaybeTF, G>, Either<A, B>>) -> HK<HK<MaybeTF, G>, B> {
@@ -213,7 +213,7 @@ public class MaybeTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F =
     }
     
     public func combineK<A>(_ x: HK<HK<MaybeTF, G>, A>, _ y: HK<HK<MaybeTF, G>, A>) -> HK<HK<MaybeTF, G>, A> {
-        return MaybeT.ev(x).orElse(MaybeT.ev(y), monad)
+        return MaybeT.fix(x).orElse(MaybeT.fix(y), monad)
     }
 }
 
@@ -235,8 +235,8 @@ public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == HK<F, HK<Ma
     }
     
     public func eqv(_ a: HK<HK<MaybeTF, F>, B>, _ b: HK<HK<MaybeTF, F>, B>) -> Bool {
-        let a = MaybeT.ev(a)
-        let b = MaybeT.ev(b)
+        let a = MaybeT.fix(a)
+        let b = MaybeT.fix(b)
         return eq.eqv(functor.map(a.value, { aa in aa as HK<MaybeF, B> }),
                       functor.map(b.value, { bb in bb as HK<MaybeF, B> }))
     }
