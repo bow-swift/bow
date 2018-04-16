@@ -100,13 +100,13 @@ public class NonEmptyList<A> : Kind<ForNonEmptyList, A> {
     }
     
     public func foldR<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return ListKW<A>.foldable().foldR(self.all().k(), b, f)
+        return ListK<A>.foldable().foldR(self.all().k(), b, f)
     }
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<ForNonEmptyList, B>> where Appl : Applicative, Appl.F == G {
         return applicative.map2Eval(f(self.head),
-                                    Eval<Kind<G, Kind<ForListKW, B>>>.always({ ListKW<A>.traverse().traverse(ListKW<A>(self.tail), f, applicative) }),
-                                    { (a : B, b : Kind<ForListKW, B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
+                                    Eval<Kind<G, Kind<ForListK, B>>>.always({ ListK<A>.traverse().traverse(ListK<A>(self.tail), f, applicative) }),
+                                    { (a : B, b : Kind<ForListK, B>) in NonEmptyList<B>(head: a, tail: b.fix().asArray) }).value()
     }
     
     public func coflatMap<B>(_ f : @escaping (NonEmptyList<A>) -> B) -> NonEmptyList<B> {

@@ -52,14 +52,14 @@ class StateTTest: XCTestCase {
         }
     }
     
-    class StateTListKWEq : Eq {
-        public typealias A = Kind3<ForStateT, ForListKW, Int, Int>
+    class StateTListKEq : Eq {
+        public typealias A = Kind3<ForStateT, ForListK, Int, Int>
         
-        public func eqv(_ a: Kind3<ForStateT, ForListKW, Int, Int>,
-                        _ b: Kind3<ForStateT, ForListKW, Int, Int>) -> Bool {
-            let x = StateT.fix(a).runM(1, ListKW<Any>.monad())
-            let y = StateT.fix(b).runM(1, ListKW<Any>.monad())
-            return ListKW.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
+        public func eqv(_ a: Kind3<ForStateT, ForListK, Int, Int>,
+                        _ b: Kind3<ForStateT, ForListK, Int, Int>) -> Bool {
+            let x = StateT.fix(a).runM(1, ListK<Any>.monad())
+            let y = StateT.fix(b).runM(1, ListK<Any>.monad())
+            return ListK.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
         }
     }
     
@@ -95,10 +95,10 @@ class StateTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<StateTPartial<ForListKW, Int>>.check(
-            semigroupK: StateT<ForListKW, Int, Int>.semigroupK(ListKW<Int>.monad(), ListKW<Int>.semigroupK()),
-            generator: { (a : Int) in StateT<ForListKW, Int, Int>.applicative(ListKW<Int>.monad()).pure(a) },
-            eq: StateTListKWEq())
+        SemigroupKLaws<StateTPartial<ForListK, Int>>.check(
+            semigroupK: StateT<ForListK, Int, Int>.semigroupK(ListK<Int>.monad(), ListK<Int>.semigroupK()),
+            generator: { (a : Int) in StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(a) },
+            eq: StateTListKEq())
     }
     
     func testMonadStateLaws() {

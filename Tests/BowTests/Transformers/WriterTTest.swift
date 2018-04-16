@@ -35,17 +35,17 @@ class WriterTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<WriterTPartial<ForListKW, Int>>.check(
-            semigroupK: WriterT<ForListKW, Int, Int>.semigroupK(ListKW<Int>.semigroupK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
-            eq: WriterT<ForListKW, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+        SemigroupKLaws<WriterTPartial<ForListK, Int>>.check(
+            semigroupK: WriterT<ForListK, Int, Int>.semigroupK(ListK<Int>.semigroupK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
+            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<WriterTPartial<ForListKW, Int>>.check(
-            monoidK: WriterT<ForListKW, Int, Int>.monoidK(ListKW<Int>.monoidK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
-            eq: WriterT<ForListKW, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+        MonoidKLaws<WriterTPartial<ForListK, Int>>.check(
+            monoidK: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
+            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testFunctorFilterLaws() {
