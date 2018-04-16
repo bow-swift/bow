@@ -50,8 +50,8 @@ public class Try<A> : HK<TryF, A> {
                          })
     }
     
-    public static func ev(_ fa : HK<TryF, A>) -> Try<A> {
-        return fa.ev()
+    public static func fix(_ fa : HK<TryF, A>) -> Try<A> {
+        return fa.fix()
     }
     
     public func fold<B>(_ fe : (Error) -> B, _ fa : (A) throws -> B) -> B {
@@ -150,7 +150,7 @@ extension Try : CustomStringConvertible {
 }
 
 public extension HK where F == TryF {
-    public func ev() -> Try<A> {
+    public func fix() -> Try<A> {
         return self as! Try<A>
     }
 }
@@ -181,7 +181,7 @@ public class TryFunctor : Functor {
     public typealias F = TryF
     
     public func map<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> B) -> HK<TryF, B> {
-        return fa.ev().map(f)
+        return fa.fix().map(f)
     }
 }
 
@@ -191,17 +191,17 @@ public class TryApplicative : TryFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<TryF, A>, _ ff: HK<TryF, (A) -> B>) -> HK<TryF, B> {
-        return fa.ev().ap(ff.ev())
+        return fa.fix().ap(ff.fix())
     }
 }
 
 public class TryMonad : TryApplicative, Monad {
     public func flatMap<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> HK<TryF, B>) -> HK<TryF, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<TryF, Either<A, B>>) -> HK<TryF, B> {
-        return Try<A>.tailRecM(a, { a in f(a).ev() })
+        return Try<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
 
@@ -213,7 +213,7 @@ public class TryMonadError<C> : TryMonad, MonadError where C : Error{
     }
     
     public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: @escaping (C) -> HK<TryF, A>) -> HK<TryF, A> {
-        return fa.ev().recoverWith({ e in f(e as! C).ev() })
+        return fa.fix().recoverWith({ e in f(e as! C).fix() })
     }
 }
 
@@ -226,8 +226,8 @@ public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
     
     public func eqv(_ a: HK<TryF, R>, _ b: HK<TryF, R>) -> Bool {
-        let a = Try.ev(a)
-        let b = Try.ev(b)
+        let a = Try.fix(a)
+        let b = Try.fix(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
                       { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
     }
