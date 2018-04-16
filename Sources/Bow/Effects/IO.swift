@@ -9,10 +9,11 @@
 import Foundation
 
 public class ForIO {}
+public typealias IOOf<A> = Kind<ForIO, A>
 
-public class IO<A> : Kind<ForIO, A> {
+public class IO<A> : IOOf<A> {
     
-    public static func fix(_ fa : Kind<ForIO, A>) -> IO<A> {
+    public static func fix(_ fa : IOOf<A>) -> IO<A> {
         return fa.fix()
     }
     
@@ -32,7 +33,7 @@ public class IO<A> : Kind<ForIO, A> {
         return RaiseError(error)
     }
     
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Kind<ForIO, Either<A, B>>) -> IO<B> {
+    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> IOOf<Either<A, B>>) -> IO<B> {
         return IO<Either<A, B>>.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO<B>.pure(b) })
@@ -175,7 +176,7 @@ public class IO<A> : Kind<ForIO, A> {
         return Join(self.map(f))
     }
     
-    public func handleErrorWith(_ f : @escaping (Error) -> Kind<ForIO, A>) -> IO<A> {
+    public func handleErrorWith(_ f : @escaping (Error) -> IOOf<A>) -> IO<A> {
         return attempt().flatMap{ either in either.fold({ e in f(e).fix() }, IO<A>.pure) }
     }
 }
@@ -333,27 +334,27 @@ public extension IO {
 public class IOFunctor : Functor {
     public typealias F = ForIO
     
-    public func map<A, B>(_ fa: Kind<ForIO, A>, _ f: @escaping (A) -> B) -> Kind<ForIO, B> {
+    public func map<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> B) -> IOOf<B> {
         return IO.fix(fa).map(f)
     }
 }
 
 public class IOApplicative : IOFunctor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<ForIO, A> {
+    public func pure<A>(_ a: A) -> IOOf<A> {
         return IO.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<ForIO, A>, _ ff: Kind<ForIO, (A) -> B>) -> Kind<ForIO, B> {
+    public func ap<A, B>(_ fa: IOOf<A>, _ ff: IOOf<(A) -> B>) -> IOOf<B> {
         return fa.fix().ap(ff.fix())
     }
 }
 
 public class IOMonad : IOApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<ForIO, A>, _ f: @escaping (A) -> Kind<ForIO, B>) -> Kind<ForIO, B> {
+    public func flatMap<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> IOOf<B>) -> IOOf<B> {
         return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForIO, Either<A, B>>) -> Kind<ForIO, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<Either<A, B>>) -> IOOf<B> {
         return IO.tailRecM(a, f)
     }
 }
@@ -361,7 +362,7 @@ public class IOMonad : IOApplicative, Monad {
 public class IOAsyncContext : AsyncContext {
     public typealias F = ForIO
     
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> Kind<ForIO, A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> IOOf<A> {
         return IO.runAsync(fa)
     }
 }
@@ -369,17 +370,17 @@ public class IOAsyncContext : AsyncContext {
 public class IOMonadError : IOMonad, MonadError {
     public typealias E = Error
     
-    public func raiseError<A>(_ e: Error) -> Kind<ForIO, A> {
+    public func raiseError<A>(_ e: Error) -> IOOf<A> {
         return IO.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<ForIO, A>, _ f: @escaping (Error) -> Kind<ForIO, A>) -> Kind<ForIO, A> {
+    public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Error) -> IOOf<A>) -> IOOf<A> {
         return fa.fix().handleErrorWith(f)
     }
 }
 
 public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
-    public typealias A = Kind<ForIO, B>
+    public typealias A = IOOf<B>
     
     private let semigroup : SemiG
     
@@ -387,7 +388,7 @@ public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A 
         self.semigroup = semigroup
     }
     
-    public func combine(_ a: Kind<ForIO, B>, _ b: Kind<ForIO, B>) -> Kind<ForIO, B> {
+    public func combine(_ a: IOOf<B>, _ b: IOOf<B>) -> IOOf<B> {
         return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
     }
 }
@@ -400,13 +401,13 @@ public class IOMonoid<B, Mono> : IOSemigroup<B, Mono>, Monoid where Mono : Monoi
         super.init(monoid)
     }
     
-    public var empty: Kind<ForIO, B> {
+    public var empty: IOOf<B> {
         return IO.pure(monoid.empty)
     }
 }
 
 public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq, EqError.A == Error {
-    public typealias A = Kind<ForIO, B>
+    public typealias A = IOOf<B>
     
     private let eq : EqB
     private let eqError : EqError
@@ -416,7 +417,7 @@ public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq
         self.eqError = eqError
     }
     
-    public func eqv(_ a: Kind<ForIO, B>, _ b: Kind<ForIO, B>) -> Bool {
+    public func eqv(_ a: IOOf<B>, _ b: IOOf<B>) -> Bool {
         var aValue, bValue : B?
         var aError, bError : Error?
         

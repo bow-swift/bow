@@ -50,7 +50,7 @@ class IOTest: XCTestCase {
     
     func testSemigroupLaws() {
         property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            SemigroupLaws<Kind<ForIO, Int>>.check(
+            SemigroupLaws<IOOf<Int>>.check(
                 semigroup: IO<Int>.semigroup(Int.sumMonoid),
                 a: IO.pure(a),
                 b: IO.pure(b),
@@ -61,7 +61,7 @@ class IOTest: XCTestCase {
     
     func testMonoidLaws() {
         property("Monoid laws") <- forAll { (a : Int) in
-            MonoidLaws<Kind<ForIO, Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
+            MonoidLaws<IOOf<Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
         }
     }
     
