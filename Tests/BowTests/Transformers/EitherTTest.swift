@@ -10,7 +10,7 @@ import XCTest
 @testable import Bow
 
 class EitherTTest: XCTestCase {
-    var generator : (Int) -> Kind3<ForEitherT, ForId, Int, Int> {
+    var generator : (Int) -> EitherTOf<ForId, Int, Int> {
         return { a in EitherT.pure(a, Id<Int>.applicative()) }
     }
     
