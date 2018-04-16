@@ -10,8 +10,9 @@ import Foundation
 
 public class ForCokleisli {}
 public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
+public typealias CokleisliOf<F, A, B> = Kind3<ForCokleisli, F, A, B>
 
-public class Cokleisli<F, A, B> : Kind3<ForCokleisli, F, A, B> {
+public class Cokleisli<F, A, B> : CokleisliOf<F, A, B> {
     internal let run : (Kind<F, A>) -> B
     
     public static func pure(_ b : B) -> Cokleisli<F, A, B> {
