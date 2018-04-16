@@ -18,7 +18,7 @@ public class Const<A, T> : HK2<ConstF, A, T> {
         return Const<A, T>(a)
     }
     
-    public static func ev(_ fa : HK2<ConstF, A, T>) -> Const<A, T>{
+    public static func fix(_ fa : HK2<ConstF, A, T>) -> Const<A, T>{
         return fa as! Const<A, T>
     }
     
@@ -91,7 +91,7 @@ public class ConstFunctor<R> : Functor {
     public typealias F = ConstPartial<R>
     
     public func map<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> B) -> HK<HK<ConstF, R>, B> {
-        return Const.ev(fa).retag()
+        return Const.fix(fa).retag()
     }
 }
 
@@ -107,7 +107,7 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
     }
     
     public func ap<A, B>(_ fa: HK<HK<ConstF, R>, A>, _ ff: HK<HK<ConstF, R>, (A) -> B>) -> HK<HK<ConstF, R>, B> {
-        return Const.ev(fa).ap(Const.ev(ff), monoid)
+        return Const.fix(fa).ap(Const.fix(ff), monoid)
     }
 }
 
@@ -120,7 +120,7 @@ public class ConstSemigroup<R, S, SemiG> : Semigroup where SemiG : Semigroup, Se
     }
     
     public func combine(_ a: HK2<ConstF, R, S>, _ b: HK2<ConstF, R, S>) -> HK2<ConstF, R, S> {
-        return Const.ev(a).combine(Const.ev(b), semigroup)
+        return Const.fix(a).combine(Const.fix(b), semigroup)
     }
 }
 
@@ -151,13 +151,13 @@ public class ConstFoldable<R> : Foldable {
 
 public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
-        return Const.ev(fa).traverse(f, applicative)
+        return Const.fix(fa).traverse(f, applicative)
     }
 }
 
 public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
     public func traverseFilter<A, B, G, Appl>(_ fa: HK<HK<ConstF, R>, A>, _ f: @escaping (A) -> HK<G, Maybe<B>>, _ applicative: Appl) -> HK<G, HK<HK<ConstF, R>, B>> where G == Appl.F, Appl : Applicative {
-        return Const.ev(fa).traverseFilter(f, applicative)
+        return Const.fix(fa).traverseFilter(f, applicative)
     }
 }
 
@@ -170,6 +170,6 @@ public class ConstEq<R, S, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
     
     public func eqv(_ a: HK2<ConstF, R, S>, _ b: HK2<ConstF, R, S>) -> Bool {
-        return eqr.eqv(Const.ev(a).value, Const.ev(b).value)
+        return eqr.eqv(Const.fix(a).value, Const.fix(b).value)
     }
 }
