@@ -9,9 +9,10 @@
 import Foundation
 
 public class ForFree {}
+public typealias FreeOf<S, A> = Kind2<ForFree, S, A>
 public typealias FreePartial<S> = Kind<ForFree, S>
 
-public class Free<S, A> : Kind2<ForFree, S, A> {
+public class Free<S, A> : FreeOf<S, A> {
     
     public static func pure(_ a : A) -> Free<S, A> {
         return Pure(a)
@@ -33,7 +34,7 @@ public class Free<S, A> : Kind2<ForFree, S, A> {
         return ApplicativeFreePartial(applicative)
     }
     
-    public static func fix(_ fa : Kind2<ForFree, S, A>) -> Free<S, A> {
+    public static func fix(_ fa : FreeOf<S, A>) -> Free<S, A> {
         return fa as! Free<S, A>
     }
     
@@ -143,7 +144,7 @@ internal class FunctionKFree<S> : FunctionK {
     typealias F = S
     typealias G = FreePartial<S>
     
-    func invoke<A>(_ fa: Kind<S, A>) -> Kind<Kind<ForFree, S>, A> {
+    func invoke<A>(_ fa: Kind<S, A>) -> FreeOf<S, A> {
         return Free.liftF(fa)
     }
 }
@@ -156,11 +157,11 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
         self.applicative = applicative
     }
     
-    func pure<A>(_ a: A) -> Kind<Kind<ForFree, S>, A> {
+    func pure<A>(_ a: A) -> FreeOf<S, A> {
         return Free.pure(a)
     }
 
-    func ap<A, B>(_ fa: Kind<Kind<ForFree, S>, A>, _ ff: Kind<Kind<ForFree, S>, (A) -> B>) -> Kind<Kind<ForFree, S>, B> {
+    func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
         return applicative.ap(fa, ff)
     }
 }
@@ -186,27 +187,27 @@ public extension Free {
 public class FreeFunctor<S> : Functor {
     public typealias F = FreePartial<S>
     
-    public func map<A, B>(_ fa: Kind<Kind<ForFree, S>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ForFree, S>, B> {
+    public func map<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> B) -> FreeOf<S, B> {
         return Free.fix(fa).map(f)
     }
 }
 
 public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
-    public func pure<A>(_ a: A) -> Kind<Kind<ForFree, S>, A> {
+    public func pure<A>(_ a: A) -> FreeOf<S, A> {
         return Free.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<Kind<ForFree, S>, A>, _ ff: Kind<Kind<ForFree, S>, (A) -> B>) -> Kind<Kind<ForFree, S>, B> {
+    public func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
         return Free.fix(fa).ap(Free.fix(ff))
     }
 }
 
 public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
-    public func flatMap<A, B>(_ fa: Kind<Kind<ForFree, S>, A>, _ f: @escaping (A) -> Kind<Kind<ForFree, S>, B>) -> Kind<Kind<ForFree, S>, B> {
+    public func flatMap<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> FreeOf<S, B>) -> FreeOf<S, B> {
         return Free.fix(fa).flatMap({ a in Free.fix(f(a)) })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Kind<ForFree, S>, Either<A, B>>) -> Kind<Kind<ForFree, S>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FreeOf<S, Either<A, B>>) -> FreeOf<S, B> {
         return flatMap(f(a)) { either in
             either.fold({ left in self.tailRecM(left, f) },
                         { right in self.pure(right) })
@@ -215,7 +216,7 @@ public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
 }
 
 public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == Kind<G, B> {
-    public typealias A = Kind<FreePartial<F>, B>
+    public typealias A = FreeOf<F, B>
     
     private let functionK : FuncKFG
     private let monad : MonG
@@ -227,7 +228,7 @@ public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK
         self.eq = eq
     }
     
-    public func eqv(_ a: Kind<Kind<ForFree, F>, B>, _ b: Kind<Kind<ForFree, F>, B>) -> Bool {
+    public func eqv(_ a: FreeOf<F, B>, _ b: FreeOf<F, B>) -> Bool {
         return eq.eqv(Free.fix(a).foldMap(functionK, monad),
                       Free.fix(b).foldMap(functionK, monad))
     }

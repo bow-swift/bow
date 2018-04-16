@@ -104,7 +104,7 @@ class FreeTest: XCTestCase {
         XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))
     }
     
-    fileprivate var generator : (Int) -> Kind2<ForFree, OpsF, Int> {
+    fileprivate var generator : (Int) -> FreeOf<OpsF, Int> {
         return { a in Ops<Any>.value(a) }
     }
     
