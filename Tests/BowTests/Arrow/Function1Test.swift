@@ -15,7 +15,7 @@ class Function1Test: XCTestCase {
         typealias A = HK2<Function1F, Int, Int>
         
         func eqv(_ a: HK<HK<Function1F, Int>, Int>, _ b: HK<HK<Function1F, Int>, Int>) -> Bool {
-            return Function1.ev(a).invoke(1) == Function1.ev(b).invoke(1)
+            return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
         }
     }
     
@@ -23,7 +23,7 @@ class Function1Test: XCTestCase {
         typealias A = HK2<Function1F, Int, ()>
         
         func eqv(_ a: HK<HK<Function1F, Int>, ()>, _ b: HK<HK<Function1F, Int>, ()>) -> Bool {
-            return Function1.ev(a).invoke(1) == Function1.ev(b).invoke(1)
+            return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
         }
     }
     

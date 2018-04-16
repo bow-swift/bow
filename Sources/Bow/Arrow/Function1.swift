@@ -23,14 +23,14 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
     }
     
     private static func step<A, B>(_ a : A, _ t : I, _ f : (A) -> HK2<Function1F, I, Either<A, B>>) -> B {
-        return Function1<I, Either<A, B>>.ev(f(a)).f(t).fold({ a in step(a, t, f) }, id)
+        return Function1<I, Either<A, B>>.fix(f(a)).f(t).fold({ a in step(a, t, f) }, id)
     }
     
     public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK2<Function1F, I, Either<A, B>>) -> HK2<Function1F, I, B> {
         return Function1<I, B>({ t in step(a, t, f) })
     }
     
-    public static func ev(_ fa : HK2<Function1F, I, O>) -> Function1<I, O> {
+    public static func fix(_ fa : HK2<Function1F, I, O>) -> Function1<I, O> {
         return fa as! Function1<I, O>
     }
     
@@ -82,7 +82,7 @@ public class Function1Functor<I> : Functor {
     public typealias F = Function1Partial<I>
     
     public func map<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> B) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).map(f)
+        return Function1.fix(fa).map(f)
     }
 }
 
@@ -92,13 +92,13 @@ public class Function1Applicative<I> : Function1Functor<I>, Applicative {
     }
     
     public func ap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ ff: HK<HK<Function1F, I>, (A) -> B>) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).ap(Function1.ev(ff))
+        return Function1.fix(fa).ap(Function1.fix(ff))
     }
 }
 
 public class Function1Monad<I> : Function1Applicative<I>, Monad {
     public func flatMap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> HK<HK<Function1F, I>, B>) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).flatMap({ a in Function1.ev(f(a)) })
+        return Function1.fix(fa).flatMap({ a in Function1.fix(f(a)) })
     }
     
     public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<Function1F, I>, Either<A, B>>) -> HK<HK<Function1F, I>, B> {
@@ -114,7 +114,7 @@ public class Function1MonadReader<I> : Function1Monad<I>, MonadReader {
     }
     
     public func local<A>(_ f: @escaping (I) -> I, _ fa: HK<HK<Function1F, I>, A>) -> HK<HK<Function1F, I>, A> {
-        return Function1.ev(fa).local(f)
+        return Function1.fix(fa).local(f)
     }
 }
 
