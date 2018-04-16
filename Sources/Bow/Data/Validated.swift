@@ -9,9 +9,10 @@
 import Foundation
 
 public class ForValidated {}
+public typealias ValidatedOf<E, A> = Kind2<ForValidated, E, A>
 public typealias ValidatedPartial<E> = Kind<ForValidated, E>
 
-public class Validated<E, A> : Kind2<ForValidated, E, A> {
+public class Validated<E, A> : ValidatedOf<E, A> {
     public static func pure(_ value : A) -> Validated<E, A> {
         return Valid(value)
     }
@@ -36,7 +37,7 @@ public class Validated<E, A> : Kind2<ForValidated, E, A> {
         return m.fold(ifNone >>> Validated<E, A>.invalid, Validated<E, A>.valid)
     }
     
-    public static func fix(_ fa : Kind2<ForValidated, E, A>) -> Validated<E, A> {
+    public static func fix(_ fa : ValidatedOf<E, A>) -> Validated<E, A> {
         return fa as! Validated<E, A>
     }
     
@@ -133,7 +134,7 @@ public class Validated<E, A> : Kind2<ForValidated, E, A> {
         return fold(f, Validated.valid)
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind2<ForValidated, E, B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, ValidatedOf<E, B>> where Appl : Applicative, Appl.F == G {
         return fold(Validated<E, B>.invalid >>> applicative.pure,
                     { a in applicative.map(f(a), Validated<E, B>.valid) })
     }
@@ -201,7 +202,7 @@ public extension Validated {
 public class ValidatedFunctor<R> : Functor {
     public typealias F = ValidatedPartial<R>
     
-    public func map<A, B>(_ fa: Kind<Kind<ForValidated, R>, A>, _ f: @escaping (A) -> B) -> Kind<Kind<ForValidated, R>, B> {
+    public func map<A, B>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> B) -> ValidatedOf<R, B> {
         return Validated.fix(fa).map(f)
     }
 }
@@ -213,11 +214,11 @@ public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative w
         self.semigroup = semigroup
     }
     
-    public func pure<A>(_ a: A) -> Kind<Kind<ForValidated, R>, A> {
+    public func pure<A>(_ a: A) -> ValidatedOf<R, A> {
         return Validated<R, A>.valid(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<Kind<ForValidated, R>, A>, _ ff: Kind<Kind<ForValidated, R>, (A) -> B>) -> Kind<Kind<ForValidated, R>, B> {
+    public func ap<A, B>(_ fa: ValidatedOf<R, A>, _ ff: ValidatedOf<R, (A) -> B>) -> ValidatedOf<R, B> {
         return Validated.fix(fa).ap(Validated.fix(ff), semigroup)
     }
 }
@@ -225,11 +226,11 @@ public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative w
 public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG>, ApplicativeError where SemiG : Semigroup, SemiG.A == R {
     public typealias E = R
     
-    public func raiseError<A>(_ e: R) -> Kind<Kind<ForValidated, R>, A> {
+    public func raiseError<A>(_ e: R) -> ValidatedOf<R, A> {
         return Validated<R, A>.invalid(e)
     }
     
-    public func handleErrorWith<A>(_ fa: Kind<Kind<ForValidated, R>, A>, _ f: @escaping (R) -> Kind<Kind<ForValidated, R>, A>) -> Kind<Kind<ForValidated, R>, A> {
+    public func handleErrorWith<A>(_ fa: ValidatedOf<R, A>, _ f: @escaping (R) -> ValidatedOf<R, A>) -> ValidatedOf<R, A> {
         return Validated.fix(fa).handleLeftWith({ r in Validated.fix(f(r)) })
     }
 }
@@ -237,17 +238,17 @@ public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG
 public class ValidatedFoldable<R> : Foldable {
     public typealias F = ValidatedPartial<R>
     
-    public func foldL<A, B>(_ fa: Kind<Kind<ForValidated, R>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldL<A, B>(_ fa: ValidatedOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return Validated.fix(fa).foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<Kind<ForValidated, R>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldR<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return Validated.fix(fa).foldR(b, f)
     }
 }
 
 public class ValidatedTraverse<R> : ValidatedFoldable<R>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<Kind<ForValidated, R>, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<Kind<ForValidated, R>, B>> where G == Appl.F, Appl : Applicative {
+    public func traverse<G, A, B, Appl>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ValidatedOf<R, B>> where G == Appl.F, Appl : Applicative {
         return Validated.fix(fa).traverse(f, applicative)
     }
 }
@@ -261,13 +262,13 @@ public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup,
         self.semigroup = semigroup
     }
     
-    public func combineK<A>(_ x: Kind<Kind<ForValidated, R>, A>, _ y: Kind<Kind<ForValidated, R>, A>) -> Kind<Kind<ForValidated, R>, A> {
+    public func combineK<A>(_ x: ValidatedOf<R, A>, _ y: ValidatedOf<R, A>) -> ValidatedOf<R, A> {
         return Validated.fix(x).combineK(Validated.fix(y), semigroup)
     }
 }
 
 public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = Kind2<ForValidated, L, R>
+    public typealias A = ValidatedOf<L, R>
     private let eql : EqL
     private let eqr : EqR
     
@@ -276,7 +277,7 @@ public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : 
         self.eqr = eqr
     }
     
-    public func eqv(_ a: Kind2<ForValidated, L, R>, _ b: Kind2<ForValidated, L, R>) -> Bool {
+    public func eqv(_ a: ValidatedOf<L, R>, _ b: ValidatedOf<L, R>) -> Bool {
         let a = Validated.fix(a)
         let b = Validated.fix(b)
         return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constF(false))},
