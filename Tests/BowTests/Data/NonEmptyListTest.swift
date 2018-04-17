@@ -53,4 +53,8 @@ class NonEmptyListTest: XCTestCase {
     func testSemigroupKLaws() {
         SemigroupKLaws<ForNonEmptyList>.check(semigroupK: NonEmptyList<Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: NonEmptyList.show(), generator: { a in NonEmptyList(head: a, tail: [a, a])})
+    }
 }
