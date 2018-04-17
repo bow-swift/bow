@@ -49,4 +49,8 @@ class ConstTest: XCTestCase {
                 eq: self.eq)
         }
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Const.show(), generator: { a in Const<Int, Int>.pure(a) })
+    }
 }
