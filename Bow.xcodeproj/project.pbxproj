@@ -11,6 +11,7 @@
 		111082CD2085DBF700C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082CE2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082CF2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
+		111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -501,6 +502,7 @@
 
 /* Begin PBXFileReference section */
 		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -805,6 +807,7 @@
 				OBJ_138 /* OrderLaws.swift */,
 				OBJ_139 /* SemigroupKLaws.swift */,
 				OBJ_140 /* SemigroupLaws.swift */,
+				111082D02085DD4D00C8563C /* ShowLaws.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -1642,6 +1645,7 @@
 				OBJ_280 /* FunctorLaws.swift in Sources */,
 				OBJ_281 /* MonadErrorLaws.swift in Sources */,
 				OBJ_282 /* MonadFilterLaws.swift in Sources */,
+				111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */,
 				OBJ_283 /* MonadLaws.swift in Sources */,
 				OBJ_284 /* MonadStateLaws.swift in Sources */,
 				OBJ_285 /* MonadWriterLaws.swift in Sources */,
