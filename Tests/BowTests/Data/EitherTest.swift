@@ -51,6 +51,10 @@ class EitherTest: XCTestCase {
         SemigroupKLaws<EitherPartial<Int>>.check(semigroupK: Either<Int, Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
     
+    func testShowLaws() {
+        ShowLaws.check(show: Either.show(), generator: { a in (a % 2 == 0) ? Either<Int, Int>.pure(a) : Either<Int, Int>.left(a) })
+    }
+    
     func testCheckers() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
