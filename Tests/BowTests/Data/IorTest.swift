@@ -10,7 +10,7 @@ import XCTest
 @testable import Bow
 
 class IorTest: XCTestCase {
-    var generator : (Int) -> HK2<IorF, Int, Int> {
+    var generator : (Int) -> IorOf<Int, Int> {
         return { a in Ior<Int, Int>.right(a) }
     }
     

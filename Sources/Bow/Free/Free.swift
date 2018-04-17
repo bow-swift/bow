@@ -8,16 +8,17 @@
 
 import Foundation
 
-public class FreeF {}
-public typealias FreePartial<S> = HK<FreeF, S>
+public class ForFree {}
+public typealias FreeOf<S, A> = Kind2<ForFree, S, A>
+public typealias FreePartial<S> = Kind<ForFree, S>
 
-public class Free<S, A> : HK2<FreeF, S, A> {
+public class Free<S, A> : FreeOf<S, A> {
     
     public static func pure(_ a : A) -> Free<S, A> {
         return Pure(a)
     }
     
-    public static func liftF(_ fa : HK<S, A>) -> Free<S, A> {
+    public static func liftF(_ fa : Kind<S, A>) -> Free<S, A> {
         return Suspend(fa)
     }
     
@@ -33,7 +34,7 @@ public class Free<S, A> : HK2<FreeF, S, A> {
         return ApplicativeFreePartial(applicative)
     }
     
-    public static func ev(_ fa : HK2<FreeF, S, A>) -> Free<S, A> {
+    public static func fix(_ fa : FreeOf<S, A>) -> Free<S, A> {
         return fa as! Free<S, A>
     }
     
@@ -72,17 +73,17 @@ public class Free<S, A> : HK2<FreeF, S, A> {
         }
     }
     
-    public func foldMap<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> HK<M, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
+    public func foldMap<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> Kind<M, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
         return monad.tailRecM(self) { freeSA in
             return freeSA.step().foldMapChild(f, monad)
         }
     }
     
-    fileprivate func foldMapChild<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> HK<M, Either<Free<S, A>,A>> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
+    fileprivate func foldMapChild<M, FuncK, Mon>(_ f : FuncK, _ monad : Mon) -> Kind<M, Either<Free<S, A>,A>> where FuncK : FunctionK, FuncK.F == S, FuncK.G == M, Mon : Monad, Mon.F == M {
         fatalError("foldMapChild must be implemented by subclasses")
     }
     
-    public func run<Mon>(_ monad : Mon) -> HK<S, A> where Mon : Monad, Mon.F == S {
+    public func run<Mon>(_ monad : Mon) -> Kind<S, A> where Mon : Monad, Mon.F == S {
         return self.foldMap(IdFunctionK<S>.id, monad)
     }
 }
@@ -94,7 +95,7 @@ fileprivate class Pure<S, A> : Free<S, A> {
         self.a = a
     }
     
-    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> Kind<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
         return monad.pure(Either.right(self.a))
     }
     
@@ -104,18 +105,18 @@ fileprivate class Pure<S, A> : Free<S, A> {
 }
 
 fileprivate class Suspend<S, A> : Free<S, A> {
-    fileprivate let a : HK<S, A>
+    fileprivate let a : Kind<S, A>
     
-    init(_ a : HK<S, A>) {
+    init(_ a : Kind<S, A>) {
         self.a = a
     }
     
-    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> Kind<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
         return monad.map(f.invoke(self.a), { a in Either.right(a) })
     }
     
     override public func transform<B, S, O, FuncK>(_ f: @escaping (A) -> B, _ fs: FuncK) -> Free<O, B> where S == FuncK.F, O == FuncK.G, FuncK : FunctionK {
-        return Free<O, A>.liftF(fs.invoke(a as! HK<S, A>)).map(f)
+        return Free<O, A>.liftF(fs.invoke(a as! Kind<S, A>)).map(f)
     }
 }
 
@@ -128,7 +129,7 @@ fileprivate class FlatMapped<S, A, C> : Free<S, A> {
         self.f = f
     }
     
-    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> HK<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
+    override fileprivate func foldMapChild<M, FuncK, Mon>(_ f: FuncK, _ monad: Mon) -> Kind<M, Either<Free<S, A>, A>> where S == FuncK.F, M == FuncK.G, FuncK : FunctionK, Mon : Monad, FuncK.G == Mon.F {
         let g = self.f
         let c = self.c
         return monad.map(c.foldMap(f, monad), { cc in Either.left(g(cc)) })
@@ -143,7 +144,7 @@ internal class FunctionKFree<S> : FunctionK {
     typealias F = S
     typealias G = FreePartial<S>
     
-    func invoke<A>(_ fa: HK<S, A>) -> HK<HK<FreeF, S>, A> {
+    func invoke<A>(_ fa: Kind<S, A>) -> FreeOf<S, A> {
         return Free.liftF(fa)
     }
 }
@@ -156,11 +157,11 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
         self.applicative = applicative
     }
     
-    func pure<A>(_ a: A) -> HK<HK<FreeF, S>, A> {
+    func pure<A>(_ a: A) -> FreeOf<S, A> {
         return Free.pure(a)
     }
 
-    func ap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ ff: HK<HK<FreeF, S>, (A) -> B>) -> HK<HK<FreeF, S>, B> {
+    func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
         return applicative.ap(fa, ff)
     }
 }
@@ -186,27 +187,27 @@ public extension Free {
 public class FreeFunctor<S> : Functor {
     public typealias F = FreePartial<S>
     
-    public func map<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).map(f)
+    public func map<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> B) -> FreeOf<S, B> {
+        return Free.fix(fa).map(f)
     }
 }
 
 public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
-    public func pure<A>(_ a: A) -> HK<HK<FreeF, S>, A> {
+    public func pure<A>(_ a: A) -> FreeOf<S, A> {
         return Free.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ ff: HK<HK<FreeF, S>, (A) -> B>) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).ap(Free.ev(ff))
+    public func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
+        return Free.fix(fa).ap(Free.fix(ff))
     }
 }
 
 public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
-    public func flatMap<A, B>(_ fa: HK<HK<FreeF, S>, A>, _ f: @escaping (A) -> HK<HK<FreeF, S>, B>) -> HK<HK<FreeF, S>, B> {
-        return Free.ev(fa).flatMap({ a in Free.ev(f(a)) })
+    public func flatMap<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> FreeOf<S, B>) -> FreeOf<S, B> {
+        return Free.fix(fa).flatMap({ a in Free.fix(f(a)) })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<FreeF, S>, Either<A, B>>) -> HK<HK<FreeF, S>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FreeOf<S, Either<A, B>>) -> FreeOf<S, B> {
         return flatMap(f(a)) { either in
             either.fold({ left in self.tailRecM(left, f) },
                         { right in self.pure(right) })
@@ -214,8 +215,8 @@ public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
     }
 }
 
-public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == HK<G, B> {
-    public typealias A = HK<FreePartial<F>, B>
+public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == Kind<G, B> {
+    public typealias A = FreeOf<F, B>
     
     private let functionK : FuncKFG
     private let monad : MonG
@@ -227,8 +228,8 @@ public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK
         self.eq = eq
     }
     
-    public func eqv(_ a: HK<HK<FreeF, F>, B>, _ b: HK<HK<FreeF, F>, B>) -> Bool {
-        return eq.eqv(Free.ev(a).foldMap(functionK, monad),
-                      Free.ev(b).foldMap(functionK, monad))
+    public func eqv(_ a: FreeOf<F, B>, _ b: FreeOf<F, B>) -> Bool {
+        return eq.eqv(Free.fix(a).foldMap(functionK, monad),
+                      Free.fix(b).foldMap(functionK, monad))
     }
 }

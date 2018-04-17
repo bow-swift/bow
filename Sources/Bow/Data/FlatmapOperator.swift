@@ -30,11 +30,11 @@ public func >>=<A, B>(_ fa : Id<A>, _ f : @escaping (A) -> Id<B>) -> Id<B> {
     return fa.flatMap(f)
 }
 
-public func >>=<A, B>(_ fa : ListKW<A>, _ f : @escaping (A) -> ListKW<B>) -> ListKW<B> {
+public func >>=<A, B>(_ fa : ListK<A>, _ f : @escaping (A) -> ListK<B>) -> ListK<B> {
     return fa.flatMap(f)
 }
 
-public func >>=<K, A, B>(_ fa : MapKW<K, A>, _ f : @escaping (A) -> MapKW<K, B>) -> MapKW<K, B> {
+public func >>=<K, A, B>(_ fa : MapK<K, A>, _ f : @escaping (A) -> MapK<K, B>) -> MapK<K, B> {
     return fa.flatMap(f)
 }
 

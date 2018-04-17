@@ -12,7 +12,7 @@ public protocol FunctionK {
     associatedtype F
     associatedtype G
     
-    func invoke<A>(_ fa : HK<F, A>) -> HK<G, A>
+    func invoke<A>(_ fa : Kind<F, A>) -> Kind<G, A>
 }
 
 public class IdFunctionK<M> : FunctionK {
@@ -23,7 +23,7 @@ public class IdFunctionK<M> : FunctionK {
         return IdFunctionK<M>()
     }
     
-    public func invoke<A>(_ fa: HK<M, A>) -> HK<M, A> {
+    public func invoke<A>(_ fa: Kind<M, A>) -> Kind<M, A> {
         return fa
     }
 }

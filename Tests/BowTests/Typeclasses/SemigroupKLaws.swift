@@ -12,11 +12,11 @@ import SwiftCheck
 
 class SemigroupKLaws<F> {
     
-    static func check<SemiK, EqF>(semigroupK : SemiK, generator : @escaping (Int) -> HK<F, Int>, eq : EqF) where SemiK : SemigroupK, SemiK.F == F, EqF : Eq, EqF.A == HK<F, Int> {
+    static func check<SemiK, EqF>(semigroupK : SemiK, generator : @escaping (Int) -> Kind<F, Int>, eq : EqF) where SemiK : SemigroupK, SemiK.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
         associative(semigroupK, generator, eq)
     }
     
-    private static func associative<SemiK, EqF>(_ semigroupK : SemiK, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqF) where SemiK : SemigroupK, SemiK.F == F, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func associative<SemiK, EqF>(_ semigroupK : SemiK, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where SemiK : SemigroupK, SemiK.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
         property("SemigroupK combine is associative") <- forAll { (a : Int, b : Int, c : Int) in
             let fa = generator(a)
             let fb = generator(b)

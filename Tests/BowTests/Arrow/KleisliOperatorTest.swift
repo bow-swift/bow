@@ -40,11 +40,11 @@ class KleisliOperatorTest: XCTestCase {
         expect(Id.eq(Int.order).eqv((f >=> g)(5), Id(10))).to(beTrue())
     }
     
-    func testKleisliForListKW() {
-        let f = { (x : Int) in ListKW([x, x + 1]) }
-        let g = { (x : Int) in ListKW([2 * x, 3 * x]) }
+    func testKleisliForListK() {
+        let f = { (x : Int) in ListK([x, x + 1]) }
+        let g = { (x : Int) in ListK([2 * x, 3 * x]) }
         
-        expect(ListKW.eq(Int.order).eqv((f >=> g)(1), ListKW([2, 3, 4, 6]))).to(beTrue())
+        expect(ListK.eq(Int.order).eqv((f >=> g)(1), ListK([2, 3, 4, 6]))).to(beTrue())
     }
     
     func testKleisliForMaybe() {
@@ -67,7 +67,7 @@ class KleisliOperatorTest: XCTestCase {
         let f = { (x : Int) in Reader({ (_ : String) in x }) }
         let g = { (x : Int) in Reader({ (_ : String) in 2 * x }) }
         
-        expect((f >=> g)(5).invoke("Hello").ev().value).to(be(10))
+        expect((f >=> g)(5).invoke("Hello").fix().value).to(be(10))
     }
     
     func testKleisliForTry() {

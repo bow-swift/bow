@@ -8,10 +8,11 @@
 
 import Foundation
 
-public class Function1F {}
-public typealias Function1Partial<I> = HK<Function1F, I>
+public class ForFunction1 {}
+public typealias Function1Of<I, O> = Kind2<ForFunction1, I, O>
+public typealias Function1Partial<I> = Kind<ForFunction1, I>
 
-public class Function1<I, O> : HK2<Function1F, I, O> {
+public class Function1<I, O> : Function1Of<I, O> {
     private let f : (I) -> O
     
     public static func ask<I>() -> Function1<I, I> {
@@ -22,15 +23,15 @@ public class Function1<I, O> : HK2<Function1F, I, O> {
         return Function1<I, A>({ _ in a })
     }
     
-    private static func step<A, B>(_ a : A, _ t : I, _ f : (A) -> HK2<Function1F, I, Either<A, B>>) -> B {
-        return Function1<I, Either<A, B>>.ev(f(a)).f(t).fold({ a in step(a, t, f) }, id)
+    private static func step<A, B>(_ a : A, _ t : I, _ f : (A) -> Function1Of<I, Either<A, B>>) -> B {
+        return Function1<I, Either<A, B>>.fix(f(a)).f(t).fold({ a in step(a, t, f) }, id)
     }
     
-    public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> HK2<Function1F, I, Either<A, B>>) -> HK2<Function1F, I, B> {
+    public static func tailRecM<A, B>(_ a : A, _ f : @escaping (A) -> Function1Of<I, Either<A, B>>) -> Function1Of<I, B> {
         return Function1<I, B>({ t in step(a, t, f) })
     }
     
-    public static func ev(_ fa : HK2<Function1F, I, O>) -> Function1<I, O> {
+    public static func fix(_ fa : Function1Of<I, O>) -> Function1<I, O> {
         return fa as! Function1<I, O>
     }
     
@@ -81,27 +82,27 @@ public extension Function1 {
 public class Function1Functor<I> : Functor {
     public typealias F = Function1Partial<I>
     
-    public func map<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> B) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).map(f)
+    public func map<A, B>(_ fa: Function1Of<I, A>, _ f: @escaping (A) -> B) -> Function1Of<I, B> {
+        return Function1.fix(fa).map(f)
     }
 }
 
 public class Function1Applicative<I> : Function1Functor<I>, Applicative {
-    public func pure<A>(_ a: A) -> HK<HK<Function1F, I>, A> {
+    public func pure<A>(_ a: A) -> Function1Of<I, A> {
         return Function1<I, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ ff: HK<HK<Function1F, I>, (A) -> B>) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).ap(Function1.ev(ff))
+    public func ap<A, B>(_ fa: Function1Of<I, A>, _ ff: Function1Of<I, (A) -> B>) -> Function1Of<I, B> {
+        return Function1.fix(fa).ap(Function1.fix(ff))
     }
 }
 
 public class Function1Monad<I> : Function1Applicative<I>, Monad {
-    public func flatMap<A, B>(_ fa: HK<HK<Function1F, I>, A>, _ f: @escaping (A) -> HK<HK<Function1F, I>, B>) -> HK<HK<Function1F, I>, B> {
-        return Function1.ev(fa).flatMap({ a in Function1.ev(f(a)) })
+    public func flatMap<A, B>(_ fa: Function1Of<I, A>, _ f: @escaping (A) -> Function1Of<I, B>) -> Function1Of<I, B> {
+        return Function1.fix(fa).flatMap({ a in Function1.fix(f(a)) })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<Function1F, I>, Either<A, B>>) -> HK<HK<Function1F, I>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Function1Of<I, Either<A, B>>) -> Function1Of<I, B> {
         return Function1<I, A>.tailRecM(a, f)
     }
 }
@@ -109,12 +110,12 @@ public class Function1Monad<I> : Function1Applicative<I>, Monad {
 public class Function1MonadReader<I> : Function1Monad<I>, MonadReader {
     public typealias D = I
     
-    public func ask() -> HK<HK<Function1F, I>, I> {
+    public func ask() -> Function1Of<I, I> {
         return Function1<I, I>.ask()
     }
     
-    public func local<A>(_ f: @escaping (I) -> I, _ fa: HK<HK<Function1F, I>, A>) -> HK<HK<Function1F, I>, A> {
-        return Function1.ev(fa).local(f)
+    public func local<A>(_ f: @escaping (I) -> I, _ fa: Function1Of<I, A>) -> Function1Of<I, A> {
+        return Function1.fix(fa).local(f)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class State<S, A> : StateT<IdF, S, A> {
+public class State<S, A> : StateT<ForId, S, A> {
     
     public init(_ run : @escaping (S) -> (S, A)) {
         super.init(Id.pure({ s in Id.pure(run(s)) }))

@@ -1,12 +1,12 @@
 language: objective-c
-osx_image: xcode9.1
+osx_image: xcode9.3
 
 before_install:
   - carthage bootstrap
 
 script:
   - set -o pipefail
-  - xcodebuild test -project Bow.xcodeproj -scheme Bow -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=11.1,name=iPhone X" | xcpretty -c
+  - xcodebuild test -project Bow.xcodeproj -scheme Bow -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=11.3,name=iPhone X" | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

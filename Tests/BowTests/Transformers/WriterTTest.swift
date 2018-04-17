@@ -11,7 +11,7 @@ import XCTest
 
 class WriterTTest: XCTestCase {
     
-    var generator : (Int) -> HK3<WriterTF, IdF, Int, Int> {
+    var generator : (Int) -> WriterTOf<ForId, Int, Int> {
         return { a in WriterT.pure(a, Int.sumMonoid, Id<Any>.applicative()) }
     }
     
@@ -23,48 +23,48 @@ class WriterTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<WriterTPartial<IdF, Int>>.check(functor: WriterT<IdF, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<WriterTPartial<ForId, Int>>.check(functor: WriterT<ForId, Int, Int>.functor(Id<Any>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<WriterTPartial<IdF, Int>>.check(applicative: WriterT<IdF, Int, Int>.applicative(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
+        ApplicativeLaws<WriterTPartial<ForId, Int>>.check(applicative: WriterT<ForId, Int, Int>.applicative(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<WriterTPartial<IdF, Int>>.check(monad: WriterT<IdF, Int, Int>.monad(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
+        MonadLaws<WriterTPartial<ForId, Int>>.check(monad: WriterT<ForId, Int, Int>.monad(Id<Any>.monad(), Int.sumMonoid), eq: self.eq)
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<WriterTPartial<ListKWF, Int>>.check(
-            semigroupK: WriterT<ListKWF, Int, Int>.semigroupK(ListKW<Int>.semigroupK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
-            eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+        SemigroupKLaws<WriterTPartial<ForListK, Int>>.check(
+            semigroupK: WriterT<ForListK, Int, Int>.semigroupK(ListK<Int>.semigroupK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
+            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<WriterTPartial<ListKWF, Int>>.check(
-            monoidK: WriterT<ListKWF, Int, Int>.monoidK(ListKW<Int>.monoidK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListKW<Int>.applicative()) },
-            eq: WriterT<ListKWF, Int, Int>.eq(ListKW.eq(Tuple.eq(Int.order, Int.order))))
+        MonoidKLaws<WriterTPartial<ForListK, Int>>.check(
+            monoidK: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
+            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<WriterTPartial<MaybeF, Int>>.check(
-            functorFilter: WriterT<MaybeF, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
+        FunctorFilterLaws<WriterTPartial<ForMaybe, Int>>.check(
+            functorFilter: WriterT<ForMaybe, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
-            eq: WriterT<MaybeF, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
+            eq: WriterT<ForMaybe, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<WriterTPartial<MaybeF, Int>>.check(
-            monadFilter: WriterT<MaybeF, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
+        MonadFilterLaws<WriterTPartial<ForMaybe, Int>>.check(
+            monadFilter: WriterT<ForMaybe, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
-            eq: WriterT<MaybeF, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
+            eq: WriterT<ForMaybe, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonadWriterLaws() {
-        MonadWriterLaws<WriterTPartial<IdF, Int>, Int>.check(
-            monadWriter: WriterT<IdF, Int, Int>.writer(Id<Int>.monad(), Int.sumMonoid),
+        MonadWriterLaws<WriterTPartial<ForId, Int>, Int>.check(
+            monadWriter: WriterT<ForId, Int, Int>.writer(Id<Int>.monad(), Int.sumMonoid),
             monoid: Int.sumMonoid,
             eq: self.eq,
             eqUnit: WriterT.eq(Id.eq(Tuple.eq(Int.order, UnitEq()))),

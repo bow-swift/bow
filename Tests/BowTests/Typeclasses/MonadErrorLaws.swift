@@ -12,12 +12,12 @@ import SwiftCheck
 
 class MonadErrorLaws<F, E> {
     
-    static func check<MonErr, EqF>(monadError : MonErr, eq : EqF, gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    static func check<MonErr, EqF>(monadError : MonErr, eq : EqF, gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         leftZero(monadError, eq, gen)
         ensureConsistency(monadError, eq, gen)
     }
     
-    private static func leftZero<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func leftZero<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Left zero") <- forAll { (a : Int) in
             let error = gen()
             let f = { (_ : Int) in monadError.pure(a) }
@@ -26,7 +26,7 @@ class MonadErrorLaws<F, E> {
         }
     }
     
-    private static func ensureConsistency<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == HK<F, Int> {
+    private static func ensureConsistency<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Ensure consistency") <- forAll { (a : Int, bool : Bool) in
             let error = gen()
             let fa = monadError.pure(a)

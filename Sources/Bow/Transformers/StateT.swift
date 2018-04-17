@@ -8,13 +8,14 @@
 
 import Foundation
 
-public class StateTF {}
-public typealias StateTPartial<F, S> = HK2<StateTF, F, S>
+public class ForStateT {}
+public typealias StateTOf<F, S, A> = Kind3<ForStateT, F, S, A>
+public typealias StateTPartial<F, S> = Kind2<ForStateT, F, S>
 
-public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
-    private let runF : HK<F, (S) -> HK<F, (S,A)>>
+public class StateT<F, S, A> : StateTOf<F, S, A> {
+    private let runF : Kind<F, (S) -> Kind<F, (S,A)>>
     
-    public static func lift<Mon>(_ fa : HK<F, A>, _ monad : Mon) -> StateT<F, S, A> where Mon : Monad, Mon.F == F {
+    public static func lift<Mon>(_ fa : Kind<F, A>, _ monad : Mon) -> StateT<F, S, A> where Mon : Monad, Mon.F == F {
         return StateT(monad.pure({ s in monad.map(fa, { a in (s, a) }) }))
     }
     
@@ -26,21 +27,21 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
         return StateT<F, S, ()>(applicative.pure({ _ in applicative.pure((s, ())) }))
     }
     
-    public static func tailRecM<B, Mon>(_ a : A, _ f : @escaping (A) -> HK<StateTPartial<F, S>, Either<A, B>>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
+    public static func tailRecM<B, Mon>(_ a : A, _ f : @escaping (A) -> Kind<StateTPartial<F, S>, Either<A, B>>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
         return StateT<F, S, B>(monad.pure({ s in
             monad.tailRecM((s, a), { pair in
-                monad.map(StateT<F, S, Either<A, B>>.ev(f(pair.1)).runM(pair.0, monad), { sss, ab in
+                monad.map(StateT<F, S, Either<A, B>>.fix(f(pair.1)).runM(pair.0, monad), { sss, ab in
                     ab.bimap({ left in (sss, left) }, { right in (sss, right) })
                 })
             })
         }))
     }
     
-    public static func ev(_ fa : HK3<StateTF, F, S, A>) -> StateT<F, S, A> {
+    public static func fix(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
         return fa as! StateT<F, S, A>
     }
     
-    public init(_ runF : HK<F, (S) -> HK<F, (S,A)>>) {
+    public init(_ runF : Kind<F, (S) -> Kind<F, (S,A)>>) {
         self.runF = runF
     }
     
@@ -96,7 +97,7 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
         )
     }
     
-    public func flatMapF<B, Mon>(_ f : @escaping (A) -> HK<F, B>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
+    public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
         return StateT<F, S, B>(
             monad.map(runF) { sfsa in
                 sfsa >>> { fsa in
@@ -114,19 +115,19 @@ public class StateT<F, S, A> : HK3<StateTF, F, S, A> {
         )
     }
     
-    public func run<Mon>(_ initial : S, _ monad : Mon) -> HK<F, (S, A)> where Mon : Monad, Mon.F == F {
+    public func run<Mon>(_ initial : S, _ monad : Mon) -> Kind<F, (S, A)> where Mon : Monad, Mon.F == F {
         return monad.flatMap(runF, { f in f(initial) })
     }
     
-    public func runA<Mon>(_ s : S, _ monad : Mon) -> HK<F, A> where Mon : Monad, Mon.F == F {
+    public func runA<Mon>(_ s : S, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
         return monad.map(run(s, monad)){ (_, a) in a }
     }
     
-    public func runS<Mon>(_ s : S, _ monad : Mon) -> HK<F, S> where Mon : Monad, Mon.F == F {
+    public func runS<Mon>(_ s : S, _ monad : Mon) -> Kind<F, S> where Mon : Monad, Mon.F == F {
         return monad.map(run(s, monad)){ (s, _) in s }
     }
     
-    public func runM<Mon>(_ initial : S, _ monad : Mon) -> HK<F, (S, A)> where Mon : Monad, Mon.F == F {
+    public func runM<Mon>(_ initial : S, _ monad : Mon) -> Kind<F, (S, A)> where Mon : Monad, Mon.F == F {
         return self.run(initial, monad)
     }
 }
@@ -170,8 +171,8 @@ public class StateTFunctor<G, S, FuncG> : Functor where FuncG : Functor, FuncG.F
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).map(f, functor)
+    public func map<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> B) -> StateTOf<G, S, B> {
+        return StateT.fix(fa).map(f, functor)
     }
 }
 
@@ -183,22 +184,22 @@ public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicat
         super.init(monad)
     }
     
-    public func pure<A>(_ a: A) -> HK<HK<HK<StateTF, G>, S>, A> {
+    public func pure<A>(_ a: A) -> StateTOf<G, S, A> {
         return StateT(monad.pure({ s in self.monad.pure((s, a))}))
     }
     
-    public func ap<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ ff: HK<HK<HK<StateTF, G>, S>, (A) -> B>) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).ap(StateT.ev(ff), monad)
+    public func ap<A, B>(_ fa: StateTOf<G, S, A>, _ ff: StateTOf<G, S, (A) -> B>) -> StateTOf<G, S, B> {
+        return StateT.fix(fa).ap(StateT.fix(ff), monad)
     }
 }
 
 public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad where MonG : Monad, MonG.F == G {
     
-    public func flatMap<A, B>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (A) -> HK<HK<HK<StateTF, G>, S>, B>) -> HK<HK<HK<StateTF, G>, S>, B> {
-        return StateT.ev(fa).flatMap({ a in StateT.ev(f(a)) }, monad)
+    public func flatMap<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> StateTOf<G, S, B>) -> StateTOf<G, S, B> {
+        return StateT.fix(fa).flatMap({ a in StateT.fix(f(a)) }, monad)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<StateTF, G>, S>, Either<A, B>>) -> HK<HK<HK<StateTF, G>, S>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<G, S, Either<A, B>>) -> StateTOf<G, S, B> {
         return StateT.tailRecM(a, f, monad)
     }
 }
@@ -206,11 +207,11 @@ public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad wher
 public class StateTMonadState<G, R, MonG> : StateTMonad<G, R, MonG>, MonadState where MonG : Monad, MonG.F == G {
     public typealias S = R
     
-    public func get() -> HK<HK<HK<StateTF, G>, R>, R> {
+    public func get() -> StateTOf<G, R, R> {
         return StateT<G, R, R>.get(monad)
     }
     
-    public func set(_ s: R) -> HK<HK<HK<StateTF, G>, R>, ()> {
+    public func set(_ s: R) -> StateTOf<G, R, ()> {
         return StateT<G, R, Unit>.set(s, monad)
     }
 }
@@ -226,8 +227,8 @@ public class StateTSemigroupK<G, S, MonG, SemiKG> : SemigroupK where MonG : Mona
         self.semigroupK = semigroupK
     }
     
-    public func combineK<A>(_ x: HK<HK<HK<StateTF, G>, S>, A>, _ y: HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
-        return StateT.ev(x).combineK(StateT.ev(y), monad, semigroupK)
+    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
+        return StateT.fix(x).combineK(StateT.fix(y), monad, semigroupK)
     }
 }
 
@@ -239,19 +240,19 @@ public class StateTMonadCombine<G, S, MonComG> : StateTMonad<G, S, MonComG>, Mon
         super.init(monadCombine)
     }
     
-    public func combineK<A>(_ x: HK<HK<HK<StateTF, G>, S>, A>, _ y: HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
-        return StateT.ev(x).combineK(StateT.ev(y), monadCombine, monadCombine)
+    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
+        return StateT.fix(x).combineK(StateT.fix(y), monadCombine, monadCombine)
     }
     
-    public func empty<A>() -> HK<HK<HK<StateTF, G>, S>, A> {
+    public func empty<A>() -> StateTOf<G, S, A> {
         return liftT(monadCombine.empty())
     }
     
-    public func emptyK<A>() -> HK<HK<HK<StateTF, G>, S>, A> {
+    public func emptyK<A>() -> StateTOf<G, S, A> {
         return liftT(monadCombine.empty())
     }
     
-    func liftT<A>(_ fa : HK<G, A>) -> StateT<G, S, A> {
+    func liftT<A>(_ fa : Kind<G, A>) -> StateT<G, S, A> {
         return StateT(monad.pure({ s in self.monad.map(fa, { a in (s, a) }) }))
     }
 }
@@ -266,14 +267,14 @@ public class StateTMonadError<G, S, Err, MonErrG> : StateTMonad<G, S, MonErrG>, 
         super.init(monadError)
     }
     
-    public func raiseError<A>(_ e: Err) -> HK<HK<HK<StateTF, G>, S>, A> {
+    public func raiseError<A>(_ e: Err) -> StateTOf<G, S, A> {
         return StateT<G, S, A>.lift(monadError.raiseError(e), monadError)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<HK<StateTF, G>, S>, A>, _ f: @escaping (Err) -> HK<HK<HK<StateTF, G>, S>, A>) -> HK<HK<HK<StateTF, G>, S>, A> {
+    public func handleErrorWith<A>(_ fa: StateTOf<G, S, A>, _ f: @escaping (Err) -> StateTOf<G, S, A>) -> StateTOf<G, S, A> {
         return StateT<G, S, A>(monadError.pure({ s in
-            self.monadError.handleErrorWith(StateT.ev(fa).runM(s, self.monadError), { e in
-                StateT.ev(f(e)).runM(s, self.monadError)
+            self.monadError.handleErrorWith(StateT.fix(fa).runM(s, self.monadError), { e in
+                StateT.fix(f(e)).runM(s, self.monadError)
             })
         }))
     }

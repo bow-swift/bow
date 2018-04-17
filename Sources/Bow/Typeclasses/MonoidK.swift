@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol MonoidK : SemigroupK {
-    func emptyK<A>() -> HK<F, A>
+    func emptyK<A>() -> Kind<F, A>
 }
 
 public extension MonoidK {
@@ -19,14 +19,14 @@ public extension MonoidK {
 }
 
 public class MonoidAlgebra<F, B> : SemigroupAlgebra<F, B>, Monoid {
-    private let emptyK : () -> HK<F, B>
+    private let emptyK : () -> Kind<F, B>
     
-    init(combineK: @escaping (HK<F, B>, HK<F, B>) -> HK<F, B>, emptyK : @escaping () -> HK<F, B>) {
+    init(combineK: @escaping (Kind<F, B>, Kind<F, B>) -> Kind<F, B>, emptyK : @escaping () -> Kind<F, B>) {
         self.emptyK = emptyK
         super.init(combineK: combineK)
     }
     
-    public var empty: HK<F, B> {
+    public var empty: Kind<F, B> {
         return emptyK()
     }
 }

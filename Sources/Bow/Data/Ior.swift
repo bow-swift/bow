@@ -8,10 +8,11 @@
 
 import Foundation
 
-public class IorF {}
-public typealias IorPartial<A> = HK<IorF, A>
+public class ForIor {}
+public typealias IorOf<A, B> = Kind2<ForIor, A, B>
+public typealias IorPartial<A> = Kind<ForIor, A>
 
-public class Ior<A, B> : HK2<IorF, A, B> {
+public class Ior<A, B> : IorOf<A, B> {
     public static func left(_ a : A) -> Ior<A, B> {
         return IorLeft<A, B>(a)
     }
@@ -50,11 +51,11 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                       })
     }
     
-    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> HK<IorPartial<C>, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
-        return loop(Ior<C, Either<A, B>>.ev(f(a)), { a in Ior<C, Either<A, B>>.ev(f(a)) }, semigroup)
+    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> Kind<IorPartial<C>, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
+        return loop(Ior<C, Either<A, B>>.fix(f(a)), { a in Ior<C, Either<A, B>>.fix(f(a)) }, semigroup)
     }
     
-    public static func ev(_ fa : HK2<IorF, A, B>) -> Ior<A, B> {
+    public static func fix(_ fa : IorOf<A, B>) -> Ior<A, B> {
         return fa as! Ior<A, B>
     }
     
@@ -96,7 +97,7 @@ public class Ior<A, B> : HK2<IorF, A, B> {
                     { _, b in f(b, c) })
     }
     
-    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, HK2<IorF, A, C>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, C, Appl>(_ f : (B) -> Kind<G, C>, _ applicative : Appl) -> Kind<G, IorOf<A, C>> where Appl : Applicative, Appl.F == G {
         return fold({ a in applicative.pure(Ior<A, C>.left(a)) },
                     { b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) },
                     { _, b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) })
@@ -233,8 +234,8 @@ public extension Ior {
 public class IorFunctor<L> : Functor {
     public typealias F = IorPartial<L>
     
-    public func map<A, B>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> B) -> HK<HK<IorF, L>, B> {
-        return Ior.ev(fa).map(f)
+    public func map<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> B) -> IorOf<L, B> {
+        return Ior.fix(fa).map(f)
     }
 }
 
@@ -245,22 +246,22 @@ public class IorApplicative<L, SemiG> : IorFunctor<L>, Applicative where SemiG :
         self.semigroup = semigroup
     }
     
-    public func pure<A>(_ a: A) -> HK<HK<IorF, L>, A> {
+    public func pure<A>(_ a: A) -> IorOf<L, A> {
         return Ior<L, A>.right(a)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<IorF, L>, A>, _ ff: HK<HK<IorF, L>, (A) -> B>) -> HK<HK<IorF, L>, B> {
-        return Ior.ev(fa).ap(Ior.ev(ff), semigroup)
+    public func ap<A, B>(_ fa: IorOf<L, A>, _ ff: IorOf<L, (A) -> B>) -> IorOf<L, B> {
+        return Ior.fix(fa).ap(Ior.fix(ff), semigroup)
     }
 }
 
 public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : Semigroup, SemiG.A == L{
     
-    public func flatMap<A, B>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> HK<HK<IorF, L>, B>) -> HK<HK<IorF, L>, B> {
-        return Ior.ev(fa).flatMap({ a in Ior.ev(f(a)) }, self.semigroup)
+    public func flatMap<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> IorOf<L, B>) -> IorOf<L, B> {
+        return Ior.fix(fa).flatMap({ a in Ior.fix(f(a)) }, self.semigroup)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<IorF, L>, Either<A, B>>) -> HK<HK<IorF, L>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IorOf<L, Either<A, B>>) -> IorOf<L, B> {
         return Ior.tailRecM(a, f, self.semigroup)
     }
 }
@@ -268,23 +269,23 @@ public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : 
 public class IorFoldable<L> : Foldable {
     public typealias F = IorPartial<L>
     
-    public func foldL<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Ior.ev(fa).foldL(b, f)
+    public func foldL<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return Ior.fix(fa).foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: HK<HK<IorF, L>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Ior.ev(fa).foldR(b, f)
+    public func foldR<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Ior.fix(fa).foldR(b, f)
     }
 }
 
 public class IorTraverse<L> : IorFoldable<L>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<HK<IorF, L>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<IorF, L>, B>> where G == Appl.F, Appl : Applicative {
-        return Ior.ev(fa).traverse(f, applicative)
+    public func traverse<G, A, B, Appl>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IorOf<L, B>> where G == Appl.F, Appl : Applicative {
+        return Ior.fix(fa).traverse(f, applicative)
     }
 }
 
 public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = HK2<IorF, L, R>
+    public typealias A = IorOf<L, R>
     
     private let eql : EqL
     private let eqr : EqR
@@ -294,9 +295,9 @@ public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, Eq
         self.eqr = eqr
     }
     
-    public func eqv(_ a: HK2<IorF, L, R>, _ b: HK2<IorF, L, R>) -> Bool {
-        let a = Ior.ev(a)
-        let b = Ior.ev(b)
+    public func eqv(_ a: IorOf<L, R>, _ b: IorOf<L, R>) -> Bool {
+        let a = Ior.fix(a)
+        let b = Ior.fix(b)
         return a.fold({ aLeft in
             b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false), constF(false))
         },

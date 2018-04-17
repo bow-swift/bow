@@ -11,7 +11,7 @@ import SwiftCheck
 @testable import Bow
 
 class IdTest: XCTestCase {
-    var generator : (Int) -> HK<IdF, Int> {
+    var generator : (Int) -> IdOf<Int> {
         return { a in Id<Int>.pure(a) }
     }
     
@@ -23,18 +23,18 @@ class IdTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IdF>.check(functor: Id<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ForId>.check(functor: Id<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<IdF>.check(applicative: Id<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<ForId>.check(applicative: Id<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<IdF>.check(monad: Id<Int>.monad(), eq: self.eq)
+        MonadLaws<ForId>.check(monad: Id<Int>.monad(), eq: self.eq)
     }
     
     func testComonadLaws() {
-        ComonadLaws<IdF>.check(comonad: Id<Int>.comonad(), generator: self.generator, eq: self.eq)
+        ComonadLaws<ForId>.check(comonad: Id<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
 }

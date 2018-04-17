@@ -11,7 +11,7 @@ import SwiftCheck
 @testable import Bow
 
 class FunctorLaws<F> {
-    static func check<Func, EqA, EqUnit>(functor : Func, generator : @escaping (Int) -> HK<F, Int>, eq : EqA, eqUnit : EqUnit) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int>, EqUnit : Eq, EqUnit.A == HK<F, ()> {
+    static func check<Func, EqA, EqUnit>(functor : Func, generator : @escaping (Int) -> Kind<F, Int>, eq : EqA, eqUnit : EqUnit) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int>, EqUnit : Eq, EqUnit.A == Kind<F, ()> {
         covariantIdentity(functor, generator, eq)
         covariantComposition(functor, generator, eq)
         void(functor, generator, eqUnit)
@@ -20,14 +20,14 @@ class FunctorLaws<F> {
         tupleRight(functor, generator, eq)
     }
 
-    private static func covariantIdentity<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int> {
+    private static func covariantIdentity<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("Identity is preserved under functor transformation") <- forAll() { (a : Int) in
             let fa = generator(a)
             return eq.eqv(functor.map(fa, id), id(fa))
         }
     }
     
-    private static func covariantComposition<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int> {
+    private static func covariantComposition<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("Composition is preserved under functor transformation") <- forAll() { (a : Int, b : Int, c : Int) in
             let f : (Int) -> Int = constF(b)
             let g : (Int) -> Int = constF(c)
@@ -36,7 +36,7 @@ class FunctorLaws<F> {
         }
     }
     
-    private static func void<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, ()> {
+    private static func void<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, ()> {
         property("Void") <- forAll() { (a : Int, b : Int) in
             let fa = generator(a)
             let f = { (_ : Int) in b }
@@ -45,7 +45,7 @@ class FunctorLaws<F> {
         }
     }
     
-    private static func fproduct<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int> {
+    private static func fproduct<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("fproduct") <- forAll { (a : Int, b : Int) in
             let fa = generator(a)
             let f = { (_ : Int) in b }
@@ -54,7 +54,7 @@ class FunctorLaws<F> {
         }
     }
     
-    private static func tupleLeft<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int> {
+    private static func tupleLeft<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("tuple left") <- forAll { (a : Int, b : Int) in
             let fa = generator(a)
             return eq.eqv(functor.map(functor.tupleLeft(fa, b), { x in x.0 }),
@@ -62,7 +62,7 @@ class FunctorLaws<F> {
         }
     }
     
-    private static func tupleRight<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> HK<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == HK<F, Int> {
+    private static func tupleRight<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("tuple right") <- forAll { (a : Int, b : Int) in
             let fa = generator(a)
             return eq.eqv(functor.map(functor.tupleRight(fa, b), { x in x.1 }),

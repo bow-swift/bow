@@ -8,23 +8,24 @@
 
 import Foundation
 
-public class CofreeF {}
-public typealias CofreeEval<S, A> = HK<S, Cofree<S, A>>
-public typealias CofreePartial<S> = HK<CofreeF, S>
+public class ForCofree {}
+public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>
+public typealias CofreeOf<S, A> = Kind2<ForCofree, S, A>
+public typealias CofreePartial<S> = Kind<ForCofree, S>
 
-public class Cofree<S, A> : HK2<CofreeF, S, A> {
+public class Cofree<S, A> : CofreeOf<S, A> {
     private let head : A
     private let tail : Eval<CofreeEval<S, A>>
     
-    public static func unfold<Func>(_ a : A, _ f : @escaping (A) -> HK<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
+    public static func unfold<Func>(_ a : A, _ f : @escaping (A) -> Kind<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
         return create(a, f, functor)
     }
     
-    public static func create<Func>(_ a : A, _ f : @escaping (A) -> HK<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
+    public static func create<Func>(_ a : A, _ f : @escaping (A) -> Kind<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
         return Cofree(a, Eval.later({ functor.map(f(a), { inA in create(inA, f, functor) }) }))
     }
     
-    public static func ev(_ fa : HK2<CofreeF, S, A>) -> Cofree<S, A> {
+    public static func fix(_ fa : CofreeOf<S, A>) -> Cofree<S, A> {
         return fa as! Cofree<S, A>
     }
     
@@ -77,13 +78,13 @@ public class Cofree<S, A> : HK2<CofreeF, S, A> {
         return head
     }
     
-    public func cata<B, Trav>(_ folder : @escaping (A, HK<S, B>) -> Eval<B>, _ traverse : Trav) -> Eval<B> where Trav : Traverse, Trav.F == S {
-        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).ev()
+    public func cata<B, Trav>(_ folder : @escaping (A, Kind<S, B>) -> Eval<B>, _ traverse : Trav) -> Eval<B> where Trav : Traverse, Trav.F == S {
+        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).fix()
         return ev.flatMap { sb in folder(self.extract(), sb) }
     }
     
-    public func cataM<B, M, FuncK, Trav, Mon>(_ folder : @escaping (A, HK<S, B>) -> HK<M, B>, _ inclusion : FuncK, _ traverse : Trav, _ monad : Mon) -> HK<M, B> where FuncK : FunctionK, FuncK.F == EvalF, FuncK.G == M, Trav : Traverse, Trav.F == S, Mon : Monad, Mon.F == M {
-        func loop(_ ev : Cofree<S, A>) -> Eval<HK<M, B>> {
+    public func cataM<B, M, FuncK, Trav, Mon>(_ folder : @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion : FuncK, _ traverse : Trav, _ monad : Mon) -> Kind<M, B> where FuncK : FunctionK, FuncK.F == ForEval, FuncK.G == M, Trav : Traverse, Trav.F == S, Mon : Monad, Mon.F == M {
+        func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
             let looped = traverse.traverse(ev.tailForced(), { cof in  monad.flatten(inclusion.invoke(Eval.deferEvaluation({ loop(cof) }))) }, monad)
             let folded = monad.flatMap(looped, { fb in folder(ev.head, fb) })
             return Eval.now(folded)
@@ -111,18 +112,18 @@ public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S 
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (A) -> B) -> HK<HK<CofreeF, S>, B> {
-        return Cofree.ev(fa).map(f, functor)
+    public func map<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (A) -> B) -> CofreeOf<S, B> {
+        return Cofree.fix(fa).map(f, functor)
     }
 }
 
 public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
     
-    public func coflatMap<A, B>(_ fa: HK<HK<CofreeF, S>, A>, _ f: @escaping (HK<HK<CofreeF, S>, A>) -> B) -> HK<HK<CofreeF, S>, B> {
-        return Cofree.ev(fa).coflatMap(f, functor)
+    public func coflatMap<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (CofreeOf<S, A>) -> B) -> CofreeOf<S, B> {
+        return Cofree.fix(fa).coflatMap(f, functor)
     }
     
-    public func extract<A>(_ fa: HK<HK<CofreeF, S>, A>) -> A {
-        return Cofree.ev(fa).extract()
+    public func extract<A>(_ fa: CofreeOf<S, A>) -> A {
+        return Cofree.fix(fa).extract()
     }
 }

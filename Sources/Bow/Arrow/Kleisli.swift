@@ -8,18 +8,19 @@
 
 import Foundation
 
-public class KleisliF {}
+public class ForKleisli {}
 public typealias ReaderT<F, D, A> = Kleisli<F, D, A>
-public typealias KleisliPartial<F, D> = HK2<KleisliF, F, D>
+public typealias KleisliOf<F, D, A> = Kind3<ForKleisli, F, D, A>
+public typealias KleisliPartial<F, D> = Kind2<ForKleisli, F, D>
 
-public class Kleisli<F, D, A> : HK3<KleisliF, F, D, A> {
-    internal let run : (D) -> HK<F, A>
+public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
+    internal let run : (D) -> Kind<F, A>
     
-    public static func ev(_ fa : HK3<KleisliF, F, D, A>) -> Kleisli<F, D, A> {
+    public static func fix(_ fa : KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
         return fa as! Kleisli<F, D, A>
     }
     
-    public init(_ run : @escaping (D) -> HK<F, A>) {
+    public init(_ run : @escaping (D) -> Kind<F, A>) {
         self.run = run
     }
     
@@ -49,11 +50,11 @@ public class Kleisli<F, D, A> : HK3<KleisliF, F, D, A> {
         return andThen(f.run, monad)
     }
     
-    public func andThen<B, Mon>(_ f : @escaping (A) -> HK<F, B>, _ monad : Mon) -> Kleisli<F, D, B> where Mon : Monad, Mon.F == F {
+    public func andThen<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> Kleisli<F, D, B> where Mon : Monad, Mon.F == F {
         return Kleisli<F, D, B>({ d in monad.flatMap(self.run(d), f) })
     }
     
-    public func andThen<B, Mon>(_ a : HK<F, B>, _ monad : Mon) -> Kleisli<F, D, B> where Mon : Monad, Mon.F == F {
+    public func andThen<B, Mon>(_ a : Kind<F, B>, _ monad : Mon) -> Kleisli<F, D, B> where Mon : Monad, Mon.F == F {
         return andThen({ _ in a }, monad)
     }
     
@@ -73,11 +74,11 @@ public class Kleisli<F, D, A> : HK3<KleisliF, F, D, A> {
         return Kleisli<F, D, A>({ _ in monadError.raiseError(e) })
     }
     
-    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> HK3<KleisliF, F, D, Either<A, B>>, _ monad : MonF) -> HK3<KleisliF, F, D, B> where MonF : Monad, MonF.F == F {
-        return Kleisli<F, D, B>({ b in monad.tailRecM(a, { a in Kleisli<F, D, Either<A, B>>.ev(f(a)).run(b) })})
+    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> KleisliOf<F, D, Either<A, B>>, _ monad : MonF) -> KleisliOf<F, D, B> where MonF : Monad, MonF.F == F {
+        return Kleisli<F, D, B>({ b in monad.tailRecM(a, { a in Kleisli<F, D, Either<A, B>>.fix(f(a)).run(b) })})
     }
     
-    public func invoke(_ value : D) -> HK<F, A> {
+    public func invoke(_ value : D) -> Kind<F, A> {
         return run(value)
     }
 }
@@ -113,8 +114,8 @@ public class KleisliFunctor<G, D, FuncG> : Functor where FuncG : Functor, FuncG.
         self.functor = functor
     }
     
-    public func map<A, B>(_ fa: HK<HK<HK<KleisliF, G>, D>, A>, _ f: @escaping (A) -> B) -> HK<HK<HK<KleisliF, G>, D>, B> {
-        return Kleisli.ev(fa).map(f, functor)
+    public func map<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> B) -> KleisliOf<G, D, B> {
+        return Kleisli.fix(fa).map(f, functor)
     }
 }
 
@@ -127,12 +128,12 @@ public class KleisliApplicative<G, D, ApplG> : KleisliFunctor<G, D, ApplG>, Appl
         super.init(applicative)
     }
     
-    public func pure<A>(_ a: A) -> HK<HK<HK<KleisliF, G>, D>, A> {
+    public func pure<A>(_ a: A) -> KleisliOf<G, D, A> {
         return Kleisli.pure(a, applicative)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<HK<KleisliF, G>, D>, A>, _ ff: HK<HK<HK<KleisliF, G>, D>, (A) -> B>) -> HK<HK<HK<KleisliF, G>, D>, B> {
-        return Kleisli.ev(fa).ap(Kleisli.ev(ff), applicative)
+    public func ap<A, B>(_ fa: KleisliOf<G, D, A>, _ ff: KleisliOf<G, D, (A) -> B>) -> KleisliOf<G, D, B> {
+        return Kleisli.fix(fa).ap(Kleisli.fix(ff), applicative)
     }
 }
 
@@ -145,11 +146,11 @@ public class KleisliMonad<G, D, MonG> : KleisliApplicative<G, D, MonG>, Monad wh
         super.init(monad)
     }
     
-    public func flatMap<A, B>(_ fa: HK<HK<HK<KleisliF, G>, D>, A>, _ f: @escaping (A) -> HK<HK<HK<KleisliF, G>, D>, B>) -> HK<HK<HK<KleisliF, G>, D>, B> {
-        return Kleisli.ev(fa).flatMap({ a in Kleisli.ev(f(a)) }, monad)
+    public func flatMap<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> KleisliOf<G, D, B>) -> KleisliOf<G, D, B> {
+        return Kleisli.fix(fa).flatMap({ a in Kleisli.fix(f(a)) }, monad)
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<HK<KleisliF, G>, D>, Either<A, B>>) -> HK<HK<HK<KleisliF, G>, D>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> KleisliOf<G, D, Either<A, B>>) -> KleisliOf<G, D, B> {
         return Kleisli.tailRecM(a, f, monad)
     }
 }
@@ -157,12 +158,12 @@ public class KleisliMonad<G, D, MonG> : KleisliApplicative<G, D, MonG>, Monad wh
 public class KleisliMonadReader<G, E, MonG> : KleisliMonad<G, E, MonG>, MonadReader where MonG : Monad, MonG.F == G {
     public typealias D = E
     
-    public func ask() -> HK<HK<HK<KleisliF, G>, E>, E> {
+    public func ask() -> KleisliOf<G, E, E> {
         return Kleisli<G, E, E>.ask(monad)
     }
     
-    public func local<A>(_ f: @escaping (E) -> E, _ fa: HK<HK<HK<KleisliF, G>, E>, A>) -> HK<HK<HK<KleisliF, G>, E>, A> {
-        return Kleisli.ev(fa).local(f)
+    public func local<A>(_ f: @escaping (E) -> E, _ fa: KleisliOf<G, E, A>) -> KleisliOf<G, E, A> {
+        return Kleisli.fix(fa).local(f)
     }
 }
 
@@ -176,11 +177,11 @@ public class KleisliMonadError<G, D, Err, MonErrG> : KleisliMonad<G, D, MonErrG>
         super.init(monadError)
     }
     
-    public func raiseError<A>(_ e: Err) -> HK<HK<HK<KleisliF, G>, D>, A> {
+    public func raiseError<A>(_ e: Err) -> KleisliOf<G, D, A> {
         return Kleisli<G, D, A>.raiseError(e, monadError)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<HK<KleisliF, G>, D>, A>, _ f: @escaping (Err) -> HK<HK<HK<KleisliF, G>, D>, A>) -> HK<HK<HK<KleisliF, G>, D>, A> {
-        return Kleisli.ev(fa).handleErrorWith({ e in Kleisli.ev(f(e)) }, monadError)
+    public func handleErrorWith<A>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (Err) -> KleisliOf<G, D, A>) -> KleisliOf<G, D, A> {
+        return Kleisli.fix(fa).handleErrorWith({ e in Kleisli.fix(f(e)) }, monadError)
     }
 }

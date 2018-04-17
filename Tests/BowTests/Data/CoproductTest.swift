@@ -11,8 +11,8 @@ import XCTest
 
 class CoproductTest: XCTestCase {
     
-    var generator : (Int) -> HK3<CoproductF, IdF, IdF, Int> {
-        return { a in Coproduct<IdF, IdF, Int>(Either.pure(Id.pure(a))) }
+    var generator : (Int) -> CoproductOf<ForId, ForId, Int> {
+        return { a in Coproduct<ForId, ForId, Int>(Either.pure(Id.pure(a))) }
     }
     
     var eq = Coproduct.eq(Either.eq(Id.eq(Int.order), Id.eq(Int.order)))
@@ -23,10 +23,10 @@ class CoproductTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<CoproductPartial<IdF, IdF>>.check(functor: Coproduct<IdF, IdF, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<CoproductPartial<ForId, ForId>>.check(functor: Coproduct<ForId, ForId, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testComonadLaws() {
-        ComonadLaws<CoproductPartial<IdF, IdF>>.check(comonad: Coproduct<IdF, IdF, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: self.generator, eq: self.eq)
+        ComonadLaws<CoproductPartial<ForId, ForId>>.check(comonad: Coproduct<ForId, ForId, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: self.generator, eq: self.eq)
     }
 }

@@ -14,9 +14,10 @@ public enum TryError : Error {
     case unsupportedOperation(String)
 }
 
-public class TryF {}
+public class ForTry {}
+public typealias TryOf<A> = Kind<ForTry, A>
 
-public class Try<A> : HK<TryF, A> {
+public class Try<A> : TryOf<A> {
     public static func success(_ value : A) -> Try<A> {
         return Success<A>(value)
     }
@@ -50,8 +51,8 @@ public class Try<A> : HK<TryF, A> {
                          })
     }
     
-    public static func ev(_ fa : HK<TryF, A>) -> Try<A> {
-        return fa.ev()
+    public static func fix(_ fa : TryOf<A>) -> Try<A> {
+        return fa.fix()
     }
     
     public func fold<B>(_ fe : (Error) -> B, _ fa : (A) throws -> B) -> B {
@@ -79,7 +80,7 @@ public class Try<A> : HK<TryF, A> {
                     { a in f(a, lb) })
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> HK<G, B>, _ applicative : Appl) -> HK<G, Try<B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Try<B>> where Appl : Applicative, Appl.F == G {
         return fold({ _ in applicative.pure(Try<B>.raise(TryError.illegalState)) },
                     { a in applicative.map(f(a), { b in Try<B>.invoke{ b } }) })
     }
@@ -149,8 +150,8 @@ extension Try : CustomStringConvertible {
     }
 }
 
-public extension HK where F == TryF {
-    public func ev() -> Try<A> {
+public extension Kind where F == ForTry {
+    public func fix() -> Try<A> {
         return self as! Try<A>
     }
 }
@@ -178,56 +179,56 @@ public extension Try {
 }
 
 public class TryFunctor : Functor {
-    public typealias F = TryF
+    public typealias F = ForTry
     
-    public func map<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> B) -> HK<TryF, B> {
-        return fa.ev().map(f)
+    public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
+        return fa.fix().map(f)
     }
 }
 
 public class TryApplicative : TryFunctor, Applicative {
-    public func pure<A>(_ a: A) -> HK<TryF, A> {
+    public func pure<A>(_ a: A) -> TryOf<A> {
         return Try<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<TryF, A>, _ ff: HK<TryF, (A) -> B>) -> HK<TryF, B> {
-        return fa.ev().ap(ff.ev())
+    public func ap<A, B>(_ fa: TryOf<A>, _ ff: TryOf<(A) -> B>) -> TryOf<B> {
+        return fa.fix().ap(ff.fix())
     }
 }
 
 public class TryMonad : TryApplicative, Monad {
-    public func flatMap<A, B>(_ fa: HK<TryF, A>, _ f: @escaping (A) -> HK<TryF, B>) -> HK<TryF, B> {
-        return fa.ev().flatMap({ a in f(a).ev() })
+    public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
+        return fa.fix().flatMap({ a in f(a).fix() })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<TryF, Either<A, B>>) -> HK<TryF, B> {
-        return Try<A>.tailRecM(a, { a in f(a).ev() })
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
+        return Try<A>.tailRecM(a, { a in f(a).fix() })
     }
 }
 
 public class TryMonadError<C> : TryMonad, MonadError where C : Error{
     public typealias E = C
     
-    public func raiseError<A>(_ e: C) -> HK<TryF, A> {
+    public func raiseError<A>(_ e: C) -> TryOf<A> {
         return Try<A>.failure(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<TryF, A>, _ f: @escaping (C) -> HK<TryF, A>) -> HK<TryF, A> {
-        return fa.ev().recoverWith({ e in f(e as! C).ev() })
+    public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
+        return fa.fix().recoverWith({ e in f(e as! C).fix() })
     }
 }
 
 public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = HK<TryF, R>
+    public typealias A = TryOf<R>
     private let eqr : EqR
     
     public init(_ eqr : EqR) {
         self.eqr = eqr
     }
     
-    public func eqv(_ a: HK<TryF, R>, _ b: HK<TryF, R>) -> Bool {
-        let a = Try.ev(a)
-        let b = Try.ev(b)
+    public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
+        let a = Try.fix(a)
+        let b = Try.fix(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
                       { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
     }

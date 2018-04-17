@@ -8,10 +8,11 @@
 
 import Foundation
 
-public typealias EitherPartial<A> = HK<EitherF, A>
-public class EitherF {}
+public class ForEither {}
+public typealias EitherOf<A, B> = Kind2<ForEither, A, B>
+public typealias EitherPartial<A> = Kind<ForEither, A>
 
-public class Either<A, B> : HK2<EitherF, A, B> {
+public class Either<A, B> : EitherOf<A, B> {
     public static func left(_ a : A) -> Either<A, B> {
         return Left<A, B>(a)
     }
@@ -24,15 +25,15 @@ public class Either<A, B> : HK2<EitherF, A, B> {
         return right(b)
     }
     
-    public static func tailRecM<C>(_ a : A, _ f : (A) -> HK<EitherPartial<C>, Either<A, B>>) -> Either<C, B> {
-        return Either<C, Either<A, B>>.ev(f(a)).fold(Either<C, B>.left,
+    public static func tailRecM<C>(_ a : A, _ f : (A) -> Kind<EitherPartial<C>, Either<A, B>>) -> Either<C, B> {
+        return Either<C, Either<A, B>>.fix(f(a)).fold(Either<C, B>.left,
             { either in
                 either.fold({ left in tailRecM(left, f)},
                             Either<C, B>.right)
             })
     }
     
-    public static func ev(_ fa : HK2<EitherF, A, B>) -> Either<A, B> {
+    public static func fix(_ fa : EitherOf<A, B>) -> Either<A, B> {
         return fa as! Either<A, B>
     }
     
@@ -104,7 +105,7 @@ public class Either<A, B> : HK2<EitherF, A, B> {
                         Either<A, B>.left(defaultValue) })
     }
 
-    public func traverse<G, C, Appl>(_ f : (B) -> HK<G, C>, _ applicative : Appl) -> HK<G, HK<EitherPartial<A>, C>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, C, Appl>(_ f : (B) -> Kind<G, C>, _ applicative : Appl) -> Kind<G, Kind<EitherPartial<A>, C>> where Appl : Applicative, Appl.F == G {
         return fold({ a in applicative.pure(Either<A, C>.left(a)) },
                     { b in applicative.map(f(b), { c in Either<A, C>.right(c) }) })
     }
@@ -174,21 +175,21 @@ public extension Either {
 public class EitherApplicative<C> : Applicative {
     public typealias F = EitherPartial<C>
     
-    public func pure<A>(_ a: A) -> HK<HK<EitherF, C>, A> {
+    public func pure<A>(_ a: A) -> EitherOf<C, A> {
         return Either<C, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ ff: HK<HK<EitherF, C>, (A) -> B>) -> HK<HK<EitherF, C>, B> {
-        return Either.ev(fa).ap(Either.ev(ff))
+    public func ap<A, B>(_ fa: EitherOf<C, A>, _ ff: EitherOf<C, (A) -> B>) -> EitherOf<C, B> {
+        return Either.fix(fa).ap(Either.fix(ff))
     }
 }
 
 public class EitherMonad<C> : EitherApplicative<C>, Monad {
-    public func flatMap<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (A) -> HK<HK<EitherF, C>, B>) -> HK<HK<EitherF, C>, B> {
-        return Either.ev(fa).flatMap({ eca in Either.ev(f(eca)) })
+    public func flatMap<A, B>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> EitherOf<C, B>) -> EitherOf<C, B> {
+        return Either.fix(fa).flatMap({ eca in Either.fix(f(eca)) })
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> HK<HK<EitherF, C>, Either<A, B>>) -> HK<HK<EitherF, C>, B> {
+    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<C, Either<A, B>>) -> EitherOf<C, B> {
         return Either<A, B>.tailRecM(a, f)
     }
 }
@@ -196,43 +197,43 @@ public class EitherMonad<C> : EitherApplicative<C>, Monad {
 public class EitherMonadError<C> : EitherMonad<C>, MonadError {
     public typealias E = C
     
-    public func raiseError<A>(_ e: C) -> HK<HK<EitherF, C>, A> {
+    public func raiseError<A>(_ e: C) -> EitherOf<C, A> {
         return Either<C, A>.left(e)
     }
     
-    public func handleErrorWith<A>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (C) -> HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
-        return Either.ev(fa).fold(f, constF(Either.ev(fa)))
+    public func handleErrorWith<A>(_ fa: EitherOf<C, A>, _ f: @escaping (C) -> EitherOf<C, A>) -> EitherOf<C, A> {
+        return Either.fix(fa).fold(f, constF(Either.fix(fa)))
     }
 }
 
 public class EitherFoldable<C> : Foldable {
     public typealias F = EitherPartial<C>
     
-    public func foldL<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Either.ev(fa).foldL(b, f)
+    public func foldL<A, B>(_ fa: EitherOf<C, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return Either.fix(fa).foldL(b, f)
     }
     
-    public func foldR<A, B>(_ fa: HK<HK<EitherF, C>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Either.ev(fa).foldR(b, f)
+    public func foldR<A, B>(_ fa: EitherOf<C, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Either.fix(fa).foldR(b, f)
     }
 }
 
 public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: HK<HK<EitherF, C>, A>, _ f: @escaping (A) -> HK<G, B>, _ applicative: Appl) -> HK<G, HK<HK<EitherF, C>, B>> where G == Appl.F, Appl : Applicative {
-        return Either.ev(fa).traverse(f, applicative)
+    public func traverse<G, A, B, Appl>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, EitherOf<C, B>> where G == Appl.F, Appl : Applicative {
+        return Either.fix(fa).traverse(f, applicative)
     }
 }
 
 public class EitherSemigroupK<C> : SemigroupK {
     public typealias F = EitherPartial<C>
     
-    public func combineK<A>(_ x: HK<HK<EitherF, C>, A>, _ y: HK<HK<EitherF, C>, A>) -> HK<HK<EitherF, C>, A> {
-        return Either.ev(x).combineK(Either.ev(y))
+    public func combineK<A>(_ x: EitherOf<C, A>, _ y: EitherOf<C, A>) -> EitherOf<C, A> {
+        return Either.fix(x).combineK(Either.fix(y))
     }
 }
 
 public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = HK2<EitherF, L, R>
+    public typealias A = EitherOf<L, R>
     private let eql : EqL
     private let eqr : EqR
     
@@ -241,8 +242,8 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
         self.eqr = eqr
     }
     
-    public func eqv(_ a: HK2<EitherF, L, R>, _ b: HK2<EitherF, L, R>) -> Bool {
-        return Either.ev(a).fold({ aLeft  in Either.ev(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
-                                 { aRight in Either.ev(b).fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
+    public func eqv(_ a: EitherOf<L, R>, _ b: EitherOf<L, R>) -> Bool {
+        return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
+                                 { aRight in Either.fix(b).fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }
 }
