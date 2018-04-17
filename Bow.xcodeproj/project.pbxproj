@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111082CC2085D9DD00C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
+		111082CD2085DBF700C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
+		111082CE2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
+		111082CF2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -496,6 +500,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -923,6 +928,7 @@
 				OBJ_82 /* Reducible.swift */,
 				OBJ_83 /* Semigroup.swift */,
 				OBJ_84 /* SemigroupK.swift */,
+				111082CB2085D9DD00C8563C /* Show.swift */,
 				OBJ_85 /* Traverse.swift */,
 				OBJ_86 /* TraverseFilter.swift */,
 			);
@@ -1338,6 +1344,7 @@
 				D6D624E92068178800739E2D /* Try.swift in Sources */,
 				D6D624EA2068178800739E2D /* Tuple.swift in Sources */,
 				D6D624EB2068178800739E2D /* Validated.swift in Sources */,
+				111082CD2085DBF700C8563C /* Show.swift in Sources */,
 				D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */,
 				D6D624ED2068178800739E2D /* IO.swift in Sources */,
 				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
@@ -1467,6 +1474,7 @@
 				D6D6257A206841B300739E2D /* Try.swift in Sources */,
 				D6D6257B206841B300739E2D /* Tuple.swift in Sources */,
 				D6D6257C206841B300739E2D /* Validated.swift in Sources */,
+				111082CE2085DBF800C8563C /* Show.swift in Sources */,
 				D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */,
 				D6D6257E206841B300739E2D /* IO.swift in Sources */,
 				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
@@ -1544,6 +1552,7 @@
 				D6DBDEB020684C38004F979F /* Try.swift in Sources */,
 				D6DBDEB120684C38004F979F /* Tuple.swift in Sources */,
 				D6DBDEB220684C38004F979F /* Validated.swift in Sources */,
+				111082CF2085DBF800C8563C /* Show.swift in Sources */,
 				D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */,
 				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
 				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
@@ -1673,6 +1682,7 @@
 				OBJ_403 /* Try.swift in Sources */,
 				OBJ_404 /* Tuple.swift in Sources */,
 				OBJ_405 /* Validated.swift in Sources */,
+				111082CC2085D9DD00C8563C /* Show.swift in Sources */,
 				OBJ_406 /* AsyncContext.swift in Sources */,
 				OBJ_407 /* IO.swift in Sources */,
 				OBJ_408 /* Cofree.swift in Sources */,
