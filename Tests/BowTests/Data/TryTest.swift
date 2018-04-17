@@ -41,4 +41,8 @@ class TryTest: XCTestCase {
     func testMonadErrorLaws() {
         MonadErrorLaws<ForTry, CategoryError>.check(monadError: Try<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Try.show(), generator: { a in (a % 2 == 0) ? Try.success(a) : Try.failure(TryError.illegalState) })
+    }
 }
