@@ -33,4 +33,8 @@ class ValidatedTest: XCTestCase {
     func testSemigroupKLaws() {
         SemigroupKLaws<ValidatedPartial<Int>>.check(semigroupK: Validated<Int, Int>.semigroupK(Int.sumMonoid), generator: self.generator, eq: self.eq)
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Validated.show(), generator: { a in (a % 2 == 0) ? Validated.valid(a) : Validated.invalid(a) })
+    }
 }

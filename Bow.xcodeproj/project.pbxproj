@@ -986,15 +986,15 @@
 		OBJ_88 /* BowTests */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_89 /* Arrow */,
 				OBJ_94 /* BooleanFunctionsTest.swift */,
 				OBJ_95 /* CurryTest.swift */,
+				OBJ_117 /* PartialApplicationTest.swift */,
+				OBJ_118 /* PredefTest.swift */,
+				OBJ_89 /* Arrow */,
 				OBJ_96 /* Data */,
 				OBJ_109 /* Effects */,
 				OBJ_112 /* Free */,
 				OBJ_114 /* Instances */,
-				OBJ_117 /* PartialApplicationTest.swift */,
-				OBJ_118 /* PredefTest.swift */,
 				OBJ_119 /* Transformers */,
 				OBJ_124 /* Typeclasses */,
 			);
