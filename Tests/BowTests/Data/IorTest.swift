@@ -32,4 +32,14 @@ class IorTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<IorPartial<Int>>.check(monad: Ior<Int, Int>.monad(Int.sumMonoid), eq: self.eq)
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Ior.show(), generator: { (a : Int) -> Ior<Int, Int> in
+            switch a % 3 {
+            case 0 : return Ior.left(a)
+            case 1: return Ior.right(a)
+            default: return Ior.both(a, a)
+            }
+        })
+    }
 }
