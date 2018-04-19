@@ -1,10 +1,3 @@
-//
-//  Show.swift
-//  Bow
-//
-//  Created by Tomás Ruiz López on 17/4/18.
-//
-
 import Foundation
 
 public protocol Show : Typeclass {

@@ -1,11 +1,3 @@
-//
-//  Tuple.swift
-//  Bow
-//
-//  Created by Tomás Ruiz López on 21/11/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 
 public class Tuple<A, B> {

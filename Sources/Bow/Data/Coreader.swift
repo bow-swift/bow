@@ -1,11 +1,3 @@
-//
-//  Coreader.swift
-//  Bow
-//
-//  Created by Tomás Ruiz López on 5/10/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 
 public class Coreader<A, B> : CoreaderT<ForId, A, B> {

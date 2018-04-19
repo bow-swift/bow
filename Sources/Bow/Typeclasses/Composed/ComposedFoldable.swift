@@ -1,11 +1,3 @@
-//
-//  ComposedFoldable.swift
-//  Bow
-//
-//  Created by Tomás Ruiz López on 15/11/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 
 public protocol ComposedFoldable : Foldable where F == Nested<G, H>, FoldG : Foldable, FoldG.F == G, FoldH : Foldable, FoldH.F == H {
