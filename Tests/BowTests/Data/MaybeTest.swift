@@ -78,4 +78,8 @@ class MaybeTest: XCTestCase {
     func testMonadFilterLaws() {
         MonadFilterLaws<ForMaybe>.check(monadFilter: Maybe<Int>.monadFilter(), generator: self.generator, eq: self.eq)
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Maybe.show(), generator: { a in (a % 2 == 0) ? Maybe.some(a) : Maybe.none() })
+    }
 }

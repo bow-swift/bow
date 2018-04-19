@@ -37,4 +37,8 @@ class IdTest: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<ForId>.check(comonad: Id<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
+    
+    func testShowLaws() {
+        ShowLaws.check(show: Id.show(), generator: { a in Id.pure(a) })
+    }
 }
