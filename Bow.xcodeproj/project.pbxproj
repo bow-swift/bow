@@ -12,6 +12,8 @@
 		111082CE2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082CF2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
+		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
+		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -1307,6 +1309,7 @@
 				D6D624662068141800739E2D /* FunctorLaws.swift in Sources */,
 				D6D624672068141800739E2D /* MonadErrorLaws.swift in Sources */,
 				D6D624682068141800739E2D /* MonadFilterLaws.swift in Sources */,
+				11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */,
 				D6D624692068141800739E2D /* MonadLaws.swift in Sources */,
 				D6D6246A2068141800739E2D /* MonadStateLaws.swift in Sources */,
 				D6D6246B2068141800739E2D /* MonadWriterLaws.swift in Sources */,
@@ -1437,6 +1440,7 @@
 				D6D62545206817A700739E2D /* FunctorLaws.swift in Sources */,
 				D6D62546206817A700739E2D /* MonadErrorLaws.swift in Sources */,
 				D6D62547206817A700739E2D /* MonadFilterLaws.swift in Sources */,
+				11AA44102088D4090091B474 /* ShowLaws.swift in Sources */,
 				D6D62548206817A700739E2D /* MonadLaws.swift in Sources */,
 				D6D62549206817A700739E2D /* MonadStateLaws.swift in Sources */,
 				D6D6254A206817A700739E2D /* MonadWriterLaws.swift in Sources */,

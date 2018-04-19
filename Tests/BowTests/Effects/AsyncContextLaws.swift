@@ -1,11 +1,3 @@
-//
-//  AsyncContextLaws.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 8/12/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 import SwiftCheck
 @testable import Bow

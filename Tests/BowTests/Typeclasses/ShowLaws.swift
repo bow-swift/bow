@@ -1,10 +1,3 @@
-//
-//  ShowLaws.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 17/4/18.
-//
-
 import XCTest
 import SwiftCheck
 @testable import Bow
