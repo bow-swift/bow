@@ -1,11 +1,3 @@
-//
-//  KleisliOperatorTest.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 27/11/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import XCTest
 import Nimble
 @testable import Bow

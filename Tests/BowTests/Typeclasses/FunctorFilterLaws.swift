@@ -1,11 +1,3 @@
-//
-//  FunctorFilterLaws.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 24/11/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 import SwiftCheck
 @testable import Bow

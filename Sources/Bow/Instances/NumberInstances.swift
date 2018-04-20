@@ -1,11 +1,3 @@
-//
-//  NumberInstances.swift
-//  Bow
-//
-//  Created by Tomás Ruiz López on 14/11/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import Foundation
 
 // Int

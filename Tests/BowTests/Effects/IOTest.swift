@@ -1,11 +1,3 @@
-//
-//  IOTest.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 1/12/17.
-//  Copyright © 2017 Tomás Ruiz López. All rights reserved.
-//
-
 import XCTest
 import SwiftCheck
 @testable import Bow
