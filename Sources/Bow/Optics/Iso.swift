@@ -107,6 +107,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return Getter(get : self.get)
     }
     
+    public func asLens() -> PLens<S, T, A, B> {
+        return PLens(get: self.get, set: { _, b in self.set(b) })
+    }
+    
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
