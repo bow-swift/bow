@@ -20,6 +20,18 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PPrism<S, T, A, B>, rhs : PLens<A, B, C, D>) -> POptional<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PPrism<S, T, A, B>, rhs : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PPrism<S, T, A, B>, rhs : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(getOrModify : @escaping (S) -> Either<T, A>, reverseGet : @escaping (B) -> T) {
         self.getOrModifyFunc = getOrModify
         self.reverseGetFunc = reverseGet
@@ -142,6 +154,18 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PPrism<S, T, C, D> {
         return self.compose(other.asPrism())
+    }
+    
+    public func compose<C, D>(_ other : PLens<A, B, C, D>) -> POptional<S, T, C, D> {
+        return self.asOptional().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return self.asOptional().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return self.asSetter().compose(other)
     }
     
     public func asOptional() -> POptional<S, T, A, B> {
