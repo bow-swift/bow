@@ -28,6 +28,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : POptional<S, T, A, B>, rhs : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(set : @escaping (S, B) -> T, getOrModify : @escaping (S) -> Either<T, A>) {
         self.setFunc = set
         self.getOrModifyFunc = getOrModify
@@ -131,6 +135,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> POptional<S, T, C, D> {
         return self.compose(other.asOptional())
+    }
+    
+    public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return self.asSetter().compose(other)
     }
     
     public func asSetter() -> PSetter<S, T, A, B> {
