@@ -750,13 +750,13 @@
 		11AC527120974B29008EC1E4 /* Optics */ = {
 			isa = PBXGroup;
 			children = (
+				11E531BF209B1C3F00A78E8D /* Fold.swift */,
 				11AC527220974D58008EC1E4 /* Getter.swift */,
 				11AC527420975422008EC1E4 /* Iso.swift */,
 				11AC527620975EE5008EC1E4 /* Lens.swift */,
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
-				11E531BF209B1C3F00A78E8D /* Fold.swift */,
 			);
 			path = Optics;
 			sourceTree = "<group>";
