@@ -11,6 +11,14 @@ public class Getter<S, A> : GetterOf<S, A> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : Getter<S, A>, rhs : Lens<A, C>) -> Getter<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C>(lhs : Getter<S, A>, rhs : Iso<A, C>) -> Getter<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func codiagonal() -> Getter<Either<S, S>, S> {
         return Getter<Either<S, S>, S>(get: { either in
             either.fold(id, id)
@@ -60,6 +68,14 @@ public class Getter<S, A> : GetterOf<S, A> {
     }
     
     public func compose<C>(_ other : Getter<A, C>) -> Getter<S, C> {
+        return Getter<S, C>(get: other.get <<< self.get)
+    }
+    
+    public func compose<C>(_ other : Lens<A, C>) -> Getter<S, C> {
+        return Getter<S, C>(get: other.get <<< self.get)
+    }
+    
+    public func compose<C>(_ other : Iso<A, C>) -> Getter<S, C> {
         return Getter<S, C>(get: other.get <<< self.get)
     }
     
