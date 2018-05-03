@@ -168,20 +168,8 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public extension Iso {
+    public static func identity() -> Iso<S, S> {
+        return Iso<S, S>(get: id, reverseGet: id)
+    }
+}
