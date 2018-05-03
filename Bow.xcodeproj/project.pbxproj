@@ -51,6 +51,13 @@
 		11E531CD209B319F00A78E8D /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
 		11E531CE209B31A000A78E8D /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
 		11E531D4209B4CB700A78E8D /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
+		11E531D7209B4EF400A78E8D /* At.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D6209B4EF400A78E8D /* At.swift */; };
+		11E531D8209B4FCD00A78E8D /* At.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D6209B4EF400A78E8D /* At.swift */; };
+		11E531D9209B4FCD00A78E8D /* At.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D6209B4EF400A78E8D /* At.swift */; };
+		11E531DA209B4FCE00A78E8D /* At.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D6209B4EF400A78E8D /* At.swift */; };
+		11E531DB209B4FD200A78E8D /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
+		11E531DC209B4FD300A78E8D /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
+		11E531DD209B4FD400A78E8D /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -553,6 +560,7 @@
 		11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
 		11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeInstances.swift; sourceTree = "<group>"; };
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
+		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -752,6 +760,7 @@
 		11AC527120974B29008EC1E4 /* Optics */ = {
 			isa = PBXGroup;
 			children = (
+				11E531D3209B4CB700A78E8D /* BoundSetter.swift */,
 				11E531BF209B1C3F00A78E8D /* Fold.swift */,
 				11AC527220974D58008EC1E4 /* Getter.swift */,
 				11AC527420975422008EC1E4 /* Iso.swift */,
@@ -759,9 +768,17 @@
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
-				11E531D3209B4CB700A78E8D /* BoundSetter.swift */,
+				11E531D5209B4ECC00A78E8D /* Typeclasses */,
 			);
 			path = Optics;
+			sourceTree = "<group>";
+		};
+		11E531D5209B4ECC00A78E8D /* Typeclasses */ = {
+			isa = PBXGroup;
+			children = (
+				11E531D6209B4EF400A78E8D /* At.swift */,
+			);
+			path = Typeclasses;
 			sourceTree = "<group>";
 		};
 		D68A51F9206811C6008DA945 /* Build */ = {
@@ -1401,6 +1418,7 @@
 				D6D624D82068178800739E2D /* KleisliOperator.swift in Sources */,
 				D6D624D92068178800739E2D /* BooleanFunctions.swift in Sources */,
 				D6D624DA2068178800739E2D /* Curry.swift in Sources */,
+				11E531D8209B4FCD00A78E8D /* At.swift in Sources */,
 				D6D624DB2068178800739E2D /* Const.swift in Sources */,
 				D6D624DC2068178800739E2D /* Coproduct.swift in Sources */,
 				11AC52782097697C008EC1E4 /* Getter.swift in Sources */,
@@ -1431,6 +1449,7 @@
 				D6D624F22068178800739E2D /* HigherKinds.swift in Sources */,
 				D6D624F32068178800739E2D /* NumberInstances.swift in Sources */,
 				D6D624F42068178800739E2D /* StringInstances.swift in Sources */,
+				11E531DB209B4FD200A78E8D /* BoundSetter.swift in Sources */,
 				D6D624F52068178800739E2D /* PartialApplication.swift in Sources */,
 				11AC52792097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B2209AF13600A78E8D /* Prism.swift in Sources */,
@@ -1541,6 +1560,7 @@
 				D6D62569206841B300739E2D /* KleisliOperator.swift in Sources */,
 				D6D6256A206841B300739E2D /* BooleanFunctions.swift in Sources */,
 				D6D6256B206841B300739E2D /* Curry.swift in Sources */,
+				11E531D9209B4FCD00A78E8D /* At.swift in Sources */,
 				D6D6256C206841B300739E2D /* Const.swift in Sources */,
 				D6D6256D206841B300739E2D /* Coproduct.swift in Sources */,
 				11AC527B2097697C008EC1E4 /* Getter.swift in Sources */,
@@ -1571,6 +1591,7 @@
 				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
 				D6D62584206841B300739E2D /* NumberInstances.swift in Sources */,
 				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
+				11E531DC209B4FD300A78E8D /* BoundSetter.swift in Sources */,
 				D6D62586206841B300739E2D /* PartialApplication.swift in Sources */,
 				11AC527C2097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B3209AF13600A78E8D /* Prism.swift in Sources */,
@@ -1627,6 +1648,7 @@
 				D6DBDE9F20684C38004F979F /* KleisliOperator.swift in Sources */,
 				D6DBDEA020684C38004F979F /* BooleanFunctions.swift in Sources */,
 				D6DBDEA120684C38004F979F /* Curry.swift in Sources */,
+				11E531DA209B4FCE00A78E8D /* At.swift in Sources */,
 				D6DBDEA220684C38004F979F /* Const.swift in Sources */,
 				D6DBDEA320684C38004F979F /* Coproduct.swift in Sources */,
 				11AC527E2097697D008EC1E4 /* Getter.swift in Sources */,
@@ -1657,6 +1679,7 @@
 				D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */,
 				D6DBDEBA20684C38004F979F /* NumberInstances.swift in Sources */,
 				D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */,
+				11E531DD209B4FD400A78E8D /* BoundSetter.swift in Sources */,
 				D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */,
 				11AC527F2097697D008EC1E4 /* Iso.swift in Sources */,
 				11E531B4209AF13700A78E8D /* Prism.swift in Sources */,
@@ -1761,6 +1784,7 @@
 			files = (
 				OBJ_381 /* Cokleisli.swift in Sources */,
 				OBJ_382 /* Function0.swift in Sources */,
+				11E531D7209B4EF400A78E8D /* At.swift in Sources */,
 				OBJ_383 /* Function1.swift in Sources */,
 				OBJ_384 /* FunctionK.swift in Sources */,
 				OBJ_385 /* Kleisli.swift in Sources */,
