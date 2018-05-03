@@ -50,6 +50,7 @@
 		11E531CC209B319E00A78E8D /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
 		11E531CD209B319F00A78E8D /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
 		11E531CE209B31A000A78E8D /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
+		11E531D4209B4CB700A78E8D /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -551,6 +552,7 @@
 		11E531C4209B29EF00A78E8D /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
 		11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
 		11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeInstances.swift; sourceTree = "<group>"; };
+		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -757,6 +759,7 @@
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
+				11E531D3209B4CB700A78E8D /* BoundSetter.swift */,
 			);
 			path = Optics;
 			sourceTree = "<group>";
@@ -1795,6 +1798,7 @@
 				OBJ_412 /* HigherKinds.swift in Sources */,
 				OBJ_413 /* NumberInstances.swift in Sources */,
 				OBJ_414 /* StringInstances.swift in Sources */,
+				11E531D4209B4CB700A78E8D /* BoundSetter.swift in Sources */,
 				OBJ_415 /* PartialApplication.swift in Sources */,
 				11AC527520975422008EC1E4 /* Iso.swift in Sources */,
 				11E531B1209AE89A00A78E8D /* Prism.swift in Sources */,
