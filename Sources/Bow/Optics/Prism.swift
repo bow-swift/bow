@@ -143,4 +143,8 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PPrism<S, T, C, D> {
         return self.compose(other.asPrism())
     }
+    
+    public func asOptional() -> POptional<S, T, A, B> {
+        return POptional(set: self.set, getOrModify: self.getOrModify)
+    }
 }

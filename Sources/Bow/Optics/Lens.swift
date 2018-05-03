@@ -87,6 +87,12 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return Getter(get: self.get)
     }
     
+    public func asOptional() -> POptional<S, T, A, B> {
+        return POptional(
+            set: self.set,
+            getOrModify: self.get >>> Either.right)
+    }
+    
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
         return set(s, f(get(s)))
     }

@@ -115,6 +115,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return PPrism(getOrModify: { s in Either.right(self.get(s)) }, reverseGet: self.reverseGet)
     }
     
+    public func asOptional() -> POptional<S, T, A, B> {
+        return POptional(set: { _, b in self.set(b) }, getOrModify: self.get >>> Either.right)
+    }
+    
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
