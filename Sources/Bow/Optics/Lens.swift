@@ -24,6 +24,18 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PLens<S, T, A, B>, rhs : PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PLens<S, T, A, B>, rhs : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PLens<S, T, A, B>, rhs : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(get : @escaping (S) -> A, set : @escaping (S, B) -> T) {
         self.getFunc = get
         self.setFunc = set
@@ -81,6 +93,18 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func compose<C>(_ other : Getter<A, C>) -> Getter<S, C> {
         return self.asGetter().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
+        return self.asOptional().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return self.asOptional().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return self.asSetter().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
