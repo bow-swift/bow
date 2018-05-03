@@ -19,6 +19,10 @@ public class Getter<S, A> : GetterOf<S, A> {
         return lhs.compose(rhs)
     }
     
+    public static func identity() -> Getter<S, S> {
+        return Iso<S, S>.identity().asGetter()
+    }
+    
     public static func codiagonal() -> Getter<Either<S, S>, S> {
         return Getter<Either<S, S>, S>(get: { either in
             either.fold(id, id)

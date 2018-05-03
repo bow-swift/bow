@@ -32,6 +32,15 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func identity() -> Prism<S, S> {
+        return Iso<S, S>.identity().asPrism()
+    }
+    
+    public static func only<EqA>(_ a : A, _ eq : EqA) -> Prism<A, Unit> where EqA : Eq, EqA.A == A {
+        return Prism<A, Unit>(getOrModify: { x in eq.eqv(a, x) ? Either.left(a) : Either.right(unit)},
+                              reverseGet: { _ in a })
+    }
+    
     public init(getOrModify : @escaping (S) -> Either<T, A>, reverseGet : @escaping (B) -> T) {
         self.getOrModifyFunc = getOrModify
         self.reverseGetFunc = reverseGet

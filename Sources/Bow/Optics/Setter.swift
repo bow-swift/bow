@@ -31,6 +31,10 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func identity() -> Setter<S, S> {
+        return Iso<S, S>.identity().asSetter()
+    }
+    
     public static func codiagonal() -> Setter<Either<S, S>, S> {
         return Setter<Either<S, S>, S>(modify: { f in { ss in ss.bimap(f, f) } })
     }

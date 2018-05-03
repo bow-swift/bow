@@ -32,6 +32,16 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func identity() -> Optional<S, S> {
+        return Iso<S, S>.identity().asOptional()
+    }
+    
+    public static func codiagonal() -> Optional<Either<S, S>, S> {
+        return Optional<Either<S, S>, S>(
+            set: { ess, s in ess.bimap(constF(s), constF(s)) },
+            getOrModify: { ess in ess.fold(Either.right, Either.right) })
+    }
+    
     public init(set : @escaping (S, B) -> T, getOrModify : @escaping (S) -> Either<T, A>) {
         self.setFunc = set
         self.getOrModifyFunc = getOrModify
