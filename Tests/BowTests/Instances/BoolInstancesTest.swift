@@ -31,4 +31,8 @@ class BoolInstancesTest: XCTestCase {
         }
     }
     
+    func testEqLaws() {
+        EqLaws.check(eq: Bool.eq, generator: id)
+    }
+    
 }
