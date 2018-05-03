@@ -132,4 +132,8 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> POptional<S, T, C, D> {
         return self.compose(other.asOptional())
     }
+    
+    public func asSetter() -> PSetter<S, T, A, B> {
+        return PSetter(modify: { f in { s in self.modify(s, f) } })
+    }
 }

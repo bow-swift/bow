@@ -147,4 +147,8 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     public func asOptional() -> POptional<S, T, A, B> {
         return POptional(set: self.set, getOrModify: self.getOrModify)
     }
+    
+    public func asSetter() -> PSetter<S, T, A, B> {
+        return PSetter(modify: { f in {s in self.modify(s, f) } })
+    }
 }

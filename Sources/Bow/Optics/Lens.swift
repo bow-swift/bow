@@ -93,6 +93,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
             getOrModify: self.get >>> Either.right)
     }
     
+    public func asSetter() -> PSetter<S, T, A, B> {
+        return PSetter(modify: { f in { s in self.modify(s, f) } })
+    }
+    
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
         return set(s, f(get(s)))
     }

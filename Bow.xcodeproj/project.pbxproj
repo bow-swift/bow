@@ -34,6 +34,10 @@
 		11E531B7209AFAF500A78E8D /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B5209AF80100A78E8D /* Optional.swift */; };
 		11E531B8209AFAF600A78E8D /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B5209AF80100A78E8D /* Optional.swift */; };
 		11E531B9209AFAF700A78E8D /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B5209AF80100A78E8D /* Optional.swift */; };
+		11E531BB209B0BE300A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
+		11E531BC209B148E00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
+		11E531BD209B148E00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
+		11E531BE209B148F00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -530,6 +534,7 @@
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
 		11E531B0209AE89A00A78E8D /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
 		11E531B5209AF80100A78E8D /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		11E531BA209B0BE300A78E8D /* Setter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -734,6 +739,7 @@
 				11AC527620975EE5008EC1E4 /* Lens.swift */,
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
+				11E531BA209B0BE300A78E8D /* Setter.swift */,
 			);
 			path = Optics;
 			sourceTree = "<group>";
@@ -1427,6 +1433,7 @@
 				D6D6250A2068178800739E2D /* MonadCombine.swift in Sources */,
 				D6D6250B2068178800739E2D /* MonadError.swift in Sources */,
 				D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */,
+				11E531BC209B148E00A78E8D /* Setter.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
@@ -1563,6 +1570,7 @@
 				D6D6259B206841B300739E2D /* MonadCombine.swift in Sources */,
 				D6D6259C206841B300739E2D /* MonadError.swift in Sources */,
 				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
+				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
 				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
 				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
@@ -1646,6 +1654,7 @@
 				D6DBDED120684C38004F979F /* MonadCombine.swift in Sources */,
 				D6DBDED220684C38004F979F /* MonadError.swift in Sources */,
 				D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */,
+				11E531BE209B148F00A78E8D /* Setter.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
@@ -1782,6 +1791,7 @@
 				OBJ_436 /* MonadCombine.swift in Sources */,
 				OBJ_437 /* MonadError.swift in Sources */,
 				OBJ_438 /* MonadFilter.swift in Sources */,
+				11E531BB209B0BE300A78E8D /* Setter.swift in Sources */,
 				OBJ_439 /* MonadReader.swift in Sources */,
 				OBJ_440 /* MonadState.swift in Sources */,
 				OBJ_441 /* MonadWriter.swift in Sources */,
