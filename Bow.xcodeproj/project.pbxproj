@@ -38,6 +38,14 @@
 		11E531BC209B148E00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
 		11E531BD209B148E00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
 		11E531BE209B148F00A78E8D /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
+		11E531C0209B1C3F00A78E8D /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BF209B1C3F00A78E8D /* Fold.swift */; };
+		11E531C1209B1CE700A78E8D /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BF209B1C3F00A78E8D /* Fold.swift */; };
+		11E531C2209B1CE800A78E8D /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BF209B1C3F00A78E8D /* Fold.swift */; };
+		11E531C3209B1CE900A78E8D /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BF209B1C3F00A78E8D /* Fold.swift */; };
+		11E531C5209B29EF00A78E8D /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
+		11E531C7209B2B3400A78E8D /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */; };
+		11E531C8209B2B5700A78E8D /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */; };
+		11E531C9209B2B5700A78E8D /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -535,6 +543,9 @@
 		11E531B0209AE89A00A78E8D /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
 		11E531B5209AF80100A78E8D /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		11E531BA209B0BE300A78E8D /* Setter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
+		11E531BF209B1C3F00A78E8D /* Fold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fold.swift; sourceTree = "<group>"; };
+		11E531C4209B29EF00A78E8D /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
+		11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -740,6 +751,7 @@
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
+				11E531BF209B1C3F00A78E8D /* Fold.swift */,
 			);
 			path = Optics;
 			sourceTree = "<group>";
@@ -818,6 +830,7 @@
 			children = (
 				OBJ_115 /* NumberInstancesTest.swift */,
 				OBJ_116 /* StringInstancesTest.swift */,
+				11E531C6209B2B3400A78E8D /* BoolInstancesTest.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -920,6 +933,7 @@
 			children = (
 				OBJ_46 /* NumberInstances.swift */,
 				OBJ_47 /* StringInstances.swift */,
+				11E531C4209B29EF00A78E8D /* BoolInstances.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -1351,6 +1365,7 @@
 				D6D624642068141800739E2D /* EqLaws.swift in Sources */,
 				D6D624652068141800739E2D /* FunctorFilterLaws.swift in Sources */,
 				D6D624662068141800739E2D /* FunctorLaws.swift in Sources */,
+				11E531C8209B2B5700A78E8D /* BoolInstancesTest.swift in Sources */,
 				D6D624672068141800739E2D /* MonadErrorLaws.swift in Sources */,
 				D6D624682068141800739E2D /* MonadFilterLaws.swift in Sources */,
 				11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */,
@@ -1401,6 +1416,7 @@
 				D6D624ED2068178800739E2D /* IO.swift in Sources */,
 				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
 				D6D624EF2068178800739E2D /* Coyoneda.swift in Sources */,
+				11E531C1209B1CE700A78E8D /* Fold.swift in Sources */,
 				D6D624F02068178800739E2D /* Free.swift in Sources */,
 				D6D624F12068178800739E2D /* Yoneda.swift in Sources */,
 				D6D624F22068178800739E2D /* HigherKinds.swift in Sources */,
@@ -1488,6 +1504,7 @@
 				D6D62543206817A700739E2D /* EqLaws.swift in Sources */,
 				D6D62544206817A700739E2D /* FunctorFilterLaws.swift in Sources */,
 				D6D62545206817A700739E2D /* FunctorLaws.swift in Sources */,
+				11E531C9209B2B5700A78E8D /* BoolInstancesTest.swift in Sources */,
 				D6D62546206817A700739E2D /* MonadErrorLaws.swift in Sources */,
 				D6D62547206817A700739E2D /* MonadFilterLaws.swift in Sources */,
 				11AA44102088D4090091B474 /* ShowLaws.swift in Sources */,
@@ -1538,6 +1555,7 @@
 				D6D6257E206841B300739E2D /* IO.swift in Sources */,
 				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
 				D6D62580206841B300739E2D /* Coyoneda.swift in Sources */,
+				11E531C2209B1CE800A78E8D /* Fold.swift in Sources */,
 				D6D62581206841B300739E2D /* Free.swift in Sources */,
 				D6D62582206841B300739E2D /* Yoneda.swift in Sources */,
 				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
@@ -1622,6 +1640,7 @@
 				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
 				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
 				D6DBDEB620684C38004F979F /* Coyoneda.swift in Sources */,
+				11E531C3209B1CE900A78E8D /* Fold.swift in Sources */,
 				D6DBDEB720684C38004F979F /* Free.swift in Sources */,
 				D6DBDEB820684C38004F979F /* Yoneda.swift in Sources */,
 				D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */,
@@ -1709,6 +1728,7 @@
 				OBJ_278 /* EqLaws.swift in Sources */,
 				OBJ_279 /* FunctorFilterLaws.swift in Sources */,
 				OBJ_280 /* FunctorLaws.swift in Sources */,
+				11E531C7209B2B3400A78E8D /* BoolInstancesTest.swift in Sources */,
 				OBJ_281 /* MonadErrorLaws.swift in Sources */,
 				OBJ_282 /* MonadFilterLaws.swift in Sources */,
 				111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */,
@@ -1759,6 +1779,7 @@
 				OBJ_407 /* IO.swift in Sources */,
 				OBJ_408 /* Cofree.swift in Sources */,
 				OBJ_409 /* Coyoneda.swift in Sources */,
+				11E531C0209B1C3F00A78E8D /* Fold.swift in Sources */,
 				OBJ_410 /* Free.swift in Sources */,
 				OBJ_411 /* Yoneda.swift in Sources */,
 				OBJ_412 /* HigherKinds.swift in Sources */,
@@ -1780,6 +1801,7 @@
 				OBJ_426 /* Bimonad.swift in Sources */,
 				OBJ_427 /* Comonad.swift in Sources */,
 				OBJ_428 /* Composed.swift in Sources */,
+				11E531C5209B29EF00A78E8D /* BoolInstances.swift in Sources */,
 				OBJ_429 /* ComposedFoldable.swift in Sources */,
 				OBJ_430 /* Eq.swift in Sources */,
 				11E531B6209AF80100A78E8D /* Optional.swift in Sources */,
