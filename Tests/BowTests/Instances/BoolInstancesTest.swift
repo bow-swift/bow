@@ -1,10 +1,3 @@
-//
-//  BoolInstancesTest.swift
-//  BowTests
-//
-//  Created by Tomás Ruiz López on 3/5/18.
-//
-
 import XCTest
 import SwiftCheck
 @testable import Bow
