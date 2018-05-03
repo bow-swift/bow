@@ -21,6 +21,22 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : PLens<A, B, C, D>) -> PLens<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : PPrism<A, B, C, D>) -> PPrism<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(get : @escaping (S) -> A, reverseGet : @escaping (B) -> T) {
         self.getFunc = get
         self.reverseGetFunc = reverseGet
@@ -101,6 +117,22 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
     
     public func compose<C>(_ other : Getter<A, C>) -> Getter<S, C> {
         return self.asGetter().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PLens<A, B, C, D>) -> PLens<S, T, C, D> {
+        return self.asLens().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> PPrism<S, T, C, D> {
+        return self.asPrism().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+        return self.asOptional().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return self.asSetter().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
