@@ -24,3 +24,4 @@ class TokenEq : Eq {
 
 let tokenIso = Iso(get: { (token : Token) in token.value }, reverseGet: Token.init )
 let tokenLens = Lens(get: { (token : Token) in token.value }, set: { (_ : Token, newValue : String) in Token(value: newValue) })
+let tokenSetter = Setter(modify: { s in { token in Token(value: s(token.value)) } })
