@@ -65,6 +65,9 @@
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
+		11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
+		11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
+		11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -570,6 +573,7 @@
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -795,6 +799,7 @@
 			isa = PBXGroup;
 			children = (
 				11FE0065209C50A700183AF6 /* IsoLaws.swift */,
+				11FE0069209C5E3A00183AF6 /* LensLaws.swift */,
 			);
 			name = Optics;
 			path = "New Group";
@@ -1394,6 +1399,7 @@
 				D6D624522068141800739E2D /* NonEmptyListTest.swift in Sources */,
 				D6D624532068141800739E2D /* TryTest.swift in Sources */,
 				D6D624542068141800739E2D /* TupleTest.swift in Sources */,
+				11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D624552068141800739E2D /* ValidatedTest.swift in Sources */,
 				D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */,
 				D6D624572068141800739E2D /* IOTest.swift in Sources */,
@@ -1538,6 +1544,7 @@
 				D6D62531206817A700739E2D /* NonEmptyListTest.swift in Sources */,
 				D6D62532206817A700739E2D /* TryTest.swift in Sources */,
 				D6D62533206817A700739E2D /* TupleTest.swift in Sources */,
+				11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */,
 				D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */,
 				D6D62536206817A700739E2D /* IOTest.swift in Sources */,
@@ -1771,6 +1778,7 @@
 				OBJ_260 /* NonEmptyListTest.swift in Sources */,
 				OBJ_261 /* TryTest.swift in Sources */,
 				OBJ_262 /* TupleTest.swift in Sources */,
+				11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				OBJ_263 /* ValidatedTest.swift in Sources */,
 				OBJ_264 /* AsyncContextLaws.swift in Sources */,
 				OBJ_265 /* IOTest.swift in Sources */,
