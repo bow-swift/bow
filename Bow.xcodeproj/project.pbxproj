@@ -83,6 +83,9 @@
 		11FE0081209C945900183AF6 /* IsoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0080209C945900183AF6 /* IsoTest.swift */; };
 		11FE0082209C945900183AF6 /* IsoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0080209C945900183AF6 /* IsoTest.swift */; };
 		11FE0083209C945900183AF6 /* IsoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0080209C945900183AF6 /* IsoTest.swift */; };
+		11FE0085209C976F00183AF6 /* LensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0084209C976F00183AF6 /* LensTest.swift */; };
+		11FE0086209C976F00183AF6 /* LensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0084209C976F00183AF6 /* LensTest.swift */; };
+		11FE0087209C976F00183AF6 /* LensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0084209C976F00183AF6 /* LensTest.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -594,6 +597,7 @@
 		11FE0075209C813C00183AF6 /* OptionalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionalLaws.swift; path = Tests/BowTests/Optics/Laws/OptionalLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE007C209C8F9400183AF6 /* TestDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDomain.swift; sourceTree = "<group>"; };
 		11FE0080209C945900183AF6 /* IsoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoTest.swift; sourceTree = "<group>"; };
+		11FE0084209C976F00183AF6 /* LensTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensTest.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -819,6 +823,7 @@
 			isa = PBXGroup;
 			children = (
 				11FE0080209C945900183AF6 /* IsoTest.swift */,
+				11FE0084209C976F00183AF6 /* LensTest.swift */,
 				11FE007C209C8F9400183AF6 /* TestDomain.swift */,
 				11FE007B209C8E6900183AF6 /* Laws */,
 			);
@@ -1447,6 +1452,7 @@
 				D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */,
 				D6D6245F2068141800739E2D /* StateTTest.swift in Sources */,
 				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
+				11FE0086209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */,
 				D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */,
 				D6D624632068141800739E2D /* ComonadLaws.swift in Sources */,
@@ -1597,6 +1603,7 @@
 				D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */,
 				D6D6253E206817A700739E2D /* StateTTest.swift in Sources */,
 				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
+				11FE0087209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */,
 				D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */,
 				D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */,
@@ -1836,6 +1843,7 @@
 				OBJ_272 /* MaybeTTest.swift in Sources */,
 				OBJ_273 /* StateTTest.swift in Sources */,
 				OBJ_274 /* WriterTTest.swift in Sources */,
+				11FE0085209C976F00183AF6 /* LensTest.swift in Sources */,
 				OBJ_275 /* ApplicativeErrorLaws.swift in Sources */,
 				OBJ_276 /* ApplicativeLaws.swift in Sources */,
 				OBJ_277 /* ComonadLaws.swift in Sources */,
