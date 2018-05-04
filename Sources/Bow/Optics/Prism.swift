@@ -51,7 +51,7 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
     
     public func reverseGet(_ b : B) -> T {
-        return reverseGet(b)
+        return reverseGetFunc(b)
     }
     
     public func modifyF<Appl, F>(_ applicative : Appl, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
