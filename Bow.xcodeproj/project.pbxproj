@@ -581,11 +581,11 @@
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
-		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
-		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/LensLaws.swift; sourceTree = SOURCE_ROOT; };
-		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
-		11FE0071209C6DEC00183AF6 /* PrismLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrismLaws.swift; path = Tests/BowTests/Optics/PrismLaws.swift; sourceTree = SOURCE_ROOT; };
-		11FE0075209C813C00183AF6 /* OptionalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionalLaws.swift; path = Tests/BowTests/Optics/OptionalLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE0071209C6DEC00183AF6 /* PrismLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrismLaws.swift; path = Tests/BowTests/Optics/Laws/PrismLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE0075209C813C00183AF6 /* OptionalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OptionalLaws.swift; path = Tests/BowTests/Optics/Laws/OptionalLaws.swift; sourceTree = SOURCE_ROOT; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -807,7 +807,15 @@
 			path = Typeclasses;
 			sourceTree = "<group>";
 		};
-		11FE0064209C507D00183AF6 /* Optics */ = {
+		11FE007A209C8E5A00183AF6 /* Optics */ = {
+			isa = PBXGroup;
+			children = (
+				11FE007B209C8E6900183AF6 /* Laws */,
+			);
+			path = Optics;
+			sourceTree = "<group>";
+		};
+		11FE007B209C8E6900183AF6 /* Laws */ = {
 			isa = PBXGroup;
 			children = (
 				11FE0065209C50A700183AF6 /* IsoLaws.swift */,
@@ -816,8 +824,7 @@
 				11FE0071209C6DEC00183AF6 /* PrismLaws.swift */,
 				11FE006D209C685F00183AF6 /* SetterLaws.swift */,
 			);
-			name = Optics;
-			path = "New Group";
+			path = Laws;
 			sourceTree = "<group>";
 		};
 		D68A51F9206811C6008DA945 /* Build */ = {
@@ -1120,7 +1127,7 @@
 				OBJ_109 /* Effects */,
 				OBJ_112 /* Free */,
 				OBJ_114 /* Instances */,
-				11FE0064209C507D00183AF6 /* Optics */,
+				11FE007A209C8E5A00183AF6 /* Optics */,
 				OBJ_119 /* Transformers */,
 				OBJ_124 /* Typeclasses */,
 			);
