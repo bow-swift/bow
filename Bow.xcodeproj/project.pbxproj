@@ -89,6 +89,9 @@
 		11FE0089209C98A400183AF6 /* SetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0088209C98A400183AF6 /* SetterTest.swift */; };
 		11FE008A209C98A400183AF6 /* SetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0088209C98A400183AF6 /* SetterTest.swift */; };
 		11FE008B209C98A400183AF6 /* SetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0088209C98A400183AF6 /* SetterTest.swift */; };
+		11FE0092209C9C3300183AF6 /* PrismTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0091209C9C3300183AF6 /* PrismTest.swift */; };
+		11FE0093209C9C3300183AF6 /* PrismTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0091209C9C3300183AF6 /* PrismTest.swift */; };
+		11FE0094209C9C3300183AF6 /* PrismTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0091209C9C3300183AF6 /* PrismTest.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -602,6 +605,7 @@
 		11FE0080209C945900183AF6 /* IsoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsoTest.swift; sourceTree = "<group>"; };
 		11FE0084209C976F00183AF6 /* LensTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensTest.swift; sourceTree = "<group>"; };
 		11FE0088209C98A400183AF6 /* SetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetterTest.swift; sourceTree = "<group>"; };
+		11FE0091209C9C3300183AF6 /* PrismTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismTest.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -828,6 +832,7 @@
 			children = (
 				11FE0080209C945900183AF6 /* IsoTest.swift */,
 				11FE0084209C976F00183AF6 /* LensTest.swift */,
+				11FE0091209C9C3300183AF6 /* PrismTest.swift */,
 				11FE0088209C98A400183AF6 /* SetterTest.swift */,
 				11FE007C209C8F9400183AF6 /* TestDomain.swift */,
 				11FE007B209C8E6900183AF6 /* Laws */,
@@ -1476,6 +1481,7 @@
 				D6D6246C2068141800739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
 				D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */,
+				11FE0093209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007E209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */,
 				D6D624702068141800739E2D /* SemigroupLaws.swift in Sources */,
@@ -1628,6 +1634,7 @@
 				D6D6254B206817A700739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
 				D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */,
+				11FE0094209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007F209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
 				D6D6254F206817A700739E2D /* SemigroupLaws.swift in Sources */,
@@ -1869,6 +1876,7 @@
 				OBJ_286 /* MonoidKLaws.swift in Sources */,
 				OBJ_287 /* MonoidLaws.swift in Sources */,
 				OBJ_288 /* OrderLaws.swift in Sources */,
+				11FE0092209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007D209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				OBJ_289 /* SemigroupKLaws.swift in Sources */,
 				OBJ_290 /* SemigroupLaws.swift in Sources */,
