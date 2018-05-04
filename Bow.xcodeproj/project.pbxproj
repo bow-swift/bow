@@ -68,6 +68,9 @@
 		11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
 		11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
 		11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0069209C5E3A00183AF6 /* LensLaws.swift */; };
+		11FE006E209C685F00183AF6 /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE006D209C685F00183AF6 /* SetterLaws.swift */; };
+		11FE006F209C685F00183AF6 /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE006D209C685F00183AF6 /* SetterLaws.swift */; };
+		11FE0070209C685F00183AF6 /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE006D209C685F00183AF6 /* SetterLaws.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -574,6 +577,7 @@
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/LensLaws.swift; sourceTree = SOURCE_ROOT; };
+		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
@@ -800,6 +804,7 @@
 			children = (
 				11FE0065209C50A700183AF6 /* IsoLaws.swift */,
 				11FE0069209C5E3A00183AF6 /* LensLaws.swift */,
+				11FE006D209C685F00183AF6 /* SetterLaws.swift */,
 			);
 			name = Optics;
 			path = "New Group";
@@ -1384,6 +1389,7 @@
 				D6D624442068141800739E2D /* Function0Test.swift in Sources */,
 				D6D624452068141800739E2D /* Function1Test.swift in Sources */,
 				D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */,
+				11FE006F209C685F00183AF6 /* SetterLaws.swift in Sources */,
 				D6D624472068141800739E2D /* KleisliTest.swift in Sources */,
 				D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D624492068141800739E2D /* CurryTest.swift in Sources */,
@@ -1529,6 +1535,7 @@
 				D6D62523206817A700739E2D /* Function0Test.swift in Sources */,
 				D6D62524206817A700739E2D /* Function1Test.swift in Sources */,
 				D6D62525206817A700739E2D /* KleisliOperatorTest.swift in Sources */,
+				11FE0070209C685F00183AF6 /* SetterLaws.swift in Sources */,
 				D6D62526206817A700739E2D /* KleisliTest.swift in Sources */,
 				D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D62528206817A700739E2D /* CurryTest.swift in Sources */,
@@ -1763,6 +1770,7 @@
 				OBJ_246 /* Function0Test.swift in Sources */,
 				OBJ_247 /* Function1Test.swift in Sources */,
 				OBJ_248 /* KleisliOperatorTest.swift in Sources */,
+				11FE006E209C685F00183AF6 /* SetterLaws.swift in Sources */,
 				OBJ_249 /* KleisliTest.swift in Sources */,
 				OBJ_250 /* BooleanFunctionsTest.swift in Sources */,
 				OBJ_251 /* CurryTest.swift in Sources */,
