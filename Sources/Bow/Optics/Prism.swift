@@ -184,4 +184,20 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in {s in self.modify(s, f) } })
     }
+    
+    public func asFold() -> Fold<S, A> {
+        return PrismFold(prism: self)
+    }
+}
+
+fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
+    private let prism : PPrism<S, T, A, B>
+    
+    init(prism : PPrism<S, T, A, B>) {
+        self.prism = prism
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return prism.getMaybe(s).map(f).getOrElse(monoid.empty)
+    }
 }
