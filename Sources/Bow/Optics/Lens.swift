@@ -36,6 +36,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PLens<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Lens<S, S> {
         return Iso<S, S>.identity().asLens()
     }
@@ -115,6 +119,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.asSetter().compose(other)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
