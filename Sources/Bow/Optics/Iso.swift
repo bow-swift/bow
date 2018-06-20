@@ -155,6 +155,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
+    public func asFold() -> Fold<S, A> {
+        return IsoFold(iso: self)
+    }
+    
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
@@ -171,5 +175,17 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
 public extension Iso {
     public static func identity() -> Iso<S, S> {
         return Iso<S, S>(get: id, reverseGet: id)
+    }
+}
+
+fileprivate class IsoFold<S, T, A, B> : Fold<S, A> {
+    private let iso : PIso<S, T, A, B>
+    
+    init(iso : PIso<S, T, A, B>) {
+        self.iso = iso
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return f(iso.get(s))
     }
 }
