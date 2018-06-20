@@ -62,6 +62,10 @@ open class Fold<S, A> : FoldOf<S, A> {
         return ChoiceFold(first: self, second: other)
     }
     
+    public func left<C>() -> Fold<Either<S, C>, Either<A, C>> {
+        return LeftFold(fold: self)
+    }
+    
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
         return foldMap(FirstMaybeMonoid<A>(), s, { a in predicate(a) ? Const<Maybe<A>, First>(Maybe.some(a)) : Const(Maybe.none()) }).value
     }
@@ -113,5 +117,18 @@ fileprivate class ChoiceFold<S, C, A> : Fold<Either<S, C>, A> {
     override func foldMap<Mono, R>(_ monoid: Mono, _ esc: Either<S, C>, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
         return esc.fold({ s in first.foldMap(monoid, s, f)},
                       { c in second.foldMap(monoid, c, f)})
+    }
+}
+
+fileprivate class LeftFold<S, C, A> : Fold<Either<S, C>, Either<A, C>> {
+    private let fold : Fold<S, A>
+    
+    init(fold : Fold<S, A>) {
+        self.fold = fold
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<S, C>, _ f: @escaping (Either<A, C>) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return s.fold({ a1 in fold.foldMap(monoid, a1, { b in f(Either.left(b)) }) },
+                      { c in f(Either.right(c)) })
     }
 }
