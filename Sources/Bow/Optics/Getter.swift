@@ -19,6 +19,10 @@ public class Getter<S, A> : GetterOf<S, A> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : Getter<S, A>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Getter<S, S> {
         return Iso<S, S>.identity().asGetter()
     }
@@ -81,6 +85,10 @@ public class Getter<S, A> : GetterOf<S, A> {
     
     public func compose<C>(_ other : Iso<A, C>) -> Getter<S, C> {
         return Getter<S, C>(get: other.get <<< self.get)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asFold() -> Fold<S, A> {

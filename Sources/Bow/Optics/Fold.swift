@@ -30,6 +30,10 @@ open class Fold<S, A> : FoldOf<S, A> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : Fold<S, A>, rhs : Getter<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+
     open func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
         fatalError("foldMap must be overriden in subclasses")
     }
@@ -87,6 +91,10 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func compose<C>(_ other : Iso<A, C>) -> Fold<S, C> {
+        return ComposeFold(first: self, second: other.asFold())
+    }
+    
+    public func compose<C>(_ other : Getter<A, C>) -> Fold<S, C> {
         return ComposeFold(first: self, second: other.asFold())
     }
     
