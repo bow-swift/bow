@@ -37,6 +37,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PIso<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public init(get : @escaping (S) -> A, reverseGet : @escaping (B) -> T) {
         self.getFunc = get
         self.reverseGetFunc = reverseGet
@@ -133,6 +137,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.asSetter().compose(other)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
