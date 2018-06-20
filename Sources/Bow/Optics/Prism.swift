@@ -32,6 +32,10 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PPrism<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Prism<S, S> {
         return Iso<S, S>.identity().asPrism()
     }
@@ -175,6 +179,10 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.asSetter().compose(other)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asOptional() -> POptional<S, T, A, B> {
