@@ -58,6 +58,10 @@ open class Fold<S, A> : FoldOf<S, A> {
         return foldMap(ListK<A>.monoid(), s, ListK<A>.pure).fix()
     }
     
+    public func choice<C>(_ other : Fold<C, A>) -> Fold<Either<S, C>, A> {
+        return ChoiceFold(first: self, second: other)
+    }
+    
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
         return foldMap(FirstMaybeMonoid<A>(), s, { a in predicate(a) ? Const<Maybe<A>, First>(Maybe.some(a)) : Const(Maybe.none()) }).value
     }
@@ -94,5 +98,20 @@ fileprivate class FoldableFold<FoldableType, F, S> : Fold<Kind<F, S>, S> where F
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: Kind<F, S>, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
         return foldable.foldMap(monoid, s, f)
+    }
+}
+
+fileprivate class ChoiceFold<S, C, A> : Fold<Either<S, C>, A> {
+    private let first : Fold<S, A>
+    private let second : Fold<C, A>
+    
+    init(first : Fold<S, A>, second : Fold<C, A>) {
+        self.first = first
+        self.second = second
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ esc: Either<S, C>, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return esc.fold({ s in first.foldMap(monoid, s, f)},
+                      { c in second.foldMap(monoid, c, f)})
     }
 }
