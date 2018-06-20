@@ -131,6 +131,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
+    public func asFold() -> Fold<S, A> {
+        return LensFold(lens: self)
+    }
+    
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
         return set(s, f(get(s)))
     }
@@ -146,5 +150,17 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
+    }
+}
+
+fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
+    private let lens : PLens<S, T, A, B>
+    
+    init(lens : PLens<S, T, A, B>) {
+        self.lens = lens
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return f(lens.get(s))
     }
 }
