@@ -4,14 +4,22 @@ public class ForFold {}
 public typealias FoldOf<S, A> = Kind2<ForFold, S, A>
 public typealias FoldPartial<S> = Kind<ForFold, S>
 
-public class Fold<S, A> : FoldOf<S, A> {
+open class Fold<S, A> : FoldOf<S, A> {
     
-    public static func create<Mono, R>(foldMap : @escaping (Mono, S, @escaping (A) -> R) -> R) -> Fold<S, A> where Mono : Monoid, Mono.A == R {
-        return FoldDefault<S, A, Mono, R>(foldMap: foldMap)
+    public static func codiagonal() -> Fold<Either<S, S>, S> {
+        return CodiagonalFold<S>()
     }
     
-    public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
-        fatalError()
+    public static func select(_ predicate : @escaping (S) -> Bool) -> Fold<S, S> {
+        return SelectFold<S>(predicate: predicate)
+    }
+    
+    public static func from<FoldableType, F>(foldable : FoldableType) -> Fold<Kind<F, S>, S> where FoldableType : Foldable, FoldableType.F == F {
+        return FoldableFold(foldable: foldable)
+    }
+    
+    open func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
+        fatalError("foldMap must be overriden in subclasses")
     }
     
     public func size(_ s : S) -> Int {
@@ -59,14 +67,32 @@ public class Fold<S, A> : FoldOf<S, A> {
     }
 }
 
-fileprivate class FoldDefault<S, A, Mono, R> : Fold<S, A> where Mono : Monoid, Mono.A == R {
-    private let foldMapFunc : (Mono, S, @escaping (A) -> R) -> R
+fileprivate class CodiagonalFold<S> : Fold<Either<S, S>, S> {
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<S, S>, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return s.fold(f, f)
+    }
+}
+
+fileprivate class SelectFold<S> : Fold<S, S> {
+    private let predicate : (S) -> Bool
     
-    fileprivate init(foldMap : @escaping (Mono, S, @escaping (A) -> R) -> R) {
-        self.foldMapFunc = foldMap
+    init(predicate : @escaping (S) -> Bool) {
+        self.predicate = predicate
     }
     
-    override public func foldMap<Mono2, R2>(_ monoid: Mono2, _ s: S, _ f: @escaping (A) -> R2) -> R2 where Mono2 : Monoid, R2 == Mono2.A {
-        return self.foldMapFunc(monoid as! Mono, s, { a in f(a) as! R }) as! R2
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return predicate(s) ? f(s) : monoid.empty
+    }
+}
+
+fileprivate class FoldableFold<FoldableType, F, S> : Fold<Kind<F, S>, S> where FoldableType : Foldable, FoldableType.F == F {
+    private let foldable : FoldableType
+    
+    init(foldable : FoldableType) {
+        self.foldable = foldable
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Kind<F, S>, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return foldable.foldMap(monoid, s, f)
     }
 }
