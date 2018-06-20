@@ -18,6 +18,10 @@ open class Fold<S, A> : FoldOf<S, A> {
         return FoldableFold(foldable: foldable)
     }
     
+    public static func +<C>(lhs : Fold<S, A>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     open func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
         fatalError("foldMap must be overriden in subclasses")
     }
@@ -68,6 +72,10 @@ open class Fold<S, A> : FoldOf<S, A> {
     
     public func right<C>() -> Fold<Either<C, S>, Either<C, A>> {
         return RightFold(fold: self)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return ComposeFold(first: self, second: other)
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
@@ -147,5 +155,19 @@ fileprivate class RightFold<S, C, A> : Fold<Either<C, S>, Either<C, A>> {
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<C, S>, _ f: @escaping (Either<C, A>) -> R) -> R where Mono : Monoid, R == Mono.A {
         return s.fold({ c in f(Either.left(c)) },
                       { a1 in fold.foldMap(monoid, a1, { b in f(Either.right(b)) }) })
+    }
+}
+
+fileprivate class ComposeFold<S, C, A> : Fold<S, C> {
+    private let first : Fold<S, A>
+    private let second : Fold<A, C>
+    
+    init(first : Fold<S, A>, second : Fold<A, C>) {
+        self.first = first
+        self.second = second
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (C) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return self.first.foldMap(monoid, s, { c in self.second.foldMap(monoid, c, f) })
     }
 }
