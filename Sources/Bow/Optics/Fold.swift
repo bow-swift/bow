@@ -6,6 +6,10 @@ public typealias FoldPartial<S> = Kind<ForFold, S>
 
 open class Fold<S, A> : FoldOf<S, A> {
     
+    public static func identity() -> Fold<A, A> {
+        return Iso<A, A>.identity().asFold()
+    }
+    
     public static func codiagonal() -> Fold<Either<S, S>, S> {
         return CodiagonalFold<S>()
     }
