@@ -19,6 +19,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return CodiagonalTraversal()
     }
     
+    public static func from<Trav, T>(traverse : Trav) -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
+        return TraverseTraversal(traverse: traverse)
+    }
+    
     public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
         return Const.fix(self.modifyF(Const<R, B>.applicative(monoid), s, { b in Const<R, B>(f(b)) })).value
     }
@@ -124,5 +128,17 @@ fileprivate class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
         return s.bimap(f, f)
             .fold({ fa in applicative.map(fa, Either.left) },
                   { fa in applicative.map(fa, Either.right) })
+    }
+}
+
+fileprivate class TraverseTraversal<Trav, T, A, B> : PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
+    private let traverse : Trav
+    
+    init(traverse : Trav) {
+        self.traverse = traverse
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Kind<T, A>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Kind<T, B>> where Appl : Applicative, F == Appl.F {
+        return traverse.traverse(s, f, applicative)
     }
 }
