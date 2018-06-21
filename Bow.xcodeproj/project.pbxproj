@@ -26,6 +26,7 @@
 		11AC527E2097697D008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
 		11AC527F2097697D008EC1E4 /* Iso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527420975422008EC1E4 /* Iso.swift */; };
 		11AC52802097697D008EC1E4 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527620975EE5008EC1E4 /* Lens.swift */; };
+		11C9B6AF20DB8A8D00AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
 		11E531B1209AE89A00A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B2209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B3209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
@@ -589,6 +590,7 @@
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traversal.swift; sourceTree = "<group>"; };
 		11E531B0209AE89A00A78E8D /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
 		11E531B5209AF80100A78E8D /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		11E531BA209B0BE300A78E8D /* Setter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 				11E531B5209AF80100A78E8D /* Optional.swift */,
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
+				11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */,
 				11E531D5209B4ECC00A78E8D /* Typeclasses */,
 			);
 			path = Optics;
@@ -1969,6 +1972,7 @@
 				OBJ_439 /* MonadReader.swift in Sources */,
 				OBJ_440 /* MonadState.swift in Sources */,
 				OBJ_441 /* MonadWriter.swift in Sources */,
+				11C9B6AF20DB8A8D00AFD4AA /* Traversal.swift in Sources */,
 				OBJ_442 /* Monoid.swift in Sources */,
 				OBJ_443 /* MonoidK.swift in Sources */,
 				OBJ_444 /* NonEmptyReducible.swift in Sources */,
