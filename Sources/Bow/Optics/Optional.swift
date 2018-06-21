@@ -154,4 +154,20 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
+    
+    public func asFold() -> Fold<S, A> {
+        return OptionalFold(optional: self)
+    }
+}
+
+fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
+    private let optional : POptional<S, T, A, B>
+    
+    init(optional : POptional<S, T, A, B>) {
+        self.optional = optional
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return optional.getMaybe(s).map(f).getOrElse(monoid.empty)
+    }
 }
