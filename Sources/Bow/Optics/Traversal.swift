@@ -151,6 +151,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PTraversal<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
         return Const.fix(self.modifyF(Const<R, B>.applicative(monoid), s, { b in Const<R, B>(f(b)) })).value
     }
@@ -201,6 +205,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.asSetter().compose(other)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asSetter() -> PSetter<S, T, A, B> {
