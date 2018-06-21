@@ -15,6 +15,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         fatalError("modifyF must be implemented in subclasses")
     }
 
+    public static func identity() -> Traversal<S, S> {
+        return Iso<S, S>.identity().asTraversal()
+    }
+    
     public static func codiagonal() -> Traversal<Either<S, S>, S> {
         return CodiagonalTraversal()
     }
