@@ -187,6 +187,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return ChoiceTraversal(first: self, second: other)
     }
     
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return ComposeTraversal(first: self, second: other)
+    }
+    
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
@@ -532,5 +536,19 @@ fileprivate class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
                                f(self.get8(s)),
                                f(self.get9(s)),
                                { b1, b2, b3, b4, b5, b6, b7, b8, b9 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, b9, s) })
+    }
+}
+
+fileprivate class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
+    private let first : PTraversal<S, T, A, B>
+    private let second : PTraversal<A, B, C, D>
+    
+    init(first : PTraversal<S, T, A, B>, second : PTraversal<A, B, C, D>) {
+        self.first = first
+        self.second = second
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (C) -> Kind<F, D>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return self.first.modifyF(applicative, s, { a in self.second.modifyF(applicative, a, f)})
     }
 }
