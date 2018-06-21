@@ -40,6 +40,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PLens<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Lens<S, S> {
         return Iso<S, S>.identity().asLens()
     }
@@ -123,6 +127,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
         return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
