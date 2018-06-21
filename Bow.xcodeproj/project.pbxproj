@@ -849,11 +849,11 @@
 			children = (
 				11FE0080209C945900183AF6 /* IsoTest.swift */,
 				11FE0084209C976F00183AF6 /* LensTest.swift */,
+				11FE0095209C9EB800183AF6 /* OptionalTest.swift */,
 				11FE0091209C9C3300183AF6 /* PrismTest.swift */,
 				11FE0088209C98A400183AF6 /* SetterTest.swift */,
 				11FE007C209C8F9400183AF6 /* TestDomain.swift */,
 				11FE007B209C8E6900183AF6 /* Laws */,
-				11FE0095209C9EB800183AF6 /* OptionalTest.swift */,
 			);
 			path = Optics;
 			sourceTree = "<group>";
