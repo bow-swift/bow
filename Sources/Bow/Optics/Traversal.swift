@@ -23,6 +23,10 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return CodiagonalTraversal()
     }
     
+    public static func void() -> Traversal<S, A> {
+        return Optional<S, A>.void().asTraversal()
+    }
+    
     public static func from<Trav, T>(traverse : Trav) -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
         return TraverseTraversal(traverse: traverse)
     }
