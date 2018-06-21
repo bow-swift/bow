@@ -14,4 +14,8 @@ class PrismTest: XCTestCase {
     func testOptionalLaws() {
         OptionalLaws.check(optional: stringPrism.asOptional(), eqA: String.order, eqB: String.order)
     }
+    
+    func testTraversalLaws() {
+        TraversalLaws.check(traversal: stringPrism.asTraversal(), eqA: String.order, eqB: String.order)
+    }
 }
