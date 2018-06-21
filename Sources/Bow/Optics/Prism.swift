@@ -196,6 +196,10 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     public func asFold() -> Fold<S, A> {
         return PrismFold(prism: self)
     }
+    
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return PrismTraversal(prism: self)
+    }
 }
 
 fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
@@ -207,5 +211,19 @@ fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
         return prism.getMaybe(s).map(f).getOrElse(monoid.empty)
+    }
+}
+
+fileprivate class PrismTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let prism : PPrism<S, T, A, B>
+    
+    init(prism : PPrism<S, T, A, B>) {
+        self.prism = prism
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return prism.getOrModify(s)
+            .fold(applicative.pure,
+                  { a in applicative.map(f(a), prism.reverseGet) })
     }
 }
