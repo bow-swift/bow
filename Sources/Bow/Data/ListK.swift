@@ -99,6 +99,14 @@ public class ListK<A> : ListKOf<A> {
     public func combineK(_ y : ListK<A>) -> ListK<A> {
         return self + y
     }
+    
+    public func firstOrNone() -> Maybe<A> {
+        if let first = self.list.first {
+            return Maybe.some(first)
+        } else {
+            return Maybe.none()
+        }
+    }
 }
 
 public extension Kind where F == ForListK {
