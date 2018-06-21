@@ -32,6 +32,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : POptional<S, T, A, B>, rhs : Getter<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Optional<S, S> {
         return Iso<S, S>.identity().asOptional()
     }
@@ -149,6 +153,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.asSetter().compose(other)
+    }
+    
+    public func compose<C>(_ other : Getter<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
     }
     
     public func asSetter() -> PSetter<S, T, A, B> {
