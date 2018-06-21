@@ -29,6 +29,9 @@
 		11C9B6AF20DB8A8D00AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
 		11C9B6B120DBB02000AFD4AA /* Each.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B020DBB02000AFD4AA /* Each.swift */; };
 		11C9B6B320DBB0EC00AFD4AA /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
+		11C9B6B620DBB34C00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
+		11C9B6B720DBB34D00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
+		11C9B6B820DBB34D00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
 		11E531B1209AE89A00A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B2209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B3209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
@@ -595,6 +598,7 @@
 		11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traversal.swift; sourceTree = "<group>"; };
 		11C9B6B020DBB02000AFD4AA /* Each.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Each.swift; sourceTree = "<group>"; };
 		11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterIndex.swift; sourceTree = "<group>"; };
+		11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalLaws.swift; sourceTree = "<group>"; };
 		11E531B0209AE89A00A78E8D /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
 		11E531B5209AF80100A78E8D /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		11E531BA209B0BE300A78E8D /* Setter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setter.swift; sourceTree = "<group>"; };
@@ -862,6 +866,7 @@
 				11FE0075209C813C00183AF6 /* OptionalLaws.swift */,
 				11FE0071209C6DEC00183AF6 /* PrismLaws.swift */,
 				11FE006D209C685F00183AF6 /* SetterLaws.swift */,
+				11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */,
 			);
 			path = Laws;
 			sourceTree = "<group>";
@@ -1495,6 +1500,7 @@
 				D6D6246C2068141800739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
 				D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */,
+				11C9B6B720DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
 				11FE0093209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007E209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1649,6 +1655,7 @@
 				D6D6254B206817A700739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
 				D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */,
+				11C9B6B820DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
 				11FE0094209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007F209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1892,6 +1899,7 @@
 				OBJ_286 /* MonoidKLaws.swift in Sources */,
 				OBJ_287 /* MonoidLaws.swift in Sources */,
 				OBJ_288 /* OrderLaws.swift in Sources */,
+				11C9B6B620DBB34C00AFD4AA /* TraversalLaws.swift in Sources */,
 				11FE0092209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007D209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				OBJ_289 /* SemigroupKLaws.swift in Sources */,
