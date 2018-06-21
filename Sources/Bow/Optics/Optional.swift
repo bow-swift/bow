@@ -50,6 +50,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
             getOrModify: { ess in ess.fold(Either.right, Either.right) })
     }
     
+    public static func void() -> Optional<S, A> {
+        return Optional(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
+    }
+    
     public init(set : @escaping (S, B) -> T, getOrModify : @escaping (S) -> Either<T, A>) {
         self.setFunc = set
         self.getOrModifyFunc = getOrModify
