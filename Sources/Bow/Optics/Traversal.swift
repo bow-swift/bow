@@ -12,7 +12,7 @@ public typealias TraversalPartial<S> = Kind<ForPTraversal, S>
 open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
 
     open func modifyF<Appl, F>(_ applicative : Appl, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
-        fatalError("mofifyF must be implemented in subclasses")
+        fatalError("modifyF must be implemented in subclasses")
     }
 
     public static func codiagonal() -> Traversal<Either<S, S>, S> {
@@ -21,6 +21,126 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     
     public static func from<Trav, T>(traverse : Trav) -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
         return TraverseTraversal(traverse: traverse)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get2Traversal(get1: get1,
+                             get2: get2,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get3Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get4Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ get5 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get5Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             get5: get5,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ get5 : @escaping (S) -> A,
+                            _ get6 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get6Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             get5: get5,
+                             get6: get6,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ get5 : @escaping (S) -> A,
+                            _ get6 : @escaping (S) -> A,
+                            _ get7 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get7Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             get5: get5,
+                             get6: get6,
+                             get7: get7,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ get5 : @escaping (S) -> A,
+                            _ get6 : @escaping (S) -> A,
+                            _ get7 : @escaping (S) -> A,
+                            _ get8 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get8Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             get5: get5,
+                             get6: get6,
+                             get7: get7,
+                             get8: get8,
+                             set: set)
+    }
+    
+    public static func from(_ get1 : @escaping (S) -> A,
+                            _ get2 : @escaping (S) -> A,
+                            _ get3 : @escaping (S) -> A,
+                            _ get4 : @escaping (S) -> A,
+                            _ get5 : @escaping (S) -> A,
+                            _ get6 : @escaping (S) -> A,
+                            _ get7 : @escaping (S) -> A,
+                            _ get8 : @escaping (S) -> A,
+                            _ get9 : @escaping (S) -> A,
+                            _ set : @escaping (B, B, B, B, B, B, B, B, B, S) -> T) -> PTraversal<S, T, A, B> {
+        return Get9Traversal(get1: get1,
+                             get2: get2,
+                             get3: get3,
+                             get4: get4,
+                             get5: get5,
+                             get6: get6,
+                             get7: get7,
+                             get8: get8,
+                             get9: get9,
+                             set: set)
     }
     
     public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
@@ -140,5 +260,277 @@ fileprivate class TraverseTraversal<Trav, T, A, B> : PTraversal<Kind<T, A>, Kind
     
     override func modifyF<Appl, F>(_ applicative: Appl, _ s: Kind<T, A>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Kind<T, B>> where Appl : Applicative, F == Appl.F {
         return traverse.traverse(s, f, applicative)
+    }
+}
+
+fileprivate class Get2Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let set : (B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         set : @escaping (B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               { b1, b2 in self.set(b1, b2, s) })
+    }
+}
+
+fileprivate class Get3Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let set : (B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         set : @escaping (B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               { b1, b2, b3 in self.set(b1, b2, b3, s) })
+    }
+}
+
+fileprivate class Get4Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let set : (B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               { b1, b2, b3, b4 in self.set(b1, b2, b3, b4, s) })
+    }
+}
+
+fileprivate class Get5Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let get5 : (S) -> A
+    private let set : (B, B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         get5 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.get5 = get5
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               f(self.get5(s)),
+                               { b1, b2, b3, b4, b5 in self.set(b1, b2, b3, b4, b5, s) })
+    }
+}
+
+fileprivate class Get6Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let get5 : (S) -> A
+    private let get6 : (S) -> A
+    private let set : (B, B, B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         get5 : @escaping (S) -> A,
+         get6 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.get5 = get5
+        self.get6 = get6
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               f(self.get5(s)),
+                               f(self.get6(s)),
+                               { b1, b2, b3, b4, b5, b6 in self.set(b1, b2, b3, b4, b5, b6, s) })
+    }
+}
+
+fileprivate class Get7Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let get5 : (S) -> A
+    private let get6 : (S) -> A
+    private let get7 : (S) -> A
+    private let set : (B, B, B, B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         get5 : @escaping (S) -> A,
+         get6 : @escaping (S) -> A,
+         get7 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.get5 = get5
+        self.get6 = get6
+        self.get7 = get7
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               f(self.get5(s)),
+                               f(self.get6(s)),
+                               f(self.get7(s)),
+                               { b1, b2, b3, b4, b5, b6, b7 in self.set(b1, b2, b3, b4, b5, b6, b7, s) })
+    }
+}
+
+fileprivate class Get8Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let get5 : (S) -> A
+    private let get6 : (S) -> A
+    private let get7 : (S) -> A
+    private let get8 : (S) -> A
+    private let set : (B, B, B, B, B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         get5 : @escaping (S) -> A,
+         get6 : @escaping (S) -> A,
+         get7 : @escaping (S) -> A,
+         get8 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.get5 = get5
+        self.get6 = get6
+        self.get7 = get7
+        self.get8 = get8
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               f(self.get5(s)),
+                               f(self.get6(s)),
+                               f(self.get7(s)),
+                               f(self.get8(s)),
+                               { b1, b2, b3, b4, b5, b6, b7, b8 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, s) })
+    }
+}
+
+fileprivate class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let get1 : (S) -> A
+    private let get2 : (S) -> A
+    private let get3 : (S) -> A
+    private let get4 : (S) -> A
+    private let get5 : (S) -> A
+    private let get6 : (S) -> A
+    private let get7 : (S) -> A
+    private let get8 : (S) -> A
+    private let get9 : (S) -> A
+    private let set : (B, B, B, B, B, B, B, B, B, S) -> T
+    
+    init(get1 : @escaping (S) -> A,
+         get2 : @escaping (S) -> A,
+         get3 : @escaping (S) -> A,
+         get4 : @escaping (S) -> A,
+         get5 : @escaping (S) -> A,
+         get6 : @escaping (S) -> A,
+         get7 : @escaping (S) -> A,
+         get8 : @escaping (S) -> A,
+         get9 : @escaping (S) -> A,
+         set : @escaping (B, B, B, B, B, B, B, B, B, S) -> T) {
+        self.get1 = get1
+        self.get2 = get2
+        self.get3 = get3
+        self.get4 = get4
+        self.get5 = get5
+        self.get6 = get6
+        self.get7 = get7
+        self.get8 = get8
+        self.get9 = get9
+        self.set = set
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.get1(s)),
+                               f(self.get2(s)),
+                               f(self.get3(s)),
+                               f(self.get4(s)),
+                               f(self.get5(s)),
+                               f(self.get6(s)),
+                               f(self.get7(s)),
+                               f(self.get8(s)),
+                               f(self.get9(s)),
+                               { b1, b2, b3, b4, b5, b6, b7, b8, b9 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, b9, s) })
     }
 }
