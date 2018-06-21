@@ -167,6 +167,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return IsoFold(iso: self)
     }
     
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return IsoTraversal(iso: self)
+    }
+    
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
@@ -195,5 +199,17 @@ fileprivate class IsoFold<S, T, A, B> : Fold<S, A> {
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
         return f(iso.get(s))
+    }
+}
+
+fileprivate class IsoTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let iso : PIso<S, T, A, B>
+    
+    init(iso : PIso<S, T, A, B>) {
+        self.iso = iso
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(iso.get(s)), iso.reverseGet)
     }
 }
