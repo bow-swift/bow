@@ -15,73 +15,77 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         fatalError("mofifyF must be implemented in subclasses")
     }
 
-    func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
+    public static func codiagonal() -> Traversal<Either<S, S>, S> {
+        return CodiagonalTraversal()
+    }
+    
+    public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
         return Const.fix(self.modifyF(Const<R, B>.applicative(monoid), s, { b in Const<R, B>(f(b)) })).value
     }
     
-    func fold<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
+    public func fold<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
         return foldMap(monoid, s, id)
     }
     
-    func combineAll<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
+    public func combineAll<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
         return fold(monoid, s)
     }
     
-    func getAll(_ s : S) -> ListK<A> {
+    public func getAll(_ s : S) -> ListK<A> {
         return foldMap(ListK.monoid(), s, { a in ListK([a]) }).fix()
     }
     
-    func set(_ s : S, _ b : B) -> T {
+    public func set(_ s : S, _ b : B) -> T {
         return modify(s, constF(b))
     }
     
-    func size(_ s : S) -> Int {
+    public func size(_ s : S) -> Int {
         return foldMap(Int.sumMonoid, s, constF(1))
     }
     
-    func isEmpty(_ s : S) -> Bool {
+    public func isEmpty(_ s : S) -> Bool {
         return foldMap(Bool.andMonoid, s, constF(false))
     }
     
-    func nonEmpty(_ s : S) -> Bool {
+    public func nonEmpty(_ s : S) -> Bool {
         return !isEmpty(s)
     }
     
-    func headMaybe(_ s : S) -> Maybe<A> {
+    public func headMaybe(_ s : S) -> Maybe<A> {
         return foldMap(FirstMaybeMonoid<A>(), s, { b in Const(Maybe.some(b)) }).value
     }
     
-    func lastMaybe(_ s : S) -> Maybe<A> {
+    public func lastMaybe(_ s : S) -> Maybe<A> {
         return foldMap(LastMaybeMonoid<A>(), s, { b in Const(Maybe.some(b)) }).value
     }
     
-    func choice<U, V>(_ other : PTraversal<U, V, A, B>) -> PTraversal<Either<S, U>, Either<T, V>, A, B> {
+    public func choice<U, V>(_ other : PTraversal<U, V, A, B>) -> PTraversal<Either<S, U>, Either<T, V>, A, B> {
         return ChoiceTraversal(first: self, second: other)
     }
     
-    func asSetter() -> PSetter<S, T, A, B> {
+    public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
-    func asFold() -> Fold<S, A> {
+    public func asFold() -> Fold<S, A> {
         return TraversalFold(traversal: self)
     }
     
-    func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
+    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
         return foldMap(FirstMaybeMonoid(), s, { a in
             predicate(a) ? Const(Maybe.some(a)) : Const(Maybe.none())
         }).value
     }
     
-    func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
+    public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
         return modifyF(Id<A>.applicative(), s, { a in Id.pure(f(a)) }).fix().value
     }
     
-    func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
+    public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
         return find(s, predicate).fold(constF(false), constF(true))
     }
     
-    func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
+    public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldMap(Bool.andMonoid, s, predicate)
     }
 }
@@ -112,5 +116,13 @@ fileprivate class TraversalFold<S, T, A, B> : Fold<S, A> {
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
         return traversal.foldMap(monoid, s, f)
+    }
+}
+
+fileprivate class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Either<S, S>, _ f: @escaping (S) -> Kind<F, S>) -> Kind<F, Either<S, S>> where Appl : Applicative, F == Appl.F {
+        return s.bimap(f, f)
+            .fold({ fa in applicative.map(fa, Either.left) },
+                  { fa in applicative.map(fa, Either.right) })
     }
 }
