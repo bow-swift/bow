@@ -22,4 +22,8 @@ class IsoTest: XCTestCase {
     func testSetterLaws() {
         SetterLaws.check(setter: tokenIso.asSetter(), eqA: Token.eq)
     }
+    
+    func testTraversalLaws() {
+        TraversalLaws.check(traversal: tokenIso.asTraversal(), eqA: Token.eq, eqB: String.order)
+    }
 }
