@@ -41,6 +41,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(get : @escaping (S) -> A, reverseGet : @escaping (B) -> T) {
         self.getFunc = get
         self.reverseGetFunc = reverseGet
@@ -141,6 +145,10 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
         return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
     }
     
     public func asGetter() -> Getter<S, A> {
