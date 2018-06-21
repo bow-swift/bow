@@ -143,6 +143,10 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return LensFold(lens: self)
     }
     
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return LensTraversal(lens: self)
+    }
+    
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
         return set(s, f(get(s)))
     }
@@ -170,5 +174,17 @@ fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
         return f(lens.get(s))
+    }
+}
+
+fileprivate class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let lens : PLens<S, T, A, B>
+    
+    init(lens : PLens<S, T, A, B>) {
+        self.lens = lens
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
     }
 }
