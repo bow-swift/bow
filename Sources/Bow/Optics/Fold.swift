@@ -18,6 +18,10 @@ open class Fold<S, A> : FoldOf<S, A> {
         return SelectFold<S>(predicate: predicate)
     }
     
+    public static func void() -> Fold<S, A> {
+        return Optional<S, A>.void().asFold()
+    }
+    
     public static func from<FoldableType, F>(foldable : FoldableType) -> Fold<Kind<F, S>, S> where FoldableType : Foldable, FoldableType.F == F {
         return FoldableFold(foldable: foldable)
     }
