@@ -32,6 +32,15 @@
 		11C9B6B620DBB34C00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
 		11C9B6B720DBB34D00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
 		11C9B6B820DBB34D00AFD4AA /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */; };
+		11C9B6D120DCF54600AFD4AA /* Each.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B020DBB02000AFD4AA /* Each.swift */; };
+		11C9B6D220DCF54700AFD4AA /* Each.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B020DBB02000AFD4AA /* Each.swift */; };
+		11C9B6D320DCF54800AFD4AA /* Each.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B020DBB02000AFD4AA /* Each.swift */; };
+		11C9B6D420DCF54A00AFD4AA /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
+		11C9B6D520DCF54B00AFD4AA /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
+		11C9B6D620DCF54B00AFD4AA /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
+		11C9B6D720DCF55000AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
+		11C9B6D820DCF55000AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
+		11C9B6D920DCF55100AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
 		11E531B1209AE89A00A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B2209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B3209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
@@ -1515,6 +1524,7 @@
 			files = (
 				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
 				D6D624D42068178800739E2D /* Function0.swift in Sources */,
+				11C9B6D420DCF54A00AFD4AA /* FilterIndex.swift in Sources */,
 				D6D624D52068178800739E2D /* Function1.swift in Sources */,
 				D6D624D62068178800739E2D /* FunctionK.swift in Sources */,
 				D6D624D72068178800739E2D /* Kleisli.swift in Sources */,
@@ -1566,6 +1576,7 @@
 				D6D624FC2068178800739E2D /* Alternative.swift in Sources */,
 				D6D624FD2068178800739E2D /* Applicative.swift in Sources */,
 				D6D624FE2068178800739E2D /* ApplicativeError.swift in Sources */,
+				11C9B6D120DCF54600AFD4AA /* Each.swift in Sources */,
 				D6D624FF2068178800739E2D /* Bifoldable.swift in Sources */,
 				D6D625002068178800739E2D /* Bimonad.swift in Sources */,
 				D6D625012068178800739E2D /* Comonad.swift in Sources */,
@@ -1575,6 +1586,7 @@
 				11E531B7209AFAF500A78E8D /* Optional.swift in Sources */,
 				D6D625052068178800739E2D /* Foldable.swift in Sources */,
 				D6D625062068178800739E2D /* Functor.swift in Sources */,
+				11C9B6D720DCF55000AFD4AA /* Traversal.swift in Sources */,
 				D6D625072068178800739E2D /* FunctorFilter.swift in Sources */,
 				D6D625082068178800739E2D /* Inject.swift in Sources */,
 				D6D625092068178800739E2D /* Monad.swift in Sources */,
@@ -1670,6 +1682,7 @@
 			files = (
 				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
 				D6D62565206841B300739E2D /* Function0.swift in Sources */,
+				11C9B6D520DCF54B00AFD4AA /* FilterIndex.swift in Sources */,
 				D6D62566206841B300739E2D /* Function1.swift in Sources */,
 				D6D62567206841B300739E2D /* FunctionK.swift in Sources */,
 				D6D62568206841B300739E2D /* Kleisli.swift in Sources */,
@@ -1721,6 +1734,7 @@
 				D6D6258D206841B300739E2D /* Alternative.swift in Sources */,
 				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
 				D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */,
+				11C9B6D220DCF54700AFD4AA /* Each.swift in Sources */,
 				D6D62590206841B300739E2D /* Bifoldable.swift in Sources */,
 				D6D62591206841B300739E2D /* Bimonad.swift in Sources */,
 				D6D62592206841B300739E2D /* Comonad.swift in Sources */,
@@ -1730,6 +1744,7 @@
 				11E531B8209AFAF600A78E8D /* Optional.swift in Sources */,
 				D6D62596206841B300739E2D /* Foldable.swift in Sources */,
 				D6D62597206841B300739E2D /* Functor.swift in Sources */,
+				11C9B6D820DCF55000AFD4AA /* Traversal.swift in Sources */,
 				D6D62598206841B300739E2D /* FunctorFilter.swift in Sources */,
 				D6D62599206841B300739E2D /* Inject.swift in Sources */,
 				D6D6259A206841B300739E2D /* Monad.swift in Sources */,
@@ -1759,6 +1774,7 @@
 			files = (
 				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
 				D6DBDE9B20684C38004F979F /* Function0.swift in Sources */,
+				11C9B6D620DCF54B00AFD4AA /* FilterIndex.swift in Sources */,
 				D6DBDE9C20684C38004F979F /* Function1.swift in Sources */,
 				D6DBDE9D20684C38004F979F /* FunctionK.swift in Sources */,
 				D6DBDE9E20684C38004F979F /* Kleisli.swift in Sources */,
@@ -1810,6 +1826,7 @@
 				D6DBDEC320684C38004F979F /* Alternative.swift in Sources */,
 				D6DBDEC420684C38004F979F /* Applicative.swift in Sources */,
 				D6DBDEC520684C38004F979F /* ApplicativeError.swift in Sources */,
+				11C9B6D320DCF54800AFD4AA /* Each.swift in Sources */,
 				D6DBDEC620684C38004F979F /* Bifoldable.swift in Sources */,
 				D6DBDEC720684C38004F979F /* Bimonad.swift in Sources */,
 				D6DBDEC820684C38004F979F /* Comonad.swift in Sources */,
@@ -1819,6 +1836,7 @@
 				11E531B9209AFAF700A78E8D /* Optional.swift in Sources */,
 				D6DBDECC20684C38004F979F /* Foldable.swift in Sources */,
 				D6DBDECD20684C38004F979F /* Functor.swift in Sources */,
+				11C9B6D920DCF55100AFD4AA /* Traversal.swift in Sources */,
 				D6DBDECE20684C38004F979F /* FunctorFilter.swift in Sources */,
 				D6DBDECF20684C38004F979F /* Inject.swift in Sources */,
 				D6DBDED020684C38004F979F /* Monad.swift in Sources */,
