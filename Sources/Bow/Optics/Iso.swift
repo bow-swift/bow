@@ -37,6 +37,14 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PIso<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PIso<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public init(get : @escaping (S) -> A, reverseGet : @escaping (B) -> T) {
         self.getFunc = get
         self.reverseGetFunc = reverseGet
@@ -135,6 +143,14 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return self.asSetter().compose(other)
     }
     
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
+    }
+    
     public func asGetter() -> Getter<S, A> {
         return Getter(get : self.get)
     }
@@ -155,6 +171,14 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
+    public func asFold() -> Fold<S, A> {
+        return IsoFold(iso: self)
+    }
+    
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return IsoTraversal(iso: self)
+    }
+    
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
@@ -171,5 +195,29 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
 public extension Iso {
     public static func identity() -> Iso<S, S> {
         return Iso<S, S>(get: id, reverseGet: id)
+    }
+}
+
+fileprivate class IsoFold<S, T, A, B> : Fold<S, A> {
+    private let iso : PIso<S, T, A, B>
+    
+    init(iso : PIso<S, T, A, B>) {
+        self.iso = iso
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return f(iso.get(s))
+    }
+}
+
+fileprivate class IsoTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let iso : PIso<S, T, A, B>
+    
+    init(iso : PIso<S, T, A, B>) {
+        self.iso = iso
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(iso.get(s)), iso.reverseGet)
     }
 }

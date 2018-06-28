@@ -32,6 +32,18 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : POptional<S, T, A, B>, rhs : Getter<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C>(lhs : POptional<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : POptional<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Optional<S, S> {
         return Iso<S, S>.identity().asOptional()
     }
@@ -40,6 +52,10 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return Optional<Either<S, S>, S>(
             set: { ess, s in ess.bimap(constF(s), constF(s)) },
             getOrModify: { ess in ess.fold(Either.right, Either.right) })
+    }
+    
+    public static func void() -> Optional<S, A> {
+        return Optional(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
     }
     
     public init(set : @escaping (S, B) -> T, getOrModify : @escaping (S) -> Either<T, A>) {
@@ -151,7 +167,51 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return self.asSetter().compose(other)
     }
     
+    public func compose<C>(_ other : Getter<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
+    }
+    
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
+    }
+    
+    public func asFold() -> Fold<S, A> {
+        return OptionalFold(optional: self)
+    }
+    
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return OptionalTraversal(optional: self)
+    }
+}
+
+fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
+    private let optional : POptional<S, T, A, B>
+    
+    init(optional : POptional<S, T, A, B>) {
+        self.optional = optional
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return optional.getMaybe(s).map(f).getOrElse(monoid.empty)
+    }
+}
+
+fileprivate class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let optional : POptional<S, T, A, B>
+    
+    init(optional : POptional<S, T, A, B>) {
+        self.optional = optional
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return self.optional.modifyF(applicative, s, f)
     }
 }

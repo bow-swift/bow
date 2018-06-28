@@ -36,6 +36,14 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PLens<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PLens<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Lens<S, S> {
         return Iso<S, S>.identity().asLens()
     }
@@ -117,6 +125,14 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return self.asSetter().compose(other)
     }
     
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
+    }
+    
     public func asGetter() -> Getter<S, A> {
         return Getter(get: self.get)
     }
@@ -129,6 +145,14 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
+    }
+    
+    public func asFold() -> Fold<S, A> {
+        return LensFold(lens: self)
+    }
+    
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return LensTraversal(lens: self)
     }
     
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
@@ -146,5 +170,29 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
+    }
+}
+
+fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
+    private let lens : PLens<S, T, A, B>
+    
+    init(lens : PLens<S, T, A, B>) {
+        self.lens = lens
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return f(lens.get(s))
+    }
+}
+
+fileprivate class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let lens : PLens<S, T, A, B>
+    
+    init(lens : PLens<S, T, A, B>) {
+        self.lens = lens
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return applicative.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
     }
 }

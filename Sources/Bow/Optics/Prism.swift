@@ -32,6 +32,14 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : PPrism<S, T, A, B>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
+    public static func +<C, D>(lhs : PPrism<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Prism<S, S> {
         return Iso<S, S>.identity().asPrism()
     }
@@ -177,11 +185,53 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return self.asSetter().compose(other)
     }
     
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+        return self.asTraversal().compose(other)
+    }
+    
     public func asOptional() -> POptional<S, T, A, B> {
         return POptional(set: self.set, getOrModify: self.getOrModify)
     }
     
     public func asSetter() -> PSetter<S, T, A, B> {
         return PSetter(modify: { f in {s in self.modify(s, f) } })
+    }
+    
+    public func asFold() -> Fold<S, A> {
+        return PrismFold(prism: self)
+    }
+    
+    public func asTraversal() -> PTraversal<S, T, A, B> {
+        return PrismTraversal(prism: self)
+    }
+}
+
+fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
+    private let prism : PPrism<S, T, A, B>
+    
+    init(prism : PPrism<S, T, A, B>) {
+        self.prism = prism
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return prism.getMaybe(s).map(f).getOrElse(monoid.empty)
+    }
+}
+
+fileprivate class PrismTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let prism : PPrism<S, T, A, B>
+    
+    init(prism : PPrism<S, T, A, B>) {
+        self.prism = prism
+    }
+    
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+        return prism.getOrModify(s)
+            .fold(applicative.pure,
+                  { a in applicative.map(f(a), prism.reverseGet) })
     }
 }

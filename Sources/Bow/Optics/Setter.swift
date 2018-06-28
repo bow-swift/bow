@@ -31,6 +31,10 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C, D>(lhs : PSetter<S, T, A, B>, rhs : PTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Setter<S, S> {
         return Iso<S, S>.identity().asSetter()
     }
@@ -96,6 +100,10 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PSetter<S, T, C, D> {
+        return self.compose(other.asSetter())
+    }
+    
+    public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.compose(other.asSetter())
     }
 }

@@ -19,6 +19,10 @@ public class Getter<S, A> : GetterOf<S, A> {
         return lhs.compose(rhs)
     }
     
+    public static func +<C>(lhs : Getter<S, A>, rhs : Fold<A, C>) -> Fold<S, C> {
+        return lhs.compose(rhs)
+    }
+    
     public static func identity() -> Getter<S, S> {
         return Iso<S, S>.identity().asGetter()
     }
@@ -83,6 +87,14 @@ public class Getter<S, A> : GetterOf<S, A> {
         return Getter<S, C>(get: other.get <<< self.get)
     }
     
+    public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
+        return self.asFold().compose(other)
+    }
+    
+    public func asFold() -> Fold<S, A> {
+        return GetterFold(getter: self)
+    }
+    
     public func find(_ s : S, _ predicate : (A) -> Bool) -> Maybe<A> {
         let a = get(s)
         if predicate(a) {
@@ -94,5 +106,17 @@ public class Getter<S, A> : GetterOf<S, A> {
     
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
+    }
+}
+
+fileprivate class GetterFold<S, A> : Fold<S, A> {
+    private let getter : Getter<S, A>
+    
+    init(getter : Getter<S, A>) {
+        self.getter = getter
+    }
+    
+    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+        return f(getter.get(s))
     }
 }

@@ -14,4 +14,8 @@ class LensTest: XCTestCase {
     func testSetterLaws() {
         SetterLaws.check(setter: tokenLens.asSetter(), eqA: Token.eq)
     }
+    
+    func testTraversalLaws() {
+        TraversalLaws.check(traversal: tokenLens.asTraversal(), eqA: Token.eq, eqB: String.order)
+    }
 }
