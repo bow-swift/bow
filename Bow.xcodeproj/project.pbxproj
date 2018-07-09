@@ -13,6 +13,7 @@
 		111082CF2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		1116204620F37AE300685EC4 /* Either+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204520F37AE300685EC4 /* Either+Optics.swift */; };
+		1116204820F37D1900685EC4 /* Id+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204720F37D1900685EC4 /* Id+Optics.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -603,6 +604,7 @@
 		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
 		1116204520F37AE300685EC4 /* Either+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Either+Optics.swift"; sourceTree = "<group>"; };
+		1116204720F37D1900685EC4 /* Id+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Id+Optics.swift"; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -831,6 +833,7 @@
 			isa = PBXGroup;
 			children = (
 				1116204520F37AE300685EC4 /* Either+Optics.swift */,
+				1116204720F37D1900685EC4 /* Id+Optics.swift */,
 			);
 			path = STD;
 			sourceTree = "<group>";
@@ -1945,6 +1948,7 @@
 				OBJ_382 /* Function0.swift in Sources */,
 				11E531D7209B4EF400A78E8D /* At.swift in Sources */,
 				OBJ_383 /* Function1.swift in Sources */,
+				1116204820F37D1900685EC4 /* Id+Optics.swift in Sources */,
 				OBJ_384 /* FunctionK.swift in Sources */,
 				OBJ_385 /* Kleisli.swift in Sources */,
 				11E531CB209B2FEA00A78E8D /* MaybeInstances.swift in Sources */,
