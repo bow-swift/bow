@@ -37,6 +37,13 @@
 		1116206320F398D800685EC4 /* Try+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206120F398CB00685EC4 /* Try+Optics.swift */; };
 		1116206420F398D900685EC4 /* Try+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206120F398CB00685EC4 /* Try+Optics.swift */; };
 		1116206520F398D900685EC4 /* Try+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206120F398CB00685EC4 /* Try+Optics.swift */; };
+		1116206720F39E0700685EC4 /* Validated+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206620F39E0700685EC4 /* Validated+Optics.swift */; };
+		1116206820F39EBB00685EC4 /* Validated+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206620F39E0700685EC4 /* Validated+Optics.swift */; };
+		1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206620F39E0700685EC4 /* Validated+Optics.swift */; };
+		1116206A20F39EBC00685EC4 /* Validated+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206620F39E0700685EC4 /* Validated+Optics.swift */; };
+		1116206B20F39EC000685EC4 /* String+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116205F20F38A5C00685EC4 /* String+Optics.swift */; };
+		1116206C20F39EC100685EC4 /* String+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116205F20F38A5C00685EC4 /* String+Optics.swift */; };
+		1116206D20F39EC100685EC4 /* String+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116205F20F38A5C00685EC4 /* String+Optics.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -633,6 +640,7 @@
 		1116204E20F3820500685EC4 /* Maybe+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Maybe+Optics.swift"; sourceTree = "<group>"; };
 		1116205F20F38A5C00685EC4 /* String+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Optics.swift"; sourceTree = "<group>"; };
 		1116206120F398CB00685EC4 /* Try+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Try+Optics.swift"; sourceTree = "<group>"; };
+		1116206620F39E0700685EC4 /* Validated+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validated+Optics.swift"; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -867,6 +875,7 @@
 				1116204E20F3820500685EC4 /* Maybe+Optics.swift */,
 				1116205F20F38A5C00685EC4 /* String+Optics.swift */,
 				1116206120F398CB00685EC4 /* Try+Optics.swift */,
+				1116206620F39E0700685EC4 /* Validated+Optics.swift */,
 			);
 			path = STD;
 			sourceTree = "<group>";
@@ -1569,6 +1578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1116206820F39EBB00685EC4 /* Validated+Optics.swift in Sources */,
 				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
 				D6D624D42068178800739E2D /* Function0.swift in Sources */,
 				11C9B6D420DCF54A00AFD4AA /* FilterIndex.swift in Sources */,
@@ -1610,6 +1620,7 @@
 				D6D624F12068178800739E2D /* Yoneda.swift in Sources */,
 				D6D624F22068178800739E2D /* HigherKinds.swift in Sources */,
 				D6D624F32068178800739E2D /* NumberInstances.swift in Sources */,
+				1116206B20F39EC000685EC4 /* String+Optics.swift in Sources */,
 				D6D624F42068178800739E2D /* StringInstances.swift in Sources */,
 				11E531DB209B4FD200A78E8D /* BoundSetter.swift in Sources */,
 				D6D624F52068178800739E2D /* PartialApplication.swift in Sources */,
@@ -1733,6 +1744,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
 				D6D62565206841B300739E2D /* Function0.swift in Sources */,
 				11C9B6D520DCF54B00AFD4AA /* FilterIndex.swift in Sources */,
@@ -1774,6 +1786,7 @@
 				D6D62582206841B300739E2D /* Yoneda.swift in Sources */,
 				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
 				D6D62584206841B300739E2D /* NumberInstances.swift in Sources */,
+				1116206C20F39EC100685EC4 /* String+Optics.swift in Sources */,
 				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
 				11E531DC209B4FD300A78E8D /* BoundSetter.swift in Sources */,
 				D6D62586206841B300739E2D /* PartialApplication.swift in Sources */,
@@ -1831,6 +1844,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1116206A20F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
 				D6DBDE9B20684C38004F979F /* Function0.swift in Sources */,
 				11C9B6D620DCF54B00AFD4AA /* FilterIndex.swift in Sources */,
@@ -1872,6 +1886,7 @@
 				D6DBDEB820684C38004F979F /* Yoneda.swift in Sources */,
 				D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */,
 				D6DBDEBA20684C38004F979F /* NumberInstances.swift in Sources */,
+				1116206D20F39EC100685EC4 /* String+Optics.swift in Sources */,
 				D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */,
 				11E531DD209B4FD400A78E8D /* BoundSetter.swift in Sources */,
 				D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */,
@@ -2059,6 +2074,7 @@
 				OBJ_428 /* Composed.swift in Sources */,
 				11E531C5209B29EF00A78E8D /* BoolInstances.swift in Sources */,
 				OBJ_429 /* ComposedFoldable.swift in Sources */,
+				1116206720F39E0700685EC4 /* Validated+Optics.swift in Sources */,
 				OBJ_430 /* Eq.swift in Sources */,
 				11E531B6209AF80100A78E8D /* Optional.swift in Sources */,
 				OBJ_431 /* Foldable.swift in Sources */,
