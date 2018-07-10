@@ -20,6 +20,10 @@
 		1116207A20F4937400685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
 		1116207B20F4937500685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
 		1116207C20F4937600685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
+		1116208420F4971A00685EC4 /* EitherOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */; };
+		1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */; };
+		1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */; };
+		1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -611,6 +615,7 @@
 		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
 		1116207320F3AC1800685EC4 /* At+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "At+Optics.swift"; sourceTree = "<group>"; };
 		1116207820F4923E00685EC4 /* Each+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
+		1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherOpticsInstances.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -844,6 +849,14 @@
 			path = DSL;
 			sourceTree = "<group>";
 		};
+		1116208220F496E100685EC4 /* Instances */ = {
+			isa = PBXGroup;
+			children = (
+				1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */,
+			);
+			path = Instances;
+			sourceTree = "<group>";
+		};
 		11AC527120974B29008EC1E4 /* Optics */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +870,7 @@
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
 				11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */,
 				1116207220F3ABF200685EC4 /* DSL */,
+				1116208220F496E100685EC4 /* Instances */,
 				11E531D5209B4ECC00A78E8D /* Typeclasses */,
 			);
 			path = Optics;
@@ -1615,6 +1629,7 @@
 				1116207520F3AD7000685EC4 /* At+Optics.swift in Sources */,
 				D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */,
 				11E531BC209B148E00A78E8D /* Setter.swift in Sources */,
+				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
@@ -1775,6 +1790,7 @@
 				1116207620F3AD7000685EC4 /* At+Optics.swift in Sources */,
 				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
 				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
+				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
 				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
 				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
@@ -1869,6 +1885,7 @@
 				1116207720F3AD7100685EC4 /* At+Optics.swift in Sources */,
 				D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */,
 				11E531BE209B148F00A78E8D /* Setter.swift in Sources */,
+				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
@@ -2009,6 +2026,7 @@
 				OBJ_419 /* StateT.swift in Sources */,
 				OBJ_420 /* WriterT.swift in Sources */,
 				OBJ_421 /* Typeclass.swift in Sources */,
+				1116208420F4971A00685EC4 /* EitherOpticsInstances.swift in Sources */,
 				OBJ_422 /* Alternative.swift in Sources */,
 				OBJ_423 /* Applicative.swift in Sources */,
 				OBJ_424 /* ApplicativeError.swift in Sources */,
