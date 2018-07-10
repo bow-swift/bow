@@ -5,5 +5,5 @@ public protocol FilterIndex {
     associatedtype I
     associatedtype A
     
-    func filter(_ predicate : (I) -> Bool) -> Traversal<S, A>
+    func filter(_ predicate : @escaping (I) -> Bool) -> Traversal<S, A>
 }

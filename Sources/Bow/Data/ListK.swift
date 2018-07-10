@@ -107,6 +107,14 @@ public class ListK<A> : ListKOf<A> {
             return Maybe.none()
         }
     }
+    
+    public func getOrNone(_ i : Int) -> Maybe<A> {
+        if i >= 0 && i < list.count {
+            return Maybe<A>.some(list[i])
+        } else {
+            return Maybe<A>.none()
+        }
+    }
 }
 
 public extension Kind where F == ForListK {
