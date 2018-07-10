@@ -40,6 +40,10 @@
 		1116209920F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
 		1116209A20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
 		1116209B20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
+		1116209D20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
+		1116209E20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
+		1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
+		111620A020F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -636,6 +640,7 @@
 		1116208D20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyListOpticsInstances.swift; sourceTree = "<group>"; };
 		1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeOpticsInstances.swift; sourceTree = "<group>"; };
 		1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOpticsInstances.swift; sourceTree = "<group>"; };
+		1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryOpticsInstances.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -877,6 +882,7 @@
 				1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */,
 				1116208D20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift */,
 				1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */,
+				1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -1614,6 +1620,7 @@
 				111082CD2085DBF700C8563C /* Show.swift in Sources */,
 				D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */,
 				D6D624ED2068178800739E2D /* IO.swift in Sources */,
+				1116209E20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
 				D6D624EF2068178800739E2D /* Coyoneda.swift in Sources */,
 				11E531C1209B1CE700A78E8D /* Fold.swift in Sources */,
@@ -1779,6 +1786,7 @@
 				111082CE2085DBF800C8563C /* Show.swift in Sources */,
 				D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */,
 				D6D6257E206841B300739E2D /* IO.swift in Sources */,
+				1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
 				D6D62580206841B300739E2D /* Coyoneda.swift in Sources */,
 				11E531C2209B1CE800A78E8D /* Fold.swift in Sources */,
@@ -1878,6 +1886,7 @@
 				111082CF2085DBF800C8563C /* Show.swift in Sources */,
 				D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */,
 				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
+				111620A020F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
 				D6DBDEB620684C38004F979F /* Coyoneda.swift in Sources */,
 				11E531C3209B1CE900A78E8D /* Fold.swift in Sources */,
@@ -2017,6 +2026,7 @@
 				OBJ_385 /* Kleisli.swift in Sources */,
 				11E531CB209B2FEA00A78E8D /* MaybeInstances.swift in Sources */,
 				OBJ_386 /* KleisliOperator.swift in Sources */,
+				1116209D20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				OBJ_387 /* BooleanFunctions.swift in Sources */,
 				OBJ_388 /* Curry.swift in Sources */,
 				OBJ_389 /* Const.swift in Sources */,
