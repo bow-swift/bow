@@ -36,6 +36,10 @@
 		1116209420F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */; };
 		1116209520F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */; };
 		1116209620F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */; };
+		1116209820F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
+		1116209920F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
+		1116209A20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
+		1116209B20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -631,6 +635,7 @@
 		1116208820F4999D00685EC4 /* ListKOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListKOpticsInstances.swift; sourceTree = "<group>"; };
 		1116208D20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyListOpticsInstances.swift; sourceTree = "<group>"; };
 		1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeOpticsInstances.swift; sourceTree = "<group>"; };
+		1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOpticsInstances.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -871,6 +876,7 @@
 				1116208820F4999D00685EC4 /* ListKOpticsInstances.swift */,
 				1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */,
 				1116208D20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift */,
+				1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -1649,6 +1655,7 @@
 				D6D6250B2068178800739E2D /* MonadError.swift in Sources */,
 				1116207520F3AD7000685EC4 /* At+Optics.swift in Sources */,
 				D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */,
+				1116209920F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BC209B148E00A78E8D /* Setter.swift in Sources */,
 				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
@@ -1813,6 +1820,7 @@
 				D6D6259C206841B300739E2D /* MonadError.swift in Sources */,
 				1116207620F3AD7000685EC4 /* At+Optics.swift in Sources */,
 				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
+				1116209A20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
 				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
@@ -1911,6 +1919,7 @@
 				D6DBDED220684C38004F979F /* MonadError.swift in Sources */,
 				1116207720F3AD7100685EC4 /* At+Optics.swift in Sources */,
 				D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */,
+				1116209B20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BE209B148F00A78E8D /* Setter.swift in Sources */,
 				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
@@ -2043,6 +2052,7 @@
 				OBJ_412 /* HigherKinds.swift in Sources */,
 				1116209320F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				OBJ_413 /* NumberInstances.swift in Sources */,
+				1116209820F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				OBJ_414 /* StringInstances.swift in Sources */,
 				11E531D4209B4CB700A78E8D /* BoundSetter.swift in Sources */,
 				OBJ_415 /* PartialApplication.swift in Sources */,
