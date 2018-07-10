@@ -16,6 +16,10 @@
 		1116207520F3AD7000685EC4 /* At+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207320F3AC1800685EC4 /* At+Optics.swift */; };
 		1116207620F3AD7000685EC4 /* At+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207320F3AC1800685EC4 /* At+Optics.swift */; };
 		1116207720F3AD7100685EC4 /* At+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207320F3AC1800685EC4 /* At+Optics.swift */; };
+		1116207920F4923E00685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
+		1116207A20F4937400685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
+		1116207B20F4937500685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
+		1116207C20F4937600685EC4 /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -606,6 +610,7 @@
 		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
 		1116207320F3AC1800685EC4 /* At+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "At+Optics.swift"; sourceTree = "<group>"; };
+		1116207820F4923E00685EC4 /* Each+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -834,6 +839,7 @@
 			isa = PBXGroup;
 			children = (
 				1116207320F3AC1800685EC4 /* At+Optics.swift */,
+				1116207820F4923E00685EC4 /* Each+Optics.swift */,
 			);
 			path = DSL;
 			sourceTree = "<group>";
@@ -1617,6 +1623,7 @@
 				D6D625122068178800739E2D /* NonEmptyReducible.swift in Sources */,
 				D6D625132068178800739E2D /* Order.swift in Sources */,
 				11E531E0209B502F00A78E8D /* Index.swift in Sources */,
+				1116207A20F4937400685EC4 /* Each+Optics.swift in Sources */,
 				D6D625142068178800739E2D /* Reducible.swift in Sources */,
 				D6D625152068178800739E2D /* Semigroup.swift in Sources */,
 				D6D625162068178800739E2D /* SemigroupK.swift in Sources */,
@@ -1776,6 +1783,7 @@
 				D6D625A3206841B300739E2D /* NonEmptyReducible.swift in Sources */,
 				D6D625A4206841B300739E2D /* Order.swift in Sources */,
 				11E531E1209B503000A78E8D /* Index.swift in Sources */,
+				1116207B20F4937500685EC4 /* Each+Optics.swift in Sources */,
 				D6D625A5206841B300739E2D /* Reducible.swift in Sources */,
 				D6D625A6206841B300739E2D /* Semigroup.swift in Sources */,
 				D6D625A7206841B300739E2D /* SemigroupK.swift in Sources */,
@@ -1869,6 +1877,7 @@
 				D6DBDED920684C38004F979F /* NonEmptyReducible.swift in Sources */,
 				D6DBDEDA20684C38004F979F /* Order.swift in Sources */,
 				11E531E2209B503000A78E8D /* Index.swift in Sources */,
+				1116207C20F4937600685EC4 /* Each+Optics.swift in Sources */,
 				D6DBDEDB20684C38004F979F /* Reducible.swift in Sources */,
 				D6DBDEDC20684C38004F979F /* Semigroup.swift in Sources */,
 				D6DBDEDD20684C38004F979F /* SemigroupK.swift in Sources */,
@@ -2021,6 +2030,7 @@
 				OBJ_437 /* MonadError.swift in Sources */,
 				OBJ_438 /* MonadFilter.swift in Sources */,
 				11E531BB209B0BE300A78E8D /* Setter.swift in Sources */,
+				1116207920F4923E00685EC4 /* Each+Optics.swift in Sources */,
 				OBJ_439 /* MonadReader.swift in Sources */,
 				OBJ_440 /* MonadState.swift in Sources */,
 				OBJ_441 /* MonadWriter.swift in Sources */,
