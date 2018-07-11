@@ -3,7 +3,7 @@ import SwiftCheck
 @testable import Bow
 
 class ConstTest: XCTestCase {
-    var generator : (Int) -> ConstOf<Int, Int> {
+    var generator : (Int) -> Const<Int, Int> {
         return { a in Const<Int, Int>.pure(a) }
     }
     
@@ -43,6 +43,10 @@ class ConstTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Const.show(), generator: { a in Const<Int, Int>.pure(a) })
+        ShowLaws.check(show: Const.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ConstPartial<Int>>.check(foldable: Const<Int, Int>.foldable(), generator: self.generator)
     }
 }
