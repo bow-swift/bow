@@ -2,8 +2,12 @@ import XCTest
 @testable import Bow
 
 class IorTest: XCTestCase {
-    var generator : (Int) -> IorOf<Int, Int> {
-        return { a in Ior<Int, Int>.right(a) }
+    var generator = { (a : Int) -> Ior<Int, Int> in
+        switch a % 3 {
+        case 0 : return Ior.left(a)
+        case 1: return Ior.right(a)
+        default: return Ior.both(a, a)
+        }
     }
     
     let eq = Ior.eq(Int.order, Int.order)
@@ -26,12 +30,10 @@ class IorTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Ior.show(), generator: { (a : Int) -> Ior<Int, Int> in
-            switch a % 3 {
-            case 0 : return Ior.left(a)
-            case 1: return Ior.right(a)
-            default: return Ior.both(a, a)
-            }
-        })
+        ShowLaws.check(show: Ior.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<IorPartial<Int>>.check(foldable: Ior<Int, Int>.foldable(), generator: self.generator)
     }
 }
