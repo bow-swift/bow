@@ -194,6 +194,10 @@ public extension Maybe {
     public static func monadFilter() -> MaybeMonadFilter {
         return MaybeMonadFilter()
     }
+    
+    public static func foldable() -> MaybeFoldable {
+        return MaybeFoldable()
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -286,5 +290,17 @@ public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
 public class MaybeMonadFilter : MaybeMonad, MonadFilter {
     public func empty<A>() -> MaybeOf<A> {
         return Maybe.empty()
+    }
+}
+
+public class MaybeFoldable : Foldable {
+    public typealias F = ForMaybe
+    
+    public func foldL<A, B>(_ fa: Kind<ForMaybe, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: Kind<ForMaybe, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldR(b, f)
     }
 }
