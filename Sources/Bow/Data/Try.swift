@@ -168,6 +168,10 @@ public extension Try {
     public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
         return TryEq<A, EqA>(eqa)
     }
+    
+    public static func foldable() -> TryFoldable {
+        return TryFoldable()
+    }
 }
 
 public class TryFunctor : Functor {
@@ -223,5 +227,17 @@ public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         let b = Try.fix(b)
         return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
                       { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+    }
+}
+
+public class TryFoldable : Foldable {
+    public typealias F = ForTry
+    
+    public func foldL<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldR(b, f)
     }
 }
