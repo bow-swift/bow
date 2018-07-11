@@ -3,7 +3,7 @@ import XCTest
 
 class CoproductTest: XCTestCase {
     
-    var generator : (Int) -> CoproductOf<ForId, ForId, Int> {
+    var generator : (Int) -> Coproduct<ForId, ForId, Int> {
         return { a in Coproduct<ForId, ForId, Int>(Either.pure(Id.pure(a))) }
     }
     
@@ -20,5 +20,9 @@ class CoproductTest: XCTestCase {
     
     func testComonadLaws() {
         ComonadLaws<CoproductPartial<ForId, ForId>>.check(comonad: Coproduct<ForId, ForId, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: self.generator, eq: self.eq)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<CoproductPartial<ForId, ForId>>.check(foldable: Coproduct<ForId, ForId, Int>.foldable(Id<Int>.foldable(), Id<Int>.foldable()), generator: self.generator)
     }
 }
