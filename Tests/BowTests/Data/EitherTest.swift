@@ -47,6 +47,11 @@ class EitherTest: XCTestCase {
         ShowLaws.check(show: Either.show(), generator: { a in (a % 2 == 0) ? Either<Int, Int>.pure(a) : Either<Int, Int>.left(a) })
     }
     
+    func testFoldableLaws() {
+        FoldableLaws<EitherPartial<Int>>.check(foldable: Either<Int, Int>.foldable(),
+                                               generator: self.generator)
+    }
+    
     func testCheckers() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
