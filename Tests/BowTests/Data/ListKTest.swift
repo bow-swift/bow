@@ -36,6 +36,15 @@ class ListKTest: XCTestCase {
                 c: ListK<Int>.pure(c),
                 eq: self.eq)
         }
+        
+        property("ListK semigroupK algebra semigroup laws") <- forAll() { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(
+                semigroup: ListK<Int>.semigroupK().algebra(),
+                a: ListK<Int>.pure(a),
+                b: ListK<Int>.pure(b),
+                c: ListK<Int>.pure(c),
+                eq: self.eq)
+        }
     }
     
     func testSemigroupKLaws() {
