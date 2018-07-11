@@ -55,6 +55,10 @@ class ListKTest: XCTestCase {
         property("ListK monoid laws") <- forAll() { (a : Int) in
             return MonoidLaws<ListKOf<Int>>.check(monoid: ListK<Int>.monoid(), a: ListK<Int>.pure(a), eq: self.eq)
         }
+        
+        property("ListK monoidK algebra monoid laws") <- forAll() { (a : Int) in
+            return MonoidLaws<ListKOf<Int>>.check(monoid: ListK<Int>.monoidK().algebra(), a: ListK<Int>.pure(a), eq: self.eq)
+        }
     }
     
     func testMonoidKLaws() {
