@@ -59,4 +59,8 @@ class ListKTest: XCTestCase {
     func testMonadFilterLaws() {
         MonadFilterLaws<ForListK>.check(monadFilter: ListK<Int>.monadFilter(), generator: self.generator, eq: self.eq)
     }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForListK>.check(foldable: ListK<Int>.foldable(), generator: self.generator)
+    }
 }
