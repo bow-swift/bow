@@ -3,8 +3,8 @@ import XCTest
 
 class ValidatedTest: XCTestCase {
     
-    var generator : (Int) -> ValidatedOf<Int, Int> {
-        return { a in Validated<Int, Int>.pure(a) }
+    var generator : (Int) -> Validated<Int, Int> {
+        return { a in (a % 2 == 0) ? Validated.valid(a) : Validated.invalid(a) }
     }
     
     let eq = Validated.eq(Int.order, Int.order)
@@ -27,6 +27,10 @@ class ValidatedTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Validated.show(), generator: { a in (a % 2 == 0) ? Validated.valid(a) : Validated.invalid(a) })
+        ShowLaws.check(show: Validated.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ValidatedPartial<Int>>.check(foldable: Validated<Int, Int>.foldable(), generator: self.generator)
     }
 }
