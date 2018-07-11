@@ -21,6 +21,9 @@
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
+		11635BB220F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB320F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB420F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -613,6 +616,7 @@
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
+		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -994,6 +998,7 @@
 				111620A620F606F300685EC4 /* FoldableLaws.swift */,
 				OBJ_129 /* FunctorFilterLaws.swift */,
 				OBJ_130 /* FunctorLaws.swift */,
+				11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */,
 				OBJ_131 /* MonadErrorLaws.swift */,
 				OBJ_132 /* MonadFilterLaws.swift */,
 				OBJ_133 /* MonadLaws.swift */,
@@ -1528,6 +1533,7 @@
 				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
 				D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */,
 				11C9B6B720DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB320F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0093209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007E209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1689,6 +1695,7 @@
 				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
 				D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */,
 				11C9B6B820DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB420F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0094209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007F209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1942,6 +1949,7 @@
 				OBJ_287 /* MonoidLaws.swift in Sources */,
 				OBJ_288 /* OrderLaws.swift in Sources */,
 				11C9B6B620DBB34C00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB220F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0092209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007D209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				OBJ_289 /* SemigroupKLaws.swift in Sources */,
