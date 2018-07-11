@@ -15,6 +15,9 @@
 		111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
 		111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
 		111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -605,6 +608,7 @@
 		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
+		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -979,6 +983,7 @@
 			children = (
 				OBJ_125 /* ApplicativeErrorLaws.swift */,
 				OBJ_126 /* ApplicativeLaws.swift */,
+				111620AE20F6131E00685EC4 /* BimonadLaws.swift */,
 				OBJ_127 /* ComonadLaws.swift */,
 				OBJ_128 /* EqLaws.swift */,
 				111620A620F606F300685EC4 /* FoldableLaws.swift */,
@@ -1469,6 +1474,7 @@
 				D6D624472068141800739E2D /* KleisliTest.swift in Sources */,
 				D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D624492068141800739E2D /* CurryTest.swift in Sources */,
+				111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D6244A2068141800739E2D /* ConstTest.swift in Sources */,
 				D6D6244B2068141800739E2D /* CoproductTest.swift in Sources */,
 				D6D6244C2068141800739E2D /* EitherTest.swift in Sources */,
@@ -1628,6 +1634,7 @@
 				D6D62526206817A700739E2D /* KleisliTest.swift in Sources */,
 				D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D62528206817A700739E2D /* CurryTest.swift in Sources */,
+				111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D62529206817A700739E2D /* ConstTest.swift in Sources */,
 				D6D6252A206817A700739E2D /* CoproductTest.swift in Sources */,
 				D6D6252B206817A700739E2D /* EitherTest.swift in Sources */,
@@ -1879,6 +1886,7 @@
 				OBJ_249 /* KleisliTest.swift in Sources */,
 				OBJ_250 /* BooleanFunctionsTest.swift in Sources */,
 				OBJ_251 /* CurryTest.swift in Sources */,
+				111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				OBJ_252 /* ConstTest.swift in Sources */,
 				OBJ_253 /* CoproductTest.swift in Sources */,
 				OBJ_254 /* EitherTest.swift in Sources */,
