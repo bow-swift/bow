@@ -37,4 +37,8 @@ class IdTest: XCTestCase {
     func testFoldableLaws() {
         FoldableLaws<ForId>.check(foldable: Id<Int>.foldable(), generator: self.generator)
     }
+    
+    func testBimonadLaws() {
+        
+    }
 }
