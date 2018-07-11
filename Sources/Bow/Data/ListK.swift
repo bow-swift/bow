@@ -26,9 +26,8 @@ public class ListK<A> : ListKOf<A> {
                             let newBuf = buf + [b]
                             return go(newBuf, f, ListK<Either<A, B>>([Either<A, B>](v.list.dropFirst())))
                       })
-        } else {
-            return buf
         }
+        return buf
     }
     
     public static func tailRecM<B>(_ a : A, _ f : (A) -> ListKOf<Either<A, B>>) -> ListK<B> {
@@ -101,11 +100,8 @@ public class ListK<A> : ListKOf<A> {
     }
     
     public func firstOrNone() -> Maybe<A> {
-        if let first = self.list.first {
-            return Maybe.some(first)
-        } else {
-            return Maybe.none()
-        }
+        if let first = asArray.first { return Maybe.some(first) }
+        return Maybe.none()
     }
 }
 

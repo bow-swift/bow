@@ -72,4 +72,8 @@ class ListKTest: XCTestCase {
     func testFoldableLaws() {
         FoldableLaws<ForListK>.check(foldable: ListK<Int>.foldable(), generator: self.generator)
     }
+    
+    func testMonadCombineLaws() {
+        MonadCombineLaws<ForListK>.check(monadCombine: ListK<Int>.monadCombine(), eq: self.eq)
+    }
 }
