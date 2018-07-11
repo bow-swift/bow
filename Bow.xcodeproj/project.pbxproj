@@ -12,6 +12,9 @@
 		111082CE2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082CF2085DBF800C8563C /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
 		111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
+		111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -601,6 +604,7 @@
 /* Begin PBXFileReference section */
 		111082CB2085D9DD00C8563C /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		111082D02085DD4D00C8563C /* ShowLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLaws.swift; sourceTree = "<group>"; };
+		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -977,6 +981,7 @@
 				OBJ_126 /* ApplicativeLaws.swift */,
 				OBJ_127 /* ComonadLaws.swift */,
 				OBJ_128 /* EqLaws.swift */,
+				111620A620F606F300685EC4 /* FoldableLaws.swift */,
 				OBJ_129 /* FunctorFilterLaws.swift */,
 				OBJ_130 /* FunctorLaws.swift */,
 				OBJ_131 /* MonadErrorLaws.swift */,
@@ -1493,6 +1498,7 @@
 				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
 				11FE0086209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */,
 				D6D624632068141800739E2D /* ComonadLaws.swift in Sources */,
 				D6D624642068141800739E2D /* EqLaws.swift in Sources */,
@@ -1651,6 +1657,7 @@
 				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
 				11FE0087209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */,
 				D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */,
 				D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */,
 				D6D62543206817A700739E2D /* EqLaws.swift in Sources */,
@@ -1901,6 +1908,7 @@
 				OBJ_274 /* WriterTTest.swift in Sources */,
 				11FE0085209C976F00183AF6 /* LensTest.swift in Sources */,
 				OBJ_275 /* ApplicativeErrorLaws.swift in Sources */,
+				111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				OBJ_276 /* ApplicativeLaws.swift in Sources */,
 				OBJ_277 /* ComonadLaws.swift in Sources */,
 				OBJ_278 /* EqLaws.swift in Sources */,
