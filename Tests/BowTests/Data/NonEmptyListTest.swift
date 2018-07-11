@@ -57,4 +57,28 @@ class NonEmptyListTest: XCTestCase {
     func testFoldableLaws() {
         FoldableLaws<ForNonEmptyList>.check(foldable: NonEmptyList<Int>.foldable(), generator: self.generator)
     }
+    
+    private let nelGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
+    
+    func testConcatenation() {
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.nelGenerator, self.nelGenerator) { (x : ArrayOf<Int>, y : ArrayOf<Int>) in
+            let a = NonEmptyList.fromArrayUnsafe(x.getArray)
+            let b = NonEmptyList.fromArrayUnsafe(y.getArray)
+            return a.count + b.count == (a + b).count
+        }
+        
+        property("Adding one element increases length in one") <- forAll(self.nelGenerator, Int.arbitrary) { (array : ArrayOf<Int>, element : Int) in
+            let nel = NonEmptyList.fromArrayUnsafe(array.getArray)
+            return (nel + element).count == nel.count + 1
+        }
+        
+        property("Result of concatenation contains all items from the original lists") <- forAll(self.nelGenerator, self.nelGenerator) {
+            (x : ArrayOf<Int>, y : ArrayOf<Int>) in
+            let a = NonEmptyList.fromArrayUnsafe(x.getArray)
+            let b = NonEmptyList.fromArrayUnsafe(y.getArray)
+            let concatenation = a + b
+            return concatenation.containsAll(elements: a.all()) &&
+                    concatenation.containsAll(elements: b.all())
+        }
+    }
 }
