@@ -21,11 +21,8 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public static func fromOption(_ a : A?) -> Maybe<A> {
-        if let a = a {
-            return some(a)
-        } else {
-            return none()
-        }
+        if let a = a { return some(a) }
+        return none()
     }
     
     public static func tailRecM<B>(_ a : A, _ f : (A) -> Maybe<Either<A, B>>) -> Maybe<B> {
@@ -98,7 +95,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func filter(_ predicate : (A) -> Bool) -> Maybe<A> {
-        return fold({ Maybe<A>.none() },
+        return fold(constant(Maybe<A>.none()),
                     { a in predicate(a) ? Maybe<A>.some(a) : Maybe<A>.none() })
     }
     
@@ -107,7 +104,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func exists(_ predicate : (A) -> Bool) -> Bool {
-        return fold({ false }, predicate)
+        return fold(constant(false), predicate)
     }
     
     public func forall(_ predicate : (A) -> Bool) -> Bool {
@@ -131,7 +128,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func toOption() -> A? {
-        return fold({ nil }, id)
+        return fold(constant(nil), id)
     }
 }
 
