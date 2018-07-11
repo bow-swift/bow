@@ -14,7 +14,7 @@ public extension Foldable {
     
     public func reduceLeftToMaybe<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Maybe<B> {
         return foldL(fa, Maybe.empty(), { maybe, a in
-            maybe.fold(constF(Maybe<B>.some(f(a))),
+            maybe.fold(constant(Maybe<B>.some(f(a))),
                        { b in Maybe<B>.some(g(b, a)) })
         })
     }
@@ -92,7 +92,7 @@ public extension Foldable {
         return (foldM(fa, Int64(0), { i, a in
             (i == index) ? Either<A, Int64>.left(a) : Either<A, Int64>.right(i + 1)
         }, Either<A, Int64>.monad() as EitherMonad<A>) as! Either<A, Int64>)
-            .fold(Maybe<A>.some, constF(Maybe<A>.none()))
+            .fold(Maybe<A>.some, constant(Maybe<A>.none()))
     }
     
     public func size<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> Int64 where Mono : Monoid, Mono.A == Int64 {

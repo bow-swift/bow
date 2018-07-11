@@ -8,8 +8,8 @@ public extension MonadCombine {
     }
     
     public func separate<G, A, B, Bifold>(_ fgab : Kind<F, Kind2<G, A, B>>, _ bifoldable : Bifold) -> (Kind<F, A>, Kind<F, B>) where Bifold : Bifoldable, Bifold.F == G {
-        let asep = flatMap(fgab, { gab in bifoldable.bifoldMap(gab, self.pure, constF(self.empty()), self.algebra()) })
-        let bsep = flatMap(fgab, { gab in bifoldable.bifoldMap(gab, constF(self.empty()), self.pure, self.algebra()) } )
+        let asep = flatMap(fgab, { gab in bifoldable.bifoldMap(gab, self.pure, constant(self.empty()), self.algebra()) })
+        let bsep = flatMap(fgab, { gab in bifoldable.bifoldMap(gab, constant(self.empty()), self.pure, self.algebra()) } )
         return (asep, bsep)
     }
 }

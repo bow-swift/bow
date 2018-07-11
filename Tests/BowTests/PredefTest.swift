@@ -12,27 +12,27 @@ class PredefTest : XCTestCase {
     
     func testConstF() {
         property("ConstF must create an argument-less function that always return a constant value") <- forAll() { (a : Int) in
-            let f : () -> Int = constF(a)
+            let f : () -> Int = constant(a)
             return f() == a
         }
         
         property("ConstF must create a one argument function that always return a constant value") <- forAll() { (a : Int, b : Int) in
-            let f : (Int) -> Int = constF(a)
+            let f : (Int) -> Int = constant(a)
             return f(b) == a
         }
         
         property("ConstF must create a two argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int) in
-            let f : (Int, Int) -> Int = constF(a)
+            let f : (Int, Int) -> Int = constant(a)
             return f(b, c) == a
         }
         
         property("ConstF must create a three argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int) in
-            let f : (Int, Int, Int) -> Int = constF(a)
+            let f : (Int, Int, Int) -> Int = constant(a)
             return f(b, c, d) == a
         }
         
         property("ConstF must create a four argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int) in
-            let f : (Int, Int, Int, Int) -> Int = constF(a)
+            let f : (Int, Int, Int, Int) -> Int = constant(a)
             return f(b, c, d, e) == a
         }
     }
@@ -71,9 +71,9 @@ class PredefTest : XCTestCase {
         }
         
         property("Function composition is associative") <- forAll() { (a : Int, b : Int, c : Int, x : Int) in
-            let f : (Int) -> Int = constF(a)
-            let g : (Int) -> Int = constF(b)
-            let h : (Int) -> Int = constF(c)
+            let f : (Int) -> Int = constant(a)
+            let g : (Int) -> Int = constant(b)
+            let h : (Int) -> Int = constant(c)
             
             return ((h <<< g) <<< f)(x) == (h <<< (g <<< f))(x)
         }

@@ -11,7 +11,7 @@ public class FirstMaybeMonoid<B> : Monoid {
     }
     
     public func combine(_ a: Const<Maybe<B>, First>, _ b: Const<Maybe<B>, First>) -> Const<Maybe<B>, First> {
-        return a.value.fold(constF(false), constF(true)) ? a : b
+        return a.value.fold(constant(false), constant(true)) ? a : b
     }
 }
 
@@ -23,6 +23,6 @@ public class LastMaybeMonoid<B> : Monoid {
     }
     
     public func combine(_ a: Const<Maybe<B>, Last>, _ b: Const<Maybe<B>, Last>) -> Const<Maybe<B>, Last> {
-        return b.value.fold(constF(false), constF(true)) ? b : a
+        return b.value.fold(constant(false), constant(true)) ? b : a
     }
 }

@@ -133,7 +133,7 @@ public class WriterT<F, W, A> : WriterTOf<F, W, A> {
     }
     
     public func reset<Mono, Mon>(_ monoid : Mono, _ monad : Mon) -> WriterT<F, W, A> where Mono : Monoid, Mono.A == W, Mon : Monad, Mon.F == F {
-        return mapAcc(constF(monoid.empty), monad)
+        return mapAcc(constant(monoid.empty), monad)
     }
 }
 

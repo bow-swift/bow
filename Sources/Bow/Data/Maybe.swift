@@ -29,7 +29,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : (A) -> Maybe<Either<A, B>>) -> Maybe<B> {
-        return f(a).fold(constF(Maybe<B>.none()),
+        return f(a).fold(constant(Maybe<B>.none()),
                          { either in
                             either.fold({ left in tailRecM(left, f) },
                                         Maybe<B>.some)
@@ -80,7 +80,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return self.fold(constF(b),
+        return self.fold(constant(b),
                          { a in f(a, b) })
     }
     
@@ -115,7 +115,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return getOrElse(constF(defaultValue))
+        return getOrElse(constant(defaultValue))
     }
     
     public func getOrElse(_ defaultValue : () -> A) -> A {
@@ -123,7 +123,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func orElse(_ defaultValue : Maybe<A>) -> Maybe<A> {
-        return orElse(constF(defaultValue))
+        return orElse(constant(defaultValue))
     }
     
     public func orElse(_ defaultValue : () -> Maybe<A>) -> Maybe<A> {
@@ -235,8 +235,8 @@ public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG
     public func combine(_ a: MaybeOf<R>, _ b: MaybeOf<R>) -> MaybeOf<R> {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
-        return a.fold(constF(b),
-                      { aSome in b.fold(constF(a),
+        return a.fold(constant(b),
+                      { aSome in b.fold(constant(a),
                                         { bSome in Maybe.some(semigroup.combine(aSome, bSome)) })
                       })
     }
@@ -272,8 +272,8 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     public func eqv(_ a: MaybeOf<R>, _ b: MaybeOf<R>) -> Bool {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
-        return a.fold({ b.fold(constF(true), constF(false)) },
-                      { aSome in b.fold(constF(false), { bSome in eqr.eqv(aSome, bSome) })})
+        return a.fold({ b.fold(constant(true), constant(false)) },
+                      { aSome in b.fold(constant(false), { bSome in eqr.eqv(aSome, bSome) })})
     }
 }
 

@@ -22,7 +22,7 @@ class ApplicativeLaws<F> {
     
     private static func homomorphism<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("homomorphism") <- forAll() { (a : Int, b : Int) in
-            let f : (Int) -> Int = constF(b)
+            let f : (Int) -> Int = constant(b)
             return eq.eqv(applicative.ap(applicative.pure(a), applicative.pure(f)),
                           applicative.pure(f(a)))
         }
@@ -30,7 +30,7 @@ class ApplicativeLaws<F> {
     
     private static func interchange<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("interchange") <- forAll() { (a : Int, b : Int) in
-            let fa = applicative.pure(constF(a) as (Int) -> Int)
+            let fa = applicative.pure(constant(a) as (Int) -> Int)
             return eq.eqv(applicative.ap(applicative.pure(b), fa),
                           applicative.ap(fa, applicative.pure({ (x : (Int) -> Int) in x(a) } )))
         }
@@ -38,7 +38,7 @@ class ApplicativeLaws<F> {
     
     private static func mapDerived<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("mad derived") <- forAll() { (a : Int, b : Int) in
-            let f : (Int) -> Int = constF(b)
+            let f : (Int) -> Int = constant(b)
             let fa = applicative.pure(a)
             return eq.eqv(applicative.map(fa, f),
                           applicative.ap(fa, applicative.pure(f)))

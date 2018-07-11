@@ -56,7 +56,7 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     
     public init(modify : @escaping (@escaping (A) -> B) -> (S) -> T) {
         self.modifyFunc = { s, f in modify(f)(s) }
-        self.setFunc = { s, b in modify(constF(b))(s) }
+        self.setFunc = { s, b in modify(constant(b))(s) }
     }
     
     public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {

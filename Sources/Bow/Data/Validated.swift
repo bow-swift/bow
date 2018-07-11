@@ -45,7 +45,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public var isValid : Bool {
-        return fold(constF(false), constF(true))
+        return fold(constant(false), constant(true))
     }
     
     public var isInvalid : Bool {
@@ -53,7 +53,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public func exists(_ predicate : (A) -> Bool) -> Bool {
-        return fold(constF(false), predicate)
+        return fold(constant(false), predicate)
     }
     
     public func toEither() -> Either<E, A> {
@@ -61,11 +61,11 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public func toMaybe() -> Maybe<A> {
-        return fold(constF(Maybe.none()), Maybe.some)
+        return fold(constant(Maybe.none()), Maybe.some)
     }
     
     public func toList() -> [A] {
-        return fold(constF([]), { a in [a] })
+        return fold(constant([]), { a in [a] })
     }
     
     public func withEither<EE, B>(_ f : (Either<E, A>) -> Either<EE, B>) -> Validated<EE, B> {
@@ -93,11 +93,11 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
-        return fold(constF(b), { a in f(b, a) })
+        return fold(constant(b), { a in f(b, a) })
     }
     
     public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B>{
-        return fold(constF(b), { a in f(a, b) })
+        return fold(constant(b), { a in f(a, b) })
     }
     
     public func swap() -> Validated<A, E> {
@@ -105,7 +105,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return fold(constF(defaultValue), id)
+        return fold(constant(defaultValue), id)
     }
     
     public func valueOr(_ f : (E) -> A) -> A {
@@ -119,7 +119,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
     }
     
     public func orElse(_ defaultValue : Validated<E, A>) -> Validated<E, A> {
-        return fold(constF(defaultValue), Validated.valid)
+        return fold(constant(defaultValue), Validated.valid)
     }
     
     public func handleLeftWith(_ f : (E) -> Validated<E, A>) -> Validated<E, A> {
@@ -272,7 +272,7 @@ public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : 
     public func eqv(_ a: ValidatedOf<L, R>, _ b: ValidatedOf<L, R>) -> Bool {
         let a = Validated.fix(a)
         let b = Validated.fix(b)
-        return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constF(false))},
-                      { aValid in b.fold(constF(false), { bValid in eqr.eqv(aValid, bValid) })})
+        return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constant(false))},
+                      { aValid in b.fold(constant(false), { bValid in eqr.eqv(aValid, bValid) })})
     }
 }

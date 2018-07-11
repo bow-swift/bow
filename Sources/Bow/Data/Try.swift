@@ -63,12 +63,12 @@ public class Try<A> : TryOf<A> {
     }
     
     public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
-        return fold(constF(b),
+        return fold(constant(b),
                     { a in f(b, a) })
     }
     
     public func foldR<B>(_ lb : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fold(constF(lb),
+        return fold(constant(lb),
                     { a in f(a, lb) })
     }
     
@@ -103,7 +103,7 @@ public class Try<A> : TryOf<A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return fold(constF(defaultValue), id)
+        return fold(constant(defaultValue), id)
     }
     
     public func recoverWith(_ f : (Error) -> Try<A>) -> Try<A> {
@@ -221,7 +221,7 @@ public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
         let a = Try.fix(a)
         let b = Try.fix(b)
-        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
-                      { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
+                      { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
     }
 }

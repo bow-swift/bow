@@ -66,25 +66,25 @@ public class Ior<A, B> : IorOf<A, B> {
     }
     
     public var isLeft : Bool {
-        return fold(constF(true), constF(false), constF(false))
+        return fold(constant(true), constant(false), constant(false))
     }
     
     public var isRight : Bool {
-        return fold(constF(false), constF(true), constF(false))
+        return fold(constant(false), constant(true), constant(false))
     }
     
     public var isBoth : Bool {
-        return fold(constF(false), constF(false), constF(true))
+        return fold(constant(false), constant(false), constant(true))
     }
     
     public func foldL<C>(_ c : C, _ f : (C, B) -> C) -> C {
-        return fold(constF(c),
+        return fold(constant(c),
                     { b in f(c, b) },
                     { _, b in f(c, b) })
     }
     
     public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
-        return fold(constF(c),
+        return fold(constant(c),
                     { b in f(b, c) },
                     { _, b in f(b, c) })
     }
@@ -157,7 +157,7 @@ public class Ior<A, B> : IorOf<A, B> {
     }
     
     public func getOrElse(_ defaultValue : B) -> B {
-        return fold(constF(defaultValue),
+        return fold(constant(defaultValue),
                     id,
                     { _, b in b })
     }
@@ -291,13 +291,13 @@ public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, Eq
         let a = Ior.fix(a)
         let b = Ior.fix(b)
         return a.fold({ aLeft in
-            b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false), constF(false))
+            b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false), constant(false))
         },
                       { aRight in
-            b.fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }, constF(false))
+            b.fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }, constant(false))
         },
                       { aLeft, aRight in
-            b.fold(constF(false), constF(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
+            b.fold(constant(false), constant(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
         })
     }
 }
