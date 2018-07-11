@@ -4,7 +4,7 @@ import SwiftCheck
 
 class NonEmptyListTest: XCTestCase {
     
-    var generator : (Int) -> NonEmptyListOf<Int> {
+    var generator : (Int) -> NonEmptyList<Int> {
         return { a in NonEmptyList.pure(a) }
     }
     
@@ -47,6 +47,10 @@ class NonEmptyListTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: NonEmptyList.show(), generator: { a in NonEmptyList(head: a, tail: [a, a])})
+        ShowLaws.check(show: NonEmptyList.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForNonEmptyList>.check(foldable: NonEmptyList<Int>.foldable(), generator: self.generator)
     }
 }
