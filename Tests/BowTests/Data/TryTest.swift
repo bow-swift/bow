@@ -3,8 +3,8 @@ import XCTest
 
 class TryTest: XCTestCase {
     
-    var generator : (Int) -> TryOf<Int> {
-        return { a in Try.pure(a) }
+    var generator : (Int) -> Try<Int> {
+        return { a in (a % 2 == 0) ? Try.invoke(constant(a)) : Try.invoke({ throw TryError.illegalState }) }
     }
     
     let eq = Try.eq(Int.order)
@@ -35,6 +35,10 @@ class TryTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Try.show(), generator: { a in (a % 2 == 0) ? Try.success(a) : Try.failure(TryError.illegalState) })
+        ShowLaws.check(show: Try.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForTry>.check(foldable: Try<Int>.foldable(), generator: self.generator)
     }
 }
