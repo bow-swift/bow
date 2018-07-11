@@ -99,4 +99,8 @@ class StateTTest: XCTestCase {
             eq: StateTPointEq(),
             eqUnit: StateTIdUnitEq())
     }
+    
+    func testMonadCombineLaws() {
+        MonadCombineLaws<StateTPartial<ForListK, Int>>.check(monadCombine: StateT<ForListK, Int, Int>.monadCombine(ListK<Int>.monadCombine()), eq: StateTListKEq())
+    }
 }
