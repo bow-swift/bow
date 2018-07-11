@@ -11,27 +11,27 @@ class PredefTest : XCTestCase {
     }
     
     func testConstF() {
-        property("ConstF must create an argument-less function that always return a constant value") <- forAll() { (a : Int) in
+        property("constant must create an argument-less function that always return a constant value") <- forAll() { (a : Int) in
             let f : () -> Int = constant(a)
             return f() == a
         }
         
-        property("ConstF must create a one argument function that always return a constant value") <- forAll() { (a : Int, b : Int) in
+        property("constant must create a one argument function that always return a constant value") <- forAll() { (a : Int, b : Int) in
             let f : (Int) -> Int = constant(a)
             return f(b) == a
         }
         
-        property("ConstF must create a two argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int) in
+        property("constant must create a two argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int) in
             let f : (Int, Int) -> Int = constant(a)
             return f(b, c) == a
         }
         
-        property("ConstF must create a three argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int) in
+        property("constant must create a three argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int) in
             let f : (Int, Int, Int) -> Int = constant(a)
             return f(b, c, d) == a
         }
         
-        property("ConstF must create a four argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int) in
+        property("constant must create a four argument function that always return a constant value") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int) in
             let f : (Int, Int, Int, Int) -> Int = constant(a)
             return f(b, c, d, e) == a
         }
