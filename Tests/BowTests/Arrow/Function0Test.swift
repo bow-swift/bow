@@ -29,4 +29,9 @@ class Function0Test: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<ForFunction0>.check(comonad: Function0<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
+    
+    func testBimonadLaws() {
+        MonadLaws<ForFunction0>.check(monad: Function0<Int>.bimonad(), eq: self.eq)
+        ComonadLaws<ForFunction0>.check(comonad: Function0<Int>.bimonad(), generator: self.generator, eq: self.eq)
+    }
 }
