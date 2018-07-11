@@ -3,7 +3,7 @@ import SwiftCheck
 @testable import Bow
 
 class IdTest: XCTestCase {
-    var generator : (Int) -> IdOf<Int> {
+    var generator : (Int) -> Id<Int> {
         return { a in Id<Int>.pure(a) }
     }
     
@@ -31,6 +31,10 @@ class IdTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Id.show(), generator: { a in Id.pure(a) })
+        ShowLaws.check(show: Id.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForId>.check(foldable: Id<Int>.foldable(), generator: self.generator)
     }
 }
