@@ -39,6 +39,6 @@ class IdTest: XCTestCase {
     }
     
     func testBimonadLaws() {
-        
+        BimonadLaws<ForId>.check(bimonad: Id<Int>.bimonad(), generator: self.generator, eq: self.eq)
     }
 }
