@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class ValidatedTest: XCTestCase {
@@ -24,6 +25,17 @@ class ValidatedTest: XCTestCase {
     
     func testSemigroupKLaws() {
         SemigroupKLaws<ValidatedPartial<Int>>.check(semigroupK: Validated<Int, Int>.semigroupK(Int.sumMonoid), generator: self.generator, eq: self.eq)
+    }
+    
+    func testSemigroupLaws() {
+        property("Validated semigroupK algebra semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(
+                semigroup: Validated<Int, Int>.semigroupK(Int.sumMonoid).algebra(),
+                a: Validated.valid(a),
+                b: Validated.valid(b),
+                c: Validated.valid(c),
+                eq: self.eq)
+        }
     }
     
     func testShowLaws() {
