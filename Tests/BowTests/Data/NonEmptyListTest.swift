@@ -44,6 +44,15 @@ class NonEmptyListTest: XCTestCase {
                     c: NonEmptyList<Int>.pure(c),
                     eq: self.eq)
         }
+        
+        property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws<NonEmptyListOf<Int>>.check(
+                semigroup: NonEmptyList<Int>.semigroupK().algebra(),
+                a: NonEmptyList<Int>.pure(a),
+                b: NonEmptyList<Int>.pure(b),
+                c: NonEmptyList<Int>.pure(c),
+                eq: self.eq)
+        }
     }
     
     func testSemigroupKLaws() {
