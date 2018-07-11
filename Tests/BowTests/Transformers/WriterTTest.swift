@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class WriterTTest: XCTestCase {
@@ -33,11 +34,29 @@ class WriterTTest: XCTestCase {
             eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
+    func testSemigroupLaws() {
+        property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(semigroup: WriterT<ForListK, Int, Int>.semigroupK(ListK<Int>.semigroupK()).algebra(),
+                                       a: WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()),
+                                       b: WriterT.pure(b, Int.sumMonoid, ListK<Int>.applicative()),
+                                       c: WriterT.pure(c, Int.sumMonoid, ListK<Int>.applicative()),
+                                       eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+        }
+    }
+    
     func testMonoidKLaws() {
         MonoidKLaws<WriterTPartial<ForListK, Int>>.check(
             monoidK: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()),
             generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
             eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+    }
+    
+    func testMonoidLaws() {
+        property("Monoid laws") <- forAll { (a : Int) in
+            return MonoidLaws.check(monoid: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()).algebra(),
+                                    a: WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()),
+                                    eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+        }
     }
     
     func testFunctorFilterLaws() {
