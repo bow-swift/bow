@@ -12,8 +12,8 @@ class UnitEq : Eq {
 
 class MaybeTest: XCTestCase {
     
-    var generator : (Int) -> MaybeOf<Int> {
-        return { a in Maybe.pure(a) }
+    var generator : (Int) -> Maybe<Int> {
+        return { a in a % 2 == 0 ? Maybe.pure(a) : Maybe.none() }
     }
     
     let eq = Maybe.eq(Int.order)
@@ -72,6 +72,18 @@ class MaybeTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Maybe.show(), generator: { a in (a % 2 == 0) ? Maybe.some(a) : Maybe.none() })
+        ShowLaws.check(show: Maybe.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForMaybe>.check(foldable: Maybe<Int>.foldable(), generator: self.generator)
+    }
+    
+    func testFromToOption() {
+        property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
+            let maybe = y % 2 == 0 ? Maybe<Int>.none() : Maybe<Int>.some(y)
+            return Maybe.fromOption(x).toOption() == x &&
+                Maybe.eq(Int.order).eqv(Maybe.fromOption(maybe.toOption()), maybe)
+        }
     }
 }
