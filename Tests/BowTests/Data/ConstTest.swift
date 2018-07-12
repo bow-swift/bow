@@ -49,4 +49,8 @@ class ConstTest: XCTestCase {
     func testFoldableLaws() {
         FoldableLaws<ConstPartial<Int>>.check(foldable: Const<Int, Int>.foldable(), generator: self.generator)
     }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ConstPartial<Int>>.check(traverse: Const<Int, Int>.traverse(), functor: Const<Int, Int>.traverse(), generator: self.generator, eq: self.eq)
+    }
 }
