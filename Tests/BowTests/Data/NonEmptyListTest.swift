@@ -35,6 +35,10 @@ class NonEmptyListTest: XCTestCase {
         BimonadLaws<ForNonEmptyList>.check(bimonad: NonEmptyList<Int>.bimonad(), generator: self.generator, eq: self.eq)
     }
     
+    func testTraverseLaws() {
+        TraverseLaws<ForNonEmptyList>.check(traverse: NonEmptyList<Int>.traverse(), functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<NonEmptyListOf<Int>>.check(
