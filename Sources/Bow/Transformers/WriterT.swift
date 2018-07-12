@@ -217,7 +217,7 @@ public class WriterTMonad<G, W, MonG, MonoW> : WriterTApplicative<G, W, MonG, Mo
 }
 
 public class WriterTMonadFilter<G, W, MonFilG, MonoW> : WriterTMonad<G, W, MonFilG, MonoW>, MonadFilter where MonFilG : MonadFilter, MonFilG.F == G, MonoW : Monoid, MonoW.A == W {
-    
+
     private let monadFilter : MonFilG
     
     override public init(_ monadFilter : MonFilG, _ monoid : MonoW) {

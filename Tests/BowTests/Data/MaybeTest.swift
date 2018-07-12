@@ -83,6 +83,10 @@ class MaybeTest: XCTestCase {
         TraverseLaws<ForMaybe>.check(traverse: Maybe<Int>.traverse(), functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
+    func testTraverseFilterLaws() {
+        TraverseFilterLaws<ForMaybe>.check(traverseFilter: Maybe<Int>.traverseFilter(), applicative: Maybe<Int>.applicative(), eq: Maybe.eq(self.eq))
+    }
+    
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
             let maybe = y % 2 == 0 ? Maybe<Int>.none() : Maybe<Int>.some(y)
