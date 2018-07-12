@@ -41,4 +41,8 @@ class IdTest: XCTestCase {
     func testBimonadLaws() {
         BimonadLaws<ForId>.check(bimonad: Id<Int>.bimonad(), generator: self.generator, eq: self.eq)
     }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ForId>.check(traverse: Id<Int>.traverse(), functor: Id<Int>.functor(), generator: self.generator, eq: self.eq)
+    }
 }
