@@ -1,4 +1,6 @@
 import XCTest
+import Nimble
+import SwiftCheck
 @testable import Bow
 
 class IorTest: XCTestCase {
@@ -35,5 +37,42 @@ class IorTest: XCTestCase {
     
     func testFoldableLaws() {
         FoldableLaws<IorPartial<Int>>.check(foldable: Ior<Int, Int>.foldable(), generator: self.generator)
+    }
+    
+    func testCheckers() {
+        property("Ior can only be one of left, right or both") <- forAll { (x : Int) in
+            let input = self.generator(x)
+            return xor(input.isBoth, xor(input.isLeft, input.isRight))
+        }
+    }
+    
+    func testBimapConsitent() {
+        property("bimap is equivalent to map and mapLeft") <- forAll { (x : Int, f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>) in
+            let input = self.generator(x)
+            return self.eq.eqv(input.bimap(f.getArrow, g.getArrow),
+                               input.map(g.getArrow).mapLeft(f.getArrow))
+        }
+    }
+    
+    func testSwapIsomorphism() {
+        property("swap twice is equivalent to identity") <- forAll { (x : Int) in
+            let input = self.generator(x)
+            return self.eq.eqv(input.swap().swap(),
+                               input)
+        }
+    }
+    
+    func testToEither() {
+        property("left and right preserved in conversion to Either") <- forAll { (x : Int) in
+            let input = self.generator(x)
+            return (input.isLeft && input.toEither().isLeft) || input.toEither().isRight
+        }
+    }
+    
+    func testToMaybe() {
+        property("right or both converted to some") <- forAll { (x : Int) in
+            let input = self.generator(x)
+            return (input.isLeft && input.toMaybe().isEmpty) || input.toMaybe().isDefined
+        }
     }
 }
