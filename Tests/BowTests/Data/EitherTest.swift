@@ -59,6 +59,13 @@ class EitherTest: XCTestCase {
                                                generator: self.generator)
     }
     
+    func testTraverseLaws() {
+        TraverseLaws<EitherPartial<Int>>.check(traverse: Either<Int, Int>.traverse(),
+                                               functor: Either<Int, Int>.functor(),
+                                               generator: self.generator,
+                                               eq: self.eq)
+    }
+    
     func testCheckers() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
