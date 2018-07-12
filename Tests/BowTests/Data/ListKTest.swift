@@ -80,4 +80,11 @@ class ListKTest: XCTestCase {
     func testMonadCombineLaws() {
         MonadCombineLaws<ForListK>.check(monadCombine: ListK<Int>.monadCombine(), eq: self.eq)
     }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ForListK>.check(traverse: ListK<Int>.traverse(),
+                                     functor: ListK<Int>.functor(),
+                                     generator: self.generator,
+                                     eq: self.eq)
+    }
 }
