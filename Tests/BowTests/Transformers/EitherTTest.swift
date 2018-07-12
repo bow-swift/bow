@@ -1,8 +1,9 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class EitherTTest: XCTestCase {
-    var generator : (Int) -> EitherTOf<ForId, Int, Int> {
+    var generator : (Int) -> EitherT<ForId, Int, Int> {
         return { a in EitherT.pure(a, Id<Int>.applicative()) }
     }
     
@@ -46,5 +47,15 @@ class EitherTTest: XCTestCase {
     
     func testSemigroupKLaws() {
         SemigroupKLaws<EitherTPartial<ForId, Int>>.check(semigroupK: EitherT<ForId, Int, Int>.semigroupK(Id<Any>.monad()), generator: self.generator, eq: self.eq)
+    }
+    
+    func testSemigroupLaws() {
+        property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(semigroup: EitherT<ForId, Int, Int>.semigroupK(Id<Any>.monad()).algebra(),
+                                       a: self.generator(a),
+                                       b: self.generator(b),
+                                       c: self.generator(c),
+                                       eq: self.eq)
+        }
     }
 }
