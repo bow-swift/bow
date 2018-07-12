@@ -38,44 +38,35 @@ class PredefTest : XCTestCase {
     }
     
     func testComposition() {
-        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, b : String) in
-            let f = { a }
-            let g = { (_ : Int) in b }
+        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, g : ArrowOf<Int, String>) in
+            let f = constant(a)
             let x1 = f()
-            let x2 = g(x1)
-            return x2 == (g <<< f)()
+            let x2 = g.getArrow(x1)
+            return x2 == (g.getArrow <<< f)()
         }
         
-        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, b : String, x1 : Int) in
-            let f = { (_ : Int) in a }
-            let g = { (_ : Int) in b }
-            let x2 = f(x1)
-            let x3 = g(x2)
-            return x3 == (g <<< f)(x1)
+        property("Function composition is equal to applying functions sequentially") <- forAll() { (f : ArrowOf<Int, Int>, g : ArrowOf<Int, String>, x1 : Int) in
+            let x2 = f.getArrow(x1)
+            let x3 = g.getArrow(x2)
+            return x3 == (g.getArrow <<< f.getArrow)(x1)
         }
         
-        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, b : String) in
-            let f = { a }
-            let g = { (_ : Int) in b }
+        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, g : ArrowOf<Int, String>) in
+            let f = constant(a)
             let x1 = f()
-            let x2 = g(x1)
-            return x2 == compose(g, f)()
+            let x2 = g.getArrow(x1)
+            return x2 == compose(g.getArrow, f)()
         }
         
-        property("Function composition is equal to applying functions sequentially") <- forAll() { (a : Int, b : String, x1 : Int) in
-            let f = { (_ : Int) in a }
-            let g = { (_ : Int) in b }
-            let x2 = f(x1)
-            let x3 = g(x2)
-            return x3 == compose(g, f)(x1)
+        property("Function composition is equal to applying functions sequentially") <- forAll() { (f : ArrowOf<Int, Int>, g : ArrowOf<Int, String>, x1 : Int) in
+            let x2 = f.getArrow(x1)
+            let x3 = g.getArrow(x2)
+            return x3 == compose(g.getArrow, f.getArrow)(x1)
         }
         
-        property("Function composition is associative") <- forAll() { (a : Int, b : Int, c : Int, x : Int) in
-            let f : (Int) -> Int = constant(a)
-            let g : (Int) -> Int = constant(b)
-            let h : (Int) -> Int = constant(c)
+        property("Function composition is associative") <- forAll() { (f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>, h : ArrowOf<Int, Int>, x : Int) in
             
-            return ((h <<< g) <<< f)(x) == (h <<< (g <<< f))(x)
+            return ((h.getArrow <<< g.getArrow) <<< f.getArrow)(x) == (h.getArrow <<< (g.getArrow <<< f.getArrow))(x)
         }
     }
 }
