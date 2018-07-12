@@ -72,7 +72,7 @@ public class Try<A> : TryOf<A> {
                     { a in f(a, lb) })
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Try<B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, TryOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ _ in applicative.pure(Try<B>.raise(TryError.illegalState)) },
                     { a in applicative.map(f(a), { b in Try<B>.invoke{ b } }) })
     }
@@ -172,6 +172,10 @@ public extension Try {
     public static func foldable() -> TryFoldable {
         return TryFoldable()
     }
+    
+    public static func traverse() -> TryTraverse {
+        return TryTraverse()
+    }
 }
 
 public class TryFunctor : Functor {
@@ -239,5 +243,11 @@ public class TryFoldable : Foldable {
     
     public func foldR<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
+    }
+}
+
+public class TryTraverse : TryFoldable, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverse(f, applicative)
     }
 }
