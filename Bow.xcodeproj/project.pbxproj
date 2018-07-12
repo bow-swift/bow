@@ -1120,7 +1120,6 @@
 				OBJ_60 /* Bifoldable.swift */,
 				OBJ_61 /* Bimonad.swift */,
 				OBJ_62 /* Comonad.swift */,
-				OBJ_63 /* Composed */,
 				OBJ_66 /* Eq.swift */,
 				OBJ_67 /* Foldable.swift */,
 				OBJ_68 /* Functor.swift */,
@@ -1143,6 +1142,7 @@
 				111082CB2085D9DD00C8563C /* Show.swift */,
 				OBJ_85 /* Traverse.swift */,
 				OBJ_86 /* TraverseFilter.swift */,
+				OBJ_63 /* Composed */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";

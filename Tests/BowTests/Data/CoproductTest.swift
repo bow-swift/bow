@@ -25,4 +25,12 @@ class CoproductTest: XCTestCase {
     func testFoldableLaws() {
         FoldableLaws<CoproductPartial<ForId, ForId>>.check(foldable: Coproduct<ForId, ForId, Int>.foldable(Id<Int>.foldable(), Id<Int>.foldable()), generator: self.generator)
     }
+    
+    func testTraverseLaws() {
+        TraverseLaws<CoproductPartial<ForId, ForId>>.check(
+            traverse: Coproduct<ForId, ForId, Int>.traverse(Id<Int>.traverse(), Id<Int>.traverse()),
+            functor: Coproduct<ForId, ForId, Int>.functor(Id<Int>.functor(), Id<Int>.functor()),
+            generator: self.generator,
+            eq: self.eq)
+    }
 }
