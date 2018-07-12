@@ -85,7 +85,7 @@ public class Maybe<A> : MaybeOf<A> {
         return self.fold(Maybe<B>.none, f)
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Maybe<B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, MaybeOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ applicative.pure(Maybe<B>.none()) },
                     { a in applicative.map(f(a), Maybe<B>.some)})
     }

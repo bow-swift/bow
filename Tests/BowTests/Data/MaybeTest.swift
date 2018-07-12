@@ -79,6 +79,10 @@ class MaybeTest: XCTestCase {
         FoldableLaws<ForMaybe>.check(foldable: Maybe<Int>.foldable(), generator: self.generator)
     }
     
+    func testTraverseLaws() {
+        TraverseLaws<ForMaybe>.check(traverse: Maybe<Int>.traverse(), functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
             let maybe = y % 2 == 0 ? Maybe<Int>.none() : Maybe<Int>.some(y)
