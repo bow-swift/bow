@@ -4,7 +4,9 @@ import SwiftCheck
 
 class EitherTTest: XCTestCase {
     var generator : (Int) -> EitherT<ForId, Int, Int> {
-        return { a in EitherT.pure(a, Id<Int>.applicative()) }
+        return { a in a % 2 == 0 ? EitherT.pure(a, Id<Int>.applicative())
+                                 : EitherT.left(a, Id<Int>.applicative())
+        }
     }
     
     let eq = EitherT.eq(Id.eq(Either.eq(Int.order, Int.order)), Id<Any>.functor())
@@ -56,6 +58,21 @@ class EitherTTest: XCTestCase {
                                        b: self.generator(b),
                                        c: self.generator(c),
                                        eq: self.eq)
+        }
+    }
+    
+    func testMaybeTConversion() {
+        let maybeTEq = MaybeT.eq(Id.eq(Maybe.eq(Int.order)), Id<Int>.functor())
+        property("Left converted to none") <- forAll { (x : Int) in
+            let eitherT = EitherT<ForId, Int, Int>.left(x, Id<Int>.applicative())
+            let expected = MaybeT<ForId, Int>.none(Id<Int>.applicative())
+            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
+        }
+        
+        property("Right converted to some") <- forAll { (x : Int) in
+            let eitherT = EitherT<ForId, Int, Int>.right(x, Id<Int>.applicative())
+            let expected = MaybeT<ForId, Int>.pure(x, Id<Int>.applicative())
+            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
         }
     }
 }
