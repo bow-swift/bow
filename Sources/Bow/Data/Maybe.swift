@@ -81,7 +81,7 @@ public class Maybe<A> : MaybeOf<A> {
                          { a in f(a, b) })
     }
     
-    public func mapFilter<B>(_ f : (A) -> Maybe<B>) -> Maybe<B> {
+    public func mapFilter<B>(_ f : (A) -> MaybeOf<B>) -> MaybeOf<B> {
         return self.fold(Maybe<B>.none, f)
     }
     
@@ -90,7 +90,7 @@ public class Maybe<A> : MaybeOf<A> {
                     { a in applicative.map(f(a), Maybe<B>.some)})
     }
     
-    public func traverseFilter<G, B, Appl>(_ f : (A) -> Kind<G, Maybe<B>>, _ applicative : Appl) -> Kind<G, Maybe<B>> where Appl : Applicative, Appl.F == G {
+    public func traverseFilter<G, B, Appl>(_ f : (A) -> Kind<G, MaybeOf<B>>, _ applicative : Appl) -> Kind<G, MaybeOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ applicative.pure(Maybe<B>.none()) }, f)
     }
     
@@ -199,6 +199,10 @@ public extension Maybe {
     public static func traverse() -> MaybeTraverse {
         return MaybeTraverse()
     }
+    
+    public static func traverseFilter() -> MaybeTraverseFilter {
+        return MaybeTraverseFilter()
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -283,7 +287,7 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
 }
 
 public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: MaybeOf<A>, _ f: @escaping (A) -> Maybe<B>) -> MaybeOf<B> {
+    public func mapFilter<A, B>(_ fa: MaybeOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> MaybeOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
@@ -291,6 +295,10 @@ public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
 public class MaybeMonadFilter : MaybeMonad, MonadFilter {
     public func empty<A>() -> MaybeOf<A> {
         return Maybe.empty()
+    }
+    
+    public func mapFilter<A, B>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<ForMaybe, B>) -> Kind<ForMaybe, B> {
+        return fa.fix().mapFilter(f)
     }
 }
 
@@ -309,5 +317,11 @@ public class MaybeFoldable : Foldable {
 public class MaybeTraverse : MaybeFoldable, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
+    }
+}
+
+public class MaybeTraverseFilter : MaybeTraverse, TraverseFilter {
+    public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, MaybeOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverseFilter(f, applicative)
     }
 }
