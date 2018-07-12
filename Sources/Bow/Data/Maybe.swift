@@ -195,6 +195,10 @@ public extension Maybe {
     public static func foldable() -> MaybeFoldable {
         return MaybeFoldable()
     }
+    
+    public static func traverse() -> MaybeTraverse {
+        return MaybeTraverse()
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -299,5 +303,11 @@ public class MaybeFoldable : Foldable {
     
     public func foldR<A, B>(_ fa: Kind<ForMaybe, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return fa.fix().foldR(b, f)
+    }
+}
+
+public class MaybeTraverse : MaybeFoldable, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverse(f, applicative)
     }
 }
