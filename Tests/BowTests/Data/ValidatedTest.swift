@@ -54,6 +54,10 @@ class ValidatedTest: XCTestCase {
             gen: { CategoryError.common })
     }
     
+    func testTraverseLaws() {
+        TraverseLaws<ValidatedPartial<Int>>.check(traverse: Validated<Int, Int>.traverse(), functor: Validated<Int, Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
     func testCheckers() {
         property("valid and invalid are mutually exclusive") <- forAll { (x : Int) in
             let input = self.generator(x)
