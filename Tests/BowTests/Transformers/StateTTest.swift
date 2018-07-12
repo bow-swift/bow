@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class StateTTest: XCTestCase {
@@ -91,6 +92,16 @@ class StateTTest: XCTestCase {
             semigroupK: StateT<ForListK, Int, Int>.semigroupK(ListK<Int>.monad(), ListK<Int>.semigroupK()),
             generator: { (a : Int) in StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(a) },
             eq: StateTListKEq())
+    }
+    
+    func testSemigroupLaws() {
+        property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(semigroup: StateT<ForListK, Int, Int>.semigroupK(ListK<Int>.monad(), ListK<Int>.semigroupK()).algebra(),
+                                       a: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(a),
+                                       b: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(b),
+                                       c: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(c),
+                                       eq: StateTListKEq())
+        }
     }
     
     func testMonadStateLaws() {
