@@ -24,6 +24,9 @@
 		11635BB220F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
 		11635BB320F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
 		11635BB420F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
+		11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
+		11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -617,6 +620,7 @@
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
+		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -1010,6 +1014,7 @@
 				OBJ_139 /* SemigroupKLaws.swift */,
 				OBJ_140 /* SemigroupLaws.swift */,
 				111082D02085DD4D00C8563C /* ShowLaws.swift */,
+				11635BB520F76131007BB4FA /* TraverseLaws.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -1492,6 +1497,7 @@
 				11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */,
 				11FE0073209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6244E2068141800739E2D /* IdTest.swift in Sources */,
+				11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6244F2068141800739E2D /* IorTest.swift in Sources */,
 				D6D624502068141800739E2D /* ListKTest.swift in Sources */,
 				D6D624512068141800739E2D /* MaybeTest.swift in Sources */,
@@ -1654,6 +1660,7 @@
 				11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */,
 				11FE0074209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6252D206817A700739E2D /* IdTest.swift in Sources */,
+				11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6252E206817A700739E2D /* IorTest.swift in Sources */,
 				D6D6252F206817A700739E2D /* ListKTest.swift in Sources */,
 				D6D62530206817A700739E2D /* MaybeTest.swift in Sources */,
@@ -1908,6 +1915,7 @@
 				11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */,
 				11FE0072209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				OBJ_256 /* IdTest.swift in Sources */,
+				11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				OBJ_257 /* IorTest.swift in Sources */,
 				OBJ_258 /* ListKTest.swift in Sources */,
 				OBJ_259 /* MaybeTest.swift in Sources */,
