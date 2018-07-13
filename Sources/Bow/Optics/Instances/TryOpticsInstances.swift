@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Try {
-    public static func traversal() -> Traversal<Try<A>, A> {
+    public static func traversal() -> Traversal<TryOf<A>, A> {
         return TryTraversal<A>()
     }
     
@@ -10,17 +10,17 @@ public extension Try {
     }
 }
 
-fileprivate class TryTraversal<A> : Traversal<Try<A>, A> {
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Try<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, Try<A>> where Appl : Applicative, F == Appl.F {
-        return s.traverse(f, applicative)
+fileprivate class TryTraversal<A> : Traversal<TryOf<A>, A> {
+    override func modifyF<Appl, F>(_ applicative: Appl, _ s: TryOf<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, TryOf<A>> where Appl : Applicative, F == Appl.F {
+        return s.fix().traverse(f, applicative)
     }
 }
 
 public class TryEach<E> : Each {
-    public typealias S = Try<E>
+    public typealias S = TryOf<E>
     public typealias A = E
     
-    public func each() -> Traversal<Try<E>, E> {
+    public func each() -> Traversal<TryOf<E>, E> {
         return Try.traversal()
     }
 }
