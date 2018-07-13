@@ -120,6 +120,14 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
     public func combineK(_ y : NonEmptyList<A>) -> NonEmptyList<A> {
         return self + y
     }
+    
+    public func getOrNone(_ i : Int) -> Maybe<A> {
+        if i >= 0 && i < count {
+            return Maybe<A>.some(all()[i])
+        } else {
+            return Maybe<A>.none()
+        }
+    }
 }
 
 public extension NonEmptyList where A : Equatable {
