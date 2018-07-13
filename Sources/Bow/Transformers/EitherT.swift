@@ -96,7 +96,7 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
     
     public func combineK<Mon>(_ y : EitherT<F, A, B>, _ monad : Mon) -> EitherT<F, A, B> where Mon : Monad, Mon.F == F {
         return EitherT<F, A, B>(monad.flatMap(value, { either in
-            either.fold(constF(y.value), { b in monad.pure(Either<A, B>.right(b)) })
+            either.fold(constant(y.value), { b in monad.pure(Either<A, B>.right(b)) })
         }))
     }
 }

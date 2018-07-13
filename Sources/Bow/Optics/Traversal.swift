@@ -196,15 +196,15 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func set(_ s : S, _ b : B) -> T {
-        return modify(s, constF(b))
+        return modify(s, constant(b))
     }
     
     public func size(_ s : S) -> Int {
-        return foldMap(Int.sumMonoid, s, constF(1))
+        return foldMap(Int.sumMonoid, s, constant(1))
     }
     
     public func isEmpty(_ s : S) -> Bool {
-        return foldMap(Bool.andMonoid, s, constF(false))
+        return foldMap(Bool.andMonoid, s, constant(false))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
@@ -270,7 +270,7 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return find(s, predicate).fold(constF(false), constF(true))
+        return find(s, predicate).fold(constant(false), constant(true))
     }
     
     public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {

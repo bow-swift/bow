@@ -15,17 +15,16 @@ class BoolInstancesTest: XCTestCase {
     }
     
     func testBoolMonoidLaws() {
-        property("And monoid laws") <- forAll { (a : Bool, b : Bool, c : Bool) in
-            return SemigroupLaws.check(semigroup: Bool.andMonoid, a: a, b: b, c: c, eq: Bool.eq)
+        property("And monoid laws") <- forAll { (a : Bool) in
+            return MonoidLaws.check(monoid: Bool.andMonoid, a: a, eq: Bool.eq)
         }
         
-        property("Or monoid laws") <- forAll { (a : Bool, b : Bool, c : Bool) in
-            return SemigroupLaws.check(semigroup: Bool.orMonoid, a: a, b: b, c: c, eq: Bool.eq)
+        property("Or monoid laws") <- forAll { (a : Bool) in
+            return MonoidLaws.check(monoid: Bool.orMonoid, a: a, eq: Bool.eq)
         }
     }
     
     func testEqLaws() {
         EqLaws.check(eq: Bool.eq, generator: id)
     }
-    
 }

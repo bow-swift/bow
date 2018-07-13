@@ -22,7 +22,7 @@ public class OrSemigroup : Semigroup {
     }
 }
 
-public class OrMonoid : OrSemigroup {
+public class OrMonoid : OrSemigroup, Monoid {
     public var empty : Bool {
         return false
     }

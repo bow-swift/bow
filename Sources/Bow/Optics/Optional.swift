@@ -50,7 +50,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     
     public static func codiagonal() -> Optional<Either<S, S>, S> {
         return Optional<Either<S, S>, S>(
-            set: { ess, s in ess.bimap(constF(s), constF(s)) },
+            set: { ess, s in ess.bimap(constant(s), constant(s)) },
             getOrModify: { ess in ess.fold(Either.right, Either.right) })
     }
     
@@ -84,7 +84,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func setMaybe(_ s : S, _ b : B) -> Maybe<T> {
-        return modifyMaybe(s, constF(b))
+        return modifyMaybe(s, constant(b))
     }
     
     public func isEmpty(_ s : S) -> Bool {
@@ -92,7 +92,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func nonEmpty(_ s : S) -> Bool {
-        return getMaybe(s).fold(constF(false), constF(true))
+        return getMaybe(s).fold(constant(false), constant(true))
     }
     
     public func choice<S1, T1>(_ other : POptional<S1, T1, A, B>) -> POptional<Either<S, S1>, Either<T, T1>, A, B> {
@@ -134,11 +134,11 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constF(false), predicate)
+        return getMaybe(s).fold(constant(false), predicate)
     }
     
     public func all(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constF(true), predicate)
+        return getMaybe(s).fold(constant(true), predicate)
     }
     
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {

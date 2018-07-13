@@ -27,7 +27,7 @@ public extension Monad {
     }
     
     public func forEffectEval<A, B>(_ fa : Kind<F, A>, _ fb : Eval<Kind<F, B>>) -> Kind<F, A> {
-        return self.flatMap(fa, { a in self.map(fb.value(), constF(a)) })
+        return self.flatMap(fa, { a in self.map(fb.value(), constant(a)) })
     }
     
     public func mproduct<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, (A, B)> {

@@ -39,7 +39,7 @@ class IsoLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : Has
     
     private static func consistentSetModify<EqA>(_ iso : Iso<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
         property("Consistent set-modify") <- forAll { (a : A, b : B) in
-            return eqA.eqv(iso.set(b), iso.modify(a, constF(b)))
+            return eqA.eqv(iso.set(b), iso.modify(a, constant(b)))
         }
     }
     

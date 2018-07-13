@@ -48,7 +48,7 @@ class LensLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : Ha
     private static func consistentSetModify<EqA>(_ lens : Lens<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
         property("Consistent set - modify") <- forAll { (a : A, b : B) in
             return eqA.eqv(lens.set(a, b),
-                           lens.modify(a, constF(b)))
+                           lens.modify(a, constant(b)))
         }
     }
     

@@ -24,7 +24,7 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
     private static func setGetMaybe<EqMaybeB>(_ optional : Bow.Optional<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == MaybeOf<B> {
         property("set - getMaybe") <- forAll { (a : A, b : B) in
             return eqB.eqv(optional.getMaybe(optional.set(a, b)),
-                           optional.getMaybe(a).map(constF(b)))
+                           optional.getMaybe(a).map(constant(b)))
         }
     }
     
@@ -51,7 +51,7 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
     private static func consistentSetModify<EqA>(_ optional : Bow.Optional<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
         property("Consistent set - modify") <- forAll { (a : A, b : B) in
             return eqA.eqv(optional.set(a, b),
-                           optional.modify(a, constF(b)))
+                           optional.modify(a, constant(b)))
         }
     }
     
@@ -88,6 +88,6 @@ fileprivate class OptionalMonoid<B> : Monoid {
     }
     
     func combine(_ a: FirstMaybe<B>, _ b: FirstMaybe<B>) -> FirstMaybe<B> {
-        return a.maybe.fold(constF(false), constF(true)) ? a : b
+        return a.maybe.fold(constant(false), constant(true)) ? a : b
     }
 }

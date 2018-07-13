@@ -7,7 +7,7 @@ public class State<S, A> : StateT<ForId, S, A> {
     }
     
     public func run(_ initial : S) -> (S, A) {
-        return (self.run(initial, Id<S>.monad()) as! Id<(S, A)>).extract()
+        return self.run(initial, Id<S>.monad()).fix().extract()
     }
     
     public func runA(_ s : S) -> A {

@@ -59,7 +59,7 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func size(_ s : S) -> Int {
-        return foldMap(Int.sumMonoid, s, constF(1))
+        return foldMap(Int.sumMonoid, s, constant(1))
     }
     
     public func forAll(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
@@ -67,7 +67,7 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func isEmpty(_ s : S) -> Bool {
-        return foldMap(Bool.andMonoid, s, constF(false))
+        return foldMap(Bool.andMonoid, s, constant(false))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
@@ -139,7 +139,7 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return find(s, predicate).fold(constF(false), constF(true))
+        return find(s, predicate).fold(constant(false), constant(true))
     }
 }
 
