@@ -13,6 +13,7 @@ class MonadLaws<F> {
         flatMapCoherence(monad, eq)
         stackSafety(monad, eq)
         monadComprehensions(monad, eq)
+        flatten(monad, eq)
     }
     
     private static func leftIdentity<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
@@ -65,9 +66,85 @@ class MonadLaws<F> {
     private static func monadComprehensions<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Monad comprehensions") <- forAll { (a : Int) in
             let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) })
+            return eq.eqv(x, monad.pure(a + 1))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
                                   { a in monad.pure(a + 1) },
                                   { _, b in monad.pure(b + 1) })
             return eq.eqv(x, monad.pure(a + 2))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) })
+            return eq.eqv(x, monad.pure(a + 3))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) },
+                                  { _, _, _, d in monad.pure(d + 1) })
+            return eq.eqv(x, monad.pure(a + 4))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) },
+                                  { _, _, _, d in monad.pure(d + 1) },
+                                  { _, _, _, _, e in monad.pure(e + 1) })
+            return eq.eqv(x, monad.pure(a + 5))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) },
+                                  { _, _, _, d in monad.pure(d + 1) },
+                                  { _, _, _, _, e in monad.pure(e + 1) },
+                                  { _, _, _, _, _, f in monad.pure(f + 1) })
+            return eq.eqv(x, monad.pure(a + 6))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) },
+                                  { _, _, _, d in monad.pure(d + 1) },
+                                  { _, _, _, _, e in monad.pure(e + 1) },
+                                  { _, _, _, _, _, f in monad.pure(f + 1) },
+                                  { _, _, _, _, _, _, g in monad.pure(g + 1) })
+            return eq.eqv(x, monad.pure(a + 7))
+        }
+        
+        property("Monad comprehensions") <- forAll { (a : Int) in
+            let x = monad.binding({ monad.pure(a) },
+                                  { a in monad.pure(a + 1) },
+                                  { _, b in monad.pure(b + 1) },
+                                  { _, _, c in monad.pure(c + 1) },
+                                  { _, _, _, d in monad.pure(d + 1) },
+                                  { _, _, _, _, e in monad.pure(e + 1) },
+                                  { _, _, _, _, _, f in monad.pure(f + 1) },
+                                  { _, _, _, _, _, _, g in monad.pure(g + 1) },
+                                  { _, _, _, _, _, _, _, h in monad.pure(h + 1) })
+            return eq.eqv(x, monad.pure(a + 8))
+        }
+    }
+    
+    private static func flatten<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+        property("Flatten") <- forAll { (a : Int) in
+            return eq.eqv(monad.flatten(monad.pure(monad.pure(a))),
+                          monad.pure(a))
         }
     }
 }

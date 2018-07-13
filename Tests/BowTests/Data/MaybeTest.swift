@@ -12,8 +12,8 @@ class UnitEq : Eq {
 
 class MaybeTest: XCTestCase {
     
-    var generator : (Int) -> MaybeOf<Int> {
-        return { a in Maybe.pure(a) }
+    var generator : (Int) -> Maybe<Int> {
+        return { a in a % 2 == 0 ? Maybe.pure(a) : Maybe.none() }
     }
     
     let eq = Maybe.eq(Int.order)
@@ -72,6 +72,57 @@ class MaybeTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Maybe.show(), generator: { a in (a % 2 == 0) ? Maybe.some(a) : Maybe.none() })
+        ShowLaws.check(show: Maybe.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForMaybe>.check(foldable: Maybe<Int>.foldable(), generator: self.generator)
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ForMaybe>.check(traverse: Maybe<Int>.traverse(), functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
+    func testTraverseFilterLaws() {
+        TraverseFilterLaws<ForMaybe>.check(traverseFilter: Maybe<Int>.traverseFilter(), applicative: Maybe<Int>.applicative(), eq: Maybe.eq(self.eq))
+    }
+    
+    func testFromToOption() {
+        property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
+            let maybe = y % 2 == 0 ? Maybe<Int>.none() : Maybe<Int>.some(y)
+            return Maybe.fromOption(x).toOption() == x &&
+                Maybe.eq(Int.order).eqv(Maybe.fromOption(maybe.toOption()), maybe)
+        }
+    }
+    
+    func testDefinedOrEmpty() {
+        property("Maybe cannot be simultaneously empty and defined") <- forAll { (x : Int?) in
+            let maybe = Maybe.fromOption(x)
+            return xor(maybe.isEmpty, maybe.isDefined)
+        }
+    }
+    
+    func testGetOrElse() {
+        property("getOrElse consistent with orElse") <- forAll { (x : Int?, y : Int) in
+            let maybe = Maybe.fromOption(x)
+            return Maybe.eq(Int.order).eqv(Maybe<Int>.pure(maybe.getOrElse(y)),
+                                           maybe.orElse(Maybe.pure(y)))
+        }
+    }
+    
+    func testFilter() {
+        property("filter is opposite of filterNot") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
+            let maybe = Maybe.fromOption(x)
+            let eq = Maybe.eq(Int.order)
+            let none = Maybe<Int>.none()
+            return xor(eq.eqv(maybe.filter(predicate.getArrow), none), eq.eqv(maybe.filterNot(predicate.getArrow), none))
+        }
+    }
+    
+    func testExistForAll() {
+        property("exists and forall are equivalent") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
+            let maybe = Maybe.fromOption(x)
+            return maybe.exists(predicate.getArrow) == maybe.forall(predicate.getArrow)
+        }
     }
 }

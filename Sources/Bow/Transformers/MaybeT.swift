@@ -74,7 +74,7 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
     }
     
     public func getOrElseF<Mon>(_ defaultValue : Kind<F, A>, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
-        return monad.flatMap(value, { maybe in maybe.fold(constF(defaultValue), monad.pure)})
+        return monad.flatMap(value, { maybe in maybe.fold(constant(defaultValue), monad.pure)})
     }
     
     public func filter<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> MaybeT<F, A> where Func : Functor, Func.F == F {
@@ -99,7 +99,7 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
     
     public func orElseF<Mon>(_ defaultValue : Kind<F, Maybe<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
         return MaybeT<F, A>(monad.flatMap(value, { maybe in
-            maybe.fold(constF(defaultValue),
+            maybe.fold(constant(defaultValue),
                        { _ in monad.pure(maybe) }) }))
     }
     
@@ -111,8 +111,8 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
         return transform({ maybe in maybe.flatMap(f) }, functor)
     }
     
-    public func mapFilter<B, Func>(_ f : @escaping (A) -> Maybe<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
-        return MaybeT<F, B>(functor.map(value, { maybe in maybe.flatMap(f) }))
+    public func mapFilter<B, Func>(_ f : @escaping (A) -> MaybeOf<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
+        return MaybeT<F, B>(functor.map(value, { maybe in maybe.flatMap({ x in f(x).fix() }) }))
     }
 }
 
@@ -162,7 +162,7 @@ public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F ==
 
 public class MaybeTFunctorFilter<G, FuncG> : MaybeTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
     
-    public func mapFilter<A, B>(_ fa: MaybeTOf<G, A>, _ f: @escaping (A) -> Maybe<B>) -> MaybeTOf<G, B> {
+    public func mapFilter<A, B>(_ fa: MaybeTOf<G, A>, _ f: @escaping (A) -> MaybeOf<B>) -> MaybeTOf<G, B> {
         return MaybeT.fix(fa).mapFilter(f, functor)
     }
 }

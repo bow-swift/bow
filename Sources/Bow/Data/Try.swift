@@ -63,16 +63,16 @@ public class Try<A> : TryOf<A> {
     }
     
     public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
-        return fold(constF(b),
+        return fold(constant(b),
                     { a in f(b, a) })
     }
     
     public func foldR<B>(_ lb : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fold(constF(lb),
+        return fold(constant(lb),
                     { a in f(a, lb) })
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Try<B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, TryOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ _ in applicative.pure(Try<B>.raise(TryError.illegalState)) },
                     { a in applicative.map(f(a), { b in Try<B>.invoke{ b } }) })
     }
@@ -103,7 +103,7 @@ public class Try<A> : TryOf<A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return fold(constF(defaultValue), id)
+        return fold(constant(defaultValue), id)
     }
     
     public func recoverWith(_ f : (Error) -> Try<A>) -> Try<A> {
@@ -168,6 +168,14 @@ public extension Try {
     public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
         return TryEq<A, EqA>(eqa)
     }
+    
+    public static func foldable() -> TryFoldable {
+        return TryFoldable()
+    }
+    
+    public static func traverse() -> TryTraverse {
+        return TryTraverse()
+    }
 }
 
 public class TryFunctor : Functor {
@@ -221,7 +229,25 @@ public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
         let a = Try.fix(a)
         let b = Try.fix(b)
-        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constF(false))},
-                      { aSuccess in b.fold(constF(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
+                      { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+    }
+}
+
+public class TryFoldable : Foldable {
+    public typealias F = ForTry
+    
+    public func foldL<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldR(b, f)
+    }
+}
+
+public class TryTraverse : TryFoldable, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverse(f, applicative)
     }
 }

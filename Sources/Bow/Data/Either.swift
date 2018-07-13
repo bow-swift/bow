@@ -41,7 +41,7 @@ public class Either<A, B> : EitherOf<A, B> {
     }
     
     public var isLeft : Bool {
-        return fold(constF(true), constF(false))
+        return fold(constant(true), constant(false))
     }
     
     public var isRight : Bool {
@@ -49,11 +49,11 @@ public class Either<A, B> : EitherOf<A, B> {
     }
     
     public func foldL<C>(_ c : C, _ f : (C, B) -> C) -> C {
-        return fold(constF(c), { b in f(c, b) })
+        return fold(constant(c), { b in f(c, b) })
     }
     
     public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
-        return fold(constF(c), { b in f(b, c) })
+        return fold(constant(c), { b in f(b, c) })
     }
     
     public func swap() -> Either<B, A> {
@@ -79,15 +79,15 @@ public class Either<A, B> : EitherOf<A, B> {
     }
     
     public func exists(_ predicate : (B) -> Bool) -> Bool {
-        return fold(constF(false), predicate)
+        return fold(constant(false), predicate)
     }
     
     public func toMaybe() -> Maybe<B> {
-        return fold(constF(Maybe<B>.none()), Maybe<B>.some)
+        return fold(constant(Maybe<B>.none()), Maybe<B>.some)
     }
     
     public func getOrElse(_ defaultValue : B) -> B {
-        return fold(constF(defaultValue), id)
+        return fold(constant(defaultValue), id)
     }
     
     public func filterOrElse(_ predicate : @escaping (B) -> Bool, _ defaultValue : A) -> Either<A, B> {
@@ -103,7 +103,7 @@ public class Either<A, B> : EitherOf<A, B> {
     }
     
     public func combineK(_ y : Either<A, B>) -> Either<A, B> {
-        return fold(constF(y), Either<A, B>.right)
+        return fold(constant(y), Either<A, B>.right)
     }
 }
 
@@ -194,7 +194,7 @@ public class EitherMonadError<C> : EitherMonad<C>, MonadError {
     }
     
     public func handleErrorWith<A>(_ fa: EitherOf<C, A>, _ f: @escaping (C) -> EitherOf<C, A>) -> EitherOf<C, A> {
-        return Either.fix(fa).fold(f, constF(Either.fix(fa)))
+        return Either.fix(fa).fold(f, constant(Either.fix(fa)))
     }
 }
 
@@ -235,7 +235,7 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
     }
     
     public func eqv(_ a: EitherOf<L, R>, _ b: EitherOf<L, R>) -> Bool {
-        return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constF(false)) },
-                                 { aRight in Either.fix(b).fold(constF(false), { bRight in eqr.eqv(aRight, bRight) }) })
+        return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false)) },
+                                 { aRight in Either.fix(b).fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }
 }

@@ -76,15 +76,15 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
     
     public func set(_ s : S, _ b : B) -> T {
-        return modify(s, constF(b))
+        return modify(s, constant(b))
     }
     
     public func setMaybe(_ s : S, _ b : B) -> Maybe<T> {
-        return modifyMaybe(s, constF(b))
+        return modifyMaybe(s, constant(b))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
-        return getMaybe(s).fold(constF(false), constF(true))
+        return getMaybe(s).fold(constant(false), constant(true))
     }
     
     public func isEmpty(_ s : S) -> Bool {
@@ -132,11 +132,11 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constF(false), predicate)
+        return getMaybe(s).fold(constant(false), predicate)
     }
     
     public func all(_ s : S, _ predicate : @escaping(A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constF(true), predicate)
+        return getMaybe(s).fold(constant(true), predicate)
     }
     
     public func left<C>() -> PPrism<Either<S, C>, Either<T, C>, Either<A, C>, Either<B, C>> {

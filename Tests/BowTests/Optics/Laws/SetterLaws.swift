@@ -33,7 +33,7 @@ class SetterLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : 
     private static func consistentSetModify<EqA>(_ setter : Setter<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
         property("Consistent set - modify") <- forAll { (a : A, b : B) in
             return eqA.eqv(setter.set(a, b),
-                           setter.modify(a, constF(b)))
+                           setter.modify(a, constant(b)))
         }
     }
 }

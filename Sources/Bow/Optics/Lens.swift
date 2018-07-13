@@ -51,7 +51,7 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     public static func codiagonal() -> Lens<Either<S, S>, S> {
         return Lens<Either<S, S>, S>(
             get: { ess in ess.fold(id, id) },
-            set: { ess, s in ess.bimap(constF(s), constF(s)) })
+            set: { ess, s in ess.bimap(constant(s), constant(s)) })
     }
     
     public init(get : @escaping (S) -> A, set : @escaping (S, B) -> T) {

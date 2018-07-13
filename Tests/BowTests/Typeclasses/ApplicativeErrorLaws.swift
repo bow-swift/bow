@@ -10,6 +10,10 @@ enum CategoryError : Error {
     static var eq : CategoryErrorEq {
         return CategoryErrorEq()
     }
+    
+    static var semigroup : CategoryErrorSemigroup {
+        return CategoryErrorSemigroup()
+    }
 }
 
 class CategoryErrorEq : Eq {
@@ -19,6 +23,18 @@ class CategoryErrorEq : Eq {
         switch (a, b) {
         case (.common, .common), (.fatal, .fatal), (.unknown, .unknown): return true
         default: return false
+        }
+    }
+}
+
+class CategoryErrorSemigroup : Semigroup {
+    typealias A = CategoryError
+    
+    func combine(_ a: CategoryError, _ b: CategoryError) -> CategoryError {
+        switch (a, b) {
+        case (.fatal, _), (_, .fatal): return .fatal
+        case (.common, _), (_, .common): return .common
+        default: return .unknown
         }
     }
 }
