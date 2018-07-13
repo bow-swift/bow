@@ -20,6 +20,8 @@ class OrderLaws<F, A> where A : Arbitrary {
         antireflexivityOfGreaterThan(order, generator)
         asymmetryOfGreaterThan(order, generator)
         transitivityOfGreaterThan(order, generator)
+        
+        sortConsistentWithMaxMin(order, generator)
     }
     
     private static func reflexivityOfLessThanOrEqual<Ord>(_ order : Ord, _ generator : @escaping (A) -> F) where Ord : Order, Ord.A == F {
@@ -122,4 +124,12 @@ class OrderLaws<F, A> where A : Arbitrary {
         }
     }
     
+    private static func sortConsistentWithMaxMin<Ord>(_ order : Ord, _ generator : @escaping (A) -> F) where Ord : Order, Ord.A == F {
+        property("Sort is consistent with max and min") <- forAll { (a : A, b : A) in
+            let x = generator(a)
+            let y = generator(b)
+            let sorted = order.sort(x, y)
+            return order.eqv(sorted.0, order.max(x, y)) && order.eqv(sorted.1, order.min(x, y))
+        }
+    }
 }

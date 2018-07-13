@@ -20,7 +20,7 @@ class MonadFilterLaws<F> {
     private static func rightEmpty<MonFil, EqF>(_ monadFilter : MonFil, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
         property("Right empty") <- forAll { (a : Int) in
             let fa = generator(a)
-            return eq.eqv(monadFilter.flatMap(fa, constF(monadFilter.empty())),
+            return eq.eqv(monadFilter.flatMap(fa, constant(monadFilter.empty())),
                           monadFilter.empty())
         }
     }

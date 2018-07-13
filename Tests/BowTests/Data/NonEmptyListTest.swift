@@ -4,7 +4,7 @@ import SwiftCheck
 
 class NonEmptyListTest: XCTestCase {
     
-    var generator : (Int) -> NonEmptyListOf<Int> {
+    var generator : (Int) -> NonEmptyList<Int> {
         return { a in NonEmptyList.pure(a) }
     }
     
@@ -31,6 +31,14 @@ class NonEmptyListTest: XCTestCase {
         ComonadLaws<ForNonEmptyList>.check(comonad: NonEmptyList<Int>.comonad(), generator: self.generator, eq: self.eq)
     }
     
+    func testBimonadLaws() {
+        BimonadLaws<ForNonEmptyList>.check(bimonad: NonEmptyList<Int>.bimonad(), generator: self.generator, eq: self.eq)
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ForNonEmptyList>.check(traverse: NonEmptyList<Int>.traverse(), functor: NonEmptyList<Int>.functor(), generator: self.generator, eq: self.eq)
+    }
+    
     func testSemigroupLaws() {
         property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<NonEmptyListOf<Int>>.check(
@@ -40,6 +48,15 @@ class NonEmptyListTest: XCTestCase {
                     c: NonEmptyList<Int>.pure(c),
                     eq: self.eq)
         }
+        
+        property("NonEmptyList semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws<NonEmptyListOf<Int>>.check(
+                semigroup: NonEmptyList<Int>.semigroupK().algebra(),
+                a: NonEmptyList<Int>.pure(a),
+                b: NonEmptyList<Int>.pure(b),
+                c: NonEmptyList<Int>.pure(c),
+                eq: self.eq)
+        }
     }
     
     func testSemigroupKLaws() {
@@ -47,6 +64,34 @@ class NonEmptyListTest: XCTestCase {
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: NonEmptyList.show(), generator: { a in NonEmptyList(head: a, tail: [a, a])})
+        ShowLaws.check(show: NonEmptyList.show(), generator: self.generator)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForNonEmptyList>.check(foldable: NonEmptyList<Int>.foldable(), generator: self.generator)
+    }
+    
+    private let nelGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
+    
+    func testConcatenation() {
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.nelGenerator, self.nelGenerator) { (x : ArrayOf<Int>, y : ArrayOf<Int>) in
+            let a = NonEmptyList.fromArrayUnsafe(x.getArray)
+            let b = NonEmptyList.fromArrayUnsafe(y.getArray)
+            return a.count + b.count == (a + b).count
+        }
+        
+        property("Adding one element increases length in one") <- forAll(self.nelGenerator, Int.arbitrary) { (array : ArrayOf<Int>, element : Int) in
+            let nel = NonEmptyList.fromArrayUnsafe(array.getArray)
+            return (nel + element).count == nel.count + 1
+        }
+        
+        property("Result of concatenation contains all items from the original lists") <- forAll(self.nelGenerator, self.nelGenerator) {
+            (x : ArrayOf<Int>, y : ArrayOf<Int>) in
+            let a = NonEmptyList.fromArrayUnsafe(x.getArray)
+            let b = NonEmptyList.fromArrayUnsafe(y.getArray)
+            let concatenation = a + b
+            return concatenation.containsAll(elements: a.all()) &&
+                    concatenation.containsAll(elements: b.all())
+        }
     }
 }

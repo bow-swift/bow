@@ -21,15 +21,12 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public static func fromOption(_ a : A?) -> Maybe<A> {
-        if let a = a {
-            return some(a)
-        } else {
-            return none()
-        }
+        if let a = a { return some(a) }
+        return none()
     }
     
     public static func tailRecM<B>(_ a : A, _ f : (A) -> Maybe<Either<A, B>>) -> Maybe<B> {
-        return f(a).fold(constF(Maybe<B>.none()),
+        return f(a).fold(constant(Maybe<B>.none()),
                          { either in
                             either.fold({ left in tailRecM(left, f) },
                                         Maybe<B>.some)
@@ -80,25 +77,25 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return self.fold(constF(b),
+        return self.fold(constant(b),
                          { a in f(a, b) })
     }
     
-    public func mapFilter<B>(_ f : (A) -> Maybe<B>) -> Maybe<B> {
+    public func mapFilter<B>(_ f : (A) -> MaybeOf<B>) -> MaybeOf<B> {
         return self.fold(Maybe<B>.none, f)
     }
     
-    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Maybe<B>> where Appl : Applicative, Appl.F == G {
+    public func traverse<G, B, Appl>(_ f : (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, MaybeOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ applicative.pure(Maybe<B>.none()) },
                     { a in applicative.map(f(a), Maybe<B>.some)})
     }
     
-    public func traverseFilter<G, B, Appl>(_ f : (A) -> Kind<G, Maybe<B>>, _ applicative : Appl) -> Kind<G, Maybe<B>> where Appl : Applicative, Appl.F == G {
+    public func traverseFilter<G, B, Appl>(_ f : (A) -> Kind<G, MaybeOf<B>>, _ applicative : Appl) -> Kind<G, MaybeOf<B>> where Appl : Applicative, Appl.F == G {
         return fold({ applicative.pure(Maybe<B>.none()) }, f)
     }
     
     public func filter(_ predicate : (A) -> Bool) -> Maybe<A> {
-        return fold({ Maybe<A>.none() },
+        return fold(constant(Maybe<A>.none()),
                     { a in predicate(a) ? Maybe<A>.some(a) : Maybe<A>.none() })
     }
     
@@ -107,7 +104,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func exists(_ predicate : (A) -> Bool) -> Bool {
-        return fold({ false }, predicate)
+        return fold(constant(false), predicate)
     }
     
     public func forall(_ predicate : (A) -> Bool) -> Bool {
@@ -115,7 +112,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func getOrElse(_ defaultValue : A) -> A {
-        return getOrElse(constF(defaultValue))
+        return getOrElse(constant(defaultValue))
     }
     
     public func getOrElse(_ defaultValue : () -> A) -> A {
@@ -123,7 +120,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func orElse(_ defaultValue : Maybe<A>) -> Maybe<A> {
-        return orElse(constF(defaultValue))
+        return orElse(constant(defaultValue))
     }
     
     public func orElse(_ defaultValue : () -> Maybe<A>) -> Maybe<A> {
@@ -131,7 +128,7 @@ public class Maybe<A> : MaybeOf<A> {
     }
     
     public func toOption() -> A? {
-        return fold({ nil }, id)
+        return fold(constant(nil), id)
     }
 }
 
@@ -194,6 +191,18 @@ public extension Maybe {
     public static func monadFilter() -> MaybeMonadFilter {
         return MaybeMonadFilter()
     }
+    
+    public static func foldable() -> MaybeFoldable {
+        return MaybeFoldable()
+    }
+    
+    public static func traverse() -> MaybeTraverse {
+        return MaybeTraverse()
+    }
+    
+    public static func traverseFilter() -> MaybeTraverseFilter {
+        return MaybeTraverseFilter()
+    }
 }
 
 public class MaybeFunctor : Functor {
@@ -235,8 +244,8 @@ public class MaybeSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG
     public func combine(_ a: MaybeOf<R>, _ b: MaybeOf<R>) -> MaybeOf<R> {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
-        return a.fold(constF(b),
-                      { aSome in b.fold(constF(a),
+        return a.fold(constant(b),
+                      { aSome in b.fold(constant(a),
                                         { bSome in Maybe.some(semigroup.combine(aSome, bSome)) })
                       })
     }
@@ -272,13 +281,13 @@ public class MaybeEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     public func eqv(_ a: MaybeOf<R>, _ b: MaybeOf<R>) -> Bool {
         let a = Maybe.fix(a)
         let b = Maybe.fix(b)
-        return a.fold({ b.fold(constF(true), constF(false)) },
-                      { aSome in b.fold(constF(false), { bSome in eqr.eqv(aSome, bSome) })})
+        return a.fold({ b.fold(constant(true), constant(false)) },
+                      { aSome in b.fold(constant(false), { bSome in eqr.eqv(aSome, bSome) })})
     }
 }
 
 public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: MaybeOf<A>, _ f: @escaping (A) -> Maybe<B>) -> MaybeOf<B> {
+    public func mapFilter<A, B>(_ fa: MaybeOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> MaybeOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
@@ -286,5 +295,33 @@ public class MaybeFunctorFilter : MaybeFunctor, FunctorFilter {
 public class MaybeMonadFilter : MaybeMonad, MonadFilter {
     public func empty<A>() -> MaybeOf<A> {
         return Maybe.empty()
+    }
+    
+    public func mapFilter<A, B>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<ForMaybe, B>) -> Kind<ForMaybe, B> {
+        return fa.fix().mapFilter(f)
+    }
+}
+
+public class MaybeFoldable : Foldable {
+    public typealias F = ForMaybe
+    
+    public func foldL<A, B>(_ fa: Kind<ForMaybe, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldL(b, f)
+    }
+    
+    public func foldR<A, B>(_ fa: Kind<ForMaybe, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldR(b, f)
+    }
+}
+
+public class MaybeTraverse : MaybeFoldable, Traverse {
+    public func traverse<G, A, B, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverse(f, applicative)
+    }
+}
+
+public class MaybeTraverseFilter : MaybeTraverse, TraverseFilter {
+    public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, MaybeOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
+        return fa.fix().traverseFilter(f, applicative)
     }
 }

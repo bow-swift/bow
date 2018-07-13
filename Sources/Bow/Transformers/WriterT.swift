@@ -133,7 +133,7 @@ public class WriterT<F, W, A> : WriterTOf<F, W, A> {
     }
     
     public func reset<Mono, Mon>(_ monoid : Mono, _ monad : Mon) -> WriterT<F, W, A> where Mono : Monoid, Mono.A == W, Mon : Monad, Mon.F == F {
-        return mapAcc(constF(monoid.empty), monad)
+        return mapAcc(constant(monoid.empty), monad)
     }
 }
 
@@ -217,7 +217,7 @@ public class WriterTMonad<G, W, MonG, MonoW> : WriterTApplicative<G, W, MonG, Mo
 }
 
 public class WriterTMonadFilter<G, W, MonFilG, MonoW> : WriterTMonad<G, W, MonFilG, MonoW>, MonadFilter where MonFilG : MonadFilter, MonFilG.F == G, MonoW : Monoid, MonoW.A == W {
-    
+
     private let monadFilter : MonFilG
     
     override public init(_ monadFilter : MonFilG, _ monoid : MonoW) {

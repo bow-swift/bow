@@ -36,6 +36,15 @@ class ListKTest: XCTestCase {
                 c: ListK<Int>.pure(c),
                 eq: self.eq)
         }
+        
+        property("ListK semigroupK algebra semigroup laws") <- forAll() { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(
+                semigroup: ListK<Int>.semigroupK().algebra(),
+                a: ListK<Int>.pure(a),
+                b: ListK<Int>.pure(b),
+                c: ListK<Int>.pure(c),
+                eq: self.eq)
+        }
     }
     
     func testSemigroupKLaws() {
@@ -45,6 +54,10 @@ class ListKTest: XCTestCase {
     func testMonoidLaws() {
         property("ListK monoid laws") <- forAll() { (a : Int) in
             return MonoidLaws<ListKOf<Int>>.check(monoid: ListK<Int>.monoid(), a: ListK<Int>.pure(a), eq: self.eq)
+        }
+        
+        property("ListK monoidK algebra monoid laws") <- forAll() { (a : Int) in
+            return MonoidLaws<ListKOf<Int>>.check(monoid: ListK<Int>.monoidK().algebra(), a: ListK<Int>.pure(a), eq: self.eq)
         }
     }
     
@@ -58,5 +71,20 @@ class ListKTest: XCTestCase {
     
     func testMonadFilterLaws() {
         MonadFilterLaws<ForListK>.check(monadFilter: ListK<Int>.monadFilter(), generator: self.generator, eq: self.eq)
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<ForListK>.check(foldable: ListK<Int>.foldable(), generator: self.generator)
+    }
+    
+    func testMonadCombineLaws() {
+        MonadCombineLaws<ForListK>.check(monadCombine: ListK<Int>.monadCombine(), eq: self.eq)
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<ForListK>.check(traverse: ListK<Int>.traverse(),
+                                     functor: ListK<Int>.functor(),
+                                     generator: self.generator,
+                                     eq: self.eq)
     }
 }

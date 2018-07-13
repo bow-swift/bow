@@ -42,7 +42,7 @@ class PrismLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : H
     private static func consistentSetModify<EqA>(_ prism : Prism<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
         property("Consistent set - modify") <- forAll { (a : A, b : B) in
             return eqA.eqv(prism.set(a, b),
-                           prism.modify(a, constF(b)))
+                           prism.modify(a, constant(b)))
         }
     }
     

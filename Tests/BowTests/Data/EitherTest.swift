@@ -1,5 +1,6 @@
 import XCTest
 import Nimble
+import SwiftCheck
 @testable import Bow
 
 class EitherTest: XCTestCase {
@@ -43,8 +44,26 @@ class EitherTest: XCTestCase {
         SemigroupKLaws<EitherPartial<Int>>.check(semigroupK: Either<Int, Int>.semigroupK(), generator: self.generator, eq: self.eq)
     }
     
+    func testSemigroupLaws() {
+        property("Sum semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+            return SemigroupLaws.check(semigroup: Either<Int, Int>.semigroupK().algebra(), a: Either.right(a), b: Either.right(b), c: Either.right(c), eq: self.eq)
+        }
+    }
+    
     func testShowLaws() {
         ShowLaws.check(show: Either.show(), generator: { a in (a % 2 == 0) ? Either<Int, Int>.pure(a) : Either<Int, Int>.left(a) })
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<EitherPartial<Int>>.check(foldable: Either<Int, Int>.foldable(),
+                                               generator: self.generator)
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<EitherPartial<Int>>.check(traverse: Either<Int, Int>.traverse(),
+                                               functor: Either<Int, Int>.functor(),
+                                               generator: self.generator,
+                                               eq: self.eq)
     }
     
     func testCheckers() {

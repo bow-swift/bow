@@ -44,6 +44,24 @@
 		1116209E20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
 		1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
 		111620A020F4B88500685EC4 /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
+		111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620A620F606F300685EC4 /* FoldableLaws.swift */; };
+		111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
+		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
+		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
+		11635BB220F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB320F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB420F64A20007BB4FA /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */; };
+		11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
+		11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
+		11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB520F76131007BB4FA /* TraverseLaws.swift */; };
+		11635BBA20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
+		11635BBB20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
+		11635BBC20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -641,6 +659,12 @@
 		1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeOpticsInstances.swift; sourceTree = "<group>"; };
 		1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOpticsInstances.swift; sourceTree = "<group>"; };
 		1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryOpticsInstances.swift; sourceTree = "<group>"; };
+		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
+		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
+		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
+		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
+		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
+		11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseFilterLaws.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -1037,12 +1061,16 @@
 		OBJ_124 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */,
 				OBJ_125 /* ApplicativeErrorLaws.swift */,
 				OBJ_126 /* ApplicativeLaws.swift */,
+				111620AE20F6131E00685EC4 /* BimonadLaws.swift */,
 				OBJ_127 /* ComonadLaws.swift */,
 				OBJ_128 /* EqLaws.swift */,
+				111620A620F606F300685EC4 /* FoldableLaws.swift */,
 				OBJ_129 /* FunctorFilterLaws.swift */,
 				OBJ_130 /* FunctorLaws.swift */,
+				11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */,
 				OBJ_131 /* MonadErrorLaws.swift */,
 				OBJ_132 /* MonadFilterLaws.swift */,
 				OBJ_133 /* MonadLaws.swift */,
@@ -1054,6 +1082,8 @@
 				OBJ_139 /* SemigroupKLaws.swift */,
 				OBJ_140 /* SemigroupLaws.swift */,
 				111082D02085DD4D00C8563C /* ShowLaws.swift */,
+				11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */,
+				11635BB520F76131007BB4FA /* TraverseLaws.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -1159,7 +1189,6 @@
 				OBJ_60 /* Bifoldable.swift */,
 				OBJ_61 /* Bimonad.swift */,
 				OBJ_62 /* Comonad.swift */,
-				OBJ_63 /* Composed */,
 				OBJ_66 /* Eq.swift */,
 				OBJ_67 /* Foldable.swift */,
 				OBJ_68 /* Functor.swift */,
@@ -1182,6 +1211,7 @@
 				111082CB2085D9DD00C8563C /* Show.swift */,
 				OBJ_85 /* Traverse.swift */,
 				OBJ_86 /* TraverseFilter.swift */,
+				OBJ_63 /* Composed */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -1528,6 +1558,7 @@
 				D6D624472068141800739E2D /* KleisliTest.swift in Sources */,
 				D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D624492068141800739E2D /* CurryTest.swift in Sources */,
+				111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D6244A2068141800739E2D /* ConstTest.swift in Sources */,
 				D6D6244B2068141800739E2D /* CoproductTest.swift in Sources */,
 				D6D6244C2068141800739E2D /* EitherTest.swift in Sources */,
@@ -1535,6 +1566,7 @@
 				11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */,
 				11FE0073209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6244E2068141800739E2D /* IdTest.swift in Sources */,
+				11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6244F2068141800739E2D /* IorTest.swift in Sources */,
 				D6D624502068141800739E2D /* ListKTest.swift in Sources */,
 				D6D624512068141800739E2D /* MaybeTest.swift in Sources */,
@@ -1550,6 +1582,7 @@
 				D6D6245A2068141800739E2D /* StringInstancesTest.swift in Sources */,
 				D6D6245B2068141800739E2D /* PartialApplicationTest.swift in Sources */,
 				D6D6245C2068141800739E2D /* PredefTest.swift in Sources */,
+				11635BBB20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0082209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */,
 				D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */,
@@ -1557,7 +1590,9 @@
 				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
 				11FE0086209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */,
+				11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				D6D624632068141800739E2D /* ComonadLaws.swift in Sources */,
 				D6D624642068141800739E2D /* EqLaws.swift in Sources */,
 				D6D624652068141800739E2D /* FunctorFilterLaws.swift in Sources */,
@@ -1574,6 +1609,7 @@
 				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
 				D6D6246E2068141800739E2D /* OrderLaws.swift in Sources */,
 				11C9B6B720DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB320F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0093209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007E209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6246F2068141800739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1694,6 +1730,7 @@
 				D6D62526206817A700739E2D /* KleisliTest.swift in Sources */,
 				D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D62528206817A700739E2D /* CurryTest.swift in Sources */,
+				111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D62529206817A700739E2D /* ConstTest.swift in Sources */,
 				D6D6252A206817A700739E2D /* CoproductTest.swift in Sources */,
 				D6D6252B206817A700739E2D /* EitherTest.swift in Sources */,
@@ -1701,6 +1738,7 @@
 				11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */,
 				11FE0074209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6252D206817A700739E2D /* IdTest.swift in Sources */,
+				11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6252E206817A700739E2D /* IorTest.swift in Sources */,
 				D6D6252F206817A700739E2D /* ListKTest.swift in Sources */,
 				D6D62530206817A700739E2D /* MaybeTest.swift in Sources */,
@@ -1716,6 +1754,7 @@
 				D6D62539206817A700739E2D /* StringInstancesTest.swift in Sources */,
 				D6D6253A206817A700739E2D /* PartialApplicationTest.swift in Sources */,
 				D6D6253B206817A700739E2D /* PredefTest.swift in Sources */,
+				11635BBC20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0083209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */,
 				D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */,
@@ -1723,7 +1762,9 @@
 				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
 				11FE0087209C976F00183AF6 /* LensTest.swift in Sources */,
 				D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */,
+				111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */,
 				D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */,
+				11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */,
 				D6D62543206817A700739E2D /* EqLaws.swift in Sources */,
 				D6D62544206817A700739E2D /* FunctorFilterLaws.swift in Sources */,
@@ -1740,6 +1781,7 @@
 				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
 				D6D6254D206817A700739E2D /* OrderLaws.swift in Sources */,
 				11C9B6B820DBB34D00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB420F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0094209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007F209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
@@ -1960,6 +2002,7 @@
 				OBJ_249 /* KleisliTest.swift in Sources */,
 				OBJ_250 /* BooleanFunctionsTest.swift in Sources */,
 				OBJ_251 /* CurryTest.swift in Sources */,
+				111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				OBJ_252 /* ConstTest.swift in Sources */,
 				OBJ_253 /* CoproductTest.swift in Sources */,
 				OBJ_254 /* EitherTest.swift in Sources */,
@@ -1967,6 +2010,7 @@
 				11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */,
 				11FE0072209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				OBJ_256 /* IdTest.swift in Sources */,
+				11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				OBJ_257 /* IorTest.swift in Sources */,
 				OBJ_258 /* ListKTest.swift in Sources */,
 				OBJ_259 /* MaybeTest.swift in Sources */,
@@ -1982,6 +2026,7 @@
 				OBJ_268 /* StringInstancesTest.swift in Sources */,
 				OBJ_269 /* PartialApplicationTest.swift in Sources */,
 				OBJ_270 /* PredefTest.swift in Sources */,
+				11635BBA20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0081209C945900183AF6 /* IsoTest.swift in Sources */,
 				OBJ_271 /* EitherTTest.swift in Sources */,
 				OBJ_272 /* MaybeTTest.swift in Sources */,
@@ -1989,7 +2034,9 @@
 				OBJ_274 /* WriterTTest.swift in Sources */,
 				11FE0085209C976F00183AF6 /* LensTest.swift in Sources */,
 				OBJ_275 /* ApplicativeErrorLaws.swift in Sources */,
+				111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				OBJ_276 /* ApplicativeLaws.swift in Sources */,
+				11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				OBJ_277 /* ComonadLaws.swift in Sources */,
 				OBJ_278 /* EqLaws.swift in Sources */,
 				OBJ_279 /* FunctorFilterLaws.swift in Sources */,
@@ -2006,6 +2053,7 @@
 				OBJ_287 /* MonoidLaws.swift in Sources */,
 				OBJ_288 /* OrderLaws.swift in Sources */,
 				11C9B6B620DBB34C00AFD4AA /* TraversalLaws.swift in Sources */,
+				11635BB220F64A20007BB4FA /* MonadCombineLaws.swift in Sources */,
 				11FE0092209C9C3300183AF6 /* PrismTest.swift in Sources */,
 				11FE007D209C8F9400183AF6 /* TestDomain.swift in Sources */,
 				OBJ_289 /* SemigroupKLaws.swift in Sources */,

@@ -26,9 +26,8 @@ public class ListK<A> : ListKOf<A> {
                             let newBuf = buf + [b]
                             return go(newBuf, f, ListK<Either<A, B>>([Either<A, B>](v.list.dropFirst())))
                       })
-        } else {
-            return buf
         }
+        return buf
     }
     
     public static func tailRecM<B>(_ a : A, _ f : (A) -> ListKOf<Either<A, B>>) -> ListK<B> {
@@ -92,8 +91,8 @@ public class ListK<A> : ListKOf<A> {
         }
     }
     
-    public func mapFilter<B>(_ f : (A) -> Maybe<B>) -> ListK<B> {
-        return flatMap { a in f(a).fold(ListK<B>.empty, ListK<B>.pure) }
+    public func mapFilter<B>(_ f : (A) -> MaybeOf<B>) -> ListK<B> {
+        return flatMap { a in f(a).fix().fold(ListK<B>.empty, ListK<B>.pure) }
     }
     
     public func combineK(_ y : ListK<A>) -> ListK<A> {
@@ -101,11 +100,8 @@ public class ListK<A> : ListKOf<A> {
     }
     
     public func firstOrNone() -> Maybe<A> {
-        if let first = self.list.first {
-            return Maybe.some(first)
-        } else {
-            return Maybe.none()
-        }
+        if let first = asArray.first { return Maybe.some(first) }
+        return Maybe.none()
     }
     
     public func getOrNone(_ i : Int) -> Maybe<A> {
@@ -244,7 +240,7 @@ public class ListKMonoidK : ListKSemigroupK, MonoidK {
 }
 
 public class ListKFunctorFilter : ListKFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> Maybe<B>) -> ListKOf<B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
@@ -254,7 +250,7 @@ public class ListKMonadFilter : ListKMonad, MonadFilter {
         return ListK<A>.empty()
     }
     
-    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> Maybe<B>) -> ListKOf<B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
