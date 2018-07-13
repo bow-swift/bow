@@ -942,6 +942,8 @@
 				1116206620F39E0700685EC4 /* Validated+Optics.swift */,
 			);
 			path = STD;
+			sourceTree = "<group>";
+		};
 		1116207220F3ABF200685EC4 /* DSL */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,9 +978,9 @@
 				11E531B0209AE89A00A78E8D /* Prism.swift */,
 				11E531BA209B0BE300A78E8D /* Setter.swift */,
 				11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */,
-				1116204420F37ABA00685EC4 /* STD */,
 				1116207220F3ABF200685EC4 /* DSL */,
 				1116208220F496E100685EC4 /* Instances */,
+				1116204420F37ABA00685EC4 /* STD */,
 				11E531D5209B4ECC00A78E8D /* Typeclasses */,
 			);
 			path = Optics;
