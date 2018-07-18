@@ -9,6 +9,12 @@ struct Token {
     let value : String
 }
 
+extension Token : Equatable {}
+
+func ==(lhs : Token, rhs : Token) -> Bool {
+    return lhs.value == rhs.value
+}
+
 extension Token : Arbitrary {
     static var arbitrary: Gen<Token> {
         return String.arbitrary.map(Token.init)
@@ -26,6 +32,13 @@ class TokenEq : Eq {
 let tokenIso = Iso(get: { (token : Token) in token.value }, reverseGet: Token.init )
 let tokenLens = Lens(get: { (token : Token) in token.value }, set: { (_ : Token, newValue : String) in Token(value: newValue) })
 let tokenSetter = Setter(modify: { s in { token in Token(value: s(token.value)) } })
+let tokenGetter = Getter(get: { (t : Token) in t.value })
+
+struct User {
+    let token : Token
+}
+
+let userIso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
 
 let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
                         reverseGet: { (reversed : String) in String(reversed.reversed()) })
