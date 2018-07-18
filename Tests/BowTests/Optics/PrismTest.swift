@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class PrismTest: XCTestCase {
@@ -17,5 +18,94 @@ class PrismTest: XCTestCase {
     
     func testTraversalLaws() {
         TraversalLaws.check(traversal: stringPrism.asTraversal(), eqA: String.order, eqB: String.order)
+    }
+    
+    func testPrismAsFold() {
+        property("Prism as Fold: size") <- forAll { (sum : SumType) in
+            return sumPrism.asFold().size(sum) == sumPrism.getMaybe(sum).map(constant(1)).getOrElse(0)
+        }
+        
+        property("Prism as Fold: nonEmpty") <- forAll { (sum : SumType) in
+            return sumPrism.asFold().nonEmpty(sum) == sumPrism.getMaybe(sum).isDefined
+        }
+        
+        property("Prism as Fold: isEmpty") <- forAll { (sum : SumType) in
+            return sumPrism.asFold().isEmpty(sum) == sumPrism.getMaybe(sum).isEmpty
+        }
+        
+        property("Prism as Fold: getAll") <- forAll { (sum : SumType) in
+            return ListK.eq(String.order).eqv(sumPrism.asFold().getAll(sum),
+                                              sumPrism.getMaybe(sum).toList().k())
+        }
+        
+        property("Prism as Fold: combineAll") <- forAll { (sum : SumType) in
+            return sumPrism.asFold().combineAll(String.concatMonoid, sum) == sumPrism.getMaybe(sum).fold(constant(String.concatMonoid.empty), id)
+        }
+        
+        property("Prism as Fold: fold") <- forAll { (sum : SumType) in
+            return sumPrism.asFold().fold(String.concatMonoid, sum) == sumPrism.getMaybe(sum).fold(constant(String.concatMonoid.empty), id)
+        }
+        
+        property("Prism as Fold: headMaybe") <- forAll { (sum : SumType) in
+            return Maybe.eq(String.order).eqv(sumPrism.asFold().headMaybe(sum),
+                                              sumPrism.getMaybe(sum))
+        }
+        
+        property("Prism as Fold: lastMaybe") <- forAll { (sum : SumType) in
+            return Maybe.eq(String.order).eqv(sumPrism.asFold().lastMaybe(sum),
+                                              sumPrism.getMaybe(sum))
+        }
+    }
+    
+    let sumAGen : Gen<SumType> = String.arbitrary.map(SumType.a)
+    
+    func testPrismProperties() {
+        property("Joining two prisms with the same target should yield the same result") <- forAll { (sum : SumType) in
+            let eq = Maybe.eq(String.order)
+            return eq.eqv((sumPrism + stringPrism).getMaybe(sum),
+                          sumPrism.getMaybe(sum).flatMap(stringPrism.getMaybe))
+        }
+
+        property("Checking if a prism exists with a target") <- forAll { (a : SumType, b : SumType, bool : Bool) in
+            return Prism<SumType, SumType>.only(a, ConstantEq(constant: bool)).isEmpty(b) == bool
+        }
+        
+        property("Checking if there is no target") <- forAll { (sum : SumType) in
+            return sumPrism.isEmpty(sum) == !sum.isA
+        }
+        
+        property("Checking if a target exists") <- forAll { (sum : SumType) in
+            return sumPrism.nonEmpty(sum) == sum.isA
+        }
+        
+        property("Setting a target on a prism should set the correct target") <- forAll(self.sumAGen, String.arbitrary) { (sum : SumType, str : String) in
+            return Maybe.eq(SumType.eq).eqv(sumPrism.setMaybe(sum, str),
+                                            Maybe.some(SumType.a(str)))
+        }
+        
+        property("Finding a target using a predicate within a Prism should be wrapped in the correct option result") <- forAll { (sum : SumType, predicate : Bool) in
+            return sumPrism.find(sum, constant(predicate)).fold(constant(false), constant(true)) == (predicate && sum.isA)
+        }
+        
+        property("Checking existence predicate over the target should result in same result as predicate") <- forAll { (sum : SumType, predicate : Bool) in
+            return sumPrism.exists(sum, constant(predicate)) == (predicate && sum.isA)
+        }
+        
+        property("Checking satisfaction of predicate over the target should result in opposite result as predicate") <- forAll { (sum : SumType, predicate : Bool) in
+            return sumPrism.all(sum, constant(predicate)) == (predicate || !sum.isA)
+        }
+    }
+}
+
+fileprivate class ConstantEq : Eq {
+    typealias A = SumType
+    private let constant : Bool
+    
+    init(constant : Bool) {
+        self.constant = constant
+    }
+    
+    func eqv(_ a: SumType, _ b: SumType) -> Bool {
+        return constant
     }
 }
