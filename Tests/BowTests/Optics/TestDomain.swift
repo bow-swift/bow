@@ -38,7 +38,14 @@ struct User {
     let token : Token
 }
 
+extension User : Arbitrary {
+    static var arbitrary : Gen<User> {
+        return Token.arbitrary.map(User.init)
+    }
+}
+
 let userIso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
+let userLens = Lens<User, Token>(get: { user in user.token }, set: { user, newToken in User(token: newToken) })
 
 let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
                         reverseGet: { (reversed : String) in String(reversed.reversed()) })
