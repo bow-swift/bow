@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import Bow
 
 class IsoTest: XCTestCase {
@@ -25,5 +26,120 @@ class IsoTest: XCTestCase {
     
     func testTraversalLaws() {
         TraversalLaws.check(traversal: tokenIso.asTraversal(), eqA: Token.eq, eqB: String.order)
+    }
+    
+    func testIsoAsFold() {
+        property("Iso as Fold: size") <- forAll { (token : Token) in
+            return tokenIso.asFold().size(token) == 1
+        }
+        
+        property("Iso as Fold: nonEmpty") <- forAll { (token : Token) in
+            return tokenIso.asFold().nonEmpty(token)
+        }
+        
+        property("Iso as Fold: isEmpty") <- forAll { (token : Token) in
+            return !tokenIso.asFold().isEmpty(token)
+        }
+        
+        property("Iso as Fold: getAll") <- forAll { (token : Token) in
+            return ListK.eq(String.order).eqv(tokenIso.asFold().getAll(token), ListK.pure(token.value))
+        }
+        
+        property("Iso as Fold: combineAll") <- forAll { (token : Token) in
+            return tokenIso.asFold().combineAll(String.concatMonoid, token) == token.value
+        }
+        
+        property("Iso as Fold: fold") <- forAll { (token : Token) in
+            return tokenIso.asFold().fold(String.concatMonoid, token) == token.value
+        }
+        
+        property("Iso as Fold: headMaybe") <- forAll { (token : Token) in
+            return Maybe.eq(String.order).eqv(tokenIso.asFold().headMaybe(token),
+                                              Maybe.some(token.value))
+        }
+        
+        property("Iso as Fold: lastMaybe") <- forAll { (token : Token) in
+            return Maybe.eq(String.order).eqv(tokenIso.asFold().lastMaybe(token),
+                                              Maybe.some(token.value))
+        }
+    }
+    
+    func testIsoAsGetter() {
+        property("Iso as Getter: get") <- forAll { (token : Token) in
+            return tokenIso.asGetter().get(token) == tokenGetter.get(token)
+        }
+        
+        property("Iso as Getter: find") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
+            return Maybe.eq(String.order).eqv(
+                tokenIso.asGetter().find(token, predicate.getArrow),
+                tokenGetter.find(token, predicate.getArrow))
+        }
+        
+        property("Iso as Getter: exists") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
+            return Maybe.eq(String.order).eqv(tokenIso.asGetter().find(token, predicate.getArrow),
+                                              tokenGetter.find(token, predicate.getArrow))
+        }
+    }
+    
+    func testIsoProperties() {
+        property("Lifting a function should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
+            return Token.eq.eqv(tokenIso.modify(token, constant(value)),
+                                tokenIso.lift(constant(value))(token))
+        }
+        
+        property("Lifting a function as a functior should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
+            return Maybe.eq(Token.eq).eqv(tokenIso.modifyF(Maybe<String>.functor(), token, constant(Maybe.some(value))),
+                                          tokenIso.liftF(Maybe<String>.functor(), constant(Maybe.some(value)))(token))
+        }
+        
+        property("Creating a first pair with a type should result in the target to value") <- forAll { (token : Token, value : Int) in
+            let first : Iso<(Token, Int), (String, Int)> = tokenIso.first()
+            return first.get((token, value)) == (tokenIso.get(token), value)
+        }
+        
+        property("Creating a second pair with a type should result in the value to target") <- forAll { (token : Token, value : Int) in
+            let second : Iso<(Int, Token), (Int, String)> = tokenIso.second()
+            return second.get((value, token)) == (value, tokenIso.get(token))
+        }
+        
+        property("Creating a left with a type should result in the sum of value and target") <- forAll { (token : Token, value : Int) in
+            let left : Iso<Either<Token, Int>, Either<String, Int>> = tokenIso.left()
+            let eq = Either.eq(String.order, Int.order)
+            return eq.eqv(left.get(Either.left(token)),
+                          Either.left(tokenIso.get(token))) &&
+                eq.eqv(left.get(Either.right(value)),
+                       Either.right(value))
+        }
+        
+        property("Creating a right with a type should result in the sum of target and value") <- forAll { (token : Token, value : Int) in
+            let right : Iso<Either<Int, Token>, Either<Int, String>> = tokenIso.right()
+            let eq = Either.eq(Int.order, String.order)
+            return eq.eqv(right.get(Either.right(token)),
+                          Either.right(tokenIso.get(token))) &&
+                eq.eqv(right.get(Either.left(value)),
+                       Either.left(value))
+        }
+        
+        property("Finding a target using a predicate within an Iso should be wrapped in the correct option result") <- forAll { (predicate : Bool) in
+            return tokenIso.find(Token(value: "Any value"), constant(predicate)).fold(constant(false), constant(true)) == predicate
+        }
+        
+        property("Checking existence predicate over the target should result in the same result as predicate") <- forAll { (predicate : Bool) in
+            return tokenIso.exists(Token(value: "Any value"), constant(predicate)) == predicate
+        }
+        
+        property("Pairing two disjoint isos together") <- forAll { (tokenValue : String) in
+            let token = Token(value: tokenValue)
+            let user = User(token: token)
+            let joinedIso = tokenIso.split(userIso)
+            return joinedIso.get((token, user)) == (tokenValue, token)
+        }
+        
+        property("Composing isos should result in an iso of the first iso's value to the second's target") <- forAll { (tokenValue : String) in
+            let composedIso = userIso + tokenIso
+            let token = Token(value: tokenValue)
+            let user = User(token: token)
+            return composedIso.get(user) == tokenValue
+        }
     }
 }
