@@ -49,3 +49,44 @@ let userLens = Lens<User, Token>(get: { user in user.token }, set: { user, newTo
 
 let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
                         reverseGet: { (reversed : String) in String(reversed.reversed()) })
+
+enum SumType {
+    static var eq : SumTypeEq {
+        return SumTypeEq()
+    }
+    
+    case a(String)
+    case b(Int)
+    
+    var isA : Bool {
+        switch self {
+        case .a(_): return true
+        default: return false
+        }
+    }
+}
+
+class SumTypeEq : Eq {
+    typealias A = SumType
+    
+    func eqv(_ lhs: SumType, _ rhs: SumType) -> Bool {
+        switch (lhs, rhs) {
+        case let (.a(left), .a(right)): return left == right
+        case let (.b(left), .b(right)): return left == right
+        default: return false
+        }
+    }
+}
+
+extension SumType : Arbitrary {
+    static var arbitrary: Gen<SumType> {
+        return Gen.one(of: [String.arbitrary.map(SumType.a), Int.arbitrary.map(SumType.b)])
+    }
+}
+
+let sumPrism = Prism<SumType, String>(getOrModify: { sum in
+    switch sum {
+    case let .a(str): return Either.right(str)
+    default: return Either.left(sum)
+    }
+}, reverseGet: SumType.a)
