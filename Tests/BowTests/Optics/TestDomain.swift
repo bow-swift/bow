@@ -46,6 +46,9 @@ extension User : Arbitrary {
 
 let userIso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
 let userLens = Lens<User, Token>(get: { user in user.token }, set: { user, newToken in User(token: newToken) })
+let userGetter = userIso.asGetter()
+let lengthGetter = Getter<String, Int>(get: { str in str.count })
+let upperGetter = Getter<String, String>(get: { str in str.uppercased() })
 
 let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
                         reverseGet: { (reversed : String) in String(reversed.reversed()) })
