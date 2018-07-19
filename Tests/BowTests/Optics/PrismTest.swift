@@ -9,7 +9,7 @@ class PrismTest: XCTestCase {
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: stringPrism.asSetter(), eqA: String.order)
+        SetterLaws.check(setter: stringPrism.asSetter(), eqA: String.order, generatorA: String.arbitrary)
     }
     
     func testOptionalLaws() {
@@ -17,7 +17,7 @@ class PrismTest: XCTestCase {
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: stringPrism.asTraversal(), eqA: String.order, eqB: String.order)
+        TraversalLaws.check(traversal: stringPrism.asTraversal(), eqA: String.order, eqB: String.order, generatorA: String.arbitrary)
     }
     
     func testPrismAsFold() {

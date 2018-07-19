@@ -13,11 +13,11 @@ class LensTest: XCTestCase {
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenLens.asSetter(), eqA: Token.eq)
+        SetterLaws.check(setter: tokenLens.asSetter(), eqA: Token.eq, generatorA: Token.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: tokenLens.asTraversal(), eqA: Token.eq, eqB: String.order)
+        TraversalLaws.check(traversal: tokenLens.asTraversal(), eqA: Token.eq, eqB: String.order, generatorA: Token.arbitrary)
     }
     
     func testLensAsFold() {

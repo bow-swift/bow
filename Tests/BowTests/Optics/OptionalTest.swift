@@ -9,11 +9,11 @@ class OptionalTest: XCTestCase {
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: Bow.Optional<String, String>.identity().asSetter(), eqA: String.order)
+        SetterLaws.check(setter: Bow.Optional<String, String>.identity().asSetter(), eqA: String.order, generatorA: String.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: Bow.Optional<String, String>.identity().asTraversal(), eqA: String.order, eqB: String.order)
+        TraversalLaws.check(traversal: Bow.Optional<String, String>.identity().asTraversal(), eqA: String.order, eqB: String.order, generatorA: String.arbitrary)
     }
     
     func testOptionalAsFold() {

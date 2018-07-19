@@ -21,11 +21,11 @@ class IsoTest: XCTestCase {
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenIso.asSetter(), eqA: Token.eq)
+        SetterLaws.check(setter: tokenIso.asSetter(), eqA: Token.eq, generatorA: Token.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: tokenIso.asTraversal(), eqA: Token.eq, eqB: String.order)
+        TraversalLaws.check(traversal: tokenIso.asTraversal(), eqA: Token.eq, eqB: String.order, generatorA: Token.arbitrary)
     }
     
     func testIsoAsFold() {
