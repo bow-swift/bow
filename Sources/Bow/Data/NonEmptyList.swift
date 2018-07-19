@@ -287,3 +287,9 @@ public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         }
     }
 }
+
+extension NonEmptyList : Equatable where A : Equatable {
+    public static func ==(lhs : Nel<A>, rhs : Nel<A>) -> Bool {
+        return lhs.all() == rhs.all()
+    }
+}
