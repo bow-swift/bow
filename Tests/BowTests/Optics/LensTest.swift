@@ -111,4 +111,38 @@ class LensTest: XCTestCase {
             return second.get((value, token)) == (value, token.value)
         }
     }
+    
+    func testLensComposition() {
+        property("Lens + Lens::identity") <- forAll { (token : Token) in
+            return (tokenLens + Lens<String, String>.identity()).get(token) == tokenLens.get(token)
+        }
+        
+        property("Lens + Iso::identity") <- forAll { (token : Token) in
+            return (tokenLens + Iso<String, String>.identity()).get(token) == tokenLens.get(token)
+        }
+        
+        property("Lens + Getter::identity") <- forAll { (token : Token) in
+            return (tokenLens + Getter<String, String>.identity()).get(token) == tokenLens.get(token)
+        }
+        
+        property("Lens + Prism::identity") <- forAll { (token : Token) in
+            return (tokenLens + Prism<String, String>.identity()).getMaybe(token).getOrElse("") == tokenLens.get(token)
+        }
+        
+        property("Lens + Optional::identity") <- forAll { (token : Token) in
+            return (tokenLens + Bow.Optional<String, String>.identity()).getMaybe(token).getOrElse("") == tokenLens.get(token)
+        }
+        
+        property("Lens + Setter::identity") <- forAll { (token : Token, value : String) in
+            return (tokenLens + Setter<String, String>.identity()).set(token, value) == tokenLens.set(token, value)
+        }
+        
+        property("Lens + Fold::identity") <- forAll { (token : Token) in
+            return (tokenLens + Fold<String, String>.identity()).getAll(token).asArray == [tokenLens.get(token)]
+        }
+        
+        property("Lens + Traversal::identity") <- forAll { (token : Token) in
+            return (tokenLens + Traversal<String, String>.identity()).getAll(token).asArray == [tokenLens.get(token)]
+        }
+    }
 }
