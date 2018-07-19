@@ -56,4 +56,34 @@ class FoldTest : XCTestCase {
             return self.intFold.nonEmpty(array.getArray.k()) == !array.getArray.isEmpty
         }
     }
+    
+    func testFoldComposition() {
+        property("Fold + Fold::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Fold<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Iso::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Iso<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Lens::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Lens<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Prism::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Prism<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Getter::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Getter<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Optional::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Bow.Optional<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Fold + Traversal::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.intFold + Traversal<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+        }
+    }
 }
