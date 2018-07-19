@@ -84,4 +84,34 @@ class TraversalTest: XCTestCase {
             return self.listKTraversal.size(array.getArray.k()) == array.getArray.count
         }
     }
+    
+    func testTraversalComposition() {
+        property("Traversal + Traversal::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Traversal<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Traversal + Iso::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Iso<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Traversal + Lens::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Lens<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Traversal + Prism::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Prism<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Traversal + Optional::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Bow.Optional<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+        
+        property("Traversal + Setter::identity") <- forAll { (array : ArrayOf<Int>, value : Int) in
+            return (self.listKTraversal + Setter<Int, Int>.identity()).set(array.getArray.k(), value).fix().asArray == self.listKTraversal.set(array.getArray.k(), value).fix().asArray
+        }
+        
+        property("Traversal + Fold::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (self.listKTraversal + Fold<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.listKTraversal.getAll(array.getArray.k()).asArray
+        }
+    }
 }
