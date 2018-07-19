@@ -239,3 +239,10 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
                                  { aRight in Either.fix(b).fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }) })
     }
 }
+
+extension Either : Equatable where A : Equatable, B : Equatable {
+    public static func ==(lhs : Either<A, B>, rhs : Either<A, B>) -> Bool {
+        return lhs.fold({ la in rhs.fold({ lb in la == lb }, constant(false)) },
+                        { ra in rhs.fold(constant(false), { rb in ra == rb })})
+    }
+}
