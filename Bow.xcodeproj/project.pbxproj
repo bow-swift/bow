@@ -159,6 +159,9 @@
 		11E531E0209B502F00A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E1209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E2209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
+		11F5306A20FF8B1800D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
+		11F5306B20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
+		11F5306C20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -722,6 +725,7 @@
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		11F5306820FF8B1500D92335 /* GetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1000,6 +1004,7 @@
 		11FE007A209C8E5A00183AF6 /* Optics */ = {
 			isa = PBXGroup;
 			children = (
+				11F5306820FF8B1500D92335 /* GetterTest.swift */,
 				11FE0080209C945900183AF6 /* IsoTest.swift */,
 				11FE0084209C976F00183AF6 /* LensTest.swift */,
 				11FE0095209C9EB800183AF6 /* OptionalTest.swift */,
@@ -1660,6 +1665,7 @@
 				11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */,
 				D6D624692068141800739E2D /* MonadLaws.swift in Sources */,
 				D6D6246A2068141800739E2D /* MonadStateLaws.swift in Sources */,
+				11F5306B20FF8B1900D92335 /* GetterTest.swift in Sources */,
 				D6D6246B2068141800739E2D /* MonadWriterLaws.swift in Sources */,
 				D6D6246C2068141800739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6246D2068141800739E2D /* MonoidLaws.swift in Sources */,
@@ -1840,6 +1846,7 @@
 				11AA44102088D4090091B474 /* ShowLaws.swift in Sources */,
 				D6D62548206817A700739E2D /* MonadLaws.swift in Sources */,
 				D6D62549206817A700739E2D /* MonadStateLaws.swift in Sources */,
+				11F5306C20FF8B1900D92335 /* GetterTest.swift in Sources */,
 				D6D6254A206817A700739E2D /* MonadWriterLaws.swift in Sources */,
 				D6D6254B206817A700739E2D /* MonoidKLaws.swift in Sources */,
 				D6D6254C206817A700739E2D /* MonoidLaws.swift in Sources */,
@@ -2128,6 +2135,7 @@
 				111082D12085DD4D00C8563C /* ShowLaws.swift in Sources */,
 				OBJ_283 /* MonadLaws.swift in Sources */,
 				OBJ_284 /* MonadStateLaws.swift in Sources */,
+				11F5306A20FF8B1800D92335 /* GetterTest.swift in Sources */,
 				OBJ_285 /* MonadWriterLaws.swift in Sources */,
 				OBJ_286 /* MonoidKLaws.swift in Sources */,
 				OBJ_287 /* MonoidLaws.swift in Sources */,
