@@ -299,4 +299,8 @@ public class ListKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
 }
 
-
+extension ListK : Equatable where A : Equatable {
+    public static func ==(lhs : ListK<A>, rhs : ListK<A>) -> Bool {
+        return lhs.list == rhs.list
+    }
+}
