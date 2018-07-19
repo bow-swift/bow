@@ -276,3 +276,10 @@ public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : 
                       { aValid in b.fold(constant(false), { bValid in eqr.eqv(aValid, bValid) })})
     }
 }
+
+extension Validated : Equatable where E : Equatable, A : Equatable {
+    public static func ==(lhs : Validated<E, A>, rhs : Validated<E, A>) -> Bool {
+        return lhs.fold({ le in rhs.fold({ re in le == re }, constant(false)) },
+                        { la in rhs.fold(constant(false), { ra in la == ra }) })
+    }
+}
