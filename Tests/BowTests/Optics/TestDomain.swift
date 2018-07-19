@@ -94,3 +94,9 @@ let sumPrism = Prism<SumType, String>(getOrModify: { sum in
     default: return Either.left(sum)
     }
 }, reverseGet: SumType.a)
+
+let optionalHead = Bow.Optional<Array<Int>, Int>(
+    set: { array, value in [value] + ((array.count > 1) ? Array(array.dropFirst()) : [])},
+    getOrModify: { array in Maybe.fromOption(array.first).fold(constant(Either.left(array)), Either.right) })
+
+let defaultHead = Bow.Optional<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)
