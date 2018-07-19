@@ -99,4 +99,22 @@ class GetterTest : XCTestCase {
                        Either.left(value))
         }
     }
+    
+    func testGetterComposition() {
+        property("Getter + Iso::identity") <- forAll { (token : Token) in
+            return (tokenGetter + Iso<String, String>.identity()).get(token) == tokenGetter.get(token)
+        }
+        
+        property("Getter + Lens::identity") <- forAll { (token : Token) in
+            return (tokenGetter + Lens<String, String>.identity()).get(token) == tokenGetter.get(token)
+        }
+        
+        property("Getter + Getter::identity") <- forAll { (token : Token) in
+            return (tokenGetter + Getter<String, String>.identity()).get(token) == tokenGetter.get(token)
+        }
+        
+        property("Getter + Fold::identity") <- forAll { (token : Token) in
+            return (tokenGetter + Fold<String, String>.identity()).getAll(token).asArray == [tokenGetter.get(token)]
+        }
+    }
 }
