@@ -141,5 +141,43 @@ class IsoTest: XCTestCase {
             let user = User(token: token)
             return composedIso.get(user) == tokenValue
         }
+        
+        property("Reverse isomorphism") <- forAll { (token : Token) in
+            return tokenIso.reverse().reverse().get(token) == tokenIso.get(token)
+        }
+    }
+    
+    func testIsoComposition() {
+        property("Iso + Iso::identity") <- forAll { (token : Token) in
+            return (tokenIso + Iso<String, String>.identity()).get(token) == tokenIso.get(token)
+        }
+        
+        property("Iso + Lens::identity") <- forAll { (token : Token) in
+            return (tokenIso + Lens<String, String>.identity()).get(token) == tokenIso.get(token)
+        }
+        
+        property("Iso + Prism::identity") <- forAll { (token : Token) in
+            return (tokenIso + Prism<String, String>.identity()).getMaybe(token).getOrElse("") == tokenIso.get(token)
+        }
+        
+        property("Iso + Getter::identity") <- forAll { (token : Token) in
+            return (tokenIso + Getter<String, String>.identity()).get(token) == tokenIso.get(token)
+        }
+        
+        property("Iso + Setter::identity") <- forAll { (token : Token) in
+            return (tokenIso + Setter<String, String>.identity()).set(token, "Any") == tokenIso.set("Any")
+        }
+        
+        property("Iso + Optional::identity") <- forAll { (token : Token) in
+            return (tokenIso + Bow.Optional<String, String>.identity()).getMaybe(token).getOrElse("") == tokenIso.get(token)
+        }
+        
+        property("Iso + Fold::identity") <- forAll { (token : Token) in
+            return (tokenIso + Fold<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+        }
+        
+        property("Iso + Traversal::identity") <- forAll { (token : Token) in
+            return (tokenIso + Traversal<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+        }
     }
 }
