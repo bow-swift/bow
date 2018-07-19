@@ -100,4 +100,39 @@ class OptionalTest: XCTestCase {
                                            joinedOptional.getMaybe(Either.right(int)))
         }
     }
+    
+    func testOptionalComposition() {
+        property("Optional + Optional::identity") <- forAll { (array : ArrayOf<Int>, def : Int) in
+            return (optionalHead + Bow.Optional<Int, Int>.identity()).getMaybe(array.getArray).getOrElse(def) == optionalHead.getMaybe(array.getArray).getOrElse(def)
+        }
+        
+        property("Optional + Iso::identity") <- forAll { (array : ArrayOf<Int>, def : Int) in
+            return (optionalHead + Iso<Int, Int>.identity()).getMaybe(array.getArray).getOrElse(def) == optionalHead.getMaybe(array.getArray).getOrElse(def)
+        }
+        
+        property("Optional + Lens::identity") <- forAll { (array : ArrayOf<Int>, def : Int) in
+            return (optionalHead + Lens<Int, Int>.identity()).getMaybe(array.getArray).getOrElse(def) == optionalHead.getMaybe(array.getArray).getOrElse(def)
+        }
+        
+        property("Optional + Prism::identity") <- forAll { (array : ArrayOf<Int>, def : Int) in
+            return (optionalHead + Prism<Int, Int>.identity()).getMaybe(array.getArray).getOrElse(def) == optionalHead.getMaybe(array.getArray).getOrElse(def)
+        }
+        
+        property("Optional + Getter::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (optionalHead + Getter<Int, Int>.identity()).getAll(array.getArray).asArray == optionalHead.getMaybe(array.getArray).fold(constant([]), { x in [x] })
+        }
+        
+        let nonEmptyGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
+        property("Optional + Setter::identity") <- forAll(nonEmptyGenerator, Int.arbitrary) { (array : ArrayOf<Int>, def : Int) in
+            return (optionalHead + Setter<Int, Int>.identity()).set(array.getArray, def) == optionalHead.set(array.getArray, def)
+        }
+        
+        property("Optional + Fold::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (optionalHead + Fold<Int, Int>.identity()).getAll(array.getArray).asArray == optionalHead.getMaybe(array.getArray).fold(constant([]), { x in [x] })
+        }
+        
+        property("Optional + Traversal::identity") <- forAll { (array : ArrayOf<Int>) in
+            return (optionalHead + Traversal<Int, Int>.identity()).getAll(array.getArray).asArray == optionalHead.getMaybe(array.getArray).fold(constant([]), { x in [x] })
+        }
+    }
 }
