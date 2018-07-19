@@ -23,4 +23,30 @@ class SetterTest: XCTestCase {
             return tokenSetter.modify(token, constant(value)) == tokenSetter.lift(constant(value))(token)
         }
     }
+    
+    func testSetterComposition() {
+        property("Setter + Setter::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Setter<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+        
+        property("Setter + Iso::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Iso<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+        
+        property("Setter + Lens::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Lens<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+        
+        property("Setter + Prism::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Prism<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+        
+        property("Setter + Optional::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Bow.Optional<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+        
+        property("Setter + Traversal::identity") <- forAll { (token : Token, value : String) in
+            return (tokenSetter + Traversal<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+        }
+    }
 }
