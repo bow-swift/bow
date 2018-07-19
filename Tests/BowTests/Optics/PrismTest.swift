@@ -95,6 +95,36 @@ class PrismTest: XCTestCase {
             return sumPrism.all(sum, constant(predicate)) == (predicate || !sum.isA)
         }
     }
+    
+    func testPrismComposition() {
+        property("Prism + Prism::identity") <- forAll { (sum : SumType, def: String) in
+            return (sumPrism + Prism<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+        }
+        
+        property("Prism + Iso::identity") <- forAll { (sum : SumType, def: String) in
+            return (sumPrism + Iso<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+        }
+        
+        property("Prism + Lens::identity") <- forAll { (sum : SumType, def: String) in
+            return (sumPrism + Lens<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+        }
+        
+        property("Prism + Optional::identity") <- forAll { (sum : SumType, def: String) in
+            return (sumPrism + Bow.Optional<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+        }
+        
+        property("Prism + Fold::identity") <- forAll { (sum : SumType) in
+            return (sumPrism + Fold<String, String>.identity()).getAll(sum).asArray == sumPrism.getMaybe(sum).fold(constant([]), { a in [a] })
+        }
+        
+        property("Prism + Traversal::identity") <- forAll { (sum : SumType) in
+            return (sumPrism + Traversal<String, String>.identity()).getAll(sum).asArray == sumPrism.getMaybe(sum).fold(constant([]), { a in [a] })
+        }
+        
+        property("Prism + Setter::identity") <- forAll { (sum : SumType, def: String) in
+            return (sumPrism + Setter<String, String>.identity()).set(sum, def) == sumPrism.set(sum, def)
+        }
+    }
 }
 
 fileprivate class ConstantEq : Eq {

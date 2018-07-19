@@ -70,6 +70,12 @@ enum SumType {
     }
 }
 
+extension SumType : Equatable {}
+
+func ==(lhs : SumType, rhs : SumType) -> Bool {
+    return SumType.eq.eqv(lhs, rhs)
+}
+
 class SumTypeEq : Eq {
     typealias A = SumType
     
