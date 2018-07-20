@@ -159,6 +159,10 @@
 		11E531E0209B502F00A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E1209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E2209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
+		11F530782101DB5F00D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F530792101DD0300D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307A2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -722,6 +726,7 @@
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		11F530772101DB5F00D92335 /* Recursion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursion.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -995,6 +1000,14 @@
 				11E531DE209B502900A78E8D /* Index.swift */,
 			);
 			path = Typeclasses;
+			sourceTree = "<group>";
+		};
+		11F530762101DB4100D92335 /* RecursionSchemes */ = {
+			isa = PBXGroup;
+			children = (
+				11F530772101DB5F00D92335 /* Recursion.swift */,
+			);
+			path = RecursionSchemes;
 			sourceTree = "<group>";
 		};
 		11FE007A209C8E5A00183AF6 /* Optics */ = {
@@ -1304,6 +1317,7 @@
 				OBJ_39 /* Free */,
 				OBJ_45 /* Instances */,
 				11AC527120974B29008EC1E4 /* Optics */,
+				11F530762101DB4100D92335 /* RecursionSchemes */,
 				OBJ_50 /* Transformers */,
 				OBJ_56 /* Typeclasses */,
 			);
@@ -1678,6 +1692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11F530792101DD0300D92335 /* Recursion.swift in Sources */,
 				1116206820F39EBB00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209420F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
@@ -1858,6 +1873,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11F5307A2101DD0400D92335 /* Recursion.swift in Sources */,
 				1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209520F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
@@ -1966,6 +1982,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F5307B2101DD0400D92335 /* Recursion.swift in Sources */,
 				1116206A20F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209620F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
@@ -2168,6 +2185,7 @@
 				OBJ_393 /* Eval.swift in Sources */,
 				OBJ_394 /* FlatmapOperator.swift in Sources */,
 				OBJ_395 /* Id.swift in Sources */,
+				11F530782101DB5F00D92335 /* Recursion.swift in Sources */,
 				OBJ_396 /* Ior.swift in Sources */,
 				OBJ_397 /* ListK.swift in Sources */,
 				OBJ_398 /* MapK.swift in Sources */,
