@@ -197,6 +197,14 @@ extension Ior : CustomStringConvertible {
     }
 }
 
+extension Ior : CustomDebugStringConvertible where A : CustomDebugStringConvertible, B : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ a in "Left(\(a.debugDescription))" },
+                    { b in "Right(\(b.debugDescription))" },
+                    { a, b in "Both(\(a.debugDescription), \(b.debugDescription))" })
+    }
+}
+
 public extension Ior {
     public static func functor() -> IorFunctor<A> {
         return IorFunctor<A>()
