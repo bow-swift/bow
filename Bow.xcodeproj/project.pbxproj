@@ -165,6 +165,13 @@
 		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
 		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
 		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530822101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530832101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530842101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530852101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530862101E16100D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530872101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530882101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -731,6 +738,7 @@
 		11F530772101DB5F00D92335 /* Recursion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursion.swift; sourceTree = "<group>"; };
 		11F5307D2101DD7100D92335 /* Recursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursive.swift; sourceTree = "<group>"; };
 		11F5307F2101DF8A00D92335 /* Corecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corecursive.swift; sourceTree = "<group>"; };
+		11F530812101E15E00D92335 /* Birecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birecursive.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1018,6 +1026,7 @@
 		11F5307C2101DD4600D92335 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				11F530812101E15E00D92335 /* Birecursive.swift */,
 				11F5307F2101DF8A00D92335 /* Corecursive.swift */,
 				11F5307D2101DD7100D92335 /* Recursive.swift */,
 			);
@@ -1707,6 +1716,7 @@
 			buildActionMask = 0;
 			files = (
 				11F530792101DD0300D92335 /* Recursion.swift in Sources */,
+				11F530832101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206820F39EBB00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209420F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
@@ -1751,6 +1761,7 @@
 				D6D624F02068178800739E2D /* Free.swift in Sources */,
 				D6D624F12068178800739E2D /* Yoneda.swift in Sources */,
 				D6D624F22068178800739E2D /* HigherKinds.swift in Sources */,
+				11F530862101E16100D92335 /* Corecursive.swift in Sources */,
 				D6D624F32068178800739E2D /* NumberInstances.swift in Sources */,
 				1116206B20F39EC000685EC4 /* String+Optics.swift in Sources */,
 				D6D624F42068178800739E2D /* StringInstances.swift in Sources */,
@@ -1888,6 +1899,7 @@
 			buildActionMask = 0;
 			files = (
 				11F5307A2101DD0400D92335 /* Recursion.swift in Sources */,
+				11F530842101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209520F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
@@ -1932,6 +1944,7 @@
 				D6D62581206841B300739E2D /* Free.swift in Sources */,
 				D6D62582206841B300739E2D /* Yoneda.swift in Sources */,
 				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
+				11F530872101E16200D92335 /* Corecursive.swift in Sources */,
 				D6D62584206841B300739E2D /* NumberInstances.swift in Sources */,
 				1116206C20F39EC100685EC4 /* String+Optics.swift in Sources */,
 				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
@@ -1997,6 +2010,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F5307B2101DD0400D92335 /* Recursion.swift in Sources */,
+				11F530852101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206A20F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
 				1116209620F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
@@ -2041,6 +2055,7 @@
 				D6DBDEB720684C38004F979F /* Free.swift in Sources */,
 				D6DBDEB820684C38004F979F /* Yoneda.swift in Sources */,
 				D6DBDEB920684C38004F979F /* HigherKinds.swift in Sources */,
+				11F530882101E16200D92335 /* Corecursive.swift in Sources */,
 				D6DBDEBA20684C38004F979F /* NumberInstances.swift in Sources */,
 				1116206D20F39EC100685EC4 /* String+Optics.swift in Sources */,
 				D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */,
@@ -2266,6 +2281,7 @@
 				OBJ_437 /* MonadError.swift in Sources */,
 				OBJ_438 /* MonadFilter.swift in Sources */,
 				11E531BB209B0BE300A78E8D /* Setter.swift in Sources */,
+				11F530822101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116207920F4923E00685EC4 /* Each+Optics.swift in Sources */,
 				OBJ_439 /* MonadReader.swift in Sources */,
 				OBJ_440 /* MonadState.swift in Sources */,
