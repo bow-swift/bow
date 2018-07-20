@@ -176,6 +176,13 @@
 		11F5308C2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
 		11F5308D2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
 		11F5308E2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F530902101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530912101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530922101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530932101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530942101E6D000D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530952101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530962101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -744,6 +751,7 @@
 		11F5307F2101DF8A00D92335 /* Corecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corecursive.swift; sourceTree = "<group>"; };
 		11F530812101E15E00D92335 /* Birecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birecursive.swift; sourceTree = "<group>"; };
 		11F5308A2101E1B000D92335 /* Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fix.swift; sourceTree = "<group>"; };
+		11F5308F2101E6C600D92335 /* Mu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mu.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1043,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				11F5308A2101E1B000D92335 /* Fix.swift */,
+				11F5308F2101E6C600D92335 /* Mu.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1732,6 +1741,7 @@
 				11F530792101DD0300D92335 /* Recursion.swift in Sources */,
 				11F530832101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206820F39EBB00685EC4 /* Validated+Optics.swift in Sources */,
+				11F530912101E6C700D92335 /* Mu.swift in Sources */,
 				1116209420F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D624D32068178800739E2D /* Cokleisli.swift in Sources */,
 				D6D624D42068178800739E2D /* Function0.swift in Sources */,
@@ -1819,6 +1829,7 @@
 				11E531BC209B148E00A78E8D /* Setter.swift in Sources */,
 				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
+				11F530942101E6D000D92335 /* Recursive.swift in Sources */,
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
 				D6D625102068178800739E2D /* Monoid.swift in Sources */,
@@ -1916,6 +1927,7 @@
 				11F5307A2101DD0400D92335 /* Recursion.swift in Sources */,
 				11F530842101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
+				11F530922101E6C700D92335 /* Mu.swift in Sources */,
 				1116209520F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
 				D6D62565206841B300739E2D /* Function0.swift in Sources */,
@@ -2003,6 +2015,7 @@
 				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
 				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
+				11F530962101E6D100D92335 /* Recursive.swift in Sources */,
 				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
 				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
 				D6D625A1206841B300739E2D /* Monoid.swift in Sources */,
@@ -2028,6 +2041,7 @@
 				11F5307B2101DD0400D92335 /* Recursion.swift in Sources */,
 				11F530852101E15E00D92335 /* Birecursive.swift in Sources */,
 				1116206A20F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
+				11F530932101E6C700D92335 /* Mu.swift in Sources */,
 				1116209620F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
 				D6DBDE9A20684C38004F979F /* Cokleisli.swift in Sources */,
 				D6DBDE9B20684C38004F979F /* Function0.swift in Sources */,
@@ -2115,6 +2129,7 @@
 				11E531BE209B148F00A78E8D /* Setter.swift in Sources */,
 				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
+				11F530952101E6D100D92335 /* Recursive.swift in Sources */,
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
 				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
@@ -2310,6 +2325,7 @@
 				OBJ_443 /* MonoidK.swift in Sources */,
 				OBJ_444 /* NonEmptyReducible.swift in Sources */,
 				OBJ_445 /* Order.swift in Sources */,
+				11F530902101E6C700D92335 /* Mu.swift in Sources */,
 				OBJ_446 /* Reducible.swift in Sources */,
 				OBJ_447 /* Semigroup.swift in Sources */,
 				OBJ_448 /* SemigroupK.swift in Sources */,
