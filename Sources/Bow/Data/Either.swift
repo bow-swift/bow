@@ -130,6 +130,13 @@ extension Either : CustomStringConvertible {
     }
 }
 
+extension Either : CustomDebugStringConvertible where A : CustomDebugStringConvertible, B : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ a in "Left(\(a.debugDescription)"},
+                    { b in "Right(\(b.debugDescription))"})
+    }
+}
+
 public extension Either {
     public static func functor() -> EitherApplicative<A> {
         return EitherApplicative<A>()
