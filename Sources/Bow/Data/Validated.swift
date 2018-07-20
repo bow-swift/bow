@@ -161,6 +161,13 @@ extension Validated : CustomStringConvertible {
     }
 }
 
+extension Validated : CustomDebugStringConvertible where E : CustomDebugStringConvertible, A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ error in "Invalid(\(error.debugDescription))" },
+                    { value in "Valid(\(value.debugDescription))" })
+    }
+}
+
 public extension Validated {
     public static func functor() -> ValidatedFunctor<E> {
         return ValidatedFunctor<E>()
