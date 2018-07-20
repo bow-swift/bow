@@ -142,6 +142,13 @@ extension Try : CustomStringConvertible {
     }
 }
 
+extension Try : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ error in "Failure(\(error))" },
+                    { value in "Success(\(value.debugDescription))" })
+    }
+}
+
 public extension Kind where F == ForTry {
     public func fix() -> Try<A> {
         return self as! Try<A>
