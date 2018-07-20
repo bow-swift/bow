@@ -164,6 +164,7 @@
 		11F5307A2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
 		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
 		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -729,6 +730,7 @@
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		11F530772101DB5F00D92335 /* Recursion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursion.swift; sourceTree = "<group>"; };
 		11F5307D2101DD7100D92335 /* Recursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursive.swift; sourceTree = "<group>"; };
+		11F5307F2101DF8A00D92335 /* Corecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corecursive.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1016,6 +1018,7 @@
 		11F5307C2101DD4600D92335 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				11F5307F2101DF8A00D92335 /* Corecursive.swift */,
 				11F5307D2101DD7100D92335 /* Recursive.swift */,
 			);
 			path = Typeclasses;
@@ -2183,6 +2186,7 @@
 				OBJ_385 /* Kleisli.swift in Sources */,
 				11E531CB209B2FEA00A78E8D /* MaybeInstances.swift in Sources */,
 				OBJ_386 /* KleisliOperator.swift in Sources */,
+				11F530802101DF8A00D92335 /* Corecursive.swift in Sources */,
 				1116209D20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				OBJ_387 /* BooleanFunctions.swift in Sources */,
 				OBJ_388 /* Curry.swift in Sources */,
