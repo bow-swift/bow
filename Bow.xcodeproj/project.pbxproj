@@ -192,6 +192,7 @@
 		11FE0096209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0097209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0098209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
+		D6492806209C72F000B875F9 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
@@ -735,6 +736,7 @@
 		11FE0095209C9EB800183AF6 /* OptionalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalTest.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6492805209C72F000B875F9 /* SetK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetK.swift; sourceTree = "<group>"; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
 		D68A51FF206811C6008DA945 /* Nimble.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Nimble.framework.dSYM; sourceTree = "<group>"; };
 		D68A5200206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
@@ -1164,6 +1166,7 @@
 				OBJ_33 /* Try.swift */,
 				OBJ_34 /* Tuple.swift */,
 				OBJ_35 /* Validated.swift */,
+				D6492805209C72F000B875F9 /* SetK.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2221,6 +2224,7 @@
 				OBJ_430 /* Eq.swift in Sources */,
 				11E531B6209AF80100A78E8D /* Optional.swift in Sources */,
 				OBJ_431 /* Foldable.swift in Sources */,
+				D6492806209C72F000B875F9 /* SetK.swift in Sources */,
 				OBJ_432 /* Functor.swift in Sources */,
 				11E531DF209B502900A78E8D /* Index.swift in Sources */,
 				1116204F20F3820500685EC4 /* Maybe+Optics.swift in Sources */,
