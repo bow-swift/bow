@@ -195,6 +195,9 @@
 		D6492806209C72F000B875F9 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D68DC58D210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
+		D68DC58E210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
+		D68DC58F210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
 		D6D624452068141800739E2D /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Function1Test.swift */; };
 		D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* KleisliOperatorTest.swift */; };
@@ -750,6 +753,7 @@
 		D68A520A206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
 		D68A520B206811C6008DA945 /* SwiftCheck.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftCheck.framework.dSYM; sourceTree = "<group>"; };
 		D68A522320681219008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
+		D68DC58B2106653D00D7D845 /* SetKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetKTest.swift; sourceTree = "<group>"; };
 		D6D6247C2068141800739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D6251D2068178800739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D6255B206817A700739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1379,6 +1383,7 @@
 				OBJ_106 /* TryTest.swift */,
 				OBJ_107 /* TupleTest.swift */,
 				OBJ_108 /* ValidatedTest.swift */,
+				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1635,6 +1640,7 @@
 				11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D624552068141800739E2D /* ValidatedTest.swift in Sources */,
 				D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */,
+				D68DC58E210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D624572068141800739E2D /* IOTest.swift in Sources */,
 				D6D624582068141800739E2D /* FreeTest.swift in Sources */,
 				D6D624592068141800739E2D /* NumberInstancesTest.swift in Sources */,
@@ -1815,6 +1821,7 @@
 				11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */,
 				D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */,
+				D68DC58F210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D62536206817A700739E2D /* IOTest.swift in Sources */,
 				D6D62537206817A700739E2D /* FreeTest.swift in Sources */,
 				D6D62538206817A700739E2D /* NumberInstancesTest.swift in Sources */,
@@ -2103,6 +2110,7 @@
 				11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				OBJ_263 /* ValidatedTest.swift in Sources */,
 				OBJ_264 /* AsyncContextLaws.swift in Sources */,
+				D68DC58D210665DB00D7D845 /* SetKTest.swift in Sources */,
 				OBJ_265 /* IOTest.swift in Sources */,
 				OBJ_266 /* FreeTest.swift in Sources */,
 				OBJ_267 /* NumberInstancesTest.swift in Sources */,
