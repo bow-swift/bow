@@ -13,6 +13,6 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: script
-  script: ./scripts/push.sh
+  script: sh scripts/push.sh
   on:
     tags: true
