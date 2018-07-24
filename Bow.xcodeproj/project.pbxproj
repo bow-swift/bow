@@ -192,6 +192,9 @@
 		11FE0096209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0097209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0098209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
+		D60A59DE21079832005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		D60A59DF21079833005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		D60A59E021079833005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
 		D6492806209C72F000B875F9 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -1166,11 +1169,11 @@
 				OBJ_29 /* Maybe.swift */,
 				OBJ_30 /* NonEmptyList.swift */,
 				OBJ_31 /* Reader.swift */,
+				D6492805209C72F000B875F9 /* SetK.swift */,
 				OBJ_32 /* State.swift */,
 				OBJ_33 /* Try.swift */,
 				OBJ_34 /* Tuple.swift */,
 				OBJ_35 /* Validated.swift */,
-				D6492805209C72F000B875F9 /* SetK.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1380,10 +1383,10 @@
 				OBJ_103 /* ListKTest.swift */,
 				OBJ_104 /* MaybeTest.swift */,
 				OBJ_105 /* NonEmptyListTest.swift */,
+				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 				OBJ_106 /* TryTest.swift */,
 				OBJ_107 /* TupleTest.swift */,
 				OBJ_108 /* ValidatedTest.swift */,
-				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1775,6 +1778,7 @@
 				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
+				D60A59DE21079832005D53F3 /* SetK.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
 				D6D625102068178800739E2D /* Monoid.swift in Sources */,
 				D6D625112068178800739E2D /* MonoidK.swift in Sources */,
@@ -1956,6 +1960,7 @@
 				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
 				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
+				D60A59DF21079833005D53F3 /* SetK.swift in Sources */,
 				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
 				D6D625A1206841B300739E2D /* Monoid.swift in Sources */,
 				D6D625A2206841B300739E2D /* MonoidK.swift in Sources */,
@@ -2064,6 +2069,7 @@
 				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
+				D60A59E021079833005D53F3 /* SetK.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
 				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
 				D6DBDED820684C38004F979F /* MonoidK.swift in Sources */,
