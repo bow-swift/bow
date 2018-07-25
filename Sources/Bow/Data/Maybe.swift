@@ -325,3 +325,10 @@ public class MaybeTraverseFilter : MaybeTraverse, TraverseFilter {
         return fa.fix().traverseFilter(f, applicative)
     }
 }
+
+extension Maybe : Equatable where A : Equatable {
+    public static func ==(lhs : Maybe<A>, rhs : Maybe<A>) -> Bool {
+        return lhs.fold({ rhs.fold(constant(true), constant(false)) },
+                        { a in rhs.fold(constant(false), { b in a == b })})
+    }
+}

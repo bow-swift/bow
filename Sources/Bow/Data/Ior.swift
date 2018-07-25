@@ -302,5 +302,10 @@ public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, Eq
     }
 }
 
-
-
+extension Ior : Equatable where A : Equatable, B : Equatable {
+    public static func ==(lhs : Ior<A, B>, rhs : Ior<A, B>) -> Bool {
+        return lhs.fold({ la in rhs.fold({ ra in la == ra }, constant(false), constant(false)) },
+                        { lb in rhs.fold(constant(false), { rb in lb == rb }, constant(false)) },
+                        { la, lb in rhs.fold(constant(false), constant(false), { ra, rb in la == ra && lb == rb })})
+    }
+}

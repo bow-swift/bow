@@ -251,3 +251,10 @@ public class TryTraverse : TryFoldable, Traverse {
         return fa.fix().traverse(f, applicative)
     }
 }
+
+extension Try : Equatable where A : Equatable {
+    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
+        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
+                        { a in rhs.fold(constant(false), { b in a == b }) })
+    }
+}

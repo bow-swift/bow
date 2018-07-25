@@ -172,3 +172,9 @@ public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
         return eqb.eqv(Id.fix(a).value, Id.fix(b).value)
     }
 }
+
+extension Id : Equatable where A : Equatable {
+    public static func ==(lhs : Id<A>, rhs : Id<A>) -> Bool {
+        return lhs.value == rhs.value
+    }
+}

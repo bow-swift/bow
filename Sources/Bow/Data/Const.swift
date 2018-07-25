@@ -166,3 +166,9 @@ public class ConstEq<R, S, EqR> : Eq where EqR : Eq, EqR.A == R {
         return eqr.eqv(Const.fix(a).value, Const.fix(b).value)
     }
 }
+
+extension Const : Equatable where A : Equatable {
+    public static func ==(lhs : Const<A, T>, rhs : Const<A, T>) -> Bool {
+        return lhs.value == rhs.value
+    }
+}
