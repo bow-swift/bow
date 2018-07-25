@@ -192,8 +192,15 @@
 		11FE0096209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0097209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
 		11FE0098209C9EB800183AF6 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0095209C9EB800183AF6 /* OptionalTest.swift */; };
+		D60A59DE21079832005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		D60A59DF21079833005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		D60A59E021079833005D53F3 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		D6492806209C72F000B875F9 /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
 		D68A5220206811DF008DA945 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A51FE206811C6008DA945 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68A5221206811DF008DA945 /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D68A5200206811C6008DA945 /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D68DC58D210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
+		D68DC58E210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
+		D68DC58F210665DB00D7D845 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68DC58B2106653D00D7D845 /* SetKTest.swift */; };
 		D6D624442068141800739E2D /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_90 /* Function0Test.swift */; };
 		D6D624452068141800739E2D /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* Function1Test.swift */; };
 		D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* KleisliOperatorTest.swift */; };
@@ -735,6 +742,7 @@
 		11FE0095209C9EB800183AF6 /* OptionalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalTest.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6492805209C72F000B875F9 /* SetK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetK.swift; sourceTree = "<group>"; };
 		D68A51FE206811C6008DA945 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = "<group>"; };
 		D68A51FF206811C6008DA945 /* Nimble.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Nimble.framework.dSYM; sourceTree = "<group>"; };
 		D68A5200206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
@@ -748,6 +756,7 @@
 		D68A520A206811C6008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
 		D68A520B206811C6008DA945 /* SwiftCheck.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = SwiftCheck.framework.dSYM; sourceTree = "<group>"; };
 		D68A522320681219008DA945 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = "<group>"; };
+		D68DC58B2106653D00D7D845 /* SetKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetKTest.swift; sourceTree = "<group>"; };
 		D6D6247C2068141800739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D6251D2068178800739E2D /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D6255B206817A700739E2D /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1160,6 +1169,7 @@
 				OBJ_29 /* Maybe.swift */,
 				OBJ_30 /* NonEmptyList.swift */,
 				OBJ_31 /* Reader.swift */,
+				D6492805209C72F000B875F9 /* SetK.swift */,
 				OBJ_32 /* State.swift */,
 				OBJ_33 /* Try.swift */,
 				OBJ_34 /* Tuple.swift */,
@@ -1373,6 +1383,7 @@
 				OBJ_103 /* ListKTest.swift */,
 				OBJ_104 /* MaybeTest.swift */,
 				OBJ_105 /* NonEmptyListTest.swift */,
+				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 				OBJ_106 /* TryTest.swift */,
 				OBJ_107 /* TupleTest.swift */,
 				OBJ_108 /* ValidatedTest.swift */,
@@ -1632,6 +1643,7 @@
 				11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D624552068141800739E2D /* ValidatedTest.swift in Sources */,
 				D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */,
+				D68DC58E210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D624572068141800739E2D /* IOTest.swift in Sources */,
 				D6D624582068141800739E2D /* FreeTest.swift in Sources */,
 				D6D624592068141800739E2D /* NumberInstancesTest.swift in Sources */,
@@ -1766,6 +1778,7 @@
 				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
+				D60A59DE21079832005D53F3 /* SetK.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
 				D6D625102068178800739E2D /* Monoid.swift in Sources */,
 				D6D625112068178800739E2D /* MonoidK.swift in Sources */,
@@ -1812,6 +1825,7 @@
 				11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */,
 				D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */,
+				D68DC58F210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D62536206817A700739E2D /* IOTest.swift in Sources */,
 				D6D62537206817A700739E2D /* FreeTest.swift in Sources */,
 				D6D62538206817A700739E2D /* NumberInstancesTest.swift in Sources */,
@@ -1946,6 +1960,7 @@
 				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
 				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
+				D60A59DF21079833005D53F3 /* SetK.swift in Sources */,
 				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
 				D6D625A1206841B300739E2D /* Monoid.swift in Sources */,
 				D6D625A2206841B300739E2D /* MonoidK.swift in Sources */,
@@ -2054,6 +2069,7 @@
 				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
+				D60A59E021079833005D53F3 /* SetK.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
 				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
 				D6DBDED820684C38004F979F /* MonoidK.swift in Sources */,
@@ -2100,6 +2116,7 @@
 				11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				OBJ_263 /* ValidatedTest.swift in Sources */,
 				OBJ_264 /* AsyncContextLaws.swift in Sources */,
+				D68DC58D210665DB00D7D845 /* SetKTest.swift in Sources */,
 				OBJ_265 /* IOTest.swift in Sources */,
 				OBJ_266 /* FreeTest.swift in Sources */,
 				OBJ_267 /* NumberInstancesTest.swift in Sources */,
@@ -2221,6 +2238,7 @@
 				OBJ_430 /* Eq.swift in Sources */,
 				11E531B6209AF80100A78E8D /* Optional.swift in Sources */,
 				OBJ_431 /* Foldable.swift in Sources */,
+				D6492806209C72F000B875F9 /* SetK.swift in Sources */,
 				OBJ_432 /* Functor.swift in Sources */,
 				11E531DF209B502900A78E8D /* Index.swift in Sources */,
 				1116204F20F3820500685EC4 /* Maybe+Optics.swift in Sources */,
