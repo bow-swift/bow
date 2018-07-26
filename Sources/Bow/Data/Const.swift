@@ -46,6 +46,12 @@ extension Const : CustomStringConvertible {
     }
 }
 
+extension Const : CustomDebugStringConvertible where A : CustomDebugStringConvertible{
+    public var debugDescription: String {
+        return "Const(\(value.debugDescription))"
+    }
+}
+
 public extension Const {
     public static func functor() -> ConstFunctor<A> {
         return ConstFunctor<A>()

@@ -149,6 +149,13 @@ extension Maybe : CustomStringConvertible {
     }
 }
 
+extension Maybe : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold(constant("None"),
+                    { a in "Some(\(a.debugDescription)" })
+    }
+}
+
 public extension Kind where F == ForMaybe {
     public func fix() -> Maybe<A> {
         return self as! Maybe<A>

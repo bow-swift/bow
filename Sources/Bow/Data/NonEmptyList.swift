@@ -146,6 +146,13 @@ extension NonEmptyList : CustomStringConvertible {
     }
 }
 
+extension NonEmptyList : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        let contentsString = self.all().map { x in x.debugDescription }.joined(separator: ", ")
+        return "NonEmptyList(\(contentsString))"
+    }
+}
+
 public extension Kind where F == ForNonEmptyList {
     public func fix() -> NonEmptyList<A> {
         return self as! NonEmptyList<A>

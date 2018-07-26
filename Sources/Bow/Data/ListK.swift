@@ -125,6 +125,20 @@ public extension Array {
     }
 }
 
+extension ListK : CustomStringConvertible {
+    public var description : String {
+        let contentsString = self.list.map { x in "\(x)" }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
+extension ListK : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        let contentsString = self.list.map { x in x.debugDescription }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
 public extension ListK {
     public static func functor() -> ListKFunctor {
         return ListKFunctor()

@@ -69,6 +69,12 @@ extension Id : CustomStringConvertible {
     }
 }
 
+extension Id : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return "Id(\(value.debugDescription))"
+    }
+}
+
 extension Id {
     public static func functor() -> IdFunctor {
         return IdFunctor()
