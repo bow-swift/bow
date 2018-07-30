@@ -125,6 +125,20 @@ public extension Array {
     }
 }
 
+extension ListK : CustomStringConvertible {
+    public var description : String {
+        let contentsString = self.list.map { x in "\(x)" }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
+extension ListK : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        let contentsString = self.list.map { x in x.debugDescription }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
 public extension ListK {
     public static func functor() -> ListKFunctor {
         return ListKFunctor()
@@ -323,3 +337,8 @@ public class ArrayEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
 }
 
+extension ListK : Equatable where A : Equatable {
+    public static func ==(lhs : ListK<A>, rhs : ListK<A>) -> Bool {
+        return lhs.list == rhs.list
+    }
+}

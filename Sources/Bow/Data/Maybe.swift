@@ -153,6 +153,13 @@ extension Maybe : CustomStringConvertible {
     }
 }
 
+extension Maybe : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold(constant("None"),
+                    { a in "Some(\(a.debugDescription)" })
+    }
+}
+
 public extension Kind where F == ForMaybe {
     public func fix() -> Maybe<A> {
         return self as! Maybe<A>
@@ -327,5 +334,12 @@ public class MaybeTraverse : MaybeFoldable, Traverse {
 public class MaybeTraverseFilter : MaybeTraverse, TraverseFilter {
     public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, MaybeOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverseFilter(f, applicative)
+    }
+}
+
+extension Maybe : Equatable where A : Equatable {
+    public static func ==(lhs : Maybe<A>, rhs : Maybe<A>) -> Bool {
+        return lhs.fold({ rhs.fold(constant(true), constant(false)) },
+                        { a in rhs.fold(constant(false), { b in a == b })})
     }
 }

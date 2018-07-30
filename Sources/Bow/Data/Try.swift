@@ -142,6 +142,13 @@ extension Try : CustomStringConvertible {
     }
 }
 
+extension Try : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ error in "Failure(\(error))" },
+                    { value in "Success(\(value.debugDescription))" })
+    }
+}
+
 public extension Kind where F == ForTry {
     public func fix() -> Try<A> {
         return self as! Try<A>
@@ -249,5 +256,12 @@ public class TryFoldable : Foldable {
 public class TryTraverse : TryFoldable, Traverse {
     public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverse(f, applicative)
+    }
+}
+
+extension Try : Equatable where A : Equatable {
+    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
+        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
+                        { a in rhs.fold(constant(false), { b in a == b }) })
     }
 }
