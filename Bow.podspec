@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "Bow"
-  s.version     = "0.0.0.1"
+  s.version     = "0.1.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift."
   s.homepage    = "https://github.com/arrow-kt/bow"
   s.license     = { :type => "Copyright" }
