@@ -130,6 +130,10 @@ public class Maybe<A> : MaybeOf<A> {
     public func toOption() -> A? {
         return fold(constant(nil), id)
     }
+    
+    public func toList() -> [A] {
+        return fold(constant([]), { a in [a] })
+    }
 }
 
 class Some<A> : Maybe<A> {

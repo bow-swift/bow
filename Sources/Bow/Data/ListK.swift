@@ -313,6 +313,30 @@ public class ListKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
 }
 
+public extension Array {
+    public static func eq<EqR>(_ eqr : EqR) -> ArrayEq<Element, EqR> where EqR : Eq, EqR.A == Element {
+        return ArrayEq(eqr)
+    }
+}
+
+public class ArrayEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+    public typealias A = Array<R>
+    
+    private let eqr : EqR
+    
+    public init(_ eqr : EqR) {
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Array<R>, _ b: Array<R>) -> Bool {
+        if a.count != b.count {
+            return false
+        } else {
+            return zip(a, b).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+        }
+    }
+}
+
 extension ListK : Equatable where A : Equatable {
     public static func ==(lhs : ListK<A>, rhs : ListK<A>) -> Bool {
         return lhs.list == rhs.list
