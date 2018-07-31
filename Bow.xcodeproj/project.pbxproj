@@ -94,6 +94,9 @@
 		11635BBA20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
 		11635BBB20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
 		11635BBC20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
+		116D42C22110860700363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
+		116D42C32110860700363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
+		116D42C42110860800363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		11AA440F2088D4080091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AA44102088D4090091B474 /* ShowLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082D02085DD4D00C8563C /* ShowLaws.swift */; };
 		11AC527320974D58008EC1E4 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
@@ -1769,6 +1772,7 @@
 				11E531CC209B319E00A78E8D /* MaybeInstances.swift in Sources */,
 				D6D624FC2068178800739E2D /* Alternative.swift in Sources */,
 				D6D624FD2068178800739E2D /* Applicative.swift in Sources */,
+				116D42C22110860700363A86 /* BoolInstances.swift in Sources */,
 				D6D624FE2068178800739E2D /* ApplicativeError.swift in Sources */,
 				11C9B6D120DCF54600AFD4AA /* Each.swift in Sources */,
 				D6D624FF2068178800739E2D /* Bifoldable.swift in Sources */,
@@ -1954,6 +1958,7 @@
 				11E531CD209B319F00A78E8D /* MaybeInstances.swift in Sources */,
 				D6D6258D206841B300739E2D /* Alternative.swift in Sources */,
 				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
+				116D42C32110860700363A86 /* BoolInstances.swift in Sources */,
 				D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */,
 				11C9B6D220DCF54700AFD4AA /* Each.swift in Sources */,
 				D6D62590206841B300739E2D /* Bifoldable.swift in Sources */,
@@ -2063,6 +2068,7 @@
 				11E531CE209B31A000A78E8D /* MaybeInstances.swift in Sources */,
 				D6DBDEC320684C38004F979F /* Alternative.swift in Sources */,
 				D6DBDEC420684C38004F979F /* Applicative.swift in Sources */,
+				116D42C42110860800363A86 /* BoolInstances.swift in Sources */,
 				D6DBDEC520684C38004F979F /* ApplicativeError.swift in Sources */,
 				11C9B6D320DCF54800AFD4AA /* Each.swift in Sources */,
 				D6DBDEC620684C38004F979F /* Bifoldable.swift in Sources */,
