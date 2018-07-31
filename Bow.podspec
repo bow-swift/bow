@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "9.1"
   s.watchos.deployment_target = "2.0"  
   s.source   = { :git => "https://github.com/arrow-kt/bow.git", :tag => "#{s.version}" }
-  s.source_files = "Sources/Bow/*.swift"
+  s.source_files = "Sources/Bow/**/*.swift"
 end
