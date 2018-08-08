@@ -8,7 +8,7 @@ matrix:
   include:
     - env: JOB="XCODE" DEST="OS=11.4,name=iPhone 8 Plus" SCHEME="Bow" SDK="iphonesimulator" ACTION="test"
     - env: JOB="XCODE" DEST="arch=x86_64" SCHEME="Bow-macOS" SDK="macosx" ACTION="test"
-    - env: JOB="XCODE" DEST="OS=11.4,name=Apple TV" SCHEME="Bow-tvOS" SDK="appletvsimulator" ACTION="test"
+    - env: JOB="XCODE" DEST="OS=11.4,name=Apple TV" SCHEME="Bow-tvOS" SDK="appletvsimulator" ACTION="build"
     - env: JOB="XCODE" DEST="OS=4.3,name=Apple Watch - 42mm" SCHEME="Bow-watchOS" SDK="watchsimulator" ACTION="build"
 
 before_install:
