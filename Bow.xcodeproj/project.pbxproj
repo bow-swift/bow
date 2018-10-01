@@ -114,6 +114,9 @@
 		115683C221625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
 		115683C321625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
 		115683C421625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
+		115683C621625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
+		115683C721625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
+		115683C821625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -761,6 +764,7 @@
 		115683B9216253E00001749D /* ContravariantLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContravariantLaws.swift; sourceTree = "<group>"; };
 		115683BD216255F30001749D /* CategoryLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLaws.swift; sourceTree = "<group>"; };
 		115683C121625D550001749D /* BifunctorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BifunctorLaws.swift; sourceTree = "<group>"; };
+		115683C521625F930001749D /* ProfunctorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfunctorLaws.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1207,6 +1211,7 @@
 				OBJ_136 /* MonoidKLaws.swift */,
 				OBJ_137 /* MonoidLaws.swift */,
 				OBJ_138 /* OrderLaws.swift */,
+				115683C521625F930001749D /* ProfunctorLaws.swift */,
 				OBJ_139 /* SemigroupKLaws.swift */,
 				OBJ_140 /* SemigroupLaws.swift */,
 				111082D02085DD4D00C8563C /* ShowLaws.swift */,
@@ -1727,6 +1732,7 @@
 				11635BBB20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0082209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */,
+				115683C721625F930001749D /* ProfunctorLaws.swift in Sources */,
 				D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */,
 				D6D6245F2068141800739E2D /* StateTTest.swift in Sources */,
 				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
@@ -1922,6 +1928,7 @@
 				11635BBC20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0083209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */,
+				115683C821625F930001749D /* ProfunctorLaws.swift in Sources */,
 				D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */,
 				D6D6253E206817A700739E2D /* StateTTest.swift in Sources */,
 				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
@@ -2232,6 +2239,7 @@
 				11635BBA20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */,
 				11FE0081209C945900183AF6 /* IsoTest.swift in Sources */,
 				OBJ_271 /* EitherTTest.swift in Sources */,
+				115683C621625F930001749D /* ProfunctorLaws.swift in Sources */,
 				OBJ_272 /* MaybeTTest.swift in Sources */,
 				OBJ_273 /* StateTTest.swift in Sources */,
 				OBJ_274 /* WriterTTest.swift in Sources */,
