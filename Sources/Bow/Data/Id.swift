@@ -69,6 +69,12 @@ extension Id : CustomStringConvertible {
     }
 }
 
+extension Id : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return "Id(\(value.debugDescription))"
+    }
+}
+
 extension Id {
     public static func functor() -> IdFunctor {
         return IdFunctor()
@@ -170,5 +176,11 @@ public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
     
     public func eqv(_ a: IdOf<B>, _ b: IdOf<B>) -> Bool {
         return eqb.eqv(Id.fix(a).value, Id.fix(b).value)
+    }
+}
+
+extension Id : Equatable where A : Equatable {
+    public static func ==(lhs : Id<A>, rhs : Id<A>) -> Bool {
+        return lhs.value == rhs.value
     }
 }

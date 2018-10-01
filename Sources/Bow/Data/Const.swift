@@ -46,6 +46,12 @@ extension Const : CustomStringConvertible {
     }
 }
 
+extension Const : CustomDebugStringConvertible where A : CustomDebugStringConvertible{
+    public var debugDescription: String {
+        return "Const(\(value.debugDescription))"
+    }
+}
+
 public extension Const {
     public static func functor() -> ConstFunctor<A> {
         return ConstFunctor<A>()
@@ -164,5 +170,11 @@ public class ConstEq<R, S, EqR> : Eq where EqR : Eq, EqR.A == R {
     
     public func eqv(_ a: ConstOf<R, S>, _ b: ConstOf<R, S>) -> Bool {
         return eqr.eqv(Const.fix(a).value, Const.fix(b).value)
+    }
+}
+
+extension Const : Equatable where A : Equatable {
+    public static func ==(lhs : Const<A, T>, rhs : Const<A, T>) -> Bool {
+        return lhs.value == rhs.value
     }
 }

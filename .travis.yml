@@ -1,12 +1,27 @@
 language: objective-c
-osx_image: xcode9.3
+osx_image: xcode9.4
+env:
+  global:
+    - PROJECT=Bow.xcodeproj
+  secure: LatJH8j809/6dhEO6WhpQyU3lAjtkOYHAqWD14+bU6lfAc5oRrRFO4B7h56gnIDu6tvYJS0Qa/IhIuB3zZQ/GlG12oivgE/FKp1xXxxHwqjmhPHdetX9YkeAbicJ8YrSQ+C0UC6NMmP1WtU7cmLBV4Q1VwdPnVvRIrOVuWdh3ITUzUz/qQMTZwi+6Z1w92QvxbyytXDqti62NrUq81ba2c7pvBbFBujMp5hyd6+EcuZojYWGNN3cIR2DcPVXD9j4kwLyDPVAcN/OROAwaJlOZ63FbsoUcZULOAX/6s5bmcU1CuYc+eBrXX7KifSqj3yUW00Ea0ynyvsn2GWldAw5b8cYgiLuqQBp3jxtPVH/tEWRdO5TdFtMl8CDEJQiblINjFCXRbnAh8fnk/9jxKTkK+e1DXNQEk/w61+vUB21j74Zw8PhPRvCsoV8XgPkd34UiSlG5XkPaj+vImRpB2/kemYxynpY2Sjq+qoK4iUJy/DXhX/agThWCpjY1hWL2LNL/24mk6DbUHZGVH+4RgoBJxBFCI7ucSp14Og0cCFmhFfsq0nttN+xNegosmHnEcv1Z4tRW750rPf2dgGlXkf6s4msbZ/kyRnccs2zlh3JYYac509Fk98FRNfLb9q0C/jLb0xpg6qf9WbI1QbMcxPHKakyGEUuo+7FO+CLzrJ0qns=
+matrix:
+  include:
+    - env: JOB="XCODE" DEST="OS=11.4,name=iPhone 8 Plus" SCHEME="Bow" SDK="iphonesimulator" ACTION="test"
+    - env: JOB="XCODE" DEST="arch=x86_64" SCHEME="Bow-macOS" SDK="macosx" ACTION="test"
+    - env: JOB="XCODE" DEST="OS=11.4,name=Apple TV" SCHEME="Bow-tvOS" SDK="appletvsimulator" ACTION="build"
+    - env: JOB="XCODE" DEST="OS=4.3,name=Apple Watch - 42mm" SCHEME="Bow-watchOS" SDK="watchsimulator" ACTION="build"
 
 before_install:
   - carthage bootstrap
 
 script:
   - set -o pipefail
-  - xcodebuild test -project Bow.xcodeproj -scheme Bow -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,OS=11.3,name=iPhone X" | xcpretty -c
+  - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: script
+  script: sh scripts/push.sh
+  on:
+    tags: true

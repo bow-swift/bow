@@ -125,6 +125,20 @@ public extension Array {
     }
 }
 
+extension ListK : CustomStringConvertible {
+    public var description : String {
+        let contentsString = self.list.map { x in "\(x)" }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
+extension ListK : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        let contentsString = self.list.map { x in x.debugDescription }.joined(separator: ", ")
+        return "ListK(\(contentsString))"
+    }
+}
+
 public extension ListK {
     public static func functor() -> ListKFunctor {
         return ListKFunctor()
@@ -299,4 +313,32 @@ public class ListKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
     }
 }
 
+public extension Array {
+    public static func eq<EqR>(_ eqr : EqR) -> ArrayEq<Element, EqR> where EqR : Eq, EqR.A == Element {
+        return ArrayEq(eqr)
+    }
+}
 
+public class ArrayEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+    public typealias A = Array<R>
+    
+    private let eqr : EqR
+    
+    public init(_ eqr : EqR) {
+        self.eqr = eqr
+    }
+    
+    public func eqv(_ a: Array<R>, _ b: Array<R>) -> Bool {
+        if a.count != b.count {
+            return false
+        } else {
+            return zip(a, b).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+        }
+    }
+}
+
+extension ListK : Equatable where A : Equatable {
+    public static func ==(lhs : ListK<A>, rhs : ListK<A>) -> Bool {
+        return lhs.list == rhs.list
+    }
+}

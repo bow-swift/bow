@@ -130,6 +130,10 @@ public class Maybe<A> : MaybeOf<A> {
     public func toOption() -> A? {
         return fold(constant(nil), id)
     }
+    
+    public func toList() -> [A] {
+        return fold(constant([]), { a in [a] })
+    }
 }
 
 class Some<A> : Maybe<A> {
@@ -146,6 +150,13 @@ extension Maybe : CustomStringConvertible {
     public var description : String {
         return fold({ "None" },
                     { a in "Some(\(a))" })
+    }
+}
+
+extension Maybe : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold(constant("None"),
+                    { a in "Some(\(a.debugDescription)" })
     }
 }
 
@@ -323,5 +334,12 @@ public class MaybeTraverse : MaybeFoldable, Traverse {
 public class MaybeTraverseFilter : MaybeTraverse, TraverseFilter {
     public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForMaybe, A>, _ f: @escaping (A) -> Kind<G, MaybeOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForMaybe, B>> where G == Appl.F, Appl : Applicative {
         return fa.fix().traverseFilter(f, applicative)
+    }
+}
+
+extension Maybe : Equatable where A : Equatable {
+    public static func ==(lhs : Maybe<A>, rhs : Maybe<A>) -> Bool {
+        return lhs.fold({ rhs.fold(constant(true), constant(false)) },
+                        { a in rhs.fold(constant(false), { b in a == b })})
     }
 }

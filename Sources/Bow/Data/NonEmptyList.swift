@@ -146,6 +146,13 @@ extension NonEmptyList : CustomStringConvertible {
     }
 }
 
+extension NonEmptyList : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        let contentsString = self.all().map { x in x.debugDescription }.joined(separator: ", ")
+        return "NonEmptyList(\(contentsString))"
+    }
+}
+
 public extension Kind where F == ForNonEmptyList {
     public func fix() -> NonEmptyList<A> {
         return self as! NonEmptyList<A>
@@ -285,5 +292,11 @@ public class NonEmptyListEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
         } else {
             return zip(a.all(), b.all()).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
         }
+    }
+}
+
+extension NonEmptyList : Equatable where A : Equatable {
+    public static func ==(lhs : Nel<A>, rhs : Nel<A>) -> Bool {
+        return lhs.all() == rhs.all()
     }
 }

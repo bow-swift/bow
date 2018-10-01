@@ -130,6 +130,13 @@ extension Either : CustomStringConvertible {
     }
 }
 
+extension Either : CustomDebugStringConvertible where A : CustomDebugStringConvertible, B : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ a in "Left(\(a.debugDescription)"},
+                    { b in "Right(\(b.debugDescription))"})
+    }
+}
+
 public extension Either {
     public static func functor() -> EitherApplicative<A> {
         return EitherApplicative<A>()
@@ -237,5 +244,12 @@ public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq,
     public func eqv(_ a: EitherOf<L, R>, _ b: EitherOf<L, R>) -> Bool {
         return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false)) },
                                  { aRight in Either.fix(b).fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }) })
+    }
+}
+
+extension Either : Equatable where A : Equatable, B : Equatable {
+    public static func ==(lhs : Either<A, B>, rhs : Either<A, B>) -> Bool {
+        return lhs.fold({ la in rhs.fold({ lb in la == lb }, constant(false)) },
+                        { ra in rhs.fold(constant(false), { rb in ra == rb })})
     }
 }

@@ -161,6 +161,13 @@ extension Validated : CustomStringConvertible {
     }
 }
 
+extension Validated : CustomDebugStringConvertible where E : CustomDebugStringConvertible, A : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ error in "Invalid(\(error.debugDescription))" },
+                    { value in "Valid(\(value.debugDescription))" })
+    }
+}
+
 public extension Validated {
     public static func functor() -> ValidatedFunctor<E> {
         return ValidatedFunctor<E>()
@@ -274,5 +281,12 @@ public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : 
         let b = Validated.fix(b)
         return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constant(false))},
                       { aValid in b.fold(constant(false), { bValid in eqr.eqv(aValid, bValid) })})
+    }
+}
+
+extension Validated : Equatable where E : Equatable, A : Equatable {
+    public static func ==(lhs : Validated<E, A>, rhs : Validated<E, A>) -> Bool {
+        return lhs.fold({ le in rhs.fold({ re in le == re }, constant(false)) },
+                        { la in rhs.fold(constant(false), { ra in la == ra }) })
     }
 }

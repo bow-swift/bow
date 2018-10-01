@@ -197,6 +197,14 @@ extension Ior : CustomStringConvertible {
     }
 }
 
+extension Ior : CustomDebugStringConvertible where A : CustomDebugStringConvertible, B : CustomDebugStringConvertible {
+    public var debugDescription : String {
+        return fold({ a in "Left(\(a.debugDescription))" },
+                    { b in "Right(\(b.debugDescription))" },
+                    { a, b in "Both(\(a.debugDescription), \(b.debugDescription))" })
+    }
+}
+
 public extension Ior {
     public static func functor() -> IorFunctor<A> {
         return IorFunctor<A>()
@@ -302,5 +310,10 @@ public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, Eq
     }
 }
 
-
-
+extension Ior : Equatable where A : Equatable, B : Equatable {
+    public static func ==(lhs : Ior<A, B>, rhs : Ior<A, B>) -> Bool {
+        return lhs.fold({ la in rhs.fold({ ra in la == ra }, constant(false), constant(false)) },
+                        { lb in rhs.fold(constant(false), { rb in lb == rb }, constant(false)) },
+                        { la, lb in rhs.fold(constant(false), constant(false), { ra, rb in la == ra && lb == rb })})
+    }
+}
