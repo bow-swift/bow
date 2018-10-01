@@ -86,6 +86,10 @@
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839F2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
+		115683A2216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
+		115683A3216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
+		115683A4216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
+		115683A5216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -725,6 +729,7 @@
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
+		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1278,6 +1283,7 @@
 				OBJ_60 /* Bifoldable.swift */,
 				OBJ_61 /* Bimonad.swift */,
 				OBJ_62 /* Comonad.swift */,
+				115683A1216248FC0001749D /* Contravariant.swift */,
 				OBJ_66 /* Eq.swift */,
 				OBJ_67 /* Foldable.swift */,
 				OBJ_68 /* Functor.swift */,
@@ -1777,6 +1783,7 @@
 				D6D624FA2068178800739E2D /* WriterT.swift in Sources */,
 				D6D624FB2068178800739E2D /* Typeclass.swift in Sources */,
 				11E531CC209B319E00A78E8D /* MaybeInstances.swift in Sources */,
+				115683A3216248FC0001749D /* Contravariant.swift in Sources */,
 				D6D624FC2068178800739E2D /* Alternative.swift in Sources */,
 				D6D624FD2068178800739E2D /* Applicative.swift in Sources */,
 				116D42C52110A66500363A86 /* BoolInstances.swift in Sources */,
@@ -1964,6 +1971,7 @@
 				D6D6258B206841B300739E2D /* WriterT.swift in Sources */,
 				D6D6258C206841B300739E2D /* Typeclass.swift in Sources */,
 				11E531CD209B319F00A78E8D /* MaybeInstances.swift in Sources */,
+				115683A4216248FC0001749D /* Contravariant.swift in Sources */,
 				D6D6258D206841B300739E2D /* Alternative.swift in Sources */,
 				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
 				116D42C62110A66500363A86 /* BoolInstances.swift in Sources */,
@@ -2075,6 +2083,7 @@
 				D6DBDEC120684C38004F979F /* WriterT.swift in Sources */,
 				D6DBDEC220684C38004F979F /* Typeclass.swift in Sources */,
 				11E531CE209B31A000A78E8D /* MaybeInstances.swift in Sources */,
+				115683A5216248FC0001749D /* Contravariant.swift in Sources */,
 				D6DBDEC320684C38004F979F /* Alternative.swift in Sources */,
 				D6DBDEC420684C38004F979F /* Applicative.swift in Sources */,
 				116D42C72110A66600363A86 /* BoolInstances.swift in Sources */,
@@ -2262,6 +2271,7 @@
 				OBJ_419 /* StateT.swift in Sources */,
 				OBJ_420 /* WriterT.swift in Sources */,
 				OBJ_421 /* Typeclass.swift in Sources */,
+				115683A2216248FC0001749D /* Contravariant.swift in Sources */,
 				1116208420F4971A00685EC4 /* EitherOpticsInstances.swift in Sources */,
 				OBJ_422 /* Alternative.swift in Sources */,
 				OBJ_423 /* Applicative.swift in Sources */,
