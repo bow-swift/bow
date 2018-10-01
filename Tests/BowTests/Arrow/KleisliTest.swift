@@ -14,12 +14,12 @@ class KleisliTest: XCTestCase {
     }
     
     class KleisliUnitEq : Eq {
-        typealias A = KleisliOf<ForMaybe, (), Int>
+        typealias A = KleisliOf<ForOption, (), Int>
         
-        func eqv(_ a: KleisliOf<ForMaybe, (), Int>, _ b: KleisliOf<ForMaybe, (), Int>) -> Bool {
+        func eqv(_ a: KleisliOf<ForOption, (), Int>, _ b: KleisliOf<ForOption, (), Int>) -> Bool {
             let a = Kleisli.fix(a)
             let b = Kleisli.fix(b)
-            return Maybe.eq(Int.order).eqv(a.invoke(()),
+            return Option.eq(Int.order).eqv(a.invoke(()),
                                            b.invoke(()))
         }
     }
@@ -36,13 +36,13 @@ class KleisliTest: XCTestCase {
     }
     
     class KleisliEitherEq : Eq {
-        typealias A = KleisliOf<ForMaybe, (), EitherOf<(), Int>>
+        typealias A = KleisliOf<ForOption, (), EitherOf<(), Int>>
         
-        func eqv(_ a: KleisliOf<ForMaybe, (), EitherOf<(), Int>>,
-                 _ b: KleisliOf<ForMaybe, (), EitherOf<(), Int>>) -> Bool {
+        func eqv(_ a: KleisliOf<ForOption, (), EitherOf<(), Int>>,
+                 _ b: KleisliOf<ForOption, (), EitherOf<(), Int>>) -> Bool {
             let a = Kleisli.fix(a)
             let b = Kleisli.fix(b)
-            return Maybe.eq(Either.eq(UnitEq(), Int.order)).eqv(a.invoke(()),
+            return Option.eq(Either.eq(UnitEq(), Int.order)).eqv(a.invoke(()),
                                                                 b.invoke(()))
         }
     }
@@ -64,16 +64,16 @@ class KleisliTest: XCTestCase {
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<KleisliPartial<ForMaybe, ()>, ()>.check(
-            applicativeError: Kleisli<ForMaybe, (), Int>.monadError(Maybe<Any>.monadError()),
+        ApplicativeErrorLaws<KleisliPartial<ForOption, ()>, ()>.check(
+            applicativeError: Kleisli<ForOption, (), Int>.monadError(Option<Any>.monadError()),
             eq: KleisliUnitEq(),
             eqEither: KleisliEitherEq(),
             gen: { () })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<KleisliPartial<ForMaybe, ()>, ()>.check(
-            monadError: Kleisli<ForMaybe, (), Int>.monadError(Maybe<Any>.monadError()),
+        MonadErrorLaws<KleisliPartial<ForOption, ()>, ()>.check(
+            monadError: Kleisli<ForOption, (), Int>.monadError(Option<Any>.monadError()),
             eq: KleisliUnitEq(),
             gen: { ()})
     }

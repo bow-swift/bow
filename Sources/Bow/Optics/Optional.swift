@@ -79,11 +79,11 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return { s in self.modifyF(applicative, s, f) }
     }
     
-    public func getMaybe(_ s : S) -> Maybe<A> {
+    public func getMaybe(_ s : S) -> Option<A> {
         return getOrModify(s).toMaybe()
     }
     
-    public func setMaybe(_ s : S, _ b : B) -> Maybe<T> {
+    public func setMaybe(_ s : S, _ b : B) -> Option<T> {
         return modifyMaybe(s, constant(b))
     }
     
@@ -125,12 +125,12 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return { s in self.modify(s, f) }
     }
     
-    public func modifyMaybe(_ s : S, _ f : @escaping (A) -> B) -> Maybe<T> {
+    public func modifyMaybe(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
         return getMaybe(s).map { a in self.set(s, f(a)) }
     }
     
-    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
-        return getMaybe(s).flatMap { a in predicate(a) ? Maybe.some(a) : Maybe.none() }
+    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
+        return getMaybe(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {

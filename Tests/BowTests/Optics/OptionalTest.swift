@@ -18,44 +18,44 @@ class OptionalTest: XCTestCase {
     
     func testOptionalAsFold() {
         property("Optional as Fold: size") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().size(ints.getArray) == Maybe.fromOption(ints.getArray.first).map(constant(1)).getOrElse(0)
+            return optionalHead.asFold().size(ints.getArray) == Option.fromOption(ints.getArray.first).map(constant(1)).getOrElse(0)
         }
         
         property("Optional as Fold: nonEmpty") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().nonEmpty(ints.getArray) == Maybe.fromOption(ints.getArray.first).isDefined
+            return optionalHead.asFold().nonEmpty(ints.getArray) == Option.fromOption(ints.getArray.first).isDefined
         }
         
         property("Optional as Fold: isEmpty") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().isEmpty(ints.getArray) == Maybe.fromOption(ints.getArray.first).isEmpty
+            return optionalHead.asFold().isEmpty(ints.getArray) == Option.fromOption(ints.getArray.first).isEmpty
         }
         
         property("Optional as Fold: getAll") <- forAll { (ints : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Maybe.fromOption(ints.getArray.first).toList().k())
+            return ListK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOption(ints.getArray.first).toList().k())
         }
         
         property("Optional as Fold: combineAll") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().combineAll(Int.sumMonoid, ints.getArray) == Maybe.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().combineAll(Int.sumMonoid, ints.getArray) == Option.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
         }
         
         property("Optional as Fold: fold") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().fold(Int.sumMonoid, ints.getArray) == Maybe.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().fold(Int.sumMonoid, ints.getArray) == Option.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
         }
         
         property("Optional as Fold: headMaybe") <- forAll { (ints : ArrayOf<Int>) in
-            return Maybe.eq(Int.order).eqv(optionalHead.asFold().headMaybe(ints.getArray),
-                                           Maybe.fromOption(ints.getArray.first))
+            return Option.eq(Int.order).eqv(optionalHead.asFold().headMaybe(ints.getArray),
+                                           Option.fromOption(ints.getArray.first))
         }
         
         property("Optional as Fold: lastMaybe") <- forAll { (ints : ArrayOf<Int>) in
-            return Maybe.eq(Int.order).eqv(optionalHead.asFold().lastMaybe(ints.getArray),
-                                           Maybe.fromOption(ints.getArray.first))
+            return Option.eq(Int.order).eqv(optionalHead.asFold().lastMaybe(ints.getArray),
+                                           Option.fromOption(ints.getArray.first))
         }
     }
     
     func testOptionalProperties() {
         property("void should always return none") <- forAll { (value : String) in
             let void = Bow.Optional<String, Int>.void()
-            return Maybe.eq(Int.order).eqv(void.getMaybe(value), Maybe<Int>.none())
+            return Option.eq(Int.order).eqv(void.getMaybe(value), Option<Int>.none())
         }
         
         property("void should return source when setting target") <- forAll { (str : String, int : Int) in
@@ -96,7 +96,7 @@ class OptionalTest: XCTestCase {
         
         property("Joining two optionals together with same target should yield same result") <- forAll { (int : Int) in
             let joinedOptional = optionalHead.choice(defaultHead)
-            return Maybe.eq(Int.order).eqv(joinedOptional.getMaybe(Either.left([int])),
+            return Option.eq(Int.order).eqv(joinedOptional.getMaybe(Either.left([int])),
                                            joinedOptional.getMaybe(Either.right(int)))
         }
     }

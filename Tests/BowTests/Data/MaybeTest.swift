@@ -12,116 +12,116 @@ class UnitEq : Eq {
 
 class MaybeTest: XCTestCase {
     
-    var generator : (Int) -> Maybe<Int> {
-        return { a in a % 2 == 0 ? Maybe.pure(a) : Maybe.none() }
+    var generator : (Int) -> Option<Int> {
+        return { a in a % 2 == 0 ? Option.pure(a) : Option.none() }
     }
     
-    let eq = Maybe.eq(Int.order)
-    let eqUnit = Maybe.eq(UnitEq())
+    let eq = Option.eq(Int.order)
+    let eqUnit = Option.eq(UnitEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForMaybe>.check(functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ForOption>.check(functor: Option<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForMaybe>.check(applicative: Maybe<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<ForOption>.check(applicative: Option<Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        MonadLaws<ForMaybe>.check(monad: Maybe<Int>.monad(), eq: self.eq)
+        MonadLaws<ForOption>.check(monad: Option<Int>.monad(), eq: self.eq)
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<ForMaybe, Bow.Unit>.check(applicativeError: Maybe<Int>.monadError(), eq: Maybe.eq(Int.order), eqEither: Maybe.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
+        ApplicativeErrorLaws<ForOption, Bow.Unit>.check(applicativeError: Option<Int>.monadError(), eq: Option.eq(Int.order), eqEither: Option.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<ForMaybe, Bow.Unit>.check(monadError: Maybe<Int>.monadError(), eq: self.eq, gen: { () })
+        MonadErrorLaws<ForOption, Bow.Unit>.check(monadError: Option<Int>.monadError(), eq: self.eq, gen: { () })
     }
     
     func testSemigroupLaws() {
         property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<MaybeOf<Int>>.check(
-                semigroup: Maybe<Int>.semigroup(Int.sumMonoid),
-                a: Maybe.pure(a),
-                b: Maybe.pure(b),
-                c: Maybe.pure(c),
+            return SemigroupLaws<OptionOf<Int>>.check(
+                semigroup: Option<Int>.semigroup(Int.sumMonoid),
+                a: Option.pure(a),
+                b: Option.pure(b),
+                c: Option.pure(c),
                 eq: self.eq)
         }
     }
     
     func testMonoidLaws() {
         property("Maybe monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws<MaybeOf<Int>>.check(
-                monoid: Maybe<Int>.monoid(Int.sumMonoid),
-                a: Maybe.pure(a),
+            return MonoidLaws<OptionOf<Int>>.check(
+                monoid: Option<Int>.monoid(Int.sumMonoid),
+                a: Option.pure(a),
                 eq: self.eq)
         }
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForMaybe>.check(functorFilter: Maybe<Int>.functorFilter(), generator: self.generator, eq: self.eq)
+        FunctorFilterLaws<ForOption>.check(functorFilter: Option<Int>.functorFilter(), generator: self.generator, eq: self.eq)
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForMaybe>.check(monadFilter: Maybe<Int>.monadFilter(), generator: self.generator, eq: self.eq)
+        MonadFilterLaws<ForOption>.check(monadFilter: Option<Int>.monadFilter(), generator: self.generator, eq: self.eq)
     }
     
     func testShowLaws() {
-        ShowLaws.check(show: Maybe.show(), generator: self.generator)
+        ShowLaws.check(show: Option.show(), generator: self.generator)
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForMaybe>.check(foldable: Maybe<Int>.foldable(), generator: self.generator)
+        FoldableLaws<ForOption>.check(foldable: Option<Int>.foldable(), generator: self.generator)
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForMaybe>.check(traverse: Maybe<Int>.traverse(), functor: Maybe<Int>.functor(), generator: self.generator, eq: self.eq)
+        TraverseLaws<ForOption>.check(traverse: Option<Int>.traverse(), functor: Option<Int>.functor(), generator: self.generator, eq: self.eq)
     }
     
     func testTraverseFilterLaws() {
-        TraverseFilterLaws<ForMaybe>.check(traverseFilter: Maybe<Int>.traverseFilter(), applicative: Maybe<Int>.applicative(), eq: Maybe.eq(self.eq))
+        TraverseFilterLaws<ForOption>.check(traverseFilter: Option<Int>.traverseFilter(), applicative: Option<Int>.applicative(), eq: Option.eq(self.eq))
     }
     
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
-            let maybe = y % 2 == 0 ? Maybe<Int>.none() : Maybe<Int>.some(y)
-            return Maybe.fromOption(x).toOption() == x &&
-                Maybe.eq(Int.order).eqv(Maybe.fromOption(maybe.toOption()), maybe)
+            let maybe = y % 2 == 0 ? Option<Int>.none() : Option<Int>.some(y)
+            return Option.fromOption(x).toOption() == x &&
+                Option.eq(Int.order).eqv(Option.fromOption(maybe.toOption()), maybe)
         }
     }
     
     func testDefinedOrEmpty() {
         property("Maybe cannot be simultaneously empty and defined") <- forAll { (x : Int?) in
-            let maybe = Maybe.fromOption(x)
+            let maybe = Option.fromOption(x)
             return xor(maybe.isEmpty, maybe.isDefined)
         }
     }
     
     func testGetOrElse() {
         property("getOrElse consistent with orElse") <- forAll { (x : Int?, y : Int) in
-            let maybe = Maybe.fromOption(x)
-            return Maybe.eq(Int.order).eqv(Maybe<Int>.pure(maybe.getOrElse(y)),
-                                           maybe.orElse(Maybe.pure(y)))
+            let maybe = Option.fromOption(x)
+            return Option.eq(Int.order).eqv(Option<Int>.pure(maybe.getOrElse(y)),
+                                           maybe.orElse(Option.pure(y)))
         }
     }
     
     func testFilter() {
         property("filter is opposite of filterNot") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let maybe = Maybe.fromOption(x)
-            let eq = Maybe.eq(Int.order)
-            let none = Maybe<Int>.none()
+            let maybe = Option.fromOption(x)
+            let eq = Option.eq(Int.order)
+            let none = Option<Int>.none()
             return xor(eq.eqv(maybe.filter(predicate.getArrow), none), eq.eqv(maybe.filterNot(predicate.getArrow), none))
         }
     }
     
     func testExistForAll() {
         property("exists and forall are equivalent") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let maybe = Maybe.fromOption(x)
+            let maybe = Option.fromOption(x)
             return maybe.exists(predicate.getArrow) == maybe.forall(predicate.getArrow)
         }
     }

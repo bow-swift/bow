@@ -30,13 +30,13 @@ class GetterTest : XCTestCase {
         }
         
         property("Getter as Fold: headMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenGetter.asFold().headMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenGetter.asFold().headMaybe(token),
+                                              Option.some(token.value))
         }
         
         property("Getter as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenGetter.asFold().lastMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenGetter.asFold().lastMaybe(token),
+                                              Option.some(token.value))
         }
     }
     

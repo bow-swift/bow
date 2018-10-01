@@ -47,12 +47,12 @@ class PrismTest: XCTestCase {
         }
         
         property("Prism as Fold: headMaybe") <- forAll { (sum : SumType) in
-            return Maybe.eq(String.order).eqv(sumPrism.asFold().headMaybe(sum),
+            return Option.eq(String.order).eqv(sumPrism.asFold().headMaybe(sum),
                                               sumPrism.getMaybe(sum))
         }
         
         property("Prism as Fold: lastMaybe") <- forAll { (sum : SumType) in
-            return Maybe.eq(String.order).eqv(sumPrism.asFold().lastMaybe(sum),
+            return Option.eq(String.order).eqv(sumPrism.asFold().lastMaybe(sum),
                                               sumPrism.getMaybe(sum))
         }
     }
@@ -61,7 +61,7 @@ class PrismTest: XCTestCase {
     
     func testPrismProperties() {
         property("Joining two prisms with the same target should yield the same result") <- forAll { (sum : SumType) in
-            let eq = Maybe.eq(String.order)
+            let eq = Option.eq(String.order)
             return eq.eqv((sumPrism + stringPrism).getMaybe(sum),
                           sumPrism.getMaybe(sum).flatMap(stringPrism.getMaybe))
         }
@@ -79,8 +79,8 @@ class PrismTest: XCTestCase {
         }
         
         property("Setting a target on a prism should set the correct target") <- forAll(self.sumAGen, String.arbitrary) { (sum : SumType, str : String) in
-            return Maybe.eq(SumType.eq).eqv(sumPrism.setMaybe(sum, str),
-                                            Maybe.some(SumType.a(str)))
+            return Option.eq(SumType.eq).eqv(sumPrism.setMaybe(sum, str),
+                                            Option.some(SumType.a(str)))
         }
         
         property("Finding a target using a predicate within a Prism should be wrapped in the correct option result") <- forAll { (sum : SumType, predicate : Bool) in

@@ -67,9 +67,9 @@ class ValidatedTest: XCTestCase {
     
     func testConversionConsistency() {
         property("Consistency fromMaybe - toMaybe") <- forAll { (x : Int?, none : String) in
-            let maybe = Maybe<Int>.fromOption(x)
+            let maybe = Option<Int>.fromOption(x)
             let validated = Validated.fromMaybe(maybe, ifNone: constant(none))
-            return Maybe<Int>.eq(Int.order).eqv(validated.toMaybe(), maybe)
+            return Option<Int>.eq(Int.order).eqv(validated.toMaybe(), maybe)
         }
         
         property("Consistency fromEither - toEither") <- forAll { (x : Int) in

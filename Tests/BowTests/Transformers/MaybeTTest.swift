@@ -8,8 +8,8 @@ class MaybeTTest: XCTestCase {
         return { a in MaybeT<ForId, Int>.pure(a, Id<Any>.applicative()) }
     }
     
-    let eq = MaybeT.eq(Id.eq(Maybe.eq(Int.order)), Id<Any>.functor())
-    let eqUnit = MaybeT.eq(Id.eq(Maybe.eq(UnitEq())), Id<Any>.functor())
+    let eq = MaybeT.eq(Id.eq(Option.eq(Int.order)), Id<Any>.functor())
+    let eqUnit = MaybeT.eq(Id.eq(Option.eq(UnitEq())), Id<Any>.functor())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)

@@ -54,13 +54,13 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso as Fold: headMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenIso.asFold().headMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenIso.asFold().headMaybe(token),
+                                              Option.some(token.value))
         }
         
         property("Iso as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenIso.asFold().lastMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenIso.asFold().lastMaybe(token),
+                                              Option.some(token.value))
         }
     }
     
@@ -70,13 +70,13 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso as Getter: find") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Maybe.eq(String.order).eqv(
+            return Option.eq(String.order).eqv(
                 tokenIso.asGetter().find(token, predicate.getArrow),
                 tokenGetter.find(token, predicate.getArrow))
         }
         
         property("Iso as Getter: exists") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Maybe.eq(String.order).eqv(tokenIso.asGetter().find(token, predicate.getArrow),
+            return Option.eq(String.order).eqv(tokenIso.asGetter().find(token, predicate.getArrow),
                                               tokenGetter.find(token, predicate.getArrow))
         }
     }
@@ -88,8 +88,8 @@ class IsoTest: XCTestCase {
         }
         
         property("Lifting a function as a functior should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
-            return Maybe.eq(Token.eq).eqv(tokenIso.modifyF(Maybe<String>.functor(), token, constant(Maybe.some(value))),
-                                          tokenIso.liftF(Maybe<String>.functor(), constant(Maybe.some(value)))(token))
+            return Option.eq(Token.eq).eqv(tokenIso.modifyF(Option<String>.functor(), token, constant(Option.some(value))),
+                                          tokenIso.liftF(Option<String>.functor(), constant(Option.some(value)))(token))
         }
         
         property("Creating a first pair with a type should result in the target to value") <- forAll { (token : Token, value : Int) in

@@ -5,17 +5,17 @@ public typealias MaybeTOf<F, A> = Kind2<ForMaybeT, F, A>
 public typealias MaybeTPartial<F> = Kind<ForMaybeT, F>
 
 public class MaybeT<F, A> : MaybeTOf<F, A> {
-    fileprivate let value : Kind<F, Maybe<A>>
+    fileprivate let value : Kind<F, Option<A>>
     
     public static func pure<Appl>(_ a : A, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
-        return MaybeT(applicative.pure(Maybe.pure(a)))
+        return MaybeT(applicative.pure(Option.pure(a)))
     }
     
     public static func none<Appl>(_ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
-        return MaybeT(applicative.pure(Maybe.none()))
+        return MaybeT(applicative.pure(Option.none()))
     }
     
-    public static func fromMaybe<Appl>(_ maybe : Maybe<A>, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
+    public static func fromMaybe<Appl>(_ maybe : Option<A>, _ applicative : Appl) -> MaybeT<F, A> where Appl : Applicative, Appl.F == F {
         return MaybeT(applicative.pure(maybe))
     }
     
@@ -23,8 +23,8 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
         
         return MaybeT<F, B>(monad.tailRecM(a, { aa in
             monad.map(MaybeT<F, Either<A, B>>.fix(f(aa)).value, { maybe in
-                maybe.fold({ Either<A, Maybe<B>>.right(Maybe<B>.none())},
-                           { either in either.map(Maybe<B>.some) })
+                maybe.fold({ Either<A, Option<B>>.right(Option<B>.none())},
+                           { either in either.map(Option<B>.some) })
             })
         }))
     }
@@ -33,7 +33,7 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
         return fa as! MaybeT<F, A>
     }
     
-    public init(_ value : Kind<F, Maybe<A>>) {
+    public init(_ value : Kind<F, Option<A>>) {
         self.value = value
     }
     
@@ -57,12 +57,12 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
         return flatMapF({ a in f(a).value }, monad)
     }
     
-    public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, Maybe<B>>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
-        return MaybeT<F, B>(monad.flatMap(value, { maybe in maybe.fold({ monad.pure(Maybe<B>.none()) }, f)}))
+    public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, Option<B>>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
+        return MaybeT<F, B>(monad.flatMap(value, { maybe in maybe.fold({ monad.pure(Option<B>.none()) }, f)}))
     }
     
     public func liftF<B, Func>(_ fb : Kind<F, B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
-        return MaybeT<F, B>(functor.map(fb, { b in Maybe<B>.some(b) }))
+        return MaybeT<F, B>(functor.map(fb, { b in Option<B>.some(b) }))
     }
     
     public func semiflatMap<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> MaybeT<F, B> where Mon : Monad, Mon.F == F {
@@ -97,21 +97,21 @@ public class MaybeT<F, A> : MaybeTOf<F, A> {
         return orElseF(defaultValue.value, monad)
     }
     
-    public func orElseF<Mon>(_ defaultValue : Kind<F, Maybe<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
+    public func orElseF<Mon>(_ defaultValue : Kind<F, Option<A>>, _ monad : Mon) -> MaybeT<F, A> where Mon : Monad, Mon.F == F {
         return MaybeT<F, A>(monad.flatMap(value, { maybe in
             maybe.fold(constant(defaultValue),
                        { _ in monad.pure(maybe) }) }))
     }
     
-    public func transform<B, Func>(_ f : @escaping (Maybe<A>) -> Maybe<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
+    public func transform<B, Func>(_ f : @escaping (Option<A>) -> Option<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
         return MaybeT<F, B>(functor.map(value, f))
     }
     
-    public func subflatMap<B, Func>(_ f : @escaping (A) -> Maybe<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
+    public func subflatMap<B, Func>(_ f : @escaping (A) -> Option<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
         return transform({ maybe in maybe.flatMap(f) }, functor)
     }
     
-    public func mapFilter<B, Func>(_ f : @escaping (A) -> MaybeOf<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
+    public func mapFilter<B, Func>(_ f : @escaping (A) -> OptionOf<B>, _ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
         return MaybeT<F, B>(functor.map(value, { maybe in maybe.flatMap({ x in f(x).fix() }) }))
     }
 }
@@ -162,7 +162,7 @@ public class MaybeTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F ==
 
 public class MaybeTFunctorFilter<G, FuncG> : MaybeTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
     
-    public func mapFilter<A, B>(_ fa: MaybeTOf<G, A>, _ f: @escaping (A) -> MaybeOf<B>) -> MaybeTOf<G, B> {
+    public func mapFilter<A, B>(_ fa: MaybeTOf<G, A>, _ f: @escaping (A) -> OptionOf<B>) -> MaybeTOf<G, B> {
         return MaybeT.fix(fa).mapFilter(f, functor)
     }
 }
@@ -212,11 +212,11 @@ public class MaybeTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F =
 
 public class MaybeTMonoidK<G, MonG> : MaybeTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
     public func emptyK<A>() -> MaybeTOf<G, A> {
-        return MaybeT(monad.pure(Maybe.none()))
+        return MaybeT(monad.pure(Option.none()))
     }
 }
 
-public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, MaybeOf<B>>, Func : Functor, Func.F == F {
+public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, OptionOf<B>>, Func : Functor, Func.F == F {
     public typealias A = MaybeTOf<F, B>
     
     private let eq : EqF
@@ -230,7 +230,7 @@ public class MaybeTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, May
     public func eqv(_ a: MaybeTOf<F, B>, _ b: MaybeTOf<F, B>) -> Bool {
         let a = MaybeT.fix(a)
         let b = MaybeT.fix(b)
-        return eq.eqv(functor.map(a.value, { aa in aa as MaybeOf<B> }),
-                      functor.map(b.value, { bb in bb as MaybeOf<B> }))
+        return eq.eqv(functor.map(a.value, { aa in aa as OptionOf<B> }),
+                      functor.map(b.value, { bb in bb as OptionOf<B> }))
     }
 }

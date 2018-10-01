@@ -43,13 +43,13 @@ class LensTest: XCTestCase {
         }
         
         property("Lens as Fold: headMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenLens.asFold().headMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenLens.asFold().headMaybe(token),
+                                              Option.some(token.value))
         }
         
         property("Lens as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Maybe.eq(String.order).eqv(tokenLens.asFold().lastMaybe(token),
-                                              Maybe.some(token.value))
+            return Option.eq(String.order).eqv(tokenLens.asFold().lastMaybe(token),
+                                              Option.some(token.value))
         }
     }
     
@@ -59,7 +59,7 @@ class LensTest: XCTestCase {
         }
         
         property("Lens as Getter: find") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Maybe.eq(String.order).eqv(tokenLens.asGetter().find(token, predicate.getArrow),
+            return Option.eq(String.order).eqv(tokenLens.asGetter().find(token, predicate.getArrow),
                                               tokenGetter.find(token, predicate.getArrow))
         }
         
@@ -76,8 +76,8 @@ class LensTest: XCTestCase {
         }
         
         property("Lifting a function as a functor should yield the same result as not yielding") <- forAll { (token : Token, value : String) in
-            return Maybe.eq(Token.eq).eqv(tokenLens.modifyF(Maybe<String>.functor(), token, constant(Maybe.some(value))),
-                                          tokenLens.liftF(Maybe<String>.functor(), constant(Maybe.some(value)))(token))
+            return Option.eq(Token.eq).eqv(tokenLens.modifyF(Option<String>.functor(), token, constant(Option.some(value))),
+                                          tokenLens.liftF(Option<String>.functor(), constant(Option.some(value)))(token))
         }
         
         property("Finding a target using a predicate within a Lens should be wrapped in the correct option result") <- forAll { (predicate : Bool) in

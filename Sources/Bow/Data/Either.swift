@@ -82,8 +82,8 @@ public class Either<A, B> : EitherOf<A, B> {
         return fold(constant(false), predicate)
     }
     
-    public func toMaybe() -> Maybe<B> {
-        return fold(constant(Maybe<B>.none()), Maybe<B>.some)
+    public func toMaybe() -> Option<B> {
+        return fold(constant(Option<B>.none()), Option<B>.some)
     }
     
     public func getOrElse(_ defaultValue : B) -> B {

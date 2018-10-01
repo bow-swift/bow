@@ -40,12 +40,12 @@ class KleisliOperatorTest: XCTestCase {
     }
     
     func testKleisliForMaybe() {
-        let f = { (x : Int) in Maybe<Int>.none() }
-        let g = { (x : Int) in Maybe.some(x) }
-        let h = { (x : Int) in Maybe.some(2 * x) }
+        let f = { (x : Int) in Option<Int>.none() }
+        let g = { (x : Int) in Option.some(x) }
+        let h = { (x : Int) in Option.some(2 * x) }
         
-        expect(Maybe.eq(Int.order).eqv((f >=> g)(5), Maybe<Int>.none())).to(beTrue())
-        expect(Maybe.eq(Int.order).eqv((g >=> h)(5), Maybe<Int>.some(10))).to(beTrue())
+        expect(Option.eq(Int.order).eqv((f >=> g)(5), Option<Int>.none())).to(beTrue())
+        expect(Option.eq(Int.order).eqv((g >=> h)(5), Option<Int>.some(10))).to(beTrue())
     }
     
     func testKleisliForNonEmptyList() {

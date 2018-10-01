@@ -5,13 +5,13 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
     
     static func check<EqA, EqB>(optional : Bow.Optional<A, B>, eqA : EqA, eqB : EqB) where EqA : Eq, EqA.A == A, EqB : Eq, EqB.A == B {
         getMaybeSet(optional, eqA)
-        setGetMaybe(optional, Maybe<B>.eq(eqB))
+        setGetMaybe(optional, Option<B>.eq(eqB))
         setIdempotent(optional, eqA)
         modifyId(optional, eqA)
         composeModify(optional, eqA)
         consistentSetModify(optional, eqA)
         consistentModifyModifyFId(optional, eqA)
-        consistentGetMaybeModifyFId(optional, Maybe<B>.eq(eqB))
+        consistentGetMaybeModifyFId(optional, Option<B>.eq(eqB))
     }
     
     private static func getMaybeSet<EqA>(_ optional : Bow.Optional<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
@@ -21,7 +21,7 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
         }
     }
     
-    private static func setGetMaybe<EqMaybeB>(_ optional : Bow.Optional<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == MaybeOf<B> {
+    private static func setGetMaybe<EqMaybeB>(_ optional : Bow.Optional<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == OptionOf<B> {
         property("set - getMaybe") <- forAll { (a : A, b : B) in
             return eqB.eqv(optional.getMaybe(optional.set(a, b)),
                            optional.getMaybe(a).map(constant(b)))
@@ -62,10 +62,10 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
         }
     }
     
-    private static func consistentGetMaybeModifyFId<EqMaybeB>(_ optional : Bow.Optional<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == MaybeOf<B> {
+    private static func consistentGetMaybeModifyFId<EqMaybeB>(_ optional : Bow.Optional<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == OptionOf<B> {
         
         property("Consistent getMaybe - modifyF Id") <- forAll { (a : A) in
-            return eqB.eqv(Const<FirstMaybe<B>, A>.fix(optional.modifyF(Const<FirstMaybe<B>, B>.applicative(OptionalMonoid<B>()), a, { b in Const<FirstMaybe<B>, B>.pure(FirstMaybe<B>(Maybe<B>.some(b))) })).value.maybe,
+            return eqB.eqv(Const<FirstMaybe<B>, A>.fix(optional.modifyF(Const<FirstMaybe<B>, B>.applicative(OptionalMonoid<B>()), a, { b in Const<FirstMaybe<B>, B>.pure(FirstMaybe<B>(Option<B>.some(b))) })).value.maybe,
                            optional.getMaybe(a))
         }
     }
@@ -73,9 +73,9 @@ class OptionalLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B 
 }
 
 fileprivate class FirstMaybe<B> {
-    let maybe : Maybe<B>
+    let maybe : Option<B>
     
-    init(_ maybe : Maybe<B>) {
+    init(_ maybe : Option<B>) {
         self.maybe = maybe
     }
 }
@@ -84,7 +84,7 @@ fileprivate class OptionalMonoid<B> : Monoid {
     typealias A = FirstMaybe<B>
     
     var empty: FirstMaybe<B> {
-        return FirstMaybe<B>(Maybe<B>.none())
+        return FirstMaybe<B>(Option<B>.none())
     }
     
     func combine(_ a: FirstMaybe<B>, _ b: FirstMaybe<B>) -> FirstMaybe<B> {
