@@ -94,6 +94,10 @@
 		115683A821624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
 		115683A921624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
 		115683AA21624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
+		115683AC21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
+		115683AD21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
+		115683AE21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
+		115683AF21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -735,6 +739,7 @@
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
+		115683AB21624C370001749D /* Profunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profunctor.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1307,6 +1312,7 @@
 				OBJ_79 /* MonoidK.swift */,
 				OBJ_80 /* NonEmptyReducible.swift */,
 				OBJ_81 /* Order.swift */,
+				115683AB21624C370001749D /* Profunctor.swift */,
 				OBJ_82 /* Reducible.swift */,
 				OBJ_83 /* Semigroup.swift */,
 				OBJ_84 /* SemigroupK.swift */,
@@ -1785,6 +1791,7 @@
 				D6D624F62068178800739E2D /* Predef.swift in Sources */,
 				D6D624F72068178800739E2D /* EitherT.swift in Sources */,
 				1116205620F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
+				115683AD21624C370001749D /* Profunctor.swift in Sources */,
 				D6D624F82068178800739E2D /* MaybeT.swift in Sources */,
 				D6D624F92068178800739E2D /* StateT.swift in Sources */,
 				D6D624FA2068178800739E2D /* WriterT.swift in Sources */,
@@ -1974,6 +1981,7 @@
 				D6D62587206841B300739E2D /* Predef.swift in Sources */,
 				D6D62588206841B300739E2D /* EitherT.swift in Sources */,
 				1116205A20F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
+				115683AE21624C370001749D /* Profunctor.swift in Sources */,
 				D6D62589206841B300739E2D /* MaybeT.swift in Sources */,
 				D6D6258A206841B300739E2D /* StateT.swift in Sources */,
 				D6D6258B206841B300739E2D /* WriterT.swift in Sources */,
@@ -2087,6 +2095,7 @@
 				D6DBDEBD20684C38004F979F /* Predef.swift in Sources */,
 				D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */,
 				1116205E20F385D400685EC4 /* NonEmptyList+Optics.swift in Sources */,
+				115683AF21624C370001749D /* Profunctor.swift in Sources */,
 				D6DBDEBF20684C38004F979F /* MaybeT.swift in Sources */,
 				D6DBDEC020684C38004F979F /* StateT.swift in Sources */,
 				D6DBDEC120684C38004F979F /* WriterT.swift in Sources */,
@@ -2276,6 +2285,7 @@
 				11E531B1209AE89A00A78E8D /* Prism.swift in Sources */,
 				1116204C20F380E300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				OBJ_416 /* Predef.swift in Sources */,
+				115683AC21624C370001749D /* Profunctor.swift in Sources */,
 				OBJ_417 /* EitherT.swift in Sources */,
 				OBJ_418 /* MaybeT.swift in Sources */,
 				OBJ_419 /* StateT.swift in Sources */,
