@@ -98,6 +98,10 @@
 		115683AD21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
 		115683AE21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
 		115683AF21624C370001749D /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
+		115683B121624D7B0001749D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B021624D7B0001749D /* Category.swift */; };
+		115683B221624D7B0001749D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B021624D7B0001749D /* Category.swift */; };
+		115683B321624D7B0001749D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B021624D7B0001749D /* Category.swift */; };
+		115683B421624D7B0001749D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B021624D7B0001749D /* Category.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -740,6 +744,7 @@
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
 		115683AB21624C370001749D /* Profunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profunctor.swift; sourceTree = "<group>"; };
+		115683B021624D7B0001749D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1293,6 +1298,7 @@
 				OBJ_60 /* Bifoldable.swift */,
 				115683A621624AE80001749D /* Bifunctor.swift */,
 				OBJ_61 /* Bimonad.swift */,
+				115683B021624D7B0001749D /* Category.swift */,
 				OBJ_62 /* Comonad.swift */,
 				115683A1216248FC0001749D /* Contravariant.swift */,
 				OBJ_66 /* Eq.swift */,
@@ -1758,6 +1764,7 @@
 				D6D624DE2068178800739E2D /* Either.swift in Sources */,
 				D6D624DF2068178800739E2D /* Eval.swift in Sources */,
 				D6D624E02068178800739E2D /* FlatmapOperator.swift in Sources */,
+				115683B221624D7B0001749D /* Category.swift in Sources */,
 				D6D624E12068178800739E2D /* Id.swift in Sources */,
 				D6D624E22068178800739E2D /* Ior.swift in Sources */,
 				D6D624E32068178800739E2D /* ListK.swift in Sources */,
@@ -1948,6 +1955,7 @@
 				D6D6256F206841B300739E2D /* Either.swift in Sources */,
 				D6D62570206841B300739E2D /* Eval.swift in Sources */,
 				D6D62571206841B300739E2D /* FlatmapOperator.swift in Sources */,
+				115683B321624D7B0001749D /* Category.swift in Sources */,
 				D6D62572206841B300739E2D /* Id.swift in Sources */,
 				D6D62573206841B300739E2D /* Ior.swift in Sources */,
 				D6D62574206841B300739E2D /* ListK.swift in Sources */,
@@ -2062,6 +2070,7 @@
 				D6DBDEA520684C38004F979F /* Either.swift in Sources */,
 				D6DBDEA620684C38004F979F /* Eval.swift in Sources */,
 				D6DBDEA720684C38004F979F /* FlatmapOperator.swift in Sources */,
+				115683B421624D7B0001749D /* Category.swift in Sources */,
 				D6DBDEA820684C38004F979F /* Id.swift in Sources */,
 				D6DBDEA920684C38004F979F /* Ior.swift in Sources */,
 				D6DBDEAA20684C38004F979F /* ListK.swift in Sources */,
@@ -2252,6 +2261,7 @@
 				OBJ_393 /* Eval.swift in Sources */,
 				OBJ_394 /* FlatmapOperator.swift in Sources */,
 				OBJ_395 /* Id.swift in Sources */,
+				115683B121624D7B0001749D /* Category.swift in Sources */,
 				OBJ_396 /* Ior.swift in Sources */,
 				OBJ_397 /* ListK.swift in Sources */,
 				OBJ_398 /* MapK.swift in Sources */,
