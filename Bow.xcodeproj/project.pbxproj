@@ -86,6 +86,10 @@
 		115683CC2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
 		115683CD2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
 		115683CE2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		115683D021626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D121626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D221626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D321626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -725,6 +729,7 @@
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		115683CA2162689A0001749D /* MonadDefer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadDefer.swift; sourceTree = "<group>"; };
+		115683CF21626B980001749D /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -999,6 +1004,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_37 /* Async.swift */,
+				115683CF21626B980001749D /* Effect.swift */,
 				115683CA2162689A0001749D /* MonadDefer.swift */,
 			);
 			path = Typeclasses;
@@ -1740,6 +1746,7 @@
 				D6D624DA2068178800739E2D /* Curry.swift in Sources */,
 				11E531D8209B4FCD00A78E8D /* At.swift in Sources */,
 				D6D624DB2068178800739E2D /* Const.swift in Sources */,
+				115683D121626B980001749D /* Effect.swift in Sources */,
 				D6D624DC2068178800739E2D /* Coproduct.swift in Sources */,
 				11AC52782097697C008EC1E4 /* Getter.swift in Sources */,
 				11AC527A2097697C008EC1E4 /* Lens.swift in Sources */,
@@ -1927,6 +1934,7 @@
 				D6D6256B206841B300739E2D /* Curry.swift in Sources */,
 				11E531D9209B4FCD00A78E8D /* At.swift in Sources */,
 				D6D6256C206841B300739E2D /* Const.swift in Sources */,
+				115683D221626B980001749D /* Effect.swift in Sources */,
 				D6D6256D206841B300739E2D /* Coproduct.swift in Sources */,
 				11AC527B2097697C008EC1E4 /* Getter.swift in Sources */,
 				11AC527D2097697C008EC1E4 /* Lens.swift in Sources */,
@@ -2038,6 +2046,7 @@
 				D6DBDEA120684C38004F979F /* Curry.swift in Sources */,
 				11E531DA209B4FCE00A78E8D /* At.swift in Sources */,
 				D6DBDEA220684C38004F979F /* Const.swift in Sources */,
+				115683D321626B980001749D /* Effect.swift in Sources */,
 				D6DBDEA320684C38004F979F /* Coproduct.swift in Sources */,
 				11AC527E2097697D008EC1E4 /* Getter.swift in Sources */,
 				11AC52802097697D008EC1E4 /* Lens.swift in Sources */,
@@ -2225,6 +2234,7 @@
 				OBJ_389 /* Const.swift in Sources */,
 				OBJ_390 /* Coproduct.swift in Sources */,
 				1116207420F3AC1800685EC4 /* At+Optics.swift in Sources */,
+				115683D021626B980001749D /* Effect.swift in Sources */,
 				11AC527320974D58008EC1E4 /* Getter.swift in Sources */,
 				11AC527720975EE5008EC1E4 /* Lens.swift in Sources */,
 				OBJ_391 /* Coreader.swift in Sources */,
