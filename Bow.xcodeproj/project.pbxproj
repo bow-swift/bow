@@ -291,7 +291,7 @@
 		D6D624E92068178800739E2D /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
 		D6D624EA2068178800739E2D /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
 		D6D624EB2068178800739E2D /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
-		D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6D624EC2068178800739E2D /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Async.swift */; };
 		D6D624ED2068178800739E2D /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
 		D6D624EE2068178800739E2D /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
 		D6D624EF2068178800739E2D /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
@@ -410,7 +410,7 @@
 		D6D6257A206841B300739E2D /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
 		D6D6257B206841B300739E2D /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
 		D6D6257C206841B300739E2D /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
-		D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6D6257D206841B300739E2D /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Async.swift */; };
 		D6D6257E206841B300739E2D /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
 		D6D6257F206841B300739E2D /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
 		D6D62580206841B300739E2D /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
@@ -480,7 +480,7 @@
 		D6DBDEB020684C38004F979F /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
 		D6DBDEB120684C38004F979F /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
 		D6DBDEB220684C38004F979F /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
-		D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		D6DBDEB320684C38004F979F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Async.swift */; };
 		D6DBDEB420684C38004F979F /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
 		D6DBDEB520684C38004F979F /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
 		D6DBDEB620684C38004F979F /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
@@ -596,7 +596,7 @@
 		OBJ_403 /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
 		OBJ_404 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
 		OBJ_405 /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
-		OBJ_406 /* AsyncContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* AsyncContext.swift */; };
+		OBJ_406 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Async.swift */; };
 		OBJ_407 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
 		OBJ_408 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
 		OBJ_409 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
@@ -843,7 +843,7 @@
 		OBJ_33 /* Try.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Try.swift; sourceTree = "<group>"; };
 		OBJ_34 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		OBJ_35 /* Validated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validated.swift; sourceTree = "<group>"; };
-		OBJ_37 /* AsyncContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContext.swift; sourceTree = "<group>"; };
+		OBJ_37 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		OBJ_38 /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
 		OBJ_40 /* Cofree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cofree.swift; sourceTree = "<group>"; };
 		OBJ_41 /* Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coyoneda.swift; sourceTree = "<group>"; };
@@ -998,6 +998,7 @@
 		115683C9216268810001749D /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_37 /* Async.swift */,
 				115683CA2162689A0001749D /* MonadDefer.swift */,
 			);
 			path = Typeclasses;
@@ -1226,7 +1227,6 @@
 		OBJ_36 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_37 /* AsyncContext.swift */,
 				OBJ_38 /* IO.swift */,
 				115683C9216268810001749D /* Typeclasses */,
 			);
@@ -1759,7 +1759,7 @@
 				D6D624EA2068178800739E2D /* Tuple.swift in Sources */,
 				D6D624EB2068178800739E2D /* Validated.swift in Sources */,
 				111082CD2085DBF700C8563C /* Show.swift in Sources */,
-				D6D624EC2068178800739E2D /* AsyncContext.swift in Sources */,
+				D6D624EC2068178800739E2D /* Async.swift in Sources */,
 				D6D624ED2068178800739E2D /* IO.swift in Sources */,
 				1116209E20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
@@ -1946,7 +1946,7 @@
 				D6D6257B206841B300739E2D /* Tuple.swift in Sources */,
 				D6D6257C206841B300739E2D /* Validated.swift in Sources */,
 				111082CE2085DBF800C8563C /* Show.swift in Sources */,
-				D6D6257D206841B300739E2D /* AsyncContext.swift in Sources */,
+				D6D6257D206841B300739E2D /* Async.swift in Sources */,
 				D6D6257E206841B300739E2D /* IO.swift in Sources */,
 				1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
@@ -2057,7 +2057,7 @@
 				D6DBDEB120684C38004F979F /* Tuple.swift in Sources */,
 				D6DBDEB220684C38004F979F /* Validated.swift in Sources */,
 				111082CF2085DBF800C8563C /* Show.swift in Sources */,
-				D6DBDEB320684C38004F979F /* AsyncContext.swift in Sources */,
+				D6DBDEB320684C38004F979F /* Async.swift in Sources */,
 				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
 				111620A020F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
@@ -2244,7 +2244,7 @@
 				OBJ_404 /* Tuple.swift in Sources */,
 				OBJ_405 /* Validated.swift in Sources */,
 				111082CC2085D9DD00C8563C /* Show.swift in Sources */,
-				OBJ_406 /* AsyncContext.swift in Sources */,
+				OBJ_406 /* Async.swift in Sources */,
 				OBJ_407 /* IO.swift in Sources */,
 				OBJ_408 /* Cofree.swift in Sources */,
 				OBJ_409 /* Coyoneda.swift in Sources */,
