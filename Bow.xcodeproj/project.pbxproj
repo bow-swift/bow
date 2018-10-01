@@ -82,6 +82,10 @@
 		111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
 		111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
 		111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
+		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
+		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
+		1156839F2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
+		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -720,6 +724,7 @@
 		1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryOpticsInstances.swift; sourceTree = "<group>"; };
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
+		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1278,6 +1283,7 @@
 				OBJ_68 /* Functor.swift */,
 				OBJ_69 /* FunctorFilter.swift */,
 				OBJ_70 /* Inject.swift */,
+				1156839C216247290001749D /* Invariant.swift */,
 				OBJ_71 /* Monad.swift */,
 				OBJ_72 /* MonadCombine.swift */,
 				OBJ_73 /* MonadError.swift */,
@@ -1725,6 +1731,7 @@
 				1116208F20F4AB6200685EC4 /* NonEmptyListOpticsInstances.swift in Sources */,
 				D6D624DA2068178800739E2D /* Curry.swift in Sources */,
 				11E531D8209B4FCD00A78E8D /* At.swift in Sources */,
+				1156839E2162472C0001749D /* Invariant.swift in Sources */,
 				D6D624DB2068178800739E2D /* Const.swift in Sources */,
 				D6D624DC2068178800739E2D /* Coproduct.swift in Sources */,
 				11AC52782097697C008EC1E4 /* Getter.swift in Sources */,
@@ -1911,6 +1918,7 @@
 				1116209020F4AB6200685EC4 /* NonEmptyListOpticsInstances.swift in Sources */,
 				D6D6256B206841B300739E2D /* Curry.swift in Sources */,
 				11E531D9209B4FCD00A78E8D /* At.swift in Sources */,
+				1156839F2162472C0001749D /* Invariant.swift in Sources */,
 				D6D6256C206841B300739E2D /* Const.swift in Sources */,
 				D6D6256D206841B300739E2D /* Coproduct.swift in Sources */,
 				11AC527B2097697C008EC1E4 /* Getter.swift in Sources */,
@@ -2021,6 +2029,7 @@
 				1116209120F4AB6300685EC4 /* NonEmptyListOpticsInstances.swift in Sources */,
 				D6DBDEA120684C38004F979F /* Curry.swift in Sources */,
 				11E531DA209B4FCE00A78E8D /* At.swift in Sources */,
+				115683A02162472D0001749D /* Invariant.swift in Sources */,
 				D6DBDEA220684C38004F979F /* Const.swift in Sources */,
 				D6DBDEA320684C38004F979F /* Coproduct.swift in Sources */,
 				11AC527E2097697D008EC1E4 /* Getter.swift in Sources */,
@@ -2207,6 +2216,7 @@
 				OBJ_388 /* Curry.swift in Sources */,
 				OBJ_389 /* Const.swift in Sources */,
 				OBJ_390 /* Coproduct.swift in Sources */,
+				1156839D216247290001749D /* Invariant.swift in Sources */,
 				1116207420F3AC1800685EC4 /* At+Optics.swift in Sources */,
 				11AC527320974D58008EC1E4 /* Getter.swift in Sources */,
 				11AC527720975EE5008EC1E4 /* Lens.swift in Sources */,
