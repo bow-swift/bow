@@ -111,6 +111,9 @@
 		115683BE216255F30001749D /* CategoryLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683BD216255F30001749D /* CategoryLaws.swift */; };
 		115683BF216255F30001749D /* CategoryLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683BD216255F30001749D /* CategoryLaws.swift */; };
 		115683C0216255F30001749D /* CategoryLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683BD216255F30001749D /* CategoryLaws.swift */; };
+		115683C221625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
+		115683C321625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
+		115683C421625D550001749D /* BifunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C121625D550001749D /* BifunctorLaws.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -757,6 +760,7 @@
 		115683B521624EEA0001749D /* InvariantLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvariantLaws.swift; sourceTree = "<group>"; };
 		115683B9216253E00001749D /* ContravariantLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContravariantLaws.swift; sourceTree = "<group>"; };
 		115683BD216255F30001749D /* CategoryLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLaws.swift; sourceTree = "<group>"; };
+		115683C121625D550001749D /* BifunctorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BifunctorLaws.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1184,6 +1188,7 @@
 				11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */,
 				OBJ_125 /* ApplicativeErrorLaws.swift */,
 				OBJ_126 /* ApplicativeLaws.swift */,
+				115683C121625D550001749D /* BifunctorLaws.swift */,
 				111620AE20F6131E00685EC4 /* BimonadLaws.swift */,
 				115683BD216255F30001749D /* CategoryLaws.swift */,
 				OBJ_127 /* ComonadLaws.swift */,
@@ -1683,6 +1688,7 @@
 				D6D624442068141800739E2D /* Function0Test.swift in Sources */,
 				D6D624452068141800739E2D /* Function1Test.swift in Sources */,
 				11F530742100959000D92335 /* TraversalTest.swift in Sources */,
+				115683C321625D550001749D /* BifunctorLaws.swift in Sources */,
 				11FE008A209C98A400183AF6 /* SetterTest.swift in Sources */,
 				D6D624462068141800739E2D /* KleisliOperatorTest.swift in Sources */,
 				11FE006F209C685F00183AF6 /* SetterLaws.swift in Sources */,
@@ -1877,6 +1883,7 @@
 				D6D62523206817A700739E2D /* Function0Test.swift in Sources */,
 				D6D62524206817A700739E2D /* Function1Test.swift in Sources */,
 				11F530752100959000D92335 /* TraversalTest.swift in Sources */,
+				115683C421625D550001749D /* BifunctorLaws.swift in Sources */,
 				11FE008B209C98A400183AF6 /* SetterTest.swift in Sources */,
 				D6D62525206817A700739E2D /* KleisliOperatorTest.swift in Sources */,
 				11FE0070209C685F00183AF6 /* SetterLaws.swift in Sources */,
@@ -2186,6 +2193,7 @@
 				OBJ_246 /* Function0Test.swift in Sources */,
 				OBJ_247 /* Function1Test.swift in Sources */,
 				11F530732100959000D92335 /* TraversalTest.swift in Sources */,
+				115683C221625D550001749D /* BifunctorLaws.swift in Sources */,
 				11FE0089209C98A400183AF6 /* SetterTest.swift in Sources */,
 				OBJ_248 /* KleisliOperatorTest.swift in Sources */,
 				11FE006E209C685F00183AF6 /* SetterLaws.swift in Sources */,
