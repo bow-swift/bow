@@ -71,20 +71,20 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return { s in self.modifyF(applicative, s, f) }
     }
     
-    public func getMaybe(_ s : S) -> Option<A> {
-        return getOrModify(s).toMaybe()
+    public func getOption(_ s : S) -> Option<A> {
+        return getOrModify(s).toOption()
     }
     
     public func set(_ s : S, _ b : B) -> T {
         return modify(s, constant(b))
     }
     
-    public func setMaybe(_ s : S, _ b : B) -> Option<T> {
-        return modifyMaybe(s, constant(b))
+    public func setOption(_ s : S, _ b : B) -> Option<T> {
+        return modifyOption(s, constant(b))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
-        return getMaybe(s).fold(constant(false), constant(true))
+        return getOption(s).fold(constant(false), constant(true))
     }
     
     public func isEmpty(_ s : S) -> Bool {
@@ -119,24 +119,24 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return { s in self.modify(s, f) }
     }
     
-    public func modifyMaybe(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
-        return getMaybe(s).map { a in reverseGet(f(a)) }
+    public func modifyOption(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
+        return getOption(s).map { a in reverseGet(f(a)) }
     }
     
-    public func liftMaybe(_ f : @escaping (A) -> B) -> (S) -> Option<T> {
-        return { s in self.modifyMaybe(s, f) }
+    public func liftOption(_ f : @escaping (A) -> B) -> (S) -> Option<T> {
+        return { s in self.modifyOption(s, f) }
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
-        return getMaybe(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
+        return getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constant(false), predicate)
+        return getOption(s).fold(constant(false), predicate)
     }
     
     public func all(_ s : S, _ predicate : @escaping(A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constant(true), predicate)
+        return getOption(s).fold(constant(true), predicate)
     }
     
     public func left<C>() -> PPrism<Either<S, C>, Either<T, C>, Either<A, C>, Either<B, C>> {
@@ -218,7 +218,7 @@ fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
     }
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return prism.getMaybe(s).map(f).getOrElse(monoid.empty)
+        return prism.getOption(s).map(f).getOrElse(monoid.empty)
     }
 }
 

@@ -4,17 +4,17 @@ import SwiftCheck
 class TraversalLaws<A, B> where B : Arbitrary, B : CoArbitrary, B : Hashable {
     
     static func check<EqA, EqB>(traversal : Traversal<A, B>, eqA : EqA, eqB : EqB, generatorA : Gen<A>) where EqA : Eq, EqA.A == A, EqB : Eq, EqB.A == B {
-        headMaybe(traversal, Option.eq(eqB), generatorA)
+        headOption(traversal, Option.eq(eqB), generatorA)
         modifyGetAll(traversal, ListK.eq(eqB), generatorA)
         setIdempotent(traversal, eqA, generatorA)
         modifyIdentity(traversal, eqA, generatorA)
         composeModify(traversal, eqA, generatorA)
     }
     
-    private static func headMaybe<EqB>(_ traversal : Traversal<A, B>, _ eqB : EqB, _ generatorA : Gen<A>) where EqB : Eq, EqB.A == OptionOf<B> {
-        property("headMaybe") <- forAll { (_ : Int) in
+    private static func headOption<EqB>(_ traversal : Traversal<A, B>, _ eqB : EqB, _ generatorA : Gen<A>) where EqB : Eq, EqB.A == OptionOf<B> {
+        property("headOption") <- forAll { (_ : Int) in
             let a = generatorA.generate
-            return eqB.eqv(traversal.headMaybe(a),
+            return eqB.eqv(traversal.headOption(a),
                           traversal.getAll(a).firstOrNone())
         }
     }

@@ -22,9 +22,9 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> OptionTOf<F, Either<A, B>>, _ monad : MonF) -> OptionTOf<F, B> where MonF : Monad, MonF.F == F {
         
         return OptionT<F, B>(monad.tailRecM(a, { aa in
-            monad.map(OptionT<F, Either<A, B>>.fix(f(aa)).value, { maybe in
-                maybe.fold({ Either<A, Option<B>>.right(Option<B>.none())},
-                           { either in either.map(Option<B>.some) })
+            monad.map(OptionT<F, Either<A, B>>.fix(f(aa)).value, { option in
+                option.fold({ Either<A, Option<B>>.right(Option<B>.none())},
+                            { either in either.map(Option<B>.some) })
             })
         }))
     }
@@ -38,7 +38,7 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func fold<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
-        return functor.map(value, { maybe in maybe.fold(ifEmpty, f) })
+        return functor.map(value, { option in option.fold(ifEmpty, f) })
     }
     
     public func cata<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
@@ -46,7 +46,7 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func map<B, Func>(_ f : @escaping (A) -> B, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(value, { maybe in maybe.map(f) } ))
+        return OptionT<F, B>(functor.map(value, { option in option.map(f) } ))
     }
     
     public func ap<B, Mon>(_ ff : OptionT<F, (A) -> B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
@@ -58,7 +58,7 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, Option<B>>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return OptionT<F, B>(monad.flatMap(value, { maybe in maybe.fold({ monad.pure(Option<B>.none()) }, f)}))
+        return OptionT<F, B>(monad.flatMap(value, { option in option.fold({ monad.pure(Option<B>.none()) }, f)}))
     }
     
     public func liftF<B, Func>(_ fb : Kind<F, B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
@@ -66,31 +66,31 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func semiflatMap<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return flatMap({ maybe in self.liftF(f(maybe), monad)}, monad)
+        return flatMap({ option in self.liftF(f(option), monad)}, monad)
     }
     
     public func getOrElse<Func>(_ defaultValue : A, _ functor : Func) -> Kind<F, A> where Func : Functor, Func.F == F {
-        return functor.map(value, { maybe in maybe.getOrElse(defaultValue) })
+        return functor.map(value, { option in option.getOrElse(defaultValue) })
     }
     
     public func getOrElseF<Mon>(_ defaultValue : Kind<F, A>, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
-        return monad.flatMap(value, { maybe in maybe.fold(constant(defaultValue), monad.pure)})
+        return monad.flatMap(value, { option in option.fold(constant(defaultValue), monad.pure)})
     }
     
     public func filter<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> OptionT<F, A> where Func : Functor, Func.F == F {
-        return OptionT(functor.map(value, { maybe in maybe.filter(predicate) }))
+        return OptionT(functor.map(value, { option in option.filter(predicate) }))
     }
     
     public func forall<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { maybe in maybe.forall(predicate) })
+        return functor.map(value, { option in option.forall(predicate) })
     }
     
     public func isDefined<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { maybe in maybe.isDefined })
+        return functor.map(value, { option in option.isDefined })
     }
     
     public func isEmpty<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { maybe in maybe.isEmpty })
+        return functor.map(value, { option in option.isEmpty })
     }
     
     public func orElse<Mon>(_ defaultValue : OptionT<F, A>, _ monad : Mon) -> OptionT<F, A> where Mon : Monad, Mon.F == F {
@@ -98,9 +98,9 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func orElseF<Mon>(_ defaultValue : Kind<F, Option<A>>, _ monad : Mon) -> OptionT<F, A> where Mon : Monad, Mon.F == F {
-        return OptionT<F, A>(monad.flatMap(value, { maybe in
-            maybe.fold(constant(defaultValue),
-                       { _ in monad.pure(maybe) }) }))
+        return OptionT<F, A>(monad.flatMap(value, { option in
+            option.fold(constant(defaultValue),
+                        { _ in monad.pure(option) }) }))
     }
     
     public func transform<B, Func>(_ f : @escaping (Option<A>) -> Option<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
@@ -108,11 +108,11 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
     
     public func subflatMap<B, Func>(_ f : @escaping (A) -> Option<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return transform({ maybe in maybe.flatMap(f) }, functor)
+        return transform({ option in option.flatMap(f) }, functor)
     }
     
     public func mapFilter<B, Func>(_ f : @escaping (A) -> OptionOf<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(value, { maybe in maybe.flatMap({ x in f(x).fix() }) }))
+        return OptionT<F, B>(functor.map(value, { option in option.flatMap({ x in f(x).fix() }) }))
     }
 }
 

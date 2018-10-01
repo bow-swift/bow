@@ -12,28 +12,28 @@ public extension Foldable {
         return foldL(fa, monoid.empty, { acc, a in monoid.combine(acc, a) })
     }
     
-    public func reduceLeftToMaybe<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Option<B> {
-        return foldL(fa, Option.empty(), { maybe, a in
-            maybe.fold(constant(Option<B>.some(f(a))),
-                       { b in Option<B>.some(g(b, a)) })
+    public func reduceLeftToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Option<B> {
+        return foldL(fa, Option.empty(), { option, a in
+            option.fold(constant(Option<B>.some(f(a))),
+                        { b in Option<B>.some(g(b, a)) })
         })
     }
     
-    public func reduceRightToMaybe<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+    public func reduceRightToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
         return foldR(fa, Eval<Option<B>>.now(Option<B>.empty()), { a, lb in
-            lb.flatMap({ maybe in
-                maybe.fold({ Eval<Option<B>>.later({ Option<B>.some(f(a)) }) },
-                           { b in g(a, Eval<B>.now(b)).map(Option<B>.some) })
+            lb.flatMap({ option in
+                option.fold({ Eval<Option<B>>.later({ Option<B>.some(f(a)) }) },
+                            { b in g(a, Eval<B>.now(b)).map(Option<B>.some) })
             })
         })
     }
     
-    public func reduceLeftMaybe<A>(_ fa : Kind<F, A>, _ f : @escaping (A, A) -> A) -> Option<A> {
-        return reduceLeftToMaybe(fa, id, f)
+    public func reduceLeftOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, A) -> A) -> Option<A> {
+        return reduceLeftToOption(fa, id, f)
     }
     
-    public func reduceRightMaybe<A>(_ fa : Kind<F, A>, _ f : @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
-        return reduceRightToMaybe(fa, id, f)
+    public func reduceRightOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
+        return reduceRightToOption(fa, id, f)
     }
     
     public func combineAll<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> A where Mono : Monoid, Mono.A == A {

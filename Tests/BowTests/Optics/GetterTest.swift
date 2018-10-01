@@ -29,13 +29,13 @@ class GetterTest : XCTestCase {
             return tokenGetter.asFold().fold(String.concatMonoid, token) == token.value
         }
         
-        property("Getter as Fold: headMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenGetter.asFold().headMaybe(token),
+        property("Getter as Fold: headOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenGetter.asFold().headOption(token),
                                               Option.some(token.value))
         }
         
-        property("Getter as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenGetter.asFold().lastMaybe(token),
+        property("Getter as Fold: lastOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenGetter.asFold().lastOption(token),
                                               Option.some(token.value))
         }
     }
@@ -45,7 +45,7 @@ class GetterTest : XCTestCase {
             return tokenGetter.get(Token(value: value)) == value
         }
         
-        property("Finding a target using a predicate within a Getter should be wrapped in the correct Maybe result") <- forAll { (token : Token, predicate : Bool) in
+        property("Finding a target using a predicate within a Getter should be wrapped in the correct Option result") <- forAll { (token : Token, predicate : Bool) in
             return tokenGetter.find(token, constant(predicate)).fold(constant(false), constant(true)) == predicate
         }
         

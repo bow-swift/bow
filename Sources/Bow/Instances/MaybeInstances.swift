@@ -3,7 +3,7 @@ import Foundation
 public class First {}
 public class Last {}
 
-public class FirstMaybeMonoid<B> : Monoid {
+public class FirstOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, First>
     
     public var empty: Const<Option<B>, First> {
@@ -15,7 +15,7 @@ public class FirstMaybeMonoid<B> : Monoid {
     }
 }
 
-public class LastMaybeMonoid<B> : Monoid {
+public class LastOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, Last>
     
     public var empty: Const<Option<B>, Last> {

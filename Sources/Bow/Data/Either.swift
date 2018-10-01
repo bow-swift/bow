@@ -82,7 +82,7 @@ public class Either<A, B> : EitherOf<A, B> {
         return fold(constant(false), predicate)
     }
     
-    public func toMaybe() -> Option<B> {
+    public func toOption() -> Option<B> {
         return fold(constant(Option<B>.none()), Option<B>.some)
     }
     

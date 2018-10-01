@@ -69,10 +69,10 @@ class IorTest: XCTestCase {
         }
     }
     
-    func testToMaybe() {
+    func testToOption() {
         property("right or both converted to some") <- forAll { (x : Int) in
             let input = self.generator(x)
-            return (input.isLeft && input.toMaybe().isEmpty) || input.toMaybe().isDefined
+            return (input.isLeft && input.toOption().isEmpty) || input.toOption().isDefined
         }
     }
 }

@@ -55,7 +55,7 @@ fileprivate let program = Free.fix(Free<OpsF, Int>.monad().binding({ Ops<Any>.va
                                                                   { value in Ops<Any>.add(value, 10) },
                                                                   { _ , added in Ops<Any>.subtract(added, 50) }))
 
-fileprivate class MaybeInterpreter : FunctionK {
+fileprivate class OptionInterpreter : FunctionK {
     fileprivate typealias F = OpsF
     fileprivate typealias G = ForOption
     
@@ -90,7 +90,7 @@ fileprivate class IdInterpreter : FunctionK {
 class FreeTest: XCTestCase {
     
     func testInterpretsFreeProgram() {
-        let x = program.foldMap(MaybeInterpreter(), Option<Int>.monad())
+        let x = program.foldMap(OptionInterpreter(), Option<Int>.monad())
         let y = program.foldMap(IdInterpreter(), Id<Int>.monad())
         XCTAssertTrue(Option.eq(Int.order).eqv(x, Option.some(-30)))
         XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))

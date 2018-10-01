@@ -94,12 +94,12 @@ class EitherTest: XCTestCase {
         expect(right.exists(not <<< isPositive)).to(beFalse())
     }
     
-    func testToMaybe() {
+    func testToOption() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(Option.eq(Int.order).eqv(left.toMaybe(), Option<Int>.none())).to(beTrue())
-        expect(Option.eq(Int.order).eqv(right.toMaybe(), Option<Int>.some(5))).to(beTrue())
+        expect(Option.eq(Int.order).eqv(left.toOption(), Option<Int>.none())).to(beTrue())
+        expect(Option.eq(Int.order).eqv(right.toOption(), Option<Int>.some(5))).to(beTrue())
     }
     
     func testGetOrElse() {

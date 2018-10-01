@@ -13,9 +13,9 @@ public extension Option {
     
     public static func PSomePrism<B>() -> PPrism<Option<A>, Option<B>, A, B> {
         return PPrism<Option<A>, Option<B>, A, B>(
-            getOrModify: { maybe in
-                maybe.fold({ Either<Option<B>, A>.left(Option<B>.none()) },
-                           { a in Either<Option<B>, A>.right(a) })
+            getOrModify: { option in
+                option.fold({ Either<Option<B>, A>.left(Option<B>.none()) },
+                            { a in Either<Option<B>, A>.right(a) })
         },
             reverseGet: Option<B>.some)
     }
@@ -26,17 +26,17 @@ public extension Option {
     
     public static func nonePrism() -> Prism<Option<A>, Unit> {
         return Prism<Option<A>, Unit>(
-            getOrModify: { maybe in
-                maybe.fold({ Either<Option<A>, Unit>.right(unit) },
-                           { a in Either<Option<A>, Unit>.left(Option<A>.some(a)) })
+            getOrModify: { option in
+                option.fold({ Either<Option<A>, Unit>.right(unit) },
+                            { a in Either<Option<A>, Unit>.left(Option<A>.some(a)) })
         },
             reverseGet: { Option<A>.none() })
     }
     
     public static func toPEither<B>() -> PIso<Option<A>, Option<B>, Either<Unit, A>, Either<Unit, B>> {
         return PIso<Option<A>, Option<B>, Either<Unit, A>, Either<Unit, B>>(
-            get: { maybe in maybe.fold({ Either.left(unit) },
-                                       { a in Either.right(a) })
+            get: { option in option.fold({ Either.left(unit) },
+                                         { a in Either.right(a) })
         },  reverseGet: { either in either.fold({ Option<B>.none() },
                                                 { b in Option<B>.some(b) })})
     }

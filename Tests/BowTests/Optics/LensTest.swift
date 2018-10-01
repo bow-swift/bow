@@ -42,13 +42,13 @@ class LensTest: XCTestCase {
             return tokenLens.asFold().combineAll(String.concatMonoid, token) == token.value
         }
         
-        property("Lens as Fold: headMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenLens.asFold().headMaybe(token),
+        property("Lens as Fold: headOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenLens.asFold().headOption(token),
                                               Option.some(token.value))
         }
         
-        property("Lens as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenLens.asFold().lastMaybe(token),
+        property("Lens as Fold: lastOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenLens.asFold().lastOption(token),
                                               Option.some(token.value))
         }
     }
@@ -126,11 +126,11 @@ class LensTest: XCTestCase {
         }
         
         property("Lens + Prism::identity") <- forAll { (token : Token) in
-            return (tokenLens + Prism<String, String>.identity()).getMaybe(token).getOrElse("") == tokenLens.get(token)
+            return (tokenLens + Prism<String, String>.identity()).getOption(token).getOrElse("") == tokenLens.get(token)
         }
         
         property("Lens + Optional::identity") <- forAll { (token : Token) in
-            return (tokenLens + Bow.Optional<String, String>.identity()).getMaybe(token).getOrElse("") == tokenLens.get(token)
+            return (tokenLens + Bow.Optional<String, String>.identity()).getOption(token).getOrElse("") == tokenLens.get(token)
         }
         
         property("Lens + Setter::identity") <- forAll { (token : Token, value : String) in

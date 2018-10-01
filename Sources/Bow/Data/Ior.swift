@@ -17,7 +17,7 @@ public class Ior<A, B> : IorOf<A, B> {
         return IorBoth<A, B>(a, b)
     }
     
-    public static func fromMaybes(_ ma : Option<A>, _ mb : Option<B>) -> Option<Ior<A, B>> {
+    public static func fromOptions(_ ma : Option<A>, _ mb : Option<B>) -> Option<Ior<A, B>> {
         return ma.fold({ mb.fold({ Option.none() },
                                  { b in Option.some(Ior.right(b))}) },
                        { a in mb.fold({ Option.some(Ior.left(a)) },
@@ -150,7 +150,7 @@ public class Ior<A, B> : IorOf<A, B> {
                     { _, b in Either.right(b) })
     }
     
-    public func toMaybe() -> Option<B> {
+    public func toOption() -> Option<B> {
         return fold({ _ in Option<B>.none() },
                     { b in Option<B>.some(b) },
                     { _, b in Option<B>.some(b) })

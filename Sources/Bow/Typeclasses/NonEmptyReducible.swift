@@ -26,9 +26,9 @@ public extension NonEmptyReducible {
     public func reduceRightTo<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return Eval.always({ self.split(fa) }).flatMap{ (input) in
             let (a, ga) = input
-            return self.foldable().reduceRightToMaybe(ga, f, g).flatMap { maybe in
-                maybe.fold({ Eval.later({ f(a) })},
-                           { b in g(a, Eval.now(b)) })
+            return self.foldable().reduceRightToOption(ga, f, g).flatMap { option in
+                option.fold({ Eval.later({ f(a) })},
+                            { b in g(a, Eval.now(b)) })
             }
         }
     }

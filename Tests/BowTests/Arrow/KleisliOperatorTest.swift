@@ -39,7 +39,7 @@ class KleisliOperatorTest: XCTestCase {
         expect(ListK.eq(Int.order).eqv((f >=> g)(1), ListK([2, 3, 4, 6]))).to(beTrue())
     }
     
-    func testKleisliForMaybe() {
+    func testKleisliForOption() {
         let f = { (x : Int) in Option<Int>.none() }
         let g = { (x : Int) in Option.some(x) }
         let h = { (x : Int) in Option.some(2 * x) }

@@ -45,15 +45,15 @@ class TraversalTest: XCTestCase {
             return self.listKTraversal.asFold().combineAll(Int.sumMonoid, array.getArray.k()) == array.getArray.reduce(0, +)
         }
         
-        property("Traversal as Fold: headMaybe") <- forAll { (array : ArrayOf<Int>) in
+        property("Traversal as Fold: headOption") <- forAll { (array : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(
-                self.listKTraversal.asFold().headMaybe(array.getArray.k()),
+                self.listKTraversal.asFold().headOption(array.getArray.k()),
                 Option.fromOption(array.getArray.first))
         }
         
-        property("Traversal as Fold: lastMaybe") <- forAll { (array : ArrayOf<Int>) in
+        property("Traversal as Fold: lastOption") <- forAll { (array : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(
-                self.listKTraversal.asFold().lastMaybe(array.getArray.k()),
+                self.listKTraversal.asFold().lastOption(array.getArray.k()),
                 Option.fromOption(array.getArray.last))
         }
     }

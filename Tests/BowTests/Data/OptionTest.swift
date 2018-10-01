@@ -44,7 +44,7 @@ class OptionTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("Maybe semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
+        property("Option semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
             return SemigroupLaws<OptionOf<Int>>.check(
                 semigroup: Option<Int>.semigroup(Int.sumMonoid),
                 a: Option.pure(a),
@@ -55,7 +55,7 @@ class OptionTest: XCTestCase {
     }
     
     func testMonoidLaws() {
-        property("Maybe monoid laws") <- forAll { (a : Int) in
+        property("Option monoid laws") <- forAll { (a : Int) in
             return MonoidLaws<OptionOf<Int>>.check(
                 monoid: Option<Int>.monoid(Int.sumMonoid),
                 a: Option.pure(a),
@@ -89,40 +89,40 @@ class OptionTest: XCTestCase {
     
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
-            let maybe = y % 2 == 0 ? Option<Int>.none() : Option<Int>.some(y)
+            let option = y % 2 == 0 ? Option<Int>.none() : Option<Int>.some(y)
             return Option.fromOption(x).toOption() == x &&
-                Option.eq(Int.order).eqv(Option.fromOption(maybe.toOption()), maybe)
+                Option.eq(Int.order).eqv(Option.fromOption(option.toOption()), option)
         }
     }
     
     func testDefinedOrEmpty() {
-        property("Maybe cannot be simultaneously empty and defined") <- forAll { (x : Int?) in
-            let maybe = Option.fromOption(x)
-            return xor(maybe.isEmpty, maybe.isDefined)
+        property("Option cannot be simultaneously empty and defined") <- forAll { (x : Int?) in
+            let option = Option.fromOption(x)
+            return xor(option.isEmpty, option.isDefined)
         }
     }
     
     func testGetOrElse() {
         property("getOrElse consistent with orElse") <- forAll { (x : Int?, y : Int) in
-            let maybe = Option.fromOption(x)
-            return Option.eq(Int.order).eqv(Option<Int>.pure(maybe.getOrElse(y)),
-                                           maybe.orElse(Option.pure(y)))
+            let option = Option.fromOption(x)
+            return Option.eq(Int.order).eqv(Option<Int>.pure(option.getOrElse(y)),
+                                           option.orElse(Option.pure(y)))
         }
     }
     
     func testFilter() {
         property("filter is opposite of filterNot") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let maybe = Option.fromOption(x)
+            let option = Option.fromOption(x)
             let eq = Option.eq(Int.order)
             let none = Option<Int>.none()
-            return xor(eq.eqv(maybe.filter(predicate.getArrow), none), eq.eqv(maybe.filterNot(predicate.getArrow), none))
+            return xor(eq.eqv(option.filter(predicate.getArrow), none), eq.eqv(option.filterNot(predicate.getArrow), none))
         }
     }
     
     func testExistForAll() {
         property("exists and forall are equivalent") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let maybe = Option.fromOption(x)
-            return maybe.exists(predicate.getArrow) == maybe.forall(predicate.getArrow)
+            let option = Option.fromOption(x)
+            return option.exists(predicate.getArrow) == option.forall(predicate.getArrow)
         }
     }
 }

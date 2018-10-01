@@ -53,13 +53,13 @@ class IsoTest: XCTestCase {
             return tokenIso.asFold().fold(String.concatMonoid, token) == token.value
         }
         
-        property("Iso as Fold: headMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenIso.asFold().headMaybe(token),
+        property("Iso as Fold: headOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenIso.asFold().headOption(token),
                                               Option.some(token.value))
         }
         
-        property("Iso as Fold: lastMaybe") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenIso.asFold().lastMaybe(token),
+        property("Iso as Fold: lastOption") <- forAll { (token : Token) in
+            return Option.eq(String.order).eqv(tokenIso.asFold().lastOption(token),
                                               Option.some(token.value))
         }
     }
@@ -157,7 +157,7 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso + Prism::identity") <- forAll { (token : Token) in
-            return (tokenIso + Prism<String, String>.identity()).getMaybe(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + Prism<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Getter::identity") <- forAll { (token : Token) in
@@ -169,7 +169,7 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso + Optional::identity") <- forAll { (token : Token) in
-            return (tokenIso + Bow.Optional<String, String>.identity()).getMaybe(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + Bow.Optional<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Fold::identity") <- forAll { (token : Token) in

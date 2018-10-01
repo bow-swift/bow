@@ -10,7 +10,7 @@ class PrismLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : H
         composeModify(prism, eqA)
         consistentSetModify(prism, eqA)
         consistentModifyModifyFId(prism, eqA)
-        consistentGetMaybeModifyFId(prism, Option<B>.eq(eqB))
+        consistentGetOptionModifyFId(prism, Option<B>.eq(eqB))
     }
     
     private static func partialRoundTripOneWay<EqA>(_ prism : Prism<A, B>, _ eqA : EqA) where EqA : Eq, EqA.A == A {
@@ -19,9 +19,9 @@ class PrismLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : H
         }
     }
     
-    private static func roundTripOtherWay<EqMaybeB>(_ prism : Prism<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == OptionOf<B> {
+    private static func roundTripOtherWay<EqOptionB>(_ prism : Prism<A, B>, _ eqB : EqOptionB) where EqOptionB : Eq, EqOptionB.A == OptionOf<B> {
         property("Round trip other way") <- forAll { (b : B) in
-            return eqB.eqv(prism.getMaybe(prism.reverseGet(b)),
+            return eqB.eqv(prism.getOption(prism.reverseGet(b)),
                            Option.some(b))
         }
     }
@@ -53,10 +53,10 @@ class PrismLaws<A, B> where A : Arbitrary, B : Arbitrary, B : CoArbitrary, B : H
         }
     }
     
-    private static func consistentGetMaybeModifyFId<EqMaybeB>(_ prism : Prism<A, B>, _ eqB : EqMaybeB) where EqMaybeB : Eq, EqMaybeB.A == OptionOf<B> {
-        property("Consistent getMaybe - modifyF Id") <- forAll { (a : A) in
+    private static func consistentGetOptionModifyFId<EqOptionB>(_ prism : Prism<A, B>, _ eqB : EqOptionB) where EqOptionB : Eq, EqOptionB.A == OptionOf<B> {
+        property("Consistent getOption - modifyF Id") <- forAll { (a : A) in
             return eqB.eqv(Const<Option<B>, A>.fix(prism.modifyF(Const<Option<B>, B>.applicative(PrismMonoid<B>()), a, { b in Const<Option<B>, B>.pure(Option<B>.some(b)) })).value,
-                           prism.getMaybe(a))
+                           prism.getOption(a))
         }
     }
     

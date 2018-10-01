@@ -61,18 +61,18 @@ class EitherTTest: XCTestCase {
         }
     }
     
-    func testMaybeTConversion() {
-        let maybeTEq = OptionT.eq(Id.eq(Option.eq(Int.order)), Id<Int>.functor())
+    func testOptionTConversion() {
+        let optionTEq = OptionT.eq(Id.eq(Option.eq(Int.order)), Id<Int>.functor())
         property("Left converted to none") <- forAll { (x : Int) in
             let eitherT = EitherT<ForId, Int, Int>.left(x, Id<Int>.applicative())
             let expected = OptionT<ForId, Int>.none(Id<Int>.applicative())
-            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
+            return optionTEq.eqv(eitherT.toOptionT(Id<Int>.functor()), expected)
         }
         
         property("Right converted to some") <- forAll { (x : Int) in
             let eitherT = EitherT<ForId, Int, Int>.right(x, Id<Int>.applicative())
             let expected = OptionT<ForId, Int>.pure(x, Id<Int>.applicative())
-            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
+            return optionTEq.eqv(eitherT.toOptionT(Id<Int>.functor()), expected)
         }
     }
 }
