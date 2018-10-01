@@ -90,6 +90,10 @@
 		115683A3216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
 		115683A4216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
 		115683A5216248FC0001749D /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
+		115683A721624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
+		115683A821624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
+		115683A921624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
+		115683AA21624AE80001749D /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -730,6 +734,7 @@
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
+		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1281,6 +1286,7 @@
 				OBJ_58 /* Applicative.swift */,
 				OBJ_59 /* ApplicativeError.swift */,
 				OBJ_60 /* Bifoldable.swift */,
+				115683A621624AE80001749D /* Bifunctor.swift */,
 				OBJ_61 /* Bimonad.swift */,
 				OBJ_62 /* Comonad.swift */,
 				115683A1216248FC0001749D /* Contravariant.swift */,
@@ -1773,6 +1779,7 @@
 				D6D624F42068178800739E2D /* StringInstances.swift in Sources */,
 				11E531DB209B4FD200A78E8D /* BoundSetter.swift in Sources */,
 				D6D624F52068178800739E2D /* PartialApplication.swift in Sources */,
+				115683A821624AE80001749D /* Bifunctor.swift in Sources */,
 				11AC52792097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B2209AF13600A78E8D /* Prism.swift in Sources */,
 				D6D624F62068178800739E2D /* Predef.swift in Sources */,
@@ -1961,6 +1968,7 @@
 				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
 				11E531DC209B4FD300A78E8D /* BoundSetter.swift in Sources */,
 				D6D62586206841B300739E2D /* PartialApplication.swift in Sources */,
+				115683A921624AE80001749D /* Bifunctor.swift in Sources */,
 				11AC527C2097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B3209AF13600A78E8D /* Prism.swift in Sources */,
 				D6D62587206841B300739E2D /* Predef.swift in Sources */,
@@ -2073,6 +2081,7 @@
 				D6DBDEBB20684C38004F979F /* StringInstances.swift in Sources */,
 				11E531DD209B4FD400A78E8D /* BoundSetter.swift in Sources */,
 				D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */,
+				115683AA21624AE80001749D /* Bifunctor.swift in Sources */,
 				11AC527F2097697D008EC1E4 /* Iso.swift in Sources */,
 				11E531B4209AF13700A78E8D /* Prism.swift in Sources */,
 				D6DBDEBD20684C38004F979F /* Predef.swift in Sources */,
@@ -2261,6 +2270,7 @@
 				OBJ_414 /* StringInstances.swift in Sources */,
 				11E531D4209B4CB700A78E8D /* BoundSetter.swift in Sources */,
 				OBJ_415 /* PartialApplication.swift in Sources */,
+				115683A721624AE80001749D /* Bifunctor.swift in Sources */,
 				11AC527520975422008EC1E4 /* Iso.swift in Sources */,
 				11C9B6B320DBB0EC00AFD4AA /* FilterIndex.swift in Sources */,
 				11E531B1209AE89A00A78E8D /* Prism.swift in Sources */,
