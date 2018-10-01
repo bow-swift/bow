@@ -4,6 +4,7 @@ import SwiftCheck
 
 class FunctorLaws<F> {
     static func check<Func, EqA, EqUnit>(functor : Func, generator : @escaping (Int) -> Kind<F, Int>, eq : EqA, eqUnit : EqUnit) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int>, EqUnit : Eq, EqUnit.A == Kind<F, ()> {
+        InvariantLaws.check(invariant: functor, generator: generator, eq: eq)
         covariantIdentity(functor, generator, eq)
         covariantComposition(functor, generator, eq)
         void(functor, generator, eqUnit)
