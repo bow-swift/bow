@@ -105,6 +105,9 @@
 		115683B621624EEA0001749D /* InvariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B521624EEA0001749D /* InvariantLaws.swift */; };
 		115683B721624EEA0001749D /* InvariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B521624EEA0001749D /* InvariantLaws.swift */; };
 		115683B821624EEA0001749D /* InvariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B521624EEA0001749D /* InvariantLaws.swift */; };
+		115683BA216253E00001749D /* ContravariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B9216253E00001749D /* ContravariantLaws.swift */; };
+		115683BB216253E00001749D /* ContravariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B9216253E00001749D /* ContravariantLaws.swift */; };
+		115683BC216253E00001749D /* ContravariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B9216253E00001749D /* ContravariantLaws.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -749,6 +752,7 @@
 		115683AB21624C370001749D /* Profunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profunctor.swift; sourceTree = "<group>"; };
 		115683B021624D7B0001749D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		115683B521624EEA0001749D /* InvariantLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvariantLaws.swift; sourceTree = "<group>"; };
+		115683B9216253E00001749D /* ContravariantLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContravariantLaws.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1178,6 +1182,7 @@
 				OBJ_126 /* ApplicativeLaws.swift */,
 				111620AE20F6131E00685EC4 /* BimonadLaws.swift */,
 				OBJ_127 /* ComonadLaws.swift */,
+				115683B9216253E00001749D /* ContravariantLaws.swift */,
 				OBJ_128 /* EqLaws.swift */,
 				111620A620F606F300685EC4 /* FoldableLaws.swift */,
 				OBJ_129 /* FunctorFilterLaws.swift */,
@@ -1683,6 +1688,7 @@
 				111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D6244A2068141800739E2D /* ConstTest.swift in Sources */,
 				11F53070210086FD00D92335 /* FoldTest.swift in Sources */,
+				115683BB216253E00001749D /* ContravariantLaws.swift in Sources */,
 				D6D6244B2068141800739E2D /* CoproductTest.swift in Sources */,
 				D6D6244C2068141800739E2D /* EitherTest.swift in Sources */,
 				D6D6244D2068141800739E2D /* EvalTest.swift in Sources */,
@@ -1875,6 +1881,7 @@
 				111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */,
 				D6D62529206817A700739E2D /* ConstTest.swift in Sources */,
 				11F53071210086FE00D92335 /* FoldTest.swift in Sources */,
+				115683BC216253E00001749D /* ContravariantLaws.swift in Sources */,
 				D6D6252A206817A700739E2D /* CoproductTest.swift in Sources */,
 				D6D6252B206817A700739E2D /* EitherTest.swift in Sources */,
 				D6D6252C206817A700739E2D /* EvalTest.swift in Sources */,
@@ -2182,6 +2189,7 @@
 				111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */,
 				OBJ_252 /* ConstTest.swift in Sources */,
 				11F5306F210086FD00D92335 /* FoldTest.swift in Sources */,
+				115683BA216253E00001749D /* ContravariantLaws.swift in Sources */,
 				OBJ_253 /* CoproductTest.swift in Sources */,
 				OBJ_254 /* EitherTest.swift in Sources */,
 				OBJ_255 /* EvalTest.swift in Sources */,
