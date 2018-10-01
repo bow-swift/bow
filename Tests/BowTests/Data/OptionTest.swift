@@ -10,7 +10,7 @@ class UnitEq : Eq {
     }
 }
 
-class MaybeTest: XCTestCase {
+class OptionTest: XCTestCase {
     
     var generator : (Int) -> Option<Int> {
         return { a in a % 2 == 0 ? Option.pure(a) : Option.none() }
