@@ -90,6 +90,10 @@
 		115683D121626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
 		115683D221626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
 		115683D321626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D521626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D621626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D721626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D821626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -730,6 +734,7 @@
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		115683CA2162689A0001749D /* MonadDefer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadDefer.swift; sourceTree = "<group>"; };
 		115683CF21626B980001749D /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		115683D421626D3B0001749D /* ConcurrentEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentEffect.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1004,6 +1009,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_37 /* Async.swift */,
+				115683D421626D3B0001749D /* ConcurrentEffect.swift */,
 				115683CF21626B980001749D /* Effect.swift */,
 				115683CA2162689A0001749D /* MonadDefer.swift */,
 			);
@@ -1818,6 +1824,7 @@
 				D6D6250C2068178800739E2D /* MonadFilter.swift in Sources */,
 				1116209920F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BC209B148E00A78E8D /* Setter.swift in Sources */,
+				115683D621626D3B0001749D /* ConcurrentEffect.swift in Sources */,
 				1116208520F4972100685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6250D2068178800739E2D /* MonadReader.swift in Sources */,
 				115683CC2162689A0001749D /* MonadDefer.swift in Sources */,
@@ -2006,6 +2013,7 @@
 				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
 				1116209A20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
+				115683D721626D3B0001749D /* ConcurrentEffect.swift in Sources */,
 				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
 				115683CD2162689A0001749D /* MonadDefer.swift in Sources */,
@@ -2118,6 +2126,7 @@
 				D6DBDED320684C38004F979F /* MonadFilter.swift in Sources */,
 				1116209B20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
 				11E531BE209B148F00A78E8D /* Setter.swift in Sources */,
+				115683D821626D3B0001749D /* ConcurrentEffect.swift in Sources */,
 				1116208720F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
 				D6DBDED420684C38004F979F /* MonadReader.swift in Sources */,
 				115683CE2162689A0001749D /* MonadDefer.swift in Sources */,
@@ -2306,6 +2315,7 @@
 				OBJ_436 /* MonadCombine.swift in Sources */,
 				OBJ_437 /* MonadError.swift in Sources */,
 				OBJ_438 /* MonadFilter.swift in Sources */,
+				115683D521626D3B0001749D /* ConcurrentEffect.swift in Sources */,
 				11E531BB209B0BE300A78E8D /* Setter.swift in Sources */,
 				1116207920F4923E00685EC4 /* Each+Optics.swift in Sources */,
 				115683CB2162689A0001749D /* MonadDefer.swift in Sources */,
