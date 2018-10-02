@@ -12,7 +12,7 @@ matrix:
     - env: JOB="XCODE" DEST="OS=4.3,name=Apple Watch - 42mm" SCHEME="Bow-watchOS" SDK="watchsimulator" ACTION="build"
 
 before_install:
-  - carthage bootstrap
+  - carthage update
 
 script:
   - set -o pipefail
