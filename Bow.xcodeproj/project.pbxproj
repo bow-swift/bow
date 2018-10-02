@@ -149,6 +149,10 @@
 		1168901E21638B3D00F3A7A6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168901C21638B3D00F3A7A6 /* Store.swift */; };
 		1168901F21638B3D00F3A7A6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168901C21638B3D00F3A7A6 /* Store.swift */; };
 		1168902021638B3D00F3A7A6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168901C21638B3D00F3A7A6 /* Store.swift */; };
+		1168902221638D8800F3A7A6 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902121638D8800F3A7A6 /* Sum.swift */; };
+		1168902321638D8800F3A7A6 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902121638D8800F3A7A6 /* Sum.swift */; };
+		1168902421638D8800F3A7A6 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902121638D8800F3A7A6 /* Sum.swift */; };
+		1168902521638D8800F3A7A6 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902121638D8800F3A7A6 /* Sum.swift */; };
 		116D42C52110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C62110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C72110A66600363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
@@ -794,6 +798,7 @@
 		11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseFilterLaws.swift; sourceTree = "<group>"; };
 		116890172163894600F3A7A6 /* Moore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moore.swift; sourceTree = "<group>"; };
 		1168901C21638B3D00F3A7A6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		1168902121638D8800F3A7A6 /* Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sum.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -1277,6 +1282,7 @@
 				D6492805209C72F000B875F9 /* SetK.swift */,
 				OBJ_32 /* State.swift */,
 				1168901C21638B3D00F3A7A6 /* Store.swift */,
+				1168902121638D8800F3A7A6 /* Sum.swift */,
 				OBJ_33 /* Try.swift */,
 				OBJ_34 /* Tuple.swift */,
 				OBJ_35 /* Validated.swift */,
@@ -1886,6 +1892,7 @@
 				D6D624FD2068178800739E2D /* Applicative.swift in Sources */,
 				116D42C52110A66500363A86 /* BoolInstances.swift in Sources */,
 				D6D624FE2068178800739E2D /* ApplicativeError.swift in Sources */,
+				1168902321638D8800F3A7A6 /* Sum.swift in Sources */,
 				11C9B6D120DCF54600AFD4AA /* Each.swift in Sources */,
 				D6D624FF2068178800739E2D /* Bifoldable.swift in Sources */,
 				D6D625002068178800739E2D /* Bimonad.swift in Sources */,
@@ -2087,6 +2094,7 @@
 				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
 				116D42C62110A66500363A86 /* BoolInstances.swift in Sources */,
 				D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */,
+				1168902421638D8800F3A7A6 /* Sum.swift in Sources */,
 				11C9B6D220DCF54700AFD4AA /* Each.swift in Sources */,
 				D6D62590206841B300739E2D /* Bifoldable.swift in Sources */,
 				D6D62591206841B300739E2D /* Bimonad.swift in Sources */,
@@ -2207,6 +2215,7 @@
 				D6DBDEC420684C38004F979F /* Applicative.swift in Sources */,
 				116D42C72110A66600363A86 /* BoolInstances.swift in Sources */,
 				D6DBDEC520684C38004F979F /* ApplicativeError.swift in Sources */,
+				1168902521638D8800F3A7A6 /* Sum.swift in Sources */,
 				11C9B6D320DCF54800AFD4AA /* Each.swift in Sources */,
 				D6DBDEC620684C38004F979F /* Bifoldable.swift in Sources */,
 				D6DBDEC720684C38004F979F /* Bimonad.swift in Sources */,
@@ -2408,6 +2417,7 @@
 				OBJ_422 /* Alternative.swift in Sources */,
 				OBJ_423 /* Applicative.swift in Sources */,
 				OBJ_424 /* ApplicativeError.swift in Sources */,
+				1168902221638D8800F3A7A6 /* Sum.swift in Sources */,
 				OBJ_425 /* Bifoldable.swift in Sources */,
 				OBJ_426 /* Bimonad.swift in Sources */,
 				1116208E20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift in Sources */,
