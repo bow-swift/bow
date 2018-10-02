@@ -90,8 +90,8 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
         return transform({ either in either.flatMap(f) }, functor)
     }
     
-    public func toMaybeT<Func>(_ functor : Func) -> MaybeT<F, B> where Func : Functor, Func.F == F {
-        return MaybeT<F, B>(functor.map(value, { either in either.toMaybe() } ))
+    public func toOptionT<Func>(_ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
+        return OptionT<F, B>(functor.map(value, { either in either.toOption() } ))
     }
     
     public func combineK<Mon>(_ y : EitherT<F, A, B>, _ monad : Mon) -> EitherT<F, A, B> where Mon : Monad, Mon.F == F {

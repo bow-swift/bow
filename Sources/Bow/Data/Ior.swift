@@ -17,11 +17,11 @@ public class Ior<A, B> : IorOf<A, B> {
         return IorBoth<A, B>(a, b)
     }
     
-    public static func fromMaybes(_ ma : Maybe<A>, _ mb : Maybe<B>) -> Maybe<Ior<A, B>> {
-        return ma.fold({ mb.fold({ Maybe.none() },
-                                 { b in Maybe.some(Ior.right(b))}) },
-                       { a in mb.fold({ Maybe.some(Ior.left(a)) },
-                                      { b in Maybe.some(Ior.both(a, b))})})
+    public static func fromOptions(_ ma : Option<A>, _ mb : Option<B>) -> Option<Ior<A, B>> {
+        return ma.fold({ mb.fold({ Option.none() },
+                                 { b in Option.some(Ior.right(b))}) },
+                       { a in mb.fold({ Option.some(Ior.left(a)) },
+                                      { b in Option.some(Ior.both(a, b))})})
     }
     
     public static func loop<C, SemiG>(_ v : Ior<C, Either<A, B>>,
@@ -138,10 +138,10 @@ public class Ior<A, B> : IorOf<A, B> {
                     { a, b in Either.right((a, b)) })
     }
     
-    public func pad() -> (Maybe<A>, Maybe<B>) {
-        return fold({ a in (Maybe.some(a), Maybe.none()) },
-                    { b in (Maybe.none(), Maybe.some(b)) },
-                    { a, b in (Maybe.some(a), Maybe.some(b)) })
+    public func pad() -> (Option<A>, Option<B>) {
+        return fold({ a in (Option.some(a), Option.none()) },
+                    { b in (Option.none(), Option.some(b)) },
+                    { a, b in (Option.some(a), Option.some(b)) })
     }
     
     public func toEither() -> Either<A, B> {
@@ -150,10 +150,10 @@ public class Ior<A, B> : IorOf<A, B> {
                     { _, b in Either.right(b) })
     }
     
-    public func toMaybe() -> Maybe<B> {
-        return fold({ _ in Maybe<B>.none() },
-                    { b in Maybe<B>.some(b) },
-                    { _, b in Maybe<B>.some(b) })
+    public func toOption() -> Option<B> {
+        return fold({ _ in Option<B>.none() },
+                    { b in Option<B>.some(b) },
+                    { _, b in Option<B>.some(b) })
     }
     
     public func getOrElse(_ defaultValue : B) -> B {

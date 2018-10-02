@@ -80,9 +80,9 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return PIso<B, A, T, S>(get: self.reverseGet, reverseGet: self.get)
     }
     
-    public func find(_ s : S, _ predicate : (A) -> Bool) -> Maybe<A> {
+    public func find(_ s : S, _ predicate : (A) -> Bool) -> Option<A> {
         let a = get(s)
-        return predicate(a) ? Maybe.some(a) : Maybe.none()
+        return predicate(a) ? Option.some(a) : Option.none()
     }
     
     public func set(_ b : B) -> T {

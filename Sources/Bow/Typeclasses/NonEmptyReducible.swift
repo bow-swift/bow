@@ -26,9 +26,9 @@ public extension NonEmptyReducible {
     public func reduceRightTo<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return Eval.always({ self.split(fa) }).flatMap{ (input) in
             let (a, ga) = input
-            return self.foldable().reduceRightToMaybe(ga, f, g).flatMap { maybe in
-                maybe.fold({ Eval.later({ f(a) })},
-                           { b in g(a, Eval.now(b)) })
+            return self.foldable().reduceRightToOption(ga, f, g).flatMap { option in
+                option.fold({ Eval.later({ f(a) })},
+                            { b in g(a, Eval.now(b)) })
             }
         }
     }
@@ -38,9 +38,9 @@ public extension NonEmptyReducible {
         return monoid.combine(a, foldable().fold(monoid, ga))
     }
     
-    public func find<A>(_ fa: Kind<F, A>, _ f: @escaping (A) -> Bool) -> Maybe<A> {
+    public func find<A>(_ fa: Kind<F, A>, _ f: @escaping (A) -> Bool) -> Option<A> {
         let (a, ga) = split(fa)
-        return f(a) ? Maybe.some(a) : foldable().find(ga, f)
+        return f(a) ? Option.some(a) : foldable().find(ga, f)
     }
     
     public func exists<A>(_ fa: Kind<F, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
@@ -58,9 +58,9 @@ public extension NonEmptyReducible {
         return 1 + foldable().size(monoid, tail)
     }
     
-    public func get<A>(_ fa: Kind<F, A>, _ index: Int64) -> Maybe<A> {
+    public func get<A>(_ fa: Kind<F, A>, _ index: Int64) -> Option<A> {
         if index == 0 {
-            return Maybe.some(split(fa).0)
+            return Option.some(split(fa).0)
         } else {
             return foldable().get(split(fa).1, index - 1)
         }

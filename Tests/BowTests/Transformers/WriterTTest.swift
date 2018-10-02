@@ -60,17 +60,17 @@ class WriterTTest: XCTestCase {
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<WriterTPartial<ForMaybe, Int>>.check(
-            functorFilter: WriterT<ForMaybe, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
-            eq: WriterT<ForMaybe, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
+        FunctorFilterLaws<WriterTPartial<ForOption, Int>>.check(
+            functorFilter: WriterT<ForOption, Int, Int>.monadFilter(Option<Int>.monadFilter(), Int.sumMonoid),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Option<Int>.applicative()) },
+            eq: WriterT<ForOption, Int, Int>.eq(Option.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<WriterTPartial<ForMaybe, Int>>.check(
-            monadFilter: WriterT<ForMaybe, Int, Int>.monadFilter(Maybe<Int>.monadFilter(), Int.sumMonoid),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Maybe<Int>.applicative()) },
-            eq: WriterT<ForMaybe, Int, Int>.eq(Maybe.eq(Tuple.eq(Int.order, Int.order))))
+        MonadFilterLaws<WriterTPartial<ForOption, Int>>.check(
+            monadFilter: WriterT<ForOption, Int, Int>.monadFilter(Option<Int>.monadFilter(), Int.sumMonoid),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, Option<Int>.applicative()) },
+            eq: WriterT<ForOption, Int, Int>.eq(Option.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonadWriterLaws() {

@@ -55,16 +55,16 @@ fileprivate let program = Free.fix(Free<OpsF, Int>.monad().binding({ Ops<Any>.va
                                                                   { value in Ops<Any>.add(value, 10) },
                                                                   { _ , added in Ops<Any>.subtract(added, 50) }))
 
-fileprivate class MaybeInterpreter : FunctionK {
+fileprivate class OptionInterpreter : FunctionK {
     fileprivate typealias F = OpsF
-    fileprivate typealias G = ForMaybe
+    fileprivate typealias G = ForOption
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> MaybeOf<A> {
+    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> OptionOf<A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Maybe<Int>.some((op as! Value).a) as! MaybeOf<A>
-        case is Add: return Maybe<Int>.some((op as! Add).a + (op as! Add).b) as! MaybeOf<A>
-        case is Subtract: return Maybe<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! MaybeOf<A>
+        case is Value: return Option<Int>.some((op as! Value).a) as! OptionOf<A>
+        case is Add: return Option<Int>.some((op as! Add).a + (op as! Add).b) as! OptionOf<A>
+        case is Subtract: return Option<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! OptionOf<A>
         default:
             fatalError("No other options")
         }
@@ -90,9 +90,9 @@ fileprivate class IdInterpreter : FunctionK {
 class FreeTest: XCTestCase {
     
     func testInterpretsFreeProgram() {
-        let x = program.foldMap(MaybeInterpreter(), Maybe<Int>.monad())
+        let x = program.foldMap(OptionInterpreter(), Option<Int>.monad())
         let y = program.foldMap(IdInterpreter(), Id<Int>.monad())
-        XCTAssertTrue(Maybe.eq(Int.order).eqv(x, Maybe.some(-30)))
+        XCTAssertTrue(Option.eq(Int.order).eqv(x, Option.some(-30)))
         XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))
     }
     
