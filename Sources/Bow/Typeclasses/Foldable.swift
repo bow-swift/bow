@@ -12,28 +12,28 @@ public extension Foldable {
         return foldL(fa, monoid.empty, { acc, a in monoid.combine(acc, a) })
     }
     
-    public func reduceLeftToMaybe<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Maybe<B> {
-        return foldL(fa, Maybe.empty(), { maybe, a in
-            maybe.fold(constant(Maybe<B>.some(f(a))),
-                       { b in Maybe<B>.some(g(b, a)) })
+    public func reduceLeftToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Option<B> {
+        return foldL(fa, Option.empty(), { option, a in
+            option.fold(constant(Option<B>.some(f(a))),
+                        { b in Option<B>.some(g(b, a)) })
         })
     }
     
-    public func reduceRightToMaybe<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Maybe<B>> {
-        return foldR(fa, Eval<Maybe<B>>.now(Maybe<B>.empty()), { a, lb in
-            lb.flatMap({ maybe in
-                maybe.fold({ Eval<Maybe<B>>.later({ Maybe<B>.some(f(a)) }) },
-                           { b in g(a, Eval<B>.now(b)).map(Maybe<B>.some) })
+    public func reduceRightToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+        return foldR(fa, Eval<Option<B>>.now(Option<B>.empty()), { a, lb in
+            lb.flatMap({ option in
+                option.fold({ Eval<Option<B>>.later({ Option<B>.some(f(a)) }) },
+                            { b in g(a, Eval<B>.now(b)).map(Option<B>.some) })
             })
         })
     }
     
-    public func reduceLeftMaybe<A>(_ fa : Kind<F, A>, _ f : @escaping (A, A) -> A) -> Maybe<A> {
-        return reduceLeftToMaybe(fa, id, f)
+    public func reduceLeftOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, A) -> A) -> Option<A> {
+        return reduceLeftToOption(fa, id, f)
     }
     
-    public func reduceRightMaybe<A>(_ fa : Kind<F, A>, _ f : @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Maybe<A>> {
-        return reduceRightToMaybe(fa, id, f)
+    public func reduceRightOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
+        return reduceRightToOption(fa, id, f)
     }
     
     public func combineAll<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> A where Mono : Monoid, Mono.A == A {
@@ -54,9 +54,9 @@ public extension Foldable {
         return traverse_(applicative, fga, id)
     }
     
-    public func find<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Maybe<A> {
-        return foldR(fa, Eval.now(Maybe.none()), { a, lb in
-            f(a) ? Eval.now(Maybe.some(a)) : lb
+    public func find<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Option<A> {
+        return foldR(fa, Eval.now(Option.none()), { a, lb in
+            f(a) ? Eval.now(Option.some(a)) : lb
         }).value()
     }
     
@@ -88,11 +88,11 @@ public extension Foldable {
         return foldM(fa, monoid.empty, { b, a in monad.map(f(a), { bb in monoid.combine(b, bb) }) }, monad)
     }
     
-    public func get<A>(_ fa : Kind<F, A>, _ index : Int64) -> Maybe<A> {
+    public func get<A>(_ fa : Kind<F, A>, _ index : Int64) -> Option<A> {
         return (foldM(fa, Int64(0), { i, a in
             (i == index) ? Either<A, Int64>.left(a) : Either<A, Int64>.right(i + 1)
         }, Either<A, Int64>.monad() as EitherMonad<A>) as! Either<A, Int64>)
-            .fold(Maybe<A>.some, constant(Maybe<A>.none()))
+            .fold(Option<A>.some, constant(Option<A>.none()))
     }
     
     public func size<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> Int64 where Mono : Monoid, Mono.A == Int64 {

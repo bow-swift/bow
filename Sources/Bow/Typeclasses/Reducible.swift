@@ -15,12 +15,12 @@ public extension Reducible {
         return reduceRightTo(fa, id, f)
     }
     
-    public func reduceLeftToMaybe<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (B, A) -> B) -> Maybe<B> {
-        return Maybe<B>.some(reduceLeftTo(fa, f, g))
+    public func reduceLeftToOption<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (B, A) -> B) -> Option<B> {
+        return Option<B>.some(reduceLeftTo(fa, f, g))
     }
     
-    public func reduceRightToMaybe<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Maybe<B>> {
-        return reduceRightTo(fa, f, g).map(Maybe<B>.some)
+    public func reduceRightToOption<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+        return reduceRightTo(fa, f, g).map(Option<B>.some)
     }
     
     public func isEmpty<A>(_ fa: Kind<F, A>) -> Bool {

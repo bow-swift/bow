@@ -261,7 +261,7 @@
 		D6D6244E2068141800739E2D /* IdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IdTest.swift */; };
 		D6D6244F2068141800739E2D /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* IorTest.swift */; };
 		D6D624502068141800739E2D /* ListKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ListKTest.swift */; };
-		D6D624512068141800739E2D /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MaybeTest.swift */; };
+		D6D624512068141800739E2D /* OptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* OptionTest.swift */; };
 		D6D624522068141800739E2D /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NonEmptyListTest.swift */; };
 		D6D624532068141800739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		D6D624542068141800739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
@@ -274,7 +274,7 @@
 		D6D6245B2068141800739E2D /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* PartialApplicationTest.swift */; };
 		D6D6245C2068141800739E2D /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* PredefTest.swift */; };
 		D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* EitherTTest.swift */; };
-		D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MaybeTTest.swift */; };
+		D6D6245E2068141800739E2D /* OptionTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* OptionTTest.swift */; };
 		D6D6245F2068141800739E2D /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* StateTTest.swift */; };
 		D6D624602068141800739E2D /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* WriterTTest.swift */; };
 		D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ApplicativeErrorLaws.swift */; };
@@ -315,7 +315,7 @@
 		D6D624E22068178800739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6D624E32068178800739E2D /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
 		D6D624E42068178800739E2D /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
-		D6D624E52068178800739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6D624E52068178800739E2D /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Option.swift */; };
 		D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6D624E72068178800739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
 		D6D624E82068178800739E2D /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
@@ -334,7 +334,7 @@
 		D6D624F52068178800739E2D /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
 		D6D624F62068178800739E2D /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
 		D6D624F72068178800739E2D /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
-		D6D624F82068178800739E2D /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6D624F82068178800739E2D /* OptionT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* OptionT.swift */; };
 		D6D624F92068178800739E2D /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
 		D6D624FA2068178800739E2D /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
 		D6D624FB2068178800739E2D /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
@@ -380,7 +380,7 @@
 		D6D6252D206817A700739E2D /* IdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IdTest.swift */; };
 		D6D6252E206817A700739E2D /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* IorTest.swift */; };
 		D6D6252F206817A700739E2D /* ListKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ListKTest.swift */; };
-		D6D62530206817A700739E2D /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MaybeTest.swift */; };
+		D6D62530206817A700739E2D /* OptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* OptionTest.swift */; };
 		D6D62531206817A700739E2D /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NonEmptyListTest.swift */; };
 		D6D62532206817A700739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		D6D62533206817A700739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
@@ -393,7 +393,7 @@
 		D6D6253A206817A700739E2D /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* PartialApplicationTest.swift */; };
 		D6D6253B206817A700739E2D /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* PredefTest.swift */; };
 		D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* EitherTTest.swift */; };
-		D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MaybeTTest.swift */; };
+		D6D6253D206817A700739E2D /* OptionTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* OptionTTest.swift */; };
 		D6D6253E206817A700739E2D /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* StateTTest.swift */; };
 		D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* WriterTTest.swift */; };
 		D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ApplicativeErrorLaws.swift */; };
@@ -434,7 +434,7 @@
 		D6D62573206841B300739E2D /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6D62574206841B300739E2D /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
 		D6D62575206841B300739E2D /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
-		D6D62576206841B300739E2D /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6D62576206841B300739E2D /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Option.swift */; };
 		D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6D62578206841B300739E2D /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
 		D6D62579206841B300739E2D /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
@@ -453,7 +453,7 @@
 		D6D62586206841B300739E2D /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
 		D6D62587206841B300739E2D /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
 		D6D62588206841B300739E2D /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
-		D6D62589206841B300739E2D /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6D62589206841B300739E2D /* OptionT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* OptionT.swift */; };
 		D6D6258A206841B300739E2D /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
 		D6D6258B206841B300739E2D /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
 		D6D6258C206841B300739E2D /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
@@ -504,7 +504,7 @@
 		D6DBDEA920684C38004F979F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		D6DBDEAA20684C38004F979F /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
 		D6DBDEAB20684C38004F979F /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
-		D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		D6DBDEAC20684C38004F979F /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Option.swift */; };
 		D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		D6DBDEAE20684C38004F979F /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
 		D6DBDEAF20684C38004F979F /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
@@ -523,7 +523,7 @@
 		D6DBDEBC20684C38004F979F /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
 		D6DBDEBD20684C38004F979F /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
 		D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
-		D6DBDEBF20684C38004F979F /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		D6DBDEBF20684C38004F979F /* OptionT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* OptionT.swift */; };
 		D6DBDEC020684C38004F979F /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
 		D6DBDEC120684C38004F979F /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
 		D6DBDEC220684C38004F979F /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
@@ -569,7 +569,7 @@
 		OBJ_256 /* IdTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* IdTest.swift */; };
 		OBJ_257 /* IorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* IorTest.swift */; };
 		OBJ_258 /* ListKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_103 /* ListKTest.swift */; };
-		OBJ_259 /* MaybeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* MaybeTest.swift */; };
+		OBJ_259 /* OptionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_104 /* OptionTest.swift */; };
 		OBJ_260 /* NonEmptyListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* NonEmptyListTest.swift */; };
 		OBJ_261 /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		OBJ_262 /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
@@ -582,7 +582,7 @@
 		OBJ_269 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* PartialApplicationTest.swift */; };
 		OBJ_270 /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* PredefTest.swift */; };
 		OBJ_271 /* EitherTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* EitherTTest.swift */; };
-		OBJ_272 /* MaybeTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* MaybeTTest.swift */; };
+		OBJ_272 /* OptionTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* OptionTTest.swift */; };
 		OBJ_273 /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* StateTTest.swift */; };
 		OBJ_274 /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* WriterTTest.swift */; };
 		OBJ_275 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ApplicativeErrorLaws.swift */; };
@@ -620,7 +620,7 @@
 		OBJ_396 /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
 		OBJ_397 /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
 		OBJ_398 /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
-		OBJ_399 /* Maybe.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Maybe.swift */; };
+		OBJ_399 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Option.swift */; };
 		OBJ_400 /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
 		OBJ_401 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
 		OBJ_402 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
@@ -639,7 +639,7 @@
 		OBJ_415 /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
 		OBJ_416 /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
 		OBJ_417 /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
-		OBJ_418 /* MaybeT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* MaybeT.swift */; };
+		OBJ_418 /* OptionT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* OptionT.swift */; };
 		OBJ_419 /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
 		OBJ_420 /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
 		OBJ_421 /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
@@ -827,7 +827,7 @@
 		OBJ_101 /* IdTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdTest.swift; sourceTree = "<group>"; };
 		OBJ_102 /* IorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IorTest.swift; sourceTree = "<group>"; };
 		OBJ_103 /* ListKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListKTest.swift; sourceTree = "<group>"; };
-		OBJ_104 /* MaybeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTest.swift; sourceTree = "<group>"; };
+		OBJ_104 /* OptionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTest.swift; sourceTree = "<group>"; };
 		OBJ_105 /* NonEmptyListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyListTest.swift; sourceTree = "<group>"; };
 		OBJ_106 /* TryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryTest.swift; sourceTree = "<group>"; };
 		OBJ_107 /* TupleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTest.swift; sourceTree = "<group>"; };
@@ -842,7 +842,7 @@
 		OBJ_118 /* PredefTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefTest.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Function1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
 		OBJ_120 /* EitherTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherTTest.swift; sourceTree = "<group>"; };
-		OBJ_121 /* MaybeTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeTTest.swift; sourceTree = "<group>"; };
+		OBJ_121 /* OptionTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTTest.swift; sourceTree = "<group>"; };
 		OBJ_122 /* StateTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTTest.swift; sourceTree = "<group>"; };
 		OBJ_123 /* WriterTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterTTest.swift; sourceTree = "<group>"; };
 		OBJ_125 /* ApplicativeErrorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicativeErrorLaws.swift; sourceTree = "<group>"; };
@@ -876,7 +876,7 @@
 		OBJ_26 /* Ior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		OBJ_27 /* ListK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListK.swift; sourceTree = "<group>"; };
 		OBJ_28 /* MapK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapK.swift; sourceTree = "<group>"; };
-		OBJ_29 /* Maybe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maybe.swift; sourceTree = "<group>"; };
+		OBJ_29 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		OBJ_30 /* NonEmptyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonEmptyList.swift; sourceTree = "<group>"; };
 		OBJ_31 /* Reader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		OBJ_32 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -895,7 +895,7 @@
 		OBJ_48 /* PartialApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialApplication.swift; sourceTree = "<group>"; };
 		OBJ_49 /* Predef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predef.swift; sourceTree = "<group>"; };
 		OBJ_51 /* EitherT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherT.swift; sourceTree = "<group>"; };
-		OBJ_52 /* MaybeT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeT.swift; sourceTree = "<group>"; };
+		OBJ_52 /* OptionT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionT.swift; sourceTree = "<group>"; };
 		OBJ_53 /* StateT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateT.swift; sourceTree = "<group>"; };
 		OBJ_54 /* WriterT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterT.swift; sourceTree = "<group>"; };
 		OBJ_55 /* Typeclass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typeclass.swift; sourceTree = "<group>"; };
@@ -1179,7 +1179,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_120 /* EitherTTest.swift */,
-				OBJ_121 /* MaybeTTest.swift */,
+				OBJ_121 /* OptionTTest.swift */,
 				OBJ_122 /* StateTTest.swift */,
 				OBJ_123 /* WriterTTest.swift */,
 			);
@@ -1234,7 +1234,7 @@
 				OBJ_26 /* Ior.swift */,
 				OBJ_27 /* ListK.swift */,
 				OBJ_28 /* MapK.swift */,
-				OBJ_29 /* Maybe.swift */,
+				OBJ_29 /* Option.swift */,
 				OBJ_30 /* NonEmptyList.swift */,
 				OBJ_31 /* Reader.swift */,
 				D6492805209C72F000B875F9 /* SetK.swift */,
@@ -1307,7 +1307,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_51 /* EitherT.swift */,
-				OBJ_52 /* MaybeT.swift */,
+				OBJ_52 /* OptionT.swift */,
 				OBJ_53 /* StateT.swift */,
 				OBJ_54 /* WriterT.swift */,
 			);
@@ -1454,7 +1454,7 @@
 				OBJ_101 /* IdTest.swift */,
 				OBJ_102 /* IorTest.swift */,
 				OBJ_103 /* ListKTest.swift */,
-				OBJ_104 /* MaybeTest.swift */,
+				OBJ_104 /* OptionTest.swift */,
 				OBJ_105 /* NonEmptyListTest.swift */,
 				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 				OBJ_106 /* TryTest.swift */,
@@ -1714,7 +1714,7 @@
 				11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6244F2068141800739E2D /* IorTest.swift in Sources */,
 				D6D624502068141800739E2D /* ListKTest.swift in Sources */,
-				D6D624512068141800739E2D /* MaybeTest.swift in Sources */,
+				D6D624512068141800739E2D /* OptionTest.swift in Sources */,
 				D6D624522068141800739E2D /* NonEmptyListTest.swift in Sources */,
 				D6D624532068141800739E2D /* TryTest.swift in Sources */,
 				D6D624542068141800739E2D /* TupleTest.swift in Sources */,
@@ -1733,7 +1733,7 @@
 				11FE0082209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6245D2068141800739E2D /* EitherTTest.swift in Sources */,
 				115683C721625F930001749D /* ProfunctorLaws.swift in Sources */,
-				D6D6245E2068141800739E2D /* MaybeTTest.swift in Sources */,
+				D6D6245E2068141800739E2D /* OptionTTest.swift in Sources */,
 				D6D6245F2068141800739E2D /* StateTTest.swift in Sources */,
 				D6D624602068141800739E2D /* WriterTTest.swift in Sources */,
 				11FE0086209C976F00183AF6 /* LensTest.swift in Sources */,
@@ -1799,7 +1799,7 @@
 				D6D624E22068178800739E2D /* Ior.swift in Sources */,
 				D6D624E32068178800739E2D /* ListK.swift in Sources */,
 				D6D624E42068178800739E2D /* MapK.swift in Sources */,
-				D6D624E52068178800739E2D /* Maybe.swift in Sources */,
+				D6D624E52068178800739E2D /* Option.swift in Sources */,
 				D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */,
 				D6D624E72068178800739E2D /* Reader.swift in Sources */,
 				D6D624E82068178800739E2D /* State.swift in Sources */,
@@ -1829,7 +1829,7 @@
 				D6D624F72068178800739E2D /* EitherT.swift in Sources */,
 				1116205620F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AD21624C370001749D /* Profunctor.swift in Sources */,
-				D6D624F82068178800739E2D /* MaybeT.swift in Sources */,
+				D6D624F82068178800739E2D /* OptionT.swift in Sources */,
 				D6D624F92068178800739E2D /* StateT.swift in Sources */,
 				D6D624FA2068178800739E2D /* WriterT.swift in Sources */,
 				D6D624FB2068178800739E2D /* Typeclass.swift in Sources */,
@@ -1910,7 +1910,7 @@
 				11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				D6D6252E206817A700739E2D /* IorTest.swift in Sources */,
 				D6D6252F206817A700739E2D /* ListKTest.swift in Sources */,
-				D6D62530206817A700739E2D /* MaybeTest.swift in Sources */,
+				D6D62530206817A700739E2D /* OptionTest.swift in Sources */,
 				D6D62531206817A700739E2D /* NonEmptyListTest.swift in Sources */,
 				D6D62532206817A700739E2D /* TryTest.swift in Sources */,
 				D6D62533206817A700739E2D /* TupleTest.swift in Sources */,
@@ -1929,7 +1929,7 @@
 				11FE0083209C945900183AF6 /* IsoTest.swift in Sources */,
 				D6D6253C206817A700739E2D /* EitherTTest.swift in Sources */,
 				115683C821625F930001749D /* ProfunctorLaws.swift in Sources */,
-				D6D6253D206817A700739E2D /* MaybeTTest.swift in Sources */,
+				D6D6253D206817A700739E2D /* OptionTTest.swift in Sources */,
 				D6D6253E206817A700739E2D /* StateTTest.swift in Sources */,
 				D6D6253F206817A700739E2D /* WriterTTest.swift in Sources */,
 				11FE0087209C976F00183AF6 /* LensTest.swift in Sources */,
@@ -1995,7 +1995,7 @@
 				D6D62573206841B300739E2D /* Ior.swift in Sources */,
 				D6D62574206841B300739E2D /* ListK.swift in Sources */,
 				D6D62575206841B300739E2D /* MapK.swift in Sources */,
-				D6D62576206841B300739E2D /* Maybe.swift in Sources */,
+				D6D62576206841B300739E2D /* Option.swift in Sources */,
 				D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */,
 				D6D62578206841B300739E2D /* Reader.swift in Sources */,
 				D6D62579206841B300739E2D /* State.swift in Sources */,
@@ -2025,7 +2025,7 @@
 				D6D62588206841B300739E2D /* EitherT.swift in Sources */,
 				1116205A20F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AE21624C370001749D /* Profunctor.swift in Sources */,
-				D6D62589206841B300739E2D /* MaybeT.swift in Sources */,
+				D6D62589206841B300739E2D /* OptionT.swift in Sources */,
 				D6D6258A206841B300739E2D /* StateT.swift in Sources */,
 				D6D6258B206841B300739E2D /* WriterT.swift in Sources */,
 				D6D6258C206841B300739E2D /* Typeclass.swift in Sources */,
@@ -2110,7 +2110,7 @@
 				D6DBDEA920684C38004F979F /* Ior.swift in Sources */,
 				D6DBDEAA20684C38004F979F /* ListK.swift in Sources */,
 				D6DBDEAB20684C38004F979F /* MapK.swift in Sources */,
-				D6DBDEAC20684C38004F979F /* Maybe.swift in Sources */,
+				D6DBDEAC20684C38004F979F /* Option.swift in Sources */,
 				D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */,
 				D6DBDEAE20684C38004F979F /* Reader.swift in Sources */,
 				D6DBDEAF20684C38004F979F /* State.swift in Sources */,
@@ -2140,7 +2140,7 @@
 				D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */,
 				1116205E20F385D400685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AF21624C370001749D /* Profunctor.swift in Sources */,
-				D6DBDEBF20684C38004F979F /* MaybeT.swift in Sources */,
+				D6DBDEBF20684C38004F979F /* OptionT.swift in Sources */,
 				D6DBDEC020684C38004F979F /* StateT.swift in Sources */,
 				D6DBDEC120684C38004F979F /* WriterT.swift in Sources */,
 				D6DBDEC220684C38004F979F /* Typeclass.swift in Sources */,
@@ -2221,7 +2221,7 @@
 				11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */,
 				OBJ_257 /* IorTest.swift in Sources */,
 				OBJ_258 /* ListKTest.swift in Sources */,
-				OBJ_259 /* MaybeTest.swift in Sources */,
+				OBJ_259 /* OptionTest.swift in Sources */,
 				OBJ_260 /* NonEmptyListTest.swift in Sources */,
 				OBJ_261 /* TryTest.swift in Sources */,
 				OBJ_262 /* TupleTest.swift in Sources */,
@@ -2240,7 +2240,7 @@
 				11FE0081209C945900183AF6 /* IsoTest.swift in Sources */,
 				OBJ_271 /* EitherTTest.swift in Sources */,
 				115683C621625F930001749D /* ProfunctorLaws.swift in Sources */,
-				OBJ_272 /* MaybeTTest.swift in Sources */,
+				OBJ_272 /* OptionTTest.swift in Sources */,
 				OBJ_273 /* StateTTest.swift in Sources */,
 				OBJ_274 /* WriterTTest.swift in Sources */,
 				11FE0085209C976F00183AF6 /* LensTest.swift in Sources */,
@@ -2305,7 +2305,7 @@
 				OBJ_396 /* Ior.swift in Sources */,
 				OBJ_397 /* ListK.swift in Sources */,
 				OBJ_398 /* MapK.swift in Sources */,
-				OBJ_399 /* Maybe.swift in Sources */,
+				OBJ_399 /* Option.swift in Sources */,
 				OBJ_400 /* NonEmptyList.swift in Sources */,
 				OBJ_401 /* Reader.swift in Sources */,
 				OBJ_402 /* State.swift in Sources */,
@@ -2337,7 +2337,7 @@
 				OBJ_416 /* Predef.swift in Sources */,
 				115683AC21624C370001749D /* Profunctor.swift in Sources */,
 				OBJ_417 /* EitherT.swift in Sources */,
-				OBJ_418 /* MaybeT.swift in Sources */,
+				OBJ_418 /* OptionT.swift in Sources */,
 				OBJ_419 /* StateT.swift in Sources */,
 				OBJ_420 /* WriterT.swift in Sources */,
 				OBJ_421 /* Typeclass.swift in Sources */,

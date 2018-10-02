@@ -22,38 +22,38 @@ class PrismTest: XCTestCase {
     
     func testPrismAsFold() {
         property("Prism as Fold: size") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().size(sum) == sumPrism.getMaybe(sum).map(constant(1)).getOrElse(0)
+            return sumPrism.asFold().size(sum) == sumPrism.getOption(sum).map(constant(1)).getOrElse(0)
         }
         
         property("Prism as Fold: nonEmpty") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().nonEmpty(sum) == sumPrism.getMaybe(sum).isDefined
+            return sumPrism.asFold().nonEmpty(sum) == sumPrism.getOption(sum).isDefined
         }
         
         property("Prism as Fold: isEmpty") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().isEmpty(sum) == sumPrism.getMaybe(sum).isEmpty
+            return sumPrism.asFold().isEmpty(sum) == sumPrism.getOption(sum).isEmpty
         }
         
         property("Prism as Fold: getAll") <- forAll { (sum : SumType) in
             return ListK.eq(String.order).eqv(sumPrism.asFold().getAll(sum),
-                                              sumPrism.getMaybe(sum).toList().k())
+                                              sumPrism.getOption(sum).toList().k())
         }
         
         property("Prism as Fold: combineAll") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().combineAll(String.concatMonoid, sum) == sumPrism.getMaybe(sum).fold(constant(String.concatMonoid.empty), id)
+            return sumPrism.asFold().combineAll(String.concatMonoid, sum) == sumPrism.getOption(sum).fold(constant(String.concatMonoid.empty), id)
         }
         
         property("Prism as Fold: fold") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().fold(String.concatMonoid, sum) == sumPrism.getMaybe(sum).fold(constant(String.concatMonoid.empty), id)
+            return sumPrism.asFold().fold(String.concatMonoid, sum) == sumPrism.getOption(sum).fold(constant(String.concatMonoid.empty), id)
         }
         
-        property("Prism as Fold: headMaybe") <- forAll { (sum : SumType) in
-            return Maybe.eq(String.order).eqv(sumPrism.asFold().headMaybe(sum),
-                                              sumPrism.getMaybe(sum))
+        property("Prism as Fold: headOption") <- forAll { (sum : SumType) in
+            return Option.eq(String.order).eqv(sumPrism.asFold().headOption(sum),
+                                               sumPrism.getOption(sum))
         }
         
-        property("Prism as Fold: lastMaybe") <- forAll { (sum : SumType) in
-            return Maybe.eq(String.order).eqv(sumPrism.asFold().lastMaybe(sum),
-                                              sumPrism.getMaybe(sum))
+        property("Prism as Fold: lastOption") <- forAll { (sum : SumType) in
+            return Option.eq(String.order).eqv(sumPrism.asFold().lastOption(sum),
+                                               sumPrism.getOption(sum))  
         }
     }
     
@@ -61,9 +61,9 @@ class PrismTest: XCTestCase {
     
     func testPrismProperties() {
         property("Joining two prisms with the same target should yield the same result") <- forAll { (sum : SumType) in
-            let eq = Maybe.eq(String.order)
-            return eq.eqv((sumPrism + stringPrism).getMaybe(sum),
-                          sumPrism.getMaybe(sum).flatMap(stringPrism.getMaybe))
+            let eq = Option.eq(String.order)
+            return eq.eqv((sumPrism + stringPrism).getOption(sum),
+                          sumPrism.getOption(sum).flatMap(stringPrism.getOption))
         }
 
         property("Checking if a prism exists with a target") <- forAll { (a : SumType, b : SumType, bool : Bool) in
@@ -79,8 +79,8 @@ class PrismTest: XCTestCase {
         }
         
         property("Setting a target on a prism should set the correct target") <- forAll(self.sumAGen, String.arbitrary) { (sum : SumType, str : String) in
-            return Maybe.eq(SumType.eq).eqv(sumPrism.setMaybe(sum, str),
-                                            Maybe.some(SumType.a(str)))
+            return Option.eq(SumType.eq).eqv(sumPrism.setOption(sum, str),
+                                            Option.some(SumType.a(str)))
         }
         
         property("Finding a target using a predicate within a Prism should be wrapped in the correct option result") <- forAll { (sum : SumType, predicate : Bool) in
@@ -98,27 +98,27 @@ class PrismTest: XCTestCase {
     
     func testPrismComposition() {
         property("Prism + Prism::identity") <- forAll { (sum : SumType, def: String) in
-            return (sumPrism + Prism<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+            return (sumPrism + Prism<String, String>.identity()).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
         }
         
         property("Prism + Iso::identity") <- forAll { (sum : SumType, def: String) in
-            return (sumPrism + Iso<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+            return (sumPrism + Iso<String, String>.identity()).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
         }
         
         property("Prism + Lens::identity") <- forAll { (sum : SumType, def: String) in
-            return (sumPrism + Lens<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+            return (sumPrism + Lens<String, String>.identity()).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
         }
         
         property("Prism + Optional::identity") <- forAll { (sum : SumType, def: String) in
-            return (sumPrism + Bow.Optional<String, String>.identity()).getMaybe(sum).getOrElse(def) == sumPrism.getMaybe(sum).getOrElse(def)
+            return (sumPrism + Bow.Optional<String, String>.identity()).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
         }
         
         property("Prism + Fold::identity") <- forAll { (sum : SumType) in
-            return (sumPrism + Fold<String, String>.identity()).getAll(sum).asArray == sumPrism.getMaybe(sum).fold(constant([]), { a in [a] })
+            return (sumPrism + Fold<String, String>.identity()).getAll(sum).asArray == sumPrism.getOption(sum).fold(constant([]), { a in [a] })
         }
         
         property("Prism + Traversal::identity") <- forAll { (sum : SumType) in
-            return (sumPrism + Traversal<String, String>.identity()).getAll(sum).asArray == sumPrism.getMaybe(sum).fold(constant([]), { a in [a] })
+            return (sumPrism + Traversal<String, String>.identity()).getAll(sum).asArray == sumPrism.getOption(sum).fold(constant([]), { a in [a] })
         }
         
         property("Prism + Setter::identity") <- forAll { (sum : SumType, def: String) in

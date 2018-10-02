@@ -211,12 +211,12 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return !isEmpty(s)
     }
     
-    public func headMaybe(_ s : S) -> Maybe<A> {
-        return foldMap(FirstMaybeMonoid<A>(), s, { b in Const(Maybe.some(b)) }).value
+    public func headOption(_ s : S) -> Option<A> {
+        return foldMap(FirstOptionMonoid<A>(), s, { b in Const(Option.some(b)) }).value
     }
     
-    public func lastMaybe(_ s : S) -> Maybe<A> {
-        return foldMap(LastMaybeMonoid<A>(), s, { b in Const(Maybe.some(b)) }).value
+    public func lastOption(_ s : S) -> Option<A> {
+        return foldMap(LastOptionMonoid<A>(), s, { b in Const(Option.some(b)) }).value
     }
     
     public func choice<U, V>(_ other : PTraversal<U, V, A, B>) -> PTraversal<Either<S, U>, Either<T, V>, A, B> {
@@ -259,9 +259,9 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return TraversalFold(traversal: self)
     }
     
-    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
-        return foldMap(FirstMaybeMonoid(), s, { a in
-            predicate(a) ? Const(Maybe.some(a)) : Const(Maybe.none())
+    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
+        return foldMap(FirstOptionMonoid(), s, { a in
+            predicate(a) ? Const(Option.some(a)) : Const(Option.none())
         }).value
     }
     

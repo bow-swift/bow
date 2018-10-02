@@ -163,9 +163,9 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return { s in self.modify(s, f) }
     }
     
-    public func find(_ s : S, _ predicate : (A) -> Bool) -> Maybe<A> {
+    public func find(_ s : S, _ predicate : (A) -> Bool) -> Option<A> {
         let a = get(s)
-        return predicate(a) ? Maybe.some(a) : Maybe.none()
+        return predicate(a) ? Option.some(a) : Option.none()
     }
     
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {

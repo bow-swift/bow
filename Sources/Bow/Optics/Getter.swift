@@ -95,12 +95,12 @@ public class Getter<S, A> : GetterOf<S, A> {
         return GetterFold(getter: self)
     }
     
-    public func find(_ s : S, _ predicate : (A) -> Bool) -> Maybe<A> {
+    public func find(_ s : S, _ predicate : (A) -> Bool) -> Option<A> {
         let a = get(s)
         if predicate(a) {
-            return Maybe.some(a)
+            return Option.some(a)
         } else {
-            return Maybe.none()
+            return Option.none()
         }
     }
     
