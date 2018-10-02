@@ -82,18 +82,6 @@
 		111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
 		111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
 		111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111620AE20F6131E00685EC4 /* BimonadLaws.swift */; };
-		115683CB2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
-		115683CC2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
-		115683CD2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
-		115683CE2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
-		115683D021626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
-		115683D121626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
-		115683D221626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
-		115683D321626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
-		115683D521626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
-		115683D621626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
-		115683D721626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
-		115683D821626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839F2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -129,6 +117,18 @@
 		115683C621625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
 		115683C721625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
 		115683C821625F930001749D /* ProfunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683C521625F930001749D /* ProfunctorLaws.swift */; };
+		115683CB2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		115683CC2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		115683CD2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		115683CE2162689A0001749D /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		115683D021626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D121626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D221626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D321626B980001749D /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		115683D521626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D621626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D721626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		115683D821626D3B0001749D /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
 		11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
 		11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */; };
@@ -767,9 +767,6 @@
 		1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryOpticsInstances.swift; sourceTree = "<group>"; };
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
-		115683CA2162689A0001749D /* MonadDefer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadDefer.swift; sourceTree = "<group>"; };
-		115683CF21626B980001749D /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
-		115683D421626D3B0001749D /* ConcurrentEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentEffect.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -780,6 +777,9 @@
 		115683BD216255F30001749D /* CategoryLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryLaws.swift; sourceTree = "<group>"; };
 		115683C121625D550001749D /* BifunctorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BifunctorLaws.swift; sourceTree = "<group>"; };
 		115683C521625F930001749D /* ProfunctorLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfunctorLaws.swift; sourceTree = "<group>"; };
+		115683CA2162689A0001749D /* MonadDefer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadDefer.swift; sourceTree = "<group>"; };
+		115683CF21626B980001749D /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		115683D421626D3B0001749D /* ConcurrentEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentEffect.swift; sourceTree = "<group>"; };
 		11635BAD20F6464E007BB4FA /* AlternativeLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeLaws.swift; sourceTree = "<group>"; };
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
@@ -1623,6 +1623,12 @@
 			attributes = {
 				LastUpgradeCheck = 0930;
 				TargetAttributes = {
+					"Bow::Bow" = {
+						LastSwiftMigration = 1000;
+					};
+					"Bow::BowTests" = {
+						LastSwiftMigration = 1000;
+					};
 					D6DBDE9120684BEB004F979F = {
 						CreatedOnToolsVersion = 9.2;
 						DevelopmentTeam = 84PJ9JE3TM;
@@ -2786,7 +2792,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = BowTests;
 			};
 			name = Debug;
@@ -2809,7 +2815,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = BowTests;
 			};
 			name = Release;
@@ -2881,7 +2887,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = Bow;
 			};
 			name = Debug;
@@ -2905,7 +2911,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGET_NAME = Bow;
 			};
 			name = Release;
