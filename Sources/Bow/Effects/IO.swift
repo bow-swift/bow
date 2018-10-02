@@ -352,13 +352,13 @@ public class IOMonad : IOApplicative, Monad {
 }
 
 public class IOAsync : IOMonadError, Async {
-    public func delay<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
+    public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
         fatalError("Not implemented yet")
     }
     
     public typealias F = ForIO
     
-    public func suspend<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> IOOf<A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> IOOf<A> {
         return IO.runAsync(fa)
     }
 }
