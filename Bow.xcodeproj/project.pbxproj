@@ -141,6 +141,10 @@
 		11635BBA20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
 		11635BBB20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
 		11635BBC20F77FE5007BB4FA /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */; };
+		116890182163894600F3A7A6 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116890172163894600F3A7A6 /* Moore.swift */; };
+		116890192163894600F3A7A6 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116890172163894600F3A7A6 /* Moore.swift */; };
+		1168901A2163894600F3A7A6 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116890172163894600F3A7A6 /* Moore.swift */; };
+		1168901B2163894600F3A7A6 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116890172163894600F3A7A6 /* Moore.swift */; };
 		116D42C52110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C62110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C72110A66600363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
@@ -784,6 +788,7 @@
 		11635BB120F64A20007BB4FA /* MonadCombineLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadCombineLaws.swift; sourceTree = "<group>"; };
 		11635BB520F76131007BB4FA /* TraverseLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseLaws.swift; sourceTree = "<group>"; };
 		11635BB920F77FE5007BB4FA /* TraverseFilterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraverseFilterLaws.swift; sourceTree = "<group>"; };
+		116890172163894600F3A7A6 /* Moore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moore.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -1260,8 +1265,9 @@
 				OBJ_26 /* Ior.swift */,
 				OBJ_27 /* ListK.swift */,
 				OBJ_28 /* MapK.swift */,
-				OBJ_29 /* Option.swift */,
+				116890172163894600F3A7A6 /* Moore.swift */,
 				OBJ_30 /* NonEmptyList.swift */,
+				OBJ_29 /* Option.swift */,
 				OBJ_31 /* Reader.swift */,
 				D6492805209C72F000B875F9 /* SetK.swift */,
 				OBJ_32 /* State.swift */,
@@ -1859,6 +1865,7 @@
 				11AC52792097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B2209AF13600A78E8D /* Prism.swift in Sources */,
 				D6D624F62068178800739E2D /* Predef.swift in Sources */,
+				116890192163894600F3A7A6 /* Moore.swift in Sources */,
 				D6D624F72068178800739E2D /* EitherT.swift in Sources */,
 				1116205620F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AD21624C370001749D /* Profunctor.swift in Sources */,
@@ -2058,6 +2065,7 @@
 				11AC527C2097697C008EC1E4 /* Iso.swift in Sources */,
 				11E531B3209AF13600A78E8D /* Prism.swift in Sources */,
 				D6D62587206841B300739E2D /* Predef.swift in Sources */,
+				1168901A2163894600F3A7A6 /* Moore.swift in Sources */,
 				D6D62588206841B300739E2D /* EitherT.swift in Sources */,
 				1116205A20F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AE21624C370001749D /* Profunctor.swift in Sources */,
@@ -2176,6 +2184,7 @@
 				11AC527F2097697D008EC1E4 /* Iso.swift in Sources */,
 				11E531B4209AF13700A78E8D /* Prism.swift in Sources */,
 				D6DBDEBD20684C38004F979F /* Predef.swift in Sources */,
+				1168901B2163894600F3A7A6 /* Moore.swift in Sources */,
 				D6DBDEBE20684C38004F979F /* EitherT.swift in Sources */,
 				1116205E20F385D400685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				115683AF21624C370001749D /* Profunctor.swift in Sources */,
@@ -2375,6 +2384,7 @@
 				11AC527520975422008EC1E4 /* Iso.swift in Sources */,
 				11C9B6B320DBB0EC00AFD4AA /* FilterIndex.swift in Sources */,
 				11E531B1209AE89A00A78E8D /* Prism.swift in Sources */,
+				116890182163894600F3A7A6 /* Moore.swift in Sources */,
 				1116204C20F380E300685EC4 /* NonEmptyList+Optics.swift in Sources */,
 				OBJ_416 /* Predef.swift in Sources */,
 				115683AC21624C370001749D /* Profunctor.swift in Sources */,
