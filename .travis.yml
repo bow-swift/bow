@@ -11,6 +11,10 @@ matrix:
     - env: JOB="XCODE" DEST="OS=11.4,name=Apple TV" SCHEME="Bow-tvOS" SDK="appletvsimulator" ACTION="build"
     - env: JOB="XCODE" DEST="OS=4.3,name=Apple Watch - 42mm" SCHEME="Bow-watchOS" SDK="watchsimulator" ACTION="build"
 
+cache:
+  directories:
+  - Carthage
+  
 before_install:
   - carthage update
 
