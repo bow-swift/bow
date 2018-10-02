@@ -25,23 +25,23 @@ class StateTTest: XCTestCase {
     }
     
     class StateTUnitEq : Eq {
-        public typealias A = StateTOf<ForMaybe, (), Int>
+        public typealias A = StateTOf<ForOption, (), Int>
         
-        public func eqv(_ a: StateTOf<ForMaybe, (), Int>, _ b: StateTOf<ForMaybe, (), Int>) -> Bool {
-            let x = StateT.fix(a).runM((), Maybe<Any>.monad())
-            let y = StateT.fix(b).runM((), Maybe<Any>.monad())
-            return Maybe.eq(Tuple.eq(UnitEq(), Int.order)).eqv(x, y)
+        public func eqv(_ a: StateTOf<ForOption, (), Int>, _ b: StateTOf<ForOption, (), Int>) -> Bool {
+            let x = StateT.fix(a).runM((), Option<Any>.monad())
+            let y = StateT.fix(b).runM((), Option<Any>.monad())
+            return Option.eq(Tuple.eq(UnitEq(), Int.order)).eqv(x, y)
         }
     }
     
     class StateTEitherEq : Eq {
-        public typealias A = StateTOf<ForMaybe, (), EitherOf<(), Int>>
+        public typealias A = StateTOf<ForOption, (), EitherOf<(), Int>>
         
-        public func eqv(_ a: StateTOf<ForMaybe, (), EitherOf<(), Int>>,
-                        _ b: StateTOf<ForMaybe, (), EitherOf<(), Int>>) -> Bool {
-            let x = StateT.fix(a).runM((), Maybe<Any>.monad())
-            let y = StateT.fix(b).runM((), Maybe<Any>.monad())
-            return Maybe.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)
+        public func eqv(_ a: StateTOf<ForOption, (), EitherOf<(), Int>>,
+                        _ b: StateTOf<ForOption, (), EitherOf<(), Int>>) -> Bool {
+            let x = StateT.fix(a).runM((), Option<Any>.monad())
+            let y = StateT.fix(b).runM((), Option<Any>.monad())
+            return Option.eq(Tuple.eq(UnitEq(), Either.eq(UnitEq(), Int.order))).eqv(x, y)
         }
     }
     
@@ -73,16 +73,16 @@ class StateTTest: XCTestCase {
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<StateTPartial<ForMaybe, ()>, ()>.check(
-            applicativeError: StateT<ForMaybe, (), Int>.monadError(Maybe<Any>.monadError()),
+        ApplicativeErrorLaws<StateTPartial<ForOption, ()>, ()>.check(
+            applicativeError: StateT<ForOption, (), Int>.monadError(Option<Any>.monadError()),
             eq: StateTUnitEq(),
             eqEither: StateTEitherEq(),
             gen: { () })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<StateTPartial<ForMaybe, ()>, ()>.check(
-            monadError: StateT<ForMaybe, (), Int>.monadError(Maybe<Any>.monadError()),
+        MonadErrorLaws<StateTPartial<ForOption, ()>, ()>.check(
+            monadError: StateT<ForOption, (), Int>.monadError(Option<Any>.monadError()),
             eq: StateTUnitEq(),
             gen: { () })
     }

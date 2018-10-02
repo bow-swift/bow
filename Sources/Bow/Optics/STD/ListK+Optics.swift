@@ -1,18 +1,18 @@
 import Foundation
 
 public extension ListK {
-    public static func toPMaybeNel<B>() -> PIso<ListK<A>, ListK<B>, Maybe<NonEmptyList<A>>, Maybe<NonEmptyList<B>>> {
-        return PIso<ListK<A>, ListK<B>, Maybe<NonEmptyList<A>>, Maybe<NonEmptyList<B>>>(
+    public static func toPOptionNel<B>() -> PIso<ListK<A>, ListK<B>, Option<NonEmptyList<A>>, Option<NonEmptyList<B>>> {
+        return PIso<ListK<A>, ListK<B>, Option<NonEmptyList<A>>, Option<NonEmptyList<B>>>(
             get: { list in list.isEmpty ?
-                Maybe<NonEmptyList<A>>.none() :
-                Maybe<NonEmptyList<A>>.some(NonEmptyList<A>(head: list.asArray[0], tail: Array(list.asArray.dropFirst()))) },
-            reverseGet: { maybe in
-                maybe.fold(ListK<B>.empty, { nel in ListK<B>(nel.all()) })
+                Option<NonEmptyList<A>>.none() :
+                Option<NonEmptyList<A>>.some(NonEmptyList<A>(head: list.asArray[0], tail: Array(list.asArray.dropFirst()))) },
+            reverseGet: { option in
+                option.fold(ListK<B>.empty, { nel in ListK<B>(nel.all()) })
         })
     }
     
-    public static func toMaybeNel() -> Iso<ListK<A>, Maybe<NonEmptyList<A>>> {
-        return toPMaybeNel()
+    public static func toOptionNel() -> Iso<ListK<A>, Option<NonEmptyList<A>>> {
+        return toPOptionNel()
     }
 }
 

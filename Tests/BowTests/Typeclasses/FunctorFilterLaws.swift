@@ -12,8 +12,8 @@ class FunctorFilterLaws<F> {
     private static func mapFilterComposition<FuncFilt, EqF>(_ functorFilter : FuncFilt, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where FuncFilt : FunctorFilter, FuncFilt.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
         property("MapFilter composition") <- forAll { (a : Int, b : Int, c : Int) in
             let fa = generator(a)
-            let f : (Int) -> Maybe<Int> = arc4random_uniform(2) == 0 ? { _ in Maybe.pure(b) } : { _ in Maybe<Int>.none() }
-            let g : (Int) -> Maybe<Int> = arc4random_uniform(2) == 0 ? { _ in Maybe.pure(c) } : { _ in Maybe<Int>.none() }
+            let f : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(b) } : { _ in Option<Int>.none() }
+            let g : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(c) } : { _ in Option<Int>.none() }
             return eq.eqv(functorFilter.mapFilter(functorFilter.mapFilter(fa, f), g),
                           functorFilter.mapFilter(fa, f >=> g ))
         }
@@ -23,7 +23,7 @@ class FunctorFilterLaws<F> {
         property("Consistency between mapFilter and map") <- forAll { (a : Int, b : Int) in
             let fa = generator(a)
             let f : (Int) -> Int = { _ in b }
-            return eq.eqv(functorFilter.mapFilter(fa, { x in Maybe.some(f(x)) }),
+            return eq.eqv(functorFilter.mapFilter(fa, { x in Option.some(f(x)) }),
                           functorFilter.map(fa, f))
         }
     }

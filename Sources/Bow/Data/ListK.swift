@@ -91,7 +91,7 @@ public class ListK<A> : ListKOf<A> {
         }
     }
     
-    public func mapFilter<B>(_ f : (A) -> MaybeOf<B>) -> ListK<B> {
+    public func mapFilter<B>(_ f : (A) -> OptionOf<B>) -> ListK<B> {
         return flatMap { a in f(a).fix().fold(ListK<B>.empty, ListK<B>.pure) }
     }
     
@@ -99,16 +99,16 @@ public class ListK<A> : ListKOf<A> {
         return self + y
     }
     
-    public func firstOrNone() -> Maybe<A> {
-        if let first = asArray.first { return Maybe.some(first) }
-        return Maybe.none()
+    public func firstOrNone() -> Option<A> {
+        if let first = asArray.first { return Option.some(first) }
+        return Option.none()
     }
     
-    public func getOrNone(_ i : Int) -> Maybe<A> {
+    public func getOrNone(_ i : Int) -> Option<A> {
         if i >= 0 && i < list.count {
-            return Maybe<A>.some(list[i])
+            return Option<A>.some(list[i])
         } else {
-            return Maybe<A>.none()
+            return Option<A>.none()
         }
     }
 }
@@ -254,7 +254,7 @@ public class ListKMonoidK : ListKSemigroupK, MonoidK {
 }
 
 public class ListKFunctorFilter : ListKFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> ListKOf<B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }
@@ -264,7 +264,7 @@ public class ListKMonadFilter : ListKMonad, MonadFilter {
         return ListK<A>.empty()
     }
     
-    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> MaybeOf<B>) -> ListKOf<B> {
+    public func mapFilter<A, B>(_ fa: ListKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ListKOf<B> {
         return fa.fix().mapFilter(f)
     }
 }

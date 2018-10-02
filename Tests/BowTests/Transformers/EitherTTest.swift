@@ -33,17 +33,17 @@ class EitherTTest: XCTestCase {
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<EitherTPartial<ForMaybe, ()>, ()>.check(
-            applicativeError: EitherT<ForMaybe, (), Int>.monadError(Maybe<Int>.monadError()),
-            eq: EitherT<ForMaybe, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
-            eqEither: EitherT.eq(Maybe.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Maybe<Any>.functor()),
+        ApplicativeErrorLaws<EitherTPartial<ForOption, ()>, ()>.check(
+            applicativeError: EitherT<ForOption, (), Int>.monadError(Option<Int>.monadError()),
+            eq: EitherT<ForOption, (), Int>.eq(Option.eq(Either.eq(UnitEq(), Int.order)), Option<Int>.functor()),
+            eqEither: EitherT.eq(Option.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Option<Any>.functor()),
             gen: { () })
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<EitherTPartial<ForMaybe, ()>, ()>.check(
-            monadError: EitherT<ForMaybe, (), Int>.monadError(Maybe<Int>.monadError()),
-            eq: EitherT<ForMaybe, (), Int>.eq(Maybe.eq(Either.eq(UnitEq(), Int.order)), Maybe<Int>.functor()),
+        MonadErrorLaws<EitherTPartial<ForOption, ()>, ()>.check(
+            monadError: EitherT<ForOption, (), Int>.monadError(Option<Int>.monadError()),
+            eq: EitherT<ForOption, (), Int>.eq(Option.eq(Either.eq(UnitEq(), Int.order)), Option<Int>.functor()),
             gen: { () })
     }
     
@@ -61,18 +61,18 @@ class EitherTTest: XCTestCase {
         }
     }
     
-    func testMaybeTConversion() {
-        let maybeTEq = MaybeT.eq(Id.eq(Maybe.eq(Int.order)), Id<Int>.functor())
+    func testOptionTConversion() {
+        let optionTEq = OptionT.eq(Id.eq(Option.eq(Int.order)), Id<Int>.functor())
         property("Left converted to none") <- forAll { (x : Int) in
             let eitherT = EitherT<ForId, Int, Int>.left(x, Id<Int>.applicative())
-            let expected = MaybeT<ForId, Int>.none(Id<Int>.applicative())
-            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
+            let expected = OptionT<ForId, Int>.none(Id<Int>.applicative())
+            return optionTEq.eqv(eitherT.toOptionT(Id<Int>.functor()), expected)
         }
         
         property("Right converted to some") <- forAll { (x : Int) in
             let eitherT = EitherT<ForId, Int, Int>.right(x, Id<Int>.applicative())
-            let expected = MaybeT<ForId, Int>.pure(x, Id<Int>.applicative())
-            return maybeTEq.eqv(eitherT.toMaybeT(Id<Int>.functor()), expected)
+            let expected = OptionT<ForId, Int>.pure(x, Id<Int>.applicative())
+            return optionTEq.eqv(eitherT.toOptionT(Id<Int>.functor()), expected)
         }
     }
 }

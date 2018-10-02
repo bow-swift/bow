@@ -35,8 +35,8 @@ class FoldTest : XCTestCase {
         }
         
         property("Find first element matching predicate") <- forAll { (array : ArrayOf<Int>) in
-            return Maybe.eq(Int.order).eqv(self.intFold.find(array.getArray.k(), { x in x > 10 }),
-                                           Maybe.fromOption(array.getArray.filter{ x in x > 10 }.first))
+            return Option.eq(Int.order).eqv(self.intFold.find(array.getArray.k(), { x in x > 10 }),
+                                           Option.fromOption(array.getArray.filter{ x in x > 10 }.first))
         }
         
         property("Checking existence of a target") <- forAll(self.nonEmptyListGen, Bool.arbitrary) { (array : ArrayOf<Int>, predicate : Bool) in

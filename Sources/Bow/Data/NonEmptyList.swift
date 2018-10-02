@@ -24,8 +24,8 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
         return NonEmptyList(head: head, tail: tail)
     }
     
-    public static func fromArray(_ array : [A]) -> Maybe<NonEmptyList<A>> {
-        return array.isEmpty ? Maybe<NonEmptyList<A>>.none() : Maybe<NonEmptyList<A>>.some(NonEmptyList(all: array))
+    public static func fromArray(_ array : [A]) -> Option<NonEmptyList<A>> {
+        return array.isEmpty ? Option<NonEmptyList<A>>.none() : Option<NonEmptyList<A>>.some(NonEmptyList(all: array))
     }
     
     public static func fromArrayUnsafe(_ array : [A]) -> NonEmptyList<A> {
@@ -121,11 +121,11 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
         return self + y
     }
     
-    public func getOrNone(_ i : Int) -> Maybe<A> {
+    public func getOrNone(_ i : Int) -> Option<A> {
         if i >= 0 && i < count {
-            return Maybe<A>.some(all()[i])
+            return Option<A>.some(all()[i])
         } else {
-            return Maybe<A>.none()
+            return Option<A>.none()
         }
     }
 }
