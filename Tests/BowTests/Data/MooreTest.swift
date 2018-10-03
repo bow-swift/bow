@@ -15,6 +15,22 @@ class MooreTest : XCTestCase {
         }
     }
     
+    class MooreEqUnit : Eq {
+        typealias A = MooreOf<Int, ()>
+        
+        func eqv(_ a: MooreOf<Int, ()>, _ b: MooreOf<Int, ()>) -> Bool {
+            return Moore<Int, ()>.fix(a).extract() == Moore<Int, ()>.fix(b).extract()
+        }
+    }
+    
+    func testFunctorLaws() {
+        FunctorLaws.check(functor: Moore<Int, Int>.functor(), generator: handle, eq: MooreEq(), eqUnit: MooreEqUnit())
+    }
+    
+    func testComonadLaws() {
+        ComonadLaws.check(comonad: Moore<Int, Int>.comonad(), generator: handle, eq: MooreEq())
+    }
+    
     func handleRoute(_ route : String) -> Moore<String, Id<String>> {
         switch route {
         case "About": return Moore(view: Id("About"), handle: handleRoute)
