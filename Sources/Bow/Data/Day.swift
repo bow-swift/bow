@@ -2,6 +2,7 @@ import Foundation
 
 public class ForDay {}
 public typealias DayOf<F, G, A> = Kind3<ForDay, F, G, A>
+public typealias DayPartial<F, G> = Kind2<ForDay, F, G>
 
 public class Day<F, G, A> : DayOf<F, G, A> {
     public static func fix(_ value : DayOf<F, G, A>) -> Day<F, G, A> {
@@ -28,10 +29,6 @@ public class Day<F, G, A> : DayOf<F, G, A> {
     
     public func map<B>(_ f : @escaping (A) -> B) -> Day<F, G, B> {
         fatalError("map must be implemented in subclasses")
-    }
-    
-    public func ap<B, ApplF, ApplG>(_ applicativeF : ApplF, _ applicativeG : ApplG, _ f : DayOf<F, G, (A) -> B>) -> Day<F, G, B> where ApplF : Applicative, ApplF.F == F, ApplG : Applicative, ApplG.F == G {
-        fatalError("ap must be implemented in subclasses")
     }
     
     public func coflatMap<B, ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG, _ f : @escaping (DayOf<F, G, A>) -> B) -> Day<F, G, B> where ComonF : Comonad, ComonF.F == F, ComonG : Comonad, ComonG.F == G {
@@ -68,18 +65,6 @@ fileprivate class DefaultDay<F, G, X, Y, A> : Day<F, G, A> {
         }
     }
     
-    override public func ap<B, ApplF, ApplG>(_ applicativeF : ApplF, _ applicativeG : ApplG, _ f : DayOf<F, G, (A) -> B>) -> Day<F, G, B> where ApplF : Applicative, ApplF.F == F, ApplG : Applicative, ApplG.F == G {
-        return self.stepDay { left, right, get in
-            (Day<F, G, (A) -> B>.fix(f) as! DefaultDay<F, G, X, Y, (A) -> B>).stepDay { lf, rf, getf in
-                let l = applicativeF.tupled(left, lf)
-                let r = applicativeG.tupled(right, rf)
-                return DefaultDay<F, G, (X, X), (Y, Y), B>(left: l, right: r) { x, y in
-                    getf(x.1, y.1)(get(x.0, y.0))
-                }
-            }
-        }
-    }
-    
     override public func coflatMap<B, ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG, _ f : @escaping (DayOf<F, G, A>) -> B) -> Day<F, G, B> where ComonF : Comonad, ComonF.F == F, ComonG : Comonad, ComonG.F == G {
         return self.stepDay { left, right, get in
             let l = comonadF.duplicate(left)
@@ -88,5 +73,41 @@ fileprivate class DefaultDay<F, G, X, Y, A> : Day<F, G, A> {
                 f(DefaultDay(left: x, right: y, f: get))
             }
         }
+    }
+}
+
+public extension Day {
+    public static func functor() -> DayFunctor<F, G> {
+        return DayFunctor()
+    }
+    
+    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> DayComonad<F, G, ComonF, ComonG> {
+        return DayComonad(comonadF, comonadG)
+    }
+}
+
+public class DayFunctor<G, H> : Functor {
+    public typealias F = DayPartial<G, H>
+
+    public func map<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (A) -> B) -> DayOf<G, H, B> {
+        return Day<G, H, A>.fix(fa).map(f)
+    }
+}
+
+public class DayComonad<G, H, ComonG, ComonH> : DayFunctor<G, H>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
+    private let comonadG : ComonG
+    private let comonadH : ComonH
+    
+    public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+        self.comonadG = comonadG
+        self.comonadH = comonadH
+    }
+    
+    public func coflatMap<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (DayOf<G, H, A>) -> B) -> DayOf<G, H, B> {
+        return Day<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
+    }
+    
+    public func extract<A>(_ fa: DayOf<G, H, A>) -> A {
+        return Day<G, H, A>.fix(fa).extract(comonadG, comonadH)
     }
 }

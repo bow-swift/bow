@@ -14,6 +14,23 @@ class DayTest : XCTestCase {
         }
     }
     
+    class DayEqUnit : Eq {
+        typealias A = DayOf<ForId, ForId, ()>
+        
+        func eqv(_ a: DayOf<ForId, ForId, ()>, _ b: DayOf<ForId, ForId, ()>) -> Bool {
+            return Day<ForId, ForId, ()>.fix(a).extract(Id<Int>.comonad(), Id<()>.comonad()) ==
+                Day<ForId, ForId, ()>.fix(b).extract(Id<Int>.comonad(), Id<()>.comonad())
+        }
+    }
+    
+    func testFunctorLaws() {
+        FunctorLaws.check(functor: Day<ForId, ForId, Int>.functor(), generator: cf, eq: DayEq(), eqUnit: DayEqUnit())
+    }
+    
+    func testComonadLaws() {
+        ComonadLaws.check(comonad: Day<ForId, ForId, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: cf, eq: DayEq())
+    }
+    
     let day = Day.from(left: Id(1), right: Id(1), f: { (left : Int, right : Int) in (left, right) })
     let compareSides = { (left : Int, right : Int) -> String in
         if left > right {
