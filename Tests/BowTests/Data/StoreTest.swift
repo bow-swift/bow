@@ -13,6 +13,22 @@ class StoreTest : XCTestCase {
         }
     }
     
+    class StoreEqUnit : Eq {
+        typealias A = StoreOf<Int, ()>
+        
+        func eqv(_ a: StoreOf<Int, ()>, _ b: StoreOf<Int, ()>) -> Bool {
+            return Store<Int, ()>.fix(a).extract() == Store<Int, ()>.fix(b).extract()
+        }
+    }
+    
+    func testFunctorLaws() {
+        FunctorLaws.check(functor: Store<Int, Int>.functor(), generator: intStore, eq: StoreEq(), eqUnit: StoreEqUnit())
+    }
+    
+    func testComonadLaws() {
+        ComonadLaws.check(comonad: Store<Int, Int>.comonad(), generator: intStore, eq: StoreEq())
+    }
+    
     let greetingStore = { (name : String) in Store(state: name, render: { name in "Hi \(name)!"}) }
     
     func testExtractRendersCurrentState() {
