@@ -15,6 +15,23 @@ class SumTest : XCTestCase {
         }
     }
     
+    class SumEqUnit : Eq {
+        typealias A = SumOf<ForId, ForId, ()>
+        
+        func eqv(_ a: SumOf<ForId, ForId, ()>, _ b: SumOf<ForId, ForId, ()>) -> Bool {
+            return Sum<ForId, ForId, ()>.fix(a).extract(Id<()>.comonad(), Id<()>.comonad()) ==
+                Sum<ForId, ForId, ()>.fix(b).extract(Id<()>.comonad(), Id<()>.comonad())
+        }
+    }
+    
+    func testFunctorLaws() {
+        FunctorLaws.check(functor: Sum<ForId, ForId, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: cf, eq: SumEq(), eqUnit: SumEqUnit())
+    }
+    
+    func testComonadLaws() {
+        ComonadLaws.check(comonad: Sum<ForId, ForId, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: cf, eq: SumEq())
+    }
+    
     let abSum = Sum.left(Id("A"), Id("B"))
     
     func testSumExtractReturnsViewOfCurrentSide() {
