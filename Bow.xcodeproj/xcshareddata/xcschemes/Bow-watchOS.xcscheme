@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6D62562206841B300739E2D"
-               BuildableName = "Bow.framework"
+               BlueprintIdentifier = "11D6DCDC21662D4E0068D575"
+               BuildableName = "Bow_watchOS.framework"
                BlueprintName = "Bow-watchOS"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D6D62562206841B300739E2D"
-            BuildableName = "Bow.framework"
+            BlueprintIdentifier = "11D6DCDC21662D4E0068D575"
+            BuildableName = "Bow_watchOS.framework"
             BlueprintName = "Bow-watchOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D6D62562206841B300739E2D"
-            BuildableName = "Bow.framework"
+            BlueprintIdentifier = "11D6DCDC21662D4E0068D575"
+            BuildableName = "Bow_watchOS.framework"
             BlueprintName = "Bow-watchOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
