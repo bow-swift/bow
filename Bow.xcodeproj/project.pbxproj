@@ -157,6 +157,9 @@
 		11689028216392EF00F3A7A6 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11689026216392EF00F3A7A6 /* Day.swift */; };
 		11689029216392EF00F3A7A6 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11689026216392EF00F3A7A6 /* Day.swift */; };
 		1168902A216392EF00F3A7A6 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11689026216392EF00F3A7A6 /* Day.swift */; };
+		1168902C2164AAFB00F3A7A6 /* DayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902B2164AAFB00F3A7A6 /* DayTest.swift */; };
+		1168902D2164AAFB00F3A7A6 /* DayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902B2164AAFB00F3A7A6 /* DayTest.swift */; };
+		1168902E2164AAFB00F3A7A6 /* DayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1168902B2164AAFB00F3A7A6 /* DayTest.swift */; };
 		116D42C52110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C62110A66500363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
 		116D42C72110A66600363A86 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
@@ -804,6 +807,7 @@
 		1168901C21638B3D00F3A7A6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		1168902121638D8800F3A7A6 /* Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sum.swift; sourceTree = "<group>"; };
 		11689026216392EF00F3A7A6 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		1168902B2164AAFB00F3A7A6 /* DayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTest.swift; sourceTree = "<group>"; };
 		11AC527220974D58008EC1E4 /* Getter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getter.swift; sourceTree = "<group>"; };
 		11AC527420975422008EC1E4 /* Iso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso.swift; sourceTree = "<group>"; };
 		11AC527620975EE5008EC1E4 /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
@@ -1499,13 +1503,14 @@
 			children = (
 				OBJ_97 /* ConstTest.swift */,
 				OBJ_98 /* CoproductTest.swift */,
+				1168902B2164AAFB00F3A7A6 /* DayTest.swift */,
 				OBJ_99 /* EitherTest.swift */,
 				OBJ_100 /* EvalTest.swift */,
 				OBJ_101 /* IdTest.swift */,
 				OBJ_102 /* IorTest.swift */,
 				OBJ_103 /* ListKTest.swift */,
-				OBJ_104 /* OptionTest.swift */,
 				OBJ_105 /* NonEmptyListTest.swift */,
+				OBJ_104 /* OptionTest.swift */,
 				D68DC58B2106653D00D7D845 /* SetKTest.swift */,
 				OBJ_106 /* TryTest.swift */,
 				OBJ_107 /* TupleTest.swift */,
@@ -1758,6 +1763,7 @@
 				D6D624482068141800739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D624492068141800739E2D /* CurryTest.swift in Sources */,
 				111620B420F6137B00685EC4 /* BimonadLaws.swift in Sources */,
+				1168902D2164AAFB00F3A7A6 /* DayTest.swift in Sources */,
 				D6D6244A2068141800739E2D /* ConstTest.swift in Sources */,
 				11F53070210086FD00D92335 /* FoldTest.swift in Sources */,
 				115683BB216253E00001749D /* ContravariantLaws.swift in Sources */,
@@ -1961,6 +1967,7 @@
 				D6D62527206817A700739E2D /* BooleanFunctionsTest.swift in Sources */,
 				D6D62528206817A700739E2D /* CurryTest.swift in Sources */,
 				111620B520F6137C00685EC4 /* BimonadLaws.swift in Sources */,
+				1168902E2164AAFB00F3A7A6 /* DayTest.swift in Sources */,
 				D6D62529206817A700739E2D /* ConstTest.swift in Sources */,
 				11F53071210086FE00D92335 /* FoldTest.swift in Sources */,
 				115683BC216253E00001749D /* ContravariantLaws.swift in Sources */,
@@ -2286,6 +2293,7 @@
 				OBJ_250 /* BooleanFunctionsTest.swift in Sources */,
 				OBJ_251 /* CurryTest.swift in Sources */,
 				111620B320F6137B00685EC4 /* BimonadLaws.swift in Sources */,
+				1168902C2164AAFB00F3A7A6 /* DayTest.swift in Sources */,
 				OBJ_252 /* ConstTest.swift in Sources */,
 				11F5306F210086FD00D92335 /* FoldTest.swift in Sources */,
 				115683BA216253E00001749D /* ContravariantLaws.swift in Sources */,
