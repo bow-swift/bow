@@ -159,8 +159,8 @@ public extension ObservableK {
         return ObservableKTraverse()
     }
     
-    public static func applicativeError() -> ObservableKApplicativeError {
-        return ObservableKApplicativeError()
+    public static func applicativeError<E>() -> ObservableKApplicativeError<E> {
+        return ObservableKApplicativeError<E>()
     }
     
     public static func monadError() -> ObservableKMonadError {
@@ -230,15 +230,15 @@ public class ObservableKTraverse : ObservableKFoldable, Traverse {
     }
 }
 
-public class ObservableKApplicativeError : ObservableKApplicative, ApplicativeError {
-    public typealias E = Error
+public class ObservableKApplicativeError<Err> : ObservableKApplicative, ApplicativeError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> ObservableKOf<A> {
+    public func raiseError<A>(_ e: Err) -> ObservableKOf<A> {
         return ObservableK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Error) -> ObservableKOf<A>) -> ObservableKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e).fix() }
+    public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Err) -> ObservableKOf<A>) -> ObservableKOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 

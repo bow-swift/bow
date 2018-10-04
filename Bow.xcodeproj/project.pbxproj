@@ -71,6 +71,9 @@
 		1145F227216648E600D4AE81 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F226216648E600D4AE81 /* MaybeKTest.swift */; };
 		1145F228216648E600D4AE81 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F226216648E600D4AE81 /* MaybeKTest.swift */; };
 		1145F229216648E600D4AE81 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F226216648E600D4AE81 /* MaybeKTest.swift */; };
+		1145F22B21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
+		1145F22C21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
+		1145F22D21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -740,6 +743,7 @@
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		1145F2222166337A00D4AE81 /* SingleKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKTest.swift; sourceTree = "<group>"; };
 		1145F226216648E600D4AE81 /* MaybeKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeKTest.swift; sourceTree = "<group>"; };
+		1145F22A21664E2400D4AE81 /* ObservableKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableKTest.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -1084,8 +1088,9 @@
 		1145F2202166332F00D4AE81 /* Rx */ = {
 			isa = PBXGroup;
 			children = (
-				1145F2222166337A00D4AE81 /* SingleKTest.swift */,
 				1145F226216648E600D4AE81 /* MaybeKTest.swift */,
+				1145F22A21664E2400D4AE81 /* ObservableKTest.swift */,
+				1145F2222166337A00D4AE81 /* SingleKTest.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -1988,6 +1993,7 @@
 				D6D624612068141800739E2D /* ApplicativeErrorLaws.swift in Sources */,
 				111620AC20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				D6D624622068141800739E2D /* ApplicativeLaws.swift in Sources */,
+				1145F22C21664E2400D4AE81 /* ObservableKTest.swift in Sources */,
 				11635BAF20F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				1145F2242166337A00D4AE81 /* SingleKTest.swift in Sources */,
 				D6D624632068141800739E2D /* ComonadLaws.swift in Sources */,
@@ -2192,6 +2198,7 @@
 				D6D62540206817A700739E2D /* ApplicativeErrorLaws.swift in Sources */,
 				111620AD20F6070300685EC4 /* FoldableLaws.swift in Sources */,
 				D6D62541206817A700739E2D /* ApplicativeLaws.swift in Sources */,
+				1145F22D21664E2400D4AE81 /* ObservableKTest.swift in Sources */,
 				11635BB020F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				1145F2252166337A00D4AE81 /* SingleKTest.swift in Sources */,
 				D6D62542206817A700739E2D /* ComonadLaws.swift in Sources */,
@@ -2396,6 +2403,7 @@
 				OBJ_275 /* ApplicativeErrorLaws.swift in Sources */,
 				111620AB20F6070200685EC4 /* FoldableLaws.swift in Sources */,
 				OBJ_276 /* ApplicativeLaws.swift in Sources */,
+				1145F22B21664E2400D4AE81 /* ObservableKTest.swift in Sources */,
 				11635BAE20F6464E007BB4FA /* AlternativeLaws.swift in Sources */,
 				1145F2232166337A00D4AE81 /* SingleKTest.swift in Sources */,
 				OBJ_277 /* ComonadLaws.swift in Sources */,
