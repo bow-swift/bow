@@ -132,8 +132,8 @@ public extension MaybeK {
         return MaybeKFoldable()
     }
     
-    public static func applicativeError() -> MaybeKApplicativeError {
-        return MaybeKApplicativeError()
+    public static func applicativeError<E>() -> MaybeKApplicativeError<E> {
+        return MaybeKApplicativeError<E>()
     }
     
     public static func monadError() -> MaybeKMonadError {
@@ -193,15 +193,15 @@ public class MaybeKFoldable : Foldable {
     }
 }
 
-public class MaybeKApplicativeError : MaybeKApplicative, ApplicativeError {
-    public typealias E = Error
+public class MaybeKApplicativeError<Err> : MaybeKApplicative, ApplicativeError where Err : Error {
+    public typealias E = Err
 
-    public func raiseError<A>(_ e: Error) -> MaybeKOf<A> {
+    public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
         return MaybeK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Error) -> MaybeKOf<A>) -> MaybeKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e).fix() }
+    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 
