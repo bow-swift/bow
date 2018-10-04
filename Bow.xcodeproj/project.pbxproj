@@ -272,7 +272,7 @@
 		D6D624532068141800739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		D6D624542068141800739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
 		D6D624552068141800739E2D /* ValidatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ValidatedTest.swift */; };
-		D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncContextLaws.swift */; };
+		D6D624562068141800739E2D /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncLaws.swift */; };
 		D6D624572068141800739E2D /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* IOTest.swift */; };
 		D6D624582068141800739E2D /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FreeTest.swift */; };
 		D6D624592068141800739E2D /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* NumberInstancesTest.swift */; };
@@ -391,7 +391,7 @@
 		D6D62532206817A700739E2D /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		D6D62533206817A700739E2D /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
 		D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ValidatedTest.swift */; };
-		D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncContextLaws.swift */; };
+		D6D62535206817A700739E2D /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncLaws.swift */; };
 		D6D62536206817A700739E2D /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* IOTest.swift */; };
 		D6D62537206817A700739E2D /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FreeTest.swift */; };
 		D6D62538206817A700739E2D /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* NumberInstancesTest.swift */; };
@@ -508,7 +508,7 @@
 		OBJ_261 /* TryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* TryTest.swift */; };
 		OBJ_262 /* TupleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* TupleTest.swift */; };
 		OBJ_263 /* ValidatedTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* ValidatedTest.swift */; };
-		OBJ_264 /* AsyncContextLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncContextLaws.swift */; };
+		OBJ_264 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_110 /* AsyncLaws.swift */; };
 		OBJ_265 /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_111 /* IOTest.swift */; };
 		OBJ_266 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_113 /* FreeTest.swift */; };
 		OBJ_267 /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* NumberInstancesTest.swift */; };
@@ -849,7 +849,7 @@
 		OBJ_107 /* TupleTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTest.swift; sourceTree = "<group>"; };
 		OBJ_108 /* ValidatedTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedTest.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Function0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
-		OBJ_110 /* AsyncContextLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContextLaws.swift; sourceTree = "<group>"; };
+		OBJ_110 /* AsyncLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLaws.swift; sourceTree = "<group>"; };
 		OBJ_111 /* IOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOTest.swift; sourceTree = "<group>"; };
 		OBJ_113 /* FreeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeTest.swift; sourceTree = "<group>"; };
 		OBJ_115 /* NumberInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInstancesTest.swift; sourceTree = "<group>"; };
@@ -1058,6 +1058,21 @@
 			path = Instances;
 			sourceTree = "<group>";
 		};
+		1145F21F21662F5D00D4AE81 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				115E3C53216625B000709EC3 /* RxCocoa.framework */,
+				115E3C54216625B100709EC3 /* RxSwift.framework */,
+				115E3C55216625B100709EC3 /* RxBlocking.framework */,
+				11D6DCE821662EC00068D575 /* RxSwift.framework */,
+				11D6DCE921662EC00068D575 /* RxCocoa.framework */,
+				115E3C5F216626EA00709EC3 /* RxCocoa.framework */,
+				115E3C60216626EA00709EC3 /* RxSwift.framework */,
+				115E3C61216626EA00709EC3 /* RxBlocking.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		115683C9216268810001749D /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,7 +1231,7 @@
 		OBJ_109 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_110 /* AsyncContextLaws.swift */,
+				OBJ_110 /* AsyncLaws.swift */,
 				OBJ_111 /* IOTest.swift */,
 			);
 			path = Effects;
@@ -1361,16 +1376,8 @@
 			isa = PBXGroup;
 			children = (
 				115E3C79216629AE00709EC3 /* RxBlocking.framework */,
-				115E3C5B2166266600709EC3 /* RxBlocking.framework */,
-				115E3C6C216627F300709EC3 /* RxBlocking.framework */,
 				115E3C7F21662B4E00709EC3 /* RxCocoa.framework */,
-				115E3C592166266600709EC3 /* RxCocoa.framework */,
-				115E3C6A216627F300709EC3 /* RxCocoa.framework */,
-				115E3C77216629AD00709EC3 /* RxCocoa.framework */,
 				115E3C8021662B4F00709EC3 /* RxSwift.framework */,
-				115E3C6B216627F300709EC3 /* RxSwift.framework */,
-				115E3C78216629AD00709EC3 /* RxSwift.framework */,
-				115E3C5A2166266600709EC3 /* RxSwift.framework */,
 				OBJ_6 /* Package.swift */,
 				11D6DCDE21662D4E0068D575 /* Bow-watchOS */,
 				D68A51F9206811C6008DA945 /* Build */,
@@ -1386,6 +1393,7 @@
 				115E3C77216629AD00709EC3 /* RxCocoa.framework */,
 				115E3C78216629AD00709EC3 /* RxSwift.framework */,
 				115E3C5A2166266600709EC3 /* RxSwift.framework */,
+				1145F21F21662F5D00D4AE81 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1933,7 +1941,7 @@
 				D6D624542068141800739E2D /* TupleTest.swift in Sources */,
 				11FE006B209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D624552068141800739E2D /* ValidatedTest.swift in Sources */,
-				D6D624562068141800739E2D /* AsyncContextLaws.swift in Sources */,
+				D6D624562068141800739E2D /* AsyncLaws.swift in Sources */,
 				D68DC58E210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D624572068141800739E2D /* IOTest.swift in Sources */,
 				D6D624582068141800739E2D /* FreeTest.swift in Sources */,
@@ -2135,7 +2143,7 @@
 				D6D62533206817A700739E2D /* TupleTest.swift in Sources */,
 				11FE006C209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				D6D62534206817A700739E2D /* ValidatedTest.swift in Sources */,
-				D6D62535206817A700739E2D /* AsyncContextLaws.swift in Sources */,
+				D6D62535206817A700739E2D /* AsyncLaws.swift in Sources */,
 				D68DC58F210665DB00D7D845 /* SetKTest.swift in Sources */,
 				D6D62536206817A700739E2D /* IOTest.swift in Sources */,
 				D6D62537206817A700739E2D /* FreeTest.swift in Sources */,
@@ -2337,7 +2345,7 @@
 				OBJ_262 /* TupleTest.swift in Sources */,
 				11FE006A209C5E3A00183AF6 /* LensLaws.swift in Sources */,
 				OBJ_263 /* ValidatedTest.swift in Sources */,
-				OBJ_264 /* AsyncContextLaws.swift in Sources */,
+				OBJ_264 /* AsyncLaws.swift in Sources */,
 				D68DC58D210665DB00D7D845 /* SetKTest.swift in Sources */,
 				OBJ_265 /* IOTest.swift in Sources */,
 				OBJ_266 /* FreeTest.swift in Sources */,
