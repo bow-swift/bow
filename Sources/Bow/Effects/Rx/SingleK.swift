@@ -124,8 +124,8 @@ public extension SingleK {
         return SingleKMonad()
     }
     
-    public static func applicativeError() -> SingleKApplicativeError {
-        return SingleKApplicativeError()
+    public static func applicativeError<E>() -> SingleKApplicativeError<E> {
+        return SingleKApplicativeError<E>()
     }
     
     public static func monadError() -> SingleKMonadError {
@@ -177,15 +177,16 @@ public class SingleKMonad : SingleKApplicative, Monad {
     }
 }
 
-public class SingleKApplicativeError : SingleKApplicative, ApplicativeError {
-    public typealias E = Error
+public class SingleKApplicativeError<Err> : SingleKApplicative, ApplicativeError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> SingleKOf<A> {
+    public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
         return SingleK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Error) -> SingleKOf<A>) -> SingleKOf<A> {
-        return fa.fix().handleErrorWith{ e in f(e).fix() }    }
+    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
+        return fa.fix().handleErrorWith{ e in f(e as! Err).fix() }
+    }
 }
 
 public class SingleKMonadError : SingleKMonad, MonadError {
