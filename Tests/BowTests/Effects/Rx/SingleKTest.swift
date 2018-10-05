@@ -59,7 +59,6 @@ class SingleKTest : XCTestCase {
     }
     
     func testAsyncLaws() {
-        AsyncLaws.check(async: SingleK<Int>.async(), monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
         AsyncLaws.check(async: SingleK<Int>.effect(), monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
     }
 }

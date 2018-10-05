@@ -61,7 +61,6 @@ class MaybeKTest : XCTestCase {
     }
     
     func testAsyncLaws() {
-        AsyncLaws.check(async: MaybeK<Int>.async(), monadError: MaybeK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
         AsyncLaws.check(async: MaybeK<Int>.effect(), monadError: MaybeK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
     }
 }

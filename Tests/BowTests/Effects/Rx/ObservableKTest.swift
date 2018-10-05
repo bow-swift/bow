@@ -64,7 +64,6 @@ class ObservableKTest : XCTestCase {
     }
     
     func testAsyncLaws() {
-        AsyncLaws.check(async: ObservableK<Int>.async(), monadError: ObservableK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
         AsyncLaws.check(async: ObservableK<Int>.effect(), monadError: ObservableK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
     }
 }
