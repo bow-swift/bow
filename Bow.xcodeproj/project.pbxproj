@@ -86,6 +86,10 @@
 		1145F2402167506800D4AE81 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F23E2167506800D4AE81 /* Generic.swift */; };
 		1145F2412167506800D4AE81 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F23E2167506800D4AE81 /* Generic.swift */; };
 		1145F2422167506800D4AE81 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F23E2167506800D4AE81 /* Generic.swift */; };
+		1145F244216750D900D4AE81 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F243216750D900D4AE81 /* HList.swift */; };
+		1145F245216750D900D4AE81 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F243216750D900D4AE81 /* HList.swift */; };
+		1145F246216750D900D4AE81 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F243216750D900D4AE81 /* HList.swift */; };
+		1145F247216750D900D4AE81 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F243216750D900D4AE81 /* HList.swift */; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839F2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -772,6 +776,7 @@
 		111620A620F606F300685EC4 /* FoldableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableLaws.swift; sourceTree = "<group>"; };
 		111620AE20F6131E00685EC4 /* BimonadLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BimonadLaws.swift; sourceTree = "<group>"; };
 		1145F23E2167506800D4AE81 /* Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
+		1145F243216750D900D4AE81 /* HList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HList.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -1059,6 +1064,7 @@
 			isa = PBXGroup;
 			children = (
 				1145F23E2167506800D4AE81 /* Generic.swift */,
+				1145F243216750D900D4AE81 /* HList.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";
@@ -1856,6 +1862,7 @@
 				111082CD2085DBF700C8563C /* Show.swift in Sources */,
 				1145F2402167506800D4AE81 /* Generic.swift in Sources */,
 				D6D624EC2068178800739E2D /* Async.swift in Sources */,
+				1145F245216750D900D4AE81 /* HList.swift in Sources */,
 				D6D624ED2068178800739E2D /* IO.swift in Sources */,
 				1116209E20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D624EE2068178800739E2D /* Cofree.swift in Sources */,
@@ -2056,6 +2063,7 @@
 				111082CE2085DBF800C8563C /* Show.swift in Sources */,
 				1145F2412167506800D4AE81 /* Generic.swift in Sources */,
 				D6D6257D206841B300739E2D /* Async.swift in Sources */,
+				1145F246216750D900D4AE81 /* HList.swift in Sources */,
 				D6D6257E206841B300739E2D /* IO.swift in Sources */,
 				1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
@@ -2175,6 +2183,7 @@
 				111082CF2085DBF800C8563C /* Show.swift in Sources */,
 				1145F2422167506800D4AE81 /* Generic.swift in Sources */,
 				D6DBDEB320684C38004F979F /* Async.swift in Sources */,
+				1145F247216750D900D4AE81 /* HList.swift in Sources */,
 				D6DBDEB420684C38004F979F /* IO.swift in Sources */,
 				111620A020F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
 				D6DBDEB520684C38004F979F /* Cofree.swift in Sources */,
@@ -2375,6 +2384,7 @@
 				111082CC2085D9DD00C8563C /* Show.swift in Sources */,
 				1145F23F2167506800D4AE81 /* Generic.swift in Sources */,
 				OBJ_406 /* Async.swift in Sources */,
+				1145F244216750D900D4AE81 /* HList.swift in Sources */,
 				OBJ_407 /* IO.swift in Sources */,
 				OBJ_408 /* Cofree.swift in Sources */,
 				OBJ_409 /* Coyoneda.swift in Sources */,
