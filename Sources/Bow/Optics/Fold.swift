@@ -74,12 +74,12 @@ open class Fold<S, A> : FoldOf<S, A> {
         return !isEmpty(s)
     }
     
-    public func headMaybe(_ s : S) -> Maybe<A> {
-        return foldMap(FirstMaybeMonoid<A>(), s, { a in Const<Maybe<A>, First>(Maybe.some(a)) }).value
+    public func headOption(_ s : S) -> Option<A> {
+        return foldMap(FirstOptionMonoid<A>(), s, { a in Const<Option<A>, First>(Option.some(a)) }).value
     }
     
-    public func lastMaybe(_ s : S) -> Maybe<A> {
-        return foldMap(LastMaybeMonoid<A>(), s, { a in Const<Maybe<A>, Last>(Maybe.some(a)) }).value
+    public func lastOption(_ s : S) -> Option<A> {
+        return foldMap(LastOptionMonoid<A>(), s, { a in Const<Option<A>, Last>(Option.some(a)) }).value
     }
     
     public func fold<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
@@ -134,8 +134,8 @@ open class Fold<S, A> : FoldOf<S, A> {
         return ComposeFold(first: self, second: other.asFold())
     }
     
-    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
-        return foldMap(FirstMaybeMonoid<A>(), s, { a in predicate(a) ? Const<Maybe<A>, First>(Maybe.some(a)) : Const(Maybe.none()) }).value
+    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
+        return foldMap(FirstOptionMonoid<A>(), s, { a in predicate(a) ? Const<Option<A>, First>(Option.some(a)) : Const(Option.none()) }).value
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {

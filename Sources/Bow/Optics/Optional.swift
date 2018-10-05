@@ -79,12 +79,12 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return { s in self.modifyF(applicative, s, f) }
     }
     
-    public func getMaybe(_ s : S) -> Maybe<A> {
-        return getOrModify(s).toMaybe()
+    public func getOption(_ s : S) -> Option<A> {
+        return getOrModify(s).toOption()
     }
     
-    public func setMaybe(_ s : S, _ b : B) -> Maybe<T> {
-        return modifyMaybe(s, constant(b))
+    public func setOption(_ s : S, _ b : B) -> Option<T> {
+        return modifyOption(s, constant(b))
     }
     
     public func isEmpty(_ s : S) -> Bool {
@@ -92,7 +92,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func nonEmpty(_ s : S) -> Bool {
-        return getMaybe(s).fold(constant(false), constant(true))
+        return getOption(s).fold(constant(false), constant(true))
     }
     
     public func choice<S1, T1>(_ other : POptional<S1, T1, A, B>) -> POptional<Either<S, S1>, Either<T, T1>, A, B> {
@@ -106,13 +106,13 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     
     public func first<C>() -> POptional<(S, C), (T, C), (A, C), (B, C)> {
         return POptional<(S, C), (T, C), (A, C), (B, C)>(
-            set: { sc, bc in self.setMaybe(sc.0, bc.0).fold({ (self.set(sc.0, bc.0), bc.1) }, { t in (t, sc.1) }) },
+            set: { sc, bc in self.setOption(sc.0, bc.0).fold({ (self.set(sc.0, bc.0), bc.1) }, { t in (t, sc.1) }) },
             getOrModify: { s, c in self.getOrModify(s).bimap({ t in (t, c) }, { a in (a, c) }) })
     }
     
     public func second<C>() -> POptional<(C, S), (C, T), (C, A), (C, B)> {
         return POptional<(C, S), (C, T), (C, A), (C, B)>(
-            set: { cs, cb in self.setMaybe(cs.1, cb.1).fold({ (cs.0, self.set(cs.1, cb.1)) }, { t in (cb.0, t)}) },
+            set: { cs, cb in self.setOption(cs.1, cb.1).fold({ (cs.0, self.set(cs.1, cb.1)) }, { t in (cb.0, t)}) },
             getOrModify: { c, s in self.getOrModify(s).bimap({ t in (c, t) }, { a in (c, a) })
         })
     }
@@ -125,20 +125,20 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return { s in self.modify(s, f) }
     }
     
-    public func modifyMaybe(_ s : S, _ f : @escaping (A) -> B) -> Maybe<T> {
-        return getMaybe(s).map { a in self.set(s, f(a)) }
+    public func modifyOption(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
+        return getOption(s).map { a in self.set(s, f(a)) }
     }
     
-    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Maybe<A> {
-        return getMaybe(s).flatMap { a in predicate(a) ? Maybe.some(a) : Maybe.none() }
+    public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
+        return getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constant(false), predicate)
+        return getOption(s).fold(constant(false), predicate)
     }
     
     public func all(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return getMaybe(s).fold(constant(true), predicate)
+        return getOption(s).fold(constant(true), predicate)
     }
     
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
@@ -200,7 +200,7 @@ fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
     }
     
     override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return optional.getMaybe(s).map(f).getOrElse(monoid.empty)
+        return optional.getOption(s).map(f).getOrElse(monoid.empty)
     }
 }
 

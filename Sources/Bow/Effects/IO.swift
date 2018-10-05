@@ -33,7 +33,7 @@ public class IO<A> : IOOf<A> {
     }
     
     public static func runAsync(_ proc : @escaping Proc<A>) -> IO<A> {
-        return Async(proc)
+        return AsyncIO(proc)
     }
     
     public static func merge<B>(_ fa : @escaping () throws -> A,
@@ -247,7 +247,7 @@ fileprivate class Join<A> : IO<A> {
     }
 }
 
-fileprivate class Async<A> : IO<A> {
+fileprivate class AsyncIO<A> : IO<A> {
     let f : Proc<A>
     
     init(_ f : @escaping Proc<A>) {
@@ -302,8 +302,8 @@ public extension IO {
         return IOMonad()
     }
     
-    public static func asyncContext() -> IOAsyncContext {
-        return IOAsyncContext()
+    public static func asyncContext() -> IOAsync {
+        return IOAsync()
     }
     
     public static func monadError() -> IOMonadError {
@@ -351,7 +351,11 @@ public class IOMonad : IOApplicative, Monad {
     }
 }
 
-public class IOAsyncContext : AsyncContext {
+public class IOAsync : IOMonadError, Async {
+    public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
+        fatalError("Not implemented yet")
+    }
+    
     public typealias F = ForIO
     
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> IOOf<A> {

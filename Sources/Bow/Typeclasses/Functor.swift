@@ -1,12 +1,14 @@
 import Foundation
 
-public protocol Functor : Typeclass {
-    associatedtype F
-    
+public protocol Functor : Invariant {
     func map<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B) -> Kind<F, B>
 }
 
 public extension Functor {
+    public func imap<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<F, B> {
+        return self.map(fa, f)
+    }
+    
     public func lift<A, B>(_ f : @escaping (A) -> B) -> (Kind<F, A>) -> Kind<F, B> {
         return { fa in self.map(fa, f) }
     }

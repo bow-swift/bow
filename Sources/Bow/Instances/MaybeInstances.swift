@@ -3,26 +3,26 @@ import Foundation
 public class First {}
 public class Last {}
 
-public class FirstMaybeMonoid<B> : Monoid {
-    public typealias A = Const<Maybe<B>, First>
+public class FirstOptionMonoid<B> : Monoid {
+    public typealias A = Const<Option<B>, First>
     
-    public var empty: Const<Maybe<B>, First> {
-        return Const(Maybe.none())
+    public var empty: Const<Option<B>, First> {
+        return Const(Option.none())
     }
     
-    public func combine(_ a: Const<Maybe<B>, First>, _ b: Const<Maybe<B>, First>) -> Const<Maybe<B>, First> {
+    public func combine(_ a: Const<Option<B>, First>, _ b: Const<Option<B>, First>) -> Const<Option<B>, First> {
         return a.value.fold(constant(false), constant(true)) ? a : b
     }
 }
 
-public class LastMaybeMonoid<B> : Monoid {
-    public typealias A = Const<Maybe<B>, Last>
+public class LastOptionMonoid<B> : Monoid {
+    public typealias A = Const<Option<B>, Last>
     
-    public var empty: Const<Maybe<B>, Last> {
-        return Const(Maybe.none())
+    public var empty: Const<Option<B>, Last> {
+        return Const(Option.none())
     }
     
-    public func combine(_ a: Const<Maybe<B>, Last>, _ b: Const<Maybe<B>, Last>) -> Const<Maybe<B>, Last> {
+    public func combine(_ a: Const<Option<B>, Last>, _ b: Const<Option<B>, Last>) -> Const<Option<B>, Last> {
         return b.value.fold(constant(false), constant(true)) ? b : a
     }
 }

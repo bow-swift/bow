@@ -25,7 +25,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return e.fold(Validated<E, A>.invalid, Validated<E, A>.valid)
     }
     
-    public static func fromMaybe(_ m : Maybe<A>, ifNone : @escaping () -> E) -> Validated<E, A> {
+    public static func fromOption(_ m : Option<A>, ifNone : @escaping () -> E) -> Validated<E, A> {
         return m.fold(ifNone >>> Validated<E, A>.invalid, Validated<E, A>.valid)
     }
     
@@ -60,8 +60,8 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return fold(Either.left, Either.right)
     }
     
-    public func toMaybe() -> Maybe<A> {
-        return fold(constant(Maybe.none()), Maybe.some)
+    public func toOption() -> Option<A> {
+        return fold(constant(Option.none()), Option.some)
     }
     
     public func toList() -> [A] {

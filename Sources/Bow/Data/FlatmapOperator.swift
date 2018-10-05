@@ -30,7 +30,7 @@ public func >>=<K, A, B>(_ fa : MapK<K, A>, _ f : @escaping (A) -> MapK<K, B>) -
     return fa.flatMap(f)
 }
 
-public func >>=<A, B>(_ fa : Maybe<A>, _ f : @escaping (A) -> Maybe<B>) -> Maybe<B> {
+public func >>=<A, B>(_ fa : Option<A>, _ f : @escaping (A) -> Option<B>) -> Option<B> {
     return fa.flatMap(f)
 }
 

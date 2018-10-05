@@ -27,7 +27,7 @@ public class Const<A, T> : ConstOf<A, T> {
         return applicative.pure(retag())
     }
     
-    public func traverseFilter<F, U, Appl>(_ f : (T) -> Kind<F, MaybeOf<U>>, _ applicative : Appl) -> Kind<F, ConstOf<A, U>> where Appl : Applicative, Appl.F == F {
+    public func traverseFilter<F, U, Appl>(_ f : (T) -> Kind<F, OptionOf<U>>, _ applicative : Appl) -> Kind<F, ConstOf<A, U>> where Appl : Applicative, Appl.F == F {
         return applicative.pure(retag())
     }
     
@@ -155,7 +155,7 @@ public class ConstTraverse<R> : ConstFoldable<R>, Traverse {
 }
 
 public class ConstTraverseFilter<R> : ConstTraverse<R>, TraverseFilter {
-    public func traverseFilter<A, B, G, Appl>(_ fa: ConstOf<R, A>, _ f: @escaping (A) -> Kind<G, MaybeOf<B>>, _ applicative: Appl) -> Kind<G, ConstOf<R, B>> where G == Appl.F, Appl : Applicative {
+    public func traverseFilter<A, B, G, Appl>(_ fa: ConstOf<R, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>, _ applicative: Appl) -> Kind<G, ConstOf<R, B>> where G == Appl.F, Appl : Applicative {
         return Const.fix(fa).traverseFilter(f, applicative)
     }
 }
