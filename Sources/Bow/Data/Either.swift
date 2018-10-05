@@ -105,6 +105,10 @@ public class Either<A, B> : EitherOf<A, B> {
     public func combineK(_ y : Either<A, B>) -> Either<A, B> {
         return fold(constant(y), Either<A, B>.right)
     }
+    
+    public func get() -> B {
+        return fold({ _ in fatalError("Attempted to get a right value but got \(self.description)") }, id)
+    }
 }
 
 class Left<A, B> : Either<A, B> {
