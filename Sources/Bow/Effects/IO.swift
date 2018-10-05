@@ -302,7 +302,7 @@ public extension IO {
         return IOMonad()
     }
     
-    public static func asyncContext() -> IOAsync {
+    public static func async() -> IOAsync {
         return IOAsync()
     }
     

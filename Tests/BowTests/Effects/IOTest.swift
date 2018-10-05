@@ -58,6 +58,6 @@ class IOTest: XCTestCase {
     }
     
     func testAsyncContextLaws() {
-        AsyncContextLaws<ForIO>.check(asyncContext: IO<Int>.asyncContext(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
+        AsyncLaws<ForIO>.check(async: IO<Int>.async(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
     }
 }

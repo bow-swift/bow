@@ -1,3 +1,4 @@
-github "Quick/Nimble" "v7.0.3"
-github "trill-lang/FileCheck" "0.0.6"
+github "Quick/Nimble" "v7.3.1"
+github "ReactiveX/RxSwift" "4.3.1"
+github "trill-lang/FileCheck" "0.0.8"
 github "typelift/SwiftCheck" "0.9.1"
