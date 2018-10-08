@@ -128,24 +128,24 @@ public extension SingleK {
         return SingleKApplicativeError<E>()
     }
     
-    public static func monadError() -> SingleKMonadError {
-        return SingleKMonadError()
+    public static func monadError<E>() -> SingleKMonadError<E> {
+        return SingleKMonadError<E>()
     }
     
-    public static func monadDefer() -> SingleKMonadDefer {
-        return SingleKMonadDefer()
+    public static func monadDefer<E>() -> SingleKMonadDefer<E> {
+        return SingleKMonadDefer<E>()
     }
     
-    public static func async() -> SingleKAsync {
-        return SingleKAsync()
+    public static func async<E>() -> SingleKAsync<E> {
+        return SingleKAsync<E>()
     }
     
-    public static func effect() -> SingleKEffect {
-        return SingleKEffect()
+    public static func effect<E>() -> SingleKEffect<E> {
+        return SingleKEffect<E>()
     }
     
-    public static func concurrentEffect() -> SingleKConcurrentEffect {
-        return SingleKConcurrentEffect()
+    public static func concurrentEffect<E>() -> SingleKConcurrentEffect<E> {
+        return SingleKConcurrentEffect<E>()
     }
 }
 
@@ -189,37 +189,37 @@ public class SingleKApplicativeError<Err> : SingleKApplicative, ApplicativeError
     }
 }
 
-public class SingleKMonadError : SingleKMonad, MonadError {
-    public typealias E = Error
+public class SingleKMonadError<Err> : SingleKMonad, MonadError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> SingleKOf<A> {
+    public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
         return SingleK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Error) -> SingleKOf<A>) -> SingleKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e).fix() }
+    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 
-public class SingleKMonadDefer : SingleKMonadError, MonadDefer {
+public class SingleKMonadDefer<Err> : SingleKMonadError<Err>, MonadDefer where Err : Error {
     public func suspend<A>(_ fa: @escaping () -> SingleKOf<A>) -> SingleKOf<A> {
         return SingleK.suspend(fa)
     }
 }
 
-public class SingleKAsync : SingleKMonadDefer, Async {
+public class SingleKAsync<Err> : SingleKMonadDefer<Err>, Async where Err : Error {
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> Kind<ForSingleK, A> {
         return SingleK.async(fa)
     }
 }
 
-public class SingleKEffect : SingleKAsync, Effect {
+public class SingleKEffect<Err> : SingleKAsync<Err>, Effect where Err : Error {
     public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, Unit>) -> Kind<ForSingleK, Unit> {
         return fa.fix().runAsync(callback)
     }
 }
 
-public class SingleKConcurrentEffect : SingleKEffect, ConcurrentEffect {
+public class SingleKConcurrentEffect<Err> : SingleKEffect<Err>, ConcurrentEffect where Err : Error {
     public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, Unit>) -> Kind<ForSingleK, Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }
