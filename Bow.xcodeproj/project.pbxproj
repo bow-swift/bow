@@ -104,6 +104,10 @@
 		114D530D216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
 		114D530E216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
 		114D530F216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
+		114D5312216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5313216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5314216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5315216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -833,6 +837,7 @@
 		114D5306216B4BC800495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
 		114D5307216B4BC800495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
 		114D530B216B4CD000495778 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		114D5311216B4F6C00495778 /* FutureK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureK.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -1216,6 +1221,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		114D5310216B4F5300495778 /* BrightFutures */ = {
+			isa = PBXGroup;
+			children = (
+				114D5311216B4F6C00495778 /* FutureK.swift */,
+			);
+			path = BrightFutures;
+			sourceTree = "<group>";
+		};
 		115683C9216268810001749D /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1527,6 +1540,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_38 /* IO.swift */,
+				114D5310216B4F5300495778 /* BrightFutures */,
 				1181FD4C2164DB9A0037B298 /* Rx */,
 				115683C9216268810001749D /* Typeclasses */,
 			);
@@ -2127,6 +2141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D5315216B4F6C00495778 /* FutureK.swift in Sources */,
 				114D530F216B4CD000495778 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2328,6 +2343,7 @@
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
 				D60A59DE21079832005D53F3 /* SetK.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
+				114D5313216B4F6C00495778 /* FutureK.swift in Sources */,
 				D6D625102068178800739E2D /* Monoid.swift in Sources */,
 				D6D625112068178800739E2D /* MonoidK.swift in Sources */,
 				D6D625122068178800739E2D /* NonEmptyReducible.swift in Sources */,
@@ -2541,6 +2557,7 @@
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
 				D60A59E021079833005D53F3 /* SetK.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
+				114D5314216B4F6C00495778 /* FutureK.swift in Sources */,
 				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
 				D6DBDED820684C38004F979F /* MonoidK.swift in Sources */,
 				D6DBDED920684C38004F979F /* NonEmptyReducible.swift in Sources */,
@@ -2754,6 +2771,7 @@
 				OBJ_440 /* MonadState.swift in Sources */,
 				OBJ_441 /* MonadWriter.swift in Sources */,
 				11C9B6AF20DB8A8D00AFD4AA /* Traversal.swift in Sources */,
+				114D5312216B4F6C00495778 /* FutureK.swift in Sources */,
 				1116206020F38A5C00685EC4 /* String+Optics.swift in Sources */,
 				OBJ_442 /* Monoid.swift in Sources */,
 				11F53098210207A100D92335 /* Nu.swift in Sources */,
