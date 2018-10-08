@@ -74,6 +74,32 @@
 		1145F22B21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
 		1145F22C21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
 		1145F22D21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
+		114D52D5216B496000495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52D4216B496000495778 /* Result.framework */; };
+		114D52D7216B497400495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52D6216B497400495778 /* BrightFutures.framework */; };
+		114D52DA216B49BD00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52D8216B49BD00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52DB216B49BD00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52D9216B49BD00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52DE216B49DA00495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52DC216B49DA00495778 /* BrightFutures.framework */; };
+		114D52DF216B49DA00495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52DD216B49DA00495778 /* Result.framework */; };
+		114D52E2216B4A0C00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52E0216B4A0C00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52E3216B4A0C00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52E1216B4A0C00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52E4216B4A3000495778 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD702164DE570037B298 /* RxCocoa.framework */; };
+		114D52E5216B4A3000495778 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD6F2164DE570037B298 /* RxSwift.framework */; };
+		114D52E8216B4A3000495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52E6216B4A3000495778 /* BrightFutures.framework */; };
+		114D52E9216B4A3000495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52E7216B4A3000495778 /* Result.framework */; };
+		114D52EE216B4AAC00495778 /* Result.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EA216B4AAC00495778 /* Result.framework */; };
+		114D52EF216B4AAC00495778 /* BrightFutures.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EB216B4AAC00495778 /* BrightFutures.framework */; };
+		114D52F0216B4AAC00495778 /* RxCocoa.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EC216B4AAC00495778 /* RxCocoa.framework */; };
+		114D52F1216B4AAC00495778 /* RxSwift.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52ED216B4AAC00495778 /* RxSwift.framework */; };
+		114D52F4216B4ACE00495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52F2216B4ACE00495778 /* Result.framework */; };
+		114D52F5216B4ACE00495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52F3216B4ACE00495778 /* BrightFutures.framework */; };
+		114D52F8216B4AFA00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52F6216B4AFA00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52F9216B4AFA00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52F7216B4AFA00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52FC216B4B3700495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52FA216B4B3600495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52FD216B4B3700495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52FB216B4B3700495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5304216B4B9000495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5302216B4B9000495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5305216B4B9000495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5303216B4B9000495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5308216B4BC800495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5306216B4BC800495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5309216B4BC800495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5307216B4BC800495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -118,7 +144,6 @@
 		115E3C462166228400709EC3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115E3C452166228400709EC3 /* RxBlocking.framework */; };
 		115E3C4D216622EE00709EC3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD552164DD400037B298 /* RxCocoa.framework */; };
 		115E3C4E216622EE00709EC3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD542164DD400037B298 /* RxSwift.framework */; };
-		115E3C50216622EE00709EC3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115E3C4F216622EE00709EC3 /* RxBlocking.framework */; };
 		115E3C56216625B100709EC3 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C53216625B000709EC3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		115E3C57216625B100709EC3 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C54216625B100709EC3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		115E3C58216625B100709EC3 /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C55216625B100709EC3 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -213,34 +238,6 @@
 		11E531DF209B502900A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E0209B502F00A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E2209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
-		11F530782101DB5F00D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F530792101DD0300D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307A2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530822101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530832101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530842101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530852101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530862101E16100D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530872101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530882101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F5308B2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308C2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308D2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308E2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F530902101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530912101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530922101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530932101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530942101E6D000D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530952101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530962101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F53098210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F53099210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F5309A210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F5309B210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
 		11F5306A20FF8B1800D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
 		11F5306B20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
 		11F5306C20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
@@ -250,6 +247,27 @@
 		11F530732100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
 		11F530742100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
 		11F530752100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
+		11F530782101DB5F00D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F530792101DD0300D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530822101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530832101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530852101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530862101E16100D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530882101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F5308B2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F5308C2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F5308E2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F530902101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530912101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530932101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530942101E6D000D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530952101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F53098210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
+		11F53099210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
+		11F5309B210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -676,6 +694,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52DA216B49BD00495778 /* BrightFutures.framework in CopyFiles */,
+				114D52DB216B49BD00495778 /* Result.framework in CopyFiles */,
 				115E3C56216625B100709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C57216625B100709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C58216625B100709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -688,6 +708,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52E2216B4A0C00495778 /* Result.framework in CopyFiles */,
+				114D52E3216B4A0C00495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C6D216627F300709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C6E216627F300709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C6F216627F300709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -700,6 +722,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52F8216B4AFA00495778 /* BrightFutures.framework in CopyFiles */,
+				114D52F9216B4AFA00495778 /* Result.framework in CopyFiles */,
 				11D6DCEA21662EC00068D575 /* RxSwift.framework in CopyFiles */,
 				11D6DCEB21662EC00068D575 /* RxCocoa.framework in CopyFiles */,
 			);
@@ -711,6 +735,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52FC216B4B3700495778 /* BrightFutures.framework in CopyFiles */,
+				114D52FD216B4B3700495778 /* Result.framework in CopyFiles */,
 				115E3C5C2166266600709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C5D2166266600709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C5E2166266600709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -725,6 +751,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D5304216B4B9000495778 /* Result.framework in CopyFiles */,
+				114D5305216B4B9000495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C8121662B4F00709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C8221662B4F00709EC3 /* RxSwift.framework in CopyFiles */,
 				D6D62481206814CE00739E2D /* Nimble.framework in CopyFiles */,
@@ -738,6 +766,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D5308216B4BC800495778 /* Result.framework in CopyFiles */,
+				114D5309216B4BC800495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C62216626EB00709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C63216626EB00709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C64216626EB00709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -772,6 +802,32 @@
 		1145F2222166337A00D4AE81 /* SingleKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKTest.swift; sourceTree = "<group>"; };
 		1145F226216648E600D4AE81 /* MaybeKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeKTest.swift; sourceTree = "<group>"; };
 		1145F22A21664E2400D4AE81 /* ObservableKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableKTest.swift; sourceTree = "<group>"; };
+		114D52D4216B496000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52D6216B497400495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52D8216B49BD00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52D9216B49BD00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52DC216B49DA00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52DD216B49DA00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52E0216B4A0C00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52E1216B4A0C00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52E6216B4A3000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52E7216B4A3000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D52EA216B4AAC00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D52EB216B4AAC00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52EC216B4AAC00495778 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/tvOS/RxCocoa.framework; sourceTree = "<group>"; };
+		114D52ED216B4AAC00495778 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
+		114D52F2216B4ACE00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
+		114D52F3216B4ACE00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/watchOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52F6216B4AFA00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/watchOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52F7216B4AFA00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
+		114D52FA216B4B3600495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52FB216B4B3700495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52FE216B4B7000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52FF216B4B7000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D5302216B4B9000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D5303216B4B9000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D5306216B4BC800495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D5307216B4BC800495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -843,6 +899,9 @@
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		11F5306820FF8B1500D92335 /* GetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
+		11F5306D210086F500D92335 /* FoldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldTest.swift; sourceTree = "<group>"; };
+		11F530722100959000D92335 /* TraversalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalTest.swift; sourceTree = "<group>"; };
 		11F530772101DB5F00D92335 /* Recursion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursion.swift; sourceTree = "<group>"; };
 		11F5307D2101DD7100D92335 /* Recursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursive.swift; sourceTree = "<group>"; };
 		11F5307F2101DF8A00D92335 /* Corecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corecursive.swift; sourceTree = "<group>"; };
@@ -850,9 +909,6 @@
 		11F5308A2101E1B000D92335 /* Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fix.swift; sourceTree = "<group>"; };
 		11F5308F2101E6C600D92335 /* Mu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mu.swift; sourceTree = "<group>"; };
 		11F53097210207A100D92335 /* Nu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nu.swift; sourceTree = "<group>"; };
-		11F5306820FF8B1500D92335 /* GetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
-		11F5306D210086F500D92335 /* FoldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldTest.swift; sourceTree = "<group>"; };
-		11F530722100959000D92335 /* TraversalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalTest.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1008,6 +1064,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D52F4216B4ACE00495778 /* Result.framework in Frameworks */,
+				114D52F5216B4ACE00495778 /* BrightFutures.framework in Frameworks */,
 				11D6DCE521662E950068D575 /* RxCocoa.framework in Frameworks */,
 				11D6DCE621662E950068D575 /* RxSwift.framework in Frameworks */,
 			);
@@ -1026,6 +1084,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				114D52DE216B49DA00495778 /* BrightFutures.framework in Frameworks */,
+				114D52DF216B49DA00495778 /* Result.framework in Frameworks */,
 				115E3C462166228400709EC3 /* RxBlocking.framework in Frameworks */,
 				115E3C432166228400709EC3 /* RxCocoa.framework in Frameworks */,
 				115E3C442166228400709EC3 /* RxSwift.framework in Frameworks */,
@@ -1044,6 +1104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D52E8216B4A3000495778 /* BrightFutures.framework in Frameworks */,
+				114D52E9216B4A3000495778 /* Result.framework in Frameworks */,
+				114D52E4216B4A3000495778 /* RxCocoa.framework in Frameworks */,
+				114D52E5216B4A3000495778 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,7 +1123,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				115E3C50216622EE00709EC3 /* RxBlocking.framework in Frameworks */,
+				114D52D7216B497400495778 /* BrightFutures.framework in Frameworks */,
+				114D52D5216B496000495778 /* Result.framework in Frameworks */,
 				115E3C4D216622EE00709EC3 /* RxCocoa.framework in Frameworks */,
 				115E3C4E216622EE00709EC3 /* RxSwift.framework in Frameworks */,
 			);
@@ -1307,6 +1372,14 @@
 		D6D623EF2068134800739E2D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				114D52D6216B497400495778 /* BrightFutures.framework */,
+				114D52F3216B4ACE00495778 /* BrightFutures.framework */,
+				114D52D4216B496000495778 /* Result.framework */,
+				114D52DC216B49DA00495778 /* BrightFutures.framework */,
+				114D52DD216B49DA00495778 /* Result.framework */,
+				114D52E6216B4A3000495778 /* BrightFutures.framework */,
+				114D52E7216B4A3000495778 /* Result.framework */,
+				114D52F2216B4ACE00495778 /* Result.framework */,
 				115E3C452166228400709EC3 /* RxBlocking.framework */,
 				115E3C4F216622EE00709EC3 /* RxBlocking.framework */,
 				115E3C722166294400709EC3 /* RxBlocking.framework */,
@@ -1471,6 +1544,24 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				114D52D8216B49BD00495778 /* BrightFutures.framework */,
+				114D52E1216B4A0C00495778 /* BrightFutures.framework */,
+				114D52EB216B4AAC00495778 /* BrightFutures.framework */,
+				114D52FF216B4B7000495778 /* BrightFutures.framework */,
+				114D5303216B4B9000495778 /* BrightFutures.framework */,
+				114D5307216B4BC800495778 /* BrightFutures.framework */,
+				114D52D9216B49BD00495778 /* Result.framework */,
+				114D52E0216B4A0C00495778 /* Result.framework */,
+				114D52EA216B4AAC00495778 /* Result.framework */,
+				114D52F6216B4AFA00495778 /* BrightFutures.framework */,
+				114D52F7216B4AFA00495778 /* Result.framework */,
+				114D52FA216B4B3600495778 /* BrightFutures.framework */,
+				114D52FB216B4B3700495778 /* Result.framework */,
+				114D52FE216B4B7000495778 /* Result.framework */,
+				114D5302216B4B9000495778 /* Result.framework */,
+				114D5306216B4BC800495778 /* Result.framework */,
+				114D52EC216B4AAC00495778 /* RxCocoa.framework */,
+				114D52ED216B4AAC00495778 /* RxSwift.framework */,
 				115E3C79216629AE00709EC3 /* RxBlocking.framework */,
 				115E3C7F21662B4E00709EC3 /* RxCocoa.framework */,
 				115E3C8021662B4F00709EC3 /* RxSwift.framework */,
@@ -1859,6 +1950,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D52EE216B4AAC00495778 /* Result.framework in Resources */,
+				114D52EF216B4AAC00495778 /* BrightFutures.framework in Resources */,
+				114D52F0216B4AAC00495778 /* RxCocoa.framework in Resources */,
+				114D52F1216B4AAC00495778 /* RxSwift.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1876,6 +1971,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1896,6 +1993,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1907,20 +2006,24 @@
 		};
 		115E3C7E21662AD900709EC3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		11D6DCEC21662EC80068D575 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1932,6 +2035,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/watchOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/watchOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/watchOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/watchOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1952,6 +2057,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -1969,6 +2076,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -1987,6 +2096,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -2297,131 +2408,6 @@
 				D6D6254E206817A700739E2D /* SemigroupKLaws.swift in Sources */,
 				D6D6254F206817A700739E2D /* SemigroupLaws.swift in Sources */,
 				11FE0098209C9EB800183AF6 /* OptionalTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6D62563206841B300739E2D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				11F5307A2101DD0400D92335 /* Recursion.swift in Sources */,
-				11F530842101E15E00D92335 /* Birecursive.swift in Sources */,
-				1116206920F39EBC00685EC4 /* Validated+Optics.swift in Sources */,
-				11F530922101E6C700D92335 /* Mu.swift in Sources */,
-				1116209520F4B0B500685EC4 /* MaybeOpticsInstances.swift in Sources */,
-				D6D62564206841B300739E2D /* Cokleisli.swift in Sources */,
-				D6D62565206841B300739E2D /* Function0.swift in Sources */,
-				11C9B6D520DCF54B00AFD4AA /* FilterIndex.swift in Sources */,
-				D6D62566206841B300739E2D /* Function1.swift in Sources */,
-				1116205820F385D300685EC4 /* Id+Optics.swift in Sources */,
-				D6D62567206841B300739E2D /* FunctionK.swift in Sources */,
-				D6D62568206841B300739E2D /* Kleisli.swift in Sources */,
-				D6D62569206841B300739E2D /* KleisliOperator.swift in Sources */,
-				D6D6256A206841B300739E2D /* BooleanFunctions.swift in Sources */,
-				1116209020F4AB6200685EC4 /* NonEmptyListOpticsInstances.swift in Sources */,
-				D6D6256B206841B300739E2D /* Curry.swift in Sources */,
-				11E531D9209B4FCD00A78E8D /* At.swift in Sources */,
-				1156839F2162472C0001749D /* Invariant.swift in Sources */,
-				D6D6256C206841B300739E2D /* Const.swift in Sources */,
-				115683D221626B980001749D /* Effect.swift in Sources */,
-				D6D6256D206841B300739E2D /* Coproduct.swift in Sources */,
-				11AC527B2097697C008EC1E4 /* Getter.swift in Sources */,
-				11AC527D2097697C008EC1E4 /* Lens.swift in Sources */,
-				D6D6256E206841B300739E2D /* Coreader.swift in Sources */,
-				D6D6256F206841B300739E2D /* Either.swift in Sources */,
-				D6D62570206841B300739E2D /* Eval.swift in Sources */,
-				D6D62571206841B300739E2D /* FlatmapOperator.swift in Sources */,
-				115683B321624D7B0001749D /* Category.swift in Sources */,
-				D6D62572206841B300739E2D /* Id.swift in Sources */,
-				D6D62573206841B300739E2D /* Ior.swift in Sources */,
-				D6D62574206841B300739E2D /* ListK.swift in Sources */,
-				D6D62575206841B300739E2D /* MapK.swift in Sources */,
-				D6D62576206841B300739E2D /* Option.swift in Sources */,
-				D6D62577206841B300739E2D /* NonEmptyList.swift in Sources */,
-				D6D62578206841B300739E2D /* Reader.swift in Sources */,
-				D6D62579206841B300739E2D /* State.swift in Sources */,
-				D6D6257A206841B300739E2D /* Try.swift in Sources */,
-				D6D6257B206841B300739E2D /* Tuple.swift in Sources */,
-				D6D6257C206841B300739E2D /* Validated.swift in Sources */,
-				111082CE2085DBF800C8563C /* Show.swift in Sources */,
-				D6D6257D206841B300739E2D /* Async.swift in Sources */,
-				D6D6257E206841B300739E2D /* IO.swift in Sources */,
-				1116209F20F4B88500685EC4 /* TryOpticsInstances.swift in Sources */,
-				D6D6257F206841B300739E2D /* Cofree.swift in Sources */,
-				D6D62580206841B300739E2D /* Coyoneda.swift in Sources */,
-				11E531C2209B1CE800A78E8D /* Fold.swift in Sources */,
-				1116206420F398D900685EC4 /* Try+Optics.swift in Sources */,
-				D6D62581206841B300739E2D /* Free.swift in Sources */,
-				D6D62582206841B300739E2D /* Yoneda.swift in Sources */,
-				D6D62583206841B300739E2D /* HigherKinds.swift in Sources */,
-				11F530872101E16200D92335 /* Corecursive.swift in Sources */,
-				D6D62584206841B300739E2D /* NumberInstances.swift in Sources */,
-				1116206C20F39EC100685EC4 /* String+Optics.swift in Sources */,
-				D6D62585206841B300739E2D /* StringInstances.swift in Sources */,
-				11E531DC209B4FD300A78E8D /* BoundSetter.swift in Sources */,
-				D6D62586206841B300739E2D /* PartialApplication.swift in Sources */,
-				115683A921624AE80001749D /* Bifunctor.swift in Sources */,
-				11AC527C2097697C008EC1E4 /* Iso.swift in Sources */,
-				11E531B3209AF13600A78E8D /* Prism.swift in Sources */,
-				D6D62587206841B300739E2D /* Predef.swift in Sources */,
-				D6D62588206841B300739E2D /* EitherT.swift in Sources */,
-				1116205A20F385D300685EC4 /* NonEmptyList+Optics.swift in Sources */,
-				115683AE21624C370001749D /* Profunctor.swift in Sources */,
-				D6D62589206841B300739E2D /* OptionT.swift in Sources */,
-				D6D6258A206841B300739E2D /* StateT.swift in Sources */,
-				D6D6258B206841B300739E2D /* WriterT.swift in Sources */,
-				D6D6258C206841B300739E2D /* Typeclass.swift in Sources */,
-				11E531CD209B319F00A78E8D /* MaybeInstances.swift in Sources */,
-				115683A4216248FC0001749D /* Contravariant.swift in Sources */,
-				D6D6258D206841B300739E2D /* Alternative.swift in Sources */,
-				D6D6258E206841B300739E2D /* Applicative.swift in Sources */,
-				116D42C62110A66500363A86 /* BoolInstances.swift in Sources */,
-				D6D6258F206841B300739E2D /* ApplicativeError.swift in Sources */,
-				11C9B6D220DCF54700AFD4AA /* Each.swift in Sources */,
-				D6D62590206841B300739E2D /* Bifoldable.swift in Sources */,
-				D6D62591206841B300739E2D /* Bimonad.swift in Sources */,
-				D6D62592206841B300739E2D /* Comonad.swift in Sources */,
-				1116205720F385D300685EC4 /* Either+Optics.swift in Sources */,
-				1116208B20F49B1F00685EC4 /* ListKOpticsInstances.swift in Sources */,
-				D6D62593206841B300739E2D /* Composed.swift in Sources */,
-				D6D62594206841B300739E2D /* ComposedFoldable.swift in Sources */,
-				11F5309A210207A100D92335 /* Nu.swift in Sources */,
-				D6D62595206841B300739E2D /* Eq.swift in Sources */,
-				11E531B8209AFAF600A78E8D /* Optional.swift in Sources */,
-				D6D62596206841B300739E2D /* Foldable.swift in Sources */,
-				D6D62597206841B300739E2D /* Functor.swift in Sources */,
-				11C9B6D820DCF55000AFD4AA /* Traversal.swift in Sources */,
-				D6D62598206841B300739E2D /* FunctorFilter.swift in Sources */,
-				D6D62599206841B300739E2D /* Inject.swift in Sources */,
-				D6D6259A206841B300739E2D /* Monad.swift in Sources */,
-				D6D6259B206841B300739E2D /* MonadCombine.swift in Sources */,
-				1116205920F385D300685EC4 /* ListK+Optics.swift in Sources */,
-				D6D6259C206841B300739E2D /* MonadError.swift in Sources */,
-				1116207620F3AD7000685EC4 /* At+Optics.swift in Sources */,
-				D6D6259D206841B300739E2D /* MonadFilter.swift in Sources */,
-				1116209A20F4B1DA00685EC4 /* StringOpticsInstances.swift in Sources */,
-				11E531BD209B148E00A78E8D /* Setter.swift in Sources */,
-				115683D721626D3B0001749D /* ConcurrentEffect.swift in Sources */,
-				1116208620F4972200685EC4 /* EitherOpticsInstances.swift in Sources */,
-				D6D6259E206841B300739E2D /* MonadReader.swift in Sources */,
-				11F530962101E6D100D92335 /* Recursive.swift in Sources */,
-				115683CD2162689A0001749D /* MonadDefer.swift in Sources */,
-				D6D6259F206841B300739E2D /* MonadState.swift in Sources */,
-				D60A59DF21079833005D53F3 /* SetK.swift in Sources */,
-				D6D625A0206841B300739E2D /* MonadWriter.swift in Sources */,
-				D6D625A1206841B300739E2D /* Monoid.swift in Sources */,
-				D6D625A2206841B300739E2D /* MonoidK.swift in Sources */,
-				D6D625A3206841B300739E2D /* NonEmptyReducible.swift in Sources */,
-				D6D625A4206841B300739E2D /* Order.swift in Sources */,
-				11E531E1209B503000A78E8D /* Index.swift in Sources */,
-				1116207B20F4937500685EC4 /* Each+Optics.swift in Sources */,
-				D6D625A5206841B300739E2D /* Reducible.swift in Sources */,
-				D6D625A6206841B300739E2D /* Semigroup.swift in Sources */,
-				11F5308D2101E1B000D92335 /* Fix.swift in Sources */,
-				1116205120F385C400685EC4 /* Maybe+Optics.swift in Sources */,
-				D6D625A7206841B300739E2D /* SemigroupK.swift in Sources */,
-				D6D625A8206841B300739E2D /* Traverse.swift in Sources */,
-				D6D625A9206841B300739E2D /* TraverseFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
