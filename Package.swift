@@ -11,10 +11,12 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/typelift/SwiftCheck", from: "0.9.1"),
         .package(url: "https://github.com/Quick/Nimble", from: "7.0.2")
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
     ],
     targets: [
         .target(
             name: "Bow",
+            dependencies: ["RxSwift", "RxCocoa"],
             path: "Sources"),
         .testTarget(
             name: "BowTests",
