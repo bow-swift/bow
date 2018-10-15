@@ -16,7 +16,7 @@ cache:
   - Carthage
 
 before_install:
-  - carthage update
+  - carthage update --cache-builds
 
 script:
   - set -o pipefail
