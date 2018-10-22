@@ -302,12 +302,12 @@ public extension IO {
         return IOMonad()
     }
     
-    public static func async() -> IOAsync {
-        return IOAsync()
+    public static func async<E>() -> IOAsync<E> {
+        return IOAsync<E>()
     }
     
-    public static func monadError() -> IOMonadError {
-        return IOMonadError()
+    public static func monadError<E>() -> IOMonadError<E> {
+        return IOMonadError<E>()
     }
     
     public static func semigroup<SemiG>(_ semigroup : SemiG) -> IOSemigroup<A, SemiG> {
@@ -351,7 +351,7 @@ public class IOMonad : IOApplicative, Monad {
     }
 }
 
-public class IOAsync : IOMonadError, Async {
+public class IOAsync<Err> : IOMonadError<Err>, Async where Err : Error {
     public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
         fatalError("Not implemented yet")
     }
@@ -363,15 +363,15 @@ public class IOAsync : IOMonadError, Async {
     }
 }
 
-public class IOMonadError : IOMonad, MonadError {
-    public typealias E = Error
+public class IOMonadError<Err> : IOMonad, MonadError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> IOOf<A> {
+    public func raiseError<A>(_ e: Err) -> IOOf<A> {
         return IO.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Error) -> IOOf<A>) -> IOOf<A> {
-        return fa.fix().handleErrorWith(f)
+    public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Err) -> IOOf<A>) -> IOOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 

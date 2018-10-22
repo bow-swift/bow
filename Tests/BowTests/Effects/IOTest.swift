@@ -37,7 +37,7 @@ class IOTest: XCTestCase {
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<ForIO, Error>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
+        MonadErrorLaws<ForIO, CategoryError>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
     }
     
     func testSemigroupLaws() {
@@ -58,6 +58,6 @@ class IOTest: XCTestCase {
     }
     
     func testAsyncContextLaws() {
-        AsyncLaws<ForIO>.check(async: IO<Int>.async(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
+        AsyncLaws<ForIO, CategoryError>.check(async: IO<Int>.async(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
     }
 }
