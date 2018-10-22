@@ -1,3 +1,5 @@
 github "typelift/SwiftCheck" ~> 0.9.1
 github "Quick/Nimble" ~> 7.0.2
 github "ReactiveX/RxSwift" ~> 4.0
+github "Thomvis/BrightFutures" ~> 7.0.0
+github "antitypical/Result" ~> 4.0.0

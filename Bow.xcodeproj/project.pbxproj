@@ -74,6 +74,41 @@
 		1145F22B21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
 		1145F22C21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
 		1145F22D21664E2400D4AE81 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145F22A21664E2400D4AE81 /* ObservableKTest.swift */; };
+		114D52D5216B496000495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52D4216B496000495778 /* Result.framework */; };
+		114D52D7216B497400495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52D6216B497400495778 /* BrightFutures.framework */; };
+		114D52DA216B49BD00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52D8216B49BD00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52DB216B49BD00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52D9216B49BD00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52DE216B49DA00495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52DC216B49DA00495778 /* BrightFutures.framework */; };
+		114D52DF216B49DA00495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52DD216B49DA00495778 /* Result.framework */; };
+		114D52E2216B4A0C00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52E0216B4A0C00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52E3216B4A0C00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52E1216B4A0C00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52E4216B4A3000495778 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD702164DE570037B298 /* RxCocoa.framework */; };
+		114D52E5216B4A3000495778 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD6F2164DE570037B298 /* RxSwift.framework */; };
+		114D52E8216B4A3000495778 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52E6216B4A3000495778 /* BrightFutures.framework */; };
+		114D52E9216B4A3000495778 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52E7216B4A3000495778 /* Result.framework */; };
+		114D52EE216B4AAC00495778 /* Result.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EA216B4AAC00495778 /* Result.framework */; };
+		114D52EF216B4AAC00495778 /* BrightFutures.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EB216B4AAC00495778 /* BrightFutures.framework */; };
+		114D52F0216B4AAC00495778 /* RxCocoa.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52EC216B4AAC00495778 /* RxCocoa.framework */; };
+		114D52F1216B4AAC00495778 /* RxSwift.framework in Resources */ = {isa = PBXBuildFile; fileRef = 114D52ED216B4AAC00495778 /* RxSwift.framework */; };
+		114D52F8216B4AFA00495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52F6216B4AFA00495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52F9216B4AFA00495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52F7216B4AFA00495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52FC216B4B3700495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52FA216B4B3600495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D52FD216B4B3700495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D52FB216B4B3700495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5304216B4B9000495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5302216B4B9000495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5305216B4B9000495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5303216B4B9000495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5308216B4BC800495778 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5306216B4BC800495778 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D5309216B4BC800495778 /* BrightFutures.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 114D5307216B4BC800495778 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		114D530C216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
+		114D530D216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
+		114D530E216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
+		114D530F216B4CD000495778 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D530B216B4CD000495778 /* Result.swift */; };
+		114D5312216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5313216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5314216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5315216B4F6C00495778 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5311216B4F6C00495778 /* FutureK.swift */; };
+		114D5318216B6C1C00495778 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5317216B6C1C00495778 /* FutureKTest.swift */; };
+		114D5319216B6C1C00495778 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5317216B6C1C00495778 /* FutureKTest.swift */; };
+		114D531A216B6C1C00495778 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D5317216B6C1C00495778 /* FutureKTest.swift */; };
 		1156839D216247290001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		1156839E2162472C0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
 		115683A02162472D0001749D /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
@@ -118,7 +153,6 @@
 		115E3C462166228400709EC3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115E3C452166228400709EC3 /* RxBlocking.framework */; };
 		115E3C4D216622EE00709EC3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD552164DD400037B298 /* RxCocoa.framework */; };
 		115E3C4E216622EE00709EC3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD542164DD400037B298 /* RxSwift.framework */; };
-		115E3C50216622EE00709EC3 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115E3C4F216622EE00709EC3 /* RxBlocking.framework */; };
 		115E3C56216625B100709EC3 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C53216625B000709EC3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		115E3C57216625B100709EC3 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C54216625B100709EC3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		115E3C58216625B100709EC3 /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 115E3C55216625B100709EC3 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -208,11 +242,133 @@
 		11C9B6D620DCF54B00AFD4AA /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
 		11C9B6D720DCF55000AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
 		11C9B6D920DCF55100AFD4AA /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
-		11D6DCE121662D4E0068D575 /* Bow_watchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 11D6DCDF21662D4E0068D575 /* Bow_watchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11D6DCE521662E950068D575 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD672164DE250037B298 /* RxCocoa.framework */; };
 		11D6DCE621662E950068D575 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1181FD662164DE250037B298 /* RxSwift.framework */; };
 		11D6DCEA21662EC00068D575 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 11D6DCE821662EC00068D575 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		11D6DCEB21662EC00068D575 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 11D6DCE921662EC00068D575 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		11E4666721748B5F002DE61F /* BooleanFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* BooleanFunctions.swift */; };
+		11E4666821748B5F002DE61F /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Curry.swift */; };
+		11E4666921748B5F002DE61F /* HigherKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* HigherKinds.swift */; };
+		11E4666A21748B5F002DE61F /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* PartialApplication.swift */; };
+		11E4666B21748B5F002DE61F /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Predef.swift */; };
+		11E4666C21748B5F002DE61F /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* Typeclass.swift */; };
+		11E4666D21748B5F002DE61F /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cokleisli.swift */; };
+		11E4666E21748B5F002DE61F /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Function0.swift */; };
+		11E4666F21748B5F002DE61F /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Function1.swift */; };
+		11E4667021748B5F002DE61F /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* FunctionK.swift */; };
+		11E4667121748B5F002DE61F /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Kleisli.swift */; };
+		11E4667221748B5F002DE61F /* KleisliOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* KleisliOperator.swift */; };
+		11E4667321748B5F002DE61F /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Const.swift */; };
+		11E4667421748B5F002DE61F /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Coproduct.swift */; };
+		11E4667521748B5F002DE61F /* Coreader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Coreader.swift */; };
+		11E4667621748B5F002DE61F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Either.swift */; };
+		11E4667721748B5F002DE61F /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* Eval.swift */; };
+		11E4667821748B5F002DE61F /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* FlatmapOperator.swift */; };
+		11E4667921748B5F002DE61F /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Id.swift */; };
+		11E4667A21748B5F002DE61F /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Ior.swift */; };
+		11E4667B21748B5F002DE61F /* ListK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ListK.swift */; };
+		11E4667C21748B5F002DE61F /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* MapK.swift */; };
+		11E4667D21748B5F002DE61F /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* NonEmptyList.swift */; };
+		11E4667E21748B5F002DE61F /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Option.swift */; };
+		11E4667F21748B5F002DE61F /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Reader.swift */; };
+		11E4668021748B5F002DE61F /* SetK.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6492805209C72F000B875F9 /* SetK.swift */; };
+		11E4668121748B5F002DE61F /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* State.swift */; };
+		11E4668221748B5F002DE61F /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Try.swift */; };
+		11E4668321748B5F002DE61F /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Tuple.swift */; };
+		11E4668421748B5F002DE61F /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Validated.swift */; };
+		11E4668521748B5F002DE61F /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* IO.swift */; };
+		11E4668621748B5F002DE61F /* MaybeK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1181FD77216502410037B298 /* MaybeK.swift */; };
+		11E4668721748B5F002DE61F /* ObservableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1181FD7C2165F7A00037B298 /* ObservableK.swift */; };
+		11E4668821748B5F002DE61F /* SingleK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1181FD4D2164DCD90037B298 /* SingleK.swift */; };
+		11E4668921748B5F002DE61F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Async.swift */; };
+		11E4668A21748B5F002DE61F /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683D421626D3B0001749D /* ConcurrentEffect.swift */; };
+		11E4668B21748B5F002DE61F /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CF21626B980001749D /* Effect.swift */; };
+		11E4668C21748B5F002DE61F /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683CA2162689A0001749D /* MonadDefer.swift */; };
+		11E4668D21748B5F002DE61F /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Cofree.swift */; };
+		11E4668E21748B5F002DE61F /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Coyoneda.swift */; };
+		11E4668F21748B5F002DE61F /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Free.swift */; };
+		11E4669021748B5F002DE61F /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* Yoneda.swift */; };
+		11E4669121748B5F002DE61F /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531C4209B29EF00A78E8D /* BoolInstances.swift */; };
+		11E4669221748B5F002DE61F /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531CA209B2FEA00A78E8D /* MaybeInstances.swift */; };
+		11E4669321748B5F002DE61F /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* NumberInstances.swift */; };
+		11E4669421748B5F002DE61F /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* StringInstances.swift */; };
+		11E4669521748B5F002DE61F /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D3209B4CB700A78E8D /* BoundSetter.swift */; };
+		11E4669621748B5F002DE61F /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BF209B1C3F00A78E8D /* Fold.swift */; };
+		11E4669721748B5F002DE61F /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527220974D58008EC1E4 /* Getter.swift */; };
+		11E4669821748B5F002DE61F /* Iso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527420975422008EC1E4 /* Iso.swift */; };
+		11E4669921748B5F002DE61F /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AC527620975EE5008EC1E4 /* Lens.swift */; };
+		11E4669A21748B5F002DE61F /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B5209AF80100A78E8D /* Optional.swift */; };
+		11E4669B21748B5F002DE61F /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
+		11E4669C21748B5F002DE61F /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531BA209B0BE300A78E8D /* Setter.swift */; };
+		11E4669D21748B5F002DE61F /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6AE20DB8A8D00AFD4AA /* Traversal.swift */; };
+		11E4669E21748B5F002DE61F /* At+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207320F3AC1800685EC4 /* At+Optics.swift */; };
+		11E4669F21748B5F002DE61F /* Each+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116207820F4923E00685EC4 /* Each+Optics.swift */; };
+		11E466A021748B5F002DE61F /* EitherOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208320F4971A00685EC4 /* EitherOpticsInstances.swift */; };
+		11E466A121748B5F002DE61F /* ListKOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208820F4999D00685EC4 /* ListKOpticsInstances.swift */; };
+		11E466A221748B5F002DE61F /* MaybeOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209220F4B0B500685EC4 /* MaybeOpticsInstances.swift */; };
+		11E466A321748B5F002DE61F /* NonEmptyListOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116208D20F4AB1700685EC4 /* NonEmptyListOpticsInstances.swift */; };
+		11E466A421748B5F002DE61F /* StringOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209720F4B1DA00685EC4 /* StringOpticsInstances.swift */; };
+		11E466A521748B5F002DE61F /* TryOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116209C20F4B88500685EC4 /* TryOpticsInstances.swift */; };
+		11E466A621748B5F002DE61F /* Either+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204520F37AE300685EC4 /* Either+Optics.swift */; };
+		11E466A721748B5F002DE61F /* Id+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204720F37D1900685EC4 /* Id+Optics.swift */; };
+		11E466A821748B5F002DE61F /* ListK+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204920F37DFA00685EC4 /* ListK+Optics.swift */; };
+		11E466A921748B5F002DE61F /* NonEmptyList+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204B20F380E300685EC4 /* NonEmptyList+Optics.swift */; };
+		11E466AA21748B5F002DE61F /* Maybe+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116204E20F3820500685EC4 /* Maybe+Optics.swift */; };
+		11E466AB21748B5F002DE61F /* String+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116205F20F38A5C00685EC4 /* String+Optics.swift */; };
+		11E466AC21748B5F002DE61F /* Try+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206120F398CB00685EC4 /* Try+Optics.swift */; };
+		11E466AD21748B5F002DE61F /* Validated+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116206620F39E0700685EC4 /* Validated+Optics.swift */; };
+		11E466AE21748B5F002DE61F /* At.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531D6209B4EF400A78E8D /* At.swift */; };
+		11E466AF21748B5F002DE61F /* Each.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B020DBB02000AFD4AA /* Each.swift */; };
+		11E466B021748B5F002DE61F /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */; };
+		11E466B121748B5F002DE61F /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
+		11E466B221748B5F002DE61F /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11E466B321748B5F002DE61F /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11E466B421748B5F002DE61F /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
+		11E466B521748B5F002DE61F /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11E466B621748B5F002DE61F /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11E466B721748B5F002DE61F /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11E466B821748B5F002DE61F /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11E466B921748B5F002DE61F /* EitherT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* EitherT.swift */; };
+		11E466BA21748B5F002DE61F /* OptionT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* OptionT.swift */; };
+		11E466BB21748B5F002DE61F /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* StateT.swift */; };
+		11E466BC21748B5F002DE61F /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* WriterT.swift */; };
+		11E466BD21748B5F002DE61F /* Alternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* Alternative.swift */; };
+		11E466BE21748B5F002DE61F /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* Applicative.swift */; };
+		11E466BF21748B5F002DE61F /* ApplicativeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* ApplicativeError.swift */; };
+		11E466C021748B5F002DE61F /* Bifoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* Bifoldable.swift */; };
+		11E466C121748B5F002DE61F /* Bifunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A621624AE80001749D /* Bifunctor.swift */; };
+		11E466C221748B5F002DE61F /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Bimonad.swift */; };
+		11E466C321748B5F002DE61F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683B021624D7B0001749D /* Category.swift */; };
+		11E466C421748B5F002DE61F /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* Comonad.swift */; };
+		11E466C521748B5F002DE61F /* Contravariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683A1216248FC0001749D /* Contravariant.swift */; };
+		11E466C621748B5F002DE61F /* Eq.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* Eq.swift */; };
+		11E466C721748B5F002DE61F /* Foldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_67 /* Foldable.swift */; };
+		11E466C821748B5F002DE61F /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_68 /* Functor.swift */; };
+		11E466C921748B5F002DE61F /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_69 /* FunctorFilter.swift */; };
+		11E466CA21748B5F002DE61F /* Inject.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_70 /* Inject.swift */; };
+		11E466CB21748B5F002DE61F /* Invariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1156839C216247290001749D /* Invariant.swift */; };
+		11E466CC21748B5F002DE61F /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_71 /* Monad.swift */; };
+		11E466CD21748B5F002DE61F /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* MonadCombine.swift */; };
+		11E466CE21748B5F002DE61F /* MonadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* MonadError.swift */; };
+		11E466CF21748B5F002DE61F /* MonadFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_74 /* MonadFilter.swift */; };
+		11E466D021748B5F002DE61F /* MonadReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* MonadReader.swift */; };
+		11E466D121748B5F002DE61F /* MonadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* MonadState.swift */; };
+		11E466D221748B5F002DE61F /* MonadWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* MonadWriter.swift */; };
+		11E466D321748B5F002DE61F /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* Monoid.swift */; };
+		11E466D421748B5F002DE61F /* MonoidK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* MonoidK.swift */; };
+		11E466D521748B5F002DE61F /* NonEmptyReducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* NonEmptyReducible.swift */; };
+		11E466D621748B5F002DE61F /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* Order.swift */; };
+		11E466D721748B5F002DE61F /* Profunctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115683AB21624C370001749D /* Profunctor.swift */; };
+		11E466D821748B5F002DE61F /* Reducible.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* Reducible.swift */; };
+		11E466D921748B5F002DE61F /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_83 /* Semigroup.swift */; };
+		11E466DA21748B5F002DE61F /* SemigroupK.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* SemigroupK.swift */; };
+		11E466DB21748B5F002DE61F /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111082CB2085D9DD00C8563C /* Show.swift */; };
+		11E466DC21748B5F002DE61F /* Traverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* Traverse.swift */; };
+		11E466DD21748B5F002DE61F /* TraverseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* TraverseFilter.swift */; };
+		11E466DE21748B5F002DE61F /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_64 /* Composed.swift */; };
+		11E466DF21748B5F002DE61F /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* ComposedFoldable.swift */; };
+		11E466E021748E65002DE61F /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52F3216B4ACE00495778 /* BrightFutures.framework */; };
+		11E466E121748E65002DE61F /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 114D52F2216B4ACE00495778 /* Result.framework */; };
 		11E531B1209AE89A00A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B2209AF13600A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
 		11E531B4209AF13700A78E8D /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531B0209AE89A00A78E8D /* Prism.swift */; };
@@ -241,34 +397,6 @@
 		11E531DF209B502900A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E0209B502F00A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
 		11E531E2209B503000A78E8D /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E531DE209B502900A78E8D /* Index.swift */; };
-		11F530782101DB5F00D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F530792101DD0300D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307A2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
-		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530822101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530832101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530842101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530852101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
-		11F530862101E16100D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530872101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F530882101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
-		11F5308B2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308C2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308D2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F5308E2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
-		11F530902101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530912101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530922101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530932101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
-		11F530942101E6D000D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530952101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F530962101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
-		11F53098210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F53099210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F5309A210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
-		11F5309B210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
 		11F5306A20FF8B1800D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
 		11F5306B20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
 		11F5306C20FF8B1900D92335 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5306820FF8B1500D92335 /* GetterTest.swift */; };
@@ -278,6 +406,27 @@
 		11F530732100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
 		11F530742100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
 		11F530752100959000D92335 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530722100959000D92335 /* TraversalTest.swift */; };
+		11F530782101DB5F00D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F530792101DD0300D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307B2101DD0400D92335 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530772101DB5F00D92335 /* Recursion.swift */; };
+		11F5307E2101DD7100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530802101DF8A00D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530822101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530832101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530852101E15E00D92335 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F530812101E15E00D92335 /* Birecursive.swift */; };
+		11F530862101E16100D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F530882101E16200D92335 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307F2101DF8A00D92335 /* Corecursive.swift */; };
+		11F5308B2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F5308C2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F5308E2101E1B000D92335 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308A2101E1B000D92335 /* Fix.swift */; };
+		11F530902101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530912101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530932101E6C700D92335 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5308F2101E6C600D92335 /* Mu.swift */; };
+		11F530942101E6D000D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F530952101E6D100D92335 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F5307D2101DD7100D92335 /* Recursive.swift */; };
+		11F53098210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
+		11F53099210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
+		11F5309B210207A100D92335 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F53097210207A100D92335 /* Nu.swift */; };
 		11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
 		11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FE0065209C50A700183AF6 /* IsoLaws.swift */; };
@@ -704,6 +853,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52DA216B49BD00495778 /* BrightFutures.framework in CopyFiles */,
+				114D52DB216B49BD00495778 /* Result.framework in CopyFiles */,
 				115E3C56216625B100709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C57216625B100709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C58216625B100709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -716,6 +867,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52E2216B4A0C00495778 /* Result.framework in CopyFiles */,
+				114D52E3216B4A0C00495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C6D216627F300709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C6E216627F300709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C6F216627F300709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -728,6 +881,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52F8216B4AFA00495778 /* BrightFutures.framework in CopyFiles */,
+				114D52F9216B4AFA00495778 /* Result.framework in CopyFiles */,
 				11D6DCEA21662EC00068D575 /* RxSwift.framework in CopyFiles */,
 				11D6DCEB21662EC00068D575 /* RxCocoa.framework in CopyFiles */,
 			);
@@ -739,6 +894,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D52FC216B4B3700495778 /* BrightFutures.framework in CopyFiles */,
+				114D52FD216B4B3700495778 /* Result.framework in CopyFiles */,
 				115E3C5C2166266600709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C5D2166266600709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C5E2166266600709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -753,6 +910,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D5304216B4B9000495778 /* Result.framework in CopyFiles */,
+				114D5305216B4B9000495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C8121662B4F00709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C8221662B4F00709EC3 /* RxSwift.framework in CopyFiles */,
 				D6D62481206814CE00739E2D /* Nimble.framework in CopyFiles */,
@@ -766,6 +925,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				114D5308216B4BC800495778 /* Result.framework in CopyFiles */,
+				114D5309216B4BC800495778 /* BrightFutures.framework in CopyFiles */,
 				115E3C62216626EB00709EC3 /* RxCocoa.framework in CopyFiles */,
 				115E3C63216626EB00709EC3 /* RxSwift.framework in CopyFiles */,
 				115E3C64216626EB00709EC3 /* RxBlocking.framework in CopyFiles */,
@@ -800,6 +961,35 @@
 		1145F2222166337A00D4AE81 /* SingleKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKTest.swift; sourceTree = "<group>"; };
 		1145F226216648E600D4AE81 /* MaybeKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaybeKTest.swift; sourceTree = "<group>"; };
 		1145F22A21664E2400D4AE81 /* ObservableKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableKTest.swift; sourceTree = "<group>"; };
+		114D52D4216B496000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52D6216B497400495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52D8216B49BD00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52D9216B49BD00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52DC216B49DA00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52DD216B49DA00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52E0216B4A0C00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52E1216B4A0C00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52E6216B4A3000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52E7216B4A3000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D52EA216B4AAC00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D52EB216B4AAC00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52EC216B4AAC00495778 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/tvOS/RxCocoa.framework; sourceTree = "<group>"; };
+		114D52ED216B4AAC00495778 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
+		114D52F2216B4ACE00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
+		114D52F3216B4ACE00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/watchOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52F6216B4AFA00495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/watchOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52F7216B4AFA00495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
+		114D52FA216B4B3600495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D52FB216B4B3700495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		114D52FE216B4B7000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D52FF216B4B7000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D5302216B4B9000495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
+		114D5303216B4B9000495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
+		114D5306216B4BC800495778 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
+		114D5307216B4BC800495778 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
+		114D530B216B4CD000495778 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		114D5311216B4F6C00495778 /* FutureK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureK.swift; sourceTree = "<group>"; };
+		114D5317216B6C1C00495778 /* FutureKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureKTest.swift; sourceTree = "<group>"; };
 		1156839C216247290001749D /* Invariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invariant.swift; sourceTree = "<group>"; };
 		115683A1216248FC0001749D /* Contravariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contravariant.swift; sourceTree = "<group>"; };
 		115683A621624AE80001749D /* Bifunctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bifunctor.swift; sourceTree = "<group>"; };
@@ -864,9 +1054,7 @@
 		11C9B6B020DBB02000AFD4AA /* Each.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Each.swift; sourceTree = "<group>"; };
 		11C9B6B220DBB0EC00AFD4AA /* FilterIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterIndex.swift; sourceTree = "<group>"; };
 		11C9B6B420DBB19500AFD4AA /* TraversalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalLaws.swift; sourceTree = "<group>"; };
-		11D6DCDD21662D4E0068D575 /* Bow_watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow_watchOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11D6DCDF21662D4E0068D575 /* Bow_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bow_watchOS.h; sourceTree = "<group>"; };
-		11D6DCE021662D4E0068D575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11D6DCDD21662D4E0068D575 /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D6DCE821662EC00068D575 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/watchOS/RxSwift.framework; sourceTree = "<group>"; };
 		11D6DCE921662EC00068D575 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/watchOS/RxCocoa.framework; sourceTree = "<group>"; };
 		11E531B0209AE89A00A78E8D /* Prism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
@@ -879,6 +1067,9 @@
 		11E531D3209B4CB700A78E8D /* BoundSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundSetter.swift; sourceTree = "<group>"; };
 		11E531D6209B4EF400A78E8D /* At.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = At.swift; sourceTree = "<group>"; };
 		11E531DE209B502900A78E8D /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
+		11F5306820FF8B1500D92335 /* GetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
+		11F5306D210086F500D92335 /* FoldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldTest.swift; sourceTree = "<group>"; };
+		11F530722100959000D92335 /* TraversalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalTest.swift; sourceTree = "<group>"; };
 		11F530772101DB5F00D92335 /* Recursion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursion.swift; sourceTree = "<group>"; };
 		11F5307D2101DD7100D92335 /* Recursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recursive.swift; sourceTree = "<group>"; };
 		11F5307F2101DF8A00D92335 /* Corecursive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Corecursive.swift; sourceTree = "<group>"; };
@@ -886,9 +1077,6 @@
 		11F5308A2101E1B000D92335 /* Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fix.swift; sourceTree = "<group>"; };
 		11F5308F2101E6C600D92335 /* Mu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mu.swift; sourceTree = "<group>"; };
 		11F53097210207A100D92335 /* Nu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nu.swift; sourceTree = "<group>"; };
-		11F5306820FF8B1500D92335 /* GetterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
-		11F5306D210086F500D92335 /* FoldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldTest.swift; sourceTree = "<group>"; };
-		11F530722100959000D92335 /* TraversalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraversalTest.swift; sourceTree = "<group>"; };
 		11FE0065209C50A700183AF6 /* IsoLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IsoLaws.swift; path = Tests/BowTests/Optics/Laws/IsoLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE0069209C5E3A00183AF6 /* LensLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LensLaws.swift; path = Tests/BowTests/Optics/Laws/LensLaws.swift; sourceTree = SOURCE_ROOT; };
 		11FE006D209C685F00183AF6 /* SetterLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetterLaws.swift; path = Tests/BowTests/Optics/Laws/SetterLaws.swift; sourceTree = SOURCE_ROOT; };
@@ -1044,6 +1232,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E466E021748E65002DE61F /* BrightFutures.framework in Frameworks */,
+				11E466E121748E65002DE61F /* Result.framework in Frameworks */,
 				11D6DCE521662E950068D575 /* RxCocoa.framework in Frameworks */,
 				11D6DCE621662E950068D575 /* RxSwift.framework in Frameworks */,
 			);
@@ -1062,6 +1252,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				114D52DE216B49DA00495778 /* BrightFutures.framework in Frameworks */,
+				114D52DF216B49DA00495778 /* Result.framework in Frameworks */,
 				115E3C462166228400709EC3 /* RxBlocking.framework in Frameworks */,
 				115E3C432166228400709EC3 /* RxCocoa.framework in Frameworks */,
 				115E3C442166228400709EC3 /* RxSwift.framework in Frameworks */,
@@ -1080,6 +1272,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D52E8216B4A3000495778 /* BrightFutures.framework in Frameworks */,
+				114D52E9216B4A3000495778 /* Result.framework in Frameworks */,
+				114D52E4216B4A3000495778 /* RxCocoa.framework in Frameworks */,
+				114D52E5216B4A3000495778 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,7 +1291,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				115E3C50216622EE00709EC3 /* RxBlocking.framework in Frameworks */,
+				114D52D7216B497400495778 /* BrightFutures.framework in Frameworks */,
+				114D52D5216B496000495778 /* Result.framework in Frameworks */,
 				115E3C4D216622EE00709EC3 /* RxCocoa.framework in Frameworks */,
 				115E3C4E216622EE00709EC3 /* RxSwift.framework in Frameworks */,
 			);
@@ -1174,6 +1371,30 @@
 			path = Typeclasses;
 			sourceTree = "<group>";
 		};
+		114D530A216B4CB400495778 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				114D530B216B4CD000495778 /* Result.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		114D5310216B4F5300495778 /* BrightFutures */ = {
+			isa = PBXGroup;
+			children = (
+				114D5311216B4F6C00495778 /* FutureK.swift */,
+			);
+			path = BrightFutures;
+			sourceTree = "<group>";
+		};
+		114D5316216B6C0000495778 /* BrightFutures */ = {
+			isa = PBXGroup;
+			children = (
+				114D5317216B6C1C00495778 /* FutureKTest.swift */,
+			);
+			path = BrightFutures;
+			sourceTree = "<group>";
+		};
 		115683C9216268810001749D /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -1213,15 +1434,6 @@
 				11E531D5209B4ECC00A78E8D /* Typeclasses */,
 			);
 			path = Optics;
-			sourceTree = "<group>";
-		};
-		11D6DCDE21662D4E0068D575 /* Bow-watchOS */ = {
-			isa = PBXGroup;
-			children = (
-				11D6DCDF21662D4E0068D575 /* Bow_watchOS.h */,
-				11D6DCE021662D4E0068D575 /* Info.plist */,
-			);
-			path = "Bow-watchOS";
 			sourceTree = "<group>";
 		};
 		11E531D5209B4ECC00A78E8D /* Typeclasses */ = {
@@ -1343,6 +1555,14 @@
 		D6D623EF2068134800739E2D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				114D52D6216B497400495778 /* BrightFutures.framework */,
+				114D52F3216B4ACE00495778 /* BrightFutures.framework */,
+				114D52D4216B496000495778 /* Result.framework */,
+				114D52DC216B49DA00495778 /* BrightFutures.framework */,
+				114D52DD216B49DA00495778 /* Result.framework */,
+				114D52E6216B4A3000495778 /* BrightFutures.framework */,
+				114D52E7216B4A3000495778 /* Result.framework */,
+				114D52F2216B4ACE00495778 /* Result.framework */,
 				115E3C452166228400709EC3 /* RxBlocking.framework */,
 				115E3C4F216622EE00709EC3 /* RxBlocking.framework */,
 				115E3C722166294400709EC3 /* RxBlocking.framework */,
@@ -1363,6 +1583,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_111 /* IOTest.swift */,
+				114D5316216B6C0000495778 /* BrightFutures */,
 				1145F2202166332F00D4AE81 /* Rx */,
 				1145F2212166334500D4AE81 /* Typeclasses */,
 			);
@@ -1458,6 +1679,7 @@
 				OBJ_33 /* Try.swift */,
 				OBJ_34 /* Tuple.swift */,
 				OBJ_35 /* Validated.swift */,
+				114D530A216B4CB400495778 /* Extensions */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1471,7 +1693,7 @@
 				D6D6251D2068178800739E2D /* Bow.framework */,
 				D6D6255B206817A700739E2D /* BowTests.xctest */,
 				D6DBDE9220684BEB004F979F /* Bow.framework */,
-				11D6DCDD21662D4E0068D575 /* Bow_watchOS.framework */,
+				11D6DCDD21662D4E0068D575 /* Bow.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1480,6 +1702,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_38 /* IO.swift */,
+				114D5310216B4F5300495778 /* BrightFutures */,
 				1181FD4C2164DB9A0037B298 /* Rx */,
 				115683C9216268810001749D /* Typeclasses */,
 			);
@@ -1511,11 +1734,28 @@
 		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
+				114D52D8216B49BD00495778 /* BrightFutures.framework */,
+				114D52E1216B4A0C00495778 /* BrightFutures.framework */,
+				114D52EB216B4AAC00495778 /* BrightFutures.framework */,
+				114D52FF216B4B7000495778 /* BrightFutures.framework */,
+				114D5303216B4B9000495778 /* BrightFutures.framework */,
+				114D5307216B4BC800495778 /* BrightFutures.framework */,
+				114D52D9216B49BD00495778 /* Result.framework */,
+				114D52E0216B4A0C00495778 /* Result.framework */,
+				114D52EA216B4AAC00495778 /* Result.framework */,
+				114D52F6216B4AFA00495778 /* BrightFutures.framework */,
+				114D52F7216B4AFA00495778 /* Result.framework */,
+				114D52FA216B4B3600495778 /* BrightFutures.framework */,
+				114D52FB216B4B3700495778 /* Result.framework */,
+				114D52FE216B4B7000495778 /* Result.framework */,
+				114D5302216B4B9000495778 /* Result.framework */,
+				114D5306216B4BC800495778 /* Result.framework */,
+				114D52EC216B4AAC00495778 /* RxCocoa.framework */,
+				114D52ED216B4AAC00495778 /* RxSwift.framework */,
 				115E3C79216629AE00709EC3 /* RxBlocking.framework */,
 				115E3C7F21662B4E00709EC3 /* RxCocoa.framework */,
 				115E3C8021662B4F00709EC3 /* RxSwift.framework */,
 				OBJ_6 /* Package.swift */,
-				11D6DCDE21662D4E0068D575 /* Bow-watchOS */,
 				D68A51F9206811C6008DA945 /* Build */,
 				D6D623EF2068134800739E2D /* Frameworks */,
 				OBJ_218 /* Products */,
@@ -1701,23 +1941,11 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		11D6DCD821662D4E0068D575 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				11D6DCE121662D4E0068D575 /* Bow_watchOS.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		11D6DCDC21662D4E0068D575 /* Bow-watchOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11D6DCE221662D4E0068D575 /* Build configuration list for PBXNativeTarget "Bow-watchOS" */;
 			buildPhases = (
-				11D6DCD821662D4E0068D575 /* Headers */,
 				11D6DCD921662D4E0068D575 /* Sources */,
 				11D6DCDA21662D4E0068D575 /* Frameworks */,
 				11D6DCDB21662D4E0068D575 /* Resources */,
@@ -1730,7 +1958,7 @@
 			);
 			name = "Bow-watchOS";
 			productName = "Bow-watchOS";
-			productReference = 11D6DCDD21662D4E0068D575 /* Bow_watchOS.framework */;
+			productReference = 11D6DCDD21662D4E0068D575 /* Bow.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		"Bow::Bow" /* Bow */ = {
@@ -1854,7 +2082,8 @@
 				TargetAttributes = {
 					11D6DCDC21662D4E0068D575 = {
 						CreatedOnToolsVersion = 10.0;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Manual;
 					};
 					"Bow::Bow" = {
 						LastSwiftMigration = 1000;
@@ -1903,6 +2132,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114D52EE216B4AAC00495778 /* Result.framework in Resources */,
+				114D52EF216B4AAC00495778 /* BrightFutures.framework in Resources */,
+				114D52F0216B4AAC00495778 /* RxCocoa.framework in Resources */,
+				114D52F1216B4AAC00495778 /* RxSwift.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +2153,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1940,6 +2175,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1951,20 +2188,24 @@
 		};
 		115E3C7E21662AD900709EC3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		11D6DCEC21662EC80068D575 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1976,6 +2217,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/watchOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/watchOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/watchOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/watchOS/BrightFutures.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1996,6 +2239,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -2013,6 +2258,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -2031,6 +2278,8 @@
 				"$(SRCROOT)/Carthage/Build/Mac/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/Mac/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/Result.framework",
+				"$(SRCROOT)/Carthage/Build/Mac/BrightFutures.framework",
 			);
 			outputPaths = (
 			);
@@ -2045,6 +2294,129 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E4666721748B5F002DE61F /* BooleanFunctions.swift in Sources */,
+				11E4666821748B5F002DE61F /* Curry.swift in Sources */,
+				11E4666921748B5F002DE61F /* HigherKinds.swift in Sources */,
+				11E4666A21748B5F002DE61F /* PartialApplication.swift in Sources */,
+				11E4666B21748B5F002DE61F /* Predef.swift in Sources */,
+				11E4666C21748B5F002DE61F /* Typeclass.swift in Sources */,
+				11E4666D21748B5F002DE61F /* Cokleisli.swift in Sources */,
+				11E4666E21748B5F002DE61F /* Function0.swift in Sources */,
+				11E4666F21748B5F002DE61F /* Function1.swift in Sources */,
+				11E4667021748B5F002DE61F /* FunctionK.swift in Sources */,
+				11E4667121748B5F002DE61F /* Kleisli.swift in Sources */,
+				11E4667221748B5F002DE61F /* KleisliOperator.swift in Sources */,
+				11E4667321748B5F002DE61F /* Const.swift in Sources */,
+				11E4667421748B5F002DE61F /* Coproduct.swift in Sources */,
+				11E4667521748B5F002DE61F /* Coreader.swift in Sources */,
+				11E4667621748B5F002DE61F /* Either.swift in Sources */,
+				11E4667721748B5F002DE61F /* Eval.swift in Sources */,
+				11E4667821748B5F002DE61F /* FlatmapOperator.swift in Sources */,
+				11E4667921748B5F002DE61F /* Id.swift in Sources */,
+				11E4667A21748B5F002DE61F /* Ior.swift in Sources */,
+				11E4667B21748B5F002DE61F /* ListK.swift in Sources */,
+				11E4667C21748B5F002DE61F /* MapK.swift in Sources */,
+				11E4667D21748B5F002DE61F /* NonEmptyList.swift in Sources */,
+				11E4667E21748B5F002DE61F /* Option.swift in Sources */,
+				11E4667F21748B5F002DE61F /* Reader.swift in Sources */,
+				11E4668021748B5F002DE61F /* SetK.swift in Sources */,
+				11E4668121748B5F002DE61F /* State.swift in Sources */,
+				11E4668221748B5F002DE61F /* Try.swift in Sources */,
+				11E4668321748B5F002DE61F /* Tuple.swift in Sources */,
+				11E4668421748B5F002DE61F /* Validated.swift in Sources */,
+				11E4668521748B5F002DE61F /* IO.swift in Sources */,
+				11E4668621748B5F002DE61F /* MaybeK.swift in Sources */,
+				11E4668721748B5F002DE61F /* ObservableK.swift in Sources */,
+				11E4668821748B5F002DE61F /* SingleK.swift in Sources */,
+				11E4668921748B5F002DE61F /* Async.swift in Sources */,
+				11E4668A21748B5F002DE61F /* ConcurrentEffect.swift in Sources */,
+				11E4668B21748B5F002DE61F /* Effect.swift in Sources */,
+				11E4668C21748B5F002DE61F /* MonadDefer.swift in Sources */,
+				11E4668D21748B5F002DE61F /* Cofree.swift in Sources */,
+				11E4668E21748B5F002DE61F /* Coyoneda.swift in Sources */,
+				11E4668F21748B5F002DE61F /* Free.swift in Sources */,
+				11E4669021748B5F002DE61F /* Yoneda.swift in Sources */,
+				11E4669121748B5F002DE61F /* BoolInstances.swift in Sources */,
+				11E4669221748B5F002DE61F /* MaybeInstances.swift in Sources */,
+				11E4669321748B5F002DE61F /* NumberInstances.swift in Sources */,
+				11E4669421748B5F002DE61F /* StringInstances.swift in Sources */,
+				11E4669521748B5F002DE61F /* BoundSetter.swift in Sources */,
+				11E4669621748B5F002DE61F /* Fold.swift in Sources */,
+				11E4669721748B5F002DE61F /* Getter.swift in Sources */,
+				11E4669821748B5F002DE61F /* Iso.swift in Sources */,
+				11E4669921748B5F002DE61F /* Lens.swift in Sources */,
+				11E4669A21748B5F002DE61F /* Optional.swift in Sources */,
+				11E4669B21748B5F002DE61F /* Prism.swift in Sources */,
+				11E4669C21748B5F002DE61F /* Setter.swift in Sources */,
+				11E4669D21748B5F002DE61F /* Traversal.swift in Sources */,
+				11E4669E21748B5F002DE61F /* At+Optics.swift in Sources */,
+				11E4669F21748B5F002DE61F /* Each+Optics.swift in Sources */,
+				11E466A021748B5F002DE61F /* EitherOpticsInstances.swift in Sources */,
+				11E466A121748B5F002DE61F /* ListKOpticsInstances.swift in Sources */,
+				11E466A221748B5F002DE61F /* MaybeOpticsInstances.swift in Sources */,
+				11E466A321748B5F002DE61F /* NonEmptyListOpticsInstances.swift in Sources */,
+				11E466A421748B5F002DE61F /* StringOpticsInstances.swift in Sources */,
+				11E466A521748B5F002DE61F /* TryOpticsInstances.swift in Sources */,
+				11E466A621748B5F002DE61F /* Either+Optics.swift in Sources */,
+				11E466A721748B5F002DE61F /* Id+Optics.swift in Sources */,
+				11E466A821748B5F002DE61F /* ListK+Optics.swift in Sources */,
+				11E466A921748B5F002DE61F /* NonEmptyList+Optics.swift in Sources */,
+				11E466AA21748B5F002DE61F /* Maybe+Optics.swift in Sources */,
+				11E466AB21748B5F002DE61F /* String+Optics.swift in Sources */,
+				11E466AC21748B5F002DE61F /* Try+Optics.swift in Sources */,
+				11E466AD21748B5F002DE61F /* Validated+Optics.swift in Sources */,
+				11E466AE21748B5F002DE61F /* At.swift in Sources */,
+				11E466AF21748B5F002DE61F /* Each.swift in Sources */,
+				11E466B021748B5F002DE61F /* FilterIndex.swift in Sources */,
+				11E466B121748B5F002DE61F /* Index.swift in Sources */,
+				11E466B221748B5F002DE61F /* Fix.swift in Sources */,
+				11E466B321748B5F002DE61F /* Mu.swift in Sources */,
+				11E466B421748B5F002DE61F /* Nu.swift in Sources */,
+				11E466B521748B5F002DE61F /* Birecursive.swift in Sources */,
+				11E466B621748B5F002DE61F /* Corecursive.swift in Sources */,
+				11E466B721748B5F002DE61F /* Recursive.swift in Sources */,
+				11E466B821748B5F002DE61F /* Recursion.swift in Sources */,
+				11E466B921748B5F002DE61F /* EitherT.swift in Sources */,
+				11E466BA21748B5F002DE61F /* OptionT.swift in Sources */,
+				11E466BB21748B5F002DE61F /* StateT.swift in Sources */,
+				11E466BC21748B5F002DE61F /* WriterT.swift in Sources */,
+				11E466BD21748B5F002DE61F /* Alternative.swift in Sources */,
+				11E466BE21748B5F002DE61F /* Applicative.swift in Sources */,
+				11E466BF21748B5F002DE61F /* ApplicativeError.swift in Sources */,
+				11E466C021748B5F002DE61F /* Bifoldable.swift in Sources */,
+				11E466C121748B5F002DE61F /* Bifunctor.swift in Sources */,
+				11E466C221748B5F002DE61F /* Bimonad.swift in Sources */,
+				11E466C321748B5F002DE61F /* Category.swift in Sources */,
+				11E466C421748B5F002DE61F /* Comonad.swift in Sources */,
+				11E466C521748B5F002DE61F /* Contravariant.swift in Sources */,
+				11E466C621748B5F002DE61F /* Eq.swift in Sources */,
+				11E466C721748B5F002DE61F /* Foldable.swift in Sources */,
+				11E466C821748B5F002DE61F /* Functor.swift in Sources */,
+				11E466C921748B5F002DE61F /* FunctorFilter.swift in Sources */,
+				11E466CA21748B5F002DE61F /* Inject.swift in Sources */,
+				11E466CB21748B5F002DE61F /* Invariant.swift in Sources */,
+				11E466CC21748B5F002DE61F /* Monad.swift in Sources */,
+				11E466CD21748B5F002DE61F /* MonadCombine.swift in Sources */,
+				11E466CE21748B5F002DE61F /* MonadError.swift in Sources */,
+				11E466CF21748B5F002DE61F /* MonadFilter.swift in Sources */,
+				11E466D021748B5F002DE61F /* MonadReader.swift in Sources */,
+				11E466D121748B5F002DE61F /* MonadState.swift in Sources */,
+				11E466D221748B5F002DE61F /* MonadWriter.swift in Sources */,
+				11E466D321748B5F002DE61F /* Monoid.swift in Sources */,
+				11E466D421748B5F002DE61F /* MonoidK.swift in Sources */,
+				11E466D521748B5F002DE61F /* NonEmptyReducible.swift in Sources */,
+				11E466D621748B5F002DE61F /* Order.swift in Sources */,
+				11E466D721748B5F002DE61F /* Profunctor.swift in Sources */,
+				11E466D821748B5F002DE61F /* Reducible.swift in Sources */,
+				11E466D921748B5F002DE61F /* Semigroup.swift in Sources */,
+				11E466DA21748B5F002DE61F /* SemigroupK.swift in Sources */,
+				11E466DB21748B5F002DE61F /* Show.swift in Sources */,
+				11E466DC21748B5F002DE61F /* Traverse.swift in Sources */,
+				11E466DD21748B5F002DE61F /* TraverseFilter.swift in Sources */,
+				11E466DE21748B5F002DE61F /* Composed.swift in Sources */,
+				11E466DF21748B5F002DE61F /* ComposedFoldable.swift in Sources */,
+				114D5315216B4F6C00495778 /* FutureK.swift in Sources */,
+				114D530F216B4CD000495778 /* Result.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2075,6 +2447,7 @@
 				D6D6244C2068141800739E2D /* EitherTest.swift in Sources */,
 				D6D6244D2068141800739E2D /* EvalTest.swift in Sources */,
 				11FE0067209C50D300183AF6 /* IsoLaws.swift in Sources */,
+				114D5319216B6C1C00495778 /* FutureKTest.swift in Sources */,
 				11FE0073209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6244E2068141800739E2D /* IdTest.swift in Sources */,
 				11635BB720F76131007BB4FA /* TraverseLaws.swift in Sources */,
@@ -2177,6 +2550,7 @@
 				D6D624E62068178800739E2D /* NonEmptyList.swift in Sources */,
 				D6D624E72068178800739E2D /* Reader.swift in Sources */,
 				D6D624E82068178800739E2D /* State.swift in Sources */,
+				114D530D216B4CD000495778 /* Result.swift in Sources */,
 				D6D624E92068178800739E2D /* Try.swift in Sources */,
 				1181FD7E2165F7A00037B298 /* ObservableK.swift in Sources */,
 				D6D624EA2068178800739E2D /* Tuple.swift in Sources */,
@@ -2252,6 +2626,7 @@
 				D6D6250E2068178800739E2D /* MonadState.swift in Sources */,
 				D60A59DE21079832005D53F3 /* SetK.swift in Sources */,
 				D6D6250F2068178800739E2D /* MonadWriter.swift in Sources */,
+				114D5313216B4F6C00495778 /* FutureK.swift in Sources */,
 				D6D625102068178800739E2D /* Monoid.swift in Sources */,
 				D6D625112068178800739E2D /* MonoidK.swift in Sources */,
 				D6D625122068178800739E2D /* NonEmptyReducible.swift in Sources */,
@@ -2295,6 +2670,7 @@
 				D6D6252B206817A700739E2D /* EitherTest.swift in Sources */,
 				D6D6252C206817A700739E2D /* EvalTest.swift in Sources */,
 				11FE0068209C50D400183AF6 /* IsoLaws.swift in Sources */,
+				114D531A216B6C1C00495778 /* FutureKTest.swift in Sources */,
 				11FE0074209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				D6D6252D206817A700739E2D /* IdTest.swift in Sources */,
 				11635BB820F76131007BB4FA /* TraverseLaws.swift in Sources */,
@@ -2526,6 +2902,7 @@
 				D6DBDEAD20684C38004F979F /* NonEmptyList.swift in Sources */,
 				D6DBDEAE20684C38004F979F /* Reader.swift in Sources */,
 				D6DBDEAF20684C38004F979F /* State.swift in Sources */,
+				114D530E216B4CD000495778 /* Result.swift in Sources */,
 				D6DBDEB020684C38004F979F /* Try.swift in Sources */,
 				1181FD802165F7A00037B298 /* ObservableK.swift in Sources */,
 				D6DBDEB120684C38004F979F /* Tuple.swift in Sources */,
@@ -2601,6 +2978,7 @@
 				D6DBDED520684C38004F979F /* MonadState.swift in Sources */,
 				D60A59E021079833005D53F3 /* SetK.swift in Sources */,
 				D6DBDED620684C38004F979F /* MonadWriter.swift in Sources */,
+				114D5314216B4F6C00495778 /* FutureK.swift in Sources */,
 				D6DBDED720684C38004F979F /* Monoid.swift in Sources */,
 				D6DBDED820684C38004F979F /* MonoidK.swift in Sources */,
 				D6DBDED920684C38004F979F /* NonEmptyReducible.swift in Sources */,
@@ -2644,6 +3022,7 @@
 				OBJ_254 /* EitherTest.swift in Sources */,
 				OBJ_255 /* EvalTest.swift in Sources */,
 				11FE0066209C50A700183AF6 /* IsoLaws.swift in Sources */,
+				114D5318216B6C1C00495778 /* FutureKTest.swift in Sources */,
 				11FE0072209C6DEC00183AF6 /* PrismLaws.swift in Sources */,
 				OBJ_256 /* IdTest.swift in Sources */,
 				11635BB620F76131007BB4FA /* TraverseLaws.swift in Sources */,
@@ -2746,6 +3125,7 @@
 				OBJ_402 /* State.swift in Sources */,
 				OBJ_403 /* Try.swift in Sources */,
 				1116208920F4999D00685EC4 /* ListKOpticsInstances.swift in Sources */,
+				114D530C216B4CD000495778 /* Result.swift in Sources */,
 				1181FD7D2165F7A00037B298 /* ObservableK.swift in Sources */,
 				OBJ_404 /* Tuple.swift in Sources */,
 				OBJ_405 /* Validated.swift in Sources */,
@@ -2821,6 +3201,7 @@
 				OBJ_440 /* MonadState.swift in Sources */,
 				OBJ_441 /* MonadWriter.swift in Sources */,
 				11C9B6AF20DB8A8D00AFD4AA /* Traversal.swift in Sources */,
+				114D5312216B4F6C00495778 /* FutureK.swift in Sources */,
 				1116206020F38A5C00685EC4 /* String+Optics.swift in Sources */,
 				OBJ_442 /* Monoid.swift in Sources */,
 				11F53098210207A100D92335 /* Nu.swift in Sources */,
@@ -2874,9 +3255,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2892,16 +3274,18 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Bow-watchOS/Info.plist";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.Bow-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowwatchOS";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2926,10 +3310,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -2941,13 +3326,14 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "Bow-watchOS/Info.plist";
+				INFOPLIST_FILE = Bow.xcodeproj/Bow_Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.Bow-watchOS";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arrow-kt.bowwatchOS";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;

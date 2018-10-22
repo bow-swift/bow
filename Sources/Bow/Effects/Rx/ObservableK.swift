@@ -163,24 +163,24 @@ public extension ObservableK {
         return ObservableKApplicativeError<E>()
     }
     
-    public static func monadError() -> ObservableKMonadError {
-        return ObservableKMonadError()
+    public static func monadError<E>() -> ObservableKMonadError<E> {
+        return ObservableKMonadError<E>()
     }
     
-    public static func monadDefer() -> ObservableKMonadDefer {
-        return ObservableKMonadDefer()
+    public static func monadDefer<E>() -> ObservableKMonadDefer<E> {
+        return ObservableKMonadDefer<E>()
     }
     
-    public static func async() -> ObservableKAsync {
-        return ObservableKAsync()
+    public static func async<E>() -> ObservableKAsync<E> {
+        return ObservableKAsync<E>()
     }
     
-    public static func effect() -> ObservableKEffect {
-        return ObservableKEffect()
+    public static func effect<E>() -> ObservableKEffect<E> {
+        return ObservableKEffect<E>()
     }
     
-    public static func concurrentEffect() -> ObservableKConcurrentEffect {
-        return ObservableKConcurrentEffect()
+    public static func concurrentEffect<E>() -> ObservableKConcurrentEffect<E> {
+        return ObservableKConcurrentEffect<E>()
     }
 }
 
@@ -242,37 +242,37 @@ public class ObservableKApplicativeError<Err> : ObservableKApplicative, Applicat
     }
 }
 
-public class ObservableKMonadError : ObservableKMonad, MonadError {
-    public typealias E = Error
+public class ObservableKMonadError<Err> : ObservableKMonad, MonadError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> ObservableKOf<A> {
+    public func raiseError<A>(_ e: Err) -> ObservableKOf<A> {
         return ObservableK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Error) -> ObservableKOf<A>) -> ObservableKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e).fix() }
+    public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Err) -> ObservableKOf<A>) -> ObservableKOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 
-public class ObservableKMonadDefer : ObservableKMonadError, MonadDefer {
+public class ObservableKMonadDefer<Err> : ObservableKMonadError<Err>, MonadDefer where Err : Error {
     public func suspend<A>(_ fa: @escaping () -> ObservableKOf<A>) -> ObservableKOf<A> {
         return ObservableK.suspend(fa)
     }
 }
 
-public class ObservableKAsync : ObservableKMonadDefer, Async {
+public class ObservableKAsync<Err> : ObservableKMonadDefer<Err>, Async where Err : Error {
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> ObservableKOf<A> {
         return ObservableK.runAsync(fa)
     }
 }
 
-public class ObservableKEffect : ObservableKAsync, Effect {
+public class ObservableKEffect<Err> : ObservableKAsync<Err>, Effect where Err : Error {
     public func runAsync<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableKOf<Unit> {
         return fa.fix().runAsync(callback)
     }
 }
 
-public class ObservableKConcurrentEffect : ObservableKEffect, ConcurrentEffect {
+public class ObservableKConcurrentEffect<Err> : ObservableKEffect<Err>, ConcurrentEffect where Err : Error {
     public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableKOf<Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }

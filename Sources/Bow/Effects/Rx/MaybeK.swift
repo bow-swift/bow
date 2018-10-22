@@ -136,20 +136,20 @@ public extension MaybeK {
         return MaybeKApplicativeError<E>()
     }
     
-    public static func monadError() -> MaybeKMonadError {
-        return MaybeKMonadError()
+    public static func monadError<E>() -> MaybeKMonadError<E> {
+        return MaybeKMonadError<E>()
     }
     
-    public static func monadDefer() -> MaybeKMonadDefer {
-        return MaybeKMonadDefer()
+    public static func monadDefer<E>() -> MaybeKMonadDefer<E> {
+        return MaybeKMonadDefer<E>()
     }
     
-    public static func async() -> MaybeKAsync {
-        return MaybeKAsync()
+    public static func async<E>() -> MaybeKAsync<E> {
+        return MaybeKAsync<E>()
     }
     
-    public static func effect() -> MaybeKEffect {
-        return MaybeKEffect()
+    public static func effect<E>() -> MaybeKEffect<E> {
+        return MaybeKEffect<E>()
     }
 }
 
@@ -205,31 +205,31 @@ public class MaybeKApplicativeError<Err> : MaybeKApplicative, ApplicativeError w
     }
 }
 
-public class MaybeKMonadError : MaybeKMonad, MonadError {
-    public typealias E = Error
+public class MaybeKMonadError<Err> : MaybeKMonad, MonadError where Err : Error {
+    public typealias E = Err
     
-    public func raiseError<A>(_ e: Error) -> MaybeKOf<A> {
+    public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
         return MaybeK.raiseError(e)
     }
     
-    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Error) -> MaybeKOf<A>) -> MaybeKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e).fix() }
+    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
+        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
     }
 }
 
-public class MaybeKMonadDefer : MaybeKMonadError, MonadDefer {
+public class MaybeKMonadDefer<Err> : MaybeKMonadError<Err>, MonadDefer where Err : Error {
     public func suspend<A>(_ fa: @escaping () -> MaybeKOf<A>) -> MaybeKOf<A> {
         return MaybeK.suspend(fa)
     }
 }
 
-public class MaybeKAsync : MaybeKMonadDefer, Async {
+public class MaybeKAsync<Err> : MaybeKMonadDefer<Err>, Async where Err : Error {
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> MaybeKOf<A> {
         return MaybeK.async(fa)
     }
 }
 
-public class MaybeKEffect : MaybeKAsync, Effect {
+public class MaybeKEffect<Err> : MaybeKAsync<Err>, Effect where Err : Error {
     public func runAsync<A>(_ fa: MaybeKOf<A>, _ callback: @escaping (Either<Error, A>) -> MaybeKOf<Unit>) -> MaybeKOf<Unit> {
         return fa.fix().runAsync(callback)
     }
