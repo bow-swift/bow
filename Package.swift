@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/Quick/Nimble", from: "7.0.2")
         .package(url: "https://github.com/ReactiveX/RxSwift.git", "4.0.0" ..< "5.0.0")
         .package(url: "https://github.com/antitypical/Result", "4.0.0")
-        .package(url: "https://github.com/Thomvis/BrightFutures", 7.0.0)
+        .package(url: "https://github.com/Thomvis/BrightFutures", "7.0.0")
     ],
     targets: [
         .target(
