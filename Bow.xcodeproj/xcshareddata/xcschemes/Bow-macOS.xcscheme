@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6D624D12068178800739E2D"
-               BuildableName = "Bow.framework"
+               BuildableName = "Bow-macOS.framework"
                BlueprintName = "Bow-macOS"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6D624D12068178800739E2D"
-            BuildableName = "Bow.framework"
+            BuildableName = "Bow-macOS.framework"
             BlueprintName = "Bow-macOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6D624D12068178800739E2D"
-            BuildableName = "Bow.framework"
+            BuildableName = "Bow-macOS.framework"
             BlueprintName = "Bow-macOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6D624D12068178800739E2D"
-            BuildableName = "Bow.framework"
+            BuildableName = "Bow-macOS.framework"
             BlueprintName = "Bow-macOS"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
