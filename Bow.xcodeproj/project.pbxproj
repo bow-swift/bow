@@ -945,6 +945,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11DDCD19217F163400844D9D /* Syntax */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
+				8BA0F43C217E2E9200969984 /* Curry.swift */,
+				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
+				8BA0F450217E2E9200969984 /* Predef.swift */,
+			);
+			path = Syntax;
+			sourceTree = "<group>";
+		};
+		11DDCD1A217F165400844D9D /* Syntax */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */,
+				8BA0F3A7217E2DEF00969984 /* CurryTest.swift */,
+				8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */,
+				8BA0F393217E2DEF00969984 /* PredefTest.swift */,
+			);
+			path = Syntax;
+			sourceTree = "<group>";
+		};
 		8BA0F363217E2CB100969984 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,18 +995,15 @@
 		8BA0F389217E2DEF00969984 /* BowTests */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */,
-				8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */,
-				8BA0F393217E2DEF00969984 /* PredefTest.swift */,
-				8BA0F3A7217E2DEF00969984 /* CurryTest.swift */,
-				8BA0F38C217E2DEF00969984 /* Free */,
 				8BA0F38E217E2DEF00969984 /* Arrow */,
-				8BA0F394217E2DEF00969984 /* Transformers */,
-				8BA0F399217E2DEF00969984 /* Instances */,
-				8BA0F39D217E2DEF00969984 /* Effects */,
 				8BA0F3A8217E2DEF00969984 /* Data */,
-				8BA0F3BA217E2DEF00969984 /* Typeclasses */,
+				8BA0F39D217E2DEF00969984 /* Effects */,
+				8BA0F38C217E2DEF00969984 /* Free */,
+				8BA0F399217E2DEF00969984 /* Instances */,
 				8BA0F3D7217E2DEF00969984 /* Optics */,
+				11DDCD1A217F165400844D9D /* Syntax */,
+				8BA0F394217E2DEF00969984 /* Transformers */,
+				8BA0F3BA217E2DEF00969984 /* Typeclasses */,
 			);
 			path = BowTests;
 			sourceTree = "<group>";
@@ -1158,22 +1177,19 @@
 		8BA0F43B217E2E9200969984 /* Bow */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F43C217E2E9200969984 /* Curry.swift */,
-				8BA0F449217E2E9200969984 /* Typeclass.swift */,
-				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
-				8BA0F450217E2E9200969984 /* Predef.swift */,
-				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
 				8BA0F48B217E2E9200969984 /* HigherKinds.swift */,
-				8BA0F43D217E2E9200969984 /* Free */,
+				8BA0F449217E2E9200969984 /* Typeclass.swift */,
 				8BA0F442217E2E9200969984 /* Arrow */,
-				8BA0F44B217E2E9200969984 /* Transformers */,
-				8BA0F451217E2E9200969984 /* RecursionSchemes */,
+				8BA0F472217E2E9200969984 /* Data */,
+				8BA0F465217E2E9200969984 /* Effects */,
+				8BA0F43D217E2E9200969984 /* Free */,
 				8BA0F45C217E2E9200969984 /* Generic */,
 				8BA0F460217E2E9200969984 /* Instances */,
-				8BA0F465217E2E9200969984 /* Effects */,
-				8BA0F472217E2E9200969984 /* Data */,
-				8BA0F48C217E2E9200969984 /* Typeclasses */,
 				8BA0F4B1217E2E9200969984 /* Optics */,
+				8BA0F451217E2E9200969984 /* RecursionSchemes */,
+				11DDCD19217F163400844D9D /* Syntax */,
+				8BA0F44B217E2E9200969984 /* Transformers */,
+				8BA0F48C217E2E9200969984 /* Typeclasses */,
 			);
 			path = Bow;
 			sourceTree = "<group>";
