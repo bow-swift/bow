@@ -17,9 +17,7 @@ class MemoizationTest: XCTestCase {
             timesCalled = 0
             let memoizedFunction = memoize(longRunningOperation)
             
-            for _ in 0 ..< times {
-                let _ = memoizedFunction(input)
-            }
+            (0 ..< times).forEach { _ in let _ = memoizedFunction(input) }
             
             return timesCalled == 1
         }
@@ -37,9 +35,7 @@ class MemoizationTest: XCTestCase {
                 return x == 0 ? 1 : x * factorial(x - 1)
             }
             
-            for _ in 0 ..< times {
-                let _ = memoizedFactorial(input)
-            }
+            (0 ..< times).forEach { _ in let _ = memoizedFactorial(input) }
             
             return timesCalled[input] == 1
         }
