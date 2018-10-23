@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1D217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1E217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1F217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
+		11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
+		11DDCD24217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
+		11DDCD25217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
+		11DDCD26217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
+		11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD27217F1FC200844D9D /* ReverseTest.swift */; };
 		8BA0F368217E2CB100969984 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		8BA0F369217E2CB100969984 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		8BA0F36A217E2CB100969984 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
@@ -646,6 +656,10 @@
 
 /* Begin PBXFileReference section */
 		11D6DCDD21662D4E0068D575 /* Bow-watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Bow-watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
+		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
+		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
+		11DDCD27217F1FC200844D9D /* ReverseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseTest.swift; sourceTree = "<group>"; };
 		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -945,6 +959,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11DDCD19217F163400844D9D /* Syntax */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
+				8BA0F43C217E2E9200969984 /* Curry.swift */,
+				11DDCD1B217F171900844D9D /* Memoization.swift */,
+				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
+				8BA0F450217E2E9200969984 /* Predef.swift */,
+				11DDCD22217F1E2B00844D9D /* Reverse.swift */,
+			);
+			path = Syntax;
+			sourceTree = "<group>";
+		};
+		11DDCD1A217F165400844D9D /* Syntax */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */,
+				8BA0F3A7217E2DEF00969984 /* CurryTest.swift */,
+				11DDCD20217F194B00844D9D /* MemoizationTest.swift */,
+				8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */,
+				8BA0F393217E2DEF00969984 /* PredefTest.swift */,
+				11DDCD27217F1FC200844D9D /* ReverseTest.swift */,
+			);
+			path = Syntax;
+			sourceTree = "<group>";
+		};
 		8BA0F363217E2CB100969984 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,18 +1013,15 @@
 		8BA0F389217E2DEF00969984 /* BowTests */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */,
-				8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */,
-				8BA0F393217E2DEF00969984 /* PredefTest.swift */,
-				8BA0F3A7217E2DEF00969984 /* CurryTest.swift */,
-				8BA0F38C217E2DEF00969984 /* Free */,
 				8BA0F38E217E2DEF00969984 /* Arrow */,
-				8BA0F394217E2DEF00969984 /* Transformers */,
-				8BA0F399217E2DEF00969984 /* Instances */,
-				8BA0F39D217E2DEF00969984 /* Effects */,
 				8BA0F3A8217E2DEF00969984 /* Data */,
-				8BA0F3BA217E2DEF00969984 /* Typeclasses */,
+				8BA0F39D217E2DEF00969984 /* Effects */,
+				8BA0F38C217E2DEF00969984 /* Free */,
+				8BA0F399217E2DEF00969984 /* Instances */,
 				8BA0F3D7217E2DEF00969984 /* Optics */,
+				11DDCD1A217F165400844D9D /* Syntax */,
+				8BA0F394217E2DEF00969984 /* Transformers */,
+				8BA0F3BA217E2DEF00969984 /* Typeclasses */,
 			);
 			path = BowTests;
 			sourceTree = "<group>";
@@ -1158,22 +1195,19 @@
 		8BA0F43B217E2E9200969984 /* Bow */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F43C217E2E9200969984 /* Curry.swift */,
-				8BA0F449217E2E9200969984 /* Typeclass.swift */,
-				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
-				8BA0F450217E2E9200969984 /* Predef.swift */,
-				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
 				8BA0F48B217E2E9200969984 /* HigherKinds.swift */,
-				8BA0F43D217E2E9200969984 /* Free */,
+				8BA0F449217E2E9200969984 /* Typeclass.swift */,
 				8BA0F442217E2E9200969984 /* Arrow */,
-				8BA0F44B217E2E9200969984 /* Transformers */,
-				8BA0F451217E2E9200969984 /* RecursionSchemes */,
+				8BA0F472217E2E9200969984 /* Data */,
+				8BA0F465217E2E9200969984 /* Effects */,
+				8BA0F43D217E2E9200969984 /* Free */,
 				8BA0F45C217E2E9200969984 /* Generic */,
 				8BA0F460217E2E9200969984 /* Instances */,
-				8BA0F465217E2E9200969984 /* Effects */,
-				8BA0F472217E2E9200969984 /* Data */,
-				8BA0F48C217E2E9200969984 /* Typeclasses */,
 				8BA0F4B1217E2E9200969984 /* Optics */,
+				8BA0F451217E2E9200969984 /* RecursionSchemes */,
+				11DDCD19217F163400844D9D /* Syntax */,
+				8BA0F44B217E2E9200969984 /* Transformers */,
+				8BA0F48C217E2E9200969984 /* Typeclasses */,
 			);
 			path = Bow;
 			sourceTree = "<group>";
@@ -1802,6 +1836,7 @@
 				8BA0F5E6217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D6217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F546217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1F217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F516217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61E217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F50A217E2E9200969984 /* EitherT.swift in Sources */,
@@ -1812,6 +1847,7 @@
 				8BA0F58E217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5C2217E2E9200969984 /* Coreader.swift in Sources */,
 				8BA0F4E2217E2E9200969984 /* Cofree.swift in Sources */,
+				11DDCD26217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F57A217E2E9200969984 /* ObservableK.swift in Sources */,
 				8BA0F5DE217E2E9200969984 /* Alternative.swift in Sources */,
 				8BA0F692217E2E9200969984 /* Either+Optics.swift in Sources */,
@@ -1939,6 +1975,7 @@
 				8BA0F5E4217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D4217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F544217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1D217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F514217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61C217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F508217E2E9200969984 /* EitherT.swift in Sources */,
@@ -1949,6 +1986,7 @@
 				8BA0F58C217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5C0217E2E9200969984 /* Coreader.swift in Sources */,
 				8BA0F4E0217E2E9200969984 /* Cofree.swift in Sources */,
+				11DDCD24217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F578217E2E9200969984 /* ObservableK.swift in Sources */,
 				8BA0F5DC217E2E9200969984 /* Alternative.swift in Sources */,
 				8BA0F690217E2E9200969984 /* Either+Optics.swift in Sources */,
@@ -2076,6 +2114,7 @@
 				8BA0F5E5217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D5217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F545217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1E217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F515217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61D217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F509217E2E9200969984 /* EitherT.swift in Sources */,
@@ -2086,6 +2125,7 @@
 				8BA0F58D217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5C1217E2E9200969984 /* Coreader.swift in Sources */,
 				8BA0F4E1217E2E9200969984 /* Cofree.swift in Sources */,
+				11DDCD25217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F579217E2E9200969984 /* ObservableK.swift in Sources */,
 				8BA0F5DD217E2E9200969984 /* Alternative.swift in Sources */,
 				8BA0F691217E2E9200969984 /* Either+Optics.swift in Sources */,
@@ -2203,10 +2243,12 @@
 				8BA0F405217E2DEF00969984 /* IdTest.swift in Sources */,
 				8BA0F424217E2DEF00969984 /* CategoryLaws.swift in Sources */,
 				8BA0F3EF217E2DEF00969984 /* PredefTest.swift in Sources */,
+				11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */,
 				8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */,
 				8BA0F423217E2DEF00969984 /* SemigroupKLaws.swift in Sources */,
 				8BA0F407217E2DEF00969984 /* IorTest.swift in Sources */,
 				8BA0F3F1217E2DEF00969984 /* StateTTest.swift in Sources */,
+				11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */,
 				8BA0F411217E2DEF00969984 /* MonoidLaws.swift in Sources */,
 				8BA0F41C217E2DEF00969984 /* ProfunctorLaws.swift in Sources */,
 				8BA0F429217E2DEF00969984 /* InvariantLaws.swift in Sources */,
@@ -2302,6 +2344,7 @@
 				8BA0F5E3217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D3217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F543217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1C217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F513217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61B217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F507217E2E9200969984 /* EitherT.swift in Sources */,
@@ -2312,6 +2355,7 @@
 				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				8BA0F4DF217E2E9200969984 /* Cofree.swift in Sources */,
+				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F577217E2E9200969984 /* ObservableK.swift in Sources */,
 				8BA0F5DB217E2E9200969984 /* Alternative.swift in Sources */,
 				8BA0F68F217E2E9200969984 /* Either+Optics.swift in Sources */,
