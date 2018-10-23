@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1D217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1E217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD1F217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
+		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
 		8BA0F368217E2CB100969984 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		8BA0F369217E2CB100969984 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		8BA0F36A217E2CB100969984 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
@@ -646,6 +651,8 @@
 
 /* Begin PBXFileReference section */
 		11D6DCDD21662D4E0068D575 /* Bow-watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Bow-watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
+		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
 		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -950,6 +957,7 @@
 			children = (
 				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
 				8BA0F43C217E2E9200969984 /* Curry.swift */,
+				11DDCD1B217F171900844D9D /* Memoization.swift */,
 				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
 				8BA0F450217E2E9200969984 /* Predef.swift */,
 			);
@@ -961,6 +969,7 @@
 			children = (
 				8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */,
 				8BA0F3A7217E2DEF00969984 /* CurryTest.swift */,
+				11DDCD20217F194B00844D9D /* MemoizationTest.swift */,
 				8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */,
 				8BA0F393217E2DEF00969984 /* PredefTest.swift */,
 			);
@@ -1818,6 +1827,7 @@
 				8BA0F5E6217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D6217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F546217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1F217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F516217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61E217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F50A217E2E9200969984 /* EitherT.swift in Sources */,
@@ -1955,6 +1965,7 @@
 				8BA0F5E4217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D4217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F544217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1D217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F514217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61C217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F508217E2E9200969984 /* EitherT.swift in Sources */,
@@ -2092,6 +2103,7 @@
 				8BA0F5E5217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D5217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F545217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1E217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F515217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61D217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F509217E2E9200969984 /* EitherT.swift in Sources */,
@@ -2219,6 +2231,7 @@
 				8BA0F405217E2DEF00969984 /* IdTest.swift in Sources */,
 				8BA0F424217E2DEF00969984 /* CategoryLaws.swift in Sources */,
 				8BA0F3EF217E2DEF00969984 /* PredefTest.swift in Sources */,
+				11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */,
 				8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */,
 				8BA0F423217E2DEF00969984 /* SemigroupKLaws.swift in Sources */,
 				8BA0F407217E2DEF00969984 /* IorTest.swift in Sources */,
@@ -2318,6 +2331,7 @@
 				8BA0F5E3217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F6D3217E2E9200969984 /* Each+Optics.swift in Sources */,
 				8BA0F543217E2E9200969984 /* Generic.swift in Sources */,
+				11DDCD1C217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F513217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61B217E2E9200969984 /* Reducible.swift in Sources */,
 				8BA0F507217E2E9200969984 /* EitherT.swift in Sources */,
