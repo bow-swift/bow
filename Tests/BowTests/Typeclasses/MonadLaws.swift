@@ -17,10 +17,10 @@ class MonadLaws<F> {
     }
     
     private static func leftIdentity<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Monad left identity") <- forAll { (a : Int, b : Int) in
-            let f = { (_ : Int) in monad.pure(a) }
-            return eq.eqv(monad.flatMap(monad.pure(b), f),
-                          f(b))
+        property("Monad left identity") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
+            let g = f.getArrow >>> monad.pure
+            return eq.eqv(monad.flatMap(monad.pure(a), g),
+                          g(a))
         }
     }
     
@@ -33,27 +33,27 @@ class MonadLaws<F> {
     }
     
     private static func kleisliLeftIdentity<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Kleisli left identity") <- forAll { (a : Int, b : Int) in
-            let f = { (_ : Int) in monad.pure(a) }
-            return eq.eqv(Kleisli({ (n : Int) in monad.pure(n) }).andThen(Kleisli(f), monad).invoke(b),
-                          f(b))
+        property("Kleisli left identity") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
+            let g = f.getArrow >>> monad.pure
+            return eq.eqv(Kleisli({ (n : Int) in monad.pure(n) }).andThen(Kleisli(g), monad).invoke(a),
+                          g(a))
         }
     }
     
     private static func kleisliRightIdentity<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Kleisli right identity") <- forAll { (a : Int, b : Int) in
-            let f = { (_ : Int) in monad.pure(a) }
-            return eq.eqv(Kleisli(f).andThen(monad.pure, monad).invoke(b),
-                          f(b))
+        property("Kleisli right identity") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
+            let g = f.getArrow >>> monad.pure
+            return eq.eqv(Kleisli(g).andThen(monad.pure, monad).invoke(a),
+                          g(a))
         }
     }
     
     private static func flatMapCoherence<Mon, EqF>(_ monad : Mon, _ eq : EqF) where Mon : Monad, Mon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Monad flatMap coherence") <- forAll { (a : Int, b : Int) in
-            let f = { (_ : Int) in a }
-            let fb = monad.pure(b)
-            return eq.eqv(monad.flatMap(fb, f >>> monad.pure),
-                          monad.map(fb, f))
+        property("Monad flatMap coherence") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
+            let g = f.getArrow >>> monad.pure
+            let fa = monad.pure(a)
+            return eq.eqv(monad.flatMap(fa, g),
+                          monad.map(fa, f.getArrow))
         }
     }
     
