@@ -30,20 +30,18 @@ class FunctorLaws<F> {
     }
     
     private static func void<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, ()> {
-        property("Void") <- forAll() { (a : Int, b : Int) in
+        property("Void") <- forAll() { (a : Int, f : ArrowOf<Int, Int>) in
             let fa = generator(a)
-            let f = { (_ : Int) in b }
             return eq.eqv(functor.void(fa),
-                          functor.void(functor.map(fa, f)))
+                          functor.void(functor.map(fa, f.getArrow)))
         }
     }
     
     private static func fproduct<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("fproduct") <- forAll { (a : Int, b : Int) in
+        property("fproduct") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
             let fa = generator(a)
-            let f = { (_ : Int) in b }
-            return eq.eqv(functor.map(functor.fproduct(fa, f), { x in x.1 }),
-                          functor.map(fa, f))
+            return eq.eqv(functor.map(functor.fproduct(fa, f.getArrow), { x in x.1 }),
+                          functor.map(fa, f.getArrow))
         }
     }
     
