@@ -21,11 +21,9 @@ class FunctorLaws<F> {
     }
     
     private static func covariantComposition<Func, EqA>(_ functor : Func, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqA) where Func : Functor, Func.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("Composition is preserved under functor transformation") <- forAll() { (a : Int, b : Int, c : Int) in
-            let f : (Int) -> Int = constant(b)
-            let g : (Int) -> Int = constant(c)
+        property("Composition is preserved under functor transformation") <- forAll() { (a : Int, f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>) in
             let fa = generator(a)
-            return eq.eqv(functor.map(functor.map(fa, f), g), functor.map(fa, f >>> g))
+            return eq.eqv(functor.map(functor.map(fa, f.getArrow), g.getArrow), functor.map(fa, f.getArrow >>> g.getArrow))
         }
     }
     
