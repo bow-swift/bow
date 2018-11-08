@@ -127,7 +127,7 @@ class ApplicativeErrorLaws<F, E> {
         property("Catch") <- forAll { (_ : Int) in
             let error = gen()
             if error is Error {
-                let f : () throws -> Int = { if error is Error { throw error as! Error } else { return 0 }}
+                let f : () throws -> Int = { throw error as! Error }
                 return eq.eqv(applicativeError.catchError(f, recover: { e in e as! E }),
                               applicativeError.raiseError(error))
             } else {
