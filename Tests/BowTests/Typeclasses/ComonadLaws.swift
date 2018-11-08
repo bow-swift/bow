@@ -31,11 +31,10 @@ class ComonadLaws<F> {
     }
     
     private static func mapAndCoflatMapCoherence<Comon, EqF>(_ comonad : Comon, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where Comon : Comonad, Comon.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("map and coflatMap coherence") <- forAll { (a : Int, b : Int) in
+        property("map and coflatMap coherence") <- forAll { (a : Int, f : ArrowOf<Int, Int>) in
             let fa = generator(a)
-            let f = { (_ : Int) in b }
-            return eq.eqv(comonad.map(fa, f),
-                          comonad.coflatMap(fa, { a in f(comonad.extract(a)) }))
+            return eq.eqv(comonad.map(fa, f.getArrow),
+                          comonad.coflatMap(fa, { a in f.getArrow(comonad.extract(a)) }))
         }
     }
     
