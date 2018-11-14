@@ -22,10 +22,9 @@ class ApplicativeLaws<F> {
     }
     
     private static func homomorphism<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("homomorphism") <- forAll() { (a : Int, b : Int) in
-            let f : (Int) -> Int = constant(b)
-            return eq.eqv(applicative.ap(applicative.pure(a), applicative.pure(f)),
-                          applicative.pure(f(a)))
+        property("homomorphism") <- forAll() { (a : Int, f : ArrowOf<Int, Int>) in
+            return eq.eqv(applicative.ap(applicative.pure(a), applicative.pure(f.getArrow)),
+                          applicative.pure(f.getArrow(a)))
         }
     }
     
@@ -38,11 +37,10 @@ class ApplicativeLaws<F> {
     }
     
     private static func mapDerived<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("mad derived") <- forAll() { (a : Int, b : Int) in
-            let f : (Int) -> Int = constant(b)
+        property("mad derived") <- forAll() { (a : Int, f : ArrowOf<Int, Int>) in
             let fa = applicative.pure(a)
-            return eq.eqv(applicative.map(fa, f),
-                          applicative.ap(fa, applicative.pure(f)))
+            return eq.eqv(applicative.map(fa, f.getArrow),
+                          applicative.ap(fa, applicative.pure(f.getArrow)))
             
         }
     }

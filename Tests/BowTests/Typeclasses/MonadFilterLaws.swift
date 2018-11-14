@@ -26,11 +26,10 @@ class MonadFilterLaws<F> {
     }
     
     private static func consistency<MonFil, EqF>(_ monadFilter : MonFil, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Consistency") <- forAll { (a : Int, b : Bool) in
-            let f = { (_ : Int) in b }
+        property("Consistency") <- forAll { (a : Int, f : ArrowOf<Int, Bool>) in
             let fa = generator(a)
-            return eq.eqv(monadFilter.filter(fa, f),
-                          monadFilter.flatMap(fa, { a in f(a) ? monadFilter.pure(a) : monadFilter.empty() }))
+            return eq.eqv(monadFilter.filter(fa, f.getArrow),
+                          monadFilter.flatMap(fa, { a in f.getArrow(a) ? monadFilter.pure(a) : monadFilter.empty() }))
         }
     }
 }
