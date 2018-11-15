@@ -68,13 +68,8 @@
 		112296D6219DC1FA006D66C5 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		11229732219DC4B3006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		11229733219DC4B3006D66C5 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
-		11229734219DC4B3006D66C5 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
-		11229735219DC4B3006D66C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1122973F219DC557006D66C5 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F468217E2E9200969984 /* IO.swift */; };
 		11229740219DC557006D66C5 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F467217E2E9200969984 /* FutureK.swift */; };
-		11229741219DC557006D66C5 /* MaybeK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F470217E2E9200969984 /* MaybeK.swift */; };
-		11229742219DC557006D66C5 /* ObservableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F471217E2E9200969984 /* ObservableK.swift */; };
-		11229743219DC557006D66C5 /* SingleK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46F217E2E9200969984 /* SingleK.swift */; };
 		11229744219DC557006D66C5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46C217E2E9200969984 /* Async.swift */; };
 		11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */; };
 		11229746219DC557006D66C5 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46B217E2E9200969984 /* Effect.swift */; };
@@ -88,10 +83,20 @@
 		1122977D219DC88F006D66C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		11229787219DCA18006D66C5 /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A0217E2DEF00969984 /* IOTest.swift */; };
 		11229788219DCA1E006D66C5 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39F217E2DEF00969984 /* FutureKTest.swift */; };
-		11229789219DCA23006D66C5 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */; };
-		1122978A219DCA23006D66C5 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */; };
-		1122978B219DCA23006D66C5 /* SingleKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */; };
 		1122978C219DCA28006D66C5 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
+		112297A3219DCE76006D66C5 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
+		112297A4219DCE76006D66C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
+		112297AC219DCF1F006D66C5 /* MaybeK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F470217E2E9200969984 /* MaybeK.swift */; };
+		112297AD219DCF1F006D66C5 /* ObservableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F471217E2E9200969984 /* ObservableK.swift */; };
+		112297AE219DCF1F006D66C5 /* SingleK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46F217E2E9200969984 /* SingleK.swift */; };
+		112297BB219DCFDE006D66C5 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */; };
+		112297BC219DCFDE006D66C5 /* SingleKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */; };
+		112297BD219DCFDE006D66C5 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */; };
+		112297C2219DCFDE006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
+		112297C3219DCFDE006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		112297C4219DCFDE006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		112297C7219DCFDE006D66C5 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
+		112297C8219DCFDE006D66C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
 		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
 		11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
@@ -404,6 +409,48 @@
 			remoteGlobalIDString = 1122962A219D9718006D66C5;
 			remoteInfo = "Bow-Result";
 		};
+		11229795219DCE76006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		112297AF219DCF6A006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
+			remoteInfo = "Bow-Effects";
+		};
+		112297B5219DCFDE006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
+			remoteInfo = "Bow-Effects";
+		};
+		112297B7219DCFDE006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
+		112297B9219DCFDE006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		112297CF219DCFF9006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11229791219DCE76006D66C5;
+			remoteInfo = "Bow-Rx";
+		};
 		11E71735219D79A100B94845 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -463,6 +510,10 @@
 		1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Info.plist"; sourceTree = "<absolute>"; };
 		11229782219DC88F006D66C5 /* BowEffectsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowEffectsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-EffectsTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-EffectsTests-Info.plist"; sourceTree = "<absolute>"; };
+		112297A9219DCE76006D66C5 /* BowRx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Rx-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Rx-Info.plist"; sourceTree = "<absolute>"; };
+		112297CD219DCFDE006D66C5 /* BowRxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-RxTests-Info.plist"; sourceTree = "<absolute>"; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
 		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
@@ -790,8 +841,6 @@
 			files = (
 				11229732219DC4B3006D66C5 /* BrightFutures.framework in Frameworks */,
 				11229733219DC4B3006D66C5 /* Result.framework in Frameworks */,
-				11229734219DC4B3006D66C5 /* RxCocoa.framework in Frameworks */,
-				11229735219DC4B3006D66C5 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,6 +855,27 @@
 				1122977B219DC88F006D66C5 /* BrightFutures.framework in Frameworks */,
 				1122977C219DC88F006D66C5 /* RxCocoa.framework in Frameworks */,
 				1122977D219DC88F006D66C5 /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112297A0219DCE76006D66C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112297A3219DCE76006D66C5 /* RxCocoa.framework in Frameworks */,
+				112297A4219DCE76006D66C5 /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112297C1219DCFDE006D66C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112297C2219DCFDE006D66C5 /* Bow.framework in Frameworks */,
+				112297C3219DCFDE006D66C5 /* Nimble.framework in Frameworks */,
+				112297C4219DCFDE006D66C5 /* SwiftCheck.framework in Frameworks */,
+				112297C7219DCFDE006D66C5 /* RxCocoa.framework in Frameworks */,
+				112297C8219DCFDE006D66C5 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,7 +982,6 @@
 			children = (
 				8BA0F468217E2E9200969984 /* IO.swift */,
 				8BA0F466217E2E9200969984 /* BrightFutures */,
-				8BA0F46E217E2E9200969984 /* Rx */,
 				8BA0F469217E2E9200969984 /* Typeclasses */,
 			);
 			path = BowEffects;
@@ -923,10 +992,29 @@
 			children = (
 				8BA0F3A0217E2DEF00969984 /* IOTest.swift */,
 				8BA0F39E217E2DEF00969984 /* BrightFutures */,
-				8BA0F3A3217E2DEF00969984 /* Rx */,
 				8BA0F3A1217E2DEF00969984 /* Typeclasses */,
 			);
 			path = BowEffectsTests;
+			sourceTree = "<group>";
+		};
+		112297AB219DCEDA006D66C5 /* BowRx */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F470217E2E9200969984 /* MaybeK.swift */,
+				8BA0F471217E2E9200969984 /* ObservableK.swift */,
+				8BA0F46F217E2E9200969984 /* SingleK.swift */,
+			);
+			path = BowRx;
+			sourceTree = "<group>";
+		};
+		112297D1219DD050006D66C5 /* BowRxTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */,
+				8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */,
+				8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */,
+			);
+			path = BowRxTests;
 			sourceTree = "<group>";
 		};
 		11DDCD19217F163400844D9D /* Syntax */ = {
@@ -1133,16 +1221,6 @@
 			path = Typeclasses;
 			sourceTree = "<group>";
 		};
-		8BA0F3A3217E2DEF00969984 /* Rx */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */,
-				8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */,
-				8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */,
-			);
-			path = Rx;
-			sourceTree = "<group>";
-		};
 		8BA0F3A8217E2DEF00969984 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,16 +1343,6 @@
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
 			);
 			path = Typeclasses;
-			sourceTree = "<group>";
-		};
-		8BA0F46E217E2E9200969984 /* Rx */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F470217E2E9200969984 /* MaybeK.swift */,
-				8BA0F471217E2E9200969984 /* ObservableK.swift */,
-				8BA0F46F217E2E9200969984 /* SingleK.swift */,
-			);
-			path = Rx;
 			sourceTree = "<group>";
 		};
 		8BA0F472217E2E9200969984 /* Data */ = {
@@ -1422,6 +1490,8 @@
 				112296CE219DC15C006D66C5 /* BowResultTests.xctest */,
 				1122973A219DC4B3006D66C5 /* BowEffects.framework */,
 				11229782219DC88F006D66C5 /* BowEffectsTests.xctest */,
+				112297A9219DCE76006D66C5 /* BowRx.framework */,
+				112297CD219DCFDE006D66C5 /* BowRxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1447,6 +1517,8 @@
 				112296CF219DC15C006D66C5 /* Bow-ResultTests-Info.plist */,
 				1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */,
 				11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */,
+				112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */,
+				112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1460,6 +1532,7 @@
 				11E71714219D709300B94845 /* BowOptics */,
 				112294F0219D8F22006D66C5 /* BowRecursionSchemes */,
 				11229692219D9733006D66C5 /* BowResult */,
+				112297AB219DCEDA006D66C5 /* BowRx */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -1476,6 +1549,7 @@
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
 				11229536219D9013006D66C5 /* BowRecursionSchemesTests */,
 				112296D2219DC180006D66C5 /* BowResultTests */,
+				112297D1219DD050006D66C5 /* BowRxTests */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -1670,6 +1744,46 @@
 			productReference = 11229782219DC88F006D66C5 /* BowEffectsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		11229791219DCE76006D66C5 /* Bow-Rx */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112297A6219DCE76006D66C5 /* Build configuration list for PBXNativeTarget "Bow-Rx" */;
+			buildPhases = (
+				11229796219DCE76006D66C5 /* Sources */,
+				112297A0219DCE76006D66C5 /* Frameworks */,
+				112297A5219DCE76006D66C5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112297B0219DCF6A006D66C5 /* PBXTargetDependency */,
+				11229794219DCE76006D66C5 /* PBXTargetDependency */,
+			);
+			name = "Bow-Rx";
+			productName = Bow;
+			productReference = 112297A9219DCE76006D66C5 /* BowRx.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		112297B1219DCFDE006D66C5 /* Bow-RxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112297CA219DCFDE006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RxTests" */;
+			buildPhases = (
+				112297BA219DCFDE006D66C5 /* Sources */,
+				112297C1219DCFDE006D66C5 /* Frameworks */,
+				112297C9219DCFDE006D66C5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112297D0219DCFF9006D66C5 /* PBXTargetDependency */,
+				112297B4219DCFDE006D66C5 /* PBXTargetDependency */,
+				112297B6219DCFDE006D66C5 /* PBXTargetDependency */,
+				112297B8219DCFDE006D66C5 /* PBXTargetDependency */,
+			);
+			name = "Bow-RxTests";
+			productName = BowTests;
+			productReference = 112297CD219DCFDE006D66C5 /* BowRxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		11E71683219D704F00B94845 /* Bow-Optics */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11E7170F219D704F00B94845 /* Build configuration list for PBXNativeTarget "Bow-Optics" */;
@@ -1801,6 +1915,8 @@
 				11229694219DC15C006D66C5 /* Bow-ResultTests */,
 				112296D7219DC4B3006D66C5 /* Bow-Effects */,
 				11229748219DC88F006D66C5 /* Bow-EffectsTests */,
+				11229791219DCE76006D66C5 /* Bow-Rx */,
+				112297B1219DCFDE006D66C5 /* Bow-RxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1936,6 +2052,42 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		112297A5219DCE76006D66C5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		112297C9219DCFDE006D66C5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 			);
@@ -2091,9 +2243,6 @@
 			files = (
 				1122973F219DC557006D66C5 /* IO.swift in Sources */,
 				11229740219DC557006D66C5 /* FutureK.swift in Sources */,
-				11229741219DC557006D66C5 /* MaybeK.swift in Sources */,
-				11229742219DC557006D66C5 /* ObservableK.swift in Sources */,
-				11229743219DC557006D66C5 /* SingleK.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
@@ -2105,12 +2254,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				1122978A219DCA23006D66C5 /* ObservableKTest.swift in Sources */,
-				1122978B219DCA23006D66C5 /* SingleKTest.swift in Sources */,
-				11229789219DCA23006D66C5 /* MaybeKTest.swift in Sources */,
 				11229788219DCA1E006D66C5 /* FutureKTest.swift in Sources */,
 				11229787219DCA18006D66C5 /* IOTest.swift in Sources */,
 				1122978C219DCA28006D66C5 /* AsyncLaws.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11229796219DCE76006D66C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112297AC219DCF1F006D66C5 /* MaybeK.swift in Sources */,
+				112297AD219DCF1F006D66C5 /* ObservableK.swift in Sources */,
+				112297AE219DCF1F006D66C5 /* SingleK.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		112297BA219DCFDE006D66C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112297BB219DCFDE006D66C5 /* ObservableKTest.swift in Sources */,
+				112297BC219DCFDE006D66C5 /* SingleKTest.swift in Sources */,
+				112297BD219DCFDE006D66C5 /* MaybeKTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2412,6 +2578,36 @@
 			isa = PBXTargetDependency;
 			target = 1122962A219D9718006D66C5 /* Bow-Result */;
 			targetProxy = 1122978F219DCAA2006D66C5 /* PBXContainerItemProxy */;
+		};
+		11229794219DCE76006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 11229795219DCE76006D66C5 /* PBXContainerItemProxy */;
+		};
+		112297B0219DCF6A006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
+			targetProxy = 112297AF219DCF6A006D66C5 /* PBXContainerItemProxy */;
+		};
+		112297B4219DCFDE006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
+			targetProxy = 112297B5219DCFDE006D66C5 /* PBXContainerItemProxy */;
+		};
+		112297B6219DCFDE006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 112297B7219DCFDE006D66C5 /* PBXContainerItemProxy */;
+		};
+		112297B8219DCFDE006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 112297B9219DCFDE006D66C5 /* PBXContainerItemProxy */;
+		};
+		112297D0219DCFF9006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
+			targetProxy = 112297CF219DCFF9006D66C5 /* PBXContainerItemProxy */;
 		};
 		11E71736219D79A100B94845 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2891,6 +3087,96 @@
 			};
 			name = Release;
 		};
+		112297A7219DCE76006D66C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Rx-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRx;
+			};
+			name = Debug;
+		};
+		112297A8219DCE76006D66C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Rx-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRx;
+			};
+			name = Release;
+		};
+		112297CB219DCFDE006D66C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RxTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRxTests;
+			};
+			name = Debug;
+		};
+		112297CC219DCFDE006D66C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RxTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRxTests;
+			};
+			name = Release;
+		};
 		11E71710219D704F00B94845 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3299,6 +3585,24 @@
 			buildConfigurations = (
 				11229780219DC88F006D66C5 /* Debug */,
 				11229781219DC88F006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		112297A6219DCE76006D66C5 /* Build configuration list for PBXNativeTarget "Bow-Rx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112297A7219DCE76006D66C5 /* Debug */,
+				112297A8219DCE76006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		112297CA219DCFDE006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112297CB219DCFDE006D66C5 /* Debug */,
+				112297CC219DCFDE006D66C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

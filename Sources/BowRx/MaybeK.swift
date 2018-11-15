@@ -1,6 +1,7 @@
 import Foundation
 import RxSwift
 import Bow
+import BowEffects
 
 public class ForMaybeK {}
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>

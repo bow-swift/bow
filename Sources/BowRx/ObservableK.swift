@@ -1,6 +1,7 @@
 import Foundation
 import RxSwift
 import Bow
+import BowEffects
 
 public class ForObservableK {}
 public typealias ObservableKOf<A> = Kind<ForObservableK, A>
@@ -123,7 +124,7 @@ public class ObservableK<A> : ObservableKOf<A> {
             .catchError { e in callback(Either.left(e)).fix().value }.k()
     }
     
-    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<Disposable> {
+    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<BowEffects.Disposable> {
         return Observable.create { _ in
             let disposable = self.runAsync(callback).value.subscribe()
             return Disposables.create {
@@ -274,7 +275,7 @@ public class ObservableKEffect<Err> : ObservableKAsync<Err>, Effect where Err : 
 }
 
 public class ObservableKConcurrentEffect<Err> : ObservableKEffect<Err>, ConcurrentEffect where Err : Error {
-    public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<Disposable> {
+    public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<BowEffects.Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }
 }

@@ -1,6 +1,7 @@
 import Foundation
 import RxSwift
 import Bow
+import BowEffects
 
 public class ForSingleK {}
 public typealias SingleKOf<A> = Kind<ForSingleK, A>
@@ -99,8 +100,8 @@ public class SingleK<A> : SingleKOf<A> {
             .catchError{ e in callback(Either.left(e)).fix().value }.k()
     }
     
-    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<Disposable> {
-        return Single<Disposable>.create { _ in
+    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<BowEffects.Disposable> {
+        return Single<BowEffects.Disposable>.create { _ in
             return self.runAsync(callback).value.subscribe()
         }.k()
     }
@@ -221,7 +222,7 @@ public class SingleKEffect<Err> : SingleKAsync<Err>, Effect where Err : Error {
 }
 
 public class SingleKConcurrentEffect<Err> : SingleKEffect<Err>, ConcurrentEffect where Err : Error {
-    public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, Disposable> {
+    public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, BowEffects.Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }
 }
