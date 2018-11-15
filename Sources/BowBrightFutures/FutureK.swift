@@ -1,6 +1,7 @@
 import Foundation
 import BrightFutures
 import Bow
+import BowEffects
 
 public class ForFutureK {}
 public typealias FutureKOf<E, A> = Kind2<ForFutureK, E, A>
@@ -182,7 +183,7 @@ public class FutureKMonadDefer<Err> : FutureKMonadError<Err>, MonadDefer where E
     }
 }
 
-public class FutureKAsync<Err> : FutureKMonadDefer<Err>, Async where Err : Error {
+public class FutureKAsync<Err> : FutureKMonadDefer<Err>, BowEffects.Async where Err : Error {
     public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> FutureKOf<E, A> {
         return Future { complete in
             do {
