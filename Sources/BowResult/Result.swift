@@ -1,5 +1,5 @@
-import Foundation
 import Result
+import Bow
 
 public extension Result {
     public func toEither() -> Either<Error, Value> {
@@ -24,5 +24,17 @@ public extension Result {
         case let .failure(error): return ifFailure(error)
         case let .success(value): return ifSuccess(value)
         }
+    }
+}
+
+public extension Either where A : Error {
+    public func toResult() -> Result<B, A> {
+        return self.fold(Result.init(error:), Result.init(value:))
+    }
+}
+
+public extension Validated where E : Error {
+    public func toResult() -> Result<A, E> {
+        return self.fold(Result.init(error:), Result.init(value:))
     }
 }
