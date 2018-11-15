@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForIO {}
 public typealias IOOf<A> = Kind<ForIO, A>
@@ -18,7 +19,7 @@ public class IO<A> : IOOf<A> {
     }
     
     public static func suspend(_ f : @escaping () throws -> IO<A>) -> IO<A> {
-        return Pure<Unit>(()).flatMap(f)
+        return Pure<()>(()).flatMap(f)
     }
     
     public static func raiseError(_ error : Error) -> IO<A> {
@@ -276,9 +277,9 @@ fileprivate class AsyncIO<A> : IO<A> {
         let either = try result.unsafePerformIO()
         
         if either.isLeft {
-            throw (either as! Left).a
+            throw either.leftValue
         } else {
-            return (either as! Right).b
+            return either.rightValue
         }
     }
 }
@@ -358,7 +359,7 @@ public class IOAsync<Err> : IOMonadError<Err>, Async where Err : Error {
     
     public typealias F = ForIO
     
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> IOOf<A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> IOOf<A> {
         return IO.runAsync(fa)
     }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import Bow
 
 public class ForObservableK {}
 public typealias ObservableKOf<A> = Kind<ForObservableK, A>
@@ -117,12 +118,12 @@ public class ObservableK<A> : ObservableKOf<A> {
         return value.catchError { e in f(e).value }.k()
     }
     
-    public func runAsync(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableK<Unit> {
+    public func runAsync(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<()> {
         return value.flatMap { a in callback(Either.right(a)).fix().value }
             .catchError { e in callback(Either.left(e)).fix().value }.k()
     }
     
-    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableK<Disposable> {
+    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<Disposable> {
         return Observable.create { _ in
             let disposable = self.runAsync(callback).value.subscribe()
             return Disposables.create {
@@ -261,19 +262,19 @@ public class ObservableKMonadDefer<Err> : ObservableKMonadError<Err>, MonadDefer
 }
 
 public class ObservableKAsync<Err> : ObservableKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> ObservableKOf<A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> ObservableKOf<A> {
         return ObservableK.runAsync(fa)
     }
 }
 
 public class ObservableKEffect<Err> : ObservableKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableKOf<Unit> {
+    public func runAsync<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<()> {
         return fa.fix().runAsync(callback)
     }
 }
 
 public class ObservableKConcurrentEffect<Err> : ObservableKEffect<Err>, ConcurrentEffect where Err : Error {
-    public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<Unit>) -> ObservableKOf<Disposable> {
+    public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }
 }

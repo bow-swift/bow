@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import Bow
 
 public class ForSingleK {}
 public typealias SingleKOf<A> = Kind<ForSingleK, A>
@@ -93,12 +94,12 @@ public class SingleK<A> : SingleKOf<A> {
         return value.catchError { e in f(e).value }.k()
     }
     
-    public func runAsync(_ callback : @escaping (Either<Error, A>) -> SingleKOf<Unit>) -> SingleK<Unit> {
+    public func runAsync(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<()> {
         return value.flatMap { a in callback(Either.right(a)).fix().value }
             .catchError{ e in callback(Either.left(e)).fix().value }.k()
     }
     
-    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> SingleKOf<Unit>) -> SingleK<Disposable> {
+    public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<Disposable> {
         return Single<Disposable>.create { _ in
             return self.runAsync(callback).value.subscribe()
         }.k()
@@ -208,19 +209,19 @@ public class SingleKMonadDefer<Err> : SingleKMonadError<Err>, MonadDefer where E
 }
 
 public class SingleKAsync<Err> : SingleKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> Kind<ForSingleK, A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
         return SingleK.async(fa)
     }
 }
 
 public class SingleKEffect<Err> : SingleKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, Unit>) -> Kind<ForSingleK, Unit> {
+    public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, ()> {
         return fa.fix().runAsync(callback)
     }
 }
 
 public class SingleKConcurrentEffect<Err> : SingleKEffect<Err>, ConcurrentEffect where Err : Error {
-    public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, Unit>) -> Kind<ForSingleK, Disposable> {
+    public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, Disposable> {
         return fa.fix().runAsyncCancellable(callback)
     }
 }

@@ -1,5 +1,6 @@
 import Foundation
 import BrightFutures
+import Bow
 
 public class ForFutureK {}
 public typealias FutureKOf<E, A> = Kind2<ForFutureK, E, A>
@@ -34,7 +35,7 @@ public class FutureK<E, A> : FutureKOf<E, A> where E : Error {
         return FutureK<E, A>.fix(fa())
     }
     
-    public static func runAsync(_ fa : @escaping ((Either<E, A>) -> Unit) throws -> Unit) -> FutureK<E, A> {
+    public static func runAsync(_ fa : @escaping ((Either<E, A>) -> ()) throws -> ()) -> FutureK<E, A> {
         return Future { complete in
             do {
                 try fa { either in
@@ -83,9 +84,9 @@ public class FutureK<E, A> : FutureKOf<E, A> where E : Error {
         return value.recoverWith { e in FutureK<E, A>.fix(f(e)).value }.k()
     }
     
-    public func runAsync(_ callback : @escaping (Either<E, A>) -> FutureKOf<E, Unit>) -> FutureK<E, Unit> {
-        return value.flatMap { a in FutureK<E, Unit>.fix(callback(Either.right(a))).value }
-            .recoverWith { e in FutureK<E, Unit>.fix(callback(Either.left(e))).value }.k()
+    public func runAsync(_ callback : @escaping (Either<E, A>) -> FutureKOf<E, ()>) -> FutureK<E, ()> {
+        return value.flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
+            .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
     }
 }
 
@@ -182,7 +183,7 @@ public class FutureKMonadDefer<Err> : FutureKMonadError<Err>, MonadDefer where E
 }
 
 public class FutureKAsync<Err> : FutureKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> FutureKOf<E, A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> FutureKOf<E, A> {
         return Future { complete in
             do {
                 try fa { either in
@@ -195,9 +196,9 @@ public class FutureKAsync<Err> : FutureKMonadDefer<Err>, Async where Err : Error
 }
 
 public class FutureKEffect<Err> : FutureKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: FutureKOf<E, A>, _ callback: @escaping (Either<Error, A>) -> FutureKOf<E, Unit>) -> FutureKOf<E, Unit> {
+    public func runAsync<A>(_ fa: FutureKOf<E, A>, _ callback: @escaping (Either<Error, A>) -> FutureKOf<E, ()>) -> FutureKOf<E, ()> {
         return FutureK<E, A>.fix(fa).value
-            .flatMap { a in FutureK<E, Unit>.fix(callback(Either.right(a))).value }
-            .recoverWith { e in FutureK<E, Unit>.fix(callback(Either.left(e))).value }.k()
+            .flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
+            .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
     }
 }

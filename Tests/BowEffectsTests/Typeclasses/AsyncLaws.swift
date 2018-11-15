@@ -1,6 +1,7 @@
 import Foundation
 import SwiftCheck
 @testable import Bow
+@testable import BowEffects
 
 class AsyncLaws<F, E> where E : Error {
     

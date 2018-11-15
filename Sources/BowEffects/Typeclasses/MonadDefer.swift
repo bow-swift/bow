@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public protocol MonadDefer : MonadError where E : Error {
     func suspend<A>(_ fa : @escaping () -> Kind<F, A>) -> Kind<F, A>
@@ -15,7 +16,7 @@ public extension MonadDefer {
         }
     }
     
-    public func lazy() -> Kind<F, Unit> {
+    public func lazy() -> Kind<F, ()> {
         return delay {}
     }
     

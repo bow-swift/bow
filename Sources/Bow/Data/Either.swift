@@ -48,6 +48,14 @@ public class Either<A, B> : EitherOf<A, B> {
         return !isLeft
     }
     
+    public var leftValue : A {
+        return fold(id, { _ in fatalError("Attempted to obtain leftValue on a right instance") })
+    }
+    
+    public var rightValue : B {
+        return fold({ _ in fatalError("Attempted to obtain rightValue on a left instance") }, id)
+    }
+    
     public func foldL<C>(_ c : C, _ f : (C, B) -> C) -> C {
         return fold(constant(c), { b in f(c, b) })
     }

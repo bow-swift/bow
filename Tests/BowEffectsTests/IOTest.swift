@@ -2,6 +2,15 @@ import XCTest
 import SwiftCheck
 @testable import BowLaws
 @testable import Bow
+@testable import BowEffects
+
+class UnitEq : Eq {
+    typealias A = ()
+    
+    func eqv(_ a: (), _ b: ()) -> Bool {
+        return true
+    }
+}
 
 class IOTest: XCTestCase {
     

@@ -1,6 +1,7 @@
 import XCTest
 @testable import BowLaws
 @testable import Bow
+@testable import BowEffects
 
 class SingleKTest : XCTestCase {
     class SingleKEq<T> : Eq where T : Equatable {

@@ -1,5 +1,6 @@
 import Foundation
 import RxSwift
+import Bow
 
 public class ForMaybeK {}
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>
@@ -103,7 +104,7 @@ public class MaybeK<A> : MaybeKOf<A> {
         return value.catchError { e in f(e).value }.k()
     }
     
-    public func runAsync(_ callback : @escaping (Either<Error, A>) -> MaybeKOf<Unit>) -> MaybeK<Unit> {
+    public func runAsync(_ callback : @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeK<()> {
         return value.flatMap { a in callback(Either.right(a)).fix().value }
             .catchError { e in callback(Either.left(e)).fix().value }.k()
     }
@@ -224,13 +225,13 @@ public class MaybeKMonadDefer<Err> : MaybeKMonadError<Err>, MonadDefer where Err
 }
 
 public class MaybeKAsync<Err> : MaybeKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Unit) throws -> Unit) -> MaybeKOf<A> {
+    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> MaybeKOf<A> {
         return MaybeK.async(fa)
     }
 }
 
 public class MaybeKEffect<Err> : MaybeKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: MaybeKOf<A>, _ callback: @escaping (Either<Error, A>) -> MaybeKOf<Unit>) -> MaybeKOf<Unit> {
+    public func runAsync<A>(_ fa: MaybeKOf<A>, _ callback: @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeKOf<()> {
         return fa.fix().runAsync(callback)
     }
 }
