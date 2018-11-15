@@ -1,4 +1,5 @@
 import XCTest
+@testable import BowLaws
 @testable import Bow
 
 class MaybeKTest : XCTestCase {

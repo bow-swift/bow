@@ -1,6 +1,7 @@
 import XCTest
 @testable import Bow
 @testable import BowFree
+@testable import BowLaws
 
 fileprivate class OpsF {}
 
@@ -88,6 +89,15 @@ fileprivate class IdInterpreter : FunctionK {
     }
 }
 
+class UnitEq : Eq {
+    typealias A = ()
+    
+    func eqv(_ a: (), _ b: ()) -> Bool {
+        return true
+    }
+}
+
+
 class FreeTest: XCTestCase {
     
     func testInterpretsFreeProgram() {
@@ -102,21 +112,21 @@ class FreeTest: XCTestCase {
     }
     
     fileprivate let eq = Free<OpsF, Int>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(Int.order))
-    //fileprivate let eqUnit = Free<OpsF, ()>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(UnitEq()))
+    fileprivate let eqUnit = Free<OpsF, ()>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(UnitEq()))
     
     func testEqLaws() {
-        //EqLaws.check(eq: self.eq, generator: self.generator)
+        EqLaws.check(eq: self.eq, generator: self.generator)
     }
     
     func testFunctorLaws() {
-        //FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
     }
     
     func testApplicativeLaws() {
-        //ApplicativeLaws<FreePartial<OpsF>>.check(applicative: Free<OpsF, Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<FreePartial<OpsF>>.check(applicative: Free<OpsF, Int>.applicative(), eq: self.eq)
     }
     
     func testMonadLaws() {
-        //MonadLaws<FreePartial<OpsF>>.check(monad: Free<OpsF, Int>.monad(), eq: self.eq)
+        MonadLaws<FreePartial<OpsF>>.check(monad: Free<OpsF, Int>.monad(), eq: self.eq)
     }
 }

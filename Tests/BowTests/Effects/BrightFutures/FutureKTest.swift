@@ -1,5 +1,6 @@
 import XCTest
 import BrightFutures
+@testable import BowLaws
 @testable import Bow
 
 private let forcedFutureQueue = DispatchQueue(label: "forcedFutureQueue", attributes: .concurrent)

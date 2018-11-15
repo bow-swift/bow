@@ -1,6 +1,7 @@
 import XCTest
 import Nimble
 import SwiftCheck
+@testable import BowLaws
 @testable import Bow
 
 class IorTest: XCTestCase {
