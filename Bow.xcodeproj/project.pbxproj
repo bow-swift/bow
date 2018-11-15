@@ -41,12 +41,6 @@
 		11E71730219D722900B94845 /* FilterIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4CD217E2E9200969984 /* FilterIndex.swift */; };
 		11E71731219D722900B94845 /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4CC217E2E9200969984 /* Index.swift */; };
 		11E717F7219D7D5900B94845 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		11E717F8219D7D5900B94845 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
-		11E717F9219D7D5900B94845 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
-		11E717FA219D7D5900B94845 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
-		11E717FB219D7D5900B94845 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
-		11E717FC219D7D5900B94845 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
-		11E717FD219D7D5900B94845 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		11E71808219D7ECC00B94845 /* FoldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D8217E2DEF00969984 /* FoldTest.swift */; };
 		11E71809219D7ECC00B94845 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E4217E2DEF00969984 /* GetterTest.swift */; };
 		11E7180A219D7ECC00B94845 /* IsoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D9217E2DEF00969984 /* IsoTest.swift */; };
@@ -62,6 +56,14 @@
 		11E71814219D7ECC00B94845 /* PrismLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */; };
 		11E71815219D7ECC00B94845 /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
 		11E71816219D7ECC00B94845 /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
+		11E7188E219D82BD00B94845 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F440217E2E9200969984 /* Cofree.swift */; };
+		11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
+		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
+		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
+		11E71997219D878200B94845 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
+		11E71998219D878200B94845 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		11E71999219D878200B94845 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		11E719A4219D87E000B94845 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38D217E2DEF00969984 /* FreeTest.swift */; };
 		8BA0F368217E2CB100969984 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		8BA0F369217E2CB100969984 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		8BA0F36A217E2CB100969984 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
@@ -70,7 +72,6 @@
 		8BA0F387217E2D3400969984 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
-		8BA0F3EA217E2DEF00969984 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38D217E2DEF00969984 /* FreeTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
 		8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F390217E2DEF00969984 /* Function0Test.swift */; };
 		8BA0F3ED217E2DEF00969984 /* KleisliTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F391217E2DEF00969984 /* KleisliTest.swift */; };
@@ -136,10 +137,6 @@
 		8BA0F429217E2DEF00969984 /* InvariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D5217E2DEF00969984 /* InvariantLaws.swift */; };
 		8BA0F42A217E2DEF00969984 /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D6217E2DEF00969984 /* FoldableLaws.swift */; };
 		8BA0F4D3217E2E9200969984 /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43C217E2E9200969984 /* Curry.swift */; };
-		8BA0F4D7217E2E9200969984 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
-		8BA0F4DB217E2E9200969984 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
-		8BA0F4DF217E2E9200969984 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F440217E2E9200969984 /* Cofree.swift */; };
-		8BA0F4E3217E2E9200969984 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		8BA0F4E7217E2E9200969984 /* FunctionK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F443217E2E9200969984 /* FunctionK.swift */; };
 		8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F444217E2E9200969984 /* Kleisli.swift */; };
 		8BA0F4EF217E2E9200969984 /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F445217E2E9200969984 /* Function0.swift */; };
@@ -265,6 +262,27 @@
 			remoteGlobalIDString = 11E71683219D704F00B94845;
 			remoteInfo = "Bow-Optics";
 		};
+		11E7188C219D82AE00B94845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		11E71950219D878200B94845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		11E719A5219D87E800B94845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11E71817219D81B300B94845;
+			remoteInfo = "Bow-Free";
+		};
 		D653FC452067C58D00535EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -284,6 +302,10 @@
 		11E71802219D7D5900B94845 /* BowOpticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowOpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsTests-Info.plist"; sourceTree = "<absolute>"; };
 		11E71804219D7D9500B94845 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11E71889219D81B300B94845 /* BowFree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowFree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		11E7188A219D81B300B94845 /* Bow-Free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Free-Info.plist"; sourceTree = "<absolute>"; };
+		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
+		11E719A2219D878200B94845 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -532,12 +554,23 @@
 			buildActionMask = 0;
 			files = (
 				11E717F7219D7D5900B94845 /* Bow.framework in Frameworks */,
-				11E717F8219D7D5900B94845 /* Nimble.framework in Frameworks */,
-				11E717F9219D7D5900B94845 /* SwiftCheck.framework in Frameworks */,
-				11E717FA219D7D5900B94845 /* Result.framework in Frameworks */,
-				11E717FB219D7D5900B94845 /* BrightFutures.framework in Frameworks */,
-				11E717FC219D7D5900B94845 /* RxCocoa.framework in Frameworks */,
-				11E717FD219D7D5900B94845 /* RxSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11E71880219D81B300B94845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11E71996219D878200B94845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				11E71997219D878200B94845 /* Bow.framework in Frameworks */,
+				11E71998219D878200B94845 /* Nimble.framework in Frameworks */,
+				11E71999219D878200B94845 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +665,25 @@
 			path = BowOpticsTests;
 			sourceTree = "<group>";
 		};
+		11E7188B219D825200B94845 /* BowFree */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F440217E2E9200969984 /* Cofree.swift */,
+				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
+				8BA0F441217E2E9200969984 /* Free.swift */,
+				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
+			);
+			path = BowFree;
+			sourceTree = "<group>";
+		};
+		11E718F1219D84EB00B94845 /* BowFreeTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
+			);
+			path = BowFreeTests;
+			sourceTree = "<group>";
+		};
 		8BA0F363217E2CB100969984 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,21 +715,12 @@
 				8BA0F38E217E2DEF00969984 /* Arrow */,
 				8BA0F3A8217E2DEF00969984 /* Data */,
 				8BA0F39D217E2DEF00969984 /* Effects */,
-				8BA0F38C217E2DEF00969984 /* Free */,
 				8BA0F399217E2DEF00969984 /* Instances */,
 				11DDCD1A217F165400844D9D /* Syntax */,
 				8BA0F394217E2DEF00969984 /* Transformers */,
 				8BA0F3BA217E2DEF00969984 /* Typeclasses */,
 			);
 			path = BowTests;
-			sourceTree = "<group>";
-		};
-		8BA0F38C217E2DEF00969984 /* Free */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
-			);
-			path = Free;
 			sourceTree = "<group>";
 		};
 		8BA0F38E217E2DEF00969984 /* Arrow */ = {
@@ -829,7 +872,6 @@
 				8BA0F442217E2E9200969984 /* Arrow */,
 				8BA0F472217E2E9200969984 /* Data */,
 				8BA0F465217E2E9200969984 /* Effects */,
-				8BA0F43D217E2E9200969984 /* Free */,
 				8BA0F45C217E2E9200969984 /* Generic */,
 				8BA0F460217E2E9200969984 /* Instances */,
 				8BA0F451217E2E9200969984 /* RecursionSchemes */,
@@ -838,17 +880,6 @@
 				8BA0F48C217E2E9200969984 /* Typeclasses */,
 			);
 			path = Bow;
-			sourceTree = "<group>";
-		};
-		8BA0F43D217E2E9200969984 /* Free */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F440217E2E9200969984 /* Cofree.swift */,
-				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
-				8BA0F441217E2E9200969984 /* Free.swift */,
-				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
-			);
-			path = Free;
 			sourceTree = "<group>";
 		};
 		8BA0F442217E2E9200969984 /* Arrow */ = {
@@ -1109,6 +1140,8 @@
 				"Bow::Bow::Product" /* Bow.framework */,
 				11E71712219D704F00B94845 /* BowOptics.framework */,
 				11E71802219D7D5900B94845 /* BowOpticsTests.xctest */,
+				11E71889219D81B300B94845 /* BowFree.framework */,
+				11E719A2219D878200B94845 /* BowFreeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1123,12 +1156,15 @@
 				OBJ_218 /* Products */,
 				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
 				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
+				11E7188A219D81B300B94845 /* Bow-Free-Info.plist */,
+				11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				11E7188B219D825200B94845 /* BowFree */,
 				8BA0F43B217E2E9200969984 /* Bow */,
 				11E71714219D709300B94845 /* BowOptics */,
 			);
@@ -1141,6 +1177,7 @@
 				11E71804219D7D9500B94845 /* Info.plist */,
 				8BA0F389217E2DEF00969984 /* BowTests */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
+				11E718F1219D84EB00B94845 /* BowFreeTests */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -1182,6 +1219,42 @@
 			name = "Bow-OpticsTests";
 			productName = BowTests;
 			productReference = 11E71802219D7D5900B94845 /* BowOpticsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		11E71817219D81B300B94845 /* Bow-Free */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11E71886219D81B300B94845 /* Build configuration list for PBXNativeTarget "Bow-Free" */;
+			buildPhases = (
+				11E71818219D81B300B94845 /* Sources */,
+				11E71880219D81B300B94845 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11E7188D219D82AE00B94845 /* PBXTargetDependency */,
+			);
+			name = "Bow-Free";
+			productName = Bow;
+			productReference = 11E71889219D81B300B94845 /* BowFree.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		11E7194E219D878200B94845 /* Bow-FreeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11E7199F219D878200B94845 /* Build configuration list for PBXNativeTarget "Bow-FreeTests" */;
+			buildPhases = (
+				11E71951219D878200B94845 /* Sources */,
+				11E71996219D878200B94845 /* Frameworks */,
+				11E7199E219D878200B94845 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11E719A6219D87E800B94845 /* PBXTargetDependency */,
+				11E7194F219D878200B94845 /* PBXTargetDependency */,
+			);
+			name = "Bow-FreeTests";
+			productName = BowTests;
+			productReference = 11E719A2219D878200B94845 /* BowFreeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		"Bow::Bow" /* Bow */ = {
@@ -1251,6 +1324,8 @@
 				"Bow::BowTests" /* BowTests */,
 				11E71683219D704F00B94845 /* Bow-Optics */,
 				11E7179E219D7D5900B94845 /* Bow-OpticsTests */,
+				11E71817219D81B300B94845 /* Bow-Free */,
+				11E7194E219D878200B94845 /* Bow-FreeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1289,6 +1364,21 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		11E7199E219D878200B94845 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
 			);
@@ -1376,6 +1466,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		11E71818219D81B300B94845 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				11E7188E219D82BD00B94845 /* Cofree.swift in Sources */,
+				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
+				11E71890219D82BD00B94845 /* Free.swift in Sources */,
+				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11E71951219D878200B94845 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				11E719A4219D87E000B94845 /* FreeTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		OBJ_245 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -1441,7 +1550,6 @@
 				8BA0F410217E2DEF00969984 /* MonadErrorLaws.swift in Sources */,
 				8BA0F3FC217E2DEF00969984 /* SingleKTest.swift in Sources */,
 				8BA0F40D217E2DEF00969984 /* NonEmptyListTest.swift in Sources */,
-				8BA0F3EA217E2DEF00969984 /* FreeTest.swift in Sources */,
 				8BA0F40B217E2DEF00969984 /* ListKTest.swift in Sources */,
 				8BA0F41A217E2DEF00969984 /* AlternativeLaws.swift in Sources */,
 				8BA0F421217E2DEF00969984 /* MonadCombineLaws.swift in Sources */,
@@ -1476,7 +1584,6 @@
 				8BA0F54F217E2E9200969984 /* MaybeInstances.swift in Sources */,
 				8BA0F59F217E2E9200969984 /* FlatmapOperator.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
-				8BA0F4DB217E2E9200969984 /* Coyoneda.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
 				8BA0F61F217E2E9200969984 /* Show.swift in Sources */,
 				8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */,
@@ -1496,7 +1603,6 @@
 				8BA0F5B7217E2E9200969984 /* Sum.swift in Sources */,
 				8BA0F5B3217E2E9200969984 /* Result.swift in Sources */,
 				8BA0F613217E2E9200969984 /* Traverse.swift in Sources */,
-				8BA0F4D7217E2E9200969984 /* Yoneda.swift in Sources */,
 				8BA0F567217E2E9200969984 /* Async.swift in Sources */,
 				8BA0F5E3217E2E9200969984 /* MonoidK.swift in Sources */,
 				8BA0F543217E2E9200969984 /* Generic.swift in Sources */,
@@ -1509,7 +1615,6 @@
 				8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */,
 				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
-				8BA0F4DF217E2E9200969984 /* Cofree.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F577217E2E9200969984 /* ObservableK.swift in Sources */,
 				8BA0F5DB217E2E9200969984 /* Alternative.swift in Sources */,
@@ -1522,7 +1627,6 @@
 				8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */,
 				8BA0F5AF217E2E9200969984 /* Try.swift in Sources */,
 				8BA0F62B217E2E9200969984 /* NonEmptyReducible.swift in Sources */,
-				8BA0F4E3217E2E9200969984 /* Free.swift in Sources */,
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
@@ -1579,6 +1683,21 @@
 			isa = PBXTargetDependency;
 			target = 11E71683219D704F00B94845 /* Bow-Optics */;
 			targetProxy = 11E71805219D7DFB00B94845 /* PBXContainerItemProxy */;
+		};
+		11E7188D219D82AE00B94845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 11E7188C219D82AE00B94845 /* PBXContainerItemProxy */;
+		};
+		11E7194F219D878200B94845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 11E71950219D878200B94845 /* PBXContainerItemProxy */;
+		};
+		11E719A6219D87E800B94845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11E71817219D81B300B94845 /* Bow-Free */;
+			targetProxy = 11E719A5219D87E800B94845 /* PBXContainerItemProxy */;
 		};
 		OBJ_299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1675,6 +1794,96 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.2;
 				TARGET_NAME = BowOpticsTests;
+			};
+			name = Release;
+		};
+		11E71887219D81B300B94845 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Free-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowFree;
+			};
+			name = Debug;
+		};
+		11E71888219D81B300B94845 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Free-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowFree;
+			};
+			name = Release;
+		};
+		11E719A0219D878200B94845 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-FreeTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowFreeTests;
+			};
+			name = Debug;
+		};
+		11E719A1219D878200B94845 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-FreeTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowFreeTests;
 			};
 			name = Release;
 		};
@@ -1876,6 +2085,24 @@
 			buildConfigurations = (
 				11E71800219D7D5900B94845 /* Debug */,
 				11E71801219D7D5900B94845 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		11E71886219D81B300B94845 /* Build configuration list for PBXNativeTarget "Bow-Free" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11E71887219D81B300B94845 /* Debug */,
+				11E71888219D81B300B94845 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		11E7199F219D878200B94845 /* Build configuration list for PBXNativeTarget "Bow-FreeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11E719A0219D878200B94845 /* Debug */,
+				11E719A1219D878200B94845 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

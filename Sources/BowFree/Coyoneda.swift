@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForCoyoneda {}
 public typealias AnyFunc = (AnyObject) -> AnyObject

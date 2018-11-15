@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "11E71683219D704F00B94845"
-               BuildableName = "BowOptics.framework"
-               BlueprintName = "Bow-Optics"
+               BlueprintIdentifier = "11E71817219D81B300B94845"
+               BuildableName = "BowFree.framework"
+               BlueprintName = "Bow-Free"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "11E7179E219D7D5900B94845"
-               BuildableName = "BowOpticsTests.xctest"
-               BlueprintName = "Bow-OpticsTests"
+               BlueprintIdentifier = "11E7194E219D878200B94845"
+               BuildableName = "BowFreeTests.xctest"
+               BlueprintName = "Bow-FreeTests"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "11E71683219D704F00B94845"
-            BuildableName = "BowOptics.framework"
-            BlueprintName = "Bow-Optics"
+            BlueprintIdentifier = "11E71817219D81B300B94845"
+            BuildableName = "BowFree.framework"
+            BlueprintName = "Bow-Free"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "11E71683219D704F00B94845"
-            BuildableName = "BowOptics.framework"
-            BlueprintName = "Bow-Optics"
+            BlueprintIdentifier = "11E71817219D81B300B94845"
+            BuildableName = "BowFree.framework"
+            BlueprintName = "Bow-Free"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "11E71683219D704F00B94845"
-            BuildableName = "BowOptics.framework"
-            BlueprintName = "Bow-Optics"
+            BlueprintIdentifier = "11E71817219D81B300B94845"
+            BuildableName = "BowFree.framework"
+            BlueprintName = "Bow-Free"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

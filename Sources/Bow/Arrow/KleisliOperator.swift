@@ -45,7 +45,3 @@ public func >=><A, B, C, D>(_ f : @escaping (A) -> Reader<D, B>, _ g : @escaping
 public func >=><A, B, C>(_ f : @escaping (A) -> Try<B>, _ g : @escaping (B) -> Try<C>) -> (A) -> Try<C> {
     return { a in f(a) >>= g }
 }
-
-public func >=><A, B, C, D>(_ f : @escaping (A) -> Free<D, B>, _ g : @escaping (B) -> Free<D, C>) -> (A) -> Free<D, C> {
-    return { a in f(a) >>= g }
-}

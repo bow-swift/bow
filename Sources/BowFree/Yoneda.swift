@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForYoneda {}
 public typealias YonedaOf<F, A> = Kind2<ForYoneda, F, A>

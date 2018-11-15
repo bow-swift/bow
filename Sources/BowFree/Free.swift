@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForFree {}
 public typealias FreeOf<S, A> = Kind2<ForFree, S, A>
@@ -15,7 +16,7 @@ public class Free<S, A> : FreeOf<S, A> {
     }
     
     public static func deferFree(_ value : @escaping () -> Free<S, A>) -> Free<S, A> {
-        return Free<S, Unit>.pure(unit).flatMap { _ in value() }
+        return Free<S, ()>.pure(unit).flatMap { _ in value() }
     }
     
     internal static func functionKF() -> FunctionKFree<S> {

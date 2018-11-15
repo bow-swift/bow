@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForCofree {}
 public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>

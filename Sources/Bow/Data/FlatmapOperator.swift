@@ -45,7 +45,3 @@ public func >>=<A, B, C>(_ fa : Reader<A, B>, _ f : @escaping (B) -> Reader<A, C
 public func >>=<A, B>(_ fa : Try<A>, _ f : @escaping (A) -> Try<B>) -> Try<B> {
     return fa.flatMap(f)
 }
-
-public func >>=<A, B, C>(_ fa : Free<A, B>, _ f : @escaping (B) -> Free<A, C>) -> Free<A, C> {
-    return fa.flatMap(f)
-}
