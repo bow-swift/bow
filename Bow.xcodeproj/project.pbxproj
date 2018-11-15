@@ -41,6 +41,17 @@
 		11229471219D8DF3006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11229472219D8DF3006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38D217E2DEF00969984 /* FreeTest.swift */; };
+		112294F3219D8FAE006D66C5 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F452217E2E9200969984 /* Recursion.swift */; };
+		112294F4219D8FAE006D66C5 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F455217E2E9200969984 /* Fix.swift */; };
+		112294F5219D8FAE006D66C5 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F456217E2E9200969984 /* Mu.swift */; };
+		112294F6219D8FAE006D66C5 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F454217E2E9200969984 /* Nu.swift */; };
+		112294F7219D8FAE006D66C5 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F459217E2E9200969984 /* Birecursive.swift */; };
+		112294F8219D8FAE006D66C5 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45A217E2E9200969984 /* Corecursive.swift */; };
+		112294F9219D8FAE006D66C5 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F458217E2E9200969984 /* Recursive.swift */; };
+		1122956C219D9186006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
+		1122956D219D9186006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		1122956E219D9186006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		11229579219D91BA006D66C5 /* RecursionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11229539219D90C5006D66C5 /* RecursionTest.swift */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
 		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
 		11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
@@ -152,13 +163,6 @@
 		8BA0F50F217E2E9200969984 /* WriterT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F44E217E2E9200969984 /* WriterT.swift */; };
 		8BA0F513217E2E9200969984 /* StateT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F44F217E2E9200969984 /* StateT.swift */; };
 		8BA0F517217E2E9200969984 /* Predef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F450217E2E9200969984 /* Predef.swift */; };
-		8BA0F51B217E2E9200969984 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F452217E2E9200969984 /* Recursion.swift */; };
-		8BA0F51F217E2E9200969984 /* Nu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F454217E2E9200969984 /* Nu.swift */; };
-		8BA0F523217E2E9200969984 /* Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F455217E2E9200969984 /* Fix.swift */; };
-		8BA0F527217E2E9200969984 /* Mu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F456217E2E9200969984 /* Mu.swift */; };
-		8BA0F52B217E2E9200969984 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F458217E2E9200969984 /* Recursive.swift */; };
-		8BA0F52F217E2E9200969984 /* Birecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F459217E2E9200969984 /* Birecursive.swift */; };
-		8BA0F533217E2E9200969984 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45A217E2E9200969984 /* Corecursive.swift */; };
 		8BA0F537217E2E9200969984 /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45B217E2E9200969984 /* PartialApplication.swift */; };
 		8BA0F53B217E2E9200969984 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45D217E2E9200969984 /* Product.swift */; };
 		8BA0F53F217E2E9200969984 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45E217E2E9200969984 /* HList.swift */; };
@@ -278,6 +282,27 @@
 			remoteGlobalIDString = 11E71817219D81B300B94845;
 			remoteInfo = "Bow-Free";
 		};
+		112294F1219D8F99006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		1122953F219D9186006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
+		11229541219D9186006D66C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
 		11E71735219D79A100B94845 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -318,6 +343,11 @@
 /* Begin PBXFileReference section */
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RecursionSchemes-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-RecursionSchemes-Info.plist"; sourceTree = "<absolute>"; };
+		11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RecursionSchemesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-RecursionSchemesTests-Info.plist"; sourceTree = "<absolute>"; };
+		11229539219D90C5006D66C5 /* RecursionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursionTest.swift; sourceTree = "<group>"; };
+		11229577219D9186006D66C5 /* BowRecursionSchemesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRecursionSchemesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
 		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
@@ -586,6 +616,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		112294E5219D8EF4006D66C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1122956B219D9186006D66C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				1122956C219D9186006D66C5 /* Bow.framework in Frameworks */,
+				1122956D219D9186006D66C5 /* Nimble.framework in Frameworks */,
+				1122956E219D9186006D66C5 /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11E71709219D704F00B94845 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -636,6 +683,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		112294F0219D8F22006D66C5 /* BowRecursionSchemes */ = {
+			isa = PBXGroup;
+			children = (
+				8BA0F452217E2E9200969984 /* Recursion.swift */,
+				8BA0F453217E2E9200969984 /* Data */,
+				8BA0F457217E2E9200969984 /* Typeclasses */,
+			);
+			path = BowRecursionSchemes;
+			sourceTree = "<group>";
+		};
+		11229536219D9013006D66C5 /* BowRecursionSchemesTests */ = {
+			isa = PBXGroup;
+			children = (
+				11229539219D90C5006D66C5 /* RecursionTest.swift */,
+			);
+			path = BowRecursionSchemesTests;
+			sourceTree = "<group>";
+		};
 		11DDCD19217F163400844D9D /* Syntax */ = {
 			isa = PBXGroup;
 			children = (
@@ -907,7 +972,6 @@
 				8BA0F465217E2E9200969984 /* Effects */,
 				8BA0F45C217E2E9200969984 /* Generic */,
 				8BA0F460217E2E9200969984 /* Instances */,
-				8BA0F451217E2E9200969984 /* RecursionSchemes */,
 				11DDCD19217F163400844D9D /* Syntax */,
 				8BA0F44B217E2E9200969984 /* Transformers */,
 				8BA0F48C217E2E9200969984 /* Typeclasses */,
@@ -937,16 +1001,6 @@
 				8BA0F44E217E2E9200969984 /* WriterT.swift */,
 			);
 			path = Transformers;
-			sourceTree = "<group>";
-		};
-		8BA0F451217E2E9200969984 /* RecursionSchemes */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F452217E2E9200969984 /* Recursion.swift */,
-				8BA0F453217E2E9200969984 /* Data */,
-				8BA0F457217E2E9200969984 /* Typeclasses */,
-			);
-			path = RecursionSchemes;
 			sourceTree = "<group>";
 		};
 		8BA0F453217E2E9200969984 /* Data */ = {
@@ -1176,6 +1230,8 @@
 				11E71889219D81B300B94845 /* BowFree.framework */,
 				1122941B219D8B86006D66C5 /* BowLaws.framework */,
 				1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */,
+				112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */,
+				11229577219D9186006D66C5 /* BowRecursionSchemesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1188,11 +1244,13 @@
 				OBJ_87 /* Tests */,
 				8BA0F363217E2CB100969984 /* Frameworks */,
 				OBJ_218 /* Products */,
-				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
-				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
+				11E719FC219D883D00B94845 /* BowLaws-Info.plist */,
 				11E7188A219D81B300B94845 /* Bow-Free-Info.plist */,
 				11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */,
-				11E719FC219D883D00B94845 /* BowLaws-Info.plist */,
+				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
+				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
+				112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */,
+				11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1202,6 +1260,7 @@
 				8BA0F43B217E2E9200969984 /* Bow */,
 				11E7188B219D825200B94845 /* BowFree */,
 				11E71714219D709300B94845 /* BowOptics */,
+				112294F0219D8F22006D66C5 /* BowRecursionSchemes */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -1214,6 +1273,7 @@
 				8BA0F389217E2DEF00969984 /* BowTests */,
 				11E718F1219D84EB00B94845 /* BowFreeTests */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
+				11229536219D9013006D66C5 /* BowRecursionSchemesTests */,
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
@@ -1257,6 +1317,42 @@
 			name = "Bow-FreeTests";
 			productName = BowTests;
 			productReference = 1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		11229480219D8EF4006D66C5 /* Bow-RecursionSchemes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112294EB219D8EF4006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RecursionSchemes" */;
+			buildPhases = (
+				11229481219D8EF4006D66C5 /* Sources */,
+				112294E5219D8EF4006D66C5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				112294F2219D8F99006D66C5 /* PBXTargetDependency */,
+			);
+			name = "Bow-RecursionSchemes";
+			productName = Bow;
+			productReference = 112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1122953D219D9186006D66C5 /* Bow-RecursionSchemesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11229574219D9186006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RecursionSchemesTests" */;
+			buildPhases = (
+				11229542219D9186006D66C5 /* Sources */,
+				1122956B219D9186006D66C5 /* Frameworks */,
+				11229573219D9186006D66C5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1122953E219D9186006D66C5 /* PBXTargetDependency */,
+				11229540219D9186006D66C5 /* PBXTargetDependency */,
+			);
+			name = "Bow-RecursionSchemesTests";
+			productName = BowTests;
+			productReference = 11229577219D9186006D66C5 /* BowRecursionSchemesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		11E71683219D704F00B94845 /* Bow-Optics */ = {
@@ -1383,6 +1479,8 @@
 				11E7179E219D7D5900B94845 /* Bow-OpticsTests */,
 				11E71817219D81B300B94845 /* Bow-Free */,
 				11229441219D8DF3006D66C5 /* Bow-FreeTests */,
+				11229480219D8EF4006D66C5 /* Bow-RecursionSchemes */,
+				1122953D219D9186006D66C5 /* Bow-RecursionSchemesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1409,6 +1507,21 @@
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		11229477219D8DF3006D66C5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		11229573219D9186006D66C5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
@@ -1525,6 +1638,28 @@
 			buildActionMask = 0;
 			files = (
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11229481219D8EF4006D66C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112294F3219D8FAE006D66C5 /* Recursion.swift in Sources */,
+				112294F4219D8FAE006D66C5 /* Fix.swift in Sources */,
+				112294F5219D8FAE006D66C5 /* Mu.swift in Sources */,
+				112294F6219D8FAE006D66C5 /* Nu.swift in Sources */,
+				112294F7219D8FAE006D66C5 /* Birecursive.swift in Sources */,
+				112294F8219D8FAE006D66C5 /* Corecursive.swift in Sources */,
+				112294F9219D8FAE006D66C5 /* Recursive.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11229542219D9186006D66C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				11229579219D91BA006D66C5 /* RecursionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1653,7 +1788,6 @@
 				8BA0F60F217E2E9200969984 /* TraverseFilter.swift in Sources */,
 				8BA0F5FF217E2E9200969984 /* SemigroupK.swift in Sources */,
 				8BA0F5DF217E2E9200969984 /* ApplicativeError.swift in Sources */,
-				8BA0F51B217E2E9200969984 /* Recursion.swift in Sources */,
 				8BA0F573217E2E9200969984 /* MaybeK.swift in Sources */,
 				8BA0F5C3217E2E9200969984 /* Store.swift in Sources */,
 				8BA0F5AB217E2E9200969984 /* State.swift in Sources */,
@@ -1674,7 +1808,6 @@
 				8BA0F553217E2E9200969984 /* NumberInstances.swift in Sources */,
 				8BA0F4E7217E2E9200969984 /* FunctionK.swift in Sources */,
 				8BA0F547217E2E9200969984 /* BoolInstances.swift in Sources */,
-				8BA0F523217E2E9200969984 /* Fix.swift in Sources */,
 				8BA0F617217E2E9200969984 /* MonadReader.swift in Sources */,
 				8BA0F5CB217E2E9200969984 /* Tuple.swift in Sources */,
 				8BA0F5D7217E2E9200969984 /* HigherKinds.swift in Sources */,
@@ -1721,7 +1854,6 @@
 				8BA0F4F7217E2E9200969984 /* KleisliOperator.swift in Sources */,
 				8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */,
 				8BA0F63B217E2E9200969984 /* Composed.swift in Sources */,
-				8BA0F533217E2E9200969984 /* Corecursive.swift in Sources */,
 				8BA0F5F7217E2E9200969984 /* Inject.swift in Sources */,
 				8BA0F53B217E2E9200969984 /* Product.swift in Sources */,
 				8BA0F5FB217E2E9200969984 /* Bifoldable.swift in Sources */,
@@ -1730,8 +1862,6 @@
 				8BA0F633217E2E9200969984 /* Monoid.swift in Sources */,
 				8BA0F5D3217E2E9200969984 /* ListK.swift in Sources */,
 				8BA0F64B217E2E9200969984 /* Bifunctor.swift in Sources */,
-				8BA0F51F217E2E9200969984 /* Nu.swift in Sources */,
-				8BA0F52B217E2E9200969984 /* Recursive.swift in Sources */,
 				8BA0F583217E2E9200969984 /* Id.swift in Sources */,
 				8BA0F60B217E2E9200969984 /* Invariant.swift in Sources */,
 				8BA0F537217E2E9200969984 /* PartialApplication.swift in Sources */,
@@ -1741,12 +1871,10 @@
 				8BA0F5EF217E2E9200969984 /* Contravariant.swift in Sources */,
 				8BA0F5BB217E2E9200969984 /* Validated.swift in Sources */,
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
-				8BA0F527217E2E9200969984 /* Mu.swift in Sources */,
 				8BA0F627217E2E9200969984 /* Foldable.swift in Sources */,
 				8BA0F63F217E2E9200969984 /* ComposedFoldable.swift in Sources */,
 				8BA0F55B217E2E9200969984 /* IO.swift in Sources */,
 				8BA0F587217E2E9200969984 /* MapK.swift in Sources */,
-				8BA0F52F217E2E9200969984 /* Birecursive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1777,6 +1905,21 @@
 			isa = PBXTargetDependency;
 			target = 11E71817219D81B300B94845 /* Bow-Free */;
 			targetProxy = 1122947D219D8E15006D66C5 /* PBXContainerItemProxy */;
+		};
+		112294F2219D8F99006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 112294F1219D8F99006D66C5 /* PBXContainerItemProxy */;
+		};
+		1122953E219D9186006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 1122953F219D9186006D66C5 /* PBXContainerItemProxy */;
+		};
+		11229540219D9186006D66C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 11229541219D9186006D66C5 /* PBXContainerItemProxy */;
 		};
 		11E71736219D79A100B94845 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1893,6 +2036,96 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 4.2;
 				TARGET_NAME = BowFreeTests;
+			};
+			name = Release;
+		};
+		112294EC219D8EF4006D66C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RecursionSchemes-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-recursion-schemes";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRecursionSchemes;
+			};
+			name = Debug;
+		};
+		112294ED219D8EF4006D66C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RecursionSchemes-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-recursion-schemes";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRecursionSchemes;
+			};
+			name = Release;
+		};
+		11229575219D9186006D66C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RecursionSchemesTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRecursionSchemesTests;
+			};
+			name = Debug;
+		};
+		11229576219D9186006D66C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RecursionSchemesTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = BowRecursionSchemesTests;
 			};
 			name = Release;
 		};
@@ -2232,6 +2465,24 @@
 			buildConfigurations = (
 				11229479219D8DF3006D66C5 /* Debug */,
 				1122947A219D8DF3006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		112294EB219D8EF4006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RecursionSchemes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112294EC219D8EF4006D66C5 /* Debug */,
+				112294ED219D8EF4006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		11229574219D9186006D66C5 /* Build configuration list for PBXNativeTarget "Bow-RecursionSchemesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11229575219D9186006D66C5 /* Debug */,
+				11229576219D9186006D66C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

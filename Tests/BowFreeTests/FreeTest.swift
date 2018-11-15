@@ -97,7 +97,6 @@ class UnitEq : Eq {
     }
 }
 
-
 class FreeTest: XCTestCase {
     
     func testInterpretsFreeProgram() {

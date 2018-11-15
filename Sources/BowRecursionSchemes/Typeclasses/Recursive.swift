@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public protocol Recursive {
     associatedtype T

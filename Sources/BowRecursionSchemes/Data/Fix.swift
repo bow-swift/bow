@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForFix {}
 public typealias FixOf<A> = Kind<ForFix, A>

@@ -1,4 +1,5 @@
 import Foundation
+import Bow
 
 public class ForMu {}
 public typealias MuOf<F> = Kind<ForMu, F>
