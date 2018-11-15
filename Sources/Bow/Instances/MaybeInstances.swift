@@ -6,6 +6,8 @@ public class Last {}
 public class FirstOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, First>
     
+    public init() {}
+    
     public var empty: Const<Option<B>, First> {
         return Const(Option.none())
     }
@@ -17,6 +19,8 @@ public class FirstOptionMonoid<B> : Monoid {
 
 public class LastOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, Last>
+    
+    public init() {}
     
     public var empty: Const<Option<B>, Last> {
         return Const(Option.none())

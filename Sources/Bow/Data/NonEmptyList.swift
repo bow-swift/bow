@@ -5,8 +5,8 @@ public typealias NonEmptyListOf<A> = Kind<ForNonEmptyList, A>
 public typealias Nel<A> = NonEmptyList<A>
 
 public class NonEmptyList<A> : NonEmptyListOf<A> {
-    let head : A
-    let tail : [A]
+    public let head : A
+    public let tail : [A]
     
     public static func +(lhs : NonEmptyList<A>, rhs : NonEmptyList<A>) -> NonEmptyList<A> {
         return NonEmptyList(head: lhs.head, tail: lhs.tail + [rhs.head] + rhs.tail)
