@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
-  s.name        = "Bow"
+  s.name        = "BowOptics"
   s.version     = "0.2.0"
-  s.summary     = "Bow is a library for Typed Functional Programming in Swift."
+  s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowOptics contains classes to work with Optics in Swift."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "9.1"
   s.watchos.deployment_target = "2.0"
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
-  s.source_files = "Sources/Bow/**/*.swift"
+  s.source_files = "Sources/BowOptics/**/*.swift"
 end
