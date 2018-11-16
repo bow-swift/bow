@@ -20,6 +20,8 @@ Bow is split in multiple modules that can be consumed independently. These modul
 - `BowBrightFutures`: module to provide an integration with BrightFutures.
 - `BowRx`: module to provide an integration with RxSwift.
 
+Bow is available using Cocoapods, Carthage and Swift Package Manager.
+
 ## Contributing
 
 If you want to contribute to this library, you can check the [Issues](https://github.com/arrow-kt/bow/issues) to see some of the pending task.
