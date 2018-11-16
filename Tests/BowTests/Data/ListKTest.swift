@@ -1,5 +1,6 @@
 import XCTest
 import SwiftCheck
+@testable import BowLaws
 @testable import Bow
 
 class ListKTest: XCTestCase {

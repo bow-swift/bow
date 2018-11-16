@@ -1,5 +1,5 @@
 github "Quick/Nimble" "v7.3.1"
-github "ReactiveX/RxSwift" "4.3.1"
+github "ReactiveX/RxSwift" "4.4.0"
 github "Thomvis/BrightFutures" "7.0.0"
 github "antitypical/Result" "4.0.0"
 github "trill-lang/FileCheck" "0.0.8"

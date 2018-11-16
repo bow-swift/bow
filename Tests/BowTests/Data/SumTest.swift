@@ -1,5 +1,6 @@
 import XCTest
 import Nimble
+@testable import BowLaws
 @testable import Bow
 
 class SumTest : XCTestCase {
