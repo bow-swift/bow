@@ -146,6 +146,20 @@
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "11D97EC3219EBAA1008FC004"
+               BuildableName = "BowEffectsLaws.framework"
+               BlueprintName = "Bow-EffectsLaws"
+               ReferencedContainer = "container:Bow.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
