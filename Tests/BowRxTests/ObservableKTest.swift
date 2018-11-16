@@ -2,6 +2,7 @@ import XCTest
 @testable import BowLaws
 @testable import Bow
 @testable import BowRx
+@testable import BowEffectsLaws
 
 class ObservableKTest : XCTestCase {
     
@@ -66,6 +67,6 @@ class ObservableKTest : XCTestCase {
     }
     
     func testAsyncLaws() {
-        //AsyncLaws<ForObservableK, CategoryError>.check(async: ObservableK<Int>.effect(), monadError: ObservableK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
+        AsyncLaws<ForObservableK, CategoryError>.check(async: ObservableK<Int>.effect(), monadError: ObservableK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
     }
 }

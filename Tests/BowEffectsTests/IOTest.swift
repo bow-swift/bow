@@ -3,6 +3,7 @@ import SwiftCheck
 @testable import BowLaws
 @testable import Bow
 @testable import BowEffects
+@testable import BowEffectsLaws
 
 class UnitEq : Eq {
     typealias A = ()

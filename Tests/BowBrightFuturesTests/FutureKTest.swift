@@ -4,6 +4,7 @@ import BrightFutures
 @testable import Bow
 @testable import BowBrightFutures
 @testable import BowResult
+@testable import BowEffectsLaws
 
 private let forcedFutureQueue = DispatchQueue(label: "forcedFutureQueue", attributes: .concurrent)
 
@@ -92,7 +93,7 @@ class FutureKTest : XCTestCase {
     
     func testAsyncLaws() {
         DispatchQueue.global(qos: .userInteractive).async {
-            //AsyncLaws.check(async: FutureK<CategoryError, Int>.effect(), monadError: FutureK<CategoryError, Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
+            AsyncLaws.check(async: FutureK<CategoryError, Int>.effect(), monadError: FutureK<CategoryError, Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
         }
     }
 }

@@ -2,6 +2,7 @@ import XCTest
 @testable import BowLaws
 @testable import Bow
 @testable import BowRx
+@testable import BowEffectsLaws
 
 class SingleKTest : XCTestCase {
     class SingleKEq<T> : Eq where T : Equatable {
@@ -61,6 +62,6 @@ class SingleKTest : XCTestCase {
     }
     
     func testAsyncLaws() {
-        //AsyncLaws<ForSingleK, CategoryError>.check(async: SingleK<Int>.effect(), monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
+        AsyncLaws<ForSingleK, CategoryError>.check(async: SingleK<Int>.effect(), monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
     }
 }
