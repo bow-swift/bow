@@ -35,7 +35,7 @@ class EitherTTest: XCTestCase {
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<EitherTPartial<ForOption, ()>, ()>.check(
-            applicativeError: EitherT<ForOption, (), Int>.monadError(Option<Int>.monadError()),
+            applicativeError: EitherT<ForOption, (), Int>.applicativeError(Option<Int>.monadError()),
             eq: EitherT<ForOption, (), Int>.eq(Option.eq(Either.eq(UnitEq(), Int.order)), Option<Int>.functor()),
             eqEither: EitherT.eq(Option.eq(Either.eq(UnitEq(), Either.eq(UnitEq(), Int.order))), Option<Any>.functor()),
             gen: { () })
