@@ -149,6 +149,10 @@ public extension StateT {
         return StateTMonadCombine<F, S, MonComF>(monadCombine)
     }
     
+    public static func applicativeError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {
+        return StateTMonadError<F, S, Err, MonErrF>(monadError)
+    }
+    
     public static func monadError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {
         return StateTMonadError<F, S, Err, MonErrF>(monadError)
     }
