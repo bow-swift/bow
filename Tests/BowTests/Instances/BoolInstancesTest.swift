@@ -7,11 +7,11 @@ class BoolInstancesTest: XCTestCase {
     
     func testBoolSemigroupLaws() {
         property("And semigroup laws") <- forAll { (a : Bool, b : Bool, c : Bool) in
-            return SemigroupLaws.check(semigroup: Bool.andMonoid, a: a, b: b, c: c, eq: Bool.eq)
+            return SemigroupLaws.check(semigroup: Bool.andSemigroup, a: a, b: b, c: c, eq: Bool.eq)
         }
         
         property("Or semigroup laws") <- forAll { (a : Bool, b : Bool, c : Bool) in
-            return SemigroupLaws.check(semigroup: Bool.orMonoid, a: a, b: b, c: c, eq: Bool.eq)
+            return SemigroupLaws.check(semigroup: Bool.orSemigroup, a: a, b: b, c: c, eq: Bool.eq)
         }
     }
     
