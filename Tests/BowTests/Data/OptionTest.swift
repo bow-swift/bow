@@ -37,7 +37,7 @@ class OptionTest: XCTestCase {
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<ForOption, Bow.Unit>.check(applicativeError: Option<Int>.monadError(), eq: Option.eq(Int.order), eqEither: Option.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
+        ApplicativeErrorLaws<ForOption, Bow.Unit>.check(applicativeError: Option<Int>.applicativeError(), eq: Option.eq(Int.order), eqEither: Option.eq(Either.eq(UnitEq(), Int.order)), gen: { () } )
     }
     
     func testMonadErrorLaws() {

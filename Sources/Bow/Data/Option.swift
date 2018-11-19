@@ -187,6 +187,10 @@ public extension Option {
         return OptionMonoid<A, SemiG>(semigroup)
     }
     
+    public static func applicativeError() -> OptionMonadError {
+        return OptionMonadError()
+    }
+    
     public static func monadError() -> OptionMonadError {
         return OptionMonadError()
     }
