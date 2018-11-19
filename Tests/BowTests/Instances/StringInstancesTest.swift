@@ -6,12 +6,12 @@ import SwiftCheck
 class StringInstancesTest: XCTestCase {
     
     func testEqLaws() {
-        EqLaws.check(eq: String.order, generator: id)
+        EqLaws.check(eq: String.eq, generator: id)
     }
     
     func testSemigroupLaws() {
         property("String concatenation semigroup") <- forAll { (a : String, b : String, c : String) in
-            return SemigroupLaws.check(semigroup: String.concatMonoid, a: a, b: b, c: c, eq: String.order)
+            return SemigroupLaws.check(semigroup: String.concatSemigroup, a: a, b: b, c: c, eq: String.order)
         }
     }
     

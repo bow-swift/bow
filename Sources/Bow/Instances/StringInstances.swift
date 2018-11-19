@@ -33,8 +33,16 @@ public class StringOrder : StringEq, Order {
 }
 
 public extension String {
+    public static var concatSemigroup : StringConcatSemigroup {
+        return StringConcatSemigroup()
+    }
+    
     public static var concatMonoid : StringConcatMonoid {
         return StringConcatMonoid()
+    }
+    
+    public static var eq : StringEq {
+        return StringEq()
     }
     
     public static var order : StringOrder {
