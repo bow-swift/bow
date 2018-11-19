@@ -10,7 +10,7 @@ public class State<S, A> : StateOf<S, A> {
     }
     
     public func run(_ initial : S) -> (S, A) {
-        return self.run(initial, Id<S>.monad()).fix().extract()
+        return self.runM(initial, Id<S>.monad()).fix().extract()
     }
     
     public func runA(_ s : S) -> A {
@@ -19,5 +19,23 @@ public class State<S, A> : StateOf<S, A> {
     
     public func runS(_ s : S) -> S {
         return run(s).0
+    }
+}
+
+public extension State {
+    public static func functor() -> StateTFunctor<ForId, S, IdFunctor> {
+        return StateT<ForId, S, A>.functor(Id<A>.functor())
+    }
+    
+    public static func applicative() -> StateTApplicative<ForId, S, IdMonad> {
+        return StateT<ForId, S, A>.applicative(Id<A>.monad())
+    }
+    
+    public static func monad() -> StateTMonad<ForId, S, IdMonad> {
+        return StateT<ForId, S, A>.monad(Id<A>.monad())
+    }
+    
+    public static func monadState() -> StateTMonadState<ForId, S, IdMonad> {
+        return StateT<ForId, S, A>.monadState(Id<A>.monad())
     }
 }
