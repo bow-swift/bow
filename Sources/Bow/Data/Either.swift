@@ -158,6 +158,10 @@ public extension Either {
         return EitherMonad<A>()
     }
     
+    public static func applicativeError() -> EitherMonadError<A> {
+        return EitherMonadError<A>()
+    }
+    
     public static func monadError() -> EitherMonadError<A> {
         return EitherMonadError<A>()
     }

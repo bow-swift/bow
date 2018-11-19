@@ -75,7 +75,7 @@ class StateTTest: XCTestCase {
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<StateTPartial<ForOption, ()>, ()>.check(
-            applicativeError: StateT<ForOption, (), Int>.monadError(Option<Any>.monadError()),
+            applicativeError: StateT<ForOption, (), Int>.applicativeError(Option<Any>.monadError()),
             eq: StateTUnitEq(),
             eqEither: StateTEitherEq(),
             gen: { () })

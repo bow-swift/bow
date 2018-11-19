@@ -82,7 +82,7 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
             monad.map(runF) { sfsa in
                 sfsa >>> { fsa in
                     monad.flatMap(fsa) { (s, a) in
-                        f(a).run(s, monad)
+                        f(a).runM(s, monad)
                     }
                 }
             }
@@ -103,24 +103,20 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
     
     public func combineK<Mon, SemiG>(_ y : StateT<F, S, A>, _ monad : Mon, _ semigroup : SemiG) -> StateT<F, S, A> where Mon : Monad, Mon.F == F, SemiG : SemigroupK, SemiG.F == F {
         return StateT(
-            monad.pure({ s in semigroup.combineK(self.run(s, monad), y.run(s, monad)) })
+            monad.pure({ s in semigroup.combineK(self.runM(s, monad), y.runM(s, monad)) })
         )
     }
     
-    public func run<Mon>(_ initial : S, _ monad : Mon) -> Kind<F, (S, A)> where Mon : Monad, Mon.F == F {
-        return monad.flatMap(runF, { f in f(initial) })
-    }
-    
     public func runA<Mon>(_ s : S, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
-        return monad.map(run(s, monad)){ (_, a) in a }
+        return monad.map(runM(s, monad)){ (_, a) in a }
     }
     
     public func runS<Mon>(_ s : S, _ monad : Mon) -> Kind<F, S> where Mon : Monad, Mon.F == F {
-        return monad.map(run(s, monad)){ (s, _) in s }
+        return monad.map(runM(s, monad)){ (s, _) in s }
     }
     
     public func runM<Mon>(_ initial : S, _ monad : Mon) -> Kind<F, (S, A)> where Mon : Monad, Mon.F == F {
-        return self.run(initial, monad)
+        return monad.flatMap(runF, { f in f(initial) })
     }
 }
 
@@ -147,6 +143,10 @@ public extension StateT {
     
     public static func monadCombine<MonComF>(_ monadCombine : MonComF) -> StateTMonadCombine<F, S, MonComF> {
         return StateTMonadCombine<F, S, MonComF>(monadCombine)
+    }
+    
+    public static func applicativeError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {
+        return StateTMonadError<F, S, Err, MonErrF>(monadError)
     }
     
     public static func monadError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {

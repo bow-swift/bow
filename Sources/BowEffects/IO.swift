@@ -307,6 +307,10 @@ public extension IO {
         return IOAsync<E>()
     }
     
+    public static func applicativeError<E>() -> IOMonadError<E> {
+        return IOMonadError<E>()
+    }
+    
     public static func monadError<E>() -> IOMonadError<E> {
         return IOMonadError<E>()
     }

@@ -66,7 +66,7 @@ class KleisliTest: XCTestCase {
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<KleisliPartial<ForOption, ()>, ()>.check(
-            applicativeError: Kleisli<ForOption, (), Int>.monadError(Option<Any>.monadError()),
+            applicativeError: Kleisli<ForOption, (), Int>.applicativeError(Option<Any>.monadError()),
             eq: KleisliUnitEq(),
             eqEither: KleisliEitherEq(),
             gen: { () })

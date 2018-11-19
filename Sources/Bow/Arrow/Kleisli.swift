@@ -92,6 +92,10 @@ public extension Kleisli {
         return KleisliMonadReader<F, D, MonF>(monad)
     }
     
+    public static func applicativeError<E, ApplEF>(_ applicativeError : ApplEF) -> KleisliMonadError<F, D, E, ApplEF> {
+        return KleisliMonadError<F, D, E, ApplEF>(applicativeError)
+    }
+    
     public static func monadError<E, MonEF>(_ monadError : MonEF) -> KleisliMonadError<F, D, E, MonEF> {
         return KleisliMonadError<F, D, E, MonEF>(monadError)
     }

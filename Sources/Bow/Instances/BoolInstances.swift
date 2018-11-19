@@ -37,8 +37,16 @@ public class BoolEq : Eq {
 }
 
 public extension Bool {
+    public static var andSemigroup : AndSemigroup {
+        return AndSemigroup()
+    }
+    
     public static var andMonoid : AndMonoid {
         return AndMonoid()
+    }
+    
+    public static var orSemigroup : OrSemigroup {
+        return OrSemigroup()
     }
     
     public static var orMonoid : OrMonoid {

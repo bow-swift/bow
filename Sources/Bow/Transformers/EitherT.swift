@@ -114,6 +114,10 @@ public extension EitherT {
         return EitherTMonad<F, A, Mon>(monad)
     }
     
+    public static func applicativeError<Mon>(_ monad : Mon) -> EitherTMonadError<F, A, Mon> {
+        return EitherTMonadError<F, A, Mon>(monad)
+    }
+    
     public static func monadError<Mon>(_ monad : Mon) -> EitherTMonadError<F, A, Mon> {
         return EitherTMonadError<F, A, Mon>(monad)
     }

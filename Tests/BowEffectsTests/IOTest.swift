@@ -30,6 +30,7 @@ class IOTest: XCTestCase {
     let generator = { (a : Int) in IO.pure(a) }
     let eq = IO.eq(Int.order, ErrorEq())
     let eqUnit = IO.eq(UnitEq(), ErrorEq())
+    let eqEither = IO.eq(Either.eq(CategoryError.eq, Int.eq), ErrorEq())
     
     func testEqLaws() {
         EqLaws.check(eq: self.eq, generator: self.generator)
@@ -45,6 +46,10 @@ class IOTest: XCTestCase {
     
     func testMonadLaws() {
         MonadLaws<ForIO>.check(monad: IO<Int>.monad(), eq: self.eq)
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<ForIO, CategoryError>.check(applicativeError: IO<Int>.applicativeError(), eq: self.eq, eqEither: self.eqEither, gen: { CategoryError.arbitrary.generate })
     }
     
     func testMonadErrorLaws() {

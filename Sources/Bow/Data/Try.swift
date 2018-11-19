@@ -168,6 +168,10 @@ public extension Try {
         return TryMonad()
     }
     
+    public static func applicativeError<E>() -> TryMonadError<E> {
+        return TryMonadError<E>()
+    }
+    
     public static func monadError<E>() -> TryMonadError<E> {
         return TryMonadError<E>()
     }
