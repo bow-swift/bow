@@ -6,7 +6,7 @@ import SwiftCheck
 class NumberInstancesTest: XCTestCase {
     
     func testIntEqLaws() {
-        EqLaws.check(eq: Int.order, generator: id)
+        EqLaws.check(eq: Int.eq, generator: id)
     }
     
     func testIntOrderLaws() {
@@ -14,7 +14,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testInt8EqLaws() {
-        EqLaws.check(eq: Int8.order, generator: id)
+        EqLaws.check(eq: Int8.eq, generator: id)
     }
     
     func testInt8OrderLaws() {
@@ -22,7 +22,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testInt16EqLaws() {
-        EqLaws.check(eq: Int16.order, generator: id)
+        EqLaws.check(eq: Int16.eq, generator: id)
     }
     
     func testInt16OrderLaws() {
@@ -30,7 +30,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testInt32EqLaws() {
-        EqLaws.check(eq: Int32.order, generator: id)
+        EqLaws.check(eq: Int32.eq, generator: id)
     }
     
     func testInt32OrderLaws() {
@@ -38,7 +38,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testInt64EqLaws() {
-        EqLaws.check(eq: Int64.order, generator: id)
+        EqLaws.check(eq: Int64.eq, generator: id)
     }
     
     func testInt64OrderLaws() {
@@ -46,7 +46,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testUIntEqLaws() {
-        EqLaws.check(eq: Int.order, generator: id)
+        EqLaws.check(eq: Int.eq, generator: id)
     }
     
     func testUIntOrderLaws() {
@@ -54,7 +54,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testUInt8EqLaws() {
-        EqLaws.check(eq: Int8.order, generator: id)
+        EqLaws.check(eq: Int8.eq, generator: id)
     }
     
     func testUInt8OrderLaws() {
@@ -62,7 +62,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testUInt16EqLaws() {
-        EqLaws.check(eq: Int16.order, generator: id)
+        EqLaws.check(eq: Int16.eq, generator: id)
     }
     
     func testUInt16OrderLaws() {
@@ -70,7 +70,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testUInt32EqLaws() {
-        EqLaws.check(eq: Int32.order, generator: id)
+        EqLaws.check(eq: Int32.eq, generator: id)
     }
     
     func testUInt32OrderLaws() {
@@ -78,7 +78,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testUInt64EqLaws() {
-        EqLaws.check(eq: Int64.order, generator: id)
+        EqLaws.check(eq: Int64.eq, generator: id)
     }
     
     func testUInt64OrderLaws() {
@@ -86,7 +86,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testFloatEqLaws() {
-        EqLaws.check(eq: Float.order, generator: id)
+        EqLaws.check(eq: Float.eq, generator: id)
     }
     
     func testFloatOrderLaws() {
@@ -94,7 +94,7 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testDoubleEqLaws() {
-        EqLaws.check(eq: Double.order, generator: id)
+        EqLaws.check(eq: Double.eq, generator: id)
     }
     
     func testDoubleOrderLaws() {

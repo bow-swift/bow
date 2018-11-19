@@ -53,6 +53,10 @@ public extension Int {
         return IntProductMonoid()
     }
     
+    public static var eq : IntEq {
+        return IntEq()
+    }
+    
     public static var order : IntOrder {
         return IntOrder()
     }
@@ -109,6 +113,10 @@ public extension Int8 {
     
     public static var productMonoid : Int8ProductMonoid {
         return Int8ProductMonoid()
+    }
+    
+    public static var eq : Int8Eq {
+        return Int8Eq()
     }
     
     public static var order : Int8Order {
@@ -169,6 +177,10 @@ public extension Int16 {
         return Int16ProductMonoid()
     }
     
+    public static var eq : Int16Eq {
+        return Int16Eq()
+    }
+    
     public static var order : Int16Order {
         return Int16Order()
     }
@@ -227,6 +239,10 @@ public extension Int32 {
         return Int32ProductMonoid()
     }
     
+    public static var eq : Int32Eq {
+        return Int32Eq()
+    }
+    
     public static var order : Int32Order {
         return Int32Order()
     }
@@ -283,6 +299,10 @@ public extension Int64 {
     
     public static var productMonoid : Int64ProductMonoid {
         return Int64ProductMonoid()
+    }
+    
+    public static var eq : Int64Eq {
+        return Int64Eq()
     }
     
     public static var order : Int64Order {
@@ -348,6 +368,10 @@ public extension UInt {
         return UIntProductMonoid()
     }
     
+    public static var eq : UIntEq {
+        return UIntEq()
+    }
+    
     public static var order : UIntOrder {
         return UIntOrder()
     }
@@ -409,6 +433,10 @@ public extension UInt8 {
     
     public static var productMonoid : UInt8ProductMonoid {
         return UInt8ProductMonoid()
+    }
+    
+    public static var eq : UInt8Eq {
+        return UInt8Eq()
     }
     
     public static var order : UInt8Order {
@@ -474,6 +502,10 @@ public extension UInt16 {
         return UInt16ProductMonoid()
     }
     
+    public static var eq : UInt16Eq {
+        return UInt16Eq()
+    }
+    
     public static var order : UInt16Order {
         return UInt16Order()
     }
@@ -535,6 +567,10 @@ public extension UInt32 {
     
     public static var productMonoid : UInt32ProductMonoid {
         return UInt32ProductMonoid()
+    }
+    
+    public static var eq : UInt32Eq {
+        return UInt32Eq()
     }
     
     public static var order : UInt32Order {
@@ -600,6 +636,10 @@ public extension UInt64 {
         return UInt64ProductMonoid()
     }
     
+    public static var eq : UInt64Eq {
+        return UInt64Eq()
+    }
+    
     public static var order : UInt64Order {
         return UInt64Order()
     }
@@ -663,6 +703,10 @@ public extension Float {
         return FloatProductMonoid()
     }
     
+    public static var eq : FloatEq {
+        return FloatEq()
+    }
+    
     public static var order : FloatOrder {
         return FloatOrder()
     }
@@ -724,6 +768,10 @@ public extension Double {
     
     public static var productMonoid : DoubleProductMonoid {
         return DoubleProductMonoid()
+    }
+    
+    public static var eq : DoubleEq {
+        return DoubleEq()
     }
     
     public static var order : DoubleOrder {
