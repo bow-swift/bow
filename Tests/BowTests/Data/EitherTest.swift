@@ -31,7 +31,7 @@ class EitherTest: XCTestCase {
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(
-            applicativeError: Either<CategoryError, Int>.monadError(),
+            applicativeError: Either<CategoryError, Int>.applicativeError(),
             eq: Either.eq(CategoryError.eq, Int.order),
             eqEither: Either.eq(CategoryError.eq, Either.eq(CategoryError.eq, Int.order)),
             gen: { CategoryError.arbitrary.generate })
