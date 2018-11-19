@@ -45,8 +45,16 @@ public class IntOrder : IntEq, Order {
 }
 
 public extension Int {
+    public static var sumSemigroup : IntSumSemigroup {
+        return IntSumSemigroup()
+    }
+    
     public static var sumMonoid : IntSumMonoid {
         return IntSumMonoid()
+    }
+    
+    public static var productSemigroup : IntProductSemigroup {
+        return IntProductSemigroup()
     }
     
     public static var productMonoid : IntProductMonoid {
@@ -107,8 +115,16 @@ public class Int8Order : Int8Eq, Order {
 }
 
 public extension Int8 {
+    public static var sumSemigroup : Int8SumSemigroup {
+        return Int8SumSemigroup()
+    }
+    
     public static var sumMonoid : Int8SumMonoid {
         return Int8SumMonoid()
+    }
+    
+    public static var productSemigroup : Int8ProductSemigroup {
+        return Int8ProductSemigroup()
     }
     
     public static var productMonoid : Int8ProductMonoid {
@@ -169,8 +185,16 @@ public class Int16Order : Int16Eq, Order {
 }
 
 public extension Int16 {
+    public static var sumSemigroup : Int16SumSemigroup {
+        return Int16SumSemigroup()
+    }
+    
     public static var sumMonoid : Int16SumMonoid {
         return Int16SumMonoid()
+    }
+    
+    public static var productSemigroup : Int16ProductSemigroup {
+        return Int16ProductSemigroup()
     }
     
     public static var productMonoid : Int16ProductMonoid {
@@ -231,8 +255,16 @@ public class Int32Order : Int32Eq, Order {
 }
 
 public extension Int32 {
+    public static var sumSemigroup : Int32SumSemigroup {
+        return Int32SumSemigroup()
+    }
+    
     public static var sumMonoid : Int32SumMonoid {
         return Int32SumMonoid()
+    }
+
+    public static var productSemigroup : Int32ProductSemigroup {
+        return Int32ProductSemigroup()
     }
     
     public static var productMonoid : Int32ProductMonoid {
@@ -293,8 +325,16 @@ public class Int64Order : Int64Eq, Order {
 }
 
 public extension Int64 {
+    public static var sumSemigroup : Int64SumSemigroup {
+        return Int64SumSemigroup()
+    }
+    
     public static var sumMonoid : Int64SumMonoid {
         return Int64SumMonoid()
+    }
+    
+    public static var productSemigroup : Int64ProductSemigroup {
+        return Int64ProductSemigroup()
     }
     
     public static var productMonoid : Int64ProductMonoid {
@@ -360,8 +400,16 @@ public class UIntOrder : UIntEq, Order {
 }
 
 public extension UInt {
+    public static var sumSemigroup : UIntSumSemigroup {
+        return UIntSumSemigroup()
+    }
+    
     public static var sumMonoid : UIntSumMonoid {
         return UIntSumMonoid()
+    }
+    
+    public static var productSemigroup : UIntProductSemigroup {
+        return UIntProductSemigroup()
     }
     
     public static var productMonoid : UIntProductMonoid {
@@ -427,8 +475,16 @@ public class UInt8Order : UInt8Eq, Order {
 }
 
 public extension UInt8 {
+    public static var sumSemigroup : UInt8SumSemigroup {
+        return UInt8SumSemigroup()
+    }
+    
     public static var sumMonoid : UInt8SumMonoid {
         return UInt8SumMonoid()
+    }
+    
+    public static var productSemigroup : UIntProductSemigroup {
+        return UIntProductSemigroup()
     }
     
     public static var productMonoid : UInt8ProductMonoid {
@@ -494,8 +550,16 @@ public class UInt16Order : UInt16Eq, Order {
 }
 
 public extension UInt16 {
+    public static var sumSemigroup : UInt16SumSemigroup {
+        return UInt16SumSemigroup()
+    }
+    
     public static var sumMonoid : UInt16SumMonoid {
         return UInt16SumMonoid()
+    }
+    
+    public static var productSemigroup : UInt16ProductSemigroup {
+        return UInt16ProductSemigroup()
     }
     
     public static var productMonoid : UInt16ProductMonoid {
@@ -561,8 +625,16 @@ public class UInt32Order : UInt32Eq, Order {
 }
 
 public extension UInt32 {
+    public static var sumSemigroup : UInt32SumSemigroup {
+        return UInt32SumSemigroup()
+    }
+    
     public static var sumMonoid : UInt32SumMonoid {
         return UInt32SumMonoid()
+    }
+    
+    public static var productSemigroup : UInt32ProductSemigroup {
+        return UInt32ProductSemigroup()
     }
     
     public static var productMonoid : UInt32ProductMonoid {
@@ -628,8 +700,16 @@ public class UInt64Order : UInt64Eq, Order {
 }
 
 public extension UInt64 {
+    public static var sumSemigroup : UInt64SumSemigroup {
+        return UInt64SumSemigroup()
+    }
+    
     public static var sumMonoid : UInt64SumMonoid {
         return UInt64SumMonoid()
+    }
+    
+    public static var productSemigroup : UInt64ProductSemigroup {
+        return UInt64ProductSemigroup()
     }
     
     public static var productMonoid : UInt64ProductMonoid {
@@ -695,8 +775,16 @@ public class FloatOrder : FloatEq, Order {
 }
 
 public extension Float {
+    public static var sumSemigroup : FloatSumSemigroup {
+        return FloatSumSemigroup()
+    }
+    
     public static var sumMonoid : FloatSumMonoid {
         return FloatSumMonoid()
+    }
+    
+    public static var productSemigroup : FloatProductSemigroup {
+        return FloatProductSemigroup()
     }
     
     public static var productMonoid : FloatProductMonoid {
@@ -762,8 +850,16 @@ public class DoubleOrder : DoubleEq, Order {
 }
 
 public extension Double {
+    public static var sumSemigroup : DoubleSumSemigroup {
+        return DoubleSumSemigroup()
+    }
+    
     public static var sumMonoid : DoubleSumMonoid {
         return DoubleSumMonoid()
+    }
+    
+    public static var productSemigroup : DoubleProductSemigroup {
+        return DoubleProductSemigroup()
     }
     
     public static var productMonoid : DoubleProductMonoid {
