@@ -26,4 +26,5 @@ Pod::Spec.new do |s|
   s.source_files = "Sources/BowRx/**/*.swift"
   s.dependency "RxSwift", "~> 4.0.0"
   s.dependency "RxCocoa", "~> 4.0.0"
+  s.dependency "Bow", "~> 0.2.0"
 end

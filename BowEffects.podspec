@@ -24,4 +24,5 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "2.0"
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowEffects/**/*.swift"
+  s.dependency "Bow", "~> 0.2.0"
 end
