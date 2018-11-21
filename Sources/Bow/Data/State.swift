@@ -11,34 +11,6 @@ public class State<S, A> : StateOf<S, A> {
     public init(_ run : @escaping (S) -> (S, A)) {
         super.init(Id.pure({ s in Id.pure(run(s)) }))
     }
-    
-    public func run(_ initial : S) -> (S, A) {
-        return self.runM(initial, Id<S>.monad()).fix().extract()
-    }
-    
-    public func runA(_ s : S) -> A {
-        return run(s).1
-    }
-    
-    public func runS(_ s : S) -> S {
-        return run(s).0
-    }
-    
-    public func map<B>(_ f : @escaping (A) -> B) -> StateOf<S, B> {
-        return self.map(f, Id<A>.functor())
-    }
-    
-    public func ap<B>(_ ff : StateOf<S, (A) -> B>) -> StateOf<S, B> {
-        return self.ap(ff, Id<A>.monad())
-    }
-    
-    public func flatMap<B>(_ f : @escaping (A) -> StateOf<S, B>) -> StateOf<S, B> {
-        return self.flatMap(f, Id<A>.monad())
-    }
-    
-    public func product<B>(_ sb : State<S, B>) -> StateOf<S, (A, B)> {
-        return self.product(sb, Id<A>.monad())
-    }
 }
 
 public extension State {
