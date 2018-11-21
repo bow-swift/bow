@@ -120,6 +120,36 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
     }
 }
 
+public extension StateT where F == ForId {
+    public func run(_ initialState : S) -> (S, A) {
+        return self.runM(initialState, Id<A>.monad()).fix().value
+    }
+    
+    public func runA(_ s : S) -> A {
+        return run(s).1
+    }
+    
+    public func runS(_ s : S) -> S {
+        return run(s).0
+    }
+    
+    public func map<B>(_ f : @escaping (A) -> B) -> StateOf<S, B> {
+        return self.map(f, Id<A>.functor())
+    }
+    
+    public func ap<B>(_ ff : StateOf<S, (A) -> B>) -> StateOf<S, B> {
+        return self.ap(ff, Id<A>.monad())
+    }
+    
+    public func flatMap<B>(_ f : @escaping (A) -> StateOf<S, B>) -> StateOf<S, B> {
+        return self.flatMap(f, Id<A>.monad())
+    }
+    
+    public func product<B>(_ sb : State<S, B>) -> StateOf<S, (A, B)> {
+        return self.product(sb, Id<A>.monad())
+    }
+}
+
 public extension StateT {
     public static func functor<FuncF>(_ functor : FuncF) -> StateTFunctor<F, S, FuncF> {
         return StateTFunctor<F, S, FuncF>(functor)
