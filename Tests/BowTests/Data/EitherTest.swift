@@ -28,6 +28,10 @@ class EitherTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: self.eq)
     }
+
+    func testBiFunctorLaws() {
+        BifunctorLaws.check(bifunctor: Either<Int, Int>.bifunctor(), generator: self.generator, eq: self.eq)
+    }
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(

@@ -181,6 +181,18 @@ public extension Either {
     public static func eq<EqL, EqR>(_ eql : EqL, _ eqr : EqR) -> EitherEq<A, B, EqL, EqR> {
         return EitherEq<A, B, EqL, EqR>(eql, eqr)
     }
+
+    public static func bifunctor() -> EitherBiFunctor<A, B> {
+        return EitherBiFunctor<A, B>()
+    }
+}
+
+public class EitherBiFunctor<A, B>: Bifunctor {
+    public typealias F = ForEither
+
+    public func bimap<A, B, C, D>(_ fab: Kind2<ForEither, A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> Kind2<ForEither, C, D> {
+        return Either.fix(fab).bimap(f1, f2)
+    }
 }
 
 public class EitherApplicative<C> : Applicative {
