@@ -40,7 +40,7 @@ pod "BowBrightFutures", "~> 0.2.0"
 
 ### Carthage
 
-Carthage with download the whole Bow project, but it will compile individual frameworks for each module that you can use separately. Add this line to your Cartfile:
+Carthage will download the whole Bow project, but it will compile individual frameworks for each module that you can use separately. Add this line to your Cartfile:
 
 ```
 github "bow-swift/Bow" ~> 0.2.0
