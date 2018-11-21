@@ -187,7 +187,7 @@ public extension Either {
     }
 }
 
-public class EitherBiFunctor<A, B>: Bifunctor {
+public class EitherBifunctor<A, B>: Bifunctor {
     public typealias F = ForEither
 
     public func bimap<A, B, C, D>(_ fab: Kind2<ForEither, A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> Kind2<ForEither, C, D> {
