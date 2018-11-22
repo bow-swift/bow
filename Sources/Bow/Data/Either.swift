@@ -182,8 +182,8 @@ public extension Either {
         return EitherEq<A, B, EqL, EqR>(eql, eqr)
     }
 
-    public static func bifunctor() -> EitherBiFunctor<A, B> {
-        return EitherBiFunctor<A, B>()
+    public static func bifunctor() -> EitherBifunctor<A, B> {
+        return EitherBifunctor<A, B>()
     }
 }
 
