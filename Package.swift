@@ -15,11 +15,11 @@ let package = Package(
         .library(name: "BowBrightFutures", targets: ["BowBrightFutures"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/typelift/SwiftCheck", from: "0.9.1"),
-        .package(url: "https://github.com/Quick/Nimble", from: "7.0.2"),
+        .package(url: "https://github.com/typelift/SwiftCheck.git", from: "0.9.1"),
+        .package(url: "https://github.com/Quick/Nimble.git", from: "7.0.2"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "4.4.0"),
-        .package(url: "https://github.com/antitypical/Result", from: "4.0.0"),
-        .package(url: "https://github.com/Thomvis/BrightFutures", from: "7.0.0"),
+        .package(url: "https://github.com/antitypical/Result.git", from: "4.0.0"),
+        .package(url: "https://github.com/Thomvis/BrightFutures.git", from: "7.0.0"),
     ],
     targets: [
         .target(name: "Bow", dependencies: []),
