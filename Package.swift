@@ -4,9 +4,15 @@ import PackageDescription
 let package = Package(
     name: "Bow",
     products: [
-        .library(
-            name: "Bow",
-            targets: ["Bow"]),
+        .library(name: "Bow", targets: ["Bow"]),
+        .library(name: "BowOptics", targets: ["BowOptics"]),
+        .library(name: "BowRecursionSchemes", targets: ["BowRecursionSchemes"]),
+        .library(name: "BowFree", targets: ["BowFree"]),
+        .library(name: "BowGeneric", targets: ["BowGeneric"]),
+        .library(name: "BowEffects", targets: ["BowEffects"]),
+        .library(name: "BowResult", targets: ["BowResult"]),
+        .library(name: "BowRx", targets: ["BowRx"]),
+        .library(name: "BowBrightFutures", targets: ["BowBrightFutures"]),
     ],
     dependencies: [
         .package(url: "https://github.com/typelift/SwiftCheck", from: "0.9.1"),
