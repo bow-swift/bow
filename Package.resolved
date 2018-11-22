@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "BrightFutures",
+        "repositoryURL": "https://github.com/Thomvis/BrightFutures",
+        "state": {
+          "branch": null,
+          "revision": "b86a1d202afff7bfca7adf2423ad1962172ee10a",
+          "version": "7.0.0"
+        }
+      },
+      {
         "package": "FileCheck",
         "repositoryURL": "https://github.com/trill-lang/FileCheck.git",
         "state": {
@@ -17,6 +26,24 @@
           "branch": null,
           "revision": "22800b0954c89344bb8c87f8ab93378076716fb7",
           "version": "7.0.3"
+        }
+      },
+      {
+        "package": "Result",
+        "repositoryURL": "https://github.com/antitypical/Result",
+        "state": {
+          "branch": null,
+          "revision": "8fc088dcf72802801efeecba76ea8fb041fb773d",
+          "version": "4.0.0"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "e8aa1d892a0d8a153a28b74cbad25be534926f49",
+          "version": "4.4.0"
         }
       },
       {
