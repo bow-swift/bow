@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
+		0DE29CA121A7258100DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
 		11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
 		11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
@@ -56,8 +58,6 @@
 		112295E7219D9528006D66C5 /* HList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45E217E2E9200969984 /* HList.swift */; };
 		112295E8219D9528006D66C5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45D217E2E9200969984 /* Product.swift */; };
 		11229618219D9593006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		11229619219D9593006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
-		1122961A219D9593006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11229629219D964D006D66C5 /* GenericTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11229626219D95E5006D66C5 /* GenericTest.swift */; };
 		11229687219D9718006D66C5 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		11229693219D9821006D66C5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
@@ -82,19 +82,12 @@
 		112297BB219DCFDE006D66C5 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */; };
 		112297BC219DCFDE006D66C5 /* SingleKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */; };
 		112297BD219DCFDE006D66C5 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */; };
-		112297C2219DCFDE006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		112297C3219DCFDE006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
-		112297C4219DCFDE006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		112297DA219DD148006D66C5 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F467217E2E9200969984 /* FutureK.swift */; };
 		112297E0219DD148006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39F217E2DEF00969984 /* FutureKTest.swift */; };
-		112297F9219DD2AB006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		112297FA219DD2AB006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
-		112297FB219DD2AB006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		113CD8F3219DD82F00730E58 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
-		113CD8F5219DD8CC00730E58 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11D97EE5219EBAA1008FC004 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -266,6 +259,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0DE29C9D21A7244200DC781E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1122962A219D9718006D66C5;
+			remoteInfo = "Bow-Result";
+		};
+		0DE29CA221A7271A00DC781E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1122957A219D94C9006D66C5;
+			remoteInfo = "Bow-Generic";
+		};
 		1122941D219D8BBF006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -329,13 +336,6 @@
 			remoteGlobalIDString = "Bow::Bow";
 			remoteInfo = Bow;
 		};
-		112295EB219D9593006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112293AD219D8B86006D66C5;
-			remoteInfo = BowLaws;
-		};
 		112295ED219D9593006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -391,13 +391,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
 			remoteInfo = "Bow-Effects";
-		};
-		1122978F219DCAA2006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1122962A219D9718006D66C5;
-			remoteInfo = "Bow-Result";
 		};
 		11229795219DCE76006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -461,13 +454,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
 			remoteInfo = "Bow-Effects";
-		};
-		112297ED219DD2AB006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1122962A219D9718006D66C5;
-			remoteInfo = "Bow-Result";
 		};
 		112297EF219DD2AB006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -898,8 +884,6 @@
 			buildActionMask = 0;
 			files = (
 				11229618219D9593006D66C5 /* Bow.framework in Frameworks */,
-				11229619219D9593006D66C5 /* Nimble.framework in Frameworks */,
-				1122961A219D9593006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,11 +935,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
+				0DE29CA121A7258100DC781E /* Bow.framework in Frameworks */,
 				113CD8F3219DD82F00730E58 /* RxCocoa.framework in Frameworks */,
 				113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */,
-				112297C2219DCFDE006D66C5 /* Bow.framework in Frameworks */,
-				112297C3219DCFDE006D66C5 /* Nimble.framework in Frameworks */,
-				112297C4219DCFDE006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,10 +953,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				113CD8F5219DD8CC00730E58 /* Result.framework in Frameworks */,
-				112297F9219DD2AB006D66C5 /* Bow.framework in Frameworks */,
-				112297FA219DD2AB006D66C5 /* Nimble.framework in Frameworks */,
-				112297FB219DD2AB006D66C5 /* SwiftCheck.framework in Frameworks */,
+				0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */,
 				112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1770,7 +1749,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				112295EA219D9593006D66C5 /* PBXTargetDependency */,
+				0DE29CA321A7271A00DC781E /* PBXTargetDependency */,
 				112295EC219D9593006D66C5 /* PBXTargetDependency */,
 			);
 			name = "Bow-GenericTests";
@@ -1844,7 +1823,6 @@
 			);
 			dependencies = (
 				11D97EF1219EBBB4008FC004 /* PBXTargetDependency */,
-				11229790219DCAA2006D66C5 /* PBXTargetDependency */,
 				11229785219DC95B006D66C5 /* PBXTargetDependency */,
 				11229749219DC88F006D66C5 /* PBXTargetDependency */,
 				1122974B219DC88F006D66C5 /* PBXTargetDependency */,
@@ -1926,9 +1904,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				0DE29C9E21A7244200DC781E /* PBXTargetDependency */,
 				11D97EF6219EBCE1008FC004 /* PBXTargetDependency */,
 				11229808219DD31E006D66C5 /* PBXTargetDependency */,
-				112297EC219DD2AB006D66C5 /* PBXTargetDependency */,
 				112297EE219DD2AB006D66C5 /* PBXTargetDependency */,
 				112297F0219DD2AB006D66C5 /* PBXTargetDependency */,
 				112297F2219DD2AB006D66C5 /* PBXTargetDependency */,
@@ -2154,8 +2132,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
 			);
@@ -2309,12 +2285,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 			);
 			outputPaths = (
 			);
@@ -2702,6 +2673,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0DE29C9E21A7244200DC781E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1122962A219D9718006D66C5 /* Bow-Result */;
+			targetProxy = 0DE29C9D21A7244200DC781E /* PBXContainerItemProxy */;
+		};
+		0DE29CA321A7271A00DC781E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1122957A219D94C9006D66C5 /* Bow-Generic */;
+			targetProxy = 0DE29CA221A7271A00DC781E /* PBXContainerItemProxy */;
+		};
 		1122941E219D8BBF006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 112293AD219D8B86006D66C5 /* BowLaws */;
@@ -2747,11 +2728,6 @@
 			target = "Bow::Bow" /* Bow */;
 			targetProxy = 112295E4219D950E006D66C5 /* PBXContainerItemProxy */;
 		};
-		112295EA219D9593006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112293AD219D8B86006D66C5 /* BowLaws */;
-			targetProxy = 112295EB219D9593006D66C5 /* PBXContainerItemProxy */;
-		};
 		112295EC219D9593006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
@@ -2791,11 +2767,6 @@
 			isa = PBXTargetDependency;
 			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
 			targetProxy = 11229784219DC95B006D66C5 /* PBXContainerItemProxy */;
-		};
-		11229790219DCAA2006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1122962A219D9718006D66C5 /* Bow-Result */;
-			targetProxy = 1122978F219DCAA2006D66C5 /* PBXContainerItemProxy */;
 		};
 		11229794219DCE76006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2841,11 +2812,6 @@
 			isa = PBXTargetDependency;
 			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
 			targetProxy = 112297E9219DD1B8006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297EC219DD2AB006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1122962A219D9718006D66C5 /* Bow-Result */;
-			targetProxy = 112297ED219DD2AB006D66C5 /* PBXContainerItemProxy */;
 		};
 		112297EE219DD2AB006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

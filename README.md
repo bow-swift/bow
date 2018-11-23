@@ -20,7 +20,7 @@ Bow is split in multiple modules that can be consumed independently. These modul
 - `BowBrightFutures`: module to provide an integration with BrightFutures.
 - `BowRx`: module to provide an integration with RxSwift.
 
-Bow is available using CocoaPods and Carthage.
+Bow is available using CocoaPods, Carthage and Swift Package Manager.
 
 ### CocoaPods
 
@@ -44,6 +44,43 @@ Carthage will download the whole Bow project, but it will compile individual fra
 
 ```
 github "bow-swift/Bow" ~> 0.2.0
+```
+
+### Swift Package Manager
+
+Create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
+
+```
+// swift-tools-version:4.0
+
+import PackageDescription
+
+let package = Package(
+    name: "BowTestProject",
+    dependencies: [
+        .package(url: "https://github.com/bow-swift/bow.git", from: "0.2.0")
+    ],
+    targets: [
+        .target(name: "BowTestProject",
+                dependencies: [
+                    "Bow",
+                    "BowOptics",
+                    "BowRecursionSchemes",
+                    "BowFree",
+                    "BowGeneric",
+                    "BowEffects",
+                    "BowResult",
+                    "BowRx",
+                    "BowBrightFutures"]
+        )
+    ]
+)
+```
+
+To build it, just run:
+
+```
+$ swift build
 ```
 
 ## Contributing
