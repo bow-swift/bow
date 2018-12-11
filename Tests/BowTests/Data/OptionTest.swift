@@ -91,21 +91,21 @@ class OptionTest: XCTestCase {
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x : Int?, y : Int) in
             let option = y % 2 == 0 ? Option<Int>.none() : Option<Int>.some(y)
-            return Option.fromOption(x).toOption() == x &&
-                Option.eq(Int.order).eqv(Option.fromOption(option.toOption()), option)
+            return Option.fromOptional(x).toOptional() == x &&
+                Option.eq(Int.order).eqv(Option.fromOptional(option.toOptional()), option)
         }
     }
     
     func testDefinedOrEmpty() {
         property("Option cannot be simultaneously empty and defined") <- forAll { (x : Int?) in
-            let option = Option.fromOption(x)
+            let option = Option.fromOptional(x)
             return xor(option.isEmpty, option.isDefined)
         }
     }
     
     func testGetOrElse() {
         property("getOrElse consistent with orElse") <- forAll { (x : Int?, y : Int) in
-            let option = Option.fromOption(x)
+            let option = Option.fromOptional(x)
             return Option.eq(Int.order).eqv(Option<Int>.pure(option.getOrElse(y)),
                                            option.orElse(Option.pure(y)))
         }
@@ -113,7 +113,7 @@ class OptionTest: XCTestCase {
     
     func testFilter() {
         property("filter is opposite of filterNot") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let option = Option.fromOption(x)
+            let option = Option.fromOptional(x)
             let eq = Option.eq(Int.order)
             let none = Option<Int>.none()
             return xor(eq.eqv(option.filter(predicate.getArrow), none), eq.eqv(option.filterNot(predicate.getArrow), none))
@@ -122,7 +122,7 @@ class OptionTest: XCTestCase {
     
     func testExistForAll() {
         property("exists and forall are equivalent") <- forAll { (x : Int?, predicate : ArrowOf<Int, Bool>) in
-            let option = Option.fromOption(x)
+            let option = Option.fromOptional(x)
             return option.exists(predicate.getArrow) == option.forall(predicate.getArrow)
         }
     }

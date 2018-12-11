@@ -19,37 +19,37 @@ class OptionalTest: XCTestCase {
     
     func testOptionalAsFold() {
         property("Optional as Fold: size") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().size(ints.getArray) == Option.fromOption(ints.getArray.first).map(constant(1)).getOrElse(0)
+            return optionalHead.asFold().size(ints.getArray) == Option.fromOptional(ints.getArray.first).map(constant(1)).getOrElse(0)
         }
         
         property("Optional as Fold: nonEmpty") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().nonEmpty(ints.getArray) == Option.fromOption(ints.getArray.first).isDefined
+            return optionalHead.asFold().nonEmpty(ints.getArray) == Option.fromOptional(ints.getArray.first).isDefined
         }
         
         property("Optional as Fold: isEmpty") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().isEmpty(ints.getArray) == Option.fromOption(ints.getArray.first).isEmpty
+            return optionalHead.asFold().isEmpty(ints.getArray) == Option.fromOptional(ints.getArray.first).isEmpty
         }
         
         property("Optional as Fold: getAll") <- forAll { (ints : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOption(ints.getArray.first).toList().k())
+            return ListK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOptional(ints.getArray.first).toList().k())
         }
         
         property("Optional as Fold: combineAll") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().combineAll(Int.sumMonoid, ints.getArray) == Option.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().combineAll(Int.sumMonoid, ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
         }
         
         property("Optional as Fold: fold") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().fold(Int.sumMonoid, ints.getArray) == Option.fromOption(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().fold(Int.sumMonoid, ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
         }
         
         property("Optional as Fold: headOption") <- forAll { (ints : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(optionalHead.asFold().headOption(ints.getArray),
-                                           Option.fromOption(ints.getArray.first))
+                                           Option.fromOptional(ints.getArray.first))
         }
         
         property("Optional as Fold: lastOption") <- forAll { (ints : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(optionalHead.asFold().lastOption(ints.getArray),
-                                           Option.fromOption(ints.getArray.first))
+                                           Option.fromOptional(ints.getArray.first))
         }
     }
     

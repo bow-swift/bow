@@ -49,13 +49,13 @@ class TraversalTest: XCTestCase {
         property("Traversal as Fold: headOption") <- forAll { (array : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(
                 self.listKTraversal.asFold().headOption(array.getArray.k()),
-                Option.fromOption(array.getArray.first))
+                Option.fromOptional(array.getArray.first))
         }
         
         property("Traversal as Fold: lastOption") <- forAll { (array : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(
                 self.listKTraversal.asFold().lastOption(array.getArray.k()),
-                Option.fromOption(array.getArray.last))
+                Option.fromOptional(array.getArray.last))
         }
     }
     
@@ -78,7 +78,7 @@ class TraversalTest: XCTestCase {
         property("Find a target in a traversal") <- forAll { (array : ArrayOf<Int>) in
             return Option.eq(Int.order).eqv(
                 self.listKTraversal.find(array.getArray.k(), { x in x > 10 }),
-                Option.fromOption(array.getArray.filter { x in x > 10 }.first))
+                Option.fromOptional(array.getArray.filter { x in x > 10 }.first))
         }
         
         property("Size of a traversal") <- forAll { (array : ArrayOf<Int>) in
