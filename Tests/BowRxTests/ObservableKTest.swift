@@ -29,8 +29,8 @@ class ObservableKTest : XCTestCase {
         typealias A = ObservableKOf<EitherOf<CategoryError, Int>>
         
         func eqv(_ a: ObservableKOf<EitherOf<CategoryError, Int>>, _ b: ObservableKOf<EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOption(a.fix().value.blockingGet())
-            let y = Option.fromOption(b.fix().value.blockingGet())
+            let x = Option.fromOptional(a.fix().value.blockingGet())
+            let y = Option.fromOptional(b.fix().value.blockingGet())
             return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
         }
     }

@@ -104,6 +104,6 @@ let sumPrism = Prism<SumType, String>(getOrModify: { sum in
 
 let optionalHead = BowOptics.Optional<Array<Int>, Int>(
     set: { array, value in [value] + ((array.count > 1) ? Array(array.dropFirst()) : [])},
-    getOrModify: { array in Option.fromOption(array.first).fold(constant(Either.left(array)), Either.right) })
+    getOrModify: { array in Option.fromOptional(array.first).fold(constant(Either.left(array)), Either.right) })
 
 let defaultHead = BowOptics.Optional<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)

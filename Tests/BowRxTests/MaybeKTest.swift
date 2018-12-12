@@ -29,8 +29,8 @@ class MaybeKTest : XCTestCase {
         typealias A = Kind<ForMaybeK, EitherOf<CategoryError, Int>>
         
         func eqv(_ a: Kind<ForMaybeK, EitherOf<CategoryError, Int>>, _ b: Kind<ForMaybeK, EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOption(a.fix().value.blockingGet())
-            let y = Option.fromOption(b.fix().value.blockingGet())
+            let x = Option.fromOptional(a.fix().value.blockingGet())
+            let y = Option.fromOptional(b.fix().value.blockingGet())
             
             return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
         }

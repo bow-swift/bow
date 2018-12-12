@@ -4,8 +4,8 @@ import Bow
 public extension Option {
     public static func toPOption<B>() -> PIso<Option<A>, Option<B>, A?, B?> {
         return PIso<Option<A>, Option<B>, A?, B?>(
-            get: { x in x.toOption() },
-            reverseGet: Option<B>.fromOption)
+            get: { x in x.toOptional() },
+            reverseGet: Option<B>.fromOptional)
     }
     
     public static func toOption() -> Iso<Option<A>, A?> {

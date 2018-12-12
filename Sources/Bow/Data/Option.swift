@@ -20,7 +20,7 @@ public class Option<A> : OptionOf<A> {
         return None()
     }
     
-    public static func fromOption(_ a : A?) -> Option<A> {
+    public static func fromOptional(_ a : A?) -> Option<A> {
         if let a = a { return some(a) }
         return none()
     }
@@ -127,7 +127,7 @@ public class Option<A> : OptionOf<A> {
         return fold(defaultValue, Option.some)
     }
     
-    public func toOption() -> A? {
+    public func toOptional() -> A? {
         return fold(constant(nil), id)
     }
     
@@ -345,5 +345,11 @@ extension Option : Equatable where A : Equatable {
     public static func ==(lhs : Option<A>, rhs : Option<A>) -> Bool {
         return lhs.fold({ rhs.fold(constant(true), constant(false)) },
                         { a in rhs.fold(constant(false), { b in a == b })})
+    }
+}
+
+extension Optional {
+    func toOption() -> Option<Wrapped> {
+        return Option<Wrapped>.fromOptional(self)
     }
 }

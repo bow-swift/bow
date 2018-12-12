@@ -68,7 +68,7 @@ class ValidatedTest: XCTestCase {
     
     func testConversionConsistency() {
         property("Consistency fromOption - toOption") <- forAll { (x : Int?, none : String) in
-            let option = Option<Int>.fromOption(x)
+            let option = Option<Int>.fromOptional(x)
             let validated = Validated.fromOption(option, ifNone: constant(none))
             return Option<Int>.eq(Int.order).eqv(validated.toOption(), option)
         }
