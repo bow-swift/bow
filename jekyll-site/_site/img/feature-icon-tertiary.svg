@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="79px" height="79px" viewBox="0 0 79 79" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>feature-icon-tertiary</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <path d="M43,79 C43,55.2517558 23.7482442,36 0,36 L0,79 L43,79 Z" id="opacity" fill="#FA8940" opacity="0.55" transform="translate(21.500000, 57.500000) rotate(-180.000000) translate(-21.500000, -57.500000) "></path>
+            <circle id="image" fill="#FA8940" cx="43" cy="36" r="36"></circle>
+            <g id="icon" transform="translate(27.000000, 19.000000)" stroke="#FFFFFF" stroke-width="2">
+                <circle id="path" cx="16.5" cy="13.5" r="5.5"></circle>
+                <path d="M21.844401,16.438151 L25.593099,18.2708333" id="path" stroke-linecap="square"></path>
+                <path d="M17.1982422,19.4968262 L18.0305176,27.4230957" id="path" stroke-linecap="square"></path>
+                <circle id="path" cx="28.5" cy="2.5" r="2.5"></circle>
+                <circle id="path" cx="28.5" cy="19.5" r="2.5"></circle>
+                <circle id="path" cx="18.5" cy="30.5" r="2.5"></circle>
+                <circle id="path" cx="2.5" cy="28.5" r="2.5"></circle>
+                <path d="M4.5,26.5 L12.5,17.5" id="path" stroke-linecap="square"></path>
+                <circle id="path" cx="2.5" cy="7.5" r="2.5"></circle>
+                <path d="M5.0797526,8.59667969 L10.5,11.5" id="path" stroke-linecap="square"></path>
+                <path d="M20.6669922,9.68945312 L26.6669922,4.68945312" id="path" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

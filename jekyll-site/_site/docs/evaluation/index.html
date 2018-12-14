@@ -1,0 +1,34 @@
+<h1 id="evaluation-h1">Evaluation h1</h1>
+<h2 id="evaluation-h2">Evaluation h2</h2>
+<h3 id="evaluation-h3">Evaluation h3</h3>
+<h4 id="evaluation-h4">Evaluation h4</h4>
+<h5 id="evaluation-h5">Evaluation h5</h5>
+<h6 id="evaluation-h6">Evaluation h6</h6>
+
+<p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Nam lacinia auctor nunc, in commodo ante faucibus ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc vel neque ut nisi sodales aliquet. Ut nunc velit, feugiat et elit eget, lobortis sodales est. Integer turpis tellus, semper nec neque ut, elementum mollis metus. Ut <code class="highlighter-rouge">faucibus lorem</code> felis porta lorem vehicula accumsan. Duis sed tempor enim, ac porttitor mi. Maecenas non sollicitudin quam. Nam mollis scelerisque sapien eu viverra. Etiam tempor bibendum eros, a faucibus tellus ullamcorper a. Aliquam id lorem est. Vivamus in ipsum condimentum, vulputate nisl et, rutrum tellus.</p>
+
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4</li>
+</ul>
+
+<pre><code class="language-kotlin:ank">val idj = IdJ(1)
+
+val id: Kind2&lt;ForConvert, ForIdJ, A&gt; = idj.fromKindedJ()
+.attempt().unsafeRunSync()
+</code></pre>
+
+<pre><code class="language-kotlin:ank:silent">// Exception Style
+
+fun parse(s: String): Int =
+    if (s.matches(Regex("-?[0-9]+"))) s.toInt()
+    else throw NumberFormatException("$s is not a valid integer.")
+
+fun reciprocal(i: Int): Double =
+    if (i == 0) throw IllegalArgumentException("Cannot take reciprocal of 0.")
+    else 1.0 / i
+
+fun stringify(d: Double): String = d.toString()
+</code></pre>

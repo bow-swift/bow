@@ -1,0 +1,31 @@
+// Buttons 
+// -----------------------------------------------
+// -----------------------------------------------
+.button {
+    display: inline-block;
+    font-weight: $font-semibold;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: $brand-secondary;
+    color: $white;
+    border-radius: ($base-point-grid * 8);
+    transition: background $base-duration $base-timing;
+
+    &:visited {
+        color: $white;
+    }
+    &:hover {
+        color: $white;
+        background: rgba($brand-secondary, 0.5);
+        text-decoration: none;
+    }
+    &:active {
+        background: rgba($brand-secondary, 0.5);
+
+    }
+
+    &.button-large {
+        padding: ($base-point-grid * 1.6) ($base-point-grid * 6);
+        font-size: $base-font-size;
+    }
+}

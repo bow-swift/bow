@@ -1,0 +1,9 @@
+nav:
+    - title: Documentation
+      url: /docs/compile/
+
+    - title: Github
+      url: https://github.com/arrow-kt/ank
+
+    - title: License
+      url: https://github.com/arrow-kt/ank#license

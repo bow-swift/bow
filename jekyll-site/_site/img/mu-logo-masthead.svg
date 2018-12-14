@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>mu-logo-masthead</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M34,0 L34,24.537 L29.75,26.991 L29.75,7.361 L17,14.721 L4.25,7.361 L4.25,36.805 L0,34.351 L0,0 L17,9.814 L34,0 Z M21.2497,17.1756 L25.4997,14.7216 L25.4997,29.4446 L21.2497,31.8986 L16.9997,34.3516 L12.7497,31.8986 L12.7497,41.7136 L8.4997,39.2596 L8.4997,14.7216 L12.7497,17.1756 L12.7497,26.9926 L16.9997,29.4446 L21.2497,26.9906 L21.2497,17.1756 Z" id="path-1"></path>
+    </defs>
+    <g id="mu-logo-masthead" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="nav" transform="translate(7.000000, 3.000000)">
+            <g id="brand">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use fill="#12CBC4" xlink:href="#path-1"></use>
+                <rect id="opacity" fill="#0E93AC" opacity="0.540290179" mask="url(#mask-2)" x="17" y="-1" width="21" height="44"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

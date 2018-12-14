@@ -1,0 +1,27 @@
+// Masthead 
+// -----------------------------------------------
+// -----------------------------------------------
+#masthead {
+    background-image: linear-gradient(to bottom right, $brand-primary, $brand-secondary);
+    .masthead-content {
+        padding: ($base-point-grid * 20) 0;
+        @include flexbox;
+        @include align-items (center);
+        .masthead-text {
+            @include flex(1);
+            margin-right: ($base-point-grid * 3);
+            h2 {
+                margin-bottom: ($base-point-grid * 4);
+                font-size: 2.714rem;
+                font-weight: $font-medium;
+            }
+        }
+        .masthead-brand {
+            @include flex(1);
+            img {
+                width: 388px;
+                height: auto;
+            }
+        }
+    }
+}

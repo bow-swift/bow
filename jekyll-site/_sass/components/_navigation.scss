@@ -1,0 +1,54 @@
+// Navigation
+// -----------------------------------------------
+// -----------------------------------------------
+#navigation {
+    position: fixed;
+    padding: ($base-point-grid * 4) 0;
+    width: 100%;
+    background: rgba($brand-primary, 0.6);
+
+    .content-navigation {
+        @include flexbox;
+        @include justify-content(space-between);
+        @include align-items(center);
+        .navigation-brand {
+            font-size: 1.333rem;
+            text-transform: uppercase;
+            font-weight: $font-semibold;
+            a {
+                color: $white;
+                text-decoration: none;
+            }
+        }
+        .navigation-menu {
+            li {
+                display: inline-block;
+
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                a {
+                    padding: ($base-point-grid / 2) ($base-point-grid * 2);
+                    color: rgba($white, 0.9);
+                    text-decoration: none;
+                    transition: background $base-duration $base-timing;
+                    border-radius: ($base-point-grid * 8);
+                    &:visited {
+                        color: $white;
+                    }
+                    &:hover {
+                        color: $white;
+                        text-decoration: none;
+                        background: darken($brand-primary, 3%);
+                    }
+                    &:active {
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+    }
+}

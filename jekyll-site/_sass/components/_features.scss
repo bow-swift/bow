@@ -1,0 +1,63 @@
+// Content 
+// -----------------------------------------------
+// -----------------------------------------------
+#content {
+    background: $white;
+    .features {
+        padding: ($base-point-grid * 10) 0;
+        @include flexbox;
+        .feature-item {
+            margin-right: ($base-point-grid * 3);
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            @include flex(1);
+            text-align: center;
+            img {
+                margin-bottom: ($base-point-grid * 3);
+                transition: transform $base-duration $base-timing;
+            }
+            h3 {
+                margin-bottom: $base-point-grid;
+                font-size: 1.143rem;
+                font-weight: $font-medium;
+                color: $gray-primary;
+            }
+
+            p {
+                color: $gray-primary;
+            }
+            
+        }
+    }
+}
+
+// Responsive mode
+@include bp(medium) {
+    #content {
+        .features {
+            @include flex-wrap(wrap);
+            .feature-item {
+                @include flex(0 0 50%);
+                margin-right: 0;
+                margin-bottom: ($base-point-grid * 5);
+                padding: 0;
+            }
+        }
+    }
+}
+@include bp(small) {
+    #content {
+        .features {
+            @include flex-wrap(wrap);
+            .feature-item {
+                @include flex(0 0 100%);
+                margin-right: 0;
+                margin-bottom: ($base-point-grid * 5);
+                padding: 0;
+            }
+        }
+    }
+}

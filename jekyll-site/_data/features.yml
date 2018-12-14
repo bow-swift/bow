@@ -1,0 +1,16 @@
+content:
+    - title: Pattern
+      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      icon: /img/feature-icon-primary.svg
+
+    - title: Typeclasses
+      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      icon: /img/feature-icon-secondary.svg
+
+    - title: Data Types
+      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      icon: /img/feature-icon-tertiary.svg
+      
+    - title: Integrations
+      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      icon: /img/feature-icon-quarter.svg
