@@ -2,9 +2,36 @@
 // -----------------------------------------------
 // -----------------------------------------------
 #footer {
-    padding: ($base-point-grid * 6) /*48px*/ 0;
+    padding: ($base-point-grid * 6) 0;
     font-size: 0.875rem;
-    p {
-        color: rgba($white, 0.4);
+    .content-footer {
+        @include flexbox;
+        @include justify-content(space-between);
+        @include align-items(center);
+        p {
+            color: rgba($white, 0.4);
+        }
+        
+        ul {
+            li {
+                display: inline-block;
+                margin-right: ($base-point-grid * 2);
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        a {
+            color: rgba($white, 0.6);
+            &:visited {
+                color: rgba($white, 0.6);
+            }
+            &:hover {
+                color: rgba($white, 0.8);
+            }
+            &:active {}
+
+        }
     }
 }

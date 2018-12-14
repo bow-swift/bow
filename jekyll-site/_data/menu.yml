@@ -3,7 +3,7 @@ nav:
       url: /docs/compile/
 
     - title: Github
-      url: https://github.com/arrow-kt/ank
+      url: https://github.com/bow-swift/bow
 
     - title: License
-      url: https://github.com/arrow-kt/ank#license
+      url: https://github.com/bow-swift/bow
