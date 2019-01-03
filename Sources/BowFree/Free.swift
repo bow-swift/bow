@@ -39,8 +39,8 @@ public class Free<S, A> : FreeOf<S, A> {
         return flatMap { a in Free<S, B>.pure(f(a)) }
     }
     
-    public func ap<B>(_ ff : Free<S, (A) -> B>) -> Free<S, B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ ff : Free<S, AA>) -> Free<S, B> where A == (AA) -> B {
+        return flatMap(ff.map)
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Free<S, B>) -> Free<S, B> {
@@ -191,7 +191,7 @@ public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
     }
     
     public func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
-        return Free.fix(fa).ap(Free.fix(ff))
+        return Free.fix(ff).ap(Free.fix(fa))
     }
 }
 
