@@ -122,8 +122,8 @@ public class Ior<A, B> : IorOf<A, B> {
                     })
     }
     
-    public func ap<C, SemiG>(_ ff : Ior<A, (B) -> C>, _ semigroup : SemiG) -> Ior<A, C> where SemiG : Semigroup, SemiG.A == A {
-        return ff.flatMap(self.map, semigroup)
+    public func ap<BB, C, SemiG>(_ ff : Ior<A, BB>, _ semigroup : SemiG) -> Ior<A, C> where SemiG : Semigroup, SemiG.A == A, B == (BB) -> C {
+        return flatMap(ff.map, semigroup)
     }
     
     public func swap() -> Ior<B, A> {
@@ -251,7 +251,7 @@ public class IorApplicative<L, SemiG> : IorFunctor<L>, Applicative where SemiG :
     }
     
     public func ap<A, B>(_ fa: IorOf<L, A>, _ ff: IorOf<L, (A) -> B>) -> IorOf<L, B> {
-        return Ior.fix(fa).ap(Ior.fix(ff), semigroup)
+        return Ior.fix(ff).ap(Ior.fix(fa), semigroup)
     }
 }
 
