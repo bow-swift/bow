@@ -83,8 +83,8 @@ public class SingleK<A> : SingleKOf<A> {
         return value.map(f).k()
     }
     
-    public func ap<B>(_ fa : SingleKOf<(A) -> B>) -> SingleK<B> {
-        return flatMap { a in fa.fix().map { ff in ff(a) } }
+    public func ap<AA, B>(_ fa : SingleKOf<AA>) -> SingleK<B> where A == (AA) -> B {
+        return fa.fix().flatMap { a in self.map { ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> SingleKOf<B>) -> SingleK<B> {
@@ -165,7 +165,7 @@ public class SingleKApplicative : SingleKFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: SingleKOf<A>, _ ff: SingleKOf<(A) -> B>) -> SingleKOf<B> {
-        return fa.fix().ap(ff)
+        return ff.fix().ap(fa)
     }
 }
 
