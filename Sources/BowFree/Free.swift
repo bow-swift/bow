@@ -40,7 +40,7 @@ public class Free<S, A> : FreeOf<S, A> {
     }
     
     public func ap<AA, B>(_ fa : Free<S, AA>) -> Free<S, B> where A == (AA) -> B {
-        return flatMap(ff.map)
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Free<S, B>) -> Free<S, B> {
