@@ -68,8 +68,8 @@ public class Eval<A> : EvalOf<A> {
         return flatMap{ a in Eval<B>.now(f(a)) }
     }
     
-    public func ap<AA, B>(_ ff : Eval<AA>) -> Eval<B> where A == (AA) -> B {
-        return flatMap(ff.map)
+    public func ap<AA, B>(_ fa : Eval<AA>) -> Eval<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Eval<B>) -> Eval<B> {

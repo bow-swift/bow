@@ -16,8 +16,8 @@ public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
         self.run = run
     }
     
-    public func ap<AA, B, Appl>(_ ff : Kleisli<F, D, AA>, _ applicative : Appl) -> Kleisli<F, D, B> where Appl : Applicative, Appl.F == F, A == (AA) -> B {
-        return Kleisli<F, D, B>({ d in applicative.ap(self.run(d), ff.run(d)) })
+    public func ap<AA, B, Appl>(_ fa : Kleisli<F, D, AA>, _ applicative : Appl) -> Kleisli<F, D, B> where Appl : Applicative, Appl.F == F, A == (AA) -> B {
+        return Kleisli<F, D, B>({ d in applicative.ap(self.run(d), fa.run(d)) })
     }
     
     public func map<B, Func>(_ f : @escaping (A) -> B, _ functor : Func) -> Kleisli<F, D, B> where Func : Functor, Func.F == F {

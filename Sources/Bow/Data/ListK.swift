@@ -54,8 +54,8 @@ public class ListK<A> : ListKOf<A> {
         return ListK<B>(self.list.map(f))
     }
     
-    public func ap<AA, B>(_ ff : ListK<AA>) -> ListK<B> where A == (AA) -> B {
-        return flatMap(ff.map)
+    public func ap<AA, B>(_ fa : ListK<AA>) -> ListK<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : (A) -> ListK<B>) -> ListK<B> {

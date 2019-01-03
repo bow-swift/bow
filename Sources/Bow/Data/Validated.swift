@@ -85,8 +85,8 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return bimap(f, id)
     }
     
-    public func ap<AA, B, SemiG>(_ ff : Validated<E, AA>, _ semigroup : SemiG) -> Validated<E, B> where SemiG : Semigroup, SemiG.A == E, A == (AA) -> B {
-        return ff.fold({ e in self.fold({ ee in Validated<E, B>.invalid(semigroup.combine(e, ee)) },
+    public func ap<AA, B, SemiG>(_ fa : Validated<E, AA>, _ semigroup : SemiG) -> Validated<E, B> where SemiG : Semigroup, SemiG.A == E, A == (AA) -> B {
+        return fa.fold({ e in self.fold({ ee in Validated<E, B>.invalid(semigroup.combine(e, ee)) },
                                         { _ in Validated<E, B>.invalid(e) }) },
                        { a in self.fold({ ee in Validated<E, B>.invalid(ee) },
                                         { f in Validated<E, B>.valid(f(a)) }) })

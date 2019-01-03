@@ -43,8 +43,8 @@ public class Function0<A> : Function0Of<A> {
         return Function0<B>({ f(self) })
     }
     
-    public func ap<AA, B>(_ ff : Function0<AA>) -> Function0<B> where A == (AA) -> B {
-        return Function0<B>(ff.f >>> f())
+    public func ap<AA, B>(_ fa : Function0<AA>) -> Function0<B> where A == (AA) -> B {
+        return Function0<B>(fa.f >>> f())
     }
     
     public func extract() -> A {

@@ -40,8 +40,8 @@ public class MapK<K : Hashable, A> : MapKOf<K, A> {
         return fb.map{ b in self.map2(b, f) }
     }
     
-    public func ap<AA, B>(_ ff : MapK<K, AA>) -> MapK<K, B> where A == (AA) -> B {
-        return flatMap(ff.map)
+    public func ap<AA, B>(_ fa : MapK<K, AA>) -> MapK<K, B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : (A) -> MapK<K, B>) -> MapK<K, B> {

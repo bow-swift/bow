@@ -55,8 +55,8 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
         return EitherT<F, A, C>(functor.map(fc, Either<A, C>.right))
     }
     
-    public func ap<BB, C, Mon>(_ ff : EitherT<F, A, BB>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F, B == (BB) -> C {
-        return self.flatMap({ f in ff.map(f, monad) }, monad)
+    public func ap<BB, C, Mon>(_ fa : EitherT<F, A, BB>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F, B == (BB) -> C {
+        return self.flatMap({ f in fa.map(f, monad) }, monad)
     }
     
     public func flatMap<C, Mon>(_ f : @escaping (B) -> EitherT<F, A, C>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {

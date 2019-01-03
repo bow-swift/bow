@@ -85,8 +85,8 @@ public class Try<A> : TryOf<A> {
         return fold(Try<B>.raise, f)
     }
     
-    public func ap<AA, B>(_ ff : Try<AA>) -> Try<B> where A == (AA) -> B {
-        return flatMap(ff.map)
+    public func ap<AA, B>(_ fa : Try<AA>) -> Try<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func filter(_ predicate : (A) -> Bool) -> Try<A> {

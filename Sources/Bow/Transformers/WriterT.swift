@@ -88,8 +88,8 @@ public class WriterT<F, W, A> : WriterTOf<F, W, A> {
         return WriterT<F, W, B>(applicative.map2(fb, value, { x, y in (y.0, x) }))
     }
     
-    public func ap<AA, B, SemiG, Mon>(_ ff : WriterT<F, W, AA>, _ semigroup : SemiG, _ monad : Mon) -> WriterT<F, W, B> where SemiG : Semigroup, SemiG.A == W, Mon : Monad, Mon.F == F, A == (AA) -> B {
-        return flatMap({ pair in ff.map(pair, monad)}, semigroup, monad)
+    public func ap<AA, B, SemiG, Mon>(_ fa : WriterT<F, W, AA>, _ semigroup : SemiG, _ monad : Mon) -> WriterT<F, W, B> where SemiG : Semigroup, SemiG.A == W, Mon : Monad, Mon.F == F, A == (AA) -> B {
+        return flatMap({ pair in fa.map(pair, monad)}, semigroup, monad)
     }
     
     public func flatMap<B, SemiG, Mon>(_ f : @escaping (A) -> WriterT<F, W, B>, _ semigroup : SemiG, _ monad : Mon) -> WriterT<F, W, B> where SemiG : Semigroup, SemiG.A == W, Mon : Monad, Mon.F == F {

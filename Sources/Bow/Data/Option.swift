@@ -63,8 +63,8 @@ public class Option<A> : OptionOf<A> {
                     { a in Option<B>.some(f(a)) })
     }
     
-    public func ap<AA, B>(_ ff : Option<AA>) -> Option<B> where A == (AA) -> B{
-        return flatMap(ff.map)
+    public func ap<AA, B>(_ fa : Option<AA>) -> Option<B> where A == (AA) -> B{
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : (A) -> Option<B>) -> Option<B> {

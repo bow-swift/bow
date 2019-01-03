@@ -39,7 +39,7 @@ public class Free<S, A> : FreeOf<S, A> {
         return flatMap { a in Free<S, B>.pure(f(a)) }
     }
     
-    public func ap<AA, B>(_ ff : Free<S, AA>) -> Free<S, B> where A == (AA) -> B {
+    public func ap<AA, B>(_ fa : Free<S, AA>) -> Free<S, B> where A == (AA) -> B {
         return flatMap(ff.map)
     }
     

@@ -78,8 +78,8 @@ public class Either<A, B> : EitherOf<A, B> {
                     { b in Either<C, D>.right(fb(b)) })
     }
     
-    public func ap<BB, C>(_ ff : Either<A, BB>) -> Either<A, C> where B == (BB) -> C {
-        return self.flatMap(ff.map)
+    public func ap<BB, C>(_ fb : Either<A, BB>) -> Either<A, C> where B == (BB) -> C {
+        return self.flatMap(fb.map)
     }
     
     public func flatMap<C>(_ f : (B) -> Either<A, C>) -> Either<A, C> {

@@ -35,8 +35,8 @@ public class Const<A, T> : ConstOf<A, T> {
         return Const<A, T>(semigroup.combine(self.value, other.value))
     }
     
-    public func ap<AA, U, SemiG>(_ ff : Const<A, AA>, _ semigroup : SemiG) -> Const<A, U> where SemiG : Semigroup, SemiG.A == A, T == (AA) -> U {
-        return self.retag().combine(ff.retag(), semigroup)
+    public func ap<AA, U, SemiG>(_ fa : Const<A, AA>, _ semigroup : SemiG) -> Const<A, U> where SemiG : Semigroup, SemiG.A == A, T == (AA) -> U {
+        return self.retag().combine(fa.retag(), semigroup)
     }
 }
 
