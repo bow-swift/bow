@@ -54,8 +54,8 @@ public class ListK<A> : ListKOf<A> {
         return ListK<B>(self.list.map(f))
     }
     
-    public func ap<B>(_ ff : ListK<(A) -> B>) -> ListK<B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ ff : ListK<AA>) -> ListK<B> where A == (AA) -> B {
+        return flatMap(ff.map)
     }
     
     public func flatMap<B>(_ f : (A) -> ListK<B>) -> ListK<B> {
@@ -207,7 +207,7 @@ public class ListKApplicative : ListKFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: ListKOf<A>, _ ff: ListKOf<(A) -> B>) -> ListKOf<B> {
-        return fa.fix().ap(ff.fix())
+        return ff.fix().ap(fa.fix())
     }
 }
 
