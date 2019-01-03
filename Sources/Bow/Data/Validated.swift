@@ -85,11 +85,11 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return bimap(f, id)
     }
     
-    public func ap<B, SemiG>(_ ff : Validated<E, (A) -> B>, _ semigroup : SemiG) -> Validated<E, B> where SemiG : Semigroup, SemiG.A == E {
-        return fold({ e in ff.fold({ ee in Validated<E, B>.invalid(semigroup.combine(e, ee)) },
-                                   { _ in Validated<E, B>.invalid(e) }) },
-                    { a in ff.fold({ ee in Validated<E, B>.invalid(ee) },
-                                   { f in Validated<E, B>.valid(f(a)) }) })
+    public func ap<AA, B, SemiG>(_ ff : Validated<E, AA>, _ semigroup : SemiG) -> Validated<E, B> where SemiG : Semigroup, SemiG.A == E, A == (AA) -> B {
+        return ff.fold({ e in self.fold({ ee in Validated<E, B>.invalid(semigroup.combine(e, ee)) },
+                                        { _ in Validated<E, B>.invalid(e) }) },
+                       { a in self.fold({ ee in Validated<E, B>.invalid(ee) },
+                                        { f in Validated<E, B>.valid(f(a)) }) })
     }
     
     public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
@@ -218,7 +218,7 @@ public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative w
     }
     
     public func ap<A, B>(_ fa: ValidatedOf<R, A>, _ ff: ValidatedOf<R, (A) -> B>) -> ValidatedOf<R, B> {
-        return Validated.fix(fa).ap(Validated.fix(ff), semigroup)
+        return Validated.fix(ff).ap(Validated.fix(fa), semigroup)
     }
 }
 
