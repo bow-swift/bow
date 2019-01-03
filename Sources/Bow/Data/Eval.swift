@@ -321,7 +321,7 @@ public class EvalApplicative : Applicative {
         return Eval<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<F, A>, _ ff: Kind<F, (A) -> B>) -> Kind<F, B> {
+    public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
         return ff.fix().ap(fa.fix())
     }
 }

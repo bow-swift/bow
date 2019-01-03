@@ -202,7 +202,7 @@ public class TryApplicative : TryFunctor, Applicative {
         return Try<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: TryOf<A>, _ ff: TryOf<(A) -> B>) -> TryOf<B> {
+    public func ap<A, B>(_ ff: TryOf<(A) -> B>, _ fa: TryOf<A>) -> TryOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

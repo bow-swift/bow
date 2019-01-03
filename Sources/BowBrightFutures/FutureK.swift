@@ -138,8 +138,8 @@ public class FutureKApplicative<E> : FutureKFunctor<E>, Applicative where E : Er
         return FutureK<E, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: FutureKOf<E, A>, _ ff: FutureKOf<E, (A) -> B>) -> FutureKOf<E, B> {
-        return FutureK<E, (A) -> B>.fix(ff).ap(fa)
+    public func ap<A, B>(_ ff: FutureKOf<E, (A) -> B>, _ fa: FutureKOf<E, A>) -> FutureKOf<E, B> {
+        return FutureK.fix(ff).ap(fa)
     }
 }
 

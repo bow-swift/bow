@@ -84,7 +84,7 @@ public class Function1Applicative<I> : Function1Functor<I>, Applicative {
         return Function1<I, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Function1Of<I, A>, _ ff: Function1Of<I, (A) -> B>) -> Function1Of<I, B> {
+    public func ap<A, B>(_ ff: Function1Of<I, (A) -> B>, _ fa: Function1Of<I, A>) -> Function1Of<I, B> {
         return Function1.fix(ff).ap(Function1.fix(fa))
     }
 }

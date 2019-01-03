@@ -105,7 +105,7 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
         return ConstMonoid(self.monoid).empty
     }
     
-    public func ap<A, B>(_ fa: ConstOf<R, A>, _ ff: ConstOf<R, (A) -> B>) -> ConstOf<R, B> {
+    public func ap<A, B>(_ ff: ConstOf<R, (A) -> B>, _ fa: ConstOf<R, A>) -> ConstOf<R, B> {
         return Const.fix(ff).ap(Const.fix(fa), monoid)
     }
 }

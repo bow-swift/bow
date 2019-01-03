@@ -202,7 +202,7 @@ public class EitherApplicative<C> : Applicative {
         return Either<C, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: EitherOf<C, A>, _ ff: EitherOf<C, (A) -> B>) -> EitherOf<C, B> {
+    public func ap<A, B>(_ ff: EitherOf<C, (A) -> B>, _ fa: EitherOf<C, A>) -> EitherOf<C, B> {
         return Either.fix(ff).ap(Either.fix(fa))
     }
 }

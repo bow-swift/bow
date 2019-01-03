@@ -210,7 +210,7 @@ public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicat
         return StateT(monad.pure({ s in self.monad.pure((s, a))}))
     }
     
-    public func ap<A, B>(_ fa: StateTOf<G, S, A>, _ ff: StateTOf<G, S, (A) -> B>) -> StateTOf<G, S, B> {
+    public func ap<A, B>(_ ff: StateTOf<G, S, (A) -> B>, _ fa: StateTOf<G, S, A>) -> StateTOf<G, S, B> {
         return StateT.fix(ff).ap(StateT.fix(fa), monad)
     }
 }

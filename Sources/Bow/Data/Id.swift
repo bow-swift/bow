@@ -122,7 +122,7 @@ public class IdApplicative : IdFunctor, Applicative {
         return Id.pure(a)
     }
     
-    public func ap<A, B>(_ fa: IdOf<A>, _ ff: IdOf<(A) -> B>) -> IdOf<B> {
+    public func ap<A, B>(_ ff: IdOf<(A) -> B>, _ fa: IdOf<A>) -> IdOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

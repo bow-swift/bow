@@ -168,7 +168,7 @@ public class MaybeKApplicative : MaybeKFunctor, Applicative {
         return MaybeK.pure(a)
     }
     
-    public func ap<A, B>(_ fa: MaybeKOf<A>, _ ff: MaybeKOf<(A) -> B>) -> MaybeKOf<B> {
+    public func ap<A, B>(_ ff: MaybeKOf<(A) -> B>, _ fa: MaybeKOf<A>) -> MaybeKOf<B> {
         return ff.fix().ap(fa)
     }
 }

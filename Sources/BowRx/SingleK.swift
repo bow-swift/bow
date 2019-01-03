@@ -164,7 +164,7 @@ public class SingleKApplicative : SingleKFunctor, Applicative {
         return SingleK.pure(a)
     }
     
-    public func ap<A, B>(_ fa: SingleKOf<A>, _ ff: SingleKOf<(A) -> B>) -> SingleKOf<B> {
+    public func ap<A, B>(_ ff: SingleKOf<(A) -> B>, _ fa: SingleKOf<A>) -> SingleKOf<B> {
         return ff.fix().ap(fa)
     }
 }

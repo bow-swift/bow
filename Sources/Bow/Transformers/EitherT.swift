@@ -158,7 +158,7 @@ public class EitherTApplicative<G, M, Mon> : EitherTFunctor<G, M, Mon>, Applicat
         return EitherT<G, M, A>.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: EitherTOf<G, M, A>, _ ff: EitherTOf<G, M, (A) -> B>) -> EitherTOf<G, M, B> {
+    public func ap<A, B>(_ ff: EitherTOf<G, M, (A) -> B>, _ fa: EitherTOf<G, M, A>) -> EitherTOf<G, M, B> {
         return EitherT.fix(ff).ap(EitherT.fix(fa), monad)
     }
 }

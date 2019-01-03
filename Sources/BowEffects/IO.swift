@@ -341,7 +341,7 @@ public class IOApplicative : IOFunctor, Applicative {
         return IO.pure(a)
     }
     
-    public func ap<A, B>(_ fa: IOOf<A>, _ ff: IOOf<(A) -> B>) -> IOOf<B> {
+    public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

@@ -206,7 +206,7 @@ public class ListKApplicative : ListKFunctor, Applicative {
         return ListK.pure(a)
     }
     
-    public func ap<A, B>(_ fa: ListKOf<A>, _ ff: ListKOf<(A) -> B>) -> ListKOf<B> {
+    public func ap<A, B>(_ ff: ListKOf<(A) -> B>, _ fa: ListKOf<A>) -> ListKOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

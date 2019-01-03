@@ -200,7 +200,7 @@ public class WriterTApplicative<G, W, MonG, MonoW> : WriterTFunctor<G, W, MonG>,
         return WriterT(monad.pure((monoid.empty, a)))
     }
     
-    public func ap<A, B>(_ fa: WriterTOf<G, W, A>, _ ff: WriterTOf<G, W, (A) -> B>) -> WriterTOf<G, W, B> {
+    public func ap<A, B>(_ ff: WriterTOf<G, W, (A) -> B>, _ fa: WriterTOf<G, W, A>) -> WriterTOf<G, W, B> {
         return WriterT.fix(ff).ap(WriterT.fix(fa), monoid, monad)
     }
 }

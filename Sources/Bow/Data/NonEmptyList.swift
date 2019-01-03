@@ -215,7 +215,7 @@ public class NonEmptyListApplicative : NonEmptyListFunctor, Applicative {
         return NonEmptyList.pure(a)
     }
     
-    public func ap<A, B>(_ fa: NonEmptyListOf<A>, _ ff: NonEmptyListOf<(A) -> B>) -> NonEmptyListOf<B> {
+    public func ap<A, B>(_ ff: NonEmptyListOf<(A) -> B>, _ fa: NonEmptyListOf<A>) -> NonEmptyListOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

@@ -180,7 +180,7 @@ public class OptionTApplicative<G, MonG> : OptionTFunctor<G, MonG>, Applicative 
         return OptionT.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: OptionTOf<G, A>, _ ff: OptionTOf<G, (A) -> B>) -> OptionTOf<G, B> {
+    public func ap<A, B>(_ ff: OptionTOf<G, (A) -> B>, _ fa: OptionTOf<G, A>) -> OptionTOf<G, B> {
         return OptionT.fix(ff).ap(OptionT.fix(fa), monad)
     }
 }

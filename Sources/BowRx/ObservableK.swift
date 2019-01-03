@@ -199,7 +199,7 @@ public class ObservableKApplicative : ObservableKFunctor, Applicative {
         return ObservableK.pure(a)
     }
     
-    public func ap<A, B>(_ fa: ObservableKOf<A>, _ ff: ObservableKOf<(A) -> B>) -> ObservableKOf<B> {
+    public func ap<A, B>(_ ff: ObservableKOf<(A) -> B>, _ fa: ObservableKOf<A>) -> ObservableKOf<B> {
         return ff.fix().ap(fa)
     }
 }

@@ -250,7 +250,7 @@ public class IorApplicative<L, SemiG> : IorFunctor<L>, Applicative where SemiG :
         return Ior<L, A>.right(a)
     }
     
-    public func ap<A, B>(_ fa: IorOf<L, A>, _ ff: IorOf<L, (A) -> B>) -> IorOf<L, B> {
+    public func ap<A, B>(_ ff: IorOf<L, (A) -> B>, _ fa: IorOf<L, A>) -> IorOf<L, B> {
         return Ior.fix(ff).ap(Ior.fix(fa), semigroup)
     }
 }

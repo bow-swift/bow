@@ -154,8 +154,8 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
         return Free.pure(a)
     }
 
-    func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
-        return applicative.ap(fa, ff)
+    func ap<A, B>(_ ff: FreeOf<S, (A) -> B>, _ fa: FreeOf<S, A>) -> FreeOf<S, B> {
+        return applicative.ap(ff, fa)
     }
 }
 
@@ -190,7 +190,7 @@ public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
         return Free.pure(a)
     }
     
-    public func ap<A, B>(_ fa: FreeOf<S, A>, _ ff: FreeOf<S, (A) -> B>) -> FreeOf<S, B> {
+    public func ap<A, B>(_ ff: FreeOf<S, (A) -> B>, _ fa: FreeOf<S, A>) -> FreeOf<S, B> {
         return Free.fix(ff).ap(Free.fix(fa))
     }
 }

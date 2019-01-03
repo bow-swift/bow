@@ -233,7 +233,7 @@ public class OptionApplicative : OptionFunctor, Applicative {
         return Option.pure(a)
     }
     
-    public func ap<A, B>(_ fa: OptionOf<A>, _ ff: OptionOf<(A) -> B>) -> OptionOf<B> {
+    public func ap<A, B>(_ ff: OptionOf<(A) -> B>, _ fa: OptionOf<A>) -> OptionOf<B> {
         return ff.fix().ap(fa.fix())
     }
 }

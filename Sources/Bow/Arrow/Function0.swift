@@ -97,7 +97,7 @@ public class Function0Applicative : Function0Functor, Applicative {
         return Function0.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<Function0Applicative.F, A>, _ ff: Kind<Function0Applicative.F, (A) -> B>) -> Kind<Function0Applicative.F, B> {
+    public func ap<A, B>(_ ff: Kind<Function0Applicative.F, (A) -> B>, _ fa: Kind<Function0Applicative.F, A>) -> Kind<Function0Applicative.F, B> {
         return Function0.fix(ff).ap(Function0.fix(fa))
     }
 }

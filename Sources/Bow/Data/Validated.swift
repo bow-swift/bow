@@ -217,7 +217,7 @@ public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative w
         return Validated<R, A>.valid(a)
     }
     
-    public func ap<A, B>(_ fa: ValidatedOf<R, A>, _ ff: ValidatedOf<R, (A) -> B>) -> ValidatedOf<R, B> {
+    public func ap<A, B>(_ ff: ValidatedOf<R, (A) -> B>, _ fa: ValidatedOf<R, A>) -> ValidatedOf<R, B> {
         return Validated.fix(ff).ap(Validated.fix(fa), semigroup)
     }
 }
