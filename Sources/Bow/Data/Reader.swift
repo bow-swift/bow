@@ -18,7 +18,7 @@ public class Reader<D, A> : ReaderT<ForId, D, A> {
     }
     
     public func ap<B>(_ ff : Reader<D, (A) -> B>) -> Reader<D, B> {
-        return toReader(self.ap(ff, Id<A>.applicative()))
+        return toReader(ff.ap(self, Id<A>.applicative()))
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Reader<D, B>) -> Reader<D, B> {
