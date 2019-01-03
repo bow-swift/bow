@@ -80,8 +80,8 @@ public class ObservableK<A> : ObservableKOf<A> {
         return value.map(f).k()
     }
     
-    public func ap<B>(_ fa : ObservableKOf<(A) -> B>) -> ObservableK<B> {
-        return flatMap { a in fa.fix().map { ff in ff(a) } }
+    public func ap<AA, B>(_ fa : ObservableKOf<AA>) -> ObservableK<B> where A == (AA) -> B {
+        return fa.fix().flatMap { a in self.map { ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> ObservableKOf<B>) -> ObservableK<B> {
@@ -200,7 +200,7 @@ public class ObservableKApplicative : ObservableKFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: ObservableKOf<A>, _ ff: ObservableKOf<(A) -> B>) -> ObservableKOf<B> {
-        return fa.fix().ap(ff)
+        return ff.fix().ap(fa)
     }
 }
 
