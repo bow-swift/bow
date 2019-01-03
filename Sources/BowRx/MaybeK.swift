@@ -61,8 +61,8 @@ public class MaybeK<A> : MaybeKOf<A> {
         return value.map(f).k()
     }
     
-    public func ap<B>(_ fa : MaybeKOf<(A) -> B>) -> MaybeK<B> {
-        return flatMap { a in fa.fix().map{ ff in ff(a) } }
+    public func ap<AA, B>(_ fa : MaybeKOf<AA>) -> MaybeK<B> where A == (AA) -> B {
+        return fa.fix().flatMap { a in self.map{ ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> MaybeK<B>) -> MaybeK<B> {
@@ -169,7 +169,7 @@ public class MaybeKApplicative : MaybeKFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: MaybeKOf<A>, _ ff: MaybeKOf<(A) -> B>) -> MaybeKOf<B> {
-        return fa.fix().ap(ff)
+        return ff.fix().ap(fa)
     }
 }
 
