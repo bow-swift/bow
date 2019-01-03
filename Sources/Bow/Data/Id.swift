@@ -28,8 +28,8 @@ public class Id<A> : IdOf<A> {
         return Id<B>(f(value))
     }
     
-    public func ap<B>(_ ff : Id<(A) -> B>) -> Id<B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ ff : Id<AA>) -> Id<B> where A == (AA) -> B{
+        return flatMap(ff.map)
     }
     
     public func flatMap<B>(_ f : (A) -> Id<B>) -> Id<B> {
@@ -123,7 +123,7 @@ public class IdApplicative : IdFunctor, Applicative {
     }
     
     public func ap<A, B>(_ fa: IdOf<A>, _ ff: IdOf<(A) -> B>) -> IdOf<B> {
-        return fa.fix().ap(ff.fix())
+        return ff.fix().ap(fa.fix())
     }
 }
 
