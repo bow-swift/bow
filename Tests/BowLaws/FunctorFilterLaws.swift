@@ -15,7 +15,7 @@ class FunctorFilterLaws<F> {
             let f : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(b) } : { _ in Option<Int>.none() }
             let g : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(c) } : { _ in Option<Int>.none() }
             return eq.eqv(functorFilter.mapFilter(functorFilter.mapFilter(fa, f), g),
-                          functorFilter.mapFilter(fa, f >=> g ))
+                          functorFilter.mapFilter(fa, { x in f(x).flatMap(g) } ))
         }
     }
     
