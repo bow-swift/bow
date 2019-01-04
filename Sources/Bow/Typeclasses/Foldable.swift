@@ -4,7 +4,7 @@ public protocol Foldable : Typeclass {
     associatedtype F
     
     func foldLeft<A, B>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> B) -> B
-    func foldR<A, B>(_ fa : Kind<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
+    func foldRight<A, B>(_ fa : Kind<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 
 public extension Foldable {
@@ -20,7 +20,7 @@ public extension Foldable {
     }
     
     public func reduceRightToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
-        return foldR(fa, Eval<Option<B>>.now(Option<B>.empty()), { a, lb in
+        return foldRight(fa, Eval<Option<B>>.now(Option<B>.empty()), { a, lb in
             lb.flatMap({ option in
                 option.fold({ Eval<Option<B>>.later({ Option<B>.some(f(a)) }) },
                             { b in g(a, Eval<B>.now(b)).map(Option<B>.some) })
@@ -45,7 +45,7 @@ public extension Foldable {
     }
     
     public func traverse_<G, A, B, Appl>(_ applicative : Appl, _ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>) -> Kind<G, Unit> where Appl : Applicative, Appl.F == G {
-        return foldR(fa, Eval.always({ applicative.pure(unit) }), { a, acc in
+        return foldRight(fa, Eval.always({ applicative.pure(unit) }), { a, acc in
             applicative.map2Eval(f(a), acc, { _, _ in unit })
         }).value()
     }
@@ -55,25 +55,25 @@ public extension Foldable {
     }
     
     public func find<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Option<A> {
-        return foldR(fa, Eval.now(Option.none()), { a, lb in
+        return foldRight(fa, Eval.now(Option.none()), { a, lb in
             f(a) ? Eval.now(Option.some(a)) : lb
         }).value()
     }
     
     public func exists<A>(_ fa : Kind<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return foldR(fa, Eval<Bool>.False, { a, lb in
+        return foldRight(fa, Eval<Bool>.False, { a, lb in
             predicate(a) ? Eval<Bool>.True : lb
         }).value()
     }
     
     public func forall<A>(_ fa : Kind<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return foldR(fa, Eval<Bool>.True, { a, lb in
+        return foldRight(fa, Eval<Bool>.True, { a, lb in
             predicate(a) ? lb : Eval<Bool>.False
         }).value()
     }
     
     public func isEmpty<A>(_ fa : Kind<F, A>) -> Bool {
-        return foldR(fa, Eval<Bool>.True, { _, _ in Eval<Bool>.False }).value()
+        return foldRight(fa, Eval<Bool>.True, { _, _ in Eval<Bool>.False }).value()
     }
     
     public func nonEmpty<A>(_ fa : Kind<F, A>) -> Bool {

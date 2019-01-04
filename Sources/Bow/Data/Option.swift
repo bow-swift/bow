@@ -76,7 +76,7 @@ public class Option<A> : OptionOf<A> {
                     { a in f(b, a) })
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return self.fold(constant(b),
                          { a in f(a, b) })
     }
@@ -324,8 +324,8 @@ public class OptionFoldable : Foldable {
         return fa.fix().foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldR(b, f)
+    public func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldRight(b, f)
     }
 }
 

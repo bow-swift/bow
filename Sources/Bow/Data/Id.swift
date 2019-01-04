@@ -40,7 +40,7 @@ public class Id<A> : IdOf<A> {
         return f(b, value)
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return f(value, b)
     }
     
@@ -154,8 +154,8 @@ public class IdFoldable : Foldable {
         return fa.fix().foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldR(b, f)
+    public func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldRight(b, f)
     }
 }
 

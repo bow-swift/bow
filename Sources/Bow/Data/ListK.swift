@@ -66,7 +66,7 @@ public class ListK<A> : ListKOf<A> {
         return list.reduce(b, f)
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         func loop(_ lkw : ListK<A>) -> Eval<B> {
             if lkw.list.isEmpty {
                 return b
@@ -78,7 +78,7 @@ public class ListK<A> : ListKOf<A> {
     }
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, ListKOf<B>> where Appl : Applicative, Appl.F == G {
-        let x = foldR(Eval.always({ applicative.pure(ListK<B>([])) }),
+        let x = foldRight(Eval.always({ applicative.pure(ListK<B>([])) }),
                      { a, eval in applicative.map2Eval(f(a), eval, { x, y in ListK<B>([x]) + y }) }).value()
         return applicative.map(x, { a in a as ListKOf<B> })
     }
@@ -228,8 +228,8 @@ public class ListKFoldable : Foldable {
         return fa.fix().foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: ListKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldR(b, f)
+    public func foldRight<A, B>(_ fa: ListKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldRight(b, f)
     }
 }
 

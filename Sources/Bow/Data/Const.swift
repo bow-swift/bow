@@ -143,7 +143,7 @@ public class ConstFoldable<R> : Foldable {
         return b
     }
     
-    public func foldR<A, B>(_ fa: ConstOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<A, B>(_ fa: ConstOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return b
     }
 }

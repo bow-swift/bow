@@ -91,8 +91,8 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
         return tail.reduce(f(b, head), f)
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return ListK<A>.foldable().foldR(self.all().k(), b, f)
+    public func foldRight<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return ListK<A>.foldable().foldRight(self.all().k(), b, f)
     }
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, NonEmptyListOf<B>> where Appl : Applicative, Appl.F == G {
@@ -248,8 +248,8 @@ public class NonEmptyListFoldable : Foldable {
         return fa.fix().foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: NonEmptyListOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldR(b, f)
+    public func foldRight<A, B>(_ fa: NonEmptyListOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldRight(b, f)
     }
 }
 

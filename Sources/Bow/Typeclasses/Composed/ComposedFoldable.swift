@@ -19,8 +19,8 @@ public extension ComposedFoldable {
         return foldableG.foldLeft(unnest(fa), b, { bb, aa in self.foldableH.foldLeft(aa, bb, f) })
     }
     
-    public func foldR<A, B>(_ fa: Kind<Nested<G, H>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return foldableG.foldR(unnest(fa), b, { aa, bb in self.foldableH.foldR(aa, bb, f) })
+    public func foldRight<A, B>(_ fa: Kind<Nested<G, H>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return foldableG.foldRight(unnest(fa), b, { aa, bb in self.foldableH.foldRight(aa, bb, f) })
     }
     
     public func foldLC<A, B>(_ fa : Kind<G, Kind<H, A>>, _ b : B, _ f : @escaping (B, A) -> B) -> B {
@@ -28,7 +28,7 @@ public extension ComposedFoldable {
     }
     
     public func foldRC<A, B>(_ fa : Kind<G, Kind<H, A>>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return foldR(nest(fa), b, f)
+        return foldRight(nest(fa), b, f)
     }
 }
 

@@ -54,7 +54,7 @@ public class MapK<K : Hashable, A> : MapKOf<K, A> {
         return self.dictionary.values.reduce(b, f)
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return self.dictionary.values.reversed().reduce(b, { b, a in f(a, b) })
     }
     

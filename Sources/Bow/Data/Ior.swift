@@ -83,7 +83,7 @@ public class Ior<A, B> : IorOf<A, B> {
                     { _, b in f(c, b) })
     }
     
-    public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
+    public func foldRight<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
         return fold(constant(c),
                     { b in f(b, c) },
                     { _, b in f(b, c) })
@@ -273,8 +273,8 @@ public class IorFoldable<L> : Foldable {
         return Ior.fix(fa).foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Ior.fix(fa).foldR(b, f)
+    public func foldRight<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Ior.fix(fa).foldRight(b, f)
     }
 }
 

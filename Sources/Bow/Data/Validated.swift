@@ -96,7 +96,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return fold(constant(b), { a in f(b, a) })
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B>{
+    public func foldRight<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B>{
         return fold(constant(b), { a in f(a, b) })
     }
     
@@ -241,8 +241,8 @@ public class ValidatedFoldable<R> : Foldable {
         return Validated.fix(fa).foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Validated.fix(fa).foldR(b, f)
+    public func foldRight<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Validated.fix(fa).foldRight(b, f)
     }
 }
 
