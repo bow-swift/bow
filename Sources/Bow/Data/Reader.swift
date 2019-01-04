@@ -17,8 +17,8 @@ public class Reader<D, A> : ReaderT<ForId, D, A> {
         return toReader(self.map(f, Id<A>.functor()))
     }
     
-    public func ap<B>(_ ff : Reader<D, (A) -> B>) -> Reader<D, B> {
-        return toReader(self.ap(ff, Id<A>.applicative()))
+    public func ap<AA, B>(_ fa : Reader<D, AA>) -> Reader<D, B> where A == (AA) -> B {
+        return toReader(self.ap(fa, Id<A>.applicative()))
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Reader<D, B>) -> Reader<D, B> {

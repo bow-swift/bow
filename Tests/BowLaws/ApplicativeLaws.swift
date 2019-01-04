@@ -16,14 +16,14 @@ class ApplicativeLaws<F> {
     
     private static func apIdentity<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("ap identity") <- forAll() { (a : Int) in
-            return eq.eqv(applicative.ap(applicative.pure(a), applicative.pure(id)),
+            return eq.eqv(applicative.ap(applicative.pure(id), applicative.pure(a)),
                           applicative.pure(a))
         }
     }
     
     private static func homomorphism<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("homomorphism") <- forAll() { (a : Int, f : ArrowOf<Int, Int>) in
-            return eq.eqv(applicative.ap(applicative.pure(a), applicative.pure(f.getArrow)),
+            return eq.eqv(applicative.ap(applicative.pure(f.getArrow), applicative.pure(a)),
                           applicative.pure(f.getArrow(a)))
         }
     }
@@ -31,8 +31,8 @@ class ApplicativeLaws<F> {
     private static func interchange<Appl, EqA>(applicative : Appl, eq : EqA) where Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("interchange") <- forAll() { (a : Int, b : Int) in
             let fa = applicative.pure(constant(a) as (Int) -> Int)
-            return eq.eqv(applicative.ap(applicative.pure(b), fa),
-                          applicative.ap(fa, applicative.pure({ (x : (Int) -> Int) in x(a) } )))
+            return eq.eqv(applicative.ap(fa, applicative.pure(b)),
+                          applicative.ap(applicative.pure({ (x : (Int) -> Int) in x(a) } ), fa))
         }
     }
     
@@ -40,7 +40,7 @@ class ApplicativeLaws<F> {
         property("mad derived") <- forAll() { (a : Int, f : ArrowOf<Int, Int>) in
             let fa = applicative.pure(a)
             return eq.eqv(applicative.map(fa, f.getArrow),
-                          applicative.ap(fa, applicative.pure(f.getArrow)))
+                          applicative.ap(applicative.pure(f.getArrow), fa))
             
         }
     }

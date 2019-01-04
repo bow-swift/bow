@@ -55,8 +55,8 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
         return EitherT<F, A, C>(functor.map(fc, Either<A, C>.right))
     }
     
-    public func ap<C, Mon>(_ ff : EitherT<F, A, (B) -> C>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
-        return ff.flatMap({ f in self.map(f, monad) }, monad)
+    public func ap<BB, C, Mon>(_ fa : EitherT<F, A, BB>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F, B == (BB) -> C {
+        return flatMap({ f in fa.map(f, monad) }, monad)
     }
     
     public func flatMap<C, Mon>(_ f : @escaping (B) -> EitherT<F, A, C>, _ monad : Mon) -> EitherT<F, A, C> where Mon : Monad, Mon.F == F {
@@ -158,8 +158,8 @@ public class EitherTApplicative<G, M, Mon> : EitherTFunctor<G, M, Mon>, Applicat
         return EitherT<G, M, A>.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: EitherTOf<G, M, A>, _ ff: EitherTOf<G, M, (A) -> B>) -> EitherTOf<G, M, B> {
-        return EitherT.fix(fa).ap(EitherT.fix(ff), monad)
+    public func ap<A, B>(_ ff: EitherTOf<G, M, (A) -> B>, _ fa: EitherTOf<G, M, A>) -> EitherTOf<G, M, B> {
+        return EitherT.fix(ff).ap(EitherT.fix(fa), monad)
     }
 }
 

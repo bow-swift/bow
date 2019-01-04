@@ -2,16 +2,16 @@ import Foundation
 
 public protocol Applicative : Functor {
     func pure<A>(_ a : A) -> Kind<F, A>
-    func ap<A, B>(_ fa : Kind<F, A>, _ ff : Kind<F, (A) -> B>) -> Kind<F, B>
+    func ap<A, B>(_ ff : Kind<F, (A) -> B>, _ fa : Kind<F, A>) -> Kind<F, B>
 }
 
 public extension Applicative {
     public func map<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B) -> Kind<F, B> {
-        return ap(fa, pure(f))
+        return ap(pure(f), fa)
     }
     
     public func product<A, B>(_ fa : Kind<F, A>, _ fb : Kind<F, B>) -> Kind<F, (A, B)> {
-        return self.ap(fb, self.map(fa, { (a : A) in { (b : B) in (a, b) }}))
+        return ap(self.map(fa, { (a : A) in { (b : B) in (a, b) }}), fb)
     }
     
     public func product<A, B, Z>(_ fa : Kind<F, (A, B)>, _ fz : Kind<F, Z>) -> Kind<F, (A, B, Z)> {

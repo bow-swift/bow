@@ -161,8 +161,8 @@ public class IO<A> : IOOf<A> {
         return FMap(f, self)
     }
     
-    public func ap<B>(_ ff : IO<(A) -> B>) -> IO<B> {
-        return ff.flatMap(self.map)
+    public func ap<AA, B>(_ fa : IO<AA>) -> IO<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : @escaping (A) throws -> IO<B>) -> IO<B> {
@@ -341,8 +341,8 @@ public class IOApplicative : IOFunctor, Applicative {
         return IO.pure(a)
     }
     
-    public func ap<A, B>(_ fa: IOOf<A>, _ ff: IOOf<(A) -> B>) -> IOOf<B> {
-        return fa.fix().ap(ff.fix())
+    public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
+        return ff.fix().ap(fa.fix())
     }
 }
 

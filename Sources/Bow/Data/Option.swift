@@ -116,12 +116,10 @@ public class Option<A> : OptionOf<A> {
     }
     
     /**
-     Transform the type parameter using the function wrapped in an `Option`.
-     
-     - parameter ff: option value wrapping the transformation function.
+     Transform the parameter using the function wrapped in the receiver `Option`.
      */
-    public func ap<B>(_ ff : Option<(A) -> B>) -> Option<B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ fa : Option<AA>) -> Option<B> where A == (AA) -> B{
+        return flatMap(fa.map)
     }
     
     /**
@@ -430,8 +428,8 @@ public class OptionApplicative : OptionFunctor, Applicative {
         return Option.pure(a)
     }
     
-    public func ap<A, B>(_ fa: OptionOf<A>, _ ff: OptionOf<(A) -> B>) -> OptionOf<B> {
-        return fa.fix().ap(ff.fix())
+    public func ap<A, B>(_ ff: OptionOf<(A) -> B>, _ fa: OptionOf<A>) -> OptionOf<B> {
+        return ff.fix().ap(fa.fix())
     }
 }
 

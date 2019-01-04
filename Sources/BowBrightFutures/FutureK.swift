@@ -73,8 +73,8 @@ public class FutureK<E, A> : FutureKOf<E, A> where E : Error {
         return value.map(f).k()
     }
     
-    public func ap<B>(_ fa : FutureKOf<E, (A) -> B>) -> FutureK<E, B> {
-        return flatMap { a in FutureK<E, (A) -> B>.fix(fa).map { ff in ff(a) } }
+    public func ap<AA, B>(_ fa : FutureKOf<E, AA>) -> FutureK<E, B> where A == (AA) -> B {
+        return FutureK<E, AA>.fix(fa).flatMap { a in self.map { ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> FutureKOf<E, B>) -> FutureK<E, B> {
@@ -138,8 +138,8 @@ public class FutureKApplicative<E> : FutureKFunctor<E>, Applicative where E : Er
         return FutureK<E, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: FutureKOf<E, A>, _ ff: FutureKOf<E, (A) -> B>) -> FutureKOf<E, B> {
-        return FutureK<E, A>.fix(fa).ap(ff)
+    public func ap<A, B>(_ ff: FutureKOf<E, (A) -> B>, _ fa: FutureKOf<E, A>) -> FutureKOf<E, B> {
+        return FutureK.fix(ff).ap(fa)
     }
 }
 

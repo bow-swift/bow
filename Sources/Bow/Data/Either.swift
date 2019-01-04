@@ -78,8 +78,8 @@ public class Either<A, B> : EitherOf<A, B> {
                     { b in Either<C, D>.right(fb(b)) })
     }
     
-    public func ap<C>(_ ff : Either<A, (B) -> C>) -> Either<A, C> {
-        return ff.flatMap{ f in self.map(f) }
+    public func ap<BB, C>(_ fb : Either<A, BB>) -> Either<A, C> where B == (BB) -> C {
+        return flatMap(fb.map)
     }
     
     public func flatMap<C>(_ f : (B) -> Either<A, C>) -> Either<A, C> {
@@ -202,8 +202,8 @@ public class EitherApplicative<C> : Applicative {
         return Either<C, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: EitherOf<C, A>, _ ff: EitherOf<C, (A) -> B>) -> EitherOf<C, B> {
-        return Either.fix(fa).ap(Either.fix(ff))
+    public func ap<A, B>(_ ff: EitherOf<C, (A) -> B>, _ fa: EitherOf<C, A>) -> EitherOf<C, B> {
+        return Either.fix(ff).ap(Either.fix(fa))
     }
 }
 

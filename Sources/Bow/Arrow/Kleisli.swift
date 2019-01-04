@@ -16,8 +16,8 @@ public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
         self.run = run
     }
     
-    public func ap<B, Appl>(_ ff : Kleisli<F, D, (A) -> B>, _ applicative : Appl) -> Kleisli<F, D, B> where Appl : Applicative, Appl.F == F {
-        return Kleisli<F, D, B>({ d in applicative.ap(self.run(d), ff.run(d)) })
+    public func ap<AA, B, Appl>(_ fa : Kleisli<F, D, AA>, _ applicative : Appl) -> Kleisli<F, D, B> where Appl : Applicative, Appl.F == F, A == (AA) -> B {
+        return Kleisli<F, D, B>({ d in applicative.ap(self.run(d), fa.run(d)) })
     }
     
     public func map<B, Func>(_ f : @escaping (A) -> B, _ functor : Func) -> Kleisli<F, D, B> where Func : Functor, Func.F == F {
@@ -128,8 +128,8 @@ public class KleisliApplicative<G, D, ApplG> : KleisliFunctor<G, D, ApplG>, Appl
         return Kleisli.pure(a, applicative)
     }
     
-    public func ap<A, B>(_ fa: KleisliOf<G, D, A>, _ ff: KleisliOf<G, D, (A) -> B>) -> KleisliOf<G, D, B> {
-        return Kleisli.fix(fa).ap(Kleisli.fix(ff), applicative)
+    public func ap<A, B>(_ ff: KleisliOf<G, D, (A) -> B>, _ fa: KleisliOf<G, D, A>) -> KleisliOf<G, D, B> {
+        return Kleisli.fix(ff).ap(Kleisli.fix(fa), applicative)
     }
 }
 

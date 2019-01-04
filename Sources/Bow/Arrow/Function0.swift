@@ -43,8 +43,8 @@ public class Function0<A> : Function0Of<A> {
         return Function0<B>({ f(self) })
     }
     
-    public func ap<B>(_ ff : Function0<(A) -> B>) -> Function0<B> {
-        return Function0<B>(f >>> ff.f())
+    public func ap<AA, B>(_ fa : Function0<AA>) -> Function0<B> where A == (AA) -> B {
+        return Function0<B>(fa.f >>> f())
     }
     
     public func extract() -> A {
@@ -97,8 +97,8 @@ public class Function0Applicative : Function0Functor, Applicative {
         return Function0.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<Function0Applicative.F, A>, _ ff: Kind<Function0Applicative.F, (A) -> B>) -> Kind<Function0Applicative.F, B> {
-        return Function0.fix(fa).ap(Function0.fix(ff))
+    public func ap<A, B>(_ ff: Kind<Function0Applicative.F, (A) -> B>, _ fa: Kind<Function0Applicative.F, A>) -> Kind<Function0Applicative.F, B> {
+        return Function0.fix(ff).ap(Function0.fix(fa))
     }
 }
 

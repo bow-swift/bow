@@ -83,8 +83,8 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
         return f(head) + tail.flatMap{ a in f(a).all() }
     }
     
-    public func ap<B>(_ ff : NonEmptyList<(A) -> B>) -> NonEmptyList<B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ fa : NonEmptyList<AA>) -> NonEmptyList<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
@@ -215,8 +215,8 @@ public class NonEmptyListApplicative : NonEmptyListFunctor, Applicative {
         return NonEmptyList.pure(a)
     }
     
-    public func ap<A, B>(_ fa: NonEmptyListOf<A>, _ ff: NonEmptyListOf<(A) -> B>) -> NonEmptyListOf<B> {
-        return fa.fix().ap(ff.fix())
+    public func ap<A, B>(_ ff: NonEmptyListOf<(A) -> B>, _ fa: NonEmptyListOf<A>) -> NonEmptyListOf<B> {
+        return ff.fix().ap(fa.fix())
     }
 }
 

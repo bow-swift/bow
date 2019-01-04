@@ -27,13 +27,13 @@ class AlternativeLaws<F> {
     
     private static func rightDistributivity<Alt, EqA>(_ alternative : Alt, _ eq : EqA) where Alt : Alternative, Alt.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
         property("Left distributivity") <- forAll { (x : Int, f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>) in
-            return eq.eqv(alternative.ap(alternative.pure(x),
-                                         alternative.combineK(alternative.pure(f.getArrow),
-                                                              alternative.pure(g.getArrow))),
-                          alternative.combineK(alternative.ap(alternative.pure(x),
-                                                              alternative.pure(f.getArrow)),
-                                               alternative.ap(alternative.pure(x),
-                                                              alternative.pure(g.getArrow))))
+            return eq.eqv(alternative.ap(alternative.combineK(alternative.pure(f.getArrow),
+                                                              alternative.pure(g.getArrow)),
+                                         alternative.pure(x)),
+                          alternative.combineK(alternative.ap(alternative.pure(f.getArrow),
+                                                              alternative.pure(x)),
+                                               alternative.ap(alternative.pure(g.getArrow),
+                                                              alternative.pure(x))))
         }
     }
 }

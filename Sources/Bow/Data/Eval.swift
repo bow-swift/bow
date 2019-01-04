@@ -68,8 +68,8 @@ public class Eval<A> : EvalOf<A> {
         return flatMap{ a in Eval<B>.now(f(a)) }
     }
     
-    public func ap<B>(_ ff : Eval<(A) -> B>) -> Eval<B> {
-        return ff.flatMap(map)
+    public func ap<AA, B>(_ fa : Eval<AA>) -> Eval<B> where A == (AA) -> B {
+        return flatMap(fa.map)
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> Eval<B>) -> Eval<B> {
@@ -321,8 +321,8 @@ public class EvalApplicative : Applicative {
         return Eval<A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Kind<F, A>, _ ff: Kind<F, (A) -> B>) -> Kind<F, B> {
-        return fa.fix().ap(ff.fix())
+    public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
+        return ff.fix().ap(fa.fix())
     }
 }
 
