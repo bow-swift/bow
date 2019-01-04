@@ -71,12 +71,12 @@ public class Option<A> : OptionOf<A> {
         return fold(Option<B>.none, f)
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return fold({ b },
                     { a in f(b, a) })
     }
     
-    public func foldR<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<B>(_ b : Eval<B>, _ f : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return self.fold(constant(b),
                          { a in f(a, b) })
     }
@@ -320,12 +320,12 @@ public class OptionMonadFilter : OptionMonad, MonadFilter {
 public class OptionFoldable : Foldable {
     public typealias F = ForOption
     
-    public func foldL<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldL(b, f)
+    public func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldR(b, f)
+    public func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa.fix().foldRight(b, f)
     }
 }
 

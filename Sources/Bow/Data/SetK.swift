@@ -34,11 +34,11 @@ public class SetK<A: Hashable> : SetKOf<A> {
 		return set.isEmpty
 	}
 
-	public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+	public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
 		return set.reduce(b, f)
 	}
 
-	public func foldR<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+	public func foldRight<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
 		func loop(_ skw : SetK<A>) -> Eval<B> {
 			if skw.set.isEmpty {
 				return b

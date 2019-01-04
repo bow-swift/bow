@@ -139,11 +139,11 @@ public class ConstMonoid<R, S, Mono> : ConstSemigroup<R, S, Mono>, Monoid where 
 public class ConstFoldable<R> : Foldable {
     public typealias F = ConstPartial<R>
     
-    public func foldL<A, B>(_ fa: ConstOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldLeft<A, B>(_ fa: ConstOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return b
     }
     
-    public func foldR<A, B>(_ fa: ConstOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public func foldRight<A, B>(_ fa: ConstOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return b
     }
 }

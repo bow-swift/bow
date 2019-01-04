@@ -77,13 +77,13 @@ public class Ior<A, B> : IorOf<A, B> {
         return fold(constant(false), constant(false), constant(true))
     }
     
-    public func foldL<C>(_ c : C, _ f : (C, B) -> C) -> C {
+    public func foldLeft<C>(_ c : C, _ f : (C, B) -> C) -> C {
         return fold(constant(c),
                     { b in f(c, b) },
                     { _, b in f(c, b) })
     }
     
-    public func foldR<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
+    public func foldRight<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
         return fold(constant(c),
                     { b in f(b, c) },
                     { _, b in f(b, c) })
@@ -269,12 +269,12 @@ public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : 
 public class IorFoldable<L> : Foldable {
     public typealias F = IorPartial<L>
     
-    public func foldL<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Ior.fix(fa).foldL(b, f)
+    public func foldLeft<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return Ior.fix(fa).foldLeft(b, f)
     }
     
-    public func foldR<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Ior.fix(fa).foldR(b, f)
+    public func foldRight<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Ior.fix(fa).foldRight(b, f)
     }
 }
 
