@@ -69,8 +69,8 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
         }.map{ ssz in StateT<F, S, Z>(ssz) }
     }
     
-    public func ap<B, Mon>(_ ff : StateT<F, S, (A) -> B>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F {
-        return ff.map2(self, { f, a in f(a) }, monad)
+    public func ap<AA, B, Mon>(_ fa : StateT<F, S, AA>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F, A == (AA) -> B {
+        return map2(fa, { f, a in f(a) }, monad)
     }
     
     public func product<B, Mon>(_ sb : StateT<F, S, B>, _ monad : Mon) -> StateT<F, S, (A, B)> where Mon : Monad, Mon.F == F {
@@ -137,7 +137,7 @@ public extension StateT where F == ForId {
         return self.map(f, Id<A>.functor())
     }
     
-    public func ap<B>(_ ff : StateOf<S, (A) -> B>) -> StateOf<S, B> {
+    public func ap<AA, B>(_ ff : StateOf<S, AA>) -> StateOf<S, B> where A == (AA) -> B {
         return self.ap(ff, Id<A>.monad())
     }
     
@@ -210,8 +210,8 @@ public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicat
         return StateT(monad.pure({ s in self.monad.pure((s, a))}))
     }
     
-    public func ap<A, B>(_ fa: StateTOf<G, S, A>, _ ff: StateTOf<G, S, (A) -> B>) -> StateTOf<G, S, B> {
-        return StateT.fix(fa).ap(StateT.fix(ff), monad)
+    public func ap<A, B>(_ ff: StateTOf<G, S, (A) -> B>, _ fa: StateTOf<G, S, A>) -> StateTOf<G, S, B> {
+        return StateT.fix(ff).ap(StateT.fix(fa), monad)
     }
 }
 

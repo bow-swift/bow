@@ -49,8 +49,8 @@ public class OptionT<F, A> : OptionTOf<F, A> {
         return OptionT<F, B>(functor.map(value, { option in option.map(f) } ))
     }
     
-    public func ap<B, Mon>(_ ff : OptionT<F, (A) -> B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return ff.flatMap({ f in self.map(f, monad) }, monad)
+    public func ap<AA, B, Mon>(_ fa : OptionT<F, AA>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F, A == (AA) -> B {
+        return flatMap({ f in fa.map(f, monad) }, monad)
     }
     
     public func flatMap<B, Mon>(_ f : @escaping (A) -> OptionT<F, B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
@@ -180,8 +180,8 @@ public class OptionTApplicative<G, MonG> : OptionTFunctor<G, MonG>, Applicative 
         return OptionT.pure(a, monad)
     }
     
-    public func ap<A, B>(_ fa: OptionTOf<G, A>, _ ff: OptionTOf<G, (A) -> B>) -> OptionTOf<G, B> {
-        return OptionT.fix(fa).ap(OptionT.fix(ff), monad)
+    public func ap<A, B>(_ ff: OptionTOf<G, (A) -> B>, _ fa: OptionTOf<G, A>) -> OptionTOf<G, B> {
+        return OptionT.fix(ff).ap(OptionT.fix(fa), monad)
     }
 }
 

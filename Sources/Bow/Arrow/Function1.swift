@@ -40,8 +40,8 @@ public class Function1<I, O> : Function1Of<I, O> {
         return Function1<I, B>(h)
     }
     
-    public func ap<B>(_ ff : Function1<I, (O) -> B>) -> Function1<I, B> {
-        return Function1<I, B>({ i in ff.f(i)(self.f(i)) })
+    public func ap<AA, B>(_ fa : Function1<I, AA>) -> Function1<I, B> where O == (AA) -> B {
+        return Function1<I, B>({ i in self.f(i)(fa.f(i)) })
     }
     
     public func local(_ g : @escaping (I) -> I) -> Function1<I, O> {
@@ -84,8 +84,8 @@ public class Function1Applicative<I> : Function1Functor<I>, Applicative {
         return Function1<I, A>.pure(a)
     }
     
-    public func ap<A, B>(_ fa: Function1Of<I, A>, _ ff: Function1Of<I, (A) -> B>) -> Function1Of<I, B> {
-        return Function1.fix(fa).ap(Function1.fix(ff))
+    public func ap<A, B>(_ ff: Function1Of<I, (A) -> B>, _ fa: Function1Of<I, A>) -> Function1Of<I, B> {
+        return Function1.fix(ff).ap(Function1.fix(fa))
     }
 }
 

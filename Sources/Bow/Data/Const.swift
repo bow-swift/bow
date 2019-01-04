@@ -35,8 +35,8 @@ public class Const<A, T> : ConstOf<A, T> {
         return Const<A, T>(semigroup.combine(self.value, other.value))
     }
     
-    public func ap<U, SemiG>(_ ff : Const<A, (T) -> U>, _ semigroup : SemiG) -> Const<A, U> where SemiG : Semigroup, SemiG.A == A {
-        return ff.retag().combine(self.retag(), semigroup)
+    public func ap<AA, U, SemiG>(_ fa : Const<A, AA>, _ semigroup : SemiG) -> Const<A, U> where SemiG : Semigroup, SemiG.A == A, T == (AA) -> U {
+        return self.retag().combine(fa.retag(), semigroup)
     }
 }
 
@@ -105,8 +105,8 @@ public class ConstApplicative<R, Mono> : ConstFunctor<R>, Applicative where Mono
         return ConstMonoid(self.monoid).empty
     }
     
-    public func ap<A, B>(_ fa: ConstOf<R, A>, _ ff: ConstOf<R, (A) -> B>) -> ConstOf<R, B> {
-        return Const.fix(fa).ap(Const.fix(ff), monoid)
+    public func ap<A, B>(_ ff: ConstOf<R, (A) -> B>, _ fa: ConstOf<R, A>) -> ConstOf<R, B> {
+        return Const.fix(ff).ap(Const.fix(fa), monoid)
     }
 }
 
