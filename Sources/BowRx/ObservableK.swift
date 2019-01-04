@@ -217,7 +217,7 @@ public class ObservableKMonad : ObservableKApplicative, Monad {
 public class ObservableKFoldable : Foldable {
     public typealias F = ForObservableK
     
-    public func foldL<A, B>(_ fa: ObservableKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldLeft<A, B>(_ fa: ObservableKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldLeft(b, f)
     }
     

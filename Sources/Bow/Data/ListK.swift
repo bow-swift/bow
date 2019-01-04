@@ -62,7 +62,7 @@ public class ListK<A> : ListKOf<A> {
         return ListK<B>(list.flatMap({ a in f(a).list }))
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return list.reduce(b, f)
     }
     
@@ -224,8 +224,8 @@ public class ListKMonad : ListKApplicative, Monad {
 public class ListKFoldable : Foldable {
     public typealias F = ForListK
     
-    public func foldL<A, B>(_ fa: ListKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldL(b, f)
+    public func foldLeft<A, B>(_ fa: ListKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldLeft(b, f)
     }
     
     public func foldR<A, B>(_ fa: ListKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

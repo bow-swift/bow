@@ -87,7 +87,7 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
         return flatMap(fa.map)
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return tail.reduce(f(b, head), f)
     }
     
@@ -244,8 +244,8 @@ public class NonEmptyListBimonad : NonEmptyListMonad, Bimonad {
 public class NonEmptyListFoldable : Foldable {
     public typealias F = ForNonEmptyList
     
-    public func foldL<A, B>(_ fa: NonEmptyListOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldL(b, f)
+    public func foldLeft<A, B>(_ fa: NonEmptyListOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldLeft(b, f)
     }
     
     public func foldR<A, B>(_ fa: NonEmptyListOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

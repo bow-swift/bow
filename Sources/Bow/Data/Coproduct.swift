@@ -35,9 +35,9 @@ public class Coproduct<F, G, A> : CoproductOf<F, G, A> {
         return run.fold({ fa in f.invoke(fa) }, { ga in g.invoke(ga) })
     }
     
-    public func foldL<B, FoldF, FoldG>(_ b : B, _ f : @escaping (B, A) -> B, _ foldableF : FoldF, _ foldableG : FoldG) -> B where FoldF : Foldable, FoldF.F == F, FoldG : Foldable, FoldG.F == G {
-        return run.fold({ fa in foldableF.foldL(fa, b, f) },
-                        { ga in foldableG.foldL(ga, b, f) })
+    public func foldLeft<B, FoldF, FoldG>(_ b : B, _ f : @escaping (B, A) -> B, _ foldableF : FoldF, _ foldableG : FoldG) -> B where FoldF : Foldable, FoldF.F == F, FoldG : Foldable, FoldG.F == G {
+        return run.fold({ fa in foldableF.foldLeft(fa, b, f) },
+                        { ga in foldableG.foldLeft(ga, b, f) })
     }
     
     public func foldR<B, FoldF, FoldG>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>, _ foldableF : FoldF, _ foldableG : FoldG) -> Eval<B> where FoldF : Foldable, FoldF.F == F, FoldG : Foldable, FoldG.F == G {
@@ -121,8 +121,8 @@ public class CoproductFoldable<G, H, FoldG, FoldH> : Foldable where FoldG : Fold
         self.foldableH = foldableH
     }
     
-    public func foldL<A, B>(_ fa: CoproductOf<G, H, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Coproduct.fix(fa).foldL(b, f, foldableG, foldableH)
+    public func foldLeft<A, B>(_ fa: CoproductOf<G, H, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return Coproduct.fix(fa).foldLeft(b, f, foldableG, foldableH)
     }
     
     public func foldR<A, B>(_ fa: CoproductOf<G, H, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

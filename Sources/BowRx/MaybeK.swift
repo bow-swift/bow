@@ -186,7 +186,7 @@ public class MaybeKMonad : MaybeKApplicative, Monad {
 public class MaybeKFoldable : Foldable {
     public typealias F = ForMaybeK
     
-    public func foldL<A, B>(_ fa: MaybeKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldLeft<A, B>(_ fa: MaybeKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return fa.fix().foldLeft(b, f)
     }
     

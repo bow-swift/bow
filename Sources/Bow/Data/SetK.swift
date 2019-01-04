@@ -34,7 +34,7 @@ public class SetK<A: Hashable> : SetKOf<A> {
 		return set.isEmpty
 	}
 
-	public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+	public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
 		return set.reduce(b, f)
 	}
 

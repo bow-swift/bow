@@ -36,7 +36,7 @@ public class Id<A> : IdOf<A> {
         return f(value)
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return f(b, value)
     }
     
@@ -150,8 +150,8 @@ public class IdBimonad : IdMonad, Bimonad {
 public class IdFoldable : Foldable {
     public typealias F = ForId
     
-    public func foldL<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldL(b, f)
+    public func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa.fix().foldLeft(b, f)
     }
     
     public func foldR<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

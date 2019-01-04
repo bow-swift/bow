@@ -92,7 +92,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
                                         { f in Validated<E, B>.valid(f(a)) }) })
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return fold(constant(b), { a in f(b, a) })
     }
     
@@ -237,8 +237,8 @@ public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG
 public class ValidatedFoldable<R> : Foldable {
     public typealias F = ValidatedPartial<R>
     
-    public func foldL<A, B>(_ fa: ValidatedOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Validated.fix(fa).foldL(b, f)
+    public func foldLeft<A, B>(_ fa: ValidatedOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return Validated.fix(fa).foldLeft(b, f)
     }
     
     public func foldR<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

@@ -3,17 +3,17 @@ import Foundation
 public protocol Foldable : Typeclass {
     associatedtype F
     
-    func foldL<A, B>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> B) -> B
+    func foldLeft<A, B>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> B) -> B
     func foldR<A, B>(_ fa : Kind<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 
 public extension Foldable {
     public func fold<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> A where Mono : Monoid, Mono.A == A {
-        return foldL(fa, monoid.empty, { acc, a in monoid.combine(acc, a) })
+        return foldLeft(fa, monoid.empty, { acc, a in monoid.combine(acc, a) })
     }
     
     public func reduceLeftToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Option<B> {
-        return foldL(fa, Option.empty(), { option, a in
+        return foldLeft(fa, Option.empty(), { option, a in
             option.fold(constant(Option<B>.some(f(a))),
                         { b in Option<B>.some(g(b, a)) })
         })
@@ -41,7 +41,7 @@ public extension Foldable {
     }
     
     public func foldMap<A, B, Mono>(_ monoid : Mono, _ fa : Kind<F, A>, _ f : @escaping (A) -> B) -> B where Mono : Monoid, Mono.A == B {
-        return foldL(fa, monoid.empty, { b, a in monoid.combine(b, f(a)) })
+        return foldLeft(fa, monoid.empty, { b, a in monoid.combine(b, f(a)) })
     }
     
     public func traverse_<G, A, B, Appl>(_ applicative : Appl, _ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>) -> Kind<G, Unit> where Appl : Applicative, Appl.F == G {
@@ -81,7 +81,7 @@ public extension Foldable {
     }
     
     public func foldM<G, A, B, Mon>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> Kind<G, B>, _ monad : Mon) -> Kind<G, B> where Mon : Monad, Mon.F == G {
-        return foldL(fa, monad.pure(b), { gb, a in monad.flatMap(gb, { b in f(b, a) }) })
+        return foldLeft(fa, monad.pure(b), { gb, a in monad.flatMap(gb, { b in f(b, a) }) })
     }
     
     public func foldMapM<G, A, B, Mon, Mono>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>, _ monad : Mon, _ monoid : Mono) -> Kind<G, B> where Mon : Monad, Mon.F == G, Mono : Monoid, Mono.A == B {

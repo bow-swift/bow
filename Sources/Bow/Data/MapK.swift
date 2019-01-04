@@ -50,7 +50,7 @@ public class MapK<K : Hashable, A> : MapKOf<K, A> {
         }).k()
     }
     
-    public func foldL<B>(_ b : B, _ f : (B, A) -> B) -> B {
+    public func foldLeft<B>(_ b : B, _ f : (B, A) -> B) -> B {
         return self.dictionary.values.reduce(b, f)
     }
     
