@@ -11,7 +11,7 @@ public extension Applicative {
     }
     
     public func product<A, B>(_ fa : Kind<F, A>, _ fb : Kind<F, B>) -> Kind<F, (A, B)> {
-        return self.ap(self.map(fa, { (a : A) in { (b : B) in (a, b) }}), fb)
+        return ap(self.map(fa, { (a : A) in { (b : B) in (a, b) }}), fb)
     }
     
     public func product<A, B, Z>(_ fa : Kind<F, (A, B)>, _ fz : Kind<F, Z>) -> Kind<F, (A, B, Z)> {

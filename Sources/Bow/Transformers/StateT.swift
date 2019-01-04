@@ -70,7 +70,7 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
     }
     
     public func ap<AA, B, Mon>(_ fa : StateT<F, S, AA>, _ monad : Mon) -> StateT<F, S, B> where Mon : Monad, Mon.F == F, A == (AA) -> B {
-        return self.map2(fa, { f, a in f(a) }, monad)
+        return map2(fa, { f, a in f(a) }, monad)
     }
     
     public func product<B, Mon>(_ sb : StateT<F, S, B>, _ monad : Mon) -> StateT<F, S, (A, B)> where Mon : Monad, Mon.F == F {
