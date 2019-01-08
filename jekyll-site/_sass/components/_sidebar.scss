@@ -1,0 +1,54 @@
+// Sidebar
+// -----------------------------------------------
+// -----------------------------------------------
+#sidebar {
+    width: ($base-point-grid * 32);
+    height: 100%;
+    background: $gray-primary;
+    @extend .w3-sidebar;
+    @extend .w3-bar-block;
+    @extend .w3-collapse;
+    @extend .w3-animate-left;
+    transition: all $base-duration $base-timing;
+
+
+    .sidebar-brand {
+        @include flexbox;
+        @include justify-content(space-between);
+        @include align-items(center);
+        padding: ($base-point-grid * 2) ($base-point-grid * 3);
+        background: rgba($white, 0.08);
+    }
+    .sidebar-nav {
+        margin-top: ($base-point-grid * 2);
+
+        li {
+            a {
+                display: block;
+                padding: ($base-point-grid * 2) ($base-point-grid * 3);
+                color: $white;
+                transition: background $base-duration $base-timing;
+                &:visited {
+                    color: $white;
+                }
+                &:hover {
+                    background: rgba($white, 0.04);
+                    color: $white;
+                    text-decoration: none;
+                }
+                &:active {
+                    color: $white;
+                }
+            }
+            &.active {
+                a {
+                    padding-left: (($base-point-grid * 3) - 3);
+                    background: rgba($white, 0.08);
+                    border-left: 3px solid $brand-primary;
+                    pointer-events: none;
+                }
+
+            }
+        }
+    }
+}

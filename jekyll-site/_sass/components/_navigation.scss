@@ -3,9 +3,18 @@
 // -----------------------------------------------
 #navigation {
     position: fixed;
-    padding: ($base-point-grid * 4) 0;
+    padding: ($base-point-grid * 5) 0;
     width: 100%;
-    background: rgba($brand-primary, 0.6);
+    overflow: hidden;
+    background: rgba($brand-primary, 0);
+    transition: all $base-duration $base-timing;
+    z-index: 20;
+
+    &.navigation-scroll {
+        padding: ($base-point-grid * 2) 0;
+        background: rgba($brand-primary, 0.95);
+    }
+
 
     .content-navigation {
         @include flexbox;
@@ -23,8 +32,6 @@
         .navigation-menu {
             li {
                 display: inline-block;
-
-
                 &:last-child {
                     margin-right: 0;
                 }
@@ -41,7 +48,7 @@
                     &:hover {
                         color: $white;
                         text-decoration: none;
-                        background: darken($brand-primary, 3%);
+                        background: darken($brand-primary, 5%);
                     }
                     &:active {
                         color: $white;

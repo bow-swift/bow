@@ -16,16 +16,21 @@
     }
     &:hover {
         color: $white;
-        background: rgba($brand-secondary, 0.5);
+        background: darken($brand-secondary, 5%);
         text-decoration: none;
     }
     &:active {
-        background: rgba($brand-secondary, 0.5);
+        background: darken($brand-secondary, 7%);
 
     }
 
     &.button-large {
         padding: ($base-point-grid * 1.6) ($base-point-grid * 6);
         font-size: $base-font-size;
+    }
+    
+    &.button-small {
+        padding: ($base-point-grid * 0.7) ($base-point-grid * 2.2);
+        font-size: 0.7857rem;
     }
 }

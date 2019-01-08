@@ -1,6 +1,4 @@
 nav:
-    - title: Documentation
-      url: /docs/compile/
 
     - title: Github
       url: https://github.com/bow-swift/bow
