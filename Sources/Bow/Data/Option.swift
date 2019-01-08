@@ -19,7 +19,7 @@ public class Option<A> : OptionOf<A> {
      
      It is an alias for `Option<A>.pure(_:)`
      
-     - parameter a: value to be wrapped in an `Option<A>`.
+     - parameter a: Value to be wrapped in an `Option<A>`.
      */
     public static func some(_ a : A) -> Option<A> {
         return Some(a)
@@ -37,7 +37,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Lifts a pure value to `Option`.
      
-     - parameter a: value to be lifted.
+     - parameter a: Value to be lifted.
      */
     public static func pure(_ a : A) -> Option<A> {
         return some(a)
@@ -53,7 +53,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Converts a native Swift optional into a value of `Option<A>`.
      
-     - parameter a: optional value to be converted.
+     - parameter a: Optional value to be converted.
      */
     public static func fromOptional(_ a : A?) -> Option<A> {
         if let a = a { return some(a) }
@@ -91,8 +91,8 @@ public class Option<A> : OptionOf<A> {
     /**
      Applies a function based on the presence or absence of a value.
      
-     - parameter ifEmpty: a closure that is executed when there is no value in the `Option`.
-     - parameter f: a closure that is executed where there is a value in the `Option`. In such case, the the inner value is sent as an argument of `f`.
+     - parameter ifEmpty: A closure that is executed when there is no value in the `Option`.
+     - parameter f: A closure that is executed where there is a value in the `Option`. In such case, the the inner value is sent as an argument of `f`.
      */
     public func fold<B>(_ ifEmpty : () -> B, _ f : (A) -> B) -> B {
         switch self {
@@ -108,7 +108,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Transforms the type parameter, preserving its structure.
      
-     - parameter f: closure to be applied when there is presence of a value.
+     - parameter f: Closure to be applied when there is presence of a value.
      */
     public func map<B>(_ f : (A) -> B) -> Option<B> {
         return fold({ Option<B>.none() },
@@ -170,7 +170,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Applies a predicate to the wrapped value of this option, returning it if the value matches the predicate, or none otherwise.
      
-     - parameter predicate: boolean predicate to test the wrapped value.
+     - parameter predicate: Boolean predicate to test the wrapped value.
      */
     public func filter(_ predicate : (A) -> Bool) -> Option<A> {
         return fold(constant(Option<A>.none()),
@@ -180,7 +180,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Applies a predicate to the wrapped value of this option, returning it if the value does not match the predicate, or none otherwise.
      
-     - parameter predicate: boolean predicate to test the wrapped value.
+     - parameter predicate: Boolean predicate to test the wrapped value.
      */
     public func filterNot(_ predicate : @escaping (A) -> Bool) -> Option<A> {
         return filter(predicate >>> not)
@@ -189,7 +189,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Check if the wrapped value matches a predicate.
      
-     - parameter predicate: boolean predicate to test the wrapped value.
+     - parameter predicate: Boolean predicate to test the wrapped value.
      */
     public func exists(_ predicate : (A) -> Bool) -> Bool {
         return fold(constant(false), predicate)
@@ -198,7 +198,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Check if the wrapped value matches a predicate.
      
-     - parameter predicate: boolean predicate to test the wrapped value.
+     - parameter predicate: Boolean predicate to test the wrapped value.
      */
     public func forall(_ predicate : (A) -> Bool) -> Bool {
         return exists(predicate)
@@ -207,7 +207,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Obtains the wrapped value, or a default value if absent.
      
-     - parameter defaultValue: value to be returned if this option is empty.
+     - parameter defaultValue: Value to be returned if this option is empty.
      */
     public func getOrElse(_ defaultValue : A) -> A {
         return getOrElse(constant(defaultValue))
@@ -216,7 +216,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Obtains the wrapped value, or a default value if absent.
      
-     - parameter defaultValue: closure to be evaluated if there is no wrapped value in this option.
+     - parameter defaultValue: Closure to be evaluated if there is no wrapped value in this option.
      */
     public func getOrElse(_ defaultValue : () -> A) -> A {
         return fold(defaultValue, id)
@@ -225,7 +225,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Obtains this option, or a default value if this option is empty.
      
-     - parameter defaultValue: default option value to be returned if this option is empty.
+     - parameter defaultValue: Default option value to be returned if this option is empty.
      */
     public func orElse(_ defaultValue : Option<A>) -> Option<A> {
         return orElse(constant(defaultValue))
@@ -234,7 +234,7 @@ public class Option<A> : OptionOf<A> {
     /**
      Obtains this option, or a default value if this option is empty.
      
-     - parameter defaultValue: closure returning an option for the empty case.
+     - parameter defaultValue: Closure returning an option for the empty case.
      */
     public func orElse(_ defaultValue : () -> Option<A>) -> Option<A> {
         return fold(defaultValue, Option.some)
@@ -311,7 +311,6 @@ public extension Kind where F == ForOption {
 }
 
 // MARK: Option typeclass instances
-
 public extension Option {
     /**
      Obtains an instance of the `Functor` typeclass for `Option`.
