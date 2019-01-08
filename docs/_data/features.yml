@@ -1,16 +1,16 @@
 content:
-    - title: Pattern
-      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+    - title: Patterns
+      description: Solutions to recurrent problems, in a purely Functional Programming manner.
       icon: /img/feature-icon-primary.svg
 
     - title: Typeclasses
-      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      description: Enable ad-hoc polymorphism with protocols like Functor, Applicative, Monad and many others.
       icon: /img/feature-icon-secondary.svg
 
     - title: Data Types
-      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      description: Take advantage of numerous data types based on algebraic properties.
       icon: /img/feature-icon-tertiary.svg
       
     - title: Integrations
-      description: Lorem ip amet, consectetur adipiscing elit. Nullam blandit odio nec button.
+      description: Bow integrates nicely with popular Swift libraries like RxSwift or Result.
       icon: /img/feature-icon-quarter.svg
