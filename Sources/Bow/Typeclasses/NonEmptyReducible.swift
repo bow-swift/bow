@@ -9,18 +9,18 @@ public protocol NonEmptyReducible : Reducible {
 }
 
 public extension NonEmptyReducible {
-    public func foldL<A, B>(_ fa: Kind<F, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public func foldLeft<A, B>(_ fa: Kind<F, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         let (a, ga) = split(fa)
-        return foldable().foldL(ga, f(b, a), f)
+        return foldable().foldLeft(ga, f(b, a), f)
     }
     
-    public func foldR<A, B>(_ fa: Kind<F, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Eval<(A, Kind<G, A>)>.always({ self.split(fa) }).flatMap{ (a, ga) in f(a, self.foldable().foldR(ga, b, f)) }
+    public func foldRight<A, B>(_ fa: Kind<F, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return Eval<(A, Kind<G, A>)>.always({ self.split(fa) }).flatMap{ (a, ga) in f(a, self.foldable().foldRight(ga, b, f)) }
     }
     
     public func reduceLeftTo<A, B>(_ fa: Kind<F, A>, _ f: (A) -> B, _ g: @escaping (B, A) -> B) -> B {
         let (a, ga) = split(fa)
-        return foldable().foldL(ga, f(a), { b, a in g(b, a) })
+        return foldable().foldLeft(ga, f(a), { b, a in g(b, a) })
     }
     
     public func reduceRightTo<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {

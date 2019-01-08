@@ -15,7 +15,7 @@ class FoldableLaws<F> {
             let input = generator(x)
             
             return foldable.foldMap(Int.sumMonoid, input, f.getArrow) ==
-                foldable.foldL(input, Int.sumMonoid.empty, { b, a in Int.sumMonoid.combine(b, f.getArrow(a)) })
+                foldable.foldLeft(input, Int.sumMonoid.empty, { b, a in Int.sumMonoid.combine(b, f.getArrow(a)) })
         }
     }
     
@@ -53,7 +53,7 @@ class FoldableLaws<F> {
         property("Exists consistent with find") <- forAll { (x : Int, f : ArrowOf<Int, Int>) in
             let input = generator(x)
             
-            let foldL = foldable.foldL(input, Int.sumMonoid.empty, { b, a in Int.sumMonoid.combine(b, f.getArrow(a)) })
+            let foldL = foldable.foldLeft(input, Int.sumMonoid.empty, { b, a in Int.sumMonoid.combine(b, f.getArrow(a)) })
             let foldM = foldable.foldM(input, Int.sumMonoid.empty, { b, a in Id(Int.sumMonoid.combine(b, f.getArrow(a))) }, Id<Int>.monad()).fix().value
             return foldL == foldM
         }
