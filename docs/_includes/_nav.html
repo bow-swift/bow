@@ -1,0 +1,14 @@
+<nav id="navigation">
+    <div class="content-navigation container">
+        <div class="navigation-brand">
+            <a href="#">{{ site.title }}</a>
+        </div>
+        <ul id="myTopnav" class="navigation-menu">
+            {% for item in site.data.menu.nav%}
+            <li class="navigation-menu-item">
+                <a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

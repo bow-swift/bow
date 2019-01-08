@@ -1,0 +1,12 @@
+<footer id="footer">
+    <div class="content-footer container">
+        <p>{{ site.title }} is designed and developed by <a href="https://github.com/bow-swift">{{ site.title }}</a> <br>with support from <a href="https://www.47deg.com/">47 Degrees</a></p>
+        <ul>
+            {% for item in site.data.menu.nav %}
+            <li>
+                <a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</footer>
