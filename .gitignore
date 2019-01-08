@@ -2,14 +2,10 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
-_site/
-.sass-cache/
-.jekyll-metadata
-.DS_Store
 ## Build generated
 build/
 DerivedData
-.DS_Store
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -21,6 +17,7 @@ DerivedData
 !default.perspectivev3
 xcuserdata
 Carthage/
+
 ## Other
 *.xccheckout
 *.moved-aside
@@ -45,3 +42,16 @@ Carthage/
 Pods/
 
 Bow\.xcodeproj/project\.xcworkspace/xcshareddata/IDEWorkspaceChecks\.plist
+
+## Jekyll
+_site
+.sass-cache
+.jekyll-metadata
+
+## OSX generated
+.DS_Store
+
+## Ruby environment normalization:
+/docs/.bundle/
+/docs/vendor/
+/lib/bundler/man/
