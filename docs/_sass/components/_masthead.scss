@@ -19,8 +19,21 @@
             @include fadeInDown( $duration: 1s,
             $delay: .2s,
             $function: ease);
-
+            
+            .masthead-stars {
+                padding-left: ($base-point-grid * 8);
+                margin-top: ($base-point-grid * 2);
+                font-size: 1.3rem;
+                a {
+                    color: $white;
+                    
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
         }
+        
         .masthead-brand {
             text-align: center;
             @include flex(1);
@@ -57,6 +70,10 @@
                 @include order(2);
                 h2 {
                     font-size: 2.2rem;
+                }
+                
+                .masthead-stars {
+                    padding-left: 0;
                 }
             }
             
