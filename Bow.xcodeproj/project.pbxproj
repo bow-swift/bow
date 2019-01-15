@@ -206,7 +206,6 @@
 		8BA0F593217E2E9200969984 /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F479217E2E9200969984 /* NonEmptyList.swift */; };
 		8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47A217E2E9200969984 /* Coproduct.swift */; };
 		8BA0F59B217E2E9200969984 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47B217E2E9200969984 /* Day.swift */; };
-		8BA0F59F217E2E9200969984 /* FlatmapOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47C217E2E9200969984 /* FlatmapOperator.swift */; };
 		8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47D217E2E9200969984 /* Moore.swift */; };
 		8BA0F5A7217E2E9200969984 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47E217E2E9200969984 /* Eval.swift */; };
 		8BA0F5AB217E2E9200969984 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47F217E2E9200969984 /* State.swift */; };
@@ -751,7 +750,6 @@
 		8BA0F479217E2E9200969984 /* NonEmptyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonEmptyList.swift; sourceTree = "<group>"; };
 		8BA0F47A217E2E9200969984 /* Coproduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
 		8BA0F47B217E2E9200969984 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		8BA0F47C217E2E9200969984 /* FlatmapOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatmapOperator.swift; sourceTree = "<group>"; };
 		8BA0F47D217E2E9200969984 /* Moore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moore.swift; sourceTree = "<group>"; };
 		8BA0F47E217E2E9200969984 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
 		8BA0F47F217E2E9200969984 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -1435,7 +1433,6 @@
 				8BA0F47B217E2E9200969984 /* Day.swift */,
 				8BA0F474217E2E9200969984 /* Either.swift */,
 				8BA0F47E217E2E9200969984 /* Eval.swift */,
-				8BA0F47C217E2E9200969984 /* FlatmapOperator.swift */,
 				8BA0F475217E2E9200969984 /* Id.swift */,
 				8BA0F477217E2E9200969984 /* Ior.swift */,
 				8BA0F48A217E2E9200969984 /* ListK.swift */,
@@ -2602,7 +2599,6 @@
 				8BA0F623217E2E9200969984 /* Category.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
 				8BA0F54F217E2E9200969984 /* MaybeInstances.swift in Sources */,
-				8BA0F59F217E2E9200969984 /* FlatmapOperator.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
 				8BA0F61F217E2E9200969984 /* Show.swift in Sources */,
