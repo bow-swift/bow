@@ -151,7 +151,6 @@
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
 		8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F390217E2DEF00969984 /* Function0Test.swift */; };
 		8BA0F3ED217E2DEF00969984 /* KleisliTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F391217E2DEF00969984 /* KleisliTest.swift */; };
-		8BA0F3EE217E2DEF00969984 /* KleisliOperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F392217E2DEF00969984 /* KleisliOperatorTest.swift */; };
 		8BA0F3EF217E2DEF00969984 /* PredefTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F393217E2DEF00969984 /* PredefTest.swift */; };
 		8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F395217E2DEF00969984 /* WriterTTest.swift */; };
 		8BA0F3F1217E2DEF00969984 /* StateTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F396217E2DEF00969984 /* StateTTest.swift */; };
@@ -183,7 +182,6 @@
 		8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F444217E2E9200969984 /* Kleisli.swift */; };
 		8BA0F4EF217E2E9200969984 /* Function0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F445217E2E9200969984 /* Function0.swift */; };
 		8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F446217E2E9200969984 /* Function1.swift */; };
-		8BA0F4F7217E2E9200969984 /* KleisliOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F447217E2E9200969984 /* KleisliOperator.swift */; };
 		8BA0F4FB217E2E9200969984 /* Cokleisli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F448217E2E9200969984 /* Cokleisli.swift */; };
 		8BA0F4FF217E2E9200969984 /* Typeclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F449217E2E9200969984 /* Typeclass.swift */; };
 		8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */; };
@@ -623,7 +621,6 @@
 		8BA0F38F217E2DEF00969984 /* Function1Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function1Test.swift; sourceTree = "<group>"; };
 		8BA0F390217E2DEF00969984 /* Function0Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function0Test.swift; sourceTree = "<group>"; };
 		8BA0F391217E2DEF00969984 /* KleisliTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KleisliTest.swift; sourceTree = "<group>"; };
-		8BA0F392217E2DEF00969984 /* KleisliOperatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KleisliOperatorTest.swift; sourceTree = "<group>"; };
 		8BA0F393217E2DEF00969984 /* PredefTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredefTest.swift; sourceTree = "<group>"; };
 		8BA0F395217E2DEF00969984 /* WriterTTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriterTTest.swift; sourceTree = "<group>"; };
 		8BA0F396217E2DEF00969984 /* StateTTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateTTest.swift; sourceTree = "<group>"; };
@@ -708,7 +705,6 @@
 		8BA0F444217E2E9200969984 /* Kleisli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kleisli.swift; sourceTree = "<group>"; };
 		8BA0F445217E2E9200969984 /* Function0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function0.swift; sourceTree = "<group>"; };
 		8BA0F446217E2E9200969984 /* Function1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function1.swift; sourceTree = "<group>"; };
-		8BA0F447217E2E9200969984 /* KleisliOperator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KleisliOperator.swift; sourceTree = "<group>"; };
 		8BA0F448217E2E9200969984 /* Cokleisli.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cokleisli.swift; sourceTree = "<group>"; };
 		8BA0F449217E2E9200969984 /* Typeclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typeclass.swift; sourceTree = "<group>"; };
 		8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanFunctions.swift; sourceTree = "<group>"; };
@@ -1281,7 +1277,6 @@
 			children = (
 				8BA0F390217E2DEF00969984 /* Function0Test.swift */,
 				8BA0F38F217E2DEF00969984 /* Function1Test.swift */,
-				8BA0F392217E2DEF00969984 /* KleisliOperatorTest.swift */,
 				8BA0F391217E2DEF00969984 /* KleisliTest.swift */,
 			);
 			path = Arrow;
@@ -1366,7 +1361,6 @@
 				8BA0F446217E2E9200969984 /* Function1.swift */,
 				8BA0F443217E2E9200969984 /* FunctionK.swift */,
 				8BA0F444217E2E9200969984 /* Kleisli.swift */,
-				8BA0F447217E2E9200969984 /* KleisliOperator.swift */,
 			);
 			path = Arrow;
 			sourceTree = "<group>";
@@ -2568,7 +2562,6 @@
 				8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */,
 				8BA0F408217E2DEF00969984 /* ValidatedTest.swift in Sources */,
 				8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */,
-				8BA0F3EE217E2DEF00969984 /* KleisliOperatorTest.swift in Sources */,
 				8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */,
 				8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */,
 				8BA0F3FE217E2DEF00969984 /* CoproductTest.swift in Sources */,
@@ -2641,7 +2634,6 @@
 				8BA0F4FF217E2E9200969984 /* Typeclass.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
-				8BA0F4F7217E2E9200969984 /* KleisliOperator.swift in Sources */,
 				8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */,
 				8BA0F63B217E2E9200969984 /* Composed.swift in Sources */,
 				8BA0F5F7217E2E9200969984 /* Inject.swift in Sources */,
