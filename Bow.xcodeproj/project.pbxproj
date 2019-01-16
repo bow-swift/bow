@@ -193,7 +193,7 @@
 		8BA0F537217E2E9200969984 /* PartialApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45B217E2E9200969984 /* PartialApplication.swift */; };
 		8BA0F547217E2E9200969984 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F461217E2E9200969984 /* BoolInstances.swift */; };
 		8BA0F54B217E2E9200969984 /* StringInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F462217E2E9200969984 /* StringInstances.swift */; };
-		8BA0F54F217E2E9200969984 /* MaybeInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F463217E2E9200969984 /* MaybeInstances.swift */; };
+		8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F463217E2E9200969984 /* OptionInstances.swift */; };
 		8BA0F553217E2E9200969984 /* NumberInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F464217E2E9200969984 /* NumberInstances.swift */; };
 		8BA0F57B217E2E9200969984 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F473217E2E9200969984 /* Reader.swift */; };
 		8BA0F57F217E2E9200969984 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F474217E2E9200969984 /* Either.swift */; };
@@ -726,7 +726,7 @@
 		8BA0F45F217E2E9200969984 /* Generic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
 		8BA0F461217E2E9200969984 /* BoolInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
 		8BA0F462217E2E9200969984 /* StringInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInstances.swift; sourceTree = "<group>"; };
-		8BA0F463217E2E9200969984 /* MaybeInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaybeInstances.swift; sourceTree = "<group>"; };
+		8BA0F463217E2E9200969984 /* OptionInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionInstances.swift; sourceTree = "<group>"; };
 		8BA0F464217E2E9200969984 /* NumberInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInstances.swift; sourceTree = "<group>"; };
 		8BA0F467217E2E9200969984 /* FutureK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureK.swift; sourceTree = "<group>"; };
 		8BA0F468217E2E9200969984 /* IO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
@@ -1400,8 +1400,8 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F461217E2E9200969984 /* BoolInstances.swift */,
-				8BA0F463217E2E9200969984 /* MaybeInstances.swift */,
 				8BA0F464217E2E9200969984 /* NumberInstances.swift */,
+				8BA0F463217E2E9200969984 /* OptionInstances.swift */,
 				8BA0F462217E2E9200969984 /* StringInstances.swift */,
 			);
 			path = Instances;
@@ -2591,7 +2591,7 @@
 				8BA0F65F217E2E9200969984 /* Eq.swift in Sources */,
 				8BA0F623217E2E9200969984 /* Category.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
-				8BA0F54F217E2E9200969984 /* MaybeInstances.swift in Sources */,
+				8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
 				8BA0F61F217E2E9200969984 /* Show.swift in Sources */,
