@@ -32,7 +32,7 @@ public class OrSemigroup : Semigroup {
 }
 
 /**
- Instance of `Monoid for `Bool`. Uses disjunction as combination of elements.
+ Instance of `Monoid` for `Bool`. Uses disjunction as combination of elements.
  */
 public class OrMonoid : OrSemigroup, Monoid {
     public var empty : Bool {
