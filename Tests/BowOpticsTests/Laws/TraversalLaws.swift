@@ -6,7 +6,7 @@ class TraversalLaws<A, B> where B : Arbitrary, B : CoArbitrary, B : Hashable {
     
     static func check<EqA, EqB>(traversal : Traversal<A, B>, eqA : EqA, eqB : EqB, generatorA : Gen<A>) where EqA : Eq, EqA.A == A, EqB : Eq, EqB.A == B {
         headOption(traversal, Option.eq(eqB), generatorA)
-        modifyGetAll(traversal, ListK.eq(eqB), generatorA)
+        modifyGetAll(traversal, ArrayK.eq(eqB), generatorA)
         setIdempotent(traversal, eqA, generatorA)
         modifyIdentity(traversal, eqA, generatorA)
         composeModify(traversal, eqA, generatorA)
@@ -20,7 +20,7 @@ class TraversalLaws<A, B> where B : Arbitrary, B : CoArbitrary, B : Hashable {
         }
     }
     
-    private static func modifyGetAll<EqB>(_ traversal : Traversal<A, B>, _ eqB : EqB, _ generatorA : Gen<A>) where EqB : Eq, EqB.A == ListKOf<B> {
+    private static func modifyGetAll<EqB>(_ traversal : Traversal<A, B>, _ eqB : EqB, _ generatorA : Gen<A>) where EqB : Eq, EqB.A == ArrayKOf<B> {
         property("modifyGetAll") <- forAll { (f : ArrowOf<B, B>) in
             let a = generatorA.generate
             return eqB.eqv(traversal.getAll(traversal.modify(a, f.getArrow)),

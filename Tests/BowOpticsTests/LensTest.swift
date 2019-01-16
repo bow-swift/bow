@@ -35,8 +35,8 @@ class LensTest: XCTestCase {
         }
         
         property("Lens as Fold: getAll") <- forAll { (token : Token) in
-            return ListK.eq(String.order).eqv(tokenLens.asFold().getAll(token),
-                                              ListK.pure(token.value))
+            return ArrayK.eq(String.order).eqv(tokenLens.asFold().getAll(token),
+                                              ArrayK.pure(token.value))
         }
         
         property("Lens as Fold: combineAll") <- forAll { (token : Token) in

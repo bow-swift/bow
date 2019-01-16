@@ -4,8 +4,8 @@ import SwiftCheck
 @testable import BowOptics
 
 class FoldTest : XCTestCase {
-    let intFold = Fold<Int, Int>.from(foldable: ListK<Int>.foldable())
-    let stringFold = Fold<String, String>.from(foldable: ListK<String>.foldable())
+    let intFold = Fold<Int, Int>.from(foldable: ArrayK<Int>.foldable())
+    let stringFold = Fold<String, String>.from(foldable: ArrayK<String>.foldable())
     let nonEmptyListGen = ArrayOf<Int>.arbitrary.suchThat({ array in array.getArray.count > 0 })
     
     func testFoldProperties() {
@@ -27,7 +27,7 @@ class FoldTest : XCTestCase {
         }
         
         property("Get all targets") <- forAll { (array : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(self.intFold.getAll(array.getArray.k()),
+            return ArrayK.eq(Int.order).eqv(self.intFold.getAll(array.getArray.k()),
                                            array.getArray.k())
         }
         

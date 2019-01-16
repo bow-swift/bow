@@ -31,7 +31,7 @@ class OptionalTest: XCTestCase {
         }
         
         property("Optional as Fold: getAll") <- forAll { (ints : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOptional(ints.getArray.first).toList().k())
+            return ArrayK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOptional(ints.getArray.first).toArray().k())
         }
         
         property("Optional as Fold: combineAll") <- forAll { (ints : ArrayOf<Int>) in

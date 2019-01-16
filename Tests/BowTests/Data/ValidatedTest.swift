@@ -82,8 +82,8 @@ class ValidatedTest: XCTestCase {
         property("Consistency fromTry - toList") <- forAll { (x : Int) in
             let attempt = x % 2 == 0 ? Try.success(x) : Try.failure(TryError.illegalState)
             let validated = Validated<TryError, Int>.fromTry(attempt)
-            return (validated.isValid && validated.toList() == [x]) ||
-                    (validated.isInvalid && validated.toList() == [])
+            return (validated.isValid && validated.toArray() == [x]) ||
+                    (validated.isInvalid && validated.toArray() == [])
         }
     }
     

@@ -92,11 +92,11 @@ public class NonEmptyList<A> : NonEmptyListOf<A> {
     }
     
     public func foldRight<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return ListK<A>.foldable().foldRight(self.all().k(), b, f)
+        return ArrayK<A>.foldable().foldRight(self.all().k(), b, f)
     }
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, NonEmptyListOf<B>> where Appl : Applicative, Appl.F == G {
-        let listTraverse = ListK<A>.traverse().traverse(self.all().k(), f, applicative)
+        let listTraverse = ArrayK<A>.traverse().traverse(self.all().k(), f, applicative)
         return applicative.map(listTraverse, { x in NonEmptyList<B>.fromArrayUnsafe(x.fix().asArray) })
     }
     

@@ -29,34 +29,34 @@ class WriterTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<WriterTPartial<ForListK, Int>>.check(
-            semigroupK: WriterT<ForListK, Int, Int>.semigroupK(ListK<Int>.semigroupK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
-            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+        SemigroupKLaws<WriterTPartial<ForArrayK, Int>>.check(
+            semigroupK: WriterT<ForArrayK, Int, Int>.semigroupK(ArrayK<Int>.semigroupK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ArrayK<Int>.applicative()) },
+            eq: WriterT<ForArrayK, Int, Int>.eq(ArrayK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testSemigroupLaws() {
         property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws.check(semigroup: WriterT<ForListK, Int, Int>.semigroupK(ListK<Int>.semigroupK()).algebra(),
-                                       a: WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()),
-                                       b: WriterT.pure(b, Int.sumMonoid, ListK<Int>.applicative()),
-                                       c: WriterT.pure(c, Int.sumMonoid, ListK<Int>.applicative()),
-                                       eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+            return SemigroupLaws.check(semigroup: WriterT<ForArrayK, Int, Int>.semigroupK(ArrayK<Int>.semigroupK()).algebra(),
+                                       a: WriterT.pure(a, Int.sumMonoid, ArrayK<Int>.applicative()),
+                                       b: WriterT.pure(b, Int.sumMonoid, ArrayK<Int>.applicative()),
+                                       c: WriterT.pure(c, Int.sumMonoid, ArrayK<Int>.applicative()),
+                                       eq: WriterT<ForArrayK, Int, Int>.eq(ArrayK.eq(Tuple.eq(Int.order, Int.order))))
         }
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<WriterTPartial<ForListK, Int>>.check(
-            monoidK: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()),
-            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()) },
-            eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+        MonoidKLaws<WriterTPartial<ForArrayK, Int>>.check(
+            monoidK: WriterT<ForArrayK, Int, Int>.monoidK(ArrayK<Int>.monoidK()),
+            generator: { (a : Int) in WriterT.pure(a, Int.sumMonoid, ArrayK<Int>.applicative()) },
+            eq: WriterT<ForArrayK, Int, Int>.eq(ArrayK.eq(Tuple.eq(Int.order, Int.order))))
     }
     
     func testMonoidLaws() {
         property("Monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws.check(monoid: WriterT<ForListK, Int, Int>.monoidK(ListK<Int>.monoidK()).algebra(),
-                                    a: WriterT.pure(a, Int.sumMonoid, ListK<Int>.applicative()),
-                                    eq: WriterT<ForListK, Int, Int>.eq(ListK.eq(Tuple.eq(Int.order, Int.order))))
+            return MonoidLaws.check(monoid: WriterT<ForArrayK, Int, Int>.monoidK(ArrayK<Int>.monoidK()).algebra(),
+                                    a: WriterT.pure(a, Int.sumMonoid, ArrayK<Int>.applicative()),
+                                    eq: WriterT<ForArrayK, Int, Int>.eq(ArrayK.eq(Tuple.eq(Int.order, Int.order))))
         }
     }
     

@@ -4,19 +4,19 @@ import SwiftCheck
 @testable import BowOptics
 
 class TraversalTest: XCTestCase {
-    let listKTraversal = Traversal<Int, Int>.from(traverse: ListK<Int>.traverse())
-    let listKGen : Gen<ListKOf<Int>> = ArrayOf<Int>.arbitrary.map{ array in array.getArray.k() }
+    let listKTraversal = Traversal<Int, Int>.from(traverse: ArrayK<Int>.traverse())
+    let listKGen : Gen<ArrayKOf<Int>> = ArrayOf<Int>.arbitrary.map{ array in array.getArray.k() }
     
     func testTraversalLaws() {
         TraversalLaws.check(traversal: listKTraversal,
-                            eqA: ListK<Int>.eq(Int.order),
+                            eqA: ArrayK<Int>.eq(Int.order),
                             eqB: Int.order,
                             generatorA: listKGen)
     }
     
     func testSetterLaws() {
         SetterLaws.check(setter: listKTraversal.asSetter(),
-                         eqA: ListK<Int>.eq(Int.order),
+                         eqA: ArrayK<Int>.eq(Int.order),
                          generatorA: listKGen)
     }
     
@@ -34,7 +34,7 @@ class TraversalTest: XCTestCase {
         }
         
         property("Traversal as Fold: getAll") <- forAll { (array : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(self.listKTraversal.asFold().getAll(array.getArray.k()),
+            return ArrayK.eq(Int.order).eqv(self.listKTraversal.asFold().getAll(array.getArray.k()),
                                            array.getArray.k())
         }
         
@@ -61,7 +61,7 @@ class TraversalTest: XCTestCase {
     
     func testTraversalProperties() {
         property("Getting all targets of a traversal") <- forAll { (array : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(self.listKTraversal.getAll(array.getArray.k()),
+            return ArrayK.eq(Int.order).eqv(self.listKTraversal.getAll(array.getArray.k()),
                                            array.getArray.k())
         }
         

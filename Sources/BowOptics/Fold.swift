@@ -91,8 +91,8 @@ open class Fold<S, A> : FoldOf<S, A> {
         return foldMap(monoid, s, id)
     }
     
-    public func getAll(_ s : S) -> ListK<A> {
-        return foldMap(ListK<A>.monoid(), s, ListK<A>.pure).fix()
+    public func getAll(_ s : S) -> ArrayK<A> {
+        return foldMap(ArrayK<A>.monoid(), s, ArrayK<A>.pure).fix()
     }
     
     public func choice<C>(_ other : Fold<C, A>) -> Fold<Either<S, C>, A> {

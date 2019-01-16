@@ -8,7 +8,7 @@ public extension String {
             reverseGet: { characters in String(characters) })
     }
     
-    public static func toListK() -> Iso<String, ListK<Character>> {
-        return String.toArray() + Array.toListK()
+    public static func toArrayK() -> Iso<String, ArrayK<Character>> {
+        return String.toArray() + Array.toArrayK()
     }
 }

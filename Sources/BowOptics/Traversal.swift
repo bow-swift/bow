@@ -192,8 +192,8 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return fold(monoid, s)
     }
     
-    public func getAll(_ s : S) -> ListK<A> {
-        return foldMap(ListK.monoid(), s, { a in ListK([a]) }).fix()
+    public func getAll(_ s : S) -> ArrayK<A> {
+        return foldMap(ArrayK.monoid(), s, { a in ArrayK([a]) }).fix()
     }
     
     public func set(_ s : S, _ b : B) -> T {

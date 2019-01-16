@@ -18,8 +18,8 @@ class GetterTest : XCTestCase {
         }
         
         property("Getter as Fold: getAll") <- forAll { (token : Token) in
-            return ListK.eq(String.order).eqv(tokenGetter.asFold().getAll(token),
-                                              ListK.pure(token.value))
+            return ArrayK.eq(String.order).eqv(tokenGetter.asFold().getAll(token),
+                                              ArrayK.pure(token.value))
         }
         
         property("Getter as Fold: combineAll") <- forAll { (token : Token) in
