@@ -38,8 +38,8 @@ public class ArrayK<A> : ArrayKOf<A> {
         return fa.fix()
     }
     
-    public init(_ list : [A]) {
-        self.array = list
+    public init(_ array : [A]) {
+        self.array = array
     }
     
     public var asArray : [A] {

@@ -67,11 +67,11 @@ public class NonEmptyArrayIndex<E> : Index {
     
     public func index(_ i: Int) -> Optional<NonEmptyArray<E>, E> {
         return Optional<NEA<E>, E>(
-            set: { list, e in NonEmptyArray.fromArrayUnsafe(
-                list.all().enumerated().map { x in
+            set: { nea, e in NonEmptyArray.fromArrayUnsafe(
+                nea.all().enumerated().map { x in
                     (x.offset == i) ? x.element : e
                 })
-        }, getOrModify: { list in list.getOrNone(i).fold({ Either<NEA<E>, E>.left(list) },
-                                                          Either<NEA<E>, E>.right) })
+        }, getOrModify: { nea in nea.getOrNone(i).fold({ Either<NEA<E>, E>.left(nea) },
+                                                        Either<NEA<E>, E>.right) })
     }
 }

@@ -96,17 +96,17 @@ public class NonEmptyArray<A> : NonEmptyArrayOf<A> {
     }
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, NonEmptyArrayOf<B>> where Appl : Applicative, Appl.F == G {
-        let listTraverse = ArrayK<A>.traverse().traverse(self.all().k(), f, applicative)
-        return applicative.map(listTraverse, { x in NonEmptyArray<B>.fromArrayUnsafe(x.fix().asArray) })
+        let arrayTraverse = ArrayK<A>.traverse().traverse(self.all().k(), f, applicative)
+        return applicative.map(arrayTraverse, { x in NonEmptyArray<B>.fromArrayUnsafe(x.fix().asArray) })
     }
     
     public func coflatMap<B>(_ f : @escaping (NonEmptyArray<A>) -> B) -> NonEmptyArray<B> {
-        func consume(_ list : [A], _ buf : [B] = []) -> [B] {
-            if list.isEmpty {
+        func consume(_ array : [A], _ buf : [B] = []) -> [B] {
+            if array.isEmpty {
                 return buf
             } else {
-                let tail = [A](list.dropFirst())
-                let newBuf = buf + [f(NonEmptyArray(head: list[0], tail: tail))]
+                let tail = [A](array.dropFirst())
+                let newBuf = buf + [f(NonEmptyArray(head: array[0], tail: tail))]
                 return consume(tail, newBuf)
             }
         }

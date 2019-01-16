@@ -72,21 +72,21 @@ class NonEmptyArrayTest: XCTestCase {
         FoldableLaws<ForNonEmptyArray>.check(foldable: NonEmptyArray<Int>.foldable(), generator: self.generator)
     }
     
-    private let nelGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
+    private let neaGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
     
     func testConcatenation() {
-        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.nelGenerator, self.nelGenerator) { (x : ArrayOf<Int>, y : ArrayOf<Int>) in
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.neaGenerator, self.neaGenerator) { (x : ArrayOf<Int>, y : ArrayOf<Int>) in
             let a = NonEmptyArray.fromArrayUnsafe(x.getArray)
             let b = NonEmptyArray.fromArrayUnsafe(y.getArray)
             return a.count + b.count == (a + b).count
         }
         
-        property("Adding one element increases length in one") <- forAll(self.nelGenerator, Int.arbitrary) { (array : ArrayOf<Int>, element : Int) in
-            let nel = NonEmptyArray.fromArrayUnsafe(array.getArray)
-            return (nel + element).count == nel.count + 1
+        property("Adding one element increases length in one") <- forAll(self.neaGenerator, Int.arbitrary) { (array : ArrayOf<Int>, element : Int) in
+            let nea = NonEmptyArray.fromArrayUnsafe(array.getArray)
+            return (nea + element).count == nea.count + 1
         }
         
-        property("Result of concatenation contains all items from the original lists") <- forAll(self.nelGenerator, self.nelGenerator) {
+        property("Result of concatenation contains all items from the original arrays") <- forAll(self.neaGenerator, self.neaGenerator) {
             (x : ArrayOf<Int>, y : ArrayOf<Int>) in
             let a = NonEmptyArray.fromArrayUnsafe(x.getArray)
             let b = NonEmptyArray.fromArrayUnsafe(y.getArray)

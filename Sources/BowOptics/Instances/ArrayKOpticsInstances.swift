@@ -41,12 +41,12 @@ public class ArrayKIndex<E> : Index {
     
     public func index(_ i: Int) -> Optional<ArrayK<E>, E> {
         return Optional<ArrayK<E>, E>(
-            set: { list, e in
-                list.asArray.enumerated().map { x in
+            set: { arrayK, e in
+                arrayK.asArray.enumerated().map { x in
                     return (x.offset == i) ? e : x.element
                 }.k()
-        }, getOrModify: { list in
-                list.getOrNone(i).fold({ Either<ArrayK<E>, E>.left(list) }, Either<ArrayK<E>, E>.right)
+        }, getOrModify: { array in
+                array.getOrNone(i).fold({ Either<ArrayK<E>, E>.left(array) }, Either<ArrayK<E>, E>.right)
         })
     }
 }
