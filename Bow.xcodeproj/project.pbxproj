@@ -198,7 +198,7 @@
 		8BA0F57B217E2E9200969984 /* Reader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F473217E2E9200969984 /* Reader.swift */; };
 		8BA0F57F217E2E9200969984 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F474217E2E9200969984 /* Either.swift */; };
 		8BA0F583217E2E9200969984 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F475217E2E9200969984 /* Id.swift */; };
-		8BA0F587217E2E9200969984 /* MapK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F476217E2E9200969984 /* MapK.swift */; };
+		8BA0F587217E2E9200969984 /* DictionaryK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F476217E2E9200969984 /* DictionaryK.swift */; };
 		8BA0F58B217E2E9200969984 /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F477217E2E9200969984 /* Ior.swift */; };
 		8BA0F58F217E2E9200969984 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F478217E2E9200969984 /* Option.swift */; };
 		8BA0F593217E2E9200969984 /* NonEmptyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F479217E2E9200969984 /* NonEmptyList.swift */; };
@@ -740,7 +740,7 @@
 		8BA0F473217E2E9200969984 /* Reader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reader.swift; sourceTree = "<group>"; };
 		8BA0F474217E2E9200969984 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		8BA0F475217E2E9200969984 /* Id.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Id.swift; sourceTree = "<group>"; };
-		8BA0F476217E2E9200969984 /* MapK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapK.swift; sourceTree = "<group>"; };
+		8BA0F476217E2E9200969984 /* DictionaryK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryK.swift; sourceTree = "<group>"; };
 		8BA0F477217E2E9200969984 /* Ior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		8BA0F478217E2E9200969984 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		8BA0F479217E2E9200969984 /* NonEmptyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonEmptyList.swift; sourceTree = "<group>"; };
@@ -1430,7 +1430,7 @@
 				8BA0F47E217E2E9200969984 /* Eval.swift */,
 				8BA0F475217E2E9200969984 /* Id.swift */,
 				8BA0F477217E2E9200969984 /* Ior.swift */,
-				8BA0F476217E2E9200969984 /* MapK.swift */,
+				8BA0F476217E2E9200969984 /* DictionaryK.swift */,
 				8BA0F47D217E2E9200969984 /* Moore.swift */,
 				8BA0F479217E2E9200969984 /* NonEmptyList.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
@@ -2654,7 +2654,7 @@
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
 				8BA0F627217E2E9200969984 /* Foldable.swift in Sources */,
 				8BA0F63F217E2E9200969984 /* ComposedFoldable.swift in Sources */,
-				8BA0F587217E2E9200969984 /* MapK.swift in Sources */,
+				8BA0F587217E2E9200969984 /* DictionaryK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
