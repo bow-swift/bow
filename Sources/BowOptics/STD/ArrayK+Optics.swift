@@ -2,18 +2,18 @@ import Foundation
 import Bow
 
 public extension ArrayK {
-    public static func toPOptionNel<B>() -> PIso<ArrayK<A>, ArrayK<B>, Option<NonEmptyList<A>>, Option<NonEmptyList<B>>> {
-        return PIso<ArrayK<A>, ArrayK<B>, Option<NonEmptyList<A>>, Option<NonEmptyList<B>>>(
+    public static func toPOptionNEA<B>() -> PIso<ArrayK<A>, ArrayK<B>, Option<NonEmptyArray<A>>, Option<NonEmptyArray<B>>> {
+        return PIso<ArrayK<A>, ArrayK<B>, Option<NonEmptyArray<A>>, Option<NonEmptyArray<B>>>(
             get: { list in list.isEmpty ?
-                Option<NonEmptyList<A>>.none() :
-                Option<NonEmptyList<A>>.some(NonEmptyList<A>(head: list.asArray[0], tail: Array(list.asArray.dropFirst()))) },
+                Option<NonEmptyArray<A>>.none() :
+                Option<NonEmptyArray<A>>.some(NonEmptyArray<A>(head: list.asArray[0], tail: Array(list.asArray.dropFirst()))) },
             reverseGet: { option in
                 option.fold(ArrayK<B>.empty, { nel in ArrayK<B>(nel.all()) })
         })
     }
     
-    public static func toOptionNel() -> Iso<ArrayK<A>, Option<NonEmptyList<A>>> {
-        return toPOptionNel()
+    public static func toOptionNEA() -> Iso<ArrayK<A>, Option<NonEmptyArray<A>>> {
+        return toPOptionNEA()
     }
 }
 

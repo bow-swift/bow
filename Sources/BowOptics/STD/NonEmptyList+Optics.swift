@@ -1,16 +1,16 @@
 import Foundation
 import Bow
 
-public extension NonEmptyList {
-    public static func head() -> Lens<NonEmptyList<A>, A> {
-        return Lens<NonEmptyList<A>, A>(
+public extension NonEmptyArray {
+    public static func head() -> Lens<NonEmptyArray<A>, A> {
+        return Lens<NonEmptyArray<A>, A>(
             get: { x in x.head },
-            set: { (nel, newHead) in NonEmptyList(head: newHead, tail: nel.tail) })
+            set: { (nel, newHead) in NonEmptyArray(head: newHead, tail: nel.tail) })
     }
     
-    public static func tail() -> Lens<NonEmptyList<A>, [A]> {
-        return Lens<NonEmptyList<A>, [A]>(
+    public static func tail() -> Lens<NonEmptyArray<A>, [A]> {
+        return Lens<NonEmptyArray<A>, [A]>(
             get: { x in x.tail },
-            set: { (nel, newTail) in NonEmptyList(head: nel.head, tail: newTail) })
+            set: { (nel, newTail) in NonEmptyArray(head: nel.head, tail: newTail) })
     }
 }
