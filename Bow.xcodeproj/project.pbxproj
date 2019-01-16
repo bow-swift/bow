@@ -1119,14 +1119,14 @@
 		11DDCD19217F163400844D9D /* Syntax */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F48B217E2E9200969984 /* HigherKinds.swift */,
-				8BA0F449217E2E9200969984 /* Typeclass.swift */,
 				8BA0F44A217E2E9200969984 /* BooleanFunctions.swift */,
 				8BA0F43C217E2E9200969984 /* Curry.swift */,
+				8BA0F48B217E2E9200969984 /* HigherKinds.swift */,
 				11DDCD1B217F171900844D9D /* Memoization.swift */,
 				8BA0F45B217E2E9200969984 /* PartialApplication.swift */,
 				8BA0F450217E2E9200969984 /* Predef.swift */,
 				11DDCD22217F1E2B00844D9D /* Reverse.swift */,
+				8BA0F449217E2E9200969984 /* Typeclass.swift */,
 			);
 			path = Syntax;
 			sourceTree = "<group>";
