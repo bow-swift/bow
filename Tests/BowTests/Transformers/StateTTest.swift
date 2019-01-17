@@ -46,14 +46,14 @@ class StateTTest: XCTestCase {
         }
     }
     
-    class StateTListKEq : Eq {
-        public typealias A = StateTOf<ForListK, Int, Int>
+    class StateTArrayKEq : Eq {
+        public typealias A = StateTOf<ForArrayK, Int, Int>
         
-        public func eqv(_ a: StateTOf<ForListK, Int, Int>,
-                        _ b: StateTOf<ForListK, Int, Int>) -> Bool {
-            let x = StateT.fix(a).runM(1, ListK<Any>.monad())
-            let y = StateT.fix(b).runM(1, ListK<Any>.monad())
-            return ListK.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
+        public func eqv(_ a: StateTOf<ForArrayK, Int, Int>,
+                        _ b: StateTOf<ForArrayK, Int, Int>) -> Bool {
+            let x = StateT.fix(a).runM(1, ArrayK<Any>.monad())
+            let y = StateT.fix(b).runM(1, ArrayK<Any>.monad())
+            return ArrayK.eq(Tuple.eq(Int.order, Int.order)).eqv(x, y)
         }
     }
     
@@ -89,19 +89,19 @@ class StateTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<StateTPartial<ForListK, Int>>.check(
-            semigroupK: StateT<ForListK, Int, Int>.semigroupK(ListK<Int>.monad(), ListK<Int>.semigroupK()),
-            generator: { (a : Int) in StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(a) },
-            eq: StateTListKEq())
+        SemigroupKLaws<StateTPartial<ForArrayK, Int>>.check(
+            semigroupK: StateT<ForArrayK, Int, Int>.semigroupK(ArrayK<Int>.monad(), ArrayK<Int>.semigroupK()),
+            generator: { (a : Int) in StateT<ForArrayK, Int, Int>.applicative(ArrayK<Int>.monad()).pure(a) },
+            eq: StateTArrayKEq())
     }
     
     func testSemigroupLaws() {
         property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws.check(semigroup: StateT<ForListK, Int, Int>.semigroupK(ListK<Int>.monad(), ListK<Int>.semigroupK()).algebra(),
-                                       a: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(a),
-                                       b: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(b),
-                                       c: StateT<ForListK, Int, Int>.applicative(ListK<Int>.monad()).pure(c),
-                                       eq: StateTListKEq())
+            return SemigroupLaws.check(semigroup: StateT<ForArrayK, Int, Int>.semigroupK(ArrayK<Int>.monad(), ArrayK<Int>.semigroupK()).algebra(),
+                                       a: StateT<ForArrayK, Int, Int>.applicative(ArrayK<Int>.monad()).pure(a),
+                                       b: StateT<ForArrayK, Int, Int>.applicative(ArrayK<Int>.monad()).pure(b),
+                                       c: StateT<ForArrayK, Int, Int>.applicative(ArrayK<Int>.monad()).pure(c),
+                                       eq: StateTArrayKEq())
         }
     }
     
@@ -113,6 +113,6 @@ class StateTTest: XCTestCase {
     }
     
     func testMonadCombineLaws() {
-        MonadCombineLaws<StateTPartial<ForListK, Int>>.check(monadCombine: StateT<ForListK, Int, Int>.monadCombine(ListK<Int>.monadCombine()), eq: StateTListKEq())
+        MonadCombineLaws<StateTPartial<ForArrayK, Int>>.check(monadCombine: StateT<ForArrayK, Int, Int>.monadCombine(ArrayK<Int>.monadCombine()), eq: StateTArrayKEq())
     }
 }

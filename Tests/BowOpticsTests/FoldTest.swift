@@ -4,30 +4,30 @@ import SwiftCheck
 @testable import BowOptics
 
 class FoldTest : XCTestCase {
-    let intFold = Fold<Int, Int>.from(foldable: ListK<Int>.foldable())
-    let stringFold = Fold<String, String>.from(foldable: ListK<String>.foldable())
+    let intFold = Fold<Int, Int>.from(foldable: ArrayK<Int>.foldable())
+    let stringFold = Fold<String, String>.from(foldable: ArrayK<String>.foldable())
     let nonEmptyListGen = ArrayOf<Int>.arbitrary.suchThat({ array in array.getArray.count > 0 })
     
     func testFoldProperties() {
-        property("Fold select a list that contains one") <- forAll(self.nonEmptyListGen) { (array : ArrayOf<Int>) in
+        property("Fold select an array that contains one") <- forAll(self.nonEmptyListGen) { (array : ArrayOf<Int>) in
             let select = Fold<Array<Int>, Int>.select({ array in array.contains(1) })
             return select.getAll(array.getArray).asArray.first == (array.getArray.contains(1) ? array : nil)?.getArray
         }
         
-        property("Folding a list of ints") <- forAll { (array : ArrayOf<Int>) in
+        property("Folding an array of ints") <- forAll { (array : ArrayOf<Int>) in
             return self.intFold.fold(Int.sumMonoid, array.getArray.k()) == array.getArray.reduce(0, +)
         }
         
-        property("Folding a list is equivalent to combineAll") <- forAll { (array : ArrayOf<Int>) in
+        property("Folding an array is equivalent to combineAll") <- forAll { (array : ArrayOf<Int>) in
             return self.intFold.combineAll(Int.sumMonoid, array.getArray.k()) == array.getArray.reduce(0, +)
         }
         
-        property("Folding and mapping a list of strings") <- forAll { (array : ArrayOf<Int>) in
+        property("Folding and mapping an array of strings") <- forAll { (array : ArrayOf<Int>) in
             return self.stringFold.foldMap(Int.sumMonoid, array.getArray.map(String.init).k(), { s in Int(s)! }) == array.getArray.reduce(0, +)
         }
         
         property("Get all targets") <- forAll { (array : ArrayOf<Int>) in
-            return ListK.eq(Int.order).eqv(self.intFold.getAll(array.getArray.k()),
+            return ArrayK.eq(Int.order).eqv(self.intFold.getAll(array.getArray.k()),
                                            array.getArray.k())
         }
         

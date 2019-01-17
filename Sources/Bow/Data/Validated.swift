@@ -64,7 +64,7 @@ public class Validated<E, A> : ValidatedOf<E, A> {
         return fold(constant(Option.none()), Option.some)
     }
     
-    public func toList() -> [A] {
+    public func toArray() -> [A] {
         return fold(constant([]), { a in [a] })
     }
     

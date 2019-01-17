@@ -248,9 +248,9 @@ public class Option<A> : OptionOf<A> {
     }
     
     /**
-     Converts this option into an empty list, if absent, or a singleton list, if present.
+     Converts this option into an empty array, if absent, or a singleton array, if present.
      */
-    public func toList() -> [A] {
+    public func toArray() -> [A] {
         return fold(constant([]), { a in [a] })
     }
 }

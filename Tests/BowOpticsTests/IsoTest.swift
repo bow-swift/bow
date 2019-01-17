@@ -43,7 +43,7 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso as Fold: getAll") <- forAll { (token : Token) in
-            return ListK.eq(String.order).eqv(tokenIso.asFold().getAll(token), ListK.pure(token.value))
+            return ArrayK.eq(String.order).eqv(tokenIso.asFold().getAll(token), ArrayK.pure(token.value))
         }
         
         property("Iso as Fold: combineAll") <- forAll { (token : Token) in

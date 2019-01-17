@@ -35,8 +35,8 @@ class PrismTest: XCTestCase {
         }
         
         property("Prism as Fold: getAll") <- forAll { (sum : SumType) in
-            return ListK.eq(String.order).eqv(sumPrism.asFold().getAll(sum),
-                                              sumPrism.getOption(sum).toList().k())
+            return ArrayK.eq(String.order).eqv(sumPrism.asFold().getAll(sum),
+                                               sumPrism.getOption(sum).toArray().k())
         }
         
         property("Prism as Fold: combineAll") <- forAll { (sum : SumType) in
