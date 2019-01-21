@@ -50,7 +50,7 @@ public func curry<A, B, C, D, E, F>(_ fun : @escaping (A, B, C, D, E) -> F) -> (
 }
 
 /**
- Uncurries a 4-ary function.
+ Uncurries a 5-ary function.
  */
 public func uncurry<A, B, C, D, E, F>(_ fun : @escaping (A) -> (B) -> (C) -> (D) -> (E) -> F) -> (A, B, C, D, E) -> F {
     return { a, b, c, d, e in fun(a)(b)(c)(d)(e) }
