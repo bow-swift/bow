@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bow-swift/bow.svg?branch=master)](https://travis-ci.org/bow-swift/bow)
 [![codecov](https://codecov.io/gh/bow-swift/bow/branch/master/graph/badge.svg)](https://codecov.io/gh/bow-swift/bow)
-[![Gitter](https://badges.gitter.im/arrow-kt/bow.svg)](https://gitter.im/arrow-kt/bow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/bowswift/bow.svg)](https://gitter.im/bowswift/bow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Bow is a library for Typed Functional Programming in Swift.
 
