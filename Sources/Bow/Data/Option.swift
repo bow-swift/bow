@@ -116,7 +116,7 @@ public class Option<A> : OptionOf<A> {
     }
     
     /**
-     Transform the parameter using the function wrapped in the receiver `Option`.
+     Transforms the parameter using the function wrapped in the receiver `Option`.
      */
     public func ap<AA, B>(_ fa : Option<AA>) -> Option<B> where A == (AA) -> B{
         return flatMap(fa.map)
