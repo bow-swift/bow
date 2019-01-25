@@ -1,15 +1,21 @@
-// Buttons 
+// Buttons
 // -----------------------------------------------
 // -----------------------------------------------
 .button {
-    display: inline-block;
+    display: block;
     font-weight: $font-semibold;
     text-decoration: none;
     text-transform: uppercase;
     background: $brand-secondary;
     color: $white;
     border-radius: ($base-point-grid * 8);
+    text-align: center;
     transition: background $base-duration $base-timing;
+    width: 192px;
+
+    & + .button {
+      margin-top: $base-point-grid * 2;
+    }
 
     &:visited {
         color: $white;
@@ -28,9 +34,23 @@
         padding: ($base-point-grid * 1.6) ($base-point-grid * 6);
         font-size: $base-font-size;
     }
-    
+
     &.button-small {
         padding: ($base-point-grid * 0.7) ($base-point-grid * 2.2);
         font-size: 0.7857rem;
+    }
+
+    @include bp(medium) {
+      display: inline-block;
+
+      & + .button {
+        margin-top: 0;
+      }
+    }
+
+    @include bp(small) {
+      & + .button {
+        margin-top: $base-point-grid * 2;
+      }
     }
 }

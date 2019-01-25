@@ -53,6 +53,10 @@
                     &:active {
                         color: $white;
                     }
+
+                    @include bp(small) {
+                      padding: ($base-point-grid / 2) ($base-point-grid * 1);
+                    }
                 }
             }
         }
