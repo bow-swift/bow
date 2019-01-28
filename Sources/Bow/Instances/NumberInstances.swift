@@ -663,101 +663,100 @@ public extension UInt8 {
 }
 
 // MARK: UInt16 instances
-
-/**
- Instance of `Semigroup` for the `UInt16` primitive type, with sum as combination method.
- */
-public class UInt16SumSemigroup : Semigroup {
-    public typealias A = UInt16
-    
-    public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
-        return a.addingReportingOverflow(b).partialValue
+public extension UInt16 {
+    /**
+     Instance of `Semigroup` for the `UInt16` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = UInt16
+        
+        public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
+            return a.addingReportingOverflow(b).partialValue
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `UInt16` primitive type, with sum as combination method.
- */
-public class UInt16SumMonoid : UInt16SumSemigroup, Monoid {
-    public var empty : UInt16 {
-        return 0
+    /**
+     Instance of `Monoid` for the `UInt16` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : UInt16 {
+            return 0
+        }
     }
-}
 
-/**
- Instance of `Semigroup` for the `UInt16` primitive type, with product as combination method.
- */
-public class UInt16ProductSemigroup : Semigroup {
-    public typealias A = UInt16
-    
-    public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
-        return a.multipliedReportingOverflow(by: b).partialValue
+    /**
+     Instance of `Semigroup` for the `UInt16` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = UInt16
+        
+        public func combine(_ a : UInt16, _ b : UInt16) -> UInt16 {
+            return a.multipliedReportingOverflow(by: b).partialValue
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `UInt16` primitive type, with product as combination method.
- */
-public class UInt16ProductMonoid : UInt16ProductSemigroup, Monoid {
-    public var empty : UInt16 {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `UInt16` primitive type.
- */
-public class UInt16Eq : Eq {
-    public typealias A = UInt16
-    
-    public func eqv(_ a: UInt16, _ b: UInt16) -> Bool {
-        return a == b
-    }
-}
-
-/**
- Instance of `Order` for the `UInt16` primitive type.
- */
-public class UInt16Order : UInt16Eq, Order {
-    public func compare(_ a: UInt16, _ b: UInt16) -> Int {
-        if a < b {
-            return -1
-        } else if a > b {
+    /**
+     Instance of `Monoid` for the `UInt16` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : UInt16 {
             return 1
         }
-        return 0
     }
-}
 
-public extension UInt16 {
+    /**
+     Instance of `Eq` for the `UInt16` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = UInt16
+        
+        public func eqv(_ a: UInt16, _ b: UInt16) -> Bool {
+            return a == b
+        }
+    }
+
+    /**
+     Instance of `Order` for the `UInt16` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: UInt16, _ b: UInt16) -> Int {
+            if a < b {
+                return -1
+            } else if a > b {
+                return 1
+            }
+            return 0
+        }
+    }
+
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : UInt16SumSemigroup {
-        return UInt16SumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : UInt16SumMonoid {
-        return UInt16SumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : UInt16ProductSemigroup {
-        return UInt16ProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : UInt16ProductMonoid {
-        return UInt16ProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : UInt16Eq {
-        return UInt16Eq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : UInt16Order {
-        return UInt16Order()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
 
