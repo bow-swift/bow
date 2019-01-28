@@ -1,5 +1,9 @@
 language: objective-c
 osx_image: xcode10
+addons:
+  homebrew:
+    packages:
+    - sourcekitten
 env:
   global:
     - PROJECT=Bow.xcodeproj
@@ -33,6 +37,8 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - ./scripts/gen-docs.rb
+
 deploy:
   provider: script
   script: sh scripts/push.sh
