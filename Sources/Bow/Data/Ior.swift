@@ -205,115 +205,116 @@ extension Ior : CustomDebugStringConvertible where A : CustomDebugStringConverti
     }
 }
 
-public extension Ior {
-    public static func functor() -> IorFunctor<A> {
-        return IorFunctor<A>()
-    }
-    
-    public static func applicative<SemiG>(_ semigroup : SemiG) -> IorApplicative<A, SemiG> {
-        return IorApplicative<A, SemiG>(semigroup)
-    }
-    
-    public static func monad<SemiG>(_ semigroup : SemiG) -> IorMonad<A, SemiG> {
-        return IorMonad<A, SemiG>(semigroup)
-    }
-    
-    public static func foldable() -> IorFoldable<A> {
-        return IorFoldable<A>()
-    }
-    
-    public static func traverse() -> IorTraverse<A> {
-        return IorTraverse<A>()
-    }
-    
-    public static func eq<EqA, EqB>(_ eqa : EqA, _ eqb : EqB) -> IorEq<A, B, EqA, EqB> {
-        return IorEq<A, B, EqA, EqB>(eqa, eqb)
-    }
-}
-
-public class IorFunctor<L> : Functor {
-    public typealias F = IorPartial<L>
-    
-    public func map<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> B) -> IorOf<L, B> {
-        return Ior.fix(fa).map(f)
-    }
-}
-
-public class IorApplicative<L, SemiG> : IorFunctor<L>, Applicative where SemiG : Semigroup, SemiG.A == L {
-    fileprivate let semigroup : SemiG
-    
-    public init(_ semigroup : SemiG) {
-        self.semigroup = semigroup
-    }
-    
-    public func pure<A>(_ a: A) -> IorOf<L, A> {
-        return Ior<L, A>.right(a)
-    }
-    
-    public func ap<A, B>(_ ff: IorOf<L, (A) -> B>, _ fa: IorOf<L, A>) -> IorOf<L, B> {
-        return Ior.fix(ff).ap(Ior.fix(fa), semigroup)
-    }
-}
-
-public class IorMonad<L, SemiG> : IorApplicative<L, SemiG>, Monad where SemiG : Semigroup, SemiG.A == L{
-    
-    public func flatMap<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> IorOf<L, B>) -> IorOf<L, B> {
-        return Ior.fix(fa).flatMap({ a in Ior.fix(f(a)) }, self.semigroup)
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IorOf<L, Either<A, B>>) -> IorOf<L, B> {
-        return Ior.tailRecM(a, f, self.semigroup)
-    }
-}
-
-public class IorFoldable<L> : Foldable {
-    public typealias F = IorPartial<L>
-    
-    public func foldLeft<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Ior.fix(fa).foldLeft(b, f)
-    }
-    
-    public func foldRight<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Ior.fix(fa).foldRight(b, f)
-    }
-}
-
-public class IorTraverse<L> : IorFoldable<L>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IorOf<L, B>> where G == Appl.F, Appl : Applicative {
-        return Ior.fix(fa).traverse(f, applicative)
-    }
-}
-
-public class IorEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = IorOf<L, R>
-    
-    private let eql : EqL
-    private let eqr : EqR
-    
-    public init(_ eql : EqL, _ eqr : EqR) {
-        self.eql = eql
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: IorOf<L, R>, _ b: IorOf<L, R>) -> Bool {
-        let a = Ior.fix(a)
-        let b = Ior.fix(b)
-        return a.fold({ aLeft in
-            b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false), constant(false))
-        },
-                      { aRight in
-            b.fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }, constant(false))
-        },
-                      { aLeft, aRight in
-            b.fold(constant(false), constant(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
-        })
-    }
-}
-
 extension Ior : Equatable where A : Equatable, B : Equatable {
     public static func ==(lhs : Ior<A, B>, rhs : Ior<A, B>) -> Bool {
         return lhs.fold({ la in rhs.fold({ ra in la == ra }, constant(false), constant(false)) },
                         { lb in rhs.fold(constant(false), { rb in lb == rb }, constant(false)) },
                         { la, lb in rhs.fold(constant(false), constant(false), { ra, rb in la == ra && lb == rb })})
+    }
+}
+
+public extension Ior {
+    public static func functor() -> FunctorInstance<A> {
+        return FunctorInstance<A>()
+    }
+    
+    public static func applicative<SemiG>(_ semigroup : SemiG) -> ApplicativeInstance<A, SemiG> {
+        return ApplicativeInstance<A, SemiG>(semigroup)
+    }
+    
+    public static func monad<SemiG>(_ semigroup : SemiG) -> MonadInstance<A, SemiG> {
+        return MonadInstance<A, SemiG>(semigroup)
+    }
+    
+    public static func foldable() -> FoldableInstance<A> {
+        return FoldableInstance<A>()
+    }
+    
+    public static func traverse() -> TraverseInstance<A> {
+        return TraverseInstance<A>()
+    }
+    
+    public static func eq<EqA, EqB>(_ eqa : EqA, _ eqb : EqB) -> EqInstance<A, B, EqA, EqB> {
+        return EqInstance<A, B, EqA, EqB>(eqa, eqb)
+    }
+
+    public class FunctorInstance<L> : Functor {
+        public typealias F = IorPartial<L>
+        
+        public func map<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> B) -> IorOf<L, B> {
+            return Ior<L, A>.fix(fa).map(f)
+        }
+    }
+
+    public class ApplicativeInstance<L, SemiG> : FunctorInstance<L>, Applicative where SemiG : Semigroup, SemiG.A == L {
+        fileprivate let semigroup : SemiG
+        
+        public init(_ semigroup : SemiG) {
+            self.semigroup = semigroup
+        }
+        
+        public func pure<A>(_ a: A) -> IorOf<L, A> {
+            return Ior<L, A>.right(a)
+        }
+        
+        public func ap<A, B>(_ ff: IorOf<L, (A) -> B>, _ fa: IorOf<L, A>) -> IorOf<L, B> {
+            return Ior<L, (A) -> B>.fix(ff).ap(Ior<L, A>.fix(fa), semigroup)
+        }
+    }
+
+    public class MonadInstance<L, SemiG> : ApplicativeInstance<L, SemiG>, Monad where SemiG : Semigroup, SemiG.A == L{
+        
+        public func flatMap<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> IorOf<L, B>) -> IorOf<L, B> {
+            return Ior<L, A>.fix(fa).flatMap({ a in Ior<L, B>.fix(f(a)) }, self.semigroup)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IorOf<L, Either<A, B>>) -> IorOf<L, B> {
+            return Ior<A, B>.tailRecM(a, f, self.semigroup)
+        }
+    }
+
+    public class FoldableInstance<L> : Foldable {
+        public typealias F = IorPartial<L>
+        
+        public func foldLeft<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return Ior<L, A>.fix(fa).foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return Ior<L, A>.fix(fa).foldRight(b, f)
+        }
+    }
+
+    public class TraverseInstance<L> : FoldableInstance<L>, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IorOf<L, B>> where G == Appl.F, Appl : Applicative {
+            return Ior<L, A>.fix(fa).traverse(f, applicative)
+        }
+    }
+
+    public class EqInstance<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+        public typealias A = IorOf<L, R>
+        
+        private let eql : EqL
+        private let eqr : EqR
+        
+        public init(_ eql : EqL, _ eqr : EqR) {
+            self.eql = eql
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: IorOf<L, R>, _ b: IorOf<L, R>) -> Bool {
+            let a = Ior<L, R>.fix(a)
+            let b = Ior<L, R>.fix(b)
+            return a.fold(
+                { aLeft in
+                    b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false), constant(false))
+                },
+                { aRight in
+                    b.fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }, constant(false))
+                },
+                { aLeft, aRight in
+                    b.fold(constant(false), constant(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
+                })
+        }
     }
 }
