@@ -59,79 +59,79 @@ public extension Kind where F == ForFunction0 {
 }
 
 public extension Function0 {
-    public static func functor() -> Function0Functor {
-        return Function0Functor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> Function0Applicative {
-        return Function0Applicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> Function0Monad {
-        return Function0Monad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func comonad() -> Function0Bimonad {
-        return Function0Bimonad()
+    public static func comonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
-    public static func bimonad() -> Function0Bimonad {
-        return Function0Bimonad()
+    public static func bimonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
-    public static func eq<EqA>(_ eq : EqA) -> Function0Eq<A, EqA> {
-        return Function0Eq<A, EqA>(eq)
+    public static func eq<EqA>(_ eq : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eq)
     }
-}
 
-public class Function0Functor : Functor {
-    public typealias F = ForFunction0
-    
-    public func map<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> B) -> Function0Of<B> {
-        return fa.fix().map(f)
+    public class FunctorInstance : Functor {
+        public typealias F = ForFunction0
+        
+        public func map<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> B) -> Function0Of<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-public class Function0Applicative : Function0Functor, Applicative {
-    public func pure<A>(_ a: A) -> Kind<Function0Applicative.F, A> {
-        return Function0.pure(a)
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> Kind<ApplicativeInstance.F, A> {
+            return Function0<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: Kind<ApplicativeInstance.F, (A) -> B>, _ fa: Kind<ApplicativeInstance.F, A>) -> Kind<ApplicativeInstance.F, B> {
+            return Function0<(A) -> B>.fix(ff).ap(Function0<A>.fix(fa))
+        }
     }
-    
-    public func ap<A, B>(_ ff: Kind<Function0Applicative.F, (A) -> B>, _ fa: Kind<Function0Applicative.F, A>) -> Kind<Function0Applicative.F, B> {
-        return Function0.fix(ff).ap(Function0.fix(fa))
-    }
-}
 
-public class Function0Monad : Function0Applicative, Monad {
-    public func flatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> Function0Of<B>) -> Function0Of<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> Function0Of<B>) -> Function0Of<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Function0Of<Either<A, B>>) -> Function0Of<B> {
+            return Function0<A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Function0Of<Either<A, B>>) -> Function0Of<B> {
-        return Function0.tailRecM(a, f)
-    }
-}
 
-public class Function0Bimonad : Function0Monad, Bimonad {
-    public func coflatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (Function0Of<A>) -> B) -> Function0Of<B> {
-        return fa.fix().coflatMap(f)
+    public class BimonadInstance : MonadInstance, Bimonad {
+        public func coflatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (Function0Of<A>) -> B) -> Function0Of<B> {
+            return fa.fix().coflatMap(f)
+        }
+        
+        public func extract<A>(_ fa: Function0Of<A>) -> A {
+            return fa.fix().extract()
+        }
     }
-    
-    public func extract<A>(_ fa: Function0Of<A>) -> A {
-        return fa.fix().extract()
-    }
-}
 
-public class Function0Eq<B, EqB> : Eq where EqB : Eq, EqB.A == B{
-    public typealias A = Function0Of<B>
-    
-    private let eq : EqB
-    
-    public init(_ eq : EqB) {
-        self.eq = eq
-    }
-    
-    public func eqv(_ a: Function0Of<B>, _ b: Function0Of<B>) -> Bool {
-        return eq.eqv(a.fix().extract(), b.fix().extract())
+    public class EqInstance<B, EqB> : Eq where EqB : Eq, EqB.A == B{
+        public typealias A = Function0Of<B>
+        
+        private let eq : EqB
+        
+        public init(_ eq : EqB) {
+            self.eq = eq
+        }
+        
+        public func eqv(_ a: Function0Of<B>, _ b: Function0Of<B>) -> Bool {
+            return eq.eqv(a.fix().extract(), b.fix().extract())
+        }
     }
 }
