@@ -60,15 +60,15 @@ fileprivate class YonedaFromCoyoneda<F, A, Func> : Yoneda<F, A> where Func : Fun
 }
 
 public extension Coyoneda {
-    public static func functor() -> CoyonedaFunctor<F, P> {
-        return CoyonedaFunctor<F, P>()
+    public static func functor() -> FunctorInstance<F, P> {
+        return FunctorInstance<F, P>()
     }
-}
 
-public class CoyonedaFunctor<G, P> : Functor {
-    public typealias F = CoyonedaPartial<G, P>
-    
-    public func map<A, B>(_ fa: CoyonedaOf<G, P, A>, _ f: @escaping (A) -> B) -> CoyonedaOf<G, P, B> {
-        return Coyoneda.fix(fa).map(f)
+    public class FunctorInstance<G, P> : Functor {
+        public typealias F = CoyonedaPartial<G, P>
+        
+        public func map<A, B>(_ fa: CoyonedaOf<G, P, A>, _ f: @escaping (A) -> B) -> CoyonedaOf<G, P, B> {
+            return Coyoneda<G, P, A>.fix(fa).map(f)
+        }
     }
 }
