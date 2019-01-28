@@ -27,26 +27,24 @@ env:
 jobs:
   include:
     - stage: test
-    - stage: deploy
+      before_install:
+        - carthage update --platform iOS --cache-builds
       script:
-      - ./scripts/gen-docs.rb
+        - set -o pipefail
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+    - stage: deploy-docs
+      before_install:
+        - gem update --system
+        - gem install bundler
+      script:
+        - ./scripts/gen-docs.rb
 
 cache:
   bundler: true
   directories:
     - Carthage
-
-before_install:
-  - carthage update --platform iOS --cache-builds
-  - gem update --system
-  - gem install bundler
-
-script:
-  - set -o pipefail
-  - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   provider: script
