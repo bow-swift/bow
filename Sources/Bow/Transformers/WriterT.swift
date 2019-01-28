@@ -138,39 +138,39 @@ public class WriterT<F, W, A> : WriterTOf<F, W, A> {
 }
 
 public extension WriterT {
-    public static func functor<FuncF>(_ functor : FuncF) -> WriterTFunctor<F, W, FuncF> {
-        return WriterTFunctor<F, W, FuncF>(functor)
+    public static func functor<FuncF>(_ functor : FuncF) -> FunctorInstance<F, W, FuncF> {
+        return FunctorInstance<F, W, FuncF>(functor)
     }
     
-    public static func applicative<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTApplicative<F, W, MonF, MonoW> {
-        return WriterTApplicative<F, W, MonF, MonoW>(monad, monoid)
+    public static func applicative<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> ApplicativeInstance<F, W, MonF, MonoW> {
+        return ApplicativeInstance<F, W, MonF, MonoW>(monad, monoid)
     }
     
-    public static func monad<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTMonad<F, W, MonF, MonoW> {
-        return WriterTMonad<F, W, MonF, MonoW>(monad, monoid)
+    public static func monad<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> MonadInstance<F, W, MonF, MonoW> {
+        return MonadInstance<F, W, MonF, MonoW>(monad, monoid)
     }
     
-    public static func monadFilter<MonFilF, MonoW>(_ monad : MonFilF, _ monoid : MonoW) -> WriterTMonadFilter<F, W, MonFilF, MonoW> {
-        return WriterTMonadFilter<F, W, MonFilF, MonoW>(monad, monoid)
+    public static func monadFilter<MonFilF, MonoW>(_ monad : MonFilF, _ monoid : MonoW) -> MonadFilterInstance<F, W, MonFilF, MonoW> {
+        return MonadFilterInstance<F, W, MonFilF, MonoW>(monad, monoid)
     }
     
-    public static func semigroupK<SemiKF>(_ semigroupK : SemiKF) -> WriterTSemigroupK<F, W, SemiKF> {
-        return WriterTSemigroupK<F, W, SemiKF>(semigroupK)
+    public static func semigroupK<SemiKF>(_ semigroupK : SemiKF) -> SemigroupKInstance<F, W, SemiKF> {
+        return SemigroupKInstance<F, W, SemiKF>(semigroupK)
     }
 
-    public static func monoidK<MonoKF>(_ monoidK : MonoKF) -> WriterTMonoidK<F, W, MonoKF> {
-        return WriterTMonoidK<F, W, MonoKF>(monoidK)
+    public static func monoidK<MonoKF>(_ monoidK : MonoKF) -> MonoidKInstance<F, W, MonoKF> {
+        return MonoidKInstance<F, W, MonoKF>(monoidK)
     }
     
-    public static func writer<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> WriterTMonadWriter<F, W, MonF, MonoW> {
-        return WriterTMonadWriter<F, W, MonF, MonoW>(monad, monoid)
+    public static func writer<MonF, MonoW>(_ monad : MonF, _ monoid : MonoW) -> MonadWriterInstance<F, W, MonF, MonoW> {
+        return MonadWriterInstance<F, W, MonF, MonoW>(monad, monoid)
     }
     
-    public static func eq<EqF>(_ eq : EqF) -> WriterTEq<F, W, A, EqF> {
-        return WriterTEq<F, W, A, EqF>(eq)
+    public static func eq<EqF>(_ eq : EqF) -> EqInstance<F, W, A, EqF> {
+        return EqInstance<F, W, A, EqF>(eq)
     }
 
-    public class WriterTFunctor<G, W, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+    public class FunctorInstance<G, W, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
         public typealias F = WriterTPartial<G, W>
         
         private let functor : FuncG
@@ -184,7 +184,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTApplicative<G, W, MonG, MonoW> : WriterTFunctor<G, W, MonG>, Applicative where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
+    public class ApplicativeInstance<G, W, MonG, MonoW> : FunctorInstance<G, W, MonG>, Applicative where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
         
         fileprivate let monad : MonG
         fileprivate let monoid : MonoW
@@ -204,7 +204,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTMonad<G, W, MonG, MonoW> : WriterTApplicative<G, W, MonG, MonoW>, Monad where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
+    public class MonadInstance<G, W, MonG, MonoW> : ApplicativeInstance<G, W, MonG, MonoW>, Monad where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == W {
         
         public func flatMap<A, B>(_ fa: WriterTOf<G, W, A>, _ f: @escaping (A) -> WriterTOf<G, W, B>) -> WriterTOf<G, W, B> {
             return WriterT<G, W, A>.fix(fa).flatMap({ a in WriterT<G, W, B>.fix(f(a)) }, monoid, monad)
@@ -215,7 +215,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTMonadFilter<G, W, MonFilG, MonoW> : WriterTMonad<G, W, MonFilG, MonoW>, MonadFilter where MonFilG : MonadFilter, MonFilG.F == G, MonoW : Monoid, MonoW.A == W {
+    public class MonadFilterInstance<G, W, MonFilG, MonoW> : MonadInstance<G, W, MonFilG, MonoW>, MonadFilter where MonFilG : MonadFilter, MonFilG.F == G, MonoW : Monoid, MonoW.A == W {
 
         private let monadFilter : MonFilG
         
@@ -229,7 +229,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTSemigroupK<G, W, SemiKG> : SemigroupK where SemiKG : SemigroupK, SemiKG.F == G {
+    public class SemigroupKInstance<G, W, SemiKG> : SemigroupK where SemiKG : SemigroupK, SemiKG.F == G {
         public typealias F = WriterTPartial<G, W>
         
         private let semigroupK : SemiKG
@@ -243,7 +243,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTMonoidK<G, W, MonoKG> : WriterTSemigroupK<G, W, MonoKG>, MonoidK where MonoKG : MonoidK, MonoKG.F == G {
+    public class MonoidKInstance<G, W, MonoKG> : SemigroupKInstance<G, W, MonoKG>, MonoidK where MonoKG : MonoidK, MonoKG.F == G {
         
         private let monoidK : MonoKG
         
@@ -257,7 +257,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTMonadWriter<G, V, MonG, MonoW> : WriterTMonad<G, V, MonG, MonoW>, MonadWriter where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == V {
+    public class MonadWriterInstance<G, V, MonG, MonoW> : MonadInstance<G, V, MonG, MonoW>, MonadWriter where MonG : Monad, MonG.F == G, MonoW : Monoid, MonoW.A == V {
         public typealias W = V
         
         public func writer<A>(_ aw: (V, A)) -> WriterTOf<G, V, A> {
@@ -277,7 +277,7 @@ public extension WriterT {
         }
     }
 
-    public class WriterTEq<F, W, B, EqF> : Eq where EqF : Eq, EqF.A == Kind<F, (W, B)> {
+    public class EqInstance<F, W, B, EqF> : Eq where EqF : Eq, EqF.A == Kind<F, (W, B)> {
         public typealias A = WriterTOf<F, W, B>
         
         private let eq : EqF
