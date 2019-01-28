@@ -168,6 +168,13 @@ extension Validated : CustomDebugStringConvertible where E : CustomDebugStringCo
     }
 }
 
+extension Validated : Equatable where E : Equatable, A : Equatable {
+    public static func ==(lhs : Validated<E, A>, rhs : Validated<E, A>) -> Bool {
+        return lhs.fold({ le in rhs.fold({ re in le == re }, constant(false)) },
+                        { la in rhs.fold(constant(false), { ra in la == ra }) })
+    }
+}
+
 public extension Validated {
     public static func functor() -> ValidatedFunctor<E> {
         return ValidatedFunctor<E>()
@@ -196,97 +203,90 @@ public extension Validated {
     public static func eq<EqE, EqA>(_ eqe : EqE, _ eqa : EqA) -> ValidatedEq<E, A, EqE, EqA> {
         return ValidatedEq<E, A, EqE, EqA>(eqe, eqa)
     }
-}
 
-public class ValidatedFunctor<R> : Functor {
-    public typealias F = ValidatedPartial<R>
-    
-    public func map<A, B>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> B) -> ValidatedOf<R, B> {
-        return Validated.fix(fa).map(f)
+    public class ValidatedFunctor<R> : Functor {
+        public typealias F = ValidatedPartial<R>
+        
+        public func map<A, B>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> B) -> ValidatedOf<R, B> {
+            return Validated<R, A>.fix(fa).map(f)
+        }
     }
-}
 
-public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative where SemiG : Semigroup, SemiG.A == R {
-    private let semigroup : SemiG
-    
-    public init(_ semigroup : SemiG) {
-        self.semigroup = semigroup
+    public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative where SemiG : Semigroup, SemiG.A == R {
+        private let semigroup : SemiG
+        
+        public init(_ semigroup : SemiG) {
+            self.semigroup = semigroup
+        }
+        
+        public func pure<A>(_ a: A) -> ValidatedOf<R, A> {
+            return Validated<R, A>.valid(a)
+        }
+        
+        public func ap<A, B>(_ ff: ValidatedOf<R, (A) -> B>, _ fa: ValidatedOf<R, A>) -> ValidatedOf<R, B> {
+            return Validated<R, (A) -> B>.fix(ff).ap(Validated<R, A>.fix(fa), semigroup)
+        }
     }
-    
-    public func pure<A>(_ a: A) -> ValidatedOf<R, A> {
-        return Validated<R, A>.valid(a)
-    }
-    
-    public func ap<A, B>(_ ff: ValidatedOf<R, (A) -> B>, _ fa: ValidatedOf<R, A>) -> ValidatedOf<R, B> {
-        return Validated.fix(ff).ap(Validated.fix(fa), semigroup)
-    }
-}
 
-public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG>, ApplicativeError where SemiG : Semigroup, SemiG.A == R {
-    public typealias E = R
-    
-    public func raiseError<A>(_ e: R) -> ValidatedOf<R, A> {
-        return Validated<R, A>.invalid(e)
+    public class ValidatedApplicativeError<R, SemiG> : ValidatedApplicative<R, SemiG>, ApplicativeError where SemiG : Semigroup, SemiG.A == R {
+        public typealias E = R
+        
+        public func raiseError<A>(_ e: R) -> ValidatedOf<R, A> {
+            return Validated<R, A>.invalid(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: ValidatedOf<R, A>, _ f: @escaping (R) -> ValidatedOf<R, A>) -> ValidatedOf<R, A> {
+            return Validated<R, A>.fix(fa).handleLeftWith({ r in Validated<R, A>.fix(f(r)) })
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: ValidatedOf<R, A>, _ f: @escaping (R) -> ValidatedOf<R, A>) -> ValidatedOf<R, A> {
-        return Validated.fix(fa).handleLeftWith({ r in Validated.fix(f(r)) })
-    }
-}
 
-public class ValidatedFoldable<R> : Foldable {
-    public typealias F = ValidatedPartial<R>
-    
-    public func foldLeft<A, B>(_ fa: ValidatedOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Validated.fix(fa).foldLeft(b, f)
+    public class ValidatedFoldable<R> : Foldable {
+        public typealias F = ValidatedPartial<R>
+        
+        public func foldLeft<A, B>(_ fa: ValidatedOf<R, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return Validated<R, A>.fix(fa).foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return Validated<R, A>.fix(fa).foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: ValidatedOf<R, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Validated.fix(fa).foldRight(b, f)
-    }
-}
 
-public class ValidatedTraverse<R> : ValidatedFoldable<R>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ValidatedOf<R, B>> where G == Appl.F, Appl : Applicative {
-        return Validated.fix(fa).traverse(f, applicative)
+    public class ValidatedTraverse<R> : ValidatedFoldable<R>, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: ValidatedOf<R, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ValidatedOf<R, B>> where G == Appl.F, Appl : Applicative {
+            return Validated<R, A>.fix(fa).traverse(f, applicative)
+        }
     }
-}
 
-public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup, SemiG.A == R {
-    public typealias F = ValidatedPartial<R>
-    
-    private let semigroup : SemiG
-    
-    public init(_ semigroup : SemiG) {
-        self.semigroup = semigroup
+    public class ValidatedSemigroupK<R, SemiG> : SemigroupK where SemiG : Semigroup, SemiG.A == R {
+        public typealias F = ValidatedPartial<R>
+        
+        private let semigroup : SemiG
+        
+        public init(_ semigroup : SemiG) {
+            self.semigroup = semigroup
+        }
+        
+        public func combineK<A>(_ x: ValidatedOf<R, A>, _ y: ValidatedOf<R, A>) -> ValidatedOf<R, A> {
+            return Validated<R, A>.fix(x).combineK(Validated<R, A>.fix(y), semigroup)
+        }
     }
-    
-    public func combineK<A>(_ x: ValidatedOf<R, A>, _ y: ValidatedOf<R, A>) -> ValidatedOf<R, A> {
-        return Validated.fix(x).combineK(Validated.fix(y), semigroup)
-    }
-}
 
-public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = ValidatedOf<L, R>
-    private let eql : EqL
-    private let eqr : EqR
-    
-    public init(_ eql : EqL, _ eqr : EqR) {
-        self.eql = eql
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: ValidatedOf<L, R>, _ b: ValidatedOf<L, R>) -> Bool {
-        let a = Validated.fix(a)
-        let b = Validated.fix(b)
-        return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constant(false))},
-                      { aValid in b.fold(constant(false), { bValid in eqr.eqv(aValid, bValid) })})
-    }
-}
-
-extension Validated : Equatable where E : Equatable, A : Equatable {
-    public static func ==(lhs : Validated<E, A>, rhs : Validated<E, A>) -> Bool {
-        return lhs.fold({ le in rhs.fold({ re in le == re }, constant(false)) },
-                        { la in rhs.fold(constant(false), { ra in la == ra }) })
+    public class ValidatedEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+        public typealias A = ValidatedOf<L, R>
+        private let eql : EqL
+        private let eqr : EqR
+        
+        public init(_ eql : EqL, _ eqr : EqR) {
+            self.eql = eql
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: ValidatedOf<L, R>, _ b: ValidatedOf<L, R>) -> Bool {
+            let a = Validated<L, R>.fix(a)
+            let b = Validated<L, R>.fix(b)
+            return a.fold({ aInvalid in b.fold({ bInvalid in eql.eqv(aInvalid, bInvalid)}, constant(false))},
+                          { aValid in b.fold(constant(false), { bValid in eqr.eqv(aValid, bValid) })})
+        }
     }
 }

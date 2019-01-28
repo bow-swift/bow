@@ -9,7 +9,7 @@ class SetKTest: XCTestCase {
 		return { a in SetK<Int>.pure(a) }
 	}
 
-	let eq = SetK.eq(IntEq())
+	let eq = SetK.eq(Int.EqInstance())
 
 	func testEqLaws() {
 		EqLaws.check(eq: self.eq, generator: self.generator)

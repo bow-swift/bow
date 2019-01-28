@@ -80,6 +80,6 @@ class WriterTTest: XCTestCase {
             monoid: Int.sumMonoid,
             eq: self.eq,
             eqUnit: WriterT.eq(Id.eq(Tuple.eq(Int.order, UnitEq()))),
-            eqTuple: WriterT.eq(Id.eq(Tuple.eq(Int.order, TupleEq(Int.order, Int.order)))))
+            eqTuple: WriterT.eq(Id.eq(Tuple.eq(Int.order, Tuple<Int, Int>.EqInstance(Int.order, Int.order)))))
     }
 }

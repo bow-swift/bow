@@ -57,49 +57,47 @@ public class Sum<F, G, V> : SumOf<F, G, V> {
 }
 
 public extension Sum {
-    public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> SumFunctor<F, G, FuncF, FuncG> {
-        return SumFunctor(functorF, functorG)
+    public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> FunctorInstance<F, G, FuncF, FuncG> {
+        return FunctorInstance(functorF, functorG)
     }
     
-    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> SumComonad<F, G, ComonF, ComonG> {
-        return SumComonad(comonadF, comonadG)
+    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> ComonadInstance<F, G, ComonF, ComonG> {
+        return ComonadInstance(comonadF, comonadG)
     }
-}
 
-public class SumFunctor<G, H, FuncG, FuncH> : Functor where FuncG : Functor, FuncG.F == G, FuncH : Functor, FuncH.F == H {
-    public typealias F = SumPartial<G, H>
-    
-    private let functorG : FuncG
-    private let functorH : FuncH
-    
-    public init(_ functorG : FuncG, _ functorH : FuncH) {
-        self.functorG = functorG
-        self.functorH = functorH
+    public class FunctorInstance<G, H, FuncG, FuncH> : Functor where FuncG : Functor, FuncG.F == G, FuncH : Functor, FuncH.F == H {
+        public typealias F = SumPartial<G, H>
+        
+        private let functorG : FuncG
+        private let functorH : FuncH
+        
+        public init(_ functorG : FuncG, _ functorH : FuncH) {
+            self.functorG = functorG
+            self.functorH = functorH
+        }
+        
+        public func map<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (A) -> B) -> SumOf<G, H, B> {
+            return Sum<G, H, A>.fix(fa).map(functorG, functorH, f)
+        }
     }
-    
-    public func map<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (A) -> B) -> SumOf<G, H, B> {
-        return Sum<G, H, A>.fix(fa).map(functorG, functorH, f)
-    }
-}
 
-public class SumComonad<G, H, ComonG, ComonH> : SumFunctor<G, H, ComonG, ComonH>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
-    
-    private let comonadG : ComonG
-    private let comonadH : ComonH
-    
-    override public init(_ comonadG : ComonG, _ comonadH : ComonH) {
-        self.comonadG = comonadG
-        self.comonadH = comonadH
-        super.init(comonadG, comonadH)
+    public class ComonadInstance<G, H, ComonG, ComonH> : FunctorInstance<G, H, ComonG, ComonH>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
+        
+        private let comonadG : ComonG
+        private let comonadH : ComonH
+        
+        override public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+            self.comonadG = comonadG
+            self.comonadH = comonadH
+            super.init(comonadG, comonadH)
+        }
+        
+        public func coflatMap<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (SumOf<G, H, A>) -> B) -> SumOf<G, H, B> {
+            return Sum<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
+        }
+        
+        public func extract<A>(_ fa: SumOf<G, H, A>) -> A {
+            return Sum<G, H, A>.fix(fa).extract(comonadG, comonadH)
+        }
     }
-    
-    public func coflatMap<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (SumOf<G, H, A>) -> B) -> SumOf<G, H, B> {
-        return Sum<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
-    }
-    
-    public func extract<A>(_ fa: SumOf<G, H, A>) -> A {
-        return Sum<G, H, A>.fix(fa).extract(comonadG, comonadH)
-    }
-    
-    
 }
