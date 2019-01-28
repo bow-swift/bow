@@ -149,6 +149,13 @@ extension Try : CustomDebugStringConvertible where A : CustomDebugStringConverti
     }
 }
 
+extension Try : Equatable where A : Equatable {
+    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
+        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
+                        { a in rhs.fold(constant(false), { b in a == b }) })
+    }
+}
+
 public extension Kind where F == ForTry {
     public func fix() -> Try<A> {
         return self as! Try<A>
@@ -156,116 +163,109 @@ public extension Kind where F == ForTry {
 }
 
 public extension Try {
-    public static func functor() -> TryFunctor {
-        return TryFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> TryApplicative {
-        return TryApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> TryMonad {
-        return TryMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func applicativeError<E>() -> TryMonadError<E> {
-        return TryMonadError<E>()
+    public static func applicativeError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func monadError<E>() -> TryMonadError<E> {
-        return TryMonadError<E>()
+    public static func monadError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
-        return TryEq<A, EqA>(eqa)
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
     
-    public static func foldable() -> TryFoldable {
-        return TryFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
-    public static func traverse() -> TryTraverse {
-        return TryTraverse()
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
-}
 
-public class TryFunctor : Functor {
-    public typealias F = ForTry
-    
-    public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
-        return fa.fix().map(f)
+    public class FunctorInstance : Functor {
+        public typealias F = ForTry
+        
+        public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-public class TryApplicative : TryFunctor, Applicative {
-    public func pure<A>(_ a: A) -> TryOf<A> {
-        return Try<A>.pure(a)
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> TryOf<A> {
+            return Try<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: TryOf<(A) -> B>, _ fa: TryOf<A>) -> TryOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
     }
-    
-    public func ap<A, B>(_ ff: TryOf<(A) -> B>, _ fa: TryOf<A>) -> TryOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
 
-public class TryMonad : TryApplicative, Monad {
-    public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
+            return Try<A>.tailRecM(a, { a in f(a).fix() })
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
-        return Try<A>.tailRecM(a, { a in f(a).fix() })
-    }
-}
 
-public class TryMonadError<C> : TryMonad, MonadError where C : Error{
-    public typealias E = C
-    
-    public func raiseError<A>(_ e: C) -> TryOf<A> {
-        return Try<A>.failure(e)
+    public class MonadErrorInstance<C> : MonadInstance, MonadError where C : Error{
+        public typealias E = C
+        
+        public func raiseError<A>(_ e: C) -> TryOf<A> {
+            return Try<A>.failure(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
+            return fa.fix().recoverWith({ e in f(e as! C).fix() })
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
-        return fa.fix().recoverWith({ e in f(e as! C).fix() })
-    }
-}
 
-public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = TryOf<R>
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = TryOf<R>
+        private let eqr : EqR
+        
+        public init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
+            let a = Try<R>.fix(a)
+            let b = Try<R>.fix(b)
+            return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
+                          { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+        }
     }
-    
-    public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
-        let a = Try.fix(a)
-        let b = Try.fix(b)
-        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
-                      { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
-    }
-}
 
-public class TryFoldable : Foldable {
-    public typealias F = ForTry
-    
-    public func foldLeft<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
+    public class FoldableInstance : Foldable {
+        public typealias F = ForTry
+        
+        public func foldLeft<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
 
-public class TryTraverse : TryFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
-    }
-}
-
-extension Try : Equatable where A : Equatable {
-    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
-        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
-                        { a in rhs.fold(constant(false), { b in a == b }) })
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
     }
 }
