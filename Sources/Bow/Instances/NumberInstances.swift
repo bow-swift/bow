@@ -1055,100 +1055,99 @@ public extension Float {
 }
 
 // MARK: Double instances
-
-/**
- Instance of `Semigroup` for the `Double` primitive type, with sum as combination method.
- */
-public class DoubleSumSemigroup : Semigroup {
-    public typealias A = Double
-    
-    public func combine(_ a : Double, _ b : Double) -> Double {
-        return a + b
+public extension Double {
+    /**
+     Instance of `Semigroup` for the `Double` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = Double
+        
+        public func combine(_ a : Double, _ b : Double) -> Double {
+            return a + b
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `Double` primitive type, with sum as combination method.
- */
-public class DoubleSumMonoid : DoubleSumSemigroup, Monoid {
-    public var empty : Double {
-        return 0
+    /**
+     Instance of `Monoid` for the `Double` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : Double {
+            return 0
+        }
     }
-}
 
-/**
- Instance of `Semigroup` for the `Double` primitive type, with product as combination method.
- */
-public class DoubleProductSemigroup : Semigroup {
-    public typealias A = Double
-    
-    public func combine(_ a : Double, _ b : Double) -> Double {
-        return a * b
+    /**
+     Instance of `Semigroup` for the `Double` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = Double
+        
+        public func combine(_ a : Double, _ b : Double) -> Double {
+            return a * b
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `Double` primitive type, with product as combination method.
- */
-public class DoubleProductMonoid : DoubleProductSemigroup, Monoid {
-    public var empty : Double {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `Double` primitive type.
- */
-public class DoubleEq : Eq {
-    public typealias A = Double
-    
-    public func eqv(_ a: Double, _ b: Double) -> Bool {
-        return a.isEqual(to: b)
-    }
-}
-
-/**
- Instance of `Order` for the `Double` primitive type.
- */
-public class DoubleOrder : DoubleEq, Order {
-    public func compare(_ a: Double, _ b: Double) -> Int {
-        if a < b {
-            return -1
-        } else if a > b {
+    /**
+     Instance of `Monoid` for the `Double` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : Double {
             return 1
         }
-        return 0
     }
-}
 
-public extension Double {
+    /**
+     Instance of `Eq` for the `Double` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = Double
+        
+        public func eqv(_ a: Double, _ b: Double) -> Bool {
+            return a.isEqual(to: b)
+        }
+    }
+
+    /**
+     Instance of `Order` for the `Double` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: Double, _ b: Double) -> Int {
+            if a < b {
+                return -1
+            } else if a > b {
+                return 1
+            }
+            return 0
+        }
+    }
+
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : DoubleSumSemigroup {
-        return DoubleSumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : DoubleSumMonoid {
-        return DoubleSumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : DoubleProductSemigroup {
-        return DoubleProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : DoubleProductMonoid {
-        return DoubleProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : DoubleEq {
-        return DoubleEq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : DoubleOrder {
-        return DoubleOrder()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
