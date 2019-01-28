@@ -60,21 +60,21 @@ fileprivate class YonedaFunctor<F, A, Func> : Yoneda<F, A> where Func : Functor,
 }
 
 public extension Yoneda {
-    public static func functor<Func>(_ functor : Func) -> YonedaFunctorInstance<F, Func> {
-        return YonedaFunctorInstance<F, Func>(functor)
+    public static func functor<Func>(_ functor : Func) -> FunctorInstance<F, Func> {
+        return FunctorInstance<F, Func>(functor)
     }
-}
 
-public class YonedaFunctorInstance<G, Func> : Functor where Func : Functor, Func.F == G {
-    public typealias F = YonedaPartial<G>
-    
-    private let functor : Func
-    
-    public init(_ functor : Func) {
-        self.functor = functor
-    }
-    
-    public func map<A, B>(_ fa: YonedaOf<G, A>, _ f: @escaping (A) -> B) -> YonedaOf<G, B> {
-        return Yoneda.fix(fa).map(f, functor)
+    public class FunctorInstance<G, Func> : Functor where Func : Functor, Func.F == G {
+        public typealias F = YonedaPartial<G>
+        
+        private let functor : Func
+        
+        public init(_ functor : Func) {
+            self.functor = functor
+        }
+        
+        public func map<A, B>(_ fa: YonedaOf<G, A>, _ f: @escaping (A) -> B) -> YonedaOf<G, B> {
+            return Yoneda<G, A>.fix(fa).map(f, functor)
+        }
     }
 }
