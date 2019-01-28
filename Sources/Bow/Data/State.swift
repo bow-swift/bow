@@ -14,19 +14,19 @@ public class State<S, A> : StateOf<S, A> {
 }
 
 public extension State {
-    public static func functor() -> StateTFunctor<ForId, S, Id<A>.FunctorInstance> {
+    public static func functor() -> StateT<ForId, S, A>.FunctorInstance<ForId, S, Id<A>.FunctorInstance> {
         return StateT<ForId, S, A>.functor(Id<A>.functor())
     }
     
-    public static func applicative() -> StateTApplicative<ForId, S, Id<A>.MonadInstance> {
+    public static func applicative() -> StateT<ForId, S, A>.ApplicativeInstance<ForId, S, Id<A>.MonadInstance> {
         return StateT<ForId, S, A>.applicative(Id<A>.monad())
     }
     
-    public static func monad() -> StateTMonad<ForId, S, Id<A>.MonadInstance> {
+    public static func monad() -> StateT<ForId, S, A>.MonadInstance<ForId, S, Id<A>.MonadInstance> {
         return StateT<ForId, S, A>.monad(Id<A>.monad())
     }
     
-    public static func monadState() -> StateTMonadState<ForId, S, Id<A>.MonadInstance> {
+    public static func monadState() -> StateT<ForId, S, A>.MonadStateInstance<ForId, S, Id<A>.MonadInstance> {
         return StateT<ForId, S, A>.monadState(Id<A>.monad())
     }
 }

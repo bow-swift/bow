@@ -114,115 +114,115 @@ public extension Kind where F == ForSingleK {
 }
 
 public extension SingleK {
-    public static func functor() -> SingleKFunctor {
-        return SingleKFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> SingleKApplicative {
-        return SingleKApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> SingleKMonad {
-        return SingleKMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func applicativeError<E>() -> SingleKApplicativeError<E> {
-        return SingleKApplicativeError<E>()
+    public static func applicativeError<E>() -> ApplicativeErrorInstance<E> {
+        return ApplicativeErrorInstance<E>()
     }
     
-    public static func monadError<E>() -> SingleKMonadError<E> {
-        return SingleKMonadError<E>()
+    public static func monadError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func monadDefer<E>() -> SingleKMonadDefer<E> {
-        return SingleKMonadDefer<E>()
+    public static func monadDefer<E>() -> MonadDeferInstance<E> {
+        return MonadDeferInstance<E>()
     }
     
-    public static func async<E>() -> SingleKAsync<E> {
-        return SingleKAsync<E>()
+    public static func async<E>() -> AsyncInstance<E> {
+        return AsyncInstance<E>()
     }
     
-    public static func effect<E>() -> SingleKEffect<E> {
-        return SingleKEffect<E>()
+    public static func effect<E>() -> EffectInstance<E> {
+        return EffectInstance<E>()
     }
     
-    public static func concurrentEffect<E>() -> SingleKConcurrentEffect<E> {
-        return SingleKConcurrentEffect<E>()
+    public static func concurrentEffect<E>() -> ConcurrentEffectInstance<E> {
+        return ConcurrentEffectInstance<E>()
     }
-}
 
-public class SingleKFunctor : Functor {
-    public typealias F = ForSingleK
-    
-    public func map<A, B>(_ fa: SingleKOf<A>, _ f: @escaping (A) -> B) -> SingleKOf<B> {
-        return fa.fix().map(f)
+    public class FunctorInstance : Functor {
+        public typealias F = ForSingleK
+        
+        public func map<A, B>(_ fa: SingleKOf<A>, _ f: @escaping (A) -> B) -> SingleKOf<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-public class SingleKApplicative : SingleKFunctor, Applicative {
-    public func pure<A>(_ a: A) -> SingleKOf<A> {
-        return SingleK.pure(a)
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> SingleKOf<A> {
+            return SingleK<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: SingleKOf<(A) -> B>, _ fa: SingleKOf<A>) -> SingleKOf<B> {
+            return ff.fix().ap(fa)
+        }
     }
-    
-    public func ap<A, B>(_ ff: SingleKOf<(A) -> B>, _ fa: SingleKOf<A>) -> SingleKOf<B> {
-        return ff.fix().ap(fa)
-    }
-}
 
-public class SingleKMonad : SingleKApplicative, Monad {
-    public func flatMap<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
-        return fa.fix().flatMap(f)
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
+            return fa.fix().flatMap(f)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForSingleK, Either<A, B>>) -> Kind<ForSingleK, B> {
+            return SingleK<A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForSingleK, Either<A, B>>) -> Kind<ForSingleK, B> {
-        return SingleK.tailRecM(a, f)
-    }
-}
 
-public class SingleKApplicativeError<Err> : SingleKApplicative, ApplicativeError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
-        return SingleK.raiseError(e)
+    public class ApplicativeErrorInstance<Err> : ApplicativeInstance, ApplicativeError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
+            return SingleK<A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
+            return fa.fix().handleErrorWith{ e in f(e as! Err).fix() }
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
-        return fa.fix().handleErrorWith{ e in f(e as! Err).fix() }
-    }
-}
 
-public class SingleKMonadError<Err> : SingleKMonad, MonadError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
-        return SingleK.raiseError(e)
+    public class MonadErrorInstance<Err> : MonadInstance, MonadError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> SingleKOf<A> {
+            return SingleK<A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
+            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
-    }
-}
 
-public class SingleKMonadDefer<Err> : SingleKMonadError<Err>, MonadDefer where Err : Error {
-    public func suspend<A>(_ fa: @escaping () -> SingleKOf<A>) -> SingleKOf<A> {
-        return SingleK.suspend(fa)
+    public class MonadDeferInstance<Err> : MonadErrorInstance<Err>, MonadDefer where Err : Error {
+        public func suspend<A>(_ fa: @escaping () -> SingleKOf<A>) -> SingleKOf<A> {
+            return SingleK<A>.suspend(fa)
+        }
     }
-}
 
-public class SingleKAsync<Err> : SingleKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
-        return SingleK.async(fa)
+    public class AsyncInstance<Err> : MonadDeferInstance<Err>, Async where Err : Error {
+        public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
+            return SingleK<A>.async(fa)
+        }
     }
-}
 
-public class SingleKEffect<Err> : SingleKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, ()> {
-        return fa.fix().runAsync(callback)
+    public class EffectInstance<Err> : AsyncInstance<Err>, Effect where Err : Error {
+        public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, ()> {
+            return fa.fix().runAsync(callback)
+        }
     }
-}
 
-public class SingleKConcurrentEffect<Err> : SingleKEffect<Err>, ConcurrentEffect where Err : Error {
-    public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, BowEffects.Disposable> {
-        return fa.fix().runAsyncCancellable(callback)
+    public class ConcurrentEffectInstance<Err> : EffectInstance<Err>, ConcurrentEffect where Err : Error {
+        public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, BowEffects.Disposable> {
+            return fa.fix().runAsyncCancellable(callback)
+        }
     }
 }

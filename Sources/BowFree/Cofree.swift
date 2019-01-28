@@ -87,36 +87,36 @@ public class Cofree<S, A> : CofreeOf<S, A> {
 }
 
 public extension Cofree {
-    public static func functor<Func>(_ functor : Func) -> CofreeFunctor<S, Func> {
-        return CofreeFunctor<S, Func>(functor)
+    public static func functor<Func>(_ functor : Func) -> FunctorInstance<S, Func> {
+        return FunctorInstance<S, Func>(functor)
     }
     
-    public static func comonad<Func>(_ functor : Func) -> CofreeComonad<S, Func> {
-        return CofreeComonad<S, Func>(functor)
+    public static func comonad<Func>(_ functor : Func) -> ComonadInstance<S, Func> {
+        return ComonadInstance<S, Func>(functor)
     }
-}
 
-public class CofreeFunctor<S, Func> : Functor where Func : Functor, Func.F == S {
-    public typealias F = CofreePartial<S>
-    
-    fileprivate let functor : Func
-    
-    public init(_ functor : Func) {
-        self.functor = functor
+    public class FunctorInstance<S, Func> : Functor where Func : Functor, Func.F == S {
+        public typealias F = CofreePartial<S>
+        
+        fileprivate let functor : Func
+        
+        public init(_ functor : Func) {
+            self.functor = functor
+        }
+        
+        public func map<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (A) -> B) -> CofreeOf<S, B> {
+            return Cofree<S, A>.fix(fa).map(f, functor)
+        }
     }
-    
-    public func map<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (A) -> B) -> CofreeOf<S, B> {
-        return Cofree.fix(fa).map(f, functor)
-    }
-}
 
-public class CofreeComonad<S, Func> : CofreeFunctor<S, Func>, Comonad where Func : Functor, Func.F == S {
-    
-    public func coflatMap<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (CofreeOf<S, A>) -> B) -> CofreeOf<S, B> {
-        return Cofree.fix(fa).coflatMap(f, functor)
-    }
-    
-    public func extract<A>(_ fa: CofreeOf<S, A>) -> A {
-        return Cofree.fix(fa).extract()
+    public class ComonadInstance<S, Func> : FunctorInstance<S, Func>, Comonad where Func : Functor, Func.F == S {
+        
+        public func coflatMap<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (CofreeOf<S, A>) -> B) -> CofreeOf<S, B> {
+            return Cofree<S, A>.fix(fa).coflatMap(f, functor)
+        }
+        
+        public func extract<A>(_ fa: CofreeOf<S, A>) -> A {
+            return Cofree<S, A>.fix(fa).extract()
+        }
     }
 }
