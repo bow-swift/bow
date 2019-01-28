@@ -153,6 +153,12 @@ extension NonEmptyArray : CustomDebugStringConvertible where A : CustomDebugStri
     }
 }
 
+extension NonEmptyArray : Equatable where A : Equatable {
+    public static func ==(lhs : NEA<A>, rhs : NEA<A>) -> Bool {
+        return lhs.all() == rhs.all()
+    }
+}
+
 public extension Kind where F == ForNonEmptyArray {
     public func fix() -> NonEmptyArray<A> {
         return self as! NonEmptyArray<A>
@@ -160,143 +166,137 @@ public extension Kind where F == ForNonEmptyArray {
 }
 
 public extension NonEmptyArray {
-    public static func functor() -> NonEmptyArrayFunctor {
-        return NonEmptyArrayFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> NonEmptyArrayApplicative {
-        return NonEmptyArrayApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> NonEmptyArrayMonad {
-        return NonEmptyArrayMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func comonad() -> NonEmptyArrayBimonad {
-        return NonEmptyArrayBimonad()
+    public static func comonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
-    public static func bimonad() -> NonEmptyArrayBimonad {
-        return NonEmptyArrayBimonad()
+    public static func bimonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
-    public static func foldable() -> NonEmptyArrayFoldable {
-        return NonEmptyArrayFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
-    public static func traverse() -> NonEmptyArrayTraverse {
-        return NonEmptyArrayTraverse()
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
     
-    public static func semigroup() -> NonEmptyArraySemigroup<A> {
-        return NonEmptyArraySemigroup<A>()
+    public static func semigroup() -> SemigroupInstance<A> {
+        return SemigroupInstance<A>()
     }
     
-    public static func semigroupK() -> NonEmptyArraySemigroupK {
-        return NonEmptyArraySemigroupK()
+    public static func semigroupK() -> SemigroupKInstance {
+        return SemigroupKInstance()
     }
     
-    public static func eq<EqA>(_ eqa : EqA) -> NonEmptyArrayEq<A, EqA> {
-        return NonEmptyArrayEq<A, EqA>(eqa)
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
-}
 
-public class NonEmptyArrayFunctor : Functor {
-    public typealias F = ForNonEmptyArray
-    
-    public func map<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> B) -> NonEmptyArrayOf<B> {
-        return fa.fix().map(f)
-    }
-}
-
-public class NonEmptyArrayApplicative : NonEmptyArrayFunctor, Applicative {
-    
-    public func pure<A>(_ a: A) -> NonEmptyArrayOf<A> {
-        return NonEmptyArray.pure(a)
-    }
-    
-    public func ap<A, B>(_ ff: NonEmptyArrayOf<(A) -> B>, _ fa: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
-
-public class NonEmptyArrayMonad : NonEmptyArrayApplicative, Monad {
-    
-    public func flatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> NonEmptyArrayOf<B>) -> NonEmptyArrayOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>) -> NonEmptyArrayOf<B> {
-        return NonEmptyArray.tailRecM(a, f)
-    }
-}
-
-public class NonEmptyArrayBimonad : NonEmptyArrayMonad, Bimonad {
-    public func coflatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (NonEmptyArrayOf<A>) -> B) -> NonEmptyArrayOf<B> {
-        return fa.fix().coflatMap(f)
-    }
-    
-    public func extract<A>(_ fa: NonEmptyArrayOf<A>) -> A {
-        return fa.fix().extract()
-    }
-}
-
-public class NonEmptyArrayFoldable : Foldable {
-    public typealias F = ForNonEmptyArray
-    
-    public func foldLeft<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
-    }
-    
-    public func foldRight<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
-
-public class NonEmptyArrayTraverse : NonEmptyArrayFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, NonEmptyArrayOf<B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
-    }
-}
-
-public class NonEmptyArraySemigroupK : SemigroupK {
-    public typealias F = ForNonEmptyArray
-    
-    public func combineK<A>(_ x: NonEmptyArrayOf<A>, _ y: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<A> {
-        return x.fix().combineK(y.fix())
-    }
-}
-
-public class NonEmptyArraySemigroup<R> : Semigroup {
-    public typealias A = NonEmptyArrayOf<R>
-    
-    public func combine(_ a: NonEmptyArrayOf<R>, _ b: NonEmptyArrayOf<R>) -> NonEmptyArrayOf<R> {
-        return NonEmptyArray.fix(a) + NonEmptyArray.fix(b)
-    }
-}
-
-public class NonEmptyArrayEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = NonEmptyArrayOf<R>
-    
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: NonEmptyArrayOf<R>, _ b: NonEmptyArrayOf<R>) -> Bool {
-        let a = NonEmptyArray.fix(a)
-        let b = NonEmptyArray.fix(b)
-        if a.count != b.count {
-            return false
-        } else {
-            return zip(a.all(), b.all()).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+    public class FunctorInstance : Functor {
+        public typealias F = ForNonEmptyArray
+        
+        public func map<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> B) -> NonEmptyArrayOf<B> {
+            return fa.fix().map(f)
         }
     }
-}
 
-extension NonEmptyArray : Equatable where A : Equatable {
-    public static func ==(lhs : NEA<A>, rhs : NEA<A>) -> Bool {
-        return lhs.all() == rhs.all()
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        
+        public func pure<A>(_ a: A) -> NonEmptyArrayOf<A> {
+            return NonEmptyArray<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: NonEmptyArrayOf<(A) -> B>, _ fa: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
+    }
+
+    public class MonadInstance : ApplicativeInstance, Monad {
+        
+        public func flatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> NonEmptyArrayOf<B>) -> NonEmptyArrayOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>) -> NonEmptyArrayOf<B> {
+            return NonEmptyArray<A>.tailRecM(a, f)
+        }
+    }
+
+    public class BimonadInstance : MonadInstance, Bimonad {
+        public func coflatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (NonEmptyArrayOf<A>) -> B) -> NonEmptyArrayOf<B> {
+            return fa.fix().coflatMap(f)
+        }
+        
+        public func extract<A>(_ fa: NonEmptyArrayOf<A>) -> A {
+            return fa.fix().extract()
+        }
+    }
+
+    public class FoldableInstance : Foldable {
+        public typealias F = ForNonEmptyArray
+        
+        public func foldLeft<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
+    }
+
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, NonEmptyArrayOf<B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
+    }
+
+    public class SemigroupKInstance : SemigroupK {
+        public typealias F = ForNonEmptyArray
+        
+        public func combineK<A>(_ x: NonEmptyArrayOf<A>, _ y: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<A> {
+            return x.fix().combineK(y.fix())
+        }
+    }
+
+    public class SemigroupInstance<R> : Semigroup {
+        public typealias A = NonEmptyArrayOf<R>
+        
+        public func combine(_ a: NonEmptyArrayOf<R>, _ b: NonEmptyArrayOf<R>) -> NonEmptyArrayOf<R> {
+            return NonEmptyArray<R>.fix(a) + NonEmptyArray<R>.fix(b)
+        }
+    }
+
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = NonEmptyArrayOf<R>
+        
+        private let eqr : EqR
+        
+        public init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: NonEmptyArrayOf<R>, _ b: NonEmptyArrayOf<R>) -> Bool {
+            let a = NonEmptyArray<R>.fix(a)
+            let b = NonEmptyArray<R>.fix(b)
+            if a.count != b.count {
+                return false
+            } else {
+                return zip(a.all(), b.all()).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+            }
+        }
     }
 }

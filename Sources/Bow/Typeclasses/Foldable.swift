@@ -91,7 +91,7 @@ public extension Foldable {
     public func get<A>(_ fa : Kind<F, A>, _ index : Int64) -> Option<A> {
         return (foldM(fa, Int64(0), { i, a in
             (i == index) ? Either<A, Int64>.left(a) : Either<A, Int64>.right(i + 1)
-        }, Either<A, Int64>.monad() as EitherMonad<A>) as! Either<A, Int64>)
+        }, Either<A, Int64>.monad() as Either.MonadInstance<A>) as! Either<A, Int64>)
             .fold(Option<A>.some, constant(Option<A>.none()))
     }
     

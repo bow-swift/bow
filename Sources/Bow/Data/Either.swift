@@ -263,179 +263,180 @@ public extension Either {
     /**
      Obtains an instance of the `Functor` typeclass for `Either`.
      */
-    public static func functor() -> EitherApplicative<A> {
-        return EitherApplicative<A>()
+    public static func functor() -> ApplicativeInstance<A> {
+        return ApplicativeInstance<A>()
     }
     
     /**
      Obtains an instance of the `Applicative` typeclass for `Either`.
      */
-    public static func applicative() -> EitherApplicative<A> {
-        return EitherApplicative<A>()
+    public static func applicative() -> ApplicativeInstance<A> {
+        return ApplicativeInstance<A>()
     }
     
     /**
      Obtains an instance of the `Monad` typeclass for `Either`.
      */
-    public static func monad() -> EitherMonad<A> {
-        return EitherMonad<A>()
+    public static func monad() -> MonadInstance<A> {
+        return MonadInstance<A>()
     }
     
     /**
      Obtains an instance of the `ApplicativeError` typeclass for `Either`.
      */
-    public static func applicativeError() -> EitherMonadError<A> {
-        return EitherMonadError<A>()
+    public static func applicativeError() -> MonadErrorInstance<A> {
+        return MonadErrorInstance<A>()
     }
     
     /**
      Obtains an instance of the `MonadError` typeclass for `Either`.
      */
-    public static func monadError() -> EitherMonadError<A> {
-        return EitherMonadError<A>()
+    public static func monadError() -> MonadErrorInstance<A> {
+        return MonadErrorInstance<A>()
     }
     
     /**
      Obtains an instance of the `Foldable` typeclass for `Either`.
      */
-    public static func foldable() -> EitherFoldable<A> {
-        return EitherFoldable<A>()
+    public static func foldable() -> FoldableInstance<A> {
+        return FoldableInstance<A>()
     }
     
     /**
      Obtains an instance of the `Traverse` typeclass for `Either`.
      */
-    public static func traverse() -> EitherTraverse<A> {
-        return EitherTraverse<A>()
+    public static func traverse() -> TraverseInstance<A> {
+        return TraverseInstance<A>()
     }
     
     /**
      Obtains an instance of the `SemigroupK` typeclass for `Either`.
      */
-    public static func semigroupK() -> EitherSemigroupK<A> {
-        return EitherSemigroupK<A>()
+    public static func semigroupK() -> SemigroupKInstance<A> {
+        return SemigroupKInstance<A>()
     }
     
     /**
      Obtains an instance of the `Eq` typeclass for `Either`, given there exists instances of `Eq` for its type arguments.
      */
-    public static func eq<EqL, EqR>(_ eql : EqL, _ eqr : EqR) -> EitherEq<A, B, EqL, EqR> {
-        return EitherEq<A, B, EqL, EqR>(eql, eqr)
+    public static func eq<EqL, EqR>(_ eql : EqL, _ eqr : EqR) -> EqInstance<A, B, EqL, EqR> {
+        return EqInstance<A, B, EqL, EqR>(eql, eqr)
     }
 
     /**
      Obtains an instance of the `Bifunctor` typeclass for `Either`.
      */
-    public static func bifunctor() -> EitherBifunctor<A, B> {
-        return EitherBifunctor<A, B>()
+    public static func bifunctor() -> BifunctorInstance<A, B> {
+        return BifunctorInstance<A, B>()
     }
-}
 
-/**
- An instance of the `Bifunctor` typeclass for the `Either` data type.
- */
-public class EitherBifunctor<A, B>: Bifunctor {
-    public typealias F = ForEither
+    /**
+     An instance of the `Bifunctor` typeclass for the `Either` data type.
+     */
+    public class BifunctorInstance<A, B>: Bifunctor {
+        public typealias F = ForEither
 
-    public func bimap<A, B, C, D>(_ fab: Kind2<ForEither, A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> Kind2<ForEither, C, D> {
-        return Either.fix(fab).bimap(f1, f2)
+        public func bimap<A, B, C, D>(_ fab: EitherOf<A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> EitherOf<C, D> {
+            return Either<A, B>.fix(fab).bimap(f1, f2)
+        }
     }
-}
 
 
-/**
- An instance of the `Applicative` typeclass for the `Either` data type.
- */
-public class EitherApplicative<C> : Applicative {
-    public typealias F = EitherPartial<C>
-    
-    public func pure<A>(_ a: A) -> EitherOf<C, A> {
-        return Either<C, A>.pure(a)
+    /**
+     An instance of the `Applicative` typeclass for the `Either` data type.
+     */
+    public class ApplicativeInstance<C> : Applicative {
+        public typealias F = EitherPartial<C>
+        
+        public func pure<A>(_ a: A) -> EitherOf<C, A> {
+            return Either<C, A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: EitherOf<C, (A) -> B>, _ fa: EitherOf<C, A>) -> EitherOf<C, B> {
+            return Either<C, (A) -> B>.fix(ff).ap(Either<C, A>.fix(fa))
+        }
     }
-    
-    public func ap<A, B>(_ ff: EitherOf<C, (A) -> B>, _ fa: EitherOf<C, A>) -> EitherOf<C, B> {
-        return Either.fix(ff).ap(Either.fix(fa))
-    }
-}
 
-/**
- An instance of the `Monad` typeclass for the `Either` data type.
- */
-public class EitherMonad<C> : EitherApplicative<C>, Monad {
-    public func flatMap<A, B>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> EitherOf<C, B>) -> EitherOf<C, B> {
-        return Either.fix(fa).flatMap({ eca in Either.fix(f(eca)) })
+    /**
+     An instance of the `Monad` typeclass for the `Either` data type.
+     */
+    public class MonadInstance<C> : ApplicativeInstance<C>, Monad {
+        public func flatMap<A, B>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> EitherOf<C, B>) -> EitherOf<C, B> {
+            return Either<C, A>.fix(fa).flatMap({ eca in Either<C, B>.fix(f(eca)) })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<C, Either<A, B>>) -> EitherOf<C, B> {
+            return Either<A, B>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<C, Either<A, B>>) -> EitherOf<C, B> {
-        return Either<A, B>.tailRecM(a, f)
-    }
-}
 
-/**
- An instance of the `MonadError` typeclass for the `Either` data type.
- */
-public class EitherMonadError<C> : EitherMonad<C>, MonadError {
-    public typealias E = C
-    
-    public func raiseError<A>(_ e: C) -> EitherOf<C, A> {
-        return Either<C, A>.left(e)
+    /**
+     An instance of the `MonadError` typeclass for the `Either` data type.
+     */
+    public class MonadErrorInstance<C> : MonadInstance<C>, MonadError {
+        public typealias E = C
+        
+        public func raiseError<A>(_ e: C) -> EitherOf<C, A> {
+            return Either<C, A>.left(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: EitherOf<C, A>, _ f: @escaping (C) -> EitherOf<C, A>) -> EitherOf<C, A> {
+            return Either<C, A>.fix(fa).fold(f, constant(Either<C, A>.fix(fa)))
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: EitherOf<C, A>, _ f: @escaping (C) -> EitherOf<C, A>) -> EitherOf<C, A> {
-        return Either.fix(fa).fold(f, constant(Either.fix(fa)))
-    }
-}
 
-/**
- An instance of the `Foldable` typeclass for the `Either` data type.
- */
-public class EitherFoldable<C> : Foldable {
-    public typealias F = EitherPartial<C>
-    
-    public func foldLeft<A, B>(_ fa: EitherOf<C, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return Either.fix(fa).foldLeft(b, f)
+    /**
+     An instance of the `Foldable` typeclass for the `Either` data type.
+     */
+    public class FoldableInstance<C> : Foldable {
+        public typealias F = EitherPartial<C>
+        
+        public func foldLeft<A, B>(_ fa: EitherOf<C, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return Either<C, A>.fix(fa).foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: EitherOf<C, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return Either<C, A>.fix(fa).foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: EitherOf<C, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Either.fix(fa).foldRight(b, f)
-    }
-}
 
-/**
- An instance of the `Traverse` typeclass for the `Either` data type.
- */
-public class EitherTraverse<C> : EitherFoldable<C>, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, EitherOf<C, B>> where G == Appl.F, Appl : Applicative {
-        return Either.fix(fa).traverse(f, applicative)
+    /**
+     An instance of the `Traverse` typeclass for the `Either` data type.
+     */
+    public class TraverseInstance<C> : FoldableInstance<C>, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: EitherOf<C, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, EitherOf<C, B>> where G == Appl.F, Appl : Applicative {
+            return Either<C, A>.fix(fa).traverse(f, applicative)
+        }
     }
-}
 
-/**
- An instance of the `SemigroupK` typeclass for the `Either` data type.
- */
-public class EitherSemigroupK<C> : SemigroupK {
-    public typealias F = EitherPartial<C>
-    
-    public func combineK<A>(_ x: EitherOf<C, A>, _ y: EitherOf<C, A>) -> EitherOf<C, A> {
-        return Either.fix(x).combineK(Either.fix(y))
+    /**
+     An instance of the `SemigroupK` typeclass for the `Either` data type.
+     */
+    public class SemigroupKInstance<C> : SemigroupK {
+        public typealias F = EitherPartial<C>
+        
+        public func combineK<A>(_ x: EitherOf<C, A>, _ y: EitherOf<C, A>) -> EitherOf<C, A> {
+            return Either<C, A>.fix(x).combineK(Either<C, A>.fix(y))
+        }
     }
-}
 
-/**
- An instance of the `Eq` typeclass for the `Either` data type.
- */
-public class EitherEq<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-    public typealias A = EitherOf<L, R>
-    private let eql : EqL
-    private let eqr : EqR
-    
-    public init(_ eql : EqL, _ eqr : EqR) {
-        self.eql = eql
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: EitherOf<L, R>, _ b: EitherOf<L, R>) -> Bool {
-        return Either.fix(a).fold({ aLeft  in Either.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false)) },
-                                 { aRight in Either.fix(b).fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }) })
+    /**
+     An instance of the `Eq` typeclass for the `Either` data type.
+     */
+    public class EqInstance<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
+        public typealias A = EitherOf<L, R>
+        private let eql : EqL
+        private let eqr : EqR
+        
+        public init(_ eql : EqL, _ eqr : EqR) {
+            self.eql = eql
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: EitherOf<L, R>, _ b: EitherOf<L, R>) -> Bool {
+            return Either<L, R>.fix(a).fold(
+                { aLeft in Either<L, R>.fix(b).fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false)) },
+                { aRight in Either<L, R>.fix(b).fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }) })
+        }
     }
 }

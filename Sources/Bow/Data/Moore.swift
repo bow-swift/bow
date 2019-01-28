@@ -33,29 +33,29 @@ public class Moore<E, V> : MooreOf<E, V> {
 }
 
 public extension Moore {
-    public static func functor() -> MooreFunctor<E> {
-        return MooreFunctor<E>()
+    public static func functor() -> FunctorInstance<E> {
+        return FunctorInstance<E>()
     }
     
-    public static func comonad() -> MooreComonad<E> {
-        return MooreComonad<E>()
+    public static func comonad() -> ComonadInstance<E> {
+        return ComonadInstance<E>()
     }
-}
 
-public class MooreFunctor<E> : Functor {
-    public typealias F = MoorePartial<E>
-    
-    public func map<A, B>(_ fa: MooreOf<E, A>, _ f: @escaping (A) -> B) -> MooreOf<E, B> {
-        return Moore<E, A>.fix(fa).map(f)
+    public class FunctorInstance<E> : Functor {
+        public typealias F = MoorePartial<E>
+        
+        public func map<A, B>(_ fa: MooreOf<E, A>, _ f: @escaping (A) -> B) -> MooreOf<E, B> {
+            return Moore<E, A>.fix(fa).map(f)
+        }
     }
-}
 
-public class MooreComonad<E> : MooreFunctor<E>, Comonad {
-    public func coflatMap<A, B>(_ fa: Kind<Kind<ForMoore, E>, A>, _ f: @escaping (Kind<Kind<ForMoore, E>, A>) -> B) -> Kind<Kind<ForMoore, E>, B> {
-        return Moore<E, A>.fix(fa).coflatMap(f)
-    }
-    
-    public func extract<A>(_ fa: Kind<Kind<ForMoore, E>, A>) -> A {
-        return Moore<E, A>.fix(fa).extract()
+    public class ComonadInstance<E> : FunctorInstance<E>, Comonad {
+        public func coflatMap<A, B>(_ fa: Kind<Kind<ForMoore, E>, A>, _ f: @escaping (Kind<Kind<ForMoore, E>, A>) -> B) -> Kind<Kind<ForMoore, E>, B> {
+            return Moore<E, A>.fix(fa).coflatMap(f)
+        }
+        
+        public func extract<A>(_ fa: Kind<Kind<ForMoore, E>, A>) -> A {
+            return Moore<E, A>.fix(fa).extract()
+        }
     }
 }
