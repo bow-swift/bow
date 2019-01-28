@@ -23,27 +23,27 @@ public extension Kind where F == ForFix {
 }
 
 public extension Fix {
-    public static func recursive() -> FixBirecursive {
-        return FixBirecursive()
+    public static func recursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
     
-    public static func corecursive() -> FixBirecursive {
-        return FixBirecursive()
+    public static func corecursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
     
-    public static func birecursive() -> FixBirecursive {
-        return FixBirecursive()
-    }
-}
-
-public class FixBirecursive : Birecursive {
-    public typealias T = ForFix
-    
-    public func projectT<F, Func>(_ tf : Kind<ForFix, F>, _ functor : Func) -> Kind<F, Kind<ForFix, F>> where Func : Functor, Func.F == F {
-        return functor.map(tf.fix().unFix, { x in x.value() })
+    public static func birecursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
     
-    public func embedT<Func, F>(_ tf : Kind<F, Eval<Kind<ForFix, F>>>, _ functor : Func) -> Eval<Kind<ForFix, F>> where Func : Functor, Func.F == F {
-        return Eval.later { Fix(unFix: tf) }
+    public class BirecursiveInstance : Birecursive {
+        public typealias T = ForFix
+        
+        public func projectT<F, Func>(_ tf : Kind<ForFix, F>, _ functor : Func) -> Kind<F, Kind<ForFix, F>> where Func : Functor, Func.F == F {
+            return functor.map(tf.fix().unFix, { x in x.value() })
+        }
+        
+        public func embedT<Func, F>(_ tf : Kind<F, Eval<Kind<ForFix, F>>>, _ functor : Func) -> Eval<Kind<ForFix, F>> where Func : Functor, Func.F == F {
+            return Eval.later { Fix<F>(unFix: tf) }
+        }
     }
 }
