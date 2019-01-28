@@ -118,121 +118,121 @@ public extension Kind where F == ForMaybeK {
 }
 
 public extension MaybeK {
-    public static func functor() -> MaybeKFunctor {
-        return MaybeKFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> MaybeKApplicative {
-        return MaybeKApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> MaybeKMonad {
-        return MaybeKMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func foldable() -> MaybeKFoldable {
-        return MaybeKFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
-    public static func applicativeError<E>() -> MaybeKApplicativeError<E> {
-        return MaybeKApplicativeError<E>()
+    public static func applicativeError<E>() -> ApplicativeErrorInstance<E> {
+        return ApplicativeErrorInstance<E>()
     }
     
-    public static func monadError<E>() -> MaybeKMonadError<E> {
-        return MaybeKMonadError<E>()
+    public static func monadError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func monadDefer<E>() -> MaybeKMonadDefer<E> {
-        return MaybeKMonadDefer<E>()
+    public static func monadDefer<E>() -> MonadDeferInstance<E> {
+        return MonadDeferInstance<E>()
     }
     
-    public static func async<E>() -> MaybeKAsync<E> {
-        return MaybeKAsync<E>()
+    public static func async<E>() -> AsyncInstance<E> {
+        return AsyncInstance<E>()
     }
     
-    public static func effect<E>() -> MaybeKEffect<E> {
-        return MaybeKEffect<E>()
+    public static func effect<E>() -> EffectInstance<E> {
+        return EffectInstance<E>()
     }
-}
 
-public class MaybeKFunctor : Functor {
-    public typealias F = ForMaybeK
-    
-    public func map<A, B>(_ fa: MaybeKOf<A>, _ f: @escaping (A) -> B) -> MaybeKOf<B> {
-        return fa.fix().map(f)
+    public class FunctorInstance : Functor {
+        public typealias F = ForMaybeK
+        
+        public func map<A, B>(_ fa: MaybeKOf<A>, _ f: @escaping (A) -> B) -> MaybeKOf<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-public class MaybeKApplicative : MaybeKFunctor, Applicative {
-    public func pure<A>(_ a: A) -> MaybeKOf<A> {
-        return MaybeK.pure(a)
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> MaybeKOf<A> {
+            return MaybeK<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: MaybeKOf<(A) -> B>, _ fa: MaybeKOf<A>) -> MaybeKOf<B> {
+            return ff.fix().ap(fa)
+        }
     }
-    
-    public func ap<A, B>(_ ff: MaybeKOf<(A) -> B>, _ fa: MaybeKOf<A>) -> MaybeKOf<B> {
-        return ff.fix().ap(fa)
-    }
-}
 
-public class MaybeKMonad : MaybeKApplicative, Monad {
-    public func flatMap<A, B>(_ fa: MaybeKOf<A>, _ f: @escaping (A) -> MaybeKOf<B>) -> MaybeKOf<B> {
-        return fa.fix().flatMap { a in f(a).fix() }
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: MaybeKOf<A>, _ f: @escaping (A) -> MaybeKOf<B>) -> MaybeKOf<B> {
+            return fa.fix().flatMap { a in f(a).fix() }
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> MaybeKOf<Either<A, B>>) -> MaybeKOf<B> {
+            return MaybeK<A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> MaybeKOf<Either<A, B>>) -> MaybeKOf<B> {
-        return MaybeK.tailRecM(a, f)
-    }
-}
 
-public class MaybeKFoldable : Foldable {
-    public typealias F = ForMaybeK
-    
-    public func foldLeft<A, B>(_ fa: MaybeKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
+    public class FoldableInstance : Foldable {
+        public typealias F = ForMaybeK
+        
+        public func foldLeft<A, B>(_ fa: MaybeKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: MaybeKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: MaybeKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
 
-public class MaybeKApplicativeError<Err> : MaybeKApplicative, ApplicativeError where Err : Error {
-    public typealias E = Err
+    public class ApplicativeErrorInstance<Err> : ApplicativeInstance, ApplicativeError where Err : Error {
+        public typealias E = Err
 
-    public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
-        return MaybeK.raiseError(e)
+        public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
+            return MaybeK<A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
+            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
-    }
-}
 
-public class MaybeKMonadError<Err> : MaybeKMonad, MonadError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
-        return MaybeK.raiseError(e)
+    public class MonadErrorInstance<Err> : MonadInstance, MonadError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> MaybeKOf<A> {
+            return MaybeK<A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
+            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: MaybeKOf<A>, _ f: @escaping (Err) -> MaybeKOf<A>) -> MaybeKOf<A> {
-        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
-    }
-}
 
-public class MaybeKMonadDefer<Err> : MaybeKMonadError<Err>, MonadDefer where Err : Error {
-    public func suspend<A>(_ fa: @escaping () -> MaybeKOf<A>) -> MaybeKOf<A> {
-        return MaybeK.suspend(fa)
+    public class MonadDeferInstance<Err> : MonadErrorInstance<Err>, MonadDefer where Err : Error {
+        public func suspend<A>(_ fa: @escaping () -> MaybeKOf<A>) -> MaybeKOf<A> {
+            return MaybeK<A>.suspend(fa)
+        }
     }
-}
 
-public class MaybeKAsync<Err> : MaybeKMonadDefer<Err>, Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> MaybeKOf<A> {
-        return MaybeK.async(fa)
+    public class AsyncInstance<Err> : MonadDeferInstance<Err>, Async where Err : Error {
+        public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> MaybeKOf<A> {
+            return MaybeK<A>.async(fa)
+        }
     }
-}
 
-public class MaybeKEffect<Err> : MaybeKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: MaybeKOf<A>, _ callback: @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeKOf<()> {
-        return fa.fix().runAsync(callback)
+    public class EffectInstance<Err> : AsyncInstance<Err>, Effect where Err : Error {
+        public func runAsync<A>(_ fa: MaybeKOf<A>, _ callback: @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeKOf<()> {
+            return fa.fix().runAsync(callback)
+        }
     }
 }
