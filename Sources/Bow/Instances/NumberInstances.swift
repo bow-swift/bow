@@ -957,101 +957,100 @@ public extension UInt64 {
 }
 
 // MARK: Float instances
-
-/**
- Instance of `Semigroup` for the `Float` primitive type, with sum as combination method.
- */
-public class FloatSumSemigroup : Semigroup {
-    public typealias A = Float
-    
-    public func combine(_ a : Float, _ b : Float) -> Float {
-        return a + b
+public extension Float {
+    /**
+     Instance of `Semigroup` for the `Float` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = Float
+        
+        public func combine(_ a : Float, _ b : Float) -> Float {
+            return a + b
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `Float` primitive type, with sum as combination method.
- */
-public class FloatSumMonoid : FloatSumSemigroup, Monoid {
-    public var empty : Float {
-        return 0
+    /**
+     Instance of `Monoid` for the `Float` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : Float {
+            return 0
+        }
     }
-}
 
-/**
- Instance of `Semigroup` for the `Float` primitive type, with product as combination method.
- */
-public class FloatProductSemigroup : Semigroup {
-    public typealias A = Float
-    
-    public func combine(_ a : Float, _ b : Float) -> Float {
-        return a * b
+    /**
+     Instance of `Semigroup` for the `Float` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = Float
+        
+        public func combine(_ a : Float, _ b : Float) -> Float {
+            return a * b
+        }
     }
-}
 
-/**
- Instance of `Monoid` for the `Float` primitive type, with product as combination method.
- */
-public class FloatProductMonoid : FloatProductSemigroup, Monoid {
-    public var empty : Float {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `Float` primitive type.
- */
-public class FloatEq : Eq {
-    public typealias A = Float
-    
-    public func eqv(_ a: Float, _ b: Float) -> Bool {
-        return a.isEqual(to: b)
-    }
-}
-
-/**
- Instance of `Order` for the `Float` primitive type.
- */
-public class FloatOrder : FloatEq, Order {
-    public func compare(_ a: Float, _ b: Float) -> Int {
-        if a < b {
-            return -1
-        } else if a > b {
+    /**
+     Instance of `Monoid` for the `Float` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : Float {
             return 1
         }
-        return 0
     }
-}
 
-public extension Float {
+    /**
+     Instance of `Eq` for the `Float` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = Float
+        
+        public func eqv(_ a: Float, _ b: Float) -> Bool {
+            return a.isEqual(to: b)
+        }
+    }
+
+    /**
+     Instance of `Order` for the `Float` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: Float, _ b: Float) -> Int {
+            if a < b {
+                return -1
+            } else if a > b {
+                return 1
+            }
+            return 0
+        }
+    }
+
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : FloatSumSemigroup {
-        return FloatSumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : FloatSumMonoid {
-        return FloatSumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : FloatProductSemigroup {
-        return FloatProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : FloatProductMonoid {
-        return FloatProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : FloatEq {
-        return FloatEq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : FloatOrder {
-        return FloatOrder()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
 
