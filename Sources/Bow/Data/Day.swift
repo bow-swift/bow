@@ -77,37 +77,37 @@ fileprivate class DefaultDay<F, G, X, Y, A> : Day<F, G, A> {
 }
 
 public extension Day {
-    public static func functor() -> DayFunctor<F, G> {
-        return DayFunctor()
+    public static func functor() -> FunctorInstance<F, G> {
+        return FunctorInstance()
     }
     
-    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> DayComonad<F, G, ComonF, ComonG> {
-        return DayComonad(comonadF, comonadG)
+    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> ComonadInstance<F, G, ComonF, ComonG> {
+        return ComonadInstance(comonadF, comonadG)
     }
-}
 
-public class DayFunctor<G, H> : Functor {
-    public typealias F = DayPartial<G, H>
+    public class FunctorInstance<G, H> : Functor {
+        public typealias F = DayPartial<G, H>
 
-    public func map<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (A) -> B) -> DayOf<G, H, B> {
-        return Day<G, H, A>.fix(fa).map(f)
+        public func map<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (A) -> B) -> DayOf<G, H, B> {
+            return Day<G, H, A>.fix(fa).map(f)
+        }
     }
-}
 
-public class DayComonad<G, H, ComonG, ComonH> : DayFunctor<G, H>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
-    private let comonadG : ComonG
-    private let comonadH : ComonH
-    
-    public init(_ comonadG : ComonG, _ comonadH : ComonH) {
-        self.comonadG = comonadG
-        self.comonadH = comonadH
-    }
-    
-    public func coflatMap<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (DayOf<G, H, A>) -> B) -> DayOf<G, H, B> {
-        return Day<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
-    }
-    
-    public func extract<A>(_ fa: DayOf<G, H, A>) -> A {
-        return Day<G, H, A>.fix(fa).extract(comonadG, comonadH)
+    public class ComonadInstance<G, H, ComonG, ComonH> : FunctorInstance<G, H>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
+        private let comonadG : ComonG
+        private let comonadH : ComonH
+        
+        public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+            self.comonadG = comonadG
+            self.comonadH = comonadH
+        }
+        
+        public func coflatMap<A, B>(_ fa: DayOf<G, H, A>, _ f: @escaping (DayOf<G, H, A>) -> B) -> DayOf<G, H, B> {
+            return Day<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
+        }
+        
+        public func extract<A>(_ fa: DayOf<G, H, A>) -> A {
+            return Day<G, H, A>.fix(fa).extract(comonadG, comonadH)
+        }
     }
 }
