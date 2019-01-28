@@ -13,19 +13,20 @@ env:
     - SDK="iphonesimulator"
     - ACTION="test"
   secure: LatJH8j809/6dhEO6WhpQyU3lAjtkOYHAqWD14+bU6lfAc5oRrRFO4B7h56gnIDu6tvYJS0Qa/IhIuB3zZQ/GlG12oivgE/FKp1xXxxHwqjmhPHdetX9YkeAbicJ8YrSQ+C0UC6NMmP1WtU7cmLBV4Q1VwdPnVvRIrOVuWdh3ITUzUz/qQMTZwi+6Z1w92QvxbyytXDqti62NrUq81ba2c7pvBbFBujMp5hyd6+EcuZojYWGNN3cIR2DcPVXD9j4kwLyDPVAcN/OROAwaJlOZ63FbsoUcZULOAX/6s5bmcU1CuYc+eBrXX7KifSqj3yUW00Ea0ynyvsn2GWldAw5b8cYgiLuqQBp3jxtPVH/tEWRdO5TdFtMl8CDEJQiblINjFCXRbnAh8fnk/9jxKTkK+e1DXNQEk/w61+vUB21j74Zw8PhPRvCsoV8XgPkd34UiSlG5XkPaj+vImRpB2/kemYxynpY2Sjq+qoK4iUJy/DXhX/agThWCpjY1hWL2LNL/24mk6DbUHZGVH+4RgoBJxBFCI7ucSp14Og0cCFmhFfsq0nttN+xNegosmHnEcv1Z4tRW750rPf2dgGlXkf6s4msbZ/kyRnccs2zlh3JYYac509Fk98FRNfLb9q0C/jLb0xpg6qf9WbI1QbMcxPHKakyGEUuo+7FO+CLzrJ0qns=
-matrix:
+  matrix:
+    - SCHEME="Bow"
+    - SCHEME="Bow-Free"
+    - SCHEME="Bow-Generic"
+    - SCHEME="Bow-Optics"
+    - SCHEME="Bow-RecursionSchemes"
+    - SCHEME="Bow-Result"
+    - SCHEME="Bow-Effects"
+    - SCHEME="Bow-Rx"
+    - SCHEME="Bow-BrightFutures"
+
+jobs:
   include:
     - stage: test
-      env:
-        - SCHEME="Bow"
-        - SCHEME="Bow-Free"
-        - SCHEME="Bow-Generic"
-        - SCHEME="Bow-Optics"
-        - SCHEME="Bow-RecursionSchemes"
-        - SCHEME="Bow-Result"
-        - SCHEME="Bow-Effects"
-        - SCHEME="Bow-Rx"
-        - SCHEME="Bow-BrightFutures"
     - stage: deploy
       script:
       - ./scripts/gen-docs.rb
