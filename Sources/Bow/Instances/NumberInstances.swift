@@ -95,96 +95,95 @@ public extension Int {
 }
 
 // MARK: Int8 instances
-
-/**
- Instance of `Semigroup` for the `Int8` primitive type, with sum as combination method.
- */
-public class Int8SumSemigroup : Semigroup {
-    public typealias A = Int8
-    
-    public func combine(_ a : Int8, _ b : Int8) -> Int8 {
-        return a.addingReportingOverflow(b).partialValue
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int8` primitive type, with sum as combination method.
- */
-public class Int8SumMonoid : Int8SumSemigroup, Monoid {
-    public var empty : Int8 {
-        return 0
-    }
-}
-
-/**
- Instance of `Semigroup` for the `Int8` primitive type, with product as combination method.
- */
-public class Int8ProductSemigroup : Semigroup {
-    public typealias A = Int8
-    
-    public func combine(_ a : Int8, _ b : Int8) -> Int8 {
-        return a.multipliedReportingOverflow(by: b).partialValue
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int8` primitive type, with product as combination method.
- */
-public class Int8ProductMonoid : Int8ProductSemigroup, Monoid {
-    public var empty : Int8 {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `Int8` primitive type.
- */
-public class Int8Eq : Eq {
-    public typealias A = Int8
-    
-    public func eqv(_ a: Int8, _ b: Int8) -> Bool {
-        return a == b
-    }
-}
-
-/**
- Instance of `Order` for the `Int8` primitive type.
- */
-public class Int8Order : Int8Eq, Order {
-    public func compare(_ a: Int8, _ b: Int8) -> Int {
-        return Int(a) - Int(b)
-    }
-}
-
 public extension Int8 {
+    /**
+     Instance of `Semigroup` for the `Int8` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = Int8
+        
+        public func combine(_ a : Int8, _ b : Int8) -> Int8 {
+            return a.addingReportingOverflow(b).partialValue
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int8` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : Int8 {
+            return 0
+        }
+    }
+
+    /**
+     Instance of `Semigroup` for the `Int8` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = Int8
+        
+        public func combine(_ a : Int8, _ b : Int8) -> Int8 {
+            return a.multipliedReportingOverflow(by: b).partialValue
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int8` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : Int8 {
+            return 1
+        }
+    }
+
+    /**
+     Instance of `Eq` for the `Int8` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = Int8
+        
+        public func eqv(_ a: Int8, _ b: Int8) -> Bool {
+            return a == b
+        }
+    }
+
+    /**
+     Instance of `Order` for the `Int8` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: Int8, _ b: Int8) -> Int {
+            return Int(a) - Int(b)
+        }
+    }
+
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : Int8SumSemigroup {
-        return Int8SumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : Int8SumMonoid {
-        return Int8SumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : Int8ProductSemigroup {
-        return Int8ProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : Int8ProductMonoid {
-        return Int8ProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : Int8Eq {
-        return Int8Eq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : Int8Order {
-        return Int8Order()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
 
