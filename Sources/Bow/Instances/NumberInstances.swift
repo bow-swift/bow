@@ -2,97 +2,95 @@ import Foundation
 
 // MARK: Int instances
 
-/**
- Instance of `Semigroup` for the `Int` primitive type, with sum as combination method.
- */
-public class IntSumSemigroup : Semigroup {
-    public typealias A = Int
-    
-    public func combine(_ a : Int, _ b : Int) -> Int {
-        return a + b
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int` primitive type, with sum as combination method.
- */
-public class IntSumMonoid : IntSumSemigroup, Monoid {
-    public var empty : Int {
-        return 0
-    }
-}
-
-/**
- Instance of `Semigroup` for the `Int` primitive type, with product as combination method.
- */
-public class IntProductSemigroup : Semigroup {
-    public typealias A = Int
-    
-    public func combine(_ a : Int, _ b : Int) -> Int {
-        return a * b
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int` primitive type, with product as combination method.
- */
-public class IntProductMonoid : IntProductSemigroup, Monoid {
-    public var empty : Int {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `Int` primitive type.
- */
-public class IntEq : Eq {
-    public typealias A = Int
-    
-    public func eqv(_ a: Int, _ b: Int) -> Bool {
-        return a == b
-    }
-}
-
-
-/**
- Instance of `Order` for the `Int` primitive type.
- */
-public class IntOrder : IntEq, Order {
-    public func compare(_ a: Int, _ b: Int) -> Int {
-        return a - b
-    }
-}
-
 public extension Int {
+    /**
+     Instance of `Semigroup` for the `Int` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = Int
+        
+        public func combine(_ a : Int, _ b : Int) -> Int {
+            return a + b
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : Int {
+            return 0
+        }
+    }
+
+    /**
+     Instance of `Semigroup` for the `Int` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = Int
+        
+        public func combine(_ a : Int, _ b : Int) -> Int {
+            return a * b
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : Int {
+            return 1
+        }
+    }
+
+    /**
+     Instance of `Eq` for the `Int` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = Int
+        
+        public func eqv(_ a: Int, _ b: Int) -> Bool {
+            return a == b
+        }
+    }
+
+    /**
+     Instance of `Order` for the `Int` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: Int, _ b: Int) -> Int {
+            return a - b
+        }
+    }
     
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : IntSumSemigroup {
-        return IntSumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : IntSumMonoid {
-        return IntSumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : IntProductSemigroup {
-        return IntProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : IntProductMonoid {
-        return IntProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : IntEq {
-        return IntEq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : IntOrder {
-        return IntOrder()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
 
