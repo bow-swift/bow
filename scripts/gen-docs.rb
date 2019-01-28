@@ -17,8 +17,8 @@ File.open("docs-json/all.json","w") do |f|
   f.write(joined.to_json)
 end
 
-#system 'bundle install --gemfile docs/Gemfile --path vendor/bundle'
-#system 'export BUNDLE_GEMFILE=docs/Gemfile'
-#system 'bundle exec jazzy -o api-docs --sourcekitten-sourcefile ./docs-json/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/api-docs'
+system 'bundle install --gemfile docs/Gemfile --path vendor/bundle'
+system 'export BUNDLE_GEMFILE=docs/Gemfile'
+system 'bundle exec jazzy -o api-docs --sourcekitten-sourcefile ./docs-json/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/api-docs'
 
 #system 'jazzy -o api-docs --sourcekitten-sourcefile ./docs-json/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/api-docs'
