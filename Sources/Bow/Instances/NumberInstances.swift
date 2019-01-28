@@ -374,96 +374,95 @@ public extension Int32 {
 }
 
 // MARK: Int64 instances
-
-/**
- Instance of `Semigroup` for the `Int64` primitive type, with sum as combination method.
- */
-public class Int64SumSemigroup : Semigroup {
-    public typealias A = Int64
-    
-    public func combine(_ a : Int64, _ b : Int64) -> Int64 {
-        return a.addingReportingOverflow(b).partialValue
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int64` primitive type, with sum as combination method.
- */
-public class Int64SumMonoid : Int64SumSemigroup, Monoid {
-    public var empty : Int64 {
-        return 0
-    }
-}
-
-/**
- Instance of `Semigroup` for the `Int64` primitive type, with product as combination method.
- */
-public class Int64ProductSemigroup : Semigroup {
-    public typealias A = Int64
-    
-    public func combine(_ a : Int64, _ b : Int64) -> Int64 {
-        return a.multipliedReportingOverflow(by: b).partialValue
-    }
-}
-
-/**
- Instance of `Monoid` for the `Int64` primitive type, with product as combination method.
- */
-public class Int64ProductMonoid : Int64ProductSemigroup, Monoid {
-    public var empty : Int64 {
-        return 1
-    }
-}
-
-/**
- Instance of `Eq` for the `Int64` primitive type.
- */
-public class Int64Eq : Eq {
-    public typealias A = Int64
-    
-    public func eqv(_ a: Int64, _ b: Int64) -> Bool {
-        return a == b
-    }
-}
-
-/**
- Instance of `Order` for the `Int64` primitive type.
- */
-public class Int64Order : Int64Eq, Order {
-    public func compare(_ a: Int64, _ b: Int64) -> Int {
-        return Int(a) - Int(b)
-    }
-}
-
 public extension Int64 {
+    /**
+     Instance of `Semigroup` for the `Int64` primitive type, with sum as combination method.
+     */
+    public class SumSemigroupInstance : Semigroup {
+        public typealias A = Int64
+        
+        public func combine(_ a : Int64, _ b : Int64) -> Int64 {
+            return a.addingReportingOverflow(b).partialValue
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int64` primitive type, with sum as combination method.
+     */
+    public class SumMonoidInstance : SumSemigroupInstance, Monoid {
+        public var empty : Int64 {
+            return 0
+        }
+    }
+
+    /**
+     Instance of `Semigroup` for the `Int64` primitive type, with product as combination method.
+     */
+    public class ProductSemigroupInstance : Semigroup {
+        public typealias A = Int64
+        
+        public func combine(_ a : Int64, _ b : Int64) -> Int64 {
+            return a.multipliedReportingOverflow(by: b).partialValue
+        }
+    }
+
+    /**
+     Instance of `Monoid` for the `Int64` primitive type, with product as combination method.
+     */
+    public class ProductMonoidInstance : ProductSemigroupInstance, Monoid {
+        public var empty : Int64 {
+            return 1
+        }
+    }
+
+    /**
+     Instance of `Eq` for the `Int64` primitive type.
+     */
+    public class EqInstance : Eq {
+        public typealias A = Int64
+        
+        public func eqv(_ a: Int64, _ b: Int64) -> Bool {
+            return a == b
+        }
+    }
+
+    /**
+     Instance of `Order` for the `Int64` primitive type.
+     */
+    public class OrderInstance : EqInstance, Order {
+        public func compare(_ a: Int64, _ b: Int64) -> Int {
+            return Int(a) - Int(b)
+        }
+    }
+
     /// Provides an instance of `Semigroup`, with sum as combination method.
-    public static var sumSemigroup : Int64SumSemigroup {
-        return Int64SumSemigroup()
+    public static var sumSemigroup : SumSemigroupInstance {
+        return SumSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with sum as combination method.
-    public static var sumMonoid : Int64SumMonoid {
-        return Int64SumMonoid()
+    public static var sumMonoid : SumMonoidInstance {
+        return SumMonoidInstance()
     }
     
     /// Provides an instance of `Semigroup`, with product as combination method.
-    public static var productSemigroup : Int64ProductSemigroup {
-        return Int64ProductSemigroup()
+    public static var productSemigroup : ProductSemigroupInstance {
+        return ProductSemigroupInstance()
     }
     
     /// Provides an instance of `Monoid`, with product as combination method.
-    public static var productMonoid : Int64ProductMonoid {
-        return Int64ProductMonoid()
+    public static var productMonoid : ProductMonoidInstance {
+        return ProductMonoidInstance()
     }
     
     /// Provides an instance of `Eq`.
-    public static var eq : Int64Eq {
-        return Int64Eq()
+    public static var eq : EqInstance {
+        return EqInstance()
     }
     
     /// Provides an instance of `Order`.
-    public static var order : Int64Order {
-        return Int64Order()
+    public static var order : OrderInstance {
+        return OrderInstance()
     }
 }
 
