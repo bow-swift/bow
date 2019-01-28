@@ -25,11 +25,14 @@ matrix:
     - env: SCHEME="Bow-BrightFutures"
 
 cache:
+  bundler: true
   directories:
-  - Carthage
+    - Carthage
 
 before_install:
   - carthage update --platform iOS --cache-builds
+  - gem update --system
+  - gem install bundler
 
 script:
   - set -o pipefail
