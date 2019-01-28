@@ -76,108 +76,109 @@ public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
 }
 
 public extension Kleisli {
-    public static func functor<FuncF>(_ functor : FuncF) -> KleisliFunctor<F, D, FuncF> {
-        return KleisliFunctor<F, D, FuncF>(functor)
+    public static func functor<FuncF>(_ functor : FuncF) -> FunctorInstance<F, D, FuncF> {
+        return FunctorInstance<F, D, FuncF>(functor)
     }
     
-    public static func applicative<ApplF>(_ applicative : ApplF) -> KleisliApplicative<F, D, ApplF> {
-        return KleisliApplicative<F, D, ApplF>(applicative)
+    public static func applicative<ApplF>(_ applicative : ApplF) -> ApplicativeInstance<F, D, ApplF> {
+        return ApplicativeInstance<F, D, ApplF>(applicative)
     }
     
-    public static func monad<MonF>(_ monad : MonF) -> KleisliMonad<F, D, MonF> {
-        return KleisliMonad<F, D, MonF>(monad)
+    public static func monad<MonF>(_ monad : MonF) -> MonadInstance<F, D, MonF> {
+        return MonadInstance<F, D, MonF>(monad)
     }
     
-    public static func reader<MonF>(_ monad : MonF) -> KleisliMonadReader<F, D, MonF> {
-        return KleisliMonadReader<F, D, MonF>(monad)
+    public static func reader<MonF>(_ monad : MonF) -> MonadReaderInstance<F, D, MonF> {
+        return MonadReaderInstance<F, D, MonF>(monad)
     }
     
-    public static func applicativeError<E, ApplEF>(_ applicativeError : ApplEF) -> KleisliMonadError<F, D, E, ApplEF> {
-        return KleisliMonadError<F, D, E, ApplEF>(applicativeError)
+    public static func applicativeError<E, ApplEF>(_ applicativeError : ApplEF) -> MonadErrorInstance<F, D, E, ApplEF> {
+        return MonadErrorInstance<F, D, E, ApplEF>(applicativeError)
     }
     
-    public static func monadError<E, MonEF>(_ monadError : MonEF) -> KleisliMonadError<F, D, E, MonEF> {
-        return KleisliMonadError<F, D, E, MonEF>(monadError)
+    public static func monadError<E, MonEF>(_ monadError : MonEF) -> MonadErrorInstance<F, D, E, MonEF> {
+        return MonadErrorInstance<F, D, E, MonEF>(monadError)
+    }
+
+    public class FunctorInstance<G, D, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+        public typealias F = KleisliPartial<G, D>
+        
+        private let functor : FuncG
+        
+        public init(_ functor : FuncG) {
+            self.functor = functor
+        }
+        
+        public func map<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> B) -> KleisliOf<G, D, B> {
+            return Kleisli<G, D, A>.fix(fa).map(f, functor)
+        }
+    }
+
+    public class ApplicativeInstance<G, D, ApplG> : FunctorInstance<G, D, ApplG>, Applicative where ApplG : Applicative, ApplG.F == G {
+        
+        private let applicative : ApplG
+        
+        override public init(_ applicative : ApplG) {
+            self.applicative = applicative
+            super.init(applicative)
+        }
+        
+        public func pure<A>(_ a: A) -> KleisliOf<G, D, A> {
+            return Kleisli<G, D, A>.pure(a, applicative)
+        }
+        
+        public func ap<A, B>(_ ff: KleisliOf<G, D, (A) -> B>, _ fa: KleisliOf<G, D, A>) -> KleisliOf<G, D, B> {
+            return Kleisli<G, D, (A) -> B>.fix(ff).ap(Kleisli<G, D, A>.fix(fa), applicative)
+        }
+    }
+
+    public class MonadInstance<G, D, MonG> : ApplicativeInstance<G, D, MonG>, Monad where MonG : Monad, MonG.F == G {
+        
+        fileprivate let monad : MonG
+        
+        override public init(_ monad : MonG) {
+            self.monad = monad
+            super.init(monad)
+        }
+        
+        public func flatMap<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> KleisliOf<G, D, B>) -> KleisliOf<G, D, B> {
+            return Kleisli<G, D, A>.fix(fa).flatMap({ a in Kleisli<G, D, B>.fix(f(a)) }, monad)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> KleisliOf<G, D, Either<A, B>>) -> KleisliOf<G, D, B> {
+            return Kleisli<G, D, A>.tailRecM(a, f, monad)
+        }
+    }
+
+    public class MonadReaderInstance<G, E, MonG> : MonadInstance<G, E, MonG>, MonadReader where MonG : Monad, MonG.F == G {
+        public typealias D = E
+        
+        public func ask() -> KleisliOf<G, E, E> {
+            return Kleisli<G, E, E>.ask(monad)
+        }
+        
+        public func local<A>(_ f: @escaping (E) -> E, _ fa: KleisliOf<G, E, A>) -> KleisliOf<G, E, A> {
+            return Kleisli<G, E, A>.fix(fa).local(f)
+        }
+    }
+
+    public class MonadErrorInstance<G, D, Err, MonErrG> : MonadInstance<G, D, MonErrG>, MonadError where MonErrG : MonadError, MonErrG.F == G, MonErrG.E == Err {
+        public typealias E = Err
+        
+        private let monadError : MonErrG
+        
+        override public init(_ monadError : MonErrG) {
+            self.monadError = monadError
+            super.init(monadError)
+        }
+        
+        public func raiseError<A>(_ e: Err) -> KleisliOf<G, D, A> {
+            return Kleisli<G, D, A>.raiseError(e, monadError)
+        }
+        
+        public func handleErrorWith<A>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (Err) -> KleisliOf<G, D, A>) -> KleisliOf<G, D, A> {
+            return Kleisli<G, D, A>.fix(fa).handleErrorWith({ e in Kleisli<G, D, A>.fix(f(e)) }, monadError)
+        }
     }
 }
 
-public class KleisliFunctor<G, D, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
-    public typealias F = KleisliPartial<G, D>
-    
-    private let functor : FuncG
-    
-    public init(_ functor : FuncG) {
-        self.functor = functor
-    }
-    
-    public func map<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> B) -> KleisliOf<G, D, B> {
-        return Kleisli.fix(fa).map(f, functor)
-    }
-}
-
-public class KleisliApplicative<G, D, ApplG> : KleisliFunctor<G, D, ApplG>, Applicative where ApplG : Applicative, ApplG.F == G {
-    
-    private let applicative : ApplG
-    
-    override public init(_ applicative : ApplG) {
-        self.applicative = applicative
-        super.init(applicative)
-    }
-    
-    public func pure<A>(_ a: A) -> KleisliOf<G, D, A> {
-        return Kleisli.pure(a, applicative)
-    }
-    
-    public func ap<A, B>(_ ff: KleisliOf<G, D, (A) -> B>, _ fa: KleisliOf<G, D, A>) -> KleisliOf<G, D, B> {
-        return Kleisli.fix(ff).ap(Kleisli.fix(fa), applicative)
-    }
-}
-
-public class KleisliMonad<G, D, MonG> : KleisliApplicative<G, D, MonG>, Monad where MonG : Monad, MonG.F == G {
-    
-    fileprivate let monad : MonG
-    
-    override public init(_ monad : MonG) {
-        self.monad = monad
-        super.init(monad)
-    }
-    
-    public func flatMap<A, B>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (A) -> KleisliOf<G, D, B>) -> KleisliOf<G, D, B> {
-        return Kleisli.fix(fa).flatMap({ a in Kleisli.fix(f(a)) }, monad)
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> KleisliOf<G, D, Either<A, B>>) -> KleisliOf<G, D, B> {
-        return Kleisli.tailRecM(a, f, monad)
-    }
-}
-
-public class KleisliMonadReader<G, E, MonG> : KleisliMonad<G, E, MonG>, MonadReader where MonG : Monad, MonG.F == G {
-    public typealias D = E
-    
-    public func ask() -> KleisliOf<G, E, E> {
-        return Kleisli<G, E, E>.ask(monad)
-    }
-    
-    public func local<A>(_ f: @escaping (E) -> E, _ fa: KleisliOf<G, E, A>) -> KleisliOf<G, E, A> {
-        return Kleisli.fix(fa).local(f)
-    }
-}
-
-public class KleisliMonadError<G, D, Err, MonErrG> : KleisliMonad<G, D, MonErrG>, MonadError where MonErrG : MonadError, MonErrG.F == G, MonErrG.E == Err {
-    public typealias E = Err
-    
-    private let monadError : MonErrG
-    
-    override public init(_ monadError : MonErrG) {
-        self.monadError = monadError
-        super.init(monadError)
-    }
-    
-    public func raiseError<A>(_ e: Err) -> KleisliOf<G, D, A> {
-        return Kleisli<G, D, A>.raiseError(e, monadError)
-    }
-    
-    public func handleErrorWith<A>(_ fa: KleisliOf<G, D, A>, _ f: @escaping (Err) -> KleisliOf<G, D, A>) -> KleisliOf<G, D, A> {
-        return Kleisli.fix(fa).handleErrorWith({ e in Kleisli.fix(f(e)) }, monadError)
-    }
-}
