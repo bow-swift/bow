@@ -4,6 +4,7 @@ addons:
   homebrew:
     packages:
     - sourcekitten
+
 env:
   global:
     - PROJECT=Bow.xcodeproj
@@ -15,15 +16,16 @@ env:
 matrix:
   include:
     - stage: test
-      env: SCHEME="Bow"
-      env: SCHEME="Bow-Free"
-      env: SCHEME="Bow-Generic"
-      env: SCHEME="Bow-Optics"
-      env: SCHEME="Bow-RecursionSchemes"
-      env: SCHEME="Bow-Result"
-      env: SCHEME="Bow-Effects"
-      env: SCHEME="Bow-Rx"
-      env: SCHEME="Bow-BrightFutures"
+      env:
+        - SCHEME="Bow"
+        - SCHEME="Bow-Free"
+        - SCHEME="Bow-Generic"
+        - SCHEME="Bow-Optics"
+        - SCHEME="Bow-RecursionSchemes"
+        - SCHEME="Bow-Result"
+        - SCHEME="Bow-Effects"
+        - SCHEME="Bow-Rx"
+        - SCHEME="Bow-BrightFutures"
     - stage: deploy
       script:
       - ./scripts/gen-docs.rb
