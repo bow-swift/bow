@@ -291,155 +291,155 @@ public extension Kind where F == ForIO {
 }
 
 public extension IO {
-    public static func functor() -> IOFunctor {
-        return IOFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> IOApplicative {
-        return IOApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> IOMonad {
-        return IOMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func async<E>() -> IOAsync<E> {
-        return IOAsync<E>()
+    public static func async<E>() -> AsyncInstance<E> {
+        return AsyncInstance<E>()
     }
     
-    public static func applicativeError<E>() -> IOMonadError<E> {
-        return IOMonadError<E>()
+    public static func applicativeError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func monadError<E>() -> IOMonadError<E> {
-        return IOMonadError<E>()
+    public static func monadError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func semigroup<SemiG>(_ semigroup : SemiG) -> IOSemigroup<A, SemiG> {
-        return IOSemigroup<A, SemiG>(semigroup)
+    public static func semigroup<SemiG>(_ semigroup : SemiG) -> SemigroupInstance<A, SemiG> {
+        return SemigroupInstance<A, SemiG>(semigroup)
     }
     
-    public static func monoid<Mono>(_ monoid : Mono) -> IOMonoid<A, Mono> {
-        return IOMonoid<A, Mono>(monoid)
+    public static func monoid<Mono>(_ monoid : Mono) -> MonoidInstance<A, Mono> {
+        return MonoidInstance<A, Mono>(monoid)
     }
     
-    public static func eq<EqA, EqError>(_ eq : EqA, _ eqError : EqError) -> IOEq<A, EqA, EqError> {
-        return IOEq<A, EqA, EqError>(eq, eqError)
+    public static func eq<EqA, EqError>(_ eq : EqA, _ eqError : EqError) -> EqInstance<A, EqA, EqError> {
+        return EqInstance<A, EqA, EqError>(eq, eqError)
     }
-}
 
-public class IOFunctor : Functor {
-    public typealias F = ForIO
-    
-    public func map<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> B) -> IOOf<B> {
-        return IO.fix(fa).map(f)
-    }
-}
-
-public class IOApplicative : IOFunctor, Applicative {
-    public func pure<A>(_ a: A) -> IOOf<A> {
-        return IO.pure(a)
-    }
-    
-    public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
-
-public class IOMonad : IOApplicative, Monad {
-    public func flatMap<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> IOOf<B>) -> IOOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<Either<A, B>>) -> IOOf<B> {
-        return IO.tailRecM(a, f)
-    }
-}
-
-public class IOAsync<Err> : IOMonadError<Err>, Async where Err : Error {
-    public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
-        fatalError("Not implemented yet")
-    }
-    
-    public typealias F = ForIO
-    
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> IOOf<A> {
-        return IO.runAsync(fa)
-    }
-}
-
-public class IOMonadError<Err> : IOMonad, MonadError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> IOOf<A> {
-        return IO.raiseError(e)
-    }
-    
-    public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Err) -> IOOf<A>) -> IOOf<A> {
-        return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
-    }
-}
-
-public class IOSemigroup<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
-    public typealias A = IOOf<B>
-    
-    private let semigroup : SemiG
-    
-    public init(_ semigroup : SemiG) {
-        self.semigroup = semigroup
-    }
-    
-    public func combine(_ a: IOOf<B>, _ b: IOOf<B>) -> IOOf<B> {
-        return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
-    }
-}
-
-public class IOMonoid<B, Mono> : IOSemigroup<B, Mono>, Monoid where Mono : Monoid, Mono.A == B {
-    private let monoid : Mono
-    
-    override public init(_ monoid : Mono) {
-        self.monoid = monoid
-        super.init(monoid)
-    }
-    
-    public var empty: IOOf<B> {
-        return IO.pure(monoid.empty)
-    }
-}
-
-public class IOEq<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq, EqError.A == Error {
-    public typealias A = IOOf<B>
-    
-    private let eq : EqB
-    private let eqError : EqError
-    
-    public init(_ eq : EqB, _ eqError : EqError) {
-        self.eq = eq
-        self.eqError = eqError
-    }
-    
-    public func eqv(_ a: IOOf<B>, _ b: IOOf<B>) -> Bool {
-        var aValue, bValue : B?
-        var aError, bError : Error?
+    public class FunctorInstance : Functor {
+        public typealias F = ForIO
         
-        do {
-            aValue = try a.fix().unsafePerformIO()
-        } catch {
-            aError = error
+        public func map<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> B) -> IOOf<B> {
+            return IO<A>.fix(fa).map(f)
+        }
+    }
+
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> IOOf<A> {
+            return IO<A>.pure(a)
         }
         
-        do {
-            bValue = try b.fix().unsafePerformIO()
-        } catch {
-            bError = error
+        public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
+    }
+
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> IOOf<B>) -> IOOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
         }
         
-        if let aV = aValue, let bV = bValue {
-            return eq.eqv(aV, bV)
-        } else if let aE = aError, let bE = bError {
-            return eqError.eqv(aE, bE)
-        } else {
-            return false
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<Either<A, B>>) -> IOOf<B> {
+            return IO<A>.tailRecM(a, f)
+        }
+    }
+
+    public class AsyncInstance<Err> : MonadErrorInstance<Err>, Async where Err : Error {
+        public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
+            return IO<A>.suspend { fa().fix() }
+        }
+        
+        public typealias F = ForIO
+        
+        public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> IOOf<A> {
+            return IO<A>.runAsync(fa)
+        }
+    }
+
+    public class MonadErrorInstance<Err> : MonadInstance, MonadError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> IOOf<A> {
+            return IO<A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Err) -> IOOf<A>) -> IOOf<A> {
+            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+        }
+    }
+
+    public class SemigroupInstance<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
+        public typealias A = IOOf<B>
+        
+        private let semigroup : SemiG
+        
+        init(_ semigroup : SemiG) {
+            self.semigroup = semigroup
+        }
+        
+        public func combine(_ a: IOOf<B>, _ b: IOOf<B>) -> IOOf<B> {
+            return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
+        }
+    }
+
+    public class MonoidInstance<B, Mono> : SemigroupInstance<B, Mono>, Monoid where Mono : Monoid, Mono.A == B {
+        private let monoid : Mono
+        
+        override init(_ monoid : Mono) {
+            self.monoid = monoid
+            super.init(monoid)
+        }
+        
+        public var empty: IOOf<B> {
+            return IO<B>.pure(monoid.empty)
+        }
+    }
+
+    public class EqInstance<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq, EqError.A == Error {
+        public typealias A = IOOf<B>
+        
+        private let eq : EqB
+        private let eqError : EqError
+        
+        init(_ eq : EqB, _ eqError : EqError) {
+            self.eq = eq
+            self.eqError = eqError
+        }
+        
+        public func eqv(_ a: IOOf<B>, _ b: IOOf<B>) -> Bool {
+            var aValue, bValue : B?
+            var aError, bError : Error?
+            
+            do {
+                aValue = try a.fix().unsafePerformIO()
+            } catch {
+                aError = error
+            }
+            
+            do {
+                bValue = try b.fix().unsafePerformIO()
+            } catch {
+                bError = error
+            }
+            
+            if let aV = aValue, let bV = bValue {
+                return eq.eqv(aV, bV)
+            } else if let aE = aError, let bE = bError {
+                return eqError.eqv(aE, bE)
+            } else {
+                return false
+            }
         }
     }
 }

@@ -315,22 +315,22 @@ public extension Option {
     /**
      Obtains an instance of the `Functor` typeclass for `Option`.
      */
-    public static func functor() -> OptionFunctor {
-        return OptionFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
     /**
      Obtains an instance of the `Applicative` typeclass for `Option`.
      */
-    public static func applicative() -> OptionApplicative {
-        return OptionApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
     /**
      Obtains an instance of the `Monad` typeclass for `Option`.
      */
-    public static func monad() -> OptionMonad {
-        return OptionMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
     /**
@@ -338,8 +338,8 @@ public extension Option {
      
      - semigroup: An instance of a `Semigroup` for the wrapped type.
      */
-    public static func semigroup<SemiG>(_ semigroup : SemiG) -> OptionSemigroup<A, SemiG> {
-        return OptionSemigroup<A, SemiG>(semigroup)
+    public static func semigroup<SemiG>(_ semigroup : SemiG) -> SemigroupInstance<A, SemiG> {
+        return SemigroupInstance<A, SemiG>(semigroup)
     }
     
     /**
@@ -347,221 +347,220 @@ public extension Option {
      
      - semigroup: An instance of a `Semigroup` for the wrapped type.
      */
-    public static func monoid<SemiG>(_ semigroup : SemiG) -> OptionMonoid<A, SemiG> {
-        return OptionMonoid<A, SemiG>(semigroup)
+    public static func monoid<SemiG>(_ semigroup : SemiG) -> MonoidInstance<A, SemiG> {
+        return MonoidInstance<A, SemiG>(semigroup)
     }
     
     /**
      Obtains an instance of the `ApplicativeError` typeclass for `Option`.
      */
-    public static func applicativeError() -> OptionMonadError {
-        return OptionMonadError()
+    public static func applicativeError() -> MonadErrorInstance {
+        return MonadErrorInstance()
     }
     
     /**
      Obtains an instance of the `MonadError` typeclass for `Option`.
      */
-    public static func monadError() -> OptionMonadError {
-        return OptionMonadError()
+    public static func monadError() -> MonadErrorInstance {
+        return MonadErrorInstance()
     }
     
     /**
      Obtains an instance of the `Eq` typeclass for `Option`.
      */
-    public static func eq<EqA>(_ eqa : EqA) -> OptionEq<A, EqA> {
-        return OptionEq<A, EqA>(eqa)
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
     
     /**
      Obtains an instance of the `FunctorFilter` typeclass for `Option`.
      */
-    public static func functorFilter() -> OptionFunctorFilter {
-        return OptionFunctorFilter()
+    public static func functorFilter() -> FunctorFilterInstance {
+        return FunctorFilterInstance()
     }
     
     /**
      Obtains an instance of the `MonadFilter` typeclass for `Option`.
      */
-    public static func monadFilter() -> OptionMonadFilter {
-        return OptionMonadFilter()
+    public static func monadFilter() -> MonadFilterInstance {
+        return MonadFilterInstance()
     }
     
     /**
      Obtains an instance of the `Foldable` typeclass for `Option`.
      */
-    public static func foldable() -> OptionFoldable {
-        return OptionFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
     /**
      Obtains an instance of the `Traverse` typeclass for `Option`.
      */
-    public static func traverse() -> OptionTraverse {
-        return OptionTraverse()
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
     
     /**
      Obtains an instance of the `TraverseFilter` typeclass for `Option`.
      */
-    public static func traverseFilter() -> OptionTraverseFilter {
-        return OptionTraverseFilter()
+    public static func traverseFilter() -> TraverseFilterInstance {
+        return TraverseFilterInstance()
+    }
+
+    /**
+     An instance of the `Functor` typeclass for the `Option` data type.
+     */
+    public class FunctorInstance : Functor {
+        public typealias F = ForOption
+        
+        public func map<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> B) -> OptionOf<B> {
+            return fa.fix().map(f)
+        }
+    }
+
+    /**
+     An instance of the `Applicative` typeclass for the `Option` data type.
+     */
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> OptionOf<A> {
+            return Option<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: OptionOf<(A) -> B>, _ fa: OptionOf<A>) -> OptionOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
+    }
+
+    /**
+     An instance of the `Monad` typeclass for the `Option` data type.
+     */
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
+            return Option<A>.tailRecM(a, { a in f(a).fix() })
+        }
+    }
+
+    /**
+     An instance of the `Semigroup` typeclass for the `Option` data type.
+     */
+    public class SemigroupInstance<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
+        public typealias A = OptionOf<R>
+        private let semigroup : SemiG
+        
+        init(_ semigroup : SemiG) {
+            self.semigroup = semigroup
+        }
+        
+        public func combine(_ a: OptionOf<R>, _ b: OptionOf<R>) -> OptionOf<R> {
+            let a = Option<R>.fix(a)
+            let b = Option<R>.fix(b)
+            return a.fold(constant(b),
+                          { aSome in b.fold(constant(a),
+                                            { bSome in Option<R>.some(semigroup.combine(aSome, bSome)) })
+                          })
+        }
+    }
+
+    /**
+     An instance of the `Monoid` typeclass for the `Option` data type.
+     */
+    public class MonoidInstance<R, SemiG> : SemigroupInstance<R, SemiG>, Monoid where SemiG : Semigroup, SemiG.A == R {
+        public var empty : OptionOf<R>{
+            return Option<R>.none()
+        }
+    }
+
+    /**
+     An instance of the `MonadError` typeclass for the `Option` data type.
+     */
+    public class MonadErrorInstance : MonadInstance, MonadError {
+        public typealias E = Unit
+        
+        public func raiseError<A>(_ e: Unit) -> OptionOf<A> {
+            return Option<A>.none()
+        }
+        
+        public func handleErrorWith<A>(_ fa: OptionOf<A>, _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
+            return fa.fix().orElse(f(unit).fix())
+        }
+    }
+
+    /**
+     An instance of the `Eq` typeclass for the `Option` data type.
+     */
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = OptionOf<R>
+        
+        private let eqr : EqR
+        
+        public init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: OptionOf<R>, _ b: OptionOf<R>) -> Bool {
+            let a = Option<R>.fix(a)
+            let b = Option<R>.fix(b)
+            return a.fold({ b.fold(constant(true), constant(false)) },
+                          { aSome in b.fold(constant(false), { bSome in eqr.eqv(aSome, bSome) })})
+        }
+    }
+
+    /**
+     An instance of the `FunctorFilter` typeclass for the `Option` data type.
+     */
+    public class FunctorFilterInstance : FunctorInstance, FunctorFilter {
+        public func mapFilter<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
+            return fa.fix().mapFilter(f)
+        }
+    }
+
+    /**
+     An instance of the `MonadFilter` typeclass for the `Option` data type.
+     */
+    public class MonadFilterInstance : MonadInstance, MonadFilter {
+        public func empty<A>() -> OptionOf<A> {
+            return Option<A>.empty()
+        }
+        
+        public func mapFilter<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {
+            return fa.fix().mapFilter(f)
+        }
+    }
+
+    /**
+     An instance of the `Foldable` typeclass for the `Option` data type.
+     */
+    public class FoldableInstance : Foldable {
+        public typealias F = ForOption
+        
+        public func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
+    }
+
+    /**
+     An instance of the `Traverse` typeclass for the `Option` data type.
+     */
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
+    }
+
+    /**
+     An instance of the `TraverseFilter` typeclass for the `Option` data type.
+     */
+    public class TraverseFilterInstance : TraverseInstance, TraverseFilter {
+        public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverseFilter(f, applicative)
+        }
     }
 }
-
-/**
- An instance of the `Functor` typeclass for the `Option` data type.
- */
-public class OptionFunctor : Functor {
-    public typealias F = ForOption
-    
-    public func map<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> B) -> OptionOf<B> {
-        return fa.fix().map(f)
-    }
-}
-
-/**
- An instance of the `Applicative` typeclass for the `Option` data type.
- */
-public class OptionApplicative : OptionFunctor, Applicative {
-    public func pure<A>(_ a: A) -> OptionOf<A> {
-        return Option.pure(a)
-    }
-    
-    public func ap<A, B>(_ ff: OptionOf<(A) -> B>, _ fa: OptionOf<A>) -> OptionOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
-
-/**
- An instance of the `Monad` typeclass for the `Option` data type.
- */
-public class OptionMonad : OptionApplicative, Monad {
-    public func flatMap<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
-        return Option<A>.tailRecM(a, { a in f(a).fix() })
-    }
-}
-
-/**
- An instance of the `Semigroup` typeclass for the `Option` data type.
- */
-public class OptionSemigroup<R, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == R {
-    public typealias A = OptionOf<R>
-    private let semigroup : SemiG
-    
-    public init(_ semigroup : SemiG) {
-        self.semigroup = semigroup
-    }
-    
-    public func combine(_ a: OptionOf<R>, _ b: OptionOf<R>) -> OptionOf<R> {
-        let a = Option.fix(a)
-        let b = Option.fix(b)
-        return a.fold(constant(b),
-                      { aSome in b.fold(constant(a),
-                                        { bSome in Option.some(semigroup.combine(aSome, bSome)) })
-                      })
-    }
-}
-
-/**
- An instance of the `Monoid` typeclass for the `Option` data type.
- */
-public class OptionMonoid<R, SemiG> : OptionSemigroup<R, SemiG>, Monoid where SemiG : Semigroup, SemiG.A == R {
-    public var empty : OptionOf<R>{
-        return Option<R>.none()
-    }
-}
-
-/**
- An instance of the `MonadError` typeclass for the `Option` data type.
- */
-public class OptionMonadError : OptionMonad, MonadError {
-    public typealias E = Unit
-    
-    public func raiseError<A>(_ e: Unit) -> OptionOf<A> {
-        return Option<A>.none()
-    }
-    
-    public func handleErrorWith<A>(_ fa: OptionOf<A>, _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
-        return fa.fix().orElse(f(unit).fix())
-    }
-}
-
-/**
- An instance of the `Eq` typeclass for the `Option` data type.
- */
-public class OptionEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = OptionOf<R>
-    
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: OptionOf<R>, _ b: OptionOf<R>) -> Bool {
-        let a = Option.fix(a)
-        let b = Option.fix(b)
-        return a.fold({ b.fold(constant(true), constant(false)) },
-                      { aSome in b.fold(constant(false), { bSome in eqr.eqv(aSome, bSome) })})
-    }
-}
-
-/**
- An instance of the `FunctorFilter` typeclass for the `Option` data type.
- */
-public class OptionFunctorFilter : OptionFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
-        return fa.fix().mapFilter(f)
-    }
-}
-
-/**
- An instance of the `MonadFilter` typeclass for the `Option` data type.
- */
-public class OptionMonadFilter : OptionMonad, MonadFilter {
-    public func empty<A>() -> OptionOf<A> {
-        return Option.empty()
-    }
-    
-    public func mapFilter<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {
-        return fa.fix().mapFilter(f)
-    }
-}
-
-/**
- An instance of the `Foldable` typeclass for the `Option` data type.
- */
-public class OptionFoldable : Foldable {
-    public typealias F = ForOption
-    
-    public func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
-    }
-    
-    public func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
-
-/**
- An instance of the `Traverse` typeclass for the `Option` data type.
- */
-public class OptionTraverse : OptionFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
-    }
-}
-
-/**
- An instance of the `TraverseFilter` typeclass for the `Option` data type.
- */
-public class OptionTraverseFilter : OptionTraverse, TraverseFilter {
-    public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverseFilter(f, applicative)
-    }
-}
-

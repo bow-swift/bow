@@ -144,93 +144,94 @@ public extension OptionT {
     public static func eq<EqA, Func>(_ eq : EqA, _ functor : Func) -> OptionTEq<F, A, EqA, Func> {
         return OptionTEq<F, A, EqA, Func>(eq, functor)
     }
+
+    public class OptionTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+        public typealias F = OptionTPartial<G>
+        
+        fileprivate let functor : FuncG
+        
+        init(_ functor : FuncG) {
+            self.functor = functor
+        }
+        
+        public func map<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> B) -> OptionTOf<G, B> {
+            return OptionT<G, A>.fix(fa).map(f, functor)
+        }
+    }
+
+    public class OptionTFunctorFilter<G, FuncG> : OptionTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
+        
+        public func mapFilter<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionTOf<G, B> {
+            return OptionT<G, A>.fix(fa).mapFilter(f, functor)
+        }
+    }
+
+    public class OptionTApplicative<G, MonG> : OptionTFunctor<G, MonG>, Applicative where MonG : Monad, MonG.F == G {
+        
+        fileprivate let monad : MonG
+        
+        override init(_ monad : MonG) {
+            self.monad = monad
+            super.init(monad)
+        }
+        
+        public func pure<A>(_ a: A) -> OptionTOf<G, A> {
+            return OptionT<G, A>.pure(a, monad)
+        }
+        
+        public func ap<A, B>(_ ff: OptionTOf<G, (A) -> B>, _ fa: OptionTOf<G, A>) -> OptionTOf<G, B> {
+            return OptionT<G, (A) -> B>.fix(ff).ap(OptionT<G, A>.fix(fa), monad)
+        }
+    }
+
+    public class OptionTMonad<G, MonG> : OptionTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
+        
+        public func flatMap<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionTOf<G, B>) -> OptionTOf<G, B> {
+            return OptionT<G, A>.fix(fa).flatMap({ a in OptionT<G, B>.fix(f(a)) }, monad)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionTOf<G, Either<A, B>>) -> OptionTOf<G, B> {
+            return OptionT<G, A>.tailRecM(a, f, monad)
+        }
+    }
+
+    public class OptionTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F == G {
+        public typealias F = OptionTPartial<G>
+        
+        fileprivate let monad : MonG
+        
+        init(_ monad : MonG) {
+            self.monad = monad
+        }
+        
+        public func combineK<A>(_ x: OptionTOf<G, A>, _ y: OptionTOf<G, A>) -> OptionTOf<G, A> {
+            return OptionT<G, A>.fix(x).orElse(OptionT<G, A>.fix(y), monad)
+        }
+    }
+
+    public class OptionTMonoidK<G, MonG> : OptionTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
+        public func emptyK<A>() -> OptionTOf<G, A> {
+            return OptionT<G, A>(monad.pure(Option.none()))
+        }
+    }
+
+    public class OptionTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, OptionOf<B>>, Func : Functor, Func.F == F {
+        public typealias A = OptionTOf<F, B>
+        
+        private let eq : EqF
+        private let functor : Func
+        
+        init(_ eq : EqF, _ functor : Func) {
+            self.eq = eq
+            self.functor = functor
+        }
+        
+        public func eqv(_ a: OptionTOf<F, B>, _ b: OptionTOf<F, B>) -> Bool {
+            let a = OptionT<F, B>.fix(a)
+            let b = OptionT<F, B>.fix(b)
+            return eq.eqv(functor.map(a.value, { aa in aa as OptionOf<B> }),
+                          functor.map(b.value, { bb in bb as OptionOf<B> }))
+        }
+    }
 }
 
-public class OptionTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
-    public typealias F = OptionTPartial<G>
-    
-    fileprivate let functor : FuncG
-    
-    public init(_ functor : FuncG) {
-        self.functor = functor
-    }
-    
-    public func map<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> B) -> OptionTOf<G, B> {
-        return OptionT.fix(fa).map(f, functor)
-    }
-}
-
-public class OptionTFunctorFilter<G, FuncG> : OptionTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
-    
-    public func mapFilter<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionTOf<G, B> {
-        return OptionT.fix(fa).mapFilter(f, functor)
-    }
-}
-
-public class OptionTApplicative<G, MonG> : OptionTFunctor<G, MonG>, Applicative where MonG : Monad, MonG.F == G {
-    
-    fileprivate let monad : MonG
-    
-    override public init(_ monad : MonG) {
-        self.monad = monad
-        super.init(monad)
-    }
-    
-    public func pure<A>(_ a: A) -> OptionTOf<G, A> {
-        return OptionT.pure(a, monad)
-    }
-    
-    public func ap<A, B>(_ ff: OptionTOf<G, (A) -> B>, _ fa: OptionTOf<G, A>) -> OptionTOf<G, B> {
-        return OptionT.fix(ff).ap(OptionT.fix(fa), monad)
-    }
-}
-
-public class OptionTMonad<G, MonG> : OptionTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
-    
-    public func flatMap<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionTOf<G, B>) -> OptionTOf<G, B> {
-        return OptionT.fix(fa).flatMap({ a in OptionT.fix(f(a)) }, monad)
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionTOf<G, Either<A, B>>) -> OptionTOf<G, B> {
-        return OptionT.tailRecM(a, f, monad)
-    }
-}
-
-public class OptionTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F == G {
-    public typealias F = OptionTPartial<G>
-    
-    fileprivate let monad : MonG
-    
-    public init(_ monad : MonG) {
-        self.monad = monad
-    }
-    
-    public func combineK<A>(_ x: OptionTOf<G, A>, _ y: OptionTOf<G, A>) -> OptionTOf<G, A> {
-        return OptionT.fix(x).orElse(OptionT.fix(y), monad)
-    }
-}
-
-public class OptionTMonoidK<G, MonG> : OptionTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
-    public func emptyK<A>() -> OptionTOf<G, A> {
-        return OptionT(monad.pure(Option.none()))
-    }
-}
-
-public class OptionTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, OptionOf<B>>, Func : Functor, Func.F == F {
-    public typealias A = OptionTOf<F, B>
-    
-    private let eq : EqF
-    private let functor : Func
-    
-    public init(_ eq : EqF, _ functor : Func) {
-        self.eq = eq
-        self.functor = functor
-    }
-    
-    public func eqv(_ a: OptionTOf<F, B>, _ b: OptionTOf<F, B>) -> Bool {
-        let a = OptionT.fix(a)
-        let b = OptionT.fix(b)
-        return eq.eqv(functor.map(a.value, { aa in aa as OptionOf<B> }),
-                      functor.map(b.value, { bb in bb as OptionOf<B> }))
-    }
-}

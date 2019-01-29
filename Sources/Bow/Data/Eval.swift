@@ -301,41 +301,41 @@ public extension Kind where F == ForEval {
 }
 
 public extension Eval {
-    public static func functor() -> EvalApplicative {
-        return EvalApplicative()
+    public static func functor() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func applicative() -> EvalApplicative {
-        return EvalApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func eq<EqA>(_ eq : EqA) -> EvalEq<A, EqA> {
-        return EvalEq<A, EqA>(eq)
+    public static func eq<EqA>(_ eq : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eq)
     }
-}
 
-public class EvalApplicative : Applicative {
-    public typealias F = ForEval
-    
-    public func pure<A>(_ a: A) -> Kind<F, A> {
-        return Eval<A>.pure(a)
+    public class ApplicativeInstance : Applicative {
+        public typealias F = ForEval
+        
+        public func pure<A>(_ a: A) -> Kind<F, A> {
+            return Eval<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
+            return ff.fix().ap(fa.fix())
+        }
     }
-    
-    public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
 
-public class EvalEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-    public typealias A = EvalOf<B>
-    
-    private let eq : EqB
-    
-    public init(_ eq : EqB) {
-        self.eq = eq
-    }
-    
-    public func eqv(_ a: EvalOf<B>, _ b: EvalOf<B>) -> Bool {
-        return eq.eqv(a.fix().value(), b.fix().value())
+    public class EqInstance<B, EqB> : Eq where EqB : Eq, EqB.A == B {
+        public typealias A = EvalOf<B>
+        
+        private let eq : EqB
+        
+        init(_ eq : EqB) {
+            self.eq = eq
+        }
+        
+        public func eqv(_ a: EvalOf<B>, _ b: EvalOf<B>) -> Bool {
+            return eq.eqv(a.fix().value(), b.fix().value())
+        }
     }
 }

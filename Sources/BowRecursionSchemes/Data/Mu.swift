@@ -21,34 +21,34 @@ public extension Kind where F == ForMu {
 }
 
 public extension Mu {
-    public static func recursive() -> MuBirecursive {
-        return MuBirecursive()
+    public static func recursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
     
-    public static func corecursive() -> MuBirecursive {
-        return MuBirecursive()
+    public static func corecursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
     
-    public static func birecursive() -> MuBirecursive {
-        return MuBirecursive()
+    public static func birecursive() -> BirecursiveInstance {
+        return BirecursiveInstance()
     }
-}
 
-public class MuBirecursive : Birecursive {
-    public typealias T = ForMu
-    
-    public func projectT<F, Func>(_ tf: Kind<ForMu, F>, _ functor: Func) -> Kind<F, Kind<ForMu, F>> where F == Func.F, Func : Functor {
-        return cata(tf, { ff in
-            Eval.later { functor.map(ff, { f in
-                self.embedT(functor.map(f.value(), { muf in
-                    Eval.now(muf)
-                }), functor).value()
-            }) }
-        }, functor)
-    }
-    
-    public func embedT<Func, F>(_ tf: Kind<F, Eval<Kind<ForMu, F>>>, _ functor: Func) -> Eval<Kind<ForMu, F>> where Func : Functor, F == Func.F {
-        return Eval.now(MuEmbed(tf, functor))
+    public class BirecursiveInstance : Birecursive {
+        public typealias T = ForMu
+        
+        public func projectT<F, Func>(_ tf: Kind<ForMu, F>, _ functor: Func) -> Kind<F, Kind<ForMu, F>> where F == Func.F, Func : Functor {
+            return cata(tf, { ff in
+                Eval.later { functor.map(ff, { f in
+                    self.embedT(functor.map(f.value(), { muf in
+                        Eval.now(muf)
+                    }), functor).value()
+                }) }
+            }, functor)
+        }
+        
+        public func embedT<Func, F>(_ tf: Kind<F, Eval<Kind<ForMu, F>>>, _ functor: Func) -> Eval<Kind<ForMu, F>> where Func : Functor, F == Func.F {
+            return Eval.now(MuEmbed(tf, functor))
+        }
     }
 }
 

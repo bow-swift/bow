@@ -149,147 +149,147 @@ extension Id {
     /**
      Obtains an instance of the `Functor` typeclass for `Id`.
      */
-    public static func functor() -> IdFunctor {
-        return IdFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
     /**
      Obtains an instance of the `Applicative` typeclass for `Id`.
      */
-    public static func applicative() -> IdApplicative {
-        return IdApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
     /**
      Obtains an instance of the `Monad` typeclass for `Id`.
      */
-    public static func monad() -> IdMonad {
-        return IdMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
     /**
      Obtains an instance of the `Comonad` typeclass for `Id`.
      */
-    public static func comonad() -> IdBimonad {
-        return IdBimonad()
+    public static func comonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
     /**
      Obtains an instance of the `Bimonad` typeclass for `Id`.
      */
-    public static func bimonad() -> IdBimonad {
-        return IdBimonad()
+    public static func bimonad() -> BimonadInstance {
+        return BimonadInstance()
     }
     
     /**
      Obtains an instance of the `Foldable` typeclass for `Id`.
      */
-    public static func foldable() -> IdFoldable {
-        return IdFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
     /**
      Obtains an instance of the `Traverse` typeclass for `Id`.
      */
-    public static func traverse() -> IdTraverse {
-        return IdTraverse()
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
 
     /**
      Obtains an instance of the `Eq` typeclass for `Id`.
      */
-    public static func eq<EqA>(_ eqa : EqA) -> IdEq<A, EqA> {
-        return IdEq<A, EqA>(eqa)
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
-}
 
-/**
- An instance of the `Functor` typeclass for the `Id` data type.
- */
-public class IdFunctor : Functor {
-    public typealias F = ForId
-    
-    public func map<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> B) -> IdOf<B> {
-        return fa.fix().map(f)
+    /**
+     An instance of the `Functor` typeclass for the `Id` data type.
+     */
+    public class FunctorInstance : Functor {
+        public typealias F = ForId
+        
+        public func map<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> B) -> IdOf<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-/**
- An instance of the `Applicative` typeclass for the `Id` data type.
- */
-public class IdApplicative : IdFunctor, Applicative {
-    public func pure<A>(_ a: A) -> IdOf<A> {
-        return Id.pure(a)
+    /**
+     An instance of the `Applicative` typeclass for the `Id` data type.
+     */
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> IdOf<A> {
+            return Id<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: IdOf<(A) -> B>, _ fa: IdOf<A>) -> IdOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
     }
-    
-    public func ap<A, B>(_ ff: IdOf<(A) -> B>, _ fa: IdOf<A>) -> IdOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
 
-/**
- An instance of the `Monad` typeclass for the `Id` data type.
- */
-public class IdMonad : IdApplicative, Monad {
-    public func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
+    /**
+     An instance of the `Monad` typeclass for the `Id` data type.
+     */
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
+            return Id<A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
-        return Id.tailRecM(a, f)
-    }
-}
 
-/**
- An instance of the `Bimonad` typeclass for the `Id` data type.
- */
-public class IdBimonad : IdMonad, Bimonad {
-    public func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
-        return fa.fix().coflatMap(f as (Id<A>) -> B)
+    /**
+     An instance of the `Bimonad` typeclass for the `Id` data type.
+     */
+    public class BimonadInstance : MonadInstance, Bimonad {
+        public func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
+            return fa.fix().coflatMap(f as (Id<A>) -> B)
+        }
+        
+        public func extract<A>(_ fa: IdOf<A>) -> A {
+            return fa.fix().extract()
+        }
     }
-    
-    public func extract<A>(_ fa: IdOf<A>) -> A {
-        return fa.fix().extract()
-    }
-}
 
-/**
- An instance of the `Foldable` typeclass for the `Id` data type.
- */
-public class IdFoldable : Foldable {
-    public typealias F = ForId
-    
-    public func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
+    /**
+     An instance of the `Foldable` typeclass for the `Id` data type.
+     */
+    public class FoldableInstance : Foldable {
+        public typealias F = ForId
+        
+        public func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
 
-/**
- An instance of the `Traverse` typeclass for the `Id` data type.
- */
-public class IdTraverse : IdFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IdOf<B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
+    /**
+     An instance of the `Traverse` typeclass for the `Id` data type.
+     */
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IdOf<B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
     }
-}
 
-/**
- An instance of the `Eq` typeclass for the `Id` data type.
- */
-public class IdEq<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-    public typealias A = IdOf<B>
-    
-    private let eqb : EqB
-    
-    public init(_ eqb : EqB) {
-        self.eqb = eqb
-    }
-    
-    public func eqv(_ a: IdOf<B>, _ b: IdOf<B>) -> Bool {
-        return eqb.eqv(Id.fix(a).value, Id.fix(b).value)
+    /**
+     An instance of the `Eq` typeclass for the `Id` data type.
+     */
+    public class EqInstance<B, EqB> : Eq where EqB : Eq, EqB.A == B {
+        public typealias A = IdOf<B>
+        
+        private let eqb : EqB
+        
+        init(_ eqb : EqB) {
+            self.eqb = eqb
+        }
+        
+        public func eqv(_ a: IdOf<B>, _ b: IdOf<B>) -> Bool {
+            return eqb.eqv(Id<B>.fix(a).value, Id<B>.fix(b).value)
+        }
     }
 }

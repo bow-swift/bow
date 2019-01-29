@@ -125,6 +125,12 @@ public extension Array {
     }
 }
 
+extension ArrayK : Equatable where A : Equatable {
+    public static func ==(lhs : ArrayK<A>, rhs : ArrayK<A>) -> Bool {
+        return lhs.array == rhs.array
+    }
+}
+
 extension ArrayK : CustomStringConvertible {
     public var description : String {
         let contentsString = self.array.map { x in "\(x)" }.joined(separator: ", ")
@@ -140,205 +146,199 @@ extension ArrayK : CustomDebugStringConvertible where A : CustomDebugStringConve
 }
 
 public extension ArrayK {
-    public static func functor() -> ArrayKFunctor {
-        return ArrayKFunctor()
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
-    public static func applicative() -> ArrayKApplicative {
-        return ArrayKApplicative()
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
-    public static func monad() -> ArrayKMonad {
-        return ArrayKMonad()
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
-    public static func foldable() -> ArrayKFoldable {
-        return ArrayKFoldable()
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
-    public static func traverse() -> ArrayKTraverse {
-        return ArrayKTraverse()
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
     
-    public static func semigroup() -> ArrayKSemigroup<A> {
-        return ArrayKSemigroup<A>()
+    public static func semigroup() -> SemigroupInstance<A> {
+        return SemigroupInstance<A>()
     }
     
-    public static func semigroupK() -> ArrayKSemigroupK {
-        return ArrayKSemigroupK()
+    public static func semigroupK() -> SemigroupKInstance {
+        return SemigroupKInstance()
     }
     
-    public static func monoid() -> ArrayKMonoid<A> {
-        return ArrayKMonoid<A>()
+    public static func monoid() -> MonoidInstance<A> {
+        return MonoidInstance<A>()
     }
     
-    public static func monoidK() -> ArrayKMonoidK {
-        return ArrayKMonoidK()
+    public static func monoidK() -> MonoidKInstance {
+        return MonoidKInstance()
     }
     
-    public static func functorFilter() -> ArrayKFunctorFilter {
-        return ArrayKFunctorFilter()
+    public static func functorFilter() -> FunctorFilterInstance {
+        return FunctorFilterInstance()
     }
     
-    public static func monadFilter() -> ArrayKMonadFilter {
-        return ArrayKMonadFilter()
+    public static func monadFilter() -> MonadFilterInstance {
+        return MonadFilterInstance()
     }
     
-    public static func monadCombine() -> ArrayKMonadCombine {
-        return ArrayKMonadCombine()
+    public static func monadCombine() -> MonadCombineInstance {
+        return MonadCombineInstance()
     }
     
-    public static func eq<EqA>(_ eqa : EqA) -> ArrayKEq<A, EqA> {
-        return ArrayKEq<A, EqA>(eqa)
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
-}
 
-public class ArrayKFunctor : Functor {
-    public typealias F = ForArrayK
-    
-    public func map<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> B) -> ArrayKOf<B> {
-        return fa.fix().map(f)
+    public class FunctorInstance : Functor {
+        public typealias F = ForArrayK
+        
+        public func map<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> B) -> ArrayKOf<B> {
+            return fa.fix().map(f)
+        }
     }
-}
 
-public class ArrayKApplicative : ArrayKFunctor, Applicative {
-    public func pure<A>(_ a: A) -> ArrayKOf<A> {
-        return ArrayK.pure(a)
+    public class ApplicativeInstance : FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> ArrayKOf<A> {
+            return ArrayK<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: ArrayKOf<(A) -> B>, _ fa: ArrayKOf<A>) -> ArrayKOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
     }
-    
-    public func ap<A, B>(_ ff: ArrayKOf<(A) -> B>, _ fa: ArrayKOf<A>) -> ArrayKOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
 
-public class ArrayKMonad : ArrayKApplicative, Monad {
-    public func flatMap<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
+    public class MonadInstance : ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
+            return ArrayK<A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
-        return ArrayK.tailRecM(a, f)
-    }
-}
 
-public class ArrayKFoldable : Foldable {
-    public typealias F = ForArrayK
-    
-    public func foldLeft<A, B>(_ fa: ArrayKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
+    public class FoldableInstance : Foldable {
+        public typealias F = ForArrayK
+        
+        public func foldLeft<A, B>(_ fa: ArrayKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: ArrayKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
     }
-    
-    public func foldRight<A, B>(_ fa: ArrayKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
-    }
-}
 
-public class ArrayKTraverse : ArrayKFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ArrayKOf<B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ArrayKOf<B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
     }
-}
 
-public class ArrayKSemigroupK : SemigroupK {
-    public typealias F = ForArrayK
-    
-    public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
-        return x.fix().combineK(y.fix())
+    public class SemigroupKInstance : SemigroupK {
+        public typealias F = ForArrayK
+        
+        public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
+            return x.fix().combineK(y.fix())
+        }
     }
-}
 
-public class ArrayKMonoidK : ArrayKSemigroupK, MonoidK {
-    public func emptyK<A>() -> ArrayKOf<A> {
-        return ArrayK<A>.empty()
+    public class MonoidKInstance : SemigroupKInstance, MonoidK {
+        public func emptyK<A>() -> ArrayKOf<A> {
+            return ArrayK<A>.empty()
+        }
     }
-}
 
-public class ArrayKFunctorFilter : ArrayKFunctor, FunctorFilter {
-    public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
-        return fa.fix().mapFilter(f)
+    public class FunctorFilterInstance : FunctorInstance, FunctorFilter {
+        public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
+            return fa.fix().mapFilter(f)
+        }
     }
-}
 
-public class ArrayKMonadFilter : ArrayKMonad, MonadFilter {
-    public func empty<A>() -> ArrayKOf<A> {
-        return ArrayK<A>.empty()
+    public class MonadFilterInstance : MonadInstance, MonadFilter {
+        public func empty<A>() -> ArrayKOf<A> {
+            return ArrayK<A>.empty()
+        }
+        
+        public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
+            return fa.fix().mapFilter(f)
+        }
     }
-    
-    public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
-        return fa.fix().mapFilter(f)
-    }
-}
 
-public class ArrayKMonadCombine : ArrayKMonadFilter, MonadCombine {
-    public func emptyK<A>() -> ArrayKOf<A> {
-        return ArrayK<A>.empty()
+    public class MonadCombineInstance : MonadFilterInstance, MonadCombine {
+        public func emptyK<A>() -> ArrayKOf<A> {
+            return ArrayK<A>.empty()
+        }
+        
+        public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
+            return x.fix().combineK(y.fix())
+        }
     }
-    
-    public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
-        return x.fix().combineK(y.fix())
-    }
-}
 
-public class ArrayKSemigroup<R> : Semigroup {
-    public typealias A = ArrayKOf<R>
-    
-    public func combine(_ a: ArrayKOf<R>, _ b: ArrayKOf<R>) -> ArrayKOf<R> {
-        return ArrayK.fix(a) + ArrayK.fix(b)
+    public class SemigroupInstance<R> : Semigroup {
+        public typealias A = ArrayKOf<R>
+        
+        public func combine(_ a: ArrayKOf<R>, _ b: ArrayKOf<R>) -> ArrayKOf<R> {
+            return ArrayK<R>.fix(a) + ArrayK<R>.fix(b)
+        }
     }
-}
 
-public class ArrayKMonoid<R> : ArrayKSemigroup<R>, Monoid {
-    public var empty: ArrayKOf<R> {
-        return ArrayK<R>.empty()
+    public class MonoidInstance<R> : SemigroupInstance<R>, Monoid {
+        public var empty: ArrayKOf<R> {
+            return ArrayK<R>.empty()
+        }
     }
-}
 
-public class ArrayKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = ArrayKOf<R>
-    
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: ArrayKOf<R>, _ b: ArrayKOf<R>) -> Bool {
-        let a = ArrayK.fix(a)
-        let b = ArrayK.fix(b)
-        if a.array.count != b.array.count {
-            return false
-        } else {
-            return zip(a.array, b.array).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = ArrayKOf<R>
+        
+        private let eqr : EqR
+        
+        init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: ArrayKOf<R>, _ b: ArrayKOf<R>) -> Bool {
+            let a = ArrayK<R>.fix(a)
+            let b = ArrayK<R>.fix(b)
+            if a.array.count != b.array.count {
+                return false
+            } else {
+                return zip(a.array, b.array).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+            }
         }
     }
 }
 
 public extension Array {
-    public static func eq<EqR>(_ eqr : EqR) -> ArrayEq<Element, EqR> where EqR : Eq, EqR.A == Element {
-        return ArrayEq(eqr)
+    public static func eq<EqR>(_ eqr : EqR) -> EqInstance<Element, EqR> where EqR : Eq, EqR.A == Element {
+        return EqInstance(eqr)
     }
-}
 
-public class ArrayEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = Array<R>
-    
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
-    }
-    
-    public func eqv(_ a: Array<R>, _ b: Array<R>) -> Bool {
-        if a.count != b.count {
-            return false
-        } else {
-            return zip(a, b).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = Array<R>
+        
+        private let eqr : EqR
+        
+        init(_ eqr : EqR) {
+            self.eqr = eqr
         }
-    }
-}
-
-extension ArrayK : Equatable where A : Equatable {
-    public static func ==(lhs : ArrayK<A>, rhs : ArrayK<A>) -> Bool {
-        return lhs.array == rhs.array
+        
+        public func eqv(_ a: Array<R>, _ b: Array<R>) -> Bool {
+            if a.count != b.count {
+                return false
+            } else {
+                return zip(a, b).map{ aa, bb in eqr.eqv(aa, bb) }.reduce(true, and)
+            }
+        }
     }
 }

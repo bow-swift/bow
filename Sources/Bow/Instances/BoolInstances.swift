@@ -1,58 +1,57 @@
 import Foundation
 
-/**
- Instance of `Semigroup` for `Bool`. Uses conjunction as combination of elements.
- */
-public class AndSemigroup : Semigroup {
-    public typealias A = Bool
-    
-    public func combine(_ a: Bool, _ b: Bool) -> Bool {
-        return a && b
-    }
-}
-
-/**
- Instance of `Monoid` for `Bool`. Uses conjunction as combination of elements.
- */
-public class AndMonoid : AndSemigroup, Monoid {
-    public var empty : Bool {
-        return true
-    }
-}
-
-/**
- Instance of `Semigroup` for `Bool`. Uses disjunction as combination of elements.
- */
-public class OrSemigroup : Semigroup {
-    public typealias A = Bool
-    
-    public func combine(_ a: Bool, _ b: Bool) -> Bool {
-        return a || b
-    }
-}
-
-/**
- Instance of `Monoid` for `Bool`. Uses disjunction as combination of elements.
- */
-public class OrMonoid : OrSemigroup, Monoid {
-    public var empty : Bool {
-        return false
-    }
-}
-
-/**
- Instance of `Eq` for `Bool`.
- */
-public class BoolEq : Eq {
-    public typealias A = Bool
-    
-    public func eqv(_ a: Bool, _ b: Bool) -> Bool {
-        return a == b
-    }
-}
-
-// MARK: Typeclass instances
 public extension Bool {
+    /**
+     Instance of `Semigroup` for `Bool`. Uses conjunction as combination of elements.
+     */
+    public class AndSemigroup : Semigroup {
+        public typealias A = Bool
+        
+        public func combine(_ a: Bool, _ b: Bool) -> Bool {
+            return a && b
+        }
+    }
+
+    /**
+     Instance of `Monoid` for `Bool`. Uses conjunction as combination of elements.
+     */
+    public class AndMonoid : AndSemigroup, Monoid {
+        public var empty : Bool {
+            return true
+        }
+    }
+
+    /**
+     Instance of `Semigroup` for `Bool`. Uses disjunction as combination of elements.
+     */
+    public class OrSemigroup : Semigroup {
+        public typealias A = Bool
+        
+        public func combine(_ a: Bool, _ b: Bool) -> Bool {
+            return a || b
+        }
+    }
+
+    /**
+     Instance of `Monoid` for `Bool`. Uses disjunction as combination of elements.
+     */
+    public class OrMonoid : OrSemigroup, Monoid {
+        public var empty : Bool {
+            return false
+        }
+    }
+
+    /**
+     Instance of `Eq` for `Bool`.
+     */
+    public class BoolEq : Eq {
+        public typealias A = Bool
+        
+        public func eqv(_ a: Bool, _ b: Bool) -> Bool {
+            return a == b
+        }
+    }
+
     /**
      Provides an instance of `Semigroup` for `Bool`, using conjunction.
      */

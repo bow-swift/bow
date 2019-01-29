@@ -41,29 +41,29 @@ public class Store<S, V> : StoreOf<S, V> {
 }
 
 public extension Store {
-    public static func functor() -> StoreFunctor<S> {
-        return StoreFunctor<S>()
+    public static func functor() -> FunctorInstance<S> {
+        return FunctorInstance<S>()
     }
     
-    public static func comonad() -> StoreComonad<S> {
-        return StoreComonad<S>()
+    public static func comonad() -> ComonadInstance<S> {
+        return ComonadInstance<S>()
     }
-}
 
-public class StoreFunctor<S> : Functor {
-    public typealias F = StorePartial<S>
-    
-    public func map<A, B>(_ fa: StoreOf<S, A>, _ f: @escaping (A) -> B) -> StoreOf<S, B> {
-        return Store<S, A>.fix(fa).map(f)
+    public class FunctorInstance<S> : Functor {
+        public typealias F = StorePartial<S>
+        
+        public func map<A, B>(_ fa: StoreOf<S, A>, _ f: @escaping (A) -> B) -> StoreOf<S, B> {
+            return Store<S, A>.fix(fa).map(f)
+        }
     }
-}
 
-public class StoreComonad<S> : StoreFunctor<S>, Comonad {
-    public func coflatMap<A, B>(_ fa: StoreOf<S, A>, _ f: @escaping (StoreOf<S, A>) -> B) -> StoreOf<S, B> {
-        return Store<S, A>.fix(fa).coflatMap(f)
-    }
-    
-    public func extract<A>(_ fa: StoreOf<S, A>) -> A {
-        return Store<S, A>.fix(fa).extract()
+    public class ComonadInstance<S> : FunctorInstance<S>, Comonad {
+        public func coflatMap<A, B>(_ fa: StoreOf<S, A>, _ f: @escaping (StoreOf<S, A>) -> B) -> StoreOf<S, B> {
+            return Store<S, A>.fix(fa).coflatMap(f)
+        }
+        
+        public func extract<A>(_ fa: StoreOf<S, A>) -> A {
+            return Store<S, A>.fix(fa).extract()
+        }
     }
 }

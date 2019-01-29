@@ -92,114 +92,114 @@ public class FutureK<E, A> : FutureKOf<E, A> where E : Error {
 }
 
 public extension FutureK {
-    public static func functor() -> FutureKFunctor<E> {
-        return FutureKFunctor<E>()
+    public static func functor() -> FunctorInstance<E> {
+        return FunctorInstance<E>()
     }
     
-    public static func applicative() -> FutureKApplicative<E> {
-        return FutureKApplicative<E>()
+    public static func applicative() -> ApplicativeInstance<E> {
+        return ApplicativeInstance<E>()
     }
     
-    public static func monad() -> FutureKMonad<E> {
-        return FutureKMonad<E>()
+    public static func monad() -> MonadInstance<E> {
+        return MonadInstance<E>()
     }
     
-    public static func applicativeError() -> FutureKApplicativeError<E> {
-        return FutureKApplicativeError<E>()
+    public static func applicativeError() -> ApplicativeErrorInstance<E> {
+        return ApplicativeErrorInstance<E>()
     }
     
-    public static func monadError() -> FutureKMonadError<E> {
-        return FutureKMonadError<E>()
+    public static func monadError() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
-    public static func monadDefer() -> FutureKMonadDefer<E> {
-        return FutureKMonadDefer<E>()
+    public static func monadDefer() -> MonadDeferInstance<E> {
+        return MonadDeferInstance<E>()
     }
     
-    public static func async() -> FutureKAsync<E> {
-        return FutureKAsync<E>()
+    public static func async() -> AsyncInstance<E> {
+        return AsyncInstance<E>()
     }
     
-    public static func effect() -> FutureKEffect<E> {
-        return FutureKEffect<E>()
+    public static func effect() -> EffectInstance<E> {
+        return EffectInstance<E>()
     }
-}
 
-public class FutureKFunctor<E> : Functor where E : Error {
-    public typealias F = FutureKPartial<E>
-    
-    public func map<A, B>(_ fa: FutureKOf<E, A>, _ f: @escaping (A) -> B) -> FutureKOf<E, B> {
-        return FutureK<E, A>.fix(fa).map(f)
+    public class FunctorInstance<E> : Functor where E : Error {
+        public typealias F = FutureKPartial<E>
+        
+        public func map<A, B>(_ fa: FutureKOf<E, A>, _ f: @escaping (A) -> B) -> FutureKOf<E, B> {
+            return FutureK<E, A>.fix(fa).map(f)
+        }
     }
-}
 
-public class FutureKApplicative<E> : FutureKFunctor<E>, Applicative where E : Error {
-    public func pure<A>(_ a: A) -> FutureKOf<E, A> {
-        return FutureK<E, A>.pure(a)
+    public class ApplicativeInstance<E> : FunctorInstance<E>, Applicative where E : Error {
+        public func pure<A>(_ a: A) -> FutureKOf<E, A> {
+            return FutureK<E, A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: FutureKOf<E, (A) -> B>, _ fa: FutureKOf<E, A>) -> FutureKOf<E, B> {
+            return FutureK<E, (A) -> B>.fix(ff).ap(fa)
+        }
     }
-    
-    public func ap<A, B>(_ ff: FutureKOf<E, (A) -> B>, _ fa: FutureKOf<E, A>) -> FutureKOf<E, B> {
-        return FutureK.fix(ff).ap(fa)
-    }
-}
 
-public class FutureKMonad<E> : FutureKApplicative<E>, Monad where E : Error {
-    public func flatMap<A, B>(_ fa: FutureKOf<E, A>, _ f: @escaping (A) -> FutureKOf<E, B>) -> FutureKOf<E, B> {
-        return FutureK<E, A>.fix(fa).flatMap(f)
+    public class MonadInstance<E> : ApplicativeInstance<E>, Monad where E : Error {
+        public func flatMap<A, B>(_ fa: FutureKOf<E, A>, _ f: @escaping (A) -> FutureKOf<E, B>) -> FutureKOf<E, B> {
+            return FutureK<E, A>.fix(fa).flatMap(f)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FutureKOf<E, Either<A, B>>) -> FutureKOf<E, B> {
+            return FutureK<E, A>.tailRecM(a, f)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FutureKOf<E, Either<A, B>>) -> FutureKOf<E, B> {
-        return FutureK<E, A>.tailRecM(a, f)
-    }
-}
 
-public class FutureKApplicativeError<Err> : FutureKApplicative<Err>, ApplicativeError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> FutureKOf<E, A> {
-        return FutureK<E, A>.raiseError(e)
+    public class ApplicativeErrorInstance<Err> : ApplicativeInstance<Err>, ApplicativeError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> FutureKOf<E, A> {
+            return FutureK<E, A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: FutureKOf<E, A>, _ f: @escaping (Err) -> FutureKOf<E, A>) -> FutureKOf<E, A> {
+            return FutureK<E, A>.fix(fa).handleErrorWith(f)
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: FutureKOf<E, A>, _ f: @escaping (Err) -> FutureKOf<E, A>) -> FutureKOf<E, A> {
-        return FutureK<E, A>.fix(fa).handleErrorWith(f)
-    }
-}
 
-public class FutureKMonadError<Err> : FutureKMonad<Err>, MonadError where Err : Error {
-    public typealias E = Err
-    
-    public func raiseError<A>(_ e: Err) -> FutureKOf<E, A> {
-        return FutureK<E, A>.raiseError(e)
+    public class MonadErrorInstance<Err> : MonadInstance<Err>, MonadError where Err : Error {
+        public typealias E = Err
+        
+        public func raiseError<A>(_ e: Err) -> FutureKOf<E, A> {
+            return FutureK<E, A>.raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: FutureKOf<E, A>, _ f: @escaping (Err) -> FutureKOf<E, A>) -> FutureKOf<E, A> {
+            return FutureK<E, A>.fix(fa).handleErrorWith(f)
+        }
     }
-    
-    public func handleErrorWith<A>(_ fa: FutureKOf<E, A>, _ f: @escaping (Err) -> FutureKOf<E, A>) -> FutureKOf<E, A> {
-        return FutureK<E, A>.fix(fa).handleErrorWith(f)
-    }
-}
 
-public class FutureKMonadDefer<Err> : FutureKMonadError<Err>, MonadDefer where Err : Error {
-    public func suspend<A>(_ fa: @escaping () -> FutureKOf<E, A>) -> FutureKOf<E, A> {
-        return FutureK<E, A>.suspend(fa)
+    public class MonadDeferInstance<Err> : MonadErrorInstance<Err>, MonadDefer where Err : Error {
+        public func suspend<A>(_ fa: @escaping () -> FutureKOf<E, A>) -> FutureKOf<E, A> {
+            return FutureK<E, A>.suspend(fa)
+        }
     }
-}
 
-public class FutureKAsync<Err> : FutureKMonadDefer<Err>, BowEffects.Async where Err : Error {
-    public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> FutureKOf<E, A> {
-        return Future { complete in
-            do {
-                try fa { either in
-                    either.fold({ e in complete(.failure(e as! E)) },
-                                { a in complete(.success(a)) })
-                }
-            } catch {}
-        }.k()
+    public class AsyncInstance<Err> : MonadDeferInstance<Err>, BowEffects.Async where Err : Error {
+        public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> FutureKOf<E, A> {
+            return Future { complete in
+                do {
+                    try fa { either in
+                        either.fold({ e in complete(.failure(e as! E)) },
+                                    { a in complete(.success(a)) })
+                    }
+                } catch {}
+            }.k()
+        }
     }
-}
 
-public class FutureKEffect<Err> : FutureKAsync<Err>, Effect where Err : Error {
-    public func runAsync<A>(_ fa: FutureKOf<E, A>, _ callback: @escaping (Either<Error, A>) -> FutureKOf<E, ()>) -> FutureKOf<E, ()> {
-        return FutureK<E, A>.fix(fa).value
-            .flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
-            .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
+    public class EffectInstance<Err> : AsyncInstance<Err>, Effect where Err : Error {
+        public func runAsync<A>(_ fa: FutureKOf<E, A>, _ callback: @escaping (Either<Error, A>) -> FutureKOf<E, ()>) -> FutureKOf<E, ()> {
+            return FutureK<E, A>.fix(fa).value
+                .flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
+                .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
+        }
     }
 }

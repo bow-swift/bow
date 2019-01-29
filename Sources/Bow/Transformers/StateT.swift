@@ -151,153 +151,153 @@ public extension StateT where F == ForId {
 }
 
 public extension StateT {
-    public static func functor<FuncF>(_ functor : FuncF) -> StateTFunctor<F, S, FuncF> {
-        return StateTFunctor<F, S, FuncF>(functor)
+    public static func functor<FuncF>(_ functor : FuncF) -> FunctorInstance<F, S, FuncF> {
+        return FunctorInstance<F, S, FuncF>(functor)
     }
     
-    public static func applicative<MonF>(_ monad : MonF) -> StateTApplicative<F, S, MonF> {
-        return StateTApplicative<F, S, MonF>(monad)
+    public static func applicative<MonF>(_ monad : MonF) -> ApplicativeInstance<F, S, MonF> {
+        return ApplicativeInstance<F, S, MonF>(monad)
     }
     
-    public static func monad<MonF>(_ monad : MonF) -> StateTMonad<F, S, MonF> {
-        return StateTMonad<F, S, MonF>(monad)
+    public static func monad<MonF>(_ monad : MonF) -> MonadInstance<F, S, MonF> {
+        return MonadInstance<F, S, MonF>(monad)
     }
     
-    public static func monadState<MonF>(_ monad : MonF) -> StateTMonadState<F, S, MonF> {
-        return StateTMonadState<F, S, MonF>(monad)
+    public static func monadState<MonF>(_ monad : MonF) -> MonadStateInstance<F, S, MonF> {
+        return MonadStateInstance<F, S, MonF>(monad)
     }
     
-    public static func semigroupK<MonF, SemiKF>(_ monad : MonF, _ semigroupK : SemiKF) -> StateTSemigroupK<F, S, MonF, SemiKF> {
-        return StateTSemigroupK<F, S, MonF, SemiKF>(monad, semigroupK)
+    public static func semigroupK<MonF, SemiKF>(_ monad : MonF, _ semigroupK : SemiKF) -> SemigroupKInstance<F, S, MonF, SemiKF> {
+        return SemigroupKInstance<F, S, MonF, SemiKF>(monad, semigroupK)
     }
     
-    public static func monadCombine<MonComF>(_ monadCombine : MonComF) -> StateTMonadCombine<F, S, MonComF> {
-        return StateTMonadCombine<F, S, MonComF>(monadCombine)
+    public static func monadCombine<MonComF>(_ monadCombine : MonComF) -> MonadCombineInstance<F, S, MonComF> {
+        return MonadCombineInstance<F, S, MonComF>(monadCombine)
     }
     
-    public static func applicativeError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {
-        return StateTMonadError<F, S, Err, MonErrF>(monadError)
+    public static func applicativeError<Err, MonErrF>(_ monadError : MonErrF) -> MonadErrorInstance<F, S, Err, MonErrF> {
+        return MonadErrorInstance<F, S, Err, MonErrF>(monadError)
     }
     
-    public static func monadError<Err, MonErrF>(_ monadError : MonErrF) -> StateTMonadError<F, S, Err, MonErrF> {
-        return StateTMonadError<F, S, Err, MonErrF>(monadError)
+    public static func monadError<Err, MonErrF>(_ monadError : MonErrF) -> MonadErrorInstance<F, S, Err, MonErrF> {
+        return MonadErrorInstance<F, S, Err, MonErrF>(monadError)
     }
-}
 
-public class StateTFunctor<G, S, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
-    public typealias F = StateTPartial<G, S>
-    
-    private let functor : FuncG
-    
-    public init(_ functor : FuncG) {
-        self.functor = functor
+    public class FunctorInstance<G, S, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
+        public typealias F = StateTPartial<G, S>
+        
+        private let functor : FuncG
+        
+        init(_ functor : FuncG) {
+            self.functor = functor
+        }
+        
+        public func map<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> B) -> StateTOf<G, S, B> {
+            return StateT<G, S, A>.fix(fa).map(f, functor)
+        }
     }
-    
-    public func map<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> B) -> StateTOf<G, S, B> {
-        return StateT.fix(fa).map(f, functor)
-    }
-}
 
-public class StateTApplicative<G, S, MonG> : StateTFunctor<G, S, MonG>, Applicative where MonG : Monad, MonG.F == G {
-    fileprivate let monad : MonG
-    
-    override public init(_ monad : MonG) {
-        self.monad = monad
-        super.init(monad)
+    public class ApplicativeInstance<G, S, MonG> : FunctorInstance<G, S, MonG>, Applicative where MonG : Monad, MonG.F == G {
+        fileprivate let monad : MonG
+        
+        override init(_ monad : MonG) {
+            self.monad = monad
+            super.init(monad)
+        }
+        
+        public func pure<A>(_ a: A) -> StateTOf<G, S, A> {
+            return StateT<G, S, A>(monad.pure({ s in self.monad.pure((s, a))}))
+        }
+        
+        public func ap<A, B>(_ ff: StateTOf<G, S, (A) -> B>, _ fa: StateTOf<G, S, A>) -> StateTOf<G, S, B> {
+            return StateT<G, S, (A) -> B>.fix(ff).ap(StateT<G, S, A>.fix(fa), monad)
+        }
     }
-    
-    public func pure<A>(_ a: A) -> StateTOf<G, S, A> {
-        return StateT(monad.pure({ s in self.monad.pure((s, a))}))
-    }
-    
-    public func ap<A, B>(_ ff: StateTOf<G, S, (A) -> B>, _ fa: StateTOf<G, S, A>) -> StateTOf<G, S, B> {
-        return StateT.fix(ff).ap(StateT.fix(fa), monad)
-    }
-}
 
-public class StateTMonad<G, S, MonG> : StateTApplicative<G, S, MonG>, Monad where MonG : Monad, MonG.F == G {
-    
-    public func flatMap<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> StateTOf<G, S, B>) -> StateTOf<G, S, B> {
-        return StateT.fix(fa).flatMap({ a in StateT.fix(f(a)) }, monad)
+    public class MonadInstance<G, S, MonG> : ApplicativeInstance<G, S, MonG>, Monad where MonG : Monad, MonG.F == G {
+        
+        public func flatMap<A, B>(_ fa: StateTOf<G, S, A>, _ f: @escaping (A) -> StateTOf<G, S, B>) -> StateTOf<G, S, B> {
+            return StateT<G, S, A>.fix(fa).flatMap({ a in StateT<G, S, B>.fix(f(a)) }, monad)
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<G, S, Either<A, B>>) -> StateTOf<G, S, B> {
+            return StateT<G, S, A>.tailRecM(a, f, monad)
+        }
     }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<G, S, Either<A, B>>) -> StateTOf<G, S, B> {
-        return StateT.tailRecM(a, f, monad)
-    }
-}
 
-public class StateTMonadState<G, R, MonG> : StateTMonad<G, R, MonG>, MonadState where MonG : Monad, MonG.F == G {
-    public typealias S = R
-    
-    public func get() -> StateTOf<G, R, R> {
-        return StateT<G, R, R>.get(monad)
+    public class MonadStateInstance<G, R, MonG> : MonadInstance<G, R, MonG>, MonadState where MonG : Monad, MonG.F == G {
+        public typealias S = R
+        
+        public func get() -> StateTOf<G, R, R> {
+            return StateT<G, R, R>.get(monad)
+        }
+        
+        public func set(_ s: R) -> StateTOf<G, R, ()> {
+            return StateT<G, R, Unit>.set(s, monad)
+        }
     }
-    
-    public func set(_ s: R) -> StateTOf<G, R, ()> {
-        return StateT<G, R, Unit>.set(s, monad)
-    }
-}
 
-public class StateTSemigroupK<G, S, MonG, SemiKG> : SemigroupK where MonG : Monad, MonG.F == G, SemiKG : SemigroupK, SemiKG.F == G {
-    public typealias F = StateTPartial<G, S>
-    
-    private let monad : MonG
-    private let semigroupK : SemiKG
-    
-    public init(_ monad : MonG, _ semigroupK : SemiKG) {
-        self.monad = monad
-        self.semigroupK = semigroupK
+    public class SemigroupKInstance<G, S, MonG, SemiKG> : SemigroupK where MonG : Monad, MonG.F == G, SemiKG : SemigroupK, SemiKG.F == G {
+        public typealias F = StateTPartial<G, S>
+        
+        private let monad : MonG
+        private let semigroupK : SemiKG
+        
+        init(_ monad : MonG, _ semigroupK : SemiKG) {
+            self.monad = monad
+            self.semigroupK = semigroupK
+        }
+        
+        public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
+            return StateT<G, S, A>.fix(x).combineK(StateT<G, S, A>.fix(y), monad, semigroupK)
+        }
     }
-    
-    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
-        return StateT.fix(x).combineK(StateT.fix(y), monad, semigroupK)
-    }
-}
 
-public class StateTMonadCombine<G, S, MonComG> : StateTMonad<G, S, MonComG>, MonadCombine where MonComG : MonadCombine, MonComG.F == G {
-    private let monadCombine : MonComG
-    
-    override public init(_ monadCombine : MonComG) {
-        self.monadCombine = monadCombine
-        super.init(monadCombine)
+    public class MonadCombineInstance<G, S, MonComG> : MonadInstance<G, S, MonComG>, MonadCombine where MonComG : MonadCombine, MonComG.F == G {
+        private let monadCombine : MonComG
+        
+        override init(_ monadCombine : MonComG) {
+            self.monadCombine = monadCombine
+            super.init(monadCombine)
+        }
+        
+        public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
+            return StateT<G, S, A>.fix(x).combineK(StateT<G, S, A>.fix(y), monadCombine, monadCombine)
+        }
+        
+        public func empty<A>() -> StateTOf<G, S, A> {
+            return liftT(monadCombine.empty())
+        }
+        
+        public func emptyK<A>() -> StateTOf<G, S, A> {
+            return liftT(monadCombine.empty())
+        }
+        
+        func liftT<A>(_ fa : Kind<G, A>) -> StateT<G, S, A> {
+            return StateT<G, S, A>(monad.pure({ s in self.monad.map(fa, { a in (s, a) }) }))
+        }
     }
-    
-    public func combineK<A>(_ x: StateTOf<G, S, A>, _ y: StateTOf<G, S, A>) -> StateTOf<G, S, A> {
-        return StateT.fix(x).combineK(StateT.fix(y), monadCombine, monadCombine)
-    }
-    
-    public func empty<A>() -> StateTOf<G, S, A> {
-        return liftT(monadCombine.empty())
-    }
-    
-    public func emptyK<A>() -> StateTOf<G, S, A> {
-        return liftT(monadCombine.empty())
-    }
-    
-    func liftT<A>(_ fa : Kind<G, A>) -> StateT<G, S, A> {
-        return StateT(monad.pure({ s in self.monad.map(fa, { a in (s, a) }) }))
-    }
-}
 
-public class StateTMonadError<G, S, Err, MonErrG> : StateTMonad<G, S, MonErrG>, MonadError where MonErrG : MonadError, MonErrG.F == G, MonErrG.E == Err {
-    public typealias E = Err
-    
-    private let monadError : MonErrG
-    
-    override public init(_ monadError : MonErrG) {
-        self.monadError = monadError
-        super.init(monadError)
-    }
-    
-    public func raiseError<A>(_ e: Err) -> StateTOf<G, S, A> {
-        return StateT<G, S, A>.lift(monadError.raiseError(e), monadError)
-    }
-    
-    public func handleErrorWith<A>(_ fa: StateTOf<G, S, A>, _ f: @escaping (Err) -> StateTOf<G, S, A>) -> StateTOf<G, S, A> {
-        return StateT<G, S, A>(monadError.pure({ s in
-            self.monadError.handleErrorWith(StateT.fix(fa).runM(s, self.monadError), { e in
-                StateT.fix(f(e)).runM(s, self.monadError)
-            })
-        }))
+    public class MonadErrorInstance<G, S, Err, MonErrG> : MonadInstance<G, S, MonErrG>, MonadError where MonErrG : MonadError, MonErrG.F == G, MonErrG.E == Err {
+        public typealias E = Err
+        
+        private let monadError : MonErrG
+        
+        override init(_ monadError : MonErrG) {
+            self.monadError = monadError
+            super.init(monadError)
+        }
+        
+        public func raiseError<A>(_ e: Err) -> StateTOf<G, S, A> {
+            return StateT<G, S, A>.lift(monadError.raiseError(e), monadError)
+        }
+        
+        public func handleErrorWith<A>(_ fa: StateTOf<G, S, A>, _ f: @escaping (Err) -> StateTOf<G, S, A>) -> StateTOf<G, S, A> {
+            return StateT<G, S, A>(monadError.pure({ s in
+                self.monadError.handleErrorWith(StateT<G, S, A>.fix(fa).runM(s, self.monadError), { e in
+                    StateT<G, S, A>.fix(f(e)).runM(s, self.monadError)
+                })
+            }))
+        }
     }
 }

@@ -292,6 +292,14 @@ extension Try : CustomDebugStringConvertible where A : CustomDebugStringConverti
     }
 }
 
+/// Conformance of `Try` to `Equatable`, provided that success/failure arguments conform to `Equatable`.
+extension Try : Equatable where A : Equatable {
+    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
+        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
+                        { a in rhs.fold(constant(false), { b in a == b }) })
+    }
+}
+
 // MARK: Kind extensions
 
 public extension Kind where F == ForTry {
@@ -310,146 +318,152 @@ public extension Try {
     
     /// Obtains an instance of `Functor` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryFunctor`.
-    public static func functor() -> TryFunctor {
-        return TryFunctor()
+    /// - Returns: Instance of `FunctorInstance`.
+    public static func functor() -> FunctorInstance {
+        return FunctorInstance()
     }
     
     /// Obtains an instance of `Applicative` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryApplicative`.
-    public static func applicative() -> TryApplicative {
-        return TryApplicative()
+    /// - Returns: Instance of `ApplicativeInstance`.
+    public static func applicative() -> ApplicativeInstance {
+        return ApplicativeInstance()
     }
     
     /// Obtains an instance of `Monad` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryMonad`.
-    public static func monad() -> TryMonad {
-        return TryMonad()
+    /// - Returns: Instance of `MonadInstance`.
+    public static func monad() -> MonadInstance {
+        return MonadInstance()
     }
     
     /// Obtains an instance of `ApplicativeError` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryMonadError`.
-    public static func applicativeError<E>() -> TryMonadError<E> {
-        return TryMonadError<E>()
+    /// - Returns: Instance of `ApplicativeErrorInstance`.
+    public static func applicativeError<E>() -> ApplicativeErrorInstance<E> {
+        return ApplicativeErrorInstance<E>()
     }
     
     /// Obtains an instance of `MonadError` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryMonadError`
-    public static func monadError<E>() -> TryMonadError<E> {
-        return TryMonadError<E>()
+    /// - Returns: Instance of `MonadErrorInstance`
+    public static func monadError<E>() -> MonadErrorInstance<E> {
+        return MonadErrorInstance<E>()
     }
     
     /// Obtains an instance of `Eq` typeclass for `Try`.
     ///
     /// - Parameter eqa: Instance of `Eq` for its type argument.
-    /// - Returns: Instance of `TryEq`.
-    public static func eq<EqA>(_ eqa : EqA) -> TryEq<A, EqA> {
-        return TryEq<A, EqA>(eqa)
+    /// - Returns: Instance of `EqInstance`.
+    public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+        return EqInstance<A, EqA>(eqa)
     }
     
     /// Obtains an instance of the `Foldable` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryFoldable`.
-    public static func foldable() -> TryFoldable {
-        return TryFoldable()
+    /// - Returns: Instance of `FoldableInstance`.
+    public static func foldable() -> FoldableInstance {
+        return FoldableInstance()
     }
     
     /// Obtains an instance of the `Traverse` typeclass for `Try`.
     ///
-    /// - Returns: Instance of `TryTraverse`.
-    public static func traverse() -> TryTraverse {
-        return TryTraverse()
-    }
-}
-
-/// An instance of `Functor` typeclass for the `Try` data type.
-public class TryFunctor : Functor {
-    public typealias F = ForTry
-    
-    public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
-        return fa.fix().map(f)
-    }
-}
-
-/// An instance of `Applicative` typeclass for the `Try` data type.
-public class TryApplicative : TryFunctor, Applicative {
-    public func pure<A>(_ a: A) -> TryOf<A> {
-        return Try<A>.pure(a)
+    /// - Returns: Instance of `TraverseInstance`.
+    public static func traverse() -> TraverseInstance {
+        return TraverseInstance()
     }
     
-    public func ap<A, B>(_ ff: TryOf<(A) -> B>, _ fa: TryOf<A>) -> TryOf<B> {
-        return ff.fix().ap(fa.fix())
-    }
-}
-
-/// An instance of `Monad` typeclass for the `Try` data type.
-public class TryMonad : TryApplicative, Monad {
-    public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
-        return fa.fix().flatMap({ a in f(a).fix() })
+    /// An instance of `Functor` typeclass for the `Try` data type.
+    public class FunctorInstance: Functor {
+        public typealias F = ForTry
+        
+        public func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
+            return fa.fix().map(f)
+        }
     }
     
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
-        return Try<A>.tailRecM(a, { a in f(a).fix() })
-    }
-}
-
-/// An instance of `MonadError` typeclass for the `Try` data type.
-public class TryMonadError<C> : TryMonad, MonadError where C : Error{
-    public typealias E = C
-    
-    public func raiseError<A>(_ e: C) -> TryOf<A> {
-        return Try<A>.failure(e)
+    /// An instance of `Applicative` typeclass for the `Try` data type.
+    public class ApplicativeInstance: FunctorInstance, Applicative {
+        public func pure<A>(_ a: A) -> TryOf<A> {
+            return Try<A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: TryOf<(A) -> B>, _ fa: TryOf<A>) -> TryOf<B> {
+            return ff.fix().ap(fa.fix())
+        }
     }
     
-    public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
-        return fa.fix().recoverWith({ e in f(e as! C).fix() })
-    }
-}
-
-/// An instance of `Eq` typeclass for the `Try` data type.
-public class TryEq<R, EqR> : Eq where EqR : Eq, EqR.A == R {
-    public typealias A = TryOf<R>
-    private let eqr : EqR
-    
-    public init(_ eqr : EqR) {
-        self.eqr = eqr
+    /// An instance of `Monad` typeclass for the `Try` data type.
+    public class MonadInstance: ApplicativeInstance, Monad {
+        public func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
+            return fa.fix().flatMap({ a in f(a).fix() })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
+            return Try<A>.tailRecM(a, { a in f(a).fix() })
+        }
     }
     
-    public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
-        let a = Try.fix(a)
-        let b = Try.fix(b)
-        return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
-                      { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
-    }
-}
-
-/// An instance of `Foldable` typeclass for the `Try` data type.
-public class TryFoldable : Foldable {
-    public typealias F = ForTry
-    
-    public func foldLeft<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return fa.fix().foldLeft(b, f)
+    /// An instance of `MonadError` typeclass for the `Try` data type.
+    public class MonadErrorInstance<C>: MonadInstance, MonadError where C : Error {
+        public typealias E = C
+        
+        public func raiseError<A>(_ e: C) -> TryOf<A> {
+            return Try<A>.failure(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
+            return fa.fix().recoverWith({ e in f(e as! C).fix() })
+        }
     }
     
-    public func foldRight<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return fa.fix().foldRight(b, f)
+    /// An instance of `ApplicativeError` typeclass for the `Try` data type.
+    public class ApplicativeErrorInstance<C>: ApplicativeInstance, ApplicativeError where C : Error {
+        public typealias E = C
+        
+        public func raiseError<A>(_ e: C) -> TryOf<A> {
+            return Try<A>.monadError().raiseError(e)
+        }
+        
+        public func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (C) -> TryOf<A>) -> TryOf<A> {
+            return Try<A>.monadError().handleErrorWith(fa, f)
+        }
     }
-}
-
-public class TryTraverse : TryFoldable, Traverse {
-    public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
-        return fa.fix().traverse(f, applicative)
+    
+    /// An instance of `Eq` typeclass for the `Try` data type.
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R {
+        public typealias A = TryOf<R>
+        private let eqr : EqR
+        
+        init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+        
+        public func eqv(_ a: TryOf<R>, _ b: TryOf<R>) -> Bool {
+            let a = Try<R>.fix(a)
+            let b = Try<R>.fix(b)
+            return a.fold({ aError in b.fold({ bError in "\(aError)" == "\(bError)" }, constant(false))},
+                          { aSuccess in b.fold(constant(false), { bSuccess in eqr.eqv(aSuccess, bSuccess)})})
+        }
     }
-}
-
-/// Conformance of `Try` to `Equatable`, provided that success/failure arguments conform to `Equatable`.
-extension Try : Equatable where A : Equatable {
-    public static func ==(lhs : Try<A>, rhs : Try<A>) -> Bool {
-        return lhs.fold({ aError in rhs.fold({ bError in "\(aError)" == "\(bError)"}, constant(false))},
-                        { a in rhs.fold(constant(false), { b in a == b }) })
+    
+    /// An instance of `Foldable` typeclass for the `Try` data type.
+    public class FoldableInstance : Foldable {
+        public typealias F = ForTry
+        
+        public func foldLeft<A, B>(_ fa: Kind<ForTry, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+            return fa.fix().foldLeft(b, f)
+        }
+        
+        public func foldRight<A, B>(_ fa: Kind<ForTry, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+            return fa.fix().foldRight(b, f)
+        }
+    }
+    
+    /// An instance of `Traverse` typeclass for the `Try` data type.
+    public class TraverseInstance : FoldableInstance, Traverse {
+        public func traverse<G, A, B, Appl>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForTry, B>> where G == Appl.F, Appl : Applicative {
+            return fa.fix().traverse(f, applicative)
+        }
     }
 }

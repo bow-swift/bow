@@ -68,53 +68,51 @@ public extension Set {
 
 public extension SetK {
 
-	public static func semigroup() -> SetKSemigroup<A> {
-		return SetKSemigroup()
+	public static func semigroup() -> SemigroupInstance<A> {
+		return SemigroupInstance()
 	}
 
-	public static func monoid() -> SetKMonoid<A> {
-		return SetKMonoid()
+	public static func monoid() -> MonoidInstance<A> {
+		return MonoidInstance()
 	}
 
-	public static func eq<EqA>(_ eqa : EqA) -> SetKEq<A, EqA> {
-		return SetKEq<A, EqA>(eqa)
+	public static func eq<EqA>(_ eqa : EqA) -> EqInstance<A, EqA> {
+		return EqInstance<A, EqA>(eqa)
 	}
+
+    public class SemigroupInstance<R: Hashable>: Semigroup {
+        public typealias A = SetKOf<R>
+
+        public func combine(_ a : SetKOf<R>, _ b : SetKOf<R>) -> SetKOf<R>  {
+            return a.fix().combineK(b.fix())
+        }
+    }
+
+    public class MonoidInstance<R: Hashable>: SemigroupInstance<R>, Monoid {
+        public typealias A = SetKOf<R>
+
+        public var empty: SetKOf<R> {
+            return SetK<R>.empty()
+        }
+    }
+
+    public class EqInstance<R, EqR> : Eq where EqR : Eq, EqR.A == R, EqR.A : Hashable {
+        public typealias A = SetKOf<R>
+
+        private let eqr : EqR
+
+        init(_ eqr : EqR) {
+            self.eqr = eqr
+        }
+
+        public func eqv(_ setA: SetKOf<R>, _ setB: SetKOf<R>) -> Bool {
+            let a = setA.fix()
+            let b = setB.fix()
+            if a.set.count != b.set.count {
+                return false
+            } else {
+                return a.set.map { aa in b.set.contains{ bb in self.eqr.eqv(aa, bb) }}.reduce(true, and)
+            }
+        }
+    }
 }
-
-public class SetKSemigroup<R: Hashable>: Semigroup {
-	public typealias A = SetKOf<R>
-
-	public func combine(_ a : SetKOf<R>, _ b : SetKOf<R>) -> SetKOf<R>  {
-		return a.fix().combineK(b.fix())
-	}
-}
-
-public class SetKMonoid<R: Hashable>: SetKSemigroup<R>, Monoid {
-	public typealias A = SetKOf<R>
-
-	public var empty: SetKOf<R> {
-		return SetK<R>.empty()
-	}
-}
-
-public class SetKEq<R, EqR> : Eq where EqR : Eq, EqR.A == R, EqR.A : Hashable {
-	public typealias A = SetKOf<R>
-
-	private let eqr : EqR
-
-	public init(_ eqr : EqR) {
-		self.eqr = eqr
-	}
-
-	public func eqv(_ setA: SetKOf<R>, _ setB: SetKOf<R>) -> Bool {
-		let a = setA.fix()
-		let b = setB.fix()
-		if a.set.count != b.set.count {
-			return false
-		} else {
-			return a.set.map { aa in b.set.contains{ bb in self.eqr.eqv(aa, bb) }}.reduce(true, and)
-		}
-	}
-}
-
-

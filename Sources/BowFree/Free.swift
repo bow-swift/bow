@@ -160,69 +160,69 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
 }
 
 public extension Free {
-    public static func functor() -> FreeFunctor<S> {
-        return FreeFunctor<S>()
+    public static func functor() -> FunctorInstance<S> {
+        return FunctorInstance<S>()
     }
     
-    public static func applicative() -> FreeApplicativeInstance<S> {
-        return FreeApplicativeInstance<S>()
+    public static func applicative() -> ApplicativeInstance<S> {
+        return ApplicativeInstance<S>()
     }
     
-    public static func monad() -> FreeMonad<S> {
-        return FreeMonad<S>()
+    public static func monad() -> MonadInstance<S> {
+        return MonadInstance<S>()
     }
     
-    public static func eq<G, FuncK, Mon, EqGB>(_ functionK : FuncK, _ monad : Mon, _ eq : EqGB) -> FreeEq<S, G, A, FuncK, Mon, EqGB> {
-        return FreeEq<S, G, A, FuncK, Mon, EqGB>(functionK, monad, eq)
+    public static func eq<G, FuncK, Mon, EqGB>(_ functionK : FuncK, _ monad : Mon, _ eq : EqGB) -> EqInstance<S, G, A, FuncK, Mon, EqGB> {
+        return EqInstance<S, G, A, FuncK, Mon, EqGB>(functionK, monad, eq)
     }
-}
 
-public class FreeFunctor<S> : Functor {
-    public typealias F = FreePartial<S>
-    
-    public func map<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> B) -> FreeOf<S, B> {
-        return Free.fix(fa).map(f)
-    }
-}
-
-public class FreeApplicativeInstance<S> : FreeFunctor<S>, Applicative {
-    public func pure<A>(_ a: A) -> FreeOf<S, A> {
-        return Free.pure(a)
-    }
-    
-    public func ap<A, B>(_ ff: FreeOf<S, (A) -> B>, _ fa: FreeOf<S, A>) -> FreeOf<S, B> {
-        return Free.fix(ff).ap(Free.fix(fa))
-    }
-}
-
-public class FreeMonad<S> : FreeApplicativeInstance<S>, Monad {
-    public func flatMap<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> FreeOf<S, B>) -> FreeOf<S, B> {
-        return Free.fix(fa).flatMap({ a in Free.fix(f(a)) })
-    }
-    
-    public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FreeOf<S, Either<A, B>>) -> FreeOf<S, B> {
-        return flatMap(f(a)) { either in
-            either.fold({ left in self.tailRecM(left, f) },
-                        { right in self.pure(right) })
+    public class FunctorInstance<S> : Functor {
+        public typealias F = FreePartial<S>
+        
+        public func map<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> B) -> FreeOf<S, B> {
+            return Free<S, A>.fix(fa).map(f)
         }
     }
-}
 
-public class FreeEq<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == Kind<G, B> {
-    public typealias A = FreeOf<F, B>
-    
-    private let functionK : FuncKFG
-    private let monad : MonG
-    private let eq : EqGB
-    
-    public init(_ functionK : FuncKFG, _ monad : MonG, _ eq : EqGB) {
-        self.functionK = functionK
-        self.monad = monad
-        self.eq = eq
+    public class ApplicativeInstance<S> : FunctorInstance<S>, Applicative {
+        public func pure<A>(_ a: A) -> FreeOf<S, A> {
+            return Free<S, A>.pure(a)
+        }
+        
+        public func ap<A, B>(_ ff: FreeOf<S, (A) -> B>, _ fa: FreeOf<S, A>) -> FreeOf<S, B> {
+            return Free<S, (A) -> B>.fix(ff).ap(Free<S, A>.fix(fa))
+        }
     }
-    
-    public func eqv(_ a: FreeOf<F, B>, _ b: FreeOf<F, B>) -> Bool {
-        return eq.eqv(Free.fix(a).foldMap(functionK, monad),
-                      Free.fix(b).foldMap(functionK, monad))
+
+    public class MonadInstance<S> : ApplicativeInstance<S>, Monad {
+        public func flatMap<A, B>(_ fa: FreeOf<S, A>, _ f: @escaping (A) -> FreeOf<S, B>) -> FreeOf<S, B> {
+            return Free<S, A>.fix(fa).flatMap({ a in Free<S, B>.fix(f(a)) })
+        }
+        
+        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> FreeOf<S, Either<A, B>>) -> FreeOf<S, B> {
+            return flatMap(f(a)) { either in
+                either.fold({ left in self.tailRecM(left, f) },
+                            { right in self.pure(right) })
+            }
+        }
+    }
+
+    public class EqInstance<F, G, B, FuncKFG, MonG, EqGB> : Eq where FuncKFG : FunctionK, FuncKFG.F == F, FuncKFG.G == G, MonG : Monad, MonG.F == G, EqGB : Eq, EqGB.A == Kind<G, B> {
+        public typealias A = FreeOf<F, B>
+        
+        private let functionK : FuncKFG
+        private let monad : MonG
+        private let eq : EqGB
+        
+        init(_ functionK : FuncKFG, _ monad : MonG, _ eq : EqGB) {
+            self.functionK = functionK
+            self.monad = monad
+            self.eq = eq
+        }
+        
+        public func eqv(_ a: FreeOf<F, B>, _ b: FreeOf<F, B>) -> Bool {
+            return eq.eqv(Free<F, B>.fix(a).foldMap(functionK, monad),
+                          Free<F, B>.fix(b).foldMap(functionK, monad))
+        }
     }
 }
