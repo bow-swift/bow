@@ -67,11 +67,11 @@ public class ArrayK<A> : ArrayKOf<A> {
     }
     
     public func foldRight<B>(_ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        func loop(_ lkw : ArrayK<A>) -> Eval<B> {
-            if lkw.array.isEmpty {
+        func loop(_ ak : ArrayK<A>) -> Eval<B> {
+            if ak.array.isEmpty {
                 return b
             } else {
-                return f(lkw.array[0], Eval.deferEvaluation({ loop(ArrayK([A](lkw.array.dropFirst())))  }))
+                return f(ak.array[0], Eval.deferEvaluation({ loop(ArrayK([A](ak.array.dropFirst())))  }))
             }
         }
         return Eval.deferEvaluation({ loop(self) })

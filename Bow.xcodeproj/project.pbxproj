@@ -577,7 +577,6 @@
 		11DDCD27217F1FC200844D9D /* ReverseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseTest.swift; sourceTree = "<group>"; };
 		11E71712219D704F00B94845 /* BowOptics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOptics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E71802219D7D5900B94845 /* BowOpticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowOpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11E71804219D7D9500B94845 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11E71889219D81B300B94845 /* BowFree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowFree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5347BB21FF16CC00915E08 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-FreeTests-Info.plist"; sourceTree = "<group>"; };
 		8B5347BC21FF16CC00915E08 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-RxTests-Info.plist"; sourceTree = "<group>"; };
@@ -1631,7 +1630,6 @@
 		OBJ_87 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				11E71804219D7D9500B94845 /* Info.plist */,
 				11229806219DD2F5006D66C5 /* BowBrightFuturesTests */,
 				11D97EEC219EBB35008FC004 /* BowEffectsLaws */,
 				11229786219DC968006D66C5 /* BowEffectsTests */,
