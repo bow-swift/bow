@@ -50,7 +50,7 @@ public class Coyoneda<F, P, A> : CoyonedaOf<F, P, A> {
 fileprivate class YonedaFromCoyoneda<F, A, Func> : Yoneda<F, A> where Func : Functor, Func.F == F {
     private let functor : Func
     
-    public init(_ functor : Func) {
+    init(_ functor : Func) {
         self.functor = functor
     }
     

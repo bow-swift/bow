@@ -100,7 +100,7 @@ public extension Cofree {
         
         fileprivate let functor : Func
         
-        public init(_ functor : Func) {
+        init(_ functor : Func) {
             self.functor = functor
         }
         

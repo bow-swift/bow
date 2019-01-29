@@ -214,7 +214,7 @@ public extension Free {
         private let monad : MonG
         private let eq : EqGB
         
-        public init(_ functionK : FuncKFG, _ monad : MonG, _ eq : EqGB) {
+        init(_ functionK : FuncKFG, _ monad : MonG, _ eq : EqGB) {
             self.functionK = functionK
             self.monad = monad
             self.eq = eq
