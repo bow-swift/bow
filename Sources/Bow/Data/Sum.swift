@@ -71,7 +71,7 @@ public extension Sum {
         private let functorG : FuncG
         private let functorH : FuncH
         
-        public init(_ functorG : FuncG, _ functorH : FuncH) {
+        init(_ functorG : FuncG, _ functorH : FuncH) {
             self.functorG = functorG
             self.functorH = functorH
         }
@@ -86,7 +86,7 @@ public extension Sum {
         private let comonadG : ComonG
         private let comonadH : ComonH
         
-        override public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+        override init(_ comonadG : ComonG, _ comonadH : ComonH) {
             self.comonadG = comonadG
             self.comonadH = comonadH
             super.init(comonadG, comonadH)

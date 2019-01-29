@@ -303,7 +303,7 @@ public extension ArrayK {
         
         private let eqr : EqR
         
-        public init(_ eqr : EqR) {
+        init(_ eqr : EqR) {
             self.eqr = eqr
         }
         
@@ -329,7 +329,7 @@ public extension Array {
         
         private let eqr : EqR
         
-        public init(_ eqr : EqR) {
+        init(_ eqr : EqR) {
             self.eqr = eqr
         }
         

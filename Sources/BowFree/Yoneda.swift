@@ -69,7 +69,7 @@ public extension Yoneda {
         
         private let functor : Func
         
-        public init(_ functor : Func) {
+        init(_ functor : Func) {
             self.functor = functor
         }
         

@@ -451,7 +451,7 @@ public extension Option {
         public typealias A = OptionOf<R>
         private let semigroup : SemiG
         
-        public init(_ semigroup : SemiG) {
+        init(_ semigroup : SemiG) {
             self.semigroup = semigroup
         }
         

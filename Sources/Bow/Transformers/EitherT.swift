@@ -135,7 +135,7 @@ public extension EitherT {
         
         private let functor : Func
         
-        public init(_ functor : Func) {
+        init(_ functor : Func) {
             self.functor = functor
         }
         
@@ -148,7 +148,7 @@ public extension EitherT {
         
         fileprivate let monad : Mon
         
-        override public init(_ monad : Mon) {
+        override init(_ monad : Mon) {
             self.monad = monad
             super.init(monad)
         }
@@ -194,7 +194,7 @@ public extension EitherT {
         
         private let monad : Mon
         
-        public init(_ monad : Mon) {
+        init(_ monad : Mon) {
             self.monad = monad
         }
         
@@ -209,7 +209,7 @@ public extension EitherT {
         private let eq : EqA
         private let functor : Func
         
-        public init(_ eq : EqA, _ functor : Func) {
+        init(_ eq : EqA, _ functor : Func) {
             self.eq = eq
             self.functor = functor
         }

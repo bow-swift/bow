@@ -52,6 +52,12 @@ extension Const : CustomDebugStringConvertible where A : CustomDebugStringConver
     }
 }
 
+extension Const : Equatable where A : Equatable {
+    public static func ==(lhs : Const<A, T>, rhs : Const<A, T>) -> Bool {
+        return lhs.value == rhs.value
+    }
+}
+
 public extension Const {
     public static func functor() -> FunctorInstance<A> {
         return FunctorInstance<A>()
@@ -96,7 +102,7 @@ public extension Const {
     public class ApplicativeInstance<R, Mono> : FunctorInstance<R>, Applicative where Mono : Monoid, Mono.A == R {
         private let monoid : Mono
         
-        public init(_ monoid : Mono) {
+        init(_ monoid : Mono) {
             self.monoid = monoid
         }
         
@@ -113,7 +119,7 @@ public extension Const {
         public typealias A = ConstOf<R, S>
         private let semigroup : SemiG
         
-        public init(_ semigroup : SemiG) {
+        init(_ semigroup : SemiG) {
             self.semigroup = semigroup
         }
         
@@ -125,7 +131,7 @@ public extension Const {
     public class MonoidInstance<R, S, Mono> : SemigroupInstance<R, S, Mono>, Monoid where Mono : Monoid, Mono.A == R {
         private let monoid : Mono
         
-        override public init(_ monoid : Mono) {
+        override init(_ monoid : Mono) {
             self.monoid = monoid
             super.init(monoid)
         }
@@ -163,18 +169,12 @@ public extension Const {
         public typealias A = ConstOf<R, S>
         private let eqr : EqR
         
-        public init(_ eqr : EqR) {
+        init(_ eqr : EqR) {
             self.eqr = eqr
         }
         
         public func eqv(_ a: ConstOf<R, S>, _ b: ConstOf<R, S>) -> Bool {
             return eqr.eqv(Const<R, S>.fix(a).value, Const<R, S>.fix(b).value)
         }
-    }
-}
-
-extension Const : Equatable where A : Equatable {
-    public static func ==(lhs : Const<A, T>, rhs : Const<A, T>) -> Bool {
-        return lhs.value == rhs.value
     }
 }

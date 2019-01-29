@@ -188,7 +188,7 @@ public extension StateT {
         
         private let functor : FuncG
         
-        public init(_ functor : FuncG) {
+        init(_ functor : FuncG) {
             self.functor = functor
         }
         
@@ -200,7 +200,7 @@ public extension StateT {
     public class ApplicativeInstance<G, S, MonG> : FunctorInstance<G, S, MonG>, Applicative where MonG : Monad, MonG.F == G {
         fileprivate let monad : MonG
         
-        override public init(_ monad : MonG) {
+        override init(_ monad : MonG) {
             self.monad = monad
             super.init(monad)
         }
@@ -243,7 +243,7 @@ public extension StateT {
         private let monad : MonG
         private let semigroupK : SemiKG
         
-        public init(_ monad : MonG, _ semigroupK : SemiKG) {
+        init(_ monad : MonG, _ semigroupK : SemiKG) {
             self.monad = monad
             self.semigroupK = semigroupK
         }
@@ -256,7 +256,7 @@ public extension StateT {
     public class MonadCombineInstance<G, S, MonComG> : MonadInstance<G, S, MonComG>, MonadCombine where MonComG : MonadCombine, MonComG.F == G {
         private let monadCombine : MonComG
         
-        override public init(_ monadCombine : MonComG) {
+        override init(_ monadCombine : MonComG) {
             self.monadCombine = monadCombine
             super.init(monadCombine)
         }
@@ -283,7 +283,7 @@ public extension StateT {
         
         private let monadError : MonErrG
         
-        override public init(_ monadError : MonErrG) {
+        override init(_ monadError : MonErrG) {
             self.monadError = monadError
             super.init(monadError)
         }

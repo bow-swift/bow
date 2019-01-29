@@ -285,7 +285,7 @@ public extension NonEmptyArray {
         
         private let eqr : EqR
         
-        public init(_ eqr : EqR) {
+        init(_ eqr : EqR) {
             self.eqr = eqr
         }
         

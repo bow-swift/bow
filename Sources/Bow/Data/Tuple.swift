@@ -11,7 +11,7 @@ public class Tuple<A, B> {
         private let eqm : EqM
         private let eqn : EqN
         
-        public init(_ eqm : EqM, _ eqn : EqN) {
+        init(_ eqm : EqM, _ eqn : EqN) {
             self.eqm = eqm
             self.eqn = eqn
         }

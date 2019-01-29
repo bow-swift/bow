@@ -79,7 +79,7 @@ public extension Coproduct {
         private let functorG : FuncG
         private let functorH : FuncH
         
-        public init(_ functorG : FuncG, _ functorH : FuncH) {
+        init(_ functorG : FuncG, _ functorH : FuncH) {
             self.functorG = functorG
             self.functorH = functorH
         }
@@ -94,7 +94,7 @@ public extension Coproduct {
         private let comonadG : ComonG
         private let comonadH : ComonH
         
-        override public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+        override init(_ comonadG : ComonG, _ comonadH : ComonH) {
             self.comonadG = comonadG
             self.comonadH = comonadH
             super.init(comonadG, comonadH)
@@ -115,7 +115,7 @@ public extension Coproduct {
         private let foldableG : FoldG
         private let foldableH : FoldH
         
-        public init(_ foldableG : FoldG, _ foldableH : FoldH) {
+        init(_ foldableG : FoldG, _ foldableH : FoldH) {
             self.foldableG = foldableG
             self.foldableH = foldableH
         }
@@ -134,7 +134,7 @@ public extension Coproduct {
         private let traverseG : TravG
         private let traverseH : TravH
         
-        override public init(_ traverseG : TravG, _ traverseH : TravH) {
+        override init(_ traverseG : TravG, _ traverseH : TravH) {
             self.traverseG = traverseG
             self.traverseH = traverseH
             super.init(traverseG, traverseH)
@@ -150,7 +150,7 @@ public extension Coproduct {
         
         private let eq : EqB
         
-        public init(_ eq : EqB) {
+        init(_ eq : EqB) {
             self.eq = eq
         }
         

@@ -284,7 +284,7 @@ extension Id {
         
         private let eqb : EqB
         
-        public init(_ eqb : EqB) {
+        init(_ eqb : EqB) {
             self.eqb = eqb
         }
         

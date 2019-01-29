@@ -357,7 +357,7 @@ public extension IO {
 
     public class AsyncInstance<Err> : MonadErrorInstance<Err>, Async where Err : Error {
         public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
-            fatalError("Not implemented yet")
+            return IO<A>.suspend { fa().fix() }
         }
         
         public typealias F = ForIO
@@ -384,7 +384,7 @@ public extension IO {
         
         private let semigroup : SemiG
         
-        public init(_ semigroup : SemiG) {
+        init(_ semigroup : SemiG) {
             self.semigroup = semigroup
         }
         
@@ -396,7 +396,7 @@ public extension IO {
     public class MonoidInstance<B, Mono> : SemigroupInstance<B, Mono>, Monoid where Mono : Monoid, Mono.A == B {
         private let monoid : Mono
         
-        override public init(_ monoid : Mono) {
+        override init(_ monoid : Mono) {
             self.monoid = monoid
             super.init(monoid)
         }
@@ -412,7 +412,7 @@ public extension IO {
         private let eq : EqB
         private let eqError : EqError
         
-        public init(_ eq : EqB, _ eqError : EqError) {
+        init(_ eq : EqB, _ eqError : EqError) {
             self.eq = eq
             self.eqError = eqError
         }
