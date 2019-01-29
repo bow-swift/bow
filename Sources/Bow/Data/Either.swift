@@ -428,7 +428,7 @@ public extension Either {
         private let eql : EqL
         private let eqr : EqR
         
-        public init(_ eql : EqL, _ eqr : EqR) {
+        init(_ eql : EqL, _ eqr : EqR) {
             self.eql = eql
             self.eqr = eqr
         }

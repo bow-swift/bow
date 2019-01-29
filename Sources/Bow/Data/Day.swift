@@ -97,7 +97,7 @@ public extension Day {
         private let comonadG : ComonG
         private let comonadH : ComonH
         
-        public init(_ comonadG : ComonG, _ comonadH : ComonH) {
+        init(_ comonadG : ComonG, _ comonadH : ComonH) {
             self.comonadG = comonadG
             self.comonadH = comonadH
         }

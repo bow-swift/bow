@@ -215,7 +215,7 @@ public extension Validated {
     public class ValidatedApplicative<R, SemiG> : ValidatedFunctor<R>, Applicative where SemiG : Semigroup, SemiG.A == R {
         private let semigroup : SemiG
         
-        public init(_ semigroup : SemiG) {
+        init(_ semigroup : SemiG) {
             self.semigroup = semigroup
         }
         
@@ -263,7 +263,7 @@ public extension Validated {
         
         private let semigroup : SemiG
         
-        public init(_ semigroup : SemiG) {
+        init(_ semigroup : SemiG) {
             self.semigroup = semigroup
         }
         
@@ -277,7 +277,7 @@ public extension Validated {
         private let eql : EqL
         private let eqr : EqR
         
-        public init(_ eql : EqL, _ eqr : EqR) {
+        init(_ eql : EqL, _ eqr : EqR) {
             self.eql = eql
             self.eqr = eqr
         }

@@ -105,7 +105,7 @@ public extension Kleisli {
         
         private let functor : FuncG
         
-        public init(_ functor : FuncG) {
+        init(_ functor : FuncG) {
             self.functor = functor
         }
         
@@ -118,7 +118,7 @@ public extension Kleisli {
         
         private let applicative : ApplG
         
-        override public init(_ applicative : ApplG) {
+        override init(_ applicative : ApplG) {
             self.applicative = applicative
             super.init(applicative)
         }
@@ -136,7 +136,7 @@ public extension Kleisli {
         
         fileprivate let monad : MonG
         
-        override public init(_ monad : MonG) {
+        override init(_ monad : MonG) {
             self.monad = monad
             super.init(monad)
         }
@@ -167,7 +167,7 @@ public extension Kleisli {
         
         private let monadError : MonErrG
         
-        override public init(_ monadError : MonErrG) {
+        override init(_ monadError : MonErrG) {
             self.monadError = monadError
             super.init(monadError)
         }

@@ -239,7 +239,7 @@ public extension Try {
         public typealias A = TryOf<R>
         private let eqr : EqR
         
-        public init(_ eqr : EqR) {
+        init(_ eqr : EqR) {
             self.eqr = eqr
         }
         

@@ -175,7 +175,7 @@ public extension WriterT {
         
         private let functor : FuncG
         
-        public init(_ functor : FuncG) {
+        init(_ functor : FuncG) {
             self.functor = functor
         }
         
@@ -189,7 +189,7 @@ public extension WriterT {
         fileprivate let monad : MonG
         fileprivate let monoid : MonoW
         
-        public init(_ monad : MonG, _ monoid : MonoW) {
+        init(_ monad : MonG, _ monoid : MonoW) {
             self.monad = monad
             self.monoid = monoid
             super.init(monad)
@@ -219,7 +219,7 @@ public extension WriterT {
 
         private let monadFilter : MonFilG
         
-        override public init(_ monadFilter : MonFilG, _ monoid : MonoW) {
+        override init(_ monadFilter : MonFilG, _ monoid : MonoW) {
             self.monadFilter = monadFilter
             super.init(monadFilter, monoid)
         }
@@ -234,7 +234,7 @@ public extension WriterT {
         
         private let semigroupK : SemiKG
         
-        public init(_ semigroupK : SemiKG) {
+        init(_ semigroupK : SemiKG) {
             self.semigroupK = semigroupK
         }
         
@@ -247,7 +247,7 @@ public extension WriterT {
         
         private let monoidK : MonoKG
         
-        override public init(_ monoidK : MonoKG) {
+        override init(_ monoidK : MonoKG) {
             self.monoidK = monoidK
             super.init(monoidK)
         }
@@ -282,7 +282,7 @@ public extension WriterT {
         
         private let eq : EqF
         
-        public init(_ eq : EqF) {
+        init(_ eq : EqF) {
             self.eq = eq
         }
         

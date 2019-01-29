@@ -330,7 +330,7 @@ public extension Eval {
         
         private let eq : EqB
         
-        public init(_ eq : EqB) {
+        init(_ eq : EqB) {
             self.eq = eq
         }
         

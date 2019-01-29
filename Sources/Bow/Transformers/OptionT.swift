@@ -150,7 +150,7 @@ public extension OptionT {
         
         fileprivate let functor : FuncG
         
-        public init(_ functor : FuncG) {
+        init(_ functor : FuncG) {
             self.functor = functor
         }
         
@@ -170,7 +170,7 @@ public extension OptionT {
         
         fileprivate let monad : MonG
         
-        override public init(_ monad : MonG) {
+        override init(_ monad : MonG) {
             self.monad = monad
             super.init(monad)
         }
@@ -200,7 +200,7 @@ public extension OptionT {
         
         fileprivate let monad : MonG
         
-        public init(_ monad : MonG) {
+        init(_ monad : MonG) {
             self.monad = monad
         }
         
@@ -221,7 +221,7 @@ public extension OptionT {
         private let eq : EqF
         private let functor : Func
         
-        public init(_ eq : EqF, _ functor : Func) {
+        init(_ eq : EqF, _ functor : Func) {
             self.eq = eq
             self.functor = functor
         }
