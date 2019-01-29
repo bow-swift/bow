@@ -3,9 +3,7 @@ import Foundation
 public class First {}
 public class Last {}
 
-/**
- An instance of `Monoid` that keeps the first non-empty option.
- */
+/// An instance of `Monoid` that keeps the first non-empty option.
 public class FirstOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, First>
     
@@ -20,9 +18,7 @@ public class FirstOptionMonoid<B> : Monoid {
     }
 }
 
-/**
- An instance of `Monoid` that keeps the last non-empty option.
- */
+/// An instance of `Monoid` that keeps the last non-empty option.
 public class LastOptionMonoid<B> : Monoid {
     public typealias A = Const<Option<B>, Last>
     
