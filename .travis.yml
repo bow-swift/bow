@@ -70,6 +70,8 @@ jobs:
         keep-history: true
         local-dir: docs
         verbose: true
+        on:
+          branch: "jv-113-documentation-generation"
     - stage: publish-version
       if: branch = master AND tag IS present
       script:
