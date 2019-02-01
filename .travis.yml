@@ -49,6 +49,7 @@ jobs:
       env:
         - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
+      if: branch = jv-113-documentation-generation
       addons:
         homebrew:
           packages:
@@ -58,14 +59,17 @@ jobs:
         - gem install bundler
       script:
         - ./scripts/gen-docs.rb
+    - stage: deploy
+      script:
+        - pod --version
 
 cache:
   bundler: true
   directories:
     - Carthage
 
-deploy:
-  provider: script
-  script: sh scripts/push.sh
-  on:
-    tags: true
+# deploy:
+#   provider: script
+#   script: sh scripts/push.sh
+#   on:
+#     tags: true
