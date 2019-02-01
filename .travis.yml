@@ -13,6 +13,10 @@ env:
 
 jobs:
   include:
+    # No matrix support in Stages, but this is a matrix hack:
+    # Declare the same stage name multiple times to test multiple versions.
+    # Using a YAML alias to prevent redundancy.
+    # https://github.com/travis-ci/travis-ci/issues/8295#issuecomment-454167006
     - &test
       stage: test
       env:
@@ -49,7 +53,7 @@ jobs:
       env:
         - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
-      if: branch = master AND type != pull_request
+      # if: branch = master AND type != pull_request
       addons:
         homebrew:
           packages:
@@ -59,7 +63,12 @@ jobs:
         - gem install bundler
       script:
         - ./scripts/gen-docs.rb
-    - stage: deploy
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+    - stage: publish-version
       if: branch = master AND tag IS present
       script:
         - sh scripts/push.sh
