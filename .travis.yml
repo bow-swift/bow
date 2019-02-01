@@ -17,17 +17,10 @@ env:
 
 jobs:
   include:
-    - stage: test
-      matrix:
+    - &test
+      stage: test
+      env:
         - SCHEME="Bow"
-        - SCHEME="Bow-Free"
-        - SCHEME="Bow-Generic"
-        - SCHEME="Bow-Optics"
-        - SCHEME="Bow-RecursionSchemes"
-        - SCHEME="Bow-Result"
-        - SCHEME="Bow-Effects"
-        - SCHEME="Bow-Rx"
-        - SCHEME="Bow-BrightFutures"
       before_install:
         - carthage update --platform iOS --cache-builds
       script:
@@ -35,6 +28,30 @@ jobs:
         - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
       after_success:
         - bash <(curl -s https://codecov.io/bash)
+    - <<: *test
+      env:
+        - SCHEME="Bow-Free"
+    - <<: *test
+      env:
+        - SCHEME="Bow-Generic"
+    - <<: *test
+      env:
+        - SCHEME="Bow-Optics"
+    - <<: *test
+      env:
+        - SCHEME="Bow-RecursionSchemes"
+    - <<: *test
+      env:
+        - SCHEME="Bow-Result"
+    - <<: *test
+      env:
+        - SCHEME="Bow-Effects"
+    - <<: *test
+      env:
+        - SCHEME="Bow-Rx"
+    - <<: *test
+      env:
+        - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
       before_install:
         - gem update --system
