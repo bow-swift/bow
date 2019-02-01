@@ -60,8 +60,7 @@ jobs:
       script:
         - ./scripts/gen-docs.rb
     - stage: deploy
-      on:
-        tags: true
+      if: branch = master AND tag IS present
       script:
         - sh scripts/push.sh
 
