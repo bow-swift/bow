@@ -53,7 +53,7 @@ jobs:
       env:
         - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
-      # if: branch = master AND type != pull_request
+      if: branch = master AND type != pull_request
       addons:
         homebrew:
           packages:
@@ -69,9 +69,6 @@ jobs:
         github-token: $GITHUB_TOKEN
         keep-history: true
         local-dir: docs
-        verbose: true
-        on:
-          branch: "jv-113-documentation-generation"
     - stage: publish-version
       if: branch = master AND tag IS present
       script:
