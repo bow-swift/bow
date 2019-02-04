@@ -10,7 +10,7 @@ public typealias IdOf<A> = Kind<ForId, A>
 public class Id<A> : IdOf<A> {
     public let value : A
     
-    /// Lifts a pure value to `Id<A>`.
+    /// Lifts a pure value to `Id`.
     ///
     /// - Parameter a: Value to be lifted.
     /// - Returns: Parameter in the context of `Id`.
@@ -35,14 +35,14 @@ public class Id<A> : IdOf<A> {
     /// Safe downcast.
     ///
     /// - Parameter fa: Higher Kinded Type form of `Id`.
-    /// - Returns: Value casted to `Id<A>`.
+    /// - Returns: Value casted to `Id`.
     public static func fix(_ fa : IdOf<A>) -> Id<A> {
         return fa.fix()
     }
     
-    /// Constructs a value of `Id<A>`.
+    /// Constructs a value of `Id`.
     ///
-    /// - Parameter value: Value to be wrapped in `Id<A>`.
+    /// - Parameter value: Value to be wrapped in `Id`.
     public init(_ value : A) {
         self.value = value
     }
@@ -133,28 +133,28 @@ public class Id<A> : IdOf<A> {
 public extension Kind where F == ForId {
     /// Safe downcast.
     ///
-    /// - Returns: This value casted to `Id<A>`.
+    /// - Returns: This value casted to `Id`.
     public func fix() -> Id<A> {
         return self as! Id<A>
     }
 }
 
 // MARK: Protocol conformances
-/// Conformance of `Id<A>` to `CustomStringConvertible`.
+/// Conformance of `Id` to `CustomStringConvertible`.
 extension Id : CustomStringConvertible {
     public var description : String {
         return "Id(\(value))"
     }
 }
 
-/// Conformance of `Id<A>` to `CustomDebugStringConvertible`, given that type parameter `A` also conforms to `CustomDebugStringConvertible`.
+/// Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
 extension Id : CustomDebugStringConvertible where A : CustomDebugStringConvertible {
     public var debugDescription : String {
         return "Id(\(value.debugDescription))"
     }
 }
 
-/// Conformance of `Id<A>` to `Equatable`, given that type parameter `A` also conforms to `Equatable`.
+/// Conformance of `Id` to `Equatable`, given that type parameter also conforms to `Equatable`.
 extension Id : Equatable where A : Equatable {
     public static func ==(lhs : Id<A>, rhs : Id<A>) -> Bool {
         return lhs.value == rhs.value
@@ -221,7 +221,7 @@ extension Id {
 
     /// An instance of the `Functor` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.functor()` to obtain an instance of this type.
+    /// Use `Id.functor()` to obtain an instance of this type.
     public class FunctorInstance : Functor {
         public typealias F = ForId
         
@@ -232,7 +232,7 @@ extension Id {
 
     /// An instance of the `Applicative` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.applicative()` to obtain an instance of this type.
+    /// Use `Id.applicative()` to obtain an instance of this type.
     public class ApplicativeInstance : FunctorInstance, Applicative {
         public func pure<A>(_ a: A) -> IdOf<A> {
             return Id<A>.pure(a)
@@ -245,7 +245,7 @@ extension Id {
 
     /// An instance of the `Monad` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.monad()` to obtain an instance of this type.
+    /// Use `Id.monad()` to obtain an instance of this type.
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
             return fa.fix().flatMap({ a in f(a).fix() })
@@ -258,7 +258,7 @@ extension Id {
     
     /// An instance of the `Comonad` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.comonad()` to obtain an instance of this type.
+    /// Use `Id.comonad()` to obtain an instance of this type.
     public class ComonadInstance : FunctorInstance, Comonad {
         public func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
             return fa.fix().coflatMap(f as (Id<A>) -> B)
@@ -271,7 +271,7 @@ extension Id {
 
     /// An instance of the `Bimonad` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.bimonad()` to obtain an instance of this type.
+    /// Use `Id.bimonad()` to obtain an instance of this type.
     public class BimonadInstance : MonadInstance, Bimonad {
         public func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
             return Id<A>.comonad().coflatMap(fa, f)
@@ -284,7 +284,7 @@ extension Id {
 
     /// An instance of the `Foldable` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.foldable()` to obtain an instance of this type.
+    /// Use `Id.foldable()` to obtain an instance of this type.
     public class FoldableInstance : Foldable {
         public typealias F = ForId
         
@@ -299,7 +299,7 @@ extension Id {
 
     /// An instance of the `Traverse` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.traverse()` to obtain an instance of this type.
+    /// Use `Id.traverse()` to obtain an instance of this type.
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IdOf<B>> where G == Appl.F, Appl : Applicative {
             return fa.fix().traverse(f, applicative)
@@ -308,7 +308,7 @@ extension Id {
 
     /// An instance of the `Eq` typeclass for the `Id` data type.
     ///
-    /// Use `Id<A>.eq(_:)` to obtain an instance of this type.
+    /// Use `Id.eq(_:)` to obtain an instance of this type.
     public class EqInstance<B, EqB> : Eq where EqB : Eq, EqB.A == B {
         public typealias A = IdOf<B>
         
