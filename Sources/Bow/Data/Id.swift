@@ -18,7 +18,6 @@ public class Id<A> : IdOf<A> {
         return Id<A>(a)
     }
     
-    
     /// Tail recursion function on the context of `Id`.
     ///
     /// - Parameters:
