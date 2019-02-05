@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForIor {}
-public typealias IorOf<A, B> = Kind2<ForIor, A, B>
-public typealias IorPartial<A> = Kind<ForIor, A>
+public final class ForIor {}
+public final class IorPartial<A>: Kind<ForIor, A> {}
+public typealias IorOf<A, B> = Kind<IorPartial<A>, B>
 
 public class Ior<A, B> : IorOf<A, B> {
     public static func left(_ a : A) -> Ior<A, B> {

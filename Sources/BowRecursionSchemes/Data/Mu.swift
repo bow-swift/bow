@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public class ForMu {}
+public final class ForMu {}
 public typealias MuOf<F> = Kind<ForMu, F>
 
 open class Mu<F> : MuOf<F> {

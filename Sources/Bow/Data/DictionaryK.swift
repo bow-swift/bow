@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForDictionaryK {}
+public final class ForDictionaryK {}
 public typealias DictionaryKOf<K, A> = Kind2<ForDictionaryK, K, A>
 
 public class DictionaryK<K : Hashable, A> : DictionaryKOf<K, A> {

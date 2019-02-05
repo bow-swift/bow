@@ -3,7 +3,7 @@ import RxSwift
 import Bow
 import BowEffects
 
-public class ForObservableK {}
+public final class ForObservableK {}
 public typealias ObservableKOf<A> = Kind<ForObservableK, A>
 
 public extension Observable {

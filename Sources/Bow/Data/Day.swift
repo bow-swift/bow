@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForDay {}
-public typealias DayOf<F, G, A> = Kind3<ForDay, F, G, A>
-public typealias DayPartial<F, G> = Kind2<ForDay, F, G>
+public final class ForDay {}
+public final class DayPartial<F, G>: Kind2<ForDay, F, G> {}
+public typealias DayOf<F, G, A> = Kind<DayPartial<F, G>, A>
 
 public class Day<F, G, A> : DayOf<F, G, A> {
     public static func fix(_ value : DayOf<F, G, A>) -> Day<F, G, A> {

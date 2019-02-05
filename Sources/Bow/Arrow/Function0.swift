@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForFunction0 {}
+public final class ForFunction0 {}
 public typealias Function0Of<A> = Kind<ForFunction0, A>
 
 public class Function0<A> : Function0Of<A> {

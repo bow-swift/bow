@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForOptionT {}
-public typealias OptionTOf<F, A> = Kind2<ForOptionT, F, A>
-public typealias OptionTPartial<F> = Kind<ForOptionT, F>
+public final class ForOptionT {}
+public final class OptionTPartial<F>: Kind<ForOptionT, F> {}
+public typealias OptionTOf<F, A> = Kind<OptionTPartial<F>, A>
 
 public class OptionT<F, A> : OptionTOf<F, A> {
     fileprivate let value : Kind<F, Option<A>>

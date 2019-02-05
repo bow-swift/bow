@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForFunction1 {}
-public typealias Function1Of<I, O> = Kind2<ForFunction1, I, O>
-public typealias Function1Partial<I> = Kind<ForFunction1, I>
+public final class ForFunction1 {}
+public final class Function1Partial<I>: Kind<ForFunction1, I> {}
+public typealias Function1Of<I, O> = Kind<Function1Partial<I>, O>
 
 public class Function1<I, O> : Function1Of<I, O> {
     private let f : (I) -> O

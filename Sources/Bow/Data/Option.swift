@@ -3,7 +3,7 @@ import Foundation
 /**
  Witness for the `Option<A>` data type. To be used in simulated Higher Kinded Types.
  */
-public class ForOption {}
+public final class ForOption {}
 
 /**
  Higher Kinded Type alias to improve readability of `Kind<ForOption, A>`.

@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForYoneda {}
-public typealias YonedaOf<F, A> = Kind2<ForYoneda, F, A>
-public typealias YonedaPartial<F> = Kind<ForYoneda, F>
+public final class ForYoneda {}
+public final class YonedaPartial<F>: Kind<ForYoneda, F> {}
+public typealias YonedaOf<F, A> = Kind<YonedaPartial<F>, A>
 
 open class Yoneda<F, A> : YonedaOf<F, A> {
     public static func apply<Func>(_ fa : Kind<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {

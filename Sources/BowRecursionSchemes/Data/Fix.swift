@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public class ForFix {}
+public final class ForFix {}
 public typealias FixOf<A> = Kind<ForFix, A>
 
 public class Fix<A> : FixOf<A> {

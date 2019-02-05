@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public class ForIO {}
+public final class ForIO {}
 public typealias IOOf<A> = Kind<ForIO, A>
 
 public class IO<A> : IOOf<A> {

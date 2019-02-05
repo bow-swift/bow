@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForFold {}
-public typealias FoldOf<S, A> = Kind2<ForFold, S, A>
-public typealias FoldPartial<S> = Kind<ForFold, S>
+public final class ForFold {}
+public final class FoldPartial<S>: Kind<ForFold, S> {}
+public typealias FoldOf<S, A> = Kind<FoldPartial<S>, A>
 
 open class Fold<S, A> : FoldOf<S, A> {
     

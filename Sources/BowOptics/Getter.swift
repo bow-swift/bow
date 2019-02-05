@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForGetter {}
-public typealias GetterOf<S, A> = Kind2<ForGetter, S, A>
-public typealias GetterPartial<S> = Kind<ForGetter, S>
+public final class ForGetter {}
+public final class GetterPartial<S>: Kind<ForGetter, S> {}
+public typealias GetterOf<S, A> = Kind<GetterPartial<S>, A>
 
 public class Getter<S, A> : GetterOf<S, A> {
     private let getFunc : (S) -> A

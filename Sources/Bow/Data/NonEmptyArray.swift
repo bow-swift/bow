@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForNonEmptyArray {}
+public final class ForNonEmptyArray {}
 public typealias NonEmptyArrayOf<A> = Kind<ForNonEmptyArray, A>
 public typealias NEA<A> = NonEmptyArray<A>
 

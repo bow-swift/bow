@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPTraversal {}
-public typealias PTraversalOf<S, T, A, B> = Kind4<ForPTraversal, S, T, A, B>
-public typealias PTraversalPartial<S, T, A> = Kind3<ForPTraversal, S, T, A>
+public final class ForPTraversal {}
+public final class PTraversalPartial<S, T, A>: Kind3<ForPTraversal, S, T, A> {}
+public typealias PTraversalOf<S, T, A, B> = Kind<PTraversalPartial<S, T, A>, B>
 
 public typealias Traversal<S, A> = PTraversal<S, S, A, A>
 public typealias ForTraversal = ForPTraversal

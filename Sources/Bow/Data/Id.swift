@@ -3,7 +3,7 @@ import Foundation
 /**
  Witness for the `Id<A>` data type. To be used in simulated Higher Kinded Types.
  */
-public class ForId {}
+public final class ForId {}
 
 /**
  Higher Kinded Type alias to improve readability of `Kind<ForId, A>`.

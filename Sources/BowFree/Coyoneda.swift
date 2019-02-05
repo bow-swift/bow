@@ -1,10 +1,10 @@
 import Foundation
 import Bow
 
-public class ForCoyoneda {}
+public final class ForCoyoneda {}
 public typealias AnyFunc = (AnyObject) -> AnyObject
-public typealias CoyonedaOf<F, P, A> = Kind3<ForCoyoneda, F, P, A>
-public typealias CoyonedaPartial<F, P> = Kind2<ForCoyoneda, F, P>
+public final class CoyonedaPartial<F, P>: Kind2<ForCoyoneda, F, P> {}
+public typealias CoyonedaOf<F, P, A> = Kind<CoyonedaPartial<F, P>, A>
 
 public class Coyoneda<F, P, A> : CoyonedaOf<F, P, A> {
     private let pivot : Kind<F, P>

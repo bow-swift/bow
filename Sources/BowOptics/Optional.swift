@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPOptional {}
-public typealias POptionalOf<S, T, A, B> = Kind4<ForPOptional, S, T, A, B>
-public typealias POptionalPartial<S, T, A> = Kind3<ForPOptional, S, T, A>
+public final class ForPOptional {}
+public final class POptionalPartial<S, T, A>: Kind3<ForPOptional, S, T, A> {}
+public typealias POptionalOf<S, T, A, B> = Kind<POptionalPartial<S, T, A>, B>
 
 public typealias ForOptional = ForPOptional
 public typealias Optional<S, A> = POptional<S, S, A, A>

@@ -1,9 +1,9 @@
 import Foundation
 
-public class ForKleisli {}
+public final class ForKleisli {}
+public final class KleisliPartial<F, D>: Kind2<ForKleisli, F, D> {}
+public typealias KleisliOf<F, D, A> = Kind<KleisliPartial<F, D>, A>
 public typealias ReaderT<F, D, A> = Kleisli<F, D, A>
-public typealias KleisliOf<F, D, A> = Kind3<ForKleisli, F, D, A>
-public typealias KleisliPartial<F, D> = Kind2<ForKleisli, F, D>
 
 public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
     internal let run : (D) -> Kind<F, A>

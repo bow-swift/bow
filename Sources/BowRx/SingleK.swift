@@ -3,7 +3,7 @@ import RxSwift
 import Bow
 import BowEffects
 
-public class ForSingleK {}
+public final class ForSingleK {}
 public typealias SingleKOf<A> = Kind<ForSingleK, A>
 
 public extension PrimitiveSequence where Trait == SingleTrait {

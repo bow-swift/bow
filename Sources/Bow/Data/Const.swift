@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForConst {}
-public typealias ConstOf<A, T> = Kind2<ForConst, A, T>
-public typealias ConstPartial<A> = Kind<ForConst, A>
+public final class ForConst {}
+public final class ConstPartial<A>: Kind<ForConst, A> {}
+public typealias ConstOf<A, T> = Kind<ConstPartial<A>, T>
 
 public class Const<A, T> : ConstOf<A, T> {
     public let value : A

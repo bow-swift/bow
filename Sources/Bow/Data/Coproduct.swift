@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForCoproduct {}
-public typealias CoproductOf<F, G, A> = Kind3<ForCoproduct, F, G, A>
-public typealias CoproductPartial<F, G> = Kind2<ForCoproduct, F, G>
+public final class ForCoproduct {}
+public final class CoproductPartial<F, G>: Kind2<ForCoproduct, F, G> {}
+public typealias CoproductOf<F, G, A> = Kind<CoproductPartial<F, G>, A>
 
 public class Coproduct<F, G, A> : CoproductOf<F, G, A> {
     fileprivate let run : Either<Kind<F, A>, Kind<G, A>>

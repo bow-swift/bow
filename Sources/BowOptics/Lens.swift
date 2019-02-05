@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPLens {}
-public typealias PLensOf<S, T, A, B> = Kind4<ForPLens, S, T, A, B>
-public typealias PLensPartial<S, T, A> = Kind3<ForPLens, S, T, A>
+public final class ForPLens {}
+public final class PLensPartial<S, T, A>: Kind3<ForPLens, S, T, A> {}
+public typealias PLensOf<S, T, A, B> = Kind<PLensPartial<S, T, A>, B>
 
 public typealias Lens<S, A> = PLens<S, S, A, A>
 public typealias ForLens = ForPLens

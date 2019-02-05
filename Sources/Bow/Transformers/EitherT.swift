@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForEitherT {}
-public typealias EitherTOf<F, A, B> = Kind3<ForEitherT, F, A, B>
-public typealias EitherTPartial<F, A> = Kind2<ForEitherT, F, A>
+public final class ForEitherT {}
+public final class EitherTPartial<F, A>: Kind2<ForEitherT, F, A> {}
+public typealias EitherTOf<F, A, B> = Kind<EitherTPartial<F, A>, B>
 
 public class EitherT<F, A, B> : EitherTOf<F, A, B> {
     fileprivate let value : Kind<F, Either<A, B>>

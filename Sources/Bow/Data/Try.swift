@@ -6,7 +6,7 @@ public enum TryError : Error {
     case unsupportedOperation(String)
 }
 
-public class ForTry {}
+public final class ForTry {}
 public typealias TryOf<A> = Kind<ForTry, A>
 
 public class Try<A> : TryOf<A> {

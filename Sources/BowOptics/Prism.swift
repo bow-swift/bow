@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPPrism {}
-public typealias PPrismOf<S, T, A, B> = Kind4<ForPPrism, S, T, A, B>
-public typealias PPrismPartial<S, T, A> = Kind3<ForPPrism, S, T, A>
+public final class ForPPrism {}
+public final class PPrismPartial<S, T, A>: Kind3<ForPPrism, S, T, A> {}
+public typealias PPrismOf<S, T, A, B> = Kind<PPrismPartial<S, T, A>, B>
 
 public typealias ForPrism = ForPPrism
 public typealias Prism<S, A> = PPrism<S, S, A, A>

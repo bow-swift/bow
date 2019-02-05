@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForSetK {}
+public final class ForSetK {}
 public typealias SetKOf<A> = Kind<ForSetK, A>
 
 public class SetK<A: Hashable> : SetKOf<A> {

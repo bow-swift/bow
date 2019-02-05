@@ -1,8 +1,9 @@
 import Foundation
 
-public class ForCokleisli {}
+public final class ForCokleisli {}
+public final class CokleisliPartial<F, A>: Kind2<ForCokleisli, F, A> {}
+public typealias CokleisliOf<F, A, B> = Kind<CokleisliPartial<F, A>, B>
 public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
-public typealias CokleisliOf<F, A, B> = Kind3<ForCokleisli, F, A, B>
 
 public class Cokleisli<F, A, B> : CokleisliOf<F, A, B> {
     internal let run : (Kind<F, A>) -> B
@@ -15,7 +16,7 @@ public class Cokleisli<F, A, B> : CokleisliOf<F, A, B> {
         return Cokleisli<F, B, B>({ fb in comonad.extract(fb) })
     }
     
-    public static func fix(_ fa : Kind3<ForCokleisli, F, A, B>) -> Cokleisli<F, A, B> {
+    public static func fix(_ fa : Kind<CokleisliPartial<F, A>, B>) -> Cokleisli<F, A, B> {
         return fa as! Cokleisli<F, A, B>
     }
     

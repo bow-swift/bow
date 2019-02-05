@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForStateT {}
-public typealias StateTOf<F, S, A> = Kind3<ForStateT, F, S, A>
-public typealias StateTPartial<F, S> = Kind2<ForStateT, F, S>
+public final class ForStateT {}
+public final class StateTPartial<F, S>: Kind2<ForStateT, F, S> {}
+public typealias StateTOf<F, S, A> = Kind<StateTPartial<F, S>, A>
 
 public class StateT<F, S, A> : StateTOf<F, S, A> {
     private let runF : Kind<F, (S) -> Kind<F, (S,A)>>

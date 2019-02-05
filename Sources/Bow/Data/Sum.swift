@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForSum {}
-public typealias SumOf<F, G, V> = Kind3<ForSum, F, G, V>
-public typealias SumPartial<F, G> = Kind2<ForSum, F, G>
+public final class ForSum {}
+public final class SumPartial<F, G>: Kind2<ForSum, F, G> {}
+public typealias SumOf<F, G, V> = Kind<SumPartial<F, G>, V>
 
 public enum Side {
     case left

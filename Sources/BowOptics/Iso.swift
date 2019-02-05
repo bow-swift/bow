@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPIso {}
-public typealias PIsoOf<S, T, A, B> = Kind4<ForPIso, S, T, A, B>
-public typealias PIsoPartial<S, T, A> = Kind3<ForPIso, S, T, A>
+public final class ForPIso {}
+public final class PIsoPartial<S, T, A>: Kind3<ForPIso, S, T, A> {}
+public typealias PIsoOf<S, T, A, B> = Kind<PIsoPartial<S, T, A>, B>
 
 public typealias Iso<S, A> = PIso<S, S, A, A>
 public typealias ForIso = ForPIso

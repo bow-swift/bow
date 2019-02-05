@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForFree {}
-public typealias FreeOf<S, A> = Kind2<ForFree, S, A>
-public typealias FreePartial<S> = Kind<ForFree, S>
+public final class ForFree {}
+public final class FreePartial<S>: Kind<ForFree, S> {}
+public typealias FreeOf<S, A> = Kind<FreePartial<S>, A>
 
 public class Free<S, A> : FreeOf<S, A> {
     

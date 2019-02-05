@@ -3,23 +3,23 @@ import Foundation
 /**
  Witness for the `Either<A, B>` data type. To be used in simulated Higher Kinded Types.
  */
-public class ForEither {}
-
-/**
- Higher Kinded Type alias to improve readability over `Kind2<ForEither, A, B>`
- */
-public typealias EitherOf<A, B> = Kind2<ForEither, A, B>
+public final class ForEither {}
 
 /**
  Parial application of the Either type constructor, omitting the last parameter.
- 
+
  The following statements are equivalent:
- 
+
  ```swift
  EitherOf<A, B> == Kind2<ForEither, A, B> == Kind<EitherPartial<A>, B>
  ```
  */
-public typealias EitherPartial<A> = Kind<ForEither, A>
+public final class EitherPartial<A>: Kind<ForEither, A> {}
+
+/**
+ Higher Kinded Type alias to improve readability over `Kind2<ForEither, A, B>`
+ */
+public typealias EitherOf<A, B> = Kind<EitherPartial<A>, B>
 
 /**
  Sum type of types `A` and `B`. Represents a value of either one of those types, but not both at the same time. Values of type `A` are called `left`; values of type `B` are called right.
@@ -326,20 +326,20 @@ public extension Either {
     /**
      Obtains an instance of the `Bifunctor` typeclass for `Either`.
      */
-    public static func bifunctor() -> BifunctorInstance<A, B> {
+    /* public static func bifunctor() -> BifunctorInstance<A, B> {
         return BifunctorInstance<A, B>()
-    }
+    }*/
 
     /**
      An instance of the `Bifunctor` typeclass for the `Either` data type.
      */
-    public class BifunctorInstance<A, B>: Bifunctor {
+    /* public class BifunctorInstance<A, B>: Bifunctor {
         public typealias F = ForEither
 
         public func bimap<A, B, C, D>(_ fab: EitherOf<A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> EitherOf<C, D> {
             return Either<A, B>.fix(fab).bimap(f1, f2)
         }
-    }
+    }*/
 
 
     /**

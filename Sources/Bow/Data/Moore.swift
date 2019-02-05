@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForMoore {}
-public typealias MooreOf<E, V> = Kind2<ForMoore, E, V>
-public typealias MoorePartial<E> = Kind<ForMoore, E>
+public final class ForMoore {}
+public final class MoorePartial<E>: Kind<ForMoore, E> {}
+public typealias MooreOf<E, V> = Kind<MoorePartial<E>, V>
 
 public class Moore<E, V> : MooreOf<E, V> {
     public let view : V
@@ -50,11 +50,11 @@ public extension Moore {
     }
 
     public class ComonadInstance<E> : FunctorInstance<E>, Comonad {
-        public func coflatMap<A, B>(_ fa: Kind<Kind<ForMoore, E>, A>, _ f: @escaping (Kind<Kind<ForMoore, E>, A>) -> B) -> Kind<Kind<ForMoore, E>, B> {
+        public func coflatMap<A, B>(_ fa: Kind<MoorePartial<E>, A>, _ f: @escaping (Kind<MoorePartial<E>, A>) -> B) -> Kind<MoorePartial<E>, B> {
             return Moore<E, A>.fix(fa).coflatMap(f)
         }
         
-        public func extract<A>(_ fa: Kind<Kind<ForMoore, E>, A>) -> A {
+        public func extract<A>(_ fa: MooreOf<E, A>) -> A {
             return Moore<E, A>.fix(fa).extract()
         }
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForEval {}
+public final class ForEval {}
 public typealias EvalOf<A> = Kind<ForEval, A>
 
 public class Eval<A> : EvalOf<A> {

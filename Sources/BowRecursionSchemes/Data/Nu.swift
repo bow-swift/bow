@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public class ForNu {}
+public final class ForNu {}
 public typealias NuOf<F> = Kind<ForNu, F>
 
 public class Nu<F> : NuOf<F> {

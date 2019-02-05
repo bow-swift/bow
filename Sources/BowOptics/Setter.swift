@@ -1,8 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPSetter {}
-public typealias PSetterOf<S, T, A, B> = Kind4<ForPSetter, S, T, A, B>
+public final class ForPSetter {}
+public final class PSetterPartial<S, T, A>: Kind3<ForPSetter, S, T, A> {}
+public typealias PSetterOf<S, T, A, B> = Kind<PSetterPartial<S, T, A>, B>
 
 public typealias ForSetter = ForPSetter
 public typealias Setter<S, A> = PSetter<S, S, A, A>

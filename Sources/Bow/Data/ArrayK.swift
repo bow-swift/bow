@@ -1,6 +1,6 @@
 import Foundation
 
-public class ForArrayK {}
+public final class ForArrayK {}
 public typealias ArrayKOf<A> = Kind<ForArrayK, A>
 
 public class ArrayK<A> : ArrayKOf<A> {

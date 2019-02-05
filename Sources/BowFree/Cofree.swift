@@ -1,10 +1,10 @@
 import Foundation
 import Bow
 
-public class ForCofree {}
+public final class ForCofree {}
+public final class CofreePartial<S>: Kind<ForCofree, S> {}
+public typealias CofreeOf<S, A> = Kind<CofreePartial<S>, A>
 public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>
-public typealias CofreeOf<S, A> = Kind2<ForCofree, S, A>
-public typealias CofreePartial<S> = Kind<ForCofree, S>
 
 public class Cofree<S, A> : CofreeOf<S, A> {
     private let head : A

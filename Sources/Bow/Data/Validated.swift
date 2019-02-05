@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForValidated {}
-public typealias ValidatedOf<E, A> = Kind2<ForValidated, E, A>
-public typealias ValidatedPartial<E> = Kind<ForValidated, E>
+public final class ForValidated {}
+public final class ValidatedPartial<E>: Kind<ForValidated, E> {}
+public typealias ValidatedOf<E, A> = Kind<ValidatedPartial<E>, A>
 
 public class Validated<E, A> : ValidatedOf<E, A> {
     public static func pure(_ value : A) -> Validated<E, A> {

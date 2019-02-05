@@ -3,9 +3,9 @@ import BrightFutures
 import Bow
 import BowEffects
 
-public class ForFutureK {}
-public typealias FutureKOf<E, A> = Kind2<ForFutureK, E, A>
-public typealias FutureKPartial<E> = Kind<ForFutureK, E>
+public final class ForFutureK {}
+public final class FutureKPartial<E>: Kind<ForFutureK, E> {}
+public typealias FutureKOf<E, A> = Kind<FutureKPartial<E>, A>
 
 public extension Future {
     public func k() -> FutureK<E, T> {

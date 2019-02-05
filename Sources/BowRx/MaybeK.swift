@@ -3,7 +3,7 @@ import RxSwift
 import Bow
 import BowEffects
 
-public class ForMaybeK {}
+public final class ForMaybeK {}
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>
 
 public extension PrimitiveSequence where Trait == MaybeTrait {

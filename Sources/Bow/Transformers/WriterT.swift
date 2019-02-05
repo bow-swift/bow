@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForWriterT {}
-public typealias WriterTOf<F, W, A> = Kind3<ForWriterT, F, W, A>
-public typealias WriterTPartial<F, W> = Kind2<ForWriterT, F, W>
+public final class ForWriterT {}
+public final class WriterTPartial<F, W>: Kind2<ForWriterT, F, W> {}
+public typealias WriterTOf<F, W, A> = Kind<WriterTPartial<F, W>, A>
 
 public class WriterT<F, W, A> : WriterTOf<F, W, A> {
     fileprivate let value : Kind<F, (W, A)>

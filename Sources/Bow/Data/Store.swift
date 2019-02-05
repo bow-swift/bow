@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForStore {}
-public typealias StoreOf<S, V> = Kind2<ForStore, S, V>
-public typealias StorePartial<S> = Kind<ForStore, S>
+public final class ForStore {}
+public final class StorePartial<S>: Kind<ForStore, S> {}
+public typealias StoreOf<S, V> = Kind<StorePartial<S>, V>
 
 public class Store<S, V> : StoreOf<S, V> {
     public let state : S
