@@ -44,8 +44,8 @@ class SumTest : XCTestCase {
         let firstCharacter = { (x : String) in x.first! }
         let result = abSum.coflatMap(Id<String>.comonad(), Id<String>.comonad()) { (sum) -> Character in
             switch sum.side {
-            case .left: return firstCharacter(sum.left.fix().extract())
-            case .right: return firstCharacter(sum.right.fix().extract())
+            case .left: return firstCharacter(Id<String>.fix(sum.left).extract())
+            case .right: return firstCharacter(Id<String>.fix(sum.right).extract())
             }
         }
         expect(result.extract(Id<Character>.comonad(), Id<Character>.comonad())).to(equal(Character("A")))

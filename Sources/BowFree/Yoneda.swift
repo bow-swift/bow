@@ -59,6 +59,8 @@ fileprivate class YonedaFunctor<F, A, Func> : Yoneda<F, A> where Func : Functor,
     }
 }
 
+extension Yoneda: Fixed {}
+
 public extension Yoneda {
     public static func functor<Func>(_ functor : Func) -> FunctorInstance<F, Func> {
         return FunctorInstance<F, Func>(functor)

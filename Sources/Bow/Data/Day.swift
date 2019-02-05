@@ -36,6 +36,8 @@ public class Day<F, G, A> : DayOf<F, G, A> {
     }
 }
 
+extension Day: Fixed {}
+
 fileprivate class DefaultDay<F, G, X, Y, A> : Day<F, G, A> {
     private let left : Kind<F, X>
     private let right : Kind<G, Y>

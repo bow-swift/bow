@@ -18,11 +18,7 @@ public class Nu<F> : NuOf<F> {
     }
 }
 
-public extension Kind where F == ForNu {
-    public func fix() -> Nu<A> {
-        return Nu<A>.fix(self)
-    }
-}
+extension Nu: Fixed {}
 
 public extension Nu {
     public static func recursive() -> BirecursiveInstance {
@@ -41,7 +37,7 @@ public extension Nu {
         public typealias T = ForNu
         
         public func projectT<F, Func>(_ tf: Kind<ForNu, F>, _ functor: Func) -> Kind<F, Kind<ForNu, F>> where F == Func.F, Func : Functor {
-            let fix = tf.fix()
+            let fix: Nu<F> = tf.fix()
             let unNu = fix.unNu
             return functor.map(unNu(fix.a), { x in Nu<F>(x, unNu) })
         }

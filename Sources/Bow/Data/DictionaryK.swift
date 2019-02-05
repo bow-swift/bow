@@ -1,7 +1,8 @@
 import Foundation
 
 public final class ForDictionaryK {}
-public typealias DictionaryKOf<K, A> = Kind2<ForDictionaryK, K, A>
+public final class DictionaryKPartial<K>: Kind<ForDictionaryK, K> {}
+public typealias DictionaryKOf<K, A> = Kind<DictionaryKPartial<K>, A>
 
 public class DictionaryK<K : Hashable, A> : DictionaryKOf<K, A> {
     private let dictionary : [K : A]
@@ -62,6 +63,8 @@ public class DictionaryK<K : Hashable, A> : DictionaryKOf<K, A> {
         return self.dictionary.reduce(b, { m, pair in f(m, pair) })
     }
 }
+
+extension DictionaryK: Fixed {}
 
 public extension Dictionary {
     public func k() -> DictionaryK<Key, Value> {

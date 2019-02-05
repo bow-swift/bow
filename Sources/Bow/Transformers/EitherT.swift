@@ -101,6 +101,8 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
     }
 }
 
+extension EitherT: Fixed {}
+
 public extension EitherT {
     public static func functor<Func>(_ functor : Func) -> FunctorInstance<F, A, Func> {
         return FunctorInstance<F, A, Func>(functor)

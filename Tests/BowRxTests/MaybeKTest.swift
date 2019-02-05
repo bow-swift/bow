@@ -10,7 +10,7 @@ class MaybeKTest : XCTestCase {
         typealias A = MaybeKOf<T>
         
         func eqv(_ a: Kind<ForMaybeK, T>, _ b: Kind<ForMaybeK, T>) -> Bool {
-            return a.fix().value.blockingGet() == b.fix().value.blockingGet()
+            return MaybeK<T>.fix(a).value.blockingGet() == MaybeK<T>.fix(b).value.blockingGet()
         }
     }
     
@@ -18,8 +18,8 @@ class MaybeKTest : XCTestCase {
         typealias A = MaybeKOf<Bow.Unit>
         
         func eqv(_ a: MaybeKOf<Bow.Unit>, _ b: MaybeKOf<Bow.Unit>) -> Bool {
-            let x : Bow.Unit? = a.fix().value.blockingGet()
-            let y : Bow.Unit? = b.fix().value.blockingGet()
+            let x : Bow.Unit? = MaybeK<()>.fix(a).value.blockingGet()
+            let y : Bow.Unit? = MaybeK<()>.fix(b).value.blockingGet()
             
             return (x == nil && y == nil) || (x != nil && y != nil)
         }
@@ -29,8 +29,8 @@ class MaybeKTest : XCTestCase {
         typealias A = Kind<ForMaybeK, EitherOf<CategoryError, Int>>
         
         func eqv(_ a: Kind<ForMaybeK, EitherOf<CategoryError, Int>>, _ b: Kind<ForMaybeK, EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOptional(a.fix().value.blockingGet())
-            let y = Option.fromOptional(b.fix().value.blockingGet())
+            let x = Option.fromOptional(MaybeK<EitherOf<CategoryError, Int>>.fix(a).value.blockingGet())
+            let y = Option.fromOptional(MaybeK<EitherOf<CategoryError, Int>>.fix(b).value.blockingGet())
             
             return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
         }

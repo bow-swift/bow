@@ -91,6 +91,8 @@ public class FutureK<E, A> : FutureKOf<E, A> where E : Error {
     }
 }
 
+extension FutureK: Fixed {}
+
 public extension FutureK {
     public static func functor() -> FunctorInstance<E> {
         return FunctorInstance<E>()

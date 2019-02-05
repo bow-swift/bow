@@ -97,7 +97,7 @@ public class NonEmptyArray<A> : NonEmptyArrayOf<A> {
     
     public func traverse<G, B, Appl>(_ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, NonEmptyArrayOf<B>> where Appl : Applicative, Appl.F == G {
         let arrayTraverse = ArrayK<A>.traverse().traverse(self.all().k(), f, applicative)
-        return applicative.map(arrayTraverse, { x in NonEmptyArray<B>.fromArrayUnsafe(x.fix().asArray) })
+        return applicative.map(arrayTraverse, { x in NonEmptyArray<B>.fromArrayUnsafe(ArrayK.fix(x).asArray) })
     }
     
     public func coflatMap<B>(_ f : @escaping (NonEmptyArray<A>) -> B) -> NonEmptyArray<B> {
@@ -159,11 +159,7 @@ extension NonEmptyArray : Equatable where A : Equatable {
     }
 }
 
-public extension Kind where F == ForNonEmptyArray {
-    public func fix() -> NonEmptyArray<A> {
-        return self as! NonEmptyArray<A>
-    }
-}
+extension NonEmptyArray: Fixed {}
 
 public extension NonEmptyArray {
     public static func functor() -> FunctorInstance {
@@ -210,7 +206,7 @@ public extension NonEmptyArray {
         public typealias F = ForNonEmptyArray
         
         public func map<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> B) -> NonEmptyArrayOf<B> {
-            return fa.fix().map(f)
+            return NonEmptyArray<A>.fix(fa).map(f)
         }
     }
 
@@ -221,14 +217,14 @@ public extension NonEmptyArray {
         }
         
         public func ap<A, B>(_ ff: NonEmptyArrayOf<(A) -> B>, _ fa: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<B> {
-            return ff.fix().ap(fa.fix())
+            return NonEmptyArray<(A) -> B>.fix(ff).ap(NonEmptyArray<A>.fix(fa))
         }
     }
 
     public class MonadInstance : ApplicativeInstance, Monad {
         
         public func flatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> NonEmptyArrayOf<B>) -> NonEmptyArrayOf<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return NonEmptyArray<A>.fix(fa).flatMap({ a in NonEmptyArray<B>.fix(f(a)) })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>) -> NonEmptyArrayOf<B> {
@@ -238,11 +234,11 @@ public extension NonEmptyArray {
 
     public class BimonadInstance : MonadInstance, Bimonad {
         public func coflatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (NonEmptyArrayOf<A>) -> B) -> NonEmptyArrayOf<B> {
-            return fa.fix().coflatMap(f)
+            return NonEmptyArray<A>.fix(fa).coflatMap(f)
         }
         
         public func extract<A>(_ fa: NonEmptyArrayOf<A>) -> A {
-            return fa.fix().extract()
+            return NonEmptyArray<A>.fix(fa).extract()
         }
     }
 
@@ -250,17 +246,17 @@ public extension NonEmptyArray {
         public typealias F = ForNonEmptyArray
         
         public func foldLeft<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return fa.fix().foldLeft(b, f)
+            return NonEmptyArray<A>.fix(fa).foldLeft(b, f)
         }
         
         public func foldRight<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return fa.fix().foldRight(b, f)
+            return NonEmptyArray<A>.fix(fa).foldRight(b, f)
         }
     }
 
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, NonEmptyArrayOf<B>> where G == Appl.F, Appl : Applicative {
-            return fa.fix().traverse(f, applicative)
+            return NonEmptyArray<A>.fix(fa).traverse(f, applicative)
         }
     }
 
@@ -268,7 +264,7 @@ public extension NonEmptyArray {
         public typealias F = ForNonEmptyArray
         
         public func combineK<A>(_ x: NonEmptyArrayOf<A>, _ y: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<A> {
-            return x.fix().combineK(y.fix())
+            return NonEmptyArray<A>.fix(x).combineK(NonEmptyArray<A>.fix(y))
         }
     }
 

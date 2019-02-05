@@ -52,6 +52,8 @@ public class Coproduct<F, G, A> : CoproductOf<F, G, A> {
     }
 }
 
+extension Coproduct: Fixed {}
+
 public extension Coproduct {
     public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> FunctorInstance<F, G, FuncF, FuncG> {
         return FunctorInstance<F, G, FuncF, FuncG>(functorF, functorG)

@@ -116,6 +116,8 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
 }
 
+extension OptionT: Fixed {}
+
 public extension OptionT {
     public static func functor<FuncF>(_ functor : FuncF) -> OptionTFunctor<F, FuncF> {
         return OptionTFunctor<F, FuncF>(functor)

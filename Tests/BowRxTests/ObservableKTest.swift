@@ -10,7 +10,7 @@ class ObservableKTest : XCTestCase {
         typealias A = ObservableKOf<T>
         
         func eqv(_ a: Kind<ForObservableK, T>, _ b: Kind<ForObservableK, T>) -> Bool {
-            return a.fix().value.blockingGet() == b.fix().value.blockingGet()
+            return ObservableK<T>.fix(a).value.blockingGet() == ObservableK<T>.fix(b).value.blockingGet()
         }
     }
     
@@ -18,8 +18,8 @@ class ObservableKTest : XCTestCase {
         typealias A = ObservableKOf<Bow.Unit>
         
         func eqv(_ a: ObservableKOf<Bow.Unit>, _ b: ObservableKOf<Bow.Unit>) -> Bool {
-            let x : Bow.Unit? = a.fix().value.blockingGet()
-            let y : Bow.Unit? = b.fix().value.blockingGet()
+            let x : Bow.Unit? = ObservableK<()>.fix(a).value.blockingGet()
+            let y : Bow.Unit? = ObservableK<()>.fix(b).value.blockingGet()
             
             return !xor(x == nil, y == nil)
         }
@@ -29,8 +29,8 @@ class ObservableKTest : XCTestCase {
         typealias A = ObservableKOf<EitherOf<CategoryError, Int>>
         
         func eqv(_ a: ObservableKOf<EitherOf<CategoryError, Int>>, _ b: ObservableKOf<EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOptional(a.fix().value.blockingGet())
-            let y = Option.fromOptional(b.fix().value.blockingGet())
+            let x = Option.fromOptional(ObservableK<EitherOf<CategoryError, Int>>.fix(a).value.blockingGet())
+            let y = Option.fromOptional(ObservableK<EitherOf<CategoryError, Int>>.fix(b).value.blockingGet())
             return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
         }
     }

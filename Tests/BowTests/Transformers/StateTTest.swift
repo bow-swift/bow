@@ -9,8 +9,8 @@ class StateTTest: XCTestCase {
         public typealias A = StateTOf<ForId, Int, Int>
         
         public func eqv(_ a: StateTOf<ForId, Int, Int>, _ b: StateTOf<ForId, Int, Int>) -> Bool {
-            let x = StateT.fix(a).runM(1, Id<Any>.monad()).fix().value
-            let y = StateT.fix(b).runM(1, Id<Any>.monad()).fix().value
+            let x = Id<(Int, Int)>.fix(StateT.fix(a).runM(1, Id<Any>.monad())).value
+            let y = Id<(Int, Int)>.fix(StateT.fix(b).runM(1, Id<Any>.monad())).value
             return x == y
         }
     }

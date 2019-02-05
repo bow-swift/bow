@@ -9,7 +9,7 @@ class SingleKTest : XCTestCase {
         typealias A = SingleKOf<T>
         
         func eqv(_ a: SingleKOf<T>, _ b: SingleKOf<T>) -> Bool {
-            return a.fix().value.blockingGet() == b.fix().value.blockingGet()
+            return SingleK<T>.fix(a).value.blockingGet() == SingleK<T>.fix(b).value.blockingGet()
         }
     }
     
@@ -17,8 +17,8 @@ class SingleKTest : XCTestCase {
         typealias A = SingleKOf<Bow.Unit>
         
         func eqv(_ a: SingleKOf<Bow.Unit>, _ b: SingleKOf<Bow.Unit>) -> Bool {
-            let x : Bow.Unit? = a.fix().value.blockingGet()
-            let y : Bow.Unit? = b.fix().value.blockingGet()
+            let x : Bow.Unit? = SingleK<()>.fix(a).value.blockingGet()
+            let y : Bow.Unit? = SingleK<()>.fix(b).value.blockingGet()
             
             return (x == nil && y == nil) || (x != nil && y != nil)
         }
@@ -28,8 +28,8 @@ class SingleKTest : XCTestCase {
         typealias A = Kind<ForSingleK, EitherOf<CategoryError, Int>>
         
         func eqv(_ a: Kind<ForSingleK, EitherOf<CategoryError, Int>>, _ b: Kind<ForSingleK, EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOptional(a.fix().value.blockingGet())
-            let y = Option.fromOptional(b.fix().value.blockingGet())
+            let x = Option.fromOptional(SingleK<EitherOf<CategoryError, Int>>.fix(a).value.blockingGet())
+            let y = Option.fromOptional(SingleK<EitherOf<CategoryError, Int>>.fix(b).value.blockingGet())
             return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
         }
     }

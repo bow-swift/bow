@@ -14,11 +14,7 @@ open class Mu<F> : MuOf<F> {
     }
 }
 
-public extension Kind where F == ForMu {
-    public func fix() -> Mu<A> {
-        return Mu<A>.fix(self)
-    }
-}
+extension Mu: Fixed {}
 
 public extension Mu {
     public static func recursive() -> BirecursiveInstance {
@@ -62,6 +58,6 @@ fileprivate class MuEmbed<F, Func> : Mu<F> where Func : Functor, Func.F == F {
     }
     
     override func unMu<A>(_ fa: @escaping Algebra<F, Eval<A>>) -> Eval<A> {
-        return fa(functor.map(tf, { eval in eval.flatMap { x in x.fix().unMu(fa) } }))
+        return fa(functor.map(tf, { eval in eval.flatMap { x in Mu<F>.fix(x).unMu(fa) } }))
     }
 }

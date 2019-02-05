@@ -40,6 +40,8 @@ public class Const<A, T> : ConstOf<A, T> {
     }
 }
 
+extension Const: Fixed {}
+
 extension Const : CustomStringConvertible {
     public var description : String {
         return "Const(\(value))"

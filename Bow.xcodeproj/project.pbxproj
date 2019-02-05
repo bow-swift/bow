@@ -86,6 +86,7 @@
 		112297E0219DD148006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39F217E2DEF00969984 /* FutureKTest.swift */; };
 		112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
+		112504862209B78E00861131 /* Fixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112504852209B78E00861131 /* Fixed.swift */; };
 		113CD8F3219DD82F00730E58 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F366217E2CB100969984 /* RxCocoa.framework */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -582,6 +583,7 @@
 		112297E7219DD149006D66C5 /* Bow-BrightFutures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFutures-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-BrightFutures-Info.plist"; sourceTree = "<absolute>"; };
 		11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowBrightFuturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-BrightFuturesTests-Info.plist"; sourceTree = "<absolute>"; };
+		112504852209B78E00861131 /* Fixed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixed.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D97EEB219EBAA1008FC004 /* Bow-EffectsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-EffectsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-EffectsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
@@ -1459,6 +1461,7 @@
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
 				8BA0F4AF217E2E9200969984 /* Eq.swift */,
+				112504852209B78E00861131 /* Fixed.swift */,
 				8BA0F4A0217E2E9200969984 /* Foldable.swift */,
 				8BA0F4AB217E2E9200969984 /* Functor.swift */,
 				8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */,
@@ -2632,6 +2635,7 @@
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
 				8BA0F4FF217E2E9200969984 /* Typeclass.swift in Sources */,
+				112504862209B78E00861131 /* Fixed.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
 				8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */,

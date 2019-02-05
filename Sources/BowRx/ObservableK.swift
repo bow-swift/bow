@@ -51,7 +51,7 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
     
     public static func suspend(_ fa : @escaping () -> ObservableKOf<A>) -> ObservableK<A> {
-        return Observable.deferred { fa().fix().value }.k()
+        return Observable.deferred { ObservableK<A>.fix(fa()).value }.k()
     }
     
     public static func runAsync(_ fa : @escaping Proc<A>) -> ObservableK<A> {
@@ -67,7 +67,7 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> ObservableKOf<Either<A, B>>) -> ObservableK<B> {
-        let either = f(a).fix().value.blockingGet()!
+        let either = ObservableK<Either<A, B>>.fix(f(a)).value.blockingGet()!
         return either.fold({ a in tailRecM(a, f)},
                            { b in Observable.just(b).k() })
     }
@@ -81,15 +81,15 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
     
     public func ap<AA, B>(_ fa : ObservableKOf<AA>) -> ObservableK<B> where A == (AA) -> B {
-        return fa.fix().flatMap { a in self.map { ff in ff(a) } }
+        return ObservableK<AA>.fix(fa).flatMap { a in self.map { ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> ObservableKOf<B>) -> ObservableK<B> {
-        return value.flatMap { a in f(a).fix().value }.k()
+        return value.flatMap { a in ObservableK<B>.fix(f(a)).value }.k()
     }
     
     public func concatMap<B>(_ f : @escaping (A) -> ObservableKOf<B>) -> ObservableK<B> {
-        return value.concatMap { a in f(a).fix().value }.k()
+        return value.concatMap { a in ObservableK<B>.fix(f(a)).value }.k()
     }
     
     public func foldLeft<B>(_ b : B, _ f : @escaping (B, A) -> B) -> B {
@@ -120,8 +120,8 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
     
     public func runAsync(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<()> {
-        return value.flatMap { a in callback(Either.right(a)).fix().value }
-            .catchError { e in callback(Either.left(e)).fix().value }.k()
+        return value.flatMap { a in ObservableK<()>.fix(callback(Either.right(a))).value }
+            .catchError { e in ObservableK<()>.fix(callback(Either.left(e))).value }.k()
     }
     
     public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableK<BowEffects.Disposable> {
@@ -134,11 +134,7 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
 }
 
-public extension Kind where F == ForObservableK {
-    public func fix() -> ObservableK<A> {
-        return ObservableK<A>.fix(self)
-    }
-}
+extension ObservableK: Fixed {}
 
 public extension ObservableK {
     public static func functor() -> FunctorInstance {
@@ -189,7 +185,7 @@ public extension ObservableK {
         public typealias F = ForObservableK
         
         public func map<A, B>(_ fa: ObservableKOf<A>, _ f: @escaping (A) -> B) -> ObservableKOf<B> {
-            return fa.fix().map(f)
+            return ObservableK<A>.fix(fa).map(f)
         }
     }
 
@@ -199,13 +195,13 @@ public extension ObservableK {
         }
         
         public func ap<A, B>(_ ff: ObservableKOf<(A) -> B>, _ fa: ObservableKOf<A>) -> ObservableKOf<B> {
-            return ff.fix().ap(fa)
+            return ObservableK<(A) -> B>.fix(ff).ap(fa)
         }
     }
 
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: ObservableKOf<A>, _ f: @escaping (A) -> ObservableKOf<B>) -> ObservableKOf<B> {
-            return fa.fix().flatMap { a in f(a).fix() }
+            return ObservableK<A>.fix(fa).flatMap { a in ObservableK<B>.fix(f(a)) }
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ObservableKOf<Either<A, B>>) -> ObservableKOf<B> {
@@ -217,17 +213,17 @@ public extension ObservableK {
         public typealias F = ForObservableK
         
         public func foldLeft<A, B>(_ fa: ObservableKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return fa.fix().foldLeft(b, f)
+            return ObservableK<A>.fix(fa).foldLeft(b, f)
         }
         
         public func foldRight<A, B>(_ fa: ObservableKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return fa.fix().foldRight(b, f)
+            return ObservableK<A>.fix(fa).foldRight(b, f)
         }
     }
 
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: ObservableKOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ObservableKOf<B>> where G == Appl.F, Appl : Applicative {
-            return applicative.map(fa.fix().traverse(applicative, f), { a in a as ObservableKOf<B> })
+            return applicative.map(ObservableK<A>.fix(fa).traverse(applicative, f), { a in a as ObservableKOf<B> })
         }
     }
 
@@ -239,7 +235,7 @@ public extension ObservableK {
         }
         
         public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Err) -> ObservableKOf<A>) -> ObservableKOf<A> {
-            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+            return ObservableK<A>.fix(fa).handleErrorWith { e in ObservableK<A>.fix(f(e as! Err)) }
         }
     }
 
@@ -251,7 +247,7 @@ public extension ObservableK {
         }
         
         public func handleErrorWith<A>(_ fa: ObservableKOf<A>, _ f: @escaping (Err) -> ObservableKOf<A>) -> ObservableKOf<A> {
-            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+            return ObservableK<A>.fix(fa).handleErrorWith { e in ObservableK<A>.fix(f(e as! Err)) }
         }
     }
 
@@ -269,13 +265,13 @@ public extension ObservableK {
 
     public class EffectInstance<Err> : AsyncInstance<Err>, Effect where Err : Error {
         public func runAsync<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<()> {
-            return fa.fix().runAsync(callback)
+            return ObservableK<A>.fix(fa).runAsync(callback)
         }
     }
 
     public class ConcurrentEffectInstance<Err> : EffectInstance<Err>, ConcurrentEffect where Err : Error {
         public func runAsyncCancellable<A>(_ fa: ObservableKOf<A>, _ callback: @escaping (Either<Error, A>) -> ObservableKOf<()>) -> ObservableKOf<BowEffects.Disposable> {
-            return fa.fix().runAsyncCancellable(callback)
+            return ObservableK<A>.fix(fa).runAsyncCancellable(callback)
         }
     }
 }

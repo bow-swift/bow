@@ -10,7 +10,7 @@ class KleisliTest: XCTestCase {
         func eqv(_ a: KleisliOf<ForId, Int, Int>, _ b: KleisliOf<ForId, Int, Int>) -> Bool {
             let a = Kleisli.fix(a)
             let b = Kleisli.fix(b)
-            return a.invoke(1).fix().value == b.invoke(1).fix().value
+            return Id<Int>.fix(a.invoke(1)).value == Id<Int>.fix(b.invoke(1)).value
         }
     }
     

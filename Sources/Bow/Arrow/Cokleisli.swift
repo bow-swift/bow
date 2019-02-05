@@ -56,3 +56,5 @@ public class Cokleisli<F, A, B> : CokleisliOf<F, A, B> {
         return Cokleisli<F, A, C>({ fa in f(self.run(fa)).run(fa) })
     }
 }
+
+extension Cokleisli: Fixed {}

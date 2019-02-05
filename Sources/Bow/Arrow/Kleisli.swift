@@ -75,6 +75,8 @@ public class Kleisli<F, D, A> : KleisliOf<F, D, A> {
     }
 }
 
+extension Kleisli: Fixed {}
+
 public extension Kleisli {
     public static func functor<FuncF>(_ functor : FuncF) -> FunctorInstance<F, D, FuncF> {
         return FunctorInstance<F, D, FuncF>(functor)

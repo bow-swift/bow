@@ -135,6 +135,8 @@ class Failure<A> : Try<A> {
     }
 }
 
+extension Try: Fixed {}
+
 extension Try : CustomStringConvertible {
     public var description : String {
         return fold({ error in "Failure(\(error))" },

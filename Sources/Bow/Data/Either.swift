@@ -234,6 +234,8 @@ class Right<A, B> : Either<A, B> {
 
 // MARK: Protocol conformances
 
+extension Either: Fixed {}
+
 /// Conformance of `Either` to `CustomStringConvertible`
 extension Either : CustomStringConvertible {
     public var description : String {

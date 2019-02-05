@@ -294,11 +294,7 @@ fileprivate class FlatmapDefault<A, B> : Compute<A> {
     }
 }
 
-public extension Kind where F == ForEval {
-    public func fix() -> Eval<A> {
-        return self as! Eval<A>
-    }
-}
+extension Eval: Fixed {}
 
 public extension Eval {
     public static func functor() -> ApplicativeInstance {
@@ -321,7 +317,7 @@ public extension Eval {
         }
         
         public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
-            return ff.fix().ap(fa.fix())
+            return Eval<(A) -> B>.fix(ff).ap(Eval<A>.fix(fa))
         }
     }
 
@@ -335,7 +331,7 @@ public extension Eval {
         }
         
         public func eqv(_ a: EvalOf<B>, _ b: EvalOf<B>) -> Bool {
-            return eq.eqv(a.fix().value(), b.fix().value())
+            return eq.eqv(Eval<B>.fix(a).value(), Eval<B>.fix(b).value())
         }
     }
 }

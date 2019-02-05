@@ -16,11 +16,7 @@ public class Fix<A> : FixOf<A> {
     }
 }
 
-public extension Kind where F == ForFix {
-    public func fix() -> Fix<A> {
-        return Fix<A>.fix(self)
-    }
-}
+extension Fix: Fixed {}
 
 public extension Fix {
     public static func recursive() -> BirecursiveInstance {
@@ -39,7 +35,7 @@ public extension Fix {
         public typealias T = ForFix
         
         public func projectT<F, Func>(_ tf : Kind<ForFix, F>, _ functor : Func) -> Kind<F, Kind<ForFix, F>> where Func : Functor, Func.F == F {
-            return functor.map(tf.fix().unFix, { x in x.value() })
+            return functor.map(Fix<F>.fix(tf).unFix, { x in x.value() })
         }
         
         public func embedT<Func, F>(_ tf : Kind<F, Eval<Kind<ForFix, F>>>, _ functor : Func) -> Eval<Kind<ForFix, F>> where Func : Functor, Func.F == F {

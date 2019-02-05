@@ -5,7 +5,6 @@ public final class ForIO {}
 public typealias IOOf<A> = Kind<ForIO, A>
 
 public class IO<A> : IOOf<A> {
-    
     public static func fix(_ fa : IOOf<A>) -> IO<A> {
         return fa.fix()
     }
@@ -284,11 +283,7 @@ fileprivate class AsyncIO<A> : IO<A> {
     }
 }
 
-public extension Kind where F == ForIO {
-    public func fix() -> IO<A> {
-        return self as! IO<A>
-    }
-}
+extension IO: Fixed {}
 
 public extension IO {
     public static func functor() -> FunctorInstance {
@@ -341,13 +336,13 @@ public extension IO {
         }
         
         public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
-            return ff.fix().ap(fa.fix())
+            return IO<(A) -> B>.fix(ff).ap(IO<A>.fix(fa))
         }
     }
 
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> IOOf<B>) -> IOOf<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return IO<A>.fix(fa).flatMap({ a in IO<B>.fix(f(a)) })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<Either<A, B>>) -> IOOf<B> {
@@ -375,7 +370,7 @@ public extension IO {
         }
         
         public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Err) -> IOOf<A>) -> IOOf<A> {
-            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+            return IO<A>.fix(fa).handleErrorWith { e in IO<A>.fix(f(e as! Err)) }
         }
     }
 
@@ -389,7 +384,7 @@ public extension IO {
         }
         
         public func combine(_ a: IOOf<B>, _ b: IOOf<B>) -> IOOf<B> {
-            return a.fix().flatMap { aa in b.fix().map { bb in self.semigroup.combine(aa, bb) } }
+            return IO<B>.fix(a).flatMap { aa in IO<B>.fix(b).map { bb in self.semigroup.combine(aa, bb) } }
         }
     }
 
@@ -422,13 +417,13 @@ public extension IO {
             var aError, bError : Error?
             
             do {
-                aValue = try a.fix().unsafePerformIO()
+                aValue = try IO<B>.fix(a).unsafePerformIO()
             } catch {
                 aError = error
             }
             
             do {
-                bValue = try b.fix().unsafePerformIO()
+                bValue = try IO<B>.fix(b).unsafePerformIO()
             } catch {
                 bError = error
             }

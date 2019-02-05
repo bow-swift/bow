@@ -21,7 +21,7 @@ public class ArrayK<A> : ArrayKOf<A> {
     private static func go<B>(_ buf : [B], _ f : (A) -> ArrayKOf<Either<A, B>>, _ v : ArrayK<Either<A, B>>) -> [B] {
         if !v.isEmpty {
             let head = v.array[0]
-            return head.fold({ a in go(buf, f, ArrayK<Either<A, B>>(f(a).fix().array + v.array.dropFirst())) },
+            return head.fold({ a in go(buf, f, ArrayK<Either<A, B>>(ArrayK<Either<A, B>>.fix(f(a)).array + v.array.dropFirst())) },
                       { b in
                             let newBuf = buf + [b]
                             return go(newBuf, f, ArrayK<Either<A, B>>([Either<A, B>](v.array.dropFirst())))
@@ -92,7 +92,7 @@ public class ArrayK<A> : ArrayKOf<A> {
     }
     
     public func mapFilter<B>(_ f : (A) -> OptionOf<B>) -> ArrayK<B> {
-        return flatMap { a in f(a).fix().fold(ArrayK<B>.empty, ArrayK<B>.pure) }
+        return flatMap { a in Option<B>.fix(f(a)).fold(ArrayK<B>.empty, ArrayK<B>.pure) }
     }
     
     public func combineK(_ y : ArrayK<A>) -> ArrayK<A> {
@@ -113,11 +113,7 @@ public class ArrayK<A> : ArrayKOf<A> {
     }
 }
 
-public extension Kind where F == ForArrayK {
-    public func fix() -> ArrayK<A> {
-        return self as! ArrayK<A>
-    }
-}
+extension ArrayK: Fixed {}
 
 public extension Array {
     public func k() -> ArrayK<Element> {
@@ -202,7 +198,7 @@ public extension ArrayK {
         public typealias F = ForArrayK
         
         public func map<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> B) -> ArrayKOf<B> {
-            return fa.fix().map(f)
+            return ArrayK<A>.fix(fa).map(f)
         }
     }
 
@@ -212,13 +208,13 @@ public extension ArrayK {
         }
         
         public func ap<A, B>(_ ff: ArrayKOf<(A) -> B>, _ fa: ArrayKOf<A>) -> ArrayKOf<B> {
-            return ff.fix().ap(fa.fix())
+            return ArrayK<(A) -> B>.fix(ff).ap(ArrayK<A>.fix(fa))
         }
     }
 
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return ArrayK<A>.fix(fa).flatMap({ a in ArrayK<B>.fix(f(a)) })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
@@ -230,17 +226,17 @@ public extension ArrayK {
         public typealias F = ForArrayK
         
         public func foldLeft<A, B>(_ fa: ArrayKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return fa.fix().foldLeft(b, f)
+            return ArrayK<A>.fix(fa).foldLeft(b, f)
         }
         
         public func foldRight<A, B>(_ fa: ArrayKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return fa.fix().foldRight(b, f)
+            return ArrayK<A>.fix(fa).foldRight(b, f)
         }
     }
 
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, ArrayKOf<B>> where G == Appl.F, Appl : Applicative {
-            return fa.fix().traverse(f, applicative)
+            return ArrayK<A>.fix(fa).traverse(f, applicative)
         }
     }
 
@@ -248,7 +244,7 @@ public extension ArrayK {
         public typealias F = ForArrayK
         
         public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
-            return x.fix().combineK(y.fix())
+            return ArrayK<A>.fix(x).combineK(y.fix())
         }
     }
 
@@ -260,7 +256,7 @@ public extension ArrayK {
 
     public class FunctorFilterInstance : FunctorInstance, FunctorFilter {
         public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
-            return fa.fix().mapFilter(f)
+            return ArrayK<A>.fix(fa).mapFilter(f)
         }
     }
 
@@ -270,7 +266,7 @@ public extension ArrayK {
         }
         
         public func mapFilter<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> ArrayKOf<B> {
-            return fa.fix().mapFilter(f)
+            return ArrayK<A>.fix(fa).mapFilter(f)
         }
     }
 
@@ -280,7 +276,7 @@ public extension ArrayK {
         }
         
         public func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
-            return x.fix().combineK(y.fix())
+            return ArrayK<A>.fix(x).combineK(y.fix())
         }
     }
 

@@ -54,7 +54,7 @@ public class SingleK<A> : SingleKOf<A> {
     }
     
     public static func suspend(_ fa : @escaping () -> SingleKOf<A>) -> SingleK<A> {
-        return Single.deferred { fa().fix().value }.k()
+        return Single.deferred { SingleK<A>.fix(fa()).value }.k()
     }
     
     public static func async(_ fa : @escaping Proc<A>) -> SingleK<A> {
@@ -70,7 +70,7 @@ public class SingleK<A> : SingleKOf<A> {
     }
     
     public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> SingleKOf<Either<A, B>>) -> SingleK<B> {
-        let either = f(a).fix().value.blockingGet()!
+        let either = SingleK<Either<A, B>>.fix(f(a)).value.blockingGet()!
         return either.fold({ a in tailRecM(a, f) },
                            { b in Single.just(b).k() })
     }
@@ -84,11 +84,11 @@ public class SingleK<A> : SingleKOf<A> {
     }
     
     public func ap<AA, B>(_ fa : SingleKOf<AA>) -> SingleK<B> where A == (AA) -> B {
-        return fa.fix().flatMap { a in self.map { ff in ff(a) } }
+        return SingleK<AA>.fix(fa).flatMap { a in self.map { ff in ff(a) } }
     }
     
     public func flatMap<B>(_ f : @escaping (A) -> SingleKOf<B>) -> SingleK<B> {
-        return value.flatMap { x in f(x).fix().value }.k()
+        return value.flatMap { x in SingleK<B>.fix(f(x)).value }.k()
     }
     
     public func handleErrorWith(_ f : @escaping (Error) -> SingleK<A>) -> SingleK<A> {
@@ -96,8 +96,8 @@ public class SingleK<A> : SingleKOf<A> {
     }
     
     public func runAsync(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<()> {
-        return value.flatMap { a in callback(Either.right(a)).fix().value }
-            .catchError{ e in callback(Either.left(e)).fix().value }.k()
+        return value.flatMap { a in SingleK<()>.fix(callback(Either.right(a))).value }
+            .catchError{ e in SingleK<()>.fix(callback(Either.left(e))).value }.k()
     }
     
     public func runAsyncCancellable(_ callback : @escaping (Either<Error, A>) -> SingleKOf<()>) -> SingleK<BowEffects.Disposable> {
@@ -107,11 +107,7 @@ public class SingleK<A> : SingleKOf<A> {
     }
 }
 
-public extension Kind where F == ForSingleK {
-    public func fix() -> SingleK<A> {
-        return SingleK<A>.fix(self)
-    }
-}
+extension SingleK: Fixed {}
 
 public extension SingleK {
     public static func functor() -> FunctorInstance {
@@ -154,7 +150,7 @@ public extension SingleK {
         public typealias F = ForSingleK
         
         public func map<A, B>(_ fa: SingleKOf<A>, _ f: @escaping (A) -> B) -> SingleKOf<B> {
-            return fa.fix().map(f)
+            return SingleK<A>.fix(fa).map(f)
         }
     }
 
@@ -164,13 +160,13 @@ public extension SingleK {
         }
         
         public func ap<A, B>(_ ff: SingleKOf<(A) -> B>, _ fa: SingleKOf<A>) -> SingleKOf<B> {
-            return ff.fix().ap(fa)
+            return SingleK<(A) -> B>.fix(ff).ap(fa)
         }
     }
 
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
-            return fa.fix().flatMap(f)
+            return SingleK<A>.fix(fa).flatMap(f)
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForSingleK, Either<A, B>>) -> Kind<ForSingleK, B> {
@@ -186,7 +182,7 @@ public extension SingleK {
         }
         
         public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
-            return fa.fix().handleErrorWith{ e in f(e as! Err).fix() }
+            return SingleK<A>.fix(fa).handleErrorWith{ e in SingleK<A>.fix(f(e as! Err)) }
         }
     }
 
@@ -198,7 +194,7 @@ public extension SingleK {
         }
         
         public func handleErrorWith<A>(_ fa: SingleKOf<A>, _ f: @escaping (Err) -> SingleKOf<A>) -> SingleKOf<A> {
-            return fa.fix().handleErrorWith { e in f(e as! Err).fix() }
+            return SingleK<A>.fix(fa).handleErrorWith { e in SingleK<A>.fix(f(e as! Err)) }
         }
     }
 
@@ -216,13 +212,13 @@ public extension SingleK {
 
     public class EffectInstance<Err> : AsyncInstance<Err>, Effect where Err : Error {
         public func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, ()> {
-            return fa.fix().runAsync(callback)
+            return SingleK<A>.fix(fa).runAsync(callback)
         }
     }
 
     public class ConcurrentEffectInstance<Err> : EffectInstance<Err>, ConcurrentEffect where Err : Error {
         public func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, BowEffects.Disposable> {
-            return fa.fix().runAsyncCancellable(callback)
+            return SingleK<A>.fix(fa).runAsyncCancellable(callback)
         }
     }
 }

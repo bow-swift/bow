@@ -54,11 +54,7 @@ public class SetK<A: Hashable> : SetKOf<A> {
 	}
 }
 
-public extension Kind where F == ForSetK, A: Hashable {
-	public func fix() -> SetK<A> {
-		return self as! SetK<A>
-	}
-}
+extension SetK: Fixed {}
 
 public extension Set {
 	public func k() -> SetK<Element> {
@@ -84,7 +80,7 @@ public extension SetK {
         public typealias A = SetKOf<R>
 
         public func combine(_ a : SetKOf<R>, _ b : SetKOf<R>) -> SetKOf<R>  {
-            return a.fix().combineK(b.fix())
+            return SetK<R>.fix(a).combineK(SetK<R>.fix(b))
         }
     }
 
@@ -106,8 +102,8 @@ public extension SetK {
         }
 
         public func eqv(_ setA: SetKOf<R>, _ setB: SetKOf<R>) -> Bool {
-            let a = setA.fix()
-            let b = setB.fix()
+            let a: SetK<R> = setA.fix()
+            let b: SetK<R> = setB.fix()
             if a.set.count != b.set.count {
                 return false
             } else {

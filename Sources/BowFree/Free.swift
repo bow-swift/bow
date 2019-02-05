@@ -159,6 +159,8 @@ internal class ApplicativeFreePartial<S, Appl> : Applicative where Appl : Applic
     }
 }
 
+extension Free: Fixed {}
+
 public extension Free {
     public static func functor() -> FunctorInstance<S> {
         return FunctorInstance<S>()

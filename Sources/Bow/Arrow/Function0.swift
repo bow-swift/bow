@@ -52,11 +52,7 @@ public class Function0<A> : Function0Of<A> {
     }
 }
 
-public extension Kind where F == ForFunction0 {
-    public func fix() -> Function0<A> {
-        return self as! Function0<A>
-    }
-}
+extension Function0: Fixed {}
 
 public extension Function0 {
     public static func functor() -> FunctorInstance {
@@ -87,7 +83,7 @@ public extension Function0 {
         public typealias F = ForFunction0
         
         public func map<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> B) -> Function0Of<B> {
-            return fa.fix().map(f)
+            return Function0<A>.fix(fa).map(f)
         }
     }
 
@@ -103,7 +99,7 @@ public extension Function0 {
 
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> Function0Of<B>) -> Function0Of<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return Function0<A>.fix(fa).flatMap({ a in f(a).fix() })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Function0Of<Either<A, B>>) -> Function0Of<B> {
@@ -113,11 +109,11 @@ public extension Function0 {
 
     public class BimonadInstance : MonadInstance, Bimonad {
         public func coflatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (Function0Of<A>) -> B) -> Function0Of<B> {
-            return fa.fix().coflatMap(f)
+            return Function0<A>.fix(fa).coflatMap(f)
         }
         
         public func extract<A>(_ fa: Function0Of<A>) -> A {
-            return fa.fix().extract()
+            return Function0<A>.fix(fa).extract()
         }
     }
 
@@ -131,7 +127,7 @@ public extension Function0 {
         }
         
         public func eqv(_ a: Function0Of<B>, _ b: Function0Of<B>) -> Bool {
-            return eq.eqv(a.fix().extract(), b.fix().extract())
+            return eq.eqv(Function0<B>.fix(a).extract(), Function0<B>.fix(b).extract())
         }
     }
 }

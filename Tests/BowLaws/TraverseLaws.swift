@@ -10,8 +10,8 @@ class TraverseLaws<F> {
         property("Identity traverse") <- forAll { (x : Int, y : Int) in
             let f : (Int) -> Kind<ForId, Int> = { _ in Id<Int>(y) }
             let fa = generator(x)
-            return eq.eqv(traverse.traverse(fa, f, Id<Int>.applicative()).fix().value,
-                          functor.map(functor.map(fa, f), { a in a.fix().value }))
+            return eq.eqv(Id<Kind<F, Int>>.fix(traverse.traverse(fa, f, Id<Int>.applicative())).value,
+                          functor.map(functor.map(fa, f), { a in Id<Int>.fix(a).value }))
         }
     }
 }

@@ -72,7 +72,7 @@ public class Cofree<S, A> : CofreeOf<S, A> {
     }
     
     public func cata<B, Trav>(_ folder : @escaping (A, Kind<S, B>) -> Eval<B>, _ traverse : Trav) -> Eval<B> where Trav : Traverse, Trav.F == S {
-        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).fix()
+        let ev = Eval<Kind<S, B>>.fix(traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()))
         return ev.flatMap { sb in folder(self.extract(), sb) }
     }
     
@@ -85,6 +85,8 @@ public class Cofree<S, A> : CofreeOf<S, A> {
         return monad.flatten(inclusion.invoke(loop(self)))
     }
 }
+
+extension Cofree: Fixed {}
 
 public extension Cofree {
     public static func functor<Func>(_ functor : Func) -> FunctorInstance<S, Func> {

@@ -40,6 +40,8 @@ public class Store<S, V> : StoreOf<S, V> {
     }
 }
 
+extension Store: Fixed {}
+
 public extension Store {
     public static func functor() -> FunctorInstance<S> {
         return FunctorInstance<S>()

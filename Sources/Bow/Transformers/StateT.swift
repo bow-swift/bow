@@ -120,9 +120,11 @@ public class StateT<F, S, A> : StateTOf<F, S, A> {
     }
 }
 
+extension StateT: Fixed {}
+
 public extension StateT where F == ForId {
     public func run(_ initialState : S) -> (S, A) {
-        return self.runM(initialState, Id<A>.monad()).fix().value
+        return Id<(S, A)>.fix(self.runM(initialState, Id<A>.monad())).value
     }
     
     public func runA(_ s : S) -> A {

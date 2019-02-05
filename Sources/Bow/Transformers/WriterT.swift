@@ -137,6 +137,8 @@ public class WriterT<F, W, A> : WriterTOf<F, W, A> {
     }
 }
 
+extension WriterT: Fixed {}
+
 public extension WriterT {
     public static func functor<FuncF>(_ functor : FuncF) -> FunctorInstance<F, W, FuncF> {
         return FunctorInstance<F, W, FuncF>(functor)

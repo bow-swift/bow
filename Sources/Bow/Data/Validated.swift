@@ -154,6 +154,8 @@ class Invalid<E, A> : Validated<E, A> {
     }
 }
 
+extension Validated: Fixed {}
+
 extension Validated : CustomStringConvertible {
     public var description : String {
         return fold({ e in "Invalid(\(e))" },

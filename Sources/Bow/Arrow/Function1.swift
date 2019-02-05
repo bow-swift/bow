@@ -53,6 +53,8 @@ public class Function1<I, O> : Function1Of<I, O> {
     }
 }
 
+extension Function1: Fixed {}
+
 public extension Function1 {
     public static func functor() -> FunctorInstance<I> {
         return FunctorInstance<I>()

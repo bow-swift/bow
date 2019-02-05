@@ -266,6 +266,8 @@ class Some<A> : Option<A> {
 class None<A> : Option<A> {}
 
 // MARK: Protocol conformances
+extension Option: Fixed {}
+
 /**
  Conformance of `Option` to `CustomStringConvertible`.
  */
@@ -300,13 +302,6 @@ extension Option : Equatable where A : Equatable {
 extension Optional {
     func toOption() -> Option<Wrapped> {
         return Option<Wrapped>.fromOptional(self)
-    }
-}
-
-// MARK: Kind extensions
-public extension Kind where F == ForOption {
-    public func fix() -> Option<A> {
-        return self as! Option<A>
     }
 }
 
@@ -414,7 +409,7 @@ public extension Option {
         public typealias F = ForOption
         
         public func map<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> B) -> OptionOf<B> {
-            return fa.fix().map(f)
+            return Option<A>.fix(fa).map(f)
         }
     }
 
@@ -427,7 +422,7 @@ public extension Option {
         }
         
         public func ap<A, B>(_ ff: OptionOf<(A) -> B>, _ fa: OptionOf<A>) -> OptionOf<B> {
-            return ff.fix().ap(fa.fix())
+            return Option<(A) -> B>.fix(ff).ap(Option<A>.fix(fa))
         }
     }
 
@@ -436,7 +431,7 @@ public extension Option {
      */
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return Option<A>.fix(fa).flatMap({ a in Option<B>.fix(f(a)) })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
@@ -485,7 +480,7 @@ public extension Option {
         }
         
         public func handleErrorWith<A>(_ fa: OptionOf<A>, _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
-            return fa.fix().orElse(f(unit).fix())
+            return Option<A>.fix(fa).orElse(Option<A>.fix(f(unit)))
         }
     }
 
@@ -514,7 +509,7 @@ public extension Option {
      */
     public class FunctorFilterInstance : FunctorInstance, FunctorFilter {
         public func mapFilter<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
-            return fa.fix().mapFilter(f)
+            return Option<A>.fix(fa).mapFilter(f)
         }
     }
 
@@ -527,7 +522,7 @@ public extension Option {
         }
         
         public func mapFilter<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {
-            return fa.fix().mapFilter(f)
+            return Option<A>.fix(fa).mapFilter(f)
         }
     }
 
@@ -538,11 +533,11 @@ public extension Option {
         public typealias F = ForOption
         
         public func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return fa.fix().foldLeft(b, f)
+            return Option<A>.fix(fa).foldLeft(b, f)
         }
         
         public func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return fa.fix().foldRight(b, f)
+            return Option<A>.fix(fa).foldRight(b, f)
         }
     }
 
@@ -551,7 +546,7 @@ public extension Option {
      */
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
-            return fa.fix().traverse(f, applicative)
+            return Option<A>.fix(fa).traverse(f, applicative)
         }
     }
 
@@ -560,7 +555,7 @@ public extension Option {
      */
     public class TraverseFilterInstance : TraverseInstance, TraverseFilter {
         public func traverseFilter<A, B, G, Appl>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>, _ applicative: Appl) -> Kind<G, Kind<ForOption, B>> where G == Appl.F, Appl : Applicative {
-            return fa.fix().traverseFilter(f, applicative)
+            return Option<A>.fix(fa).traverseFilter(f, applicative)
         }
     }
 }

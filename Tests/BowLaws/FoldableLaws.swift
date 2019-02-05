@@ -54,7 +54,7 @@ class FoldableLaws<F> {
             let input = generator(x)
             
             let foldL = foldable.foldLeft(input, Int.sumMonoid.empty, { b, a in Int.sumMonoid.combine(b, f.getArrow(a)) })
-            let foldM = foldable.foldM(input, Int.sumMonoid.empty, { b, a in Id(Int.sumMonoid.combine(b, f.getArrow(a))) }, Id<Int>.monad()).fix().value
+            let foldM = Id<Int>.fix(foldable.foldM(input, Int.sumMonoid.empty, { b, a in Id(Int.sumMonoid.combine(b, f.getArrow(a))) }, Id<Int>.monad())).value
             return foldL == foldM
         }
     }

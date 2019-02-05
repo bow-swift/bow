@@ -32,6 +32,8 @@ public class Moore<E, V> : MooreOf<E, V> {
     }
 }
 
+extension Moore: Fixed {}
+
 public extension Moore {
     public static func functor() -> FunctorInstance<E> {
         return FunctorInstance<E>()

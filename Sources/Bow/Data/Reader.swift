@@ -42,6 +42,6 @@ public class Reader<D, A> : ReaderT<ForId, D, A> {
     }
     
     private func toReader<B>(_ x : Kleisli<ForId, D, B>) -> Reader<D, B> {
-        return Reader<D, B>({ (d : D) in x.run(d).fix().value })
+        return Reader<D, B>({ (d : D) in Id<B>.fix(x.run(d)).value })
     }
 }

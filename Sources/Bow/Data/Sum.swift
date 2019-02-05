@@ -56,6 +56,8 @@ public class Sum<F, G, V> : SumOf<F, G, V> {
     }
 }
 
+extension Sum: Fixed {}
+
 public extension Sum {
     public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> FunctorInstance<F, G, FuncF, FuncG> {
         return FunctorInstance(functorF, functorG)

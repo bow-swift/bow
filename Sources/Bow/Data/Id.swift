@@ -107,14 +107,7 @@ public class Id<A> : IdOf<A> {
 }
 
 // MARK: Kind extensions
-public extension Kind where F == ForId {
-    /**
-     Safe downcast to `Id<A>`.
-     */
-    public func fix() -> Id<A> {
-        return self as! Id<A>
-    }
-}
+extension Id: Fixed {}
 
 // MARK: Protocol conformances
 /**
@@ -209,7 +202,7 @@ extension Id {
         public typealias F = ForId
         
         public func map<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> B) -> IdOf<B> {
-            return fa.fix().map(f)
+            return Id<A>.fix(fa).map(f)
         }
     }
 
@@ -222,7 +215,7 @@ extension Id {
         }
         
         public func ap<A, B>(_ ff: IdOf<(A) -> B>, _ fa: IdOf<A>) -> IdOf<B> {
-            return ff.fix().ap(fa.fix())
+            return Id<(A) -> B>.fix(ff).ap(Id<A>.fix(fa))
         }
     }
 
@@ -231,7 +224,7 @@ extension Id {
      */
     public class MonadInstance : ApplicativeInstance, Monad {
         public func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
-            return fa.fix().flatMap({ a in f(a).fix() })
+            return Id<A>.fix(fa).flatMap({ a in f(a).fix() })
         }
         
         public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
@@ -244,11 +237,11 @@ extension Id {
      */
     public class BimonadInstance : MonadInstance, Bimonad {
         public func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
-            return fa.fix().coflatMap(f as (Id<A>) -> B)
+            return Id<A>.fix(fa).coflatMap(f as (Id<A>) -> B)
         }
         
         public func extract<A>(_ fa: IdOf<A>) -> A {
-            return fa.fix().extract()
+            return Id<A>.fix(fa).extract()
         }
     }
 
@@ -259,11 +252,11 @@ extension Id {
         public typealias F = ForId
         
         public func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return fa.fix().foldLeft(b, f)
+            return Id<A>.fix(fa).foldLeft(b, f)
         }
         
         public func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return fa.fix().foldRight(b, f)
+            return Id<A>.fix(fa).foldRight(b, f)
         }
     }
 
@@ -272,7 +265,7 @@ extension Id {
      */
     public class TraverseInstance : FoldableInstance, Traverse {
         public func traverse<G, A, B, Appl>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IdOf<B>> where G == Appl.F, Appl : Applicative {
-            return fa.fix().traverse(f, applicative)
+            return Id<A>.fix(fa).traverse(f, applicative)
         }
     }
 

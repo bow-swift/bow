@@ -189,6 +189,8 @@ class IorBoth<A, B> : Ior<A, B> {
     }
 }
 
+extension Ior: Fixed {}
+
 extension Ior : CustomStringConvertible {
     public var description : String {
         return fold({ a in "Left(\(a))" },
