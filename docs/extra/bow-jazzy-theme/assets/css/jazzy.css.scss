@@ -4,16 +4,34 @@
 //
 // ===========================================================================
 
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+
+// Colors
+$brand-primary: rgb(244, 81, 30);
+$brand-secondary: rgb(250, 137, 64);
+$gray-primary: rgb(49, 45, 44);
+$gray-primary-lighten: lighten($gray-primary, 10%);
+$white: rgb(255, 255, 255);
+//--
+$link-color: $brand-primary;
+$link-hover: darken($brand-primary, 4%);
+
+
+// Mapbox
+
 $body_background: #fff;
-$body_font: 14px/25px 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$body_font: 14px/25px 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $text_color: #333;
 $gray_border: 1px solid #ddd;
 
 $quote_color: #858585;
 $quote_border: 4px solid #e5e5e5;
 
-$link_color: #3887BE;
-$link_hover_color: #63b6e5;
+// $link_color: #3887BE;
+// $link_hover_color: #63b6e5;
+$link_color: $brand-primary;
+$link_hover_color: darken($brand-primary, 4%);
 
 $table_alt_row_color: #fbfbfb;
 $table_border_color: #ddd;
@@ -37,9 +55,9 @@ $navigation_max_width: 300px;
 
 // ----- Header
 
-$header_weight: normal;
+$header_weight: bold;
 $header_color: #555;
-$header_font: 'Open Sans Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header_font: 'Montserrat', 'Open Sans Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $header_link_color: #fff;
 $doc_coverage_color: #999;
 
@@ -50,13 +68,13 @@ $navigation_max_width: 300px;
 $navigation_bg_color: #fbfbfb;
 $navigation_task_color: $link_color;
 
-$section_name_color: $color_darkblue;
+$section_name_color: $gray-primary;
 $navigation_gloss_color: #999;
 
 // ----- Content
 
-$declaration_title_language_color: #4183c4;
-$declaration_language_border: 4px solid $color_brightblue;
+$declaration_title_language_color: $brand-secondary;
+$declaration_language_border: 4px solid $brand-primary;
 $declaration_bg_color: #fdfeff;
 $declaration_border_color: #ddd;
 
@@ -84,7 +102,7 @@ $footer_link_color: #555;
 body {
   margin: 0;
   background: $body_background;
-  color: $color_darkblue;
+  color: $gray-primary;
   font: $body_font;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -96,7 +114,7 @@ body {
   font-family: $header_font;
   font-size: $font-size;
   font-weight: $header_weight;
-  color: $color_darkblue;
+  color: $gray-primary;
   margin: $margin;
 }
 
@@ -105,7 +123,7 @@ h1 {
 }
 
 h1 a {
-  color: $color_darkblue;
+  color: $gray-primary;
 }
 
 h2 {
@@ -259,7 +277,7 @@ pre code {
 // ===========================================================================
 
 .header-container {
-  background: $color_brightblue;
+  background: $brand-primary;
 }
 .header {
   display: flex;
@@ -355,7 +373,7 @@ pre code {
   font-size: 13px;
   font-family: $header_font;
   text-transform: uppercase;
-  color: $color_darkblue;
+  color: $gray-primary;
   letter-spacing: 1px;
 }
 
@@ -404,7 +422,7 @@ pre code {
 }
 
 .nav-group-task-link {
-   color: $color_darkblue_lighten;
+   color: $gray-primary-lighten;
 }
 // ===========================================================================
 //
@@ -684,7 +702,7 @@ form[role=search] {
     }
   }
   input:focus {
-    border: 1px solid $color_brightblue;
+    border: 1px solid $brand-primary;
     background: #fff;
   }
 
@@ -743,9 +761,11 @@ form[role=search] {
 // ===========================================================================
 
 .footer {
+  background-color: $gray-primary;
   border-top: 1px $keyline_color solid;
-  padding: $gutter/2 $gutter;
+  padding: $gutter*3 $gutter*2;
   color: $footer_text_color;
+  font-size: 0.875rem;
 
   p {
     display: inline;
@@ -798,6 +818,6 @@ html.dash {
 
 .strong { font-family: $header_font;}
 .text-purple { color: $purple; }
-.text-blue { color: $blue; }
+.text-blue { color: $brand-secondary; }
 .keyline-purple { border-color: $purple; }
-.keyline-blue { border-color: $blue; }
+.keyline-blue { border-color: $brand-secondary; }
