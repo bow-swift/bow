@@ -2,29 +2,27 @@ import Foundation
 import SwiftCheck
 @testable import Bow
 
-class FunctorFilterLaws<F> {
+class FunctorFilterLaws<F: FunctorFilter & EquatableK> {
     
-    static func check<FuncFilt, EqF>(functorFilter : FuncFilt, generator : @escaping (Int) -> Kind<F, Int>, eq : EqF) where FuncFilt : FunctorFilter, FuncFilt.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        mapFilterComposition(functorFilter, generator, eq)
-        mapFilterMapConsistency(functorFilter, generator, eq)
+    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
+        mapFilterComposition(generator)
+        mapFilterMapConsistency(generator)
     }
     
-    private static func mapFilterComposition<FuncFilt, EqF>(_ functorFilter : FuncFilt, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where FuncFilt : FunctorFilter, FuncFilt.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("MapFilter composition") <- forAll { (a : Int, b : Int, c : Int) in
+    private static func mapFilterComposition(_ generator: @escaping (Int) -> Kind<F, Int>) {
+        property("MapFilter composition") <- forAll { (a: Int, b: Int, c: Int) in
             let fa = generator(a)
-            let f : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(b) } : { _ in Option<Int>.none() }
-            let g : (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.pure(c) } : { _ in Option<Int>.none() }
-            return eq.eqv(functorFilter.mapFilter(functorFilter.mapFilter(fa, f), g),
-                          functorFilter.mapFilter(fa, { x in f(x).flatMap(g) } ))
+            let f: (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.some(b) } : { _ in Option<Int>.none() }
+            let g: (Int) -> Option<Int> = arc4random_uniform(2) == 0 ? { _ in Option.some(c) } : { _ in Option<Int>.none() }
+            return F.mapFilter(F.mapFilter(fa, f), g) == F.mapFilter(fa, { x in f(x).flatMap(g) })
         }
     }
     
-    private static func mapFilterMapConsistency<FuncFilt, EqF>(_ functorFilter : FuncFilt, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where FuncFilt : FunctorFilter, FuncFilt.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func mapFilterMapConsistency(_ generator : @escaping (Int) -> Kind<F, Int>) {
         property("Consistency between mapFilter and map") <- forAll { (a : Int, b : Int) in
             let fa = generator(a)
-            let f : (Int) -> Int = { _ in b }
-            return eq.eqv(functorFilter.mapFilter(fa, { x in Option.some(f(x)) }),
-                          functorFilter.map(fa, f))
+            let f: (Int) -> Int = { _ in b }
+            return F.mapFilter(fa, { x in Option.some(f(x)) }) == F.map(fa, f)
         }
     }
 }

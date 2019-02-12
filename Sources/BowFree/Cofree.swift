@@ -86,8 +86,6 @@ public class Cofree<S, A> : CofreeOf<S, A> {
     }
 }
 
-extension Cofree: Fixed {}
-
 public extension Cofree {
     public static func functor<Func>(_ functor : Func) -> FunctorInstance<S, Func> {
         return FunctorInstance<S, Func>(functor)

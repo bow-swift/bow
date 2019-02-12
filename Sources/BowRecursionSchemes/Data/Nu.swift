@@ -18,8 +18,6 @@ public class Nu<F> : NuOf<F> {
     }
 }
 
-extension Nu: Fixed {}
-
 public extension Nu {
     public static func recursive() -> BirecursiveInstance {
         return BirecursiveInstance()

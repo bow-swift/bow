@@ -6,18 +6,18 @@ import SwiftCheck
 class StringInstancesTest: XCTestCase {
     
     func testEqLaws() {
-        EqLaws.check(eq: String.eq, generator: id)
+        EquatableLaws<String>.check()
     }
     
     func testSemigroupLaws() {
-        property("String concatenation semigroup") <- forAll { (a : String, b : String, c : String) in
-            return SemigroupLaws.check(semigroup: String.concatSemigroup, a: a, b: b, c: c, eq: String.order)
+        property("String concatenation semigroup") <- forAll { (a: String, b: String, c: String) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testMonoidLaws() {
-        property("String concatenation monoid") <- forAll { (a : String) in
-            return MonoidLaws.check(monoid: String.concatMonoid, a: a, eq: String.order)
+        property("String concatenation monoid") <- forAll { (a: String) in
+            return MonoidLaws.check(a: a)
         }
     }
 }

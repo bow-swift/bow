@@ -3,57 +3,45 @@ import Nimble
 @testable import BowLaws
 @testable import Bow
 
-class SumTest : XCTestCase {
-    
-    let cf = { (x : Int) in Sum.left(Id(x), Id(x)) }
-    
-    class SumEq : Eq {
-        typealias A = SumOf<ForId, ForId, Int>
-        
-        func eqv(_ a: SumOf<ForId, ForId, Int>, _ b: SumOf<ForId, ForId, Int>) -> Bool {
-            return Sum<ForId, ForId, Int>.fix(a).extract(Id<Int>.comonad(), Id<Int>.comonad()) ==
-                Sum<ForId, ForId, Int>.fix(b).extract(Id<Int>.comonad(), Id<Int>.comonad())
-        }
+extension SumPartial: EquatableK where F: Comonad, G: Comonad {
+    public static func eq<A>(_ lhs: Kind<SumPartial<F, G>, A>, _ rhs: Kind<SumPartial<F, G>, A>) -> Bool where A : Equatable {
+        return Sum.fix(lhs).extract() == Sum.fix(rhs).extract()
     }
-    
-    class SumEqUnit : Eq {
-        typealias A = SumOf<ForId, ForId, ()>
-        
-        func eqv(_ a: SumOf<ForId, ForId, ()>, _ b: SumOf<ForId, ForId, ()>) -> Bool {
-            return Sum<ForId, ForId, ()>.fix(a).extract(Id<()>.comonad(), Id<()>.comonad()) ==
-                Sum<ForId, ForId, ()>.fix(b).extract(Id<()>.comonad(), Id<()>.comonad())
-        }
-    }
+}
+
+class SumTest: XCTestCase {
+    let generator = { (x: Int) in Sum.left(Id(x), Id(x)) }
     
     func testFunctorLaws() {
-        FunctorLaws.check(functor: Sum<ForId, ForId, Int>.functor(Id<Int>.functor(), Id<Int>.functor()), generator: cf, eq: SumEq(), eqUnit: SumEqUnit())
+        FunctorLaws.check(generator: generator)
     }
     
     func testComonadLaws() {
-        ComonadLaws.check(comonad: Sum<ForId, ForId, Int>.comonad(Id<Int>.comonad(), Id<Int>.comonad()), generator: cf, eq: SumEq())
+        ComonadLaws.check(generator: generator)
     }
     
     let abSum = Sum.left(Id("A"), Id("B"))
     
     func testSumExtractReturnsViewOfCurrentSide() {
-        expect(self.abSum.extract(Id<String>.comonad(), Id<String>.comonad())).to(equal("A"))
-        expect(self.abSum.change(side: .right).extract(Id<String>.comonad(), Id<String>.comonad())).to(equal("B"))
+        expect(self.abSum.extract()).to(equal("A"))
+        expect(self.abSum.change(side: .right).extract()).to(equal("B"))
     }
     
     func testCoflatMapTransformsViewType() {
         let firstCharacter = { (x : String) in x.first! }
-        let result = abSum.coflatMap(Id<String>.comonad(), Id<String>.comonad()) { (sum) -> Character in
-            switch sum.side {
-            case .left: return firstCharacter(Id<String>.fix(sum.left).extract())
-            case .right: return firstCharacter(Id<String>.fix(sum.right).extract())
+        let result = abSum.coflatMap() { (sum) -> Character in
+            let s = Sum.fix(sum)
+            switch s.side {
+            case .left: return firstCharacter(Id.fix(s.left).extract())
+            case .right: return firstCharacter(Id.fix(s.right).extract())
             }
         }
-        expect(result.extract(Id<Character>.comonad(), Id<Character>.comonad())).to(equal(Character("A")))
+        expect(result.extract()).to(equal(Character("A")))
     }
     
     func testMapTransformsViewType() {
         let firstCharacter = { (x : String) in x.first! }
-        let result = abSum.map(Id<String>.functor(), Id<String>.functor(), firstCharacter)
-        expect(result.extract(Id<Character>.comonad(), Id<Character>.comonad())).to(equal(Character("A")))
+        let result = abSum.map(firstCharacter)
+        expect(result.extract()).to(equal(Character("A")))
     }
 }

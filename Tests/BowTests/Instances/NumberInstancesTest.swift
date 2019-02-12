@@ -4,320 +4,232 @@ import SwiftCheck
 @testable import Bow
 
 class NumberInstancesTest: XCTestCase {
-    
+
     func testIntEqLaws() {
-        EqLaws.check(eq: Int.eq, generator: id)
+        EquatableLaws<Int>.check()
     }
     
     func testIntOrderLaws() {
-        OrderLaws.check(order: Int.order, generator: id)
+        ComparableLaws<Int>.check()
     }
     
     func testInt8EqLaws() {
-        EqLaws.check(eq: Int8.eq, generator: id)
+        EquatableLaws<Int8>.check()
     }
     
     func testInt8OrderLaws() {
-        OrderLaws.check(order: Int8.order, generator: id)
+        ComparableLaws<Int8>.check()
     }
     
     func testInt16EqLaws() {
-        EqLaws.check(eq: Int16.eq, generator: id)
+        EquatableLaws<Int16>.check()
     }
     
     func testInt16OrderLaws() {
-        OrderLaws.check(order: Int16.order, generator: id)
+        ComparableLaws<Int16>.check()
     }
     
     func testInt32EqLaws() {
-        EqLaws.check(eq: Int32.eq, generator: id)
+        EquatableLaws<Int32>.check()
     }
     
     func testInt32OrderLaws() {
-        OrderLaws.check(order: Int32.order, generator: id)
+        ComparableLaws<Int32>.check()
     }
     
     func testInt64EqLaws() {
-        EqLaws.check(eq: Int64.eq, generator: id)
+        EquatableLaws<Int64>.check()
     }
     
     func testInt64OrderLaws() {
-        OrderLaws.check(order: Int64.order, generator: id)
+        ComparableLaws<Int64>.check()
     }
     
     func testUIntEqLaws() {
-        EqLaws.check(eq: Int.eq, generator: id)
+        EquatableLaws<UInt>.check()
     }
     
     func testUIntOrderLaws() {
-        OrderLaws.check(order: UInt.order, generator: id)
+        ComparableLaws<UInt>.check()
     }
     
     func testUInt8EqLaws() {
-        EqLaws.check(eq: Int8.eq, generator: id)
+        EquatableLaws<UInt8>.check()
     }
     
     func testUInt8OrderLaws() {
-        OrderLaws.check(order: UInt8.order, generator: id)
+        ComparableLaws<UInt8>.check()
     }
     
     func testUInt16EqLaws() {
-        EqLaws.check(eq: Int16.eq, generator: id)
+        EquatableLaws<UInt16>.check()
     }
     
     func testUInt16OrderLaws() {
-        OrderLaws.check(order: UInt16.order, generator: id)
+        ComparableLaws<UInt16>.check()
     }
     
     func testUInt32EqLaws() {
-        EqLaws.check(eq: Int32.eq, generator: id)
+        EquatableLaws<UInt32>.check()
     }
     
     func testUInt32OrderLaws() {
-        OrderLaws.check(order: UInt32.order, generator: id)
+        ComparableLaws<UInt32>.check()
     }
     
     func testUInt64EqLaws() {
-        EqLaws.check(eq: Int64.eq, generator: id)
+        EquatableLaws<UInt64>.check()
     }
     
     func testUInt64OrderLaws() {
-        OrderLaws.check(order: UInt64.order, generator: id)
+        ComparableLaws<UInt64>.check()
     }
     
     func testFloatEqLaws() {
-        EqLaws.check(eq: Float.eq, generator: id)
+        EquatableLaws<Float>.check()
     }
     
     func testFloatOrderLaws() {
-        OrderLaws.check(order: Float.order, generator: id)
+        ComparableLaws<Float>.check()
     }
     
     func testDoubleEqLaws() {
-        EqLaws.check(eq: Double.eq, generator: id)
+        EquatableLaws<Double>.check()
     }
     
     func testDoubleOrderLaws() {
-        OrderLaws.check(order: Double.order, generator: id)
+        ComparableLaws<Double>.check()
     }
     
     func testIntSemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws.check(semigroup: Int.sumSemigroup, a: a, b: b, c: c, eq: Int.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws.check(semigroup: Int.productSemigroup, a: a, b: b, c: c, eq: Int.order)
+        property("Sum semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testInt8SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int8, b : Int8, c : Int8) in
-            return SemigroupLaws.check(semigroup: Int8.sumSemigroup, a: a, b: b, c: c, eq: Int8.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : Int8, b : Int8, c : Int8) in
-            return SemigroupLaws.check(semigroup: Int8.productSemigroup, a: a, b: b, c: c, eq: Int8.order)
+        property("Sum semigroup laws") <- forAll { (a: Int8, b: Int8, c: Int8) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testInt16SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int16, b : Int16, c : Int16) in
-            return SemigroupLaws.check(semigroup: Int16.sumSemigroup, a: a, b: b, c: c, eq: Int16.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : Int16, b : Int16, c : Int16) in
-            return SemigroupLaws.check(semigroup: Int16.productSemigroup, a: a, b: b, c: c, eq: Int16.order)
+        property("Sum semigroup laws") <- forAll { (a: Int16, b: Int16, c: Int16) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testInt32SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int32, b : Int32, c : Int32) in
-            return SemigroupLaws.check(semigroup: Int32.sumSemigroup, a: a, b: b, c: c, eq: Int32.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : Int32, b : Int32, c : Int32) in
-            return SemigroupLaws.check(semigroup: Int32.productSemigroup, a: a, b: b, c: c, eq: Int32.order)
+        property("Sum semigroup laws") <- forAll { (a: Int32, b: Int32, c: Int32) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testInt64SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int64, b : Int64, c : Int64) in
-            return SemigroupLaws.check(semigroup: Int64.sumSemigroup, a: a, b: b, c: c, eq: Int64.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : Int64, b : Int64, c : Int64) in
-            return SemigroupLaws.check(semigroup: Int64.productSemigroup, a: a, b: b, c: c, eq: Int64.order)
+        property("Sum semigroup laws") <- forAll { (a: Int64, b: Int64, c: Int64) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testUIntSemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : UInt, b : UInt, c : UInt) in
-            return SemigroupLaws.check(semigroup: UInt.sumSemigroup, a: a, b: b, c: c, eq: UInt.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : UInt, b : UInt, c : UInt) in
-            return SemigroupLaws.check(semigroup: UInt.productSemigroup, a: a, b: b, c: c, eq: UInt.order)
+        property("Sum semigroup laws") <- forAll { (a: UInt, b: UInt, c: UInt) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testUInt8SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : UInt8, b : UInt8, c : UInt8) in
-            return SemigroupLaws.check(semigroup: UInt8.sumSemigroup, a: a, b: b, c: c, eq: UInt8.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : UInt8, b : UInt8, c : UInt8) in
-            return SemigroupLaws.check(semigroup: UInt8.productMonoid, a: a, b: b, c: c, eq: UInt8.order)
+        property("Sum semigroup laws") <- forAll { (a: UInt8, b: UInt8, c: UInt8) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testUInt16SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : UInt16, b : UInt16, c : UInt16) in
-            return SemigroupLaws.check(semigroup: UInt16.sumSemigroup, a: a, b: b, c: c, eq: UInt16.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : UInt16, b : UInt16, c : UInt16) in
-            return SemigroupLaws.check(semigroup: UInt16.productMonoid, a: a, b: b, c: c, eq: UInt16.order)
+        property("Sum semigroup laws") <- forAll { (a: UInt16, b: UInt16, c: UInt16) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testUInt32SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : UInt32, b : UInt32, c : UInt32) in
-            return SemigroupLaws.check(semigroup: UInt32.sumSemigroup, a: a, b: b, c: c, eq: UInt32.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : UInt32, b : UInt32, c : UInt32) in
-            return SemigroupLaws.check(semigroup: UInt32.productMonoid, a: a, b: b, c: c, eq: UInt32.order)
+        property("Sum semigroup laws") <- forAll { (a: UInt32, b: UInt32, c: UInt32) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testUInt64SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : UInt64, b : UInt64, c : UInt64) in
-            return SemigroupLaws.check(semigroup: UInt64.sumSemigroup, a: a, b: b, c: c, eq: UInt64.order)
-        }
-        
-        property("Product semigroup laws") <- forAll { (a : UInt64, b : UInt64, c : UInt64) in
-            return SemigroupLaws.check(semigroup: UInt64.productMonoid, a: a, b: b, c: c, eq: UInt64.order)
+        property("Sum semigroup laws") <- forAll { (a: UInt64, b: UInt64, c: UInt64) in
+            return SemigroupLaws.check(a: a, b: b, c: c)
         }
     }
     
     func testIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws.check(monoid: Int.sumMonoid, a: a, eq: Int.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws.check(monoid: Int.productMonoid, a: a, eq: Int.order)
+        property("Sum Monoid laws") <- forAll { (a: Int) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Int8) in
-            return MonoidLaws.check(monoid: Int8.sumMonoid, a: a, eq: Int8.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Int8) in
-            return MonoidLaws.check(monoid: Int8.productMonoid, a: a, eq: Int8.order)
+        property("Sum Monoid laws") <- forAll { (a: Int8) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Int16) in
-            return MonoidLaws.check(monoid: Int16.sumMonoid, a: a, eq: Int16.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Int16) in
-            return MonoidLaws.check(monoid: Int16.productMonoid, a: a, eq: Int16.order)
+        property("Sum Monoid laws") <- forAll { (a: Int16) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Int32) in
-            return MonoidLaws.check(monoid: Int32.sumMonoid, a: a, eq: Int32.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Int32) in
-            return MonoidLaws.check(monoid: Int32.productMonoid, a: a, eq: Int32.order)
+        property("Sum Monoid laws") <- forAll { (a: Int32) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Int64) in
-            return MonoidLaws.check(monoid: Int64.sumMonoid, a: a, eq: Int64.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Int64) in
-            return MonoidLaws.check(monoid: Int64.productMonoid, a: a, eq: Int64.order)
+        property("Sum Monoid laws") <- forAll { (a: Int64) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testUIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : UInt) in
-            return MonoidLaws.check(monoid: UInt.sumMonoid, a: a, eq: UInt.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : UInt) in
-            return MonoidLaws.check(monoid: UInt.productMonoid, a: a, eq: UInt.order)
+        property("Sum Monoid laws") <- forAll { (a: UInt) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testUInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : UInt8) in
-            return MonoidLaws.check(monoid: UInt8.sumMonoid, a: a, eq: UInt8.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : UInt8) in
-            return MonoidLaws.check(monoid: UInt8.productMonoid, a: a, eq: UInt8.order)
+        property("Sum Monoid laws") <- forAll { (a: UInt8) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testUInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : UInt16) in
-            return MonoidLaws.check(monoid: UInt16.sumMonoid, a: a, eq: UInt16.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : UInt16) in
-            return MonoidLaws.check(monoid: UInt16.productMonoid, a: a, eq: UInt16.order)
+        property("Sum Monoid laws") <- forAll { (a: UInt16) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testUInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : UInt32) in
-            return MonoidLaws.check(monoid: UInt32.sumMonoid, a: a, eq: UInt32.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : UInt32) in
-            return MonoidLaws.check(monoid: UInt32.productMonoid, a: a, eq: UInt32.order)
+        property("Sum Monoid laws") <- forAll { (a: UInt32) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testUInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : UInt64) in
-            return MonoidLaws.check(monoid: UInt64.sumMonoid, a: a, eq: UInt64.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : UInt64) in
-            return MonoidLaws.check(monoid: UInt64.productMonoid, a: a, eq: UInt64.order)
+        property("Sum Monoid laws") <- forAll { (a: UInt64) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testFloatMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Float) in
-            return MonoidLaws.check(monoid: Float.sumMonoid, a: a, eq: Float.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Float) in
-            return MonoidLaws.check(monoid: Float.productMonoid, a: a, eq: Float.order)
+        property("Sum Monoid laws") <- forAll { (a: Float) in
+            return MonoidLaws.check(a: a)
         }
     }
     
     func testDoubleMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a : Double) in
-            return MonoidLaws.check(monoid: Double.sumMonoid, a: a, eq: Double.order)
-        }
-        
-        property("Product Monoid laws") <- forAll { (a : Double) in
-            return MonoidLaws.check(monoid: Double.productMonoid, a: a, eq: Double.order)
+        property("Sum Monoid laws") <- forAll { (a: Double) in
+            return MonoidLaws.check(a: a)
         }
     }
 }

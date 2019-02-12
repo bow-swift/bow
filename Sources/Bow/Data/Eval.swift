@@ -17,10 +17,6 @@ public class Eval<A> : EvalOf<A> {
         return Always<A>(f)
     }
     
-    public static func pure(_ a : A) -> Eval<A> {
-        return now(a)
-    }
-    
     public static func deferEvaluation(_ f : @escaping () -> Eval<A>) -> Eval<A> {
         return Call<A>(f)
     }
@@ -44,16 +40,9 @@ public class Eval<A> : EvalOf<A> {
     public static var One : Eval<Int> {
         return Now<Int>(1)
     }
-    
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> Eval<Either<A, B>>) -> Eval<B> {
-        return f(a).flatMap{ either in
-            either.fold({ a in tailRecM(a, f) },
-                        Eval<B>.pure)
-        }
-    }
-    
+
     public static func fix(_ fa : EvalOf<A>) -> Eval<A> {
-        return fa.fix()
+        return fa as! Eval<A>
     }
     
     public func value() -> A {
@@ -62,25 +51,6 @@ public class Eval<A> : EvalOf<A> {
     
     public func memoize() -> Eval<A> {
         fatalError("Must be implemented by subclass")
-    }
-    
-    public func map<B>(_ f : @escaping (A) -> B) -> Eval<B> {
-        return flatMap{ a in Eval<B>.now(f(a)) }
-    }
-    
-    public func ap<AA, B>(_ fa : Eval<AA>) -> Eval<B> where A == (AA) -> B {
-        return flatMap(fa.map)
-    }
-    
-    public func flatMap<B>(_ f : @escaping (A) -> Eval<B>) -> Eval<B> {
-        switch self {
-            case is Compute<A>:
-                return FlatmapCompute(self as! Compute<A>, f)
-            case is Call<A>:
-                return FlatmapCall(self as! Call<A>, f)
-            default:
-                return FlatmapDefault(self, f)
-        }
     }
 }
 
@@ -294,44 +264,41 @@ fileprivate class FlatmapDefault<A, B> : Compute<A> {
     }
 }
 
-extension Eval: Fixed {}
+extension ForEval: Functor {
+    public static func map<A, B>(_ fa: Kind<ForEval, A>, _ f: @escaping (A) -> B) -> Kind<ForEval, B> {
+        return flatMap(fa, { a in Eval.now(f(a)) })
+    }
+}
 
-public extension Eval {
-    public static func functor() -> ApplicativeInstance {
-        return ApplicativeInstance()
+extension ForEval: Applicative {
+    public static func pure<A>(_ a: A) -> Kind<ForEval, A> {
+        return Eval.now(a)
     }
-    
-    public static func applicative() -> ApplicativeInstance {
-        return ApplicativeInstance()
-    }
-    
-    public static func eq<EqA>(_ eq : EqA) -> EqInstance<A, EqA> {
-        return EqInstance<A, EqA>(eq)
-    }
+}
 
-    public class ApplicativeInstance : Applicative {
-        public typealias F = ForEval
-        
-        public func pure<A>(_ a: A) -> Kind<F, A> {
-            return Eval<A>.pure(a)
-        }
-        
-        public func ap<A, B>(_ ff: Kind<F, (A) -> B>, _ fa: Kind<F, A>) -> Kind<F, B> {
-            return Eval<(A) -> B>.fix(ff).ap(Eval<A>.fix(fa))
+extension ForEval: Monad {
+    public static func flatMap<A, B>(_ fa: Kind<ForEval, A>, _ f: @escaping (A) -> Kind<ForEval, B>) -> Kind<ForEval, B> {
+        let ff: (A) -> Eval<B> = { a in Eval.fix(f(a)) }
+        switch fa {
+        case let compute as Compute<A>:
+            return FlatmapCompute(compute, ff)
+        case let call as Call<A>:
+            return FlatmapCall(call, ff)
+        default:
+            return FlatmapDefault(Eval.fix(fa), ff)
         }
     }
 
-    public class EqInstance<B, EqB> : Eq where EqB : Eq, EqB.A == B {
-        public typealias A = EvalOf<B>
-        
-        private let eq : EqB
-        
-        init(_ eq : EqB) {
-            self.eq = eq
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForEval, Either<A, B>>) -> Kind<ForEval, B> {
+        return Eval.fix(f(a)).flatMap{ either in
+            either.fold({ a in tailRecM(a, f) },
+                        Eval<B>.pure)
         }
-        
-        public func eqv(_ a: EvalOf<B>, _ b: EvalOf<B>) -> Bool {
-            return eq.eqv(Eval<B>.fix(a).value(), Eval<B>.fix(b).value())
-        }
+    }
+}
+
+extension ForEval: EquatableK {
+    public static func eq<A>(_ lhs: Kind<ForEval, A>, _ rhs: Kind<ForEval, A>) -> Bool where A : Equatable {
+        return Eval.fix(lhs).value() == Eval.fix(rhs).value()
     }
 }

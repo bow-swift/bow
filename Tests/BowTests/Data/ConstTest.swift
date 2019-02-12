@@ -4,54 +4,46 @@ import SwiftCheck
 @testable import Bow
 
 class ConstTest: XCTestCase {
-    var generator : (Int) -> Const<Int, Int> {
-        return { a in Const<Int, Int>.pure(a) }
+    var generator: (Int) -> Const<Int, Int> {
+        return { a in Const<Int, Int>(a) }
     }
-    
-    let eq = Const<Int, Int>.eq(Int.order)
-    let eqUnit = Const<Int, ()>.eq(Int.order)
-    
-    func testEqLaws() {
-        EqLaws.check(eq: Const<Int, Int>.eq(Int.order), generator: self.generator)
+
+    func testEquatableLaws() {
+        EquatableKLaws<ConstPartial<Int>, Int>.check(generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ConstPartial<Int>>.check(functor: Const<Int, Int>.functor(), generator: Const<Int, Int>.pure, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ConstPartial<Int>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ConstPartial<Int>>.check(applicative: Const<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
+        ApplicativeLaws<ConstPartial<Int>>.check()
     }
     
     func testSemigroupLaws() {
-        property("Const semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<ConstOf<Int, Int>>.check(
-                semigroup: Const<Int, Int>.semigroup(Int.sumMonoid),
-                a: Const<Int, Int>.pure(a),
-                b: Const<Int, Int>.pure(b),
-                c: Const<Int, Int>.pure(c),
-                eq: self.eq)
+        property("Const semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
+            return SemigroupLaws<Const<Int, Int>>.check(
+                a: Const<Int, Int>(a),
+                b: Const<Int, Int>(b),
+                c: Const<Int, Int>(c))
         }
     }
     
     func testMonoidLaws() {
-        property("Const monoid laws") <- forAll { (a : Int) in
-            return MonoidLaws<ConstOf<Int, Int>>.check(
-                monoid: Const<Int, Int>.monoid(Int.sumMonoid),
-                a: Const<Int, Int>.pure(a),
-                eq: self.eq)
+        property("Const monoid laws") <- forAll { (a: Int) in
+            return MonoidLaws<Const<Int, Int>>.check(a: Const<Int, Int>(a))
         }
     }
     
-    func testShowLaws() {
-        ShowLaws.check(show: Const.show(), generator: self.generator)
+    func testCustomStringConvertibleLaws() {
+        CustomStringConvertibleLaws<Const<Int, Int>>.check(generator: self.generator)
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ConstPartial<Int>>.check(foldable: Const<Int, Int>.foldable(), generator: self.generator)
+        FoldableLaws<ConstPartial<Int>>.check(generator: self.generator)
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ConstPartial<Int>>.check(traverse: Const<Int, Int>.traverse(), functor: Const<Int, Int>.traverse(), generator: self.generator, eq: self.eq)
+        TraverseLaws<ConstPartial<Int>>.check(generator: self.generator)
     }
 }

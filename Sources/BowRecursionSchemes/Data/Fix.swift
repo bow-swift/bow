@@ -16,8 +16,6 @@ public class Fix<A> : FixOf<A> {
     }
 }
 
-extension Fix: Fixed {}
-
 public extension Fix {
     public static func recursive() -> BirecursiveInstance {
         return BirecursiveInstance()

@@ -107,8 +107,6 @@ public class SingleK<A> : SingleKOf<A> {
     }
 }
 
-extension SingleK: Fixed {}
-
 public extension SingleK {
     public static func functor() -> FunctorInstance {
         return FunctorInstance()

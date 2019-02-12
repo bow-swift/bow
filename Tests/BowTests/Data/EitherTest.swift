@@ -9,24 +9,21 @@ class EitherTest: XCTestCase {
     var generator : (Int) -> EitherOf<Int, Int> {
         return { a in Either.pure(a) }
     }
-    
-    let eq = Either.eq(Int.order, Int.order)
-    let eqUnit = Either.eq(Int.order, UnitEq())
-    
-    func testEqLaws() {
-        EqLaws.check(eq: self.eq, generator: self.generator)
+
+    func testEquatableLaws() {
+        EquatableKLaws<EitherPartial<Int>, Int>.check(generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherPartial<Int>>.check(functor: Either<Int, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<EitherPartial<Int>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<EitherPartial<Int>>.check(applicative: Either<Int, Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<EitherPartial<Int>>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<EitherPartial<Int>>.check(monad: Either<Int, Int>.monad(), eq: self.eq)
+        MonadLaws<EitherPartial<Int>>.check()
     }
 
 //    func testBifunctorLaws() {
@@ -34,41 +31,30 @@ class EitherTest: XCTestCase {
 //    }
 
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(
-            applicativeError: Either<CategoryError, Int>.applicativeError(),
-            eq: Either.eq(CategoryError.eq, Int.order),
-            eqEither: Either.eq(CategoryError.eq, Either.eq(CategoryError.eq, Int.order)),
-            gen: { CategoryError.arbitrary.generate })
+        ApplicativeErrorLaws<EitherPartial<CategoryError>>.check()
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<EitherPartial<CategoryError>, CategoryError>.check(monadError: Either<CategoryError, Int>.monadError(), eq: Either.eq(CategoryError.eq, Int.order), gen: { CategoryError.arbitrary.generate })
+        MonadErrorLaws<EitherPartial<CategoryError>>.check()
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherPartial<Int>>.check(semigroupK: Either<Int, Int>.semigroupK(), generator: self.generator, eq: self.eq)
+        SemigroupKLaws<EitherPartial<Int>>.check(generator: self.generator)
     }
-    
-    func testSemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws.check(semigroup: Either<Int, Int>.semigroupK().algebra(), a: Either.right(a), b: Either.right(b), c: Either.right(c), eq: self.eq)
-        }
-    }
-    
-    func testShowLaws() {
-        ShowLaws.check(show: Either.show(), generator: { a in (a % 2 == 0) ? Either<Int, Int>.pure(a) : Either<Int, Int>.left(a) })
+
+    func testCustomStringConvertibleLaws() {
+        CustomStringConvertibleLaws.check(generator: { (a: Int) in
+            (a % 2 == 0) ?
+                Either<Int, Int>.right(a) :
+                Either<Int, Int>.left(a) })
     }
     
     func testFoldableLaws() {
-        FoldableLaws<EitherPartial<Int>>.check(foldable: Either<Int, Int>.foldable(),
-                                               generator: self.generator)
+        FoldableLaws<EitherPartial<Int>>.check(generator: self.generator)
     }
     
     func testTraverseLaws() {
-        TraverseLaws<EitherPartial<Int>>.check(traverse: Either<Int, Int>.traverse(),
-                                               functor: Either<Int, Int>.functor(),
-                                               generator: self.generator,
-                                               eq: self.eq)
+        TraverseLaws<EitherPartial<Int>>.check(generator: self.generator)
     }
     
     func testCheckers() {
@@ -85,8 +71,8 @@ class EitherTest: XCTestCase {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(Either.eq(Int.order, String.order).eqv(left.swap(), Either<Int, String>.right("Hello"))).to(beTrue())
-        expect(Either.eq(Int.order, String.order).eqv(right.swap(), Either<Int, String>.left(5))).to(beTrue())
+        expect(left.swap()).to(equal(Either<Int, String>.right("Hello")))
+        expect(right.swap()).to(equal(Either<Int, String>.left(5)))
     }
     
     func testExists() {
@@ -102,9 +88,9 @@ class EitherTest: XCTestCase {
     func testToOption() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
-        
-        expect(Option.eq(Int.order).eqv(left.toOption(), Option<Int>.none())).to(beTrue())
-        expect(Option.eq(Int.order).eqv(right.toOption(), Option<Int>.some(5))).to(beTrue())
+
+        expect(left.toOption()).to(equal(Option<Int>.none()))
+        expect(right.toOption()).to(equal(Option<Int>.some(5)))
     }
     
     func testGetOrElse() {
@@ -120,9 +106,9 @@ class EitherTest: XCTestCase {
         let right = Either<String, Int>.right(5)
         let isPositive = { (x : Int) in x >= 0 }
         
-        expect(Either.eq(String.order, Int.order).eqv(left.filterOrElse(isPositive, "10"), Either<String, Int>.left("Hello"))).to(beTrue())
-        expect(Either.eq(String.order, Int.order).eqv(right.filterOrElse(isPositive, "10"), Either<String, Int>.right(5))).to(beTrue())
-        expect(Either.eq(String.order, Int.order).eqv(right.filterOrElse(not <<< isPositive, "10"), Either<String, Int>.left("10"))).to(beTrue())
+        expect(left.filterOrElse(isPositive, "10")).to(equal(Either<String, Int>.left("Hello")))
+        expect(right.filterOrElse(isPositive, "10")).to(equal(Either<String, Int>.right(5)))
+        expect(right.filterOrElse(not <<< isPositive, "10")).to(equal(Either<String, Int>.left("10")))
     }
     
     func testConversionToString() {

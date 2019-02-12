@@ -1,125 +1,187 @@
 import Foundation
 
-public protocol Foldable : Typeclass {
-    associatedtype F
-    
-    func foldLeft<A, B>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> B) -> B
-    func foldRight<A, B>(_ fa : Kind<F, A>, _ b : Eval<B>, _ f : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
+public protocol Foldable {
+    static func foldLeft<A, B>(_ fa: Kind<Self, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B
+    static func foldRight<A, B>(_ fa: Kind<Self, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 
 public extension Foldable {
-    public func fold<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> A where Mono : Monoid, Mono.A == A {
-        return foldLeft(fa, monoid.empty, { acc, a in monoid.combine(acc, a) })
+    public static func fold<A: Monoid>(_ fa : Kind<Self, A>) -> A {
+        return foldLeft(fa, A.empty(), { acc, a in acc.combine(a) })
     }
     
-    public func reduceLeftToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping(B, A) -> B) -> Option<B> {
-        return foldLeft(fa, Option.empty(), { option, a in
-            option.fold(constant(Option<B>.some(f(a))),
-                        { b in Option<B>.some(g(b, a)) })
-        })
+    public static func reduceLeftToOption<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B, A) -> B) -> Option<B> {
+        return Option.fix(foldLeft(fa, Option.empty, { option, a in
+            Option.fix(option).fold(constant(Option.some(f(a))),
+                                    { b in Option.some(g(b, a)) })
+        }))
     }
     
-    public func reduceRightToOption<A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> B, _ g : @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
-        return foldRight(fa, Eval<Option<B>>.now(Option<B>.empty()), { a, lb in
-            lb.flatMap({ option in
-                option.fold({ Eval<Option<B>>.later({ Option<B>.some(f(a)) }) },
-                            { b in g(a, Eval<B>.now(b)).map(Option<B>.some) })
-            })
-        })
+    public static func reduceRightToOption<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+        return Eval.fix(foldRight(fa, Eval.now(Option.empty), { a, lb in
+            Eval.fix(Eval.fix(lb).flatMap({ option in
+                Option.fix(option).fold({ Eval.later({ Option.some(f(a)) }) },
+                                        { b in Eval.fix(g(a, Eval.now(b)).map(Option.some)) })
+            }))
+        }).map { x in Option.fix(x) })
     }
     
-    public func reduceLeftOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, A) -> A) -> Option<A> {
+    public static func reduceLeftOption<A>(_ fa: Kind<Self, A>, _ f: @escaping (A, A) -> A) -> Option<A> {
         return reduceLeftToOption(fa, id, f)
     }
     
-    public func reduceRightOption<A>(_ fa : Kind<F, A>, _ f : @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
+    public static func reduceRightOption<A>(_ fa: Kind<Self, A>, _ f: @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
         return reduceRightToOption(fa, id, f)
     }
     
-    public func combineAll<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> A where Mono : Monoid, Mono.A == A {
-        return fold(monoid, fa)
+    public static func combineAll<A: Monoid>(_ fa: Kind<Self, A>) -> A {
+        return fold(fa)
     }
     
-    public func foldMap<A, B, Mono>(_ monoid : Mono, _ fa : Kind<F, A>, _ f : @escaping (A) -> B) -> B where Mono : Monoid, Mono.A == B {
-        return foldLeft(fa, monoid.empty, { b, a in monoid.combine(b, f(a)) })
+    public static func foldMap<A, B: Monoid>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B) -> B {
+        return foldLeft(fa, B.empty(), { b, a in b.combine(f(a)) })
     }
     
-    public func traverse_<G, A, B, Appl>(_ applicative : Appl, _ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>) -> Kind<G, Unit> where Appl : Applicative, Appl.F == G {
-        return foldRight(fa, Eval.always({ applicative.pure(unit) }), { a, acc in
-            applicative.map2Eval(f(a), acc, { _, _ in unit })
+    public static func traverse_<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Unit> {
+        return foldRight(fa, Eval.always({ G.pure(unit) }), { a, acc in
+            G.map2Eval(f(a), acc, { _, _ in unit })
         }).value()
     }
     
-    public func sequence_<G, A, Appl>(_ applicative : Appl, _ fga : Kind<F, Kind<G, A>>) -> Kind<G, Unit> where Appl : Applicative, Appl.F == G {
-        return traverse_(applicative, fga, id)
+    public static func sequence_<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Unit> {
+        return traverse_(fga, id)
     }
     
-    public func find<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Option<A> {
+    public static func find<A>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Bool) -> Option<A> {
         return foldRight(fa, Eval.now(Option.none()), { a, lb in
             f(a) ? Eval.now(Option.some(a)) : lb
         }).value()
     }
     
-    public func exists<A>(_ fa : Kind<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
+    public static func exists<A>(_ fa: Kind<Self, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
         return foldRight(fa, Eval<Bool>.False, { a, lb in
             predicate(a) ? Eval<Bool>.True : lb
         }).value()
     }
     
-    public func forall<A>(_ fa : Kind<F, A>, _ predicate : @escaping (A) -> Bool) -> Bool {
+    public static func forall<A>(_ fa: Kind<Self, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
         return foldRight(fa, Eval<Bool>.True, { a, lb in
             predicate(a) ? lb : Eval<Bool>.False
         }).value()
     }
     
-    public func isEmpty<A>(_ fa : Kind<F, A>) -> Bool {
+    public static func isEmpty<A>(_ fa: Kind<Self, A>) -> Bool {
         return foldRight(fa, Eval<Bool>.True, { _, _ in Eval<Bool>.False }).value()
     }
     
-    public func nonEmpty<A>(_ fa : Kind<F, A>) -> Bool {
+    public static func nonEmpty<A>(_ fa: Kind<Self, A>) -> Bool {
         return !isEmpty(fa)
     }
     
-    public func foldM<G, A, B, Mon>(_ fa : Kind<F, A>, _ b : B, _ f : @escaping (B, A) -> Kind<G, B>, _ monad : Mon) -> Kind<G, B> where Mon : Monad, Mon.F == G {
-        return foldLeft(fa, monad.pure(b), { gb, a in monad.flatMap(gb, { b in f(b, a) }) })
+    public static func foldM<G: Monad, A, B>(_ fa: Kind<Self, A>, _ b: B, _ f: @escaping (B, A) -> Kind<G, B>) -> Kind<G, B> {
+        return foldLeft(fa, G.pure(b), { gb, a in G.flatMap(gb, { b in f(b, a) }) })
     }
     
-    public func foldMapM<G, A, B, Mon, Mono>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>, _ monad : Mon, _ monoid : Mono) -> Kind<G, B> where Mon : Monad, Mon.F == G, Mono : Monoid, Mono.A == B {
-        return foldM(fa, monoid.empty, { b, a in monad.map(f(a), { bb in monoid.combine(b, bb) }) }, monad)
+    public static func foldMapM<G: Monad, A, B: Monoid>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, B> {
+        return foldM(fa, B.empty(), { b, a in G.map(f(a), { bb in b.combine(bb) }) })
     }
     
-    public func get<A>(_ fa : Kind<F, A>, _ index : Int64) -> Option<A> {
-        return (foldM(fa, Int64(0), { i, a in
-            (i == index) ? Either<A, Int64>.left(a) : Either<A, Int64>.right(i + 1)
-        }, Either<A, Int64>.monad() as Either.MonadInstance<A>) as! Either<A, Int64>)
-            .fold(Option<A>.some, constant(Option<A>.none()))
+    public static func get<A>(_ fa: Kind<Self, A>, _ index: Int64) -> Option<A> {
+        return Either.fix(foldM(fa, Int64(0), { i, a in
+            (i == index) ?
+                Either<A, Int64>.left(a) :
+                Either<A, Int64>.right(i + 1)
+        })).fold(Option<A>.some,
+                 constant(Option<A>.none()))
     }
     
-    public func size<A, Mono>(_ monoid : Mono, _ fa : Kind<F, A>) -> Int64 where Mono : Monoid, Mono.A == Int64 {
-        return foldMap(monoid, fa, { _ in 1 })
+    public static func count<A: Monoid>(_ fa: Kind<Self, A>) -> Int64 {
+        return foldMap(fa, constant(1))
     }
-    
 }
 
+// MARK: Syntax for Foldable
 
+public extension Kind where F: Foldable {
+    public func foldLeft<B>(_ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return F.foldLeft(self, b, f)
+    }
 
+    public func foldRight<B>(_ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return F.foldRight(self, b, f)
+    }
 
+    public func reduceLeftToOption<B>(_ f: @escaping (A) -> B, _ g: @escaping (B, A) -> B) -> Option<B> {
+        return F.reduceLeftToOption(self, f, g)
+    }
 
+    public func reduceRightToOption<B>(_ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+        return F.reduceRightToOption(self, f, g)
+    }
 
+    public func reduceLeftOption(_ f: @escaping (A, A) -> A) -> Option<A> {
+        return F.reduceLeftOption(self, f)
+    }
 
+    public func reduceRightOption(_ f: @escaping (A, Eval<A>) -> Eval<A>) -> Eval<Option<A>> {
+        return F.reduceRightOption(self, f)
+    }
 
+    public func foldMap<B: Monoid>(_ f: @escaping (A) -> B) -> B {
+        return F.foldMap(self, f)
+    }
 
+    public func traverse_<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Unit> {
+        return F.traverse_(self, f)
+    }
 
+    public static func sequence_<G: Applicative>(_ fga: Kind<F, Kind<G, A>>) -> Kind<G, Unit> {
+        return F.sequence_(fga)
+    }
 
+    public func find(_ f: @escaping (A) -> Bool) -> Option<A> {
+        return F.find(self, f)
+    }
 
+    public func exists(_ predicate: @escaping (A) -> Bool) -> Bool {
+        return F.exists(self, predicate)
+    }
 
+    public func forall(_ predicate: @escaping (A) -> Bool) -> Bool {
+        return F.forall(self, predicate)
+    }
 
+    public var isEmpty: Bool {
+        return F.isEmpty(self)
+    }
 
+    public var nonEmpty: Bool {
+        return F.nonEmpty(self)
+    }
 
+    public func foldM<G: Monad, B>(_ b: B, _ f: @escaping (B, A) -> Kind<G, B>) -> Kind<G, B> {
+        return F.foldM(self, b, f)
+    }
 
+    public func foldMapM<G: Monad, B: Monoid>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, B> {
+        return F.foldMapM(self, f)
+    }
 
+    public func get(_ index: Int64) -> Option<A> {
+        return F.get(self, index)
+    }
+}
 
+public extension Kind where F: Foldable, A: Monoid {
+    public func fold() -> A {
+        return F.fold(self)
+    }
 
+    public func combineAll() -> A {
+        return F.combineAll(self)
+    }
 
-
-
+    public var count: Int64 {
+        return F.count(self)
+    }
+}

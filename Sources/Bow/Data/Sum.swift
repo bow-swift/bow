@@ -32,74 +32,36 @@ public class Sum<F, G, V> : SumOf<F, G, V> {
         self.side = side
     }
     
-    public func coflatMap<A, ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG, _ f : @escaping (Sum<F, G, V>) -> A) -> Sum<F, G, A> where ComonF : Comonad, ComonF.F == F, ComonG : Comonad, ComonG.F == G {
-        return Sum<F, G, A>(left: comonadF.coflatMap(self.left, { _ in f(Sum(left: self.left, right: self.right, side: .left)) }),
-                            right: comonadG.coflatMap(self.right, { _ in f(Sum(left: self.left, right: self.right, side: .right)) }),
-                            side: self.side)
-    }
-    
-    public func map<A, FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG, _ f : @escaping (V) -> A) -> Sum<F, G, A> where FuncF : Functor, FuncF.F == F, FuncG : Functor, FuncG.F == G {
-        return Sum<F, G, A>(left: functorF.map(self.left, f),
-                            right: functorG.map(self.right, f),
-                            side: self.side)
-    }
-    
-    public func extract<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> V where ComonF : Comonad, ComonF.F == F, ComonG : Comonad, ComonG.F == G {
-        switch self.side {
-        case .left: return comonadF.extract(self.left)
-        case .right: return comonadG.extract(self.right)
-        }
-    }
-    
     public func change(side: Side) -> Sum<F, G, V> {
         return Sum(left: self.left, right: self.right, side: side)
     }
 }
 
-extension Sum: Fixed {}
 
-public extension Sum {
-    public static func functor<FuncF, FuncG>(_ functorF : FuncF, _ functorG : FuncG) -> FunctorInstance<F, G, FuncF, FuncG> {
-        return FunctorInstance(functorF, functorG)
-    }
-    
-    public static func comonad<ComonF, ComonG>(_ comonadF : ComonF, _ comonadG : ComonG) -> ComonadInstance<F, G, ComonF, ComonG> {
-        return ComonadInstance(comonadF, comonadG)
-    }
+extension SumPartial: Invariant where F: Functor, G: Functor {}
 
-    public class FunctorInstance<G, H, FuncG, FuncH> : Functor where FuncG : Functor, FuncG.F == G, FuncH : Functor, FuncH.F == H {
-        public typealias F = SumPartial<G, H>
-        
-        private let functorG : FuncG
-        private let functorH : FuncH
-        
-        init(_ functorG : FuncG, _ functorH : FuncH) {
-            self.functorG = functorG
-            self.functorH = functorH
-        }
-        
-        public func map<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (A) -> B) -> SumOf<G, H, B> {
-            return Sum<G, H, A>.fix(fa).map(functorG, functorH, f)
-        }
+extension SumPartial: Functor where F: Functor, G: Functor {
+    public static func map<A, B>(_ fa: Kind<SumPartial<F, G>, A>, _ f: @escaping (A) -> B) -> Kind<SumPartial<F, G>, B> {
+        let sum = Sum.fix(fa)
+        return Sum(left: sum.left.map(f),
+                   right: sum.right.map(f),
+                   side: sum.side)
+    }
+}
+
+extension SumPartial: Comonad where F: Comonad, G: Comonad {
+    public static func coflatMap<A, B>(_ fa: Kind<SumPartial<F, G>, A>, _ f: @escaping (Kind<SumPartial<F, G>, A>) -> B) -> Kind<SumPartial<F, G>, B> {
+        let sum = Sum.fix(fa)
+        return Sum(left: F.coflatMap(sum.left, { _ in f(Sum(left: sum.left, right: sum.right, side: .left)) }),
+                   right: G.coflatMap(sum.right, { _ in f(Sum(left: sum.left, right: sum.right, side: .right)) }),
+                   side: sum.side)
     }
 
-    public class ComonadInstance<G, H, ComonG, ComonH> : FunctorInstance<G, H, ComonG, ComonH>, Comonad where ComonG : Comonad, ComonG.F == G, ComonH : Comonad, ComonH.F == H {
-        
-        private let comonadG : ComonG
-        private let comonadH : ComonH
-        
-        override init(_ comonadG : ComonG, _ comonadH : ComonH) {
-            self.comonadG = comonadG
-            self.comonadH = comonadH
-            super.init(comonadG, comonadH)
-        }
-        
-        public func coflatMap<A, B>(_ fa: SumOf<G, H, A>, _ f: @escaping (SumOf<G, H, A>) -> B) -> SumOf<G, H, B> {
-            return Sum<G, H, A>.fix(fa).coflatMap(comonadG, comonadH, f)
-        }
-        
-        public func extract<A>(_ fa: SumOf<G, H, A>) -> A {
-            return Sum<G, H, A>.fix(fa).extract(comonadG, comonadH)
+    public static func extract<A>(_ fa: Kind<SumPartial<F, G>, A>) -> A {
+        let sum = Sum.fix(fa)
+        switch sum.side {
+        case .left: return F.extract(sum.left)
+        case .right: return G.extract(sum.right)
         }
     }
 }

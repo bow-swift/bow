@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Eq : Typeclass {
+public protocol Eq {
     associatedtype A
     
     func eqv(_ a : A, _ b : A) -> Bool

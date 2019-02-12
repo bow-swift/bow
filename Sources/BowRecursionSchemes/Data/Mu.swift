@@ -14,8 +14,6 @@ open class Mu<F> : MuOf<F> {
     }
 }
 
-extension Mu: Fixed {}
-
 public extension Mu {
     public static func recursive() -> BirecursiveInstance {
         return BirecursiveInstance()

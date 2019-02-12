@@ -2,34 +2,31 @@ import Foundation
 import SwiftCheck
 @testable import Bow
 
-class MonadFilterLaws<F> {
+class MonadFilterLaws<F: MonadFilter & EquatableK> {
     
-    static func check<MonFil, EqF>(monadFilter : MonFil, generator : @escaping (Int) -> Kind<F, Int>, eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        leftEmpty(monadFilter, generator, eq)
-        rightEmpty(monadFilter, generator, eq)
-        consistency(monadFilter, generator, eq)
+    static func check(generator : @escaping (Int) -> Kind<F, Int>) {
+        leftEmpty(generator)
+        rightEmpty(generator)
+        consistency(generator)
     }
     
-    private static func leftEmpty<MonFil, EqF>(_ monadFilter : MonFil, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func leftEmpty(_ generator: @escaping (Int) -> Kind<F, Int>) {
         property("Left empty") <- forAll { (_ : Int) in
-            return eq.eqv(monadFilter.flatMap(monadFilter.empty(), generator),
-                          monadFilter.empty())
+            return F.flatMap(F.empty(), generator) == F.empty()
         }
     }
     
-    private static func rightEmpty<MonFil, EqF>(_ monadFilter : MonFil, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func rightEmpty(_ generator : @escaping (Int) -> Kind<F, Int>) {
         property("Right empty") <- forAll { (a : Int) in
             let fa = generator(a)
-            return eq.eqv(monadFilter.flatMap(fa, constant(monadFilter.empty())),
-                          monadFilter.empty())
+            return F.flatMap(fa, constant(F.empty())) == F.empty() as Kind<F, Int>
         }
     }
     
-    private static func consistency<MonFil, EqF>(_ monadFilter : MonFil, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonFil : MonadFilter, MonFil.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func consistency(_ generator : @escaping (Int) -> Kind<F, Int>)  {
         property("Consistency") <- forAll { (a : Int, f : ArrowOf<Int, Bool>) in
             let fa = generator(a)
-            return eq.eqv(monadFilter.filter(fa, f.getArrow),
-                          monadFilter.flatMap(fa, { a in f.getArrow(a) ? monadFilter.pure(a) : monadFilter.empty() }))
+            return F.filter(fa, f.getArrow) == F.flatMap(fa, { a in f.getArrow(a) ? F.pure(a) : F.empty() })
         }
     }
 }

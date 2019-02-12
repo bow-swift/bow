@@ -111,8 +111,6 @@ public class MaybeK<A> : MaybeKOf<A> {
     }
 }
 
-extension MaybeK: Fixed {}
-
 public extension MaybeK {
     public static func functor() -> FunctorInstance {
         return FunctorInstance()

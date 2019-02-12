@@ -283,8 +283,6 @@ fileprivate class AsyncIO<A> : IO<A> {
     }
 }
 
-extension IO: Fixed {}
-
 public extension IO {
     public static func functor() -> FunctorInstance {
         return FunctorInstance()

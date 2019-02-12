@@ -134,8 +134,6 @@ public class ObservableK<A> : ObservableKOf<A> {
     }
 }
 
-extension ObservableK: Fixed {}
-
 public extension ObservableK {
     public static func functor() -> FunctorInstance {
         return FunctorInstance()
