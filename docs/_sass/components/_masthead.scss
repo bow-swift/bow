@@ -10,6 +10,7 @@
         @include align-items (center);
         .masthead-text {
             @include flex(1);
+            color: $white;
             margin-right: ($base-point-grid * 3);
             h2 {
                 margin-bottom: ($base-point-grid * 4);
