@@ -99,6 +99,10 @@ $footer_link_color: #555;
   box-sizing: inherit;
 }
 
+html {
+  font: $body_font;
+}
+
 body {
   margin: 0;
   background: $body_background;
