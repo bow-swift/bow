@@ -5,11 +5,7 @@ public final class ForYoneda {}
 public final class YonedaPartial<F>: Kind<ForYoneda, F> {}
 public typealias YonedaOf<F, A> = Kind<YonedaPartial<F>, A>
 
-open class Yoneda<F, A> : YonedaOf<F, A> {
-    public static func apply<Func>(_ fa : Kind<F, A>, _ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
-        return YonedaFunctor<F, A, Func>(fa, functor)
-    }
-    
+open class Yoneda<F, A>: YonedaOf<F, A> {
     public static func fix(_ fa : YonedaOf<F, A>) -> Yoneda<F, A> {
         return fa as! Yoneda<F, A>
     }
@@ -22,20 +18,22 @@ open class Yoneda<F, A> : YonedaOf<F, A> {
         return apply(id)
     }
     
-    public func map<B, Func>(_ ff : @escaping (A) -> B, _ functor : Func) -> Yoneda<F, B> where Func : Functor, Func.F == F {
-        return YonedaDefault(self, ff)
-    }
-    
     public func toCoyoneda() -> Coyoneda<F, A, A> {
         return Coyoneda<F, A, A>.apply(lower(), id)
     }
 }
 
-fileprivate class YonedaDefault<F, A, B> : Yoneda<F, B> {
-    private let ff : (A) -> B
-    private let yoneda : Yoneda<F, A>
+public extension Yoneda where F: Functor {
+    public static func apply(_ fa : Kind<F, A>) -> Yoneda<F, A> {
+        return YonedaFunctor<F, A>(fa)
+    }
+}
+
+fileprivate class YonedaDefault<F, A, B>: Yoneda<F, B> {
+    private let ff: (A) -> B
+    private let yoneda: Yoneda<F, A>
     
-    init(_ yoneda : Yoneda<F, A>, _ ff : @escaping (A) -> B) {
+    init(_ yoneda: Yoneda<F, A>, _ ff: @escaping (A) -> B) {
         self.yoneda = yoneda
         self.ff = ff
     }
@@ -45,36 +43,21 @@ fileprivate class YonedaDefault<F, A, B> : Yoneda<F, B> {
     }
 }
 
-fileprivate class YonedaFunctor<F, A, Func> : Yoneda<F, A> where Func : Functor, Func.F == F {
+fileprivate class YonedaFunctor<F: Functor, A>: Yoneda<F, A> {
     private let fa : Kind<F, A>
-    private let functor : Func
-    
-    init(_ fa : Kind<F, A>, _ functor : Func) {
+
+    init(_ fa : Kind<F, A>) {
         self.fa = fa
-        self.functor = functor
     }
     
     override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
-        return functor.map(fa, f)
+        return F.map(fa, f)
     }
 }
 
-public extension Yoneda {
-    public static func functor<Func>(_ functor : Func) -> FunctorInstance<F, Func> {
-        return FunctorInstance<F, Func>(functor)
-    }
-
-    public class FunctorInstance<G, Func> : Functor where Func : Functor, Func.F == G {
-        public typealias F = YonedaPartial<G>
-        
-        private let functor : Func
-        
-        init(_ functor : Func) {
-            self.functor = functor
-        }
-        
-        public func map<A, B>(_ fa: YonedaOf<G, A>, _ f: @escaping (A) -> B) -> YonedaOf<G, B> {
-            return Yoneda<G, A>.fix(fa).map(f, functor)
-        }
+extension YonedaPartial: Functor {
+    public static func map<A, B>(_ fa: Kind<YonedaPartial<F>, A>, _ f: @escaping (A) -> B) -> Kind<YonedaPartial<F>, B> {
+        return YonedaDefault(Yoneda.fix(fa), f)
     }
 }
+
