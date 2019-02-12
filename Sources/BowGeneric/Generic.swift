@@ -4,6 +4,6 @@ public protocol Generic {
     associatedtype T
     associatedtype Repr
     
-    func to(_ t : T) -> Repr
-    func from(_ r : Repr) -> T
+    func to(_ t: T) -> Repr
+    func from(_ r: Repr) -> T
 }
