@@ -1,27 +1,45 @@
 import Foundation
 import Bow
 
-public protocol MonadDefer : MonadError where E : Error {
-    func suspend<A>(_ fa : @escaping () -> Kind<F, A>) -> Kind<F, A>
+public protocol MonadDefer: MonadError where E: Error {
+    static func suspend<A>(_ fa: @escaping () -> Kind<Self, A>) -> Kind<Self, A>
 }
 
 public extension MonadDefer {
-    public func delay<A>(_ f : @escaping () throws -> A) -> Kind<F, A> {
+    public static func delay<A>(_ f: @escaping () throws -> A) -> Kind<Self, A> {
         return self.suspend {
             do {
-                return try self.pure(f())
+                return try pure(f())
             } catch {
-                return self.raiseError(error as! E)
+                return raiseError(error as! E)
             }
         }
     }
     
-    public func lazy() -> Kind<F, ()> {
+    public static func lazy() -> Kind<Self, ()> {
         return delay {}
     }
     
-    public func delayEither<A>(_ f : @escaping () -> Either<Error, A>) -> Kind<F, A> {
-        return self.suspend { f().fold({ e in self.raiseError(e as! E) },
-                                     { a in self.pure(a) }) }
+    public static func delayEither<A>(_ f: @escaping () -> Either<E, A>) -> Kind<Self, A> {
+        return self.suspend { f().fold({ e in self.raiseError(e) },
+                                       { a in self.pure(a) }) }
+    }
+}
+
+public extension Kind where F: MonadDefer {
+    public static func suspend(_ fa: @escaping () -> Kind<F, A>) -> Kind<F, A> {
+        return F.suspend(fa)
+    }
+
+    public static func delay(_ f: @escaping () throws -> A) -> Kind<F, A> {
+        return F.delay(f)
+    }
+
+    public static func lazy() -> Kind<F, ()> {
+        return F.lazy()
+    }
+
+    public static func delayEither(_ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
+        return F.delayEither(f)
     }
 }

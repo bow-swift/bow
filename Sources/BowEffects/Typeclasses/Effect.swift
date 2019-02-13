@@ -1,6 +1,12 @@
 import Foundation
 import Bow
 
-public protocol Effect : Async {
-    func runAsync<A>(_ fa : Kind<F, A>, _ callback : @escaping (Either<Error, A>) -> Kind<F, ()>) -> Kind<F, ()>
+public protocol Effect: Async {
+    static func runAsync<A>(_ fa: Kind<Self, A>, _ callback: @escaping (Either<E, A>) -> Kind<Self, ()>) -> Kind<Self, ()>
+}
+
+public extension Kind where F: Effect {
+    public func runAsync(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, ()> {
+        return F.runAsync(self, callback)
+    }
 }

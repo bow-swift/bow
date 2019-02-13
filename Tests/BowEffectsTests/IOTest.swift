@@ -5,75 +5,35 @@ import SwiftCheck
 @testable import BowEffects
 @testable import BowEffectsLaws
 
-class UnitEq : Eq {
-    typealias A = ()
-    
-    func eqv(_ a: (), _ b: ()) -> Bool {
-        return true
-    }
-}
-
 class IOTest: XCTestCase {
     
-    class ErrorEq : Eq {
-        typealias A = Error
-        
-        func eqv(_ a: Error, _ b: Error) -> Bool {
-            if let a = a as? CategoryError, let b = b as? CategoryError {
-                return CategoryError.eq.eqv(a, b)
-            } else {
-                return false
-            }
-        }
-    }
-    
-    let generator = { (a : Int) in IO.pure(a) }
-    let eq = IO.eq(Int.order, ErrorEq())
-    let eqUnit = IO.eq(UnitEq(), ErrorEq())
-    let eqEither = IO.eq(Either.eq(CategoryError.eq, Int.eq), ErrorEq())
-    
-    func testEqLaws() {
-        EqLaws.check(eq: self.eq, generator: self.generator)
+    let generator = { (a : Int) in IO<CategoryError, Int>.pure(a) }
+
+    func testEquatableLaws() {
+        EquatableKLaws.check(generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForIO>.check(functor: IO<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<IOPartial<CategoryError>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForIO>.check(applicative: IO<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<IOPartial<CategoryError>>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<ForIO>.check(monad: IO<Int>.monad(), eq: self.eq)
+        MonadLaws<IOPartial<CategoryError>>.check()
     }
     
     func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<ForIO, CategoryError>.check(applicativeError: IO<Int>.applicativeError(), eq: self.eq, eqEither: self.eqEither, gen: { CategoryError.arbitrary.generate })
+        ApplicativeErrorLaws<IOPartial<CategoryError>>.check()
     }
     
     func testMonadErrorLaws() {
-        MonadErrorLaws<ForIO, CategoryError>.check(monadError: IO<Int>.monadError(), eq: self.eq, gen: { CategoryError.arbitrary.generate })
-    }
-    
-    func testSemigroupLaws() {
-        property("Semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            SemigroupLaws<IOOf<Int>>.check(
-                semigroup: IO<Int>.semigroup(Int.sumMonoid),
-                a: IO.pure(a),
-                b: IO.pure(b),
-                c: IO.pure(c),
-                eq: self.eq)
-        }
-    }
-    
-    func testMonoidLaws() {
-        property("Monoid laws") <- forAll { (a : Int) in
-            MonoidLaws<IOOf<Int>>.check(monoid: IO<Int>.monoid(Int.sumMonoid), a: IO.pure(a), eq: self.eq)
-        }
+        MonadErrorLaws<IOPartial<CategoryError>>.check()
     }
     
     func testAsyncContextLaws() {
-        AsyncLaws<ForIO, CategoryError>.check(async: IO<Int>.async(), monadError: IO<Int>.monadError(), eq: self.eq, gen : { CategoryError.arbitrary.generate })
+        AsyncLaws<IOPartial<CategoryError>>.check()
     }
 }

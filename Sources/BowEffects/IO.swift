@@ -2,186 +2,170 @@ import Foundation
 import Bow
 
 public final class ForIO {}
-public typealias IOOf<A> = Kind<ForIO, A>
+public final class IOPartial<E: Error>: Kind<ForIO, E> {}
+public typealias IOOf<E: Error, A> = Kind<IOPartial<E>, A>
 
-public class IO<A> : IOOf<A> {
-    public static func fix(_ fa : IOOf<A>) -> IO<A> {
-        return fa.fix()
+public class IO<E: Error, A>: IOOf<E, A> {
+    public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
+        return fa as! IO<E, A>
     }
-    
-    public static func pure(_ a : A) -> IO<A> {
-        return Pure(a)
-    }
-    
-    public static func invoke(_ f : @escaping () throws -> A) -> IO<A> {
-        return suspend({ try Pure(f()) })
-    }
-    
-    public static func suspend(_ f : @escaping () throws -> IO<A>) -> IO<A> {
-        return Pure<()>(()).flatMap(f)
-    }
-    
-    public static func raiseError(_ error : Error) -> IO<A> {
-        return RaiseError(error)
-    }
-    
-    public static func tailRecM<B>(_ a : A, _ f : @escaping (A) -> IOOf<Either<A, B>>) -> IO<B> {
-        return IO<Either<A, B>>.fix(f(a)).flatMap { either in
-            either.fold({ a in tailRecM(a, f) },
-                        { b in IO<B>.pure(b) })
-        }
-    }
-    
-    public static func runAsync(_ proc : @escaping Proc<A>) -> IO<A> {
-        return AsyncIO(proc)
+
+    public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
+        return IO.fix(IO.suspend({
+            do {
+                return Pure<E, A>(try f())
+            } catch let error as E {
+                return RaiseError(error)
+            } catch {
+                fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
+            }
+        }))
     }
     
     public static func merge<B>(_ fa : @escaping () throws -> A,
-                                _ fb : @escaping () throws -> B) -> IO<(A, B)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb)).fix()
+                                _ fb : @escaping () throws -> B) -> IO<E, (A, B)> {
+        return IO<E, (A, B)>.fix(IO<E, (A, B)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb)))
     }
     
     public static func merge<B, C>(_ fa : @escaping () throws -> A,
                                    _ fb : @escaping () throws -> B,
-                                   _ fc : @escaping () throws -> C) -> IO<(A, B, C)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc)).fix()
+                                   _ fc : @escaping () throws -> C) -> IO<E, (A, B, C)> {
+        return IO<E, (A, B, C)>.fix(IO<E, (A, B, C)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc)))
     }
     
     public static func merge<B, C, D>(_ fa : @escaping () throws -> A,
                                       _ fb : @escaping () throws -> B,
                                       _ fc : @escaping () throws -> C,
-                                      _ fd : @escaping () throws -> D) -> IO<(A, B, C, D)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd)).fix()
+                                      _ fd : @escaping () throws -> D) -> IO<E, (A, B, C, D)> {
+        return IO<E, (A, B, C, D)>.fix(IO<E, (A, B, C, D)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd)))
     }
     
-    public static func merge<B, C, D, E>(_ fa : @escaping () throws -> A,
+    public static func merge<B, C, D, F>(_ fa : @escaping () throws -> A,
                                          _ fb : @escaping () throws -> B,
                                          _ fc : @escaping () throws -> C,
                                          _ fd : @escaping () throws -> D,
-                                         _ fe : @escaping () throws -> E) -> IO<(A, B, C, D, E)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe)).fix()
+                                         _ ff : @escaping () throws -> F) -> IO<E, (A, B, C, D, F)> {
+        return IO<E, (A, B, C, D, F)>.fix(IO<E, (A, B, C, D, F)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd),
+            IO<E, F>.invoke(ff)))
     }
     
-    public static func merge<B, C, D, E, F>(_ fa : @escaping () throws -> A,
+    public static func merge<B, C, D, F, G>(_ fa : @escaping () throws -> A,
                                             _ fb : @escaping () throws -> B,
                                             _ fc : @escaping () throws -> C,
                                             _ fd : @escaping () throws -> D,
-                                            _ fe : @escaping () throws -> E,
-                                            _ ff : @escaping () throws -> F) -> IO<(A, B, C, D, E, F)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe),
-                                       IO<F>.invoke(ff)).fix()
+                                            _ ff : @escaping () throws -> F,
+                                            _ fg : @escaping () throws -> G) -> IO<E, (A, B, C, D, F, G)> {
+        return IO<E, (A, B, C, D, F, G)>.fix(IO<E, (A, B, C, D, F, G)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd),
+            IO<E, F>.invoke(ff),
+            IO<E, G>.invoke(fg)))
     }
     
-    public static func merge<B, C, D, E, F, G>(_ fa : @escaping () throws -> A,
+    public static func merge<B, C, D, F, G, H>(_ fa : @escaping () throws -> A,
                                                _ fb : @escaping () throws -> B,
                                                _ fc : @escaping () throws -> C,
                                                _ fd : @escaping () throws -> D,
-                                               _ fe : @escaping () throws -> E,
                                                _ ff : @escaping () throws -> F,
-                                               _ fg : @escaping () throws -> G) -> IO<(A, B, C, D, E, F, G)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe),
-                                       IO<F>.invoke(ff),
-                                       IO<G>.invoke(fg)).fix()
+                                               _ fg : @escaping () throws -> G,
+                                               _ fh : @escaping () throws -> H ) -> IO<E, (A, B, C, D, F, G, H)> {
+        return IO<E, (A, B, C, D, F, G, H)>.fix(IO<E, (A, B, C, D, F, G, H)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd),
+            IO<E, F>.invoke(ff),
+            IO<E, G>.invoke(fg),
+            IO<E, H>.invoke(fh)))
     }
     
-    public static func merge<B, C, D, E, F, G, H>(_ fa : @escaping () throws -> A,
+    public static func merge<B, C, D, F, G, H, I>(_ fa : @escaping () throws -> A,
                                                   _ fb : @escaping () throws -> B,
                                                   _ fc : @escaping () throws -> C,
                                                   _ fd : @escaping () throws -> D,
-                                                  _ fe : @escaping () throws -> E,
                                                   _ ff : @escaping () throws -> F,
                                                   _ fg : @escaping () throws -> G,
-                                                  _ fh : @escaping () throws -> H) -> IO<(A, B, C, D, E, F, G, H)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe),
-                                       IO<F>.invoke(ff),
-                                       IO<G>.invoke(fg),
-                                       IO<H>.invoke(fh)).fix()
+                                                  _ fh : @escaping () throws -> H,
+                                                  _ fi : @escaping () throws -> I) -> IO<E, (A, B, C, D, F, G, H, I)> {
+        return IO<E, (A, B, C, D, F, G, H, I)>.fix(IO<E, (A, B, C, D, F, G, H, I)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd),
+            IO<E, F>.invoke(ff),
+            IO<E, G>.invoke(fg),
+            IO<E, H>.invoke(fh),
+            IO<E, I>.invoke(fi)))
     }
     
-    public static func merge<B, C, D, E, F, G, H, I>(_ fa : @escaping () throws -> A,
+    public static func merge<B, C, D, F, G, H, I, J>(_ fa : @escaping () throws -> A,
                                                      _ fb : @escaping () throws -> B,
                                                      _ fc : @escaping () throws -> C,
                                                      _ fd : @escaping () throws -> D,
-                                                     _ fe : @escaping () throws -> E,
                                                      _ ff : @escaping () throws -> F,
                                                      _ fg : @escaping () throws -> G,
                                                      _ fh : @escaping () throws -> H,
-                                                     _ fi : @escaping () throws -> I) -> IO<(A, B, C, D, E, F, G, H, I)> {
-        return IO.applicative().tupled(IO<A>.invoke(fa),
-                                       IO<B>.invoke(fb),
-                                       IO<C>.invoke(fc),
-                                       IO<D>.invoke(fd),
-                                       IO<E>.invoke(fe),
-                                       IO<F>.invoke(ff),
-                                       IO<G>.invoke(fg),
-                                       IO<H>.invoke(fh),
-                                       IO<I>.invoke(fi)).fix()
+                                                     _ fi : @escaping () throws -> I,
+                                                     _ fj : @escaping () throws -> J ) -> IO<E, (A, B, C, D, F, G, H, I, J)> {
+        return IO<E, (A, B, C, D, F, G, H, I, J)>.fix(IO<E, (A, B, C, D, F, G, H, I, J)>.tupled(
+            IO<E, A>.invoke(fa),
+            IO<E, B>.invoke(fb),
+            IO<E, C>.invoke(fc),
+            IO<E, D>.invoke(fd),
+            IO<E, F>.invoke(ff),
+            IO<E, G>.invoke(fg),
+            IO<E, H>.invoke(fh),
+            IO<E, I>.invoke(fi),
+            IO<E, J>.invoke(fj)))
     }
     
     public func unsafePerformIO() throws -> A {
-        fatalError("Implement in subclasses")
+        fatalError("unsafePerformIO must be implemented in subclasses")
     }
     
-    public func attempt() -> IO<Either<Error, A>>{
-        fatalError("Implement in subclasses")
+    public func attempt() -> IO<E, A>{
+        fatalError("attempt must be implemented in subclasses")
     }
     
-    public func unsafeRunAsync(_ callback : Callback<A>) {
+    public func unsafeRunAsync(_ callback: Callback<E, A>) {
         do {
             callback(Either.right(try unsafePerformIO()))
-        } catch {
+        } catch let error as E {
             callback(Either.left(error))
+        } catch {
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
     }
-    
-    public func map<B>(_ f : @escaping (A) throws -> B) -> IO<B> {
-        return FMap(f, self)
-    }
-    
-    public func ap<AA, B>(_ fa : IO<AA>) -> IO<B> where A == (AA) -> B {
-        return flatMap(fa.map)
-    }
-    
-    public func flatMap<B>(_ f : @escaping (A) throws -> IO<B>) -> IO<B> {
-        return Join(self.map(f))
-    }
-    
-    public func handleErrorWith(_ f : @escaping (Error) -> IOOf<A>) -> IO<A> {
-        return attempt().flatMap{ either in either.fold({ e in f(e).fix() }, IO<A>.pure) }
+
+    public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
+        return FErrorMap(f, self)
     }
 }
 
-fileprivate class Pure<A> : IO<A> {
-    let a : A
+fileprivate class Pure<E: Error, A>: IO<E, A> {
+    let a: A
     
-    init(_ a : A) {
+    init(_ a: A) {
         self.a = a
     }
     
-    override func attempt() -> IO<Either<Error, A>> {
-        return Pure<Either<Error, A>>(Either<Error, A>.right(a))
+    override func attempt() -> IO<E, A> {
+        return Pure<E, A>(a)
     }
     
     override func unsafePerformIO() throws -> A {
@@ -189,15 +173,15 @@ fileprivate class Pure<A> : IO<A> {
     }
 }
 
-fileprivate class RaiseError<A> : IO<A> {
-    let error : Error
+fileprivate class RaiseError<E: Error, A> : IO<E, A> {
+    let error: E
     
-    init(_ error : Error) {
+    init(_ error : E) {
         self.error = error
     }
     
-    override func attempt() -> IO<Either<Error, A>> {
-        return Pure<Either<Error, A>>(Either<Error, A>.left(error))
+    override func attempt() -> IO<E, A> {
+        return RaiseError<E, A>(error)
     }
     
     override func unsafePerformIO() throws -> A {
@@ -205,20 +189,22 @@ fileprivate class RaiseError<A> : IO<A> {
     }
 }
 
-fileprivate class FMap<A, B> : IO<B> {
-    let f : (A) throws -> B
-    let action : IO<A>
+fileprivate class FMap<E: Error, A, B> : IO<E, B> {
+    let f: (A) throws -> B
+    let action: IO<E, A>
     
-    init(_ f : @escaping (A) throws -> B, _ action : IO<A>) {
+    init(_ f: @escaping (A) throws -> B, _ action: IO<E, A>) {
         self.f = f
         self.action = action
     }
     
-    override func attempt() -> IO<Either<Error, B>> {
+    override func attempt() -> IO<E, B> {
         do {
-            return try Pure<Either<Error, B>>(Either<Error, B>.right(self.unsafePerformIO()))
+            return try Pure<E, B>(self.unsafePerformIO())
+        } catch let error as E {
+            return RaiseError<E, B>(error)
         } catch {
-            return Pure<Either<Error, B>>(Either<Error, B>.left(error))
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
     }
     
@@ -227,18 +213,52 @@ fileprivate class FMap<A, B> : IO<B> {
     }
 }
 
-fileprivate class Join<A> : IO<A> {
-    let io : IO<IO<A>>
+fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
+    let f: (E) -> EE
+    let action: IO<E, A>
+
+    init(_ f: @escaping (E) -> EE, _ action: IO<E, A>) {
+        self.f = f
+        self.action = action
+    }
+
+    override func attempt() -> IO<EE, A> {
+        do {
+            return try Pure<EE, A>(self.unsafePerformIO())
+        } catch let error as E {
+            return RaiseError<EE, A>(f(error))
+        } catch let error as EE {
+            return RaiseError<EE, A>(error)
+        } catch {
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) or \(EE.self) are handled.")
+        }
+    }
+
+    override func unsafePerformIO() throws -> A {
+        do {
+            return try action.unsafePerformIO()
+        } catch let error as E {
+            throw f(error)
+        } catch {
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        }
+    }
+}
+
+fileprivate class Join<E: Error, A> : IO<E, A> {
+    let io: IO<E, IO<E, A>>
     
-    init(_ io : IO<IO<A>>) {
+    init(_ io: IO<E, IO<E, A>>) {
         self.io = io
     }
     
-    override func attempt() -> IO<Either<Error, A>> {
+    override func attempt() -> IO<E, A> {
         do {
-            return try Pure<Either<Error, A>>(Either<Error, A>.right(self.unsafePerformIO()))
+            return Pure<E, A>(try unsafePerformIO())
+        } catch let error as E {
+            return RaiseError<E, A>(error)
         } catch {
-            return Pure<Either<Error, A>>(Either<Error, A>.left(error))
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
     }
     
@@ -247,23 +267,25 @@ fileprivate class Join<A> : IO<A> {
     }
 }
 
-fileprivate class AsyncIO<A> : IO<A> {
-    let f : Proc<A>
+fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
+    let f: Proc<E, A>
     
-    init(_ f : @escaping Proc<A>) {
+    init(_ f: @escaping Proc<E, A>) {
         self.f = f
     }
     
-    override func attempt() -> IO<Either<Error, A>> {
-        var result : IO<Either<Error, A>>?
+    override func attempt() -> IO<E, A> {
+        var result: IO<E, A>?
         
         do {
-            let callback : Callback<A> = { either in
-                result = Pure<Either<Error, A>>(either)
+            let callback: Callback<E, A> = { either in
+                result = either.fold(RaiseError.init, Pure.init)
             }
             try f(callback)
+        } catch let error as E {
+            result = RaiseError<E, A>(error)
         } catch {
-            result = Pure<Either<Error, A>>(Either<Error, A>.left(error))
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
         
         while(result == nil) {}
@@ -273,166 +295,94 @@ fileprivate class AsyncIO<A> : IO<A> {
     
     override func unsafePerformIO() throws -> A {
         let result = attempt()
-        let either = try result.unsafePerformIO()
-        
-        if either.isLeft {
-            throw either.leftValue
-        } else {
-            return either.rightValue
+        return try result.unsafePerformIO()
+    }
+}
+
+extension IOPartial: Functor {
+    public static func map<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<IOPartial<E>, B> {
+        return FMap(f, IO.fix(fa))
+    }
+}
+
+extension IOPartial: Applicative {
+    public static func pure<A>(_ a: A) -> Kind<IOPartial<E>, A> {
+        return Pure(a)
+    }
+}
+
+extension IOPartial: Monad {
+    public static func flatMap<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+        return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
+    }
+
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IOPartial<E>, Either<A, B>>) -> Kind<IOPartial<E>, B> {
+        return IO.fix(f(a)).flatMap { either in
+            either.fold({ a in tailRecM(a, f) },
+                        { b in IO.pure(b) })
         }
     }
 }
 
-public extension IO {
-    public static func functor() -> FunctorInstance {
-        return FunctorInstance()
-    }
-    
-    public static func applicative() -> ApplicativeInstance {
-        return ApplicativeInstance()
-    }
-    
-    public static func monad() -> MonadInstance {
-        return MonadInstance()
-    }
-    
-    public static func async<E>() -> AsyncInstance<E> {
-        return AsyncInstance<E>()
-    }
-    
-    public static func applicativeError<E>() -> MonadErrorInstance<E> {
-        return MonadErrorInstance<E>()
-    }
-    
-    public static func monadError<E>() -> MonadErrorInstance<E> {
-        return MonadErrorInstance<E>()
-    }
-    
-    public static func semigroup<SemiG>(_ semigroup : SemiG) -> SemigroupInstance<A, SemiG> {
-        return SemigroupInstance<A, SemiG>(semigroup)
-    }
-    
-    public static func monoid<Mono>(_ monoid : Mono) -> MonoidInstance<A, Mono> {
-        return MonoidInstance<A, Mono>(monoid)
-    }
-    
-    public static func eq<EqA, EqError>(_ eq : EqA, _ eqError : EqError) -> EqInstance<A, EqA, EqError> {
-        return EqInstance<A, EqA, EqError>(eq, eqError)
+extension IOPartial: ApplicativeError {
+    public static func raiseError<A>(_ e: E) -> Kind<IOPartial<E>, A> {
+        return RaiseError(e)
     }
 
-    public class FunctorInstance : Functor {
-        public typealias F = ForIO
-        
-        public func map<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> B) -> IOOf<B> {
-            return IO<A>.fix(fa).map(f)
+    private static func fold<A, B>(_ io: IO<E, A>, _ fe: @escaping (E) -> B, _ fa: @escaping (A) -> B) -> B {
+        switch io {
+        case let pure as Pure<E, A>: return fa(pure.a)
+        case let raise as RaiseError<E, A>: return fe(raise.error)
+        default: fatalError("Invoke attempt before fold")
         }
     }
 
-    public class ApplicativeInstance : FunctorInstance, Applicative {
-        public func pure<A>(_ a: A) -> IOOf<A> {
-            return IO<A>.pure(a)
-        }
-        
-        public func ap<A, B>(_ ff: IOOf<(A) -> B>, _ fa: IOOf<A>) -> IOOf<B> {
-            return IO<(A) -> B>.fix(ff).ap(IO<A>.fix(fa))
-        }
+    public static func handleErrorWith<A>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (E) -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+        return fold(IO.fix(fa).attempt(), f, IO.pure)
     }
+}
 
-    public class MonadInstance : ApplicativeInstance, Monad {
-        public func flatMap<A, B>(_ fa: IOOf<A>, _ f: @escaping (A) -> IOOf<B>) -> IOOf<B> {
-            return IO<A>.fix(fa).flatMap({ a in IO<B>.fix(f(a)) })
-        }
-        
-        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<Either<A, B>>) -> IOOf<B> {
-            return IO<A>.tailRecM(a, f)
-        }
+extension IOPartial: MonadError {}
+
+extension IOPartial: MonadDefer {
+    public static func suspend<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+        return Pure(()).flatMap(fa)
     }
+}
 
-    public class AsyncInstance<Err> : MonadErrorInstance<Err>, Async where Err : Error {
-        public func suspend<A>(_ fa: @escaping () -> Kind<ForIO, A>) -> Kind<ForIO, A> {
-            return IO<A>.suspend { fa().fix() }
-        }
-        
-        public typealias F = ForIO
-        
-        public func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> IOOf<A> {
-            return IO<A>.runAsync(fa)
-        }
+extension IOPartial: Async {
+    public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
+        return AsyncIO(fa)
     }
+}
 
-    public class MonadErrorInstance<Err> : MonadInstance, MonadError where Err : Error {
-        public typealias E = Err
-        
-        public func raiseError<A>(_ e: Err) -> IOOf<A> {
-            return IO<A>.raiseError(e)
-        }
-        
-        public func handleErrorWith<A>(_ fa: IOOf<A>, _ f: @escaping (Err) -> IOOf<A>) -> IOOf<A> {
-            return IO<A>.fix(fa).handleErrorWith { e in IO<A>.fix(f(e as! Err)) }
-        }
-    }
+extension IOPartial: EquatableK where E: Equatable {
+    public static func eq<A: Equatable>(_ lhs: Kind<IOPartial<E>, A>, _ rhs: Kind<IOPartial<E>, A>) -> Bool {
+        var aValue, bValue : A?
+        var aError, bError : E?
 
-    public class SemigroupInstance<B, SemiG> : Semigroup where SemiG : Semigroup, SemiG.A == B {
-        public typealias A = IOOf<B>
-        
-        private let semigroup : SemiG
-        
-        init(_ semigroup : SemiG) {
-            self.semigroup = semigroup
+        do {
+            aValue = try IO.fix(lhs).unsafePerformIO()
+        } catch let error as E {
+            aError = error
+        } catch {
+            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
         }
-        
-        public func combine(_ a: IOOf<B>, _ b: IOOf<B>) -> IOOf<B> {
-            return IO<B>.fix(a).flatMap { aa in IO<B>.fix(b).map { bb in self.semigroup.combine(aa, bb) } }
-        }
-    }
 
-    public class MonoidInstance<B, Mono> : SemigroupInstance<B, Mono>, Monoid where Mono : Monoid, Mono.A == B {
-        private let monoid : Mono
-        
-        override init(_ monoid : Mono) {
-            self.monoid = monoid
-            super.init(monoid)
+        do {
+            bValue = try IO.fix(rhs).unsafePerformIO()
+        } catch let error as E {
+            bError = error
+        } catch {
+            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
         }
-        
-        public var empty: IOOf<B> {
-            return IO<B>.pure(monoid.empty)
-        }
-    }
 
-    public class EqInstance<B, EqB, EqError> : Eq where EqB : Eq, EqB.A == B, EqError : Eq, EqError.A == Error {
-        public typealias A = IOOf<B>
-        
-        private let eq : EqB
-        private let eqError : EqError
-        
-        init(_ eq : EqB, _ eqError : EqError) {
-            self.eq = eq
-            self.eqError = eqError
-        }
-        
-        public func eqv(_ a: IOOf<B>, _ b: IOOf<B>) -> Bool {
-            var aValue, bValue : B?
-            var aError, bError : Error?
-            
-            do {
-                aValue = try IO<B>.fix(a).unsafePerformIO()
-            } catch {
-                aError = error
-            }
-            
-            do {
-                bValue = try IO<B>.fix(b).unsafePerformIO()
-            } catch {
-                bError = error
-            }
-            
-            if let aV = aValue, let bV = bValue {
-                return eq.eqv(aV, bV)
-            } else if let aE = aError, let bE = bError {
-                return eqError.eqv(aE, bE)
-            } else {
-                return false
-            }
+        if let aV = aValue, let bV = bValue {
+            return aV == bV
+        } else if let aE = aError, let bE = bError {
+            return aE == bE
+        } else {
+            return false
         }
     }
 }
