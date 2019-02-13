@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public protocol MonadDefer: MonadError where E: Error {
+public protocol MonadDefer: MonadError {
     static func suspend<A>(_ fa: @escaping () -> Kind<Self, A>) -> Kind<Self, A>
 }
 

@@ -1,8 +1,8 @@
 import Foundation
 import Bow
 
-public typealias Proc<E: Error, A> = (Callback<E, A>) throws -> ()
-public typealias Callback<E: Error, A> = (Either<E, A>) -> ()
+public typealias Proc<E, A> = (Callback<E, A>) throws -> ()
+public typealias Callback<E, A> = (Either<E, A>) -> ()
 
 public protocol Async: MonadDefer {
     static func runAsync<A>(_ fa: @escaping Proc<E, A>) -> Kind<Self, A>

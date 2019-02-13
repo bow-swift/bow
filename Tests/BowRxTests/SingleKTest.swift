@@ -4,64 +4,24 @@ import XCTest
 @testable import BowRx
 @testable import BowEffectsLaws
 
-class SingleKTest : XCTestCase {
-    class SingleKEq<T> : Eq where T : Equatable {
-        typealias A = SingleKOf<T>
-        
-        func eqv(_ a: SingleKOf<T>, _ b: SingleKOf<T>) -> Bool {
-            return SingleK<T>.fix(a).value.blockingGet() == SingleK<T>.fix(b).value.blockingGet()
-        }
+extension ForSingleK: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: Kind<ForSingleK, A>, _ rhs: Kind<ForSingleK, A>) -> Bool {
+        return SingleK.fix(lhs).value.blockingGet() == SingleK.fix(rhs).value.blockingGet()
     }
-    
-    class SingleKUnitEq : Eq {
-        typealias A = SingleKOf<Bow.Unit>
-        
-        func eqv(_ a: SingleKOf<Bow.Unit>, _ b: SingleKOf<Bow.Unit>) -> Bool {
-            let x : Bow.Unit? = SingleK<()>.fix(a).value.blockingGet()
-            let y : Bow.Unit? = SingleK<()>.fix(b).value.blockingGet()
-            
-            return (x == nil && y == nil) || (x != nil && y != nil)
-        }
-    }
-    
-    class SingleKEitherEq : Eq {
-        typealias A = Kind<ForSingleK, EitherOf<CategoryError, Int>>
-        
-        func eqv(_ a: Kind<ForSingleK, EitherOf<CategoryError, Int>>, _ b: Kind<ForSingleK, EitherOf<CategoryError, Int>>) -> Bool {
-            let x = Option.fromOptional(SingleK<EitherOf<CategoryError, Int>>.fix(a).value.blockingGet())
-            let y = Option.fromOptional(SingleK<EitherOf<CategoryError, Int>>.fix(b).value.blockingGet())
-            return Option.eq(Either.eq(CategoryError.eq, Int.order)).eqv(x, y)
-        }
-    }
-    
-    let generator = { (x : Int) -> SingleKOf<Int> in SingleK.pure(x) }
-    let eq = SingleKEq<Int>()
-    
+}
+
+class SingleKTest: XCTestCase {
+    let generator = { (x: Int) in SingleK.pure(x) }
+
     func testFunctorLaws() {
-        FunctorLaws.check(functor: SingleK<Int>.functor(), generator: generator, eq: eq, eqUnit: SingleKUnitEq())
+        FunctorLaws<ForSingleK>.check(generator: generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws.check(applicative: SingleK<Int>.applicative(), eq: eq)
+        ApplicativeLaws<ForSingleK>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws.check(monad: SingleK<Int>.monad(), eq: eq)
-    }
-    
-    func testMonadErrorLaws() {
-        MonadErrorLaws.check(monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
-    }
-    
-    func testApplicativeErrorLaws() {
-        ApplicativeErrorLaws<ForSingleK, CategoryError>.check(
-            applicativeError: SingleK<Int>.applicativeError(),
-            eq: eq,
-            eqEither: SingleKEitherEq(),
-            gen: constant(CategoryError.unknown))
-    }
-    
-    func testAsyncLaws() {
-        AsyncLaws<ForSingleK, CategoryError>.check(async: SingleK<Int>.effect(), monadError: SingleK<Int>.monadError(), eq: eq, gen: constant(CategoryError.unknown))
+        MonadLaws<ForSingleK>.check()
     }
 }
