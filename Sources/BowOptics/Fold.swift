@@ -23,8 +23,8 @@ open class Fold<S, A> : FoldOf<S, A> {
         return Optional<S, A>.void().asFold()
     }
     
-    public static func from<FoldableType, F>(foldable : FoldableType) -> Fold<Kind<F, S>, S> where FoldableType : Foldable, FoldableType.F == F {
-        return FoldableFold(foldable: foldable)
+    public static func fromFoldable<F: Foldable>() -> Fold<Kind<F, S>, S> {
+        return FoldableFold()
     }
     
     public static func +<C>(lhs : Fold<S, A>, rhs : Fold<A, C>) -> Fold<S, C> {
@@ -55,20 +55,20 @@ open class Fold<S, A> : FoldOf<S, A> {
         return lhs.compose(rhs)
     }
     
-    open func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
+    open func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
         fatalError("foldMap must be overriden in subclasses")
     }
     
     public func size(_ s : S) -> Int {
-        return foldMap(Int.sumMonoid, s, constant(1))
+        return foldMap(s, constant(1))
     }
     
-    public func forAll(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return foldMap(Bool.andMonoid, s, predicate)
+    public func forAll(_ s: S, _ predicate : @escaping (A) -> Bool) -> Bool {
+        return foldMap(s, predicate)
     }
     
     public func isEmpty(_ s : S) -> Bool {
-        return foldMap(Bool.andMonoid, s, constant(false))
+        return foldMap(s, constant(false))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
@@ -76,23 +76,15 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func headOption(_ s : S) -> Option<A> {
-        return foldMap(FirstOptionMonoid<A>(), s, { a in Const<Option<A>, First>(Option.some(a)) }).value
+        return foldMap(s, FirstOption.init).const.value
     }
     
     public func lastOption(_ s : S) -> Option<A> {
-        return foldMap(LastOptionMonoid<A>(), s, { a in Const<Option<A>, Last>(Option.some(a)) }).value
-    }
-    
-    public func fold<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
-        return foldMap(monoid, s, id)
-    }
-    
-    public func combineAll<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
-        return foldMap(monoid, s, id)
+        return foldMap(s, LastOption.init).const.value
     }
     
     public func getAll(_ s : S) -> ArrayK<A> {
-        return foldMap(ArrayK<A>.monoid(), s, ArrayK<A>.pure).fix()
+        return foldMap(s, { x in ArrayK.fix(ArrayK<A>.pure(x)) })
     }
     
     public func choice<C>(_ other : Fold<C, A>) -> Fold<Either<S, C>, A> {
@@ -136,7 +128,7 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
-        return foldMap(FirstOptionMonoid<A>(), s, { a in predicate(a) ? Const<Option<A>, First>(Option.some(a)) : Const(Option.none()) }).value
+        return foldMap(s, { a in predicate(a) ? FirstOption(a) : FirstOption(Option.none()) }).const.value
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
@@ -144,8 +136,18 @@ open class Fold<S, A> : FoldOf<S, A> {
     }
 }
 
+public extension Fold where A: Monoid {
+    public func fold(_ s: S) -> A {
+        return foldMap(s, id)
+    }
+
+    public func combineAll(_ s : S) -> A {
+        return foldMap(s, id)
+    }
+}
+
 fileprivate class CodiagonalFold<S> : Fold<Either<S, S>, S> {
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<S, S>, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: Either<S, S>, _ f: @escaping (S) -> R) -> R {
         return s.fold(f, f)
     }
 }
@@ -157,20 +159,14 @@ fileprivate class SelectFold<S> : Fold<S, S> {
         self.predicate = predicate
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return predicate(s) ? f(s) : monoid.empty
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (S) -> R) -> R {
+        return predicate(s) ? f(s) : R.empty()
     }
 }
 
-fileprivate class FoldableFold<FoldableType, F, S> : Fold<Kind<F, S>, S> where FoldableType : Foldable, FoldableType.F == F {
-    private let foldable : FoldableType
-    
-    init(foldable : FoldableType) {
-        self.foldable = foldable
-    }
-    
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Kind<F, S>, _ f: @escaping (S) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return foldable.foldMap(monoid, s, f)
+fileprivate class FoldableFold<F: Foldable, S> : Fold<Kind<F, S>, S> {
+    override func foldMap<R: Monoid>(_ s: Kind<F, S>, _ f: @escaping (S) -> R) -> R {
+        return F.foldMap(s, f)
     }
 }
 
@@ -183,9 +179,9 @@ fileprivate class ChoiceFold<S, C, A> : Fold<Either<S, C>, A> {
         self.second = second
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ esc: Either<S, C>, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return esc.fold({ s in first.foldMap(monoid, s, f)},
-                      { c in second.foldMap(monoid, c, f)})
+    override func foldMap<R: Monoid>(_ esc: Either<S, C>, _ f: @escaping (A) -> R) -> R {
+        return esc.fold({ s in first.foldMap(s, f)},
+                        { c in second.foldMap(c, f)})
     }
 }
 
@@ -196,8 +192,8 @@ fileprivate class LeftFold<S, C, A> : Fold<Either<S, C>, Either<A, C>> {
         self.fold = fold
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<S, C>, _ f: @escaping (Either<A, C>) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return s.fold({ a1 in fold.foldMap(monoid, a1, { b in f(Either.left(b)) }) },
+    override func foldMap<R: Monoid>(_ s: Either<S, C>, _ f: @escaping (Either<A, C>) -> R) -> R  {
+        return s.fold({ a1 in fold.foldMap(a1, { b in f(Either.left(b)) }) },
                       { c in f(Either.right(c)) })
     }
 }
@@ -209,9 +205,9 @@ fileprivate class RightFold<S, C, A> : Fold<Either<C, S>, Either<C, A>> {
         self.fold = fold
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: Either<C, S>, _ f: @escaping (Either<C, A>) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: Either<C, S>, _ f: @escaping (Either<C, A>) -> R) -> R {
         return s.fold({ c in f(Either.left(c)) },
-                      { a1 in fold.foldMap(monoid, a1, { b in f(Either.right(b)) }) })
+                      { a1 in fold.foldMap(a1, { b in f(Either.right(b)) }) })
     }
 }
 
@@ -224,7 +220,7 @@ fileprivate class ComposeFold<S, C, A> : Fold<S, C> {
         self.second = second
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (C) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return self.first.foldMap(monoid, s, { c in self.second.foldMap(monoid, c, f) })
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (C) -> R) -> R {
+        return self.first.foldMap(s, { c in self.second.foldMap(c, f) })
     }
 }

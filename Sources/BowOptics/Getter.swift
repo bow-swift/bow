@@ -72,7 +72,7 @@ public class Getter<S, A> : GetterOf<S, A> {
     
     public func right<C>() -> Getter<Either<C, S>, Either<C, A>> {
         return Getter<Either<C, S>, Either<C, A>>(get: { either in
-            either.map(self.get)
+            Either.fix(either.map(self.get))
         })
     }
     
@@ -117,7 +117,7 @@ fileprivate class GetterFold<S, A> : Fold<S, A> {
         self.getter = getter
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
         return f(getter.get(s))
     }
 }

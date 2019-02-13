@@ -59,21 +59,21 @@ public class PIso<S, T, A, B> : PIsoOf<S, T, A, B> {
         return reverseGetFunc(b)
     }
     
-    public func mapping<Func, F>(_ functor : Func) -> PIso<Kind<F, S>, Kind<F, T>, Kind<F, A>, Kind<F, B>> where Func : Functor, Func.F == F {
+    public func mapping<F: Functor>() -> PIso<Kind<F, S>, Kind<F, T>, Kind<F, A>, Kind<F, B>> {
         return PIso<Kind<F, S>, Kind<F, T>, Kind<F, A>, Kind<F, B>>(get: { fs in
-            functor.map(fs, self.get)
+            F.map(fs, self.get)
         }, reverseGet: { fb in
-            functor.map(fb, self.reverseGet)
+            F.map(fb, self.reverseGet)
         })
     }
     
-    public func modifyF<Func, F>(_ functor : Func, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Func : Functor, Func.F == F {
-        return functor.map(f(get(s)), self.reverseGet)
+    public func modifyF<F: Functor>(_ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(get(s)), self.reverseGet)
     }
     
-    public func liftF<Func, F>(_ functor : Func, _ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> where Func : Functor, Func.F == F {
+    public func liftF<F: Functor>(_ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> {
         return { s in
-            functor.map(f(self.get(s)), self.reverseGet)
+            F.map(f(self.get(s)), self.reverseGet)
         }
     }
     
@@ -206,7 +206,7 @@ fileprivate class IsoFold<S, T, A, B> : Fold<S, A> {
         self.iso = iso
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
         return f(iso.get(s))
     }
 }
@@ -218,7 +218,7 @@ fileprivate class IsoTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.iso = iso
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(iso.get(s)), iso.reverseGet)
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(iso.get(s)), iso.reverseGet)
     }
 }

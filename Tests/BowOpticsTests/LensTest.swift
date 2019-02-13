@@ -6,19 +6,19 @@ import SwiftCheck
 class LensTest: XCTestCase {
     
     func testLensLaws() {
-        LensLaws.check(lens: tokenLens, eqA: Token.eq, eqB: String.order)
+        LensLaws.check(lens: tokenLens)
     }
     
     func testOptionalLaws() {
-        OptionalLaws.check(optional: tokenLens.asOptional(), eqA: Token.eq, eqB: String.order)
+        OptionalLaws.check(optional: tokenLens.asOptional())
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenLens.asSetter(), eqA: Token.eq, generatorA: Token.arbitrary)
+        SetterLaws.check(setter: tokenLens.asSetter(), generatorA: Token.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: tokenLens.asTraversal(), eqA: Token.eq, eqB: String.order, generatorA: Token.arbitrary)
+        TraversalLaws.check(traversal: tokenLens.asTraversal(), generatorA: Token.arbitrary)
     }
     
     func testLensAsFold() {
@@ -35,22 +35,19 @@ class LensTest: XCTestCase {
         }
         
         property("Lens as Fold: getAll") <- forAll { (token : Token) in
-            return ArrayK.eq(String.order).eqv(tokenLens.asFold().getAll(token),
-                                              ArrayK.pure(token.value))
+            return tokenLens.asFold().getAll(token) == ArrayK.pure(token.value)
         }
         
         property("Lens as Fold: combineAll") <- forAll { (token : Token) in
-            return tokenLens.asFold().combineAll(String.concatMonoid, token) == token.value
+            return tokenLens.asFold().combineAll(token) == token.value
         }
         
         property("Lens as Fold: headOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenLens.asFold().headOption(token),
-                                              Option.some(token.value))
+            return tokenLens.asFold().headOption(token) == Option.some(token.value)
         }
         
         property("Lens as Fold: lastOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenLens.asFold().lastOption(token),
-                                              Option.some(token.value))
+            return tokenLens.asFold().lastOption(token) == Option.some(token.value)
         }
     }
     
@@ -60,8 +57,8 @@ class LensTest: XCTestCase {
         }
         
         property("Lens as Getter: find") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Option.eq(String.order).eqv(tokenLens.asGetter().find(token, predicate.getArrow),
-                                              tokenGetter.find(token, predicate.getArrow))
+            return tokenLens.asGetter().find(token, predicate.getArrow) ==
+                tokenGetter.find(token, predicate.getArrow)
         }
         
         property("Lens as Getter: exists") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
@@ -77,8 +74,8 @@ class LensTest: XCTestCase {
         }
         
         property("Lifting a function as a functor should yield the same result as not yielding") <- forAll { (token : Token, value : String) in
-            return Option.eq(Token.eq).eqv(tokenLens.modifyF(Option<String>.functor(), token, constant(Option.some(value))),
-                                          tokenLens.liftF(Option<String>.functor(), constant(Option.some(value)))(token))
+            return tokenLens.modifyF(token, constant(Option.some(value))) ==
+                tokenLens.liftF(constant(Option.some(value)))(token)
         }
         
         property("Finding a target using a predicate within a Lens should be wrapped in the correct option result") <- forAll { (predicate : Bool) in

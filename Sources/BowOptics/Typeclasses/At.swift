@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public protocol At : Typeclass {
+public protocol At {
     associatedtype S
     associatedtype I
     associatedtype A

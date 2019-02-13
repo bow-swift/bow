@@ -5,39 +5,36 @@ import SwiftCheck
 
 class GetterTest : XCTestCase {
     func testGetterAsFold() {
-        property("Getter as Fold: size") <- forAll { (token : Token) in
+        property("Getter as Fold: size") <- forAll { (token: Token) in
             return tokenGetter.asFold().size(token) == 1
         }
         
-        property("Getter as Fold: nonEmpty") <- forAll { (token : Token) in
+        property("Getter as Fold: nonEmpty") <- forAll { (token: Token) in
             return tokenGetter.asFold().nonEmpty(token)
         }
         
-        property("Getter as Fold: isEmpty") <- forAll { (token : Token) in
+        property("Getter as Fold: isEmpty") <- forAll { (token: Token) in
             return !tokenGetter.asFold().isEmpty(token)
         }
         
-        property("Getter as Fold: getAll") <- forAll { (token : Token) in
-            return ArrayK.eq(String.order).eqv(tokenGetter.asFold().getAll(token),
-                                              ArrayK.pure(token.value))
+        property("Getter as Fold: getAll") <- forAll { (token: Token) in
+            return tokenGetter.asFold().getAll(token) == ArrayK.pure(token.value)
         }
         
-        property("Getter as Fold: combineAll") <- forAll { (token : Token) in
-            return tokenGetter.asFold().combineAll(String.concatMonoid, token) == token.value
+        property("Getter as Fold: combineAll") <- forAll { (token: Token) in
+            return tokenGetter.asFold().combineAll(token) == token.value
         }
         
-        property("Getter as Fold: fold") <- forAll { (token : Token) in
-            return tokenGetter.asFold().fold(String.concatMonoid, token) == token.value
+        property("Getter as Fold: fold") <- forAll { (token: Token) in
+            return tokenGetter.asFold().fold(token) == token.value
         }
         
-        property("Getter as Fold: headOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenGetter.asFold().headOption(token),
-                                              Option.some(token.value))
+        property("Getter as Fold: headOption") <- forAll { (token: Token) in
+            return tokenGetter.asFold().headOption(token) == Option.some(token.value)
         }
         
-        property("Getter as Fold: lastOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenGetter.asFold().lastOption(token),
-                                              Option.some(token.value))
+        property("Getter as Fold: lastOption") <- forAll { (token: Token) in
+            return tokenGetter.asFold().lastOption(token) == Option.some(token.value)
         }
     }
     
@@ -73,31 +70,25 @@ class GetterTest : XCTestCase {
         }
         
         property("Creating a first pair with a type should result in the target to value") <- forAll { (token : Token, value : Int) in
-            let first : Getter<(Token, Int), (String, Int)> = tokenGetter.first()
+            let first: Getter<(Token, Int), (String, Int)> = tokenGetter.first()
             return first.get((token, value)) == (token.value, value)
         }
         
         property("Creating a second pair with a type should result in the value to target") <- forAll { (token : Token, value : Int) in
-            let second : Getter<(Int, Token), (Int, String)> = tokenGetter.second()
+            let second: Getter<(Int, Token), (Int, String)> = tokenGetter.second()
             return second.get((value, token)) == (value, token.value)
         }
         
         property("Creating a left with a type should result in the sum of value and target") <- forAll { (token : Token, value : Int) in
-            let left : Getter<Either<Token, Int>, Either<String, Int>> = tokenGetter.left()
-            let eq = Either.eq(String.order, Int.order)
-            return eq.eqv(left.get(Either.left(token)),
-                          Either.left(tokenIso.get(token))) &&
-                eq.eqv(left.get(Either.right(value)),
-                       Either.right(value))
+            let left: Getter<Either<Token, Int>, Either<String, Int>> = tokenGetter.left()
+            return left.get(Either.left(token)) == Either.left(tokenIso.get(token)) &&
+                left.get(Either.right(value)) == Either.right(value)
         }
         
         property("Creating a right with a type should result in the sum of target and value") <- forAll { (token : Token, value : Int) in
-            let right : Getter<Either<Int, Token>, Either<Int, String>> = tokenGetter.right()
-            let eq = Either.eq(Int.order, String.order)
-            return eq.eqv(right.get(Either.right(token)),
-                          Either.right(tokenIso.get(token))) &&
-                eq.eqv(right.get(Either.left(value)),
-                       Either.left(value))
+            let right: Getter<Either<Int, Token>, Either<Int, String>> = tokenGetter.right()
+            return right.get(Either.right(token)) == Either.right(tokenIso.get(token)) &&
+                right.get(Either.left(value)) == Either.left(value)
         }
     }
     

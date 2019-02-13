@@ -45,11 +45,6 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return Iso<S, S>.identity().asPrism()
     }
     
-    public static func only<EqA>(_ a : A, _ eq : EqA) -> Prism<A, ()> where EqA : Eq, EqA.A == A {
-        return Prism<A, ()>(getOrModify: { x in eq.eqv(a, x) ? Either.left(a) : Either.right(unit)},
-                              reverseGet: { _ in a })
-    }
-    
     public init(getOrModify : @escaping (S) -> Either<T, A>, reverseGet : @escaping (B) -> T) {
         self.getOrModifyFunc = getOrModify
         self.reverseGetFunc = reverseGet
@@ -63,13 +58,13 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return reverseGetFunc(b)
     }
     
-    public func modifyF<Appl, F>(_ applicative : Appl, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
-        return getOrModify(s).fold(applicative.pure,
-                                   { a in applicative.map(f(a), self.reverseGet) })
+    public func modifyF<F: Applicative>(_ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return getOrModify(s).fold(F.pure,
+                                   { a in F.map(f(a), self.reverseGet) })
     }
     
-    public func liftF<Appl, F>(_ applicative : Appl, _ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
-        return { s in self.modifyF(applicative, s, f) }
+    public func liftF<F: Applicative>(_ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> {
+        return { s in self.modifyF(s, f) }
     }
     
     public func getOption(_ s : S) -> Option<A> {
@@ -121,7 +116,7 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
     
     public func modifyOption(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
-        return getOption(s).map { a in reverseGet(f(a)) }
+        return Option.fix(getOption(s).map { a in self.reverseGet(f(a)) })
     }
     
     public func liftOption(_ f : @escaping (A) -> B) -> (S) -> Option<T> {
@@ -129,7 +124,7 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
-        return getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
+        return Option.fix(getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() })
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
@@ -158,14 +153,14 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
                          { s in self.getOrModify(s).bimap(Either.right, Either.right) })
         },
             reverseGet: { ecb in
-                ecb.map(self.reverseGet)
+                Either.fix(ecb.map(self.reverseGet))
         })
     }
     
     public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> PPrism<S, T, C, D> {
         return PPrism<S, T, C, D>(
             getOrModify: { s in
-                self.getOrModify(s).flatMap{ a in other.getOrModify(a).bimap({ b in self.set(s, b) }, id)}
+                Either.fix(self.getOrModify(s).flatMap{ a in other.getOrModify(a).bimap({ b in self.set(s, b) }, id)})
         },
             reverseGet: self.reverseGet <<< other.reverseGet)
     }
@@ -211,6 +206,13 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
 }
 
+public extension Prism where A: Equatable {
+    public static func only(_ a: A) -> Prism<A, ()> {
+        return Prism<A, ()>(getOrModify: { x in a == x ? Either.left(a) : Either.right(unit)},
+                            reverseGet: { _ in a })
+    }
+}
+
 fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
     private let prism : PPrism<S, T, A, B>
     
@@ -218,8 +220,8 @@ fileprivate class PrismFold<S, T, A, B> : Fold<S, A> {
         self.prism = prism
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return prism.getOption(s).map(f).getOrElse(monoid.empty)
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
+        return Option.fix(prism.getOption(s).map(f)).getOrElse(R.empty())
     }
 }
 
@@ -230,9 +232,9 @@ fileprivate class PrismTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.prism = prism
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         return prism.getOrModify(s)
-            .fold(applicative.pure,
-                  { a in applicative.map(f(a), prism.reverseGet) })
+            .fold(F.pure,
+                  { a in F.map(f(a), prism.reverseGet) })
     }
 }

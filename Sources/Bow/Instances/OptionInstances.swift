@@ -3,36 +3,50 @@ import Foundation
 public class First {}
 public class Last {}
 
-/**
- An instance of `Monoid` that keeps the first non-empty option.
- */
-//public class FirstOptionMonoid<B> : Monoid {
-//    public typealias A = Const<Option<B>, First>
-//
-//    public init() {}
-//
-//    public var empty: Const<Option<B>, First> {
-//        return Const(Option.none())
-//    }
-//
-//    public func combine(_ a: Const<Option<B>, First>, _ b: Const<Option<B>, First>) -> Const<Option<B>, First> {
-//        return a.value.fold(constant(false), constant(true)) ? a : b
-//    }
-//}
+public final class FirstOption<A> {
+    public let const: Const<Option<A>, First>
 
-/**
- An instance of `Monoid` that keeps the last non-empty option.
- */
-//public class LastOptionMonoid<B> : Monoid {
-//    public typealias A = Const<Option<B>, Last>
-//    
-//    public init() {}
-//    
-//    public var empty: Const<Option<B>, Last> {
-//        return Const(Option.none())
-//    }
-//    
-//    public func combine(_ a: Const<Option<B>, Last>, _ b: Const<Option<B>, Last>) -> Const<Option<B>, Last> {
-//        return b.value.fold(constant(false), constant(true)) ? b : a
-//    }
-//}
+    public init(_ value: A) {
+        self.const = Const(Option.some(value))
+    }
+
+    public init(_ value: Option<A>) {
+        self.const = Const(value)
+    }
+}
+
+public final class LastOption<A> {
+    public let const: Const<Option<A>, Last>
+
+    public init(_ value: A) {
+        self.const = Const(Option.some(value))
+    }
+
+    public init(_ value: Option<A>) {
+        self.const = Const(value)
+    }
+}
+
+extension FirstOption: Semigroup {
+    public func combine(_ other: FirstOption<A>) -> FirstOption<A> {
+        return self.const.value.fold(constant(false), constant(true)) ? self : other
+    }
+}
+
+extension FirstOption: Monoid {
+    public static func empty() -> FirstOption<A> {
+        return FirstOption(Option.none())
+    }
+}
+
+extension LastOption: Semigroup {
+    public func combine(_ other: LastOption<A>) -> LastOption<A> {
+        return other.const.value.fold(constant(false), constant(true)) ? other : self
+    }
+}
+
+extension LastOption: Monoid {
+    public static func empty() -> LastOption<A> {
+        return LastOption(Option.none())
+    }
+}

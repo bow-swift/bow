@@ -61,16 +61,16 @@ public extension ArrayK {
             self.predicate = predicate
         }
         
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>> where Appl : Applicative, F == Appl.F {
-            return applicative.map(s.asArray.enumerated().map(id).k().traverse({ x in
-                self.predicate(x.offset) ? f(x.element) : applicative.pure(x.element)
-            }, applicative), { l in l.fix() })
+        override func modifyF<F: Applicative>(_ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>> {
+            return F.map(s.asArray.enumerated().map(id).k().traverse({ x in
+                self.predicate(x.offset) ? f(x.element) : F.pure(x.element)
+            }), ArrayK<A>.fix)
         }
     }
     
     fileprivate class ArrayKTraversal<A> : Traversal<ArrayK<A>, A> {
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>> where Appl : Applicative, F == Appl.F {
-            return applicative.map(s.traverse(f, applicative), { x in ArrayK<A>.fix(x) })
+        override func modifyF<F: Applicative>(_ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>>  {
+            return F.map(s.traverse(f), { x in ArrayK<A>.fix(x) })
         }
     }
 }

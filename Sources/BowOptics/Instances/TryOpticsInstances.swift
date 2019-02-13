@@ -10,9 +10,9 @@ public extension Try {
         return TryEach<A>()
     }
     
-    fileprivate class TryTraversal<A> : Traversal<TryOf<A>, A> {
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: TryOf<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, TryOf<A>> where Appl : Applicative, F == Appl.F {
-            return s.fix().traverse(f, applicative)
+    fileprivate class TryTraversal<A>: Traversal<TryOf<A>, A> {
+        override func modifyF<F: Applicative>(_ s: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, Kind<ForTry, A>> {
+            return s.traverse(f)
         }
     }
     

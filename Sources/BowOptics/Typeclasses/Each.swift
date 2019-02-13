@@ -12,9 +12,11 @@ public extension Each {
     public static func fromIso<B, EachIn>(_ each : EachIn, _ iso : Iso<S, A>) -> EachFromIso<S, B, A, EachIn> where EachIn : Each, EachIn.S == A, EachIn.A == B {
         return EachFromIso<S, B, A, EachIn>(each : each, iso : iso)
     }
-    
-    public static func from<Trav>(traverse : Trav) -> EachFromTraverse<S, A, Trav> where Trav : Traverse, Trav.F == S {
-        return EachFromTraverse<S, A, Trav>(traverse: traverse)
+}
+
+public extension Each where S: Traverse {
+    public static func from() -> EachFromTraverse<S, A>  {
+        return EachFromTraverse<S, A>()
     }
 }
 
@@ -35,17 +37,13 @@ public class EachFromIso<M, N, O, EachIn> : Each where EachIn : Each, EachIn.S =
     }
 }
 
-public class EachFromTraverse<M, N, Trav> : Each where Trav : Traverse, Trav.F == M {
+public class EachFromTraverse<M: Traverse, N>: Each {
     public typealias S = Kind<M, N>
     public typealias A = N
-    
-    private let traverse : Trav
-    
-    public init(traverse : Trav) {
-        self.traverse = traverse
-    }
+
+    public init() {}
 
     public func each() -> Traversal<Kind<M, N>, N> {
-        return Traversal<S, A>.from(traverse: traverse)
+        return Traversal<S, A>.fromTraverse()
     }
 }

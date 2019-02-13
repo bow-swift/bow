@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public protocol Index : Typeclass {
+public protocol Index {
     associatedtype S
     associatedtype I
     associatedtype A
