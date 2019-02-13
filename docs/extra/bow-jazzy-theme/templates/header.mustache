@@ -2,11 +2,11 @@
   <div class="limiter">
     <div class="header">
     <p class="header-col header-col--primary">
-      <a class="header-link" href="{{path_to_root}}index.html">
-        <img style="height: 25px;"  class="header-icon" src="{{path_to_root}}img/bow-logo.png" alt="{{module_name}} Docs"/>
-        <span class='header-tag'>{{module_name}} Reference</span>
+      <a class="header-link" href="/">
+        <img style="height: 18px;" class="header-icon" src="{{path_to_root}}img/bow-logo.png" alt="{{module_name}} Docs"/>
+        <span class="header-title">{{module_name}}</span>
       </a>
-      {{#doc_coverage}} ({{doc_coverage}}% documented){{/doc_coverage}}
+      <span class="header-tag">{{#doc_coverage}} {{doc_coverage}}% documented{{/doc_coverage}}</span>
     </p>
 
     {{#github_url}}
