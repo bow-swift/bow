@@ -2,17 +2,29 @@ import Foundation
 import Bow
 
 public protocol Recursive {
-    associatedtype T
-    
-    func projectT<F, Func>(_ tf : Kind<T, F>, _ functor : Func) -> Kind<F, Kind<T, F>> where Func : Functor, Func.F == F
+    static func projectT<F: Functor>(_ tf: Kind<Self, F>) -> Kind<F, Kind<Self, F>>
 }
 
 public extension Recursive {
-    public func project<F, Func>(_ functor : Func) -> Coalgebra<F, Kind<T, F>> where Func : Functor, Func.F == F {
-        return { t in self.projectT(t, functor) }
+    public static func project<F: Functor>() -> Coalgebra<F, Kind<Self, F>> {
+        return { t in projectT(t) }
     }
     
-    public func cata<F, Func, A>(_ tf : Kind<T, F>, _ algebra : @escaping Algebra<F, Eval<A>>, _ functor : Func) -> A where Func : Functor, Func.F == F {
-        return functor.hylo(algebra, self.project(functor), tf)
+    public static func cata<F: Functor, A>(_ tf: Kind<Self, F>, _ algebra: @escaping Algebra<F, Eval<A>>) -> A {
+        return F.hylo(algebra, project(), tf)
+    }
+}
+
+public extension Kind where F: Recursive, A: Functor {
+    public func projectT() -> Kind<A, Kind<F, A>> {
+        return F.projectT(self)
+    }
+
+    public static func project() -> Coalgebra<A, Kind<F, A>> {
+        return F.project()
+    }
+
+    public func cata<B>(_ algebra: @escaping Algebra<A, Eval<B>>) -> B  {
+        return F.cata(self, algebra)
     }
 }
