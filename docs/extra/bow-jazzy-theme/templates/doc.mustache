@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{module_name}} - {{name}} {{kind}} Reference</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="{{module_name}} - {{name}} {{kind}} Reference" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="{{path_to_root}}css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="{{path_to_root}}css/highlight.css" />
+
+    <script src="{{path_to_root}}js/jquery.min.js" defer></script>
+    <script src="{{path_to_root}}js/jazzy.js" defer></script>
+
+    {{{custom_head}}}
+
+    {{^disable_search}}
+    <script src="{{path_to_root}}js/lunr.min.js" defer></script>
+    <script src="{{path_to_root}}js/typeahead.jquery.js" defer></script>
+    <script src="{{path_to_root}}js/jazzy.search.js" defer></script>
+
+    <meta class="swiftype" name="type" data-type="enum" content="{{module_name}} Reference" />
+    <meta class="swiftype" name="title" data-type="string" content="{{name}}" />
+
+    {{/disable_search}}
+
+    <style type="text/css">
+      .nav-group-name[data-name="{{name}}"] > .small-heading,
+      .nav-group-task[data-name="{{name}}"] {
+        background-color: #f5f8fc;
+        font-family: "Open Sans Bold";
+        border-left: 3px solid #3a68d8;
+        padding-left: 5px
+      }
+    </style>
+  </head>
+  <body>
+
+    {{#dash_type}}
+    <a name="//apple_ref/{{language_stub}}/{{dash_type}}/{{name}}" class="dashAnchor"></a>
+    {{/dash_type}}
+
+    <a title="{{name}} {{kind}} Reference"></a>
+
+    {{> header}}
+
+    <div class="breadcrumbs">
+      <div class="limiter">
+        <a class="breadcrumb" href="{{path_to_root}}index.html">{{module_name}} Reference</a>
+        <img class="carat" src="{{path_to_root}}img/carat.png" />
+        {{name}} {{kind}} Reference
+      </div>
+    </div>
+
+    <div class="content-wrapper limiter">
+      {{> nav}}
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            {{^hide_name}}<a href="#/{{name}}"><h1 id="{{name}}">{{name}}<span class="anchor-icon" /></h1></a>{{/hide_name}}
+            {{> deprecation}}
+            {{#declaration}}
+              <div class="declaration">
+                <div class="language">
+                  {{{declaration}}}
+                </div>
+              </div>
+            {{/declaration}}
+            {{{overview}}}
+          </div>
+        </section>
+
+        {{> tasks}}
+
+      </article>
+    </div>
+    {{> footer}}
+  </body>
+</div>
+</html>
