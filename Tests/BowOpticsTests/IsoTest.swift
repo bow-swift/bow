@@ -80,8 +80,7 @@ class IsoTest: XCTestCase {
     
     func testIsoProperties() {
         property("Lifting a function should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
-            return Token.eq.eqv(tokenIso.modify(token, constant(value)),
-                                tokenIso.lift(constant(value))(token))
+            return tokenIso.modify(token, constant(value)) == tokenIso.lift(constant(value))(token)
         }
         
         property("Lifting a function as a functior should yield the same value as not yielding") <- forAll { (token : Token, value : String) in

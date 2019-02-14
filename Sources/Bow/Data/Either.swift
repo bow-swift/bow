@@ -246,24 +246,3 @@ extension EitherPartial: SemigroupK {
         return Either.fix(x).fold(constant(Either.fix(y)), Either.right)
     }
 }
-
-// MARK: Either typeclass instances
-public extension Either {
-    /**
-     Obtains an instance of the `Bifunctor` typeclass for `Either`.
-     */
-    /* public static func bifunctor() -> BifunctorInstance<A, B> {
-        return BifunctorInstance<A, B>()
-    }*/
-
-    /**
-     An instance of the `Bifunctor` typeclass for the `Either` data type.
-     */
-    /* public class BifunctorInstance<A, B>: Bifunctor {
-        public typealias F = ForEither
-
-        public func bimap<A, B, C, D>(_ fab: EitherOf<A, B>, _ f1: @escaping (A) -> C, _ f2: @escaping (B) -> D) -> EitherOf<C, D> {
-            return Either<A, B>.fix(fab).bimap(f1, f2)
-        }
-    }*/
-}

@@ -69,8 +69,7 @@ class LensTest: XCTestCase {
     
     func testLensProperties() {
         property("Lifting a function should yield the same result as not yielding") <- forAll { (token : Token, value : String) in
-            return Token.eq.eqv(tokenLens.set(token, value),
-                                tokenLens.lift(constant(value))(token))
+            return tokenLens.set(token, value) == tokenLens.lift(constant(value))(token)
         }
         
         property("Lifting a function as a functor should yield the same result as not yielding") <- forAll { (token : Token, value : String) in
