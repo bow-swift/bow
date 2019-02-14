@@ -97,7 +97,7 @@ class Invalid<E, A>: Validated<E, A> {
 extension Validated: CustomStringConvertible {
     public var description: String {
         return fold({ e in "Invalid(\(e))" },
-                    { a in "Valid(\(a)" })
+                    { a in "Valid(\(a))" })
     }
 }
 
