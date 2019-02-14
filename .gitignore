@@ -23,6 +23,7 @@ Carthage/
 *.moved-aside
 *.xcuserstate
 *.xcscmblueprint
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
@@ -42,6 +43,10 @@ Carthage/
 Pods/
 
 Bow\.xcodeproj/project\.xcworkspace/xcshareddata/IDEWorkspaceChecks\.plist
+
+## Docs
+/docs/api-docs
+/docs-json
 
 ## Jekyll
 _site
