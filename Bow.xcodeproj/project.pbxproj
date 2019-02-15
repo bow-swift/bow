@@ -235,8 +235,6 @@
 		8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A2217E2E9200969984 /* Bimonad.swift */; };
 		8BA0F633217E2E9200969984 /* Monoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A3217E2E9200969984 /* Monoid.swift */; };
 		8BA0F637217E2E9200969984 /* Monad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A4217E2E9200969984 /* Monad.swift */; };
-		8BA0F63B217E2E9200969984 /* Composed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A6217E2E9200969984 /* Composed.swift */; };
-		8BA0F63F217E2E9200969984 /* ComposedFoldable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A7217E2E9200969984 /* ComposedFoldable.swift */; };
 		8BA0F643217E2E9200969984 /* Applicative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A8217E2E9200969984 /* Applicative.swift */; };
 		8BA0F647217E2E9200969984 /* Comonad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4A9217E2E9200969984 /* Comonad.swift */; };
 		8BA0F64F217E2E9200969984 /* Functor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AB217E2E9200969984 /* Functor.swift */; };
@@ -769,8 +767,6 @@
 		8BA0F4A2217E2E9200969984 /* Bimonad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bimonad.swift; sourceTree = "<group>"; };
 		8BA0F4A3217E2E9200969984 /* Monoid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoid.swift; sourceTree = "<group>"; };
 		8BA0F4A4217E2E9200969984 /* Monad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monad.swift; sourceTree = "<group>"; };
-		8BA0F4A6217E2E9200969984 /* Composed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composed.swift; sourceTree = "<group>"; };
-		8BA0F4A7217E2E9200969984 /* ComposedFoldable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposedFoldable.swift; sourceTree = "<group>"; };
 		8BA0F4A8217E2E9200969984 /* Applicative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Applicative.swift; sourceTree = "<group>"; };
 		8BA0F4A9217E2E9200969984 /* Comonad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comonad.swift; sourceTree = "<group>"; };
 		8BA0F4AB217E2E9200969984 /* Functor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functor.swift; sourceTree = "<group>"; };
@@ -1455,18 +1451,8 @@
 				8BA0F49E217E2E9200969984 /* Show.swift */,
 				8BA0F49B217E2E9200969984 /* Traverse.swift */,
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
-				8BA0F4A5217E2E9200969984 /* Composed */,
 			);
 			path = Typeclasses;
-			sourceTree = "<group>";
-		};
-		8BA0F4A5217E2E9200969984 /* Composed */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F4A6217E2E9200969984 /* Composed.swift */,
-				8BA0F4A7217E2E9200969984 /* ComposedFoldable.swift */,
-			);
-			path = Composed;
 			sourceTree = "<group>";
 		};
 		8BA0F4B5217E2E9200969984 /* STD */ = {
@@ -2601,7 +2587,6 @@
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
 				8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */,
-				8BA0F63B217E2E9200969984 /* Composed.swift in Sources */,
 				8BA0F5F7217E2E9200969984 /* Inject.swift in Sources */,
 				1125054D220DD92B00861131 /* EquatableK.swift in Sources */,
 				8BA0F603217E2E9200969984 /* MonadWriter.swift in Sources */,
@@ -2617,7 +2602,6 @@
 				8BA0F5BB217E2E9200969984 /* Validated.swift in Sources */,
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
 				8BA0F627217E2E9200969984 /* Foldable.swift in Sources */,
-				8BA0F63F217E2E9200969984 /* ComposedFoldable.swift in Sources */,
 				8BA0F587217E2E9200969984 /* DictionaryK.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
