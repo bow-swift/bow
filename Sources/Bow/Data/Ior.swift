@@ -1,8 +1,8 @@
 import Foundation
 
-public class ForIor {}
-public typealias IorOf<A, B> = Kind2<ForIor, A, B>
-public typealias IorPartial<A> = Kind<ForIor, A>
+public final class ForIor {}
+public final class IorPartial<L>: Kind<ForIor, L> {}
+public typealias IorOf<A, B> = Kind<IorPartial<A>, B>
 
 public class Ior<A, B> : IorOf<A, B> {
     public static func left(_ a : A) -> Ior<A, B> {
@@ -23,45 +23,17 @@ public class Ior<A, B> : IorOf<A, B> {
                        { a in mb.fold({ Option.some(Ior.left(a)) },
                                       { b in Option.some(Ior.both(a, b))})})
     }
-    
-    public static func loop<C, SemiG>(_ v : Ior<C, Either<A, B>>,
-                                      _ f : @escaping (A) -> Ior<C, Either<A, B>>,
-                                      _ semigroup : SemiG) -> Ior<C, B>
-        where SemiG : Semigroup, SemiG.A == C {
-        return v.fold({ left in Ior<C, B>.left(left) },
-                      { right in
-                        right.fold({ a in loop(f(a), f, semigroup) },
-                                   { b in Ior<C, B>.right(b) })
-                      },
-                      { left, right in
-                        right.fold({ a in
-                                      f(a).fold({ aLeft in Ior<C, B>.left(semigroup.combine(aLeft, left)) },
-                                                { aRight in loop(Ior<C, Either<A, B>>.both(left, aRight), f, semigroup) },
-                                                { aLeft, aRight in loop(Ior<C, Either<A, B>>.both(semigroup.combine(left, aLeft), aRight), f, semigroup)})
-                                   },
-                                   { b in Ior<C, B>.both(left, b)})
-                      })
-    }
-    
-    public static func tailRecM<C, SemiG>(_ a : A, _ f : @escaping (A) -> Kind<IorPartial<C>, Either<A, B>>, _ semigroup : SemiG) -> Ior<C, B> where SemiG : Semigroup, SemiG.A == C {
-        return loop(Ior<C, Either<A, B>>.fix(f(a)), { a in Ior<C, Either<A, B>>.fix(f(a)) }, semigroup)
-    }
-    
+
     public static func fix(_ fa : IorOf<A, B>) -> Ior<A, B> {
         return fa as! Ior<A, B>
     }
     
     public func fold<C>(_ fa : (A) -> C, _ fb : (B) -> C, _ fab : (A, B) -> C) -> C {
         switch self {
-            case is IorLeft<A, B>:
-                return (self as! IorLeft<A, B>).a |> fa
-            case is IorRight<A, B>:
-                return (self as! IorRight<A, B>).b |> fb
-            case is IorBoth<A, B>:
-                let both = self as! IorBoth<A, B>
-                return fab(both.a, both.b)
-            default:
-                fatalError("Ior must only have left, right or both")
+        case let left as IorLeft<A, B>: return fa(left.a)
+        case let right as IorRight<A, B>: return fb(right.b)
+        case let both as IorBoth<A, B>: return fab(both.a, both.b)
+        default: fatalError("Ior must only have left, right or both")
         }
     }
     
@@ -76,31 +48,7 @@ public class Ior<A, B> : IorOf<A, B> {
     public var isBoth : Bool {
         return fold(constant(false), constant(false), constant(true))
     }
-    
-    public func foldLeft<C>(_ c : C, _ f : (C, B) -> C) -> C {
-        return fold(constant(c),
-                    { b in f(c, b) },
-                    { _, b in f(c, b) })
-    }
-    
-    public func foldRight<C>(_ c : Eval<C>, _ f : (B, Eval<C>) -> Eval<C>) -> Eval<C> {
-        return fold(constant(c),
-                    { b in f(b, c) },
-                    { _, b in f(b, c) })
-    }
-    
-    public func traverse<G, C, Appl>(_ f : (B) -> Kind<G, C>, _ applicative : Appl) -> Kind<G, IorOf<A, C>> where Appl : Applicative, Appl.F == G {
-        return fold({ a in applicative.pure(Ior<A, C>.left(a)) },
-                    { b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) },
-                    { _, b in applicative.map(f(b), { c in Ior<A, C>.right(c) }) })
-    }
-    
-    public func map<C>(_ f : (B) -> C) -> Ior<A, C> {
-        return fold(Ior<A, C>.left,
-                    { b in Ior<A, C>.right(f(b)) },
-                    { a, b in Ior<A, C>.both(a, f(b)) })
-    }
-    
+
     public func bimap<C, D>(_ fa : (A) -> C, _ fb : (B) -> D) -> Ior<C, D> {
         return fold({ a in Ior<C, D>.left(fa(a)) },
                     { b in Ior<C, D>.right(fb(b)) },
@@ -111,19 +59,6 @@ public class Ior<A, B> : IorOf<A, B> {
         return fold({ a in Ior<C, B>.left(f(a)) },
                     Ior<C, B>.right,
                     { a, b in Ior<C, B>.both(f(a), b) })
-    }
-    
-    public func flatMap<C, SemiG>(_ f : (B) -> Ior<A, C>, _ semigroup : SemiG) -> Ior<A, C> where SemiG : Semigroup, SemiG.A == A {
-        return fold(Ior<A, C>.left,
-                    f,
-                    { a, b in f(b).fold({ lft in Ior<A, C>.left(semigroup.combine(a, lft)) },
-                                        { rgt in Ior<A, C>.right(rgt) },
-                                        { lft, rgt in Ior<A, C>.both(semigroup.combine(a, lft), rgt) })
-                    })
-    }
-    
-    public func ap<BB, C, SemiG>(_ fa : Ior<A, BB>, _ semigroup : SemiG) -> Ior<A, C> where SemiG : Semigroup, SemiG.A == A, B == (BB) -> C {
-        return flatMap(fa.map, semigroup)
     }
     
     public func swap() -> Ior<B, A> {
@@ -189,15 +124,15 @@ class IorBoth<A, B> : Ior<A, B> {
     }
 }
 
-extension Ior : CustomStringConvertible {
-    public var description : String {
+extension Ior: CustomStringConvertible {
+    public var description: String {
         return fold({ a in "Left(\(a))" },
                     { b in "Right(\(b))" },
                     { a, b in "Both(\(a),\(b))" })
     }
 }
 
-extension Ior : CustomDebugStringConvertible where A : CustomDebugStringConvertible, B : CustomDebugStringConvertible {
+extension Ior: CustomDebugStringConvertible where A: CustomDebugStringConvertible, B: CustomDebugStringConvertible {
     public var debugDescription : String {
         return fold({ a in "Left(\(a.debugDescription))" },
                     { b in "Right(\(b.debugDescription))" },
@@ -205,116 +140,85 @@ extension Ior : CustomDebugStringConvertible where A : CustomDebugStringConverti
     }
 }
 
-extension Ior : Equatable where A : Equatable, B : Equatable {
-    public static func ==(lhs : Ior<A, B>, rhs : Ior<A, B>) -> Bool {
-        return lhs.fold({ la in rhs.fold({ ra in la == ra }, constant(false), constant(false)) },
-                        { lb in rhs.fold(constant(false), { rb in lb == rb }, constant(false)) },
-                        { la, lb in rhs.fold(constant(false), constant(false), { ra, rb in la == ra && lb == rb })})
+extension IorPartial: EquatableK where L: Equatable {
+    public static func eq<A>(_ lhs: Kind<IorPartial<L>, A>, _ rhs: Kind<IorPartial<L>, A>) -> Bool where A : Equatable {
+        let il = Ior.fix(lhs)
+        let ir = Ior.fix(rhs)
+        return il.fold({ la in ir.fold({ ra in la == ra }, constant(false), constant(false)) },
+                       { lb in ir.fold(constant(false), { rb in lb == rb }, constant(false)) },
+                       { la, lb in ir.fold(constant(false), constant(false), { ra, rb in la == ra && lb == rb })})
     }
 }
 
-public extension Ior {
-    public static func functor() -> FunctorInstance<A> {
-        return FunctorInstance<A>()
+extension IorPartial: Functor {
+    public static func map<A, B>(_ fa: Kind<IorPartial<L>, A>, _ f: @escaping (A) -> B) -> Kind<IorPartial<L>, B> {
+        let ior = Ior.fix(fa)
+        return ior.fold({ a    in Ior.left(a) },
+                        { b    in Ior.right(f(b)) },
+                        { a, b in Ior.both(a, f(b)) })
     }
-    
-    public static func applicative<SemiG>(_ semigroup : SemiG) -> ApplicativeInstance<A, SemiG> {
-        return ApplicativeInstance<A, SemiG>(semigroup)
+}
+
+extension IorPartial: Applicative where L: Semigroup {
+    public static func pure<A>(_ a: A) -> Kind<IorPartial<L>, A> {
+        return Ior.right(a)
     }
-    
-    public static func monad<SemiG>(_ semigroup : SemiG) -> MonadInstance<A, SemiG> {
-        return MonadInstance<A, SemiG>(semigroup)
-    }
-    
-    public static func foldable() -> FoldableInstance<A> {
-        return FoldableInstance<A>()
-    }
-    
-    public static func traverse() -> TraverseInstance<A> {
-        return TraverseInstance<A>()
-    }
-    
-    public static func eq<EqA, EqB>(_ eqa : EqA, _ eqb : EqB) -> EqInstance<A, B, EqA, EqB> {
-        return EqInstance<A, B, EqA, EqB>(eqa, eqb)
+}
+
+extension IorPartial: Monad where L: Semigroup {
+    public static func flatMap<A, B>(_ fa: Kind<IorPartial<L>, A>, _ f: @escaping (A) -> Kind<IorPartial<L>, B>) -> Kind<IorPartial<L>, B> {
+        return Ior.fix(fa).fold(
+            Ior.left,
+            f,
+            { a, b in Ior.fix(f(b)).fold({ lft in Ior.left(a.combine(lft)) },
+                                         { rgt in Ior.right(rgt) },
+                                         { lft, rgt in Ior.both(a.combine(lft), rgt) })
+        })
     }
 
-    public class FunctorInstance<L> : Functor {
-        public typealias F = IorPartial<L>
-        
-        public func map<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> B) -> IorOf<L, B> {
-            return Ior<L, A>.fix(fa).map(f)
-        }
+    private static func loop<A, B>(_ v : Ior<L, Either<A, B>>,
+                                      _ f : @escaping (A) -> Ior<L, Either<A, B>>) -> Ior<L, B> {
+            return v.fold({ left in .left(left) },
+                          { right in
+                            right.fold({ a in loop(f(a), f) },
+                                       { b in .right(b) })
+            },
+                          { left, right in
+                            right.fold({ a in
+                                f(a).fold({ aLeft in .left(aLeft.combine(left)) },
+                                          { aRight in loop(.both(left, aRight), f) },
+                                          { aLeft, aRight in loop(.both(left.combine(aLeft), aRight), f) })
+                                        },
+                                       { b in .both(left, b) })
+            })
     }
 
-    public class ApplicativeInstance<L, SemiG> : FunctorInstance<L>, Applicative where SemiG : Semigroup, SemiG.A == L {
-        fileprivate let semigroup : SemiG
-        
-        init(_ semigroup : SemiG) {
-            self.semigroup = semigroup
-        }
-        
-        public func pure<A>(_ a: A) -> IorOf<L, A> {
-            return Ior<L, A>.right(a)
-        }
-        
-        public func ap<A, B>(_ ff: IorOf<L, (A) -> B>, _ fa: IorOf<L, A>) -> IorOf<L, B> {
-            return Ior<L, (A) -> B>.fix(ff).ap(Ior<L, A>.fix(fa), semigroup)
-        }
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IorPartial<L>, Either<A, B>>) -> Kind<IorPartial<L>, B> {
+        return loop(Ior.fix(f(a)), { a in Ior.fix(f(a)) })
+    }
+}
+
+extension IorPartial: Foldable {
+    public static func foldLeft<A, B>(_ fa: Kind<IorPartial<L>, A>, _ c: B, _ f: @escaping (B, A) -> B) -> B {
+        let ior = Ior.fix(fa)
+        return ior.fold(constant(c),
+                        { b    in f(c, b) },
+                        { _, b in f(c, b) })
     }
 
-    public class MonadInstance<L, SemiG> : ApplicativeInstance<L, SemiG>, Monad where SemiG : Semigroup, SemiG.A == L{
-        
-        public func flatMap<A, B>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> IorOf<L, B>) -> IorOf<L, B> {
-            return Ior<L, A>.fix(fa).flatMap({ a in Ior<L, B>.fix(f(a)) }, self.semigroup)
-        }
-        
-        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IorOf<L, Either<A, B>>) -> IorOf<L, B> {
-            return Ior<A, B>.tailRecM(a, f, self.semigroup)
-        }
+    public static func foldRight<A, B>(_ fa: Kind<IorPartial<L>, A>, _ c: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        let ior = Ior.fix(fa)
+        return ior.fold(constant(c),
+                        { b    in f(b, c) },
+                        { _, b in f(b, c) })
     }
+}
 
-    public class FoldableInstance<L> : Foldable {
-        public typealias F = IorPartial<L>
-        
-        public func foldLeft<A, B>(_ fa: IorOf<L, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-            return Ior<L, A>.fix(fa).foldLeft(b, f)
-        }
-        
-        public func foldRight<A, B>(_ fa: IorOf<L, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-            return Ior<L, A>.fix(fa).foldRight(b, f)
-        }
-    }
-
-    public class TraverseInstance<L> : FoldableInstance<L>, Traverse {
-        public func traverse<G, A, B, Appl>(_ fa: IorOf<L, A>, _ f: @escaping (A) -> Kind<G, B>, _ applicative: Appl) -> Kind<G, IorOf<L, B>> where G == Appl.F, Appl : Applicative {
-            return Ior<L, A>.fix(fa).traverse(f, applicative)
-        }
-    }
-
-    public class EqInstance<L, R, EqL, EqR> : Eq where EqL : Eq, EqL.A == L, EqR : Eq, EqR.A == R {
-        public typealias A = IorOf<L, R>
-        
-        private let eql : EqL
-        private let eqr : EqR
-        
-        init(_ eql : EqL, _ eqr : EqR) {
-            self.eql = eql
-            self.eqr = eqr
-        }
-        
-        public func eqv(_ a: IorOf<L, R>, _ b: IorOf<L, R>) -> Bool {
-            let a = Ior<L, R>.fix(a)
-            let b = Ior<L, R>.fix(b)
-            return a.fold(
-                { aLeft in
-                    b.fold({ bLeft in eql.eqv(aLeft, bLeft) }, constant(false), constant(false))
-                },
-                { aRight in
-                    b.fold(constant(false), { bRight in eqr.eqv(aRight, bRight) }, constant(false))
-                },
-                { aLeft, aRight in
-                    b.fold(constant(false), constant(false), { bLeft, bRight in eql.eqv(aLeft, bLeft) && eqr.eqv(aRight, bRight)})
-                })
-        }
+extension IorPartial: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: Kind<IorPartial<L>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<IorPartial<L>, B>> {
+        let ior = Ior.fix(fa)
+        return ior.fold({ a    in G.pure(Ior.left(a)) },
+                        { b    in f(b).map(Ior.right) },
+                        { _, b in f(b).map(Ior.right) })
     }
 }

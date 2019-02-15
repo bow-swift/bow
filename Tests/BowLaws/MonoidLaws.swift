@@ -1,17 +1,17 @@
 import Foundation
 @testable import Bow
 
-class MonoidLaws<A> {
+class MonoidLaws<A: Monoid & Equatable> {
     
-    static func check<Mono, EqA>(monoid : Mono, a : A, eq : EqA) -> Bool where Mono : Monoid, Mono.A == A, EqA : Eq, EqA.A == A {
-        return leftIdentity(monoid: monoid, a: a, eq: eq) && rightIdentity(monoid: monoid, a: a, eq: eq)
+    static func check(a: A) -> Bool {
+        return leftIdentity(a) && rightIdentity(a)
     }
     
-    private static func leftIdentity<Mono, EqA>(monoid : Mono, a : A, eq : EqA) -> Bool where Mono : Monoid, Mono.A == A, EqA : Eq, EqA.A == A {
-        return eq.eqv(monoid.combine(monoid.empty, a), a)
+    private static func leftIdentity(_ a: A) -> Bool {
+        return A.empty().combine(a) == a
     }
     
-    private static func rightIdentity<Mono, EqA>(monoid : Mono, a : A, eq : EqA) -> Bool where Mono : Monoid, Mono.A == A, EqA : Eq, EqA.A == A {
-        return eq.eqv(monoid.combine(a, monoid.empty), a)
+    private static func rightIdentity(_ a: A) -> Bool {
+        return a.combine(A.empty()) == a
     }
 }

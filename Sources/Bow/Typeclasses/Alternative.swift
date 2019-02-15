@@ -1,3 +1,3 @@
 import Foundation
 
-public protocol Alternative : Applicative, MonoidK {}
+public protocol Alternative: Applicative, MonoidK {}

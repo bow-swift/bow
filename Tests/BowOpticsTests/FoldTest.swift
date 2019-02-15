@@ -3,88 +3,93 @@ import SwiftCheck
 @testable import Bow
 @testable import BowOptics
 
-class FoldTest : XCTestCase {
-    let intFold = Fold<Int, Int>.from(foldable: ArrayK<Int>.foldable())
-    let stringFold = Fold<String, String>.from(foldable: ArrayK<String>.foldable())
+class FoldTest: XCTestCase {
     let nonEmptyListGen = ArrayOf<Int>.arbitrary.suchThat({ array in array.getArray.count > 0 })
-    
+
+    func intFold<F: Foldable>() -> Fold<Kind<F, Int>, Int> {
+        return Fold<Int, Int>.fromFoldable()
+    }
+
+    func stringFold<F: Foldable>() -> Fold<Kind<F, String>, String> {
+        return Fold<String, String>.fromFoldable()
+    }
+
     func testFoldProperties() {
         property("Fold select an array that contains one") <- forAll(self.nonEmptyListGen) { (array : ArrayOf<Int>) in
             let select = Fold<Array<Int>, Int>.select({ array in array.contains(1) })
             return select.getAll(array.getArray).asArray.first == (array.getArray.contains(1) ? array : nil)?.getArray
         }
         
-        property("Folding an array of ints") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.fold(Int.sumMonoid, array.getArray.k()) == array.getArray.reduce(0, +)
+        property("Folding an array of ints") <- forAll { (array: ArrayOf<Int>) in
+            return self.intFold().fold(array.getArray.k()) == array.getArray.reduce(0, +)
         }
         
-        property("Folding an array is equivalent to combineAll") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.combineAll(Int.sumMonoid, array.getArray.k()) == array.getArray.reduce(0, +)
+        property("Folding an array is equivalent to combineAll") <- forAll { (array: ArrayOf<Int>) in
+            return self.intFold().combineAll(array.getArray.k()) == array.getArray.reduce(0, +)
         }
         
         property("Folding and mapping an array of strings") <- forAll { (array : ArrayOf<Int>) in
-            return self.stringFold.foldMap(Int.sumMonoid, array.getArray.map(String.init).k(), { s in Int(s)! }) == array.getArray.reduce(0, +)
+            return self.stringFold().foldMap(array.getArray.map(String.init).k(), { s in Int(s)! }) == array.getArray.reduce(0, +)
         }
         
-        property("Get all targets") <- forAll { (array : ArrayOf<Int>) in
-            return ArrayK.eq(Int.order).eqv(self.intFold.getAll(array.getArray.k()),
-                                           array.getArray.k())
+        property("Get all targets") <- forAll { (array: ArrayOf<Int>) in
+            return self.intFold().getAll(array.getArray.k()) == array.getArray.k()
         }
         
-        property("Get size of the fold") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.size(array.getArray.k()) == array.getArray.count
+        property("Get size of the fold") <- forAll { (array: ArrayOf<Int>) in
+            return self.intFold().size(array.getArray.k()) == array.getArray.count
         }
         
-        property("Find first element matching predicate") <- forAll { (array : ArrayOf<Int>) in
-            return Option.eq(Int.order).eqv(self.intFold.find(array.getArray.k(), { x in x > 10 }),
-                                           Option.fromOptional(array.getArray.filter{ x in x > 10 }.first))
+        property("Find first element matching predicate") <- forAll { (array: ArrayOf<Int>) in
+            return self.intFold().find(array.getArray.k(), { x in x > 10 }) ==
+                Option.fromOptional(array.getArray.filter{ x in x > 10 }.first)
         }
         
-        property("Checking existence of a target") <- forAll(self.nonEmptyListGen, Bool.arbitrary) { (array : ArrayOf<Int>, predicate : Bool) in
-            return self.intFold.exists(array.getArray.k(), constant(predicate)) == predicate
+        property("Checking existence of a target") <- forAll(self.nonEmptyListGen, Bool.arbitrary) { (array: ArrayOf<Int>, predicate: Bool) in
+            return self.intFold().exists(array.getArray.k(), constant(predicate)) == predicate
         }
         
         property("Check if all targets match the predicate") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.forAll(array.getArray.k(), { x in x % 2 == 0 }) ==
+            return self.intFold().forAll(array.getArray.k(), { x in x % 2 == 0 }) ==
                 array.getArray.map { x in x % 2 == 0 }.reduce(true, and)
         }
         
         property("Check if there is no target") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.isEmpty(array.getArray.k()) == array.getArray.isEmpty
+            return self.intFold().isEmpty(array.getArray.k()) == array.getArray.isEmpty
         }
         
         property("Check if there is a target") <- forAll { (array : ArrayOf<Int>) in
-            return self.intFold.nonEmpty(array.getArray.k()) == !array.getArray.isEmpty
+            return self.intFold().nonEmpty(array.getArray.k()) == !array.getArray.isEmpty
         }
     }
     
     func testFoldComposition() {
         property("Fold + Fold::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Fold<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Fold<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Iso::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Iso<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Iso<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Lens::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Lens<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Lens<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Prism::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Prism<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Prism<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Getter::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Getter<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Getter<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Optional::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + BowOptics.Optional<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + BowOptics.Optional<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
         
         property("Fold + Traversal::identity") <- forAll { (array : ArrayOf<Int>) in
-            return (self.intFold + Traversal<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold.getAll(array.getArray.k()).asArray
+            return (self.intFold() + Traversal<Int, Int>.identity()).getAll(array.getArray.k()).asArray == self.intFold().getAll(array.getArray.k()).asArray
         }
     }
 }

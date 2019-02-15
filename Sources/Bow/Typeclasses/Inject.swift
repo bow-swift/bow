@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Inject : Typeclass {
+public protocol Inject {
     associatedtype F
     associatedtype G
     associatedtype Function where Function : FunctionK, Function.F == F, Function.G == G

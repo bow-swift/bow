@@ -1,3 +1,3 @@
 import Foundation
 
-public protocol Bimonad : Monad, Comonad {}
+public protocol Bimonad: Monad, Comonad {}

@@ -3,129 +3,131 @@ import XCTest
 @testable import BowFree
 @testable import BowLaws
 
-fileprivate class OpsF {}
+fileprivate final class ForOps {}
 
-fileprivate class Ops<A> : Kind<OpsF, A> {
-    fileprivate static func fix(_ fa : Kind<OpsF, A>) -> Ops<A> {
+extension ForOps: EquatableK {
+    static func eq<A>(_ lhs: Kind<ForOps, A>, _ rhs: Kind<ForOps, A>) -> Bool where A : Equatable {
+        let x = lhs as! Ops<A>
+        let y = rhs as! Ops<A>
+        switch (x, y) {
+        case (let vx as Value, let vy as Value): return vx.a == vy.a
+        case (let ax as Add, let ay as Add): return ax.a == ay.a && ax.b == ay.b
+        case (let ox as Subtract, let oy as Subtract): return ox.a == oy.a && ox.b == oy.b
+        default:
+            return false
+        }
+    }
+}
+
+fileprivate class Ops<A>: Kind<ForOps, A> {
+    fileprivate static func fix(_ fa: Kind<ForOps, A>) -> Ops<A> {
         return fa as! Ops<A>
     }
     
-    fileprivate static func value(_ n : Int) -> Free<OpsF, Int> {
+    fileprivate static func value(_ n: Int) -> Free<ForOps, Int> {
         return Free.liftF(Value(n))
     }
     
-    fileprivate static func add(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
+    fileprivate static func add(_ a: Int, _ b: Int) -> Free<ForOps, Int> {
         return Free.liftF(Add(a, b))
     }
     
-    fileprivate static func subtract(_ a : Int, _ b : Int) -> Free<OpsF, Int> {
+    fileprivate static func subtract(_ a: Int, _ b: Int) -> Free<ForOps, Int> {
         return Free.liftF(Subtract(a, b))
     }
 }
 
-fileprivate class Value : Ops<Int> {
-    let a : Int
+fileprivate class Value: Ops<Int> {
+    let a: Int
     
-    init(_ a : Int) {
+    init(_ a: Int) {
         self.a = a
     }
 }
 
-fileprivate class Add : Ops<Int> {
-    let a : Int
-    let b : Int
+fileprivate class Add: Ops<Int> {
+    let a: Int
+    let b: Int
     
-    init(_ a : Int, _ b : Int) {
-        self.a = a
-        self.b = b
-    }
-}
-
-fileprivate class Subtract : Ops<Int> {
-    let a : Int
-    let b : Int
-    
-    init(_ a : Int, _ b : Int) {
+    init(_ a: Int, _ b: Int) {
         self.a = a
         self.b = b
     }
 }
 
+fileprivate class Subtract: Ops<Int> {
+    let a: Int
+    let b: Int
+    
+    init(_ a: Int, _ b: Int) {
+        self.a = a
+        self.b = b
+    }
+}
 
-
-fileprivate let program = Free.fix(Free<OpsF, Int>.monad().binding({ Ops<Any>.value(10) },
-                                                                  { value in Ops<Any>.add(value, 10) },
-                                                                  { _ , added in Ops<Any>.subtract(added, 50) }))
+fileprivate let program = Free.fix(Free<ForOps, Int>.binding({ Ops<Any>.value(10) },
+                                                           { value in Ops<Any>.add(value, 10) },
+                                                           { _ , added in Ops<Any>.subtract(added, 50) }))
 
 fileprivate class OptionInterpreter : FunctionK {
-    fileprivate typealias F = OpsF
+    fileprivate typealias F = ForOps
     fileprivate typealias G = ForOption
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> OptionOf<A> {
+    fileprivate func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Option<Int>.some((op as! Value).a) as! OptionOf<A>
-        case is Add: return Option<Int>.some((op as! Add).a + (op as! Add).b) as! OptionOf<A>
-        case is Subtract: return Option<Int>.some((op as! Subtract).a - (op as! Subtract).b) as! OptionOf<A>
+        case let value as Value: return Option<Int>.pure(value.a) as! Kind<ForOption, A>
+        case let add as Add: return Option<Int>.pure(add.a + add.b) as! Kind<ForOption, A>
+        case let subtract as Subtract: return Option<Int>.pure(subtract.a - subtract.b) as! Kind<ForOption, A>
         default:
             fatalError("No other options")
         }
     }
 }
 
-fileprivate class IdInterpreter : FunctionK {
-    fileprivate typealias F = OpsF
+fileprivate class IdInterpreter: FunctionK {
+    fileprivate typealias F = ForOps
     fileprivate typealias G = ForId
     
-    fileprivate func invoke<A>(_ fa: Kind<OpsF, A>) -> IdOf<A> {
+    fileprivate func invoke<A>(_ fa: Kind<ForOps, A>) -> IdOf<A> {
         let op = Ops.fix(fa)
         switch op {
-        case is Value: return Id<Int>.pure((op as! Value).a) as! IdOf<A>
-        case is Add: return Id<Int>.pure((op as! Add).a + (op as! Add).b) as! IdOf<A>
-        case is Subtract: return Id<Int>.pure((op as! Subtract).a - (op as! Subtract).b) as! IdOf<A>
+        case let value as Value: return Id<Int>.pure(value.a) as! IdOf<A>
+        case let add as Add: return Id<Int>.pure(add.a + add.b) as! IdOf<A>
+        case let subtract as Subtract: return Id<Int>.pure(subtract.a - subtract.b) as! IdOf<A>
         default:
             fatalError("No other options")
         }
     }
 }
 
-class UnitEq : Eq {
-    typealias A = ()
-    
-    func eqv(_ a: (), _ b: ()) -> Bool {
-        return true
+extension FreePartial: EquatableK where S: Monad & EquatableK {
+    public static func eq<A>(_ lhs: Kind<FreePartial<S>, A>, _ rhs: Kind<FreePartial<S>, A>) -> Bool where A : Equatable {
+        return Free.fix(lhs).run() == Free.fix(rhs).run()
     }
 }
 
 class FreeTest: XCTestCase {
-    
     func testInterpretsFreeProgram() {
-        let x = program.foldMap(OptionInterpreter(), Option<Int>.monad())
-        let y = program.foldMap(IdInterpreter(), Id<Int>.monad())
-        XCTAssertTrue(Option.eq(Int.order).eqv(x, Option.some(-30)))
-        XCTAssertTrue(Id.eq(Int.order).eqv(y, Id.pure(-30)))
+        let x = program.foldMapK(OptionInterpreter())
+        let y = program.foldMapK(IdInterpreter())
+        XCTAssertEqual(x, Option.some(-30))
+        XCTAssertEqual(y, Id.pure(-30))
     }
     
-    fileprivate var generator : (Int) -> FreeOf<OpsF, Int> {
-        return { a in Ops<Any>.value(a) }
-    }
-    
-    fileprivate let eq = Free<OpsF, Int>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(Int.order))
-    fileprivate let eqUnit = Free<OpsF, ()>.eq(IdInterpreter(), Id<Int>.monad(), Id.eq(UnitEq()))
-    
-    func testEqLaws() {
-        EqLaws.check(eq: self.eq, generator: self.generator)
+    fileprivate var generator: (Int) -> FreeOf<ForId, Int> {
+        return { a in Free.liftF(Id(a)) }
     }
     
     func testFunctorLaws() {
-        FunctorLaws<FreePartial<OpsF>>.check(functor: Free<OpsF, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<FreePartial<ForId>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<FreePartial<OpsF>>.check(applicative: Free<OpsF, Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<FreePartial<ForId>>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<FreePartial<OpsF>>.check(monad: Free<OpsF, Int>.monad(), eq: self.eq)
+        MonadLaws<FreePartial<ForId>>.check()
     }
 }

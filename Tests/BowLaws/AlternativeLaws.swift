@@ -1,39 +1,34 @@
 import SwiftCheck
 @testable import Bow
 
-class AlternativeLaws<F> {
+class AlternativeLaws<F: Alternative & EquatableK> {
     
-    public static func check<Alt, EqA>(alternative : Alt, eq : EqA) where Alt : Alternative, Alt.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        rightAbsorption(alternative, eq)
-        leftDistributivity(alternative, eq)
-        rightDistributivity(alternative, eq)
+    public static func check()  {
+        rightAbsorption()
+        leftDistributivity()
+        rightDistributivity()
     }
     
-    private static func rightAbsorption<Alt, EqA>(_ alternative : Alt, _ eq : EqA) where Alt : Alternative, Alt.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("Right absorption") <- forAll { (f : ArrowOf<Int, Int>) in
-            return eq.eqv(alternative.ap(alternative.emptyK(), alternative.pure(f.getArrow)),
-                          alternative.emptyK())
+    private static func rightAbsorption() {
+        property("Right absorption") <- forAll { (f: ArrowOf<Int, Int>) in
+            return F.ap(F.emptyK(), F.pure(f.getArrow)) ==
+                F.emptyK() as Kind<F, Int>
         }
     }
     
-    private static func leftDistributivity<Alt, EqA>(_ alternative : Alt, _ eq : EqA) where Alt : Alternative, Alt.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("Left distributivity") <- forAll { (x : Int, y : Int, f : ArrowOf<Int, Int>) in
-            return eq.eqv(alternative.map(alternative.combineK(alternative.pure(x),
-                                                               alternative.pure(y)), f.getArrow),
-                          alternative.combineK(alternative.map(alternative.pure(x), f.getArrow),
-                                               alternative.map(alternative.pure(y), f.getArrow)))
+    private static func leftDistributivity() {
+        property("Left distributivity") <- forAll { (x: Int, y: Int, f: ArrowOf<Int, Int>) in
+            return F.map(F.combineK(F.pure(x), F.pure(y)), f.getArrow) ==
+                F.combineK(F.map(F.pure(x), f.getArrow), F.map(F.pure(y), f.getArrow))
         }
     }
     
-    private static func rightDistributivity<Alt, EqA>(_ alternative : Alt, _ eq : EqA) where Alt : Alternative, Alt.F == F, EqA : Eq, EqA.A == Kind<F, Int> {
-        property("Left distributivity") <- forAll { (x : Int, f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>) in
-            return eq.eqv(alternative.ap(alternative.combineK(alternative.pure(f.getArrow),
-                                                              alternative.pure(g.getArrow)),
-                                         alternative.pure(x)),
-                          alternative.combineK(alternative.ap(alternative.pure(f.getArrow),
-                                                              alternative.pure(x)),
-                                               alternative.ap(alternative.pure(g.getArrow),
-                                                              alternative.pure(x))))
+    private static func rightDistributivity() {
+        property("Left distributivity") <- forAll { (x: Int, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
+            return F.ap(F.combineK(F.pure(f.getArrow), F.pure(g.getArrow)),
+                        F.pure(x)) ==
+                F.combineK(F.ap(F.pure(f.getArrow), F.pure(x)),
+                           F.ap(F.pure(g.getArrow), F.pure(x)))
         }
     }
 }

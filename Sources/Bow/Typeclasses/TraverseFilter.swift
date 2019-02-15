@@ -1,19 +1,27 @@
 import Foundation
 
-public protocol TraverseFilter : Traverse, FunctorFilter {
-    func traverseFilter<A, B, G, Appl>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, OptionOf<B>>, _ applicative : Appl) -> Kind<G, Kind<F, B>> where Appl : Applicative, Appl.F == G
+public protocol TraverseFilter: Traverse, FunctorFilter {
+    static func traverseFilter<A, B, G: Applicative>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, Kind<Self, B>>
 }
 
 public extension TraverseFilter {
-    public func mapFilter<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> OptionOf<B>) -> Kind<F, B> {
-        return (traverseFilter(fa, { a in Id<OptionOf<B>>.pure(f(a)) }, Id<Option<B>>.applicative()) as! Id<Kind<F, B>>).extract()
+    public static func filterA<A, G: Applicative>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Bool>) -> Kind<G, Kind<Self, A>> {
+        return traverseFilter(fa, { a in G.map(f(a), { b in b ? Option.some(a) : Option.none() }) })
     }
     
-    public func filterA<A, G, Appl>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, Bool>, _ applicative : Appl) -> Kind<G, Kind<F, A>> where Appl : Applicative, Appl.F == G {
-        return traverseFilter(fa, { a in applicative.map(f(a), { b in b ? Option.some(a) : Option.none() }) }, applicative)
+    public static func filter<A>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Bool) -> Kind<Self, A> {
+        return (filterA(fa, { a in Id.pure(f(a)) })).extract()
     }
-    
-    public func filter<A>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Bool) -> Kind<F, A> {
-        return (filterA(fa, { a in Id.pure(f(a)) }, Id<A>.applicative()) as! Id<Kind<F, A>>).extract()
+}
+
+// MARK: Syntax for TraverseFilter
+
+public extension Kind where F: TraverseFilter {
+    public func traverseFilter<B, G: Applicative>(_ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, Kind<F, B>> {
+        return F.traverseFilter(self, f)
+    }
+
+    public func filterA<G: Applicative>(_ f: @escaping (A) -> Kind<G, Bool>) -> Kind<G, Kind<F, A>> {
+        return F.filterA(self, f)
     }
 }

@@ -9,3 +9,4 @@ public class Coreader<A, B> : CoreaderT<ForId, A, B> {
         return self.run(Id<A>.pure(a))
     }
 }
+

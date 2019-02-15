@@ -11,8 +11,8 @@ public extension Either {
     }
     
     fileprivate class EitherTraversal<L, R> : Traversal<Either<L, R>, R> {
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: Either<L, R>, _ f: @escaping (R) -> Kind<F, R>) -> Kind<F, Either<L, R>> where Appl : Applicative, F == Appl.F {
-            return applicative.map(s.traverse(f, applicative), { x in Either<L, R>.fix(x) })
+        override func modifyF<F: Applicative>(_ s: Either<L, R>, _ f: @escaping (R) -> Kind<F, R>) -> Kind<F, Either<L, R>> {
+            return F.map(s.traverse(f), { x in Either<L, R>.fix(x) })
         }
     }
     

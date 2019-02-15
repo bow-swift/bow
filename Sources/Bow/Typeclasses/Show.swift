@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Show : Typeclass {
+public protocol Show {
     associatedtype A
     
     func show(_ a : A) -> String

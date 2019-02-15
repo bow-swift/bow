@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForGetter {}
-public typealias GetterOf<S, A> = Kind2<ForGetter, S, A>
-public typealias GetterPartial<S> = Kind<ForGetter, S>
+public final class ForGetter {}
+public final class GetterPartial<S>: Kind<ForGetter, S> {}
+public typealias GetterOf<S, A> = Kind<GetterPartial<S>, A>
 
 public class Getter<S, A> : GetterOf<S, A> {
     private let getFunc : (S) -> A
@@ -72,7 +72,7 @@ public class Getter<S, A> : GetterOf<S, A> {
     
     public func right<C>() -> Getter<Either<C, S>, Either<C, A>> {
         return Getter<Either<C, S>, Either<C, A>>(get: { either in
-            either.map(self.get)
+            Either.fix(either.map(self.get))
         })
     }
     
@@ -117,7 +117,7 @@ fileprivate class GetterFold<S, A> : Fold<S, A> {
         self.getter = getter
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
         return f(getter.get(s))
     }
 }

@@ -6,20 +6,20 @@ import SwiftCheck
 class OptionalTest: XCTestCase {
     
     func testOptionalLaws() {
-        OptionalLaws.check(optional: BowOptics.Optional<String, String>.identity(), eqA: String.order, eqB: String.order)
+        OptionalLaws.check(optional: BowOptics.Optional<String, String>.identity())
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: BowOptics.Optional<String, String>.identity().asSetter(), eqA: String.order, generatorA: String.arbitrary)
+        SetterLaws.check(setter: BowOptics.Optional<String, String>.identity().asSetter(), generatorA: String.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: BowOptics.Optional<String, String>.identity().asTraversal(), eqA: String.order, eqB: String.order, generatorA: String.arbitrary)
+        TraversalLaws.check(traversal: BowOptics.Optional<String, String>.identity().asTraversal(), generatorA: String.arbitrary)
     }
     
     func testOptionalAsFold() {
         property("Optional as Fold: size") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().size(ints.getArray) == Option.fromOptional(ints.getArray.first).map(constant(1)).getOrElse(0)
+            return optionalHead.asFold().size(ints.getArray) == Option.fix(Option.fromOptional(ints.getArray.first).map(constant(1))).getOrElse(0)
         }
         
         property("Optional as Fold: nonEmpty") <- forAll { (ints : ArrayOf<Int>) in
@@ -31,32 +31,33 @@ class OptionalTest: XCTestCase {
         }
         
         property("Optional as Fold: getAll") <- forAll { (ints : ArrayOf<Int>) in
-            return ArrayK.eq(Int.order).eqv(optionalHead.asFold().getAll(ints.getArray), Option.fromOptional(ints.getArray.first).toArray().k())
+            return optionalHead.asFold().getAll(ints.getArray) ==
+                Option.fromOptional(ints.getArray.first).toArray().k()
         }
         
         property("Optional as Fold: combineAll") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().combineAll(Int.sumMonoid, ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().combineAll(ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.empty()), id)
         }
         
         property("Optional as Fold: fold") <- forAll { (ints : ArrayOf<Int>) in
-            return optionalHead.asFold().fold(Int.sumMonoid, ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.sumMonoid.empty), id)
+            return optionalHead.asFold().fold(ints.getArray) == Option.fromOptional(ints.getArray.first).fold(constant(Int.empty()), id)
         }
         
         property("Optional as Fold: headOption") <- forAll { (ints : ArrayOf<Int>) in
-            return Option.eq(Int.order).eqv(optionalHead.asFold().headOption(ints.getArray),
-                                           Option.fromOptional(ints.getArray.first))
+            return optionalHead.asFold().headOption(ints.getArray) ==
+                Option.fromOptional(ints.getArray.first)
         }
         
         property("Optional as Fold: lastOption") <- forAll { (ints : ArrayOf<Int>) in
-            return Option.eq(Int.order).eqv(optionalHead.asFold().lastOption(ints.getArray),
-                                           Option.fromOptional(ints.getArray.first))
+            return optionalHead.asFold().lastOption(ints.getArray) ==
+                Option.fromOptional(ints.getArray.first)
         }
     }
     
     func testOptionalProperties() {
         property("void should always return none") <- forAll { (value : String) in
             let void = BowOptics.Optional<String, Int>.void()
-            return Option.eq(Int.order).eqv(void.getOption(value), Option<Int>.none())
+            return void.getOption(value) == Option<Int>.none()
         }
         
         property("void should return source when setting target") <- forAll { (str : String, int : Int) in
@@ -78,9 +79,8 @@ class OptionalTest: XCTestCase {
         
         property("liftF should be consistent with modifyF") <- forAll { (ints : ArrayOf<Int>, f : ArrowOf<Int, Int>) in
             let g = f.getArrow >>> Try.pure
-            return Try.eq(Array<Int>.eq(Int.order)).eqv(
-                optionalHead.liftF(Try<Int>.applicative(), g)(ints.getArray),
-                optionalHead.modifyF(Try<Int>.applicative(), ints.getArray, g))
+            return optionalHead.liftF(g)(ints.getArray) ==
+                optionalHead.modifyF(ints.getArray, g)
         }
         
         property("Finding a target using a predicate should be wrapped in the correct option result") <- forAll { (ints : ArrayOf<Int>, predicate : Bool) in
@@ -97,8 +97,7 @@ class OptionalTest: XCTestCase {
         
         property("Joining two optionals together with same target should yield same result") <- forAll { (int : Int) in
             let joinedOptional = optionalHead.choice(defaultHead)
-            return Option.eq(Int.order).eqv(joinedOptional.getOption(Either.left([int])),
-                                           joinedOptional.getOption(Either.right(int)))
+            return joinedOptional.getOption(Either.left([int])) == joinedOptional.getOption(Either.right(int))
         }
     }
     

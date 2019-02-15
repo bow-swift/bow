@@ -2,24 +2,24 @@ import Foundation
 import SwiftCheck
 @testable import Bow
 
-class MonoidKLaws<F> {
+class MonoidKLaws<F: MonoidK & EquatableK> {
     
-    static func check<MonoK, EqF>(monoidK : MonoK, generator : @escaping (Int) -> Kind<F, Int>, eq : EqF) where MonoK : MonoidK, MonoK.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
-        leftIdentity(monoidK, generator, eq)
-        rightIdentity(monoidK, generator, eq)
+    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
+        leftIdentity(generator)
+        rightIdentity(generator)
     }
     
-    private static func leftIdentity<MonoK, EqF>(_ monoidK : MonoK, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonoK : MonoidK, MonoK.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func leftIdentity(_ generator : @escaping (Int) -> Kind<F, Int>) {
         property("MonoidK left identity") <- forAll { (a : Int) in
             let fa = generator(a)
-            return eq.eqv(monoidK.combineK(monoidK.emptyK(), fa), fa)
+            return F.emptyK().combineK(fa) == fa
         }
     }
     
-    private static func rightIdentity<MonoK, EqF>(_ monoidK : MonoK, _ generator : @escaping (Int) -> Kind<F, Int>, _ eq : EqF) where MonoK : MonoidK, MonoK.F == F, EqF : Eq, EqF.A == Kind<F, Int> {
+    private static func rightIdentity(_ generator : @escaping (Int) -> Kind<F, Int>) {
         property("MonoidK left identity") <- forAll { (a : Int) in
             let fa = generator(a)
-            return eq.eqv(monoidK.combineK(fa, monoidK.emptyK()), fa)
+            return fa.combineK(F.emptyK()) == fa
         }
     }
 }

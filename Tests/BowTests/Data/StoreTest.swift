@@ -3,31 +3,21 @@ import Nimble
 @testable import BowLaws
 @testable import Bow
 
-class StoreTest : XCTestCase {
-    let intStore = { (x : Int) in Store(state: x, render: id) }
-    
-    class StoreEq : Eq {
-        typealias A = StoreOf<Int, Int>
-        
-        func eqv(_ a: StoreOf<Int, Int>, _ b: StoreOf<Int, Int>) -> Bool {
-            return Store<Int, Int>.fix(a).extract() == Store<Int, Int>.fix(b).extract()
-        }
+extension StorePartial: EquatableK {
+    public static func eq<A>(_ lhs: Kind<StorePartial<S>, A>, _ rhs: Kind<StorePartial<S>, A>) -> Bool where A: Equatable {
+        return Store.fix(lhs).extract() == Store.fix(rhs).extract()
     }
-    
-    class StoreEqUnit : Eq {
-        typealias A = StoreOf<Int, ()>
-        
-        func eqv(_ a: StoreOf<Int, ()>, _ b: StoreOf<Int, ()>) -> Bool {
-            return Store<Int, ()>.fix(a).extract() == Store<Int, ()>.fix(b).extract()
-        }
-    }
-    
+}
+
+class StoreTest: XCTestCase {
+    let intStore = { (x: Int) in Store(state: x, render: id) }
+
     func testFunctorLaws() {
-        FunctorLaws.check(functor: Store<Int, Int>.functor(), generator: intStore, eq: StoreEq(), eqUnit: StoreEqUnit())
+        FunctorLaws<StorePartial<Int>>.check(generator: intStore)
     }
     
     func testComonadLaws() {
-        ComonadLaws.check(comonad: Store<Int, Int>.comonad(), generator: intStore, eq: StoreEq())
+        ComonadLaws<StorePartial<Int>>.check(generator: intStore)
     }
     
     let greetingStore = { (name : String) in Store(state: name, render: { name in "Hi \(name)!"}) }
@@ -39,7 +29,7 @@ class StoreTest : XCTestCase {
     
     func testCoflatMapCreatesNewStore() {
         let result = greetingStore("Bow").coflatMap { (store) -> String in
-            if store.state == "Bow" {
+            if Store.fix(store).state == "Bow" {
                 return "This is my master"
             } else {
                 return "This is not my master"

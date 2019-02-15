@@ -2,33 +2,22 @@ import XCTest
 @testable import BowLaws
 @testable import Bow
 
+extension Function1Partial: EquatableK where I == Int {
+    public static func eq<A>(_ lhs: Kind<Function1Partial<I>, A>, _ rhs: Kind<Function1Partial<I>, A>) -> Bool where A : Equatable {
+        return Function1.fix(lhs).invoke(1) == Function1.fix(rhs).invoke(1)
+    }
+}
+
 class Function1Test: XCTestCase {
-    
-    class Function1PointEq : Eq {
-        typealias A = Function1Of<Int, Int>
-        
-        func eqv(_ a: Function1Of<Int, Int>, _ b: Function1Of<Int, Int>) -> Bool {
-            return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
-        }
-    }
-    
-    class Function1UnitPointEq : Eq {
-        typealias A = Function1Of<Int, ()>
-        
-        func eqv(_ a: Function1Of<Int, ()>, _ b: Function1Of<Int, ()>) -> Bool {
-            return Function1.fix(a).invoke(1) == Function1.fix(b).invoke(1)
-        }
-    }
-    
     func testFunctorLaws() {
-        FunctorLaws<Function1Partial<Int>>.check(functor: Function1<Int, Int>.functor(), generator: { a in Function1<Int, Int>.pure(a) }, eq: Function1PointEq(), eqUnit: Function1UnitPointEq())
+        FunctorLaws<Function1Partial<Int>>.check(generator: { a in Function1<Int, Int>.pure(a) })
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<Function1Partial<Int>>.check(applicative: Function1<Int, Int>.applicative(), eq: Function1PointEq())
+        ApplicativeLaws<Function1Partial<Int>>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<Function1Partial<Int>>.check(monad: Function1<Int, Int>.monad(), eq: Function1PointEq())
+        MonadLaws<Function1Partial<Int>>.check()
     }
 }

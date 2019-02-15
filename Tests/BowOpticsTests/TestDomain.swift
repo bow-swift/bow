@@ -4,9 +4,6 @@ import SwiftCheck
 @testable import BowOptics
 
 struct Token {
-    static var eq : TokenEq {
-        return TokenEq()
-    }
     let value : String
 }
 
@@ -19,14 +16,6 @@ func ==(lhs : Token, rhs : Token) -> Bool {
 extension Token : Arbitrary {
     static var arbitrary: Gen<Token> {
         return String.arbitrary.map(Token.init)
-    }
-}
-
-class TokenEq : Eq {
-    typealias A = Token
-    
-    func eqv(_ a: Token, _ b: Token) -> Bool {
-        return a.value == b.value
     }
 }
 
@@ -56,10 +45,6 @@ let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.
                         reverseGet: { (reversed : String) in String(reversed.reversed()) })
 
 enum SumType {
-    static var eq : SumTypeEq {
-        return SumTypeEq()
-    }
-    
     case a(String)
     case b(Int)
     
@@ -74,18 +59,10 @@ enum SumType {
 extension SumType : Equatable {}
 
 func ==(lhs : SumType, rhs : SumType) -> Bool {
-    return SumType.eq.eqv(lhs, rhs)
-}
-
-class SumTypeEq : Eq {
-    typealias A = SumType
-    
-    func eqv(_ lhs: SumType, _ rhs: SumType) -> Bool {
-        switch (lhs, rhs) {
-        case let (.a(left), .a(right)): return left == right
-        case let (.b(left), .b(right)): return left == right
-        default: return false
-        }
+    switch (lhs, rhs) {
+    case let (.a(left), .a(right)): return left == right
+    case let (.b(left), .b(right)): return left == right
+    default: return false
     }
 }
 

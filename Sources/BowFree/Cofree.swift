@@ -1,28 +1,20 @@
 import Foundation
 import Bow
 
-public class ForCofree {}
+public final class ForCofree {}
+public final class CofreePartial<S>: Kind<ForCofree, S> {}
+public typealias CofreeOf<S, A> = Kind<CofreePartial<S>, A>
 public typealias CofreeEval<S, A> = Kind<S, Cofree<S, A>>
-public typealias CofreeOf<S, A> = Kind2<ForCofree, S, A>
-public typealias CofreePartial<S> = Kind<ForCofree, S>
 
-public class Cofree<S, A> : CofreeOf<S, A> {
-    private let head : A
-    private let tail : Eval<CofreeEval<S, A>>
-    
-    public static func unfold<Func>(_ a : A, _ f : @escaping (A) -> Kind<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
-        return create(a, f, functor)
-    }
-    
-    public static func create<Func>(_ a : A, _ f : @escaping (A) -> Kind<S, A>, _ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
-        return Cofree(a, Eval.later({ functor.map(f(a), { inA in create(inA, f, functor) }) }))
-    }
-    
-    public static func fix(_ fa : CofreeOf<S, A>) -> Cofree<S, A> {
+public class Cofree<S, A>: CofreeOf<S, A> {
+    fileprivate let head: A
+    fileprivate let tail: Eval<CofreeEval<S, A>>
+
+    public static func fix(_ fa: CofreeOf<S, A>) -> Cofree<S, A> {
         return fa as! Cofree<S, A>
     }
     
-    public init(_ head : A, _ tail : Eval<CofreeEval<S, A>>) {
+    public init(_ head: A, _ tail: Eval<CofreeEval<S, A>>) {
         self.head = head
         self.tail = tail
     }
@@ -30,93 +22,73 @@ public class Cofree<S, A> : CofreeOf<S, A> {
     public func tailForced() -> CofreeEval<S, A> {
         return tail.value()
     }
-    
-    public func transform<B, Func>(_ f : @escaping (A) -> B, _ g : @escaping (Cofree<S, A>) -> Cofree<S, B>, _ functor : Func) -> Cofree<S, B> where Func : Functor, Func.F == S {
-        return Cofree<S, B>(f(head), tail.map{ coevsa in functor.map(coevsa, g) })
-    }
-    
-    public func map<B, Func>(_ f : @escaping (A) -> B, _ functor : Func) -> Cofree<S, B> where Func : Functor, Func.F == S {
-        return transform(f, { cofsa in cofsa.map(f, functor) }, functor)
-    }
-    
+
     public func mapBranchingRoot<FuncK>(_ functionK : FuncK) -> Cofree<S, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == S {
-        return Cofree(head, tail.map{ coevsa in functionK.invoke(coevsa) })
+        return Cofree(head, Eval.fix(tail.map{ coevsa in functionK.invoke(coevsa) }))
     }
-    
-    public func mapBranchingS<T, FuncK, FuncS, FuncT>(_ functionK : FuncK, _ functorS : FuncS, _ functorT : FuncT) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T, FuncS : Functor, FuncS.F == S, FuncT : Functor, FuncT.F == T {
-        return Cofree<T, A>(head, tail.map{ ce in functionK.invoke(functorS.map(ce, { cof in cof.mapBranchingS(functionK, functorS, functorT) })) })
-    }
-    
-    public func mapBranchingT<T, FuncK, FuncS, FuncT>(_ functionK : FuncK, _ functorS : FuncS, _ functorT : FuncT) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T, FuncS : Functor, FuncS.F == S, FuncT : Functor, FuncT.F == T {
-        return Cofree<T, A>(head, tail.map{ ce in functorT.map(functionK.invoke(ce), { cof in cof.mapBranchingT(functionK, functorS, functorT) }) })
-    }
-    
-    public func coflatMap<B, Func>(_ f : @escaping (Cofree<S, A>) -> B, _ functor : Func) -> Cofree<S, B> where Func : Functor, Func.F == S {
-        return Cofree<S, B>(f(self), tail.map{ coevsa in functor.map(coevsa, { _ in self.coflatMap(f, functor) }) })
-    }
-    
-    public func duplicate<Func>(_ functor : Func) -> Cofree<S, Cofree<S, A>> where Func : Functor, Func.F == S {
-        return Cofree<S, Cofree<S, A>>(self, tail.map{ coevsa in functor.map(coevsa, { _ in self.duplicate(functor) }) })
-    }
-    
+
     public func runTail() -> Cofree<S, A> {
         return Cofree(head, Eval.now(tail.value()))
     }
-    
-    public func run<Func>(_ functor : Func) -> Cofree<S, A> where Func : Functor, Func.F == S {
-        return Cofree(head, Eval.now(tail.map{ coevsa in functor.map(coevsa, { cof in cof.run(functor) }) }.value()))
+}
+
+public extension Cofree where S: Functor {
+    public static func unfold(_ a: A, _ f: @escaping (A) -> Kind<S, A>) -> Cofree<S, A> {
+        return create(a, f)
     }
-    
-    public func extract() -> A {
-        return head
+
+    public static func create(_ a: A, _ f: @escaping (A) -> Kind<S, A>) -> Cofree<S, A> {
+        return Cofree(a, Eval.later({ S.map(f(a), { inA in create(inA, f) }) }))
     }
-    
-    public func cata<B, Trav>(_ folder : @escaping (A, Kind<S, B>) -> Eval<B>, _ traverse : Trav) -> Eval<B> where Trav : Traverse, Trav.F == S {
-        let ev = traverse.traverse(self.tailForced(), { cof in cof.cata(folder, traverse) }, Eval<B>.applicative()).fix()
-        return ev.flatMap { sb in folder(self.extract(), sb) }
+
+    public func transform<B>(_ f: @escaping (A) -> B, _ g: @escaping (Cofree<S, A>) -> Cofree<S, B>) -> Cofree<S, B> {
+        return Cofree<S, B>(f(head), Eval.fix(tail.map{ coevsa in S.map(coevsa, g) }))
     }
-    
-    public func cataM<B, M, FuncK, Trav, Mon>(_ folder : @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion : FuncK, _ traverse : Trav, _ monad : Mon) -> Kind<M, B> where FuncK : FunctionK, FuncK.F == ForEval, FuncK.G == M, Trav : Traverse, Trav.F == S, Mon : Monad, Mon.F == M {
-        func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
-            let looped = traverse.traverse(ev.tailForced(), { cof in  monad.flatten(inclusion.invoke(Eval.deferEvaluation({ loop(cof) }))) }, monad)
-            let folded = monad.flatMap(looped, { fb in folder(ev.head, fb) })
-            return Eval.now(folded)
-        }
-        return monad.flatten(inclusion.invoke(loop(self)))
+
+    public func mapBranchingS<T, FuncK>(_ functionK: FuncK) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T {
+        return Cofree<T, A>(head, Eval.fix(tail.map { ce in functionK.invoke(S.map(ce, { cof in cof.mapBranchingS(functionK) })) }))
+    }
+
+    public func mapBranchingT<T: Functor, FuncK>(_ functionK: FuncK) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T {
+        return Cofree<T, A>(head, Eval.fix(tail.map{ ce in T.map(functionK.invoke(ce), { cof in cof.mapBranchingT(functionK) }) }))
+    }
+
+    public func run() -> Cofree<S, A> {
+        return Cofree(head, Eval.now(Eval.fix(tail.map{ coevsa in S.map(coevsa, { cof in cof.run() }) }).value()))
     }
 }
 
-public extension Cofree {
-    public static func functor<Func>(_ functor : Func) -> FunctorInstance<S, Func> {
-        return FunctorInstance<S, Func>(functor)
-    }
-    
-    public static func comonad<Func>(_ functor : Func) -> ComonadInstance<S, Func> {
-        return ComonadInstance<S, Func>(functor)
+public extension Cofree where S: Traverse {
+    public func cata<B>(_ folder: @escaping (A, Kind<S, B>) -> Eval<B>) -> Eval<B> {
+        let ev = Eval.fix(S.traverse(self.tailForced(), { cof in cof.cata(folder) }))
+        return Eval.fix(ev.flatMap { sb in folder(self.extract(), sb) })
     }
 
-    public class FunctorInstance<S, Func> : Functor where Func : Functor, Func.F == S {
-        public typealias F = CofreePartial<S>
-        
-        fileprivate let functor : Func
-        
-        init(_ functor : Func) {
-            self.functor = functor
+    public func cataM<B, M: Monad, FuncK>(_ folder: @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion: FuncK) -> Kind<M, B> where FuncK: FunctionK, FuncK.F == ForEval, FuncK.G == M {
+        func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
+            let looped = S.traverse(ev.tailForced(), { cof in  M.flatten(inclusion.invoke(Eval.deferEvaluation({ loop(cof) }))) })
+            let folded = M.flatMap(looped, { fb in folder(ev.head, fb) })
+            return Eval.now(folded)
         }
-        
-        public func map<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (A) -> B) -> CofreeOf<S, B> {
-            return Cofree<S, A>.fix(fa).map(f, functor)
-        }
+        return M.flatten(inclusion.invoke(loop(self)))
+    }
+}
+
+extension CofreePartial: Invariant where S: Functor {}
+
+extension CofreePartial: Functor where S: Functor {
+    public static func map<A, B>(_ fa: Kind<CofreePartial<S>, A>, _ f: @escaping (A) -> B) -> Kind<CofreePartial<S>, B> {
+        return Cofree.fix(fa).transform(f, { cofsa in Cofree.fix(cofsa.map(f)) })
+    }
+}
+
+extension CofreePartial: Comonad where S: Functor {
+    public static func coflatMap<A, B>(_ fa: Kind<CofreePartial<S>, A>, _ f: @escaping (Kind<CofreePartial<S>, A>) -> B) -> Kind<CofreePartial<S>, B> {
+        let cofree = Cofree.fix(fa)
+        return Cofree<S, B>(f(fa), Eval.fix(cofree.tail.map { coevsa in S.map(coevsa, { _ in Cofree.fix(cofree.coflatMap(f)) }) }))
     }
 
-    public class ComonadInstance<S, Func> : FunctorInstance<S, Func>, Comonad where Func : Functor, Func.F == S {
-        
-        public func coflatMap<A, B>(_ fa: CofreeOf<S, A>, _ f: @escaping (CofreeOf<S, A>) -> B) -> CofreeOf<S, B> {
-            return Cofree<S, A>.fix(fa).coflatMap(f, functor)
-        }
-        
-        public func extract<A>(_ fa: CofreeOf<S, A>) -> A {
-            return Cofree<S, A>.fix(fa).extract()
-        }
+    public static func extract<A>(_ fa: Kind<CofreePartial<S>, A>) -> A {
+        return Cofree.fix(fa).head
     }
 }
