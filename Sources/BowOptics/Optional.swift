@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPOptional {}
-public typealias POptionalOf<S, T, A, B> = Kind4<ForPOptional, S, T, A, B>
-public typealias POptionalPartial<S, T, A> = Kind3<ForPOptional, S, T, A>
+public final class ForPOptional {}
+public final class POptionalPartial<S, T, A>: Kind3<ForPOptional, S, T, A> {}
+public typealias POptionalOf<S, T, A, B> = Kind<POptionalPartial<S, T, A>, B>
 
 public typealias ForOptional = ForPOptional
 public typealias Optional<S, A> = POptional<S, S, A, A>
@@ -72,12 +72,12 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return getOrModifyFunc(s)
     }
     
-    public func modifyF<Appl, F>(_ applicative : Appl, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
-        return getOrModify(s).fold(applicative.pure, { a in applicative.map(f(a)){ b in self.set(s, b) } })
+    public func modifyF<F: Applicative>(_ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return getOrModify(s).fold(F.pure, { a in F.map(f(a)){ b in self.set(s, b) } })
     }
     
-    public func liftF<Appl, F>(_ applicative : Appl, _ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
-        return { s in self.modifyF(applicative, s, f) }
+    public func liftF<F: Applicative>(_ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> {
+        return { s in self.modifyF(s, f) }
     }
     
     public func getOption(_ s : S) -> Option<A> {
@@ -127,11 +127,11 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func modifyOption(_ s : S, _ f : @escaping (A) -> B) -> Option<T> {
-        return getOption(s).map { a in self.set(s, f(a)) }
+        return Option.fix(getOption(s).map { a in self.set(s, f(a)) })
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
-        return getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() }
+        return Option.fix(getOption(s).flatMap { a in predicate(a) ? Option.some(a) : Option.none() })
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
@@ -148,7 +148,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
                 self.modify(s){ a in other.set(a, d) }
         },
             getOrModify: { s in
-                self.getOrModify(s).flatMap { a in other.getOrModify(a).bimap({ t in self.set(s, t) }, id)}
+                Either.fix(self.getOrModify(s).flatMap { a in other.getOrModify(a).bimap({ t in self.set(s, t) }, id)})
         })
     }
     
@@ -200,8 +200,8 @@ fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
         self.optional = optional
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return optional.getOption(s).map(f).getOrElse(monoid.empty)
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
+        return Option.fix(optional.getOption(s).map(f)).getOrElse(R.empty())
     }
 }
 
@@ -212,7 +212,7 @@ fileprivate class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.optional = optional
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return self.optional.modifyF(applicative, s, f)
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return self.optional.modifyF(s, f)
     }
 }

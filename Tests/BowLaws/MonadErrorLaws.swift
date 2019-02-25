@@ -2,28 +2,24 @@ import Foundation
 import SwiftCheck
 @testable import Bow
 
-class MonadErrorLaws<F, E> {
+class MonadErrorLaws<F: MonadError & EquatableK> where F.E: Arbitrary {
     
-    static func check<MonErr, EqF>(monadError : MonErr, eq : EqF, gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
-        leftZero(monadError, eq, gen)
-        ensureConsistency(monadError, eq, gen)
+    static func check()  {
+        leftZero()
+        ensureConsistency()
     }
     
-    private static func leftZero<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Left zero") <- forAll { (a : Int, g : ArrowOf<Int, Int>) in
-            let error = gen()
-            let f = g.getArrow >>> monadError.pure
-            return eq.eqv(monadError.flatMap(monadError.raiseError(error), f),
-                          monadError.raiseError(error))
+    private static func leftZero() {
+        property("Left zero") <- forAll { (a: Int, g: ArrowOf<Int, Int>, error: F.E) in
+            let f = g.getArrow >>> F.pure
+            return F.flatMap(F.raiseError(error), f) == F.raiseError(error)
         }
     }
     
-    private static func ensureConsistency<MonErr, EqF>(_ monadError : MonErr, _ eq : EqF, _ gen : @escaping () -> E) where MonErr : MonadError, MonErr.F == F, MonErr.E == E, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Ensure consistency") <- forAll { (a : Int, p : ArrowOf<Int, Bool>) in
-            let error = gen()
-            let fa = monadError.pure(a)
-            return eq.eqv(monadError.ensure(fa, error: constant(error), predicate: p.getArrow),
-                          monadError.flatMap(fa, { a in p.getArrow(a) ? monadError.pure(a) : monadError.raiseError(error) }))
+    private static func ensureConsistency() {
+        property("Ensure consistency") <- forAll { (a: Int, p: ArrowOf<Int, Bool>, error: F.E) in
+            let fa = F.pure(a)
+            return F.ensure(fa, constant(error), p.getArrow) == F.flatMap(fa, { a in p.getArrow(a) ? F.pure(a) : F.raiseError(error) })
         }
     }
     

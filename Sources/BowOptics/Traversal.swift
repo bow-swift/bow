@@ -1,18 +1,18 @@
 import Foundation
 import Bow
 
-public class ForPTraversal {}
-public typealias PTraversalOf<S, T, A, B> = Kind4<ForPTraversal, S, T, A, B>
-public typealias PTraversalPartial<S, T, A> = Kind3<ForPTraversal, S, T, A>
+public final class ForPTraversal {}
+public final class PTraversalPartial<S, T, A>: Kind3<ForPTraversal, S, T, A> {}
+public typealias PTraversalOf<S, T, A, B> = Kind<PTraversalPartial<S, T, A>, B>
 
 public typealias Traversal<S, A> = PTraversal<S, S, A, A>
 public typealias ForTraversal = ForPTraversal
 public typealias TraversalOf<S, A> = PTraversalOf<S, S, A, A>
 public typealias TraversalPartial<S> = Kind<ForPTraversal, S>
 
-open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
+open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     
-    open func modifyF<Appl, F>(_ applicative : Appl, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, Appl.F == F {
+    open func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         fatalError("modifyF must be implemented in subclasses")
     }
 
@@ -28,8 +28,8 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return Optional<S, A>.void().asTraversal()
     }
     
-    public static func from<Trav, T>(traverse : Trav) -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
-        return TraverseTraversal(traverse: traverse)
+    public static func fromTraverse<T: Traverse>() -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
+        return TraverseTraversal()
     }
     
     public static func from(_ get1 : @escaping (S) -> A,
@@ -180,20 +180,12 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    public func foldMap<Mono, R>(_ monoid : Mono, _ s : S, _ f : @escaping (A) -> R) -> R where Mono : Monoid, Mono.A == R {
-        return Const.fix(self.modifyF(Const<R, B>.applicative(monoid), s, { b in Const<R, B>(f(b)) })).value
-    }
-    
-    public func fold<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
-        return foldMap(monoid, s, id)
-    }
-    
-    public func combineAll<Mono>(_ monoid : Mono, _ s : S) -> A where Mono : Monoid, Mono.A == A {
-        return fold(monoid, s)
+    public func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R  {
+        return Const.fix(self.modifyF(s, { b in Const<R, B>(f(b)) })).value
     }
     
     public func getAll(_ s : S) -> ArrayK<A> {
-        return foldMap(ArrayK.monoid(), s, { a in ArrayK([a]) }).fix()
+        return ArrayK.fix(foldMap(s, { a in ArrayK([a]) }))
     }
     
     public func set(_ s : S, _ b : B) -> T {
@@ -201,11 +193,11 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func size(_ s : S) -> Int {
-        return foldMap(Int.sumMonoid, s, constant(1))
+        return foldMap(s, constant(1))
     }
     
     public func isEmpty(_ s : S) -> Bool {
-        return foldMap(Bool.andMonoid, s, constant(false))
+        return foldMap(s, constant(false))
     }
     
     public func nonEmpty(_ s : S) -> Bool {
@@ -213,11 +205,11 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func headOption(_ s : S) -> Option<A> {
-        return foldMap(FirstOptionMonoid<A>(), s, { b in Const(Option.some(b)) }).value
+        return foldMap(s, FirstOption.init).const.value
     }
     
     public func lastOption(_ s : S) -> Option<A> {
-        return foldMap(LastOptionMonoid<A>(), s, { b in Const(Option.some(b)) }).value
+        return foldMap(s, LastOption.init).const.value
     }
     
     public func choice<U, V>(_ other : PTraversal<U, V, A, B>) -> PTraversal<Either<S, U>, Either<T, V>, A, B> {
@@ -261,13 +253,13 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func find(_ s : S, _ predicate : @escaping (A) -> Bool) -> Option<A> {
-        return foldMap(FirstOptionMonoid(), s, { a in
-            predicate(a) ? Const(Option.some(a)) : Const(Option.none())
-        }).value
+        return foldMap(s, { a in
+            predicate(a) ? FirstOption(a) : FirstOption(Option.none())
+        }).const.value
     }
     
-    public func modify(_ s : S, _ f : @escaping (A) -> B) -> T {
-        return modifyF(Id<A>.applicative(), s, { a in Id.pure(f(a)) }).fix().value
+    public func modify(_ s: S, _ f : @escaping (A) -> B) -> T {
+        return Id.fix(modifyF(s, { a in Id.pure(f(a)) })).value
     }
     
     public func exists(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
@@ -275,7 +267,17 @@ open class PTraversal<S, T, A, B> : PTraversalOf<S, T, A, B> {
     }
     
     public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
-        return foldMap(Bool.andMonoid, s, predicate)
+        return foldMap(s, predicate)
+    }
+}
+
+extension PTraversal where A: Monoid {
+    public func fold(_ s: S) -> A {
+        return foldMap(s, id)
+    }
+
+    public func combineAll(_ s: S) -> A {
+        return fold(s)
     }
 }
 
@@ -287,13 +289,14 @@ fileprivate class ChoiceTraversal<S, T, U, V, A, B> : PTraversal<Either<S, U>, E
         self.first = first
         self.second = second
     }
-    
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Either<S, U>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Either<T, V>> where Appl : Applicative, F == Appl.F {
-        return s.fold({ s in applicative.map(first.modifyF(applicative, s, f), { t in
-                        Either.left(t) }) },
-                      { u in applicative.map(second.modifyF(applicative, u, f), { v in
+
+    override func modifyF<F: Applicative>(_ s: Either<S, U>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Either<T, V>> {
+        return s.fold({ s in F.map(first.modifyF(s, f), { t in
+            Either.left(t) }) },
+                      { u in F.map(second.modifyF(u, f), { v in
                         Either.right(v) }) })
     }
+
 }
 
 fileprivate class TraversalFold<S, T, A, B> : Fold<S, A> {
@@ -303,28 +306,22 @@ fileprivate class TraversalFold<S, T, A, B> : Fold<S, A> {
         self.traversal = traversal
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
-        return traversal.foldMap(monoid, s, f)
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
+        return traversal.foldMap(s, f)
     }
 }
 
 fileprivate class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Either<S, S>, _ f: @escaping (S) -> Kind<F, S>) -> Kind<F, Either<S, S>> where Appl : Applicative, F == Appl.F {
+    override func modifyF<F>(_ s: Either<S, S>, _ f: @escaping (S) -> Kind<F, S>) -> Kind<F, Either<S, S>> where F : Applicative {
         return s.bimap(f, f)
-            .fold({ fa in applicative.map(fa, Either.left) },
-                  { fa in applicative.map(fa, Either.right) })
+            .fold({ fa in F.map(fa, Either.left) },
+                  { fa in F.map(fa, Either.right) })
     }
 }
 
-fileprivate class TraverseTraversal<Trav, T, A, B> : PTraversal<Kind<T, A>, Kind<T, B>, A, B> where Trav : Traverse, Trav.F == T {
-    private let traverse : Trav
-    
-    init(traverse : Trav) {
-        self.traverse = traverse
-    }
-    
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: Kind<T, A>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Kind<T, B>> where Appl : Applicative, F == Appl.F {
-        return traverse.traverse(s, f, applicative)
+fileprivate class TraverseTraversal<T: Traverse, A, B>: PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
+    override func modifyF<F: Applicative>(_ s: Kind<T, A>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Kind<T, B>> {
+        return T.traverse(s, f)
     }
 }
 
@@ -341,10 +338,10 @@ fileprivate class Get2Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               { b1, b2 in self.set(b1, b2, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     { b1, b2 in self.set(b1, b2, s) })
     }
 }
 
@@ -364,11 +361,11 @@ fileprivate class Get3Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               { b1, b2, b3 in self.set(b1, b2, b3, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     { b1, b2, b3 in self.set(b1, b2, b3, s) })
     }
 }
 
@@ -391,12 +388,12 @@ fileprivate class Get4Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               { b1, b2, b3, b4 in self.set(b1, b2, b3, b4, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     { b1, b2, b3, b4 in self.set(b1, b2, b3, b4, s) })
     }
 }
 
@@ -422,13 +419,13 @@ fileprivate class Get5Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               f(self.get5(s)),
-                               { b1, b2, b3, b4, b5 in self.set(b1, b2, b3, b4, b5, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     f(self.get5(s)),
+                     { b1, b2, b3, b4, b5 in self.set(b1, b2, b3, b4, b5, s) })
     }
 }
 
@@ -457,14 +454,14 @@ fileprivate class Get6Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               f(self.get5(s)),
-                               f(self.get6(s)),
-                               { b1, b2, b3, b4, b5, b6 in self.set(b1, b2, b3, b4, b5, b6, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     f(self.get5(s)),
+                     f(self.get6(s)),
+                     { b1, b2, b3, b4, b5, b6 in self.set(b1, b2, b3, b4, b5, b6, s) })
     }
 }
 
@@ -496,15 +493,15 @@ fileprivate class Get7Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               f(self.get5(s)),
-                               f(self.get6(s)),
-                               f(self.get7(s)),
-                               { b1, b2, b3, b4, b5, b6, b7 in self.set(b1, b2, b3, b4, b5, b6, b7, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     f(self.get5(s)),
+                     f(self.get6(s)),
+                     f(self.get7(s)),
+                     { b1, b2, b3, b4, b5, b6, b7 in self.set(b1, b2, b3, b4, b5, b6, b7, s) })
     }
 }
 
@@ -539,16 +536,16 @@ fileprivate class Get8Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               f(self.get5(s)),
-                               f(self.get6(s)),
-                               f(self.get7(s)),
-                               f(self.get8(s)),
-                               { b1, b2, b3, b4, b5, b6, b7, b8 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     f(self.get5(s)),
+                     f(self.get6(s)),
+                     f(self.get7(s)),
+                     f(self.get8(s)),
+                     { b1, b2, b3, b4, b5, b6, b7, b8 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, s) })
     }
 }
 
@@ -586,17 +583,17 @@ fileprivate class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.set = set
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.get1(s)),
-                               f(self.get2(s)),
-                               f(self.get3(s)),
-                               f(self.get4(s)),
-                               f(self.get5(s)),
-                               f(self.get6(s)),
-                               f(self.get7(s)),
-                               f(self.get8(s)),
-                               f(self.get9(s)),
-                               { b1, b2, b3, b4, b5, b6, b7, b8, b9 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, b9, s) })
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get1(s)),
+                     f(self.get2(s)),
+                     f(self.get3(s)),
+                     f(self.get4(s)),
+                     f(self.get5(s)),
+                     f(self.get6(s)),
+                     f(self.get7(s)),
+                     f(self.get8(s)),
+                     f(self.get9(s)),
+                     { b1, b2, b3, b4, b5, b6, b7, b8, b9 in self.set(b1, b2, b3, b4, b5, b6, b7, b8, b9, s) })
     }
 }
 
@@ -609,7 +606,9 @@ fileprivate class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
         self.second = second
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (C) -> Kind<F, D>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return self.first.modifyF(applicative, s, { a in self.second.modifyF(applicative, a, f)})
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (C) -> Kind<F, D>) -> Kind<F, T> {
+        return self.first.modifyF(s, { a in
+            self.second.modifyF(a, f)
+        })
     }
 }

@@ -1,34 +1,12 @@
 import Foundation
 
-public class ForOptionT {}
-public typealias OptionTOf<F, A> = Kind2<ForOptionT, F, A>
-public typealias OptionTPartial<F> = Kind<ForOptionT, F>
+public final class ForOptionT {}
+public final class OptionTPartial<F>: Kind<ForOptionT, F> {}
+public typealias OptionTOf<F, A> = Kind<OptionTPartial<F>, A>
 
 public class OptionT<F, A> : OptionTOf<F, A> {
     fileprivate let value : Kind<F, Option<A>>
-    
-    public static func pure<Appl>(_ a : A, _ applicative : Appl) -> OptionT<F, A> where Appl : Applicative, Appl.F == F {
-        return OptionT(applicative.pure(Option.pure(a)))
-    }
-    
-    public static func none<Appl>(_ applicative : Appl) -> OptionT<F, A> where Appl : Applicative, Appl.F == F {
-        return OptionT(applicative.pure(Option.none()))
-    }
-    
-    public static func fromOption<Appl>(_ option : Option<A>, _ applicative : Appl) -> OptionT<F, A> where Appl : Applicative, Appl.F == F {
-        return OptionT(applicative.pure(option))
-    }
-    
-    public static func tailRecM<B, MonF>(_ a : A, _ f : @escaping (A) -> OptionTOf<F, Either<A, B>>, _ monad : MonF) -> OptionTOf<F, B> where MonF : Monad, MonF.F == F {
-        
-        return OptionT<F, B>(monad.tailRecM(a, { aa in
-            monad.map(OptionT<F, Either<A, B>>.fix(f(aa)).value, { option in
-                option.fold({ Either<A, Option<B>>.right(Option<B>.none())},
-                            { either in either.map(Option<B>.some) })
-            })
-        }))
-    }
-    
+
     public static func fix(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
         return fa as! OptionT<F, A>
     }
@@ -36,202 +14,133 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     public init(_ value : Kind<F, Option<A>>) {
         self.value = value
     }
-    
-    public func fold<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
-        return functor.map(value, { option in option.fold(ifEmpty, f) })
+}
+
+extension OptionT where F: Functor {
+    public func fold<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
+        return value.map { option in option.fold(ifEmpty, f) }
     }
-    
-    public func cata<B, Func>(_ ifEmpty : @escaping () -> B, _ f : @escaping (A) -> B, _ functor : Func) -> Kind<F, B> where Func : Functor, Func.F == F {
-        return fold(ifEmpty, f, functor)
+
+    public func cata<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
+        return fold(ifEmpty, f)
     }
-    
-    public func map<B, Func>(_ f : @escaping (A) -> B, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(value, { option in option.map(f) } ))
+
+    public func liftF<B>(_ fb: Kind<F, B>) -> OptionT<F, B> {
+        return OptionT<F, B>(fb.map(Option<B>.some))
     }
-    
-    public func ap<AA, B, Mon>(_ fa : OptionT<F, AA>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F, A == (AA) -> B {
-        return flatMap({ f in fa.map(f, monad) }, monad)
+
+    public func getOrElse(_ defaultValue: A) -> Kind<F, A> {
+        return value.map { option in option.getOrElse(defaultValue) }
     }
-    
-    public func flatMap<B, Mon>(_ f : @escaping (A) -> OptionT<F, B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return flatMapF({ a in f(a).value }, monad)
+
+    public var isDefined: Kind<F, Bool> {
+        return value.map { option in option.isDefined }
     }
-    
-    public func flatMapF<B, Mon>(_ f : @escaping (A) -> Kind<F, Option<B>>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return OptionT<F, B>(monad.flatMap(value, { option in option.fold({ monad.pure(Option<B>.none()) }, f)}))
+
+    public func transform<B>(_ f: @escaping (Option<A>) -> Option<B>) -> OptionT<F, B> {
+        return OptionT<F, B>(value.map(f))
     }
-    
-    public func liftF<B, Func>(_ fb : Kind<F, B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(fb, { b in Option<B>.some(b) }))
+
+    public func subflatMap<B>(_ f: @escaping (A) -> Option<B>) -> OptionT<F, B> {
+        return transform { option in Option.fix(option.flatMap(f)) }
     }
-    
-    public func semiflatMap<B, Mon>(_ f : @escaping (A) -> Kind<F, B>, _ monad : Mon) -> OptionT<F, B> where Mon : Monad, Mon.F == F {
-        return flatMap({ option in self.liftF(f(option), monad)}, monad)
+}
+
+extension OptionT where F: Applicative {
+    public static func none() -> OptionT<F, A> {
+        return OptionT(F.pure(.none()))
     }
-    
-    public func getOrElse<Func>(_ defaultValue : A, _ functor : Func) -> Kind<F, A> where Func : Functor, Func.F == F {
-        return functor.map(value, { option in option.getOrElse(defaultValue) })
+
+    public static func some(_ a: A) -> OptionT<F, A> {
+        return OptionT(F.pure(.some(a)))
     }
-    
-    public func getOrElseF<Mon>(_ defaultValue : Kind<F, A>, _ monad : Mon) -> Kind<F, A> where Mon : Monad, Mon.F == F {
-        return monad.flatMap(value, { option in option.fold(constant(defaultValue), monad.pure)})
+
+    public static func fromOption(_ option: Option<A>) -> OptionT<F, A> {
+        return OptionT(F.pure(option))
     }
-    
-    public func filter<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> OptionT<F, A> where Func : Functor, Func.F == F {
-        return OptionT(functor.map(value, { option in option.filter(predicate) }))
+}
+
+extension OptionT where F: Monad {
+    public func orElse(_ defaultValue: OptionT<F, A>) -> OptionT<F, A> {
+        return orElseF(defaultValue.value)
     }
-    
-    public func forall<Func>(_ predicate : @escaping (A) -> Bool, _ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { option in option.forall(predicate) })
-    }
-    
-    public func isDefined<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { option in option.isDefined })
-    }
-    
-    public func isEmpty<Func>(_ functor : Func) -> Kind<F, Bool> where Func : Functor, Func.F == F {
-        return functor.map(value, { option in option.isEmpty })
-    }
-    
-    public func orElse<Mon>(_ defaultValue : OptionT<F, A>, _ monad : Mon) -> OptionT<F, A> where Mon : Monad, Mon.F == F {
-        return orElseF(defaultValue.value, monad)
-    }
-    
-    public func orElseF<Mon>(_ defaultValue : Kind<F, Option<A>>, _ monad : Mon) -> OptionT<F, A> where Mon : Monad, Mon.F == F {
-        return OptionT<F, A>(monad.flatMap(value, { option in
+
+    public func orElseF(_ defaultValue: Kind<F, Option<A>>) -> OptionT<F, A> {
+        return OptionT<F, A>(value.flatMap { option in
             option.fold(constant(defaultValue),
-                        { _ in monad.pure(option) }) }))
+                        constant(F.pure(option))) })
     }
-    
-    public func transform<B, Func>(_ f : @escaping (Option<A>) -> Option<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(value, f))
+
+    public func semiflatMap<B>(_ f: @escaping (A) -> Kind<F, B>) -> OptionT<F, B> {
+        return OptionT<F, B>.fix(self.flatMap({ option in self.liftF(f(option)) }))
     }
-    
-    public func subflatMap<B, Func>(_ f : @escaping (A) -> Option<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return transform({ option in option.flatMap(f) }, functor)
-    }
-    
-    public func mapFilter<B, Func>(_ f : @escaping (A) -> OptionOf<B>, _ functor : Func) -> OptionT<F, B> where Func : Functor, Func.F == F {
-        return OptionT<F, B>(functor.map(value, { option in option.flatMap({ x in f(x).fix() }) }))
+
+    public func getOrElseF(_ defaultValue: Kind<F, A>) -> Kind<F, A> {
+        return value.flatMap { option in option.fold(constant(defaultValue), F.pure) }
     }
 }
 
-public extension OptionT {
-    public static func functor<FuncF>(_ functor : FuncF) -> OptionTFunctor<F, FuncF> {
-        return OptionTFunctor<F, FuncF>(functor)
-    }
-    
-    public static func functorFilter<FuncF>(_ functor : FuncF) -> OptionTFunctorFilter<F, FuncF> {
-        return OptionTFunctorFilter<F, FuncF>(functor)
-    }
-    
-    public static func applicative<MonF>(_ monad : MonF) -> OptionTApplicative<F, MonF> {
-        return OptionTApplicative<F, MonF>(monad)
-    }
-    
-    public static func monad<MonF>(_ monad : MonF) -> OptionTMonad<F, MonF> {
-        return OptionTMonad<F, MonF>(monad)
-    }
-    
-    public static func semigroupK<MonF>(_ monad : MonF) -> OptionTSemigroupK<F, MonF> {
-        return OptionTSemigroupK<F, MonF>(monad)
-    }
-    
-    public static func monoidK<MonF>(_ monad : MonF) -> OptionTMonoidK<F, MonF> {
-        return OptionTMonoidK<F, MonF>(monad)
-    }
-    
-    public static func eq<EqA, Func>(_ eq : EqA, _ functor : Func) -> OptionTEq<F, A, EqA, Func> {
-        return OptionTEq<F, A, EqA, Func>(eq, functor)
-    }
-
-    public class OptionTFunctor<G, FuncG> : Functor where FuncG : Functor, FuncG.F == G {
-        public typealias F = OptionTPartial<G>
-        
-        fileprivate let functor : FuncG
-        
-        init(_ functor : FuncG) {
-            self.functor = functor
-        }
-        
-        public func map<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> B) -> OptionTOf<G, B> {
-            return OptionT<G, A>.fix(fa).map(f, functor)
-        }
-    }
-
-    public class OptionTFunctorFilter<G, FuncG> : OptionTFunctor<G, FuncG>, FunctorFilter where FuncG : Functor, FuncG.F == G {
-        
-        public func mapFilter<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionTOf<G, B> {
-            return OptionT<G, A>.fix(fa).mapFilter(f, functor)
-        }
-    }
-
-    public class OptionTApplicative<G, MonG> : OptionTFunctor<G, MonG>, Applicative where MonG : Monad, MonG.F == G {
-        
-        fileprivate let monad : MonG
-        
-        override init(_ monad : MonG) {
-            self.monad = monad
-            super.init(monad)
-        }
-        
-        public func pure<A>(_ a: A) -> OptionTOf<G, A> {
-            return OptionT<G, A>.pure(a, monad)
-        }
-        
-        public func ap<A, B>(_ ff: OptionTOf<G, (A) -> B>, _ fa: OptionTOf<G, A>) -> OptionTOf<G, B> {
-            return OptionT<G, (A) -> B>.fix(ff).ap(OptionT<G, A>.fix(fa), monad)
-        }
-    }
-
-    public class OptionTMonad<G, MonG> : OptionTApplicative<G, MonG>, Monad where MonG : Monad, MonG.F == G {
-        
-        public func flatMap<A, B>(_ fa: OptionTOf<G, A>, _ f: @escaping (A) -> OptionTOf<G, B>) -> OptionTOf<G, B> {
-            return OptionT<G, A>.fix(fa).flatMap({ a in OptionT<G, B>.fix(f(a)) }, monad)
-        }
-        
-        public func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionTOf<G, Either<A, B>>) -> OptionTOf<G, B> {
-            return OptionT<G, A>.tailRecM(a, f, monad)
-        }
-    }
-
-    public class OptionTSemigroupK<G, MonG> : SemigroupK where MonG : Monad, MonG.F == G {
-        public typealias F = OptionTPartial<G>
-        
-        fileprivate let monad : MonG
-        
-        init(_ monad : MonG) {
-            self.monad = monad
-        }
-        
-        public func combineK<A>(_ x: OptionTOf<G, A>, _ y: OptionTOf<G, A>) -> OptionTOf<G, A> {
-            return OptionT<G, A>.fix(x).orElse(OptionT<G, A>.fix(y), monad)
-        }
-    }
-
-    public class OptionTMonoidK<G, MonG> : OptionTSemigroupK<G, MonG>, MonoidK where MonG : Monad, MonG.F == G {
-        public func emptyK<A>() -> OptionTOf<G, A> {
-            return OptionT<G, A>(monad.pure(Option.none()))
-        }
-    }
-
-    public class OptionTEq<F, B, EqF, Func> : Eq where EqF : Eq, EqF.A == Kind<F, OptionOf<B>>, Func : Functor, Func.F == F {
-        public typealias A = OptionTOf<F, B>
-        
-        private let eq : EqF
-        private let functor : Func
-        
-        init(_ eq : EqF, _ functor : Func) {
-            self.eq = eq
-            self.functor = functor
-        }
-        
-        public func eqv(_ a: OptionTOf<F, B>, _ b: OptionTOf<F, B>) -> Bool {
-            let a = OptionT<F, B>.fix(a)
-            let b = OptionT<F, B>.fix(b)
-            return eq.eqv(functor.map(a.value, { aa in aa as OptionOf<B> }),
-                          functor.map(b.value, { bb in bb as OptionOf<B> }))
-        }
+extension OptionTPartial: EquatableK where F: EquatableK {
+    public static func eq<A>(_ lhs: Kind<OptionTPartial<F>, A>, _ rhs: Kind<OptionTPartial<F>, A>) -> Bool where A : Equatable {
+        return OptionT.fix(lhs).value == OptionT.fix(rhs).value
     }
 }
 
+extension OptionTPartial: Invariant where F: Functor {}
+
+extension OptionTPartial: Functor where F: Functor {
+    public static func map<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> B) -> Kind<OptionTPartial<F>, B> {
+        let ota = OptionT.fix(fa)
+        return OptionT(ota.value.map { a in Option.fix(a.map(f)) })
+    }
+}
+
+extension OptionTPartial: FunctorFilter where F: Functor {
+    public static func mapFilter<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<OptionTPartial<F>, B> {
+        let ota = OptionT.fix(fa)
+        return OptionT(ota.value.map { option in Option.fix(option.flatMap(f)) })
+    }
+}
+
+extension OptionTPartial: Applicative where F: Applicative {
+    public static func pure<A>(_ a: A) -> Kind<OptionTPartial<F>, A> {
+        return OptionT(F.pure(.some(a)))
+    }
+
+    public static func ap<A, B>(_ ff: Kind<OptionTPartial<F>, (A) -> B>, _ fa: Kind<OptionTPartial<F>, A>) -> Kind<OptionTPartial<F>, B> {
+        let otf = OptionT.fix(ff)
+        let ota = OptionT.fix(fa)
+        return OptionT(F.map(otf.value, ota.value) { of, oa in Option.fix(of.ap(oa)) })
+    }
+}
+
+extension OptionTPartial: Monad where F: Monad {
+    public static func flatMap<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<OptionTPartial<F>, B>) -> Kind<OptionTPartial<F>, B> {
+        let ota = OptionT.fix(fa)
+        return OptionT(ota.value.flatMap { option in
+            option.fold({ F.pure(Option<B>.none()) },
+                        { a in OptionT.fix(f(a)).value })
+        })
+    }
+
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<OptionTPartial<F>, Either<A, B>>) -> Kind<OptionTPartial<F>, B> {
+        return OptionT(F.tailRecM(a, { aa in
+            OptionT.fix(f(aa)).value.map { option in
+                option.fold({ Either.right(Option.none())},
+                            { either in Either.fix(either.map(Option.some)) })
+            }
+        }))
+    }
+}
+
+extension OptionTPartial: SemigroupK where F: Monad {
+    public static func combineK<A>(_ x: Kind<OptionTPartial<F>, A>, _ y: Kind<OptionTPartial<F>, A>) -> Kind<OptionTPartial<F>, A> {
+        return OptionT.fix(x).orElse(OptionT.fix(y))
+    }
+}
+
+extension OptionTPartial: MonoidK where F: Monad {
+    public static func emptyK<A>() -> Kind<OptionTPartial<F>, A> {
+        return OptionT(F.pure(.none()))
+    }
+}

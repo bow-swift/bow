@@ -3,33 +3,23 @@ import Nimble
 @testable import BowLaws
 @testable import Bow
 
-class MooreTest : XCTestCase {
-    func handle(_ x : Int) -> Moore<Int, Int> {
+extension MoorePartial: EquatableK {
+    public static func eq<A>(_ lhs: Kind<MoorePartial<E>, A>, _ rhs: Kind<MoorePartial<E>, A>) -> Bool where A : Equatable {
+        return Moore.fix(lhs).extract() == Moore.fix(rhs).extract()
+    }
+}
+
+class MooreTest: XCTestCase {
+    func handle(_ x: Int) -> Moore<Int, Int> {
         return Moore(view: x, handle: handle)
     }
-    
-    class MooreEq : Eq {
-        typealias A = MooreOf<Int, Int>
-        
-        func eqv(_ a: MooreOf<Int, Int>, _ b: MooreOf<Int, Int>) -> Bool {
-            return Moore<Int, Int>.fix(a).extract() == Moore<Int, Int>.fix(b).extract()
-        }
-    }
-    
-    class MooreEqUnit : Eq {
-        typealias A = MooreOf<Int, ()>
-        
-        func eqv(_ a: MooreOf<Int, ()>, _ b: MooreOf<Int, ()>) -> Bool {
-            return Moore<Int, ()>.fix(a).extract() == Moore<Int, ()>.fix(b).extract()
-        }
-    }
-    
+
     func testFunctorLaws() {
-        FunctorLaws.check(functor: Moore<Int, Int>.functor(), generator: handle, eq: MooreEq(), eqUnit: MooreEqUnit())
+        FunctorLaws<MoorePartial<Int>>.check(generator: handle)
     }
     
     func testComonadLaws() {
-        ComonadLaws.check(comonad: Moore<Int, Int>.comonad(), generator: handle, eq: MooreEq())
+        ComonadLaws<MoorePartial<Int>>.check(generator: handle)
     }
     
     func handleRoute(_ route : String) -> Moore<String, Id<String>> {

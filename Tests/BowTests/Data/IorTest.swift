@@ -12,32 +12,29 @@ class IorTest: XCTestCase {
         default: return Ior.both(a, a)
         }
     }
-    
-    let eq = Ior.eq(Int.order, Int.order)
-    let eqUnit = Ior.eq(Int.order, UnitEq())
-    
-    func testEqLaws() {
-        EqLaws.check(eq: self.eq, generator: self.generator)
+
+    func testEquatableLaws() {
+        EquatableKLaws.check(generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IorPartial<Int>>.check(functor: Ior<Int, Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<IorPartial<Int>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<IorPartial<Int>>.check(applicative: Ior<Int, Int>.applicative(Int.sumMonoid), eq: self.eq)
+        ApplicativeLaws<IorPartial<Int>>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<IorPartial<Int>>.check(monad: Ior<Int, Int>.monad(Int.sumMonoid), eq: self.eq)
+        MonadLaws<IorPartial<Int>>.check()
     }
     
-    func testShowLaws() {
-        ShowLaws.check(show: Ior.show(), generator: self.generator)
+    func testCustomStringConvertibleLaws() {
+        CustomStringConvertibleLaws.check(generator: self.generator)
     }
     
     func testFoldableLaws() {
-        FoldableLaws<IorPartial<Int>>.check(foldable: Ior<Int, Int>.foldable(), generator: self.generator)
+        FoldableLaws<IorPartial<Int>>.check(generator: self.generator)
     }
     
     func testCheckers() {
@@ -50,16 +47,14 @@ class IorTest: XCTestCase {
     func testBimapConsitent() {
         property("bimap is equivalent to map and mapLeft") <- forAll { (x : Int, f : ArrowOf<Int, Int>, g : ArrowOf<Int, Int>) in
             let input = self.generator(x)
-            return self.eq.eqv(input.bimap(f.getArrow, g.getArrow),
-                               input.map(g.getArrow).mapLeft(f.getArrow))
+            return input.bimap(f.getArrow, g.getArrow) == Ior.fix(input.map(g.getArrow)).mapLeft(f.getArrow)
         }
     }
     
     func testSwapIsomorphism() {
         property("swap twice is equivalent to identity") <- forAll { (x : Int) in
             let input = self.generator(x)
-            return self.eq.eqv(input.swap().swap(),
-                               input)
+            return input.swap().swap() == input
         }
     }
     

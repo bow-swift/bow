@@ -10,10 +10,10 @@ public extension String {
         return EachInstance()
     }
     
-    fileprivate class StringTraversal : Traversal<String, Character> {
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: String, _ f: @escaping (Character) -> Kind<F, Character>) -> Kind<F, String> where Appl : Applicative, F == Appl.F {
-            return applicative.map(s.map(id).k().traverse(f, applicative), { x in
-                String(x.fix().asArray)
+    fileprivate class StringTraversal: Traversal<String, Character> {
+        override func modifyF<F: Applicative>(_ s: String, _ f: @escaping (Character) -> Kind<F, Character>) -> Kind<F, String> {
+            return F.map(s.map(id).k().traverse(f), { x in
+                String(ArrayK.fix(x).asArray)
             })
         }
     }

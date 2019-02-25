@@ -1,19 +1,33 @@
 import Foundation
 
-public protocol Traverse : Functor, Foldable {
-    func traverse<G, A, B, Appl>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, B>, _ applicative : Appl) -> Kind<G, Kind<F, B>> where Appl : Applicative, Appl.F == G
+public protocol Traverse: Functor, Foldable {
+    static func traverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<Self, B>>
 }
 
 public extension Traverse {
-    public func map<A, B>(_ fa: Kind<F, A>, _ f: @escaping (A) -> B) -> Kind<F, B> {
-        return (traverse(fa, { a in Id<B>.pure(f(a)) }, Id<B>.applicative()) as! Id<Kind<F, B>>).extract()
+    public static func sequence<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Kind<Self, A>> {
+        return traverse(fga, id)
     }
     
-    public func sequence<Appl, G, A>(_ applicative : Appl, _ fga : Kind<F, Kind<G, A>>) -> Kind<G, Kind<F, A>> where Appl : Applicative, Appl.F == G{
-        return traverse(fga, id, applicative)
+    public static func flatTraverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> where Self: Monad {
+        return G.map(traverse(fa, f), Self.flatten)
     }
-    
-    public func flatTraverse<Appl, Mon, G, A, B>(_ fa : Kind<F, A>, _ f : @escaping (A) -> Kind<G, Kind<F, B>>, _ applicative : Appl, _ monad : Mon) -> Kind<G, Kind<F, B>> where Appl : Applicative, Appl.F == G, Mon : Monad, Mon.F == F {
-        return applicative.map(traverse(fa, f, applicative), monad.flatten)
+}
+
+// MARK: Syntax for Traverse
+
+public extension Kind where F: Traverse {
+    public func traverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<F, B>> {
+        return F.traverse(self, f)
+    }
+
+    public static func sequence<G: Applicative>(_ fga: Kind<F, Kind<G, A>>) -> Kind<G, Kind<F, A>> {
+        return F.sequence(fga)
+    }
+}
+
+public extension Kind where F: Traverse & Monad {
+    public func flatTraverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, Kind<F, B>>) -> Kind<G, Kind<F, B>> {
+        return F.flatTraverse(self, f)
     }
 }

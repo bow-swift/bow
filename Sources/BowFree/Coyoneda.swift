@@ -1,14 +1,14 @@
 import Foundation
 import Bow
 
-public class ForCoyoneda {}
+public final class ForCoyoneda {}
 public typealias AnyFunc = (AnyObject) -> AnyObject
-public typealias CoyonedaOf<F, P, A> = Kind3<ForCoyoneda, F, P, A>
-public typealias CoyonedaPartial<F, P> = Kind2<ForCoyoneda, F, P>
+public final class CoyonedaPartial<F, P>: Kind2<ForCoyoneda, F, P> {}
+public typealias CoyonedaOf<F, P, A> = Kind<CoyonedaPartial<F, P>, A>
 
-public class Coyoneda<F, P, A> : CoyonedaOf<F, P, A> {
-    private let pivot : Kind<F, P>
-    private let ks : [AnyFunc]
+public class Coyoneda<F, P, A>: CoyonedaOf<F, P, A> {
+    fileprivate let pivot: Kind<F, P>
+    fileprivate let ks: [AnyFunc]
     
     public static func apply(_ fp : Kind<F, P>, _ f : @escaping (P) -> A) -> Coyoneda<F, P, A> {
         return unsafeApply(fp, [f as! AnyFunc])
@@ -33,42 +33,27 @@ public class Coyoneda<F, P, A> : CoyonedaOf<F, P, A> {
             return result as! A
         }
     }
-    
-    public func lower<Func>(_ functor : Func) -> Kind<F, A> where Func : Functor, Func.F == F {
-        return functor.map(pivot, transform())
+}
+
+public extension Coyoneda where F: Functor {
+    public func lower() -> Kind<F, A> {
+        return F.map(pivot, transform())
     }
-    
-    public func map<B>(_ f : @escaping (A) -> B) -> Coyoneda<F, P, B> {
-        return Coyoneda<F, P, B>(pivot, ks + [f as! AnyFunc])
-    }
-    
-    public func toYoneda<Func>(_ functor : Func) -> Yoneda<F, A> where Func : Functor, Func.F == F {
-        return YonedaFromCoyoneda<F, A, Func>(functor)
+
+    public func toYoneda() -> Yoneda<F, A> {
+        return YonedaFromCoyoneda<F, A>()
     }
 }
 
-fileprivate class YonedaFromCoyoneda<F, A, Func> : Yoneda<F, A> where Func : Functor, Func.F == F {
-    private let functor : Func
-    
-    init(_ functor : Func) {
-        self.functor = functor
-    }
-    
+fileprivate class YonedaFromCoyoneda<F: Functor, A>: Yoneda<F, A> {
     override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
-        return map(f, functor).lower()
+        return Yoneda.fix(self.map(f)).lower()
     }
 }
 
-public extension Coyoneda {
-    public static func functor() -> FunctorInstance<F, P> {
-        return FunctorInstance<F, P>()
-    }
-
-    public class FunctorInstance<G, P> : Functor {
-        public typealias F = CoyonedaPartial<G, P>
-        
-        public func map<A, B>(_ fa: CoyonedaOf<G, P, A>, _ f: @escaping (A) -> B) -> CoyonedaOf<G, P, B> {
-            return Coyoneda<G, P, A>.fix(fa).map(f)
-        }
+extension CoyonedaPartial: Functor {
+    public static func map<A, B>(_ fa: Kind<CoyonedaPartial<F, P>, A>, _ f: @escaping (A) -> B) -> Kind<CoyonedaPartial<F, P>, B> {
+        let coyoneda = Coyoneda.fix(fa)
+        return Coyoneda(coyoneda.pivot, coyoneda.ks + [f as! AnyFunc])
     }
 }

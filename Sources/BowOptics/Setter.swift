@@ -1,8 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPSetter {}
-public typealias PSetterOf<S, T, A, B> = Kind4<ForPSetter, S, T, A, B>
+public final class ForPSetter {}
+public final class PSetterPartial<S, T, A>: Kind3<ForPSetter, S, T, A> {}
+public typealias PSetterOf<S, T, A, B> = Kind<PSetterPartial<S, T, A>, B>
 
 public typealias ForSetter = ForPSetter
 public typealias Setter<S, A> = PSetter<S, S, A, A>
@@ -44,9 +45,9 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
         return Setter<Either<S, S>, S>(modify: { f in { ss in ss.bimap(f, f) } })
     }
     
-    public static func fromFunctor<Func, F>(_ functor : Func) -> PSetter<Kind<F, A>, Kind<F, B>, A, B> where Func : Functor, Func.F == F {
+    public static func fromFunctor<F: Functor>() -> PSetter<Kind<F, A>, Kind<F, B>, A, B> {
         return PSetter<Kind<F, A>, Kind<F, B>, A, B>(modify: { f in
-            { fs in functor.map(fs, f) }
+            { fs in F.map(fs, f) }
         })
     }
     

@@ -6,70 +6,56 @@ import SwiftCheck
 class NonEmptyArrayTest: XCTestCase {
     
     var generator : (Int) -> NonEmptyArray<Int> {
-        return { a in NonEmptyArray.pure(a) }
+        return { a in NonEmptyArray(head: a, tail: []) }
     }
-    
-    let eq = NonEmptyArray.eq(Int.order)
-    let eqUnit = NonEmptyArray.eq(UnitEq())
-    
-    func testEqLaws() {
-        EqLaws.check(eq: self.eq, generator: self.generator)
+
+    func testEquatableLaws() {
+        EquatableKLaws.check(generator: self.generator)
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForNonEmptyArray>.check(functor: NonEmptyArray<Int>.functor(), generator: self.generator, eq: self.eq, eqUnit: self.eqUnit)
+        FunctorLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForNonEmptyArray>.check(applicative: NonEmptyArray<Int>.applicative(), eq: self.eq)
+        ApplicativeLaws<ForNonEmptyArray>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<ForNonEmptyArray>.check(monad: NonEmptyArray<Int>.monad(), eq: self.eq)
+        MonadLaws<ForNonEmptyArray>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForNonEmptyArray>.check(comonad: NonEmptyArray<Int>.comonad(), generator: self.generator, eq: self.eq)
+        ComonadLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForNonEmptyArray>.check(bimonad: NonEmptyArray<Int>.bimonad(), generator: self.generator, eq: self.eq)
+        BimonadLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForNonEmptyArray>.check(traverse: NonEmptyArray<Int>.traverse(), functor: NonEmptyArray<Int>.functor(), generator: self.generator, eq: self.eq)
+        TraverseLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
     func testSemigroupLaws() {
-        property("NonEmptyArray semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<NonEmptyArrayOf<Int>>.check(
-                    semigroup: NonEmptyArray<Int>.semigroup(),
-                    a: NonEmptyArray<Int>.pure(a),
-                    b: NonEmptyArray<Int>.pure(b),
-                    c: NonEmptyArray<Int>.pure(c),
-                    eq: self.eq)
-        }
-        
-        property("NonEmptyArray semigroup laws") <- forAll { (a : Int, b : Int, c : Int) in
-            return SemigroupLaws<NonEmptyArrayOf<Int>>.check(
-                semigroup: NonEmptyArray<Int>.semigroupK().algebra(),
-                a: NonEmptyArray<Int>.pure(a),
-                b: NonEmptyArray<Int>.pure(b),
-                c: NonEmptyArray<Int>.pure(c),
-                eq: self.eq)
+        property("NonEmptyArray semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
+            return SemigroupLaws<NonEmptyArray<Int>>.check(
+                a: NonEmptyArray<Int>(head: a, tail: []),
+                    b: NonEmptyArray<Int>(head: b, tail: []),
+                    c: NonEmptyArray<Int>(head: c, tail: []))
         }
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForNonEmptyArray>.check(semigroupK: NonEmptyArray<Int>.semigroupK(), generator: self.generator, eq: self.eq)
+        SemigroupKLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
-    func testShowLaws() {
-        ShowLaws.check(show: NonEmptyArray.show(), generator: self.generator)
+    func testCustomStringConvertibleLaws() {
+        CustomStringConvertibleLaws.check(generator: self.generator)
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForNonEmptyArray>.check(foldable: NonEmptyArray<Int>.foldable(), generator: self.generator)
+        FoldableLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
     private let neaGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }

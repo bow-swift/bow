@@ -6,8 +6,8 @@ import SwiftCheck
 class SetterTest: XCTestCase {
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenSetter, eqA: Token.eq, generatorA: Token.arbitrary)
-        SetterLaws.check(setter: Setter<String, String>.identity(), eqA: String.order, generatorA: String.arbitrary)
+        SetterLaws.check(setter: tokenSetter, generatorA: Token.arbitrary)
+        SetterLaws.check(setter: Setter<String, String>.identity(), generatorA: String.arbitrary)
     }
     
     func testSetterProperties() {

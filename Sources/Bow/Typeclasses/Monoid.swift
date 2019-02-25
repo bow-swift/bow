@@ -1,5 +1,5 @@
 import Foundation
 
-public protocol Monoid : Semigroup {
-    var empty : A { get }
+public protocol Monoid: Semigroup {
+    static func empty() -> Self
 }

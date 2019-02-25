@@ -55,8 +55,8 @@ public extension NonEmptyArray {
 }
 
 fileprivate class NEATraversal<A> : Traversal<NEA<A>, A> {
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: NonEmptyArray<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, NonEmptyArray<A>> where Appl : Applicative, F == Appl.F {
-        return applicative.map(s.traverse(f, applicative), NonEmptyArray.fix)
+    override func modifyF<F: Applicative>(_ s: NonEmptyArray<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, NonEmptyArray<A>> {
+        return F.map(s.traverse(f), NonEmptyArray.fix)
     }
 }
 
@@ -67,11 +67,11 @@ fileprivate class NonEmptyArrayFilterIndexTraversal<E> : Traversal<NEA<E>, E> {
         self.predicate = predicate
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: NonEmptyArray<E>, _ f: @escaping (E) -> Kind<F, E>) -> Kind<F, NonEmptyArray<E>> where Appl : Applicative, F == Appl.F {
-        return applicative.map(
+    override func modifyF<F: Applicative>(_ s: NonEmptyArray<E>, _ f: @escaping (E) -> Kind<F, E>) -> Kind<F, NonEmptyArray<E>> {
+        return F.map(
             NonEmptyArray.fromArrayUnsafe(s.all().enumerated().map(id))
                 .traverse({ x in
-                    self.predicate(x.offset) ? f(x.element) : applicative.pure(x.element)
-                }, applicative), NonEmptyArray.fix)
+                    self.predicate(x.offset) ? f(x.element) : F.pure(x.element)
+                }), NonEmptyArray.fix)
     }
 }

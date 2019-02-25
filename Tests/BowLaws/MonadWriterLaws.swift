@@ -2,41 +2,40 @@ import Foundation
 import SwiftCheck
 @testable import Bow
 
-class MonadWriterLaws<F, W> where W : Arbitrary {
+class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
     
-    static func check<MonWri, MonoW, EqF, EqUnit, EqTuple>(monadWriter : MonWri, monoid : MonoW, eq : EqF, eqUnit : EqUnit, eqTuple: EqTuple) where MonWri : MonadWriter, MonWri.F == F, MonWri.W == W, MonoW : Monoid, MonoW.A == W, EqF : Eq, EqF.A == Kind<F, Int>, EqUnit : Eq, EqUnit.A == Kind<F, ()>, EqTuple : Eq, EqTuple.A == Kind<F, (W, Int)> {
-        writerPure(monadWriter, monoid, eq)
-        tellFusion(monadWriter, monoid, eqUnit)
-        listenPure(monadWriter, monoid, eqTuple)
-        listenWriter(monadWriter, monoid, eqTuple)
+    static func check() {
+        writerPure()
+        tellFusion()
+        listenPure()
+        listenWriter()
     }
     
-    private static func writerPure<MonWri, MonoW, EqF>(_ monadWriter : MonWri, _ monoid : MonoW, _ eq : EqF) where MonWri : MonadWriter, MonWri.F == F, MonWri.W == W, MonoW : Monoid, MonoW.A == W, EqF : Eq, EqF.A == Kind<F, Int> {
-        property("Writer pure") <- forAll { (a : Int) in
-            return eq.eqv(monadWriter.writer((monoid.empty, a)),
-                          monadWriter.pure(a))
+    private static func writerPure() {
+        property("Writer pure") <- forAll { (a: Int) in
+            return F.writer((Int.empty(), a)) == F.pure(a)
         }
     }
     
-    private static func tellFusion<MonWri, MonoW, EqF>(_ monadWriter : MonWri, _ monoid : MonoW, _ eq : EqF) where MonWri : MonadWriter, MonWri.F == F, MonWri.W == W, MonoW : Monoid, MonoW.A == W, EqF : Eq, EqF.A == Kind<F, ()> {
-        property("Tell fusion") <- forAll { (a : W, b : W) in
-            return eq.eqv(monadWriter.flatMap(monadWriter.tell(a), { _ in monadWriter.tell(b) }),
-                          monadWriter.tell(monoid.combine(a, b)))
+    private static func tellFusion() {
+        property("Tell fusion") <- forAll { (a: Int, b: Int) in
+            return isEqual(F.flatMap(F.tell(a), { _ in F.tell(b) }),
+                           F.tell(a.combine(b)))
         }
     }
     
-    private static func listenPure<MonWri, MonoW, EqF>(_ monadWriter : MonWri, _ monoid : MonoW, _ eq : EqF) where MonWri : MonadWriter, MonWri.F == F, MonWri.W == W, MonoW : Monoid, MonoW.A == W, EqF : Eq, EqF.A == Kind<F, (W, Int)> {
-        property("Listen pure") <- forAll { (a : Int) in
-            return eq.eqv(monadWriter.listen(monadWriter.pure(a)),
-                          monadWriter.pure((monoid.empty, a)))
+    private static func listenPure() {
+        property("Listen pure") <- forAll { (a: Int) in
+            return isEqual(F.listen(F.pure(a)), F.pure((Int.empty(), a)))
         }
     }
     
-    private static func listenWriter<MonWri, MonoW, EqF>(_ monadWriter : MonWri, _ monoid : MonoW, _ eq : EqF) where MonWri : MonadWriter, MonWri.F == F, MonWri.W == W, MonoW : Monoid, MonoW.A == W, EqF : Eq, EqF.A == Kind<F, (W, Int)> {
-        property("Listen writer") <- forAll { (a : Int, w : W) in
+    private static func listenWriter() {
+        property("Listen writer") <- forAll { (a: Int, w: Int) in
             let tuple = (w, a)
-            return eq.eqv(monadWriter.listen(monadWriter.writer(tuple)),
-                          monadWriter.map(monadWriter.tell(tuple.0), { _ in tuple }))
+            return isEqual(F.listen(F.writer(tuple)), F.map(F.tell(tuple.0), { _ in tuple }))
         }
     }
+
+    
 }

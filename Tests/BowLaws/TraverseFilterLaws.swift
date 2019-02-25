@@ -1,26 +1,24 @@
 import SwiftCheck
 @testable import Bow
 
-class TraverseFilterLaws<F> {
-    static func check<TravFilt, Appl, EqA>(traverseFilter : TravFilt, applicative : Appl, eq : EqA) where TravFilt : TraverseFilter, TravFilt.F == F, Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Kind<F, Int>> {
-        identityTraverseFilter(traverseFilter, applicative, eq)
-        filterAConsistentWithTraverseFilter(traverseFilter, applicative, eq)
+class TraverseFilterLaws<F: TraverseFilter & Applicative & EquatableK> {
+    static func check() {
+        identityTraverseFilter()
+        filterAConsistentWithTraverseFilter()
     }
     
-    private static func identityTraverseFilter<TravFilt, Appl, EqA>(_ traverseFilter : TravFilt, _ applicative : Appl, _ eq : EqA) where TravFilt : TraverseFilter, TravFilt.F == F, Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Kind<F, Int>> {
+    private static func identityTraverseFilter() {
         property("identity traverse filter") <- forAll { (x : Int) in
-            let input = applicative.pure(x)
-            return eq.eqv(traverseFilter.traverseFilter(input, { a in applicative.pure(Option<Int>.some(a)) }, applicative),
-                          applicative.pure(input))
+            let input = F.pure(x)
+            return F.traverseFilter(input, { a in F.pure(Option<Int>.some(a)) }) == F.pure(input)
         }
     }
     
-    private static func filterAConsistentWithTraverseFilter<TravFilt, Appl, EqA>(_ traverseFilter : TravFilt, _ applicative : Appl, _ eq : EqA) where TravFilt : TraverseFilter, TravFilt.F == F, Appl : Applicative, Appl.F == F, EqA : Eq, EqA.A == Kind<F, Kind<F, Int>> {
+    private static func filterAConsistentWithTraverseFilter() {
         property("filterA consistent with traverseFilter") <- forAll { (x : Int, bool : Bool) in
-            let input = applicative.pure(x)
-            let f = { (_ : Int) in applicative.pure(bool) }
-            return eq.eqv(traverseFilter.filterA(input, f, applicative),
-                          traverseFilter.traverseFilter(input, { a in applicative.map(f(a)){ b in b ? Option<Int>.some(a) : Option<Int>.none()} }, applicative))
+            let input = F.pure(x)
+            let f = { (_ : Int) in F.pure(bool) }
+            return F.filterA(input, f) == F.traverseFilter(input, { a in F.map(f(a)){ b in b ? Option<Int>.some(a) : Option<Int>.none()} })
         }
     }
 }

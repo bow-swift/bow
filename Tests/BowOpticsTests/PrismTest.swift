@@ -6,24 +6,24 @@ import SwiftCheck
 class PrismTest: XCTestCase {
     
     func testPrismLaws() {
-        PrismLaws.check(prism: stringPrism, eqA: String.order, eqB: String.order)
+        PrismLaws.check(prism: stringPrism)
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: stringPrism.asSetter(), eqA: String.order, generatorA: String.arbitrary)
+        SetterLaws.check(setter: stringPrism.asSetter(), generatorA: String.arbitrary)
     }
     
     func testOptionalLaws() {
-        OptionalLaws.check(optional: stringPrism.asOptional(), eqA: String.order, eqB: String.order)
+        OptionalLaws.check(optional: stringPrism.asOptional())
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: stringPrism.asTraversal(), eqA: String.order, eqB: String.order, generatorA: String.arbitrary)
+        TraversalLaws.check(traversal: stringPrism.asTraversal(), generatorA: String.arbitrary)
     }
     
     func testPrismAsFold() {
         property("Prism as Fold: size") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().size(sum) == sumPrism.getOption(sum).map(constant(1)).getOrElse(0)
+            return sumPrism.asFold().size(sum) == Option.fix(sumPrism.getOption(sum).map(constant(1))).getOrElse(0)
         }
         
         property("Prism as Fold: nonEmpty") <- forAll { (sum : SumType) in
@@ -35,26 +35,23 @@ class PrismTest: XCTestCase {
         }
         
         property("Prism as Fold: getAll") <- forAll { (sum : SumType) in
-            return ArrayK.eq(String.order).eqv(sumPrism.asFold().getAll(sum),
-                                               sumPrism.getOption(sum).toArray().k())
+            return sumPrism.asFold().getAll(sum) == sumPrism.getOption(sum).toArray().k()
         }
         
         property("Prism as Fold: combineAll") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().combineAll(String.concatMonoid, sum) == sumPrism.getOption(sum).fold(constant(String.concatMonoid.empty), id)
+            return sumPrism.asFold().combineAll(sum) == sumPrism.getOption(sum).fold(constant(String.empty()), id)
         }
         
         property("Prism as Fold: fold") <- forAll { (sum : SumType) in
-            return sumPrism.asFold().fold(String.concatMonoid, sum) == sumPrism.getOption(sum).fold(constant(String.concatMonoid.empty), id)
+            return sumPrism.asFold().fold(sum) == sumPrism.getOption(sum).fold(constant(String.empty()), id)
         }
         
         property("Prism as Fold: headOption") <- forAll { (sum : SumType) in
-            return Option.eq(String.order).eqv(sumPrism.asFold().headOption(sum),
-                                               sumPrism.getOption(sum))
+            return sumPrism.asFold().headOption(sum) == sumPrism.getOption(sum)
         }
         
         property("Prism as Fold: lastOption") <- forAll { (sum : SumType) in
-            return Option.eq(String.order).eqv(sumPrism.asFold().lastOption(sum),
-                                               sumPrism.getOption(sum))  
+            return sumPrism.asFold().lastOption(sum) == sumPrism.getOption(sum)
         }
     }
     
@@ -62,13 +59,11 @@ class PrismTest: XCTestCase {
     
     func testPrismProperties() {
         property("Joining two prisms with the same target should yield the same result") <- forAll { (sum : SumType) in
-            let eq = Option.eq(String.order)
-            return eq.eqv((sumPrism + stringPrism).getOption(sum),
-                          sumPrism.getOption(sum).flatMap(stringPrism.getOption))
+            return (sumPrism + stringPrism).getOption(sum) == sumPrism.getOption(sum).flatMap(stringPrism.getOption)
         }
 
-        property("Checking if a prism exists with a target") <- forAll { (a : SumType, b : SumType, bool : Bool) in
-            return Prism<SumType, SumType>.only(a, ConstantEq(constant: bool)).isEmpty(b) == bool
+        property("Checking if a prism exists with a target") <- forAll { (a : SumType, b : SumType) in
+            return Prism<SumType, SumType>.only(a).isEmpty(b) == (a == b)
         }
         
         property("Checking if there is no target") <- forAll { (sum : SumType) in
@@ -80,8 +75,7 @@ class PrismTest: XCTestCase {
         }
         
         property("Setting a target on a prism should set the correct target") <- forAll(self.sumAGen, String.arbitrary) { (sum : SumType, str : String) in
-            return Option.eq(SumType.eq).eqv(sumPrism.setOption(sum, str),
-                                            Option.some(SumType.a(str)))
+            return sumPrism.setOption(sum, str) == Option.some(SumType.a(str))
         }
         
         property("Finding a target using a predicate within a Prism should be wrapped in the correct option result") <- forAll { (sum : SumType, predicate : Bool) in
@@ -125,18 +119,5 @@ class PrismTest: XCTestCase {
         property("Prism + Setter::identity") <- forAll { (sum : SumType, def: String) in
             return (sumPrism + Setter<String, String>.identity()).set(sum, def) == sumPrism.set(sum, def)
         }
-    }
-}
-
-fileprivate class ConstantEq : Eq {
-    typealias A = SumType
-    private let constant : Bool
-    
-    init(constant : Bool) {
-        self.constant = constant
-    }
-    
-    func eqv(_ a: SumType, _ b: SumType) -> Bool {
-        return constant
     }
 }

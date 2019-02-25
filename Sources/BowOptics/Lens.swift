@@ -1,9 +1,9 @@
 import Foundation
 import Bow
 
-public class ForPLens {}
-public typealias PLensOf<S, T, A, B> = Kind4<ForPLens, S, T, A, B>
-public typealias PLensPartial<S, T, A> = Kind3<ForPLens, S, T, A>
+public final class ForPLens {}
+public final class PLensPartial<S, T, A>: Kind3<ForPLens, S, T, A> {}
+public typealias PLensOf<S, T, A, B> = Kind<PLensPartial<S, T, A>, B>
 
 public typealias Lens<S, A> = PLens<S, S, A, A>
 public typealias ForLens = ForPLens
@@ -68,12 +68,12 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return setFunc(s, b)
     }
     
-    public func modifyF<Func, F>(_ functor : Func, _ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Func : Functor, Func.F == F {
-        return functor.map(f(self.get(s)), { b in self.set(s, b) })
+    public func modifyF<F: Functor>(_ s : S, _ f : @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.get(s)), { b in self.set(s, b) })
     }
     
-    public func liftF<Func, F>(_ functor : Func, _ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> where Func : Functor, Func.F == F {
-        return { s in self.modifyF(functor, s, f) }
+    public func liftF<F: Functor>(_ f : @escaping (A) -> Kind<F, B>) -> (S) -> Kind<F, T> {
+        return { s in self.modifyF(s, f) }
     }
     
     public func choice<S1, T1>(_ other : PLens<S1, T1, A, B>) -> PLens<Either<S, S1>, Either<T, T1>, A, B> {
@@ -181,7 +181,7 @@ fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
         self.lens = lens
     }
     
-    override func foldMap<Mono, R>(_ monoid: Mono, _ s: S, _ f: @escaping (A) -> R) -> R where Mono : Monoid, R == Mono.A {
+    override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
         return f(lens.get(s))
     }
 }
@@ -193,7 +193,7 @@ fileprivate class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         self.lens = lens
     }
     
-    override func modifyF<Appl, F>(_ applicative: Appl, _ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> where Appl : Applicative, F == Appl.F {
-        return applicative.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
+    override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
+        return F.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
     }
 }

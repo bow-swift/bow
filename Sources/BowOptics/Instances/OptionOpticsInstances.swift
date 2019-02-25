@@ -11,8 +11,8 @@ public extension Option {
     }
     
     fileprivate class OptionTraversal<A> : Traversal<OptionOf<A>, A> {
-        override func modifyF<Appl, F>(_ applicative: Appl, _ s: OptionOf<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, OptionOf<A>> where Appl : Applicative, F == Appl.F {
-            return s.fix().traverse(f, applicative)
+        override func modifyF<F: Applicative>(_ s: OptionOf<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, OptionOf<A>> {
+            return s.traverse(f)
         }
     }
     

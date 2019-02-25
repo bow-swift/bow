@@ -6,27 +6,27 @@ import SwiftCheck
 class IsoTest: XCTestCase {
     
     func testIsoLaws() {
-        IsoLaws.check(iso: tokenIso, eqA: Token.eq, eqB: String.order)
+        IsoLaws.check(iso: tokenIso)
     }
     
     func testPrismLaws() {
-        PrismLaws.check(prism: tokenIso.asPrism(), eqA: Token.eq, eqB: String.order)
+        PrismLaws.check(prism: tokenIso.asPrism())
     }
     
     func testLensLaws() {
-        LensLaws.check(lens: tokenIso.asLens(), eqA: Token.eq, eqB: String.order)
+        LensLaws.check(lens: tokenIso.asLens())
     }
     
     func testOptionalLaws() {
-        OptionalLaws.check(optional: tokenIso.asOptional(), eqA: Token.eq, eqB: String.order)
+        OptionalLaws.check(optional: tokenIso.asOptional())
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenIso.asSetter(), eqA: Token.eq, generatorA: Token.arbitrary)
+        SetterLaws.check(setter: tokenIso.asSetter(), generatorA: Token.arbitrary)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: tokenIso.asTraversal(), eqA: Token.eq, eqB: String.order, generatorA: Token.arbitrary)
+        TraversalLaws.check(traversal: tokenIso.asTraversal(), generatorA: Token.arbitrary)
     }
     
     func testIsoAsFold() {
@@ -43,25 +43,23 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso as Fold: getAll") <- forAll { (token : Token) in
-            return ArrayK.eq(String.order).eqv(tokenIso.asFold().getAll(token), ArrayK.pure(token.value))
+            return tokenIso.asFold().getAll(token) == ArrayK.pure(token.value)
         }
         
         property("Iso as Fold: combineAll") <- forAll { (token : Token) in
-            return tokenIso.asFold().combineAll(String.concatMonoid, token) == token.value
+            return tokenIso.asFold().combineAll(token) == token.value
         }
         
         property("Iso as Fold: fold") <- forAll { (token : Token) in
-            return tokenIso.asFold().fold(String.concatMonoid, token) == token.value
+            return tokenIso.asFold().fold(token) == token.value
         }
         
         property("Iso as Fold: headOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenIso.asFold().headOption(token),
-                                              Option.some(token.value))
+            return tokenIso.asFold().headOption(token) == Option.some(token.value)
         }
         
         property("Iso as Fold: lastOption") <- forAll { (token : Token) in
-            return Option.eq(String.order).eqv(tokenIso.asFold().lastOption(token),
-                                              Option.some(token.value))
+            return tokenIso.asFold().lastOption(token) == Option.some(token.value)
         }
     }
     
@@ -71,26 +69,23 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso as Getter: find") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Option.eq(String.order).eqv(
-                tokenIso.asGetter().find(token, predicate.getArrow),
-                tokenGetter.find(token, predicate.getArrow))
+            return tokenIso.asGetter().find(token, predicate.getArrow) == tokenGetter.find(token, predicate.getArrow)
         }
         
         property("Iso as Getter: exists") <- forAll { (token : Token, predicate : ArrowOf<String, Bool>) in
-            return Option.eq(String.order).eqv(tokenIso.asGetter().find(token, predicate.getArrow),
-                                              tokenGetter.find(token, predicate.getArrow))
+            return tokenIso.asGetter().find(token, predicate.getArrow) ==
+                tokenGetter.find(token, predicate.getArrow)
         }
     }
     
     func testIsoProperties() {
         property("Lifting a function should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
-            return Token.eq.eqv(tokenIso.modify(token, constant(value)),
-                                tokenIso.lift(constant(value))(token))
+            return tokenIso.modify(token, constant(value)) == tokenIso.lift(constant(value))(token)
         }
         
         property("Lifting a function as a functior should yield the same value as not yielding") <- forAll { (token : Token, value : String) in
-            return Option.eq(Token.eq).eqv(tokenIso.modifyF(Option<String>.functor(), token, constant(Option.some(value))),
-                                          tokenIso.liftF(Option<String>.functor(), constant(Option.some(value)))(token))
+            return tokenIso.modifyF(token, constant(Option.some(value))) ==
+                tokenIso.liftF(constant(Option.some(value)))(token)
         }
         
         property("Creating a first pair with a type should result in the target to value") <- forAll { (token : Token, value : Int) in
@@ -105,20 +100,14 @@ class IsoTest: XCTestCase {
         
         property("Creating a left with a type should result in the sum of value and target") <- forAll { (token : Token, value : Int) in
             let left : Iso<Either<Token, Int>, Either<String, Int>> = tokenIso.left()
-            let eq = Either.eq(String.order, Int.order)
-            return eq.eqv(left.get(Either.left(token)),
-                          Either.left(tokenIso.get(token))) &&
-                eq.eqv(left.get(Either.right(value)),
-                       Either.right(value))
+            return left.get(Either.left(token)) == Either.left(tokenIso.get(token)) &&
+                left.get(Either.right(value)) == Either.right(value)
         }
         
         property("Creating a right with a type should result in the sum of target and value") <- forAll { (token : Token, value : Int) in
             let right : Iso<Either<Int, Token>, Either<Int, String>> = tokenIso.right()
-            let eq = Either.eq(Int.order, String.order)
-            return eq.eqv(right.get(Either.right(token)),
-                          Either.right(tokenIso.get(token))) &&
-                eq.eqv(right.get(Either.left(value)),
-                       Either.left(value))
+            return right.get(Either.right(token)) == Either.right(tokenIso.get(token)) &&
+                right.get(Either.left(value)) == Either.left(value)
         }
         
         property("Finding a target using a predicate within an Iso should be wrapped in the correct option result") <- forAll { (predicate : Bool) in
