@@ -1,17 +1,13 @@
 import Foundation
 
-    /// Instance of `Semigroup` for `Bool`. Uses conjunction as combination of elements.
-    ///
-    /// Use `Bool.andSemigroup` to obtain an instance of this type.
+/// Instance of `Semigroup` for `Bool`. Uses conjunction as combination of elements.
 extension Bool: Semigroup {
     public func combine(_ other: Bool) -> Bool {
         return self && other
     }
 }
 
-    /// Instance of `Monoid` for `Bool`. Uses conjunction as combination of elements.
-    ///
-    /// Use `Bool.andMonoid` to obtain an instance of this type.
+/// Instance of `Monoid` for `Bool`. Uses conjunction as combination of elements and `true` as empty element.
 extension Bool: Monoid {
     public static func empty() -> Bool {
         return true
