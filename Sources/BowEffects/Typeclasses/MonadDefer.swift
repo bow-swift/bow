@@ -26,6 +26,8 @@ public extension MonadDefer {
     }
 }
 
+// MARK: Syntax for MonadDefer
+
 public extension Kind where F: MonadDefer {
     public static func suspend(_ fa: @escaping () -> Kind<F, A>) -> Kind<F, A> {
         return F.suspend(fa)

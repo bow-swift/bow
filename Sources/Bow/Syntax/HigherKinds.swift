@@ -8,6 +8,7 @@ import Foundation
 ///     class ForOption {}
 ///     class Option<A>: Kind<ForOption, A> {}
 open class Kind<F, A> {
+    /// Default initializer
     public init() {}
 }
 
