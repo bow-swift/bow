@@ -1,18 +1,12 @@
 import Foundation
 
-/**
- Witness for the `Id<A>` data type. To be used in simulated Higher Kinded Types.
- */
+/// Witness for the `Id<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForId {}
 
-/**
- Higher Kinded Type alias to improve readability of `Kind<ForId, A>`.
- */
+/// Higher Kinded Type alias to improve readability of `Kind<ForId, A>`.
 public typealias IdOf<A> = Kind<ForId, A>
 
-/**
- The identity data type represents a context of having no effect on the type it wraps. A instance of `Id<A>` is isomorphic to an instance of `A`; it is just wrapped without any additional information.
- */
+/// The identity data type represents a context of having no effect on the type it wraps. A instance of `Id<A>` is isomorphic to an instance of `A`; it is just wrapped without any additional information.
 public class Id<A>: IdOf<A> {
     public let value: A
 
@@ -23,35 +17,30 @@ public class Id<A>: IdOf<A> {
         return fa as! Id<A>
     }
     
-    /**
-     Constructs a value of `Id<A>` given a value of `A`.
-     
-     - parameter value: Value to be wrapped in `Id<A>`.
-     */
+    /// Constructs a value of `Id`.
+    ///
+    /// - Parameter value: Value to be wrapped in `Id`.
     public init(_ value: A) {
         self.value = value
     }
 }
 
 // MARK: Protocol conformances
-/**
- Conformance of `Id<A>` to `CustomStringConvertible`.
- */
+/// Conformance of `Id` to `CustomStringConvertible`.
 extension Id: CustomStringConvertible {
     public var description: String {
         return "Id(\(value))"
     }
 }
 
-/**
- Conformance of `Id<A>` to `CustomDebugStringConvertible`, given that type parameter `A` also conforms to `CustomDebugStringConvertible`.
- */
+/// Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
 extension Id: CustomDebugStringConvertible where A : CustomDebugStringConvertible {
     public var debugDescription: String {
         return "Id(\(value.debugDescription))"
     }
 }
 
+/// Conformance of `Id` to `Equatable`, given that type parameter also conforms to `Equatable`.
 extension ForId: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForId, A>, _ rhs: Kind<ForId, A>) -> Bool where A : Equatable {
         return Id.fix(lhs).value == Id.fix(rhs).value
