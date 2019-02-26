@@ -9,14 +9,6 @@ public typealias OptionOf<A> = Kind<ForOption, A>
 /// Represents optional values. Instances of this type may represent the presence of a value (`some`) or absence of it (`none`). This type is isomorphic to native Swift `Optional<A>` (usually written `A?`), with the addition of behaving as a Higher Kinded Type.
 public final class Option<A>: OptionOf<A> {
     private let value: A?
-    /**
-     Constructs an instance of `Option` with presence of a value of the type parameter.
-     
-     It is an alias for `Option<A>.pure(_:)`
-     
-     - parameter a: Value to be wrapped in an `Option<A>`.
-     */
-
     /// Constructs an instance of `Option` with presence of a value of the type parameter.
     ///
     /// It is an alias for `Option<A>.pure(_:)`
