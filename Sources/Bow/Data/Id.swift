@@ -10,9 +10,10 @@ public typealias IdOf<A> = Kind<ForId, A>
 public class Id<A>: IdOf<A> {
     public let value: A
 
-    /**
-     Safe downcast to `Id<A>`.
-     */
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to `Id`.
     public static func fix(_ fa: IdOf<A>) -> Id<A> {
         return fa as! Id<A>
     }
