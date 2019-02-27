@@ -15,6 +15,8 @@ public extension Recursive {
     }
 }
 
+// MARK: Syntax for Recursive
+
 public extension Kind where F: Recursive, A: Functor {
     public func projectT() -> Kind<A, Kind<F, A>> {
         return F.projectT(self)

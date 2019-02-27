@@ -15,6 +15,8 @@ public extension Corecursive {
     }
 }
 
+// MARK: Syntax for Corecursive
+
 public extension Kind where F: Corecursive, A: Functor {
     public static func embedT(_ tf: Kind<A, Eval<Kind<F, A>>>) -> Eval<Kind<F, A>> {
         return F.embedT(tf)

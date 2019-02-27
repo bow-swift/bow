@@ -38,7 +38,7 @@ public extension Monad {
         return flatMap(fa, { a in a ? ifTrue() : ifFalse() })
     }
     
-    // Binding
+    // MARK: Monad comprehensions
     
     public static func binding<B, C>(_ f: () -> Kind<Self, B>,
                               _ fb: @escaping (B) -> Kind<Self, C>) -> Kind<Self, C> {
@@ -214,6 +214,7 @@ public extension Kind where F: Monad {
         return F.mproduct(self, f)
     }
 
+    // MARK: Syntax for Monad Comprehensions
     public static func binding<B, C>(_ f: () -> Kind<F, B>,
                                      _ fb: @escaping (B) -> Kind<F, C>) -> Kind<F, C> {
         return F.binding(f, fb)
