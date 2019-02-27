@@ -15,6 +15,7 @@ public extension Functor {
     }
 }
 
+// MARK: Syntax for F-Algebras
 public extension Kind where F: Functor {
     public static func hylo<B>(_ algebra: @escaping Algebra<F, Eval<B>>,
                                _ coalgebra: @escaping Coalgebra<F, A>,
