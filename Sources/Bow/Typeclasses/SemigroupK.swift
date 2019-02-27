@@ -1,34 +1,30 @@
 import Foundation
 
+/// SemigroupK is a `Semigroup` that operates on kinds with one type parameter.
 public protocol SemigroupK {
+    /// Combines two values of the same type in the context implementing this instance.
+    ///
+    /// Implementations of this method must obey the associative law:
+    ///
+    ///     combineK(fa, combineK(fb, fc)) == combineK(combineK(fa, fb), fc)
+    ///
+    /// - Parameters:
+    ///   - x: Left value in the combination.
+    ///   - y: Right value in the combination.
+    /// - Returns: Combination of the two values.
     static func combineK<A>(_ x: Kind<Self, A>, _ y: Kind<Self, A>) -> Kind<Self, A>
 }
-
-/*
- public extension SemigroupK {
-    public static func algebra<B>() -> SemigroupAlgebra<Self, B> {
-        return SemigroupAlgebra(combineK: combineK)
-    }
-}
-
-public class SemigroupAlgebra<F, B> : Semigroup {
-    public typealias A = Kind<F, B>
-    
-    private let combineK : (Kind<F, B>, Kind<F, B>) -> Kind<F, B>
-    
-    init(combineK : @escaping (Kind<F, B>, Kind<F, B>) -> Kind<F, B>) {
-        self.combineK = combineK
-    }
-    
-    public func combine(_ a: Kind<F, B>, _ b: Kind<F, B>) -> Kind<F, B> {
-        return combineK(a, b)
-    }
-}
-*/
 
 // MARK: Syntax for SemigroupK
 
 public extension Kind where F: SemigroupK {
+    /// Combines this value with another value of the same type.
+    ///
+    /// This is a convenience method to call `SemigroupK.combineK` as an instance method of this type.
+    ///
+    /// - Parameters:
+    ///   - y: Right value in the combination.
+    /// - Returns: Combination of the two values.
     public func combineK(_ y: Kind<F, A>) -> Kind<F, A> {
         return F.combineK(self, y)
     }
