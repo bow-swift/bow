@@ -26,7 +26,7 @@ public extension Comparable {
     /// - Parameters:
     ///   - a: 1st value.
     ///   - b: 2nd value.
-    /// - Returns: minimum of both values.
+    /// - Returns: Minimum of both values.
     static func min(_ a: Self, _ b: Self) -> Self {
         return a <= b ? a : b
     }
