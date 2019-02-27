@@ -79,12 +79,6 @@ public final class Option<A>: OptionOf<A> {
         return getOrElse(constant(defaultValue))
     }
     
-    /**
-     Obtains the wrapped value, or a default value if absent.
-     
-     - parameter defaultValue: Closure to be evaluated if there is no wrapped value in this option.
-     */
-
     /// Obtains the wrapped value, or a default value if absent.
     ///
     /// - Parameter defaultValue: Closure to be evaluated if there is no wrapped value in this option.
