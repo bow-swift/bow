@@ -1,23 +1,39 @@
 import Foundation
 
+/// Witness for the `Function0<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForFunction0 {}
+
+/// Higher Kinded Type alias to improve readability of `Kind<ForFunction0, A>`.
 public typealias Function0Of<A> = Kind<ForFunction0, A>
 
+/// This data type acts as a wrapper over functions that receive no input and produce a value; namely, constant functions. This wrapper gives these functions capabilities to be used as a Higher Kinded Type and conform to typeclasses that have this requirement.
 public class Function0<A>: Function0Of<A> {
     fileprivate let f: () -> A
     
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to `Function0`.
     public static func fix(_ fa: Function0Of<A>) -> Function0<A> {
         return fa as! Function0
     }
     
+    /// Constructs a value of `Function0`.
+    ///
+    /// - Parameter f: A constant function.
     public init(_ f: @escaping () -> A) {
         self.f = f
     }
     
+    /// Invokes the function.
+    ///
+    /// - Returns: Value produced by this function.
     public func invoke() -> A {
         return f()
     }
 }
+
+// MARK: Protocol conformances
 
 extension ForFunction0: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForFunction0, A>, _ rhs: Kind<ForFunction0, A>) -> Bool where A : Equatable {
