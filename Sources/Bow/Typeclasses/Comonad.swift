@@ -29,6 +29,8 @@ public protocol Comonad: Functor {
     static func extract<A>(_ fa: Kind<Self, A>) -> A
 }
 
+// MARK: Related functions
+
 public extension Comonad {
     /// Wraps a value in another layer of the context implementing this instance.
     ///
