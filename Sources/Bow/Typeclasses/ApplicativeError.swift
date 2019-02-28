@@ -4,6 +4,7 @@ import Foundation
 ///
 /// It has an associated type `E` to represent the error type that the implementing instance is able to handle.
 public protocol ApplicativeError: Applicative {
+    /// Error type associated to this `ApplicativeError` instance
     associatedtype E
     
     /// Lifts an error to the context implementing this instance.
