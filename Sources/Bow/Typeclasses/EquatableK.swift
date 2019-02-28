@@ -4,6 +4,20 @@ import Foundation
 public protocol EquatableK {
     /// Checks if two kinds are equal, given that the enclosed value type conforms to `Equatable`.
     ///
+    /// Implementations of this method must obey the following laws:
+    ///
+    /// 1. Identity
+    ///
+    ///         eq(fa, fa) == true
+    ///
+    /// 2. Symmetry
+    ///
+    ///         eq(fa, fb) == eq(fb, fa)
+    ///
+    /// 3. Transitivity
+    ///
+    ///         eq(fa, fb) ^ eq(fb, fc) -> eq(fa, fc)
+    ///
     /// - Parameters:
     ///   - lhs: Left hand side of the equality check.
     ///   - rhs: Right hand side of the equality check.
