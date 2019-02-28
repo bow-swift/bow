@@ -20,7 +20,7 @@ public extension MonadError {
     }
 }
 
-// MARK Syntax for MonadError
+// MARK: Syntax for MonadError
 
 public extension Kind where F: MonadError {
     /// Checks if the value of this computation matches a predicate, raising an error if not.
