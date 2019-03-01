@@ -23,7 +23,7 @@ public class Cofree<S, A>: CofreeOf<S, A> {
         return tail.value()
     }
 
-    public func mapBranchingRoot<FuncK>(_ functionK : FuncK) -> Cofree<S, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == S {
+    public func mapBranchingRoot(_ functionK: FunctionK<S, S>) -> Cofree<S, A> {
         return Cofree(head, Eval.fix(tail.map{ coevsa in functionK.invoke(coevsa) }))
     }
 
@@ -45,11 +45,11 @@ public extension Cofree where S: Functor {
         return Cofree<S, B>(f(head), Eval.fix(tail.map{ coevsa in S.map(coevsa, g) }))
     }
 
-    public func mapBranchingS<T, FuncK>(_ functionK: FuncK) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T {
+    public func mapBranchingS<T>(_ functionK: FunctionK<S, T>) -> Cofree<T, A> {
         return Cofree<T, A>(head, Eval.fix(tail.map { ce in functionK.invoke(S.map(ce, { cof in cof.mapBranchingS(functionK) })) }))
     }
 
-    public func mapBranchingT<T: Functor, FuncK>(_ functionK: FuncK) -> Cofree<T, A> where FuncK : FunctionK, FuncK.F == S, FuncK.G == T {
+    public func mapBranchingT<T: Functor>(_ functionK: FunctionK<S, T>) -> Cofree<T, A> {
         return Cofree<T, A>(head, Eval.fix(tail.map{ ce in T.map(functionK.invoke(ce), { cof in cof.mapBranchingT(functionK) }) }))
     }
 
@@ -64,7 +64,7 @@ public extension Cofree where S: Traverse {
         return Eval.fix(ev.flatMap { sb in folder(self.extract(), sb) })
     }
 
-    public func cataM<B, M: Monad, FuncK>(_ folder: @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion: FuncK) -> Kind<M, B> where FuncK: FunctionK, FuncK.F == ForEval, FuncK.G == M {
+    public func cataM<B, M: Monad>(_ folder: @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion: FunctionK<ForEval, M>) -> Kind<M, B> {
         func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
             let looped = S.traverse(ev.tailForced(), { cof in  M.flatten(inclusion.invoke(Eval.deferEvaluation({ loop(cof) }))) })
             let folded = M.flatMap(looped, { fb in folder(ev.head, fb) })

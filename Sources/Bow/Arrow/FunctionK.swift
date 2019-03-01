@@ -1,21 +1,21 @@
 import Foundation
 
-public protocol FunctionK {
-    associatedtype F
-    associatedtype G
-    
-    func invoke<A>(_ fa : Kind<F, A>) -> Kind<G, A>
+open class FunctionK<F, G> {
+    public init() {}
+
+    open func invoke<A>(_ fa: Kind<F, A>) -> Kind<G, A> {
+        fatalError("FunctionK.invoke must be implemented in subclasses")
+    }
 }
 
-public class IdFunctionK<M> : FunctionK {
-    public typealias F = M
-    public typealias G = M
-    
-    public static var id : IdFunctionK<M> {
-        return IdFunctionK<M>()
+public extension FunctionK where F == G {
+    public static var id: FunctionK<F, F> {
+        return IdFunctionK<F>()
     }
-    
-    public func invoke<A>(_ fa: Kind<M, A>) -> Kind<M, A> {
+}
+
+fileprivate class IdFunctionK<F>: FunctionK<F, F> {
+    override func invoke<A>(_ fa: Kind<F, A>) -> Kind<F, A> {
         return fa
     }
 }
