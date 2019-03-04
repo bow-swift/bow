@@ -1,6 +1,6 @@
 import Foundation
 
-/// An Applicative Functor is a `Functor` that also provides functionality to embed pure expressions, and sequence computations and combine their results.
+/// An Applicative Functor is a `Functor` that also provides functionality to lift pure expressions, and sequence computations and combine their results.
 ///
 /// Instances of this typeclass must obey the following laws:
 ///

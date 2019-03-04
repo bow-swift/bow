@@ -22,6 +22,10 @@ public protocol Monad: Applicative {
 
     /// Monadic tail recursion.
     ///
+    /// `tailRecM` can be used for computations that can potentially make the stack overflow.
+    ///
+    /// Initially introduced in [Stack Safety for Free](https://functorial.com/stack-safety-for-free/index.pdf)
+    ///
     /// - Parameters:
     ///   - a: Initial value for the recursion.
     ///   - f: A function describing a recursive step.
@@ -55,11 +59,11 @@ public extension Monad {
         return self.flatMap(fa, { _ in fb })
     }
 
-    /// Sequentially compose a computation with a lazy computation, discarding the value produced by the first.
+    /// Sequentially compose a computation with a potentially lazy one, discarding the value produced by the first.
     ///
     /// - Parameters:
     ///   - fa: Regular computation.
-    ///   - fb: Lazy computation.
+    ///   - fb: Potentially lazy computation.
     /// - Returns: Result of running the second computation after the first one.
     public static func followedByEval<A, B>(_ fa: Kind<Self, A>, _ fb: Eval<Kind<Self, B>>) -> Kind<Self, B> {
         return self.flatMap(fa, { _ in fb.value() })
@@ -75,11 +79,11 @@ public extension Monad {
         return self.flatMap(fa, { a in self.map(fb, { _ in a })})
     }
 
-    /// Sequentially compose a computation with a lazy computation, discarding the value produced by the second.
+    /// Sequentially compose a computation with a potentially lazy one, discarding the value produced by the second.
     ///
     /// - Parameters:
     ///   - fa: Regular computation.
-    ///   - fb: Lazy computation.
+    ///   - fb: Potentially lazy computation.
     /// - Returns: Result produced from the first computation after both are computed.
     public static func forEffectEval<A, B>(_ fa: Kind<Self, A>, _ fb: Eval<Kind<Self, B>>) -> Kind<Self, A> {
         return self.flatMap(fa, { a in self.map(fb.value(), constant(a)) })
@@ -386,7 +390,7 @@ public extension Kind where F: Monad {
         return F.followedBy(self, fb)
     }
 
-    /// Sequentially compose a computation with a lazy computation, discarding the value produced by this one.
+    /// Sequentially compose this computation with a potentially lazy one, discarding the value produced by this one.
     ///
     /// This is a convenience method to call `Monad.followedByEval` as an instance method of this type.
     ///
@@ -408,7 +412,7 @@ public extension Kind where F: Monad {
         return F.forEffect(self, fb)
     }
 
-    /// Sequentially composen with a lazy computation, discarding the value produced by the received one.
+    /// Sequentially compose with a potentially lazy computation, discarding the value produced by the received one.
     ///
     /// This is a convenience method to call `Monad.forEffectEval` as an instance method of this type.
     ///

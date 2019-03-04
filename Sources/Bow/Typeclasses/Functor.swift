@@ -1,6 +1,6 @@
 import Foundation
 
-/// A Functor provides a type the ability to transform its value type into another type, while preserving its structure.
+/// A Functor provides a type with the ability to transform its value type into another type, while preserving its structure.
 ///
 /// Using the encoding for HKTs in Bow, in the type `Kind<F, A>`, `A` is the value type and `F` represents the structure of the type. An instance of `Functor` for `F` allows to transform `A` into another type, while maintaining `F` unchanged.
 public protocol Functor: Invariant {
