@@ -69,11 +69,8 @@ fileprivate let program = Free.fix(Free<ForOps, Int>.binding({ Ops<Any>.value(10
                                                            { value in Ops<Any>.add(value, 10) },
                                                            { _ , added in Ops<Any>.subtract(added, 50) }))
 
-fileprivate class OptionInterpreter : FunctionK {
-    fileprivate typealias F = ForOps
-    fileprivate typealias G = ForOption
-    
-    fileprivate func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
+fileprivate class OptionInterpreter: FunctionK<ForOps, ForOption> {
+    override func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
         let op = Ops.fix(fa)
         switch op {
         case let value as Value: return Option<Int>.pure(value.a) as! Kind<ForOption, A>
@@ -85,11 +82,8 @@ fileprivate class OptionInterpreter : FunctionK {
     }
 }
 
-fileprivate class IdInterpreter: FunctionK {
-    fileprivate typealias F = ForOps
-    fileprivate typealias G = ForId
-    
-    fileprivate func invoke<A>(_ fa: Kind<ForOps, A>) -> IdOf<A> {
+fileprivate class IdInterpreter: FunctionK<ForOps, ForId> {
+    override func invoke<A>(_ fa: Kind<ForOps, A>) -> IdOf<A> {
         let op = Ops.fix(fa)
         switch op {
         case let value as Value: return Id<Int>.pure(value.a) as! IdOf<A>

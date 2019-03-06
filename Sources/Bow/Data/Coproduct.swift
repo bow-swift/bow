@@ -15,7 +15,7 @@ public class Coproduct<F, G, A>: CoproductOf<F, G, A> {
         self.run = run
     }
 
-    public func fold<H, FuncKF, FuncKG>(_ f: FuncKF, _ g: FuncKG) -> Kind<H, A> where FuncKF: FunctionK, FuncKF.F == F, FuncKF.G == H, FuncKG : FunctionK, FuncKG.F == G, FuncKG.G == H {
+    public func fold<H>(_ f: FunctionK<F, H>, _ g: FunctionK<G, H>) -> Kind<H, A> {
         return run.fold({ fa in f.invoke(fa) }, { ga in g.invoke(ga) })
     }
 }
