@@ -9,13 +9,14 @@
     @include justify-content(space-between);
     @include align-items(center);
     font-family: $brand-font-family;
-    font-size: 2rem;
+    font-size: 1.425rem;
     font-weight: $font-bold;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: $white;
     img {
         height: 42px;
+        margin-right: ($base-point-grid * 2);
     }
 
     a {
@@ -28,8 +29,8 @@
 
         &.brand {
             margin-left: 0px;
-            justify-content: space-evenly;
-            display: flex;
+            @include flexbox;
+             @include align-items(center);
             width: 100%;
         }
     }

@@ -27,7 +27,7 @@
         &.active {
             > a {
                 padding-left: (($base-point-grid * 3) - 4px);
-                border-left: 4px solid $brand-quaternary;
+                border-left: 4px solid rgba($white, 0.5);
                 background: rgba($brand-tertiary, 0.5);
 
                 .fa {
@@ -56,7 +56,7 @@
                     @include links($white, $white, rgba($white, 0.6), rgba($white, 0.6));
 
                     &.active {
-                        color: $brand-quaternary;
+                        color: rgba($white, 0.5)
                     }
 
                     &:hover {

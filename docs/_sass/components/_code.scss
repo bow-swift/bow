@@ -4,7 +4,7 @@
 
 p, ul {
   code {
-    background: #f5f5f5;
+    background: $white;
     border: 1px solid #eee;
     border-radius: 1px;
     font-family: $code-font-family;
@@ -15,14 +15,18 @@ p, ul {
 }
 
 .highlighter-rouge div.highlight {
-  border-left: 4px solid $brand-primary;
   border-radius: 2px;
   display: block;
   overflow-x: auto;
   color: #312d2c;
-  background: #f5f5f5;
+  background: $white;
   padding: ($base-point-grid * 1.5) 0 ($base-point-grid * 1.5) ($base-point-grid * 2);
   font-family: $code-font-family;
   font-size: 0.9rem;
   margin: 0 0 12px;
+}
+
+.hljs,
+.highlight {
+    background: $white;
 }

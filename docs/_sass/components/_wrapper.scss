@@ -11,7 +11,7 @@
 }
 
 #sidebar-wrapper {
-    background: $brand-primary;
+    background: darken($brand-primary, 5%);
     left: 0;
     height: 100%;
     overflow-y: auto;
