@@ -17,6 +17,12 @@
                 font-size: 2.714rem;
                 font-weight: $font-medium;
             }
+            
+            .button {
+          
+                    margin-right: $base-point-grid;
+            }
+            
             @include fadeInDown( $duration: 1s,
             $delay: .2s,
             $function: ease);
@@ -27,7 +33,6 @@
                 font-size: 1.3rem;
                 a {
                     color: $white;
-
                     &:hover {
                         text-decoration: none;
                     }

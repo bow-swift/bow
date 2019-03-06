@@ -2,7 +2,7 @@
 // -----------------------------------------------
 // -----------------------------------------------
 .button {
-    display: block;
+    display: inline-block;
     font-weight: $font-semibold;
     text-decoration: none;
     text-transform: uppercase;
@@ -11,11 +11,7 @@
     border-radius: ($base-point-grid * 8);
     text-align: center;
     transition: background $base-duration $base-timing;
-    width: 192px;
 
-    & + .button {
-      margin-top: $base-point-grid * 2;
-    }
 
     &:visited {
         color: $white;
@@ -32,7 +28,8 @@
 
     &.button-large {
         padding: ($base-point-grid * 1.6) ($base-point-grid * 6);
-        font-size: $base-font-size;
+        font-size: 0.9rem;
+
     }
 
     &.button-small {
