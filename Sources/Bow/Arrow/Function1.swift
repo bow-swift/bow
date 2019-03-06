@@ -1,24 +1,43 @@
 import Foundation
 
+/// Witness for the `Function1<I, O>` data type. To be used in simulated Higher Kinded Types`.
 public final class ForFunction1 {}
+
+/// Partial application of the `Function1` type constructor, omitting the last parameter.
 public final class Function1Partial<I>: Kind<ForFunction1, I> {}
+
+/// Higher Kinded Type alias to improve readability of `Kind<Function1Partial<I>, O>`.
 public typealias Function1Of<I, O> = Kind<Function1Partial<I>, O>
 
-public class Function1<I, O> : Function1Of<I, O> {
-    fileprivate let f : (I) -> O
+/// This data type acts as a wrapper over functions. It receives two type parameters representing the input and output type of the function. The wrapper adds capabilities to use a function as a Higher Kinded Type and conform to typeclasses that have this requirement.
+public class Function1<I, O>: Function1Of<I, O> {
+    fileprivate let f: (I) -> O
     
-    public static func fix(_ fa : Function1Of<I, O>) -> Function1<I, O> {
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to `Function1`.
+    public static func fix(_ fa: Function1Of<I, O>) -> Function1<I, O> {
         return fa as! Function1<I, O>
     }
     
-    public init(_ f : @escaping (I) -> O) {
+    /// Constructs a value of `Function1`.
+    ///
+    /// - Parameter f: Function to be wrapped in this Higher Kinded Type.
+    public init(_ f: @escaping (I) -> O) {
         self.f = f
     }
     
-    public func invoke(_ value : I) -> O {
+    /// Invokes this function.
+    ///
+    /// - Parameter value: Input to the function.
+    /// - Returns: Result of invoking the function.
+    public func invoke(_ value: I) -> O {
         return f(value)
     }
 }
+
+// MARK: Protocol conformances
 
 extension Function1Partial: Functor {
     public static func map<A, B>(_ fa: Kind<Function1Partial<I>, A>, _ f: @escaping (A) -> B) -> Kind<Function1Partial<I>, B> {
@@ -37,7 +56,7 @@ extension Function1Partial: Monad {
         return Function1<I, B>({ i in Function1.fix(f(Function1.fix(fa).f(i))).f(i) })
     }
 
-    private static func step<A, B>(_ a : A, _ t : I, _ f : (A) -> Function1Of<I, Either<A, B>>) -> B {
+    private static func step<A, B>(_ a: A, _ t: I, _ f: (A) -> Function1Of<I, Either<A, B>>) -> B {
         return Function1.fix(f(a)).f(t).fold({ a in step(a, t, f) }, id)
     }
 
