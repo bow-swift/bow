@@ -5,7 +5,7 @@
 // ===========================================================================
 
 // Google Fonts
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
 
 // Colors
 $brand-primary: rgb(244, 81, 30);
@@ -17,11 +17,11 @@ $white: rgb(255, 255, 255);
 $link-color: $brand-primary;
 $link-hover: darken($brand-primary, 4%);
 
+// Bow
 
-// Mapbox
-
-$body_background: #fff;
-$body_font: 14px/25px 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$body_background: #fafafa;
+$body_font: 14px/25px "Montserrat", "Open Sans", "Helvetica Neue", Helvetica,
+  Arial, sans-serif;
 $text_color: #333;
 $gray_border: 1px solid #ddd;
 
@@ -37,14 +37,14 @@ $table_alt_row_color: #fbfbfb;
 $table_border_color: #ddd;
 
 $color_light: #f5f5f5;
-$color_darkblue: #0B293A;
-$color_brightblue: #3A68D8;
+$color_darkblue: #0b293a;
+$color_brightblue: #3a68d8;
 $color_darkblue_lighten: rgba(11, 41, 58, 0.75);
 $keyline_color: rgba(12, 40, 73, 0.08);
 $code_font: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
 
-$purple: #9595D1;
-$blue: #4092C5;
+$purple: #9595d1;
+$blue: #4092c5;
 
 // ----- Layout
 
@@ -52,14 +52,13 @@ $gutter: 16px;
 $navigation_min_width: 200px;
 $navigation_max_width: 250px;
 
-
 // ----- Header
 
 $header_weight: bold;
 $header_color: #555;
-$header_font: 'Montserrat', 'Open Sans Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header_font: "Montserrat", "Open Sans Bold", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
 $header_link_color: #fff;
-
 
 // ----- Navigation
 
@@ -74,19 +73,18 @@ $navigation_gloss_color: #999;
 
 $declaration_title_language_color: $brand-secondary;
 $declaration_language_border: 4px solid $brand-primary;
-$declaration_bg_color: #fdfeff;
+$declaration_bg_color: #fafafa;
 $declaration_border_color: #ddd;
 
 $aside_color: #aaa;
-$aside_border: 4px solid lighten($aside_color, 20%);
-$aside_warning_color: #ff0000;
-$aside_warning_border: 4px solid lighten($aside_warning_color, 20%);
+$aside_border: 3px solid lighten($aside_color, 20%);
+$aside_warning_color: #f00;
+$aside_warning_border: 3px solid lighten($aside_warning_color, 20%);
 
 // ----- Footer
 
-$footer_text_color: rgba(255,255,255,0.4);
-$footer_link_color: rgba(255,255,255,0.6);
-
+$footer_text_color: rgba(255, 255, 255, 0.4);
+$footer_link_color: rgba(255, 255, 255, 0.6);
 
 // ===========================================================================
 //
@@ -94,7 +92,9 @@ $footer_link_color: rgba(255,255,255,0.6);
 //
 // ===========================================================================
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -146,7 +146,8 @@ h4 {
   @include heading(1rem);
 }
 
-h5, h6 {
+h5,
+h6 {
   @include heading;
 }
 
@@ -154,18 +155,19 @@ p {
   margin: 0 0 1em;
 }
 
-ul, ol {
+ul,
+ol {
   padding: 0 0 0 1.5em;
   margin: 0 0 0.85em;
 }
 
 ul.item-container {
-  padding: 0px;
+  padding: 0;
 }
 
 ul:first-of-type,
 ol:first-of-type {
-  margin: 0px;
+  margin: 0;
 }
 
 blockquote {
@@ -174,7 +176,6 @@ blockquote {
   color: $quote_color;
   border-left: $quote_border;
 }
-
 
 // ----- Inline elements
 
@@ -185,11 +186,15 @@ img {
 a {
   color: $link_color;
   text-decoration: none;
-  > *:hover, &:hover, &:focus {
+
+  > *:hover,
+  &:hover,
+  &:focus {
     opacity: 0.7;
   }
+
   &:focus {
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -206,17 +211,17 @@ table {
   margin: 0 0 0.85em;
 }
 
-th, td {
+th,
+td {
   padding: 6px 13px;
   border: 1px solid $keyline_color;
 }
-
 
 // ----- Code
 
 pre {
   margin: 0 0 1.275em;
-  padding: .85em 1em;
+  padding: 0.85em 1em;
   overflow: auto;
   background: $color_light;
   font-family: $code_font;
@@ -226,12 +231,13 @@ pre {
 code {
   font-family: $code_font;
   font-size: 13px;
-  line-height: .85em;
+  line-height: 0.85em;
 }
 
-p, li {
+p,
+li {
   > code {
-    background: $color_light;
+    background: $white;
     padding: 0.1em 0.2em;
     font-weight: bold;
     border: 1px solid #eee;
@@ -250,7 +256,6 @@ pre code {
   white-space: pre;
 }
 
-
 // ===========================================================================
 //
 //  Layout
@@ -260,15 +265,18 @@ pre code {
 .content-wrapper {
   display: flex;
   flex-direction: column;
+
   @media (min-width: 768px) {
     flex-direction: row;
   }
 }
+
 .limiter {
   max-width: 1360px;
   margin: auto;
-  padding: 0px 30px;
+  padding: 0 30px;
 }
+
 .space-right2 {
   margin-right: 20px;
 }
@@ -282,11 +290,13 @@ pre code {
 .header-container {
   background: $brand-primary;
 }
+
 .header {
   display: flex;
-  padding: 12px 0px;
+  padding: 12px 0;
   font-size: 1rem;
   color: $white;
+
   @media (max-width: 768px) {
     display: block;
   }
@@ -310,7 +320,7 @@ pre code {
 
 .header-col {
   margin: 5px 0 0 0;
-  padding: 0
+  padding: 0;
 }
 
 .header-col--primary {
@@ -322,7 +332,8 @@ pre code {
   color: $header_link_color;
 }
 
-.header-image, .header-icon {
+.header-image,
+.header-icon {
   padding-right: 2px;
   vertical-align: -4px;
   height: 16px;
@@ -336,7 +347,7 @@ pre code {
 
 .breadcrumbs {
   font-size: 13px;
-  padding: $gutter / 2 0px;
+  padding: $gutter / 2 0;
   margin: 0;
   background: $color_light;
 }
@@ -345,7 +356,6 @@ pre code {
   height: 10px;
   margin: 0 5px;
 }
-
 
 // ===========================================================================
 //
@@ -357,12 +367,13 @@ pre code {
   order: 2;
   font-size: 13px;
   padding-top: 20px;
+
   @media (min-width: 768px) {
     order: 1;
     width: 25%;
     min-width: $navigation_min_width;
     max-width: $navigation_max_width;
-    padding-bottom: $gutter*4;
+    padding-bottom: $gutter * 4;
     line-height: 20px;
     overflow: hidden;
     border-right: 1px solid $keyline_color;
@@ -380,10 +391,11 @@ pre code {
 }
 
 .nav-group-name {
-  padding: $gutter/2 0 $gutter/2 0px;
+  padding: $gutter/2 0 $gutter/2 0;
 }
 
-.small-heading, h4 {
+.small-heading,
+h4 {
   font-size: 13px;
   font-family: $header_font;
   text-transform: uppercase;
@@ -408,6 +420,7 @@ pre code {
 
 .nav-group-task[data-url^="Protocols/"] > .nav-group-task-link::after {
   @extend %nav-group-task-gloss;
+
   content: "(Protocol)";
 }
 
@@ -421,6 +434,7 @@ pre code {
 .nav-group-task[data-name="MGLVectorStyleLayer"] {
   .nav-group-task-link::after {
     @extend %nav-group-task-gloss;
+
     content: "(Abstract Class)";
   }
 }
@@ -431,7 +445,7 @@ pre code {
 }
 
 .nav-group-task-link {
-   color: $gray-primary-lighten;
+  color: $gray-primary-lighten;
 }
 // ===========================================================================
 //
@@ -441,6 +455,7 @@ pre code {
 
 .main-content {
   order: 1;
+
   @media (min-width: 768px) {
     order: 2;
     flex: 1;
@@ -450,7 +465,8 @@ pre code {
 }
 
 .section {
-  padding: 0px 20px;
+  padding: 0 20px;
+
   @media (max-width: 768px) {
     padding: inherit;
   }
@@ -481,7 +497,10 @@ pre code {
   height: 10px;
 }
 
-h1 > .anchor-icon { margin-bottom: 2px; }
+h1 > .anchor-icon {
+  margin-bottom: 2px;
+}
+
 .declaration .highlight {
   font-size: 15px;
   overflow-x: initial; // This allows the scrollbar to show up inside declarations
@@ -492,19 +511,21 @@ h1 > .anchor-icon { margin-bottom: 2px; }
   border: none;
 }
 
-.highlight a { text-decoration: underline; }
+.highlight a {
+  text-decoration: underline;
+}
 
 .task-group-section {
   border-top: $gray_border;
 }
 
 .task-group {
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 .task-name-container {
   a[name] {
-    &:before {
+    &::before {
       content: "";
       display: block;
     }
@@ -516,27 +537,29 @@ h1 > .anchor-icon { margin-bottom: 2px; }
   list-style-type: none;
 
   a[name] {
-    &:before {
+    &::before {
       content: "";
       display: block;
     }
   }
 
   .token {
-    margin-left: 0px;
+    margin-left: 0;
     font-size: 13px;
     display: flex;
-    padding: 5px 0px;
+    padding: 5px 0;
     line-height: 14px;
   }
+
   .token-name {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .token-icon {
-    background: url('../img/plus.svg');
+    background: url("../img/plus.svg");
     width: 17px;
     display: inline-block;
     vertical-align: middle;
@@ -545,22 +568,22 @@ h1 > .anchor-icon { margin-bottom: 2px; }
     margin-left: 5px;
     background-repeat: no-repeat;
   }
+
   .token-icon-minus {
-    background: url('../img/minus.svg');
+    background: url("../img/minus.svg");
     background-repeat: no-repeat;
   }
 
   .discouraged {
     text-decoration: line-through;
   }
+
   .declaration-note {
     font-size: 13px;
     color: #808080;
     font-style: italic;
   }
-
 }
-
 
 .pointer-container {
   border-bottom: $gray_border;
@@ -588,21 +611,23 @@ h1 > .anchor-icon { margin-bottom: 2px; }
   position: relative;
   width: 100%;
   overflow: hidden;
+
   .section {
-    background: $declaration_bg_color;
-    border: 1px solid $keyline_color;
+    background: $color_light;
     padding: 15px 20px;
     border-radius: 2px;
-    margin: 10px 0px 30px;
+    margin: 10px 0 30px;
   }
 }
 
-.aside, .language {
+.aside,
+.language {
   padding: 6px 12px;
   margin: 12px 0;
   border-left: $aside_border;
-  border-radius: 2px;
+  border-radius: 0;
   overflow-y: hidden;
+
   .aside-title {
     font-size: 10px;
     font-family: $header_font;
@@ -613,25 +638,31 @@ h1 > .anchor-icon { margin-bottom: 2px; }
     margin: 0;
     -webkit-user-select: none;
   }
+
   p:last-child {
     margin-bottom: 0;
   }
 }
 
 .language {
-  background: $color_light;
+  background: $white;
   border-left: $declaration_language_border;
 }
 
-.aside.aside-see, .aside.aside-note, {
+.aside.aside-see,
+.aside.aside-note {
   background: $color_light;
+
   .aside-title {
-    padding-left: 0px;
+    padding-left: 0;
   }
 }
 
-.aside-warning, .aside-deprecated, .aside-unavailable {
+.aside-warning,
+.aside-deprecated,
+.aside-unavailable {
   border-left: $aside_warning_border;
+
   .aside-title {
     color: $aside_warning_color;
   }
@@ -639,18 +670,21 @@ h1 > .anchor-icon { margin-bottom: 2px; }
 
 .graybox {
   width: 100%;
-  border-collapse:separate;
-  border:solid $keyline_color 1px;
+  border-collapse: separate;
+  border: solid $keyline_color 1px;
   border-radius: 2px;
+
   p {
     margin: 0;
     word-break: break-word;
     min-width: 50px;
   }
+
   td {
     padding: 5px 25px 5px 10px;
     vertical-align: middle;
   }
+
   tr td:first-of-type {
     text-align: right;
     padding: 7px;
@@ -660,13 +694,18 @@ h1 > .anchor-icon { margin-bottom: 2px; }
     border-left: none;
     border-top: none;
   }
-  th, td {
-    border-right:none;
+
+  th,
+  td {
+    border-right: none;
     border-top: none;
   }
-  td:first-child, th:first-child {
-     border-left: none;
+
+  td:first-child,
+  th:first-child {
+    border-left: none;
   }
+
   tr:last-of-type td {
     border-bottom: none;
   }
@@ -685,19 +724,18 @@ h1 > .anchor-icon { margin-bottom: 2px; }
   font-size: 13px;
 }
 
-
 // ===========================================================================
 //
 //  Search
 //
 // ===========================================================================
 
-form[role=search] {
+form[role="search"] {
   input {
     font: $body_font;
     font-size: 14px;
     line-height: 24px;
-    padding: 0px 15px;
+    padding: 0 15px;
     height: 36px;
     margin: 0;
     border: 1px solid $keyline_color;
@@ -706,15 +744,16 @@ form[role=search] {
     margin-bottom: 10px;
     border-radius: 2px;
     width: calc(100% - 30px);
+
     .loading & {
       background: white url(../img/spinner.gif) center right 4px no-repeat;
     }
   }
+
   input:focus {
     border: 1px solid $brand-primary;
     background: #fff;
   }
-
 
   // Typeahead elements
 
@@ -736,10 +775,12 @@ form[role=search] {
   .tt-suggestion {
     font: $body_font;
     padding: 0 $gutter/2;
+
     span {
       display: table-cell;
       white-space: nowrap;
     }
+
     .doc-parent-name {
       width: 100%;
       text-align: right;
@@ -762,7 +803,6 @@ form[role=search] {
   }
 }
 
-
 // ===========================================================================
 //
 //  Footer
@@ -772,7 +812,7 @@ form[role=search] {
 .footer {
   background-color: $gray-primary;
   border-top: 1px $keyline_color solid;
-  padding: $gutter*3 $gutter*2;
+  padding: $gutter * 3 $gutter * 2;
   color: $footer_text_color;
   font-size: 0.875rem;
 
@@ -804,7 +844,6 @@ form[role=search] {
   }
 }
 
-
 // ===========================================================================
 //
 //  Dash
@@ -812,8 +851,9 @@ form[role=search] {
 // ===========================================================================
 
 html.dash {
-
-  .header, .breadcrumbs, .navigation {
+  .header,
+  .breadcrumbs,
+  .navigation {
     display: none;
   }
 
@@ -822,7 +862,6 @@ html.dash {
   }
 }
 
-
 // ===========================================================================
 //
 //  Fonts
@@ -830,22 +869,42 @@ html.dash {
 // ===========================================================================
 
 @font-face {
-  font-family:'Open Sans';
-    src:url('../fonts/opensans-regular.eot');
-    src:url('../fonts/opensans-regular.eot#iefix') format('embedded-opentype'),
-        url('../fonts/opensans-regular.woff') format('woff');
-  }
+  font-family: "Open Sans";
+  src: url("../fonts/opensans-regular.eot");
+  src:
+    url("../fonts/opensans-regular.eot#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-regular.woff") format("woff");
+}
 
 @font-face {
-  font-family:'Open Sans Bold';
-    src:url('../fonts/opensans-bold.eot');
-    src:url('../fonts/opensans-bold.eot#iefix') format('embedded-opentype'),
-        url('../fonts/opensans-bold.woff') format('woff');
-  }
+  font-family: "Open Sans Bold";
+  src: url("../fonts/opensans-bold.eot");
+  src:
+    url("../fonts/opensans-bold.eot#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-bold.woff") format("woff");
+}
 
+.strong {
+  font-family: $header_font;
+}
 
-.strong { font-family: $header_font;}
-.text-purple { color: $purple; }
-.text-blue { color: $brand-secondary; }
-.keyline-purple { border-color: $purple; }
-.keyline-blue { border-color: $brand-secondary; }
+.key-main {
+  border-color: $brand-primary;
+}
+
+.key-other {
+  border-color: $brand-secondary;
+}
+
+.key-main-text,
+.key-main-other {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.key-main-text {
+  color: $brand-primary;
+}
+
+.key-other-text {
+  color: $brand-secondary;
+}

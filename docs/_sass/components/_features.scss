@@ -1,99 +1,95 @@
-// Content 
+// Content
 // -----------------------------------------------
 // -----------------------------------------------
 #content {
-    background: $white;
-    .features {
-        padding: ($base-point-grid * 4) 0 ($base-point-grid * 10) 0;
-        @include flexbox;
-        .feature-item {
-            margin-right: ($base-point-grid * 3);
+  background: $white;
 
-            &:last-child {
-                margin-right: 0;
-            }
+  .features {
+    padding: ($base-point-grid * 4) 0 ($base-point-grid * 10) 0;
 
-            @include flex(1);
-            text-align: center;
-            img {
-                margin-bottom: ($base-point-grid * 3);
-                transition: transform $base-duration $base-timing;
-            }
-            h3 {
-                margin-bottom: $base-point-grid;
-                font-size: 1.143rem;
-                font-weight: $font-medium;
-                color: $gray-primary;
-            }
+    @include flexbox;
 
-            p {
-                margin-bottom: ($base-point-grid * 2);
-                color: $gray-primary;
-            }
+    .feature-item {
+      margin-right: ($base-point-grid * 3);
 
-            &:nth-child(2),
-            &:nth-child(3) {
-                margin-top: ($base-point-grid * 4);
-            }
+      &:last-child {
+        margin-right: 0;
+      }
 
-            &:nth-child(1) {
-                @include fadeInDown( 
-                $duration: 1s,
-                $delay: 1s,
-                $function: ease);
+      @include flex(1);
 
-            }
-            &:nth-child(2) {
-                @include fadeInDown( 
-                $duration: 1s,
-                $delay: 1.3s,
-                $function: ease);
+      text-align: center;
 
-            }
-            &:nth-child(3) {
-                @include fadeInDown( 
-                $duration: 1s,
-                $delay: 1.6s,
-                $function: ease);
+      img {
+        margin-bottom: ($base-point-grid * 3);
+        transition: transform $base-duration $base-timing;
+      }
 
-            }
-            &:nth-child(4) {
-                @include fadeInDown( 
-                $duration: 1s,
-                $delay: 1.9s,
-                $function: ease);
+      h3 {
+        margin-bottom: $base-point-grid;
+        font-size: 1.143rem;
+        font-weight: $font-medium;
+        color: $gray-primary;
+      }
 
-            }
+      p {
+        margin-bottom: ($base-point-grid * 2);
+        color: $gray-primary;
+      }
 
-        }
+      &:nth-child(2),
+      &:nth-child(3) {
+        margin-top: ($base-point-grid * 4);
+      }
+
+      &:nth-child(1) {
+        @include fadeInDown($duration: 1s, $delay: 1s, $function: ease);
+      }
+
+      &:nth-child(2) {
+        @include fadeInDown($duration: 1s, $delay: 1.3s, $function: ease);
+      }
+
+      &:nth-child(3) {
+        @include fadeInDown($duration: 1s, $delay: 1.6s, $function: ease);
+      }
+
+      &:nth-child(4) {
+        @include fadeInDown($duration: 1s, $delay: 1.9s, $function: ease);
+      }
     }
+  }
 }
 
 // Responsive mode
 @include bp(medium) {
-    #content {
-        .features {
-            @include flex-wrap(wrap);
-            .feature-item {
-                @include flex(0 0 50%);
-                margin-right: 0;
-                margin-bottom: ($base-point-grid * 5);
-                padding: 0;
-            }
-        }
+  #content {
+    .features {
+      @include flex-wrap(wrap);
+
+      .feature-item {
+        @include flex(0 0 50%);
+
+        margin-right: 0;
+        margin-bottom: ($base-point-grid * 5);
+        padding: 0;
+      }
     }
+  }
 }
 
 @include bp(small) {
-    #content {
-        .features {
-            @include flex-wrap(wrap);
-            .feature-item {
-                @include flex(0 0 100%);
-                margin-right: 0;
-                margin-bottom: ($base-point-grid * 5);
-                padding: 0;
-            }
-        }
+  #content {
+    .features {
+      @include flex-wrap(wrap);
+
+      .feature-item {
+        @include flex(0 0 100%);
+
+        margin-right: 0;
+        margin-bottom: ($base-point-grid * 5);
+        padding: 0;
+      }
     }
+  }
 }

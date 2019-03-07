@@ -1,4 +1,4 @@
-<img height="100" src="https://avatars2.githubusercontent.com/u/44965417?s=200&v=4" width="100">
+<img src="https://bow-swift.io/img/bow-brand-color.png" height="200" width="200">
 
 [![Build Status](https://travis-ci.org/bow-swift/bow.svg?branch=master)](https://travis-ci.org/bow-swift/bow)
 [![codecov](https://codecov.io/gh/bow-swift/bow/branch/master/graph/badge.svg)](https://codecov.io/gh/bow-swift/bow)

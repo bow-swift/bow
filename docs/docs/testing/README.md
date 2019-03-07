@@ -25,10 +25,11 @@ Now, the association is done using generic parametrization rather than subclassi
 You can read all about how Arrow implements typeclasses in the [glossary]({{'/docs/patterns/glossary/'|relative_url}}).
 If you'd like to use typeclasses effectively in your client code you can head to the docs entry about [dependency injection]({{'/docs/patterns/dependency_injection'|relative_url}}).
 
-#### Example
 
 {:.intermediate}
 intermediate
+
+#### Example
 
  Let's define a typeclass for the behavior of equality between two objects, and we'll call it `Eq`:
 
@@ -88,6 +89,26 @@ let list = ListK(["1", "2", "3"])
 let filtered = list.mapFilter { stringEq.eqv($0, "2") ? Option.pure($0) : Option.none() }
 filtered.fix()
 ```
+
+Colons can be used to align columns.
+
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the
+raw Markdown line up prettily. You can also use inline Markdown.
+
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
 
 ## Recursion
 

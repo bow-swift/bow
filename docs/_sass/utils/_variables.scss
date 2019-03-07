@@ -3,8 +3,8 @@
 // -----------------------------------------------
 
 // Google Fonts
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700");
 
 // Colors
 $brand-primary: rgb(244, 81, 30);
@@ -18,8 +18,8 @@ $link-color: $brand-primary;
 $link-hover: darken($brand-primary, 4%);
 
 // Typography
-$base-font-family: 'Montserrat', sans-serif;
-$brand-font-family: 'Montserrat', sans-serif;
+$base-font-family: "Montserrat", sans-serif;
+$brand-font-family: "Montserrat", sans-serif;
 $header-font-family: $base-font-family;
 $base-font-color: $gray-primary;
 $header-font-color: $gray-primary;
