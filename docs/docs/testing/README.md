@@ -27,6 +27,9 @@ If you'd like to use typeclasses effectively in your client code you can head to
 
 #### Example
 
+{:.intermediate}
+intermediate
+
  Let's define a typeclass for the behavior of equality between two objects, and we'll call it `Eq`:
 
 ```swift
@@ -73,6 +76,9 @@ stringEq.eqv("1", "2")
 // jiuhjioj
 stringEq.eqv("2", "1")
 ```
+
+{:.advanced}
+advanced
 
 and even use it as parametrization in a function call
 and even use it as parametrization in a function call 2
