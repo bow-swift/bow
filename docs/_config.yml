@@ -19,3 +19,5 @@ permalink: pretty
 exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor', 'Procfile', 'Rakefile', '.bundle', 'extra']
 #-------------------------
 google_analytics: UA-18433785-19
+#-------------------------
+github_repository: https://github.com/bow-swift/bow
