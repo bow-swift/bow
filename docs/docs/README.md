@@ -1,3 +1,9 @@
+---
+layout: docs
+title: Bow docs
+permalink: /docs/
+---
+
 <img src="https://bow-swift.io/img/bow-brand-color.png" height="200" width="200">
 
 [![Build Status](https://travis-ci.org/bow-swift/bow.svg?branch=master)](https://travis-ci.org/bow-swift/bow)

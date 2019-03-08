@@ -1,0 +1,24 @@
+options:
+  - title: Start
+
+    nested_options:
+
+      - title: Index
+        url: /docs/
+
+  - title: API Docs
+
+    nested_options:
+
+          - title: Index
+            url: /api-docs/
+
+  - title: Legal
+
+    nested_options:
+
+      - title: Credits
+        url: /docs/legal/credits/
+
+      - title: Licenses
+        url: /docs/legal/licenses/

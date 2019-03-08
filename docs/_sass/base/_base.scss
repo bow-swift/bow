@@ -4,57 +4,58 @@
 // Body, html
 // -----------------------------------------------
 html {
-    box-sizing: border-box;
-    font-size: $base-font-size;
+  box-sizing: border-box;
+  font-size: $base-font-size;
 }
 
 *,
 *::after,
 *::before {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body,
 html {
-    height: 100%;
+  height: 100%;
 }
 
 // Typography
 // -----------------------------------------------
 body {
-    color: $white;
-    background: $gray-primary;
-    font-family: $base-font-family;
-    line-height: $base-line-height;
+  color: $gray-primary;
+  background: $gray-primary;
+  font-family: $base-font-family;
+  line-height: $base-line-height;
 }
 
-
 a {
-    color: $link-color;
-    text-decoration: none;
-    transition: color $base-duration $base-timing;
+  color: $link-color;
+  text-decoration: none;
+  transition: color $base-duration $base-timing;
 
-    &:visited {
-        color: $link-color;
-    }
-    &:hover {
-        color: $link-hover;
-        text-decoration: underline;
-    }
-    &:active {
-        color: $white
-    }
+  &:visited {
+    color: $link-color;
+  }
+
+  &:hover {
+    color: $link-hover;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: $white;
+  }
 }
 
 hr {
-    display: block;
-    border: none;
+  display: block;
+  border: none;
 }
 
 // Helpers
 // -----------------------------------------------
 .container {
-    max-width: 980px;
-    padding: 0 ($base-point-grid * 3);
-    margin: 0 auto;
+  max-width: 980px;
+  padding: 0 ($base-point-grid * 3);
+  margin: 0 auto;
 }

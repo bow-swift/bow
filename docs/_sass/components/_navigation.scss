@@ -2,64 +2,70 @@
 // -----------------------------------------------
 // -----------------------------------------------
 #navigation {
-    position: fixed;
-    padding: ($base-point-grid * 5) 0;
-    width: 100%;
-    overflow: hidden;
-    background: rgba($brand-primary, 0);
-    transition: all $base-duration $base-timing;
-    z-index: 20;
+  position: fixed;
+  padding: ($base-point-grid * 5) 0;
+  width: 100%;
+  overflow: hidden;
+  background: rgba($brand-primary, 0);
+  transition: all $base-duration $base-timing;
+  z-index: 20;
 
-    &.navigation-scroll {
-        padding: ($base-point-grid * 2) 0;
-        background: rgba($brand-primary, 0.95);
+  &.navigation-scroll {
+    padding: ($base-point-grid * 2) 0;
+    background: rgba($brand-primary, 0.95);
+  }
+
+  .content-navigation {
+    @include flexbox;
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    .navigation-brand {
+      font-size: 1.333rem;
+      text-transform: uppercase;
+      font-weight: $font-semibold;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        transition: none;
+      }
     }
 
+    .navigation-menu {
+      li {
+        display: inline-block;
 
-    .content-navigation {
-        @include flexbox;
-        @include justify-content(space-between);
-        @include align-items(center);
-        .navigation-brand {
-            font-size: 1.333rem;
-            text-transform: uppercase;
-            font-weight: $font-semibold;
-            a {
-                color: $white;
-                text-decoration: none;
-            }
-        }
-        .navigation-menu {
-            li {
-                display: inline-block;
-                &:last-child {
-                    margin-right: 0;
-                }
-
-                a {
-                    padding: ($base-point-grid / 2) ($base-point-grid * 2);
-                    color: rgba($white, 0.9);
-                    text-decoration: none;
-                    transition: background $base-duration $base-timing;
-                    border-radius: ($base-point-grid * 8);
-                    &:visited {
-                        color: $white;
-                    }
-                    &:hover {
-                        color: $white;
-                        text-decoration: none;
-                        background: darken($brand-primary, 5%);
-                    }
-                    &:active {
-                        color: $white;
-                    }
-
-                    @include bp(small) {
-                      padding: ($base-point-grid / 2) ($base-point-grid * 1);
-                    }
-                }
-            }
+        &:last-child {
+          margin-right: 0;
         }
 
+        a {
+          padding: ($base-point-grid / 2) ($base-point-grid * 2);
+          color: rgba($white, 0.9);
+          text-decoration: none;
+          transition: background $base-duration $base-timing;
+          border-radius: ($base-point-grid * 8);
+
+          &:visited {
+            color: $white;
+          }
+
+          &:hover {
+            color: $white;
+            text-decoration: none;
+            background: darken($brand-primary, 5%);
+          }
+
+          &:active {
+            color: $white;
+          }
+
+          @include bp(small) {
+            padding: ($base-point-grid / 2) ($base-point-grid * 1);
+          }
+        }
+      }
     }
+  }
 }

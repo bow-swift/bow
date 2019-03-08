@@ -2,89 +2,106 @@
 // -----------------------------------------------
 // -----------------------------------------------
 #masthead {
-    position: relative;
-    background-image: linear-gradient(to bottom right, $brand-primary, $brand-secondary);
-    .masthead-content {
-        padding: ($base-point-grid * 20) 0 ($base-point-grid * 25) 0;
-        @include flexbox;
-        @include align-items (center);
-        .masthead-text {
-            @include flex(1);
-            margin-right: ($base-point-grid * 3);
-            h2 {
-                margin-bottom: ($base-point-grid * 4);
-                font-size: 2.714rem;
-                font-weight: $font-medium;
-            }
-            @include fadeInDown( $duration: 1s,
-            $delay: .2s,
-            $function: ease);
+  position: relative;
+  background-image:
+    linear-gradient(
+      to bottom right,
+      $brand-primary,
+      $brand-secondary
+    );
 
-            .masthead-stars {
-                padding-left: ($base-point-grid * 8);
-                margin-top: ($base-point-grid * 2);
-                font-size: 1.3rem;
-                a {
-                    color: $white;
+  .masthead-content {
+    padding: ($base-point-grid * 20) 0 ($base-point-grid * 25) 0;
 
-                    &:hover {
-                        text-decoration: none;
-                    }
-                }
-            }
+    @include flexbox;
+    @include align-items(center);
+
+    .masthead-text {
+      @include flex(1);
+
+      color: $white;
+      margin-right: ($base-point-grid * 3);
+
+      h2 {
+        margin-bottom: ($base-point-grid * 4);
+        font-size: 2.714rem;
+        font-weight: $font-medium;
+      }
+
+      .button {
+        margin-right: $base-point-grid;
+      }
+
+      @include fadeInDown($duration: 1s, $delay: 0.2s, $function: ease);
+
+      .masthead-stars {
+        padding-left: ($base-point-grid * 8);
+        margin-top: ($base-point-grid * 2);
+        font-size: 1.3rem;
+
+        a {
+          color: $white;
+
+          &:hover {
+            text-decoration: none;
+          }
         }
-
-        .masthead-brand {
-            text-align: center;
-            @include flex(1);
-            img {
-                width: 388px;
-                height: auto;
-            }
-            @include fadeInDown( $duration: 1s,
-            $delay: .6s,
-            $function: ease);
-
-        }
+      }
     }
 
-    svg {
-        position: absolute;
-        bottom: -2px;
+    .masthead-brand {
+      text-align: center;
+
+      @include flex(1);
+
+      img {
+        width: 388px;
+        height: auto;
+      }
+
+      @include fadeInDown($duration: 1s, $delay: 0.6s, $function: ease);
     }
+  }
+
+  svg {
+    position: absolute;
+    bottom: -2px;
+  }
 }
-
 
 // Responsive mode
 @include bp(medium) {
-    #masthead {
-        .masthead-content {
-            @include flex-wrap(wrap);
-            .masthead-text,
-            .masthead-brand {
-                @include flex(0 0 100%);
-                text-align: center;
-            }
+  #masthead {
+    .masthead-content {
+      @include flex-wrap(wrap);
 
-            .masthead-text {
-                @include order(2);
-                h2 {
-                    font-size: 2.2rem;
-                }
+      .masthead-text,
+      .masthead-brand {
+        @include flex(0 0 100%);
 
-                .masthead-stars {
-                    padding-left: 0;
-                }
-            }
+        text-align: center;
+      }
 
-            .masthead-brand {
-                @include order(1);
-                img {
-                width: 200px;
-                height: auto;
-            }
-            }
+      .masthead-text {
+        @include order(2);
 
+        h2 {
+          font-size: 2.2rem;
         }
+
+        .masthead-stars {
+          padding-left: 0;
+        }
+      }
+
+      .masthead-brand {
+        @include order(1);
+
+        img {
+          width: 200px;
+          height: auto;
+        }
+      }
     }
+  }
 }

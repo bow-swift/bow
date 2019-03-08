@@ -3,11 +3,14 @@
 // -----------------------------------------------
 
 // Google Fonts
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700");
 
 // Colors
 $brand-primary: rgb(244, 81, 30);
 $brand-secondary: rgb(250, 137, 64);
+$brand-tertiary: rgb(250, 137, 64);
+$brand-quaternary: rgb(250, 137, 64);
 $gray-primary: rgb(49, 45, 44);
 $white: rgb(255, 255, 255);
 //--
@@ -15,10 +18,18 @@ $link-color: $brand-primary;
 $link-hover: darken($brand-primary, 4%);
 
 // Typography
-$base-font-family: 'Montserrat', sans-serif;
+$base-font-family: "Montserrat", sans-serif;
+$brand-font-family: "Montserrat", sans-serif;
 $header-font-family: $base-font-family;
 $base-font-color: $gray-primary;
 $header-font-color: $gray-primary;
+$code-font-family: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
+
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
 //---
 $base-font-size: 14px;
 $base-line-height: 1.6;

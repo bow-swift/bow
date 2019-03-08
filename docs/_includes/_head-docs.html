@@ -1,0 +1,37 @@
+<head>
+    <meta charset="UTF-8">
+    <title>{{site.name}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{site.description}}">
+    <meta name="keywords" content="{{site.keywords}}">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="{{site.name}}" />
+    <meta property="og:site_name" content="{{site.name}}" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{{site.description}}" />
+    <meta property="og:keywords" content="{{site.keywords}}" />
+
+    <meta name="twitter:text:description" content="{{site.description}}" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ '/img/favicon.png' | relative_url }}">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="{{ '/css/docs.css' | relative_url }}">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="{{ '/api-docs/css/highlight.css' | relative_url }}">
+
+    {% if jekyll.environment == 'production' and site.google_analytics %}
+        {% include _google-tag-manager.html %}
+    {% endif %}
+
+</head>
