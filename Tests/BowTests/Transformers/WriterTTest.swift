@@ -19,7 +19,11 @@ class WriterTTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<WriterTPartial<ForId, Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<WriterTPartial<ForId, Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<WriterTPartial<ForId, Int>>.check()
     }

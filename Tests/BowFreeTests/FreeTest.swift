@@ -120,6 +120,10 @@ class FreeTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<FreePartial<ForId>>.check()
     }
+
+    func testSelectiveLaws() {
+        SelectiveLaws<FreePartial<ForId>>.check()
+    }
     
     func testMonadLaws() {
         MonadLaws<FreePartial<ForId>>.check()
