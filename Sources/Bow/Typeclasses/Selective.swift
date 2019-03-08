@@ -51,3 +51,51 @@ public extension Selective {
         return Eval.later { whenS(x, whileS(x).value()) }
     }
 }
+
+// MARK: Syntax for Selective
+
+public extension Kind where F: Selective {
+    public func select<AA, B>(_ f: Kind<F, (AA) -> B>) -> Kind<F, B> where A == Either<AA, B> {
+        return F.select(self, f)
+    }
+
+    public func branch<AA, B, C>(_ fa: Kind<F, (AA) -> C>, _ fb: Kind<F, (B) -> C>) -> Kind<F, C> where A == Either<AA, B> {
+        return F.branch(self, fa, fb)
+    }
+
+    public static func fromOptionS(_ x: Kind<F, A>, _ mx: Kind<F, Option<A>>) -> Kind<F, A> {
+        return F.fromOptionS(x, mx)
+    }
+}
+
+public extension Kind where F: Selective, A == Bool {
+    public static func whenS(_ cond: Kind<F, Bool>, _ f: Kind<F, ()>) -> Kind<F, ()> {
+        return F.whenS(cond, f)
+    }
+
+    public static func ifS<A>(_ x: Kind<F, Bool>, _ t: Kind<F, A>, _ e: Kind<F, A>) -> Kind<F, A> {
+        return F.ifS(x, t, e)
+    }
+
+    public static func orS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
+        return F.orS(x, y)
+    }
+
+    public static func andS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
+        return F.andS(x, y)
+    }
+
+    public static func whileS(_ x: Kind<F, Bool>) -> Eval<Kind<F, ()>> {
+        return F.whileS(x)
+    }
+}
+
+public extension ArrayK {
+    public func anyS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
+        return F.anyS(p, self)
+    }
+
+    public func allS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
+        return F.anyS(p, self)
+    }
+}
