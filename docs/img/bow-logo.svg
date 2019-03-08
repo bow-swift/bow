@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>bow-logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0%" x2="0%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.737789554" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.818704939" offset="30.8589479%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="bow-logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M29.0427366,35.7226685 L5.79036721,35.7226685 L21.9535605,19.5602369 C25.9494432,23.8824803 28.5534776,29.5093099 29.0427366,35.7226685 L29.0427366,35.7226685 Z M20.4414025,18.0482002 L4.27767455,34.2106318 L4.27767455,10.9601273 C10.4915315,11.449347 16.1188124,14.0531726 20.4414025,18.0482002 L20.4414025,18.0482002 Z M26.6279894,4.74462994 L32.2210488,6.26949862 L23.4625102,15.0273348 C17.8721243,9.80417842 10.3749649,6.59831847 2.13883727,6.59831847 L0,6.59831847 L0,40 L33.4043606,40 L33.4043606,37.8613343 C33.4043606,29.6264018 30.1982435,22.1293091 24.9746681,16.5393715 L33.7182349,7.79704062 L35.2095392,13.3773542 L39.9994653,0.000534666435 L40,0 L26.6279894,4.74462994 Z" id="path" fill="url(#linearGradient-1)"></path>
+    </g>
+</svg>

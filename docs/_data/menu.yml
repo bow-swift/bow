@@ -1,9 +1,8 @@
 nav:
-
     - title: API docs
       url: /api-docs
 
-    - title: Github
+    - title: GitHub
       url: https://github.com/bow-swift/bow
 
     - title: License
