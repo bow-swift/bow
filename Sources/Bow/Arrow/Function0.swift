@@ -53,6 +53,8 @@ extension ForFunction0: Applicative {
     }
 }
 
+extension ForFunction0: Selective {}
+
 extension ForFunction0: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> Kind<ForFunction0, B>) -> Kind<ForFunction0, B> {
         return f(Function0.fix(fa).f())

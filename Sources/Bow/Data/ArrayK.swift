@@ -78,6 +78,8 @@ extension ForArrayK: Applicative {
     }
 }
 
+extension ForArrayK: Selective {}
+
 extension ForArrayK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForArrayK, A>, _ f: @escaping (A) -> Kind<ForArrayK, B>) -> Kind<ForArrayK, B> {
         let fixed = ArrayK<A>.fix(fa)

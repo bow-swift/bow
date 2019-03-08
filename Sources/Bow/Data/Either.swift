@@ -183,6 +183,8 @@ extension EitherPartial: Applicative {
     }
 }
 
+extension EitherPartial: Selective {}
+
 /// Instance of `Monad` for `Either`.
 extension EitherPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> Kind<EitherPartial<L>, B>) -> Kind<EitherPartial<L>, B> {

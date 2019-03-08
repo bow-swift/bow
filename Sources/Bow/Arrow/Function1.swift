@@ -51,6 +51,8 @@ extension Function1Partial: Applicative {
     }
 }
 
+extension Function1Partial: Selective {}
+
 extension Function1Partial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<Function1Partial<I>, A>, _ f: @escaping (A) -> Kind<Function1Partial<I>, B>) -> Kind<Function1Partial<I>, B> {
         return Function1<I, B>({ i in Function1.fix(f(Function1.fix(fa).f(i))).f(i) })
