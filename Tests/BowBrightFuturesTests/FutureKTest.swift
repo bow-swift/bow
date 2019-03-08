@@ -54,7 +54,9 @@ class FutureKTest: XCTestCase {
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<FutureKPartial<CategoryError>>.check()
+        DispatchQueue.global(qos: .userInteractive).async {
+            SelectiveLaws<FutureKPartial<CategoryError>>.check()
+        }
     }
     
     func testMonadLaws() {
