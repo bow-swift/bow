@@ -36,14 +36,8 @@ $table_border_color: #ddd;
 
 $color_light: #f5f5f5;
 
-$color_darkblue: #0b293a;
-$color_brightblue: #3a68d8;
-$color_darkblue_lighten: rgba(11, 41, 58, 0.75);
 $keyline_color: rgba(12, 40, 73, 0.08);
 $code_font: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
-
-$purple: #9595d1;
-$blue: #4092c5;
 
 // ----- Layout
 $gutter: 16px;
@@ -77,7 +71,6 @@ $aside_warning_color: #f00;
 $aside_warning_border: 3px solid lighten($aside_warning_color, 20%);
 
 // ----- Footer
-
 $footer_text_color: rgba(255, 255, 255, 0.4);
 $footer_link_color: rgba(255, 255, 255, 0.6);
 
@@ -554,7 +547,7 @@ h1 > .anchor-icon {
   }
 
   .token-icon {
-    background: url("../img/plus.svg");
+    background: url("../img/minus.svg");
     width: 17px;
     display: inline-block;
     vertical-align: middle;
@@ -564,8 +557,8 @@ h1 > .anchor-icon {
     background-repeat: no-repeat;
   }
 
-  .token-icon-minus {
-    background: url("../img/minus.svg");
+  .token-icon-plus {
+    background: url("../img/plus.svg");
     background-repeat: no-repeat;
   }
 
@@ -889,23 +882,6 @@ html.dash {
 .key-other {
   border-color: $brand-secondary;
   border-width: 2px;
-}
-
-.key-main-text,
-.key-main-other {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.strong {
-  font-family: $header_font;
-}
-
-.key-main {
-  border-color: $brand-primary;
-}
-
-.key-other {
-  border-color: $brand-secondary;
 }
 
 .key-main-text,
