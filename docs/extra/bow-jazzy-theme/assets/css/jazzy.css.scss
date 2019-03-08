@@ -17,19 +17,16 @@ $white: rgb(255, 255, 255);
 $link-color: $brand-primary;
 $link-hover: darken($brand-primary, 4%);
 
-
-// Mapbox
-
-$body_background: #fff;
-$body_font: 14px/25px 'Montserrat', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+// Bow
+$body_background: #fafafa;
+$body_font: 14px/25px "Montserrat", "Open Sans", "Helvetica Neue", Helvetica,
+  Arial, sans-serif;
 $text_color: #333;
 $gray_border: 1px solid #ddd;
 
 $quote_color: #858585;
 $quote_border: 4px solid #e5e5e5;
 
-// $link_color: #3887BE;
-// $link_hover_color: #63b6e5;
 $link_color: $brand-primary;
 $link_hover_color: darken($brand-primary, 4%);
 
@@ -37,24 +34,16 @@ $table_alt_row_color: #fbfbfb;
 $table_border_color: #ddd;
 
 $color_light: #f5f5f5;
-$color_darkblue: #0B293A;
-$color_brightblue: #3A68D8;
-$color_darkblue_lighten: rgba(11, 41, 58, 0.75);
 $keyline_color: rgba(12, 40, 73, 0.08);
 $code_font: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
 
-$purple: #9595D1;
-$blue: #4092C5;
-
 // ----- Layout
-
 $gutter: 16px;
 $navigation_min_width: 200px;
 $navigation_max_width: 250px;
 
 
 // ----- Header
-
 $header_weight: bold;
 $header_color: #555;
 $header_font: 'Montserrat', 'Open Sans Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -62,7 +51,6 @@ $header_link_color: #fff;
 
 
 // ----- Navigation
-
 $navigation_max_width: 300px;
 $navigation_bg_color: #fbfbfb;
 $navigation_task_color: $link_color;
@@ -71,7 +59,6 @@ $section_name_color: $gray-primary;
 $navigation_gloss_color: #999;
 
 // ----- Content
-
 $declaration_title_language_color: $brand-secondary;
 $declaration_language_border: 4px solid $brand-primary;
 $declaration_bg_color: #fdfeff;
@@ -83,10 +70,8 @@ $aside_warning_color: #ff0000;
 $aside_warning_border: 4px solid lighten($aside_warning_color, 20%);
 
 // ----- Footer
-
-$footer_text_color: rgba(255,255,255,0.4);
-$footer_link_color: rgba(255,255,255,0.6);
-
+$footer_text_color: rgba(255, 255, 255, 0.4);
+$footer_link_color: rgba(255, 255, 255, 0.6);
 
 // ===========================================================================
 //
@@ -536,7 +521,7 @@ h1 > .anchor-icon { margin-bottom: 2px; }
     text-overflow: ellipsis;
   }
   .token-icon {
-    background: url('../img/plus.svg');
+    background: url("../img/minus.svg");
     width: 17px;
     display: inline-block;
     vertical-align: middle;
@@ -545,8 +530,9 @@ h1 > .anchor-icon { margin-bottom: 2px; }
     margin-left: 5px;
     background-repeat: no-repeat;
   }
-  .token-icon-minus {
-    background: url('../img/minus.svg');
+
+  .token-icon-plus {
+    background: url("../img/plus.svg");
     background-repeat: no-repeat;
   }
 
@@ -584,7 +570,6 @@ h1 > .anchor-icon { margin-bottom: 2px; }
 }
 
 .height-container {
-  display: none;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -837,11 +822,30 @@ html.dash {
   }
 
 @font-face {
-  font-family:'Open Sans Bold';
-    src:url('../fonts/opensans-bold.eot');
-    src:url('../fonts/opensans-bold.eot#iefix') format('embedded-opentype'),
-        url('../fonts/opensans-bold.woff') format('woff');
-  }
+  font-family: "Open Sans Bold";
+  src: url("../fonts/opensans-bold.eot");
+  src:
+    url("../fonts/opensans-bold.eot#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-bold.woff") format("woff");
+}
+
+.strong {
+  font-family: $header_font;
+}
+
+.key-main {
+  border-color: $brand-secondary;
+}
+
+.key-other {
+  border-color: $brand-secondary;
+  border-width: 2px;
+}
+
+.key-main-text,
+.key-main-other {
+  background: rgba(0, 0, 0, 0.1);
+}
 
 
 .strong { font-family: $header_font;}
