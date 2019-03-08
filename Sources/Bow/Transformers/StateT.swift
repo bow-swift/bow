@@ -94,6 +94,8 @@ extension StateTPartial: Applicative where F: Monad {
     }
 }
 
+extension StateTPartial: Selective where F: Monad {}
+
 extension StateTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<StateTPartial<F, S>, A>, _ f: @escaping (A) -> Kind<StateTPartial<F, S>, B>) -> Kind<StateTPartial<F, S>, B> {
         let sta = StateT.fix(fa)

@@ -143,6 +143,8 @@ extension WriterTPartial: Applicative where F: Monad, W: Monoid {
     }
 }
 
+extension WriterTPartial: Selective where F: Monad, W: Monoid {}
+
 extension WriterTPartial: Monad where F: Monad, W: Monoid {
     public static func flatMap<A, B>(_ fa: Kind<WriterTPartial<F, W>, A>, _ f: @escaping (A) -> Kind<WriterTPartial<F, W>, B>) -> Kind<WriterTPartial<F, W>, B> {
         let wa = WriterT.fix(fa)
