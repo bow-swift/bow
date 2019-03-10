@@ -53,6 +53,8 @@ extension ForMaybeK: Applicative {
     }
 }
 
+extension ForMaybeK: Selective {}
+
 extension ForMaybeK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
         return MaybeK.fix(fa).value.flatMap { a in MaybeK<B>.fix(f(a)).value }.k()

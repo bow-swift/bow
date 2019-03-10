@@ -62,6 +62,8 @@ extension ForSingleK: Applicative {
     }
 }
 
+extension ForSingleK: Selective {}
+
 extension ForSingleK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
         return SingleK.fix(fa).value.flatMap { x in SingleK.fix(f(x)).value }.k()

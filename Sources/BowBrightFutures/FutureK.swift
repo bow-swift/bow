@@ -73,6 +73,8 @@ extension FutureKPartial: Applicative {
     }
 }
 
+extension FutureKPartial: Selective {}
+
 extension FutureKPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> Kind<FutureKPartial<E>, B>) -> Kind<FutureKPartial<E>, B> {
         return FutureK.fix(fa).value.flatMap { a in FutureK.fix(f(a)).value }.k()
