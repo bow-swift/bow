@@ -138,6 +138,16 @@ extension ValidatedPartial: Applicative where I: Semigroup {
     }
 }
 
+extension ValidatedPartial: Selective where I: Semigroup {
+    public static func select<A, B>(_ fab: Kind<ValidatedPartial<I>, Either<A, B>>, _ f: Kind<ValidatedPartial<I>, (A) -> B>) -> Kind<ValidatedPartial<I>, B> {
+        return Validated.fix(fab).fold(
+            { e in Validated.invalid(e) },
+            { eab in eab.fold({ a in map(f, { ff in ff(a) }) },
+                              { b in Validated.valid(b) })
+            })
+    }
+}
+
 extension ValidatedPartial: ApplicativeError where I: Semigroup {
     public typealias E = I
 
