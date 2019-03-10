@@ -41,7 +41,7 @@ public class MaybeK<A>: MaybeKOf<A> {
     }
 }
 
-public postfix func ^(_ value : MaybeKOf<A>) -> MaybeK<A> {
+public postfix func ^<A>(_ value : MaybeKOf<A>) -> MaybeK<A> {
     return MaybeK.fix(value)
 }
 
