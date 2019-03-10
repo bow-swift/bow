@@ -22,7 +22,7 @@ class ValidatedTest: XCTestCase {
     }
     
     func testSelectiveLaws() {
-        SelectiveLaws<ValidatedPartial<Int>.check()
+        SelectiveLaws<ValidatedPartial<Int>>.check()
     }
     
     func testSemigroupKLaws() {
