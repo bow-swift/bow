@@ -30,6 +30,10 @@ public class Day<F: Comonad, G: Comonad, A> : DayOf<F, G, A> {
     }
 }
 
+public postfix func ^<F, G, A>(_ value : DayOf<F, G, A>) -> Day<F, G, A> {
+    return Day.fix(value)
+}
+
 public extension Day where F: Applicative, G: Applicative {
     public static func from(_ a: A) -> Day<F, G, A> {
         return DefaultDay(left: F.pure(unit),

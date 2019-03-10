@@ -37,6 +37,14 @@ public class Function1<I, O>: Function1Of<I, O> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to `Function1`.
+public postfix func ^<I, O>(_ fa: Function1Of<I, O>) -> Function1<I, O> {
+    return Function1.fix(fa)
+}
+
 // MARK: Protocol conformances
 
 extension Function1Partial: Functor {

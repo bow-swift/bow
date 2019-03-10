@@ -23,6 +23,10 @@ public class Store<S, V> : StoreOf<S, V> {
     }
 }
 
+public postfix func ^<S, V>(_ value: StoreOf<S, V>) -> Store<S, V> {
+    return Store.fix(value)
+}
+
 extension StorePartial: Functor {
     public static func map<A, B>(_ fa: Kind<StorePartial<S>, A>, _ f: @escaping (A) -> B) -> Kind<StorePartial<S>, B> {
         let store = Store.fix(fa)

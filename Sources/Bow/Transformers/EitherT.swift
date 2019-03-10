@@ -16,6 +16,10 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
     }
 }
 
+public postfix func ^<F, A, B>(_ fa: EitherTOf<F, A, B>) -> EitherT<F, A, B> {
+    return EitherT.fix(fa)
+}
+
 extension EitherT where F: Functor {
     public func fold<C>(_ fa: @escaping (A) -> C, _ fb: @escaping (B) -> C) -> Kind<F, C> {
         return value.map { either in either.fold(fa, fb) }

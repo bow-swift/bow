@@ -64,6 +64,10 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     }
 }
 
+public postfix func ^<A>(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
+    return NonEmptyArray.fix(fa)
+}
+
 public extension NonEmptyArray where A: Equatable {
     public func contains(element : A) -> Bool {
         return head == element || tail.contains(where: { $0 == element })

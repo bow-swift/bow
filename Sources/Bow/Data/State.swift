@@ -12,3 +12,7 @@ public class State<S, A>: StateOf<S, A> {
         super.init(Id.pure({ s in Id.pure(run(s)) }))
     }
 }
+
+public postfix func ^<S, A>(_ value: StateOf<S, A>) -> State<S, A> {
+    return State.fix(value)
+}

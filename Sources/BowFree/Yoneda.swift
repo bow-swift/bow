@@ -23,6 +23,10 @@ open class Yoneda<F, A>: YonedaOf<F, A> {
     }
 }
 
+public postfix func ^<F, A>(_ fa : YonedaOf<F, A>) -> Yoneda<F, A> {
+    return Yoneda.fix(fa)
+}
+
 public extension Yoneda where F: Functor {
     public static func apply(_ fa : Kind<F, A>) -> Yoneda<F, A> {
         return YonedaFunctor<F, A>(fa)

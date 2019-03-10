@@ -21,6 +21,10 @@ public class Cokleisli<F, A, B>: CokleisliOf<F, A, B> {
     }
 }
 
+public postfix func ^<F, A, B>(_ value: Kind<CokleisliPartial<F, A>, B>) -> Cokleisli<F, A, B> {
+    return Cokleisli.fix(value)
+}
+
 extension Cokleisli where F: Comonad {
     public static func ask() -> Cokleisli<F, B, B> {
         return Cokleisli<F, B, B>({ fb in fb.extract() })

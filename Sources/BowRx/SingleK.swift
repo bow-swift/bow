@@ -50,6 +50,10 @@ public class SingleK<A>: SingleKOf<A> {
     }
 }
 
+public postfix func ^<A>(_ value: SingleKOf<A>) -> SingleK<A> {
+    return SingleK.fix(value)
+}
+
 extension ForSingleK: Functor {
     public static func map<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> B) -> Kind<ForSingleK, B> {
         return SingleK.fix(fa).value.map(f).k()

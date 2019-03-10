@@ -54,6 +54,10 @@ public class Eval<A> : EvalOf<A> {
     }
 }
 
+public postfix func ^<A>(_ fa : EvalOf<A>) -> Eval<A> {
+    return Eval.fix(fa)
+}
+
 class Now<A> : Eval<A> {
     fileprivate let a : A
     

@@ -16,6 +16,10 @@ public class StateT<F, S, A>: StateTOf<F, S, A> {
     }
 }
 
+public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
+    return StateT.fix(fa)
+}
+
 public extension StateT where F == ForId {
     public func run(_ initialState: S) -> (S, A) {
         return Id.fix(self.runM(initialState)).value

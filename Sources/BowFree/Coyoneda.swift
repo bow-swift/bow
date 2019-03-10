@@ -35,6 +35,10 @@ public class Coyoneda<F, P, A>: CoyonedaOf<F, P, A> {
     }
 }
 
+public postfix func ^<F, P, A>(_ fa : CoyonedaOf<F, P, A>) -> Coyoneda<F, P, A> {
+    return Coyoneda.fix(fa)
+}
+
 public extension Coyoneda where F: Functor {
     public func lower() -> Kind<F, A> {
         return F.map(pivot, transform())

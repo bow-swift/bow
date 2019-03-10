@@ -18,6 +18,10 @@ public class Nu<F>: NuOf<F> {
     }
 }
 
+public postfix func ^<F>(_ value: NuOf<F>) -> Nu<F> {
+    return Nu.fix(value)
+}
+
 extension ForNu: Recursive {
     public static func projectT<F: Functor>(_ tf: Kind<ForNu, F>) -> Kind<F, Kind<ForNu, F>> {
         let fix = Nu.fix(tf)

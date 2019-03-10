@@ -18,6 +18,10 @@ public class Moore<E, V>: MooreOf<E, V> {
     }
 }
 
+public postfix func ^<E, V>(_ value: MooreOf<E, V>) -> Moore<E, V> {
+    return Moore.fix(value)
+}
+
 extension MoorePartial: Functor {
     public static func map<A, B>(_ fa: Kind<MoorePartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<MoorePartial<E>, B> {
         let moore = Moore.fix(fa)

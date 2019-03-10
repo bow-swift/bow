@@ -7,7 +7,7 @@ public typealias ConstOf<A, T> = Kind<ConstPartial<A>, T>
 public final class Const<A, T>: ConstOf<A, T> {
     public let value: A
 
-    public static func fix(_ fa: ConstOf<A, T>) -> Const<A, T>{
+    public static func fix(_ fa: ConstOf<A, T>) -> Const<A, T> {
         return fa as! Const<A, T>
     }
     
@@ -18,6 +18,10 @@ public final class Const<A, T>: ConstOf<A, T> {
     public func retag<U>() -> Const<A, U> {
         return Const<A, U>(value)
     }
+}
+
+public postfix func ^<A, T>(_ fa: ConstOf<A, T>) -> Const<A, T> {
+    return Const.fix(fa)
 }
 
 extension Const: CustomStringConvertible {

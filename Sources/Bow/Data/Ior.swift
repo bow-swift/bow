@@ -98,6 +98,10 @@ public class Ior<A, B> : IorOf<A, B> {
     }
 }
 
+public postfix func ^<A, B>(_ fa : IorOf<A, B>) -> Ior<A, B> {
+    return Ior.fix(fa)
+}
+
 class IorLeft<A, B> : Ior<A, B> {
     fileprivate let a : A
     

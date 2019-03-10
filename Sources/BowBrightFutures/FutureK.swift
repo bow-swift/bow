@@ -61,6 +61,10 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
     }
 }
 
+public postfix func ^<E, A>(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
+    return FutureK.fix(value)
+}
+
 extension FutureKPartial: Functor {
     public static func map<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<FutureKPartial<E>, B> {
         return FutureK.fix(fa).value.map(f).k()

@@ -78,6 +78,10 @@ public class Validated<E, A>: ValidatedOf<E, A> {
     }
 }
 
+public postfix func ^<E, A>(_ fa: ValidatedOf<E, A>) -> Validated<E, A> {
+    return Validated.fix(fa)
+}
+
 class Valid<E, A>: Validated<E, A> {
     fileprivate let value: A
     

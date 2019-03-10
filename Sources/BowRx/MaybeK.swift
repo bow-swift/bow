@@ -41,6 +41,10 @@ public class MaybeK<A>: MaybeKOf<A> {
     }
 }
 
+public postfix func ^(_ value : MaybeKOf<A>) -> MaybeK<A> {
+    return MaybeK.fix(value)
+}
+
 extension ForMaybeK: Functor {
     public static func map<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> B) -> Kind<ForMaybeK, B> {
         return MaybeK.fix(fa).value.map(f).k()

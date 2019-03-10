@@ -16,6 +16,10 @@ public class Fix<A>: FixOf<A> {
     }
 }
 
+public postfix func ^<A>(_ value: FixOf<A>) -> Fix<A> {
+    return Fix.fix(value)
+}
+
 extension ForFix: Recursive {
     public static func projectT<F: Functor>(_ tf: Kind<ForFix, F>) -> Kind<F, Kind<ForFix, F>> {
         return F.map(Fix.fix(tf).unFix, { x in x.value() })

@@ -27,6 +27,10 @@ public final class SetK<A: Hashable>: SetKOf<A> {
 	}
 }
 
+public postfix func ^<A>(_ fa: SetKOf<A>) -> SetK<A> {
+    return SetK.fix(fa)
+}
+
 extension SetK: Semigroup {
     public func combine(_ other: SetK<A>) -> SetK<A> {
         return self + other

@@ -14,6 +14,10 @@ open class Mu<F>: MuOf<F> {
     }
 }
 
+public postfix func ^<F>(_ value: MuOf<F>) -> Mu<F> {
+    return Mu.fix(value)
+}
+
 extension ForMu: Recursive {
     public static func projectT<F: Functor>(_ tf: Kind<ForMu, F>) -> Kind<F, Kind<ForMu, F>> {
         return cata(tf, { ff in
