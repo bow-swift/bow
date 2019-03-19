@@ -118,9 +118,7 @@ public final class Option<A>: OptionOf<A> {
     }
 }
 
-// MARK: Protocol conformances
-
-/// Conformance of `Option` to `CustomStringConvertible`.
+// MARK: Conformance of `Option` to `CustomStringConvertible`.
 extension Option: CustomStringConvertible {
     public var description: String {
         return fold({ "None" },
@@ -128,7 +126,7 @@ extension Option: CustomStringConvertible {
     }
 }
 
-/// Conformance of `Option` to `CustomDebugStringConvertible`, given that the type parameter `A` also conforms to `CustomDebugStringConvertible`.
+// MARK: Conformance of `Option` to `CustomDebugStringConvertible`.
 extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription : String {
         return fold(constant("None"),
@@ -136,7 +134,7 @@ extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvert
     }
 }
 
-/// Instance of `EquatableK` for `Option`.
+// MARK: Instance of `EquatableK` for `Option`.
 extension ForOption: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForOption, A>, _ rhs: Kind<ForOption, A>) -> Bool where A : Equatable {
         let ol = Option.fix(lhs)
@@ -146,21 +144,21 @@ extension ForOption: EquatableK {
     }
 }
 
-/// Instance of `Functor` for `Option`.
+// MARK: Instance of `Functor` for `Option`.
 extension ForOption: Functor {
     public static func map<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> B) -> Kind<ForOption, B> {
         return Option.fix(fa).fold(Option.none, Option.some <<< f)
     }
 }
 
-/// Instance of `Applicative` for `Option`.
+// MARK: Instance of `Applicative` for `Option`.
 extension ForOption: Applicative {
     public static func pure<A>(_ a: A) -> Kind<ForOption, A> {
         return Option.some(a)
     }
 }
 
-/// Instance of `Monad` for `Option`.
+// MARK: Instance of `Monad` for `Option`.
 extension ForOption: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {
         let option = Option.fix(fa)
@@ -176,7 +174,7 @@ extension ForOption: Monad {
     }
 }
 
-/// Instance of `ApplicativeError` for `Option`.
+// MARK: Instance of `ApplicativeError` for `Option`.
 extension ForOption: ApplicativeError {
     public typealias E = Unit
 
@@ -189,20 +187,20 @@ extension ForOption: ApplicativeError {
     }
 }
 
-/// Instance of `MonadError` for `Option`.
+// MARK: Instance of `MonadError` for `Option`.
 extension ForOption: MonadError {}
 
-/// Instance of `FunctorFilter` for `Option`.
+// MARK: Instance of `FunctorFilter` for `Option`.
 extension ForOption: FunctorFilter {}
 
-/// Instance of `MonadFilter` for `Option`.
+// MARK: Instance of `MonadFilter` for `Option`.
 extension ForOption: MonadFilter {
     public static func empty<A>() -> Kind<ForOption, A> {
         return Option.none()
     }
 }
 
-/// Instance of `Foldable` for `Option`.
+// MARK: Instance of `Foldable` for `Option`.
 extension ForOption: Foldable {
     public static func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         let option = Option.fix(fa)
@@ -217,7 +215,7 @@ extension ForOption: Foldable {
     }
 }
 
-/// Instance of `Traverse` for `Option`.
+// MARK: Instance of `Traverse` for `Option`.
 extension ForOption: Traverse {
     public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForOption, B>> {
         let option = Option.fix(fa)
@@ -226,7 +224,7 @@ extension ForOption: Traverse {
     }
 }
 
-/// Instance of `TraverseFilter` for `Option`.
+// MARK: Instance of `TraverseFilter` for `Option`.
 extension ForOption: TraverseFilter {
     public static func traverseFilter<A, B, G: Applicative>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, Kind<ForOption, B>>) -> Kind<G, Kind<ForOption, B>> {
         let option = Option.fix(fa)
@@ -234,7 +232,7 @@ extension ForOption: TraverseFilter {
     }
 }
 
-/// Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
+// MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
         return self.fold(constant(other),
@@ -244,7 +242,7 @@ extension Option: Semigroup where A: Semigroup {
     }
 }
 
-/// Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
+// MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {
         return Option(A.empty())

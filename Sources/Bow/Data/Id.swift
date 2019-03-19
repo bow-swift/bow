@@ -34,32 +34,35 @@ extension Id: CustomStringConvertible {
     }
 }
 
-/// Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
+// MARK: Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
 extension Id: CustomDebugStringConvertible where A : CustomDebugStringConvertible {
     public var debugDescription: String {
         return "Id(\(value.debugDescription))"
     }
 }
 
-/// Conformance of `Id` to `Equatable`, given that type parameter also conforms to `Equatable`.
+// MARK: Conformance of `Id` to `Equatable`, given that type parameter also conforms to `Equatable`.
 extension ForId: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForId, A>, _ rhs: Kind<ForId, A>) -> Bool where A : Equatable {
         return Id.fix(lhs).value == Id.fix(rhs).value
     }
 }
 
+// MARK: Instance of `Functor` for `Id`
 extension ForId: Functor {
     public static func map<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> B) -> Kind<ForId, B> {
         return Id(f(Id.fix(fa).value))
     }
 }
 
+// MARK: Instance of `Applicative` for `Id`
 extension ForId: Applicative {
     public static func pure<A>(_ a: A) -> Kind<ForId, A> {
         return Id(a)
     }
 }
 
+// MARK: Instance of `Monad` for `Id`
 extension ForId: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<ForId, B>) -> Kind<ForId, B> {
         let id = Id<A>.fix(fa)
@@ -73,6 +76,7 @@ extension ForId: Monad {
     }
 }
 
+// MARK: Instance of `Comonad` for `Id`
 extension ForId: Comonad {
     public static func coflatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (Kind<ForId, A>) -> B) -> Kind<ForId, B> {
         return fa.map{ _ in f(fa) }
@@ -83,8 +87,10 @@ extension ForId: Comonad {
     }
 }
 
+// MARK: Instance of `Bimonad` for `Id`
 extension ForId: Bimonad {}
 
+// MARK: Instance of `Foldable` for `Id`
 extension ForId: Foldable {
     public static func foldLeft<A, B>(_ fa: Kind<ForId, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         let id = Id<A>.fix(fa)
@@ -97,6 +103,7 @@ extension ForId: Foldable {
     }
 }
 
+// MARK: Instance of `Traverse` for `Id`
 extension ForId: Traverse {
     public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForId, B>> {
         let id = Id<A>.fix(fa)
