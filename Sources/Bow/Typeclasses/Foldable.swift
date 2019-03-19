@@ -95,7 +95,7 @@ public extension Foldable {
                  constant(Option<A>.none()))
     }
     
-    public static func count<A: Monoid>(_ fa: Kind<Self, A>) -> Int64 {
+    public static func count<A>(_ fa: Kind<Self, A>) -> Int64 {
         return foldMap(fa, constant(1))
     }
 }
