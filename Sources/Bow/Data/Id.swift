@@ -8,6 +8,7 @@ public typealias IdOf<A> = Kind<ForId, A>
 
 /// The identity data type represents a context of having no effect on the type it wraps. A instance of `Id<A>` is isomorphic to an instance of `A`; it is just wrapped without any additional information.
 public class Id<A>: IdOf<A> {
+    /// Value wrapped in this `Id`.
     public let value: A
 
     /// Safe downcast.
@@ -26,8 +27,7 @@ public class Id<A>: IdOf<A> {
     }
 }
 
-// MARK: Protocol conformances
-/// Conformance of `Id` to `CustomStringConvertible`.
+// MARK: Conformance of `Id` to `CustomStringConvertible`.
 extension Id: CustomStringConvertible {
     public var description: String {
         return "Id(\(value))"
@@ -41,7 +41,7 @@ extension Id: CustomDebugStringConvertible where A : CustomDebugStringConvertibl
     }
 }
 
-// MARK: Conformance of `Id` to `Equatable`, given that type parameter also conforms to `Equatable`.
+// MARK: Instance of `EquatableK` for `Id`
 extension ForId: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForId, A>, _ rhs: Kind<ForId, A>) -> Bool where A : Equatable {
         return Id.fix(lhs).value == Id.fix(rhs).value
