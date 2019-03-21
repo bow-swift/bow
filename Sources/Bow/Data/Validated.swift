@@ -78,6 +78,14 @@ public class Validated<E, A>: ValidatedOf<E, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Validated.
+public postfix func ^<E, A>(_ fa: ValidatedOf<E, A>) -> Validated<E, A> {
+    return Validated.fix(fa)
+}
+
 class Valid<E, A>: Validated<E, A> {
     fileprivate let value: A
     

@@ -40,6 +40,14 @@ public final class ArrayK<A>: ArrayKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to ArrayK.
+public postfix func ^<A>(_ fa: ArrayKOf<A>) -> ArrayK<A> {
+    return ArrayK.fix(fa)
+}
+
 public extension Array {
     public func k() -> ArrayK<Element> {
         return ArrayK(self)

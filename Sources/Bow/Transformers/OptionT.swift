@@ -16,6 +16,14 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to OptionT.
+public postfix func ^<F, A>(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
+    return OptionT.fix(fa)
+}
+
 extension OptionT where F: Functor {
     public func fold<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
         return value.map { option in option.fold(ifEmpty, f) }

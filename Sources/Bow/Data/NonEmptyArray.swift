@@ -64,6 +64,14 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to NonEmptyArray.
+public postfix func ^<A>(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
+    return NonEmptyArray.fix(fa)
+}
+
 public extension NonEmptyArray where A: Equatable {
     public func contains(element : A) -> Bool {
         return head == element || tail.contains(where: { $0 == element })

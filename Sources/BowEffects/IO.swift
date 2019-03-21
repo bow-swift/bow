@@ -157,6 +157,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to IO.
+public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
+    return IO.fix(fa)
+}
+
 fileprivate class Pure<E: Error, A>: IO<E, A> {
     let a: A
     
