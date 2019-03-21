@@ -227,7 +227,7 @@
                     top: "100%",
                     left: "0",
                     zIndex: "100",
-                    display: "none"
+                    display: "block"
                 },
                 ltr: {
                     left: "0",
@@ -1024,10 +1024,12 @@
                 return s.setLanguageDirection.apply(this, [].slice.call(arguments, 0));
             },
             _hide: function hide() {
-                this.$node.hide();
+              this.$node.css("opacity", "0");
+              this.$node.css("max-height", "0");
             },
             _show: function show() {
-                this.$node.css("display", "block");
+              this.$node.css("opacity", "1");
+              this.$node.css("max-height", "1000px");
             }
         });
         return DefaultMenu;

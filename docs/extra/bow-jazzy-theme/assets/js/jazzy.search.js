@@ -2,6 +2,9 @@ $(function(){
   var searchIndex = lunr(function() {
     this.ref('url');
     this.field('name');
+
+    this.pipeline.remove(lunr.stopWordFilter);
+    this.pipeline.remove(lunr.trimmer);
   });
 
   var $typeahead = $('[data-typeahead]');
@@ -36,13 +39,15 @@ $(function(){
           minLength: 3
         },
         {
-          limit: 10,
+          limit: 20,
           display: displayTemplate,
           templates: { suggestion: suggestionTemplate },
           source: function(query, sync) {
             var results = searchIndex.search(query).map(function(result) {
               var doc = searchData[result.ref];
               doc.url = result.ref;
+              var type = doc.url.split('/').length > 0 ? doc.url.split('/')[0] : '';
+              doc.type = type;
               return doc;
             });
             sync(results);
@@ -56,7 +61,7 @@ $(function(){
 
   $typeahead.on('typeahead:select', function(e, result) {
     var subdirectory = window.location.pathname.split('/').slice(0, -1).pop();
-    var jazzySubdirectories = ['Categories', 'Classes', 'Enums', 'Protocols', 'Structs'];
+    var jazzySubdirectories = ['Categories', 'Extensions', 'Classes', 'Enums', 'Protocols', 'Structs'];
     if (jazzySubdirectories.indexOf(subdirectory) > -1) {
       result.url = ('../').concat(result.url);
     }

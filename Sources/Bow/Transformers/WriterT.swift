@@ -16,6 +16,14 @@ public class WriterT<F, W, A>: WriterTOf<F, W, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to WriterT.
+public postfix func ^<F, W, A>(_ fa : WriterTOf<F, W, A>) -> WriterT<F, W, A> {
+    return WriterT.fix(fa)
+}
+
 extension WriterT where F: Functor {
     public static func putT(_ fa: Kind<F, A>, _ w: W) -> WriterT<F, W, A> {
         return WriterT(fa.map { a in (w, a) })
@@ -142,6 +150,9 @@ extension WriterTPartial: Applicative where F: Monad, W: Monoid {
         return WriterT(F.pure((W.empty(), a)))
     }
 }
+
+// MARK: Instance of `Selective` for `WriterT`
+extension WriterTPartial: Selective where F: Monad, W: Monoid {}
 
 extension WriterTPartial: Monad where F: Monad, W: Monoid {
     public static func flatMap<A, B>(_ fa: Kind<WriterTPartial<F, W>, A>, _ f: @escaping (A) -> Kind<WriterTPartial<F, W>, B>) -> Kind<WriterTPartial<F, W>, B> {

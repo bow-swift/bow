@@ -98,6 +98,14 @@ public class Ior<A, B> : IorOf<A, B> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Ior.
+public postfix func ^<A, B>(_ fa : IorOf<A, B>) -> Ior<A, B> {
+    return Ior.fix(fa)
+}
+
 class IorLeft<A, B> : Ior<A, B> {
     fileprivate let a : A
     
@@ -164,6 +172,9 @@ extension IorPartial: Applicative where L: Semigroup {
         return Ior.right(a)
     }
 }
+
+// MARK: Instance of `Selective` for `Ior`
+extension IorPartial: Selective where L: Semigroup {}
 
 extension IorPartial: Monad where L: Semigroup {
     public static func flatMap<A, B>(_ fa: Kind<IorPartial<L>, A>, _ f: @escaping (A) -> Kind<IorPartial<L>, B>) -> Kind<IorPartial<L>, B> {

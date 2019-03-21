@@ -23,7 +23,11 @@ class StateTTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<StateTPartial<ForId, Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<StateTPartial<ForId, Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<StateTPartial<ForId, Int>>.check()
     }
