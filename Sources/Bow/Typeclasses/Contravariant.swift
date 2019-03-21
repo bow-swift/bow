@@ -17,7 +17,7 @@ public extension Contravariant {
         return contramap(fa, g)
     }
     
-    /// Given a function, provides a new function lifted to the context type implementing this instance of `Functor`, but reversing the direction of the arrow.
+    /// Given a function, provides a new function lifted to the context type implementing this instance of `Contravariant`, but reversing the direction of the arrow.
     ///
     /// - Parameter f: Function to be lifted.
     /// - Returns: Function in the context implementing this instance.
