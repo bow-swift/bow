@@ -1,7 +1,12 @@
 import Foundation
 
+/// Witness for the `StateT<F, S, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForStateT {}
+
+/// Partial application of the StateT type constructor, omitting the last type argument.
 public final class StateTPartial<F, S>: Kind2<ForStateT, F, S> {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<StateTPartial<F, S>, A>`
 public typealias StateTOf<F, S, A> = Kind<StateTPartial<F, S>, A>
 
 /// StateT transformer represents operations that need to write and read a state through a computation or effect.
