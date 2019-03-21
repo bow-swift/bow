@@ -45,7 +45,7 @@ public postfix func ^<A, T>(_ fa: ConstOf<A, T>) -> Const<A, T> {
     return Const.fix(fa)
 }
 
-// MARK: Conformance to CustomStringConvertible
+// MARK: Conformance to `CustomStringConvertible`
 extension Const: CustomStringConvertible {
     public var description : String {
         return "Const(\(value))"
