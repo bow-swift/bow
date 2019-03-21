@@ -65,6 +65,7 @@ extension KleisliPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Kleisli`
 extension KleisliPartial: Selective where F: Monad {}
 
 extension KleisliPartial: Monad where F: Monad {

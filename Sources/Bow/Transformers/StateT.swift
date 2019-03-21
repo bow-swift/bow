@@ -94,6 +94,7 @@ extension StateTPartial: Applicative where F: Monad {
     }
 }
 
+// MARK: Instance of `Selective` for `StateT`
 extension StateTPartial: Selective where F: Monad {}
 
 extension StateTPartial: Monad where F: Monad {

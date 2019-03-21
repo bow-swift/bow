@@ -78,6 +78,7 @@ extension ForArrayK: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `ArrayK`
 extension ForArrayK: Selective {}
 
 extension ForArrayK: Monad {

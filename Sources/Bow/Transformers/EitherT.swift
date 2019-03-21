@@ -94,6 +94,7 @@ extension EitherTPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `EitherT`
 extension EitherTPartial: Selective where F: Monad {}
 
 extension EitherTPartial: Monad where F: Monad {

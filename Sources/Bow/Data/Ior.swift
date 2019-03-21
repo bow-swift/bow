@@ -165,6 +165,7 @@ extension IorPartial: Applicative where L: Semigroup {
     }
 }
 
+// MARK: Instance of `Selective` for `Ior`
 extension IorPartial: Selective where L: Semigroup {}
 
 extension IorPartial: Monad where L: Semigroup {

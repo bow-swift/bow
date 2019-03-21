@@ -62,6 +62,7 @@ extension ForSingleK: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `SingleK`
 extension ForSingleK: Selective {}
 
 extension ForSingleK: Monad {

@@ -60,6 +60,7 @@ extension ForId: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Id`
 extension ForId: Selective {}
 
 extension ForId: Monad {

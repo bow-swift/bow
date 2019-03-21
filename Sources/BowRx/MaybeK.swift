@@ -53,6 +53,7 @@ extension ForMaybeK: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `MaybeK`
 extension ForMaybeK: Selective {}
 
 extension ForMaybeK: Monad {

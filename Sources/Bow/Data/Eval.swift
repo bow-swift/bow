@@ -276,6 +276,7 @@ extension ForEval: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Eval`
 extension ForEval: Selective {}
 
 extension ForEval: Monad {

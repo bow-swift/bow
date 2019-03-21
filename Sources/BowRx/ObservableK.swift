@@ -63,6 +63,7 @@ extension ForObservableK: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `ObservableK`
 extension ForObservableK: Selective {}
 
 extension ForObservableK: Monad {

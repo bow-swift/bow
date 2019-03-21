@@ -132,6 +132,7 @@ extension FreePartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Free`
 extension FreePartial: Selective {}
 
 extension FreePartial: Monad {

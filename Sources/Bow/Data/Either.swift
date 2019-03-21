@@ -183,6 +183,7 @@ extension EitherPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Either`
 extension EitherPartial: Selective {}
 
 /// Instance of `Monad` for `Either`.

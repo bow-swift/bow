@@ -105,6 +105,7 @@ extension ForNonEmptyArray: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `NonEmptyArray`
 extension ForNonEmptyArray: Selective {}
 
 extension ForNonEmptyArray: Monad {

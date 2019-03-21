@@ -160,6 +160,7 @@ extension ForOption: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Option`
 extension ForOption: Selective {}
 
 /// Instance of `Monad` for `Option`.

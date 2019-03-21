@@ -114,6 +114,7 @@ extension OptionTPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `OptionT`
 extension OptionTPartial: Selective where F: Monad {}
 
 extension OptionTPartial: Monad where F: Monad {

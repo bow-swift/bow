@@ -59,6 +59,7 @@ extension CokleisliPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Cokleisli`
 extension CokleisliPartial: Selective {}
 
 extension CokleisliPartial: Monad {

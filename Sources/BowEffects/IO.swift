@@ -311,6 +311,7 @@ extension IOPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `IO`
 extension IOPartial: Selective {}
 
 extension IOPartial: Monad {

@@ -118,6 +118,7 @@ extension ForTry: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Try`
 extension ForTry: Selective {}
 
 extension ForTry: Monad {

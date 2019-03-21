@@ -53,6 +53,7 @@ extension ForFunction0: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Function0`
 extension ForFunction0: Selective {}
 
 extension ForFunction0: Monad {

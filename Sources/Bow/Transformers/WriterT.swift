@@ -143,6 +143,7 @@ extension WriterTPartial: Applicative where F: Monad, W: Monoid {
     }
 }
 
+// MARK: Instance of `Selective` for `WriterT`
 extension WriterTPartial: Selective where F: Monad, W: Monoid {}
 
 extension WriterTPartial: Monad where F: Monad, W: Monoid {

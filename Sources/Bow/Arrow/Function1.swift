@@ -51,6 +51,7 @@ extension Function1Partial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Function1`
 extension Function1Partial: Selective {}
 
 extension Function1Partial: Monad {

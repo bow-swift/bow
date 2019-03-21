@@ -73,6 +73,7 @@ extension FutureKPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `FutureK`
 extension FutureKPartial: Selective {}
 
 extension FutureKPartial: Monad {
