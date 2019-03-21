@@ -20,7 +20,11 @@ class SingleKTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForSingleK>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForSingleK>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForSingleK>.check()
     }

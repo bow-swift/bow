@@ -118,6 +118,14 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to DictionaryK.
+public postfix func ^<K, A>(_ fa: DictionaryKOf<K, A>) -> DictionaryK<K, A> {
+    return DictionaryK.fix(fa)
+}
+
 // MARK: Convenience functions to convert to DictionaryK
 public extension Dictionary {
     /// Creates a `DictionaryK`.
