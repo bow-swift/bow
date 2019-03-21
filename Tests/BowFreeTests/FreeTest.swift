@@ -37,6 +37,10 @@ fileprivate class Ops<A>: Kind<ForOps, A> {
     }
 }
 
+fileprivate postfix func ^<A>(_ fa: Kind<ForOps, A>) -> Ops<A> {
+    return Ops.fix(fa)
+}
+
 fileprivate class Value: Ops<Int> {
     let a: Int
     
@@ -119,6 +123,10 @@ class FreeTest: XCTestCase {
     
     func testApplicativeLaws() {
         ApplicativeLaws<FreePartial<ForId>>.check()
+    }
+
+    func testSelectiveLaws() {
+        SelectiveLaws<FreePartial<ForId>>.check()
     }
     
     func testMonadLaws() {
