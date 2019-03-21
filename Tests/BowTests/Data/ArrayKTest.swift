@@ -26,7 +26,11 @@ class ArrayKTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForArrayK>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForArrayK>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForArrayK>.check()
     }

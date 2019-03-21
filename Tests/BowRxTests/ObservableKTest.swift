@@ -20,7 +20,11 @@ class ObservableKTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForObservableK>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForObservableK>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForObservableK>.check()
     }

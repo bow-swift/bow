@@ -20,6 +20,14 @@ public class Coproduct<F, G, A>: CoproductOf<F, G, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Coproduct.
+public postfix func ^<F, G, A>(_ fa: CoproductOf<F, G, A>) -> Coproduct<F, G, A> {
+    return Coproduct.fix(fa)
+}
+
 extension CoproductPartial: EquatableK where F: EquatableK, G: EquatableK {
     public static func eq<A>(_ lhs: Kind<CoproductPartial<F, G>, A>, _ rhs: Kind<CoproductPartial<F, G>, A>) -> Bool where A : Equatable {
         return Coproduct.fix(lhs).run == Coproduct.fix(rhs).run

@@ -29,6 +29,14 @@ public class EitherT<F, A, B>: EitherTOf<F, A, B> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to EitherT.
+public postfix func ^<F, A, B>(_ fa: EitherTOf<F, A, B>) -> EitherT<F, A, B> {
+    return EitherT.fix(fa)
+}
+
 // MARK: Functions for `EitherT` when the effect has an instance of `Functor`.
 extension EitherT where F: Functor {
     /// Applies the provided closures based on the content of the nested `Either` value.
@@ -160,6 +168,9 @@ extension EitherTPartial: Applicative where F: Applicative {
         })
     }
 }
+
+// MARK: Instance of `Selective` for `EitherT`
+extension EitherTPartial: Selective where F: Monad {}
 
 // MARK: Instance of `Monad` for `EitherT`
 extension EitherTPartial: Monad where F: Monad {

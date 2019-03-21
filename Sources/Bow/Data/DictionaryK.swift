@@ -60,6 +60,14 @@ public class DictionaryK<K: Hashable, A> : DictionaryKOf<K, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to DictionaryK.
+public postfix func ^<K, A>(_ fa: DictionaryKOf<K, A>) -> DictionaryK<K, A> {
+    return DictionaryK.fix(fa)
+}
+
 public extension Dictionary {
     public func k() -> DictionaryK<Key, Value> {
         return DictionaryK<Key, Value>(self)
