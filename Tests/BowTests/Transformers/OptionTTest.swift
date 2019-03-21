@@ -20,6 +20,10 @@ class OptionTTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<OptionTPartial<ForId>>.check()
     }
+
+    func testSelectiveLaws() {
+        SelectiveLaws<OptionTPartial<ForId>>.check()
+    }
     
     func testMonadLaws() {
         MonadLaws<OptionTPartial<ForId>>.check()

@@ -115,6 +115,14 @@ public class Try<A>: TryOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Try.
+public postfix func ^<A>(_ fa: TryOf<A>) -> Try<A> {
+    return Try.fix(fa)
+}
+
 class Success<A>: Try<A> {
     fileprivate let value: A
     
@@ -170,6 +178,9 @@ extension ForTry: Applicative {
         return Try.success(a)
     }
 }
+
+// MARK: Instance of `Selective` for `Try`
+extension ForTry: Selective {}
 
 // MARK: Instance of `Monad` for `Try`
 extension ForTry: Monad {

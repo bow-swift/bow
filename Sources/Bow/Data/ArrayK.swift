@@ -40,6 +40,14 @@ public final class ArrayK<A>: ArrayKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to ArrayK.
+public postfix func ^<A>(_ fa: ArrayKOf<A>) -> ArrayK<A> {
+    return ArrayK.fix(fa)
+}
+
 public extension Array {
     public func k() -> ArrayK<Element> {
         return ArrayK(self)
@@ -77,6 +85,9 @@ extension ForArrayK: Applicative {
         return ArrayK([a])
     }
 }
+
+// MARK: Instance of `Selective` for `ArrayK`
+extension ForArrayK: Selective {}
 
 extension ForArrayK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForArrayK, A>, _ f: @escaping (A) -> Kind<ForArrayK, B>) -> Kind<ForArrayK, B> {
