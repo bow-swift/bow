@@ -21,6 +21,14 @@ public class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Kleisli.
+public postfix func ^<F, D, A>(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
+    return Kleisli.fix(fa)
+}
+
 extension Kleisli where F: Monad {
     public func zip<B>(_ o: Kleisli<F, D, B>) -> Kleisli<F, D, (A, B)> {
         return Kleisli<F, D, (A, B)>.fix(self.flatMap({ a in
@@ -64,6 +72,9 @@ extension KleisliPartial: Applicative where F: Applicative {
         return Kleisli<F, D, B>({ d in Kleisli.fix(ff).run(d).ap(Kleisli.fix(fa).run(d)) })
     }
 }
+
+// MARK: Instance of `Selective` for `Kleisli`
+extension KleisliPartial: Selective where F: Monad {}
 
 extension KleisliPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (A) -> Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, B> {

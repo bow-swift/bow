@@ -29,6 +29,14 @@ public class WriterT<F, W, A>: WriterTOf<F, W, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to WriterT.
+public postfix func ^<F, W, A>(_ fa : WriterTOf<F, W, A>) -> WriterT<F, W, A> {
+    return WriterT.fix(fa)
+}
+
 // MARK: Functions for `WriterT` when the effect has an instance of `Functor`
 extension WriterT where F: Functor {
     /// Adds an accumulated value to an effect.
@@ -237,6 +245,9 @@ extension WriterTPartial: Applicative where F: Monad, W: Monoid {
         return WriterT(F.pure((W.empty(), a)))
     }
 }
+
+// MARK: Instance of `Selective` for `WriterT`
+extension WriterTPartial: Selective where F: Monad, W: Monoid {}
 
 // MARK: Instance of `Monad` for `WriterT`
 extension WriterTPartial: Monad where F: Monad, W: Monoid {
