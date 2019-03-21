@@ -21,7 +21,11 @@ class EitherTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<EitherPartial<Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<EitherPartial<Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<EitherPartial<Int>>.check()
     }

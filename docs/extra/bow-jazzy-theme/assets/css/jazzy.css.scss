@@ -748,11 +748,19 @@ form[role="search"] {
     width: 100%;
   }
 
+  .tt-hint {
+    color: #aaa;
+  }
+
   .tt-menu {
-    margin: 0;
+    margin: -10px 0 0;
     background: $navigation_bg_color;
     color: $text_color;
     border: 1px solid $keyline_color;
+    width: calc(100% - 30px);
+    max-height: 0;
+    opacity: 0;
+    transition: max-height ease-in 350ms, opacity ease-in 250ms;
   }
 
   .tt-highlight {

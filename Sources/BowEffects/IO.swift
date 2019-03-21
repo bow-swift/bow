@@ -157,6 +157,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to IO.
+public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
+    return IO.fix(fa)
+}
+
 fileprivate class Pure<E: Error, A>: IO<E, A> {
     let a: A
     
@@ -310,6 +318,9 @@ extension IOPartial: Applicative {
         return Pure(a)
     }
 }
+
+// MARK: Instance of `Selective` for `IO`
+extension IOPartial: Selective {}
 
 extension IOPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {

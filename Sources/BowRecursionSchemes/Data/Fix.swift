@@ -16,6 +16,14 @@ public class Fix<A>: FixOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Fix.
+public postfix func ^<A>(_ value: FixOf<A>) -> Fix<A> {
+    return Fix.fix(value)
+}
+
 extension ForFix: Recursive {
     public static func projectT<F: Functor>(_ tf: Kind<ForFix, F>) -> Kind<F, Kind<ForFix, F>> {
         return F.map(Fix.fix(tf).unFix, { x in x.value() })
