@@ -19,7 +19,11 @@ class Function0Test: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForFunction0>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForFunction0>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForFunction0>.check()
     }

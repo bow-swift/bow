@@ -19,7 +19,11 @@ class IdTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForId>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForId>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForId>.check()
     }

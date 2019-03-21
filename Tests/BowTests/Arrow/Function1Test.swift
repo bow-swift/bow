@@ -16,7 +16,11 @@ class Function1Test: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<Function1Partial<Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<Function1Partial<Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<Function1Partial<Int>>.check()
     }

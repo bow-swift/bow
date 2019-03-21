@@ -51,6 +51,14 @@ public class ObservableK<A>: ObservableKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to ObservableK.
+public postfix func ^<A>(_ value: ObservableKOf<A>) -> ObservableK<A> {
+    return ObservableK.fix(value)
+}
+
 extension ForObservableK: Functor {
     public static func map<A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> B) -> Kind<ForObservableK, B> {
         return ObservableK.fix(fa).value.map(f).k()
@@ -62,6 +70,9 @@ extension ForObservableK: Applicative {
         return Observable.just(a).k()
     }
 }
+
+// MARK: Instance of `Selective` for `ObservableK`
+extension ForObservableK: Selective {}
 
 extension ForObservableK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {

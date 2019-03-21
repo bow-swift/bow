@@ -78,6 +78,14 @@ public class Validated<E, A>: ValidatedOf<E, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Validated.
+public postfix func ^<E, A>(_ fa: ValidatedOf<E, A>) -> Validated<E, A> {
+    return Validated.fix(fa)
+}
+
 class Valid<E, A>: Validated<E, A> {
     fileprivate let value: A
     
@@ -135,6 +143,17 @@ extension ValidatedPartial: Applicative where I: Semigroup {
                                           { _ in Validated.invalid(e) }) },
                          { a in valF.fold({ ee in Validated.invalid(ee) },
                                           { f in Validated.valid(f(a)) }) })
+    }
+}
+
+// MARK: Instance of `Selective` for `Validated`
+extension ValidatedPartial: Selective where I: Semigroup {
+    public static func select<A, B>(_ fab: Kind<ValidatedPartial<I>, Either<A, B>>, _ f: Kind<ValidatedPartial<I>, (A) -> B>) -> Kind<ValidatedPartial<I>, B> {
+        return Validated.fix(fab).fold(
+            { e in Validated.invalid(e) },
+            { eab in eab.fold({ a in map(f, { ff in ff(a) }) },
+                              { b in Validated.valid(b) })
+            })
     }
 }
 

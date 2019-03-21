@@ -40,8 +40,15 @@ public class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     }
 }
 
-// MARK: Functions when F has an instance of `Monad`.
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Kleisli.
+public postfix func ^<F, D, A>(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
+    return Kleisli.fix(fa)
+}
 
+// MARK: Functions when F has an instance of `Monad`.
 extension Kleisli where F: Monad {
     /// Zips this Kleisli function with another one with the same input type.
     ///
@@ -105,6 +112,9 @@ extension KleisliPartial: Applicative where F: Applicative {
         return Kleisli<F, D, B>({ d in Kleisli.fix(ff).run(d).ap(Kleisli.fix(fa).run(d)) })
     }
 }
+
+// MARK: Instance of `Selective` for `Kleisli`
+extension KleisliPartial: Selective where F: Monad {}
 
 // MARK: Instance of `Monad` for `Kleisli`
 extension KleisliPartial: Monad where F: Monad {

@@ -20,7 +20,11 @@ class NonEmptyArrayTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForNonEmptyArray>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForNonEmptyArray>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForNonEmptyArray>.check()
     }
