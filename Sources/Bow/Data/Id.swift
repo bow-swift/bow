@@ -26,6 +26,14 @@ public class Id<A>: IdOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to `Id`.
+public postfix func ^<A>(_ fa: IdOf<A>) -> Id<A> {
+    return Id.fix(fa)
+}
+
 // MARK: Protocol conformances
 /// Conformance of `Id` to `CustomStringConvertible`.
 extension Id: CustomStringConvertible {
@@ -59,6 +67,9 @@ extension ForId: Applicative {
         return Id(a)
     }
 }
+
+// MARK: Instance of `Selective` for `Id`
+extension ForId: Selective {}
 
 extension ForId: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<ForId, B>) -> Kind<ForId, B> {

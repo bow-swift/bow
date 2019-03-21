@@ -29,6 +29,14 @@ public class OptionT<F, A>: OptionTOf<F, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to OptionT.
+public postfix func ^<F, A>(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
+    return OptionT.fix(fa)
+}
+
 // MARK: Functions for `OptionT` when the effect has an instance of `Functor`
 extension OptionT where F: Functor {
     /// Applies the provided closures based on the content of the nested `Option` value.
@@ -190,6 +198,9 @@ extension OptionTPartial: Applicative where F: Applicative {
         return OptionT(F.map(otf.value, ota.value) { of, oa in Option.fix(of.ap(oa)) })
     }
 }
+
+// MARK: Instance of `Selective` for `OptionT`
+extension OptionTPartial: Selective where F: Monad {}
 
 // MARK: Instance of `Monad` for `OptionT`
 extension OptionTPartial: Monad where F: Monad {

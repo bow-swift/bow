@@ -20,7 +20,11 @@ class MaybeKTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForMaybeK>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForMaybeK>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForMaybeK>.check()
     }

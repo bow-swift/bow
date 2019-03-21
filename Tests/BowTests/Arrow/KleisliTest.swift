@@ -14,7 +14,11 @@ class KleisliTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<KleisliPartial<ForId, Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<KleisliPartial<ForId, Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<KleisliPartial<ForId, Int>>.check()
     }

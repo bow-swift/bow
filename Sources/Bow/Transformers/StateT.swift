@@ -16,6 +16,14 @@ public class StateT<F, S, A>: StateTOf<F, S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to StateT.
+public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
+    return StateT.fix(fa)
+}
+
 public extension StateT where F == ForId {
     public func run(_ initialState: S) -> (S, A) {
         return Id.fix(self.runM(initialState)).value
@@ -93,6 +101,9 @@ extension StateTPartial: Applicative where F: Monad {
         return StateT(F.pure({ s in F.pure((s, a)) }))
     }
 }
+
+// MARK: Instance of `Selective` for `StateT`
+extension StateTPartial: Selective where F: Monad {}
 
 extension StateTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<StateTPartial<F, S>, A>, _ f: @escaping (A) -> Kind<StateTPartial<F, S>, B>) -> Kind<StateTPartial<F, S>, B> {
