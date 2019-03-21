@@ -209,7 +209,7 @@ public extension Foldable {
         })).fold(Option<A>.some,
                  constant(Option<A>.none()))
     }
-    
+
     /// Counts how many elements a structure contains.
     ///
     /// - Parameter fa: Structure of values.
