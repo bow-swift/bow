@@ -1,93 +1,168 @@
 import Foundation
 
+/// Witness for the `OptionT<F, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForOptionT {}
+
+/// Partial application of the OptionT type constructor, omitting the last parameter.
 public final class OptionTPartial<F>: Kind<ForOptionT, F> {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<OptionTPartial<F>, A>`
 public typealias OptionTOf<F, A> = Kind<OptionTPartial<F>, A>
 
-public class OptionT<F, A> : OptionTOf<F, A> {
+/// The OptionT transformer represents the nesting of an `Option` value inside any other effect. It is equivalent to `Kind<F, Option<A>>`.
+public class OptionT<F, A>: OptionTOf<F, A> {
     fileprivate let value : Kind<F, Option<A>>
 
-    public static func fix(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to OptionT.
+    public static func fix(_ fa: OptionTOf<F, A>) -> OptionT<F, A> {
         return fa as! OptionT<F, A>
     }
     
-    public init(_ value : Kind<F, Option<A>>) {
+    /// Initializes an `OptionT` value.
+    ///
+    /// - Parameter value: An `Option` value wrapped in an effect.
+    public init(_ value: Kind<F, Option<A>>) {
         self.value = value
     }
 }
 
+// MARK: Functions for `OptionT` when the effect has an instance of `Functor`
 extension OptionT where F: Functor {
+    /// Applies the provided closures based on the content of the nested `Option` value.
+    ///
+    /// - Parameters:
+    ///   - ifEmpty: Closure to apply if the contained value in the nested `Option` is absent.
+    ///   - f: Closure to apply if the contained value in the nested `Option` is present.
+    /// - Returns: Result of applying the corresponding closure to the nested `Option`, wrapped in the effect.
     public func fold<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
         return value.map { option in option.fold(ifEmpty, f) }
     }
 
+    /// Applies the provided closures based on the content of the nested `Option` value.
+    ///
+    /// - Parameters:
+    ///   - ifEmpty: Closure to apply if the contained value in the nested `Option` is absent.
+    ///   - f: Closure to apply if the contained value in the nested `Option` is present.
+    /// - Returns: Result of applying the corresponding closure to the nested `Option`, wrapped in the effect.
     public func cata<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
         return fold(ifEmpty, f)
     }
 
-    public func liftF<B>(_ fb: Kind<F, B>) -> OptionT<F, B> {
-        return OptionT<F, B>(fb.map(Option<B>.some))
+    /// Lifts a value by wrapping the contained value in the effect into an `Option.some` value.
+    ///
+    /// - Parameter fb: Value to be lifted.
+    /// - Returns: A present `Option` wrapped in the effect.
+    public static func liftF(_ fb: Kind<F, A>) -> OptionT<F, A> {
+        return OptionT(fb.map(Option.some))
     }
 
+    /// Obtains the value of the nested `Option` or a default value, wrapped in the effect.
+    ///
+    /// - Parameter defaultValue: Value for the absent case in the nested `Option`.
+    /// - Returns: Value contained in the nested `Option` if present, or the default value otherwise, wrapped in the effect.
     public func getOrElse(_ defaultValue: A) -> Kind<F, A> {
         return value.map { option in option.getOrElse(defaultValue) }
     }
 
+    /// Checks if the nested `Option` is present.
     public var isDefined: Kind<F, Bool> {
         return value.map { option in option.isDefined }
     }
 
+    /// Transforms the nested `Option`.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: An `OptionT` where the nested `Option` has been transformed using the provided function.
     public func transform<B>(_ f: @escaping (Option<A>) -> Option<B>) -> OptionT<F, B> {
         return OptionT<F, B>(value.map(f))
     }
 
+    /// Flatmaps the provided function to the nested `Option`.
+    ///
+    /// - Parameter f: Function for the flatmap operation.
+    /// - Returns: Result of flatmapping the provided function to the nested `Option`, wrapped in the effect.
     public func subflatMap<B>(_ f: @escaping (A) -> Option<B>) -> OptionT<F, B> {
         return transform { option in Option.fix(option.flatMap(f)) }
     }
 }
 
+// MARK: Functions for `OptionT` when the effect has an instance of `Applicative`
 extension OptionT where F: Applicative {
+    /// Constructs an `OptionT` with a nested empty `Option`.
+    ///
+    /// - Returns: An `OptionT` with a nested empty `Option`.
     public static func none() -> OptionT<F, A> {
         return OptionT(F.pure(.none()))
     }
 
+    /// Constructs an `OptionT` with a nested present `Option`.
+    ///
+    /// - Parameter a: Value to be wrapped in the nested `Option`.
+    /// - Returns: An `OptionT` with a nested present `Option`.
     public static func some(_ a: A) -> OptionT<F, A> {
         return OptionT(F.pure(.some(a)))
     }
 
+    /// Constructs an `OptionT` from an `Option`.
+    ///
+    /// - Parameter option: An `Option` value.
+    /// - Returns: An `OptionT` wrapping the passed argument.
     public static func fromOption(_ option: Option<A>) -> OptionT<F, A> {
         return OptionT(F.pure(option))
     }
 }
 
+// MARK: Functions for `OptionT` when the effect has an instance of `Monad`
 extension OptionT where F: Monad {
+    /// Obtains this value if the value contained in the nested option is present, or a default value if it is absent.
+    ///
+    /// - Parameter defaultValue: Default value to return when the nested option is empty.
+    /// - Returns: This `OptionT` if the nested option is present, or the default value otherwise.
     public func orElse(_ defaultValue: OptionT<F, A>) -> OptionT<F, A> {
         return orElseF(defaultValue.value)
     }
 
+    /// Obtains this value if the value contained in the nested option is present, or a default value if it is absent.
+    ///
+    /// - Parameter defaultValue: Default value to return when the nested option is empty.
+    /// - Returns: This `OptionT` if the nested option is present, or the default value otherwise.
     public func orElseF(_ defaultValue: Kind<F, Option<A>>) -> OptionT<F, A> {
         return OptionT<F, A>(value.flatMap { option in
             option.fold(constant(defaultValue),
                         constant(F.pure(option))) })
     }
 
+    /// Flatmaps a function that produces an effect and lifts if back to `OptionT`.
+    ///
+    /// - Parameter f: A function producing an effect.
+    /// - Returns: Result of flatmapping and lifting the function thi this value.
     public func semiflatMap<B>(_ f: @escaping (A) -> Kind<F, B>) -> OptionT<F, B> {
-        return OptionT<F, B>.fix(self.flatMap({ option in self.liftF(f(option)) }))
+        return OptionT<F, B>.fix(self.flatMap({ option in OptionT<F, B>.liftF(f(option)) }))
     }
 
+    /// Obtains the value contained in the nested `Option` if present, or a default value otherwise.
+    ///
+    /// - Parameter defaultValue: Default value to return when the nested option is empty.
+    /// - Returns: The value in the nested option wrapped in the effect if it is present, or the default value otherwise.
     public func getOrElseF(_ defaultValue: Kind<F, A>) -> Kind<F, A> {
         return value.flatMap { option in option.fold(constant(defaultValue), F.pure) }
     }
 }
 
+// MARK: Instance of `EquatableK` for `OptionT`
 extension OptionTPartial: EquatableK where F: EquatableK {
     public static func eq<A>(_ lhs: Kind<OptionTPartial<F>, A>, _ rhs: Kind<OptionTPartial<F>, A>) -> Bool where A : Equatable {
         return OptionT.fix(lhs).value == OptionT.fix(rhs).value
     }
 }
 
+// MARK: Instance of `Invariant` for `OptionT`
 extension OptionTPartial: Invariant where F: Functor {}
 
+// MARK: Instance of `Functor` for `OptionT`
 extension OptionTPartial: Functor where F: Functor {
     public static func map<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> B) -> Kind<OptionTPartial<F>, B> {
         let ota = OptionT.fix(fa)
@@ -95,6 +170,7 @@ extension OptionTPartial: Functor where F: Functor {
     }
 }
 
+// MARK: Instance of `FunctorFilter` for `OptionT`
 extension OptionTPartial: FunctorFilter where F: Functor {
     public static func mapFilter<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<OptionTPartial<F>, B> {
         let ota = OptionT.fix(fa)
@@ -102,6 +178,7 @@ extension OptionTPartial: FunctorFilter where F: Functor {
     }
 }
 
+// MARK: Instance of `Applicative` for `OptionT`
 extension OptionTPartial: Applicative where F: Applicative {
     public static func pure<A>(_ a: A) -> Kind<OptionTPartial<F>, A> {
         return OptionT(F.pure(.some(a)))
@@ -114,6 +191,7 @@ extension OptionTPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Monad` for `OptionT`
 extension OptionTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<OptionTPartial<F>, B>) -> Kind<OptionTPartial<F>, B> {
         let ota = OptionT.fix(fa)
@@ -133,12 +211,14 @@ extension OptionTPartial: Monad where F: Monad {
     }
 }
 
+// MARK: Instance of `SemigroupK` for `OptionT`
 extension OptionTPartial: SemigroupK where F: Monad {
     public static func combineK<A>(_ x: Kind<OptionTPartial<F>, A>, _ y: Kind<OptionTPartial<F>, A>) -> Kind<OptionTPartial<F>, A> {
         return OptionT.fix(x).orElse(OptionT.fix(y))
     }
 }
 
+// MARK: Instance of `MonoidK` for `OptionT`
 extension OptionTPartial: MonoidK where F: Monad {
     public static func emptyK<A>() -> Kind<OptionTPartial<F>, A> {
         return OptionT(F.pure(.none()))
