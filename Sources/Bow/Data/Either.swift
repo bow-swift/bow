@@ -149,9 +149,7 @@ class Right<A, B> : Either<A, B> {
     }
 }
 
-// MARK: Protocol conformances
-
-/// Conformance of `Either` to `CustomStringConvertible`
+// MARK: Conformance of `Either` to `CustomStringConvertible`
 extension Either: CustomStringConvertible {
     public var description: String {
         return fold({ a in "Left(\(a))"},
@@ -159,7 +157,7 @@ extension Either: CustomStringConvertible {
     }
 }
 
-/// Conformance of `Either` to `CustomDebugStringConvertible`, provided that both of its type arguments conform to `CustomDebugStringConvertible`.
+// MARK: Conformance of `Either` to `CustomDebugStringConvertible`, provided that both of its type arguments conform to `CustomDebugStringConvertible`.
 extension Either: CustomDebugStringConvertible where A: CustomDebugStringConvertible, B: CustomDebugStringConvertible {
     public var debugDescription: String {
         return fold({ a in "Left(\(a.debugDescription)"},
@@ -167,7 +165,7 @@ extension Either: CustomDebugStringConvertible where A: CustomDebugStringConvert
     }
 }
 
-/// Instance of `EquatableK` for `Either`.
+// MARK: Instance of `EquatableK` for `Either`.
 extension EitherPartial: EquatableK where L: Equatable {
     public static func eq<A>(_ lhs: Kind<EitherPartial<L>, A>, _ rhs: Kind<EitherPartial<L>, A>) -> Bool where A : Equatable {
         let el = Either.fix(lhs)
@@ -177,14 +175,14 @@ extension EitherPartial: EquatableK where L: Equatable {
     }
 }
 
-/// Instance of `Functor` for `Either`.
+// MARK: Instance of `Functor` for `Either`.
 extension EitherPartial: Functor {
     public static func map<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> B) -> Kind<EitherPartial<L>, B> {
         return Either.fix(fa).fold(Either.left, Either.right <<< f)
     }
 }
 
-/// Instance of `Applicative` for `Either`.
+// MARK: Instance of `Applicative` for `Either`.
 extension EitherPartial: Applicative {
     public static func pure<A>(_ a: A) -> Kind<EitherPartial<L>, A> {
         return Either.right(a)
@@ -194,7 +192,7 @@ extension EitherPartial: Applicative {
 // MARK: Instance of `Selective` for `Either`
 extension EitherPartial: Selective {}
 
-/// Instance of `Monad` for `Either`.
+// MARK: Instance of `Monad` for `Either`.
 extension EitherPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> Kind<EitherPartial<L>, B>) -> Kind<EitherPartial<L>, B> {
         return Either.fix(fa).fold(Either.left, f)
@@ -209,7 +207,7 @@ extension EitherPartial: Monad {
     }
 }
 
-/// Instance of `ApplicativeError` for `Either`.
+// MARK: Instance of `ApplicativeError` for `Either`.
 extension EitherPartial: ApplicativeError {
     public typealias E = L
 
@@ -222,10 +220,10 @@ extension EitherPartial: ApplicativeError {
     }
 }
 
-/// Instance of `MonadError` for `Either`.
+// MARK: Instance of `MonadError` for `Either`.
 extension EitherPartial: MonadError {}
 
-/// Instance of `Foldable` for `Either`.
+// MARK: Instance of `Foldable` for `Either`.
 extension EitherPartial: Foldable {
     public static func foldLeft<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ c: B, _ f: @escaping (B, A) -> B) -> B {
         return Either.fix(fa).fold(constant(c), { b in f(c, b) })
@@ -236,7 +234,7 @@ extension EitherPartial: Foldable {
     }
 }
 
-/// Instance of `Traverse` for `Either`.
+// MARK: Instance of `Traverse` for `Either`.
 extension EitherPartial: Traverse {
     public static func traverse<G: Applicative, A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<EitherPartial<L>, B>> {
         return Either.fix(fa).fold({ a in G.pure(Either.left(a)) },
@@ -244,7 +242,7 @@ extension EitherPartial: Traverse {
     }
 }
 
-/// Instance of `SemigroupK` for `Either`.
+// MARK: Instance of `SemigroupK` for `Either`.
 extension EitherPartial: SemigroupK {
     public static func combineK<A>(_ x: Kind<EitherPartial<L>, A>, _ y: Kind<EitherPartial<L>, A>) -> Kind<EitherPartial<L>, A> {
         return Either.fix(x).fold(constant(Either.fix(y)), Either.right)
