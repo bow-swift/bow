@@ -24,7 +24,11 @@ class IorTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<IorPartial<Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<IorPartial<Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<IorPartial<Int>>.check()
     }

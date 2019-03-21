@@ -168,6 +168,9 @@ extension ForOption: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Option`
+extension ForOption: Selective {}
+
 /// Instance of `Monad` for `Option`.
 extension ForOption: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {

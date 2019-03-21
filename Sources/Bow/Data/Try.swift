@@ -126,6 +126,9 @@ extension ForTry: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Try`
+extension ForTry: Selective {}
+
 extension ForTry: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<ForTry, B>) -> Kind<ForTry, B> {
         let trya = Try<A>.fix(fa)

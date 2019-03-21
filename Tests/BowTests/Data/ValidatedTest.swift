@@ -21,6 +21,10 @@ class ValidatedTest: XCTestCase {
         ApplicativeLaws<ValidatedPartial<Int>>.check()
     }
     
+    func testSelectiveLaws() {
+        SelectiveLaws<ValidatedPartial<Int>>.check()
+    }
+    
     func testSemigroupKLaws() {
         SemigroupKLaws<ValidatedPartial<Int>>.check(generator: self.generator)
     }

@@ -140,6 +140,9 @@ extension FreePartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Free`
+extension FreePartial: Selective {}
+
 extension FreePartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<FreePartial<S>, A>, _ f: @escaping (A) -> Kind<FreePartial<S>, B>) -> Kind<FreePartial<S>, B> {
         return FlatMapped(Free.fix(fa), { a in Free.fix(f(a)) })

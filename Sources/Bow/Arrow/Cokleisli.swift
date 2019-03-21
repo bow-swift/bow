@@ -67,6 +67,9 @@ extension CokleisliPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Cokleisli`
+extension CokleisliPartial: Selective {}
+
 extension CokleisliPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<CokleisliPartial<F, I>, A>, _ f: @escaping (A) -> Kind<CokleisliPartial<F, I>, B>) -> Kind<CokleisliPartial<F, I>, B> {
         let cok = Cokleisli.fix(fa)

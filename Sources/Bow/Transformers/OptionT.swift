@@ -122,6 +122,9 @@ extension OptionTPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `OptionT`
+extension OptionTPartial: Selective where F: Monad {}
+
 extension OptionTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<OptionTPartial<F>, B>) -> Kind<OptionTPartial<F>, B> {
         let ota = OptionT.fix(fa)

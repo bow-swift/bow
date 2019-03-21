@@ -319,6 +319,9 @@ extension IOPartial: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `IO`
+extension IOPartial: Selective {}
+
 extension IOPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
         return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))

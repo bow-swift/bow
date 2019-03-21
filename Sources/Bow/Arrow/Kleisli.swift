@@ -73,6 +73,9 @@ extension KleisliPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Kleisli`
+extension KleisliPartial: Selective where F: Monad {}
+
 extension KleisliPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (A) -> Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, B> {
         return Kleisli<F, D, B>({ d in Kleisli.fix(fa).run(d).flatMap { a in Kleisli.fix(f(a)).run(d) } })

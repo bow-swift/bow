@@ -71,6 +71,9 @@ extension ForObservableK: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `ObservableK`
+extension ForObservableK: Selective {}
+
 extension ForObservableK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
         return ObservableK.fix(fa).value.flatMap { a in ObservableK<B>.fix(f(a)).value }.k()
