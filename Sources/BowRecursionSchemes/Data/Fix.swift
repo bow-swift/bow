@@ -16,6 +16,10 @@ public class Fix<A>: FixOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Fix.
 public postfix func ^<A>(_ value: FixOf<A>) -> Fix<A> {
     return Fix.fix(value)
 }

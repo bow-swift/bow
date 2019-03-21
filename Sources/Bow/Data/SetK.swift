@@ -27,6 +27,10 @@ public final class SetK<A: Hashable>: SetKOf<A> {
 	}
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to SetK.
 public postfix func ^<A>(_ fa: SetKOf<A>) -> SetK<A> {
     return SetK.fix(fa)
 }

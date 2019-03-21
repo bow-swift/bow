@@ -16,6 +16,10 @@ public class EitherT<F, A, B> : EitherTOf<F, A, B> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to EitherT.
 public postfix func ^<F, A, B>(_ fa: EitherTOf<F, A, B>) -> EitherT<F, A, B> {
     return EitherT.fix(fa)
 }

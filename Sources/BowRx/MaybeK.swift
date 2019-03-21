@@ -41,7 +41,11 @@ public class MaybeK<A>: MaybeKOf<A> {
     }
 }
 
-public postfix func ^<A>(_ value : MaybeKOf<A>) -> MaybeK<A> {
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to MaybeK.
+public postfix func ^<A>(_ value: MaybeKOf<A>) -> MaybeK<A> {
     return MaybeK.fix(value)
 }
 

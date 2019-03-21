@@ -32,6 +32,10 @@ public class Cofree<S, A>: CofreeOf<S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Cofree.
 public postfix func ^<S, A>(_ fa: CofreeOf<S, A>) -> Cofree<S, A> {
     return Cofree.fix(fa)
 }

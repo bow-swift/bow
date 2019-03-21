@@ -23,6 +23,10 @@ public class Store<S, V> : StoreOf<S, V> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Store.
 public postfix func ^<S, V>(_ value: StoreOf<S, V>) -> Store<S, V> {
     return Store.fix(value)
 }

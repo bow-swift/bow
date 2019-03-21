@@ -13,6 +13,10 @@ public class State<S, A>: StateOf<S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to State.
 public postfix func ^<S, A>(_ value: StateOf<S, A>) -> State<S, A> {
     return State.fix(value)
 }

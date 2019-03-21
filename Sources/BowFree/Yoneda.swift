@@ -23,7 +23,11 @@ open class Yoneda<F, A>: YonedaOf<F, A> {
     }
 }
 
-public postfix func ^<F, A>(_ fa : YonedaOf<F, A>) -> Yoneda<F, A> {
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Yoneda.
+public postfix func ^<F, A>(_ fa: YonedaOf<F, A>) -> Yoneda<F, A> {
     return Yoneda.fix(fa)
 }
 

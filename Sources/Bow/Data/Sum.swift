@@ -37,7 +37,11 @@ public class Sum<F, G, V> : SumOf<F, G, V> {
     }
 }
 
-public postfix func ^<F, G, V>(_ value : SumOf<F, G, V>) -> Sum<F, G, V> {
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Sum.
+public postfix func ^<F, G, V>(_ value: SumOf<F, G, V>) -> Sum<F, G, V> {
     return Sum.fix(value)
 }
 

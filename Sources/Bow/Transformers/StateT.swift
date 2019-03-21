@@ -16,6 +16,10 @@ public class StateT<F, S, A>: StateTOf<F, S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to StateT.
 public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
     return StateT.fix(fa)
 }

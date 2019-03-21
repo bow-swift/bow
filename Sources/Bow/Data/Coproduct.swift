@@ -20,6 +20,10 @@ public class Coproduct<F, G, A>: CoproductOf<F, G, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Coproduct.
 public postfix func ^<F, G, A>(_ fa: CoproductOf<F, G, A>) -> Coproduct<F, G, A> {
     return Coproduct.fix(fa)
 }

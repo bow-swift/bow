@@ -50,6 +50,10 @@ public class SingleK<A>: SingleKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to SingleK.
 public postfix func ^<A>(_ value: SingleKOf<A>) -> SingleK<A> {
     return SingleK.fix(value)
 }

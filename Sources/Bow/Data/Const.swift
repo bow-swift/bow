@@ -20,6 +20,10 @@ public final class Const<A, T>: ConstOf<A, T> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Const.
 public postfix func ^<A, T>(_ fa: ConstOf<A, T>) -> Const<A, T> {
     return Const.fix(fa)
 }

@@ -56,7 +56,11 @@ public class Free<S, A>: FreeOf<S, A> {
     }
 }
 
-public postfix func ^<S, A>(_ fa : FreeOf<S, A>) -> Free<S, A> {
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Free.
+public postfix func ^<S, A>(_ fa: FreeOf<S, A>) -> Free<S, A> {
     return Free.fix(fa)
 }
 

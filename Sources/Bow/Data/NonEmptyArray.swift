@@ -64,6 +64,10 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to NonEmptyArray.
 public postfix func ^<A>(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
     return NonEmptyArray.fix(fa)
 }

@@ -18,6 +18,10 @@ public class Moore<E, V>: MooreOf<E, V> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Moore.
 public postfix func ^<E, V>(_ value: MooreOf<E, V>) -> Moore<E, V> {
     return Moore.fix(value)
 }

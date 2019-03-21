@@ -30,7 +30,11 @@ public class Day<F: Comonad, G: Comonad, A> : DayOf<F, G, A> {
     }
 }
 
-public postfix func ^<F, G, A>(_ value : DayOf<F, G, A>) -> Day<F, G, A> {
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Day.
+public postfix func ^<F, G, A>(_ value: DayOf<F, G, A>) -> Day<F, G, A> {
     return Day.fix(value)
 }
 

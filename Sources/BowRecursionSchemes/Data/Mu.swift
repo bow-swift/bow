@@ -14,6 +14,10 @@ open class Mu<F>: MuOf<F> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to Mu.
 public postfix func ^<F>(_ value: MuOf<F>) -> Mu<F> {
     return Mu.fix(value)
 }

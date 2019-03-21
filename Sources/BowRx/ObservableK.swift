@@ -51,6 +51,10 @@ public class ObservableK<A>: ObservableKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to ObservableK.
 public postfix func ^<A>(_ value: ObservableKOf<A>) -> ObservableK<A> {
     return ObservableK.fix(value)
 }

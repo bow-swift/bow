@@ -21,6 +21,10 @@ public class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Kleisli.
 public postfix func ^<F, D, A>(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
     return Kleisli.fix(fa)
 }

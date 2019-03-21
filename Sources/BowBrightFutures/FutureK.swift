@@ -61,7 +61,11 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
     }
 }
 
-public postfix func ^<E, A>(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to FutureK.
+public postfix func ^<E, A>(_ value: FutureKOf<E, A>) -> FutureK<E, A> {
     return FutureK.fix(value)
 }
 

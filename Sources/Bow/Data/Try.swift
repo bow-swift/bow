@@ -67,6 +67,10 @@ public class Try<A>: TryOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Try.
 public postfix func ^<A>(_ fa: TryOf<A>) -> Try<A> {
     return Try.fix(fa)
 }

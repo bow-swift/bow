@@ -35,7 +35,11 @@ public class Coyoneda<F, P, A>: CoyonedaOf<F, P, A> {
     }
 }
 
-public postfix func ^<F, P, A>(_ fa : CoyonedaOf<F, P, A>) -> Coyoneda<F, P, A> {
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Coyoneda.
+public postfix func ^<F, P, A>(_ fa: CoyonedaOf<F, P, A>) -> Coyoneda<F, P, A> {
     return Coyoneda.fix(fa)
 }
 
