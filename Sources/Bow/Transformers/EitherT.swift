@@ -102,6 +102,9 @@ extension EitherTPartial: Applicative where F: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `EitherT`
+extension EitherTPartial: Selective where F: Monad {}
+
 extension EitherTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ f: @escaping (A) -> Kind<EitherTPartial<F, L>, B>) -> Kind<EitherTPartial<F, L>, B> {
         let eta = EitherT.fix(fa)

@@ -284,6 +284,9 @@ extension ForEval: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Eval`
+extension ForEval: Selective {}
+
 extension ForEval: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForEval, A>, _ f: @escaping (A) -> Kind<ForEval, B>) -> Kind<ForEval, B> {
         let ff: (A) -> Eval<B> = { a in Eval.fix(f(a)) }

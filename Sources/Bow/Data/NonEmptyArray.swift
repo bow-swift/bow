@@ -113,6 +113,9 @@ extension ForNonEmptyArray: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `NonEmptyArray`
+extension ForNonEmptyArray: Selective {}
+
 extension ForNonEmptyArray: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForNonEmptyArray, A>, _ f: @escaping (A) -> Kind<ForNonEmptyArray, B>) -> Kind<ForNonEmptyArray, B> {
         let nea = NonEmptyArray.fix(fa)

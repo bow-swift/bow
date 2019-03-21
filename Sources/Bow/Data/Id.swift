@@ -70,6 +70,9 @@ extension ForId: Applicative {
     }
 }
 
+// MARK: Instance of `Selective` for `Id`
+extension ForId: Selective {}
+
 // MARK: Instance of `Monad` for `Id`
 extension ForId: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<ForId, B>) -> Kind<ForId, B> {

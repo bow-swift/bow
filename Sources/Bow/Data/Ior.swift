@@ -173,6 +173,9 @@ extension IorPartial: Applicative where L: Semigroup {
     }
 }
 
+// MARK: Instance of `Selective` for `Ior`
+extension IorPartial: Selective where L: Semigroup {}
+
 extension IorPartial: Monad where L: Semigroup {
     public static func flatMap<A, B>(_ fa: Kind<IorPartial<L>, A>, _ f: @escaping (A) -> Kind<IorPartial<L>, B>) -> Kind<IorPartial<L>, B> {
         return Ior.fix(fa).fold(
