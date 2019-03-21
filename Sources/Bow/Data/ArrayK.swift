@@ -75,6 +75,14 @@ public final class ArrayK<A>: ArrayKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to ArrayK.
+public postfix func ^<A>(_ fa: ArrayKOf<A>) -> ArrayK<A> {
+    return ArrayK.fix(fa)
+}
+
 // MARK: Convenience methods to convert to ArrayK
 public extension Array {
     /// Creates an `ArrayK` from this array.
@@ -121,6 +129,9 @@ extension ForArrayK: Applicative {
         return ArrayK([a])
     }
 }
+
+// MARK: Instance of `Selective` for `ArrayK`
+extension ForArrayK: Selective {}
 
 // MARK: Instance of `Monad` for `ArrayK`
 extension ForArrayK: Monad {

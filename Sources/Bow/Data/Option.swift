@@ -118,6 +118,14 @@ public final class Option<A>: OptionOf<A> {
     }
 }
 
+/// Safe downcasting.
+///
+/// - Parameter fa: Option in higher-kind form.
+/// - Returns: Value cast to Option.
+public postfix func ^<A>(_ fa: OptionOf<A>) -> Option<A> {
+    return Option.fix(fa)
+}
+
 // MARK: Protocol conformances
 
 /// Conformance of `Option` to `CustomStringConvertible`.
@@ -159,6 +167,9 @@ extension ForOption: Applicative {
         return Option.some(a)
     }
 }
+
+// MARK: Instance of `Selective` for `Option`
+extension ForOption: Selective {}
 
 /// Instance of `Monad` for `Option`.
 extension ForOption: Monad {

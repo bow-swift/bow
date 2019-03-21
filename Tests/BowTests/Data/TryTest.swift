@@ -19,7 +19,11 @@ class TryTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForTry>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForTry>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForTry>.check()
     }

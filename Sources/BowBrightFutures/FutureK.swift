@@ -61,6 +61,14 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to FutureK.
+public postfix func ^<E, A>(_ value: FutureKOf<E, A>) -> FutureK<E, A> {
+    return FutureK.fix(value)
+}
+
 extension FutureKPartial: Functor {
     public static func map<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<FutureKPartial<E>, B> {
         return FutureK.fix(fa).value.map(f).k()
@@ -72,6 +80,9 @@ extension FutureKPartial: Applicative {
         return Future(value: a).k()
     }
 }
+
+// MARK: Instance of `Selective` for `FutureK`
+extension FutureKPartial: Selective {}
 
 extension FutureKPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> Kind<FutureKPartial<E>, B>) -> Kind<FutureKPartial<E>, B> {
