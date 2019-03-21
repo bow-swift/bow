@@ -37,6 +37,27 @@ public protocol Applicative: Functor {
 
 // MARK: Related functions
 public extension Applicative {
+    /// Sequentially compose two computations, discarding the value produced by the first.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st computation.
+    ///   - fb: 2nd computation.
+    /// - Returns: Result of running the second computation after the first one.
+    public static func sequenceRight<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, B> {
+        return map(fa, fb) { _, b in b }
+    }
+
+    /// Sequentially compose two computations, discarding the value produced by the second.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st computation.
+    ///   - fb: 2nd computation.
+    /// - Returns: Result produced from the first computation after both are computed.
+
+    public static func sequenceLeft<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, A> {
+        return map(fa, fb) { a, _ in a }
+    }
+
     /// Creates a tuple in the context implementing this instance from two values in the same context.
     ///
     /// - Parameters:

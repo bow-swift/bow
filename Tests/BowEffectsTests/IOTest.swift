@@ -20,6 +20,10 @@ class IOTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<IOPartial<CategoryError>>.check()
     }
+
+    func testSelectiveLaws() {
+        SelectiveLaws<IOPartial<CategoryError>>.check()
+    }
     
     func testMonadLaws() {
         MonadLaws<IOPartial<CategoryError>>.check()

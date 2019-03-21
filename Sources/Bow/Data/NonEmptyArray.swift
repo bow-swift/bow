@@ -64,6 +64,14 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to NonEmptyArray.
+public postfix func ^<A>(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
+    return NonEmptyArray.fix(fa)
+}
+
 public extension NonEmptyArray where A: Equatable {
     public func contains(element : A) -> Bool {
         return head == element || tail.contains(where: { $0 == element })
@@ -104,6 +112,9 @@ extension ForNonEmptyArray: Applicative {
         return NonEmptyArray(head: a, tail: [])
     }
 }
+
+// MARK: Instance of `Selective` for `NonEmptyArray`
+extension ForNonEmptyArray: Selective {}
 
 extension ForNonEmptyArray: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForNonEmptyArray, A>, _ f: @escaping (A) -> Kind<ForNonEmptyArray, B>) -> Kind<ForNonEmptyArray, B> {

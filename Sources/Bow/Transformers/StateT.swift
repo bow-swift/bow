@@ -33,6 +33,14 @@ public class StateT<F, S, A>: StateTOf<F, S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to StateT.
+public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
+    return StateT.fix(fa)
+}
+
 // MARK: Convenience functions when the effect is `Id`
 public extension StateT where F == ForId {
     /// Runs this computation provided an initial state.
@@ -158,6 +166,9 @@ extension StateTPartial: Applicative where F: Monad {
         return StateT(F.pure({ s in F.pure((s, a)) }))
     }
 }
+
+// MARK: Instance of `Selective` for `StateT`
+extension StateTPartial: Selective where F: Monad {}
 
 // MARK: Instance of `Monad` for `StateT`
 extension StateTPartial: Monad where F: Monad {
