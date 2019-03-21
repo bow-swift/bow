@@ -138,7 +138,7 @@ extension OptionT where F: Monad {
     /// Flatmaps a function that produces an effect and lifts if back to `OptionT`.
     ///
     /// - Parameter f: A function producing an effect.
-    /// - Returns: Result of flatmapping and lifting the function thi this value.
+    /// - Returns: Result of flatmapping and lifting the function to this value.
     public func semiflatMap<B>(_ f: @escaping (A) -> Kind<F, B>) -> OptionT<F, B> {
         return OptionT<F, B>.fix(self.flatMap({ option in OptionT<F, B>.liftF(f(option)) }))
     }
