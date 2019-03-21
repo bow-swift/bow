@@ -37,6 +37,10 @@ fileprivate class Ops<A>: Kind<ForOps, A> {
     }
 }
 
+fileprivate postfix func ^<A>(_ fa: Kind<ForOps, A>) -> Ops<A> {
+    return Ops.fix(fa)
+}
+
 fileprivate class Value: Ops<Int> {
     let a: Int
     

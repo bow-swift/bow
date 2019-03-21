@@ -27,6 +27,14 @@ public class Id<A>: IdOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to `Id`.
+public postfix func ^<A>(_ fa: IdOf<A>) -> Id<A> {
+    return Id.fix(fa)
+}
+
 // MARK: Conformance of `Id` to `CustomStringConvertible`.
 extension Id: CustomStringConvertible {
     public var description: String {

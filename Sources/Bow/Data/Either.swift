@@ -125,6 +125,14 @@ public class Either<A, B>: EitherOf<A, B> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to Either.
+public postfix func ^<A, B>(_ fa: EitherOf<A, B>) -> Either<A, B> {
+    return Either.fix(fa)
+}
+
 class Left<A, B> : Either<A, B> {
     let a : A
     

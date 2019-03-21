@@ -118,6 +118,14 @@ public final class Option<A>: OptionOf<A> {
     }
 }
 
+/// Safe downcasting.
+///
+/// - Parameter fa: Option in higher-kind form.
+/// - Returns: Value cast to Option.
+public postfix func ^<A>(_ fa: OptionOf<A>) -> Option<A> {
+    return Option.fix(fa)
+}
+
 // MARK: Conformance of `Option` to `CustomStringConvertible`.
 extension Option: CustomStringConvertible {
     public var description: String {

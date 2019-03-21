@@ -54,6 +54,14 @@ public class Eval<A> : EvalOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Eval.
+public postfix func ^<A>(_ fa : EvalOf<A>) -> Eval<A> {
+    return Eval.fix(fa)
+}
+
 class Now<A> : Eval<A> {
     fileprivate let a : A
     

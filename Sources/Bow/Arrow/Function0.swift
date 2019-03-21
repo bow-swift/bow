@@ -33,6 +33,14 @@ public class Function0<A>: Function0Of<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to `Function0`.
+public postfix func ^<A>(_ fa: Function0Of<A>) -> Function0<A> {
+    return Function0.fix(fa)
+}
+
 // MARK: Protocol conformances
 
 extension ForFunction0: EquatableK {

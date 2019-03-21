@@ -56,6 +56,14 @@ public class Free<S, A>: FreeOf<S, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Free.
+public postfix func ^<S, A>(_ fa: FreeOf<S, A>) -> Free<S, A> {
+    return Free.fix(fa)
+}
+
 public extension Free where S: Monad {
     public func run() -> Kind<S, A> {
         return self.foldMapK(FunctionK<S, S>.id)
