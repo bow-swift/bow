@@ -20,7 +20,11 @@ class OptionTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<ForOption>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<ForOption>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<ForOption>.check()
     }

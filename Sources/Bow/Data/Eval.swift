@@ -54,6 +54,14 @@ public class Eval<A> : EvalOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Eval.
+public postfix func ^<A>(_ fa : EvalOf<A>) -> Eval<A> {
+    return Eval.fix(fa)
+}
+
 class Now<A> : Eval<A> {
     fileprivate let a : A
     
@@ -275,6 +283,9 @@ extension ForEval: Applicative {
         return Eval.now(a)
     }
 }
+
+// MARK: Instance of `Selective` for `Eval`
+extension ForEval: Selective {}
 
 extension ForEval: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForEval, A>, _ f: @escaping (A) -> Kind<ForEval, B>) -> Kind<ForEval, B> {

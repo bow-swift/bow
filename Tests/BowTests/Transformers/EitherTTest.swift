@@ -21,7 +21,11 @@ class EitherTTest: XCTestCase {
     func testApplicativeLaws() {
         ApplicativeLaws<EitherTPartial<ForId, Int>>.check()
     }
-    
+
+    func testSelectiveLaws() {
+        SelectiveLaws<EitherTPartial<ForId, Int>>.check()
+    }
+
     func testMonadLaws() {
         MonadLaws<EitherTPartial<ForId, Int>>.check()
     }

@@ -33,6 +33,14 @@ public class Function0<A>: Function0Of<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to `Function0`.
+public postfix func ^<A>(_ fa: Function0Of<A>) -> Function0<A> {
+    return Function0.fix(fa)
+}
+
 // MARK: Protocol conformances
 
 extension ForFunction0: EquatableK {
@@ -52,6 +60,9 @@ extension ForFunction0: Applicative {
         return Function0(constant(a))
     }
 }
+
+// MARK: Instance of `Selective` for `Function0`
+extension ForFunction0: Selective {}
 
 extension ForFunction0: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> Kind<ForFunction0, B>) -> Kind<ForFunction0, B> {

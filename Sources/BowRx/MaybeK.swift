@@ -41,6 +41,14 @@ public class MaybeK<A>: MaybeKOf<A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in higher-kind form.
+/// - Returns: Value cast to MaybeK.
+public postfix func ^<A>(_ value: MaybeKOf<A>) -> MaybeK<A> {
+    return MaybeK.fix(value)
+}
+
 extension ForMaybeK: Functor {
     public static func map<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> B) -> Kind<ForMaybeK, B> {
         return MaybeK.fix(fa).value.map(f).k()
@@ -52,6 +60,9 @@ extension ForMaybeK: Applicative {
         return Maybe.just(a).k()
     }
 }
+
+// MARK: Instance of `Selective` for `MaybeK`
+extension ForMaybeK: Selective {}
 
 extension ForMaybeK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {

@@ -11,7 +11,7 @@ import Foundation
 /// Also, instances of `Monad` derive a default implementation for `Applicative.ap` as:
 ///
 ///     ap(ff, fa) == flapMap(ff, { f in map(fa, f) }
-public protocol Monad: Applicative {
+public protocol Monad: Selective {
     /// Sequentially compose two computations, passing any value produced by the first as an argument to the second.
     ///
     /// - Parameters:
@@ -39,6 +39,12 @@ public extension Monad {
     // Docs inherited from `Applicative`
     public static func ap<A, B>(_ ff: Kind<Self, (A) -> B>, _ fa: Kind<Self, A>) -> Kind<Self, B> {
         return self.flatMap(ff, { f in map(fa, f) })
+    }
+
+    // Docs inherited from `Selective`
+    static func select<A, B>(_ fab: Kind<Self, Either<A, B>>, _ f: Kind<Self, (A) -> B>) -> Kind<Self, B> {
+        return flatMap(fab) { eab in eab.fold({ a in map(f, { ff in ff(a) }) },
+                                              { b in pure(b) })}
     }
 
     /// Flattens a nested structure of the context implementing this instance into a single layer.

@@ -16,6 +16,14 @@ public class OptionT<F, A> : OptionTOf<F, A> {
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to OptionT.
+public postfix func ^<F, A>(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
+    return OptionT.fix(fa)
+}
+
 extension OptionT where F: Functor {
     public func fold<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
         return value.map { option in option.fold(ifEmpty, f) }
@@ -113,6 +121,9 @@ extension OptionTPartial: Applicative where F: Applicative {
         return OptionT(F.map(otf.value, ota.value) { of, oa in Option.fix(of.ap(oa)) })
     }
 }
+
+// MARK: Instance of `Selective` for `OptionT`
+extension OptionTPartial: Selective where F: Monad {}
 
 extension OptionTPartial: Monad where F: Monad {
     public static func flatMap<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<OptionTPartial<F>, B>) -> Kind<OptionTPartial<F>, B> {
