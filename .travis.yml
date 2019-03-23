@@ -52,6 +52,12 @@ jobs:
     - <<: *test
       env:
         - SCHEME="Bow-BrightFutures"
+    - stage: compile-docs
+      before_install:
+        - brew tap bow-swift/nef
+        - brew install nef
+      script:
+        - nef compile contents/Documentation
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       addons:
