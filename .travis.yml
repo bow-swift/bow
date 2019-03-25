@@ -1,5 +1,6 @@
 language: objective-c
 osx_image: xcode10
+sudo: required
 
 env:
   global:
@@ -17,6 +18,14 @@ jobs:
     # Declare the same stage name multiple times to test multiple versions.
     # Using a YAML alias to prevent redundancy.
     # https://github.com/travis-ci/travis-ci/issues/8295#issuecomment-454167006
+    - stage: compile-docs
+      before_install:
+        - brew update
+      install:
+        - brew tap bow-swift/nef
+        - brew install nef
+      script:
+        - nef compile contents/Documentation
     - &test
       stage: test
       env:
@@ -52,14 +61,6 @@ jobs:
     - <<: *test
       env:
         - SCHEME="Bow-BrightFutures"
-    - stage: compile-docs
-      before_install:
-        - brew update
-      install:
-        - brew tap bow-swift/nef
-        - brew install nef
-      script:
-        - nef compile contents/Documentation
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       addons:
