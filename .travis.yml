@@ -1,7 +1,12 @@
 language: objective-c
 osx_image: xcode10
 sudo: required
-
+addons:
+  homebrew:
+    taps:
+      - bow-swift/nef
+    packages:
+      - nef
 env:
   global:
     - PROJECT=Bow.xcodeproj
@@ -19,11 +24,6 @@ jobs:
     # Using a YAML alias to prevent redundancy.
     # https://github.com/travis-ci/travis-ci/issues/8295#issuecomment-454167006
     - stage: compile-docs
-      before_install:
-        - brew update
-      install:
-        - brew tap bow-swift/nef
-        - sudo brew install nef
       script:
         - nef compile contents/Documentation
     - &test
