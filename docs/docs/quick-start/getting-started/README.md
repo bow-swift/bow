@@ -1,15 +1,14 @@
-// nef:begin:header
-/*
- layout: docs
- title: Getting started
- */
-// nef:end
-/*:
- # Getting started
+---
+layout: docs
+title: Getting started
+permalink: /docs/quick-start/getting-started/
+---
+
+# Getting started
  
  Bow is available using CocoaPods, Carthage and Swift Package Manager.
  
- ## CocoaPods
+## CocoaPods
  
  You can consume each Bow module as a separate pod. You can add these lines to your Podfile at your convenience:
  
@@ -25,7 +24,7 @@
  pod "BowBrightFutures",    "~> 0.3.0"
  ```
  
- ## Carthage
+## Carthage
  
  Carthage will download the whole Bow project, but it will compile individual frameworks for each module that you can use separately. Add this line to your Cartfile:
  
@@ -33,7 +32,7 @@
  github "bow-swift/Bow" ~> 0.3.0
  ```
  
- ## Swift Package Manager
+## Swift Package Manager
  
  Create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
 
@@ -69,4 +68,3 @@ let package = Package(
  ```
  $ swift build
  ```
- */

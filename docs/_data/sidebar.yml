@@ -1,24 +1,26 @@
 options:
-  - title: Start
+
+  - title: Quick start
 
     nested_options:
 
-      - title: Index
-        url: /docs/
+        - title: Getting started
+          url: /docs/quick-start/getting-started/
 
-  - title: API Docs
+        - title: Modules
+          url: /docs/quick-start/modules/
 
-    nested_options:
+        - title: Resources
+          url: /docs/quick-start/resources/
 
-          - title: Index
-            url: /api-docs/
 
   - title: Legal
 
     nested_options:
 
-      - title: Credits
-        url: /docs/legal/credits/
+        - title: Credits
+          url: /docs/legal/credits/
 
-      - title: Licenses
-        url: /docs/legal/licenses/
+        - title: License
+          url: /docs/legal/license/
+

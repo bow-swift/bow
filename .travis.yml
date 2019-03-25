@@ -54,6 +54,8 @@ jobs:
         - SCHEME="Bow-BrightFutures"
     - stage: compile-docs
       before_install:
+        - brew update
+      install:
         - brew tap bow-swift/nef
         - brew install nef
       script:

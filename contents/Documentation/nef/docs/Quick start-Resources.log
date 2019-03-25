@@ -1,0 +1,3 @@
+nef(command: Markup.Node.Nef.Command.header, [Markup.Node.raw(" layout: docs\n title: Resources\n")])
+markup(description: Optional(""), " # Resources\n \n In this section you can find a list of projects and libraries that use Bow:\n \n - [Intro to Bow](https://github.com/truizlop/IntroToBow): A playground with an introduction to some of the core features of Bow.\n - [Bow Hangman](https://github.com/truizlop/BowHangman): An implementation of the game of hangman in a pure functional way using Bow.\n - [From imperative to functional code](https://github.com/truizlop/ImperativeToFunctional): A demonstration on how to transform code written in imperative style to a more functional style.\n")
+RENDER SUCCEEDED
