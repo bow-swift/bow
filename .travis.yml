@@ -23,7 +23,7 @@ jobs:
         - brew update
       install:
         - brew tap bow-swift/nef
-        - brew install nef
+        - sudo brew install nef
       script:
         - nef compile contents/Documentation
     - &test
