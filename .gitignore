@@ -60,3 +60,6 @@ _site
 /docs/.bundle/
 /docs/vendor/
 /lib/bundler/man/
+
+## nef
+**/*/nef
