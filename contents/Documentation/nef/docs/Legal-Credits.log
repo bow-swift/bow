@@ -1,3 +1,0 @@
-nef(command: Markup.Node.Nef.Command.header, [Markup.Node.raw(" layout: docs\n title: Credits\n")])
-markup(description: Optional(""), " # Credits\n \n 2019 - © The Bow Authors\n \n For a comprehensive list of contributors, [visit the repository](https://github.com/bow-swift/bow/graphs/contributors) on GitHub.\n")
-RENDER SUCCEEDED
