@@ -72,6 +72,7 @@ jobs:
         - gem install bundler
       script:
         - ./scripts/gen-docs.rb
+        - nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md
       deploy:
         provider: pages
         skip-cleanup: true
