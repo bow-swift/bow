@@ -1,7 +1,7 @@
 // nef:begin:header
 /*
  layout: docs
- title: Licens
+ title: License
  */
 // nef:end
 /*:

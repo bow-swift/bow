@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: License
+title: Licens
 permalink: /docs/legal/license/
 ---
 

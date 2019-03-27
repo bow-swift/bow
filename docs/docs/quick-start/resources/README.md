@@ -26,3 +26,11 @@ permalink: /docs/quick-start/resources/
 
  Be the first one showing here!
  
+
+```swift
+let x = Either<String, Int>.right(2)
+let y = x.map {
+    "\($0 + 2)"
+}
+print(y)
+```
