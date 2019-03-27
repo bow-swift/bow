@@ -1,5 +1,13 @@
 language: objective-c
 osx_image: xcode10
+sudo: required
+addons:
+  homebrew:
+    taps:
+    - bow-swift/nef
+    packages:
+    - sourcekitten
+    - nef
 
 env:
   global:
@@ -17,6 +25,9 @@ jobs:
     # Declare the same stage name multiple times to test multiple versions.
     # Using a YAML alias to prevent redundancy.
     # https://github.com/travis-ci/travis-ci/issues/8295#issuecomment-454167006
+    - stage: compile-docs
+      script:
+        - nef compile contents/Documentation
     - &test
       stage: test
       env:
@@ -54,15 +65,12 @@ jobs:
         - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
       if: branch = master AND type != pull_request
-      addons:
-        homebrew:
-          packages:
-          - sourcekitten
       before_install:
         - gem update --system
         - gem install bundler
       script:
         - ./scripts/gen-docs.rb
+        - nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md
       deploy:
         provider: pages
         skip-cleanup: true

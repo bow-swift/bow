@@ -1,24 +1,57 @@
 options:
-  - title: Start
+
+  - title: Quick start
 
     nested_options:
 
-      - title: Index
-        url: /docs/
+        - title: Getting started
+          url: /docs/quick-start/getting-started/
 
-  - title: API Docs
+        - title: Modules
+          url: /docs/quick-start/modules/
+
+        - title: Resources
+          url: /docs/quick-start/resources/
+
+
+  - title: FP concepts
 
     nested_options:
 
-          - title: Index
-            url: /api-docs/
+        - title: Glossary
+          url: /docs/fp-concepts/glossary/
+
+        - title: Functions vs Procedures
+          url: /docs/fp-concepts/functions-vs-procedures/
+
+        - title: Higher Kinded Types
+          url: /docs/fp-concepts/higher-kinded-types/
+
+        - title: Type classes
+          url: /docs/fp-concepts/type-classes/
+
+
+  - title: Patterns
+
+    nested_options:
+
+        - title: Error handling
+          url: /docs/patterns/error-handling/
+
+        - title: Dependency injection
+          url: /docs/patterns/dependency-injection/
+
+        - title: Polymorphic programs
+          url: /docs/patterns/polymorphic-programs/
+
 
   - title: Legal
 
     nested_options:
 
-      - title: Credits
-        url: /docs/legal/credits/
+        - title: Credits
+          url: /docs/legal/credits/
 
-      - title: Licenses
-        url: /docs/legal/licenses/
+        - title: License
+          url: /docs/legal/license/
+
