@@ -133,7 +133,7 @@ public postfix func ^<A, B>(_ fa: EitherOf<A, B>) -> Either<A, B> {
     return Either.fix(fa)
 }
 
-class Left<A, B> : Either<A, B> {
+private class Left<A, B> : Either<A, B> {
     let a : A
     
     init(_ a : A) {
@@ -141,7 +141,7 @@ class Left<A, B> : Either<A, B> {
     }
 }
 
-class Right<A, B> : Either<A, B> {
+private class Right<A, B> : Either<A, B> {
     let b : B
     
     init(_ b : B) {
