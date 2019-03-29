@@ -123,7 +123,7 @@ public postfix func ^<A>(_ fa: TryOf<A>) -> Try<A> {
     return Try.fix(fa)
 }
 
-class Success<A>: Try<A> {
+private class Success<A>: Try<A> {
     fileprivate let value: A
     
     init(_ value: A) {
@@ -131,7 +131,7 @@ class Success<A>: Try<A> {
     }
 }
 
-class Failure<A>: Try<A> {
+private class Failure<A>: Try<A> {
     fileprivate let error: Error
     
     init(_ error: Error) {
