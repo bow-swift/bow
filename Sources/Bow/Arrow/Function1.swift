@@ -35,6 +35,30 @@ public class Function1<I, O>: Function1Of<I, O> {
     public func invoke(_ value: I) -> O {
         return f(value)
     }
+
+    /// Composes with another function.
+    ///
+    /// - Parameter f: Function to compose.
+    /// - Returns: Composition of the two functions.
+    public func compose<A>(_ f: Function1<A, I>) -> Function1<A, O> {
+        return Function1<A, O>(self.f <<< f.f)
+    }
+
+    /// Concatenates another function.
+    ///
+    /// - Parameter f: Function to concatenate.
+    /// - Returns: Concatenation of the two functions.
+    public func andThen<A>(_ f: Function1<O, A>) -> Function1<I, A> {
+        return f.compose(self)
+    }
+
+    /// Composes with another function.
+    ///
+    /// - Parameter f: Function to compose.
+    /// - Returns: Composition of the two functions.
+    public func contramap<A>(_ f: @escaping (A) -> I) -> Function1<A, O> {
+        return Function1<A, O>(self.f <<< f)
+    }
 }
 
 /// Safe downcast.
