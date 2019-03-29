@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import BowLaws
 @testable import Bow
 
@@ -38,5 +39,20 @@ class TryTest: XCTestCase {
     
     func testTraverseLaws() {
         TraverseLaws<ForTry>.check(generator: self.generator)
+    }
+
+    func testSemigroupLaws() {
+        property("Try semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
+            return SemigroupLaws<Try<Int>>.check(
+                a: Try.success(a),
+                b: Try.success(b),
+                c: Try.success(c))
+        }
+    }
+
+    func testMonoidLaws() {
+        property("Try monoid laws") <- forAll { (a: Int) in
+            return MonoidLaws<Try<Int>>.check(a: Try.success(a))
+        }
     }
 }
