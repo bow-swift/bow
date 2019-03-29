@@ -47,12 +47,14 @@ public postfix func ^<I, O>(_ fa: Function1Of<I, O>) -> Function1<I, O> {
 
 // MARK: Protocol conformances
 
+// MARK: Instance of `Functor` for `Function1`
 extension Function1Partial: Functor {
     public static func map<A, B>(_ fa: Kind<Function1Partial<I>, A>, _ f: @escaping (A) -> B) -> Kind<Function1Partial<I>, B> {
         return Function1(Function1.fix(fa).f >>> f)
     }
 }
 
+// MARK: Instance of `Applicative` for `Function1`
 extension Function1Partial: Applicative {
     public static func pure<A>(_ a: A) -> Kind<Function1Partial<I>, A> {
         return Function1(constant(a))
@@ -62,6 +64,7 @@ extension Function1Partial: Applicative {
 // MARK: Instance of `Selective` for `Function1`
 extension Function1Partial: Selective {}
 
+// MARK: Instance of `Monad` for `Function1`
 extension Function1Partial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<Function1Partial<I>, A>, _ f: @escaping (A) -> Kind<Function1Partial<I>, B>) -> Kind<Function1Partial<I>, B> {
         return Function1<I, B>({ i in Function1.fix(f(Function1.fix(fa).f(i))).f(i) })
@@ -76,6 +79,7 @@ extension Function1Partial: Monad {
     }
 }
 
+// MARK: Instance of `MonadReader` for `Function1`
 extension Function1Partial: MonadReader {
     public typealias D = I
 
