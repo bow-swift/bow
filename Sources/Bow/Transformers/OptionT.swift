@@ -95,6 +95,14 @@ extension OptionT where F: Functor {
     public func subflatMap<B>(_ f: @escaping (A) -> Option<B>) -> OptionT<F, B> {
         return transform { option in Option.fix(option.flatMap(f)) }
     }
+
+    /// Convert this `OptionT` to an `EitherT`.
+    ///
+    /// - Parameter defaultRigth: Function returning a default value to use as right if the `OptionT` is none.
+    /// - Returns: Returns: An `EitherT` containing the value as left or as right with the default value if the `OptionT` contains a none.
+    public func toLeft<R>(_ defaultRigth: @escaping () -> R) -> EitherT<F, A, R> {
+        return EitherT(cata({ .right(defaultRigth()) }, Either.left))
+    }
 }
 
 // MARK: Functions for `OptionT` when the effect has an instance of `Applicative`
