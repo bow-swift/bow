@@ -100,8 +100,8 @@ extension OptionT where F: Functor {
     ///
     /// - Parameter defaultRigth: Function returning a default value to use as right if the `OptionT` is none.
     /// - Returns: Returns: An `EitherT` containing the value as left or as right with the default value if the `OptionT` contains a none.
-    public func toLeft<R>(_ defaultRigth: @escaping () -> R) -> EitherT<F, A, R> {
-        return EitherT(cata({ .right(defaultRigth()) }, Either.left))
+    public func toLeft<R>(_ defaultRight: @escaping () -> R) -> EitherT<F, A, R> {
+        return EitherT(cata({ .right(defaultRight()) }, Either.left))
     }
 
     /// Convert this `OptionT` to an `EitherT`.
