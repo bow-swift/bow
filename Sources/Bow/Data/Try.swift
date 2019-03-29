@@ -3,9 +3,11 @@ import Foundation
 /// Models an error in an invocation to some methods of `Try`.
 ///
 /// - illegalState: The value is in an illegal state when an operation is invoked.
+/// - predicateDoesNotMatch: The value does not match the provided predicate.
 /// - unsupportedOperation: The invoked operation is unsupported for the value receiving it.
 public enum TryError: Error {
     case illegalState
+    case predicateError
     case unsupportedOperation(String)
 }
 
@@ -81,7 +83,17 @@ public class Try<A>: TryOf<A> {
                 fatalError("Try must only have Success or Failure cases")
         }
     }
-    
+
+    /// Checks if this value is a failure.
+    public var isFailure: Bool {
+        return fold(constant(true), constant(false))
+    }
+
+    /// Checks if this value is a success.
+    public var isSuccess: Bool {
+        return !isFailure
+    }
+
     /// Obtains the wrapped error in this `Try`.
     ///
     /// - Returns: A successful error or a failure with `TryError.unsupportedOperation` if this value was not an error.
@@ -112,6 +124,51 @@ public class Try<A>: TryOf<A> {
     /// - Returns: A `Try` value from the recovery, or the original value if it was not an error.
     public func recover(_ f: @escaping (Error) -> A) -> Try<A> {
         return fold(f >>> Try.success, Try.success)
+    }
+
+    /// Converts this value to a failure if the transformation provides no value.
+    ///
+    /// - Parameter f: Transformation function.
+    /// - Returns: A failure if the transformation of this value provides no result, or a success with the result of the transformation.
+    public func mapFilter<B>(_ f: @escaping (A) -> Option<B>) -> Try<B> {
+        return self.flatMap { a in f(a).fold(constant(Try<B>.raiseError(TryError.predicateError)), Try<B>.pure) }^
+    }
+
+    /// Converts this value to an `Option`.
+    ///
+    /// - Returns: `Option.some` if this value is a success, or `Option.none` otherwise.
+    public func toOption() -> Option<A> {
+        return fold(constant(Option.none()), Option.some)
+    }
+
+    /// Converts this value to an `Either`.
+    ///
+    /// - Returns: A right value if this value is a success, or a left value if it contains an error.
+    public func toEither() -> Either<Error, A> {
+        return fold(Either.left, Either.right)
+    }
+
+    /// Obtains the value of this success or the provided default one if it is a failure.
+    ///
+    /// - Parameter defaultValue: Function providing the default value.
+    /// - Returns: Wrapped value in this success, or default value otherwise.
+    public func getOrDefault(_ defaultValue: @escaping @autoclosure () -> A) -> A {
+        return fold(constant(defaultValue()), id)
+    }
+
+    /// Obtains the value of this success or nil if it is a failure.
+    ///
+    /// - Returns: Wrapped value in this success, or nil otherwise.
+    public func orNil() -> A? {
+        return fold(constant(nil), id)
+    }
+
+    /// Obtains this value or the provided default `Try` if it is a failure.
+    ///
+    /// - Parameter f: Function providing the default value.
+    /// - Returns: This value if it is a success, or the default provided one otherwise.
+    public func orElse(_ f: @escaping @autoclosure () -> Try<A>) -> Try<A> {
+        return fold(constant(f()), Try.success)
     }
 }
 
