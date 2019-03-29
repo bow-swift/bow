@@ -55,7 +55,7 @@ extension OptionT where F: Functor {
     ///   - ifEmpty: Closure to apply if the contained value in the nested `Option` is absent.
     ///   - f: Closure to apply if the contained value in the nested `Option` is present.
     /// - Returns: Result of applying the corresponding closure to the nested `Option`, wrapped in the effect.
-    public func cata<B>(_ ifEmpty: @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
+    public func cata<B>(_ ifEmpty: @autoclosure @escaping () -> B, _ f: @escaping (A) -> B) -> Kind<F, B> {
         return fold(ifEmpty, f)
     }
 
@@ -101,7 +101,12 @@ extension OptionT where F: Functor {
     /// - Parameter defaultRigth: Function returning a default value to use as right if the `OptionT` is none.
     /// - Returns: Returns: An `EitherT` containing the value as left or as right with the default value if the `OptionT` contains a none.
     public func toLeft<R>(_ defaultRight: @escaping () -> R) -> EitherT<F, A, R> {
-        return EitherT(cata({ .right(defaultRight()) }, Either.left))
+        return EitherT(cata(.right(defaultRight()), Either.left))
+    }
+
+    /// Convenience `toLeft` allowing a constant as the parameter.
+    public func toLeft<R>(_ defaultRight: @autoclosure @escaping () -> R) -> EitherT<F, A, R> {
+        return toLeft(defaultRight)
     }
 
     /// Convert this `OptionT` to an `EitherT`.
@@ -109,7 +114,12 @@ extension OptionT where F: Functor {
     /// - Parameter defaultLeft: Function returning a default value to use as left if the `OptionT` is none.
     /// - Returns: Returns: An `EitherT` containing the value as right or as left with the default value if the `OptionT` contains a none.
     public func toRight<L>(_ defaultLeft: @escaping () -> L) -> EitherT<F, L, A> {
-        return EitherT(cata({ .left(defaultLeft()) }, Either.right))
+        return EitherT(cata(.left(defaultLeft()), Either.right))
+    }
+
+    /// Convenience `toRight` allowing a constant as the parameter.
+    public func toRight<L>(_ defaultLeft: @autoclosure @escaping () -> L) -> EitherT<F, L, A> {
+        return EitherT(cata(.left(defaultLeft()), Either.right))
     }
 }
 
