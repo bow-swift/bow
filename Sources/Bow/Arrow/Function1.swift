@@ -10,7 +10,7 @@ public final class Function1Partial<I>: Kind<ForFunction1, I> {}
 public typealias Function1Of<I, O> = Kind<Function1Partial<I>, O>
 
 /// This data type acts as a wrapper over functions. It receives two type parameters representing the input and output type of the function. The wrapper adds capabilities to use a function as a Higher Kinded Type and conform to typeclasses that have this requirement.
-public class Function1<I, O>: Function1Of<I, O> {
+public final class Function1<I, O>: Function1Of<I, O> {
     fileprivate let f: (I) -> O
     
     /// Safe downcast.
@@ -113,5 +113,12 @@ extension Function1Partial: MonadReader {
 
     public static func local<A>(_ fa: Kind<Function1Partial<I>, A>, _ f: @escaping (I) -> I) -> Kind<Function1Partial<I>, A> {
         return Function1(f >>> Function1.fix(fa).f)
+    }
+}
+
+// MARK: Instance of `Semigroup` for Function1
+extension Function1: Semigroup where O: Semigroup {
+    public func combine(_ other: Function1<I, O>) -> Function1<I, O> {
+        return Function1 { i in self.invoke(i).combine(other.invoke(i)) }
     }
 }
