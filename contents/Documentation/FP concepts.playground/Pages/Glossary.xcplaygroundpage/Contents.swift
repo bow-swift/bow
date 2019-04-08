@@ -28,6 +28,12 @@
 
  **Functional Programming** is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data.
 
+ # K
+
+ ### Kind
+
+ A **kind** is a group of types. As values are grouped into types, types are grouped into kinds. The notion of kind lets us conceptualize type constructors that receive a number of type arguments and abstract over them. This generalization is known as **higher kinded types** and enable generic polymorphic programs. Swift does not support this feature natively, but it is simulated in Bow.
+
  # M
 
  ### Memoization
@@ -45,4 +51,24 @@
  ### Referential Transparency
 
  **Referential transparency** is a property of a function that allows it to be replaced by the result of its execution without altering the overall behavior of the program.
+
+ # T
+
+ ### Type
+
+ A **type** is a set of values that helps us conceptualize data and restrict the possible values that functions can accept as input or provide as output. Types can be finite (like `Bool`, with two values: `true` and `false`) or infinite (like `String`).
+
+ ### Type constructor
+
+ A **type constructor** is a type that receives other types and produces new types. Examples of type constructors are `Array<Element>` or `Optional<Wrapped>`, where providing types for `Element` or `Wrapper` types yields new types like `Array<Int>` or `Optional<String>`.
+
+ ### Type parameter
+
+ A **type parameter** is a placeholder in a type constructor or generic function that let us provide different types and generate a family of types or functions. For instance, in `Array<Element>`, `Element` is a type parameter for `Array` and replacing with concrete types yields a family of new types.
+
+ # W
+
+ ### Witness
+
+ A **witness** is an intermediate class that is used to simulate Higher Kinded Types in Bow. As a convention, they are prefixed by `For`. As an example, consider the `Option<A>` data type in Bow. This data type extends `Kind<ForOption, A>` in order to enable HKT support. `ForOption` is the witness for `Option`.
  */
