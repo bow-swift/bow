@@ -12,6 +12,12 @@
  
  This is a compendium of some of the terminology that is used in the documentation for Bow and in literature about Functional Programming. It is expected to grow over time as we make progress in the documentation of the library. If there is a term that you would like to see in this list, please, open an issue and we will consider adding it here.
 
+ # A
+
+ ### Ad-hoc polymorphism
+
+ **Ad-hoc polymorphism** is a type of polymorphism achieved by having functions with the same name but different signatures and/or different number of arguments. In Functional Programming, ad-hoc polymorphism is achieved with type classes that act as constraints added to type parameters in parametrically polymorphic types or functions. Ad-hoc polymorphism is also known as function overloading.
+
  # F
 
  ### Function
@@ -28,6 +34,12 @@
 
  **Functional Programming** is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data.
 
+ # I
+
+ ### Instance (of a type class)
+
+ An **instance** of a type class is the implementation of such type class for a given type. They are usually done in Swift using the `extension` functionality in the language.
+
  # K
 
  ### Kind
@@ -41,6 +53,10 @@
  **Memoization** is an optimization technique that transforms expensive computational function calls into searches in a lookup table by caching previous calls.
 
  # P
+
+ ### Parametric polymorphism
+
+ **Parametric polymorphism** is a type of polymorphism that allows to specify generic types to create functions and/or other types. These generic types are called *type parameters*.
 
  ### Procedure
 
@@ -57,6 +73,10 @@
  ### Type
 
  A **type** is a set of values that helps us conceptualize data and restrict the possible values that functions can accept as input or provide as output. Types can be finite (like `Bool`, with two values: `true` and `false`) or infinite (like `String`).
+
+ ### Type class
+
+ A **type class** is a group of functions that operate on generic type parameters and is governed by algebraic laws. They are usually represented in Swift as protocols with associated types or self requirements.
 
  ### Type constructor
 

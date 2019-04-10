@@ -15,7 +15,7 @@ import Bow
  
  **Type classes**, also known as extension interfaces, are usually represented in Swift as protocols with associated types and/or `Self` requirements. They are groups of functions that operate on generic type parameters and are governed by algebraic laws.
 
- Type classes can be used to enable **ad hoc polymorphism**; they act as constraints added to type parameters en parametrically polymorphic types or functions.
+ Type classes can be used to enable **ad hoc polymorphism**; they act as constraints added to type parameters in parametrically polymorphic types or functions.
 
  Consider, for instance, the `Equatable` protocol. It is a type class that adds some functionality to existing types; more precisely, it enables to check for equality of values of a type. It is governed by the following laws:
 
