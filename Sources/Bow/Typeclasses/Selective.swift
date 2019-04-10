@@ -50,7 +50,7 @@ public extension Selective {
     ///   - e: Computation that will be executed if the first evaluates to `false`.
     /// - Returns: Composition of the computations.
     public static func ifS<A>(_ x: Kind<Self, Bool>, _ t: Kind<Self, A>, _ e: Kind<Self, A>) -> Kind<Self, A> {
-        return branch(selector(x), map(t, constant), map(e, constant))
+        return branch(selector(x), map(t, { tt in constant(tt) }), map(e, { ee in constant(ee) }))
     }
 
     /// A lifted version of lazy boolean or.
@@ -81,7 +81,7 @@ public extension Selective {
     /// - Returns: Composition of the two computations.
     public static func fromOptionS<A>(_ x: Kind<Self, A>, _ mx: Kind<Self, Option<A>>) -> Kind<Self, A> {
         let s = map(mx) { a in Option.fix(a.map(Either<(), A>.right)).getOrElse(Either.left(())) }
-        return select(s, map(x, constant))
+        return select(s, map(x, { xx in constant(xx) }))
     }
 
     /// A lifted version of `any`. Retains the short-circuiting behavior.
