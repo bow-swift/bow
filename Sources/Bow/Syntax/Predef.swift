@@ -17,40 +17,40 @@ public func id<A>(_ a : A) -> A {
 ///
 /// - Parameter a: Constant value to return.
 /// - Returns: A 0-ary function that constantly return the value provided as argument.
-public func constant<A>(_ a : A) -> () -> A {
-    return { a }
+public func constant<A>(_ a: @autoclosure @escaping () -> A) -> () -> A {
+    return a
 }
 
 /// Provides a constant function.
 ///
 /// - Parameter a: Constant value to return.
 /// - Returns: A 1-ary function that constantly return the value provided as argument, regardless of its input parameter.
-public func constant<A, B>(_ a : A) -> (B) -> A {
-    return { _ in a }
+public func constant<A, B>(_ a: @autoclosure @escaping () -> A) -> (B) -> A {
+    return { _ in return a() }
 }
 
 /// Provides a constant function.
 ///
 /// - Parameter a: Constant value to return.
 /// - Returns: A 2-ary function that constantly return the value provided as argument, regardless of its input parameters.
-public func constant<A, B, C>(_ a : A) -> (B, C) -> A {
-    return { _, _ in a }
+public func constant<A, B, C>(_ a: @autoclosure @escaping () -> A) -> (B, C) -> A {
+    return { _, _ in a() }
 }
 
 /// Provides a constant function.
 ///
 /// - Parameter a: Constant value to return.
 /// - Returns: A 3-ary function that constantly return the value provided as argument, regardless of its input parameters.
-public func constant<A, B, C, D>(_ a : A) -> (B, C, D) -> A {
-    return { _, _, _ in a }
+public func constant<A, B, C, D>(_ a: @autoclosure @escaping () -> A) -> (B, C, D) -> A {
+    return { _, _, _ in a() }
 }
 
 /// Provides a constant function.
 ///
 /// - Parameter a: Constant value to return.
 /// - Returns: A 4-ary function that constantly return the value provided as argument, regardless of its input parameters.
-public func constant<A, B, C, D, E>(_ a : A) -> (B, C, D, E) -> A {
-    return { _, _, _, _ in a }
+public func constant<A, B, C, D, E>(_ a: @autoclosure @escaping () -> A) -> (B, C, D, E) -> A {
+    return { _, _, _, _ in a() }
 }
 
 /**
