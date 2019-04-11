@@ -368,9 +368,17 @@ extension IOPartial: MonadDefer {
 }
 
 extension IOPartial: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
-        return AsyncIO(fa)
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) throws -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
     }
+
+    public static func continueOn<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
+    }
+    
+    //public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
+    //    return AsyncIO(fa)
+    //}
 }
 
 extension IOPartial: EquatableK where E: Equatable {
