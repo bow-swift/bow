@@ -355,8 +355,14 @@ extension IOPartial: ApplicativeError {
 
 extension IOPartial: MonadError {}
 
+extension IOPartial: Bracket {
+    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+        fatalError("TODO: Implement this")
+    }
+}
+
 extension IOPartial: MonadDefer {
-    public static func suspend<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
         return Pure(()).flatMap(fa)
     }
 }
