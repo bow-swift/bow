@@ -1,12 +1,16 @@
 nav:
     - title: Documentation
       url: /docs
+      icon: "fa-book"
 
     - title: API Reference
       url: /api-docs
+      icon: "fa-file-code"
 
     - title: GitHub
       url: https://github.com/bow-swift/bow
+      icon: "fa-github"
 
     - title: License
       url: https://github.com/bow-swift/bow/blob/master/LICENSE
+      icon: "fa-creative-commons"

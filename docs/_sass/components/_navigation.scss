@@ -62,8 +62,23 @@
           }
 
           @include bp(small) {
-            padding: ($base-point-grid / 2) ($base-point-grid * 1);
+            padding: 0;
+            margin: 0 12px;
           }
+        }
+      }
+
+      .nav-item-text {
+        @include bp(small) {
+        display: none;
+        }
+      }
+
+      .nav-item-icon {
+        display: none;
+
+        @include bp(small) {
+            display: inline-block;
         }
       }
     }
