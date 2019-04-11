@@ -356,7 +356,7 @@ extension IOPartial: ApplicativeError {
 extension IOPartial: MonadError {}
 
 extension IOPartial: Bracket {
-    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
         fatalError("TODO: Implement this")
     }
 }

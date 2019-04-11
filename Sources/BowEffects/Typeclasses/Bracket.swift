@@ -22,10 +22,21 @@ extension ExitCase: CustomStringConvertible {
     }
 }
 
+extension ExitCase: Equatable where E: Equatable {}
+
+public func ==<E: Equatable>(lhs: ExitCase<E>, rhs: ExitCase<E>) -> Bool {
+    switch (lhs, rhs) {
+    case (.completed, .completed): return true
+    case (.canceled, .canceled): return true
+    case let (.error(e1), .error(e2)): return e1 == e2
+    default: return false
+    }
+}
+
 public protocol Bracket: MonadError {
     static func bracketCase<A, B>(_ fa: Kind<Self, A>,
                                   _ release: @escaping (A, ExitCase<Self.E>) -> Kind<Self, ()>,
-                                  _ use: @escaping (A) -> Kind<Self, B>) -> Kind<Self, B>
+                                  _ use: @escaping (A) throws -> Kind<Self, B>) -> Kind<Self, B>
 }
 
 // MARK: Related functions
@@ -33,7 +44,7 @@ public protocol Bracket: MonadError {
 public extension Bracket {
     public static func bracket<A, B>(_ fa: Kind<Self, A>,
                                      _ release: @escaping (A) -> Kind<Self, ()>,
-                                     _ use: @escaping (A) -> Kind<Self, B>) -> Kind<Self, B> {
+                                     _ use: @escaping (A) throws -> Kind<Self, B>) -> Kind<Self, B> {
         return bracketCase(fa, { a, _ in release(a) }, use)
     }
 
@@ -56,12 +67,12 @@ public extension Bracket {
 
 public extension Kind where F: Bracket {
     public func bracketCase<B>(_ release: @escaping (A, ExitCase<F.E>) -> Kind<F, ()>,
-                               _ use: @escaping (A) -> Kind<F, B>) -> Kind<F, B> {
+                               _ use: @escaping (A) throws -> Kind<F, B>) -> Kind<F, B> {
         return F.bracketCase(self, release, use)
     }
 
     public func bracket<B>(_ release: @escaping (A) -> Kind<F, ()>,
-                           _ use: @escaping (A) -> Kind<F, B>) -> Kind<F, B> {
+                           _ use: @escaping (A) throws -> Kind<F, B>) -> Kind<F, B> {
         return F.bracket(self, release, use)
     }
 
