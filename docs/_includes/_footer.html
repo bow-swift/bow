@@ -4,7 +4,14 @@
         <ul>
             {% for item in site.data.menu.nav %}
             <li>
-                <a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a>
+              <a href="{{ item.url }}" title="{{ item.title }}" alt="{{ item.title }}">
+              {% if item.icon != "" %}
+                <i class="foot-item-icon fa fa-lg {{ item.icon }}" aria-hidden="true"></i>
+                <span class="foot-item-text">{{ item.title }}</span>
+              {% else %}
+                <span>{{ item.title }}</span>
+              {% endif %}
+              </a>
             </li>
             {% endfor %}
         </ul>

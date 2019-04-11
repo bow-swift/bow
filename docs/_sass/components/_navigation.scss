@@ -61,9 +61,24 @@
             color: $white;
           }
 
-          @include bp(small) {
-            padding: ($base-point-grid / 2) ($base-point-grid * 1);
+          @include bp(medium) {
+            padding: 0;
+            margin: 0 12px;
           }
+        }
+      }
+
+      .nav-item-text {
+        @include bp(medium) {
+        display: none;
+        }
+      }
+
+      .nav-item-icon {
+        display: none;
+
+        @include bp(medium) {
+            display: inline-block;
         }
       }
     }

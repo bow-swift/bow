@@ -5,8 +5,15 @@
         </div>
         <ul id="myTopnav" class="navigation-menu">
             {% for item in site.data.menu.nav%}
-            <li class="navigation-menu-item">
-                <a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a>
+            <li>
+                <a href="{{ item.url }}" title="{{ item.title }}" alt="{{ item.title }}">
+                {% if item.icon != "" %}
+                  <i class="nav-item-icon fa fa-lg {{ item.icon }}" aria-hidden="true"></i>
+                  <span class="nav-item-text">{{ item.title }}</span>
+                {% else %}
+                  <span>{{ item.title }}</span>
+                {% endif %}
+                </a>
             </li>
             {% endfor %}
         </ul>

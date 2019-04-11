@@ -3,7 +3,7 @@
 // -----------------------------------------------
 #footer {
   padding: ($base-point-grid * 6) 0;
-  font-size: 0.875rem;
+  font-size: 0.975rem;
 
   .content-footer {
     @include flexbox;
@@ -15,12 +15,31 @@
     }
 
     ul {
+      @include bp(medium) {
+        display: inline-flex;
+        margin-left: ($base-point-grid * 2);
+      }
+
       li {
         display: inline-block;
-        margin-right: ($base-point-grid * 2);
+        margin-right: 20px;
 
         &:last-child {
           margin-right: 0;
+        }
+      }
+
+      .foot-item-text {
+        @include bp(medium) {
+        display: none;
+        }
+      }
+
+      .foot-item-icon {
+        display: none;
+
+        @include bp(medium) {
+            display: inline-block;
         }
       }
     }
