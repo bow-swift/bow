@@ -168,7 +168,7 @@ let identity2 = id <<< f1
 
  ## Working with impure functions
 
- Real world software rarely has functions as nicely written as the `add` function above. We usually have to deal with partial, non-deterministic and/or impure functions, since software has to deal with errors and perform side effects in order to be useful. Besides presenting issues breaking referential transparency, function composition cannot be done in this circumstances. How can we deal with such situations?
+ Real world software rarely has functions as nicely written as the `add` function above. We usually have to deal with partial, non-deterministic and/or impure functions, since software has to deal with errors and perform side effects in order to be useful. Besides presenting issues breaking referential transparency, function composition cannot be done in these circumstances. How can we deal with such situations?
 
  Bow provides numerous data types that can be used to model different effects in our functions. Using those data types, such as `Option`, `Either` or `IO` can help us transform partial, non-deterministic or impure functions into total, deterministic and pure ones. Once we have them, we can use combinators that will help us compose those functions nicely.
  */
