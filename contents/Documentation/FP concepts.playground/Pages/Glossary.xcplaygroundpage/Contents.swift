@@ -56,7 +56,7 @@
 
  ### Parametric polymorphism
 
- **Parametric polymorphism** is a type of polymorphism that allows to specify generic types to create functions and/or other types. These generic types are called *type parameters*.
+ **Parametric polymorphism** is a type of polymorphism that allows specifying generic types to create functions and/or other types. These generic types are called *type parameters*.
 
  ### Procedure
 
