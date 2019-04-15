@@ -65,7 +65,7 @@ func divideValidated(x: Int, y: Int) -> Validated<DivideError, Int> {
 
  That is, given a type `F` that is able to create success and error values (via the hypothetical `ErrorSuccessRepresentable` protocol), we could write a function that checks if the division can be performed or not, and create the result values accordingly. This would allow us to write generic programs where we can generalize the container types, not only the contained ones.
 
- Unfortunately, Swift does not support writting the code above since it does not have HKTs support. Can we find a workaround to have this feature?
+ Unfortunately, Swift does not support writing the code above since it does not have HKTs support. Can we find a workaround to have this feature?
 
  ## Types and Kinds
 
