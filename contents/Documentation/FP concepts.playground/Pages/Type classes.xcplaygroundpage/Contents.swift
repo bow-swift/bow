@@ -30,7 +30,7 @@ func allEqual<A: Equatable>(_ array: [A]) -> Bool {
     return array.reduce(true) { partial, next in partial && next == first }
 }
 /*:
- The function above is parametrically polymorphic; it operates of values of type `A`. Valid types to fill this type parameter need to conform to `Equatable` and enable the posibility to use the `==` operator.
+ The function above is parametrically polymorphic; it operates of values of type `A`. Valid types to fill this type parameter need to conform to `Equatable` and enable the possibility to use the `==` operator.
 
  ## Type classes of higher kind
 
