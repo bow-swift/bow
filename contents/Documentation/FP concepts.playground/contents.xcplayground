@@ -5,6 +5,5 @@
         <page name='Functions vs Procedures'/>
         <page name='Higher Kinded Types'/>
         <page name='Type classes'/>
-        <page name='Data types'/>
     </pages>
 </playground>

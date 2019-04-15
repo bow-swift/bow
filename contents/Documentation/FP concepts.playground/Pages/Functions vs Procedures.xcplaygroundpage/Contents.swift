@@ -153,7 +153,7 @@ let composed4 = f1 >>> f2
  Composition of functions is associative; i.e. the following functions are equivalent:
  */
 func f3(_ x: String) -> String {
-    return x.rev
+    return String(x.reversed())
 }
 
 let associativity1 = (f3 <<< f2) <<< f1
