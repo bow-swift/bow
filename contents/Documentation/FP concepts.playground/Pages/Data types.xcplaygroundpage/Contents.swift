@@ -54,5 +54,5 @@
  | OptionT<F, A> | Represents an `Option<A>` nested in an arbitrary effect `F`.|
  | StateT<F, S, A> | Represents a function that receives an effect of type `S` and produces a new state of the same type and an output value of type `A`, all wrapped in an effect of type `F`.|
  | State<S, A> | Represents a StateT where the effect is Id.|
- | WriterT<F, W, A> | Represents a value of type `A` under the effect `F` that produdes a side stream of data of type `W`.|
+ | WriterT<F, W, A> | Represents a value of type `A` under the effect `F` that produces a side stream of data of type `W`.|
  */
