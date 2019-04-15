@@ -180,7 +180,7 @@ let swapped = either.map { value in value.description }^.swap() // swapped is of
 
  Previous sections have covered how to create a new type with HKT support. However, there are a number of types that are already created and probably outside our control. How do we add HKT support for them?
 
- Unfortunately, there is no way to do this out of the box using the mechanisms that Swift provides for extension. The solution that we have adopted is to wrap the existing type into another type with HKT support, and delegate methods to the internal wrapped value.
+ Unfortunately, there is no way to do this out of the box using the mechanisms that Swift provides for extensions. The solution that we have adopted is to wrap the existing type into another type with HKT support, and delegate methods to the internal wrapped value.
 
  Thus, you can see some types in Bow that have a `K` at the end. This indicates the type is a wrapper over another type, adding HKT support. The following table summarizes some of the types that we have added this kind of support.
 
