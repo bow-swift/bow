@@ -284,17 +284,10 @@ fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
     
     override func attempt() -> IO<E, A> {
         var result: IO<E, A>?
-        
-        do {
-            let callback: Callback<E, A> = { either in
-                result = either.fold(RaiseError.init, Pure.init)
-            }
-            try f(callback)
-        } catch let error as E {
-            result = RaiseError<E, A>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        let callback: Callback<E, A> = { either in
+            result = either.fold(RaiseError.init, Pure.init)
         }
+        f(callback)
         
         while(result == nil) {}
         
@@ -368,7 +361,7 @@ extension IOPartial: MonadDefer {
 }
 
 extension IOPartial: Async {
-    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) throws -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
         fatalError("TODO: Implement this")
     }
 

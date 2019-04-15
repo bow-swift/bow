@@ -89,6 +89,10 @@
 		114545D1225F4B1C00EA8755 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545D0225F4B1C00EA8755 /* Bracket.swift */; };
 		114545D7225F805500EA8755 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545D6225F805500EA8755 /* BracketLaws.swift */; };
 		114545D9225F935300EA8755 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545D8225F935300EA8755 /* MonadDeferLaws.swift */; };
+		114545DB22609B6600EA8755 /* Concurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545DA22609B6600EA8755 /* Concurrent.swift */; };
+		114545DE22609BC500EA8755 /* KindConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545DD22609BC500EA8755 /* KindConnection.swift */; };
+		114545E02260A16C00EA8755 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545DF2260A16C00EA8755 /* Atomic.swift */; };
+		114545E22260D2F400EA8755 /* Fiber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114545E12260D2F400EA8755 /* Fiber.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
 		11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4356322131ACC000C5E31 /* BoolInstances.swift */; };
@@ -578,6 +582,10 @@
 		114545D0225F4B1C00EA8755 /* Bracket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		114545D6225F805500EA8755 /* BracketLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
 		114545D8225F935300EA8755 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
+		114545DA22609B6600EA8755 /* Concurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concurrent.swift; sourceTree = "<group>"; };
+		114545DD22609BC500EA8755 /* KindConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindConnection.swift; sourceTree = "<group>"; };
+		114545DF2260A16C00EA8755 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		114545E12260D2F400EA8755 /* Fiber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fiber.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		11A435602212C59F000C5E31 /* EquatableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableLaws.swift; sourceTree = "<group>"; };
 		11A4356322131ACC000C5E31 /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
@@ -1042,7 +1050,7 @@
 		1122973C219DC4F1006D66C5 /* BowEffects */ = {
 			isa = PBXGroup;
 			children = (
-				8BA0F468217E2E9200969984 /* IO.swift */,
+				114545DC22609BAD00EA8755 /* Data */,
 				8BA0F469217E2E9200969984 /* Typeclasses */,
 			);
 			path = BowEffects;
@@ -1090,6 +1098,17 @@
 				8BA0F39F217E2DEF00969984 /* FutureKTest.swift */,
 			);
 			path = BowBrightFuturesTests;
+			sourceTree = "<group>";
+		};
+		114545DC22609BAD00EA8755 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				114545DF2260A16C00EA8755 /* Atomic.swift */,
+				114545E12260D2F400EA8755 /* Fiber.swift */,
+				8BA0F468217E2E9200969984 /* IO.swift */,
+				114545DD22609BC500EA8755 /* KindConnection.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		11D97EEC219EBB35008FC004 /* BowEffectsLaws */ = {
@@ -1395,6 +1414,7 @@
 			children = (
 				8BA0F46C217E2E9200969984 /* Async.swift */,
 				114545D0225F4B1C00EA8755 /* Bracket.swift */,
+				114545DA22609B6600EA8755 /* Concurrent.swift */,
 				8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */,
 				8BA0F46B217E2E9200969984 /* Effect.swift */,
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
@@ -2374,10 +2394,14 @@
 			buildActionMask = 0;
 			files = (
 				1122973F219DC557006D66C5 /* IO.swift in Sources */,
+				114545E02260A16C00EA8755 /* Atomic.swift in Sources */,
 				114545D1225F4B1C00EA8755 /* Bracket.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
+				114545DB22609B6600EA8755 /* Concurrent.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
+				114545DE22609BC500EA8755 /* KindConnection.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
+				114545E22260D2F400EA8755 /* Fiber.swift in Sources */,
 				11229747219DC557006D66C5 /* MonadDefer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

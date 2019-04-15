@@ -38,5 +38,11 @@ final class Atomic<A> {
         }
         return result
     }
+
+    func setNil<AA>() where A == AA? {
+        queue.sync {
+            self._value = nil
+        }
+    }
 }
 

@@ -2,8 +2,8 @@ import Foundation
 import Bow
 
 public typealias Callback<E, A> = (Either<E, A>) -> ()
-public typealias Proc<E, A> = (@escaping Callback<E, A>) throws -> ()
-public typealias ProcF<F, E, A> = (@escaping Callback<E, A>) throws -> Kind<F, ()>
+public typealias Proc<E, A> = (@escaping Callback<E, A>) -> ()
+public typealias ProcF<F, E, A> = (@escaping Callback<E, A>) -> Kind<F, ()>
 
 public protocol Async: MonadDefer {
     static func asyncF<A>(_ procf: @escaping ProcF<Self, E, A>) -> Kind<Self, A>
@@ -14,7 +14,7 @@ public extension Async {
     public static func async<A>(_ proc: @escaping Proc<E, A>) -> Kind<Self, A> {
         return asyncF { cb in
             delay {
-                try proc(cb)
+                proc(cb)
             }
         }
     }
