@@ -59,7 +59,7 @@ protocol Transformer {
 
  Swift does not provide a way of encoding these laws and enforcing them in every implementation. To do this, Bow type classes encode their laws as property-based tests using [SwiftCheck](https://github.com/typelift/SwiftCheck). Then, each implementation can be tested against these laws to guarantee that the implementation satisfies them. Type class laws help us have a better reasoning about our code and some times help us rewrite pieces for optimization (like in the case of `Transformer` where we can compose functions and apply a single transformation instead of two).
 
- Notice that sometimes you can provide an implementation for a given type class that does not satisfies the laws. Those are called **lawless instances**, in contrast to the ones that satisfy them, which are called **lawful instances**.
+ Notice that sometimes you can provide an implementation for a given type class that does not satisfy the laws. Those are called **lawless instances**, in contrast to the ones that satisfy them, which are called **lawful instances**.
 
  ## Type class instances
 
