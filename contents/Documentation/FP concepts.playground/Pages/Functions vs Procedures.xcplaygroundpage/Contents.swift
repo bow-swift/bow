@@ -95,7 +95,7 @@ let impureSquare2 = impureSum * impureSum
 /*:
  The result of the two operations is the same, but the observed behavior of the overall program is not the same: the first implementation prints twice to the console, as there are two invocations to `impureAdd`, whereas in the second case there is only one print when the sum is saved in `impureSum`.
 
- Referential transparency lets us have a better reasoning of our programs as we do not have to keep in mind the state of the computation and consider any side effects happening after the execution of a certain piece of code. Moreover, code that is referentially transparent is intrinsically testable (we just need to provide inputs and assert over the expected outputs) and can be optiimized and parallelized easily (there is no shared mutable state that causes concurrency issues).
+ Referential transparency lets us have a better reasoning of our programs as we do not have to keep in mind the state of the computation and consider any side effects happening after the execution of a certain piece of code. Moreover, code that is referentially transparent is intrinsically testable (we just need to provide inputs and assert over the expected outputs) and can be optimized and parallelized easily (there is no shared mutable state that causes concurrency issues).
 
  ## Memoization
 
