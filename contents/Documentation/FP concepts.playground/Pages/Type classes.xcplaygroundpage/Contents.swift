@@ -34,7 +34,7 @@ func allEqual<A: Equatable>(_ array: [A]) -> Bool {
 
  ## Type classes of higher kind
 
- `Equatable`, as many other protocols provided by Foundation or any other Swift framework, operates at the type level. However, there are many other interesting abstractions as type classes that need to operate at higher kind level. This is not possible by default in Swift, but Bow simulates HKTs and enable type classes to work at this level.
+ `Equatable`, like many other protocols provided by Foundation or any other Swift framework, operates at the type level. However, there are many other interesting abstractions as type classes that need to operate at higher kind level. This is not possible by default in Swift, but Bow simulates HKTs and enables type classes to work at this level.
 
  Let us consider the following example. We can try to define a type class that enables transforming values in containers; i.e., given an `F<A>`, we would like to obtain an `F<B>`, provided that we know how to transform from `A` to `B`:
 
