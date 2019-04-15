@@ -70,7 +70,7 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let either = Either<F.E, Int>.right(x)
             let k: Proc<F.E, Int> = { f in f(either) }
 
-            return F.async(k) == F.asyncF { cb in F.delay { try k(cb) } }
+            return F.async(k) == F.asyncF { cb in F.delay { k(cb) } }
         }
     }
 
