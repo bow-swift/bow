@@ -78,7 +78,7 @@ extension ForOption: Transformer {
     }
 }
 /*:
- Notice that, since the type class works at the kind level, it is not an extension of `Option`, but and extension of `ForOption`. Revisiting the definition of `Transformer`, the `Self` requirement is used in `Kind<Self, A>`. If we disect the definition of `Option<A>`, it extends `Kind<ForOption, A>`. By doing some sort of pattern matching between `Kind<Self, A>` and `Kind<ForOption, A>`, we can see that it must be `ForOption` the candidate to do the extension.
+ Notice that, since the type class works at the kind level, it is not an extension of `Option`, but an extension of `ForOption`. Revisiting the definition of `Transformer`, the `Self` requirement is used in `Kind<Self, A>`. If we dissect the definition of `Option<A>`, it extends `Kind<ForOption, A>`. By doing some sort of pattern matching between `Kind<Self, A>` and `Kind<ForOption, A>`, we can see that it must be `ForOption` the candidate to do the extension.
 
  In the case of types with a higher kind, like `Either`, we can resort to the same strategy: `Either<L, R>` is equivalent to Kind<EitherPartial<L>, R>`, so the extension should be made on `EitherPartial<L>`. Take a look at the following table for examples on some of the types in the core module for Bow.
 
