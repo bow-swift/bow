@@ -43,18 +43,21 @@ public postfix func ^<A>(_ fa: Function0Of<A>) -> Function0<A> {
 
 // MARK: Protocol conformances
 
+// MARK: Instance of `EquatableK` for `Function0`
 extension ForFunction0: EquatableK {
     public static func eq<A>(_ lhs: Kind<ForFunction0, A>, _ rhs: Kind<ForFunction0, A>) -> Bool where A : Equatable {
         return Function0.fix(lhs).extract() == Function0.fix(rhs).extract()
     }
 }
 
+// MARK: Instance of `Functor` for `Function0`
 extension ForFunction0: Functor {
     public static func map<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> B) -> Kind<ForFunction0, B> {
         return Function0(Function0.fix(fa).f >>> f)
     }
 }
 
+// MARK: Instance of `Applicative` for `Function0`
 extension ForFunction0: Applicative {
     public static func pure<A>(_ a: A) -> Kind<ForFunction0, A> {
         return Function0(constant(a))
@@ -64,6 +67,7 @@ extension ForFunction0: Applicative {
 // MARK: Instance of `Selective` for `Function0`
 extension ForFunction0: Selective {}
 
+// MARK: Instance of `Monad` for `Function0`
 extension ForFunction0: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (A) -> Kind<ForFunction0, B>) -> Kind<ForFunction0, B> {
         return f(Function0.fix(fa).f())
@@ -79,6 +83,7 @@ extension ForFunction0: Monad {
     }
 }
 
+// MARK: Instance of `Comonad` for `Function0`
 extension ForFunction0: Comonad {
     public static func coflatMap<A, B>(_ fa: Kind<ForFunction0, A>, _ f: @escaping (Kind<ForFunction0, A>) -> B) -> Kind<ForFunction0, B> {
         return Function0<B>({ f(Function0.fix(fa)) })
@@ -89,4 +94,5 @@ extension ForFunction0: Comonad {
     }
 }
 
+// MARK: Instance of `Bimonad` for `Function0`
 extension ForFunction0: Bimonad {}
