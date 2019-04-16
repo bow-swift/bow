@@ -1,3 +1,2 @@
-github "ReactiveX/RxSwift" ~> 4.4.0
-github "Thomvis/BrightFutures" ~> 7.0.0
-github "antitypical/Result" ~> 4.0.0
+github "ReactiveX/RxSwift" "master"
+github "Thomvis/BrightFutures" ~> 8.0.0
