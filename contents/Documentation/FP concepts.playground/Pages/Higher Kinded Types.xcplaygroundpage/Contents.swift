@@ -147,9 +147,6 @@ extension Xor {
 /*:
  To simplify things even further, Bow has introduced the `^` postfix operator, that calls `fix` to avoid boilerplate. In our example:
  */
-// nef:begin:hidden
-postfix operator ^
-// nef:end
 postfix func ^<A, B>(_ value: XorOf<A, B>) -> Xor<A, B> {
     return Xor.fix(value)
 }

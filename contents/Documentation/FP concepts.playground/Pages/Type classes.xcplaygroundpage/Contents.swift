@@ -65,12 +65,6 @@ protocol Transformer {
 
  A **type class instance** is a concrete implementation of a type class for a given type. Instances are usually created through the extension mechanisms that Swift provides. For instance, let us provide an instance of `Transformer` for the `Option` data type in Bow:
  */
-// nef:begin:hidden
-postfix operator ^
-postfix func ^<A>(_ value: OptionOf<A>) -> Option<A> {
-    return Option.fix(value)
-}
-// nef:end
 extension ForOption: Transformer {
     static func transform<A, B>(_ fa: Kind<ForOption, A>, _ f: (A) -> B) -> Kind<ForOption, B> {
         return fa^.fold(Option<B>.none,                // It is empty, no transformation
