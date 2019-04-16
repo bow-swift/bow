@@ -35,7 +35,7 @@ extension FutureKPartial: EquatableK where E: Equatable {
 }
 
 class FutureKTest: XCTestCase {
-    let generator = { (x : Int) -> FutureKOf<CategoryError, Int> in
+    let generator = { (x: Int) -> FutureKOf<CategoryError, Int> in
         (x % 2 == 0) ?
             FutureK.pure(x) :
             FutureK.raiseError(CategoryError.arbitrary.generate)
