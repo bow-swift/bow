@@ -56,11 +56,9 @@
 		112295E8219D9528006D66C5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45D217E2E9200969984 /* Product.swift */; };
 		11229618219D9593006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		11229629219D964D006D66C5 /* GenericTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11229626219D95E5006D66C5 /* GenericTest.swift */; };
-		11229687219D9718006D66C5 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		11229693219D9821006D66C5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
 		112296C3219DC15C006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		112296C5219DC15C006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
-		112296C6219DC15C006D66C5 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F365217E2CB100969984 /* Result.framework */; };
 		112296D6219DC1FA006D66C5 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		1122973F219DC557006D66C5 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F468217E2E9200969984 /* IO.swift */; };
 		11229744219DC557006D66C5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46C217E2E9200969984 /* Async.swift */; };
@@ -863,7 +861,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11229687219D9718006D66C5 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,7 +870,6 @@
 			files = (
 				112296C3219DC15C006D66C5 /* Bow.framework in Frameworks */,
 				112296C5219DC15C006D66C5 /* SwiftCheck.framework in Frameworks */,
-				112296C6219DC15C006D66C5 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1713,7 +1709,6 @@
 			buildPhases = (
 				1122962B219D9718006D66C5 /* Sources */,
 				11229685219D9718006D66C5 /* Frameworks */,
-				1122968A219D9718006D66C5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1979,19 +1974,73 @@
 		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				TargetAttributes = {
+					112293AD219D8B86006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11229441219D8DF3006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11229480219D8EF4006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					1122953D219D9186006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					1122957A219D94C9006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					112295E9219D9593006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					1122962A219D9718006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11229694219DC15C006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					112296D7219DC4B3006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11229748219DC88F006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11229791219DCE76006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					112297B1219DCFDE006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					112297D3219DD148006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					112297EB219DD2AB006D66C5 = {
+						LastSwiftMigration = 1020;
+					};
+					11D97EC3219EBAA1008FC004 = {
+						LastSwiftMigration = 1020;
+					};
+					11E71683219D704F00B94845 = {
+						LastSwiftMigration = 1020;
+					};
+					11E7179E219D7D5900B94845 = {
+						LastSwiftMigration = 1020;
+					};
+					11E71817219D81B300B94845 = {
+						LastSwiftMigration = 1020;
+					};
 					"Bow::Bow" = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					"Bow::BowTests" = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Bow" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -2089,24 +2138,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		1122968A219D9718006D66C5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		112296CA219DC15C006D66C5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -2114,7 +2145,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 			);
 			outputPaths = (
 			);
@@ -2200,7 +2230,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -2841,7 +2870,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowLaws;
 			};
 			name = Debug;
@@ -2865,7 +2894,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowLaws;
 			};
 			name = Release;
@@ -2886,7 +2915,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeTests;
 			};
 			name = Debug;
@@ -2907,7 +2936,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeTests;
 			};
 			name = Release;
@@ -2931,7 +2960,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemes;
 			};
 			name = Debug;
@@ -2955,7 +2984,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemes;
 			};
 			name = Release;
@@ -2976,7 +3005,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemesTests;
 			};
 			name = Debug;
@@ -2997,7 +3026,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemesTests;
 			};
 			name = Release;
@@ -3021,7 +3050,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGeneric;
 			};
 			name = Debug;
@@ -3045,7 +3074,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGeneric;
 			};
 			name = Release;
@@ -3066,7 +3095,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenericTests;
 			};
 			name = Debug;
@@ -3087,7 +3116,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenericTests;
 			};
 			name = Release;
@@ -3111,7 +3140,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowResult;
 			};
 			name = Debug;
@@ -3135,7 +3164,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowResult;
 			};
 			name = Release;
@@ -3156,7 +3185,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowResultTests;
 			};
 			name = Debug;
@@ -3177,7 +3206,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowResultTests;
 			};
 			name = Release;
@@ -3201,7 +3230,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffects;
 			};
 			name = Debug;
@@ -3225,7 +3254,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffects;
 			};
 			name = Release;
@@ -3246,7 +3275,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsTests;
 			};
 			name = Debug;
@@ -3267,7 +3296,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsTests;
 			};
 			name = Release;
@@ -3291,7 +3320,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRx;
 			};
 			name = Debug;
@@ -3315,7 +3344,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRx;
 			};
 			name = Release;
@@ -3336,7 +3365,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxTests;
 			};
 			name = Debug;
@@ -3357,7 +3386,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxTests;
 			};
 			name = Release;
@@ -3381,7 +3410,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowBrightFutures;
 			};
 			name = Debug;
@@ -3405,7 +3434,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowBrightFutures;
 			};
 			name = Release;
@@ -3426,7 +3455,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowBrightFuturesTests;
 			};
 			name = Debug;
@@ -3447,7 +3476,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowBrightFuturesTests;
 			};
 			name = Release;
@@ -3471,7 +3500,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsLaws;
 			};
 			name = Debug;
@@ -3495,7 +3524,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsLaws;
 			};
 			name = Release;
@@ -3519,7 +3548,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOptics;
 			};
 			name = Debug;
@@ -3543,7 +3572,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOptics;
 			};
 			name = Release;
@@ -3564,7 +3593,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsTests;
 			};
 			name = Debug;
@@ -3585,7 +3614,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsTests;
 			};
 			name = Release;
@@ -3609,7 +3638,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFree;
 			};
 			name = Debug;
@@ -3633,7 +3662,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFree;
 			};
 			name = Release;
@@ -3653,7 +3682,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowTests;
 			};
 			name = Debug;
@@ -3673,7 +3702,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowTests;
 			};
 			name = Release;
@@ -3745,7 +3774,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Bow;
 			};
 			name = Debug;
@@ -3769,7 +3798,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Bow;
 			};
 			name = Release;
