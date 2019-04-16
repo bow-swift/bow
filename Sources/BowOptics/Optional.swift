@@ -193,7 +193,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
 }
 
-fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
+private class OptionalFold<S, T, A, B> : Fold<S, A> {
     private let optional : POptional<S, T, A, B>
     
     init(optional : POptional<S, T, A, B>) {
@@ -205,7 +205,7 @@ fileprivate class OptionalFold<S, T, A, B> : Fold<S, A> {
     }
 }
 
-fileprivate class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let optional : POptional<S, T, A, B>
     
     init(optional : POptional<S, T, A, B>) {

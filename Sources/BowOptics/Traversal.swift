@@ -281,7 +281,7 @@ extension PTraversal where A: Monoid {
     }
 }
 
-fileprivate class ChoiceTraversal<S, T, U, V, A, B> : PTraversal<Either<S, U>, Either<T, V>, A, B> {
+private class ChoiceTraversal<S, T, U, V, A, B> : PTraversal<Either<S, U>, Either<T, V>, A, B> {
     private let first : PTraversal<S, T, A, B>
     private let second : PTraversal<U, V, A, B>
     
@@ -299,7 +299,7 @@ fileprivate class ChoiceTraversal<S, T, U, V, A, B> : PTraversal<Either<S, U>, E
 
 }
 
-fileprivate class TraversalFold<S, T, A, B> : Fold<S, A> {
+private class TraversalFold<S, T, A, B> : Fold<S, A> {
     private let traversal : PTraversal<S, T, A, B>
     
     init(traversal : PTraversal<S, T, A, B>) {
@@ -311,7 +311,7 @@ fileprivate class TraversalFold<S, T, A, B> : Fold<S, A> {
     }
 }
 
-fileprivate class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
+private class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
     override func modifyF<F>(_ s: Either<S, S>, _ f: @escaping (S) -> Kind<F, S>) -> Kind<F, Either<S, S>> where F : Applicative {
         return s.bimap(f, f)
             .fold({ fa in F.map(fa, Either.left) },
@@ -319,13 +319,13 @@ fileprivate class CodiagonalTraversal<S> : Traversal<Either<S, S>, S> {
     }
 }
 
-fileprivate class TraverseTraversal<T: Traverse, A, B>: PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
+private class TraverseTraversal<T: Traverse, A, B>: PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
     override func modifyF<F: Applicative>(_ s: Kind<T, A>, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, Kind<T, B>> {
         return T.traverse(s, f)
     }
 }
 
-fileprivate class Get2Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get2Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let set : (B, B, S) -> T
@@ -345,7 +345,7 @@ fileprivate class Get2Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get3Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get3Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -369,7 +369,7 @@ fileprivate class Get3Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get4Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get4Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -397,7 +397,7 @@ fileprivate class Get4Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get5Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get5Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -429,7 +429,7 @@ fileprivate class Get5Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get6Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get6Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -465,7 +465,7 @@ fileprivate class Get6Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get7Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get7Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -505,7 +505,7 @@ fileprivate class Get7Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get8Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get8Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -549,7 +549,7 @@ fileprivate class Get8Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let get1 : (S) -> A
     private let get2 : (S) -> A
     private let get3 : (S) -> A
@@ -597,7 +597,7 @@ fileprivate class Get9Traversal<S, T, A, B> : PTraversal<S, T, A, B> {
     }
 }
 
-fileprivate class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
+private class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
     private let first : PTraversal<S, T, A, B>
     private let second : PTraversal<A, B, C, D>
     

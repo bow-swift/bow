@@ -110,7 +110,7 @@ public class Getter<S, A> : GetterOf<S, A> {
     }
 }
 
-fileprivate class GetterFold<S, A> : Fold<S, A> {
+private class GetterFold<S, A> : Fold<S, A> {
     private let getter : Getter<S, A>
     
     init(getter : Getter<S, A>) {
