@@ -1,25 +1,24 @@
-import Result
 import Bow
 
 public extension Result {
-    public func toEither() -> Either<Error, Value> {
+    func toEither() -> Either<Failure, Success> {
         return fold(Either.left, Either.right)
     }
-    
-    public func toTry() -> Try<Value> {
+
+    func toTry() -> Try<Success> {
         return fold(Try.failure, Try.success)
     }
-    
-    public func toValidated() -> Validated<Error, Value> {
+
+    func toValidated() -> Validated<Failure, Success> {
         return fold(Validated.invalid, Validated.valid)
     }
-    
-    public func toOption() -> Option<Value> {
+
+    func toOption() -> Option<Success> {
         return fold(constant(Option.none()), Option.some)
     }
-    
-    func fold<B>(_ ifFailure : @escaping (Error) -> B,
-                 _ ifSuccess : @escaping (Value) -> B) -> B {
+
+    func fold<B>(_ ifFailure: @escaping (Failure) -> B,
+                 _ ifSuccess: @escaping (Success) -> B) -> B {
         switch self {
         case let .failure(error): return ifFailure(error)
         case let .success(value): return ifSuccess(value)
@@ -27,14 +26,14 @@ public extension Result {
     }
 }
 
-public extension Either where A : Error {
-    public func toResult() -> Result<B, A> {
-        return self.fold(Result.init(error:), Result.init(value:))
+public extension Either where A: Error {
+    func toResult() -> Result<B, A> {
+        return self.fold(Result.failure, Result.success)
     }
 }
 
-public extension Validated where E : Error {
-    public func toResult() -> Result<A, E> {
-        return self.fold(Result.init(error:), Result.init(value:))
+public extension Validated where E: Error {
+    func toResult() -> Result<A, E> {
+        return self.fold(Result.failure, Result.success)
     }
 }
