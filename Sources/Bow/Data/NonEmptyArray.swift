@@ -15,7 +15,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public let head: A
     /// Elements of the array, excluding the firs one.
     public let tail: [A]
-    
+
     /// Concatenates two non-empty arrays.
     ///
     /// - Parameters:
@@ -25,7 +25,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func +(lhs: NonEmptyArray<A>, rhs: NonEmptyArray<A>) -> NonEmptyArray<A> {
         return NonEmptyArray(head: lhs.head, tail: lhs.tail + [rhs.head] + rhs.tail)
     }
-    
+
     /// Concatenates a non-empty array with a Swift array.
     ///
     /// - Parameters:
@@ -35,7 +35,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func +(lhs: NonEmptyArray<A>, rhs: [A]) -> NonEmptyArray<A> {
         return NonEmptyArray(head: lhs.head, tail: lhs.tail + rhs)
     }
-    
+
     /// Appends an element to a non-empty array.
     ///
     /// - Parameters:
@@ -45,7 +45,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func +(lhs: NonEmptyArray<A>, rhs: A) -> NonEmptyArray<A> {
         return NonEmptyArray(head: lhs.head, tail: lhs.tail + [rhs])
     }
-    
+
     /// Creates a non-empty array from several values.
     ///
     /// - Parameters:
@@ -55,7 +55,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func of(_ head: A, _ tail: A...) -> NonEmptyArray<A> {
         return NonEmptyArray(head: head, tail: tail)
     }
-    
+
     /// Creates a non-empty array from a Swift array.
     ///
     /// - Parameter array: A Swift array.
@@ -63,7 +63,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func fromArray(_ array: [A]) -> Option<NonEmptyArray<A>> {
         return array.isEmpty ? Option<NonEmptyArray<A>>.none() : Option<NonEmptyArray<A>>.some(NonEmptyArray(all: array))
     }
-    
+
     /// Unsafely creates a non-empty array from a Swift array.
     ///
     /// This function may cause a fatal error if the argument is an empty error.
@@ -73,7 +73,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func fromArrayUnsafe(_ array: [A]) -> NonEmptyArray<A> {
         return NonEmptyArray(all: array)
     }
-    
+
     /// Safe downcast.
     ///
     /// - Parameter fa: Value in higher-kind form.
@@ -81,7 +81,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public static func fix(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
         return fa as! NonEmptyArray<A>
     }
-    
+
     /// Initializes a non-empty array.
     ///
     /// - Parameters:
@@ -91,7 +91,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
         self.head = head
         self.tail = tail
     }
-    
+
     private init(all: [A]) {
         self.head = all[0]
         self.tail = [A](all.dropFirst(1))
@@ -103,7 +103,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public func all() -> [A] {
         return [head] + tail
     }
-    
+
     /// Obtains an element from its position in this non-empty array.
     ///
     /// - Parameter i: Index of the object to obtain.
@@ -139,15 +139,15 @@ public extension NonEmptyArray where A: Equatable {
     ///
     /// - Parameter element: Element to look for in the array.
     /// - Returns: Boolean value indicating if the element appears in the array or not.
-    public func contains(element : A) -> Bool {
+    func contains(element : A) -> Bool {
         return head == element || tail.contains(where: { $0 == element })
     }
-    
+
     /// Checks if all the elements of an array appear in this array.
     ///
     /// - Parameter elements: Elements to look for in the array.
     /// - Returns: Boolean value indicating if all elements appear in the array or not.
-    public func containsAll(elements: [A]) -> Bool {
+    func containsAll(elements: [A]) -> Bool {
         return elements.map(contains).reduce(true, and)
     }
 }

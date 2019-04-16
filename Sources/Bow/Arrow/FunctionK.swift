@@ -38,22 +38,22 @@ public extension FunctionK where F == G {
     /// Identity `FunctionK`.
     ///
     /// It returns the input unmodified.
-    public static var id: FunctionK<F, F> {
+    static var id: FunctionK<F, F> {
         return IdFunctionK<F>()
     }
 }
 
 // MARK: Identity and Composed FunctionK
 
-fileprivate class IdFunctionK<F>: FunctionK<F, F> {
+private class IdFunctionK<F>: FunctionK<F, F> {
     override func invoke<A>(_ fa: Kind<F, A>) -> Kind<F, A> {
         return fa
     }
 }
 
-fileprivate class ComposedFunctionK<F, G, H>: FunctionK<F, H> {
-    fileprivate let f: FunctionK<F, G>
-    fileprivate let g: FunctionK<G, H>
+private class ComposedFunctionK<F, G, H>: FunctionK<F, H> {
+    private let f: FunctionK<F, G>
+    private let g: FunctionK<G, H>
 
     init(_ f: FunctionK<F, G>, _ g: FunctionK<G, H>) {
         self.f = f

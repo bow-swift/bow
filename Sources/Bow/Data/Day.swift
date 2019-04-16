@@ -39,14 +39,14 @@ public postfix func ^<F, G, A>(_ value: DayOf<F, G, A>) -> Day<F, G, A> {
 }
 
 public extension Day where F: Applicative, G: Applicative {
-    public static func from(_ a: A) -> Day<F, G, A> {
+    static func from(_ a: A) -> Day<F, G, A> {
         return DefaultDay(left: F.pure(unit),
                           right: G.pure(unit),
                           f: constant(a))
     }
 }
 
-fileprivate class DefaultDay<F: Comonad, G: Comonad, X, Y, A> : Day<F, G, A> {
+private class DefaultDay<F: Comonad, G: Comonad, X, Y, A> : Day<F, G, A> {
     private let left : Kind<F, X>
     private let right : Kind<G, Y>
     private let f : (X, Y) -> A

@@ -36,7 +36,7 @@ public extension Comonad {
     ///
     /// - Parameter fa: A value in the context implementing this instance.
     /// - Returns: Value wrapped in another context layer.
-    public static func duplicate<A>(_ fa: Kind<Self, A>) -> Kind<Self, Kind<Self, A>> {
+    static func duplicate<A>(_ fa: Kind<Self, A>) -> Kind<Self, Kind<Self, A>> {
         return coflatMap(fa, id)
     }
 }
@@ -53,7 +53,7 @@ public extension Kind where F: Comonad {
     /// - Parameters:
     ///   - f: Extracting function.
     /// - Returns: The result of extracting and transforming the value, in the context implementing this instance.
-    public func coflatMap<B>(_ f: @escaping (Kind<F, A>) -> B) -> Kind<F, B> {
+    func coflatMap<B>(_ f: @escaping (Kind<F, A>) -> B) -> Kind<F, B> {
         return F.coflatMap(self, f)
     }
 
@@ -64,14 +64,14 @@ public extension Kind where F: Comonad {
     /// This is a convenience function to call `Comonad.extract` as an instance method.
     ///
     /// - Returns: A normal value.
-    public func extract() -> A {
+    func extract() -> A {
         return F.extract(self)
     }
 
     /// Wraps this in another layer of this context.
     ///
     /// - Returns: This value wrapped in another context layer.
-    public func duplicate() -> Kind<F, Kind<F, A>> {
+    func duplicate() -> Kind<F, Kind<F, A>> {
         return F.duplicate(self)
     }
 }

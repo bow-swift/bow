@@ -24,7 +24,7 @@ public extension Selective {
     ///   - cond: A computation evaluating to a boolean value.
     ///   - f: A computation that will be evaluated if the first computation evaluates to `true`.
     /// - Returns: Composition of the two computations.
-    public static func whenS(_ cond: Kind<Self, Bool>, _ f: Kind<Self, ()>) -> Kind<Self, ()> {
+    static func whenS(_ cond: Kind<Self, Bool>, _ f: Kind<Self, ()>) -> Kind<Self, ()> {
         let effect = map(f) { ff in { (_: ()) in } }
         return select(selector(cond), effect)
     }
@@ -36,7 +36,7 @@ public extension Selective {
     ///   - fa: Computation that will be executed if `fab` evaluates to an `Either.left` value.
     ///   - fb: Computation that will be executed if `fab` evaluates to an `Either.right` value.
     /// - Returns: Composition of the computations.
-    public static func branch<A, B, C>(_ fab: Kind<Self, Either<A, B>>, _ fa: Kind<Self, (A) -> C>, _ fb: Kind<Self, (B) -> C>) -> Kind<Self, C> {
+    static func branch<A, B, C>(_ fab: Kind<Self, Either<A, B>>, _ fa: Kind<Self, (A) -> C>, _ fb: Kind<Self, (B) -> C>) -> Kind<Self, C> {
         let x = map(fab) { eab in Either.fix(eab.map(Either<B, C>.left)) }
         let y = map(fa) { f in { a in Either<B, C>.right(f(a)) } }
         return select(select(x, y), fb)
@@ -49,7 +49,7 @@ public extension Selective {
     ///   - t: Computation that will be executed if the first evaluates to `true`.
     ///   - e: Computation that will be executed if the first evaluates to `false`.
     /// - Returns: Composition of the computations.
-    public static func ifS<A>(_ x: Kind<Self, Bool>, _ t: Kind<Self, A>, _ e: Kind<Self, A>) -> Kind<Self, A> {
+    static func ifS<A>(_ x: Kind<Self, Bool>, _ t: Kind<Self, A>, _ e: Kind<Self, A>) -> Kind<Self, A> {
         return branch(selector(x), map(t, { tt in constant(tt) }), map(e, { ee in constant(ee) }))
     }
 
@@ -59,7 +59,7 @@ public extension Selective {
     ///   - x: Computation to be or'ed.
     ///   - y: Computation to be or'ed.
     /// - Returns: Result of the or operation on the two computations.
-    public static func orS(_ x: Kind<Self, Bool>, _ y: Kind<Self, Bool>) -> Kind<Self, Bool> {
+    static func orS(_ x: Kind<Self, Bool>, _ y: Kind<Self, Bool>) -> Kind<Self, Bool> {
         return ifS(x, pure(true), y)
     }
 
@@ -69,7 +69,7 @@ public extension Selective {
     ///   - x: Computation to be and'ed.
     ///   - y: Computation to be and'ed.
     /// - Returns: Result of the and operation on the two computations.
-    public static func andS(_ x: Kind<Self, Bool>, _ y: Kind<Self, Bool>) -> Kind<Self, Bool> {
+    static func andS(_ x: Kind<Self, Bool>, _ y: Kind<Self, Bool>) -> Kind<Self, Bool> {
         return ifS(x, y, pure(false))
     }
 
@@ -79,7 +79,7 @@ public extension Selective {
     ///   - x: Default value for the empty case.
     ///   - mx: A computation resulting in an optional value.
     /// - Returns: Composition of the two computations.
-    public static func fromOptionS<A>(_ x: Kind<Self, A>, _ mx: Kind<Self, Option<A>>) -> Kind<Self, A> {
+    static func fromOptionS<A>(_ x: Kind<Self, A>, _ mx: Kind<Self, Option<A>>) -> Kind<Self, A> {
         let s = map(mx) { a in Option.fix(a.map(Either<(), A>.right)).getOrElse(Either.left(())) }
         return select(s, map(x, { xx in constant(xx) }))
     }
@@ -90,7 +90,7 @@ public extension Selective {
     ///   - p: A lifted predicate to find any element of the `array` that matches it.
     ///   - array: An array to look for an element that matches the predicate in.
     /// - Returns: A boolean computation describing if any element of the array matches the predicate.
-    public static func anyS<A>(_ p: @escaping (A) -> Kind<Self, Bool>, _ array: ArrayK<A>) -> Kind<Self, Bool> {
+    static func anyS<A>(_ p: @escaping (A) -> Kind<Self, Bool>, _ array: ArrayK<A>) -> Kind<Self, Bool> {
         return array.foldRight(Eval.now(pure(false))) { a, b in Eval.later { orS(p(a), b.value()) } }.value()
     }
 
@@ -100,7 +100,7 @@ public extension Selective {
     ///   - p: A lifted predicate to check all elements of the `array` match it.
     ///   - array: An array to check if all elements match the predicate.
     /// - Returns: A boolean computation describing if all elements of the array match the predicate.
-    public static func allS<A>(_ p: @escaping (A) -> Kind<Self, Bool>, _ array: ArrayK<A>) -> Kind<Self, Bool> {
+    static func allS<A>(_ p: @escaping (A) -> Kind<Self, Bool>, _ array: ArrayK<A>) -> Kind<Self, Bool> {
         return array.foldRight(Eval.now(pure(true))) { a, b in Eval.later { andS(p(a), b.value()) } }.value()
     }
 
@@ -108,7 +108,7 @@ public extension Selective {
     ///
     /// - Parameter x: A computation.
     /// - Returns: A potentially lazy computation.
-    public static func whileS(_ x: Kind<Self, Bool>) -> Eval<Kind<Self, ()>> {
+    static func whileS(_ x: Kind<Self, Bool>) -> Eval<Kind<Self, ()>> {
         return Eval.later { whenS(x, whileS(x).value()) }
     }
 }
@@ -121,7 +121,7 @@ public extension Kind where F: Selective {
     /// - Parameters:
     ///   - f: A computation that is executed in case the receiving computation evaluates to a left value.
     /// - Returns: Composition of the two computations.
-    public func select<AA, B>(_ f: Kind<F, (AA) -> B>) -> Kind<F, B> where A == Either<AA, B> {
+    func select<AA, B>(_ f: Kind<F, (AA) -> B>) -> Kind<F, B> where A == Either<AA, B> {
         return F.select(self, f)
     }
 
@@ -131,7 +131,7 @@ public extension Kind where F: Selective {
     ///   - fa: Computation that will be executed if this computation evaluates to an `Either.left` value.
     ///   - fb: Computation that will be executed if this computation evaluates to an `Either.right` value.
     /// - Returns: Composition of the computations.
-    public func branch<AA, B, C>(_ fa: Kind<F, (AA) -> C>, _ fb: Kind<F, (B) -> C>) -> Kind<F, C> where A == Either<AA, B> {
+    func branch<AA, B, C>(_ fa: Kind<F, (AA) -> C>, _ fb: Kind<F, (B) -> C>) -> Kind<F, C> where A == Either<AA, B> {
         return F.branch(self, fa, fb)
     }
 
@@ -141,7 +141,7 @@ public extension Kind where F: Selective {
     ///   - x: Default value for the empty case.
     ///   - mx: A computation resulting in an optional value.
     /// - Returns: Composition of the two computations.
-    public static func fromOptionS(_ x: Kind<F, A>, _ mx: Kind<F, Option<A>>) -> Kind<F, A> {
+    static func fromOptionS(_ x: Kind<F, A>, _ mx: Kind<F, Option<A>>) -> Kind<F, A> {
         return F.fromOptionS(x, mx)
     }
 }
@@ -153,7 +153,7 @@ public extension Kind where F: Selective, A == Bool {
     ///   - cond: A computation evaluating to a boolean value.
     ///   - f: A computation that will be evaluated if the first computation evaluates to `true`.
     /// - Returns: Composition of the two computations.
-    public static func whenS(_ cond: Kind<F, Bool>, _ f: Kind<F, ()>) -> Kind<F, ()> {
+    static func whenS(_ cond: Kind<F, Bool>, _ f: Kind<F, ()>) -> Kind<F, ()> {
         return F.whenS(cond, f)
     }
 
@@ -164,7 +164,7 @@ public extension Kind where F: Selective, A == Bool {
     ///   - t: Computation that will be executed if the first evaluates to `true`.
     ///   - e: Computation that will be executed if the first evaluates to `false`.
     /// - Returns: Composition of the computations.
-    public static func ifS<A>(_ x: Kind<F, Bool>, _ t: Kind<F, A>, _ e: Kind<F, A>) -> Kind<F, A> {
+    static func ifS<A>(_ x: Kind<F, Bool>, _ t: Kind<F, A>, _ e: Kind<F, A>) -> Kind<F, A> {
         return F.ifS(x, t, e)
     }
 
@@ -174,7 +174,7 @@ public extension Kind where F: Selective, A == Bool {
     ///   - x: Computation to be or'ed.
     ///   - y: Computation to be or'ed.
     /// - Returns: Result of the or operation on the two computations.
-    public static func orS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
+    static func orS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
         return F.orS(x, y)
     }
 
@@ -184,7 +184,7 @@ public extension Kind where F: Selective, A == Bool {
     ///   - x: Computation to be and'ed.
     ///   - y: Computation to be and'ed.
     /// - Returns: Result of the and operation on the two computations.
-    public static func andS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
+    static func andS(_ x: Kind<F, Bool>, _ y: Kind<F, Bool>) -> Kind<F, Bool> {
         return F.andS(x, y)
     }
 
@@ -192,7 +192,7 @@ public extension Kind where F: Selective, A == Bool {
     ///
     /// - Parameter x: A computation.
     /// - Returns: A potentially lazy computation.
-    public static func whileS(_ x: Kind<F, Bool>) -> Eval<Kind<F, ()>> {
+    static func whileS(_ x: Kind<F, Bool>) -> Eval<Kind<F, ()>> {
         return F.whileS(x)
     }
 }
@@ -203,7 +203,7 @@ public extension ArrayK {
     /// - Parameters:
     ///   - p: A lifted predicate to find any element of this array that matches it.
     /// - Returns: A boolean computation describing if any element of the array matches the predicate.
-    public func anyS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
+    func anyS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
         return F.anyS(p, self)
     }
 
@@ -212,7 +212,7 @@ public extension ArrayK {
     /// - Parameters:
     ///   - p: A lifted predicate to check all elements of this array match it.
     /// - Returns: A boolean computation describing if all elements of the array match the predicate.
-    public func allS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
+    func allS<F: Selective>(_ p: @escaping (A) -> Kind<F, Bool>) -> Kind<F, Bool> {
         return F.anyS(p, self)
     }
 }

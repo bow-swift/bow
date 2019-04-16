@@ -26,7 +26,7 @@ public protocol Functor: Invariant {
 // MARK: Related functions
 public extension Functor {
     // Docs inherited from `Invariant`
-    public static func imap<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<Self, B> {
+    static func imap<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<Self, B> {
         return map(fa, f)
     }
 
@@ -34,7 +34,7 @@ public extension Functor {
     ///
     /// - Parameter f: Function to be lifted.
     /// - Returns: Function in the context implementing this instance of `Functor`.
-    public static func lift<A, B>(_ f: @escaping (A) -> B) -> (Kind<Self, A>) -> Kind<Self, B> {
+    static func lift<A, B>(_ f: @escaping (A) -> B) -> (Kind<Self, A>) -> Kind<Self, B> {
         return { fa in map(fa, f) }
     }
 
@@ -42,7 +42,7 @@ public extension Functor {
     ///
     /// - Parameter fa: Value to be transformed.
     /// - Returns: New value in the context implementing this instance of `Functor`, with `Void` as value type.
-    public static func void<A>(_ fa: Kind<Self, A>) -> Kind<Self, ()> {
+    static func void<A>(_ fa: Kind<Self, A>) -> Kind<Self, ()> {
         return map(fa, {_ in })
     }
 
@@ -52,7 +52,7 @@ public extension Functor {
     ///   - fa: Value to be transformed.
     ///   - f: Transforming function.
     /// - Returns: A pair with the original value and its transformation, in the context of the original value.
-    public static func fproduct<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B) -> Kind<Self, (A, B)> {
+    static func fproduct<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B) -> Kind<Self, (A, B)> {
         return map(fa, { a in (a, f(a)) })
     }
 
@@ -62,7 +62,7 @@ public extension Functor {
     ///   - fa: Value to be transformed.
     ///   - b: Constant value to replace the value type.
     /// - Returns: A new value with the structure of the original value, with its value type transformed.
-    public static func `as`<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, B> {
+    static func `as`<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, B> {
         return map(fa, { _ in b })
     }
 
@@ -72,7 +72,7 @@ public extension Functor {
     ///   - fa: Value to be transformed.
     ///   - b: Constant value for the tuple.
     /// - Returns: A new value with the structure of the original value, with a tuple in its value type.
-    public static func tupleLeft<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, (B, A)> {
+    static func tupleLeft<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, (B, A)> {
         return map(fa, { a in (b, a) })
     }
 
@@ -82,7 +82,7 @@ public extension Functor {
     ///   - fa: Value to be transformed.
     ///   - b: Constant value for the tuple.
     /// - Returns: A new value with the structure of the original value, with a tuple in its value type.
-    public static func tupleRight<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, (A, B)> {
+    static func tupleRight<A, B>(_ fa: Kind<Self, A>, _ b: B) -> Kind<Self, (A, B)> {
         return map(fa, { a in (a, b) })
     }
 }
@@ -97,7 +97,7 @@ public extension Kind where F: Functor {
     /// - Parameters:
     ///   - f: A transforming function.
     /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the original value.
-    public func map<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
+    func map<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         return F.map(self, f)
     }
 
@@ -107,7 +107,7 @@ public extension Kind where F: Functor {
     ///
     /// - Parameter f: Function to be lifted.
     /// - Returns: Function in the context implementing this instance of `Functor`.
-    public static func lift<A, B>(_ f: @escaping (A) -> B) -> (Kind<F, A>) -> Kind<F, B> {
+    static func lift<A, B>(_ f: @escaping (A) -> B) -> (Kind<F, A>) -> Kind<F, B> {
         return { fa in fa.map(f) }
     }
 
@@ -116,7 +116,7 @@ public extension Kind where F: Functor {
     /// This is a convenience method to call `Functor.void` as an instance method of this type.
     ///
     /// - Returns: New value in the context implementing this instance of `Functor`, with `Void` as value type.
-    public func void() -> Kind<F, ()> {
+    func void() -> Kind<F, ()> {
         return F.void(self)
     }
 
@@ -127,7 +127,7 @@ public extension Kind where F: Functor {
     /// - Parameters:
     ///   - f: Transforming function.
     /// - Returns: A pair with the original value and its transformation, in the context of the original value.
-    public func fproduct<B>(_ f: @escaping (A) -> B) -> Kind<F, (A, B)> {
+    func fproduct<B>(_ f: @escaping (A) -> B) -> Kind<F, (A, B)> {
         return F.fproduct(self, f)
     }
 
@@ -138,7 +138,7 @@ public extension Kind where F: Functor {
     /// - Parameters:
     ///   - b: Constant value to replace the value type.
     /// - Returns: A new value with the structure of the original value, with its value type transformed.
-    public func `as`<B>(_ b: B) -> Kind<F, B> {
+    func `as`<B>(_ b: B) -> Kind<F, B> {
         return F.as(self, b)
     }
 
@@ -149,7 +149,7 @@ public extension Kind where F: Functor {
     /// - Parameters:
     ///   - b: Constant value for the tuple.
     /// - Returns: A new value with the structure of the original value, with a tuple in its value type.
-    public func tupleLeft<B>(_ b: B) -> Kind<F, (B, A)> {
+    func tupleLeft<B>(_ b: B) -> Kind<F, (B, A)> {
         return F.tupleLeft(self, b)
     }
 
@@ -160,7 +160,7 @@ public extension Kind where F: Functor {
     /// - Parameters:
     ///   - b: Constant value for the tuple.
     /// - Returns: A new value with the structure of the original value, with a tuple in its value type.
-    public func tupleRight<B>(_ b: B) -> Kind<F, (A, B)> {
+    func tupleRight<B>(_ b: B) -> Kind<F, (A, B)> {
         return F.tupleRight(self, b)
     }
 }
