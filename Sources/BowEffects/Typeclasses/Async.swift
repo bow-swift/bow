@@ -24,7 +24,7 @@ public func runAsyncUnsafe<F: Async, A>(_ f: @escaping () -> Either<F.E, A>) -> 
 
 // MARK: Syntax for Async
 public extension Kind where F: Async {
-    public static func runAsync(_ fa: @escaping Proc<F.E, A>) -> Kind<F, A> {
+    static func runAsync(_ fa: @escaping Proc<F.E, A>) -> Kind<F, A> {
         return F.runAsync(fa)
     }
 }

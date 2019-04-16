@@ -6,7 +6,7 @@ public protocol MonadDefer: MonadError {
 }
 
 public extension MonadDefer {
-    public static func delay<A>(_ f: @escaping () throws -> A) -> Kind<Self, A> {
+    static func delay<A>(_ f: @escaping () throws -> A) -> Kind<Self, A> {
         return self.suspend {
             do {
                 return try pure(f())
@@ -15,12 +15,12 @@ public extension MonadDefer {
             }
         }
     }
-    
-    public static func lazy() -> Kind<Self, ()> {
+
+    static func lazy() -> Kind<Self, ()> {
         return delay {}
     }
-    
-    public static func delayEither<A>(_ f: @escaping () -> Either<E, A>) -> Kind<Self, A> {
+
+    static func delayEither<A>(_ f: @escaping () -> Either<E, A>) -> Kind<Self, A> {
         return self.suspend { f().fold({ e in self.raiseError(e) },
                                        { a in self.pure(a) }) }
     }
@@ -29,19 +29,19 @@ public extension MonadDefer {
 // MARK: Syntax for MonadDefer
 
 public extension Kind where F: MonadDefer {
-    public static func suspend(_ fa: @escaping () -> Kind<F, A>) -> Kind<F, A> {
+    static func suspend(_ fa: @escaping () -> Kind<F, A>) -> Kind<F, A> {
         return F.suspend(fa)
     }
 
-    public static func delay(_ f: @escaping () throws -> A) -> Kind<F, A> {
+    static func delay(_ f: @escaping () throws -> A) -> Kind<F, A> {
         return F.delay(f)
     }
 
-    public static func lazy() -> Kind<F, ()> {
+    static func lazy() -> Kind<F, ()> {
         return F.lazy()
     }
 
-    public static func delayEither(_ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
+    static func delayEither(_ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
         return F.delayEither(f)
     }
 }
