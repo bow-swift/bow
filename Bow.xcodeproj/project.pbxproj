@@ -107,6 +107,7 @@
 		11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
 		11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD27217F1FC200844D9D /* ReverseTest.swift */; };
 		11DEB47322660DF800E15277 /* MVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEB47222660DF800E15277 /* MVar.swift */; };
+		11DEB47622660FE500E15277 /* UncancelableMVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEB47522660FE500E15277 /* UncancelableMVar.swift */; };
 		11E71715219D722900B94845 /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B2217E2E9200969984 /* BoundSetter.swift */; };
 		11E71716219D722900B94845 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BE217E2E9200969984 /* Fold.swift */; };
 		11E71717219D722900B94845 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B3217E2E9200969984 /* Getter.swift */; };
@@ -601,6 +602,7 @@
 		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
 		11DDCD27217F1FC200844D9D /* ReverseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseTest.swift; sourceTree = "<group>"; };
 		11DEB47222660DF800E15277 /* MVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVar.swift; sourceTree = "<group>"; };
+		11DEB47522660FE500E15277 /* UncancelableMVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncancelableMVar.swift; sourceTree = "<group>"; };
 		11E71712219D704F00B94845 /* BowOptics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOptics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E71713219D705000B94845 /* Bow-Optics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Optics-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Optics-Info.plist"; sourceTree = "<absolute>"; };
 		11E71802219D7D5900B94845 /* BowOpticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowOpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1107,12 +1109,12 @@
 		114545DC22609BAD00EA8755 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				11DEB47422660FAA00E15277 /* Internal */,
 				114545DF2260A16C00EA8755 /* Atomic.swift */,
 				114545E12260D2F400EA8755 /* Fiber.swift */,
 				8BA0F468217E2E9200969984 /* IO.swift */,
 				114545DD22609BC500EA8755 /* KindConnection.swift */,
 				11DEB47222660DF800E15277 /* MVar.swift */,
+				11DEB47422660FAA00E15277 /* Internal */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1157,6 +1159,7 @@
 		11DEB47422660FAA00E15277 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
+				11DEB47522660FE500E15277 /* UncancelableMVar.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -2414,6 +2417,7 @@
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
 				114545DB22609B6600EA8755 /* Concurrent.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
+				11DEB47622660FE500E15277 /* UncancelableMVar.swift in Sources */,
 				114545DE22609BC500EA8755 /* KindConnection.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
 				114545E22260D2F400EA8755 /* Fiber.swift in Sources */,

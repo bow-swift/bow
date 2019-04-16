@@ -46,3 +46,15 @@ final class Atomic<A> {
     }
 }
 
+extension Atomic where A: Equatable {
+    func compareAndSet(_ check: A, _ newValue: A) -> Bool {
+        var result = false
+        queue.sync {
+            if _value == check {
+                _value = newValue
+                result = true
+            }
+        }
+        return result
+    }
+}
