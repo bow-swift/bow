@@ -76,6 +76,11 @@ public class Either<A, B>: EitherOf<A, B> {
         return fold({ _ in fatalError("Attempted to obtain rightValue on a left instance") }, id)
     }
 
+    /// Returns the value of the right type, or `nil` if it is a left value.
+    public var orNil: B? {
+        return fold(constant(nil), id)
+    }
+
     /// Reverses the types of this either. Left values become right values and vice versa.
     ///
     /// - Returns: An either value with its types reversed respect to this one.
@@ -89,9 +94,25 @@ public class Either<A, B>: EitherOf<A, B> {
     ///   - fa: Closure to be applied when there is a left value.
     ///   - fb: Closure to be applied when there is a right value.
     /// - Returns: Result of applying the corresponding closure to this value.
-    public func bimap<C, D>(_ fa : (A) -> C, _ fb : (B) -> D) -> Either<C, D> {
+    public func bimap<C, D>(_ fa: (A) -> C, _ fb: (B) -> D) -> Either<C, D> {
         return fold({ a in Either<C, D>.left(fa(a)) },
                     { b in Either<C, D>.right(fb(b)) })
+    }
+
+    /// Transforms the left type parameter, preserving the structure of this value.
+    ///
+    /// - Parameter f: Transforming closure.
+    /// - Returns: Result of appliying the transformation to any left value in this value.
+    public func mapLeft<C>(_ f: (A) -> C) -> Either<C, B> {
+        return bimap(f, id)
+    }
+
+    /// Returns the value from this `Either.right` value or allows callers to transform the `Either.left` to `Either.right`.
+    ///
+    /// - Parameter f: Left transforming function.
+    /// - Returns: Value of this `Either.right` or transformation of this `Either.left`.
+    public func getOrHandle(_ f: (A) -> B) -> B {
+        return fold(f, id)
     }
 
     /// Converts this `Either` to an `Option`.
@@ -107,7 +128,7 @@ public class Either<A, B>: EitherOf<A, B> {
     ///
     /// - Parameter defaultValue: Value to be returned if this value is left.
     /// - Returns: The wrapped value if it is right; otherwise, the default value.
-    public func getOrElse(_ defaultValue : B) -> B {
+    public func getOrElse(_ defaultValue: B) -> B {
         return fold(constant(defaultValue), id)
     }
 
@@ -122,6 +143,56 @@ public class Either<A, B>: EitherOf<A, B> {
                     { b in predicate(b) ?
                         Either<A, B>.right(b) :
                         Either<A, B>.left(defaultValue) })
+    }
+
+    /// Filters the right values, providing a function to transform those that do not match the predicate into a left-type value.
+    ///
+    /// - Parameters:
+    ///   - predicate: Filtering predicate.
+    ///   - f: Transforming function.
+    /// - Returns: This value, if it matches the predicate or is left; otherwise, a left value wrapping the transformation of the right value.
+    public func filterOrOther(_ predicate: @escaping (B) -> Bool, _ f: @escaping (B) -> A) -> Either<A, B> {
+        return flatMap { b in predicate(b) ? Either.right(b) : Either.left(f(b)) }^
+    }
+
+    /// Flattens the right side of this value, providing a default value in case the wrapped value is not present.
+    ///
+    /// - Parameter f: Function providing a default value.
+    /// - Returns: An Either value where the right side is not optional.
+    public func leftIfNull<BB>(_ f: @escaping @autoclosure () -> A) -> Either<A, BB> where B == Optional<BB> {
+        return flatMap { b in
+            if let some = b {
+                return Either<A, BB>.right(some)
+            } else {
+                return Either<A, BB>.left(f())
+            }
+        }^
+    }
+}
+
+// MARK: Functions when the right side is Equatable
+public extension Either where B: Equatable {
+    /// Checks if this value has an element in the right side.
+    ///
+    /// - Parameter element: Element to check.
+    /// - Returns: Boolean value indicating if the element was found or not.
+    func contains(_ element: B) -> Bool {
+        return fold(constant(false), { b in b == element })
+    }
+}
+
+// MARK: Either from Optional
+public extension Optional {
+    /// Converts this optional to an `Either.right` value, providing a default value if it is nil.
+    ///
+    /// - Parameter f: Default value provider.
+    /// - Returns: A right value containing the wrapped value, or a left with the provided default value.
+    func rightIfNotNull<A>(_ f: @autoclosure () -> A) -> Either<A, Wrapped> {
+        if let value = self {
+            return .right(value)
+        } else {
+            return .left(f())
+        }
     }
 }
 
