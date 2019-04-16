@@ -25,7 +25,7 @@ class ResultTest: XCTestCase {
     }
     
     func testResultValidateIsomorphism() {
-        property("Either and Result are isomorphic") <- forAll { (x: Int) in
+        property("Validated and Result are isomorphic") <- forAll { (x: Int) in
             return self.generateValidated(x).toResult().toValidated() == self.generateValidated(x)
         }
     }
