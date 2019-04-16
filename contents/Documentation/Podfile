@@ -2,13 +2,13 @@ target 'Documentation' do
   platform :osx, '10.14'
   use_frameworks!
 
-  pod "Bow", "~> 0.3.0"
-  pod "BowEffects", "~> 0.3.0"
-  pod "BowResult", "~> 0.3.0"
-  pod "BowRx", "~> 0.3.0"
-  pod "BowBrightFutures", "~> 0.3.0"
-  pod "BowOptics", "~> 0.3.0"
-  pod "BowGeneric", "~> 0.3.0"
-  pod "BowRecursionSchemes", "~> 0.3.0"
-  pod "BowFree", "~> 0.3.0"
+  pod "Bow", :path => '../..'
+  pod "BowEffects", :path => '../..'
+  pod "BowResult", :path => '../..'
+  pod "BowRx", :path => '../..'
+  pod "BowBrightFutures", :path => '../..'
+  pod "BowOptics", :path => '../..'
+  pod "BowGeneric", :path => '../..'
+  pod "BowRecursionSchemes", :path => '../..'
+  pod "BowFree", :path => '../..'
 end
