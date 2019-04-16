@@ -8,14 +8,14 @@ public final class FutureKPartial<E: Error>: Kind<ForFutureK, E> {}
 public typealias FutureKOf<E: Error, A> = Kind<FutureKPartial<E>, A>
 
 public extension Future {
-    public func k() -> FutureK<E, T> {
+    func k() -> FutureK<E, T> {
         return FutureK(self)
     }
 }
 
 public class FutureK<E: Error, A>: FutureKOf<E, A> {
     public let value: Future<A, E>
-    
+
     public static func fix(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
         return value as! FutureK<E, A>
     }
@@ -23,7 +23,7 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
     public static func raiseError(_ e : E) -> FutureK<E, A> {
         return Future(error: e).k()
     }
-    
+
     public static func from(_ f : @escaping () -> A) -> FutureK<E, A> {
         return Future { complete in complete(.success(f())) }.k()
     }
@@ -36,25 +36,25 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
                                 { a in complete(.success(a)) })
                 }
             } catch {}
-        }.k()
+            }.k()
     }
-    
+
     public init(_ value: Future<A, E>) {
         self.value = value
     }
-    
+
     public var isCompleted : Bool {
         return value.isCompleted
     }
-    
+
     public var isSuccess: Bool {
         return value.isSuccess
     }
-    
+
     public var isFailure: Bool {
         return value.isFailure
     }
-    
+
     public func runAsync(_ callback : @escaping (Either<E, A>) -> FutureKOf<E, ()>) -> FutureK<E, ()> {
         return value.flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
             .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
@@ -123,7 +123,7 @@ extension FutureKPartial: BowEffects.Async {
                                 { a in complete(.success(a)) })
                 }
             } catch {}
-        }.k()
+            }.k()
     }
 }
 
