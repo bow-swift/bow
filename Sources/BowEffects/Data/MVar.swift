@@ -46,6 +46,20 @@ public extension MVar where F: Async, A: Equatable {
     }
 }
 
+public extension MVar where F: Concurrent, A: Equatable {
+    static func cancelableEmpty() -> Kind<F, MVar<F, A>> {
+        return CancelableMVar.empty()
+    }
+
+    static func cancelableOf(_ initial: A) -> Kind<F, MVar<F, A>> {
+        return CancelableMVar.invoke(initial)
+    }
+
+    static func concurrentPartial() -> MVarPartialOf<F> {
+        return CancelableMVarPartialOf<F>()
+    }
+}
+
 public class MVarPartialOf<F> {
     init(){}
 
@@ -65,5 +79,15 @@ private class UncancelableMVarPartialOf<F: Async>: MVarPartialOf<F> {
 
     override func empty<A: Equatable>() -> Kind<F, MVar<F, A>> {
         return UncancelableMVar.empty()
+    }
+}
+
+private class CancelableMVarPartialOf<F: Concurrent>: MVarPartialOf<F> {
+    override func of<A: Equatable>(_ a: A) -> Kind<F, MVar<F, A>> {
+        return CancelableMVar.invoke(a)
+    }
+
+    override func empty<A: Equatable>() -> Kind<F, MVar<F, A>> {
+        return CancelableMVar.empty()
     }
 }
