@@ -41,6 +41,10 @@ class TryTest: XCTestCase {
         TraverseLaws<ForTry>.check(generator: self.generator)
     }
 
+    func testFunctorFilterLaws() {
+        FunctorFilterLaws<ForTry>.check(generator: self.generator)
+    }
+
     func testSemigroupLaws() {
         property("Try semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
             return SemigroupLaws<Try<Int>>.check(

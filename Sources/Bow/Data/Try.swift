@@ -285,6 +285,16 @@ extension ForTry: Traverse {
     }
 }
 
+// MARK: Instance of `FunctorFilter` for `Try`
+extension ForTry: FunctorFilter {
+    public static func mapFilter<A, B>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForTry, B> {
+        return Try.fix(fa).flatMap { a in
+            f(a)^.fold(constant(raiseError(TryError.predicateError)), pure)
+        }
+    }
+}
+
+
 // MARK: Instance of `Semigroup` for `Try`
 extension Try: Semigroup where A: Semigroup {
     public func combine(_ other: Try<A>) -> Try<A> {
