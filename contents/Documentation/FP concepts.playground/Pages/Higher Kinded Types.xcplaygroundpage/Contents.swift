@@ -58,8 +58,8 @@ func divideValidated(x: Int, y: Int) -> Validated<DivideError, Int> {
 
  ```swift
  func divide<F: ErrorSuccessRepresentable>(x: Int, y: Int) -> F<DivideError, Int> {
- guard y != 0 else { return .failure(.divisionByZero)
- return .success(x / y)
+    guard y != 0 else { return .failure(.divisionByZero)
+    return .success(x / y)
  }
  ```
 
