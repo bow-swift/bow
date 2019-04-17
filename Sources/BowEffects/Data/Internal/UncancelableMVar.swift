@@ -1,6 +1,6 @@
 import Bow
 
-class UncancelableMVar<F, A>: MVar<F, A> where F: Async, A: Equatable {
+class UncancelableMVar<F: Async, A: Equatable>: MVar<F, A> {
     private let stateRef: Atomic<State<F, A>>
 
     static func invoke(_ initial: A) -> Kind<F, MVar<F, A>> {

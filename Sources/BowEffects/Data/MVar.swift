@@ -1,6 +1,6 @@
 import Bow
 
-public class MVar<F, A> {
+public class MVar<F, A: Equatable> {
     public init() {}
 
     var isEmpty: Kind<F, Bool> {
@@ -32,12 +32,38 @@ public class MVar<F, A> {
     }
 }
 
+public extension MVar where F: Async, A: Equatable {
+    static func uncancelableEmpty() -> Kind<F, MVar<F, A>> {
+        return UncancelableMVar<F, A>.empty()
+    }
+
+    static func uncancelableOf(_ initial: A) -> Kind<F, MVar<F, A>> {
+        return UncancelableMVar.invoke(initial)
+    }
+
+    static func asyncPartial() -> MVarPartialOf<F> {
+        return UncancelableMVarPartialOf<F>()
+    }
+}
+
 public class MVarPartialOf<F> {
-    func of<A>(_ a: A) -> Kind<F, MVar<F, A>> {
+    init(){}
+
+    func of<A: Equatable>(_ a: A) -> Kind<F, MVar<F, A>> {
         fatalError("of needs to be implemented in subclasses")
     }
 
-    func empty<A>() -> Kind<F, MVar<F, A>> {
+    func empty<A: Equatable>() -> Kind<F, MVar<F, A>> {
         fatalError("empty needs to be implemented in subclasses")
+    }
+}
+
+private class UncancelableMVarPartialOf<F: Async>: MVarPartialOf<F> {
+    override func of<A: Equatable>(_ a: A) -> Kind<F, MVar<F, A>> {
+        return UncancelableMVar.invoke(a)
+    }
+
+    override func empty<A: Equatable>() -> Kind<F, MVar<F, A>> {
+        return UncancelableMVar.empty()
     }
 }
