@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		0DE29CA121A7258100DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
+		1116D4F0224E270B00507B54 /* Coproduct3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4EF224E270B00507B54 /* Coproduct3.swift */; };
+		1116D4F2224E2B1600507B54 /* Coproduct4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F1224E2B1600507B54 /* Coproduct4.swift */; };
+		1116D4F4224E2C8A00507B54 /* Coproduct5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F3224E2C8A00507B54 /* Coproduct5.swift */; };
+		1116D4F6224E2E9800507B54 /* Coproduct6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F5224E2E9800507B54 /* Coproduct6.swift */; };
+		1116D4F8224E308500507B54 /* Coproduct7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F7224E308500507B54 /* Coproduct7.swift */; };
+		1116D4FA224E324900507B54 /* Coproduct8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F9224E324900507B54 /* Coproduct8.swift */; };
+		1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FB224E332900507B54 /* Coproduct9.swift */; };
+		1116D500224E342200507B54 /* Coproduct10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FF224E342200507B54 /* Coproduct10.swift */; };
+		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
 		1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
 		11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
 		11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
@@ -162,7 +171,7 @@
 		8BA0F3F5217E2DEF00969984 /* StringInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39B217E2DEF00969984 /* StringInstancesTest.swift */; };
 		8BA0F3F6217E2DEF00969984 /* NumberInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39C217E2DEF00969984 /* NumberInstancesTest.swift */; };
 		8BA0F3FD217E2DEF00969984 /* CurryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A7217E2DEF00969984 /* CurryTest.swift */; };
-		8BA0F3FE217E2DEF00969984 /* CoproductTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A9217E2DEF00969984 /* CoproductTest.swift */; };
+		8BA0F3FE217E2DEF00969984 /* EitherKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */; };
 		8BA0F3FF217E2DEF00969984 /* MooreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3AA217E2DEF00969984 /* MooreTest.swift */; };
 		8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3AB217E2DEF00969984 /* EitherTest.swift */; };
 		8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3AC217E2DEF00969984 /* SetKTest.swift */; };
@@ -201,7 +210,7 @@
 		8BA0F58B217E2E9200969984 /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F477217E2E9200969984 /* Ior.swift */; };
 		8BA0F58F217E2E9200969984 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F478217E2E9200969984 /* Option.swift */; };
 		8BA0F593217E2E9200969984 /* NonEmptyArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F479217E2E9200969984 /* NonEmptyArray.swift */; };
-		8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47A217E2E9200969984 /* Coproduct.swift */; };
+		8BA0F597217E2E9200969984 /* EitherK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47A217E2E9200969984 /* EitherK.swift */; };
 		8BA0F59B217E2E9200969984 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47B217E2E9200969984 /* Day.swift */; };
 		8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47D217E2E9200969984 /* Moore.swift */; };
 		8BA0F5A7217E2E9200969984 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47E217E2E9200969984 /* Eval.swift */; };
@@ -542,6 +551,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1116D4EF224E270B00507B54 /* Coproduct3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct3.swift; sourceTree = "<group>"; };
+		1116D4F1224E2B1600507B54 /* Coproduct4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct4.swift; sourceTree = "<group>"; };
+		1116D4F3224E2C8A00507B54 /* Coproduct5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct5.swift; sourceTree = "<group>"; };
+		1116D4F5224E2E9800507B54 /* Coproduct6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct6.swift; sourceTree = "<group>"; };
+		1116D4F7224E308500507B54 /* Coproduct7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct7.swift; sourceTree = "<group>"; };
+		1116D4F9224E324900507B54 /* Coproduct8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct8.swift; sourceTree = "<group>"; };
+		1116D4FB224E332900507B54 /* Coproduct9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct9.swift; sourceTree = "<group>"; };
+		1116D4FF224E342200507B54 /* Coproduct10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct10.swift; sourceTree = "<group>"; };
+		1116D501224E3A2300507B54 /* Coproduct2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct2.swift; sourceTree = "<group>"; };
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -630,7 +648,7 @@
 		8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaybeKTest.swift; sourceTree = "<group>"; };
 		8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleKTest.swift; sourceTree = "<group>"; };
 		8BA0F3A7217E2DEF00969984 /* CurryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurryTest.swift; sourceTree = "<group>"; };
-		8BA0F3A9217E2DEF00969984 /* CoproductTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoproductTest.swift; sourceTree = "<group>"; };
+		8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherKTest.swift; sourceTree = "<group>"; };
 		8BA0F3AA217E2DEF00969984 /* MooreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MooreTest.swift; sourceTree = "<group>"; };
 		8BA0F3AB217E2DEF00969984 /* EitherTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherTest.swift; sourceTree = "<group>"; };
 		8BA0F3AC217E2DEF00969984 /* SetKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetKTest.swift; sourceTree = "<group>"; };
@@ -732,7 +750,7 @@
 		8BA0F477217E2E9200969984 /* Ior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ior.swift; sourceTree = "<group>"; };
 		8BA0F478217E2E9200969984 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		8BA0F479217E2E9200969984 /* NonEmptyArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonEmptyArray.swift; sourceTree = "<group>"; };
-		8BA0F47A217E2E9200969984 /* Coproduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coproduct.swift; sourceTree = "<group>"; };
+		8BA0F47A217E2E9200969984 /* EitherK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherK.swift; sourceTree = "<group>"; };
 		8BA0F47B217E2E9200969984 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		8BA0F47D217E2E9200969984 /* Moore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moore.swift; sourceTree = "<group>"; };
 		8BA0F47E217E2E9200969984 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
@@ -1002,6 +1020,15 @@
 		112295E3219D94DD006D66C5 /* BowGeneric */ = {
 			isa = PBXGroup;
 			children = (
+				1116D501224E3A2300507B54 /* Coproduct2.swift */,
+				1116D4EF224E270B00507B54 /* Coproduct3.swift */,
+				1116D4F1224E2B1600507B54 /* Coproduct4.swift */,
+				1116D4F3224E2C8A00507B54 /* Coproduct5.swift */,
+				1116D4F5224E2E9800507B54 /* Coproduct6.swift */,
+				1116D4F7224E308500507B54 /* Coproduct7.swift */,
+				1116D4F9224E324900507B54 /* Coproduct8.swift */,
+				1116D4FB224E332900507B54 /* Coproduct9.swift */,
+				1116D4FF224E342200507B54 /* Coproduct10.swift */,
 				8BA0F45F217E2E9200969984 /* Generic.swift */,
 				8BA0F45E217E2E9200969984 /* HList.swift */,
 				8BA0F45D217E2E9200969984 /* Product.swift */,
@@ -1284,8 +1311,8 @@
 			children = (
 				8BA0F3B6217E2DEF00969984 /* ArrayKTest.swift */,
 				8BA0F3B9217E2DEF00969984 /* ConstTest.swift */,
-				8BA0F3A9217E2DEF00969984 /* CoproductTest.swift */,
 				8BA0F3B7217E2DEF00969984 /* DayTest.swift */,
+				8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */,
 				8BA0F3AB217E2DEF00969984 /* EitherTest.swift */,
 				8BA0F3AF217E2DEF00969984 /* EvalTest.swift */,
 				8BA0F3B0217E2DEF00969984 /* IdTest.swift */,
@@ -1398,11 +1425,11 @@
 			children = (
 				8BA0F48A217E2E9200969984 /* ArrayK.swift */,
 				8BA0F489217E2E9200969984 /* Const.swift */,
-				8BA0F47A217E2E9200969984 /* Coproduct.swift */,
 				8BA0F485217E2E9200969984 /* Coreader.swift */,
 				8BA0F47B217E2E9200969984 /* Day.swift */,
 				8BA0F476217E2E9200969984 /* DictionaryK.swift */,
 				8BA0F474217E2E9200969984 /* Either.swift */,
+				8BA0F47A217E2E9200969984 /* EitherK.swift */,
 				8BA0F47E217E2E9200969984 /* Eval.swift */,
 				8BA0F475217E2E9200969984 /* Id.swift */,
 				8BA0F477217E2E9200969984 /* Ior.swift */,
@@ -2331,7 +2358,16 @@
 			buildActionMask = 0;
 			files = (
 				112295E6219D9528006D66C5 /* Generic.swift in Sources */,
+				1116D4F6224E2E9800507B54 /* Coproduct6.swift in Sources */,
+				1116D4F4224E2C8A00507B54 /* Coproduct5.swift in Sources */,
+				1116D4F0224E270B00507B54 /* Coproduct3.swift in Sources */,
+				1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */,
+				1116D4F2224E2B1600507B54 /* Coproduct4.swift in Sources */,
+				1116D500224E342200507B54 /* Coproduct10.swift in Sources */,
+				1116D4F8224E308500507B54 /* Coproduct7.swift in Sources */,
 				112295E7219D9528006D66C5 /* HList.swift in Sources */,
+				1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */,
+				1116D4FA224E324900507B54 /* Coproduct8.swift in Sources */,
 				112295E8219D9528006D66C5 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2521,7 +2557,7 @@
 				8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */,
 				8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */,
 				8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */,
-				8BA0F3FE217E2DEF00969984 /* CoproductTest.swift in Sources */,
+				8BA0F3FE217E2DEF00969984 /* EitherKTest.swift in Sources */,
 				8BA0F3F2217E2DEF00969984 /* EitherTTest.swift in Sources */,
 				8BA0F3ED217E2DEF00969984 /* KleisliTest.swift in Sources */,
 				8BA0F40D217E2DEF00969984 /* NonEmptyArrayTest.swift in Sources */,
@@ -2587,7 +2623,7 @@
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
-				8BA0F597217E2E9200969984 /* Coproduct.swift in Sources */,
+				8BA0F597217E2E9200969984 /* EitherK.swift in Sources */,
 				1125054D220DD92B00861131 /* EquatableK.swift in Sources */,
 				8BA0F603217E2E9200969984 /* MonadWriter.swift in Sources */,
 				8BA0F633217E2E9200969984 /* Monoid.swift in Sources */,
