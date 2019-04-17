@@ -7,7 +7,7 @@ import Foundation
 /// - unsupportedOperation: The invoked operation is unsupported for the value receiving it.
 public enum TryError: Error {
     case illegalState
-    case predicateError
+    case predicateDoesNotMatch
     case unsupportedOperation(String)
 }
 
