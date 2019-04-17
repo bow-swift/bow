@@ -109,12 +109,28 @@ extension FutureKPartial: ApplicativeError {
 extension FutureKPartial: MonadError {}
 
 extension FutureKPartial: MonadDefer {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<FutureKPartial<E>, A>) -> Kind<FutureKPartial<E>, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func bracketCase<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<FutureKPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<FutureKPartial<E>, B>) -> Kind<FutureKPartial<E>, B> {
+        fatalError("TODO: implement this")
+    }
+
     public static func suspend<A>(_ fa: @escaping () -> Kind<FutureKPartial<E>, A>) -> Kind<FutureKPartial<E>, A> {
         return FutureK.pure(()).flatMap(fa)
     }
 }
 
 extension FutureKPartial: BowEffects.Async {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<FutureKPartial<E>, ()>) -> Kind<FutureKPartial<E>, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func continueOn<A>(_ fa: Kind<FutureKPartial<E>, A>, _ queue: DispatchQueue) -> Kind<FutureKPartial<E>, A> {
+        fatalError("TODO: implement this")
+    }
+
     public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<FutureKPartial<E>, A> {
         return Future { complete in
             do {

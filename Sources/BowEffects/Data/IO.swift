@@ -284,17 +284,10 @@ fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
     
     override func attempt() -> IO<E, A> {
         var result: IO<E, A>?
-        
-        do {
-            let callback: Callback<E, A> = { either in
-                result = either.fold(RaiseError.init, Pure.init)
-            }
-            try f(callback)
-        } catch let error as E {
-            result = RaiseError<E, A>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        let callback: Callback<E, A> = { either in
+            result = either.fold(RaiseError.init, Pure.init)
         }
+        f(callback)
         
         while(result == nil) {}
         
@@ -355,16 +348,30 @@ extension IOPartial: ApplicativeError {
 
 extension IOPartial: MonadError {}
 
+extension IOPartial: Bracket {
+    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+        fatalError("TODO: Implement this")
+    }
+}
+
 extension IOPartial: MonadDefer {
-    public static func suspend<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
         return Pure(()).flatMap(fa)
     }
 }
 
 extension IOPartial: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
-        return AsyncIO(fa)
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
     }
+
+    public static func continueOn<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
+    }
+    
+    //public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
+    //    return AsyncIO(fa)
+    //}
 }
 
 extension IOPartial: EquatableK where E: Equatable {
