@@ -12,13 +12,13 @@ import Bow
 
  {:.beginner}
  beginner
- 
+
  Swift does not support Higher Kinded Types (HKTs) yet, although the [Generics Manifesto](https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#higher-kinded-types) states there are plans to support them natively. However, HKTs are essential to enable Functional Programming with type classes and polymorphism. For this reason, Bow provides lightweight emulation support of HKTs. This document describes how this feature is implemented in Bow and how you can use it to create your own types with HKT support.
 
  ## Motivation
 
  Swift provides support for generic programming, so that we do not have to rewrite the same logic for multiple types. For instance, consider the following two functions:
-*/
+ */
 func allIntsEqual(_ array: [Int]) -> Bool {
     guard let first = array.first else { return false }
     return array.reduce(true) { partial, next in partial && next == first }
@@ -57,10 +57,10 @@ func divideValidated(x: Int, y: Int) -> Validated<DivideError, Int> {
  We can see some similarities between these two functions. They are checking that the second argument is not 0 to perform the division and wrap it in a right/valid case. Otherwise, the division cannot be performed and they wrap an error in a left/invalid case. It would be helpful to unify these two functions in a similar way as in the `allEqual` example presented above. Hypothetically, we would like to write something like:
 
  ```swift
-    func divide<F: ErrorSuccessRepresentable>(x: Int, y: Int) -> F<DivideError, Int> {
-        guard y != 0 else { return .failure(.divisionByZero)
-        return .success(x / y)
-    }
+ func divide<F: ErrorSuccessRepresentable>(x: Int, y: Int) -> F<DivideError, Int> {
+ guard y != 0 else { return .failure(.divisionByZero)
+ return .success(x / y)
+ }
  ```
 
  That is, given a type `F` that is able to create success and error values (via the hypothetical `ErrorSuccessRepresentable` protocol), we could write a function that checks if the division can be performed or not, and create the result values accordingly. This would allow us to write generic programs where we can generalize the container types, not only the contained ones.
@@ -162,11 +162,6 @@ let fixedToString = Either.fix(toString) // fixedToString is of type Either<Divi
 /*:
  Or we can use the operator to reduce boilerplate:
  */
-// nef:begin:hidden
-postfix func ^<A, B>(_ value: EitherOf<A, B>) -> Either<A, B> {
-    return Either.fix(value)
-}
-//
 let fixedToString2 = toString^
 /*:
  The operator becomes much more convenient when chaining methods. For instance, the `swap` method is defined in `Either` and not available in `Kind`; therefore, we need to cast:
