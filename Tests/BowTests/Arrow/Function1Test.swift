@@ -1,4 +1,5 @@
 import XCTest
+import SwiftCheck
 @testable import BowLaws
 @testable import Bow
 
@@ -23,5 +24,16 @@ class Function1Test: XCTestCase {
 
     func testMonadLaws() {
         MonadLaws<Function1Partial<Int>>.check()
+    }
+
+    func testSemigroupLaws() {
+        func testSemigroupLaws() {
+            property("Function1 semigroup laws") <- forAll() { (f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>, h: ArrowOf<Int, Int>) in
+                return SemigroupLaws<Function1<Int, Int>>.check(
+                    a: Function1(f.getArrow),
+                    b: Function1(g.getArrow),
+                    c: Function1(h.getArrow))
+            }
+        }
     }
 }
