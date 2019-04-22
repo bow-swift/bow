@@ -4,7 +4,6 @@ target 'Documentation' do
 
   pod "Bow", :path => '../..'
   pod "BowEffects", :path => '../..'
-  pod "BowResult", :path => '../..'
   pod "BowRx", :path => '../..'
   pod "BowBrightFutures", :path => '../..'
   pod "BowOptics", :path => '../..'
