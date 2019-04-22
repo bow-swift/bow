@@ -1,5 +1,3 @@
-import Bow
-
 public extension Result {
     func toEither() -> Either<Failure, Success> {
         return fold(Either.left, Either.right)

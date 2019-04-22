@@ -65,10 +65,6 @@
 		112295E8219D9528006D66C5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45D217E2E9200969984 /* Product.swift */; };
 		11229618219D9593006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		11229629219D964D006D66C5 /* GenericTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11229626219D95E5006D66C5 /* GenericTest.swift */; };
-		11229693219D9821006D66C5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
-		112296C3219DC15C006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		112296C5219DC15C006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
-		112296D6219DC1FA006D66C5 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		1122973F219DC557006D66C5 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F468217E2E9200969984 /* IO.swift */; };
 		11229744219DC557006D66C5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46C217E2E9200969984 /* Async.swift */; };
 		11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */; };
@@ -154,6 +150,8 @@
 		11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
+		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
+		11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		8BA0F386217E2D3400969984 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		8BA0F387217E2D3400969984 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
@@ -252,13 +250,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0DE29C9D21A7244200DC781E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1122962A219D9718006D66C5;
-			remoteInfo = "Bow-Result";
-		};
 		0DE29CA221A7271A00DC781E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -336,27 +327,6 @@
 			remoteGlobalIDString = "Bow::Bow";
 			remoteInfo = Bow;
 		};
-		11229690219D9727006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Bow::Bow";
-			remoteInfo = Bow;
-		};
-		11229698219DC15C006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Bow::Bow";
-			remoteInfo = Bow;
-		};
-		112296D0219DC177006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1122962A219D9718006D66C5;
-			remoteInfo = "Bow-Result";
-		};
 		1122973D219DC545006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -426,13 +396,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 11229791219DCE76006D66C5;
 			remoteInfo = "Bow-Rx";
-		};
-		112297D5219DD148006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1122962A219D9718006D66C5;
-			remoteInfo = "Bow-Result";
 		};
 		112297D7219DD148006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -570,9 +533,7 @@
 		11229623219D9593006D66C5 /* BowGenericTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowGenericTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11229624219D9593006D66C5 /* Bow-GenericTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-GenericTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-GenericTests-Info.plist"; sourceTree = "<absolute>"; };
 		11229626219D95E5006D66C5 /* GenericTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTest.swift; sourceTree = "<group>"; };
-		1122968E219D9718006D66C5 /* BowResult.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowResult.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122968F219D9719006D66C5 /* Bow-Result-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Result-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Result-Info.plist"; sourceTree = "<absolute>"; };
-		112296CE219DC15C006D66C5 /* BowResultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowResultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112296CF219DC15C006D66C5 /* Bow-ResultTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-ResultTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-ResultTests-Info.plist"; sourceTree = "<absolute>"; };
 		112296D3219DC1EF006D66C5 /* ResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTest.swift; sourceTree = "<group>"; };
 		1122973A219DC4B3006D66C5 /* BowEffects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -875,22 +836,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		11229685219D9718006D66C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		112296C2219DC15C006D66C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				112296C3219DC15C006D66C5 /* Bow.framework in Frameworks */,
-				112296C5219DC15C006D66C5 /* SwiftCheck.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		11229731219DC4B3006D66C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -1038,22 +983,6 @@
 				11229626219D95E5006D66C5 /* GenericTest.swift */,
 			);
 			path = BowGenericTests;
-			sourceTree = "<group>";
-		};
-		11229692219D9733006D66C5 /* BowResult */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F482217E2E9200969984 /* Result.swift */,
-			);
-			path = BowResult;
-			sourceTree = "<group>";
-		};
-		112296D2219DC180006D66C5 /* BowResultTests */ = {
-			isa = PBXGroup;
-			children = (
-				112296D3219DC1EF006D66C5 /* ResultTest.swift */,
-			);
-			path = BowResultTests;
 			sourceTree = "<group>";
 		};
 		1122973C219DC4F1006D66C5 /* BowEffects */ = {
@@ -1316,6 +1245,7 @@
 				8BA0F3AA217E2DEF00969984 /* MooreTest.swift */,
 				8BA0F3B8217E2DEF00969984 /* NonEmptyArrayTest.swift */,
 				8BA0F3B5217E2DEF00969984 /* OptionTest.swift */,
+				112296D3219DC1EF006D66C5 /* ResultTest.swift */,
 				8BA0F3AC217E2DEF00969984 /* SetKTest.swift */,
 				8BA0F3B1217E2DEF00969984 /* StoreTest.swift */,
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
@@ -1433,6 +1363,7 @@
 				8BA0F479217E2E9200969984 /* NonEmptyArray.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
+				8BA0F482217E2E9200969984 /* Result.swift */,
 				8BA0F487217E2E9200969984 /* SetK.swift */,
 				8BA0F47F217E2E9200969984 /* State.swift */,
 				8BA0F486217E2E9200969984 /* Store.swift */,
@@ -1540,8 +1471,6 @@
 				11229577219D9186006D66C5 /* BowRecursionSchemesTests.xctest */,
 				112295E1219D94C9006D66C5 /* BowGeneric.framework */,
 				11229623219D9593006D66C5 /* BowGenericTests.xctest */,
-				1122968E219D9718006D66C5 /* BowResult.framework */,
-				112296CE219DC15C006D66C5 /* BowResultTests.xctest */,
 				1122973A219DC4B3006D66C5 /* BowEffects.framework */,
 				11229782219DC88F006D66C5 /* BowEffectsTests.xctest */,
 				112297A9219DCE76006D66C5 /* BowRx.framework */,
@@ -1592,7 +1521,6 @@
 				112295E3219D94DD006D66C5 /* BowGeneric */,
 				11E71714219D709300B94845 /* BowOptics */,
 				112294F0219D8F22006D66C5 /* BowRecursionSchemes */,
-				11229692219D9733006D66C5 /* BowResult */,
 				112297AB219DCEDA006D66C5 /* BowRx */,
 			);
 			path = Sources;
@@ -1610,7 +1538,6 @@
 				11E719FD219D888800B94845 /* BowLaws */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
 				11229536219D9013006D66C5 /* BowRecursionSchemesTests */,
-				112296D2219DC180006D66C5 /* BowResultTests */,
 				112297D1219DD050006D66C5 /* BowRxTests */,
 				8BA0F389217E2DEF00969984 /* BowTests */,
 			);
@@ -1730,42 +1657,6 @@
 			productReference = 11229623219D9593006D66C5 /* BowGenericTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1122962A219D9718006D66C5 /* Bow-Result */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1122968B219D9718006D66C5 /* Build configuration list for PBXNativeTarget "Bow-Result" */;
-			buildPhases = (
-				1122962B219D9718006D66C5 /* Sources */,
-				11229685219D9718006D66C5 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				11229691219D9727006D66C5 /* PBXTargetDependency */,
-			);
-			name = "Bow-Result";
-			productName = Bow;
-			productReference = 1122968E219D9718006D66C5 /* BowResult.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		11229694219DC15C006D66C5 /* Bow-ResultTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 112296CB219DC15C006D66C5 /* Build configuration list for PBXNativeTarget "Bow-ResultTests" */;
-			buildPhases = (
-				11229699219DC15C006D66C5 /* Sources */,
-				112296C2219DC15C006D66C5 /* Frameworks */,
-				112296CA219DC15C006D66C5 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				112296D1219DC177006D66C5 /* PBXTargetDependency */,
-				11229697219DC15C006D66C5 /* PBXTargetDependency */,
-			);
-			name = "Bow-ResultTests";
-			productName = BowTests;
-			productReference = 112296CE219DC15C006D66C5 /* BowResultTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		112296D7219DC4B3006D66C5 /* Bow-Effects */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11229737219DC4B3006D66C5 /* Build configuration list for PBXNativeTarget "Bow-Effects" */;
@@ -1857,7 +1748,6 @@
 			);
 			dependencies = (
 				112297EA219DD1B8006D66C5 /* PBXTargetDependency */,
-				112297D4219DD148006D66C5 /* PBXTargetDependency */,
 				112297D6219DD148006D66C5 /* PBXTargetDependency */,
 			);
 			name = "Bow-BrightFutures";
@@ -1876,7 +1766,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0DE29C9E21A7244200DC781E /* PBXTargetDependency */,
 				11D97EF6219EBCE1008FC004 /* PBXTargetDependency */,
 				11229808219DD31E006D66C5 /* PBXTargetDependency */,
 				112297EE219DD2AB006D66C5 /* PBXTargetDependency */,
@@ -2021,12 +1910,6 @@
 					112295E9219D9593006D66C5 = {
 						LastSwiftMigration = 1020;
 					};
-					1122962A219D9718006D66C5 = {
-						LastSwiftMigration = 1020;
-					};
-					11229694219DC15C006D66C5 = {
-						LastSwiftMigration = 1020;
-					};
 					112296D7219DC4B3006D66C5 = {
 						LastSwiftMigration = 1020;
 					};
@@ -2088,8 +1971,6 @@
 				11E7179E219D7D5900B94845 /* Bow-OpticsTests */,
 				11229480219D8EF4006D66C5 /* Bow-RecursionSchemes */,
 				1122953D219D9186006D66C5 /* Bow-RecursionSchemesTests */,
-				1122962A219D9718006D66C5 /* Bow-Result */,
-				11229694219DC15C006D66C5 /* Bow-ResultTests */,
 				112296D7219DC4B3006D66C5 /* Bow-Effects */,
 				11229748219DC88F006D66C5 /* Bow-EffectsTests */,
 				11229791219DCE76006D66C5 /* Bow-Rx */,
@@ -2158,20 +2039,6 @@
 			files = (
 			);
 			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		112296CA219DC15C006D66C5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
 			);
@@ -2409,22 +2276,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1122962B219D9718006D66C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				11229693219D9821006D66C5 /* Result.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		11229699219DC15C006D66C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				112296D6219DC1FA006D66C5 /* ResultTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		112296D8219DC4B3006D66C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -2572,6 +2423,7 @@
 				8BA0F404217E2DEF00969984 /* EvalTest.swift in Sources */,
 				8BA0F40E217E2DEF00969984 /* ConstTest.swift in Sources */,
 				8BA0F402217E2DEF00969984 /* SumTest.swift in Sources */,
+				11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */,
 				8BA0F40C217E2DEF00969984 /* DayTest.swift in Sources */,
 				8BA0F3F6217E2DEF00969984 /* NumberInstancesTest.swift in Sources */,
 				8BA0F405217E2DEF00969984 /* IdTest.swift in Sources */,
@@ -2636,6 +2488,7 @@
 				8BA0F643217E2E9200969984 /* Applicative.swift in Sources */,
 				11D36A19223261EC00CBD85F /* Selective.swift in Sources */,
 				8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */,
+				11ED7A2A226E094C00C27994 /* Result.swift in Sources */,
 				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
@@ -2674,11 +2527,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0DE29C9E21A7244200DC781E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1122962A219D9718006D66C5 /* Bow-Result */;
-			targetProxy = 0DE29C9D21A7244200DC781E /* PBXContainerItemProxy */;
-		};
 		0DE29CA321A7271A00DC781E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1122957A219D94C9006D66C5 /* Bow-Generic */;
@@ -2734,21 +2582,6 @@
 			target = "Bow::Bow" /* Bow */;
 			targetProxy = 112295ED219D9593006D66C5 /* PBXContainerItemProxy */;
 		};
-		11229691219D9727006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::Bow" /* Bow */;
-			targetProxy = 11229690219D9727006D66C5 /* PBXContainerItemProxy */;
-		};
-		11229697219DC15C006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::Bow" /* Bow */;
-			targetProxy = 11229698219DC15C006D66C5 /* PBXContainerItemProxy */;
-		};
-		112296D1219DC177006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1122962A219D9718006D66C5 /* Bow-Result */;
-			targetProxy = 112296D0219DC177006D66C5 /* PBXContainerItemProxy */;
-		};
 		1122973E219DC545006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
@@ -2798,11 +2631,6 @@
 			isa = PBXTargetDependency;
 			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
 			targetProxy = 112297CF219DCFF9006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297D4219DD148006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1122962A219D9718006D66C5 /* Bow-Result */;
-			targetProxy = 112297D5219DD148006D66C5 /* PBXContainerItemProxy */;
 		};
 		112297D6219DD148006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3157,96 +2985,6 @@
 			};
 			name = Release;
 		};
-		1122968C219D9718006D66C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Result-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-result";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowResult;
-			};
-			name = Debug;
-		};
-		1122968D219D9718006D66C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Result-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-result";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowResult;
-			};
-			name = Release;
-		};
-		112296CC219DC15C006D66C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-ResultTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowResultTests;
-			};
-			name = Debug;
-		};
-		112296CD219DC15C006D66C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-ResultTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowResultTests;
-			};
-			name = Release;
-		};
 		11229738219DC4B3006D66C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3478,7 +3216,6 @@
 		11229802219DD2AB006D66C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3499,7 +3236,6 @@
 		11229803219DD2AB006D66C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3937,24 +3673,6 @@
 			buildConfigurations = (
 				11229621219D9593006D66C5 /* Debug */,
 				11229622219D9593006D66C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		1122968B219D9718006D66C5 /* Build configuration list for PBXNativeTarget "Bow-Result" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1122968C219D9718006D66C5 /* Debug */,
-				1122968D219D9718006D66C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		112296CB219DC15C006D66C5 /* Build configuration list for PBXNativeTarget "Bow-ResultTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				112296CC219DC15C006D66C5 /* Debug */,
-				112296CD219DC15C006D66C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
