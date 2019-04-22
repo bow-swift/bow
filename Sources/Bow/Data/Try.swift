@@ -135,7 +135,7 @@ public final class Try<A>: TryOf<A> {
     /// - Parameter f: Transformation function.
     /// - Returns: A failure if the transformation of this value provides no result, or a success with the result of the transformation.
     public func mapFilter<B>(_ f: @escaping (A) -> Option<B>) -> Try<B> {
-        return self.flatMap { a in f(a).fold(constant(Try<B>.raiseError(TryError.predicateError)), Try<B>.pure) }^
+        return self.flatMap { a in f(a).fold(constant(Try<B>.raiseError(TryError.predicateDoesNotMatch)), Try<B>.pure) }^
     }
 
     /// Converts this value to an `Option`.
@@ -289,7 +289,7 @@ extension ForTry: Traverse {
 extension ForTry: FunctorFilter {
     public static func mapFilter<A, B>(_ fa: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForTry, B> {
         return Try.fix(fa).flatMap { a in
-            f(a)^.fold(constant(raiseError(TryError.predicateError)), pure)
+            f(a)^.fold(constant(raiseError(TryError.predicateDoesNotMatch)), pure)
         }
     }
 }

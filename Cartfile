@@ -1,2 +1,2 @@
-github "ReactiveX/RxSwift" "master"
+github "ReactiveX/RxSwift" "develop"
 github "Thomvis/BrightFutures" ~> 8.0.0

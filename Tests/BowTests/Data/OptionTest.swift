@@ -91,7 +91,7 @@ class OptionTest: XCTestCase {
     }
     
     func testFilter() {
-        property("filter is opposite of filterNot") <- forAll { (x: Int?, predicate: ArrowOf<Int, Bool>) in
+        property("filter is opposite of filterNot") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
             let option = Option.fromOptional(x)
             let none = Option<Int>.none()
             return xor(option.filter(predicate.getArrow) == none, option.filterNot(predicate.getArrow) == none)
@@ -99,7 +99,7 @@ class OptionTest: XCTestCase {
     }
     
     func testExistForAll() {
-        property("exists and forall are equivalent") <- forAll { (x: Int?, predicate: ArrowOf<Int, Bool>) in
+        property("exists and forall are equivalent") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
             let option = Option.fromOptional(x)
             return option.exists(predicate.getArrow) == option.forall(predicate.getArrow)
         }
