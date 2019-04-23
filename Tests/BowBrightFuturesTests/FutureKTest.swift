@@ -3,7 +3,6 @@ import BrightFutures
 @testable import BowLaws
 @testable import Bow
 @testable import BowBrightFutures
-@testable import BowResult
 @testable import BowEffectsLaws
 
 private let forcedFutureQueue = DispatchQueue(label: "forcedFutureQueue", attributes: .concurrent)
@@ -42,44 +41,30 @@ class FutureKTest: XCTestCase {
     }
 
     func testFunctorLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            FunctorLaws<FutureKPartial<CategoryError>>.check(generator: self.generator)
-        }
+        FunctorLaws<FutureKPartial<CategoryError>>.check(generator: self.generator)
     }
     
     func testApplicativeLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            ApplicativeLaws<FutureKPartial<CategoryError>>.check()
-        }
+        ApplicativeLaws<FutureKPartial<CategoryError>>.check()
     }
 
     func testSelectiveLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            SelectiveLaws<FutureKPartial<CategoryError>>.check()
-        }
+        SelectiveLaws<FutureKPartial<CategoryError>>.check()
     }
     
     func testMonadLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            MonadLaws<FutureKPartial<CategoryError>>.check()
-        }
+        MonadLaws<FutureKPartial<CategoryError>>.check()
     }
     
     func testApplicativeErrorLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            ApplicativeErrorLaws<FutureKPartial<CategoryError>>.check()
-        }
+        ApplicativeErrorLaws<FutureKPartial<CategoryError>>.check()
     }
     
     func testMonadErrorLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            MonadErrorLaws<FutureKPartial<CategoryError>>.check()
-        }
+        MonadErrorLaws<FutureKPartial<CategoryError>>.check()
     }
     
     func testAsyncLaws() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            AsyncLaws<FutureKPartial<CategoryError>>.check()
-        }
+        AsyncLaws<FutureKPartial<CategoryError>>.check()
     }
 }
