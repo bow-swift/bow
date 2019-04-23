@@ -56,9 +56,6 @@ jobs:
         - SCHEME="Bow-RecursionSchemes"
     - <<: *test
       env:
-        - SCHEME="Bow-Result"
-    - <<: *test
-      env:
         - SCHEME="Bow-Effects"
     - <<: *test
       env:
