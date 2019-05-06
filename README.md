@@ -16,7 +16,6 @@ Bow is split in multiple modules that can be consumed independently. These modul
 - `BowFree`: module to work with Free Monads.
 - `BowGeneric`: module to work with generic data types.
 - `BowEffects`: module to work with effects.
-- `BowResult`: module to provide an integration with Result.
 - `BowBrightFutures`: module to provide an integration with BrightFutures.
 - `BowRx`: module to provide an integration with RxSwift.
 
@@ -32,7 +31,6 @@ pod "BowOptics",           "~> 0.4.0"
 pod "BowRecursionSchemes", "~> 0.4.0"
 pod "BowFree",             "~> 0.4.0"
 pod "BowGeneric",          "~> 0.4.0"
-pod "BowResult",           "~> 0.4.0"
 pod "BowEffects",          "~> 0.4.0"
 pod "BowRx",               "~> 0.4.0"
 pod "BowBrightFutures",    "~> 0.4.0"
@@ -69,7 +67,6 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowResult",
                     "BowRx",
                     "BowBrightFutures"]
         )
