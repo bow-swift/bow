@@ -1,32 +1,31 @@
 PODS:
-  - Bow (0.3.0)
-  - BowBrightFutures (0.3.0):
-    - Bow (~> 0.3.0)
-    - BowEffects (~> 0.3.0)
-    - BrightFutures (~> 7.0.0)
-  - BowEffects (0.3.0):
-    - Bow (~> 0.3.0)
-  - BowFree (0.3.0):
-    - Bow (~> 0.3.0)
-  - BowGeneric (0.3.0):
-    - Bow (~> 0.3.0)
-  - BowOptics (0.3.0):
-    - Bow (~> 0.3.0)
-  - BowRecursionSchemes (0.3.0):
-    - Bow (~> 0.3.0)
-  - BowRx (0.3.0):
-    - Bow (~> 0.3.0)
-    - BowEffects (~> 0.3.0)
-    - RxCocoa (~> 4.4.0)
-    - RxSwift (~> 4.4.0)
-  - BrightFutures (7.0.0):
-    - Result (~> 4.0.0)
-  - Result (4.0.1)
-  - RxAtomic (4.4.2)
-  - RxCocoa (4.4.2):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxSwift (4.4.2):
-    - RxAtomic (>= 4.4.2, ~> 4.4)
+  - Bow (0.4.0)
+  - BowBrightFutures (0.4.0):
+    - Bow (~> 0.4.0)
+    - BowEffects (~> 0.4.0)
+    - BrightFutures (~> 8.0.0)
+  - BowEffects (0.4.0):
+    - Bow (~> 0.4.0)
+  - BowFree (0.4.0):
+    - Bow (~> 0.4.0)
+  - BowGeneric (0.4.0):
+    - Bow (~> 0.4.0)
+  - BowOptics (0.4.0):
+    - Bow (~> 0.4.0)
+  - BowRecursionSchemes (0.4.0):
+    - Bow (~> 0.4.0)
+  - BowRx (0.4.0):
+    - Bow (~> 0.4.0)
+    - BowEffects (~> 0.4.0)
+    - RxCocoa (~> 5.0.0)
+    - RxSwift (~> 5.0.0)
+  - BrightFutures (8.0.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
 
 DEPENDENCIES:
   - Bow (from `../..`)
@@ -41,9 +40,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BrightFutures
-    - Result
-    - RxAtomic
     - RxCocoa
+    - RxRelay
     - RxSwift
 
 EXTERNAL SOURCES:
@@ -65,20 +63,19 @@ EXTERNAL SOURCES:
     :path: "../.."
 
 SPEC CHECKSUMS:
-  Bow: 00d66a7e26595923fc1b0aee922edaa84395b95d
-  BowBrightFutures: 0dd8554d0a187cb804fa211d966da175b41eb040
-  BowEffects: f42a3973cefc13a6745a2942a258a54126338e79
-  BowFree: b765ebcef58c992584938af3e16ce1acc50f3bc0
-  BowGeneric: f6d211d9c8159dd1dc4a5749c8dfcb11640f1b9a
-  BowOptics: 7468a490c6ad8120d3b60ad95078769ad4e59052
-  BowRecursionSchemes: 77809f785b91ebae45f6eec909f4b9e298b56355
-  BowRx: d5cdf7380c339494d3062c9003dfd7ce0cf7a1c7
-  BrightFutures: 7d7436e937dfc83d814c11920f157fc2a53f5bd5
-  Result: a6e784bebf48b471d59cddc1adb81f41f678c487
-  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
-  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
-  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
+  Bow: c52be0840aa176b9a45f1f772efa52777bbd8288
+  BowBrightFutures: cbe827092c0aabf1199766ffddf4db83a66ad72c
+  BowEffects: 47f37c306eff490ab771136e0cb148afcc6c542c
+  BowFree: 2349a3d870aeb49caf3df59d506cff712e3ff1c4
+  BowGeneric: e25e63851ed2f55d64055ece34021876c84c60b7
+  BowOptics: e17a21fbebffe17e6a7997a6d1bafb3e303fdac4
+  BowRecursionSchemes: c7ce26acdfdbb529c9d973ea6342e8cd4b886ee7
+  BowRx: 6185d638b00898302ed24511faa9a7fb10b9aacd
+  BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
-PODFILE CHECKSUM: a097b185c573e13ec8a3860b0ef490ae8db6bb1a
+PODFILE CHECKSUM: 0fdd192b8f28a6797f9bd131a05f2e2bce19d4c1
 
 COCOAPODS: 1.6.1
