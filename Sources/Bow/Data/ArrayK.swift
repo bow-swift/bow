@@ -9,7 +9,7 @@ public typealias ArrayKOf<A> = Kind<ForArrayK, A>
 /// ArrayK is a Higher Kinded Type wrapper over Swift arrays.
 public final class ArrayK<A>: ArrayKOf<A> {
     fileprivate let array: [A]
-    
+
     /// Concatenates two arrays
     ///
     /// - Parameters:
@@ -27,7 +27,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
     public static func fix(_ fa: ArrayKOf<A>) -> ArrayK<A> {
         return fa as! ArrayK<A>
     }
-    
+
     /// Initializes an `ArrayK`.
     ///
     /// - Parameter array: A Swift array of values.
@@ -54,7 +54,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
         if let first = asArray.first { return Option.some(first) }
         return Option.none()
     }
-    
+
     /// Obtains the element in the position passed as an argument, if any.
     ///
     /// - Parameter i: Index of the element to obtain.
@@ -88,7 +88,7 @@ public extension Array {
     /// Creates an `ArrayK` from this array.
     ///
     /// - Returns: An `ArrayK` wrapping this array.
-    public func k() -> ArrayK<Element> {
+    func k() -> ArrayK<Element> {
         return ArrayK(self)
     }
 }

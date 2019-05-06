@@ -43,7 +43,7 @@ public extension Applicative {
     ///   - fa: 1st computation.
     ///   - fb: 2nd computation.
     /// - Returns: Result of running the second computation after the first one.
-    public static func sequenceRight<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, B> {
+    static func sequenceRight<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, B> {
         return map(fa, fb) { _, b in b }
     }
 
@@ -53,8 +53,7 @@ public extension Applicative {
     ///   - fa: 1st computation.
     ///   - fb: 2nd computation.
     /// - Returns: Result produced from the first computation after both are computed.
-
-    public static func sequenceLeft<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, A> {
+    static func sequenceLeft<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, A> {
         return map(fa, fb) { a, _ in a }
     }
 
@@ -64,17 +63,17 @@ public extension Applicative {
     ///   - fa: 1st value for the tuple.
     ///   - fb: 2nd value for the tuple.
     /// - Returns: A tuple of the provided values in the context implementing this instance.
-    public static func product<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, (A, B)> {
+    static func product<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>) -> Kind<Self, (A, B)> {
         return ap(map(fa, { (a: A) in { (b: B) in (a, b) }}), fb)
     }
-    
+
     /// Adds an element to the right of a tuple in the context implementing this instance.
     ///
     /// - Parameters:
     ///   - fa: A tuple of two elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, Z>(_ fa: Kind<Self, (A, B)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, Z)> {
+    static func product<A, B, Z>(_ fa: Kind<Self, (A, B)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, b) })
     }
 
@@ -84,7 +83,7 @@ public extension Applicative {
     ///   - fa: A tuple of three elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, Z>(_ fa: Kind<Self, (A, B, C)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, Z)> {
+    static func product<A, B, C, Z>(_ fa: Kind<Self, (A, B, C)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, b) })
     }
 
@@ -94,7 +93,7 @@ public extension Applicative {
     ///   - fa: A tuple of four elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, Z>(_ fa: Kind<Self, (A, B, C, D)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, Z)> {
+    static func product<A, B, C, D, Z>(_ fa: Kind<Self, (A, B, C, D)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, b) })
     }
 
@@ -104,7 +103,7 @@ public extension Applicative {
     ///   - fa: A tuple of five elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, Z>(_ fa: Kind<Self, (A, B, C, D, E)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, Z)> {
+    static func product<A, B, C, D, E, Z>(_ fa: Kind<Self, (A, B, C, D, E)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, b) })
     }
 
@@ -114,7 +113,7 @@ public extension Applicative {
     ///   - fa: A tuple of six elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, Z>(_ fa: Kind<Self, (A, B, C, D, E, G)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, Z)> {
+    static func product<A, B, C, D, E, G, Z>(_ fa: Kind<Self, (A, B, C, D, E, G)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, b) })
     }
 
@@ -124,7 +123,7 @@ public extension Applicative {
     ///   - fa: A tuple of seven elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, H, Z>(_ fa: Kind<Self, (A, B, C, D, E, G, H)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, H, Z)> {
+    static func product<A, B, C, D, E, G, H, Z>(_ fa: Kind<Self, (A, B, C, D, E, G, H)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, H, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, a.6, b) })
     }
 
@@ -134,10 +133,10 @@ public extension Applicative {
     ///   - fa: A tuple of eight elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, H, I, Z>(_ fa: Kind<Self, (A, B, C, D, E, G, H, I)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, H, I, Z)> {
+    static func product<A, B, C, D, E, G, H, I, Z>(_ fa: Kind<Self, (A, B, C, D, E, G, H, I)>, _ fz: Kind<Self, Z>) -> Kind<Self, (A, B, C, D, E, G, H, I, Z)> {
         return map(product(fa, fz), { a, b in (a.0, a.1, a.2, a.3, a.4, a.5, a.6, a.7, b) })
     }
-    
+
     /// Performs two computations in the context implementing this instance and combines their result using the provided function.
     ///
     /// - Parameters:
@@ -145,17 +144,17 @@ public extension Applicative {
     ///   - fb: A lazy value in the context implementing this instance.
     ///   - f: A function to combine the result of the computations.
     /// - Returns: A lazy value with the result of combining the results of each computation.
-    public static func map2Eval<A, B, Z>(_ fa: Kind<Self, A>, _ fb: Eval<Kind<Self, B>>, _ f: @escaping (A, B) -> Z) -> Eval<Kind<Self, Z>> {
+    static func map2Eval<A, B, Z>(_ fa: Kind<Self, A>, _ fb: Eval<Kind<Self, B>>, _ f: @escaping (A, B) -> Z) -> Eval<Kind<Self, Z>> {
         return Eval.fix(fb.map{ fc in map(fa, fc, f) })
     }
-    
+
     /// Creates a tuple out of two values in the context implementing this instance.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
     ///   - b: 2nd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B>(_ a: Kind<Self, A>,
+    static func tupled<A, B>(_ a: Kind<Self, A>,
                              _ b : Kind<Self, B>) -> Kind<Self, (A, B)> {
         return product(a, b)
     }
@@ -167,7 +166,7 @@ public extension Applicative {
     ///   - b: 2nd value of the tuple.
     ///   - c: 3rd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C>(_ a: Kind<Self, A>,
                                 _ b: Kind<Self, B>,
                                 _ c: Kind<Self, C>) -> Kind<Self, (A, B, C)> {
         return product(product(a, b), c)
@@ -181,7 +180,7 @@ public extension Applicative {
     ///   - c: 3rd value of the tuple.
     ///   - d: 4th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D>(_ a: Kind<Self, A>,
                                    _ b: Kind<Self, B>,
                                    _ c: Kind<Self, C>,
                                    _ d: Kind<Self, D>) -> Kind<Self, (A, B, C, D)> {
@@ -197,7 +196,7 @@ public extension Applicative {
     ///   - d: 4th value of the tuple.
     ///   - e: 5th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D, E>(_ a: Kind<Self, A>,
                                       _ b: Kind<Self, B>,
                                       _ c: Kind<Self, C>,
                                       _ d: Kind<Self, D>,
@@ -215,7 +214,7 @@ public extension Applicative {
     ///   - e: 5th value of the tuple.
     ///   - g: 6th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D, E, G>(_ a: Kind<Self, A>,
                                          _ b: Kind<Self, B>,
                                          _ c: Kind<Self, C>,
                                          _ d: Kind<Self, D>,
@@ -235,7 +234,7 @@ public extension Applicative {
     ///   - g: 6th value of the tuple.
     ///   - h: 7th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D, E, G, H>(_ a: Kind<Self, A>,
                                             _ b: Kind<Self, B>,
                                             _ c: Kind<Self, C>,
                                             _ d: Kind<Self, D>,
@@ -257,7 +256,7 @@ public extension Applicative {
     ///   - h: 7th value of the tuple.
     ///   - i: 8th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<Self, A>,
                                                _ b: Kind<Self, B>,
                                                _ c: Kind<Self, C>,
                                                _ d: Kind<Self, D>,
@@ -281,7 +280,7 @@ public extension Applicative {
     ///   - i: 8th value of the tuple.
     ///   - j: 9th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<Self, A>,
+    static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<Self, A>,
                                                   _ b: Kind<Self, B>,
                                                   _ c: Kind<Self, C>,
                                                   _ d: Kind<Self, D>,
@@ -300,9 +299,9 @@ public extension Applicative {
     ///   - b: 2nd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, Z>(_ a: Kind<Self, A>,
-                      _ b: Kind<Self, B>,
-                      _ f: @escaping (A, B) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, Z>(_ a: Kind<Self, A>,
+                             _ b: Kind<Self, B>,
+                             _ f: @escaping (A, B) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b), f)
     }
 
@@ -314,10 +313,10 @@ public extension Applicative {
     ///   - c: 3rd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, Z>(_ a: Kind<Self, A>,
-                         _ b: Kind<Self, B>,
-                         _ c: Kind<Self, C>,
-                         _ f: @escaping (A, B, C) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, Z>(_ a: Kind<Self, A>,
+                                _ b: Kind<Self, B>,
+                                _ c: Kind<Self, C>,
+                                _ f: @escaping (A, B, C) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c), f)
     }
 
@@ -330,11 +329,11 @@ public extension Applicative {
     ///   - d: 4th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, Z>(_ a: Kind<Self, A>,
-                            _ b: Kind<Self, B>,
-                            _ c: Kind<Self, C>,
-                            _ d: Kind<Self, D>,
-                            _ f: @escaping (A, B, C, D) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, Z>(_ a: Kind<Self, A>,
+                                   _ b: Kind<Self, B>,
+                                   _ c: Kind<Self, C>,
+                                   _ d: Kind<Self, D>,
+                                   _ f: @escaping (A, B, C, D) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d), f)
     }
 
@@ -348,12 +347,12 @@ public extension Applicative {
     ///   - e: 5th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, Z>(_ a: Kind<Self, A>,
-                               _ b: Kind<Self, B>,
-                               _ c: Kind<Self, C>,
-                               _ d: Kind<Self, D>,
-                               _ e: Kind<Self, E>,
-                               _ f: @escaping (A, B, C, D, E) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, E, Z>(_ a: Kind<Self, A>,
+                                      _ b: Kind<Self, B>,
+                                      _ c: Kind<Self, C>,
+                                      _ d: Kind<Self, D>,
+                                      _ e: Kind<Self, E>,
+                                      _ f: @escaping (A, B, C, D, E) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d, e), f)
     }
 
@@ -368,13 +367,13 @@ public extension Applicative {
     ///   - g: 6th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, Z>(_ a: Kind<Self, A>,
-                                  _ b: Kind<Self, B>,
-                                  _ c: Kind<Self, C>,
-                                  _ d: Kind<Self, D>,
-                                  _ e: Kind<Self, E>,
-                                  _ g: Kind<Self, G>,
-                                  _ f: @escaping (A, B, C, D, E, G) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, E, G, Z>(_ a: Kind<Self, A>,
+                                         _ b: Kind<Self, B>,
+                                         _ c: Kind<Self, C>,
+                                         _ d: Kind<Self, D>,
+                                         _ e: Kind<Self, E>,
+                                         _ g: Kind<Self, G>,
+                                         _ f: @escaping (A, B, C, D, E, G) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d, e, g), f)
     }
 
@@ -390,14 +389,14 @@ public extension Applicative {
     ///   - h: 7th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, Z>(_ a: Kind<Self, A>,
-                                     _ b: Kind<Self, B>,
-                                     _ c: Kind<Self, C>,
-                                     _ d: Kind<Self, D>,
-                                     _ e: Kind<Self, E>,
-                                     _ g: Kind<Self, G>,
-                                     _ h: Kind<Self, H>,
-                                     _ f: @escaping (A, B, C, D, E, G, H) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, E, G, H, Z>(_ a: Kind<Self, A>,
+                                            _ b: Kind<Self, B>,
+                                            _ c: Kind<Self, C>,
+                                            _ d: Kind<Self, D>,
+                                            _ e: Kind<Self, E>,
+                                            _ g: Kind<Self, G>,
+                                            _ h: Kind<Self, H>,
+                                            _ f: @escaping (A, B, C, D, E, G, H) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d, e, g, h), f)
     }
 
@@ -414,15 +413,15 @@ public extension Applicative {
     ///   - i: 8th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, I, Z>(_ a: Kind<Self, A>,
-                                        _ b: Kind<Self, B>,
-                                        _ c: Kind<Self, C>,
-                                        _ d: Kind<Self, D>,
-                                        _ e: Kind<Self, E>,
-                                        _ g: Kind<Self, G>,
-                                        _ h: Kind<Self, H>,
-                                        _ i: Kind<Self, I>,
-                                        _ f: @escaping (A, B, C, D, E, G, H, I) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, E, G, H, I, Z>(_ a: Kind<Self, A>,
+                                               _ b: Kind<Self, B>,
+                                               _ c: Kind<Self, C>,
+                                               _ d: Kind<Self, D>,
+                                               _ e: Kind<Self, E>,
+                                               _ g: Kind<Self, G>,
+                                               _ h: Kind<Self, H>,
+                                               _ i: Kind<Self, I>,
+                                               _ f: @escaping (A, B, C, D, E, G, H, I) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d, e, g, h, i), f)
     }
 
@@ -440,16 +439,16 @@ public extension Applicative {
     ///   - j: 9th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, I, J, Z>(_ a: Kind<Self, A>,
-                                           _ b: Kind<Self, B>,
-                                           _ c: Kind<Self, C>,
-                                           _ d: Kind<Self, D>,
-                                           _ e: Kind<Self, E>,
-                                           _ g: Kind<Self, G>,
-                                           _ h: Kind<Self, H>,
-                                           _ i: Kind<Self, I>,
-                                           _ j: Kind<Self, J>,
-                                           _ f: @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> Kind<Self, Z> {
+    static func map<A, B, C, D, E, G, H, I, J, Z>(_ a: Kind<Self, A>,
+                                                  _ b: Kind<Self, B>,
+                                                  _ c: Kind<Self, C>,
+                                                  _ d: Kind<Self, D>,
+                                                  _ e: Kind<Self, E>,
+                                                  _ g: Kind<Self, G>,
+                                                  _ h: Kind<Self, H>,
+                                                  _ i: Kind<Self, I>,
+                                                  _ j: Kind<Self, J>,
+                                                  _ f: @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> Kind<Self, Z> {
         return map(tupled(a, b, c, d, e, g, h, i, j), f)
     }
 }
@@ -462,7 +461,7 @@ public extension Kind where F: Applicative {
     ///
     /// - Parameter a: Value to be lifted.
     /// - Returns: Provided value in the context type implementing this instance.
-    public static func pure(_ a: A) -> Kind<F, A> {
+    static func pure(_ a: A) -> Kind<F, A> {
         return F.pure(a)
     }
 
@@ -473,7 +472,7 @@ public extension Kind where F: Applicative {
     /// - Parameters:
     ///   - fa: A value in the context implementing this instance.
     /// - Returns: A value in the context implementing this instance, resulting of the transformation of the contained original value with the contained function.
-    public func ap<AA, B>(_ fa: Kind<F, AA>) -> Kind<F, B> where A == (AA) -> B {
+    func ap<AA, B>(_ fa: Kind<F, AA>) -> Kind<F, B> where A == (AA) -> B {
         return F.ap(self, fa)
     }
 
@@ -485,7 +484,7 @@ public extension Kind where F: Applicative {
     ///   - fa: 1st value for the tuple.
     ///   - fb: 2nd value for the tuple.
     /// - Returns: A tuple of the provided values in the context implementing this instance.
-    public static func product<A, B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>) -> Kind<F, (A, B)> {
+    static func product<A, B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>) -> Kind<F, (A, B)> {
         return F.product(fa, fb)
     }
 
@@ -497,7 +496,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of two elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, Z>(_ fa: Kind<F, (A, B)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, Z)> {
+    static func product<A, B, Z>(_ fa: Kind<F, (A, B)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, Z)> {
         return F.product(fa, fz)
     }
 
@@ -509,7 +508,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of three elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, Z>(_ fa: Kind<F, (A, B, C)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, Z)> {
+    static func product<A, B, C, Z>(_ fa: Kind<F, (A, B, C)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, Z)> {
         return F.product(fa, fz)
     }
 
@@ -521,7 +520,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of four elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, Z>(_ fa: Kind<F, (A, B, C, D)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, Z)> {
+    static func product<A, B, C, D, Z>(_ fa: Kind<F, (A, B, C, D)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, Z)> {
         return F.product(fa, fz)
     }
 
@@ -533,7 +532,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of five elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, Z>(_ fa: Kind<F, (A, B, C, D, E)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, Z)> {
+    static func product<A, B, C, D, E, Z>(_ fa: Kind<F, (A, B, C, D, E)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, Z)> {
         return F.product(fa, fz)
     }
 
@@ -545,7 +544,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of six elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, Z>(_ fa: Kind<F, (A, B, C, D, E, G)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, Z)> {
+    static func product<A, B, C, D, E, G, Z>(_ fa: Kind<F, (A, B, C, D, E, G)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, Z)> {
         return F.product(fa, fz)
     }
 
@@ -557,7 +556,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of seven elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, H, Z>(_ fa: Kind<F, (A, B, C, D, E, G, H)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, H, Z)> {
+    static func product<A, B, C, D, E, G, H, Z>(_ fa: Kind<F, (A, B, C, D, E, G, H)>, _ fz: Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, H, Z)> {
         return F.product(fa, fz)
     }
 
@@ -569,7 +568,7 @@ public extension Kind where F: Applicative {
     ///   - fa: A tuple of eight elements in the context implementing this instance.
     ///   - fz: A value in the context implementing this instance.
     /// - Returns: A tuple with the value of the second argument added to the right of the tuple, in the context implementing this instance.
-    public static func product<A, B, C, D, E, G, H, I, Z>(_ fa: Kind<F, (A, B, C, D, E, G, H, I)>, _ fz : Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, H, I, Z)> {
+    static func product<A, B, C, D, E, G, H, I, Z>(_ fa: Kind<F, (A, B, C, D, E, G, H, I)>, _ fz : Kind<F, Z>) -> Kind<F, (A, B, C, D, E, G, H, I, Z)> {
         return F.product(fa, fz)
     }
 
@@ -581,8 +580,8 @@ public extension Kind where F: Applicative {
     ///   - a: 1st value of the tuple.
     ///   - b: 2nd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B>(_ a: Kind<F, A>,
-                                    _ b : Kind<F, B>) -> Kind<F, (A, B)> {
+    static func tupled<A, B>(_ a: Kind<F, A>,
+                             _ b : Kind<F, B>) -> Kind<F, (A, B)> {
         return F.tupled(a, b)
     }
 
@@ -595,9 +594,9 @@ public extension Kind where F: Applicative {
     ///   - b: 2nd value of the tuple.
     ///   - c: 3rd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C>(_ a: Kind<F, A>,
-                                       _ b: Kind<F, B>,
-                                       _ c: Kind<F, C>) -> Kind<F, (A, B, C)> {
+    static func tupled<A, B, C>(_ a: Kind<F, A>,
+                                _ b: Kind<F, B>,
+                                _ c: Kind<F, C>) -> Kind<F, (A, B, C)> {
         return F.tupled(a, b, c)
     }
 
@@ -611,10 +610,10 @@ public extension Kind where F: Applicative {
     ///   - c: 3rd value of the tuple.
     ///   - d: 4th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D>(_ a: Kind<F, A>,
-                                          _ b: Kind<F, B>,
-                                          _ c: Kind<F, C>,
-                                          _ d: Kind<F, D>) -> Kind<F, (A, B, C, D)> {
+    static func tupled<A, B, C, D>(_ a: Kind<F, A>,
+                                   _ b: Kind<F, B>,
+                                   _ c: Kind<F, C>,
+                                   _ d: Kind<F, D>) -> Kind<F, (A, B, C, D)> {
         return F.tupled(a, b, c, d)
     }
 
@@ -629,11 +628,11 @@ public extension Kind where F: Applicative {
     ///   - d: 4th value of the tuple.
     ///   - e: 5th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E>(_ a: Kind<F, A>,
-                                             _ b: Kind<F, B>,
-                                             _ c: Kind<F, C>,
-                                             _ d: Kind<F, D>,
-                                             _ e: Kind<F, E>) -> Kind<F, (A, B, C, D, E)> {
+    static func tupled<A, B, C, D, E>(_ a: Kind<F, A>,
+                                      _ b: Kind<F, B>,
+                                      _ c: Kind<F, C>,
+                                      _ d: Kind<F, D>,
+                                      _ e: Kind<F, E>) -> Kind<F, (A, B, C, D, E)> {
         return F.tupled(a, b, c, d, e)
     }
 
@@ -649,12 +648,12 @@ public extension Kind where F: Applicative {
     ///   - e: 5th value of the tuple.
     ///   - g: 6th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G>(_ a: Kind<F, A>,
-                                                _ b: Kind<F, B>,
-                                                _ c: Kind<F, C>,
-                                                _ d: Kind<F, D>,
-                                                _ e: Kind<F, E>,
-                                                _ g: Kind<F, G>) -> Kind<F, (A, B, C, D, E, G)> {
+    static func tupled<A, B, C, D, E, G>(_ a: Kind<F, A>,
+                                         _ b: Kind<F, B>,
+                                         _ c: Kind<F, C>,
+                                         _ d: Kind<F, D>,
+                                         _ e: Kind<F, E>,
+                                         _ g: Kind<F, G>) -> Kind<F, (A, B, C, D, E, G)> {
         return F.tupled(a, b, c, d, e, g)
     }
 
@@ -671,13 +670,13 @@ public extension Kind where F: Applicative {
     ///   - g: 6th value of the tuple.
     ///   - h: 7th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H>(_ a: Kind<F, A>,
-                                                   _ b: Kind<F, B>,
-                                                   _ c: Kind<F, C>,
-                                                   _ d: Kind<F, D>,
-                                                   _ e: Kind<F, E>,
-                                                   _ g: Kind<F, G>,
-                                                   _ h: Kind<F, H>) -> Kind<F, (A, B, C, D, E, G, H)> {
+    static func tupled<A, B, C, D, E, G, H>(_ a: Kind<F, A>,
+                                            _ b: Kind<F, B>,
+                                            _ c: Kind<F, C>,
+                                            _ d: Kind<F, D>,
+                                            _ e: Kind<F, E>,
+                                            _ g: Kind<F, G>,
+                                            _ h: Kind<F, H>) -> Kind<F, (A, B, C, D, E, G, H)> {
         return F.tupled(a, b, c, d, e, g, h)
     }
 
@@ -695,14 +694,14 @@ public extension Kind where F: Applicative {
     ///   - h: 7th value of the tuple.
     ///   - i: 8th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<F, A>,
-                                                      _ b: Kind<F, B>,
-                                                      _ c: Kind<F, C>,
-                                                      _ d: Kind<F, D>,
-                                                      _ e: Kind<F, E>,
-                                                      _ g: Kind<F, G>,
-                                                      _ h: Kind<F, H>,
-                                                      _ i: Kind<F, I>) -> Kind<F, (A, B, C, D, E, G, H, I)> {
+    static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<F, A>,
+                                               _ b: Kind<F, B>,
+                                               _ c: Kind<F, C>,
+                                               _ d: Kind<F, D>,
+                                               _ e: Kind<F, E>,
+                                               _ g: Kind<F, G>,
+                                               _ h: Kind<F, H>,
+                                               _ i: Kind<F, I>) -> Kind<F, (A, B, C, D, E, G, H, I)> {
         return F.tupled(a, b, c, d, e, g, h, i)
     }
 
@@ -721,15 +720,15 @@ public extension Kind where F: Applicative {
     ///   - i: 8th value of the tuple.
     ///   - j: 9th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    public static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<F, A>,
-                                                         _ b: Kind<F, B>,
-                                                         _ c: Kind<F, C>,
-                                                         _ d: Kind<F, D>,
-                                                         _ e: Kind<F, E>,
-                                                         _ g: Kind<F, G>,
-                                                         _ h: Kind<F, H>,
-                                                         _ i: Kind<F, I>,
-                                                         _ j: Kind<F, J>) -> Kind<F, (A, B, C, D, E, G, H, I, J)> {
+    static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<F, A>,
+                                                  _ b: Kind<F, B>,
+                                                  _ c: Kind<F, C>,
+                                                  _ d: Kind<F, D>,
+                                                  _ e: Kind<F, E>,
+                                                  _ g: Kind<F, G>,
+                                                  _ h: Kind<F, H>,
+                                                  _ i: Kind<F, I>,
+                                                  _ j: Kind<F, J>) -> Kind<F, (A, B, C, D, E, G, H, I, J)> {
         return F.tupled(a, b, c, d, e, g, h, i, j)
     }
 
@@ -742,9 +741,9 @@ public extension Kind where F: Applicative {
     ///   - b: 2nd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, Z>(_ a: Kind<F, A>,
-                                    _ b: Kind<F, B>,
-                                    _ f: @escaping (A, B) -> Z) -> Kind<F, Z> {
+    static func map<A, B, Z>(_ a: Kind<F, A>,
+                             _ b: Kind<F, B>,
+                             _ f: @escaping (A, B) -> Z) -> Kind<F, Z> {
         return F.map(a, b, f)
     }
 
@@ -758,10 +757,10 @@ public extension Kind where F: Applicative {
     ///   - c: 3rd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, Z>(_ a: Kind<F, A>,
-                                       _ b: Kind<F, B>,
-                                       _ c: Kind<F, C>,
-                                       _ f: @escaping (A, B, C) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, Z>(_ a: Kind<F, A>,
+                                _ b: Kind<F, B>,
+                                _ c: Kind<F, C>,
+                                _ f: @escaping (A, B, C) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, f)
     }
 
@@ -776,11 +775,11 @@ public extension Kind where F: Applicative {
     ///   - d: 4th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, Z>(_ a: Kind<F, A>,
-                                          _ b: Kind<F, B>,
-                                          _ c: Kind<F, C>,
-                                          _ d: Kind<F, D>,
-                                          _ f: @escaping (A, B, C, D) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, Z>(_ a: Kind<F, A>,
+                                   _ b: Kind<F, B>,
+                                   _ c: Kind<F, C>,
+                                   _ d: Kind<F, D>,
+                                   _ f: @escaping (A, B, C, D) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, f)
     }
 
@@ -796,12 +795,12 @@ public extension Kind where F: Applicative {
     ///   - e: 5th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, Z>(_ a: Kind<F, A>,
-                                             _ b: Kind<F, B>,
-                                             _ c: Kind<F, C>,
-                                             _ d: Kind<F, D>,
-                                             _ e: Kind<F, E>,
-                                             _ f: @escaping (A, B, C, D, E) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, E, Z>(_ a: Kind<F, A>,
+                                      _ b: Kind<F, B>,
+                                      _ c: Kind<F, C>,
+                                      _ d: Kind<F, D>,
+                                      _ e: Kind<F, E>,
+                                      _ f: @escaping (A, B, C, D, E) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, e, f)
     }
 
@@ -818,13 +817,13 @@ public extension Kind where F: Applicative {
     ///   - g: 6th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, Z>(_ a: Kind<F, A>,
-                                                _ b: Kind<F, B>,
-                                                _ c: Kind<F, C>,
-                                                _ d: Kind<F, D>,
-                                                _ e: Kind<F, E>,
-                                                _ g: Kind<F, G>,
-                                                _ f: @escaping (A, B, C, D, E, G) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, E, G, Z>(_ a: Kind<F, A>,
+                                         _ b: Kind<F, B>,
+                                         _ c: Kind<F, C>,
+                                         _ d: Kind<F, D>,
+                                         _ e: Kind<F, E>,
+                                         _ g: Kind<F, G>,
+                                         _ f: @escaping (A, B, C, D, E, G) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, e, g, f)
     }
 
@@ -842,14 +841,14 @@ public extension Kind where F: Applicative {
     ///   - h: 7th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, Z>(_ a: Kind<F, A>,
-                                                   _ b: Kind<F, B>,
-                                                   _ c: Kind<F, C>,
-                                                   _ d: Kind<F, D>,
-                                                   _ e: Kind<F, E>,
-                                                   _ g: Kind<F, G>,
-                                                   _ h: Kind<F, H>,
-                                                   _ f: @escaping (A, B, C, D, E, G, H) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, E, G, H, Z>(_ a: Kind<F, A>,
+                                            _ b: Kind<F, B>,
+                                            _ c: Kind<F, C>,
+                                            _ d: Kind<F, D>,
+                                            _ e: Kind<F, E>,
+                                            _ g: Kind<F, G>,
+                                            _ h: Kind<F, H>,
+                                            _ f: @escaping (A, B, C, D, E, G, H) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, e, g, h, f)
     }
 
@@ -868,15 +867,15 @@ public extension Kind where F: Applicative {
     ///   - i: 8th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, I, Z>(_ a: Kind<F, A>,
-                                                      _ b: Kind<F, B>,
-                                                      _ c: Kind<F, C>,
-                                                      _ d: Kind<F, D>,
-                                                      _ e: Kind<F, E>,
-                                                      _ g: Kind<F, G>,
-                                                      _ h: Kind<F, H>,
-                                                      _ i: Kind<F, I>,
-                                                      _ f: @escaping (A, B, C, D, E, G, H, I) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, E, G, H, I, Z>(_ a: Kind<F, A>,
+                                               _ b: Kind<F, B>,
+                                               _ c: Kind<F, C>,
+                                               _ d: Kind<F, D>,
+                                               _ e: Kind<F, E>,
+                                               _ g: Kind<F, G>,
+                                               _ h: Kind<F, H>,
+                                               _ i: Kind<F, I>,
+                                               _ f: @escaping (A, B, C, D, E, G, H, I) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, e, g, h, i, f)
     }
 
@@ -896,16 +895,16 @@ public extension Kind where F: Applicative {
     ///   - j: 9th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    public static func map<A, B, C, D, E, G, H, I, J, Z>(_ a: Kind<F, A>,
-                                                         _ b: Kind<F, B>,
-                                                         _ c: Kind<F, C>,
-                                                         _ d: Kind<F, D>,
-                                                         _ e: Kind<F, E>,
-                                                         _ g: Kind<F, G>,
-                                                         _ h: Kind<F, H>,
-                                                         _ i: Kind<F, I>,
-                                                         _ j: Kind<F, J>,
-                                                         _ f: @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> Kind<F, Z> {
+    static func map<A, B, C, D, E, G, H, I, J, Z>(_ a: Kind<F, A>,
+                                                  _ b: Kind<F, B>,
+                                                  _ c: Kind<F, C>,
+                                                  _ d: Kind<F, D>,
+                                                  _ e: Kind<F, E>,
+                                                  _ g: Kind<F, G>,
+                                                  _ h: Kind<F, H>,
+                                                  _ i: Kind<F, I>,
+                                                  _ j: Kind<F, J>,
+                                                  _ f: @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> Kind<F, Z> {
         return F.map(a, b, c, d, e, g, h, i, j, f)
     }
 }

@@ -14,7 +14,7 @@ public protocol MonadFilter: Monad, FunctorFilter {
 
 public extension MonadFilter {
     // Docs inherited from `FunctorFilter`
-    public static func mapFilter<A, B>(_ fa : Kind<Self, A>, _ f : @escaping (A) -> OptionOf<B>) -> Kind<Self, B>{
+    static func mapFilter<A, B>(_ fa : Kind<Self, A>, _ f : @escaping (A) -> OptionOf<B>) -> Kind<Self, B>{
         return flatMap(fa, { a in
             Option<B>.fix(f(a)).fold(self.empty, self.pure)
         })
@@ -27,7 +27,7 @@ public extension Kind where F: MonadFilter {
     /// Obtains an empty element in this context.
     ///
     /// - Returns: Empty element.
-    public static var empty: Kind<F, A> {
+    static var empty: Kind<F, A> {
         return F.empty()
     }
 }

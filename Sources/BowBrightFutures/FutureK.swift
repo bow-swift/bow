@@ -8,14 +8,14 @@ public final class FutureKPartial<E: Error>: Kind<ForFutureK, E> {}
 public typealias FutureKOf<E: Error, A> = Kind<FutureKPartial<E>, A>
 
 public extension Future {
-    public func k() -> FutureK<E, T> {
+    func k() -> FutureK<E, T> {
         return FutureK(self)
     }
 }
 
 public class FutureK<E: Error, A>: FutureKOf<E, A> {
     public let value: Future<A, E>
-    
+
     public static func fix(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
         return value as! FutureK<E, A>
     }
@@ -23,7 +23,7 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
     public static func raiseError(_ e : E) -> FutureK<E, A> {
         return Future(error: e).k()
     }
-    
+
     public static func from(_ f : @escaping () -> A) -> FutureK<E, A> {
         return Future { complete in complete(.success(f())) }.k()
     }
@@ -36,25 +36,25 @@ public class FutureK<E: Error, A>: FutureKOf<E, A> {
                                 { a in complete(.success(a)) })
                 }
             } catch {}
-        }.k()
+            }.k()
     }
-    
+
     public init(_ value: Future<A, E>) {
         self.value = value
     }
-    
+
     public var isCompleted : Bool {
         return value.isCompleted
     }
-    
+
     public var isSuccess: Bool {
         return value.isSuccess
     }
-    
+
     public var isFailure: Bool {
         return value.isFailure
     }
-    
+
     public func runAsync(_ callback : @escaping (Either<E, A>) -> FutureKOf<E, ()>) -> FutureK<E, ()> {
         return value.flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
             .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
@@ -71,7 +71,7 @@ public postfix func ^<E, A>(_ value: FutureKOf<E, A>) -> FutureK<E, A> {
 
 extension FutureKPartial: Functor {
     public static func map<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<FutureKPartial<E>, B> {
-        return FutureK.fix(fa).value.map(f).k()
+        return FutureK.fix(fa).value.map(environmentContext(), f: f).k()
     }
 }
 
@@ -86,7 +86,7 @@ extension FutureKPartial: Selective {}
 
 extension FutureKPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (A) -> Kind<FutureKPartial<E>, B>) -> Kind<FutureKPartial<E>, B> {
-        return FutureK.fix(fa).value.flatMap { a in FutureK.fix(f(a)).value }.k()
+        return FutureK.fix(fa).value.flatMap(environmentContext()) { a in FutureK.fix(f(a)).value }.k()
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<FutureKPartial<E>, Either<A, B>>) -> Kind<FutureKPartial<E>, B> {
@@ -102,7 +102,7 @@ extension FutureKPartial: ApplicativeError {
     }
 
     public static func handleErrorWith<A>(_ fa: Kind<FutureKPartial<E>, A>, _ f: @escaping (E) -> Kind<FutureKPartial<E>, A>) -> Kind<FutureKPartial<E>, A> {
-        return FutureK.fix(fa).value.recoverWith { e in FutureK<E, A>.fix(f(e)).value }.k()
+        return FutureK.fix(fa).value.recoverWith(context: environmentContext()) { e in FutureK<E, A>.fix(f(e)).value }.k()
     }
 }
 
@@ -123,14 +123,22 @@ extension FutureKPartial: BowEffects.Async {
                                 { a in complete(.success(a)) })
                 }
             } catch {}
-        }.k()
+            }.k()
     }
 }
 
 extension FutureKPartial: Effect {
     public static func runAsync<A>(_ fa: Kind<FutureKPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> Kind<FutureKPartial<E>, ()>) -> Kind<FutureKPartial<E>, ()> {
         return FutureK<E, A>.fix(fa).value
-            .flatMap { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
-            .recoverWith { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
+            .flatMap(environmentContext()) { a in FutureK<E, ()>.fix(callback(Either.right(a))).value }
+            .recoverWith(context: environmentContext()) { e in FutureK<E, ()>.fix(callback(Either.left(e))).value }.k()
     }
+}
+
+private func environmentContext() -> ExecutionContext {
+    return isTesting() ? ImmediateOnMainExecutionContext : DefaultThreadingModel()
+}
+
+private func isTesting() -> Bool {
+    return ProcessInfo().environment["BOW_BRIGHT_FUTURES_TEST"] == "YES"
 }

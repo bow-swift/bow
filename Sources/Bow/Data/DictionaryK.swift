@@ -12,7 +12,7 @@ public typealias DictionaryKOf<K, A> = Kind<DictionaryKPartial<K>, A>
 /// DictionaryK is a Higher Kinded Type wrapper over Swift dictionaries.
 public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     private let dictionary: [K: A]
-    
+
     /// Safe downcast.
     ///
     /// - Parameter fa: Value in the higher-kind form.
@@ -20,7 +20,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public static func fix(_ fa: DictionaryKOf<K, A>) -> DictionaryK<K, A> {
         return fa as! DictionaryK<K, A>
     }
-    
+
     /// Initializes a `DictionaryK`.
     ///
     /// - Parameter dictionary: A Swift dictionary.
@@ -34,7 +34,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func asDictionary() -> [K: A] {
         return self.dictionary
     }
-    
+
     /// Creates a new value transforming the type using the provided function, preserving the structure of the dictionary.
     ///
     /// - Parameter f: Transforming function.
@@ -42,7 +42,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func map<B>(_ f : (A) -> B) -> DictionaryK<K, B> {
         return DictionaryK<K, B>(self.dictionary.mapValues(f))
     }
-    
+
     /// Zips this dictionary with another one and combines their values with the provided function.
     ///
     /// - Parameters:
@@ -68,7 +68,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func map2Eval<B, Z>(_ fb: Eval<DictionaryK<K, B>>, _ f: @escaping (A, B) -> Z) -> Eval<DictionaryK<K, Z>> {
         return Eval.fix(fb.map { b in self.map2(b, f) })
     }
-    
+
     /// Sequential application.
     ///
     /// - Parameter fa: A dictionary.
@@ -76,7 +76,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func ap<AA, B>(_ fa: DictionaryK<K, AA>) -> DictionaryK<K, B> where A == (AA) -> B {
         return flatMap(fa.map)
     }
-    
+
     /// Applies the provided function to all values in this dictionary, flattening the final result.
     ///
     /// - Parameter f: Transforming function.
@@ -86,7 +86,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
             f(a).dictionary[k].map { v in (k, v) }
         }).k()
     }
-    
+
     /// Eagerly reduces the values of this dictionary to a summary value.
     ///
     /// - Parameters:
@@ -96,7 +96,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func foldLeft<B>(_ b: B, _ f: (B, A) -> B) -> B {
         return self.dictionary.values.reduce(b, f)
     }
-    
+
     /// Lazily reduces the values of this dictionary to a summary value.
     ///
     /// - Parameters:
@@ -106,7 +106,7 @@ public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     public func foldRight<B>(_ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         return self.dictionary.values.reversed().reduce(b) { b, a in f(a, b) }
     }
-    
+
     /// Eagerly reduces the values of this dictionary to a summary dictionary.
     ///
     /// - Parameters:
@@ -131,7 +131,7 @@ public extension Dictionary {
     /// Creates a `DictionaryK`.
     ///
     /// - Returns: A `DictionaryK` wrapping this Swift dictionary.
-    public func k() -> DictionaryK<Key, Value> {
+    func k() -> DictionaryK<Key, Value> {
         return DictionaryK<Key, Value>(self)
     }
 }

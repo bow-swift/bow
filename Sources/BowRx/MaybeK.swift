@@ -7,27 +7,27 @@ public final class ForMaybeK {}
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>
 
 public extension PrimitiveSequence where Trait == MaybeTrait {
-    public func k() -> MaybeK<Element> {
+    func k() -> MaybeK<Element> {
         return MaybeK(self)
     }
 }
 
 public class MaybeK<A>: MaybeKOf<A> {
     public let value: Maybe<A>
-    
-    public static func fix(_ value : MaybeKOf<A>) -> MaybeK<A> {
+
+    public static func fix(_ value: MaybeKOf<A>) -> MaybeK<A> {
         return value as! MaybeK<A>
     }
-    
-    public static func from(_ f : @escaping () -> A) -> MaybeK<A> {
+
+    public static func from(_ f: @escaping () -> A) -> MaybeK<A> {
         return MaybeK.fix(suspend { MaybeK.fix(pure(f())) })
     }
 
-    public init(_ value : Maybe<A>) {
+    public init(_ value: Maybe<A>) {
         self.value = value
     }
-    
-    public func fold<B>(_ ifEmpty : @escaping () -> B, _ ifSome : @escaping (A) -> B) -> B {
+
+    public func fold<B>(_ ifEmpty: @escaping () -> B, _ ifSome: @escaping (A) -> B) -> B {
         if let result = value.blockingGet() {
             return ifSome(result)
         } else {
@@ -35,7 +35,7 @@ public class MaybeK<A>: MaybeKOf<A> {
         }
     }
 
-    public func runAsync(_ callback : @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeK<()> {
+    public func runAsync(_ callback: @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeK<()> {
         return value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
             .catchError { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
     }

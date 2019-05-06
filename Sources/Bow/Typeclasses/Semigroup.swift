@@ -22,7 +22,7 @@ public extension Semigroup {
     ///   - a: Value of the implementing type.
     ///   - b: Value of the implementing type.
     /// - Returns: Combination of `a` and `b`.
-    public static func combine(_ a: Self, _ b: Self) -> Self {
+    static func combine(_ a: Self, _ b: Self) -> Self {
         return a.combine(b)
     }
 
@@ -30,7 +30,7 @@ public extension Semigroup {
     ///
     /// - Parameter elems: Values of the implementing type.
     /// - Returns: A single value of the implementing type representing the combination of all the parameter values.
-    public static func combineAll(_ elems: Self...) -> Self {
+    static func combineAll(_ elems: Self...) -> Self {
         return combineAll(elems)
     }
 
@@ -38,7 +38,7 @@ public extension Semigroup {
     ///
     /// - Parameter elems: Array of values of the implementing type.
     /// - Returns: A single value of the implementing type representing the combination of all the parameter values.
-    public static func combineAll(_ elems: [Self]) -> Self {
+    static func combineAll(_ elems: [Self]) -> Self {
         return elems[1 ..< elems.count].reduce(elems[0], { partial, next in partial.combine(next) })
     }
 }

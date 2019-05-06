@@ -174,7 +174,7 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     }
 }
 
-fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
+private class LensFold<S, T, A, B> : Fold<S, A> {
     private let lens : PLens<S, T, A, B>
     
     init(lens : PLens<S, T, A, B>) {
@@ -186,7 +186,7 @@ fileprivate class LensFold<S, T, A, B> : Fold<S, A> {
     }
 }
 
-fileprivate class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+private class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
     private let lens : PLens<S, T, A, B>
     
     init(lens : PLens<S, T, A, B>) {

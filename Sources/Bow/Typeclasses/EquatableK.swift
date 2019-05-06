@@ -36,7 +36,7 @@ public extension Kind where F: EquatableK, A: Equatable {
     ///   - lhs: Left hand side of the equality check.
     ///   - rhs: Right hand side of the equality check.
     /// - Returns: A boolean value indicating if the two values are equal or not.
-    public func eq(_ rhs: Kind<F, A>) -> Bool {
+    func eq(_ rhs: Kind<F, A>) -> Bool {
         return F.eq(self, rhs)
     }
 }

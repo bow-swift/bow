@@ -8,7 +8,7 @@ public extension MonadCombine {
     ///
     /// - Parameter fga: Nested contexts value.
     /// - Returns: A value in the context implementing this instance where the inner context has been folded.
-    public static func unite<G: Foldable, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<Self, A> {
+    static func unite<G: Foldable, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<Self, A> {
         return flatMap(fga, { ga in G.foldLeft(ga, empty(), { acc, a in combineK(acc, pure(a)) })})
     }
 }
@@ -22,7 +22,7 @@ public extension Kind where F: MonadCombine {
     ///
     /// - Parameter fga: Nested contexts value.
     /// - Returns: A value in the context implementing this instance where the inner context has been folded.
-    public static func unite<G: Foldable>(_ fga: Kind<F, Kind<G, A>>) -> Kind<F, A> {
+    static func unite<G: Foldable>(_ fga: Kind<F, Kind<G, A>>) -> Kind<F, A> {
         return F.unite(fga)
     }
 }

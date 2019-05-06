@@ -4,7 +4,7 @@ import Foundation
 public protocol MonadReader: Monad {
     /// Type of the shared environment
     associatedtype D
-    
+
     /// Retrieves the shared environment.
     ///
     /// - Returns: Shared environment.
@@ -24,7 +24,7 @@ public extension MonadReader {
     ///
     /// - Parameter f: Selector function to apply to the environment.
     /// - Returns: A value extracted from the environment, in the context implementing this instance.
-    public static func reader<A>(_ f: @escaping (D) -> A) -> Kind<Self, A> {
+    static func reader<A>(_ f: @escaping (D) -> A) -> Kind<Self, A> {
         return map(ask(), f)
     }
 }
@@ -37,7 +37,7 @@ public extension Kind where F: MonadReader {
     /// This is a convenience method to call `MonadReader.ask` as a static method of this type.
     ///
     /// - Returns: Shared environment.
-    public static func ask() -> Kind<F, F.D> {
+    static func ask() -> Kind<F, F.D> {
         return F.ask()
     }
 
@@ -48,7 +48,7 @@ public extension Kind where F: MonadReader {
     /// - Parameters:
     ///   - f: Funtion to modify the environment.
     /// - Returns: Computation in the modified environment.
-    public func local(_ f: @escaping (F.D) -> F.D) -> Kind<F, A> {
+    func local(_ f: @escaping (F.D) -> F.D) -> Kind<F, A> {
         return F.local(self, f)
     }
 
@@ -58,7 +58,7 @@ public extension Kind where F: MonadReader {
     ///
     /// - Parameter f: Selector function to apply to the environment.
     /// - Returns: A value extracted from the environment, in the context implementing this instance.
-    public static func reader(_ f: @escaping (F.D) -> A) -> Kind<F, A> {
+    static func reader(_ f: @escaping (F.D) -> A) -> Kind<F, A> {
         return F.reader(f)
     }
 }

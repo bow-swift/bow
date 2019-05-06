@@ -3,7 +3,6 @@ PODS:
   - BowBrightFutures (0.3.0):
     - Bow (~> 0.3.0)
     - BowEffects (~> 0.3.0)
-    - BowResult (~> 0.3.0)
     - BrightFutures (~> 7.0.0)
   - BowEffects (0.3.0):
     - Bow (~> 0.3.0)
@@ -15,9 +14,6 @@ PODS:
     - Bow (~> 0.3.0)
   - BowRecursionSchemes (0.3.0):
     - Bow (~> 0.3.0)
-  - BowResult (0.3.0):
-    - Bow (~> 0.3.0)
-    - Result (~> 4.0.0)
   - BowRx (0.3.0):
     - Bow (~> 0.3.0)
     - BowEffects (~> 0.3.0)
@@ -40,7 +36,6 @@ DEPENDENCIES:
   - BowGeneric (from `../..`)
   - BowOptics (from `../..`)
   - BowRecursionSchemes (from `../..`)
-  - BowResult (from `../..`)
   - BowRx (from `../..`)
 
 SPEC REPOS:
@@ -66,8 +61,6 @@ EXTERNAL SOURCES:
     :path: "../.."
   BowRecursionSchemes:
     :path: "../.."
-  BowResult:
-    :path: "../.."
   BowRx:
     :path: "../.."
 
@@ -79,7 +72,6 @@ SPEC CHECKSUMS:
   BowGeneric: f6d211d9c8159dd1dc4a5749c8dfcb11640f1b9a
   BowOptics: 7468a490c6ad8120d3b60ad95078769ad4e59052
   BowRecursionSchemes: 77809f785b91ebae45f6eec909f4b9e298b56355
-  BowResult: ee70712825c33b565a68e12164eba1ebfb36f3f4
   BowRx: d5cdf7380c339494d3062c9003dfd7ce0cf7a1c7
   BrightFutures: 7d7436e937dfc83d814c11920f157fc2a53f5bd5
   Result: a6e784bebf48b471d59cddc1adb81f41f678c487

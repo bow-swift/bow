@@ -40,7 +40,7 @@ extension ForMu: Corecursive {
     }
 }
 
-fileprivate class MuEmbed<F: Functor> : Mu<F> {
+private class MuEmbed<F: Functor> : Mu<F> {
     private let tf: Kind<F, Eval<Kind<ForMu, F>>>
     
     init(_ tf: Kind<F, Eval<Kind<ForMu, F>>>) {

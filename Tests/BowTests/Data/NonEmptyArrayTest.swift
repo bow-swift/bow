@@ -5,7 +5,7 @@ import SwiftCheck
 
 class NonEmptyArrayTest: XCTestCase {
     
-    var generator : (Int) -> NonEmptyArray<Int> {
+    var generator: (Int) -> NonEmptyArray<Int> {
         return { a in NonEmptyArray(head: a, tail: []) }
     }
 
@@ -62,24 +62,24 @@ class NonEmptyArrayTest: XCTestCase {
         FoldableLaws<ForNonEmptyArray>.check(generator: self.generator)
     }
     
-    private let neaGenerator = ArrayOf<Int>.arbitrary.suchThat { array in array.getArray.count > 0 }
+    private let neaGenerator = Array<Int>.arbitrary.suchThat { array in array.count > 0 }
     
     func testConcatenation() {
-        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.neaGenerator, self.neaGenerator) { (x : ArrayOf<Int>, y : ArrayOf<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x.getArray)
-            let b = NonEmptyArray.fromArrayUnsafe(y.getArray)
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.neaGenerator, self.neaGenerator) { (x: Array<Int>, y: Array<Int>) in
+            let a = NonEmptyArray.fromArrayUnsafe(x)
+            let b = NonEmptyArray.fromArrayUnsafe(y)
             return a.count + b.count == (a + b).count
         }
         
-        property("Adding one element increases length in one") <- forAll(self.neaGenerator, Int.arbitrary) { (array : ArrayOf<Int>, element : Int) in
-            let nea = NonEmptyArray.fromArrayUnsafe(array.getArray)
+        property("Adding one element increases length in one") <- forAll(self.neaGenerator, Int.arbitrary) { (array: Array<Int>, element: Int) in
+            let nea = NonEmptyArray.fromArrayUnsafe(array)
             return (nea + element).count == nea.count + 1
         }
         
         property("Result of concatenation contains all items from the original arrays") <- forAll(self.neaGenerator, self.neaGenerator) {
-            (x : ArrayOf<Int>, y : ArrayOf<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x.getArray)
-            let b = NonEmptyArray.fromArrayUnsafe(y.getArray)
+            (x: Array<Int>, y: Array<Int>) in
+            let a = NonEmptyArray.fromArrayUnsafe(x)
+            let b = NonEmptyArray.fromArrayUnsafe(y)
             let concatenation = a + b
             return concatenation.containsAll(elements: a.all()) &&
                     concatenation.containsAll(elements: b.all())

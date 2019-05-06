@@ -7,7 +7,7 @@ public final class ForSingleK {}
 public typealias SingleKOf<A> = Kind<ForSingleK, A>
 
 public extension PrimitiveSequence where Trait == SingleTrait {
-    public func k() -> SingleK<Element> {
+    func k() -> SingleK<Element> {
         return SingleK<Element>(value: self)
     }
 }

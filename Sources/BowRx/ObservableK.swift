@@ -7,7 +7,7 @@ public final class ForObservableK {}
 public typealias ObservableKOf<A> = Kind<ForObservableK, A>
 
 public extension Observable {
-    public func k() -> ObservableK<Element> {
+    func k() -> ObservableK<Element> {
         return ObservableK<Element>(self)
     }
     

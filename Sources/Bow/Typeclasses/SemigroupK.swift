@@ -25,7 +25,7 @@ public extension Kind where F: SemigroupK {
     /// - Parameters:
     ///   - y: Right value in the combination.
     /// - Returns: Combination of the two values.
-    public func combineK(_ y: Kind<F, A>) -> Kind<F, A> {
+    func combineK(_ y: Kind<F, A>) -> Kind<F, A> {
         return F.combineK(self, y)
     }
 }

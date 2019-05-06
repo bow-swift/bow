@@ -16,7 +16,7 @@ public extension Traverse {
     ///
     /// - Parameter fga: A structure of values.
     /// - Returns: Results collected under the context of the effects.
-    public static func sequence<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Kind<Self, A>> {
+    static func sequence<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Kind<Self, A>> {
         return traverse(fga, id)
     }
 }
@@ -28,7 +28,7 @@ public extension Traverse where Self: Monad {
     ///   - fa: A structure of values.
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
-    public static func flatTraverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
+    static func flatTraverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
         return G.map(traverse(fa, f), Self.flatten)
     }
 }
@@ -41,14 +41,14 @@ public extension Kind where F: Traverse {
     /// - Parameters:
     ///   - f: A function producing an effect.
     /// - Returns: Results collected under the context of the effect provided by the function.
-    public func traverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<F, B>> {
+    func traverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<F, B>> {
         return F.traverse(self, f)
     }
 
     /// Evaluate each effect in this structure of values and collects the results.
     ///
     /// - Returns: Results collected under the context of the effects.
-    public func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>> where A == Kind<G, AA>{
+    func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>> where A == Kind<G, AA>{
         return F.sequence(self)
     }
 }
@@ -59,7 +59,7 @@ public extension Kind where F: Traverse & Monad {
     /// - Parameters:
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
-    public func flatTraverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, Kind<F, B>>) -> Kind<G, Kind<F, B>> {
+    func flatTraverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, Kind<F, B>>) -> Kind<G, Kind<F, B>> {
         return F.flatTraverse(self, f)
     }
 }

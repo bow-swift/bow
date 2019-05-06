@@ -16,7 +16,7 @@ public typealias StateTOf<F, S, A> = Kind<StateTPartial<F, S>, A>
 ///     - To accumulate a value without using it on the way, see `WriterT`.
 public class StateT<F, S, A>: StateTOf<F, S, A> {
     fileprivate let runF: Kind<F, (S) -> Kind<F, (S, A)>>
-    
+
     /// Safe downcast.
     ///
     /// - Parameter fa: Value in the higher-kind form.
@@ -47,23 +47,23 @@ public extension StateT where F == ForId {
     ///
     /// - Parameter initialState: Initial state for this computation.
     /// - Returns: A pair with the updated state and the produced value.
-    public func run(_ initialState: S) -> (S, A) {
+    func run(_ initialState: S) -> (S, A) {
         return Id.fix(self.runM(initialState)).value
     }
-    
+
     /// Runs this computation provided an initial state.
     ///
     /// - Parameter s: Initial state for this computation.
     /// - Returns: Produced value from this computation.
-    public func runA(_ s: S) -> A {
+    func runA(_ s: S) -> A {
         return run(s).1
     }
-    
+
     /// Runs this computation provided an initial state.
     ///
     /// - Parameter s: Initial state for this computation.
     /// - Returns: Updated state after running the computation.
-    public func runS(_ s: S) -> S {
+    func runS(_ s: S) -> S {
         return run(s).0
     }
 }

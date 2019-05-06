@@ -9,23 +9,23 @@ public class Free<S, A>: FreeOf<S, A> {
     public static func liftF(_ fa: Kind<S, A>) -> Free<S, A> {
         return Suspend(fa)
     }
-    
+
     public static func deferFree(_ value: @escaping () -> Free<S, A>) -> Free<S, A> {
         return Free.fix(Free<S, ()>.pure(unit).flatMap { _ in value() })
     }
-    
+
     internal static func functionKF() -> FunctionKFree<S> {
         return FunctionKFree<S>()
     }
 
-    public static func fix(_ fa : FreeOf<S, A>) -> Free<S, A> {
+    public static func fix(_ fa: FreeOf<S, A>) -> Free<S, A> {
         return fa as! Free<S, A>
     }
-    
-    public func transform<B, S, O>(_ f : @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
+
+    public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
         fatalError("Free.transform must be implemented by subclass")
     }
-    
+
     public func step() -> Free<S, A> {
         if self is FlatMapped<S, A, A> && (self as! FlatMapped<S, A, A>).c is FlatMapped<S, A, A> {
             let flatMappedSelf = self as! FlatMapped<S, A, A>
@@ -44,13 +44,13 @@ public class Free<S, A>: FreeOf<S, A> {
             return self
         }
     }
-    
+
     public func foldMapK<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, A> {
         return M.tailRecM(self) { freeSA in
             return freeSA.step().foldMapChild(f)
         }
     }
-    
+
     fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>,A>> {
         fatalError("foldMapChild must be implemented by subclasses")
     }
@@ -65,58 +65,58 @@ public postfix func ^<S, A>(_ fa: FreeOf<S, A>) -> Free<S, A> {
 }
 
 public extension Free where S: Monad {
-    public func run() -> Kind<S, A> {
+    func run() -> Kind<S, A> {
         return self.foldMapK(FunctionK<S, S>.id)
     }
 }
 
-fileprivate class Pure<S, A> : Free<S, A> {
+private class Pure<S, A>: Free<S, A> {
     fileprivate let a: A
-    
-    init(_ a : A) {
+
+    init(_ a: A) {
         self.a = a
     }
-    
+
     override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
         return M.pure(Either.right(self.a))
     }
-    
+
     override public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
         return Free.fix(Free.pure(f(a)))
     }
 }
 
-fileprivate class Suspend<S, A> : Free<S, A> {
+private class Suspend<S, A>: Free<S, A> {
     fileprivate let a: Kind<S, A>
     
-    init(_ a : Kind<S, A>) {
+    init(_ a: Kind<S, A>) {
         self.a = a
     }
-    
+
     override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
         return M.map(f.invoke(self.a), { a in Either.right(a) })
     }
-    
+
     override public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
         return Free.fix(Free<O, A>.liftF(fs.invoke(a as! Kind<S, A>)).map(f))
     }
 }
 
-fileprivate class FlatMapped<S, A, C> : Free<S, A> {
+private class FlatMapped<S, A, C>: Free<S, A> {
     fileprivate let c: Free<S, C>
     fileprivate let f: (C) -> Free<S, A>
-    
-    init(_ c : Free<S, C>, _ f : @escaping (C) -> Free<S, A>) {
+
+    init(_ c: Free<S, C>, _ f: @escaping (C) -> Free<S, A>) {
         self.c = c
         self.f = f
     }
-    
+
     override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
         let g = self.f
         let c = self.c
         return M.map(c.foldMapK(f), { cc in Either.left(g(cc)) })
     }
-    
+
     override public func transform<B, S, O>(_ fm: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
         return FlatMapped<O, B, C>(c.transform(id, fs), { _ in Free.fix(self.c.flatMap(self.f)).transform(fm, fs) })
     }

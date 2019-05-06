@@ -9,7 +9,7 @@ open class Yoneda<F, A>: YonedaOf<F, A> {
     public static func fix(_ fa : YonedaOf<F, A>) -> Yoneda<F, A> {
         return fa as! Yoneda<F, A>
     }
-    
+
     public func apply<B>(_ f : @escaping (A) -> B) -> Kind<F, B> {
         fatalError("Apply must be implemented in subclass")
     }
@@ -17,7 +17,7 @@ open class Yoneda<F, A>: YonedaOf<F, A> {
     public func lower() -> Kind<F, A> {
         return apply(id)
     }
-    
+
     public func toCoyoneda() -> Coyoneda<F, A, A> {
         return Coyoneda<F, A, A>.apply(lower(), id)
     }
@@ -32,32 +32,32 @@ public postfix func ^<F, A>(_ fa: YonedaOf<F, A>) -> Yoneda<F, A> {
 }
 
 public extension Yoneda where F: Functor {
-    public static func apply(_ fa : Kind<F, A>) -> Yoneda<F, A> {
+    static func apply(_ fa : Kind<F, A>) -> Yoneda<F, A> {
         return YonedaFunctor<F, A>(fa)
     }
 }
 
-fileprivate class YonedaDefault<F, A, B>: Yoneda<F, B> {
+private class YonedaDefault<F, A, B>: Yoneda<F, B> {
     private let ff: (A) -> B
     private let yoneda: Yoneda<F, A>
-    
+
     init(_ yoneda: Yoneda<F, A>, _ ff: @escaping (A) -> B) {
         self.yoneda = yoneda
         self.ff = ff
     }
-    
+
     override public func apply<C>(_ f: @escaping (B) -> C) -> Kind<F, C> {
         return yoneda.apply({ a in f(self.ff(a)) })
     }
 }
 
-fileprivate class YonedaFunctor<F: Functor, A>: Yoneda<F, A> {
+private class YonedaFunctor<F: Functor, A>: Yoneda<F, A> {
     private let fa : Kind<F, A>
 
     init(_ fa : Kind<F, A>) {
         self.fa = fa
     }
-    
+
     override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         return F.map(fa, f)
     }

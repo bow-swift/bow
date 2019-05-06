@@ -7,7 +7,7 @@ public protocol Effect: Async {
 
 // MARK: Syntax for Effect
 public extension Kind where F: Effect {
-    public func runAsync(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, ()> {
+    func runAsync(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, ()> {
         return F.runAsync(self, callback)
     }
 }

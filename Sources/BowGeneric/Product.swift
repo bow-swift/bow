@@ -29,15 +29,15 @@ public protocol ProductCompanion {
 }
 
 public extension ProductCompanion {
-    public func deriveHNil() -> Kind<A, HNil> {
+    func deriveHNil() -> Kind<A, HNil> {
         return typeclass.emptyProduct()
     }
     
-    public func deriveHCons<H, T: HList>(_ ch: Kind<A, H>, _ ct: Kind<A, T>) -> Kind<A, HCons<H, T>> {
+    func deriveHCons<H, T: HList>(_ ch: Kind<A, H>, _ ct: Kind<A, T>) -> Kind<A, HCons<H, T>> {
         return typeclass.product(ch, ct)
     }
     
-    public func deriveInstance<F, G, Gener>(_ generic: Gener, _ cg: Kind<A, G>) -> Kind<A, F> where Gener: Generic, Gener.T == F, Gener.Repr == G {
+    func deriveInstance<F, G, Gener>(_ generic: Gener, _ cg: Kind<A, G>) -> Kind<A, F> where Gener: Generic, Gener.T == F, Gener.Repr == G {
         return typeclass.project(constant(cg), generic.to, generic.from)
     }
 }

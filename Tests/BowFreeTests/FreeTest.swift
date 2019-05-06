@@ -19,7 +19,7 @@ extension ForOps: EquatableK {
     }
 }
 
-fileprivate class Ops<A>: Kind<ForOps, A> {
+private class Ops<A>: Kind<ForOps, A> {
     fileprivate static func fix(_ fa: Kind<ForOps, A>) -> Ops<A> {
         return fa as! Ops<A>
     }
@@ -41,7 +41,7 @@ fileprivate postfix func ^<A>(_ fa: Kind<ForOps, A>) -> Ops<A> {
     return Ops.fix(fa)
 }
 
-fileprivate class Value: Ops<Int> {
+private class Value: Ops<Int> {
     let a: Int
     
     init(_ a: Int) {
@@ -49,7 +49,7 @@ fileprivate class Value: Ops<Int> {
     }
 }
 
-fileprivate class Add: Ops<Int> {
+private class Add: Ops<Int> {
     let a: Int
     let b: Int
     
@@ -59,7 +59,7 @@ fileprivate class Add: Ops<Int> {
     }
 }
 
-fileprivate class Subtract: Ops<Int> {
+private class Subtract: Ops<Int> {
     let a: Int
     let b: Int
     
@@ -73,7 +73,7 @@ fileprivate let program = Free.fix(Free<ForOps, Int>.binding({ Ops<Any>.value(10
                                                            { value in Ops<Any>.add(value, 10) },
                                                            { _ , added in Ops<Any>.subtract(added, 50) }))
 
-fileprivate class OptionInterpreter: FunctionK<ForOps, ForOption> {
+private class OptionInterpreter: FunctionK<ForOps, ForOption> {
     override func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
         let op = Ops.fix(fa)
         switch op {
@@ -86,7 +86,7 @@ fileprivate class OptionInterpreter: FunctionK<ForOps, ForOption> {
     }
 }
 
-fileprivate class IdInterpreter: FunctionK<ForOps, ForId> {
+private class IdInterpreter: FunctionK<ForOps, ForId> {
     override func invoke<A>(_ fa: Kind<ForOps, A>) -> IdOf<A> {
         let op = Ops.fix(fa)
         switch op {

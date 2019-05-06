@@ -4,7 +4,7 @@ import Foundation
 public protocol MonadState: Monad {
     /// Type of the state maintained in this instance
     associatedtype S
-    
+
     /// Retrieves the state from the internals of the monad.
     ///
     /// - Returns: Maintained state.
@@ -22,26 +22,26 @@ public extension MonadState {
     ///
     /// - Parameter f: A function that receives the state and computes a value and a new state.
     /// - Returns: A value with the output of the function and the new state.
-    public static func state<A>(_ f: @escaping (S) -> (S, A)) -> Kind<Self, A> {
+    static func state<A>(_ f: @escaping (S) -> (S, A)) -> Kind<Self, A> {
         return flatMap(get(), { s in
             let result = f(s)
             return map(set(result.0), { _ in result.1 })
         })
     }
-    
+
     /// Modifies the internal state.
     ///
     /// - Parameter f: Function that modifies the state.
     /// - Returns: Unit.
-    public static func modify(_ f: @escaping (S) -> S) -> Kind<Self, ()> {
+    static func modify(_ f: @escaping (S) -> S) -> Kind<Self, ()> {
         return flatMap(get(), { s in set(f(s))})
     }
-    
+
     /// Retrieves a specific component of the state.
     ///
     /// - Parameter f: Projection function to obtain part of the state.
     /// - Returns: A specific part of the state.
-    public static func inspect<A>(_ f: @escaping (S) -> A) -> Kind<Self, A> {
+    static func inspect<A>(_ f: @escaping (S) -> A) -> Kind<Self, A> {
         return map(get(), f)
     }
 }
@@ -54,7 +54,7 @@ public extension Kind where F: MonadState {
     /// This is a convenience method to call `MonadState.get` as a static method of this type.
     ///
     /// - Returns: Maintained state.
-    public static func get() -> Kind<F, F.S> {
+    static func get() -> Kind<F, F.S> {
         return F.get()
     }
 
@@ -64,7 +64,7 @@ public extension Kind where F: MonadState {
     ///
     /// - Parameter s: New state.
     /// - Returns: Unit.
-    public static func set(_ s: F.S) -> Kind<F, ()> {
+    static func set(_ s: F.S) -> Kind<F, ()> {
         return F.set(s)
     }
 
@@ -74,7 +74,7 @@ public extension Kind where F: MonadState {
     ///
     /// - Parameter f: A function that receives the state and computes a value and a new state.
     /// - Returns: A value with the output of the function and the new state.
-    public static func state(_ f: @escaping (F.S) -> (F.S, A)) -> Kind<F, A> {
+    static func state(_ f: @escaping (F.S) -> (F.S, A)) -> Kind<F, A> {
         return F.state(f)
     }
 
@@ -84,7 +84,7 @@ public extension Kind where F: MonadState {
     ///
     /// - Parameter f: Function that modifies the state.
     /// - Returns: Unit.
-    public static func modify(_ f: @escaping (F.S) -> F.S) -> Kind<F, ()> {
+    static func modify(_ f: @escaping (F.S) -> F.S) -> Kind<F, ()> {
         return F.modify(f)
     }
 
@@ -94,7 +94,7 @@ public extension Kind where F: MonadState {
     ///
     /// - Parameter f: Projection function to obtain part of the state.
     /// - Returns: A specific part of the state.
-    public static func inspect(_ f: @escaping (F.S) -> A) -> Kind<F, A> {
+    static func inspect(_ f: @escaping (F.S) -> A) -> Kind<F, A> {
         return F.inspect(f)
     }
 }

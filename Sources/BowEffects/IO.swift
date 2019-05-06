@@ -165,7 +165,7 @@ public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
 }
 
-fileprivate class Pure<E: Error, A>: IO<E, A> {
+private class Pure<E: Error, A>: IO<E, A> {
     let a: A
     
     init(_ a: A) {
@@ -181,7 +181,7 @@ fileprivate class Pure<E: Error, A>: IO<E, A> {
     }
 }
 
-fileprivate class RaiseError<E: Error, A> : IO<E, A> {
+private class RaiseError<E: Error, A> : IO<E, A> {
     let error: E
     
     init(_ error : E) {
@@ -197,7 +197,7 @@ fileprivate class RaiseError<E: Error, A> : IO<E, A> {
     }
 }
 
-fileprivate class FMap<E: Error, A, B> : IO<E, B> {
+private class FMap<E: Error, A, B> : IO<E, B> {
     let f: (A) throws -> B
     let action: IO<E, A>
     
@@ -221,7 +221,7 @@ fileprivate class FMap<E: Error, A, B> : IO<E, B> {
     }
 }
 
-fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
+private class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     let f: (E) -> EE
     let action: IO<E, A>
 
@@ -253,7 +253,7 @@ fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     }
 }
 
-fileprivate class Join<E: Error, A> : IO<E, A> {
+private class Join<E: Error, A> : IO<E, A> {
     let io: IO<E, IO<E, A>>
     
     init(_ io: IO<E, IO<E, A>>) {
@@ -275,7 +275,7 @@ fileprivate class Join<E: Error, A> : IO<E, A> {
     }
 }
 
-fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
+private class AsyncIO<E: Error, A> : IO<E, A> {
     let f: Proc<E, A>
     
     init(_ f: @escaping Proc<E, A>) {
