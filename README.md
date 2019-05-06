@@ -16,7 +16,6 @@ Bow is split in multiple modules that can be consumed independently. These modul
 - `BowFree`: module to work with Free Monads.
 - `BowGeneric`: module to work with generic data types.
 - `BowEffects`: module to work with effects.
-- `BowResult`: module to provide an integration with Result.
 - `BowBrightFutures`: module to provide an integration with BrightFutures.
 - `BowRx`: module to provide an integration with RxSwift.
 
@@ -27,15 +26,14 @@ Bow is available using CocoaPods, Carthage and Swift Package Manager.
 You can consume each Bow module as a separate pod. You can add these lines to your Podfile at your convenience:
 
 ```ruby
-pod "Bow",                 "~> 0.3.0"
-pod "BowOptics",           "~> 0.3.0"
-pod "BowRecursionSchemes", "~> 0.3.0"
-pod "BowFree",             "~> 0.3.0"
-pod "BowGeneric",          "~> 0.3.0"
-pod "BowResult",           "~> 0.3.0"
-pod "BowEffects",          "~> 0.3.0"
-pod "BowRx",               "~> 0.3.0"
-pod "BowBrightFutures",    "~> 0.3.0"
+pod "Bow",                 "~> 0.4.0"
+pod "BowOptics",           "~> 0.4.0"
+pod "BowRecursionSchemes", "~> 0.4.0"
+pod "BowFree",             "~> 0.4.0"
+pod "BowGeneric",          "~> 0.4.0"
+pod "BowEffects",          "~> 0.4.0"
+pod "BowRx",               "~> 0.4.0"
+pod "BowBrightFutures",    "~> 0.4.0"
 ```
 
 ### Carthage
@@ -43,7 +41,7 @@ pod "BowBrightFutures",    "~> 0.3.0"
 Carthage will download the whole Bow project, but it will compile individual frameworks for each module that you can use separately. Add this line to your Cartfile:
 
 ```
-github "bow-swift/Bow" ~> 0.3.0
+github "bow-swift/Bow" ~> 0.4.0
 ```
 
 ### Swift Package Manager
@@ -58,7 +56,7 @@ import PackageDescription
 let package = Package(
     name: "BowTestProject",
     dependencies: [
-        .package(url: "https://github.com/bow-swift/bow.git", from: "0.3.0")
+        .package(url: "https://github.com/bow-swift/bow.git", from: "0.4.0")
     ],
     targets: [
         .target(name: "BowTestProject",
@@ -69,7 +67,6 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowResult",
                     "BowRx",
                     "BowBrightFutures"]
         )

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowRx"
-  s.version     = "0.3.0"
+  s.version     = "0.4.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowRx provides an integration with RxSwift."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "3.0"
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowRx/**/*.swift"
-  s.dependency "RxSwift", "~> 4.4.0"
-  s.dependency "RxCocoa", "~> 4.4.0"
-  s.dependency "Bow", "~> 0.3.0"
-  s.dependency "BowEffects", "~> 0.3.0"
+  s.dependency "RxSwift", "~> 5.0.0"
+  s.dependency "RxCocoa", "~> 5.0.0"
+  s.dependency "Bow", "~> #{s.version}"
+  s.dependency "BowEffects", "~> #{s.version}"
 end

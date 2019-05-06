@@ -7,7 +7,7 @@
 /*:
  # Data types
 
- {:beginner}
+ {:.beginner}
  beginner
 
  A data type is an abstraction that encapsulates a reusable coding pattern. Data types are generalized by one or more type parameters. Data types in Bow have Higher Kinded Type support by extending `Kind`. Their functionality works on their own structure, never on the values defined by its generic type parameters.

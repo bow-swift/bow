@@ -21,7 +21,6 @@
  pod "BowRecursionSchemes", "~> {version}"
  pod "BowFree",             "~> {version}"
  pod "BowGeneric",          "~> {version}"
- pod "BowResult",           "~> {version}"
  pod "BowEffects",          "~> {version}"
  pod "BowRx",               "~> {version}"
  pod "BowBrightFutures",    "~> {version}"
@@ -58,7 +57,7 @@ $ carthage bootstrap
  Create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
 
 ```swift
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 
 import PackageDescription
 
@@ -76,7 +75,6 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowResult",
                     "BowRx",
                     "BowBrightFutures"]
         )
