@@ -3,38 +3,29 @@
     "pins": [
       {
         "package": "BrightFutures",
-        "repositoryURL": "https://github.com/Thomvis/BrightFutures",
+        "repositoryURL": "https://github.com/Thomvis/BrightFutures.git",
         "state": {
           "branch": null,
-          "revision": "b86a1d202afff7bfca7adf2423ad1962172ee10a",
-          "version": "7.0.0"
+          "revision": "9279defa6bdc21501ce740266e5a14d0119ddc63",
+          "version": "8.0.1"
         }
       },
       {
         "package": "FileCheck",
-        "repositoryURL": "https://github.com/trill-lang/FileCheck.git",
+        "repositoryURL": "https://github.com/llvm-swift/FileCheck.git",
         "state": {
           "branch": null,
-          "revision": "34ea75a35780396a2cfa5019ec799879b48dd960",
-          "version": "0.0.6"
+          "revision": "bd9cb30ceee1f21c02f51a7168f58471449807d8",
+          "version": "0.1.0"
         }
       },
       {
         "package": "Nimble",
-        "repositoryURL": "https://github.com/Quick/Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble.git",
         "state": {
           "branch": null,
-          "revision": "22800b0954c89344bb8c87f8ab93378076716fb7",
-          "version": "7.0.3"
-        }
-      },
-      {
-        "package": "Result",
-        "repositoryURL": "https://github.com/antitypical/Result",
-        "state": {
-          "branch": null,
-          "revision": "8fc088dcf72802801efeecba76ea8fb041fb773d",
-          "version": "4.0.0"
+          "revision": "43304bf2b1579fd555f2fdd51742771c1e4f2b98",
+          "version": "8.0.1"
         }
       },
       {
@@ -42,17 +33,17 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "e8aa1d892a0d8a153a28b74cbad25be534926f49",
-          "version": "4.4.0"
+          "revision": "b3e888b4972d9bc76495dd74d30a8c7fad4b9395",
+          "version": "5.0.1"
         }
       },
       {
         "package": "SwiftCheck",
-        "repositoryURL": "https://github.com/typelift/SwiftCheck",
+        "repositoryURL": "https://github.com/typelift/SwiftCheck.git",
         "state": {
           "branch": null,
-          "revision": "df82fb889864945c64458f38846702af729b3ee4",
-          "version": "0.9.1"
+          "revision": "077c096c3ddfc38db223ac8e525ad16ffb987138",
+          "version": "0.12.0"
         }
       }
     ]

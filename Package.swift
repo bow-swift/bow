@@ -16,7 +16,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/typelift/SwiftCheck.git", from: "0.12.0"),
         .package(url: "https://github.com/Quick/Nimble.git", from: "8.0.1"),
-        .package(url: "https://github.com/ReactiveX/RxSwift.git", .branch("master")),
+        .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "5.0.1"),
         .package(url: "https://github.com/Thomvis/BrightFutures.git", from: "8.0.0"),
     ],
     targets: [

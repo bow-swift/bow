@@ -1,4 +1,4 @@
 github "Quick/Nimble" "v8.0.1"
-github "ReactiveX/RxSwift" "27b42ed7584a044d9ec6d7968c0d5f464abdcf93"
+github "ReactiveX/RxSwift" "5.0.1"
 github "Thomvis/BrightFutures" "8.0.0"
 github "typelift/SwiftCheck" "0.12.0"
