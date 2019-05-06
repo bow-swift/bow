@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowBrightFutures/**/*.swift"
   s.dependency "Bow", "~> #{s.version}"
-  s.dependency "BowResult", "~> #{s.version}"
   s.dependency "BrightFutures", "~> 8.0.0"
   s.dependency "BowEffects", "~> #{s.version}"
 end
