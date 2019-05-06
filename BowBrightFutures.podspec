@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowBrightFutures"
-  s.version     = "0.3.0"
+  s.version     = "0.4.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowBrightFutures provides an integration with BrightFutures."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "2.0"
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowBrightFutures/**/*.swift"
-  s.dependency "Bow", "~> 0.3.0"
-  s.dependency "BowResult", "~> 0.3.0"
-  s.dependency "BrightFutures", "~> 7.0.0"
-  s.dependency "BowEffects", "~> 0.3.0"
+  s.dependency "Bow", "~> #{s.version}"
+  s.dependency "BowResult", "~> #{s.version}"
+  s.dependency "BrightFutures", "~> 8.0.0"
+  s.dependency "BowEffects", "~> #{s.version}"
 end
