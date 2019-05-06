@@ -6,7 +6,7 @@ system 'swift build'
 system 'mkdir docs-json || true'
 
 modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
-  "BowEffects", "BowResult", "BowRx", "BowBrightFutures", "Bow"]
+  "BowEffects", "BowRx", "BowBrightFutures", "Bow"]
 modules.each { |m| system "sourcekitten doc --spm-module #{m} > ./docs-json/#{m}.json" }
 
 joined = []
