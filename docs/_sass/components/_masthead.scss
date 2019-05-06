@@ -5,27 +5,41 @@
   position: relative;
   background-image:
     linear-gradient(
-      to bottom right,
+      to bottom,
       $brand-primary,
       $brand-secondary
     );
 
   .masthead-content {
-    padding: ($base-point-grid * 20) 0 ($base-point-grid * 25) 0;
+    padding: ($base-point-grid * 20) 0 0;
 
-    @include flexbox;
-    @include align-items(center);
+    .masthead-top {
+      @include flexbox;
+      @include align-items(center);
+    }
 
     .masthead-text {
-      @include flex(1);
+      @include flex(1 1 75%);
+      position: relative;
 
       color: $white;
       margin-right: ($base-point-grid * 3);
 
       h2 {
+        padding-left: ($base-point-grid * 8);
         margin-bottom: ($base-point-grid * 4);
-        font-size: 2.714rem;
-        font-weight: $font-medium;
+        font-size: 3rem;
+        font-weight: $font-bold;
+
+        &:before {
+          position: absolute;
+          display: block;
+          content: "{";
+          left: -16px;
+          font-size: 12rem;
+          font-weight: normal;
+          top: -30px;
+        }
       }
 
       .button {
@@ -34,32 +48,42 @@
 
       @include fadeInDown($duration: 1s, $delay: 0.2s, $function: ease);
 
-      .masthead-stars {
-        padding-left: ($base-point-grid * 8);
-        margin-top: ($base-point-grid * 2);
-        font-size: 1.3rem;
-
-        a {
-          color: $white;
-
-          &:hover {
-            text-decoration: none;
-          }
-        }
-      }
     }
 
     .masthead-brand {
       text-align: center;
 
-      @include flex(1);
+      @include flex(1 1 25%);
 
       img {
-        width: 388px;
+        width: 160px;
         height: auto;
       }
 
       @include fadeInDown($duration: 1s, $delay: 0.6s, $function: ease);
+    }
+
+    .masthead-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 70%;
+      padding: ($base-point-grid * 12) 0 ($base-point-grid * 12);
+      margin: auto;
+    }
+
+    .masthead-stars {
+      margin: ($base-point-grid * 2) 0;
+      font-size: 1.3rem;
+      text-align: center;
+
+      a {
+        color: $white;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 
@@ -73,7 +97,10 @@
 @include bp(medium) {
   #masthead {
     .masthead-content {
-      @include flex-wrap(wrap);
+
+      .masthead-top {
+        @include flex-wrap(wrap);
+      }
 
       .masthead-text,
       .masthead-brand {
@@ -87,6 +114,10 @@
 
         h2 {
           font-size: 2.2rem;
+          padding-left: 0;
+          &:before {
+            display: none;
+          }
         }
 
         .masthead-stars {
@@ -98,9 +129,13 @@
         @include order(1);
 
         img {
-          width: 200px;
+          width: 160px;
           height: auto;
         }
+      }
+
+      .masthead-buttons {
+        width: 100%;
       }
     }
   }

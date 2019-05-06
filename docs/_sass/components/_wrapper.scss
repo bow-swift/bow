@@ -27,7 +27,13 @@
 }
 
 #sidebar-wrapper {
-  background: darken($brand-primary, 1%);
+  // background: darken($brand-primary, 1%);
+  background-image:
+    linear-gradient(
+      to bottom,
+      $brand-primary,
+      $brand-secondary
+    );
   left: 0;
   height: 100%;
   overflow-y: auto;

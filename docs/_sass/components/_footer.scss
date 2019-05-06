@@ -4,6 +4,7 @@
 #footer {
   padding: ($base-point-grid * 6) 0;
   font-size: 0.975rem;
+  flex: 0 0 0;
 
   .content-footer {
     @include flexbox;

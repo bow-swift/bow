@@ -13,7 +13,6 @@
   font-family: $brand-font-family;
   font-size: 1.625rem;
   font-weight: $font-bold;
-  text-transform: uppercase;
   letter-spacing: 1px;
   color: $white;
 
@@ -36,6 +35,7 @@
 
       @include flexbox;
       @include align-items(center);
+      @include justify-content(center);
 
       width: 100%;
     }

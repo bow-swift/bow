@@ -17,6 +17,8 @@ html {
 body,
 html {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 // Typography

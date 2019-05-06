@@ -5,11 +5,11 @@
 // ===========================================================================
 
 // Google Fonts
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600");
 
 // Colors
-$brand-primary: rgb(244, 81, 30);
-$brand-secondary: rgb(250, 137, 64);
+$brand-primary: #ff4650;
+$brand-secondary: #ff4b2c;
 $gray-primary: rgb(49, 45, 44);
 $gray-primary-lighten: lighten($gray-primary, 10%);
 $white: rgb(255, 255, 255);
@@ -20,7 +20,7 @@ $link-hover: darken($brand-primary, 4%);
 // Bow
 
 $body_background: #fafafa;
-$body_font: 14px/25px "Montserrat", "Open Sans", "Helvetica Neue", Helvetica,
+$body_font: 14px/25px "Poppins", "Open Sans", "Helvetica Neue", Helvetica,
   Arial, sans-serif;
 $text_color: #333;
 $gray_border: 1px solid #ddd;
@@ -47,7 +47,7 @@ $navigation_max_width: 250px;
 // ----- Header
 $header_weight: bold;
 $header_color: #555;
-$header_font: "Montserrat", "Open Sans Bold", "Helvetica Neue", Helvetica, Arial,
+$header_font: "Poppins", "Open Sans Bold", "Helvetica Neue", Helvetica, Arial,
   sans-serif;
 $header_link_color: #fff;
 
@@ -276,7 +276,12 @@ pre code {
 // ===========================================================================
 
 .header-container {
-  background: $brand-primary;
+  background-image:
+    linear-gradient(
+      to right,
+      $brand-primary,
+      $brand-secondary
+    );
 }
 
 .header {
@@ -293,8 +298,6 @@ pre code {
 .header-title {
   font-weight: 700;
   font-size: 1.3rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
   vertical-align: middle;
 }
 
@@ -323,7 +326,7 @@ pre code {
 .header-image,
 .header-icon {
   padding-right: 2px;
-  vertical-align: -4px;
+  vertical-align: -6px;
   height: 16px;
 }
 
