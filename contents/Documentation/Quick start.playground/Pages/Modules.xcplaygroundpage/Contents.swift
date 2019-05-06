@@ -16,7 +16,6 @@
  | ------ | ----------- | ------------ |
  | Core | Higher Kinded Types emulation, function manipulation utilities, type classes, data types, monad transformers and instances for primitive types. | `import Bow` |
  | Effects | Encapsulation of side effects. | `import BowEffects` |
- | Result | Integration with the Result library. | `import BowResult` |
 
  {:.intermediate}
  intermediate
