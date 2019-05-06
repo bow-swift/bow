@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="79px" height="79px" viewBox="0 0 79 79" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+<svg width="64px" height="72px" viewBox="0 0 64 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
     <title>feature-icon-tertiary</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-2">
-            <path d="M43,79 C43,55.2517558 23.7482442,36 0,36 L0,79 L43,79 Z" id="opacity" fill="#FA8940" opacity="0.55" transform="translate(21.500000, 57.500000) rotate(-180.000000) translate(-21.500000, -57.500000) "></path>
-            <circle id="image" fill="#FA8940" cx="43" cy="36" r="36"></circle>
-            <g id="icon" transform="translate(27.000000, 19.000000)" stroke="#FFFFFF" stroke-width="2">
+        <g id="feature-icon-tertiary" transform="translate(-4.000000, 0.000000)">
+            <polygon id="Polygon" fill="#FF4748" points="36 0 67.1769145 18 67.1769145 54 36 72 4.82308546 54 4.82308546 18"></polygon>
+            <g id="icon" transform="translate(20.000000, 20.000000)" stroke="#FFFFFF" stroke-width="2">
                 <circle id="path" cx="16.5" cy="13.5" r="5.5"></circle>
                 <path d="M21.844401,16.438151 L25.593099,18.2708333" id="path" stroke-linecap="square"></path>
                 <path d="M17.1982422,19.4968262 L18.0305176,27.4230957" id="path" stroke-linecap="square"></path>

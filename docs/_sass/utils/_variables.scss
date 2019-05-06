@@ -3,13 +3,13 @@
 // -----------------------------------------------
 
 // Google Fonts
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700");
 
 // Colors
-$brand-primary: rgb(244, 81, 30);
-$brand-secondary: rgb(250, 137, 64);
-$brand-tertiary: rgb(250, 137, 64);
+$brand-primary: #ff4650;
+$brand-secondary: #ff4b2c;
+$brand-tertiary: #ff7361;
 $brand-quaternary: rgb(250, 137, 64);
 $gray-primary: rgb(49, 45, 44);
 $white: rgb(255, 255, 255);
@@ -18,8 +18,8 @@ $link-color: $brand-primary;
 $link-hover: darken($brand-primary, 4%);
 
 // Typography
-$base-font-family: "Montserrat", sans-serif;
-$brand-font-family: "Montserrat", sans-serif;
+$base-font-family: "Poppins", sans-serif;
+$brand-font-family: "Poppins", sans-serif;
 $header-font-family: $base-font-family;
 $base-font-color: $gray-primary;
 $header-font-color: $gray-primary;

@@ -3,9 +3,12 @@
 // -----------------------------------------------
 #content {
   background: $white;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
 
   .features {
-    padding: ($base-point-grid * 4) 0 ($base-point-grid * 10) 0;
+    padding: ($base-point-grid * 10) 0 ($base-point-grid * 10) 0;
 
     @include flexbox;
 
@@ -35,11 +38,6 @@
       p {
         margin-bottom: ($base-point-grid * 2);
         color: $gray-primary;
-      }
-
-      &:nth-child(2),
-      &:nth-child(3) {
-        margin-top: ($base-point-grid * 4);
       }
 
       &:nth-child(1) {
