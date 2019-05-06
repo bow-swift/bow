@@ -21,7 +21,6 @@
  pod "BowRecursionSchemes", "~> {version}"
  pod "BowFree",             "~> {version}"
  pod "BowGeneric",          "~> {version}"
- pod "BowResult",           "~> {version}"
  pod "BowEffects",          "~> {version}"
  pod "BowRx",               "~> {version}"
  pod "BowBrightFutures",    "~> {version}"
@@ -76,7 +75,6 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowResult",
                     "BowRx",
                     "BowBrightFutures"]
         )
