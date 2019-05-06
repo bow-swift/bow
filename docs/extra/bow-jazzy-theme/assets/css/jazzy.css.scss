@@ -276,7 +276,12 @@ pre code {
 // ===========================================================================
 
 .header-container {
-  background: $brand-primary;
+  background-image:
+    linear-gradient(
+      to right,
+      $brand-primary,
+      $brand-secondary
+    );
 }
 
 .header {
