@@ -11,6 +11,7 @@
   border-radius: ($base-point-grid * 8);
   text-align: center;
   transition: background $base-duration $base-timing;
+  outline: none;
 
   &:visited {
     color: $white;
