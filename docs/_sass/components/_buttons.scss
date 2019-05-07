@@ -12,6 +12,7 @@
   text-align: center;
   transition: background $base-duration $base-timing;
   outline: none;
+  z-index: 1;
 
   &:visited {
     color: $white;
