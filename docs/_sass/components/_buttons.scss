@@ -11,6 +11,7 @@
   border-radius: ($base-point-grid * 8);
   text-align: center;
   transition: background $base-duration $base-timing;
+  outline: none;
 
   &:visited {
     color: $white;
@@ -34,19 +35,5 @@
   &.button-small {
     padding: ($base-point-grid * 0.7) ($base-point-grid * 2.2);
     font-size: 0.7857rem;
-  }
-
-  @include bp(medium) {
-    display: inline-block;
-
-    & + .button {
-      margin-top: 0;
-    }
-  }
-
-  @include bp(small) {
-    & + .button {
-      margin-top: $base-point-grid * 2;
-    }
   }
 }
