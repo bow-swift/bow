@@ -1,0 +1,22 @@
+{% for item in site.data.doc-versions.docVersions %}
+    {% if item.url == site.data.commons.stable_version %}
+      {% assign stable_version_title = item.title %}
+    {% endif %}
+{% endfor %}
+
+<select name="doc_version" onChange="window.location.href=this.value">
+    <option name="documentation" value="#">
+        <span>Documentation</span>
+    </option>
+    <option name="stable_version" value="{{ site.data.commons.stable_version | append: 'docs/' }}">
+        <span>STABLE ({{ stable_version_title }})</span>
+    </option>
+    {% for item in site.data.doc-versions.docVersions %}
+      {% if item.url != site.data.commons.stable_version %}
+        <option name="{{ item.title }}" value="{{ item.url | append: 'docs/' }}">
+            <span>{{ item.title }}</span>
+        </option>
+      {% endif %}
+    {% endfor %}
+
+</select>

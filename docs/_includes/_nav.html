@@ -4,6 +4,7 @@
             <a href="#">{{ site.title }}</a>
         </div>
         <ul id="myTopnav" class="navigation-menu">
+            {% include _navigation-doc-versions.html %}
             {% for item in site.data.menu.nav%}
             <li>
                 <a href="{{ item.url }}" title="{{ item.title }}" alt="{{ item.title }}">
