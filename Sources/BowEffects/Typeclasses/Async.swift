@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public typealias Proc<E, A> = (Callback<E, A>) throws -> ()
+public typealias Proc<E, A> = (@escaping Callback<E, A>) throws -> ()
 public typealias Callback<E, A> = (Either<E, A>) -> ()
 
 public protocol Async: MonadDefer {
