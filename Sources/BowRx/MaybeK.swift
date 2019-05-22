@@ -107,7 +107,7 @@ extension ForMaybeK: MonadDefer {
 }
 
 extension ForMaybeK: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
         return Maybe.create { emitter in
             do {
                 try fa { either in
