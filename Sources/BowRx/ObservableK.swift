@@ -134,7 +134,7 @@ extension ForObservableK: MonadDefer {
 }
 
 extension ForObservableK: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
         return Observable.create { emitter in
             do {
                 try fa { either in
