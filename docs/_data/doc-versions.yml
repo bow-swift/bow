@@ -1,8 +1,8 @@
 docVersions:
 
-    - title: "v0.2.0"
+    - title: "v0.3.0"
       url: https://0-3-0.bow-swift.io/
-      previous: https://0-2-0.bow-swift.io/
+      previous: https://0-3-0.bow-swift.io/
 
     - title: "v0.4.0"
       url: https://bow-swift.io/
