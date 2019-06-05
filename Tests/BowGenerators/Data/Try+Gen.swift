@@ -10,3 +10,11 @@ extension Try: Arbitrary where A: Arbitrary {
         return Gen.one(of: [failure, success])
     }
 }
+
+// MARK: Instance of `ArbitraryK` for `Try`
+
+extension ForTry: ArbitraryK {
+    public static func generate<A>() -> Kind<ForTry, A> where A : Arbitrary {
+        return Try.arbitrary.generate
+    }
+}
