@@ -8,3 +8,11 @@ extension ArrayK: Arbitrary where A: Arbitrary {
         return Array.arbitrary.map(ArrayK.init)
     }
 }
+
+// MARK: Instance of `ArbitraryK` for `ArrayK`
+
+extension ForArrayK: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> Kind<ForArrayK, A> {
+        return ArrayK.arbitrary.generate
+    }
+}
