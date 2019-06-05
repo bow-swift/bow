@@ -20,6 +20,7 @@
 		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
 		112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097AE22A7EE46007F3D9C /* Either+Gen.swift */; };
 		1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
 		11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
 		11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
@@ -530,6 +531,7 @@
 		1116D501224E3A2300507B54 /* Coproduct2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct2.swift; sourceTree = "<group>"; };
 		112097A922A7EBC7007F3D9C /* BowGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Generators-Info.plist"; sourceTree = "<absolute>"; };
+		112097AE22A7EE46007F3D9C /* Either+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Either+Gen.swift"; sourceTree = "<group>"; };
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -958,6 +960,7 @@
 		112097AB22A7EC03007F3D9C /* BowGenerators */ = {
 			isa = PBXGroup;
 			children = (
+				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
 			);
 			path = BowGenerators;
 			sourceTree = "<group>";
@@ -1942,6 +1945,9 @@
 			attributes = {
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
+					1120978222A7EBC7007F3D9C = {
+						LastSwiftMigration = 1020;
+					};
 					112293AD219D8B86006D66C5 = {
 						LastSwiftMigration = 1020;
 					};
@@ -2257,6 +2263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2799,6 +2806,8 @@
 		112097A722A7EBC7007F3D9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2815,6 +2824,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenerators;
 			};
@@ -2823,6 +2833,8 @@
 		112097A822A7EBC7007F3D9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

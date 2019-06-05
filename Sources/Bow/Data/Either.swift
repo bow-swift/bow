@@ -10,13 +10,19 @@ public final class EitherPartial<L>: Kind<ForEither, L> {}
 public typealias EitherOf<A, B> = Kind<EitherPartial<A>, B>
 
 /// Sum type of types `A` and `B`. Represents a value of either one of those types, but not both at the same time. Values of type `A` are called `left`; values of type `B` are called right.
-public class Either<A, B>: EitherOf<A, B> {
+public final class Either<A, B>: EitherOf<A, B> {
+    private let value: _Either<A, B>
+    
+    private init(_ value: _Either<A, B>) {
+        self.value = value
+    }
+    
     /// Constructs a left value.
     ///
     /// - Parameter a: Value to be wrapped in a left of this Either type.
     /// - Returns: A left value of Either.
     public static func left(_ a: A) -> Either<A, B> {
-        return Left<A, B>(a)
+        return Either(.left(a))
     }
 
     /// Constructs a right value
@@ -24,7 +30,7 @@ public class Either<A, B>: EitherOf<A, B> {
     /// - Parameter b: Value to be wrapped in a right of this Either type.
     /// - Returns: A right value of Either.
     public static func right(_ b: B) -> Either<A, B> {
-        return Right<A, B>(b)
+        return Either(.right(b))
     }
 
     /// Safe downcast.
@@ -42,13 +48,9 @@ public class Either<A, B>: EitherOf<A, B> {
     ///   - fb: Closure to apply if the contained value in this `Either` is a member of the right type.
     /// - Returns: Result of applying the corresponding closure to this value.
     public func fold<C>(_ fa: (A) -> C, _ fb: (B) -> C) -> C {
-        switch self {
-            case let left as Left<A, B>:
-                return fa(left.a)
-            case let right as Right<A, B>:
-                return fb(right.b)
-            default:
-                fatalError("Either must only have left and right cases")
+        switch value {
+            case let .left(a): return fa(a)
+            case let .right(b): return fb(b)
         }
     }
 
@@ -204,20 +206,9 @@ public postfix func ^<A, B>(_ fa: EitherOf<A, B>) -> Either<A, B> {
     return Either.fix(fa)
 }
 
-private class Left<A, B> : Either<A, B> {
-    let a : A
-    
-    init(_ a : A) {
-        self.a = a
-    }
-}
-
-private class Right<A, B> : Either<A, B> {
-    let b : B
-    
-    init(_ b : B) {
-        self.b = b
-    }
+private enum _Either<A, B> {
+    case left(A)
+    case right(B)
 }
 
 // MARK: Conformance of `Either` to `CustomStringConvertible`
