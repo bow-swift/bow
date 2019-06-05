@@ -976,6 +976,14 @@
 		112097AB22A7EC03007F3D9C /* BowGenerators */ = {
 			isa = PBXGroup;
 			children = (
+				112097C222A80571007F3D9C /* Data */,
+			);
+			path = BowGenerators;
+			sourceTree = "<group>";
+		};
+		112097C222A80571007F3D9C /* Data */ = {
+			isa = PBXGroup;
+			children = (
 				112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */,
 				112097B222A7F17F007F3D9C /* Const+Gen.swift */,
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
@@ -986,7 +994,7 @@
 				112097BE22A7FDEF007F3D9C /* Try+Gen.swift */,
 				112097C022A7FF37007F3D9C /* Validated+Gen.swift */,
 			);
-			path = BowGenerators;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		112294F0219D8F22006D66C5 /* BowRecursionSchemes */ = {
