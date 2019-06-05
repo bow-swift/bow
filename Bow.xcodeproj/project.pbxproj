@@ -18,6 +18,8 @@
 		1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FB224E332900507B54 /* Coproduct9.swift */; };
 		1116D500224E342200507B54 /* Coproduct10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FF224E342200507B54 /* Coproduct10.swift */; };
 		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
+		112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
 		11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
 		11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
@@ -254,6 +256,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1122957A219D94C9006D66C5;
 			remoteInfo = "Bow-Generic";
+		};
+		1120978422A7EBC7007F3D9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
 		};
 		1122941D219D8BBF006D66C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -519,6 +528,8 @@
 		1116D4FB224E332900507B54 /* Coproduct9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct9.swift; sourceTree = "<group>"; };
 		1116D4FF224E342200507B54 /* Coproduct10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct10.swift; sourceTree = "<group>"; };
 		1116D501224E3A2300507B54 /* Coproduct2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct2.swift; sourceTree = "<group>"; };
+		112097A922A7EBC7007F3D9C /* BowGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -782,6 +793,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		112097A222A7EBC7007F3D9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */,
+				112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11229412219D8B86006D66C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -935,6 +955,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		112097AB22A7EC03007F3D9C /* BowGenerators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BowGenerators;
+			sourceTree = "<group>";
+		};
 		112294F0219D8F22006D66C5 /* BowRecursionSchemes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1162,7 +1189,6 @@
 		11ED7A2C226E0BF200C27994 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				11ED7A2D226E0E7600C27994 /* Bow-Info.plist */,
 				112297E7219DD149006D66C5 /* Bow-BrightFutures-Info.plist */,
 				11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */,
 				1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */,
@@ -1170,8 +1196,11 @@
 				11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */,
 				11E7188A219D81B300B94845 /* Bow-Free-Info.plist */,
 				11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */,
+				112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */,
 				112295E2219D94C9006D66C5 /* Bow-Generic-Info.plist */,
 				11229624219D9593006D66C5 /* Bow-GenericTests-Info.plist */,
+				11ED7A2D226E0E7600C27994 /* Bow-Info.plist */,
+				11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */,
 				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
 				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
 				112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */,
@@ -1179,7 +1208,6 @@
 				112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */,
 				112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */,
 				11E71804219D7D9500B94845 /* Bow-Test-Info.plist */,
-				11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1498,6 +1526,7 @@
 				112297E6219DD148006D66C5 /* BowBrightFutures.framework */,
 				11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */,
 				11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */,
+				112097A922A7EBC7007F3D9C /* BowGenerators.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1536,6 +1565,7 @@
 				11D97EEC219EBB35008FC004 /* BowEffectsLaws */,
 				11229786219DC968006D66C5 /* BowEffectsTests */,
 				11E718F1219D84EB00B94845 /* BowFreeTests */,
+				112097AB22A7EC03007F3D9C /* BowGenerators */,
 				11229625219D95D2006D66C5 /* BowGenericTests */,
 				11E719FD219D888800B94845 /* BowLaws */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
@@ -1549,6 +1579,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1120978222A7EBC7007F3D9C /* Bow-Generators */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 112097A622A7EBC7007F3D9C /* Build configuration list for PBXNativeTarget "Bow-Generators" */;
+			buildPhases = (
+				1120978522A7EBC7007F3D9C /* Sources */,
+				112097A222A7EBC7007F3D9C /* Frameworks */,
+				112097A522A7EBC7007F3D9C /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1120978322A7EBC7007F3D9C /* PBXTargetDependency */,
+			);
+			name = "Bow-Generators";
+			productName = Bow;
+			productReference = 112097A922A7EBC7007F3D9C /* BowGenerators.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		112293AD219D8B86006D66C5 /* BowLaws */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11229418219D8B86006D66C5 /* Build configuration list for PBXNativeTarget "BowLaws" */;
@@ -1963,6 +2011,7 @@
 			projectRoot = "";
 			targets = (
 				"Bow::Bow" /* Bow */,
+				1120978222A7EBC7007F3D9C /* Bow-Generators */,
 				112293AD219D8B86006D66C5 /* BowLaws */,
 				"Bow::BowTests" /* BowTests */,
 				11E71817219D81B300B94845 /* Bow-Free */,
@@ -1985,6 +2034,26 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		112097A522A7EBC7007F3D9C /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		11229417219D8B86006D66C5 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -2184,6 +2253,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1120978522A7EBC7007F3D9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		112293AE219D8B86006D66C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -2532,6 +2608,11 @@
 			target = 1122957A219D94C9006D66C5 /* Bow-Generic */;
 			targetProxy = 0DE29CA221A7271A00DC781E /* PBXContainerItemProxy */;
 		};
+		1120978322A7EBC7007F3D9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 1120978422A7EBC7007F3D9C /* PBXContainerItemProxy */;
+		};
 		1122941E219D8BBF006D66C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 112293AD219D8B86006D66C5 /* BowLaws */;
@@ -2715,6 +2796,54 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		112097A722A7EBC7007F3D9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Generators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowGenerators;
+			};
+			name = Debug;
+		};
+		112097A822A7EBC7007F3D9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Generators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowGenerators;
+			};
+			name = Release;
+		};
 		11229419219D8B86006D66C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3623,6 +3752,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		112097A622A7EBC7007F3D9C /* Build configuration list for PBXNativeTarget "Bow-Generators" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				112097A722A7EBC7007F3D9C /* Debug */,
+				112097A822A7EBC7007F3D9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		11229418219D8B86006D66C5 /* Build configuration list for PBXNativeTarget "BowLaws" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
