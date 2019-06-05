@@ -10,3 +10,11 @@ extension Either: Arbitrary where A: Arbitrary, B: Arbitrary {
         return Gen.one(of: [left, right])
     }
 }
+
+// MARK: Instance of `ArbitraryK` for `Either`
+
+extension EitherPartial: ArbitraryK where L: Arbitrary {
+    public static func generate<A: Arbitrary>() -> Kind<EitherPartial<L>, A> {
+        return Either.arbitrary.generate
+    }
+}
