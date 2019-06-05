@@ -10,6 +10,10 @@ public extension Result {
     func toValidated() -> Validated<Failure, Success> {
         return fold(Validated.invalid, Validated.valid)
     }
+    
+    func toValidatedNEA() -> ValidatedNEA<Failure, Success> {
+        return toValidated().toValidatedNEA()
+    }
 
     func toOption() -> Option<Success> {
         return fold(constant(Option.none()), Option.some)
