@@ -13,13 +13,19 @@ public typealias ValidatedOf<E, A> = Kind<ValidatedPartial<E>, A>
 public typealias ValidatedNEA<E, A> = Validated<NEA<E>, A>
 
 /// Validated is a data type to represent valid and invalid values. It is similar to `Either`, but with error accumulation in the invalid case.
-public class Validated<E, A>: ValidatedOf<E, A> {
+public final class Validated<E, A>: ValidatedOf<E, A> {
+    private let value: _Validated<E, A>
+    
+    private init(_ value: _Validated<E, A>) {
+        self.value = value
+    }
+    
     /// Constructs a valid value.
     ///
     /// - Parameter value: Valid value to be wrapped in this validated.
     /// - Returns: A `Validated` value wrapping the parameter.
     public static func valid(_ value: A) -> Validated<E, A> {
-        return Valid(value)
+        return Validated<E, A>(.valid(value))
     }
     
     /// Constructs an invalid value.
@@ -27,7 +33,7 @@ public class Validated<E, A>: ValidatedOf<E, A> {
     /// - Parameter value: Invalid value to be wrapped in this validated.
     /// - Returns: A `Validated` value wrapping the parameter.
     public static func invalid(_ value: E) -> Validated<E, A> {
-        return Invalid(value)
+        return Validated<E, A>(.invalid(value))
     }
     
     /// Constructs a `Validated` from a `Try` value.
@@ -63,10 +69,9 @@ public class Validated<E, A>: ValidatedOf<E, A> {
     ///   - fa: Closure to apply if the contained value is valid.
     /// - Returns: Result of applying the corresponding closure to the contained value.
     public func fold<C>(_ fe: (E) -> C, _ fa: (A) -> C) -> C {
-        switch(self) {
-            case let invalid as Invalid<E, A>: return fe(invalid.value)
-            case let valid as Valid<E, A>: return fa(valid.value)
-            default: fatalError("Validated must only have Valid and Invalid cases")
+        switch value {
+            case let .invalid(value): return fe(value)
+            case let .valid(value): return fa(value)
         }
     }
     
@@ -166,20 +171,9 @@ public postfix func ^<E, A>(_ fa: ValidatedOf<E, A>) -> Validated<E, A> {
     return Validated.fix(fa)
 }
 
-class Valid<E, A>: Validated<E, A> {
-    fileprivate let value: A
-    
-    init(_ value: A) {
-        self.value = value
-    }
-}
-
-class Invalid<E, A>: Validated<E, A> {
-    fileprivate let value: E
-    
-    init(_ value: E) {
-        self.value = value
-    }
+private enum _Validated<A, B> {
+    case invalid(A)
+    case valid(B)
 }
 
 // MARK: Conformance of `Validated` to `CustomStringConvertible`
