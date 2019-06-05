@@ -10,3 +10,11 @@ extension NonEmptyArray: Arbitrary where A: Arbitrary {
             .map(NonEmptyArray.fromArrayUnsafe)
     }
 }
+
+// MARK: Instance of `ArbitraryK` for `NonEmptyArray`
+
+extension ForNonEmptyArray: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> Kind<ForNonEmptyArray, A> {
+        return NonEmptyArray.arbitrary.generate
+    }
+}
