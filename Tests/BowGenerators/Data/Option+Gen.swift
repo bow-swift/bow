@@ -10,3 +10,11 @@ extension Option: Arbitrary where A: Arbitrary {
         return Gen.one(of: [none, some])
     }
 }
+
+// MARK: Instance of `ArbitraryK` for `Option`
+
+extension ForOption: ArbitraryK {
+    public static func generate<A>() -> Kind<ForOption, A> where A : Arbitrary {
+        return Option.arbitrary.generate
+    }
+}
