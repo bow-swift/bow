@@ -155,7 +155,7 @@ public extension NonEmptyArray where A: Equatable {
 // Conformance of `NonEmptyArray` to `CustomStringConvertible`
 extension NonEmptyArray: CustomStringConvertible {
     public var description: String {
-        return "NonEmptyArray(\(self.all())"
+        return "NonEmptyArray(\(self.all()))"
     }
 }
 
