@@ -40,6 +40,7 @@
 		112097D822A90644007F3D9C /* Kleisli+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D722A90644007F3D9C /* Kleisli+Gen.swift */; };
 		112097DB22A9078B007F3D9C /* EitherT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097DA22A9078B007F3D9C /* EitherT+Gen.swift */; };
 		112097DD22A90899007F3D9C /* OptionT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097DC22A90899007F3D9C /* OptionT+Gen.swift */; };
+		112097DF22A90972007F3D9C /* StateT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097DE22A90972007F3D9C /* StateT+Gen.swift */; };
 		1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
 		11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
 		11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
@@ -570,6 +571,7 @@
 		112097D722A90644007F3D9C /* Kleisli+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kleisli+Gen.swift"; sourceTree = "<group>"; };
 		112097DA22A9078B007F3D9C /* EitherT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EitherT+Gen.swift"; sourceTree = "<group>"; };
 		112097DC22A90899007F3D9C /* OptionT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OptionT+Gen.swift"; sourceTree = "<group>"; };
+		112097DE22A90972007F3D9C /* StateT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateT+Gen.swift"; sourceTree = "<group>"; };
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1050,6 +1052,7 @@
 			children = (
 				112097DA22A9078B007F3D9C /* EitherT+Gen.swift */,
 				112097DC22A90899007F3D9C /* OptionT+Gen.swift */,
+				112097DE22A90972007F3D9C /* StateT+Gen.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -2357,6 +2360,7 @@
 				112097D622A904AC007F3D9C /* Sum+Gen.swift in Sources */,
 				112097C522A805CE007F3D9C /* Function0+Gen.swift in Sources */,
 				112097C722A80730007F3D9C /* Function1+Gen.swift in Sources */,
+				112097DF22A90972007F3D9C /* StateT+Gen.swift in Sources */,
 				112097C122A7FF37007F3D9C /* Validated+Gen.swift in Sources */,
 				112097B922A7FAF6007F3D9C /* Ior+Gen.swift in Sources */,
 				112097CE22A81BE8007F3D9C /* EitherK+Gen.swift in Sources */,
