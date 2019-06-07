@@ -1,6 +1,14 @@
 import Bow
 import SwiftCheck
 
+// MARK: Generator for Property-based Testing
+
+extension EitherK: Arbitrary where F: ArbitraryK, G: ArbitraryK, A: Arbitrary {
+    public static var arbitrary: Gen<EitherK<F, G, A>> {
+        return Gen.pure(EitherKPartial.generate()^)
+    }
+}
+
 // MARK: Instance of `ArbitraryK` for `EitherK`
 
 extension EitherKPartial: ArbitraryK where F: ArbitraryK, G: ArbitraryK {
