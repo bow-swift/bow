@@ -5,8 +5,7 @@ import SwiftCheck
 
 extension Kleisli: Arbitrary where F: ArbitraryK, A: Arbitrary {
     public static var arbitrary: Gen<Kleisli<F, D, A>> {
-        let kleisli: Kleisli<F, D, A> = KleisliPartial.generate()^
-        return Gen.pure(kleisli)
+        return Gen.from(KleisliPartial.generate >>> Kleisli.fix)
     }
 }
 

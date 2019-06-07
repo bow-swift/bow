@@ -5,7 +5,7 @@ import SwiftCheck
 
 extension EitherT: Arbitrary where F: ArbitraryK, A: Arbitrary, B: Arbitrary {
     public static var arbitrary: Gen<EitherT<F, A, B>> {
-        return Gen.pure(EitherTPartial.generate()^)
+        return Gen.from(EitherTPartial.generate >>> EitherT.fix)
     }
 }
 

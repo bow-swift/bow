@@ -5,7 +5,7 @@ import SwiftCheck
 
 extension Moore: Arbitrary where E: CoArbitrary & Hashable, V: Arbitrary {
     public static var arbitrary: Gen<Moore<E, V>> {
-        return Gen.pure(MoorePartial.generate()^)
+        return Gen.from(MoorePartial.generate >>> Moore.fix)
     }
 }
 
