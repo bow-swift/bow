@@ -7,7 +7,7 @@ public final class ForFunction0 {}
 public typealias Function0Of<A> = Kind<ForFunction0, A>
 
 /// This data type acts as a wrapper over functions that receive no input and produce a value; namely, constant functions. This wrapper gives these functions capabilities to be used as a Higher Kinded Type and conform to typeclasses that have this requirement.
-public class Function0<A>: Function0Of<A> {
+public final class Function0<A>: Function0Of<A> {
     fileprivate let f: () -> A
     
     /// Safe downcast.

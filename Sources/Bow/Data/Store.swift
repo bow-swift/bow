@@ -4,7 +4,7 @@ public final class ForStore {}
 public final class StorePartial<S>: Kind<ForStore, S> {}
 public typealias StoreOf<S, V> = Kind<StorePartial<S>, V>
 
-public class Store<S, V> : StoreOf<S, V> {
+public final class Store<S, V> : StoreOf<S, V> {
     public let state: S
     public let render: (S) -> V
     

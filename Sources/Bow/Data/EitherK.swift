@@ -10,7 +10,7 @@ public final class EitherKPartial<F, G>: Kind2<ForEitherK, F, G> {}
 public typealias EitherKOf<F, G, A> = Kind<EitherKPartial<F, G>, A>
 
 /// EitherK is a sum type for kinds. Represents a type where you can hold either a `Kind<F, A>` or a `Kind<G, A>`.
-public class EitherK<F, G, A>: EitherKOf<F, G, A> {
+public final class EitherK<F, G, A>: EitherKOf<F, G, A> {
     fileprivate let run: Either<Kind<F, A>, Kind<G, A>>
     
     /// Safe downcast.

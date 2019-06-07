@@ -13,7 +13,7 @@ public typealias KleisliOf<F, D, A> = Kind<KleisliPartial<F, D>, A>
 public typealias ReaderT<F, D, A> = Kleisli<F, D, A>
 
 /// Kleisli represents a function with the signature `(D) -> Kind<F, A>`.
-public class Kleisli<F, D, A>: KleisliOf<F, D, A> {
+public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     internal let run: (D) -> Kind<F, A>
     
     /// Safe downcast.

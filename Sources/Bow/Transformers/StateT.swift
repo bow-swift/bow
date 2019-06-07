@@ -14,7 +14,7 @@ public typealias StateTOf<F, S, A> = Kind<StateTPartial<F, S>, A>
 /// Some computations may not require the full power of this transformer:
 ///     - For read-only state, see `ReaderT` / `Kleisli`.
 ///     - To accumulate a value without using it on the way, see `WriterT`.
-public class StateT<F, S, A>: StateTOf<F, S, A> {
+public final class StateT<F, S, A>: StateTOf<F, S, A> {
     fileprivate let runF: Kind<F, (S) -> Kind<F, (S, A)>>
 
     /// Safe downcast.
@@ -41,8 +41,24 @@ public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
     return StateT.fix(fa)
 }
 
+/// Partial application of the `StateT` type constructor, omitting the last parameter.
+public typealias StatePartial<S> = StateTPartial<ForId, S>
+
+/// Higher Kinded Type alias to improve readability over `StateT<ForId, S, A>`.
+public typealias StateOf<S, A> = StateT<ForId, S, A>
+
+/// State is a convenience data type over the `StateT` transformer, when the effect is `Id`.
+public typealias State<S, A> = StateOf<S, A>
+
 // MARK: Convenience functions when the effect is `Id`
 public extension StateT where F == ForId {
+    /// Initializes a `State` value.
+    ///
+    /// - Parameter run: A function that depends on a state and produces a new state and a value.
+    convenience init(_ run: @escaping (S) -> (S, A)) {
+        self.init(Id.pure({ s in Id.pure(run(s)) }))
+    }
+    
     /// Runs this computation provided an initial state.
     ///
     /// - Parameter initialState: Initial state for this computation.
