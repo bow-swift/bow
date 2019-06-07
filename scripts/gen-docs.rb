@@ -34,6 +34,7 @@ end
 # @param version [String] tfgfgfgfg
 # @return [nil] nil.
 def generate_nef_site(version)
+  system "echo Generating nef site for #{version}"
   # system "mkdir -p docs/#{version}/_data"
   system "nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md"
   # system "nef jekyll --project contents/Documentation --output docs/#{version} --main-page contents/Home.md"
@@ -47,6 +48,7 @@ end
 # @param version [String] tfgfgfgfg
 # @return [nil] nil.
 def generate_api_site(version)
+  system "echo Generating API site for #{version}"
   system "BUNDLE_GEMFILE=./docs/Gemfile bundle exec jazzy -o ./docs/#{version}/api-docs --sourcekitten-sourcefile ./docs-json/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
   system "ls -la docs"
   system "ls -la docs/#{version}"
