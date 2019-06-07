@@ -9,6 +9,6 @@ extension SumPartial: ArbitraryK where F: ArbitraryK, G: ArbitraryK {
         let ga: Kind<G, A> = G.generate()
         let left = Sum.left(fa, ga)
         let right = Sum.right(fa, ga)
-        return (Int.arbitrary.generate % 2 == 0) ? left : right
+        return Gen.one(of: [Gen.pure(left), Gen.pure(right)]).generate
     }
 }
