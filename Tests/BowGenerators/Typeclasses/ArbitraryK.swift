@@ -16,3 +16,9 @@ public struct KindOf<F, A>: Arbitrary where F: ArbitraryK, A: Arbitrary {
         self.value = value
     }
 }
+
+extension Gen {
+    static func from(_ generator: @escaping () -> A) -> Gen<A> {
+        return Gen<()>.pure(()).map(generator)
+    }
+}
