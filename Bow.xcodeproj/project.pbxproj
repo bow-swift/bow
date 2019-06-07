@@ -232,7 +232,6 @@
 		8BA0F59B217E2E9200969984 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47B217E2E9200969984 /* Day.swift */; };
 		8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47D217E2E9200969984 /* Moore.swift */; };
 		8BA0F5A7217E2E9200969984 /* Eval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47E217E2E9200969984 /* Eval.swift */; };
-		8BA0F5AB217E2E9200969984 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47F217E2E9200969984 /* State.swift */; };
 		8BA0F5AF217E2E9200969984 /* Try.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F480217E2E9200969984 /* Try.swift */; };
 		8BA0F5B7217E2E9200969984 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F483217E2E9200969984 /* Sum.swift */; };
 		8BA0F5BB217E2E9200969984 /* Validated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F484217E2E9200969984 /* Validated.swift */; };
@@ -765,7 +764,6 @@
 		8BA0F47B217E2E9200969984 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		8BA0F47D217E2E9200969984 /* Moore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moore.swift; sourceTree = "<group>"; };
 		8BA0F47E217E2E9200969984 /* Eval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Eval.swift; sourceTree = "<group>"; };
-		8BA0F47F217E2E9200969984 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		8BA0F480217E2E9200969984 /* Try.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Try.swift; sourceTree = "<group>"; };
 		8BA0F482217E2E9200969984 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8BA0F483217E2E9200969984 /* Sum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sum.swift; sourceTree = "<group>"; };
@@ -1511,7 +1509,6 @@
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
 				8BA0F487217E2E9200969984 /* SetK.swift */,
-				8BA0F47F217E2E9200969984 /* State.swift */,
 				8BA0F486217E2E9200969984 /* Store.swift */,
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
@@ -2657,7 +2654,6 @@
 				8BA0F5FF217E2E9200969984 /* SemigroupK.swift in Sources */,
 				8BA0F5DF217E2E9200969984 /* ApplicativeError.swift in Sources */,
 				8BA0F5C3217E2E9200969984 /* Store.swift in Sources */,
-				8BA0F5AB217E2E9200969984 /* State.swift in Sources */,
 				8BA0F64F217E2E9200969984 /* Functor.swift in Sources */,
 				8BA0F517217E2E9200969984 /* Predef.swift in Sources */,
 				8BA0F4FB217E2E9200969984 /* Cokleisli.swift in Sources */,
