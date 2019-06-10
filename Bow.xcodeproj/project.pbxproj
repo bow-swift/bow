@@ -112,6 +112,9 @@
 		1125054D220DD92B00861131 /* EquatableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125054C220DD92B00861131 /* EquatableK.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
+		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
 		11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4356322131ACC000C5E31 /* BoolInstances.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
@@ -467,6 +470,27 @@
 			remoteGlobalIDString = 112297D3219DD148006D66C5;
 			remoteInfo = "Bow-BrightFutures";
 		};
+		117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		117DC0D822AE4A3600EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
+			remoteInfo = "Bow-Effects";
+		};
+		117DC0DA22AE4A3C00EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
+		};
 		11D97EC5219EBAA1008FC004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -600,6 +624,9 @@
 		11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-BrightFuturesTests-Info.plist"; sourceTree = "<absolute>"; };
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
+		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
+		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
 		11A435602212C59F000C5E31 /* EquatableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableLaws.swift; sourceTree = "<group>"; };
 		11A4356322131ACC000C5E31 /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
@@ -946,6 +973,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		117DC0CC22AE492700EF65F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */,
+				117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11D97EE3219EBAA1008FC004 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -1156,6 +1192,14 @@
 			path = BowBrightFuturesTests;
 			sourceTree = "<group>";
 		};
+		117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */ = {
+			isa = PBXGroup;
+			children = (
+				117DC0D622AE49C200EF65F0 /* IO+Gen.swift */,
+			);
+			path = BowEffectsGenerators;
+			sourceTree = "<group>";
+		};
 		11D97EEC219EBB35008FC004 /* BowEffectsLaws */ = {
 			isa = PBXGroup;
 			children = (
@@ -1287,6 +1331,7 @@
 			children = (
 				112297E7219DD149006D66C5 /* Bow-BrightFutures-Info.plist */,
 				11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */,
+				117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */,
 				1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */,
 				11D97EEB219EBAA1008FC004 /* Bow-EffectsLaws-Info.plist */,
 				11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */,
@@ -1622,6 +1667,7 @@
 				11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */,
 				11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */,
 				112097A922A7EBC7007F3D9C /* BowGenerators.framework */,
+				117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1657,6 +1703,7 @@
 			isa = PBXGroup;
 			children = (
 				11229806219DD2F5006D66C5 /* BowBrightFuturesTests */,
+				117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */,
 				11D97EEC219EBB35008FC004 /* BowEffectsLaws */,
 				11229786219DC968006D66C5 /* BowEffectsTests */,
 				11E718F1219D84EB00B94845 /* BowFreeTests */,
@@ -1922,6 +1969,26 @@
 			productReference = 11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 117DC0D022AE492700EF65F0 /* Build configuration list for PBXNativeTarget "Bow-EffectsGenerators" */;
+			buildPhases = (
+				117DC0B522AE492700EF65F0 /* Sources */,
+				117DC0CC22AE492700EF65F0 /* Frameworks */,
+				117DC0CF22AE492700EF65F0 /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				117DC0DB22AE4A3C00EF65F0 /* PBXTargetDependency */,
+				117DC0D922AE4A3600EF65F0 /* PBXTargetDependency */,
+				117DC0B322AE492700EF65F0 /* PBXTargetDependency */,
+			);
+			name = "Bow-EffectsGenerators";
+			productName = Bow;
+			productReference = 117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11D97EE7219EBAA1008FC004 /* Build configuration list for PBXNativeTarget "Bow-EffectsLaws" */;
@@ -2110,6 +2177,7 @@
 			targets = (
 				"Bow::Bow" /* Bow */,
 				1120978222A7EBC7007F3D9C /* Bow-Generators */,
+				117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */,
 				112293AD219D8B86006D66C5 /* BowLaws */,
 				"Bow::BowTests" /* BowTests */,
 				11E71817219D81B300B94845 /* Bow-Free */,
@@ -2296,6 +2364,26 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		117DC0CF22AE492700EF65F0 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
@@ -2525,6 +2613,14 @@
 			buildActionMask = 0;
 			files = (
 				112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		117DC0B522AE492700EF65F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2861,6 +2957,21 @@
 			isa = PBXTargetDependency;
 			target = 112297D3219DD148006D66C5 /* Bow-BrightFutures */;
 			targetProxy = 11229807219DD31E006D66C5 /* PBXContainerItemProxy */;
+		};
+		117DC0B322AE492700EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0D922AE4A3600EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
+			targetProxy = 117DC0D822AE4A3600EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0DB22AE4A3C00EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 117DC0DA22AE4A3C00EF65F0 /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3506,6 +3617,59 @@
 			};
 			name = Release;
 		};
+		117DC0D122AE492700EF65F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Effects-Generators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowEffectsGenerators;
+			};
+			name = Debug;
+		};
+		117DC0D222AE492700EF65F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-Effects-Generators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowEffectsGenerators;
+			};
+			name = Release;
+		};
 		11D97EE8219EBAA1008FC004 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3989,6 +4153,15 @@
 			buildConfigurations = (
 				11229802219DD2AB006D66C5 /* Debug */,
 				11229803219DD2AB006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		117DC0D022AE492700EF65F0 /* Build configuration list for PBXNativeTarget "Bow-EffectsGenerators" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				117DC0D122AE492700EF65F0 /* Debug */,
+				117DC0D222AE492700EF65F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
