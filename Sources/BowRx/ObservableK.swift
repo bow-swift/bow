@@ -31,7 +31,7 @@ public extension Observable {
     }
 }
 
-public class ObservableK<A>: ObservableKOf<A> {
+public final class ObservableK<A>: ObservableKOf<A> {
     public let value: Observable<A>
     
     public static func fix(_ value: ObservableKOf<A>) -> ObservableK<A> {
