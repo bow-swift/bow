@@ -115,6 +115,9 @@
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
+		117DC0E422AE4D6C00EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
+		117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
 		11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4356322131ACC000C5E31 /* BoolInstances.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
@@ -491,6 +494,34 @@
 			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
 			remoteInfo = "Bow-Generators";
 		};
+		117DC0DE22AE4D6C00EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
+		};
+		117DC0E022AE4D6C00EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
+			remoteInfo = "Bow-Effects";
+		};
+		117DC0E222AE4D6C00EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		117DC0EE22AE4DB800EF65F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11229791219DCE76006D66C5;
+			remoteInfo = "Bow-Rx";
+		};
 		11D97EC5219EBAA1008FC004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -627,6 +658,8 @@
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
+		117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRxGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		117DC0ED22AE4D6C00EF65F0 /* Bow-RxGenerators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxGenerators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-RxGenerators-Info.plist"; sourceTree = "<absolute>"; };
 		11A435602212C59F000C5E31 /* EquatableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableLaws.swift; sourceTree = "<group>"; };
 		11A4356322131ACC000C5E31 /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
@@ -982,6 +1015,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		117DC0E522AE4D6C00EF65F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */,
+				117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11D97EE3219EBAA1008FC004 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -1200,6 +1242,13 @@
 			path = BowEffectsGenerators;
 			sourceTree = "<group>";
 		};
+		117DC0F022AE4DDF00EF65F0 /* BowRxGenerators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BowRxGenerators;
+			sourceTree = "<group>";
+		};
 		11D97EEC219EBB35008FC004 /* BowEffectsLaws */ = {
 			isa = PBXGroup;
 			children = (
@@ -1347,6 +1396,7 @@
 				112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */,
 				11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */,
 				112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */,
+				117DC0ED22AE4D6C00EF65F0 /* Bow-RxGenerators-Info.plist */,
 				112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */,
 				11E71804219D7D9500B94845 /* Bow-Test-Info.plist */,
 			);
@@ -1668,6 +1718,7 @@
 				11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */,
 				112097A922A7EBC7007F3D9C /* BowGenerators.framework */,
 				117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */,
+				117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1712,6 +1763,7 @@
 				11E719FD219D888800B94845 /* BowLaws */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
 				11229536219D9013006D66C5 /* BowRecursionSchemesTests */,
+				117DC0F022AE4DDF00EF65F0 /* BowRxGenerators */,
 				112297D1219DD050006D66C5 /* BowRxTests */,
 				8BA0F389217E2DEF00969984 /* BowTests */,
 			);
@@ -1989,6 +2041,27 @@
 			productReference = 117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 117DC0E922AE4D6C00EF65F0 /* Build configuration list for PBXNativeTarget "Bow-RxGenerators" */;
+			buildPhases = (
+				117DC0E322AE4D6C00EF65F0 /* Sources */,
+				117DC0E522AE4D6C00EF65F0 /* Frameworks */,
+				117DC0E822AE4D6C00EF65F0 /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				117DC0EF22AE4DB800EF65F0 /* PBXTargetDependency */,
+				117DC0DD22AE4D6C00EF65F0 /* PBXTargetDependency */,
+				117DC0DF22AE4D6C00EF65F0 /* PBXTargetDependency */,
+				117DC0E122AE4D6C00EF65F0 /* PBXTargetDependency */,
+			);
+			name = "Bow-RxGenerators";
+			productName = Bow;
+			productReference = 117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11D97EE7219EBAA1008FC004 /* Build configuration list for PBXNativeTarget "Bow-EffectsLaws" */;
@@ -2178,6 +2251,7 @@
 				"Bow::Bow" /* Bow */,
 				1120978222A7EBC7007F3D9C /* Bow-Generators */,
 				117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */,
+				117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */,
 				112293AD219D8B86006D66C5 /* BowLaws */,
 				"Bow::BowTests" /* BowTests */,
 				11E71817219D81B300B94845 /* Bow-Free */,
@@ -2368,6 +2442,26 @@
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		117DC0CF22AE492700EF65F0 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		117DC0E822AE4D6C00EF65F0 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
@@ -2621,6 +2715,14 @@
 			buildActionMask = 0;
 			files = (
 				117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		117DC0E322AE4D6C00EF65F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				117DC0E422AE4D6C00EF65F0 /* IO+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2972,6 +3074,26 @@
 			isa = PBXTargetDependency;
 			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
 			targetProxy = 117DC0DA22AE4A3C00EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0DD22AE4D6C00EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 117DC0DE22AE4D6C00EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0DF22AE4D6C00EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
+			targetProxy = 117DC0E022AE4D6C00EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0E122AE4D6C00EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 117DC0E222AE4D6C00EF65F0 /* PBXContainerItemProxy */;
+		};
+		117DC0EF22AE4DB800EF65F0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
+			targetProxy = 117DC0EE22AE4DB800EF65F0 /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3670,6 +3792,59 @@
 			};
 			name = Release;
 		};
+		117DC0EA22AE4D6C00EF65F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RxGenerators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowRxGenerators;
+			};
+			name = Debug;
+		};
+		117DC0EB22AE4D6C00EF65F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-RxGenerators-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx-generators";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowRxGenerators;
+			};
+			name = Release;
+		};
 		11D97EE8219EBAA1008FC004 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4162,6 +4337,15 @@
 			buildConfigurations = (
 				117DC0D122AE492700EF65F0 /* Debug */,
 				117DC0D222AE492700EF65F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		117DC0E922AE4D6C00EF65F0 /* Build configuration list for PBXNativeTarget "Bow-RxGenerators" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				117DC0EA22AE4D6C00EF65F0 /* Debug */,
+				117DC0EB22AE4D6C00EF65F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
