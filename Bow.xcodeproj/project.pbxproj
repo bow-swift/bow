@@ -122,6 +122,7 @@
 		117DC0F622AE504500EF65F0 /* ObservableK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */; };
 		117DC10122AE522000EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */; };
 		11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
 		11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4356322131ACC000C5E31 /* BoolInstances.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
@@ -697,6 +698,7 @@
 		117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableK+Gen.swift"; sourceTree = "<group>"; };
 		117DC10722AE522000EF65F0 /* BowBrightFuturesGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowBrightFuturesGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC10822AE522100EF65F0 /* Bow-BrightFuturesGenerators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesGenerators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-BrightFuturesGenerators-Info.plist"; sourceTree = "<absolute>"; };
+		117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FutureK+Gen.swift"; sourceTree = "<group>"; };
 		11A435602212C59F000C5E31 /* EquatableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableLaws.swift; sourceTree = "<group>"; };
 		11A4356322131ACC000C5E31 /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
@@ -1301,6 +1303,7 @@
 		117DC10B22AE52FE00EF65F0 /* BowBrightFuturesGenerators */ = {
 			isa = PBXGroup;
 			children = (
+				117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */,
 			);
 			path = BowBrightFuturesGenerators;
 			sourceTree = "<group>";
@@ -2296,6 +2299,9 @@
 					112297EB219DD2AB006D66C5 = {
 						LastSwiftMigration = 1020;
 					};
+					117DC0F722AE522000EF65F0 = {
+						LastSwiftMigration = 1020;
+					};
 					11D97EC3219EBAA1008FC004 = {
 						LastSwiftMigration = 1020;
 					};
@@ -2833,6 +2839,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
