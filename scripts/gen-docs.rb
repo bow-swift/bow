@@ -1,10 +1,23 @@
 #!/usr/bin/env ruby
 require 'json'
 
+## DOCS GEN ##
+
+# If you want a specific version set this value to the one you want.
+# Otherwise the version will be the latest on alphabetical order.
+default_version = ""
+
+# This is a list of tags we know are not valuable to generate docs for
+invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
+
+# If instead you want to set the list of versions to show
+# as a positive list, do it so here
+valid_tags = []
+
 modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
   "BowEffects", "BowRx", "BowBrightFutures", "Bow"]
 
-# Generate the JSON files needed later.
+# Generate the JSON files that will be needed later.
 #
 # @param version [String] tfgfgfgfg
 # @param modules [Array] dfdgfg`
@@ -54,20 +67,20 @@ def generate_api_site(version)
   system "ls -la docs/#{version}"
 end
 
-# Initial generic logic for the
+# Initial generic logic and depencies for the docs site
 `mkdir -p docs-json`
 system "swift package clean"
 system "swift build"
 system "bundle install --gemfile ./docs/Gemfile --path vendor/bundle"
 
+# Here we generate the content available at rootpath
 generate_json("snapshot", modules)
 join_json("snapshot", modules)
 generate_nef_site("snapshot")
 generate_api_site("snapshot")
 
 # Code to generate the different release specific sites
-# This is a list of tags we know are not valuable to generate docs for
-invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
+
 # tags will contains the list of Git tags present in our repository
 tags = `git tag`.split("\n")
 filtered_tags = tags.reject { |t| invalid_tags.include? t }
@@ -81,4 +94,4 @@ filtered_tags.each { |t|
                       generate_api_site("#{t}")
                     }
 
-`git checkout master`
+`git checkout 0.4.0`
