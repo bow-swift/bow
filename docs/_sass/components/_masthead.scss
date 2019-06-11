@@ -80,10 +80,56 @@
     .masthead-buttons {
       display: flex;
       flex-direction: row;
-      justify-content: space-evenly;
+      justify-content: center;
       width: 60%;
       padding: ($base-point-grid * 12) 0 ($base-point-grid * 12);
       margin: auto;
+
+      .button {
+        background: #f58876;
+
+        &:hover {
+          color: $white;
+          background: darken($brand-tertiary, 5%);
+          text-decoration: none;
+        }
+
+        &:active {
+          background: darken($brand-tertiary, 5%);
+        }
+      }
+
+      .button-small {
+        padding: ($base-point-grid * 1.6) ($base-point-grid * 3);
+        background: rgba($brand-tertiary, 0.9);
+        margin: 0px $base-point-grid * 2;
+
+        &:visited {
+          color: $white;
+        }
+
+        &:hover {
+          color: $white;
+          text-decoration: none;
+        }
+
+      }
+
+      span {
+        font-size: 1rem;
+      }
+
+      .secondary-doc-version-text {
+        font-size: 0.750rem;
+      }
+
+      li {
+        display: inline-block;
+      }
+
+      span {
+        display: block;
+      }
     }
 
     .masthead-stars {

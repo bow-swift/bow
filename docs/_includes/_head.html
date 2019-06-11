@@ -1,3 +1,18 @@
+{% for item in site.data.doc-versions.docVersions %}
+  {% if item.url == site.data.commons.stable_version %}
+    {% assign stable_version = item %}
+  {% endif %}
+  {% if item.url == site.data.commons.next_version %}
+    {% assign next_version = item %}
+  {% endif %}
+{% endfor %}
+
+{% for item in site.data.doc-versions.docVersions %}
+  {% if item.url == stable_version.previous %}
+    {% assign previous_version = item %}
+  {% endif %}
+{% endfor %}
+
 <head>
     <meta charset="UTF-8">
     <title>{{site.name}}</title>
@@ -18,6 +33,12 @@
     <meta name="twitter:site" content="@bow_swift">
     <meta name="twitter:creator" content="@bow_swift">
     <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow versions metadata -->
+    <meta name="previous-version" data-title="{{ previous-version.title }}" data-url="{{ previous-version.url }}" />
+    <meta name="stable-version" data-title="{{ stable-version.title }}" data-url="{{ stable-version.url }}" />
+    <meta name="next-version" data-title="{{ next-version.title }}" data-url="{{ next-version.url }}" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ '/js/functions.js' | relative_url }}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -28,6 +49,9 @@
     <link rel="shortcut icon" href="{{ '/img/favicon.png' | relative_url }}">
     <!-- Main css -->
     <link rel="stylesheet" type="text/css" href="{{ '/css/styles.css' | relative_url }}">
+
+    <!-- Code to manage version information -->
+    <script src="{{ '/js/docVersions.js' | relative_url }}" defer></script>
 
     {% if jekyll.environment == 'production' and site.google_analytics %}
         {% include _google-tag-manager.html %}

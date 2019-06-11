@@ -1,8 +1,4 @@
 nav:
-    - title: Documentation
-      url: /docs
-      icon: "fa-book"
-
     - title: API Reference
       url: /api-docs
       icon: "fa-file-code"
