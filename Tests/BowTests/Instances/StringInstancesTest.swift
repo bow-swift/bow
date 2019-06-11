@@ -10,9 +10,7 @@ class StringInstancesTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("String concatenation semigroup") <- forAll { (a: String, b: String, c: String) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<String>.check()
     }
     
     func testMonoidLaws() {

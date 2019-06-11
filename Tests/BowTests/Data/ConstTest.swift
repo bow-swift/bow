@@ -21,12 +21,7 @@ class ConstTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("Const semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Const<Int, Int>>.check(
-                a: Const<Int, Int>(a),
-                b: Const<Int, Int>(b),
-                c: Const<Int, Int>(c))
-        }
+        SemigroupLaws<Const<Int, Int>>.check()
     }
     
     func testMonoidLaws() {

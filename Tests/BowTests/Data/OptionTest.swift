@@ -30,12 +30,7 @@ class OptionTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("Option semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Option<Int>>.check(
-                a: Option.some(a),
-                b: Option.some(b),
-                c: Option.some(c))
-        }
+        SemigroupLaws<Option<Int>>.check()
     }
     
     func testMonoidLaws() {

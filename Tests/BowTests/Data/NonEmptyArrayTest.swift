@@ -42,12 +42,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("NonEmptyArray semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<NonEmptyArray<Int>>.check(
-                a: NonEmptyArray<Int>(head: a, tail: []),
-                    b: NonEmptyArray<Int>(head: b, tail: []),
-                    c: NonEmptyArray<Int>(head: c, tail: []))
-        }
+        SemigroupLaws<NonEmptyArray<Int>>.check()
     }
     
     func testSemigroupKLaws() {

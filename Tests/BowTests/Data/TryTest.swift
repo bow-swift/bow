@@ -46,12 +46,7 @@ class TryTest: XCTestCase {
     }
 
     func testSemigroupLaws() {
-        property("Try semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Try<Int>>.check(
-                a: Try.success(a),
-                b: Try.success(b),
-                c: Try.success(c))
-        }
+        SemigroupLaws<Try<Int>>.check()
     }
 
     func testMonoidLaws() {

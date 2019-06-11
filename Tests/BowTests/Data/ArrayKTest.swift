@@ -36,12 +36,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("ArrayK semigroup laws") <- forAll() { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<ArrayK<Int>>.check(
-                a: ArrayK<Int>([a]),
-                b: ArrayK<Int>([b]),
-                c: ArrayK<Int>([c]))
-        }
+        SemigroupLaws<ArrayK<Int>>.check()
     }
     
     func testSemigroupKLaws() {
