@@ -3,9 +3,9 @@ require 'json'
 
 ## VERSIONED DOCS GENERATION ##
 
-# If you want a specific version to be served as defaul, set tthis value to the
-# one you want. Otherwise the version will be the latest on alphabetical order.
-default_version = ""
+# If you want a specific version to be served as default, set this value to the
+# branch/tag you want. Otherwise it will be the latest version on alphabetical order.
+default_version = "master"
 
 # This is a list of tags we know are not valuable to generate docs for
 invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
@@ -76,11 +76,11 @@ system "bundle install --gemfile ./docs/Gemfile --path vendor/bundle"
 
 # Following logic is to generate the different releases specific sites
 
-# Initially, we generate the content available at master to be at /snapshot path
-generate_json("snapshot", modules)
-join_json("snapshot", modules)
-generate_nef_site("snapshot")
-generate_api_site("snapshot")
+# Initially, we generate the content available at master to be at /next path
+generate_json("next", modules)
+join_json("next", modules)
+generate_nef_site("next")
+generate_api_site("next")
 
 # Then, tags will contain the list of Git tags present in the repo
 tags = `git tag`.split("\n")
