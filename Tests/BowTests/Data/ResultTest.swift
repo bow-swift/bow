@@ -1,6 +1,6 @@
 import XCTest
 import SwiftCheck
-@testable import Bow
+import Bow
 
 enum ResultError: Int, Error {
     case warning

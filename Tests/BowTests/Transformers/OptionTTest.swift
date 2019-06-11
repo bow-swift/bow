@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class OptionTTest: XCTestCase {
     

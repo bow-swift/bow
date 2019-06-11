@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class EitherTest: XCTestCase {
     
@@ -43,10 +43,7 @@ class EitherTest: XCTestCase {
     }
 
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: { (a: Int) in
-            (a % 2 == 0) ?
-                Either<Int, Int>.right(a) :
-                Either<Int, Int>.left(a) })
+        CustomStringConvertibleLaws<Either<Int, Int>>.check()
     }
     
     func testFoldableLaws() {

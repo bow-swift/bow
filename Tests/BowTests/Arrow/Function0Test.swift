@@ -1,6 +1,6 @@
 import XCTest
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class Function0Test: XCTestCase {
     

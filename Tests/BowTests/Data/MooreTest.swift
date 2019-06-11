@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension MoorePartial: EquatableK {
     public static func eq<A>(_ lhs: Kind<MoorePartial<E>, A>, _ rhs: Kind<MoorePartial<E>, A>) -> Bool where A : Equatable {

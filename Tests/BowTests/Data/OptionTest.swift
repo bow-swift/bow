@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class OptionTest: XCTestCase {
     
@@ -53,7 +53,7 @@ class OptionTest: XCTestCase {
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Option<Int>>.check()
     }
     
     func testFoldableLaws() {

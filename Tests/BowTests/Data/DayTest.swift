@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension DayPartial: EquatableK where F == ForId, G == ForId {
     public static func eq<A>(_ lhs: Kind<DayPartial<F, G>, A>, _ rhs: Kind<DayPartial<F, G>, A>) -> Bool where A : Equatable {

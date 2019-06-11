@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class NonEmptyArrayTest: XCTestCase {
     
@@ -55,7 +55,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<NEA<Int>>.check()
     }
     
     func testFoldableLaws() {

@@ -48,7 +48,8 @@ public final class Option<A>: OptionOf<A> {
         return fa as! Option<A>
     }
 
-    internal var isDefined: Bool {
+    /// Checks if this option contains a value
+    public var isDefined: Bool {
         return !isEmpty
     }
 

@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class EitherTTest: XCTestCase {
     var generator: (Int) -> EitherT<ForId, Int, Int> {

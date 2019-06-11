@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension StorePartial: EquatableK {
     public static func eq<A>(_ lhs: Kind<StorePartial<S>, A>, _ rhs: Kind<StorePartial<S>, A>) -> Bool where A: Equatable {

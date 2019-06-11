@@ -2,7 +2,7 @@ import XCTest
 import Nimble
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class IorTest: XCTestCase {
     var generator = { (a : Int) -> Ior<Int, Int> in
@@ -34,7 +34,7 @@ class IorTest: XCTestCase {
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Ior<Int, Int>>.check()
     }
     
     func testFoldableLaws() {

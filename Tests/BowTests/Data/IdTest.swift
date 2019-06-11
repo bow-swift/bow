@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class IdTest: XCTestCase {
     var generator : (Int) -> Id<Int> {
@@ -33,7 +33,7 @@ class IdTest: XCTestCase {
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Id<Int>>.check()
     }
     
     func testFoldableLaws() {

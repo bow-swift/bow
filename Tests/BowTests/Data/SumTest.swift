@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension SumPartial: EquatableK where F: Comonad, G: Comonad {
     public static func eq<A>(_ lhs: Kind<SumPartial<F, G>, A>, _ rhs: Kind<SumPartial<F, G>, A>) -> Bool where A : Equatable {
