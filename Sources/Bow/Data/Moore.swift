@@ -4,7 +4,7 @@ public final class ForMoore {}
 public final class MoorePartial<E>: Kind<ForMoore, E> {}
 public typealias MooreOf<E, V> = Kind<MoorePartial<E>, V>
 
-public class Moore<E, V>: MooreOf<E, V> {
+public final class Moore<E, V>: MooreOf<E, V> {
     public let view: V
     public let handle: (E) -> Moore<E, V>
     

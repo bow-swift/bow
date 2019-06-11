@@ -12,7 +12,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
     }
 }
 
-public class MaybeK<A>: MaybeKOf<A> {
+public final class MaybeK<A>: MaybeKOf<A> {
     public let value: Maybe<A>
 
     public static func fix(_ value: MaybeKOf<A>) -> MaybeK<A> {
@@ -107,7 +107,7 @@ extension ForMaybeK: MonadDefer {
 }
 
 extension ForMaybeK: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
         return Maybe.create { emitter in
             do {
                 try fa { either in

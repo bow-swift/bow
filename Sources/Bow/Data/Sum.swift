@@ -9,24 +9,24 @@ public enum Side {
     case right
 }
 
-public class Sum<F, G, V> : SumOf<F, G, V> {
-    public let left : Kind<F, V>
-    public let right : Kind<G, V>
-    public let side : Side
+public final class Sum<F, G, V> : SumOf<F, G, V> {
+    public let left: Kind<F, V>
+    public let right: Kind<G, V>
+    public let side: Side
     
-    public static func fix(_ value : SumOf<F, G, V>) -> Sum<F, G, V> {
+    public static func fix(_ value: SumOf<F, G, V>) -> Sum<F, G, V> {
         return value as! Sum<F, G, V>
     }
     
-    public static func left(_ left : Kind<F, V>, _ right : Kind<G, V>) -> Sum<F, G, V> {
+    public static func left(_ left: Kind<F, V>, _ right: Kind<G, V>) -> Sum<F, G, V> {
         return Sum(left: left, right: right, side: .left)
     }
     
-    public static func right(_ left : Kind<F, V>, _ right : Kind<G, V>) -> Sum<F, G, V> {
+    public static func right(_ left: Kind<F, V>, _ right: Kind<G, V>) -> Sum<F, G, V> {
         return Sum(left: left, right: right, side: .right)
     }
 
-    public init(left : Kind<F, V>, right : Kind<G, V>, side : Side = .left) {
+    public init(left: Kind<F, V>, right: Kind<G, V>, side: Side = .left) {
         self.left = left
         self.right = right
         self.side = side

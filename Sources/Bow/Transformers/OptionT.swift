@@ -10,7 +10,7 @@ public final class OptionTPartial<F>: Kind<ForOptionT, F> {}
 public typealias OptionTOf<F, A> = Kind<OptionTPartial<F>, A>
 
 /// The OptionT transformer represents the nesting of an `Option` value inside any other effect. It is equivalent to `Kind<F, Option<A>>`.
-public class OptionT<F, A>: OptionTOf<F, A> {
+public final class OptionT<F, A>: OptionTOf<F, A> {
     fileprivate let value : Kind<F, Option<A>>
 
     /// Safe downcast.

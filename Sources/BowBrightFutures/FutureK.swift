@@ -13,7 +13,7 @@ public extension Future {
     }
 }
 
-public class FutureK<E: Error, A>: FutureKOf<E, A> {
+public final class FutureK<E: Error, A>: FutureKOf<E, A> {
     public let value: Future<A, E>
 
     public static func fix(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
@@ -115,7 +115,7 @@ extension FutureKPartial: MonadDefer {
 }
 
 extension FutureKPartial: BowEffects.Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<FutureKPartial<E>, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping (Either<E, A>) -> ()) throws -> ()) -> Kind<FutureKPartial<E>, A> {
         return Future { complete in
             do {
                 try fa { either in

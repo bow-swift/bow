@@ -362,7 +362,7 @@ extension IOPartial: MonadDefer {
 }
 
 extension IOPartial: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping (Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
         return AsyncIO(fa)
     }
 }

@@ -31,7 +31,7 @@ public extension Observable {
     }
 }
 
-public class ObservableK<A>: ObservableKOf<A> {
+public final class ObservableK<A>: ObservableKOf<A> {
     public let value: Observable<A>
     
     public static func fix(_ value: ObservableKOf<A>) -> ObservableK<A> {
@@ -134,7 +134,7 @@ extension ForObservableK: MonadDefer {
 }
 
 extension ForObservableK: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
         return Observable.create { emitter in
             do {
                 try fa { either in

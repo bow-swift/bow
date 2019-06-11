@@ -34,7 +34,7 @@ extension PrimitiveSequence {
     }
 }
 
-public class SingleK<A>: SingleKOf<A> {
+public final class SingleK<A>: SingleKOf<A> {
     public let value: Single<A>
     
     public static func fix(_ value: SingleKOf<A>) -> SingleK<A> {
@@ -106,7 +106,7 @@ extension ForSingleK: MonadDefer {
 }
 
 extension ForSingleK: Async {
-    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
+    public static func runAsync<A>(_ fa: @escaping (@escaping (Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
         return Single<A>.create { emitter in
             do {
                 try fa { (either : Either<Error, A>) in

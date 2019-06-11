@@ -45,7 +45,7 @@ Pods/
 Bow\.xcodeproj/project\.xcworkspace/xcshareddata/IDEWorkspaceChecks\.plist
 
 ## Docs
-/docs/api-docs
+/docs/*/api-docs
 /docs-json
 
 ## Jekyll
@@ -63,3 +63,6 @@ _site
 
 ## nef
 **/*/nef
+
+## Needed due to a bug in GH Pages Travis/Jekyll process
+ffitarget.h

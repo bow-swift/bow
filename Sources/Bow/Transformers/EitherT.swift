@@ -10,7 +10,7 @@ public final class EitherTPartial<F, L>: Kind2<ForEitherT, F, L> {}
 public typealias EitherTOf<F, A, B> = Kind<EitherTPartial<F, A>, B>
 
 /// The EitherT transformer represents the nesting of an `Either` value inside any other effect. It is equivalent to `Kind<F, Either<A, B>>`.
-public class EitherT<F, A, B>: EitherTOf<F, A, B> {
+public final class EitherT<F, A, B>: EitherTOf<F, A, B> {
     fileprivate let value: Kind<F, Either<A, B>>
 
     /// Safe downcast.
