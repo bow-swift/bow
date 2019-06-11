@@ -10,7 +10,7 @@ class TryTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForTry, Int>.check()
     }
     
     func testFunctorLaws() {

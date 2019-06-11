@@ -11,7 +11,7 @@ class EitherTTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<EitherTPartial<ForId, Int>, Int>.check()
     }
     
     func testFunctorLaws() {

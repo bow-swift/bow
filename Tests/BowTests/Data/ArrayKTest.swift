@@ -16,7 +16,7 @@ class ArrayKTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForArrayK, Int>.check()
     }
     
     func testFunctorLaws() {

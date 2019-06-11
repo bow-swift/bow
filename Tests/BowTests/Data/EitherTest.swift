@@ -11,7 +11,7 @@ class EitherTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws<EitherPartial<Int>, Int>.check(generator: self.generator)
+        EquatableKLaws<EitherPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {

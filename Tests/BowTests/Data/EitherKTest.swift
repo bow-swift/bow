@@ -9,7 +9,7 @@ class EitherKTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws<EitherKPartial<ForId, ForId>, Int>.check(generator: self.generator)
+        EquatableKLaws<EitherKPartial<ForId, ForId>, Int>.check()
     }
     
     func testFunctorLaws() {

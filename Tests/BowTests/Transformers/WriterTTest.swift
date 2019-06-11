@@ -9,7 +9,7 @@ class WriterTTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<WriterTPartial<ForId, Int>, Int>.check()
     }
     
     func testFunctorLaws() {

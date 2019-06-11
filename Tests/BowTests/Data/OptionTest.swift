@@ -10,7 +10,7 @@ class OptionTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForOption, Int>.check()
     }
     
     func testFunctorLaws() {

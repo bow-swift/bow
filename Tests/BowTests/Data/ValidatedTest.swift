@@ -10,7 +10,7 @@ class ValidatedTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ValidatedPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {

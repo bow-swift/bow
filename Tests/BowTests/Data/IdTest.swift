@@ -9,7 +9,7 @@ class IdTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForId, Int>.check()
     }
     
     func testFunctorLaws() {

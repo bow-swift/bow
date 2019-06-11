@@ -14,7 +14,7 @@ class IorTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<IorPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {

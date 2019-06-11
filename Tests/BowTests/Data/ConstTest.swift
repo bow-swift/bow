@@ -9,7 +9,7 @@ class ConstTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws<ConstPartial<Int>, Int>.check(generator: self.generator)
+        EquatableKLaws<ConstPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {

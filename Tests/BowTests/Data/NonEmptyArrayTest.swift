@@ -10,7 +10,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
 
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForNonEmptyArray, Int>.check()
     }
     
     func testFunctorLaws() {
