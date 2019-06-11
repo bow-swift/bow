@@ -21,7 +21,7 @@ class EitherKTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<EitherKPartial<ForId, ForId>>.check(generator: self.generator)
+        FoldableLaws<EitherKPartial<ForId, ForId>>.check()
     }
     
     func testTraverseLaws() {

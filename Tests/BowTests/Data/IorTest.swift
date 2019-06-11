@@ -38,7 +38,7 @@ class IorTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<IorPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<IorPartial<Int>>.check()
     }
     
     func testCheckers() {

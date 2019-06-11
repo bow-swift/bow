@@ -57,7 +57,7 @@ class OptionTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForOption>.check(generator: self.generator)
+        FoldableLaws<ForOption>.check()
     }
     
     func testTraverseLaws() {

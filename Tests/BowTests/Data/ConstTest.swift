@@ -40,7 +40,7 @@ class ConstTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ConstPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<ConstPartial<Int>>.check()
     }
     
     func testTraverseLaws() {

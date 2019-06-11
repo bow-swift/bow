@@ -47,7 +47,7 @@ class EitherTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<EitherPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<EitherPartial<Int>>.check()
     }
     
     func testTraverseLaws() {

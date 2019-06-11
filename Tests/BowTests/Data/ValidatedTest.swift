@@ -34,7 +34,7 @@ class ValidatedTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<ValidatedPartial<Int>>.check()
     }
     
     func testApplicativeErrorLaws() {

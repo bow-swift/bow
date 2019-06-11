@@ -34,7 +34,7 @@ class TryTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForTry>.check(generator: self.generator)
+        FoldableLaws<ForTry>.check()
     }
     
     func testTraverseLaws() {

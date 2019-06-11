@@ -67,7 +67,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForArrayK>.check(generator: self.generator)
+        FoldableLaws<ForArrayK>.check()
     }
     
     func testMonadCombineLaws() {

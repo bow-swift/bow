@@ -59,7 +59,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForNonEmptyArray>.check(generator: self.generator)
+        FoldableLaws<ForNonEmptyArray>.check()
     }
     
     private let neaGenerator = Array<Int>.arbitrary.suchThat { array in array.count > 0 }
