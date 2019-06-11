@@ -20,7 +20,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForArrayK>.check(generator: self.generator)
+        FunctorLaws<ForArrayK>.check()
     }
     
     func testApplicativeLaws() {

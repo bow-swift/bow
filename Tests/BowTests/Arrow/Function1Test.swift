@@ -11,7 +11,7 @@ extension Function1Partial: EquatableK where I == Int {
 
 class Function1Test: XCTestCase {
     func testFunctorLaws() {
-        FunctorLaws<Function1Partial<Int>>.check(generator: { a in Function1<Int, Int>.pure(a) })
+        FunctorLaws<Function1Partial<Int>>.check()
     }
     
     func testApplicativeLaws() {

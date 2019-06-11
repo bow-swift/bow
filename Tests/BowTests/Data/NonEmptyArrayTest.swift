@@ -14,7 +14,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForNonEmptyArray>.check(generator: self.generator)
+        FunctorLaws<ForNonEmptyArray>.check()
     }
     
     func testApplicativeLaws() {

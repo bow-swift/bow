@@ -13,7 +13,7 @@ class DayTest: XCTestCase {
     let cf = { (x : Int) in Day.from(left: Id(x), right: Id(0), f: +) }
 
     func testFunctorLaws() {
-        FunctorLaws<DayPartial<ForId, ForId>>.check(generator: cf)
+        FunctorLaws<DayPartial<ForId, ForId>>.check()
     }
 
     func testComonadLaws() {

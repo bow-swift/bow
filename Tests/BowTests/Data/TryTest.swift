@@ -14,7 +14,7 @@ class TryTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForTry>.check(generator: self.generator)
+        FunctorLaws<ForTry>.check()
     }
     
     func testApplicativeLaws() {

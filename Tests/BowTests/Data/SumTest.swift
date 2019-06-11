@@ -13,7 +13,7 @@ class SumTest: XCTestCase {
     let generator = { (x: Int) in Sum.left(Id(x), Id(x)) }
     
     func testFunctorLaws() {
-        FunctorLaws.check(generator: generator)
+        FunctorLaws<SumPartial<ForId, ForId>>.check()
     }
     
     func testComonadLaws() {

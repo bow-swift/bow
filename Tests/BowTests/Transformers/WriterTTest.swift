@@ -13,7 +13,7 @@ class WriterTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<WriterTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<WriterTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {

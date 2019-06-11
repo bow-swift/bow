@@ -17,7 +17,7 @@ class StateTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<StateTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<StateTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {

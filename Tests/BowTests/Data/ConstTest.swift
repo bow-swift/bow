@@ -13,7 +13,7 @@ class ConstTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ConstPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<ConstPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {

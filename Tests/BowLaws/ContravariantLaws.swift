@@ -5,8 +5,8 @@ import BowGenerators
 
 class ContravariantLaws<F: Contravariant & EquatableK & ArbitraryK> {
     
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        InvariantLaws.check(generator: generator)
+    static func check() {
+        InvariantLaws<F>.check()
         identity()
         composition()
     }

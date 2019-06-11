@@ -13,7 +13,7 @@ class StoreTest: XCTestCase {
     let intStore = { (x: Int) in Store(state: x, render: id) }
 
     func testFunctorLaws() {
-        FunctorLaws<StorePartial<Int>>.check(generator: intStore)
+        FunctorLaws<StorePartial<Int>>.check()
     }
     
     func testComonadLaws() {

@@ -13,7 +13,7 @@ class IdTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForId>.check(generator: self.generator)
+        FunctorLaws<ForId>.check()
     }
     
     func testApplicativeLaws() {

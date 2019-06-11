@@ -13,7 +13,7 @@ class EitherKTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherKPartial<ForId, ForId>>.check(generator: self.generator)
+        FunctorLaws<EitherKPartial<ForId, ForId>>.check()
     }
     
     func testComonadLaws() {

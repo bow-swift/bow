@@ -18,7 +18,7 @@ class IorTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IorPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<IorPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {

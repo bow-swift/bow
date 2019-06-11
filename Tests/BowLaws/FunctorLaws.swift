@@ -4,8 +4,8 @@ import Bow
 import BowGenerators
 
 class FunctorLaws<F: Functor & EquatableK & ArbitraryK> {
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        InvariantLaws.check(generator: generator)
+    static func check() {
+        InvariantLaws<F>.check()
         covariantIdentity()
         covariantComposition()
         void()

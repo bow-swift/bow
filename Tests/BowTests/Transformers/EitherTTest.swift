@@ -15,7 +15,7 @@ class EitherTTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<EitherTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {

@@ -14,7 +14,7 @@ class ValidatedTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<ValidatedPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {

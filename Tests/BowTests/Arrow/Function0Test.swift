@@ -13,7 +13,7 @@ class Function0Test: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForFunction0>.check(generator: self.generator)
+        FunctorLaws<ForFunction0>.check()
     }
     
     func testApplicativeLaws() {

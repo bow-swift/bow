@@ -15,7 +15,7 @@ class MooreTest: XCTestCase {
     }
 
     func testFunctorLaws() {
-        FunctorLaws<MoorePartial<Int>>.check(generator: handle)
+        FunctorLaws<MoorePartial<Int>>.check()
     }
     
     func testComonadLaws() {

@@ -14,7 +14,7 @@ class OptionTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForOption>.check(generator: self.generator)
+        FunctorLaws<ForOption>.check()
     }
     
     func testApplicativeLaws() {

@@ -8,7 +8,7 @@ class KleisliTest: XCTestCase {
     }
     
     func testFunctorLaws() {
-        FunctorLaws<KleisliPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<KleisliPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {
