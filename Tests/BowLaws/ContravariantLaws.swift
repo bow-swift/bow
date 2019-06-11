@@ -1,26 +1,26 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class ContravariantLaws<F: Contravariant & EquatableK> {
+class ContravariantLaws<F: Contravariant & EquatableK & ArbitraryK> {
     
     static func check(generator: @escaping (Int) -> Kind<F, Int>) {
         InvariantLaws.check(generator: generator)
-        identity(generator)
-        composition(generator)
+        identity()
+        composition()
     }
     
-    private static func identity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-            property("Identity") <- forAll { (a: Int) in
-                let fa = generator(a)
-                return F.contramap(fa, id) == id(fa)
-            }
+    private static func identity() {
+        property("Identity") <- forAll { (fa: KindOf<F, Int>) in
+            return F.contramap(fa.value, id) == id(fa.value)
+        }
     }
     
-    private static func composition(_ generator: @escaping (Int) -> Kind<F, Int>) {
-            property("Composition") <- forAll { (a: Int, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
-                let fa = generator(a)
-                return F.contramap(F.contramap(fa, f.getArrow), g.getArrow) == F.contramap(fa, f.getArrow <<< g.getArrow)
-            }
+    private static func composition() {
+        property("Composition") <- forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
+            return F.contramap(F.contramap(fa.value, f.getArrow), g.getArrow) ==
+                F.contramap(fa.value, f.getArrow <<< g.getArrow)
+        }
     }
 }
