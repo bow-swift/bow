@@ -51,9 +51,7 @@ end
 # @return [nil] nil.
 def generate_nef_site(version)
   system "echo Generating nef site for #{version}"
-  # system "mkdir -p docs/#{version}/_data"
   system "nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md"
-  # system "nef jekyll --project contents/Documentation --output docs/#{version} --main-page contents/Home.md"
   system "JEKYLL_ENV=production BUNDLE_GEMFILE=./docs/Gemfile bundle exec jekyll build -s ./docs -d ./docs/#{version} -b bow/#{version}"
   system "ls -la docs"
   system "ls -la docs/#{version}"
