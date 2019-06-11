@@ -10,8 +10,6 @@ extension SumPartial: EquatableK where F: Comonad, G: Comonad {
 }
 
 class SumTest: XCTestCase {
-    let generator = { (x: Int) in Sum.left(Id(x), Id(x)) }
-    
     func testFunctorLaws() {
         FunctorLaws<SumPartial<ForId, ForId>>.check()
     }

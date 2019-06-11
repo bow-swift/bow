@@ -3,11 +3,6 @@ import XCTest
 import Bow
 
 class Function0Test: XCTestCase {
-    
-    var generator: (Int) -> Function0Of<Int> {
-        return { a in Function0.pure(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<ForFunction0, Int>.check()
     }

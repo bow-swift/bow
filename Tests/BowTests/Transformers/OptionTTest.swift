@@ -4,11 +4,6 @@ import SwiftCheck
 import Bow
 
 class OptionTTest: XCTestCase {
-    
-    var generator: (Int) -> OptionTOf<ForId, Int> {
-        return { a in OptionT<ForId, Int>.pure(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<OptionTPartial<ForId>, Int>.check()
     }

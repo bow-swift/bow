@@ -1,15 +1,9 @@
 import XCTest
 import Nimble
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
 class EitherTest: XCTestCase {
-    
-    var generator : (Int) -> EitherOf<Int, Int> {
-        return { a in Either.pure(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<EitherPartial<Int>, Int>.check()
     }

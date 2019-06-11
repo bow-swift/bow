@@ -10,10 +10,6 @@ extension MoorePartial: EquatableK {
 }
 
 class MooreTest: XCTestCase {
-    func handle(_ x: Int) -> Moore<Int, Int> {
-        return Moore(view: x, handle: handle)
-    }
-
     func testFunctorLaws() {
         FunctorLaws<MoorePartial<Int>>.check()
     }

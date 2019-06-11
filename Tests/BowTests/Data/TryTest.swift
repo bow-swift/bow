@@ -1,14 +1,8 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
 class TryTest: XCTestCase {
-    
-    var generator : (Int) -> Try<Int> {
-        return { a in (a % 2 == 0) ? Try.invoke(constant(a)) : Try.invoke({ throw TryError.illegalState }) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<ForTry, Int>.check()
     }

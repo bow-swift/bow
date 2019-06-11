@@ -1,5 +1,4 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
@@ -12,10 +11,6 @@ extension StateTPartial: EquatableK where F: EquatableK & Monad, S == Int {
 }
 
 class StateTTest: XCTestCase {
-    var generator: (Int) -> StateTOf<ForId, Int, Int> {
-        return { a in StateT<ForId, Int, Int>.pure(a) }
-    }
-    
     func testFunctorLaws() {
         FunctorLaws<StateTPartial<ForId, Int>>.check()
     }

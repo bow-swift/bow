@@ -3,11 +3,6 @@ import XCTest
 import Bow
 
 class EitherKTest: XCTestCase {
-    
-    var generator: (Int) -> EitherK<ForId, ForId, Int> {
-        return { a in EitherK<ForId, ForId, Int>(Either.right(Id(a))) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<EitherKPartial<ForId, ForId>, Int>.check()
     }

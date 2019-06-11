@@ -4,11 +4,6 @@ import SwiftCheck
 import Bow
 
 class NonEmptyArrayTest: XCTestCase {
-    
-    var generator: (Int) -> NonEmptyArray<Int> {
-        return { a in NonEmptyArray(head: a, tail: []) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<ForNonEmptyArray, Int>.check()
     }
@@ -57,24 +52,16 @@ class NonEmptyArrayTest: XCTestCase {
         FoldableLaws<ForNonEmptyArray>.check()
     }
     
-    private let neaGenerator = Array<Int>.arbitrary.suchThat { array in array.count > 0 }
-    
     func testConcatenation() {
-        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.neaGenerator, self.neaGenerator) { (x: Array<Int>, y: Array<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x)
-            let b = NonEmptyArray.fromArrayUnsafe(y)
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
             return a.count + b.count == (a + b).count
         }
         
-        property("Adding one element increases length in one") <- forAll(self.neaGenerator, Int.arbitrary) { (array: Array<Int>, element: Int) in
-            let nea = NonEmptyArray.fromArrayUnsafe(array)
+        property("Adding one element increases length in one") <- forAll { (nea: NEA<Int>, element: Int) in
             return (nea + element).count == nea.count + 1
         }
         
-        property("Result of concatenation contains all items from the original arrays") <- forAll(self.neaGenerator, self.neaGenerator) {
-            (x: Array<Int>, y: Array<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x)
-            let b = NonEmptyArray.fromArrayUnsafe(y)
+        property("Result of concatenation contains all items from the original arrays") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
             let concatenation = a + b
             return concatenation.containsAll(elements: a.all()) &&
                     concatenation.containsAll(elements: b.all())

@@ -3,10 +3,6 @@ import XCTest
 import Bow
 
 class KleisliTest: XCTestCase {
-    var generator: (Int) -> KleisliOf<ForId, Int, Int> {
-        return { a in Kleisli.pure(a) }
-    }
-    
     func testFunctorLaws() {
         FunctorLaws<KleisliPartial<ForId, Int>>.check()
     }

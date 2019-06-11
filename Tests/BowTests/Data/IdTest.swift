@@ -1,13 +1,8 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
 class IdTest: XCTestCase {
-    var generator : (Int) -> Id<Int> {
-        return { a in Id<Int>(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<ForId, Int>.check()
     }

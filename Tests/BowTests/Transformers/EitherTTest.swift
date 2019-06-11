@@ -4,12 +4,6 @@ import SwiftCheck
 import Bow
 
 class EitherTTest: XCTestCase {
-    var generator: (Int) -> EitherT<ForId, Int, Int> {
-        return { a in a % 2 == 0 ? EitherT.right(a)
-                                 : EitherT.left(a)
-        }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<EitherTPartial<ForId, Int>, Int>.check()
     }

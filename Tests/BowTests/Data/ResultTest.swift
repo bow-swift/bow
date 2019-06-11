@@ -8,24 +8,22 @@ enum ResultError: Int, Error {
     case unknown
 }
 
+extension ResultError: Arbitrary {
+    static var arbitrary: Gen<ResultError> {
+        return Gen.fromElements(of: [.warning, .fatal, .unknown])
+    }
+}
+
 class ResultTest: XCTestCase {
-    func generateEither(_ x: Int) -> Either<ResultError, Int> {
-        return x % 2 == 0 ? Either.left(.warning): Either.right(x)
-    }
-    
-    func generateValidated(_ x: Int) -> Validated<ResultError, Int> {
-        return x % 2 == 0 ? Validated.invalid(.fatal) : Validated.valid(x)
-    }
-    
     func testResultEitherIsomorphism() {
-        property("Either and Result are isomorphic") <- forAll { (x: Int) in
-            return self.generateEither(x).toResult().toEither() == self.generateEither(x)
+        property("Either and Result are isomorphic") <- forAll { (x: Either<ResultError, Int>) in
+            return x.toResult().toEither() == x
         }
     }
     
     func testResultValidateIsomorphism() {
-        property("Validated and Result are isomorphic") <- forAll { (x: Int) in
-            return self.generateValidated(x).toResult().toValidated() == self.generateValidated(x)
+        property("Validated and Result are isomorphic") <- forAll { (x: Validated<ResultError, Int>) in
+            return x.toResult().toValidated() == x
         }
     }
 }

@@ -10,8 +10,6 @@ extension StorePartial: EquatableK {
 }
 
 class StoreTest: XCTestCase {
-    let intStore = { (x: Int) in Store(state: x, render: id) }
-
     func testFunctorLaws() {
         FunctorLaws<StorePartial<Int>>.check()
     }

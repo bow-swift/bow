@@ -3,10 +3,6 @@ import XCTest
 import Bow
 
 class ConstTest: XCTestCase {
-    var generator: (Int) -> Const<Int, Int> {
-        return { a in Const<Int, Int>(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<ConstPartial<Int>, Int>.check()
     }
