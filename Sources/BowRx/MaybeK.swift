@@ -12,7 +12,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
     }
 }
 
-public class MaybeK<A>: MaybeKOf<A> {
+public final class MaybeK<A>: MaybeKOf<A> {
     public let value: Maybe<A>
 
     public static func fix(_ value: MaybeKOf<A>) -> MaybeK<A> {

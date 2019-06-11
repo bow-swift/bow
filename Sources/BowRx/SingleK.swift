@@ -34,7 +34,7 @@ extension PrimitiveSequence {
     }
 }
 
-public class SingleK<A>: SingleKOf<A> {
+public final class SingleK<A>: SingleKOf<A> {
     public let value: Single<A>
     
     public static func fix(_ value: SingleKOf<A>) -> SingleK<A> {

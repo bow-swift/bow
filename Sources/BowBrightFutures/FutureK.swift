@@ -13,7 +13,7 @@ public extension Future {
     }
 }
 
-public class FutureK<E: Error, A>: FutureKOf<E, A> {
+public final class FutureK<E: Error, A>: FutureKOf<E, A> {
     public let value: Future<A, E>
 
     public static func fix(_ value : FutureKOf<E, A>) -> FutureK<E, A> {
