@@ -1,4 +1,3 @@
-import Foundation
 import SwiftCheck
 import Bow
 

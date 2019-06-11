@@ -1,4 +1,3 @@
-import Foundation
 import SwiftCheck
 import Bow
 import BowGenerators
@@ -49,8 +48,7 @@ class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: Equatabl
     }
     
     private static func attemptFromEitherConsistentWithPure() {
-        property("Attempt from either consistent with pure") <- forAll { (b: Int, a: F.E) in
-            let either = arc4random_uniform(2) == 0 ? Either.left(a) : Either.right(b)
+        property("Attempt from either consistent with pure") <- forAll { (either: Either<F.E, Int>) in
             return F.attempt(F.fromEither(either)) == F.pure(either)
         }
     }

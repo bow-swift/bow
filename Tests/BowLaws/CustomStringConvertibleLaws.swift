@@ -1,5 +1,5 @@
 import SwiftCheck
-@testable import Bow
+import Bow
 
 class CustomStringConvertibleLaws<A: CustomStringConvertible & Arbitrary> {
     static func check(){

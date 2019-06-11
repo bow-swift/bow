@@ -1,5 +1,4 @@
-import Foundation
-@testable import Bow
+import Bow
 
 class MonoidLaws<A: Monoid & Equatable> {
     
