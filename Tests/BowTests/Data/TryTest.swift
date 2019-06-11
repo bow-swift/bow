@@ -42,7 +42,7 @@ class TryTest: XCTestCase {
     }
 
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForTry>.check(generator: self.generator)
+        FunctorFilterLaws<ForTry>.check()
     }
 
     func testSemigroupLaws() {

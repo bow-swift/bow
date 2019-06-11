@@ -4,10 +4,6 @@ import SwiftCheck
 import Bow
 
 class WriterTTest: XCTestCase {
-    var generator: (Int) -> WriterTOf<ForId, Int, Int> {
-        return { a in WriterT.pure(a) }
-    }
-
     func testEquatableLaws() {
         EquatableKLaws<WriterTPartial<ForId, Int>, Int>.check()
     }
@@ -37,7 +33,7 @@ class WriterTTest: XCTestCase {
     }
 
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<WriterTPartial<ForOption, Int>>.check(generator: { (a : Int) in WriterT.pure(a) })
+        FunctorFilterLaws<WriterTPartial<ForOption, Int>>.check()
     }
     
     func testMonadFilterLaws() {

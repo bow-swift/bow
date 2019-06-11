@@ -38,7 +38,7 @@ class OptionTTest: XCTestCase {
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        FunctorFilterLaws<OptionTPartial<ForId>>.check()
     }
 
     func testToLeftWithFunctionWithSome() {

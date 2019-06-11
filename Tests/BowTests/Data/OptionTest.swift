@@ -45,7 +45,7 @@ class OptionTest: XCTestCase {
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForOption>.check(generator: self.generator)
+        FunctorFilterLaws<ForOption>.check()
     }
     
     func testMonadFilterLaws() {
