@@ -37,7 +37,7 @@ class WriterTTest: XCTestCase {
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<WriterTPartial<ForOption, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        MonadFilterLaws<WriterTPartial<ForOption, Int>>.check()
     }
     
     func testMonadWriterLaws() {

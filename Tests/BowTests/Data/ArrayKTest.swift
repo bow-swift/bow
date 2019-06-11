@@ -63,7 +63,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForArrayK>.check(generator: self.generator)
+        MonadFilterLaws<ForArrayK>.check()
     }
     
     func testFoldableLaws() {

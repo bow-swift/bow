@@ -49,7 +49,7 @@ class OptionTest: XCTestCase {
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForOption>.check(generator: self.generator)
+        MonadFilterLaws<ForOption>.check()
     }
     
     func testCustomStringConvertibleLaws() {
