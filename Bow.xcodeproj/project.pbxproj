@@ -481,6 +481,13 @@
 			remoteGlobalIDString = 112297D3219DD148006D66C5;
 			remoteInfo = "Bow-BrightFutures";
 		};
+		1126CA7C22AFBB6C00F840CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
+		};
 		117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -1911,6 +1918,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1126CA7D22AFBB6C00F840CB /* PBXTargetDependency */,
 				1122943E219D8C54006D66C5 /* PBXTargetDependency */,
 			);
 			name = BowLaws;
@@ -3275,6 +3283,11 @@
 			isa = PBXTargetDependency;
 			target = 112297D3219DD148006D66C5 /* Bow-BrightFutures */;
 			targetProxy = 11229807219DD31E006D66C5 /* PBXContainerItemProxy */;
+		};
+		1126CA7D22AFBB6C00F840CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 1126CA7C22AFBB6C00F840CB /* PBXContainerItemProxy */;
 		};
 		117DC0B322AE492700EF65F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
