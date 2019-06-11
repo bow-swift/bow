@@ -7,20 +7,23 @@ require 'json'
 # branch/tag you want. Otherwise it will be the latest version on alphabetical order.
 default_version = "master"
 
-# This is a list of tags we know are not valuable to generate docs for
+# This is a list to filter -out- tags we know are not valuable to generate docs for.
 invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
 
-# If instead you want to set the list of versions to show
-# as a positive list, do it so here
+# This is a list to filter -in- tags. Unless it's empty, where it will be ignored.
+# If you want an empty tags list in the end (for some reason ¯\_(ツ)_/¯)
+# you can cancel these filterings with both lists having the same values:
+# invalid_tags = ["0.1.0"], valid_tags = ["0.1.0"]
 valid_tags = []
 
+# This a list of modules in which the Swift project is split on
 modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
   "BowEffects", "BowRx", "BowBrightFutures", "Bow"]
 
 # Generate the JSON files that will be needed later.
 #
-# @param version [String] tfgfgfgfg
-# @param modules [Array] dfdgfg`
+# @param version [String] The version for which the JSON will be generated.
+# @param modules [Array] The modules present in the project to split the JSON info into.
 # @return [nil] nil.
 def generate_json(version, modules)
   `mkdir -p docs-json/#{version}`
@@ -29,8 +32,8 @@ end
 
 # Join the previously generated JSON files into one single file.
 #
-# @param version [String] tfgfgfgfg
-# @param modules [Array] dfdgfg`
+# @param version [String] The version for which the JSON will be generated.
+# @param modules [Array] The modules present in the project to join the JSON info.
 # @return [nil] nil.
 def join_json(version, modules)
   joined = []
@@ -44,7 +47,7 @@ end
 
 # Generate the Jekyll site through Nef based on the contents source.
 #
-# @param version [String] tfgfgfgfg
+# @param version [String] The version for which the nef docs site will be generated.
 # @return [nil] nil.
 def generate_nef_site(version)
   system "echo Generating nef site for #{version}"
@@ -58,7 +61,7 @@ end
 
 # Generate the Jazzy site based on previouly created JSON file.
 #
-# @param version [String] tfgfgfgfg
+# @param version [String] The version for which the Jazzy API docs site will be generated.
 # @return [nil] nil.
 def generate_api_site(version)
   system "echo Generating API site for #{version}"
@@ -68,13 +71,13 @@ def generate_api_site(version)
 end
 
 
-# Initial generic logic and depencies for the docs site
+# Initial generic logic and dependencies for the docs site
 `mkdir -p docs-json`
 system "swift package clean"
 system "swift build"
 system "bundle install --gemfile ./docs/Gemfile --path vendor/bundle"
 
-# Following logic is to generate the different releases specific sites
+# Following logic will process and generate the different releases specific sites
 
 # Initially, we generate the content available at master to be at /next path
 generate_json("next", modules)
@@ -85,8 +88,14 @@ generate_api_site("next")
 # Then, tags will contain the list of Git tags present in the repo
 tags = `git tag`.split("\n")
 
+# This is done to avoid the need to write down all the tags when we want everything in
+if !valid_tags.any?
+  valid_tags = tags
+end
+
 if tags.any?
-  filtered_tags = tags.reject { |t| invalid_tags.include? t }
+  filtered_out_tags = tags.reject { |t| invalid_tags.include? t }
+  filtered_tags = filtered_out_tags.select { |t| valid_tags.include? t }
   filtered_tags.each { |t|
                         system "git checkout #{t}"
                         system "swift package clean"
