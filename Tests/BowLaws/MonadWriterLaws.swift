@@ -1,9 +1,8 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
 
 class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
-    
     static func check() {
         writerPure()
         tellFusion()
@@ -36,6 +35,4 @@ class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
             return isEqual(F.listen(F.writer(tuple)), F.map(F.tell(tuple.0), { _ in tuple }))
         }
     }
-
-    
 }

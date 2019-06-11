@@ -1,6 +1,6 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
 
 class MonadStateLaws<F: MonadState & EquatableK> where F.S == Int {
     
