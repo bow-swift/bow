@@ -55,7 +55,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws.check(generator: self.generator)
+        MonoidKLaws<ForArrayK>.check()
     }
     
     func testFunctorFilterLaws() {

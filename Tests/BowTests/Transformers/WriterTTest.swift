@@ -29,7 +29,7 @@ class WriterTTest: XCTestCase {
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<WriterTPartial<ForArrayK, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        MonoidKLaws<WriterTPartial<ForArrayK, Int>>.check()
     }
 
     func testFunctorFilterLaws() {

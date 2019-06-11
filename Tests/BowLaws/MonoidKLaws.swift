@@ -1,25 +1,23 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class MonoidKLaws<F: MonoidK & EquatableK> {
-    
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        leftIdentity(generator)
-        rightIdentity(generator)
+class MonoidKLaws<F: MonoidK & EquatableK & ArbitraryK> {
+    static func check() {
+        leftIdentity()
+        rightIdentity()
     }
     
-    private static func leftIdentity(_ generator : @escaping (Int) -> Kind<F, Int>) {
-        property("MonoidK left identity") <- forAll { (a : Int) in
-            let fa = generator(a)
-            return F.emptyK().combineK(fa) == fa
+    private static func leftIdentity() {
+        property("MonoidK left identity") <- forAll { (fa: KindOf<F, Int>) in
+            return F.emptyK().combineK(fa.value) == fa.value
         }
     }
     
-    private static func rightIdentity(_ generator : @escaping (Int) -> Kind<F, Int>) {
-        property("MonoidK left identity") <- forAll { (a : Int) in
-            let fa = generator(a)
-            return fa.combineK(F.emptyK()) == fa
+    private static func rightIdentity() {
+        property("MonoidK left identity") <- forAll { (fa: KindOf<F, Int>) in
+            return fa.value.combineK(F.emptyK()) == fa.value
         }
     }
 }

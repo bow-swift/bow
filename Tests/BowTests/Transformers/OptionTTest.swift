@@ -34,7 +34,7 @@ class OptionTTest: XCTestCase {
     }
 
     func testMonoidKLaws() {
-        MonoidKLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        MonoidKLaws<OptionTPartial<ForId>>.check()
     }
     
     func testFunctorFilterLaws() {
