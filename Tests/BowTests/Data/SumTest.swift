@@ -17,7 +17,7 @@ class SumTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws.check(generator: generator)
+        ComonadLaws<SumPartial<ForId, ForId>>.check()
     }
     
     let abSum = Sum.left(Id("A"), Id("B"))

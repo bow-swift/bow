@@ -19,7 +19,7 @@ class MooreTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<MoorePartial<Int>>.check(generator: handle)
+        ComonadLaws<MoorePartial<Int>>.check()
     }
     
     func handleRoute(_ route : String) -> Moore<String, Id<String>> {

@@ -29,7 +29,7 @@ class IdTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForId>.check(generator: self.generator)
+        ComonadLaws<ForId>.check()
     }
     
     func testCustomStringConvertibleLaws() {
@@ -41,7 +41,7 @@ class IdTest: XCTestCase {
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForId>.check(generator: self.generator)
+        BimonadLaws<ForId>.check()
     }
     
     func testTraverseLaws() {

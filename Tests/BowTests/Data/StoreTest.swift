@@ -17,7 +17,7 @@ class StoreTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<StorePartial<Int>>.check(generator: intStore)
+        ComonadLaws<StorePartial<Int>>.check()
     }
     
     let greetingStore = { (name : String) in Store(state: name, render: { name in "Hi \(name)!"}) }

@@ -30,11 +30,11 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForNonEmptyArray>.check(generator: self.generator)
+        ComonadLaws<ForNonEmptyArray>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForNonEmptyArray>.check(generator: self.generator)
+        BimonadLaws<ForNonEmptyArray>.check()
     }
     
     func testTraverseLaws() {

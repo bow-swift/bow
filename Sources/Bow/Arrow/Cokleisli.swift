@@ -14,7 +14,7 @@ public typealias CoreaderT<F, A, B> = Cokleisli<F, A, B>
 
 /// Cokleisli represents a function with the signature `(Kind<F, A>) -> B`.
 public class Cokleisli<F, A, B>: CokleisliOf<F, A, B> {
-    internal let run: (Kind<F, A>) -> B
+    public let run: (Kind<F, A>) -> B
 
     /// Safe downcast.
     ///

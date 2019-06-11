@@ -17,7 +17,7 @@ class EitherKTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<EitherKPartial<ForId, ForId>>.check(generator: self.generator)
+        ComonadLaws<EitherKPartial<ForId, ForId>>.check()
     }
     
     func testFoldableLaws() {
