@@ -38,7 +38,7 @@ class TryTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForTry>.check(generator: self.generator)
+        TraverseLaws<ForTry>.check()
     }
 
     func testFunctorFilterLaws() {

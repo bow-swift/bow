@@ -44,6 +44,6 @@ class ConstTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ConstPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<ConstPartial<Int>>.check()
     }
 }

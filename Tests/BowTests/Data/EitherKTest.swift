@@ -25,6 +25,6 @@ class EitherKTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<EitherKPartial<ForId, ForId>>.check(generator: self.generator)
+        TraverseLaws<EitherKPartial<ForId, ForId>>.check()
     }
 }

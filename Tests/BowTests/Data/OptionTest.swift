@@ -61,7 +61,7 @@ class OptionTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForOption>.check(generator: self.generator)
+        TraverseLaws<ForOption>.check()
     }
     
     func testTraverseFilterLaws() {

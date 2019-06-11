@@ -38,7 +38,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForNonEmptyArray>.check(generator: self.generator)
+        TraverseLaws<ForNonEmptyArray>.check()
     }
     
     func testSemigroupLaws() {

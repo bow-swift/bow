@@ -51,7 +51,7 @@ class EitherTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<EitherPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<EitherPartial<Int>>.check()
     }
     
     func testCheckers() {

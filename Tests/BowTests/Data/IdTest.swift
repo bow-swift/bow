@@ -45,6 +45,6 @@ class IdTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForId>.check(generator: self.generator)
+        TraverseLaws<ForId>.check()
     }
 }

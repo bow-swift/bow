@@ -75,6 +75,6 @@ class ArrayKTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForArrayK>.check(generator: self.generator)
+        TraverseLaws<ForArrayK>.check()
     }
 }

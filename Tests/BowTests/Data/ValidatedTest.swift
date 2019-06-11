@@ -42,7 +42,7 @@ class ValidatedTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<ValidatedPartial<Int>>.check()
     }
     
     func testCheckers() {
