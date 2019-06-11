@@ -7,7 +7,7 @@ public final class ForId {}
 public typealias IdOf<A> = Kind<ForId, A>
 
 /// The identity data type represents a context of having no effect on the type it wraps. A instance of `Id<A>` is isomorphic to an instance of `A`; it is just wrapped without any additional information.
-public class Id<A>: IdOf<A> {
+public final class Id<A>: IdOf<A> {
     /// Value wrapped in this `Id`.
     public let value: A
 

@@ -10,13 +10,19 @@ public final class IorPartial<L>: Kind<ForIor, L> {}
 public typealias IorOf<A, B> = Kind<IorPartial<A>, B>
 
 /// Ior represents an inclusive-or of two different types. It may have a value of the left type, the right type or both at the same time.
-public class Ior<A, B>: IorOf<A, B> {
+public final class Ior<A, B>: IorOf<A, B> {
+    private let value: _Ior<A, B>
+    
+    private init(_ value: _Ior<A, B>) {
+        self.value = value
+    }
+    
     /// Creates an Ior value of the left type.
     ///
     /// - Parameter a: A value of the left type.
     /// - Returns: An `Ior` of the left type.
     public static func left(_ a: A) -> Ior<A, B> {
-        return IorLeft<A, B>(a)
+        return Ior<A, B>(.left(a))
     }
     
     /// Creates an Ior value of the right type.
@@ -24,7 +30,7 @@ public class Ior<A, B>: IorOf<A, B> {
     /// - Parameter b: A value of the right type.
     /// - Returns: An `Ior` of the right type.
     public static func right(_ b: B) -> Ior<A, B> {
-        return IorRight<A, B>(b)
+        return Ior<A, B>(.right(b))
     }
     
     /// Creates an Ior value with both types.
@@ -34,7 +40,7 @@ public class Ior<A, B>: IorOf<A, B> {
     ///   - b: A value of the right type.
     /// - Returns: An `Ior` of both types.
     public static func both(_ a: A, _ b: B) -> Ior<A, B> {
-        return IorBoth<A, B>(a, b)
+        return Ior<A, B>(.both(a, b))
     }
     
     /// Creates an Ior value from two optional values.
@@ -66,11 +72,10 @@ public class Ior<A, B>: IorOf<A, B> {
     ///   - fab: Closure to apply if the contained values in this `Ior` are members of both types.
     /// - Returns: Result of aplying the corresponding closure to this value.
     public func fold<C>(_ fa: (A) -> C, _ fb: (B) -> C, _ fab: (A, B) -> C) -> C {
-        switch self {
-        case let left as IorLeft<A, B>: return fa(left.a)
-        case let right as IorRight<A, B>: return fb(right.b)
-        case let both as IorBoth<A, B>: return fab(both.a, both.b)
-        default: fatalError("Ior must only have left, right or both")
+        switch value {
+        case let .left(a): return fa(a)
+        case let .right(b): return fb(b)
+        case let .both(a, b): return fab(a, b)
         }
     }
     
@@ -178,30 +183,10 @@ public postfix func ^<A, B>(_ fa: IorOf<A, B>) -> Ior<A, B> {
     return Ior.fix(fa)
 }
 
-class IorLeft<A, B>: Ior<A, B> {
-    fileprivate let a: A
-    
-    init(_ a: A) {
-        self.a = a
-    }
-}
-
-class IorRight<A, B>: Ior<A, B> {
-    fileprivate let b: B
-    
-    init(_ b: B) {
-        self.b = b
-    }
-}
-
-class IorBoth<A, B>: Ior<A, B> {
-    fileprivate let a: A
-    fileprivate let b: B
-    
-    init(_ a: A, _ b: B) {
-        self.a = a
-        self.b = b
-    }
+private enum _Ior<A, B> {
+    case left(A)
+    case right(B)
+    case both(A, B)
 }
 
 // MARK: Conformance to `CustomStringConvertible`

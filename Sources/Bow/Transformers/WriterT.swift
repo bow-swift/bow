@@ -10,7 +10,7 @@ public final class WriterTPartial<F, W>: Kind2<ForWriterT, F, W> {}
 public typealias WriterTOf<F, W, A> = Kind<WriterTPartial<F, W>, A>
 
 /// WriterT transformer represents operations that accumulate values through a computation or effect, without reading them.
-public class WriterT<F, W, A>: WriterTOf<F, W, A> {
+public final class WriterT<F, W, A>: WriterTOf<F, W, A> {
     fileprivate let value: Kind<F, (W, A)>
 
     /// Safe downcast.
