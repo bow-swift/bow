@@ -142,74 +142,50 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int>.check()
     }
     
     func testInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int8) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int8>.check()
     }
     
     func testInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int16) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int16>.check()
     }
     
     func testInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int32) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int32>.check()
     }
     
     func testInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int64) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int64>.check()
     }
     
     func testUIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt>.check()
     }
     
     func testUInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt8) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt8>.check()
     }
     
     func testUInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt16) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt16>.check()
     }
     
     func testUInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt32) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt32>.check()
     }
     
     func testUInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt64) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt64>.check()
     }
     
     func testFloatMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Float) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Float>.check()
     }
     
     func testDoubleMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Double) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Double>.check()
     }
 }

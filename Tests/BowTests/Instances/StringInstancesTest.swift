@@ -1,5 +1,4 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
@@ -14,8 +13,6 @@ class StringInstancesTest: XCTestCase {
     }
     
     func testMonoidLaws() {
-        property("String concatenation monoid") <- forAll { (a: String) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<String>.check()
     }
 }

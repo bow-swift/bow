@@ -34,9 +34,7 @@ class OptionTest: XCTestCase {
     }
     
     func testMonoidLaws() {
-        property("Option monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Option<Int>>.check(a: Option.some(a))
-        }
+        MonoidLaws<Option<Int>>.check()
     }
     
     func testFunctorFilterLaws() {

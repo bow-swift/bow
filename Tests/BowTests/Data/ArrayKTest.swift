@@ -44,9 +44,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testMonoidLaws() {
-        property("ArrayK monoid laws") <- forAll() { (a: Int) in
-            return MonoidLaws<ArrayK<Int>>.check(a: ArrayK<Int>([a]))
-        }
+        MonoidLaws<ArrayK<Int>>.check()
     }
     
     func testMonoidKLaws() {

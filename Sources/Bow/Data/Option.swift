@@ -257,7 +257,7 @@ extension Option: Semigroup where A: Semigroup {
 // MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {
-        return Option(A.empty())
+        return Option.none()
     }
 }
 

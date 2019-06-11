@@ -50,8 +50,6 @@ class TryTest: XCTestCase {
     }
 
     func testMonoidLaws() {
-        property("Try monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Try<Int>>.check(a: Try.success(a))
-        }
+        MonoidLaws<Try<Int>>.check()
     }
 }

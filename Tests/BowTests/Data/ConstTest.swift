@@ -1,5 +1,4 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
 import Bow
 
@@ -25,9 +24,7 @@ class ConstTest: XCTestCase {
     }
     
     func testMonoidLaws() {
-        property("Const monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Const<Int, Int>>.check(a: Const<Int, Int>(a))
-        }
+        MonoidLaws<Const<Int, Int>>.check()
     }
     
     func testCustomStringConvertibleLaws() {
