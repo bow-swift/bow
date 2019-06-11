@@ -25,7 +25,7 @@ class WriterTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<WriterTPartial<ForArrayK, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        SemigroupKLaws<WriterTPartial<ForArrayK, Int>>.check()
     }
     
     func testMonoidKLaws() {

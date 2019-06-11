@@ -51,7 +51,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForNonEmptyArray>.check(generator: self.generator)
+        SemigroupKLaws<ForNonEmptyArray>.check()
     }
     
     func testCustomStringConvertibleLaws() {

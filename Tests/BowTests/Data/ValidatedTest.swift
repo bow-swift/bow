@@ -26,7 +26,7 @@ class ValidatedTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        SemigroupKLaws<ValidatedPartial<Int>>.check()
     }
 
     func testCustomStringConvertibleLaws() {

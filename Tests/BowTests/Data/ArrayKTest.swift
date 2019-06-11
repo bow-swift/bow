@@ -45,7 +45,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws.check(generator: self.generator)
+        SemigroupKLaws<ForArrayK>.check()
     }
     
     func testMonoidLaws() {

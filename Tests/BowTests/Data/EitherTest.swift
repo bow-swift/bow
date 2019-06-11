@@ -39,7 +39,7 @@ class EitherTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherPartial<Int>>.check(generator: self.generator)
+        SemigroupKLaws<EitherPartial<Int>>.check()
     }
 
     func testCustomStringConvertibleLaws() {

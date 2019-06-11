@@ -41,7 +41,7 @@ class StateTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<StateTPartial<ForArrayK, Int>>.check(generator: { (a : Int) in StateT<ForArrayK, Int, Int>.pure(a) })
+        SemigroupKLaws<StateTPartial<ForArrayK, Int>>.check()
     }
     
     func testMonadStateLaws() {

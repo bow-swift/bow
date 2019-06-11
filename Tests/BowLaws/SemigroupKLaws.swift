@@ -1,19 +1,17 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class SemigroupKLaws<F: SemigroupK & EquatableK> {
+class SemigroupKLaws<F: SemigroupK & EquatableK & ArbitraryK> {
     
-    static func check(generator : @escaping (Int) -> Kind<F, Int>) {
-        associative(generator)
+    static func check() {
+        associative()
     }
     
-    private static func associative(_ generator : @escaping (Int) -> Kind<F, Int>) {
-        property("SemigroupK combine is associative") <- forAll { (a: Int, b: Int, c: Int) in
-            let fa = generator(a)
-            let fb = generator(b)
-            let fc = generator(c)
-            return fa.combineK(fb.combineK(fc)) == fa.combineK(fb).combineK(fc)
+    private static func associative() {
+        property("SemigroupK combine is associative") <- forAll { (fa: KindOf<F, Int>, fb: KindOf<F, Int>, fc: KindOf<F, Int>) in
+            return fa.value.combineK(fb.value.combineK(fc.value)) == fa.value.combineK(fb.value).combineK(fc.value)
         }
     }
 }

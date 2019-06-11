@@ -30,7 +30,7 @@ class OptionTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        SemigroupKLaws<OptionTPartial<ForId>>.check()
     }
 
     func testMonoidKLaws() {

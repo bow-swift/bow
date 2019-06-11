@@ -39,7 +39,7 @@ class EitherTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherTPartial<ForId, Int>>.check(generator: self.generator)
+        SemigroupKLaws<EitherTPartial<ForId, Int>>.check()
     }
 
     func testOptionTConversion() {
