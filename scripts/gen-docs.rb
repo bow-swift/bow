@@ -41,7 +41,7 @@ $modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
 # @return [nil] nil.
 def generate_json(version)
   `mkdir -p #{$json_files_dir}/#{version}`
-  $modules.each { |m| `sourcekitten doc --spm-module #{m} > #{json_files_dir}/#{version}/#{m}.json` }
+  $modules.each { |m| `sourcekitten doc --spm-module #{m} > #{$json_files_dir}/#{version}/#{m}.json` }
 end
 
 # Join the previously generated JSON files into one single file.
@@ -51,10 +51,10 @@ end
 # @return [nil] nil.
 def join_json(version, modules)
   joined = []
-  $modules.map { |m| JSON.parse(File.read("#{json_files_dir}/#{version}/#{m}.json")) } \
+  $modules.map { |m| JSON.parse(File.read("#{$json_files_dir}/#{version}/#{m}.json")) } \
     .each { |json| joined += json }
 
-  File.open("#{json_files_dir}/#{version}/all.json","w") do |f|
+  File.open("#{$json_files_dir}/#{version}/all.json","w") do |f|
     f.write(joined.to_json)
   end
 end
