@@ -118,6 +118,7 @@
 		1126CA9622B12EC400F840CB /* Tuple3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9522B12EC400F840CB /* Tuple3.swift */; };
 		1126CA9822B12F8500F840CB /* Tuple4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9722B12F8500F840CB /* Tuple4.swift */; };
 		1126CA9A22B1301100F840CB /* Tuple5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9922B1301100F840CB /* Tuple5.swift */; };
+		1126CA9C22B130B800F840CB /* Tuple6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9B22B130B800F840CB /* Tuple6.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -762,6 +763,7 @@
 		1126CA9522B12EC400F840CB /* Tuple3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple3.swift; sourceTree = "<group>"; };
 		1126CA9722B12F8500F840CB /* Tuple4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple4.swift; sourceTree = "<group>"; };
 		1126CA9922B1301100F840CB /* Tuple5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple5.swift; sourceTree = "<group>"; };
+		1126CA9B22B130B800F840CB /* Tuple6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple6.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -1387,6 +1389,7 @@
 				1126CA9522B12EC400F840CB /* Tuple3.swift */,
 				1126CA9722B12F8500F840CB /* Tuple4.swift */,
 				1126CA9922B1301100F840CB /* Tuple5.swift */,
+				1126CA9B22B130B800F840CB /* Tuple6.swift */,
 			);
 			path = Tuple;
 			sourceTree = "<group>";
@@ -3043,6 +3046,7 @@
 				11E7171A219D722900B94845 /* Optional.swift in Sources */,
 				11E7171B219D722900B94845 /* Prism.swift in Sources */,
 				11E7171C219D722900B94845 /* Setter.swift in Sources */,
+				1126CA9C22B130B800F840CB /* Tuple6.swift in Sources */,
 				11E7171D219D722900B94845 /* Traversal.swift in Sources */,
 				11E7171E219D722900B94845 /* At+Optics.swift in Sources */,
 				11E7171F219D722900B94845 /* Each+Optics.swift in Sources */,
