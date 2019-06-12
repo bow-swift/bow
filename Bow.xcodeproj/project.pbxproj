@@ -509,6 +509,13 @@
 			remoteGlobalIDString = 117DC10E22AE563900EF65F0;
 			remoteInfo = "Bow-FreeGenerators";
 		};
+		1126CA8622B0DF2B00F840CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC0DC22AE4D6C00EF65F0;
+			remoteInfo = "Bow-RxGenerators";
+		};
 		117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -2109,6 +2116,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1126CA8722B0DF2B00F840CB /* PBXTargetDependency */,
 				11D97EF4219EBC54008FC004 /* PBXTargetDependency */,
 				112297D0219DCFF9006D66C5 /* PBXTargetDependency */,
 				112297B4219DCFDE006D66C5 /* PBXTargetDependency */,
@@ -3327,6 +3335,11 @@
 			isa = PBXTargetDependency;
 			target = 117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */;
 			targetProxy = 1126CA8422B0DE9E00F840CB /* PBXContainerItemProxy */;
+		};
+		1126CA8722B0DF2B00F840CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */;
+			targetProxy = 1126CA8622B0DF2B00F840CB /* PBXContainerItemProxy */;
 		};
 		117DC0B322AE492700EF65F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
