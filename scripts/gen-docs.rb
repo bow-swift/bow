@@ -49,7 +49,7 @@ end
 #
 # @param version [String] The version for which the JSON will be generated.
 # @return [nil] nil.
-def join_json(version, modules)
+def join_json(version)
   joined = []
   $modules.map { |m| JSON.parse(File.read("#{$json_files_dir}/#{version}/#{m}.json")) } \
     .each { |json| joined += json }
