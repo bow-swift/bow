@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
+require 'FileUtils'
 
 ## VERSIONED DOCS GENERATION ##
 
@@ -80,6 +81,21 @@ def generate_api_site(version)
   system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
+end
+
+# Auxiliary function that helps to move files. Using native `mv` could lead
+# to errors due to the way the shell handle glob patterns.
+#
+# @param src [String] The version for which the Jazzy API docs site will be generated.
+# @param dest [String] The version for which the Jazzy API docs site will be generated.
+# @return [nil] nil.
+def archive_src_to_dst_dir(src, dst)
+  if File.exist ? (src)
+    puts "about to move this file:  #{src}"
+    FileUtils.mv(src, dst)
+  else
+    puts "can not find source file to move"
+  end
 end
 
 
