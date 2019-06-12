@@ -90,8 +90,8 @@ end
 # @param dest [String] The version for which the Jazzy API docs site will be generated.
 # @return [nil] nil.
 def archive_src_to_dst_dir(src, dst)
-  if File.exist ? (src)
-    puts "about to move this file:  #{src}"
+  if File.exist?(src)
+    puts "about to move this file: #{src}"
     FileUtils.mv(src, dst)
   else
     puts "can not find source file to move"
