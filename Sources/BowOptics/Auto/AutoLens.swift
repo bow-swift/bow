@@ -1,4 +1,4 @@
-/// Protocol for automatic derivation of lenses
+/// Protocol for automatic derivation of lenses.
 public protocol AutoLens: AutoOptics {}
 
 public extension AutoLens {

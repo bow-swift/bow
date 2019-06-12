@@ -1,4 +1,4 @@
-/// Base protocol for optics automatic derivation
+/// Base protocol for optics automatic derivation.
 public protocol AutoOptics {}
 
 public extension AutoOptics {
