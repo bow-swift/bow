@@ -495,6 +495,13 @@
 			remoteGlobalIDString = 117DC0F722AE522000EF65F0;
 			remoteInfo = "Bow-BrightFuturesGenerators";
 		};
+		1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
+			remoteInfo = "Bow-EffectsGenerators";
+		};
 		117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -2053,6 +2060,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1126CA8322B0DE3F00F840CB /* PBXTargetDependency */,
 				11D97EF1219EBBB4008FC004 /* PBXTargetDependency */,
 				11229785219DC95B006D66C5 /* PBXTargetDependency */,
 				11229749219DC88F006D66C5 /* PBXTargetDependency */,
@@ -3301,6 +3309,11 @@
 			isa = PBXTargetDependency;
 			target = 117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */;
 			targetProxy = 1126CA8022B0DDD100F840CB /* PBXContainerItemProxy */;
+		};
+		1126CA8322B0DE3F00F840CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
+			targetProxy = 1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */;
 		};
 		117DC0B322AE492700EF65F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

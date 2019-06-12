@@ -1,20 +1,18 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
-@testable import BowEffects
+import Bow
+import BowEffects
+import BowEffectsGenerators
 @testable import BowEffectsLaws
 
 class IOTest: XCTestCase {
-    
-    let generator = { (a : Int) in IO<CategoryError, Int>.pure(a) }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<IOPartial<CategoryError>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<IOPartial<CategoryError>>.check(generator: self.generator)
+        FunctorLaws<IOPartial<CategoryError>>.check()
     }
     
     func testApplicativeLaws() {
