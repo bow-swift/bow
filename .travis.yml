@@ -31,40 +31,40 @@ jobs:
         - gem install cocoapods
       script:
         - nef compile contents/Documentation
-    - &test
-      stage: test
-      env:
-        - SCHEME="Bow"
-      before_install:
-        - brew update
-        - brew outdated carthage || brew upgrade carthage
-        - carthage update --platform iOS --cache-builds
-      script:
-        - set -o pipefail
-        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
-    - <<: *test
-      env:
-        - SCHEME="Bow-Free"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Generic"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Optics"
-    - <<: *test
-      env:
-        - SCHEME="Bow-RecursionSchemes"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Effects"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Rx"
-    - <<: *test
-      env:
-        - SCHEME="Bow-BrightFutures"
+    # - &test
+    #   stage: test
+    #   env:
+    #     - SCHEME="Bow"
+    #   before_install:
+    #     - brew update
+    #     - brew outdated carthage || brew upgrade carthage
+    #     - carthage update --platform iOS --cache-builds
+    #   script:
+    #     - set -o pipefail
+    #     - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+    #   after_success:
+    #     - bash <(curl -s https://codecov.io/bash)
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-Free"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-Generic"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-Optics"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-RecursionSchemes"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-Effects"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-Rx"
+    # - <<: *test
+    #   env:
+    #     - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       before_install:
