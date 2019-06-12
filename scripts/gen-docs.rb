@@ -78,7 +78,7 @@ end
 # @return [nil] nil.
 def generate_api_site(version)
   system "echo Generating API site for #{version}"
-  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
+  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
 end
