@@ -86,8 +86,8 @@ end
 # Auxiliary function that helps to move files. Using native `mv` could lead
 # to errors due to the way the shell handle glob patterns.
 #
-# @param src [String] The version for which the Jazzy API docs site will be generated.
-# @param dest [String] The version for which the Jazzy API docs site will be generated.
+# @param src [String] AAA.
+# @param dest [String] AAA.
 # @return [nil] nil.
 def archive_src_to_dst_dir(src, dst)
   if File.exist?(src)
@@ -102,7 +102,7 @@ end
 # Directory initialization
 `mkdir -p #{$json_files_dir}`
 `mkdir -p #{$publishing_dir}`
-`mkdir -p #{$gen-docs}`
+`mkdir -p #{$gen_docs_dir}`
 
 # Initial generic logic and dependencies for the docs site
 system "swift package clean"
