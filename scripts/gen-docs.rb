@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'json'
-require 'FileUtils'
 
 ## VERSIONED DOCS GENERATION ##
 
@@ -15,7 +14,7 @@ $invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
 # If you want an empty tags list in the end (for some reason ¯\_(ツ)_/¯)
 # you can cancel these filterings with both lists having the same values:
 # invalid_tags = ["0.1.0"], valid_tags = ["0.1.0"]
-$valid_tags = []
+$valid_tags = ["0.1.0", "0.2.0", "0.3.0"]
 
 # The path of the dir where the Keyll source is located.
 $source_dir = "docs"
@@ -81,21 +80,6 @@ def generate_api_site(version)
   system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
-end
-
-# Auxiliary function that helps to move files. Using native `mv` could lead
-# to errors due to the way the shell handle glob patterns.
-#
-# @param src [String] AAA.
-# @param dest [String] AAA.
-# @return [nil] nil.
-def archive_src_to_dst_dir(src, dst)
-  if File.exist?(src)
-    puts "about to move this file: #{src}"
-    FileUtils.mv(src, dst)
-  else
-    puts "can not find source file to move"
-  end
 end
 
 
