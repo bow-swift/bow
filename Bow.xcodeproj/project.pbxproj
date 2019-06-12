@@ -110,6 +110,7 @@
 		112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39F217E2DEF00969984 /* FutureKTest.swift */; };
 		112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		1125054D220DD92B00861131 /* EquatableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125054C220DD92B00861131 /* EquatableK.swift */; };
+		1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8922B1144200F840CB /* AutoOptics.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -746,6 +747,7 @@
 		11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowBrightFuturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-BrightFuturesTests-Info.plist"; sourceTree = "<absolute>"; };
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
+		1126CA8922B1144200F840CB /* AutoOptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptics.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -1353,6 +1355,14 @@
 			path = BowBrightFuturesTests;
 			sourceTree = "<group>";
 		};
+		1126CA8822B1139B00F840CB /* Auto */ = {
+			isa = PBXGroup;
+			children = (
+				1126CA8922B1144200F840CB /* AutoOptics.swift */,
+			);
+			path = Auto;
+			sourceTree = "<group>";
+		};
 		117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */ = {
 			isa = PBXGroup;
 			children = (
@@ -1434,6 +1444,7 @@
 				8BA0F4C9217E2E9200969984 /* Prism.swift */,
 				8BA0F4C0217E2E9200969984 /* Setter.swift */,
 				8BA0F4B4217E2E9200969984 /* Traversal.swift */,
+				1126CA8822B1139B00F840CB /* Auto */,
 				8BA0F4CF217E2E9200969984 /* DSL */,
 				8BA0F4C1217E2E9200969984 /* Instances */,
 				8BA0F4B5217E2E9200969984 /* STD */,
@@ -3020,6 +3031,7 @@
 				11E7172C219D722900B94845 /* Try+Optics.swift in Sources */,
 				11E7172D219D722900B94845 /* Validated+Optics.swift in Sources */,
 				11E7172E219D722900B94845 /* At.swift in Sources */,
+				1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */,
 				11E7172F219D722900B94845 /* Each.swift in Sources */,
 				11E71730219D722900B94845 /* FilterIndex.swift in Sources */,
 				11E71731219D722900B94845 /* Index.swift in Sources */,
