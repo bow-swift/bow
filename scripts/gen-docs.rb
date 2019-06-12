@@ -5,7 +5,7 @@ require 'json'
 
 # If you want a specific version to be served as default, set this value to the
 # branch/tag you want. Otherwise it will be the latest version on alphabetical order.
-$default_version = "master"
+$default_version = ""
 
 # This is a list to filter -out- tags we know are not valuable to generate docs for.
 $invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
@@ -14,7 +14,7 @@ $invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
 # If you want an empty tags list in the end (for some reason ¯\_(ツ)_/¯)
 # you can cancel these filterings with both lists having the same values:
 # invalid_tags = ["0.1.0"], valid_tags = ["0.1.0"]
-$valid_tags = ["0.1.0", "0.2.0", "0.3.0"]
+$valid_tags = []
 
 # The path of the dir where the Keyll source is located.
 $source_dir = "docs"
