@@ -3,7 +3,7 @@
         <section class="features">
            {% for item in site.data.features.content %}
             <div class="feature-item">
-                <img src={{ item.icon }} title="{{ item.title }}" />
+                <img src="{{ item.icon | relative_url }}" title="{{ item.title }}" />
                 <h3>{{ item.title }}</h3>
                 <p>{{ item.description }}</p>
             </div>
