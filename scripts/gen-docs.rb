@@ -152,7 +152,7 @@ generate_api_site("#{$default_version}")
 `mv #{$gen_docs_dir}/#{$default_version}/api-docs #{$gen_docs_dir}/`
 
 # We also move the version generated sites to its publishing destination
-`mv #{$gen_docs_dir}/* #{$publicopyshing_dir}/`
+`mv #{$gen_docs_dir}/* #{$publishing_dir}/`
 
 # And finally we move the source to the directory that will be published.
 # Remember that this should be the same directory set in GH Pages/Travis.
