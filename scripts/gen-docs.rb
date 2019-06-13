@@ -148,11 +148,11 @@ generate_json("#{$default_version}")
 join_json("#{$default_version}")
 generate_api_site("#{$default_version}")
 
-# Now we need to copy API docs to the default publishing location too.
-`cp -ar #{$gen_docs_dir}/#{$default_version}/api-docs #{$gen_docs_dir}/`
+# Now we need to move default API docs to the default publishing location too.
+`mv #{$gen_docs_dir}/#{$default_version}/api-docs #{$gen_docs_dir}/`
 
-# We finally move the version generated sites to its publishing destination
-`mv #{$gen_docs_dir}/* #{$publishing_dir}/`
+# We also move the version generated sites to its publishing destination
+`mv #{$gen_docs_dir}/* #{$publicopyshing_dir}/`
 
 # And finally we move the source to the directory that will be published.
 # Remember that this should be the same directory set in GH Pages/Travis.
