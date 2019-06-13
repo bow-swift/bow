@@ -5,7 +5,7 @@ require 'json'
 
 # If you want a specific version to be served as default, set this value to the
 # branch/tag you want. Otherwise it will be the latest version on alphabetical order.
-$default_version = ""
+$default_version = "master"
 
 # This is a list to filter -out- tags we know are not valuable to generate docs for.
 $invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
@@ -20,7 +20,7 @@ $valid_tags = []
 $source_dir = "docs"
 
 # The path of the dir that will be published. Check out GitHub Pages/Travis for this.
-$publishing_dir = "docs"
+$publishing_dir = "pub-dir"
 
 # The path of the dir to temporarily store the different sites content.
 $gen_docs_dir = "gen-docs"
@@ -131,9 +131,14 @@ if tags.any?
   else
     `git checkout #{$default_version}`
   end
-  # We finally move the source and version generated sites under /docs, (probably)
-  # and this should be the same directory set in Travis to be published.
+  # We finally move the version generated sites to its publishing destination
   `mv #{$gen_docs_dir}/* #{$publishing_dir}/`
 end
 
+## !!
+## WE NEED TO COPY API-DOCS AT DEFAULT LOCATION TOO
+## !!
+
+# And finally we move the source to the directory that will be published.
+# Remember that this should be the same directory set in GH Pages/Travis.
 `mv #{$source_dir}/* #{$publishing_dir}/`
