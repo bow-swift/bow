@@ -1,4 +1,3 @@
-import Foundation
 import Bow
 
 func isEqual<F: EquatableK & Functor>(_ fa: Kind<F, ()>, _ fb: Kind<F, ()>) -> Bool {

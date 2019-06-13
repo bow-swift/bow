@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension DayPartial: EquatableK where F == ForId, G == ForId {
     public static func eq<A>(_ lhs: Kind<DayPartial<F, G>, A>, _ rhs: Kind<DayPartial<F, G>, A>) -> Bool where A : Equatable {
@@ -10,14 +10,12 @@ extension DayPartial: EquatableK where F == ForId, G == ForId {
 }
 
 class DayTest: XCTestCase {
-    let cf = { (x : Int) in Day.from(left: Id(x), right: Id(0), f: +) }
-
     func testFunctorLaws() {
-        FunctorLaws<DayPartial<ForId, ForId>>.check(generator: cf)
+        FunctorLaws<DayPartial<ForId, ForId>>.check()
     }
 
     func testComonadLaws() {
-        ComonadLaws<DayPartial<ForId, ForId>>.check(generator: cf)
+        ComonadLaws<DayPartial<ForId, ForId>>.check()
     }
 
     let day = Day.from(left: Id(1), right: Id(1), f: { (left : Int, right : Int) in (left, right) })

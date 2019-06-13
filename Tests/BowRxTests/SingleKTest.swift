@@ -1,7 +1,8 @@
 import XCTest
 @testable import BowLaws
-@testable import Bow
+import Bow
 @testable import BowRx
+import BowRxGenerators
 @testable import BowEffectsLaws
 
 extension ForSingleK: EquatableK {
@@ -11,10 +12,8 @@ extension ForSingleK: EquatableK {
 }
 
 class SingleKTest: XCTestCase {
-    let generator = { (x: Int) in SingleK.pure(x) }
-
     func testFunctorLaws() {
-        FunctorLaws<ForSingleK>.check(generator: generator)
+        FunctorLaws<ForSingleK>.check()
     }
     
     func testApplicativeLaws() {

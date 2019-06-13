@@ -1,9 +1,9 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class ApplicativeLaws<F: Applicative & EquatableK> {
-    
+class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
     static func check() {
         apIdentity()
         homomorphism()
@@ -15,8 +15,8 @@ class ApplicativeLaws<F: Applicative & EquatableK> {
     }
     
     private static func apIdentity() {
-        property("ap identity") <- forAll() { (a: Int) in
-            return F.ap(F.pure(id), F.pure(a)) == F.pure(a)
+        property("ap identity") <- forAll() { (fa: KindOf<F, Int>) in
+            return F.ap(F.pure(id), fa.value) == fa.value
         }
     }
     
@@ -34,9 +34,8 @@ class ApplicativeLaws<F: Applicative & EquatableK> {
     }
     
     private static func mapDerived() {
-        property("mad derived") <- forAll() { (a: Int, f: ArrowOf<Int, Int>) in
-            let fa = F.pure(a)
-            return F.map(fa, f.getArrow) == F.ap(F.pure(f.getArrow), fa)
+        property("mad derived") <- forAll() { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            return F.map(fa.value, f.getArrow) == F.ap(F.pure(f.getArrow), fa.value)
         }
     }
     

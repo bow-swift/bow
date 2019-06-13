@@ -1,5 +1,5 @@
 import SwiftCheck
-@testable import Bow
+import Bow
 
 public class SelectiveLaws<F: Selective & EquatableK> {
     public static func check() {
