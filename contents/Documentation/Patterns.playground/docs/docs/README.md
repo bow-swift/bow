@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Home
-permalink: /docs
+permalink: /docs/
 ---
 
 # Bow
