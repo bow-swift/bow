@@ -109,13 +109,13 @@ end
 
 # Following logic will process and generate the different releases specific sites
 
+# Then, tags will contain the list of Git tags present in the repo
+tags = `git tag`.split("\n")
+
 # This is done to avoid the need to write down all the tags when we want everything in
 if !$valid_tags.any?
   $valid_tags = tags
 end
-
-# Then, tags will contain the list of Git tags present in the repo
-tags = `git tag`.split("\n")
 
 if tags.any?
   filtered_out_tags = tags.reject { |t| $invalid_tags.include? t }
