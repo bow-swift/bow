@@ -3,19 +3,27 @@ import Bow
 
 class EquatableLaws<A: Equatable & Arbitrary> {
     static func check() {
-        identityInEquality()
-        commutativityInEquality()
+        identity()
+        commutativity()
+        transitivity()
     }
 
-    private static func identityInEquality() {
-        property("Identity: Every object is equal to itself") <- forAll() { (a: A) in
+    private static func identity() {
+        property("Identity: Every object is equal to itself") <- forAll { (a: A) in
             return a == a
         }
     }
 
-    private static func commutativityInEquality() {
-        property("Equality is commutative") <- forAll() { (a: A, b: A) in
+    private static func commutativity() {
+        property("Equality is commutative") <- forAll { (a: A, b: A) in
             return (a == b) == (b == a)
+        }
+    }
+    
+    private static func transitivity() {
+        property("Equality is transitive") <- forAll { (a: A, b: A, c: A) in
+            // (a == b) && (b == c) --> (a == c)
+            return not((a == b) && (b == c)) || (a == c)
         }
     }
 }
