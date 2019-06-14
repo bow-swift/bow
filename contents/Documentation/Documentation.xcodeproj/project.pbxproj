@@ -80,7 +80,6 @@
 				CF58D06D907C29FDC8897AF4 /* Pods-Documentation.debug.xcconfig */,
 				5E0CE514F83405F0437852ED /* Pods-Documentation.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -333,7 +332,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.Documentation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -362,7 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.Documentation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
