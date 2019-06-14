@@ -1,15 +1,15 @@
 import SwiftCheck
-@testable import Bow
+import Bow
 
-class CustomStringConvertibleLaws<A: CustomStringConvertible> {
-    static func check(generator : @escaping (Int) -> A){
-        equality(generator)
+class CustomStringConvertibleLaws<A: CustomStringConvertible & Arbitrary> {
+    static func check(){
+        equality()
     }
     
-    private static func equality(_ generator: @escaping (Int) -> A) {
-        property("Equal objects must show equal content") <- forAll { (a : Int) in
-            let x1 = generator(a)
-            let x2 = generator(a)
+    private static func equality() {
+        property("Equal objects must show equal content") <- forAll { (a: A) in
+            let x1 = a
+            let x2 = a
             return x1.description == x2.description
         }
     }

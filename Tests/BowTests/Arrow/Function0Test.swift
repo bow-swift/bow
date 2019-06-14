@@ -1,19 +1,14 @@
 import XCTest
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class Function0Test: XCTestCase {
-    
-    var generator: (Int) -> Function0Of<Int> {
-        return { a in Function0.pure(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForFunction0, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForFunction0>.check(generator: self.generator)
+        FunctorLaws<ForFunction0>.check()
     }
     
     func testApplicativeLaws() {
@@ -29,10 +24,10 @@ class Function0Test: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForFunction0>.check(generator: self.generator)
+        ComonadLaws<ForFunction0>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForFunction0>.check(generator: self.generator)
+        BimonadLaws<ForFunction0>.check()
     }
 }

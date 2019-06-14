@@ -1,20 +1,14 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class TryTest: XCTestCase {
-    
-    var generator : (Int) -> Try<Int> {
-        return { a in (a % 2 == 0) ? Try.invoke(constant(a)) : Try.invoke({ throw TryError.illegalState }) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForTry, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForTry>.check(generator: self.generator)
+        FunctorLaws<ForTry>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,33 +24,26 @@ class TryTest: XCTestCase {
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Try<Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForTry>.check(generator: self.generator)
+        FoldableLaws<ForTry>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForTry>.check(generator: self.generator)
+        TraverseLaws<ForTry>.check()
     }
 
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForTry>.check(generator: self.generator)
+        FunctorFilterLaws<ForTry>.check()
     }
 
     func testSemigroupLaws() {
-        property("Try semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Try<Int>>.check(
-                a: Try.success(a),
-                b: Try.success(b),
-                c: Try.success(c))
-        }
+        SemigroupLaws<Try<Int>>.check()
     }
 
     func testMonoidLaws() {
-        property("Try monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Try<Int>>.check(a: Try.success(a))
-        }
+        MonoidLaws<Try<Int>>.check()
     }
 }

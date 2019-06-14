@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension MoorePartial: EquatableK {
     public static func eq<A>(_ lhs: Kind<MoorePartial<E>, A>, _ rhs: Kind<MoorePartial<E>, A>) -> Bool where A : Equatable {
@@ -10,16 +10,12 @@ extension MoorePartial: EquatableK {
 }
 
 class MooreTest: XCTestCase {
-    func handle(_ x: Int) -> Moore<Int, Int> {
-        return Moore(view: x, handle: handle)
-    }
-
     func testFunctorLaws() {
-        FunctorLaws<MoorePartial<Int>>.check(generator: handle)
+        FunctorLaws<MoorePartial<Int>>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<MoorePartial<Int>>.check(generator: handle)
+        ComonadLaws<MoorePartial<Int>>.check()
     }
     
     func handleRoute(_ route : String) -> Moore<String, Id<String>> {

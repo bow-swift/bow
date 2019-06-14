@@ -1,7 +1,6 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class StringInstancesTest: XCTestCase {
     
@@ -10,14 +9,10 @@ class StringInstancesTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("String concatenation semigroup") <- forAll { (a: String, b: String, c: String) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<String>.check()
     }
     
     func testMonoidLaws() {
-        property("String concatenation monoid") <- forAll { (a: String) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<String>.check()
     }
 }

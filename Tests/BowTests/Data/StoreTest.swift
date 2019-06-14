@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension StorePartial: EquatableK {
     public static func eq<A>(_ lhs: Kind<StorePartial<S>, A>, _ rhs: Kind<StorePartial<S>, A>) -> Bool where A: Equatable {
@@ -10,14 +10,12 @@ extension StorePartial: EquatableK {
 }
 
 class StoreTest: XCTestCase {
-    let intStore = { (x: Int) in Store(state: x, render: id) }
-
     func testFunctorLaws() {
-        FunctorLaws<StorePartial<Int>>.check(generator: intStore)
+        FunctorLaws<StorePartial<Int>>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<StorePartial<Int>>.check(generator: intStore)
+        ComonadLaws<StorePartial<Int>>.check()
     }
     
     let greetingStore = { (name : String) in Store(state: name, render: { name in "Hi \(name)!"}) }

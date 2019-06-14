@@ -1,7 +1,7 @@
 import XCTest
 import Nimble
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension SumPartial: EquatableK where F: Comonad, G: Comonad {
     public static func eq<A>(_ lhs: Kind<SumPartial<F, G>, A>, _ rhs: Kind<SumPartial<F, G>, A>) -> Bool where A : Equatable {
@@ -10,14 +10,12 @@ extension SumPartial: EquatableK where F: Comonad, G: Comonad {
 }
 
 class SumTest: XCTestCase {
-    let generator = { (x: Int) in Sum.left(Id(x), Id(x)) }
-    
     func testFunctorLaws() {
-        FunctorLaws.check(generator: generator)
+        FunctorLaws<SumPartial<ForId, ForId>>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws.check(generator: generator)
+        ComonadLaws<SumPartial<ForId, ForId>>.check()
     }
     
     let abSum = Sum.left(Id("A"), Id("B"))

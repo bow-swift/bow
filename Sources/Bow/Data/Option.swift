@@ -48,7 +48,8 @@ public final class Option<A>: OptionOf<A> {
         return fa as! Option<A>
     }
 
-    internal var isDefined: Bool {
+    /// Checks if this option contains a value
+    public var isDefined: Bool {
         return !isEmpty
     }
 
@@ -256,7 +257,7 @@ extension Option: Semigroup where A: Semigroup {
 // MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {
-        return Option(A.empty())
+        return Option.none()
     }
 }
 

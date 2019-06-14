@@ -1,15 +1,16 @@
 import XCTest
 import BrightFutures
 @testable import BowLaws
-@testable import Bow
-@testable import BowBrightFutures
+import Bow
+import BowBrightFutures
+import BowBrightFuturesGenerators
 @testable import BowEffectsLaws
 
 private let forcedFutureQueue = DispatchQueue(label: "forcedFutureQueue", attributes: .concurrent)
 
 extension Future {
     private func forcedFuture(createFuture: @escaping () -> Future<T, E>) -> Either<E, T> {
-        var result : Future<T, E>?
+        var result: Future<T, E>?
         let sem = DispatchSemaphore(value: 0)
         forcedFutureQueue.async {
             result = createFuture()
@@ -34,14 +35,8 @@ extension FutureKPartial: EquatableK where E: Equatable {
 }
 
 class FutureKTest: XCTestCase {
-    let generator = { (x: Int) -> FutureKOf<CategoryError, Int> in
-        (x % 2 == 0) ?
-            FutureK.pure(x) :
-            FutureK.raiseError(CategoryError.arbitrary.generate)
-    }
-
     func testFunctorLaws() {
-        FunctorLaws<FutureKPartial<CategoryError>>.check(generator: self.generator)
+        FunctorLaws<FutureKPartial<CategoryError>>.check()
     }
     
     func testApplicativeLaws() {

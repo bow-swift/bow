@@ -1,26 +1,14 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class ArrayKTest: XCTestCase {
-    
-    var generator: (Int) -> ArrayKOf<Int> {
-        return { a in ArrayK<Int>.pure(a) }
-    }
-
-    func testA() {
-        let x = ArrayK([1, 2, 3, 4])
-        let y = x.map { a in 2 * a }
-        XCTAssertEqual(y, ArrayK([2, 4, 6, 8]))
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForArrayK, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForArrayK>.check(generator: self.generator)
+        FunctorLaws<ForArrayK>.check()
     }
     
     func testApplicativeLaws() {
@@ -36,38 +24,31 @@ class ArrayKTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("ArrayK semigroup laws") <- forAll() { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<ArrayK<Int>>.check(
-                a: ArrayK<Int>([a]),
-                b: ArrayK<Int>([b]),
-                c: ArrayK<Int>([c]))
-        }
+        SemigroupLaws<ArrayK<Int>>.check()
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws.check(generator: self.generator)
+        SemigroupKLaws<ForArrayK>.check()
     }
     
     func testMonoidLaws() {
-        property("ArrayK monoid laws") <- forAll() { (a: Int) in
-            return MonoidLaws<ArrayK<Int>>.check(a: ArrayK<Int>([a]))
-        }
+        MonoidLaws<ArrayK<Int>>.check()
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws.check(generator: self.generator)
+        MonoidKLaws<ForArrayK>.check()
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForArrayK>.check(generator: self.generator)
+        FunctorFilterLaws<ForArrayK>.check()
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForArrayK>.check(generator: self.generator)
+        MonadFilterLaws<ForArrayK>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForArrayK>.check(generator: self.generator)
+        FoldableLaws<ForArrayK>.check()
     }
     
     func testMonadCombineLaws() {
@@ -75,6 +56,6 @@ class ArrayKTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForArrayK>.check(generator: self.generator)
+        TraverseLaws<ForArrayK>.check()
     }
 }

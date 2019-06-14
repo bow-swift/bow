@@ -299,7 +299,7 @@ extension ForTry: FunctorFilter {
 extension Try: Semigroup where A: Semigroup {
     public func combine(_ other: Try<A>) -> Try<A> {
         return self.fold(constant(other),
-                         { a in other.fold(Try.failure,
+                         { a in other.fold(constant(Try.success(a)),
                                            { b in Try.success(a.combine(b)) })
                          })
     }
@@ -308,6 +308,6 @@ extension Try: Semigroup where A: Semigroup {
 // MARK: Instance of `Monoid` for `Try`
 extension Try: Monoid where A: Monoid {
     public static func empty() -> Try<A> {
-        return Try.success(A.empty())
+        return Try.failure(TryError.illegalState)
     }
 }
