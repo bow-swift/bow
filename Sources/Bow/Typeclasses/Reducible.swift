@@ -34,10 +34,6 @@ public extension Reducible {
         return reduceLeft(fa, { b, a in a.combine(b) })
     }
 
-//    public static func reduceK<A, G: SemigroupK>(_ fga : Kind<Self, Kind<G, A>>) -> Kind<G, A> {
-//        return reduce(fga, G.algebra())
-//    }
-
     static func reduceMap<A, B: Semigroup>(_ fa : Kind<Self, A>, _ f : (A) -> B) -> B {
         return reduceLeftTo(fa, f, { b, a in b.combine(f(a)) })
     }
