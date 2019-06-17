@@ -287,3 +287,10 @@ extension ValidatedPartial: SemigroupK where I: Semigroup {
     }
 }
 
+// MARK: Instance of `Semigroup` for `Validated`
+extension Validated: Semigroup where E: Semigroup, A: Semigroup {
+    public func combine(_ other: Validated<E, A>) -> Validated<E, A> {
+        return self.fold({ e1 in other.fold({ e2 in .invalid(e1.combine(e2)) }, { a2 in .invalid(e1) }) },
+                         { a1 in other.fold({ e2 in .invalid(e2)}, { a2 in .valid(a1.combine(a2)) }) })
+    }
+}

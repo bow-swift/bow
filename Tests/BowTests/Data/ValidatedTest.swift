@@ -40,6 +40,10 @@ class ValidatedTest: XCTestCase {
         TraverseLaws<ValidatedPartial<Int>>.check()
     }
     
+    func testSemigroupLaws() {
+        SemigroupLaws<Validated<Int, Int>>.check()
+    }
+    
     func testCheckers() {
         property("valid and invalid are mutually exclusive") <- forAll { (input: Validated<Int, Int>) in
             return xor(input.isValid, input.isInvalid)
