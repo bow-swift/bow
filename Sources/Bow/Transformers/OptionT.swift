@@ -261,3 +261,16 @@ extension OptionTPartial: MonoidK where F: Monad {
         return OptionT(F.pure(.none()))
     }
 }
+
+// MARK: Instance of `ApplicativeError` for `OptionT`
+extension OptionTPartial: ApplicativeError where F: ApplicativeError {
+    public typealias E = F.E
+    
+    public static func raiseError<A>(_ e: F.E) -> Kind<OptionTPartial<F>, A> {
+        return OptionT(F.raiseError(e))
+    }
+    
+    public static func handleErrorWith<A>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (F.E) -> Kind<OptionTPartial<F>, A>) -> Kind<OptionTPartial<F>, A> {
+        return OptionT(fa^.value.handleErrorWith { e in f(e)^.value })
+    }
+}

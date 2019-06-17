@@ -35,6 +35,10 @@ class OptionTTest: XCTestCase {
     func testFunctorFilterLaws() {
         FunctorFilterLaws<OptionTPartial<ForId>>.check()
     }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<OptionTPartial<EitherPartial<CategoryError>>>.check()
+    }
 
     func testToLeftWithFunctionWithSome() {
         property("toLeft for .some should build a correct EitherT") <- forAll { (a: Int, b: String) in
