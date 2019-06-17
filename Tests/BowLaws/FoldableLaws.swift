@@ -5,7 +5,10 @@ import BowGenerators
 class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
     public static func check() {
         leftFoldConsistentWithFoldMap()
+        rightFoldConsistentWithFoldMap()
         existsConsistentWithFind()
+        existsIsLazy()
+        forAllIsLazy()
         forallConsistentWithExists()
         forallReturnsTrueIfEmpty()
         foldMIdIsFoldL()
@@ -17,9 +20,34 @@ class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
         }
     }
     
+    private static func rightFoldConsistentWithFoldMap() {
+        property("Right fold consistent with folMap") <- forAll { (f: ArrowOf<Int, Int>, fa: KindOf<F, Int>) in
+            return fa.value.foldMap(f.getArrow) ==
+                fa.value.foldRight(Eval.later { Int.empty() }, { a, lb in lb.map { b in f.getArrow(a).combine(b) }^ }).value()
+        }
+    }
+    
     private static func existsConsistentWithFind() {
         property("Exists consistent with find") <- forAll { (input: KindOf<F, Int>, predicate: ArrowOf<Int, Bool>) in
             return F.exists(input.value, predicate.getArrow) == F.find(input.value, predicate.getArrow).fold(constant(false), constant(true))
+        }
+    }
+    
+    private static func existsIsLazy() {
+        property("Exists is lazy") <- forAll { (fa: KindOf<F, Int>) in
+            var x = 0
+            let _ = fa.value.exists { _ in x += 1; return true }
+            let expected = fa.value.isEmpty ? 0 : 1
+            return x == expected
+        }
+    }
+    
+    private static func forAllIsLazy() {
+        property("ForAll is lazy") <- forAll { (fa: KindOf<F, Int>) in
+            var x = 0
+            let _ = fa.value.forall { _ in x += 1; return true }
+            let expected = fa.value.isEmpty ? 0 : fa.value.count
+            return x == expected
         }
     }
     
