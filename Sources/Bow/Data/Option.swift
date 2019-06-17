@@ -251,6 +251,13 @@ extension ForOption: SemigroupK {
     }
 }
 
+// MARK: Instance of `MonoidK` for `Option`
+extension ForOption: MonoidK {
+    public static func emptyK<A>() -> Kind<ForOption, A> {
+        return Option.none()
+    }
+}
+
 // MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
