@@ -1,6 +1,6 @@
 import XCTest
 import SwiftCheck
-@testable import Bow
+import Bow
 
 class CurryTest: XCTestCase {
     

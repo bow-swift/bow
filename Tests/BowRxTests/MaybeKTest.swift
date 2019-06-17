@@ -1,7 +1,8 @@
 import XCTest
 @testable import BowLaws
-@testable import Bow
+import Bow
 @testable import BowRx
+import BowRxGenerators
 @testable import BowEffectsLaws
 
 extension ForMaybeK: EquatableK {
@@ -11,10 +12,8 @@ extension ForMaybeK: EquatableK {
 }
 
 class MaybeKTest: XCTestCase {
-    let generator = { (x : Int) in MaybeK.pure(x) }
-    
     func testFunctorLaws() {
-        FunctorLaws<ForMaybeK>.check(generator: generator)
+        FunctorLaws<ForMaybeK>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,6 +29,6 @@ class MaybeKTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForMaybeK>.check(generator: generator)
+        FoldableLaws<ForMaybeK>.check()
     }
 }

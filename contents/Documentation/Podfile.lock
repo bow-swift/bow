@@ -17,14 +17,8 @@ PODS:
   - BowRx (0.4.0):
     - Bow (~> 0.4.0)
     - BowEffects (~> 0.4.0)
-    - RxCocoa (~> 5.0.0)
     - RxSwift (~> 5.0.0)
   - BrightFutures (8.0.0)
-  - RxCocoa (5.0.0):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.0.0):
-    - RxSwift (~> 5)
   - RxSwift (5.0.0)
 
 DEPENDENCIES:
@@ -40,8 +34,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BrightFutures
-    - RxCocoa
-    - RxRelay
     - RxSwift
 
 EXTERNAL SOURCES:
@@ -70,12 +62,10 @@ SPEC CHECKSUMS:
   BowGeneric: e25e63851ed2f55d64055ece34021876c84c60b7
   BowOptics: e17a21fbebffe17e6a7997a6d1bafb3e303fdac4
   BowRecursionSchemes: c7ce26acdfdbb529c9d973ea6342e8cd4b886ee7
-  BowRx: 6185d638b00898302ed24511faa9a7fb10b9aacd
+  BowRx: 872b09d0b26d42e56c40d04121d6fc7c7e2a639c
   BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
 PODFILE CHECKSUM: 0fdd192b8f28a6797f9bd131a05f2e2bce19d4c1
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.2

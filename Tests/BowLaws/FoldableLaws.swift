@@ -1,58 +1,49 @@
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class FoldableLaws<F: Foldable & EquatableK> {
-    public static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        leftFoldConsistentWithFoldMap(generator)
-        existsConsistentWithFind(generator)
-        forallConsistentWithExists(generator)
-        forallReturnsTrueIfEmpty(generator)
-        foldMIdIsFoldL(generator)
+class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
+    public static func check() {
+        leftFoldConsistentWithFoldMap()
+        existsConsistentWithFind()
+        forallConsistentWithExists()
+        forallReturnsTrueIfEmpty()
+        foldMIdIsFoldL()
     }
     
-    private static func leftFoldConsistentWithFoldMap(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Left fold consistent with foldMap") <- forAll { (x: Int, f: ArrowOf<Int, Int>) in
-            let input = generator(x)
-
-            return F.foldMap(input, f.getArrow) == F.foldLeft(input, Int.empty(), { b, a in b.combine(f.getArrow(a)) })
+    private static func leftFoldConsistentWithFoldMap() {
+        property("Left fold consistent with foldMap") <- forAll { (input: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            return F.foldMap(input.value, f.getArrow) == F.foldLeft(input.value, Int.empty(), { b, a in b.combine(f.getArrow(a)) })
         }
     }
     
-    private static func existsConsistentWithFind(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Exists consistent with find") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
-            let input = generator(x)
-            
-            return F.exists(input, predicate.getArrow) == F.find(input, predicate.getArrow).fold(constant(false), constant(true))
+    private static func existsConsistentWithFind() {
+        property("Exists consistent with find") <- forAll { (input: KindOf<F, Int>, predicate: ArrowOf<Int, Bool>) in
+            return F.exists(input.value, predicate.getArrow) == F.find(input.value, predicate.getArrow).fold(constant(false), constant(true))
         }
     }
     
-    private static func forallConsistentWithExists(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Forall consistent with exists") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
-            let input = generator(x)
-            
-            if F.forall(input, predicate.getArrow) {
-                let negationExists = F.exists(input, predicate.getArrow >>> not)
-                return !negationExists && (F.isEmpty(input) || F.exists(input, predicate.getArrow))
+    private static func forallConsistentWithExists() {
+        property("Forall consistent with exists") <- forAll { (input: KindOf<F, Int>, predicate: ArrowOf<Int, Bool>) in
+            if F.forall(input.value, predicate.getArrow) {
+                let negationExists = F.exists(input.value, predicate.getArrow >>> not)
+                return !negationExists && (F.isEmpty(input.value) || F.exists(input.value, predicate.getArrow))
             } else {
                 return true
             }
         }
     }
     
-    private static func forallReturnsTrueIfEmpty(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Forall returns true if empty") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
-            let input = generator(x)
-            
-            return !F.isEmpty(input) || F.forall(input, predicate.getArrow)
+    private static func forallReturnsTrueIfEmpty() {
+        property("Forall returns true if empty") <- forAll { (input: KindOf<F, Int>, predicate: ArrowOf<Int, Bool>) in
+            return !F.isEmpty(input.value) || F.forall(input.value, predicate.getArrow)
         }
     }
     
-    private static func foldMIdIsFoldL(_ generator: @escaping (Int) -> Kind<F, Int>)  {
-        property("Exists consistent with find") <- forAll { (x: Int, f: ArrowOf<Int, Int>) in
-            let input = generator(x)
-            
-            let foldL = F.foldLeft(input, Int.empty(), { b, a in b.combine(f.getArrow(a)) })
-            let foldM = Id.fix(F.foldM(input, Int.empty(), { b, a in Id(b.combine(f.getArrow(a))) })).value
+    private static func foldMIdIsFoldL()  {
+        property("Exists consistent with find") <- forAll { (input: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            let foldL = F.foldLeft(input.value, Int.empty(), { b, a in b.combine(f.getArrow(a)) })
+            let foldM = Id.fix(F.foldM(input.value, Int.empty(), { b, a in Id(b.combine(f.getArrow(a))) })).value
             return foldL == foldM
         }
     }

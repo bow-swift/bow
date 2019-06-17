@@ -1,7 +1,6 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 extension StateTPartial: EquatableK where F: EquatableK & Monad, S == Int {
     public static func eq<A>(_ lhs: Kind<StateTPartial<F, S>, A>, _ rhs: Kind<StateTPartial<F, S>, A>) -> Bool where A : Equatable {
@@ -12,12 +11,8 @@ extension StateTPartial: EquatableK where F: EquatableK & Monad, S == Int {
 }
 
 class StateTTest: XCTestCase {
-    var generator: (Int) -> StateTOf<ForId, Int, Int> {
-        return { a in StateT<ForId, Int, Int>.pure(a) }
-    }
-    
     func testFunctorLaws() {
-        FunctorLaws<StateTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<StateTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -41,7 +36,7 @@ class StateTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<StateTPartial<ForArrayK, Int>>.check(generator: { (a : Int) in StateT<ForArrayK, Int, Int>.pure(a) })
+        SemigroupKLaws<StateTPartial<ForArrayK, Int>>.check()
     }
     
     func testMonadStateLaws() {

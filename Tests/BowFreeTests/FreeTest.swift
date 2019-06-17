@@ -1,6 +1,7 @@
 import XCTest
-@testable import Bow
-@testable import BowFree
+import Bow
+import BowFree
+import BowFreeGenerators
 @testable import BowLaws
 
 fileprivate final class ForOps {}
@@ -113,12 +114,8 @@ class FreeTest: XCTestCase {
         XCTAssertEqual(y, Id.pure(-30))
     }
     
-    fileprivate var generator: (Int) -> FreeOf<ForId, Int> {
-        return { a in Free.liftF(Id(a)) }
-    }
-    
     func testFunctorLaws() {
-        FunctorLaws<FreePartial<ForId>>.check(generator: self.generator)
+        FunctorLaws<FreePartial<ForId>>.check()
     }
     
     func testApplicativeLaws() {

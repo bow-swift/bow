@@ -1,20 +1,15 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class OptionTest: XCTestCase {
-    
-    var generator: (Int) -> Option<Int> {
-        return { a in a % 2 == 0 ? Option.some(a) : Option.none() }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForOption, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForOption>.check(generator: self.generator)
+        FunctorLaws<ForOption>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,38 +25,31 @@ class OptionTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("Option semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Option<Int>>.check(
-                a: Option.some(a),
-                b: Option.some(b),
-                c: Option.some(c))
-        }
+        SemigroupLaws<Option<Int>>.check()
     }
     
     func testMonoidLaws() {
-        property("Option monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Option<Int>>.check(a: Option.some(a))
-        }
+        MonoidLaws<Option<Int>>.check()
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForOption>.check(generator: self.generator)
+        FunctorFilterLaws<ForOption>.check()
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForOption>.check(generator: self.generator)
+        MonadFilterLaws<ForOption>.check()
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Option<Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForOption>.check(generator: self.generator)
+        FoldableLaws<ForOption>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForOption>.check(generator: self.generator)
+        TraverseLaws<ForOption>.check()
     }
     
     func testTraverseFilterLaws() {
@@ -69,39 +57,34 @@ class OptionTest: XCTestCase {
     }
     
     func testFromToOption() {
-        property("fromOption - toOption isomorphism") <- forAll { (x: Int?, y: Int) in
-            let option = y % 2 == 0 ? Option<Int>.none() : Option<Int>.some(y)
+        property("fromOption - toOption isomorphism") <- forAll { (x: Int?, option: Option<Int>) in
             return Option.fromOptional(x).toOptional() == x &&
                 Option.fromOptional(option.toOptional()) == option
         }
     }
     
     func testDefinedOrEmpty() {
-        property("Option cannot be simultaneously empty and defined") <- forAll { (x: Int?) in
-            let option = Option.fromOptional(x)
+        property("Option cannot be simultaneously empty and defined") <- forAll { (option: Option<Int>) in
             return xor(option.isEmpty, option.isDefined)
         }
     }
     
     func testGetOrElse() {
-        property("getOrElse consistent with orElse") <- forAll { (x: Int?, y: Int) in
-            let option = Option.fromOptional(x)
+        property("getOrElse consistent with orElse") <- forAll { (option: Option<Int>, y: Int) in
             return Option<Int>.pure(option.getOrElse(y)) == Option.fix(option).orElse(Option.some(y))
         }
     }
     
     func testFilter() {
-        property("filter is opposite of filterNot") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
-            let option = Option.fromOptional(x)
+        property("filter is opposite of filterNot") <- forAll { (option: Option<Int>, predicate: ArrowOf<Int, Bool>) in
             let none = Option<Int>.none()
-            return xor(option.filter(predicate.getArrow) == none, option.filterNot(predicate.getArrow) == none)
+            return xor(option.filter(predicate.getArrow) == none, option.filterNot(predicate.getArrow) == none) || option.isEmpty
         }
     }
     
     func testExistForAll() {
-        property("exists and forall are equivalent") <- forAll { (x: Int, predicate: ArrowOf<Int, Bool>) in
-            let option = Option.fromOptional(x)
-            return option.exists(predicate.getArrow) == option.forall(predicate.getArrow)
+        property("exists and forall are equivalent") <- forAll { (option: Option<Int>, predicate: ArrowOf<Int, Bool>) in
+            return option.exists(predicate.getArrow) == option.forall(predicate.getArrow) || option.isEmpty
         }
     }
 }

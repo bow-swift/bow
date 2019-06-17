@@ -1,10 +1,9 @@
-import Foundation
 import SwiftCheck
 import Nimble
-@testable import Bow
+import Bow
+import BowGenerators
 
-class MonadLaws<F: Monad & EquatableK> {
-    
+class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     static func check() {
         leftIdentity()
         rightIdentity()

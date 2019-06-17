@@ -1,6 +1,5 @@
-import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
 
 class ComparableLaws<A: Comparable & Arbitrary> {
     

@@ -1,26 +1,23 @@
-import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class EquatableKLaws<F: EquatableK, A: Arbitrary & Equatable> {
+class EquatableKLaws<F: EquatableK & ArbitraryK, A: Arbitrary & Equatable> {
     
-    static func check(generator: @escaping (A) -> Kind<F, A>) {
-        identityInEquality(generator: generator)
-        commutativityInEquality(generator: generator)
+    static func check() {
+        identityInEquality()
+        commutativityInEquality()
     }
     
-    private static func identityInEquality(generator: @escaping (A) -> Kind<F, A>) {
-        property("Identity: Every object is equal to itself") <- forAll() { (a : A) in
-            let fa = generator(a)
-            return fa == fa
+    private static func identityInEquality() {
+        property("Identity: Every object is equal to itself") <- forAll() { (fa: KindOf<F, A>) in
+            return fa.value == fa.value
         }
     }
     
-    private static func commutativityInEquality(generator: @escaping (A) -> Kind<F, A>) {
-        property("Equality is commutative") <- forAll() { (a : A, b : A) in
-            let fa = generator(a)
-            let fb = generator(b)
-            return (fa == fb) == (fb == fa)
+    private static func commutativityInEquality() {
+        property("Equality is commutative") <- forAll() { (fa: KindOf<F, A>, fb: KindOf<F, A>) in
+            return (fa.value == fb.value) == (fb.value == fa.value)
         }
     }
 }

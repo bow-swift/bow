@@ -1,19 +1,14 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class ConstTest: XCTestCase {
-    var generator: (Int) -> Const<Int, Int> {
-        return { a in Const<Int, Int>(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws<ConstPartial<Int>, Int>.check(generator: self.generator)
+        EquatableKLaws<ConstPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ConstPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<ConstPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -21,29 +16,22 @@ class ConstTest: XCTestCase {
     }
     
     func testSemigroupLaws() {
-        property("Const semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<Const<Int, Int>>.check(
-                a: Const<Int, Int>(a),
-                b: Const<Int, Int>(b),
-                c: Const<Int, Int>(c))
-        }
+        SemigroupLaws<Const<Int, Int>>.check()
     }
     
     func testMonoidLaws() {
-        property("Const monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws<Const<Int, Int>>.check(a: Const<Int, Int>(a))
-        }
+        MonoidLaws<Const<Int, Int>>.check()
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws<Const<Int, Int>>.check(generator: self.generator)
+        CustomStringConvertibleLaws<Const<Int, Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ConstPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<ConstPartial<Int>>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ConstPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<ConstPartial<Int>>.check()
     }
 }

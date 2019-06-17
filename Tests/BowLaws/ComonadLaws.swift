@@ -1,68 +1,60 @@
-import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class ComonadLaws<F: Comonad & EquatableK> {
-    
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        duplicateThenExtractIsId(generator)
-        duplicateThenMapExtractIsId(generator)
-        mapAndCoflatMapCoherence(generator)
-        leftIdentity(generator)
-        rightIdentity(generator)
-        cokleisliLeftIdentity(generator)
-        cokleisliRightIdentity(generator)
+class ComonadLaws<F: Comonad & EquatableK & ArbitraryK> {
+    static func check() {
+        duplicateThenExtractIsId()
+        duplicateThenMapExtractIsId()
+        mapAndCoflatMapCoherence()
+        leftIdentity()
+        rightIdentity()
+        cokleisliLeftIdentity()
+        cokleisliRightIdentity()
     }
     
-    private static func duplicateThenExtractIsId(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Duplicate then extract is equivalent to id") <- forAll { (a: Int) in
-            let fa = generator(a)
-            return F.extract(F.duplicate(fa)) == fa
+    private static func duplicateThenExtractIsId() {
+        property("Duplicate then extract is equivalent to id") <- forAll { (fa: KindOf<F, Int>) in
+            return F.extract(F.duplicate(fa.value)) == fa.value
         }
     }
     
-    private static func duplicateThenMapExtractIsId(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Duplicate then map extract is equivalent to id") <- forAll { (a: Int) in
-            let fa = generator(a)
-            return F.map(F.duplicate(fa), F.extract) == fa
+    private static func duplicateThenMapExtractIsId() {
+        property("Duplicate then map extract is equivalent to id") <- forAll { (fa: KindOf<F, Int>) in
+            return F.map(F.duplicate(fa.value), F.extract) == fa.value
         }
     }
     
-    private static func mapAndCoflatMapCoherence(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("map and coflatMap coherence") <- forAll { (a: Int, f: ArrowOf<Int, Int>) in
-            let fa = generator(a)
-            return F.map(fa, f.getArrow) == F.coflatMap(fa, { a in f.getArrow(F.extract(a)) })
+    private static func mapAndCoflatMapCoherence() {
+        property("map and coflatMap coherence") <- forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            return F.map(fa.value, f.getArrow) == F.coflatMap(fa.value, { a in f.getArrow(F.extract(a)) })
         }
     }
     
-    private static func leftIdentity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Left identity") <- forAll { (a: Int) in
-            let fa = generator(a)
-            return F.coflatMap(fa, F.extract) == fa
+    private static func leftIdentity() {
+        property("Left identity") <- forAll { (fa: KindOf<F, Int>) in
+            return F.coflatMap(fa.value, F.extract) == fa.value
         }
     }
     
-    private static func rightIdentity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Right identity") <- forAll { (a: Int, b: Int) in
-            let fa = generator(a)
-            let f = { (_ : Kind<F, Int>) in generator(b) }
-            return F.extract(F.coflatMap(fa, f)) == f(fa)
+    private static func rightIdentity() {
+        property("Right identity") <- forAll { (fa: KindOf<F, Int>, fb: KindOf<F, Int>) in
+            let f = { (_ : Kind<F, Int>) in fb.value }
+            return F.extract(F.coflatMap(fa.value, f)) == f(fa.value)
         }
     }
     
-    private static func cokleisliLeftIdentity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Cokleisli left identity") <- forAll { (a: Int, b: Int) in
-            let fa = generator(a)
-            let f = { (_: Kind<F, Int>) in generator(b) }
-            return Cokleisli(F.extract).andThen(Cokleisli(f)).run(fa) == f(fa)
+    private static func cokleisliLeftIdentity() {
+        property("Cokleisli left identity") <- forAll { (fa: KindOf<F, Int>, fb: KindOf<F, Int>) in
+            let f = { (_: Kind<F, Int>) in fb.value }
+            return Cokleisli(F.extract).andThen(Cokleisli(f)).run(fa.value) == f(fa.value)
         }
     }
     
-    private static func cokleisliRightIdentity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Cokleisli right identity") <- forAll { (a: Int, b: Int) in
-            let fa = generator(a)
-            let f = { (_: Kind<F, Int>) in generator(b) }
-            return Cokleisli(f).andThen(Cokleisli(F.extract)).run(fa) == f(fa)
+    private static func cokleisliRightIdentity() {
+        property("Cokleisli right identity") <- forAll { (fa: KindOf<F, Int>, fb: KindOf<F, Int>) in
+            let f = { (_: Kind<F, Int>) in fb.value }
+            return Cokleisli(f).andThen(Cokleisli(F.extract)).run(fa.value) == f(fa.value)
         }
     }
 }
