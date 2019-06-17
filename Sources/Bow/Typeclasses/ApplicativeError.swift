@@ -50,6 +50,26 @@ public extension ApplicativeError {
     static func fromEither<A>(_ fea: Either<E, A>) -> Kind<Self, A> {
         return fea.fold(raiseError, pure)
     }
+    
+    /// Converts an `Option` value into a value in the context implementing this instance.
+    ///
+    /// - Parameters:
+    ///   - oa: An `Option` value.
+    ///   - f: A function providing the error value in case the option is empty.
+    /// - Returns: A value in the context implementing this instance.
+    static func fromOption<A>(_ oa: Option<A>, _ f: () -> E) -> Kind<Self, A> {
+        return oa.fold({ Self.raiseError(f()) }, Self.pure)
+    }
+    
+    /// Converts a `Try` value into a value in the context implementing this instance.
+    ///
+    /// - Parameters:
+    ///   - ta: A `Try` value.
+    ///   - f: A function transforming the error contained in `Try` to the error type of this instance.
+    /// - Returns: A value in the context implementing this instance.
+    static func fromTry<A>(_ ta: Try<A>, _ f: (Error) -> E) -> Kind<Self, A> {
+        return ta.fold({ e in Self.raiseError(f(e)) }, Self.pure)
+    }
 
     /// Evaluates a throwing function, catching and mapping errors.
     ///
@@ -132,6 +152,26 @@ public extension Kind where F: ApplicativeError {
         return F.fromEither(fea)
     }
 
+    /// Converts an `Option` value into a value in the context implementing this instance.
+    ///
+    /// - Parameters:
+    ///   - oa: An `Option` value.
+    ///   - f: A function providing the error value in case the option is empty.
+    /// - Returns: A value in the context implementing this instance.
+    static func fromOption(_ oa: Option<A>, _ f: () -> F.E) -> Kind<F, A> {
+        return F.fromOption(oa, f)
+    }
+
+    /// Converts a `Try` value into a value in the context implementing this instance.
+    ///
+    /// - Parameters:
+    ///   - ta: A `Try` value.
+    ///   - f: A function transforming the error contained in `Try` to the error type of this instance.
+    /// - Returns: A value in the context implementing this instance.
+    static func fromTry(_ ta: Try<A>, _ f: (Error) -> F.E) -> Kind<F, A> {
+        return F.fromTry(ta, f)
+    }
+    
     /// Evaluates a throwing function, catching and mapping errors.
     ///
     /// This is a convenience method to call `ApplicativeError.catchError` as a static method of this type.
