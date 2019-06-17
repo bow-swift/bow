@@ -317,3 +317,16 @@ extension WriterTPartial: MonadWriter where F: Monad, W: Monoid {
         })
     }
 }
+
+// MARK: Instance of `ApplicativeError` for `WriterT`
+extension WriterTPartial: ApplicativeError where F: MonadError, W: Monoid {
+    public typealias E = F.E
+    
+    public static func raiseError<A>(_ e: F.E) -> Kind<WriterTPartial<F, W>, A> {
+        return WriterT(F.raiseError(e))
+    }
+    
+    public static func handleErrorWith<A>(_ fa: Kind<WriterTPartial<F, W>, A>, _ f: @escaping (F.E) -> Kind<WriterTPartial<F, W>, A>) -> Kind<WriterTPartial<F, W>, A> {
+        return WriterT(fa^.value.handleErrorWith { e in f(e)^.value })
+    }
+}
