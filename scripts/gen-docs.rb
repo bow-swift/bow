@@ -23,7 +23,7 @@ $invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
 # invalid_tags = ["0.1.0"], valid_tags = ["0.1.0"]
 $valid_tags = []
 
-# The path of the dir where the Keyll source is located.
+# The path of the dir where the Jekyll source is located.
 $source_dir = "docs"
 
 # The path of the dir that will be published. Check out GitHub Pages/Travis for this.
