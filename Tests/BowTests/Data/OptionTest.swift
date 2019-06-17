@@ -64,6 +64,10 @@ class OptionTest: XCTestCase {
         TraverseFilterLaws<ForOption>.check()
     }
     
+    func testMonadCombineLaws() {
+        MonadCombineLaws<ForOption>.check()
+    }
+    
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <- forAll { (x: Int?, option: Option<Int>) in
             return Option.fromOptional(x).toOptional() == x &&

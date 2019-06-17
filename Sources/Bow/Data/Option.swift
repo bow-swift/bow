@@ -258,6 +258,9 @@ extension ForOption: MonoidK {
     }
 }
 
+// MARK: Instance of `MonadCombine` for `Option`
+extension ForOption: MonadCombine {}
+
 // MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
