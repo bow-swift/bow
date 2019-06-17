@@ -46,4 +46,8 @@ class WriterTTest: XCTestCase {
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
     }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
+    }
 }

@@ -330,3 +330,6 @@ extension WriterTPartial: ApplicativeError where F: MonadError, W: Monoid {
         return WriterT(fa^.value.handleErrorWith { e in f(e)^.value })
     }
 }
+
+// MARK: Instance of `MonadError` for `WriterT`
+extension WriterTPartial: MonadError where F: MonadError, W: Monoid {}
