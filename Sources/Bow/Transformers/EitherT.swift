@@ -97,6 +97,14 @@ extension EitherT where F: Functor {
     public func toOptionT() -> OptionT<F, B> {
         return OptionT<F, B>(value.map { either in either.toOption() } )
     }
+    
+    /// Transforms the left type of the nested `Either`.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: An `EitherT` were the left type has been transformed.
+    public func mapLeft<C>(_ f: @escaping (A) -> C) -> EitherT<F, C, B> {
+        return EitherT<F, C, B>(self.value.map { either in either.bimap(f, id) })
+    }
 }
 
 // MARK: Functions for `EitherT` when the effect has an instance of `Applicative`.
