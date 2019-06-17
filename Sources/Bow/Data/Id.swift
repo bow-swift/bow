@@ -121,3 +121,17 @@ extension ForId: Traverse {
         return G.map(f(id.value), Id<B>.init)
     }
 }
+
+// MARK: Instance of `Semigroup` for `Id`
+extension Id: Semigroup where A: Semigroup {
+    public func combine(_ other: Id<A>) -> Id<A> {
+        return Id(self.value.combine(other.value))
+    }
+}
+
+// MARK: Instance of `Monoid` for `Id`
+extension Id: Monoid where A: Monoid {
+    public static func empty() -> Id<A> {
+        return Id(A.empty())
+    }
+}
