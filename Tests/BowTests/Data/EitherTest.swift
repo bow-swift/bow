@@ -48,6 +48,14 @@ class EitherTest: XCTestCase {
         TraverseLaws<EitherPartial<Int>>.check()
     }
     
+    func testSemigroupLaws() {
+        SemigroupLaws<Either<Int, Int>>.check()
+    }
+    
+    func testMonoidLaws() {
+        MonoidLaws<Either<Int, Int>>.check()
+    }
+    
     func testCheckers() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
