@@ -217,6 +217,14 @@ public extension Foldable {
     static func count<A>(_ fa: Kind<Self, A>) -> Int64 {
         return foldMap(fa, constant(1))
     }
+    
+    static func foldK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
+        return reduceK(fga)
+    }
+    
+    static func reduceK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
+        return foldLeft(fga, Kind<G, A>.emptyK(), { b, a in b.combineK(a) })
+    }
 }
 
 // MARK: Syntax for Foldable
@@ -380,6 +388,14 @@ public extension Kind where F: Foldable {
     /// - Returns: An integer value with the count of how many elements are contained in the structure.
     var count: Int64 {
         return F.count(self)
+    }
+    
+    func foldK<G: MonoidK, B>() -> Kind<G, B> where A == Kind<G, B> {
+        return F.foldK(self)
+    }
+    
+    func reduceK<G: MonoidK, B>() -> Kind<G, B> where A == Kind<G, B> {
+        return F.reduceK(self)
     }
 }
 
