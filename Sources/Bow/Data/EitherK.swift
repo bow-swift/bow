@@ -69,7 +69,11 @@ extension EitherKPartial: EquatableK where F: EquatableK, G: EquatableK {
 }
 
 // MARK: Instance of `Invariant` for `EitherK`.
-extension EitherKPartial: Invariant where F: Functor, G: Functor {}
+extension EitherKPartial: Invariant where F: Invariant, G: Invariant {
+    public static func imap<A, B>(_ fa: Kind<EitherKPartial<F, G>, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<EitherKPartial<F, G>, B> {
+        return EitherK(fa^.run.bimap({ a in a.imap(f, g) }, { b in b.imap(f, g) }))
+    }
+}
 
 // MARK: Instance of `Functor` for `EitherK`.
 extension EitherKPartial: Functor where F: Functor, G: Functor {
@@ -120,5 +124,12 @@ extension EitherKPartial: Traverse where F: Traverse, G: Traverse {
         return cop.run.fold(
             { fa in H.map(fa.traverse(f), { fb in EitherK(Either.left(fb)) })},
             { ga in H.map(ga.traverse(f), { gb in EitherK(Either.right(gb)) })})
+    }
+}
+
+// MARK: Instance of `Contravariant` for `EitherK`
+extension EitherKPartial: Contravariant where F: Contravariant, G: Contravariant {
+    public static func contramap<A, B>(_ fa: Kind<EitherKPartial<F, G>, A>, _ f: @escaping (B) -> A) -> Kind<EitherKPartial<F, G>, B> {
+        return EitherK(fa^.run.bimap({ a in a.contramap(f) }, { b in b.contramap(f) }))
     }
 }

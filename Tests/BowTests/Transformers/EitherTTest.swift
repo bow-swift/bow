@@ -35,6 +35,14 @@ class EitherTTest: XCTestCase {
     func testSemigroupKLaws() {
         SemigroupKLaws<EitherTPartial<ForId, Int>>.check()
     }
+    
+    func testFoldableLaws() {
+        FoldableLaws<EitherTPartial<ForId, Int>>.check()
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<EitherTPartial<ForId, Int>>.check()
+    }
 
     func testOptionTConversion() {
         property("Left converted to none") <- forAll { (x: Int) in

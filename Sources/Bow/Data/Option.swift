@@ -249,6 +249,23 @@ extension ForOption: TraverseFilter {
     }
 }
 
+// MARK: Instance of `SemigroupK` for `Option`
+extension ForOption: SemigroupK {
+    public static func combineK<A>(_ x: Kind<ForOption, A>, _ y: Kind<ForOption, A>) -> Kind<ForOption, A> {
+        return x^.fold(constant(y), Option.some)
+    }
+}
+
+// MARK: Instance of `MonoidK` for `Option`
+extension ForOption: MonoidK {
+    public static func emptyK<A>() -> Kind<ForOption, A> {
+        return Option.none()
+    }
+}
+
+// MARK: Instance of `MonadCombine` for `Option`
+extension ForOption: MonadCombine {}
+
 // MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {

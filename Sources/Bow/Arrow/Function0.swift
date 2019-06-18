@@ -96,3 +96,17 @@ extension ForFunction0: Comonad {
 
 // MARK: Instance of `Bimonad` for `Function0`
 extension ForFunction0: Bimonad {}
+
+// MARK: Instance of `Semigroup` for `Function0`
+extension Function0: Semigroup where A: Semigroup {
+    public func combine(_ other: Function0<A>) -> Function0<A> {
+        return Function0 { self.invoke().combine(other.invoke()) }
+    }
+}
+
+// MARK: Instance of `Monoid` for `Function0`
+extension Function0: Monoid where A: Monoid {
+    public static func empty() -> Function0<A> {
+        return Function0(constant(A.empty()))
+    }
+}

@@ -233,3 +233,21 @@ extension EitherTPartial: SemigroupK where F: Monad {
         })
     }
 }
+
+// MARK: Instance of `Foldable` for `EitherT`
+extension EitherTPartial: Foldable where F: Foldable {
+    public static func foldLeft<A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa^.value.foldLeft(b, { bb, either in either.foldLeft(bb, f) })
+    }
+    
+    public static func foldRight<A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa^.value.foldRight(b, { either, bb in either.foldRight(bb, f) })
+    }
+}
+
+// MARK: Instance of `Traverse` for `EitherT`
+extension EitherTPartial: Traverse where F: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<EitherTPartial<F, L>, B>> {
+        return fa^.value.traverse { either in either.traverse(f) }.map { x in EitherT(x.map{ b in b^ }) }
+    }
+}

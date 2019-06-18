@@ -1,6 +1,8 @@
 import XCTest
 @testable import BowLaws
 import Bow
+import BowGenerators
+import SwiftCheck
 
 class EitherKTest: XCTestCase {
     func testEquatableLaws() {
