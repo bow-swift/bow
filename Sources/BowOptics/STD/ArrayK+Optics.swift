@@ -12,7 +12,7 @@ public extension ArrayK {
         })
     }
 
-    static func toOptionNEA() -> Iso<ArrayK<A>, Option<NonEmptyArray<A>>> {
+    static var toOptionNEA: Iso<ArrayK<A>, Option<NonEmptyArray<A>>> {
         return toPOptionNEA()
     }
 }
@@ -24,7 +24,7 @@ public extension Array {
             reverseGet: { arrayK in arrayK.asArray })
     }
 
-    static func toArrayK() -> Iso<Array<Element>, ArrayK<Element>> {
+    static var toArrayK: Iso<Array<Element>, ArrayK<Element>> {
         return toPArrayK()
     }
 }

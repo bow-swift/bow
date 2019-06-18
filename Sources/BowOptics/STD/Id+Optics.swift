@@ -8,7 +8,7 @@ public extension Id {
             reverseGet: Id<B>.init)
     }
 
-    static func toValue() -> Iso<Id<A>, A> {
+    static var toValue: Iso<Id<A>, A> {
         return toPValue()
     }
 }

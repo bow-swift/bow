@@ -8,7 +8,7 @@ public extension Either {
             reverseGet: { x in x.toEither() })
     }
 
-    static func toValidated() -> Iso<Either<A, B>, Validated<A, B>> {
+    static var toValidated: Iso<Either<A, B>, Validated<A, B>> {
         return toPValidated()
     }
 }

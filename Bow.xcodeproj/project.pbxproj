@@ -171,7 +171,7 @@
 		11E71726219D722900B94845 /* Either+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BD217E2E9200969984 /* Either+Optics.swift */; };
 		11E71727219D722900B94845 /* Id+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B6217E2E9200969984 /* Id+Optics.swift */; };
 		11E71728219D722900B94845 /* ArrayK+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BB217E2E9200969984 /* ArrayK+Optics.swift */; };
-		11E71729219D722900B94845 /* Maybe+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B8217E2E9200969984 /* Maybe+Optics.swift */; };
+		11E71729219D722900B94845 /* Option+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B8217E2E9200969984 /* Option+Optics.swift */; };
 		11E7172A219D722900B94845 /* NonEmptyArray+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BC217E2E9200969984 /* NonEmptyArray+Optics.swift */; };
 		11E7172B219D722900B94845 /* String+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B9217E2E9200969984 /* String+Optics.swift */; };
 		11E7172C219D722900B94845 /* Try+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B7217E2E9200969984 /* Try+Optics.swift */; };
@@ -994,7 +994,7 @@
 		8BA0F4B4217E2E9200969984 /* Traversal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Traversal.swift; sourceTree = "<group>"; };
 		8BA0F4B6217E2E9200969984 /* Id+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Id+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4B7217E2E9200969984 /* Try+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Try+Optics.swift"; sourceTree = "<group>"; };
-		8BA0F4B8217E2E9200969984 /* Maybe+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Maybe+Optics.swift"; sourceTree = "<group>"; };
+		8BA0F4B8217E2E9200969984 /* Option+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Option+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4B9217E2E9200969984 /* String+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4BA217E2E9200969984 /* Validated+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Validated+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4BB217E2E9200969984 /* ArrayK+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ArrayK+Optics.swift"; sourceTree = "<group>"; };
@@ -1850,7 +1850,7 @@
 				8BA0F4BB217E2E9200969984 /* ArrayK+Optics.swift */,
 				8BA0F4BD217E2E9200969984 /* Either+Optics.swift */,
 				8BA0F4B6217E2E9200969984 /* Id+Optics.swift */,
-				8BA0F4B8217E2E9200969984 /* Maybe+Optics.swift */,
+				8BA0F4B8217E2E9200969984 /* Option+Optics.swift */,
 				8BA0F4BC217E2E9200969984 /* NonEmptyArray+Optics.swift */,
 				8BA0F4B9217E2E9200969984 /* String+Optics.swift */,
 				8BA0F4B7217E2E9200969984 /* Try+Optics.swift */,
@@ -3081,7 +3081,7 @@
 				1126CA9622B12EC400F840CB /* Tuple3.swift in Sources */,
 				11E71728219D722900B94845 /* ArrayK+Optics.swift in Sources */,
 				1126CA9E22B1314F00F840CB /* Tuple7.swift in Sources */,
-				11E71729219D722900B94845 /* Maybe+Optics.swift in Sources */,
+				11E71729219D722900B94845 /* Option+Optics.swift in Sources */,
 				11E7172A219D722900B94845 /* NonEmptyArray+Optics.swift in Sources */,
 				1126CA9822B12F8500F840CB /* Tuple4.swift in Sources */,
 				11E7172B219D722900B94845 /* String+Optics.swift in Sources */,
