@@ -274,7 +274,7 @@ extension Optional {
     /// This is an alias for `Optional.k()`.
     ///
     /// - Returns: An Option value with the same structure as this value.
-    func toOption() -> Option<Wrapped> {
+    public func toOption() -> Option<Wrapped> {
         return Option<Wrapped>.fromOptional(self)
     }
 
@@ -283,7 +283,7 @@ extension Optional {
     /// This is an alias for `Optional.k()`.
     ///
     /// - Returns: An Option value with the same structure as this value.
-    func k() -> Option<Wrapped> {
+    public func k() -> Option<Wrapped> {
         return toOption()
     }
 }
