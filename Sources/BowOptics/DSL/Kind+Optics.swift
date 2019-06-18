@@ -2,7 +2,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension Kind where F: Traverse {
-    static func traversalK() -> Traversal<Kind<F, A>, A> {
+    static var traversalK: Traversal<Kind<F, A>, A> {
         return KindTraversal<F, A>()
     }
 }

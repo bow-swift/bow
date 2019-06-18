@@ -3,8 +3,12 @@ import Bow
 
 // MARK: Optics extensions
 public extension ArrayK {
-    static func traversal() -> Traversal<ArrayK<A>, A> {
-        return ArrayKTraversal<A>()
+    static var fixIso: Iso<ArrayK<A>, ArrayKOf<A>> {
+        return Iso(get: id, reverseGet: ArrayK.fix)
+    }
+    
+    static var traversal: Traversal<ArrayK<A>, A> {
+        return fixIso + traversalK
     }
 }
 
@@ -13,7 +17,7 @@ extension ArrayK: Each {
     public typealias EachFoci = A
     
     public static var each: Traversal<ArrayK<A>, A> {
-        return ArrayK.traversal()
+        return traversal
     }
 }
 
@@ -24,8 +28,7 @@ extension ArrayK: Index {
     
     public static func index(_ i: Int) -> Optional<ArrayK<A>, A> {
         return Optional(
-            set: { arrayK, e in
-                arrayK.asArray.enumerated().map { x in (x.offset == i) ? e : x.element }.k()
+            set: { arrayK, e in arrayK.asArray.enumerated().map { x in (x.offset == i) ? e : x.element }.k()
         }, getOrModify: { array in
             array.getOrNone(i).fold({ Either.left(array) }, Either.right)
         })
@@ -53,11 +56,5 @@ private class ArrayKFilterIndexTraversal<A>: Traversal<ArrayK<A>, A> {
         return F.map(s.asArray.enumerated().map(id).k().traverse({ x in
             self.predicate(x.offset) ? f(x.element) : F.pure(x.element)
         }), ArrayK<A>.fix)
-    }
-}
-
-private class ArrayKTraversal<A>: Traversal<ArrayK<A>, A> {
-    override func modifyF<F: Applicative>(_ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>>  {
-        return s.traverse(f).map { x in x^ }
     }
 }
