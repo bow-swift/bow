@@ -50,10 +50,6 @@ public class Free<S, A>: FreeOf<S, A> {
             return freeSA.step().foldMapChild(f)
         }
     }
-    
-    public func runK<M: Monad>() -> Kind<M, A> {
-        return foldMapK(FunctionK<M, M>.id)
-    }
 
     fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>,A>> {
         fatalError("foldMapChild must be implemented by subclasses")
