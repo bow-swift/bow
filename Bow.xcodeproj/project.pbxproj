@@ -151,6 +151,7 @@
 		11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD22217F1E2B00844D9D /* Reverse.swift */; };
 		11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD27217F1FC200844D9D /* ReverseTest.swift */; };
 		11E4190B22B90FE2009BDFB3 /* AutoGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4190A22B90FE2009BDFB3 /* AutoGetter.swift */; };
+		11E4190F22B91169009BDFB3 /* AutoSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4190E22B91169009BDFB3 /* AutoSetter.swift */; };
 		11E71715219D722900B94845 /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B2217E2E9200969984 /* BoundSetter.swift */; };
 		11E71716219D722900B94845 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BE217E2E9200969984 /* Fold.swift */; };
 		11E71717219D722900B94845 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B3217E2E9200969984 /* Getter.swift */; };
@@ -799,6 +800,7 @@
 		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
 		11DDCD27217F1FC200844D9D /* ReverseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseTest.swift; sourceTree = "<group>"; };
 		11E4190A22B90FE2009BDFB3 /* AutoGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGetter.swift; sourceTree = "<group>"; };
+		11E4190E22B91169009BDFB3 /* AutoSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSetter.swift; sourceTree = "<group>"; };
 		11E71712219D704F00B94845 /* BowOptics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOptics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11E71713219D705000B94845 /* Bow-Optics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Optics-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Optics-Info.plist"; sourceTree = "<absolute>"; };
 		11E71802219D7D5900B94845 /* BowOpticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowOpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1389,6 +1391,7 @@
 				1126CA8922B1144200F840CB /* AutoOptics.swift */,
 				1126CA8D22B1253D00F840CB /* AutoOptional.swift */,
 				1126CA8F22B1262F00F840CB /* AutoPrism.swift */,
+				11E4190E22B91169009BDFB3 /* AutoSetter.swift */,
 			);
 			path = Auto;
 			sourceTree = "<group>";
@@ -3087,6 +3090,7 @@
 				11E7172B219D722900B94845 /* String+Optics.swift in Sources */,
 				11E4190B22B90FE2009BDFB3 /* AutoGetter.swift in Sources */,
 				11E7172C219D722900B94845 /* Try+Optics.swift in Sources */,
+				11E4190F22B91169009BDFB3 /* AutoSetter.swift in Sources */,
 				11E7172D219D722900B94845 /* Validated+Optics.swift in Sources */,
 				11E7172E219D722900B94845 /* At.swift in Sources */,
 				1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */,
