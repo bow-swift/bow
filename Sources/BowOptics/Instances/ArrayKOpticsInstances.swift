@@ -58,6 +58,6 @@ private class ArrayKFilterIndexTraversal<A>: Traversal<ArrayK<A>, A> {
 
 private class ArrayKTraversal<A>: Traversal<ArrayK<A>, A> {
     override func modifyF<F: Applicative>(_ s: ArrayK<A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, ArrayK<A>>  {
-        return F.map(s.traverse(f), { x in ArrayK<A>.fix(x) })
+        return s.traverse(f).map { x in x^ }
     }
 }
