@@ -164,6 +164,22 @@ extension StateT where F: Monad {
             }
         )
     }
+    
+    /// Modifies the state with a function and returns unit.
+    ///
+    /// - Parameter f: Function to modify the state.
+    /// - Returns: A StateT value with a modified state and unit as result value.
+    public func modifyF(_ f: @escaping (S) -> Kind<F, S>) -> StateT<F, S, ()> {
+        return StateT<F, S, ()>(F.pure({ s in f(s).map { ss in (ss, ()) } }))
+    }
+    
+    /// Sets the state to a specific value and returns unit.
+    ///
+    /// - Parameter fs: Value to set the state.
+    /// - Returns: A StateT value with a modified state and unit as result value.
+    public func setF(_ fs: Kind<F, S>) -> StateT<F, S, ()> {
+        return self.modifyF { _ in fs }
+    }
 }
 
 // MARK: Instance of `Invariant` for `StateT`
