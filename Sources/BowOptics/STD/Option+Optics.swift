@@ -8,7 +8,7 @@ public extension Option {
             reverseGet: Option<B>.fromOptional)
     }
 
-    static func toOption() -> Iso<Option<A>, A?> {
+    static var toOption: Iso<Option<A>, A?> {
         return toPOption()
     }
 
@@ -21,11 +21,11 @@ public extension Option {
             reverseGet: Option<B>.some)
     }
 
-    static func somePrism() -> Prism<Option<A>, A> {
+    static var somePrism: Prism<Option<A>, A> {
         return PSomePrism()
     }
 
-    static func nonePrism() -> Prism<Option<A>, ()> {
+    static var nonePrism: Prism<Option<A>, ()> {
         return Prism<Option<A>, ()>(
             getOrModify: { option in
                 option.fold({ Either<Option<A>, ()>.right(unit) },
@@ -42,7 +42,7 @@ public extension Option {
                                                 { b in Option<B>.some(b) })})
     }
 
-    static func toEither() -> Iso<Option<A>, Either<(), A>> {
+    static var toEither: Iso<Option<A>, Either<(), A>> {
         return toPEither()
     }
 }

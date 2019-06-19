@@ -1,7 +1,7 @@
 import Foundation
 import SwiftCheck
-@testable import Bow
-@testable import BowOptics
+import Bow
+import BowOptics
 
 struct Token {
     let value : String

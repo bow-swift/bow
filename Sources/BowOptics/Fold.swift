@@ -6,27 +6,14 @@ public final class FoldPartial<S>: Kind<ForFold, S> {}
 public typealias FoldOf<S, A> = Kind<FoldPartial<S>, A>
 
 open class Fold<S, A>: FoldOf<S, A> {
-
-    public static func identity() -> Fold<A, A> {
-        return Iso<A, A>.identity().asFold()
-    }
-
-    public static func codiagonal() -> Fold<Either<S, S>, S> {
-        return CodiagonalFold<S>()
-    }
-
-    public static func select(_ predicate: @escaping (S) -> Bool) -> Fold<S, S> {
-        return SelectFold<S>(predicate: predicate)
-    }
-
     public static func void() -> Fold<S, A> {
         return Optional<S, A>.void().asFold()
     }
 
-    public static func fromFoldable<F: Foldable>() -> Fold<Kind<F, S>, S> {
+    public static func fromFoldable<F: Foldable>() -> Fold<Kind<F, A>, A> where S: Kind<F, A> {
         return FoldableFold()
     }
-
+    
     public static func +<C>(lhs: Fold<S, A>, rhs: Fold<A, C>) -> Fold<S, C> {
         return lhs.compose(rhs)
     }
@@ -133,6 +120,20 @@ open class Fold<S, A>: FoldOf<S, A> {
 
     public func exists(_ s: S, _ predicate: @escaping (A) -> Bool) -> Bool {
         return find(s, predicate).fold(constant(false), constant(true))
+    }
+}
+
+public extension Fold where S == A {
+    static func identity() -> Fold<S, S> {
+        return Iso<S, S>.identity().asFold()
+    }
+    
+    static func codiagonal() -> Fold<Either<S, S>, S> {
+        return CodiagonalFold<S>()
+    }
+    
+    static func select(_ predicate: @escaping (S) -> Bool) -> Fold<S, S> {
+        return SelectFold<S>(predicate: predicate)
     }
 }
 

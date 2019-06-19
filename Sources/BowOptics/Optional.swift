@@ -45,16 +45,6 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    public static func identity() -> Optional<S, S> {
-        return Iso<S, S>.identity().asOptional()
-    }
-    
-    public static func codiagonal() -> Optional<Either<S, S>, S> {
-        return Optional<Either<S, S>, S>(
-            set: { ess, s in ess.bimap(constant(s), constant(s)) },
-            getOrModify: { ess in ess.fold(Either.right, Either.right) })
-    }
-    
     public static func void() -> Optional<S, A> {
         return Optional(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
     }
@@ -193,6 +183,18 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
 }
 
+public extension Optional where S == A {
+    static func identity() -> Optional<S, S> {
+        return Iso<S, S>.identity().asOptional()
+    }
+    
+    static func codiagonal() -> Optional<Either<S, S>, S> {
+        return Optional<Either<S, S>, S>(
+            set: { ess, s in ess.bimap(constant(s), constant(s)) },
+            getOrModify: { ess in ess.fold(Either.right, Either.right) })
+    }
+}
+
 private class OptionalFold<S, T, A, B> : Fold<S, A> {
     private let optional : POptional<S, T, A, B>
     
@@ -214,5 +216,11 @@ private class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
     
     override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         return self.optional.modifyF(s, f)
+    }
+}
+
+extension Optional {
+    internal var fix: Optional<S, A> {
+        return self as! Optional<S, A>
     }
 }

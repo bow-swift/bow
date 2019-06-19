@@ -10,7 +10,7 @@ public extension Validated {
                                                 Validated<E2, B>.valid) })
     }
 
-    static func toEither() -> Iso<Validated<E, A>, Either<E, A>> {
+    static var toEither: Iso<Validated<E, A>, Either<E, A>> {
         return toPEither()
     }
 
@@ -21,7 +21,7 @@ public extension Validated {
             reverseGet: Validated<Error, B>.fromTry )
     }
 
-    static func toTry() -> Iso<Validated<Error, A>, Try<A>> {
+    static var toTry: Iso<Validated<Error, A>, Try<A>> {
         return toPTry()
     }
 }

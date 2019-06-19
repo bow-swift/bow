@@ -45,16 +45,6 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    public static func identity() -> Lens<S, S> {
-        return Iso<S, S>.identity().asLens()
-    }
-    
-    public static func codiagonal() -> Lens<Either<S, S>, S> {
-        return Lens<Either<S, S>, S>(
-            get: { ess in ess.fold(id, id) },
-            set: { ess, s in ess.bimap(constant(s), constant(s)) })
-    }
-    
     public init(get : @escaping (S) -> A, set : @escaping (S, B) -> T) {
         self.getFunc = get
         self.setFunc = set
@@ -174,6 +164,18 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     }
 }
 
+public extension Lens where S == A {
+    static func identity() -> Lens<S, S> {
+        return Iso<S, S>.identity().asLens()
+    }
+    
+    static func codiagonal() -> Lens<Either<S, S>, S> {
+        return Lens<Either<S, S>, S>(
+            get: { ess in ess.fold(id, id) },
+            set: { ess, s in ess.bimap(constant(s), constant(s)) })
+    }
+}
+
 private class LensFold<S, T, A, B> : Fold<S, A> {
     private let lens : PLens<S, T, A, B>
     
@@ -195,5 +197,11 @@ private class LensTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
     
     override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         return F.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
+    }
+}
+
+extension Lens {
+    internal var fix: Lens<S, A> {
+        return self as! Lens<S, A>
     }
 }

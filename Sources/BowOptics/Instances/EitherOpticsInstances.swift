@@ -1,28 +1,22 @@
 import Foundation
 import Bow
 
+// MARK: Optics extensions
 public extension Either {
-    static func traversal() -> Traversal<Either<A, B>, B> {
-        return EitherTraversal<A, B>()
+    static var fixIso: Iso<Either<A, B>, EitherOf<A, B>> {
+        return Iso(get: id, reverseGet: Either.fix)
     }
     
-    static func each() -> EachInstance<A, B> {
-        return EachInstance<A, B>()
-    }
-    
-    private class EitherTraversal<L, R> : Traversal<Either<L, R>, R> {
-        override func modifyF<F: Applicative>(_ s: Either<L, R>, _ f: @escaping (R) -> Kind<F, R>) -> Kind<F, Either<L, R>> {
-            return F.map(s.traverse(f), { x in Either<L, R>.fix(x) })
-        }
-    }
-    
-    class EachInstance<L, R> : Each {
-        public typealias S = Either<L, R>
-        public typealias A = R
-        
-        public func each() -> Traversal<Either<L, R>, R> {
-            return Either<L, R>.traversal()
-        }
+    static var traversal: Traversal<Either<A, B>, B> {
+        return fixIso + traversalK
     }
 }
 
+// MARK: Instance of `Each` for `Either`
+extension Either: Each {
+    public typealias EachFoci = B
+    
+    public static var each: Traversal<Either<A, B>, B> {
+        return traversal
+    }
+}

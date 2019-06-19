@@ -41,10 +41,6 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
 
-    public static func identity() -> Prism<S, S> {
-        return Iso<S, S>.identity().asPrism()
-    }
-
     public init(getOrModify : @escaping (S) -> Either<T, A>, reverseGet : @escaping (B) -> T) {
         self.getOrModifyFunc = getOrModify
         self.reverseGetFunc = reverseGet
@@ -206,6 +202,12 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
 }
 
+public extension Prism where S == A {
+    static func identity() -> Prism<S, S> {
+        return Iso<S, S>.identity().asPrism()
+    }
+}
+
 public extension Prism where A: Equatable {
     static func only(_ a: A) -> Prism<A, ()> {
         return Prism<A, ()>(getOrModify: { x in a == x ? Either.left(a) : Either.right(unit)},
@@ -236,5 +238,11 @@ private class PrismTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         return prism.getOrModify(s)
             .fold(F.pure,
                   { a in F.map(f(a), prism.reverseGet) })
+    }
+}
+
+extension Prism {
+    internal var fix: Prism<S, A> {
+        return self as! Prism<S, A>
     }
 }

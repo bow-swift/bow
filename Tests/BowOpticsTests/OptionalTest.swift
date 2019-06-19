@@ -1,7 +1,7 @@
 import XCTest
 import SwiftCheck
-@testable import Bow
-@testable import BowOptics
+import Bow
+import BowOptics
 
 class OptionalTest: XCTestCase {
 
@@ -10,11 +10,11 @@ class OptionalTest: XCTestCase {
     }
 
     func testSetterLaws() {
-        SetterLaws.check(setter: BowOptics.Optional<String, String>.identity().asSetter(), generatorA: String.arbitrary)
+        SetterLaws.check(setter: BowOptics.Optional<String, String>.identity().asSetter())
     }
 
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: BowOptics.Optional<String, String>.identity().asTraversal(), generatorA: String.arbitrary)
+        TraversalLaws.check(traversal: BowOptics.Optional<String, String>.identity().asTraversal())
     }
 
     func testOptionalAsFold() {

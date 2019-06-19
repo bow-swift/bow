@@ -1,44 +1,44 @@
 import Foundation
 import Bow
 
-public extension Lens {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Lens<S, A>) + each.each()
+public extension Lens where A: Each {
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Iso {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Iso<S, A>) + each.each()
+public extension Iso where A: Each {
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Prism {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Prism<S, A>) + each.each()
+public extension Prism where A: Each {
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Optional {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Optional<S, A>) + each.each()
+public extension Optional where A: Each {
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Setter {
-    func every<EachType, T>(_ each : EachType) -> Setter<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Setter<S, A>) + each.each()
+public extension Setter where A: Each {
+    var every: Setter<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Traversal {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Traversal<S, A>) + each.each()
+public extension Traversal where A: Each {
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Fold {
-    func every<EachType, T>(_ each : EachType) -> Fold<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return self + each.each()
+public extension Fold where A: Each {
+    var every: Fold<S, A.EachFoci> {
+        return self + A.each
     }
 }
