@@ -41,10 +41,6 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
 
-    public static func identity() -> Prism<S, S> {
-        return Iso<S, S>.identity().asPrism()
-    }
-
     public init(getOrModify : @escaping (S) -> Either<T, A>, reverseGet : @escaping (B) -> T) {
         self.getOrModifyFunc = getOrModify
         self.reverseGetFunc = reverseGet
@@ -203,6 +199,12 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
 
     public func asTraversal() -> PTraversal<S, T, A, B> {
         return PrismTraversal(prism: self)
+    }
+}
+
+public extension Prism where S == A {
+    static func identity() -> Prism<S, S> {
+        return Iso<S, S>.identity().asPrism()
     }
 }
 
