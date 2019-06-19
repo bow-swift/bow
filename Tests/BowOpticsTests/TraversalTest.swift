@@ -7,7 +7,7 @@ class TraversalTest: XCTestCase {
     let arrayKGen: Gen<ArrayKOf<Int>> = Array<Int>.arbitrary.map{ array in array.k() }
 
     func arrayKTraversal<F: Traverse>() -> Traversal<Kind<F, Int>, Int>{
-        return Traversal<Int, Int>.fromTraverse()
+        return Traversal<Kind<F, Int>, Int>.fromTraverse()
     }
 
     func testTraversalLaws() {

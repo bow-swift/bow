@@ -15,20 +15,12 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     open func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         fatalError("modifyF must be implemented in subclasses")
     }
-
-    public static func identity() -> Traversal<S, S> {
-        return Iso<S, S>.identity().asTraversal()
-    }
-    
-    public static func codiagonal() -> Traversal<Either<S, S>, S> {
-        return CodiagonalTraversal()
-    }
     
     public static func void() -> Traversal<S, A> {
         return Optional<S, A>.void().asTraversal()
     }
     
-    public static func fromTraverse<T: Traverse>() -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
+    public static func fromTraverse<F: Traverse>() -> PTraversal<Kind<F, A>, Kind<F, B>, A, B> where S: Kind<F, A>, T: Kind<F, B> {
         return TraverseTraversal()
     }
     
@@ -268,6 +260,16 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     
     public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldMap(s, predicate)
+    }
+}
+
+public extension Traversal where S == A {
+    static func identity() -> Traversal<S, S> {
+        return Iso<S, S>.identity().asTraversal()
+    }
+    
+    static func codiagonal() -> Traversal<Either<S, S>, S> {
+        return CodiagonalTraversal()
     }
 }
 
