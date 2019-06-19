@@ -45,6 +45,32 @@ extension ArrayK: FilterIndex {
     }
 }
 
+// MARK: Instance of `Cons` for `ArrayK`
+extension ArrayK: Cons {
+    public typealias First = A
+    
+    public static var cons: Prism<ArrayK<A>, (A, ArrayK<A>)> {
+        return Prism(
+            getOrModify: { array in array.firstOrNone().fold(
+                { .left(array) },
+                { head in .right((head, array.dropFirst())) }) },
+            reverseGet: { x in x.0 + x.1 })
+    }
+}
+
+// MARK: Instance of `Snoc` for `ArrayK`
+extension ArrayK: Snoc {
+    public typealias Last = A
+    
+    public static var snoc: Prism<ArrayK<A>, (ArrayK<A>, A)> {
+        return Prism(
+            getOrModify: { array in array.lastOrNone().fold(
+                { .left(array) },
+                { last in .right((array.dropLast(), last)) }) },
+            reverseGet: { x in x.0 + x.1 })
+    }
+}
+
 private class ArrayKFilterIndexTraversal<A>: Traversal<ArrayK<A>, A> {
     private let predicate: (Int) -> Bool
     
