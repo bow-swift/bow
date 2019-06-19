@@ -1,6 +1,3 @@
-import Foundation
-import Bow
-
 public protocol Index {
     associatedtype IndexType
     associatedtype IndexFoci
