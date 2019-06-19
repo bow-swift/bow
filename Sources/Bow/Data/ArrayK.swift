@@ -19,6 +19,26 @@ public final class ArrayK<A>: ArrayKOf<A> {
     public static func +(lhs: ArrayK<A>, rhs: ArrayK<A>) -> ArrayK<A> {
         return ArrayK(lhs.array + rhs.array)
     }
+    
+    /// Prepends an element to an array.
+    ///
+    /// - Parameters:
+    ///   - lhs: Element to prepend.
+    ///   - rhs: Array.
+    /// - Returns: An array containing the prepended element at the head and the other array as the tail.
+    public static func +(lhs: A, rhs: ArrayK<A>) -> ArrayK<A> {
+        return ArrayK(lhs) + rhs
+    }
+    
+    /// Appends an element to an array.
+    ///
+    /// - Parameters:
+    ///   - lhs: Array.
+    ///   - rhs: Element to append.
+    /// - Returns: An array containing all elements of the first array and the appended element as the last element.
+    public static func +(lhs: ArrayK<A>, rhs: A) -> ArrayK<A> {
+        return lhs + ArrayK(rhs)
+    }
 
     /// Safe downcast.
     ///
@@ -51,10 +71,16 @@ public final class ArrayK<A>: ArrayKOf<A> {
     ///
     /// - Returns: An optional value containing the first element of the array, if present.
     public func firstOrNone() -> Option<A> {
-        if let first = asArray.first { return Option.some(first) }
-        return Option.none()
+        return asArray.first.toOption()
     }
 
+    /// Obtains the last element of this array, or `Option.none` if it is empty.
+    ///
+    /// - Returns: An optional value containing the first element of the array, if present.
+    public func lastOrNone() -> Option<A> {
+        return asArray.last.toOption()
+    }
+    
     /// Obtains the element in the position passed as an argument, if any.
     ///
     /// - Parameter i: Index of the element to obtain.
@@ -72,6 +98,20 @@ public final class ArrayK<A>: ArrayKOf<A> {
     /// - Parameter index: Index of the element to obtain.
     public subscript(index: Int) -> Option<A> {
         return getOrNone(index)
+    }
+    
+    /// Drops the first element of this array.
+    ///
+    /// - Returns: A new array that contains all elements but the first.
+    public func dropFirst() -> ArrayK<A> {
+        return ArrayK(Array(asArray.dropFirst()))
+    }
+    
+    /// Drops the last element of this array.
+    ///
+    /// - Returns: A new array that contains all elements but the last.
+    public func dropLast() -> ArrayK<A> {
+        return ArrayK(Array(asArray.dropLast()))
     }
 }
 
