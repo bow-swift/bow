@@ -9,7 +9,7 @@ public extension Kind where F: Traverse {
 
 public extension Kind where F: Foldable {
     static var foldK: Fold<Kind<F, A>, A> {
-        return Fold<A, A>.fromFoldable()
+        return Fold<Kind<F, A>, A>.fromFoldable()
     }
 }
 
