@@ -37,15 +37,7 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    public static func identity() -> Setter<S, S> {
-        return Iso<S, S>.identity().asSetter()
-    }
-    
-    public static func codiagonal() -> Setter<Either<S, S>, S> {
-        return Setter<Either<S, S>, S>(modify: { f in { ss in ss.bimap(f, f) } })
-    }
-    
-    public static func fromFunctor<F: Functor>() -> PSetter<Kind<F, A>, Kind<F, B>, A, B> {
+    public static func fromFunctor<F: Functor>() -> PSetter<Kind<F, A>, Kind<F, B>, A, B> where S: Kind<F, A>, T: Kind<F, B> {
         return PSetter<Kind<F, A>, Kind<F, B>, A, B>(modify: { f in
             { fs in F.map(fs, f) }
         })
@@ -107,6 +99,16 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     
     public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.compose(other.asSetter())
+    }
+}
+
+public extension Setter where S == A {
+    static func identity() -> Setter<S, S> {
+        return Iso<S, S>.identity().asSetter()
+    }
+    
+    static func codiagonal() -> Setter<Either<S, S>, S> {
+        return Setter<Either<S, S>, S>(modify: { f in { ss in ss.bimap(f, f) } })
     }
 }
 
