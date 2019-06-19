@@ -7,16 +7,16 @@ class FoldTest: XCTestCase {
     let nonEmptyListGen = Array<Int>.arbitrary.suchThat({ array in array.count > 0 })
 
     func intFold<F: Foldable>() -> Fold<Kind<F, Int>, Int> {
-        return Fold<Int, Int>.fromFoldable()
+        return Fold<Kind<F, Int>, Int>.fromFoldable()
     }
 
     func stringFold<F: Foldable>() -> Fold<Kind<F, String>, String> {
-        return Fold<String, String>.fromFoldable()
+        return Fold<Kind<F, String>, String>.fromFoldable()
     }
 
     func testFoldProperties() {
         property("Fold select an array that contains one") <- forAll(self.nonEmptyListGen) { (array: Array<Int>) in
-            let select = Fold<Array<Int>, Int>.select({ array in array.contains(1) })
+            let select = Fold<Array<Int>, Array<Int>>.select({ array in array.contains(1) })
             return select.getAll(array).asArray.first == (array.contains(1) ? array : nil)
         }
         
