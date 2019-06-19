@@ -238,3 +238,9 @@ private class PrismTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
                   { a in F.map(f(a), prism.reverseGet) })
     }
 }
+
+extension Prism {
+    internal var fix: Prism<S, A> {
+        return self as! Prism<S, A>
+    }
+}

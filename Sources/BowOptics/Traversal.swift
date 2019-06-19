@@ -612,3 +612,9 @@ private class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
         })
     }
 }
+
+extension Traversal {
+    internal var fix: Traversal<S, A> {
+        return self as! Traversal<S, A>
+    }
+}

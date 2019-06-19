@@ -216,3 +216,9 @@ private class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
         return self.optional.modifyF(s, f)
     }
 }
+
+extension Optional {
+    internal var fix: Optional<S, A> {
+        return self as! Optional<S, A>
+    }
+}

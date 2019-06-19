@@ -109,3 +109,9 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
         return self.compose(other.asSetter())
     }
 }
+
+extension Setter {
+    internal var fix: Setter<S, A> {
+        return self as! Setter<S, A>
+    }
+}

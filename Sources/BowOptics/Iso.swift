@@ -222,3 +222,9 @@ private class IsoTraversal<S, T, A, B>: PTraversal<S, T, A, B> {
         return F.map(f(iso.get(s)), iso.reverseGet)
     }
 }
+
+extension Iso {
+    internal var fix: Iso<S, A> {
+        return self as! Iso<S, A>
+    }
+}
