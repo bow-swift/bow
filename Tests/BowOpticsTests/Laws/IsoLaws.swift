@@ -1,6 +1,6 @@
 import SwiftCheck
-@testable import Bow
-@testable import BowOptics
+import Bow
+import BowOptics
 
 class IsoLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable & Monoid> {
     

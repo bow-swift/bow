@@ -629,6 +629,13 @@
 			remoteGlobalIDString = 11E71817219D81B300B94845;
 			remoteInfo = "Bow-Free";
 		};
+		1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
+		};
 		11D97EC5219EBAA1008FC004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -2360,6 +2367,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1186E15522BA4A9D001F8A5D /* PBXTargetDependency */,
 				11E71806219D7DFB00B94845 /* PBXTargetDependency */,
 				11E7179F219D7D5900B94845 /* PBXTargetDependency */,
 			);
@@ -2807,6 +2815,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			outputPaths = (
 			);
@@ -3486,6 +3495,11 @@
 			isa = PBXTargetDependency;
 			target = 11E71817219D81B300B94845 /* Bow-Free */;
 			targetProxy = 117DC13322AE56D800EF65F0 /* PBXContainerItemProxy */;
+		};
+		1186E15522BA4A9D001F8A5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
