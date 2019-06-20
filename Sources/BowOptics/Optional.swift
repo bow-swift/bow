@@ -208,7 +208,7 @@ public extension Optional where S == T, A == B {
         return State { s in (self.modify(s, f), ()) }
     }
     
-    func asign(_ a: A) -> State<S, Option<A>> {
+    func assign(_ a: A) -> State<S, Option<A>> {
         return update(constant(a))
     }
     
