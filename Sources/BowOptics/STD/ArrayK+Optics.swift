@@ -27,4 +27,12 @@ public extension Array {
     static var toArrayK: Iso<Array<Element>, ArrayK<Element>> {
         return toPArrayK()
     }
+    
+    static var head: Optional<Array<Element>, Element> {
+        return firstOption
+    }
+    
+    static var tail: Optional<Array<Element>, Array<Element>> {
+        return tailOption
+    }
 }
