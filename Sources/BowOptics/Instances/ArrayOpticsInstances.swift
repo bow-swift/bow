@@ -3,8 +3,12 @@ import Foundation
 
 // MARK: Optics extensions
 public extension Array {
+    static var fold: Fold<Array<Element>, Element> {
+        return Array.toArrayK + ArrayK.fold
+    }
+    
     static var traversal: Traversal<Array<Element>, Element> {
-        return Array.toArrayK + ArrayK<Element>.traversal
+        return Array.toArrayK + ArrayK.traversal
     }
 }
 

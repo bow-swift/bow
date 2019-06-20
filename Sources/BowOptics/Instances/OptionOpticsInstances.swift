@@ -7,6 +7,10 @@ public extension Option {
         return Iso(get: id, reverseGet: Option.fix)
     }
     
+    static var fold: Fold<Option<A>, A> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Option<A>, A> {
         return fixIso + traversalK
     }

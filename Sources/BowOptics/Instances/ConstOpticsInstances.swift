@@ -6,6 +6,10 @@ public extension Const {
         return Iso(get: id, reverseGet: Const.fix)
     }
     
+    static var fold: Fold<Const<A, T>, T> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Const<A, T>, T> {
         return fixIso + traversalK
     }

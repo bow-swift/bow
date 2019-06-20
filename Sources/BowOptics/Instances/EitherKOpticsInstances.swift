@@ -7,6 +7,12 @@ public extension EitherK {
     }
 }
 
+public extension EitherK where F: Foldable, G: Foldable {
+    static var fold: Fold<EitherK<F, G, A>, A> {
+        return fixIso + foldK
+    }
+}
+
 public extension EitherK where F: Traverse, G: Traverse {
     static var traversal: Traversal<EitherK<F, G, A>, A> {
         return fixIso + traversalK

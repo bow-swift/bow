@@ -7,6 +7,10 @@ public extension Try {
         return Iso(get: id, reverseGet: Try.fix)
     }
     
+    static var fold: Fold<Try<A>, A> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Try<A>, A> {
         return fixIso + traversalK
     }

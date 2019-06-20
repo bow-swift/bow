@@ -6,6 +6,10 @@ public extension Ior {
         return Iso(get: id, reverseGet: Ior.fix)
     }
     
+    static var fold: Fold<Ior<A, B>, B> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Ior<A, B>, B> {
         return fixIso + traversalK
     }

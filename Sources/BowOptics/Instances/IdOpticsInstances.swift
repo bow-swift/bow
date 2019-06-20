@@ -6,6 +6,10 @@ public extension Id {
         return Iso(get: id, reverseGet: Id.fix)
     }
     
+    static var fold: Fold<Id<A>, A> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Id<A>, A> {
         return fixIso + traversalK
     }

@@ -6,6 +6,10 @@ public extension Validated {
         return Iso(get: id, reverseGet: Validated.fix)
     }
     
+    static var fold: Fold<Validated<E, A>, A> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Validated<E, A>, A> {
         return fixIso + traversalK
     }
