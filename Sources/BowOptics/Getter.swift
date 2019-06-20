@@ -98,6 +98,30 @@ public class Getter<S, A> : GetterOf<S, A> {
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
+    
+    public func ask() -> Reader<S, A> {
+        return Reader(get >>> Id.pure)
+    }
+    
+    public func toReader() -> Reader<S, A> {
+        return ask()
+    }
+    
+    public func asks<B>(_ f: @escaping (A) -> B) -> Reader<S, B> {
+        return ask().map(f)^
+    }
+    
+    public func extract() -> State<S, A> {
+        return State({ s in (s, self.get(s)) })
+    }
+    
+    public func toState() -> State<S, A> {
+        return extract()
+    }
+    
+    public func extractMap<B>(_ f: @escaping (A) -> B) -> State<S, B> {
+        return extract().map(f)^
+    }
 }
 
 public extension Getter where S == A {
