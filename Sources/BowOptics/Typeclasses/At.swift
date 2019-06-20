@@ -1,4 +1,3 @@
-import Foundation
 import Bow
 
 public protocol At {
