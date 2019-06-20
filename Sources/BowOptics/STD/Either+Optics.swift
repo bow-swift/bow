@@ -11,4 +11,20 @@ public extension Either {
     static var toValidated: Iso<Either<A, B>, Validated<A, B>> {
         return toPValidated()
     }
+    
+    static var leftPrism: Prism<Either<A, B>, A> {
+        return Prism(
+            getOrModify: { either in either.fold(
+                Either<Either<A, B>, A>.right,
+                { b in Either<Either<A, B>, A>.left(.right(b)) }) },
+            reverseGet: Either.left)
+    }
+    
+    static var rightPrism: Prism<Either<A, B>, B> {
+        return Prism(
+            getOrModify: { either in either.fold(
+                { a in Either<Either<A, B>, B>.left(.left(a)) },
+                Either<Either<A, B>, B>.right) },
+            reverseGet: Either.right)
+    }
 }

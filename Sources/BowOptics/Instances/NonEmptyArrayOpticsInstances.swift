@@ -7,7 +7,11 @@ public extension NonEmptyArray {
         return Iso(get: id, reverseGet: NEA.fix)
     }
     
-    static var traversal: Traversal<NonEmptyArray<A>, A> {
+    static var fold: Fold<NEA<A>, A> {
+        return fixIso + foldK
+    }
+    
+    static var traversal: Traversal<NEA<A>, A> {
         return fixIso + traversalK
     }
 }

@@ -7,6 +7,10 @@ public extension ArrayK {
         return Iso(get: id, reverseGet: ArrayK.fix)
     }
     
+    static var fold: Fold<ArrayK<A>, A> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<ArrayK<A>, A> {
         return fixIso + traversalK
     }

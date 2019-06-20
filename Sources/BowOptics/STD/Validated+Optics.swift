@@ -24,4 +24,24 @@ public extension Validated {
     static var toTry: Iso<Validated<Error, A>, Try<A>> {
         return toPTry()
     }
+    
+    static func pValidPrism<B>() -> PPrism<Validated<E, A>, Validated<E, B>, A, B> {
+        return PPrism(
+            getOrModify: { validated in validated.fold({ e in Either.left(Validated<E, B>.invalid(e)) }, Either.right) },
+            reverseGet: Validated<E, B>.valid)
+    }
+    
+    static var validPrism: Prism<Validated<E, A>, A> {
+        return pValidPrism()
+    }
+    
+    static func pInvalidPrism<EE>() -> PPrism<Validated<E, A>, Validated<EE, A>, E, EE> {
+        return PPrism(
+            getOrModify: { validated in validated.fold(Either.right, { a in Either.left(Validated<EE, A>.valid(a)) } ) },
+            reverseGet: Validated<EE, A>.invalid)
+    }
+    
+    static var invalidPrism: Prism<Validated<E, A>, E> {
+        return pInvalidPrism()
+    }
 }

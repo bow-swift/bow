@@ -7,6 +7,10 @@ public extension Either {
         return Iso(get: id, reverseGet: Either.fix)
     }
     
+    static var fold: Fold<Either<A, B>, B> {
+        return fixIso + foldK
+    }
+    
     static var traversal: Traversal<Either<A, B>, B> {
         return fixIso + traversalK
     }
