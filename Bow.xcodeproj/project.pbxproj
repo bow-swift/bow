@@ -128,6 +128,7 @@
 		112D0CE622BB7E260032F675 /* EitherKOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CE522BB7E260032F675 /* EitherKOpticsInstances.swift */; };
 		112D0CE822BB7EE20032F675 /* IdOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CE722BB7EE20032F675 /* IdOpticsInstances.swift */; };
 		112D0CEA22BB7F4D0032F675 /* IorOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CE922BB7F4D0032F675 /* IorOpticsInstances.swift */; };
+		112D0CEC22BB7FE10032F675 /* ValidatedOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CEB22BB7FE10032F675 /* ValidatedOpticsInstances.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -795,6 +796,7 @@
 		112D0CE522BB7E260032F675 /* EitherKOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EitherKOpticsInstances.swift; sourceTree = "<group>"; };
 		112D0CE722BB7EE20032F675 /* IdOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdOpticsInstances.swift; sourceTree = "<group>"; };
 		112D0CE922BB7F4D0032F675 /* IorOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IorOpticsInstances.swift; sourceTree = "<group>"; };
+		112D0CEB22BB7FE10032F675 /* ValidatedOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedOpticsInstances.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -1902,6 +1904,7 @@
 				8BA0F4C2217E2E9200969984 /* OptionOpticsInstances.swift */,
 				8BA0F4C4217E2E9200969984 /* StringOpticsInstances.swift */,
 				8BA0F4C7217E2E9200969984 /* TryOpticsInstances.swift */,
+				112D0CEB22BB7FE10032F675 /* ValidatedOpticsInstances.swift */,
 			);
 			path = Instances;
 			sourceTree = "<group>";
@@ -3130,6 +3133,7 @@
 				11E71729219D722900B94845 /* Option+Optics.swift in Sources */,
 				11E7172A219D722900B94845 /* NonEmptyArray+Optics.swift in Sources */,
 				1126CA9822B12F8500F840CB /* Tuple4.swift in Sources */,
+				112D0CEC22BB7FE10032F675 /* ValidatedOpticsInstances.swift in Sources */,
 				11E7172B219D722900B94845 /* String+Optics.swift in Sources */,
 				11E4190B22B90FE2009BDFB3 /* AutoGetter.swift in Sources */,
 				11E7172C219D722900B94845 /* Try+Optics.swift in Sources */,
