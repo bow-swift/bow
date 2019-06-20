@@ -18,3 +18,12 @@ public extension EitherK where F: Traverse, G: Traverse {
         return fixIso + traversalK
     }
 }
+
+// MARK: Instance of `Each` for `EitherK`
+extension EitherK: Each where F: Traverse, G: Traverse {
+    public typealias EachFoci = A
+    
+    public static var each: Traversal<EitherK<F, G, A>, A> {
+        return traversal
+    }
+}

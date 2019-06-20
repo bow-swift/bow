@@ -14,3 +14,12 @@ public extension Validated {
         return fixIso + traversalK
     }
 }
+
+// MARK: Instance of `Each` for `Validated`
+extension Validated: Each {
+    public typealias EachFoci = A
+    
+    public static var each: Traversal<Validated<E, A>, A> {
+        return traversal
+    }
+}

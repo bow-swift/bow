@@ -14,3 +14,12 @@ public extension Id {
         return fixIso + traversalK
     }
 }
+
+// MARK: Instance of `Each` for `Id`
+extension Id: Each {
+    public typealias EachFoci = A
+    
+    public static var each: Traversal<Id<A>, A> {
+        return traversal
+    }
+}

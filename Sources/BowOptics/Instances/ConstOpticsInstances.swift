@@ -14,3 +14,12 @@ public extension Const {
         return fixIso + traversalK
     }
 }
+
+// MARK: Instance of `Each` for `Const`
+extension Const: Each {
+    public typealias EachFoci = T
+    
+    public static var each: Traversal<Const<A, T>, T> {
+        return traversal
+    }
+}
