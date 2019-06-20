@@ -15,6 +15,14 @@ public extension ArrayK {
     static var toOptionNEA: Iso<ArrayK<A>, Option<NonEmptyArray<A>>> {
         return toPOptionNEA()
     }
+    
+    static var head: Optional<ArrayK<A>, A> {
+        return firstOption
+    }
+    
+    static var tail: Optional<ArrayK<A>, ArrayK<A>> {
+        return tailOption
+    }
 }
 
 public extension Array {
