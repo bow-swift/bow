@@ -7,6 +7,7 @@ public extension Ior {
         return Iso(get: id, reverseGet: Ior.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Ior<A, B>, B> {
         return fixIso + foldK
     }

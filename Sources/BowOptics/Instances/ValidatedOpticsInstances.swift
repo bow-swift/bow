@@ -7,6 +7,7 @@ public extension Validated {
         return Iso(get: id, reverseGet: Validated.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Validated<E, A>, A> {
         return fixIso + foldK
     }

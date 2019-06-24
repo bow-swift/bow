@@ -8,6 +8,7 @@ public extension Try {
         return Iso(get: id, reverseGet: Try.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Try<A>, A> {
         return fixIso + foldK
     }

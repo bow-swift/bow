@@ -8,6 +8,7 @@ public extension NonEmptyArray {
         return Iso(get: id, reverseGet: NEA.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<NEA<A>, A> {
         return fixIso + foldK
     }

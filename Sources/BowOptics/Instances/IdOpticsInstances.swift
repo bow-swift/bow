@@ -7,6 +7,7 @@ public extension Id {
         return Iso(get: id, reverseGet: Id.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Id<A>, A> {
         return fixIso + foldK
     }

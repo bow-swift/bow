@@ -8,6 +8,7 @@ public extension ArrayK {
         return Iso(get: id, reverseGet: ArrayK.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<ArrayK<A>, A> {
         return fixIso + foldK
     }

@@ -7,6 +7,7 @@ public extension Const {
         return Iso(get: id, reverseGet: Const.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Const<A, T>, T> {
         return fixIso + foldK
     }

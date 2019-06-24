@@ -3,6 +3,7 @@ import Foundation
 
 // MARK: Optics extensions
 public extension Array {
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Array<Element>, Element> {
         return Array.toArrayK + ArrayK.fold
     }

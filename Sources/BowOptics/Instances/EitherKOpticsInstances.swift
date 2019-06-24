@@ -9,6 +9,7 @@ public extension EitherK {
 }
 
 public extension EitherK where F: Foldable, G: Foldable {
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<EitherK<F, G, A>, A> {
         return fixIso + foldK
     }
