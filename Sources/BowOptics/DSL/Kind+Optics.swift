@@ -2,12 +2,14 @@ import Bow
 
 // MARK: Optics extensions
 public extension Kind where F: Traverse {
+    /// Provides a traversal based on the instance of `Traverse` for this type.
     static var traversalK: Traversal<Kind<F, A>, A> {
         return KindTraversal<F, A>()
     }
 }
 
 public extension Kind where F: Foldable {
+    /// Provides a traversal based on the instance of `Foldable` for this type.
     static var foldK: Fold<Kind<F, A>, A> {
         return Fold<Kind<F, A>, A>.fromFoldable()
     }
