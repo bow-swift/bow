@@ -131,6 +131,8 @@
 		112D0CEC22BB7FE10032F675 /* ValidatedOpticsInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CEB22BB7FE10032F675 /* ValidatedOpticsInstances.swift */; };
 		112D0CEE22BB85560032F675 /* Ior+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CED22BB85560032F675 /* Ior+Optics.swift */; };
 		112D0CF022BB88F20032F675 /* Result+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CEF22BB88F20032F675 /* Result+Optics.swift */; };
+		112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF322BBC0390032F675 /* AutoFold.swift */; };
+		112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF522BBC17C0032F675 /* AutoTraversal.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -801,6 +803,8 @@
 		112D0CEB22BB7FE10032F675 /* ValidatedOpticsInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedOpticsInstances.swift; sourceTree = "<group>"; };
 		112D0CED22BB85560032F675 /* Ior+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ior+Optics.swift"; sourceTree = "<group>"; };
 		112D0CEF22BB88F20032F675 /* Result+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Optics.swift"; sourceTree = "<group>"; };
+		112D0CF322BBC0390032F675 /* AutoFold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFold.swift; sourceTree = "<group>"; };
+		112D0CF522BBC17C0032F675 /* AutoTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTraversal.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -1417,12 +1421,14 @@
 		1126CA8822B1139B00F840CB /* Auto */ = {
 			isa = PBXGroup;
 			children = (
+				112D0CF322BBC0390032F675 /* AutoFold.swift */,
 				11E4190A22B90FE2009BDFB3 /* AutoGetter.swift */,
 				1126CA8B22B115E100F840CB /* AutoLens.swift */,
 				1126CA8922B1144200F840CB /* AutoOptics.swift */,
 				1126CA8D22B1253D00F840CB /* AutoOptional.swift */,
 				1126CA8F22B1262F00F840CB /* AutoPrism.swift */,
 				11E4190E22B91169009BDFB3 /* AutoSetter.swift */,
+				112D0CF522BBC17C0032F675 /* AutoTraversal.swift */,
 			);
 			path = Auto;
 			sourceTree = "<group>";
@@ -3109,6 +3115,7 @@
 				11E71718219D722900B94845 /* Iso.swift in Sources */,
 				11E71719219D722900B94845 /* Lens.swift in Sources */,
 				11E7171A219D722900B94845 /* Optional.swift in Sources */,
+				112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */,
 				11E7171B219D722900B94845 /* Prism.swift in Sources */,
 				11E7171C219D722900B94845 /* Setter.swift in Sources */,
 				1126CA9C22B130B800F840CB /* Tuple6.swift in Sources */,
@@ -3117,6 +3124,7 @@
 				11E7171E219D722900B94845 /* At+Optics.swift in Sources */,
 				11E7171F219D722900B94845 /* Each+Optics.swift in Sources */,
 				112D0CEA22BB7F4D0032F675 /* IorOpticsInstances.swift in Sources */,
+				112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */,
 				1126CA9A22B1301100F840CB /* Tuple5.swift in Sources */,
 				11E71720219D722900B94845 /* EitherOpticsInstances.swift in Sources */,
 				1126CA8E22B1253D00F840CB /* AutoOptional.swift in Sources */,
