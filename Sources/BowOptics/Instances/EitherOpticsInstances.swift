@@ -13,6 +13,7 @@ public extension Either {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Either<A, B>, B> {
         return fixIso + traversalK
     }

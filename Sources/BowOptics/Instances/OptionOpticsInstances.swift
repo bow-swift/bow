@@ -13,6 +13,7 @@ public extension Option {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Option<A>, A> {
         return fixIso + traversalK
     }

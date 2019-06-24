@@ -12,6 +12,7 @@ public extension Validated {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Validated<E, A>, A> {
         return fixIso + traversalK
     }

@@ -16,6 +16,7 @@ public extension EitherK where F: Foldable, G: Foldable {
 }
 
 public extension EitherK where F: Traverse, G: Traverse {
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<EitherK<F, G, A>, A> {
         return fixIso + traversalK
     }

@@ -8,6 +8,7 @@ public extension Array {
         return Array.toArrayK + ArrayK.fold
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Array<Element>, Element> {
         return Array.toArrayK + ArrayK.traversal
     }

@@ -12,6 +12,7 @@ public extension Const {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Const<A, T>, T> {
         return fixIso + traversalK
     }

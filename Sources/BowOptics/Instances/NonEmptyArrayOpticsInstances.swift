@@ -13,6 +13,7 @@ public extension NonEmptyArray {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<NEA<A>, A> {
         return fixIso + traversalK
     }

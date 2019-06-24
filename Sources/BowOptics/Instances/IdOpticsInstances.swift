@@ -12,6 +12,7 @@ public extension Id {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Id<A>, A> {
         return fixIso + traversalK
     }

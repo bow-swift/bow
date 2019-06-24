@@ -12,6 +12,7 @@ public extension Ior {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Ior<A, B>, B> {
         return fixIso + traversalK
     }
