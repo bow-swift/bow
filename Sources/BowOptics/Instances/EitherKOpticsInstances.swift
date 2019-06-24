@@ -2,6 +2,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension EitherK {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<EitherK<F, G, A>, EitherKOf<F, G, A>> {
         return Iso(get: id, reverseGet: EitherK.fix)
     }

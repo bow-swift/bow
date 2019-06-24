@@ -2,6 +2,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension Validated {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<Validated<E, A>, ValidatedOf<E, A>> {
         return Iso(get: id, reverseGet: Validated.fix)
     }

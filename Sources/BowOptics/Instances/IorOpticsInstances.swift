@@ -2,6 +2,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension Ior {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<Ior<A, B>, IorOf<A, B>> {
         return Iso(get: id, reverseGet: Ior.fix)
     }

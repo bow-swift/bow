@@ -3,6 +3,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension Try {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<Try<A>, TryOf<A>> {
         return Iso(get: id, reverseGet: Try.fix)
     }

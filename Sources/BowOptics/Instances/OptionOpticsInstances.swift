@@ -3,6 +3,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension Option {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<Option<A>, OptionOf<A>> {
         return Iso(get: id, reverseGet: Option.fix)
     }

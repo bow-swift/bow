@@ -3,6 +3,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension ArrayK {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<ArrayK<A>, ArrayKOf<A>> {
         return Iso(get: id, reverseGet: ArrayK.fix)
     }

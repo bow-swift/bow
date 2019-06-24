@@ -3,6 +3,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension String {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var traversal: Traversal<String, Character> {
         return StringTraversal()
     }
