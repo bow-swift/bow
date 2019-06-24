@@ -181,6 +181,44 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     public func asTraversal() -> PTraversal<S, T, A, B> {
         return OptionalTraversal(optional: self)
     }
+    
+    public func extract() -> State<S, Option<A>> {
+        return State { s in (s, self.getOption(s)) }
+    }
+    
+    public func toState() -> State<S, Option<A>> {
+        return extract()
+    }
+    
+    public func extractMap<C>(_ f: @escaping (A) -> C) -> State<S, Option<C>> {
+        return extract().map { x in x.map(f)^ }^
+    }
+}
+
+public extension Optional where S == T, A == B {
+    func update(_ f: @escaping (A) -> A) -> State<S, Option<A>> {
+        return updateOld(f).map { x in x.map(f)^ }^
+    }
+    
+    func updateOld(_ f: @escaping (A) -> A) -> State<S, Option<A>> {
+        return State { s in (self.modify(s, f), self.getOption(s)) }
+    }
+    
+    func update_(_ f: @escaping (A) -> A) -> State<S, ()> {
+        return State { s in (self.modify(s, f), ()) }
+    }
+    
+    func assign(_ a: A) -> State<S, Option<A>> {
+        return update(constant(a))
+    }
+    
+    func assignOld(_ a: A) -> State<S, Option<A>> {
+        return updateOld(constant(a))
+    }
+    
+    func assign_(_ a: A) -> State<S, ()> {
+        return update_(constant(a))
+    }
 }
 
 public extension Optional where S == A {

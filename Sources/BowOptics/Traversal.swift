@@ -261,6 +261,44 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldMap(s, predicate)
     }
+    
+    public func extract() -> State<S, ArrayK<A>> {
+        return State { s in (s, self.getAll(s)) }
+    }
+    
+    public func toState() -> State<S, ArrayK<A>> {
+        return extract()
+    }
+    
+    public func extractMap<C>(_ f: @escaping (A) -> C) -> State<S, ArrayK<C>> {
+        return extract().map { x in x.map(f)^ }^
+    }
+}
+
+public extension Traversal where S == T, A == B {
+    func update(_ f: @escaping (A) -> A) -> State<S, ArrayK<A>> {
+        return updateOld(f).map { x in x.map(f)^ }^
+    }
+    
+    func updateOld(_ f: @escaping (A) -> A) -> State<S, ArrayK<A>> {
+        return State { s in (self.modify(s, f), self.getAll(s)) }
+    }
+    
+    func update_(_ f: @escaping (A) -> A) -> State<S, ()> {
+        return State { s in (self.modify(s, f), ()) }
+    }
+    
+    func assign(_ a: A) -> State<S, ArrayK<A>> {
+        return update(constant(a))
+    }
+    
+    func assignOld(_ a: A) -> State<S, ArrayK<A>> {
+        return updateOld(constant(a))
+    }
+    
+    func assign_(_ a: A) -> State<S, ()> {
+        return update_(constant(a))
+    }
 }
 
 public extension Traversal where S == A {

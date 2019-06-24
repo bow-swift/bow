@@ -162,6 +162,59 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     public func exists(_ s : S, _ predicate : (A) -> Bool) -> Bool {
         return predicate(get(s))
     }
+    
+    public func ask() -> Reader<S, A> {
+        return Reader(get >>> Id.pure)
+    }
+    
+    public func toReader() -> Reader<S, A> {
+        return ask()
+    }
+    
+    public func asks<C>(_ f: @escaping (A) -> C) -> Reader<S, C> {
+        return ask().map(f)^
+    }
+    
+    public func extract() -> State<S, A> {
+        return State { s in (s, self.get(s)) }
+    }
+    
+    public func toState() -> State<S, A> {
+        return extract()
+    }
+    
+    public func extractMap<C>(_ f: @escaping (A) -> C) -> State<S, C> {
+        return extract().map(f)^
+    }
+}
+
+public extension Lens where S == T, A == B {
+    func update(_ f: @escaping (A) -> A) -> State<S, A> {
+        return State { s in
+            let b = f(self.get(s))
+            return (self.set(s, b), b)
+        }
+    }
+    
+    func updateOld(_ f: @escaping (A) -> A) -> State<S, A> {
+        return State { s in (self.modify(s, f), self.get(s)) }
+    }
+    
+    func update_(_ f: @escaping (A) -> A) -> State<S, ()> {
+        return State { s in (self.modify(s, f), ()) }
+    }
+    
+    func assign(_ a: A) -> State<S, A> {
+        return update(constant(a))
+    }
+    
+    func assignOld(_ a: A) -> State<S, A> {
+        return updateOld(constant(a))
+    }
+    
+    func assign_(_ a: A) -> State<S, ()> {
+        return update_(constant(a))
+    }
 }
 
 public extension Lens where S == A {
