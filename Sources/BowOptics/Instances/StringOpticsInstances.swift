@@ -3,6 +3,7 @@ import Bow
 
 // MARK: Optics extensions
 public extension String {
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<String, Character> {
         return StringTraversal()
     }

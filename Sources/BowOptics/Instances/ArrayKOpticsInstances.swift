@@ -3,14 +3,17 @@ import Bow
 
 // MARK: Optics extensions
 public extension ArrayK {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<ArrayK<A>, ArrayKOf<A>> {
         return Iso(get: id, reverseGet: ArrayK.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<ArrayK<A>, A> {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<ArrayK<A>, A> {
         return fixIso + traversalK
     }

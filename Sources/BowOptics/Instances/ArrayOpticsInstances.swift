@@ -3,10 +3,12 @@ import Foundation
 
 // MARK: Optics extensions
 public extension Array {
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<Array<Element>, Element> {
         return Array.toArrayK + ArrayK.fold
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<Array<Element>, Element> {
         return Array.toArrayK + ArrayK.traversal
     }

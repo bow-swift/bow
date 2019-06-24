@@ -3,14 +3,17 @@ import Bow
 
 // MARK: Optics extensions
 public extension NonEmptyArray {
+    /// Provides an Iso to go from/to this type to its `Kind` version.
     static var fixIso: Iso<NEA<A>, NonEmptyArrayOf<A>> {
         return Iso(get: id, reverseGet: NEA.fix)
     }
     
+    /// Provides a Fold based on the Foldable instance of this type.
     static var fold: Fold<NEA<A>, A> {
         return fixIso + foldK
     }
     
+    /// Provides a Traversal based on the Traverse instance of this type.
     static var traversal: Traversal<NEA<A>, A> {
         return fixIso + traversalK
     }
