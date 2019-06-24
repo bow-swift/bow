@@ -12,6 +12,7 @@ public protocol At {
     static func at(_ i: AtIndex) -> Lens<Self, AtFoci>
 }
 
+// MARK: Related functions
 public extension At {
     /// Deletes a value associated with an index by setting it to `Option.none`
     ///

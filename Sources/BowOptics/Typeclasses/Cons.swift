@@ -8,6 +8,7 @@ public protocol Cons {
     static var cons: Prism<Self, (First, Self)> { get }
 }
 
+// MARK: Related functions
 public extension Cons {
     /// Provides an `Optional` between this structure and its first element.
     static var firstOption: Optional<Self, First> {
