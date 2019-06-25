@@ -55,31 +55,31 @@ class FoldTest: XCTestCase {
     
     func testFoldComposition() {
         property("Fold + Fold::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Fold<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Fold<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Iso::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Iso<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Iso<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Lens::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Lens<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Lens<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Prism::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Prism<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Prism<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Getter::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Getter<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Getter<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Optional::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + BowOptics.Optional<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + BowOptics.Optional<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Traversal::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Traversal<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Traversal<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
     }
 }

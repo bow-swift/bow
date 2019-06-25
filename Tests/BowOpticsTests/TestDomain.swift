@@ -36,7 +36,7 @@ extension User : Arbitrary {
 
 let userIso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
 let userLens = Lens<User, Token>(get: { user in user.token }, set: { user, newToken in User(token: newToken) })
-let userGetter = userIso.asGetter()
+let userGetter = userIso.asGetter
 let userSetter = Setter<User, Token>(modify: { f in { user in User(token: f(user.token)) } })
 let lengthGetter = Getter<String, Int>(get: { str in str.count })
 let upperGetter = Getter<String, String>(get: { str in str.uppercased() })

@@ -7,7 +7,7 @@ class SetterTest: XCTestCase {
     
     func testSetterLaws() {
         SetterLaws.check(setter: tokenSetter)
-        SetterLaws.check(setter: Setter<String, String>.identity())
+        SetterLaws.check(setter: Setter<String, String>.identity)
     }
     
     func testSetterProperties() {
@@ -27,27 +27,27 @@ class SetterTest: XCTestCase {
     
     func testSetterComposition() {
         property("Setter + Setter::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Setter<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Setter<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Iso::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Iso<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Iso<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Lens::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Lens<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Lens<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Prism::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Prism<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Prism<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Optional::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + BowOptics.Optional<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + BowOptics.Optional<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Traversal::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Traversal<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Traversal<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
     }
 }

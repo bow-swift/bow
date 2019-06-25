@@ -45,7 +45,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    public static func void() -> Optional<S, A> {
+    public static var void: Optional<S, A> {
         return Optional(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
     }
     
@@ -143,42 +143,42 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional())
+        return self.compose(other.asOptional)
     }
     
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional())
+        return self.compose(other.asOptional)
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional())
+        return self.compose(other.asOptional)
     }
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.asSetter().compose(other)
+        return self.asSetter.compose(other)
     }
     
     public func compose<C>(_ other : Getter<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
     
     public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.asTraversal().compose(other)
+        return self.asTraversal.compose(other)
     }
     
-    public func asSetter() -> PSetter<S, T, A, B> {
+    public var asSetter: PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
-    public func asFold() -> Fold<S, A> {
+    public var asFold: Fold<S, A> {
         return OptionalFold(optional: self)
     }
     
-    public func asTraversal() -> PTraversal<S, T, A, B> {
+    public var asTraversal: PTraversal<S, T, A, B> {
         return OptionalTraversal(optional: self)
     }
     
@@ -222,11 +222,11 @@ public extension Optional where S == T, A == B {
 }
 
 public extension Optional where S == A {
-    static func identity() -> Optional<S, S> {
-        return Iso<S, S>.identity().asOptional()
+    static var identity: Optional<S, S> {
+        return Iso<S, S>.identity.asOptional
     }
     
-    static func codiagonal() -> Optional<Either<S, S>, S> {
+    static var codiagonal: Optional<Either<S, S>, S> {
         return Optional<Either<S, S>, S>(
             set: { ess, s in ess.bimap(constant(s), constant(s)) },
             getOrModify: { ess in ess.fold(Either.right, Either.right) })

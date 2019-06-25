@@ -10,70 +10,70 @@ class IsoTest: XCTestCase {
     }
     
     func testPrismLaws() {
-        PrismLaws.check(prism: tokenIso.asPrism())
+        PrismLaws.check(prism: tokenIso.asPrism)
     }
     
     func testLensLaws() {
-        LensLaws.check(lens: tokenIso.asLens())
+        LensLaws.check(lens: tokenIso.asLens)
     }
     
     func testOptionalLaws() {
-        OptionalLaws.check(optional: tokenIso.asOptional())
+        OptionalLaws.check(optional: tokenIso.asOptional)
     }
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenIso.asSetter())
+        SetterLaws.check(setter: tokenIso.asSetter)
     }
     
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: tokenIso.asTraversal())
+        TraversalLaws.check(traversal: tokenIso.asTraversal)
     }
     
     func testIsoAsFold() {
         property("Iso as Fold: size") <- forAll { (token: Token) in
-            return tokenIso.asFold().size(token) == 1
+            return tokenIso.asFold.size(token) == 1
         }
         
         property("Iso as Fold: nonEmpty") <- forAll { (token: Token) in
-            return tokenIso.asFold().nonEmpty(token)
+            return tokenIso.asFold.nonEmpty(token)
         }
         
         property("Iso as Fold: isEmpty") <- forAll { (token: Token) in
-            return !tokenIso.asFold().isEmpty(token)
+            return !tokenIso.asFold.isEmpty(token)
         }
         
         property("Iso as Fold: getAll") <- forAll { (token: Token) in
-            return tokenIso.asFold().getAll(token) == ArrayK.pure(token.value)
+            return tokenIso.asFold.getAll(token) == ArrayK.pure(token.value)
         }
         
         property("Iso as Fold: combineAll") <- forAll { (token: Token) in
-            return tokenIso.asFold().combineAll(token) == token.value
+            return tokenIso.asFold.combineAll(token) == token.value
         }
         
         property("Iso as Fold: fold") <- forAll { (token: Token) in
-            return tokenIso.asFold().fold(token) == token.value
+            return tokenIso.asFold.fold(token) == token.value
         }
         
         property("Iso as Fold: headOption") <- forAll { (token: Token) in
-            return tokenIso.asFold().headOption(token) == Option.some(token.value)
+            return tokenIso.asFold.headOption(token) == Option.some(token.value)
         }
         
         property("Iso as Fold: lastOption") <- forAll { (token: Token) in
-            return tokenIso.asFold().lastOption(token) == Option.some(token.value)
+            return tokenIso.asFold.lastOption(token) == Option.some(token.value)
         }
     }
     
     func testIsoAsGetter() {
         property("Iso as Getter: get") <- forAll { (token: Token) in
-            return tokenIso.asGetter().get(token) == tokenGetter.get(token)
+            return tokenIso.asGetter.get(token) == tokenGetter.get(token)
         }
         
         property("Iso as Getter: find") <- forAll { (token: Token, predicate: ArrowOf<String, Bool>) in
-            return tokenIso.asGetter().find(token, predicate.getArrow) == tokenGetter.find(token, predicate.getArrow)
+            return tokenIso.asGetter.find(token, predicate.getArrow) == tokenGetter.find(token, predicate.getArrow)
         }
         
         property("Iso as Getter: exists") <- forAll { (token: Token, predicate: ArrowOf<String, Bool>) in
-            return tokenIso.asGetter().find(token, predicate.getArrow) ==
+            return tokenIso.asGetter.find(token, predicate.getArrow) ==
                 tokenGetter.find(token, predicate.getArrow)
         }
     }
@@ -139,35 +139,35 @@ class IsoTest: XCTestCase {
     
     func testIsoComposition() {
         property("Iso + Iso::identity") <- forAll { (token: Token) in
-            return (tokenIso + Iso<String, String>.identity()).get(token) == tokenIso.get(token)
+            return (tokenIso + Iso<String, String>.identity).get(token) == tokenIso.get(token)
         }
         
         property("Iso + Lens::identity") <- forAll { (token: Token) in
-            return (tokenIso + Lens<String, String>.identity()).get(token) == tokenIso.get(token)
+            return (tokenIso + Lens<String, String>.identity).get(token) == tokenIso.get(token)
         }
         
         property("Iso + Prism::identity") <- forAll { (token: Token) in
-            return (tokenIso + Prism<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + Prism<String, String>.identity).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Getter::identity") <- forAll { (token: Token) in
-            return (tokenIso + Getter<String, String>.identity()).get(token) == tokenIso.get(token)
+            return (tokenIso + Getter<String, String>.identity).get(token) == tokenIso.get(token)
         }
         
         property("Iso + Setter::identity") <- forAll { (token: Token) in
-            return (tokenIso + Setter<String, String>.identity()).set(token, "Any") == tokenIso.set("Any")
+            return (tokenIso + Setter<String, String>.identity).set(token, "Any") == tokenIso.set("Any")
         }
         
         property("Iso + Optional::identity") <- forAll { (token: Token) in
-            return (tokenIso + BowOptics.Optional<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + BowOptics.Optional<String, String>.identity).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Fold::identity") <- forAll { (token: Token) in
-            return (tokenIso + Fold<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+            return (tokenIso + Fold<String, String>.identity).getAll(token).asArray == [tokenIso.get(token)]
         }
         
         property("Iso + Traversal::identity") <- forAll { (token: Token) in
-            return (tokenIso + Traversal<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+            return (tokenIso + Traversal<String, String>.identity).getAll(token).asArray == [tokenIso.get(token)]
         }
     }
 }

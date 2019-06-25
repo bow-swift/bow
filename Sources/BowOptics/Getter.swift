@@ -79,10 +79,10 @@ public class Getter<S, A> : GetterOf<S, A> {
     }
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
     
-    public func asFold() -> Fold<S, A> {
+    public var asFold: Fold<S, A> {
         return GetterFold(getter: self)
     }
     
@@ -125,11 +125,11 @@ public class Getter<S, A> : GetterOf<S, A> {
 }
 
 public extension Getter where S == A {
-    static func identity() -> Getter<S, S> {
-        return Iso<S, S>.identity().asGetter()
+    static var identity: Getter<S, S> {
+        return Iso<S, S>.identity.asGetter
     }
     
-    static func codiagonal() -> Getter<Either<S, S>, S> {
+    static var codiagonal: Getter<Either<S, S>, S> {
         return Getter<Either<S, S>, S>(get: { either in
             either.fold(id, id)
         })
