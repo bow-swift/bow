@@ -143,31 +143,31 @@ class IsoTest: XCTestCase {
         }
         
         property("Iso + Lens::identity") <- forAll { (token: Token) in
-            return (tokenIso + Lens<String, String>.identity()).get(token) == tokenIso.get(token)
+            return (tokenIso + Lens<String, String>.identity).get(token) == tokenIso.get(token)
         }
         
         property("Iso + Prism::identity") <- forAll { (token: Token) in
-            return (tokenIso + Prism<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + Prism<String, String>.identity).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Getter::identity") <- forAll { (token: Token) in
-            return (tokenIso + Getter<String, String>.identity()).get(token) == tokenIso.get(token)
+            return (tokenIso + Getter<String, String>.identity).get(token) == tokenIso.get(token)
         }
         
         property("Iso + Setter::identity") <- forAll { (token: Token) in
-            return (tokenIso + Setter<String, String>.identity()).set(token, "Any") == tokenIso.set("Any")
+            return (tokenIso + Setter<String, String>.identity).set(token, "Any") == tokenIso.set("Any")
         }
         
         property("Iso + Optional::identity") <- forAll { (token: Token) in
-            return (tokenIso + BowOptics.Optional<String, String>.identity()).getOption(token).getOrElse("") == tokenIso.get(token)
+            return (tokenIso + BowOptics.Optional<String, String>.identity).getOption(token).getOrElse("") == tokenIso.get(token)
         }
         
         property("Iso + Fold::identity") <- forAll { (token: Token) in
-            return (tokenIso + Fold<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+            return (tokenIso + Fold<String, String>.identity).getAll(token).asArray == [tokenIso.get(token)]
         }
         
         property("Iso + Traversal::identity") <- forAll { (token: Token) in
-            return (tokenIso + Traversal<String, String>.identity()).getAll(token).asArray == [tokenIso.get(token)]
+            return (tokenIso + Traversal<String, String>.identity).getAll(token).asArray == [tokenIso.get(token)]
         }
     }
 }

@@ -6,35 +6,35 @@ import BowOptics
 class GetterTest : XCTestCase {
     func testGetterAsFold() {
         property("Getter as Fold: size") <- forAll { (token: Token) in
-            return tokenGetter.asFold().size(token) == 1
+            return tokenGetter.asFold.size(token) == 1
         }
         
         property("Getter as Fold: nonEmpty") <- forAll { (token: Token) in
-            return tokenGetter.asFold().nonEmpty(token)
+            return tokenGetter.asFold.nonEmpty(token)
         }
         
         property("Getter as Fold: isEmpty") <- forAll { (token: Token) in
-            return !tokenGetter.asFold().isEmpty(token)
+            return !tokenGetter.asFold.isEmpty(token)
         }
         
         property("Getter as Fold: getAll") <- forAll { (token: Token) in
-            return tokenGetter.asFold().getAll(token) == ArrayK.pure(token.value)
+            return tokenGetter.asFold.getAll(token) == ArrayK.pure(token.value)
         }
         
         property("Getter as Fold: combineAll") <- forAll { (token: Token) in
-            return tokenGetter.asFold().combineAll(token) == token.value
+            return tokenGetter.asFold.combineAll(token) == token.value
         }
         
         property("Getter as Fold: fold") <- forAll { (token: Token) in
-            return tokenGetter.asFold().fold(token) == token.value
+            return tokenGetter.asFold.fold(token) == token.value
         }
         
         property("Getter as Fold: headOption") <- forAll { (token: Token) in
-            return tokenGetter.asFold().headOption(token) == Option.some(token.value)
+            return tokenGetter.asFold.headOption(token) == Option.some(token.value)
         }
         
         property("Getter as Fold: lastOption") <- forAll { (token: Token) in
-            return tokenGetter.asFold().lastOption(token) == Option.some(token.value)
+            return tokenGetter.asFold.lastOption(token) == Option.some(token.value)
         }
     }
     
@@ -98,15 +98,15 @@ class GetterTest : XCTestCase {
         }
         
         property("Getter + Lens::identity") <- forAll { (token: Token) in
-            return (tokenGetter + Lens<String, String>.identity()).get(token) == tokenGetter.get(token)
+            return (tokenGetter + Lens<String, String>.identity).get(token) == tokenGetter.get(token)
         }
         
         property("Getter + Getter::identity") <- forAll { (token: Token) in
-            return (tokenGetter + Getter<String, String>.identity()).get(token) == tokenGetter.get(token)
+            return (tokenGetter + Getter<String, String>.identity).get(token) == tokenGetter.get(token)
         }
         
         property("Getter + Fold::identity") <- forAll { (token: Token) in
-            return (tokenGetter + Fold<String, String>.identity()).getAll(token).asArray == [tokenGetter.get(token)]
+            return (tokenGetter + Fold<String, String>.identity).getAll(token).asArray == [tokenGetter.get(token)]
         }
     }
 }

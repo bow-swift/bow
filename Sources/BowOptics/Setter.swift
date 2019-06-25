@@ -82,15 +82,15 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.compose(other.asSetter())
+        return self.compose(other.asSetter)
     }
     
     public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.compose(other.asSetter())
+        return self.compose(other.asSetter)
     }
     
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.compose(other.asSetter())
+        return self.compose(other.asSetter)
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PSetter<S, T, C, D> {
@@ -98,16 +98,16 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.compose(other.asSetter())
+        return self.compose(other.asSetter)
     }
 }
 
 public extension Setter where S == A {
-    static func identity() -> Setter<S, S> {
+    static var identity: Setter<S, S> {
         return Iso<S, S>.identity.asSetter
     }
     
-    static func codiagonal() -> Setter<Either<S, S>, S> {
+    static var codiagonal: Setter<Either<S, S>, S> {
         return Setter<Either<S, S>, S>(modify: { f in { ss in ss.bimap(f, f) } })
     }
 }

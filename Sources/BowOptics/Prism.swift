@@ -166,44 +166,44 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
 
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional().compose(other)
+        return self.asOptional.compose(other)
     }
 
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional().compose(other)
+        return self.asOptional.compose(other)
     }
 
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.asSetter().compose(other)
+        return self.asSetter.compose(other)
     }
 
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
 
     public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.asTraversal().compose(other)
+        return self.asTraversal.compose(other)
     }
 
-    public func asOptional() -> POptional<S, T, A, B> {
+    public var asOptional: POptional<S, T, A, B> {
         return POptional(set: self.set, getOrModify: self.getOrModify)
     }
 
-    public func asSetter() -> PSetter<S, T, A, B> {
+    public var asSetter: PSetter<S, T, A, B> {
         return PSetter(modify: { f in {s in self.modify(s, f) } })
     }
 
-    public func asFold() -> Fold<S, A> {
+    public var asFold: Fold<S, A> {
         return PrismFold(prism: self)
     }
 
-    public func asTraversal() -> PTraversal<S, T, A, B> {
+    public var asTraversal: PTraversal<S, T, A, B> {
         return PrismTraversal(prism: self)
     }
 }
 
 public extension Prism where S == A {
-    static func identity() -> Prism<S, S> {
+    static var identity: Prism<S, S> {
         return Iso<S, S>.identity.asPrism
     }
 }

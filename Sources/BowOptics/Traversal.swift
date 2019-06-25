@@ -16,8 +16,8 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
         fatalError("modifyF must be implemented in subclasses")
     }
     
-    public static func void() -> Traversal<S, A> {
-        return Optional<S, A>.void().asTraversal()
+    public static var void: Traversal<S, A> {
+        return Optional<S, A>.void.asTraversal
     }
     
     public static func fromTraverse<F: Traverse>() -> PTraversal<Kind<F, A>, Kind<F, B>, A, B> where S: Kind<F, A>, T: Kind<F, B> {
@@ -213,34 +213,34 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.asSetter().compose(other)
+        return self.asSetter.compose(other)
     }
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
     
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PTraversal<S, T, C, D> {
         return self.compose(other.asTraversal)
     }
     
-    public func asSetter() -> PSetter<S, T, A, B> {
+    public var asSetter: PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
-    public func asFold() -> Fold<S, A> {
+    public var asFold: Fold<S, A> {
         return TraversalFold(traversal: self)
     }
     
@@ -302,11 +302,11 @@ public extension Traversal where S == T, A == B {
 }
 
 public extension Traversal where S == A {
-    static func identity() -> Traversal<S, S> {
+    static var identity: Traversal<S, S> {
         return Iso<S, S>.identity.asTraversal
     }
     
-    static func codiagonal() -> Traversal<Either<S, S>, S> {
+    static var codiagonal: Traversal<Either<S, S>, S> {
         return CodiagonalTraversal()
     }
 }
