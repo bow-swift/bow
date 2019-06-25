@@ -25,3 +25,7 @@ public extension UnitDuration {
 public func *(lhs: Int, rhs: Measurement<UnitDuration>) -> Measurement<UnitDuration> {
     return Measurement(value: rhs.value * Double(lhs), unit: rhs.unit)
 }
+
+public extension Measurement where UnitType == UnitDuration {
+    static var infinite = Measurement(value: Double.greatestFiniteMagnitude, unit: UnitDuration.days)
+}
