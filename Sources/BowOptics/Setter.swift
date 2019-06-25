@@ -94,7 +94,7 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.compose(other.asSetter())
+        return self.compose(other.asSetter)
     }
     
     public func compose<C, D>(_ other : PTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
@@ -104,7 +104,7 @@ public class PSetter<S, T, A, B> : PSetterOf<S, T, A, B> {
 
 public extension Setter where S == A {
     static func identity() -> Setter<S, S> {
-        return Iso<S, S>.identity().asSetter()
+        return Iso<S, S>.identity.asSetter
     }
     
     static func codiagonal() -> Setter<Either<S, S>, S> {

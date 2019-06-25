@@ -94,7 +94,7 @@ class GetterTest : XCTestCase {
     
     func testGetterComposition() {
         property("Getter + Iso::identity") <- forAll { (token: Token) in
-            return (tokenGetter + Iso<String, String>.identity()).get(token) == tokenGetter.get(token)
+            return (tokenGetter + Iso<String, String>.identity).get(token) == tokenGetter.get(token)
         }
         
         property("Getter + Lens::identity") <- forAll { (token: Token) in

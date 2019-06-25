@@ -151,7 +151,7 @@ public class POptional<S, T, A, B> : POptionalOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional())
+        return self.compose(other.asOptional)
     }
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
@@ -223,7 +223,7 @@ public extension Optional where S == T, A == B {
 
 public extension Optional where S == A {
     static func identity() -> Optional<S, S> {
-        return Iso<S, S>.identity().asOptional()
+        return Iso<S, S>.identity.asOptional
     }
     
     static func codiagonal() -> Optional<Either<S, S>, S> {

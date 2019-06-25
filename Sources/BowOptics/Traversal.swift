@@ -233,7 +233,7 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func asSetter() -> PSetter<S, T, A, B> {
@@ -303,7 +303,7 @@ public extension Traversal where S == T, A == B {
 
 public extension Traversal where S == A {
     static func identity() -> Traversal<S, S> {
-        return Iso<S, S>.identity().asTraversal()
+        return Iso<S, S>.identity.asTraversal
     }
     
     static func codiagonal() -> Traversal<Either<S, S>, S> {

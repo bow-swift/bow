@@ -97,7 +97,7 @@ class PrismTest: XCTestCase {
         }
         
         property("Prism + Iso::identity") <- forAll { (sum: SumType, def: String) in
-            return (sumPrism + Iso<String, String>.identity()).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
+            return (sumPrism + Iso<String, String>.identity).getOption(sum).getOrElse(def) == sumPrism.getOption(sum).getOrElse(def)
         }
         
         property("Prism + Lens::identity") <- forAll { (sum: SumType, def: String) in

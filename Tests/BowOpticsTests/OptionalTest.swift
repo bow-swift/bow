@@ -107,7 +107,7 @@ class OptionalTest: XCTestCase {
         }
 
         property("Optional + Iso::identity") <- forAll { (array: Array<Int>, def: Int) in
-            return (optionalHead + Iso<Int, Int>.identity()).getOption(array).getOrElse(def) == optionalHead.getOption(array).getOrElse(def)
+            return (optionalHead + Iso<Int, Int>.identity).getOption(array).getOrElse(def) == optionalHead.getOption(array).getOrElse(def)
         }
 
         property("Optional + Lens::identity") <- forAll { (array: Array<Int>, def: Int) in

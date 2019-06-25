@@ -115,7 +115,7 @@ class LensTest: XCTestCase {
         }
         
         property("Lens + Iso::identity") <- forAll { (token: Token) in
-            return (tokenLens + Iso<String, String>.identity()).get(token) == tokenLens.get(token)
+            return (tokenLens + Iso<String, String>.identity).get(token) == tokenLens.get(token)
         }
         
         property("Lens + Getter::identity") <- forAll { (token: Token) in

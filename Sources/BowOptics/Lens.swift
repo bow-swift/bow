@@ -97,7 +97,7 @@ public class PLens<S, T, A, B> : PLensOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PLens<S, T, C, D> {
-        return compose(other.asLens())
+        return compose(other.asLens)
     }
     
     public func compose<C>(_ other : Getter<A, C>) -> Getter<S, C> {
@@ -219,7 +219,7 @@ public extension Lens where S == T, A == B {
 
 public extension Lens where S == A {
     static func identity() -> Lens<S, S> {
-        return Iso<S, S>.identity().asLens()
+        return Iso<S, S>.identity.asLens
     }
     
     static func codiagonal() -> Lens<Either<S, S>, S> {

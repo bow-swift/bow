@@ -31,7 +31,7 @@ class SetterTest: XCTestCase {
         }
         
         property("Setter + Iso::identity") <- forAll { (token: Token, value: String) in
-            return (tokenSetter + Iso<String, String>.identity()).set(token, value) == tokenSetter.set(token, value)
+            return (tokenSetter + Iso<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
         }
         
         property("Setter + Lens::identity") <- forAll { (token: Token, value: String) in

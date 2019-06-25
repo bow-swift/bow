@@ -81,7 +81,7 @@ class TraversalTest: XCTestCase {
         }
 
         property("Traversal + Iso::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.traversal + Iso<Int, Int>.identity()).getAll(array) ==
+            return (ArrayK<Int>.traversal + Iso<Int, Int>.identity).getAll(array) ==
                 ArrayK<Int>.traversal.getAll(array)
         }
 

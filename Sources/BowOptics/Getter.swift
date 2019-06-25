@@ -126,7 +126,7 @@ public class Getter<S, A> : GetterOf<S, A> {
 
 public extension Getter where S == A {
     static func identity() -> Getter<S, S> {
-        return Iso<S, S>.identity().asGetter()
+        return Iso<S, S>.identity.asGetter
     }
     
     static func codiagonal() -> Getter<Either<S, S>, S> {

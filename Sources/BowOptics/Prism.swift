@@ -162,7 +162,7 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
     }
 
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PPrism<S, T, C, D> {
-        return self.compose(other.asPrism())
+        return self.compose(other.asPrism)
     }
 
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> POptional<S, T, C, D> {
@@ -204,7 +204,7 @@ public class PPrism<S, T, A, B> : PPrismOf<S, T, A, B> {
 
 public extension Prism where S == A {
     static func identity() -> Prism<S, S> {
-        return Iso<S, S>.identity().asPrism()
+        return Iso<S, S>.identity.asPrism
     }
 }
 

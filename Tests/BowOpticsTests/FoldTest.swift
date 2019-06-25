@@ -59,7 +59,7 @@ class FoldTest: XCTestCase {
         }
         
         property("Fold + Iso::identity") <- forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + Iso<Int, Int>.identity()).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+            return (ArrayK<Int>.foldK + Iso<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Lens::identity") <- forAll { (array: ArrayK<Int>) in

@@ -91,7 +91,7 @@ open class Fold<S, A>: FoldOf<S, A> {
     }
 
     public func compose<C>(_ other: Iso<A, C>) -> Fold<S, C> {
-        return ComposeFold(first: self, second: other.asFold())
+        return ComposeFold(first: self, second: other.asFold)
     }
 
     public func compose<C>(_ other: Getter<A, C>) -> Fold<S, C> {
@@ -125,7 +125,7 @@ open class Fold<S, A>: FoldOf<S, A> {
 
 public extension Fold where S == A {
     static func identity() -> Fold<S, S> {
-        return Iso<S, S>.identity().asFold()
+        return Iso<S, S>.identity.asFold
     }
     
     static func codiagonal() -> Fold<Either<S, S>, S> {
