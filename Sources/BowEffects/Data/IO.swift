@@ -9,7 +9,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
         return fa as! IO<E, A>
     }
-
+    
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
         return IO.fix(IO.suspend({
             do {
@@ -151,7 +151,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
             fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
     }
-
+    
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
         return FErrorMap(f, self)
     }
@@ -165,7 +165,7 @@ public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
 }
 
-private class Pure<E: Error, A>: IO<E, A> {
+fileprivate class Pure<E: Error, A>: IO<E, A> {
     let a: A
     
     init(_ a: A) {
@@ -181,7 +181,7 @@ private class Pure<E: Error, A>: IO<E, A> {
     }
 }
 
-private class RaiseError<E: Error, A> : IO<E, A> {
+fileprivate class RaiseError<E: Error, A> : IO<E, A> {
     let error: E
     
     init(_ error : E) {
@@ -197,7 +197,7 @@ private class RaiseError<E: Error, A> : IO<E, A> {
     }
 }
 
-private class FMap<E: Error, A, B> : IO<E, B> {
+fileprivate class FMap<E: Error, A, B> : IO<E, B> {
     let f: (A) throws -> B
     let action: IO<E, A>
     
@@ -221,15 +221,15 @@ private class FMap<E: Error, A, B> : IO<E, B> {
     }
 }
 
-private class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
+fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     let f: (E) -> EE
     let action: IO<E, A>
-
+    
     init(_ f: @escaping (E) -> EE, _ action: IO<E, A>) {
         self.f = f
         self.action = action
     }
-
+    
     override func attempt() -> IO<EE, A> {
         do {
             return try Pure<EE, A>(self.unsafePerformIO())
@@ -241,7 +241,7 @@ private class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
             fatalError("IO did not handle error: \(error). Only errors of type \(E.self) or \(EE.self) are handled.")
         }
     }
-
+    
     override func unsafePerformIO() throws -> A {
         do {
             return try action.unsafePerformIO()
@@ -253,7 +253,7 @@ private class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     }
 }
 
-private class Join<E: Error, A> : IO<E, A> {
+fileprivate class Join<E: Error, A> : IO<E, A> {
     let io: IO<E, IO<E, A>>
     
     init(_ io: IO<E, IO<E, A>>) {
@@ -275,7 +275,7 @@ private class Join<E: Error, A> : IO<E, A> {
     }
 }
 
-private class AsyncIO<E: Error, A> : IO<E, A> {
+fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
     let f: Proc<E, A>
     
     init(_ f: @escaping Proc<E, A>) {
@@ -284,17 +284,10 @@ private class AsyncIO<E: Error, A> : IO<E, A> {
     
     override func attempt() -> IO<E, A> {
         var result: IO<E, A>?
-        
-        do {
-            let callback: Callback<E, A> = { either in
-                result = either.fold(RaiseError.init, Pure.init)
-            }
-            try f(callback)
-        } catch let error as E {
-            result = RaiseError<E, A>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        let callback: Callback<E, A> = { either in
+            result = either.fold(RaiseError.init, Pure.init)
         }
+        f(callback)
         
         while(result == nil) {}
         
@@ -326,7 +319,7 @@ extension IOPartial: Monad {
     public static func flatMap<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
         return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
     }
-
+    
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IOPartial<E>, Either<A, B>>) -> Kind<IOPartial<E>, B> {
         return IO.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
@@ -339,7 +332,7 @@ extension IOPartial: ApplicativeError {
     public static func raiseError<A>(_ e: E) -> Kind<IOPartial<E>, A> {
         return RaiseError(e)
     }
-
+    
     private static func fold<A, B>(_ io: IO<E, A>, _ fe: @escaping (E) -> B, _ fa: @escaping (A) -> B) -> B {
         switch io {
         case let pure as Pure<E, A>: return fa(pure.a)
@@ -347,7 +340,7 @@ extension IOPartial: ApplicativeError {
         default: fatalError("Invoke attempt before fold")
         }
     }
-
+    
     public static func handleErrorWith<A>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (E) -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
         return fold(IO.fix(fa).attempt(), f, IO.pure)
     }
@@ -355,23 +348,37 @@ extension IOPartial: ApplicativeError {
 
 extension IOPartial: MonadError {}
 
+extension IOPartial: Bracket {
+    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+        fatalError("TODO: Implement this")
+    }
+}
+
 extension IOPartial: MonadDefer {
-    public static func suspend<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
         return Pure(()).flatMap(fa)
     }
 }
 
 extension IOPartial: Async {
-    public static func runAsync<A>(_ fa: @escaping (@escaping (Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
-        return AsyncIO(fa)
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
     }
+    
+    public static func continueOn<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, A> {
+        fatalError("TODO: Implement this")
+    }
+    
+    //public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
+    //    return AsyncIO(fa)
+    //}
 }
 
 extension IOPartial: EquatableK where E: Equatable {
     public static func eq<A: Equatable>(_ lhs: Kind<IOPartial<E>, A>, _ rhs: Kind<IOPartial<E>, A>) -> Bool {
         var aValue, bValue : A?
         var aError, bError : E?
-
+        
         do {
             aValue = try IO.fix(lhs).unsafePerformIO()
         } catch let error as E {
@@ -379,7 +386,7 @@ extension IOPartial: EquatableK where E: Equatable {
         } catch {
             fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
         }
-
+        
         do {
             bValue = try IO.fix(rhs).unsafePerformIO()
         } catch let error as E {
@@ -387,7 +394,7 @@ extension IOPartial: EquatableK where E: Equatable {
         } catch {
             fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
         }
-
+        
         if let aV = aValue, let bV = bValue {
             return aV == bV
         } else if let aE = aError, let bE = bError {

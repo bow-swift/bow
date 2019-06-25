@@ -101,13 +101,29 @@ extension ForMaybeK: ApplicativeError {
 extension ForMaybeK: MonadError {}
 
 extension ForMaybeK: MonadDefer {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<ForMaybeK, A>) -> Kind<ForMaybeK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func bracketCase<A, B>(_ fa: Kind<ForMaybeK, A>, _ release: @escaping (A, ExitCase<Error>) -> Kind<ForMaybeK, ()>, _ use: @escaping (A) throws -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
+        fatalError("TODO: implement this")
+    }
+
     public static func suspend<A>(_ fa: @escaping () -> Kind<ForMaybeK, A>) -> Kind<ForMaybeK, A> {
         return Maybe.deferred { MaybeK<A>.fix(fa()).value }.k()
     }
 }
 
 extension ForMaybeK: Async {
-    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForMaybeK, ()>) -> Kind<ForMaybeK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func continueOn<A>(_ fa: Kind<ForMaybeK, A>, _ queue: DispatchQueue) -> Kind<ForMaybeK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
         return Maybe.create { emitter in
             do {
                 try fa { either in

@@ -128,13 +128,29 @@ extension ForObservableK: Traverse {
 }
 
 extension ForObservableK: MonadDefer {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<ForObservableK, A>) -> Kind<ForObservableK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func bracketCase<A, B>(_ fa: Kind<ForObservableK, A>, _ release: @escaping (A, ExitCase<Error>) -> Kind<ForObservableK, ()>, _ use: @escaping (A) throws -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
+        fatalError("TODO: implement this")
+    }
+
     public static func suspend<A>(_ fa: @escaping () -> Kind<ForObservableK, A>) -> Kind<ForObservableK, A> {
         return Observable.deferred { ObservableK<A>.fix(fa()).value }.k()
     }
 }
 
 extension ForObservableK: Async {
-    public static func runAsync<A>(_ fa: @escaping (@escaping(Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForObservableK, ()>) -> Kind<ForObservableK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func continueOn<A>(_ fa: Kind<ForObservableK, A>, _ queue: DispatchQueue) -> Kind<ForObservableK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func runAsync<A>(_ fa: @escaping ((Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
         return Observable.create { emitter in
             do {
                 try fa { either in

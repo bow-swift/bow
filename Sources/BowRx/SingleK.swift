@@ -100,13 +100,29 @@ extension ForSingleK: ApplicativeError {
 extension ForSingleK: MonadError {}
 
 extension ForSingleK: MonadDefer {
+    public static func `defer`<A>(_ fa: @escaping () -> Kind<ForSingleK, A>) -> Kind<ForSingleK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func bracketCase<A, B>(_ fa: Kind<ForSingleK, A>, _ release: @escaping (A, ExitCase<Error>) -> Kind<ForSingleK, ()>, _ use: @escaping (A) throws -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
+        fatalError("TODO: implement this")
+    }
+
     public static func suspend<A>(_ fa: @escaping () -> Kind<ForSingleK, A>) -> Kind<ForSingleK, A> {
         return Single.deferred { SingleK<A>.fix(fa()).value }.k()
     }
 }
 
 extension ForSingleK: Async {
-    public static func runAsync<A>(_ fa: @escaping (@escaping (Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func continueOn<A>(_ fa: Kind<ForSingleK, A>, _ queue: DispatchQueue) -> Kind<ForSingleK, A> {
+        fatalError("TODO: implement this")
+    }
+
+    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
         return Single<A>.create { emitter in
             do {
                 try fa { (either : Either<Error, A>) in
