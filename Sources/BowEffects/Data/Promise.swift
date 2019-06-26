@@ -26,11 +26,11 @@ public class Promise<F, A> {
     }
 }
 
-public enum PromiseError: Error {
-    case alreadyFulfilled
+public protocol PromiseError {
+    static var alreadyFulfilled: Self { get }
 }
 
-public extension Promise where F: Concurrent {
+public extension Promise where F: Concurrent, A: Equatable, F.E: Equatable & PromiseError {
     static var cancelable: Kind<F, Promise<F, A>> {
         return F.delay { CancelablePromise<F, A>() }
     }
