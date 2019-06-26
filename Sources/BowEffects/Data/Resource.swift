@@ -9,11 +9,11 @@ public class Resource<F, E, A>: ResourceOf<F, E, A> where F: Bracket, F.E == E {
         return value as! Resource<F, E, A>
     }
     
-    public static func from(_ acquire: @escaping () -> Kind<F, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<F, ()>) -> Resource<F, E, A> {
+    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A, ExitCase<E>) -> Kind<F, ()>) -> Resource<F, E, A> {
         return RegularResource(acquire, release)
     }
     
-    public static func from(_ acquire: @escaping () -> Kind<F, A>, _ release: @escaping (A) -> Kind<F, ()>) -> Resource<F, E, A> {
+    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A) -> Kind<F, ()>) -> Resource<F, E, A> {
         return RegularResource(acquire, release)
     }
     
@@ -96,8 +96,8 @@ private class BindResource<F: Bracket, E, A, B>: Resource<F, E, B> where F.E == 
     }
 }
 
-public extension Kind {
-    func asResource<E>() -> Resource<F, E, A> where F: Bracket, F.E == E {
+public extension Kind where F: Bracket {
+    var asResource: Resource<F, F.E, A> {
         return RegularResource({ self }, { _ in F.pure(()) })
     }
 }
