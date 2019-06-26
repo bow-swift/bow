@@ -40,7 +40,7 @@ public extension Promise where F: Concurrent, A: Equatable, F.E: Equatable & Pro
     }
 }
 
-public extension Promise where F: Async {
+public extension Promise where F: Async, A: Equatable, F.E: Equatable & PromiseError {
     static var uncancelable: Kind<F, Promise<F, A>> {
         return F.delay { UncancelablePromise<F, A>() }
     }
