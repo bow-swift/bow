@@ -18,7 +18,7 @@ public class Resource<F: Bracket, A>: ResourceOf<F, A> {
     }
     
     public func use<C>(_ f: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
-        fatalError("Invoke must be implemented in subclasses")
+        fatalError("use must be implemented in subclasses")
     }
 }
 

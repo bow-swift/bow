@@ -144,6 +144,7 @@
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
 		114545D7225F805500EA8755 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		114545D9225F935300EA8755 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		114D4EA622C3692600BEE850 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D4EA522C3692600BEE850 /* Ref.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
@@ -824,6 +825,7 @@
 		112D0CEF22BB88F20032F675 /* Result+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Optics.swift"; sourceTree = "<group>"; };
 		112D0CF322BBC0390032F675 /* AutoFold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFold.swift; sourceTree = "<group>"; };
 		112D0CF522BBC17C0032F675 /* AutoTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTraversal.swift; sourceTree = "<group>"; };
+		114D4EA522C3692600BEE850 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -1294,6 +1296,7 @@
 				1104BED422C22DD2002C3F78 /* IO.swift */,
 				1104BED622C22DD2002C3F78 /* KindConnection.swift */,
 				1104BEE922C25AAF002C3F78 /* Resource.swift */,
+				114D4EA522C3692600BEE850 /* Ref.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -3061,6 +3064,7 @@
 			buildActionMask = 0;
 			files = (
 				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
+				114D4EA622C3692600BEE850 /* Ref.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				1104BEDF22C22DEC002C3F78 /* Fiber.swift in Sources */,
 				1104BEDD22C22DEC002C3F78 /* Atomic.swift in Sources */,
