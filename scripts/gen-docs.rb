@@ -40,6 +40,24 @@ $modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
   "BowEffects", "BowRx", "BowBrightFutures", "Bow"]
 
 
+$versions = []
+$versions.push({
+  "title" => "master",
+  "this" => true
+})
+$versions.push({
+  "title" => "0.4.0",
+})
+$versions.push({
+  "title" => "0.5.0",
+})
+$versions.push({
+  "title" => "next",
+})
+puts JSON.pretty_generate($versions)
+File.write("versions.json", JSON.pretty_generate($versions))
+
+
 # Generate the JSON files that will be needed later.
 # Modules present in the project are used to split the JSON info.
 #
