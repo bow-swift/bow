@@ -1,19 +1,19 @@
 import Bow
 
 public final class ForResource {}
-public final class ResourcePartial<F, E>: Kind2<ForResource, F, E> where F: Bracket, F.E == E {}
-public typealias ResourceOf<F, E, A> = Kind<ResourcePartial<F, E>, A> where F: Bracket, F.E == E
+public final class ResourcePartial<F: Bracket>: Kind<ForResource, F> {}
+public typealias ResourceOf<F: Bracket, A> = Kind<ResourcePartial<F>, A>
 
-public class Resource<F, E, A>: ResourceOf<F, E, A> where F: Bracket, F.E == E {
-    public static func fix(_ value: ResourceOf<F, E, A>) -> Resource<F, E, A> {
-        return value as! Resource<F, E, A>
+public class Resource<F, A>: ResourceOf<F, A> where F: Bracket {
+    public static func fix(_ value: ResourceOf<F, A>) -> Resource<F, A> {
+        return value as! Resource<F, A>
     }
     
-    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A, ExitCase<E>) -> Kind<F, ()>) -> Resource<F, E, A> {
+    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A, ExitCase<F.E>) -> Kind<F, ()>) -> Resource<F, A> {
         return RegularResource(acquire, release)
     }
     
-    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A) -> Kind<F, ()>) -> Resource<F, E, A> {
+    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A) -> Kind<F, ()>) -> Resource<F, A> {
         return RegularResource(acquire, release)
     }
     
@@ -22,28 +22,28 @@ public class Resource<F, E, A>: ResourceOf<F, E, A> where F: Bracket, F.E == E {
     }
 }
 
-public postfix func ^<F: Bracket, E, A>(_ value: ResourceOf<F, E, A>) -> Resource<F, E, A> where F.E == E {
+public postfix func ^<F: Bracket, A>(_ value: ResourceOf<F, A>) -> Resource<F, A> {
     return Resource.fix(value)
 }
 
 extension ResourcePartial: Functor {
-    public static func map<A, B>(_ fa: ResourceOf<F, E, A>, _ f: @escaping (A) -> B) -> ResourceOf<F, E, B> {
+    public static func map<A, B>(_ fa: ResourceOf<F, A>, _ f: @escaping (A) -> B) -> ResourceOf<F, B> {
         return fa.flatMap { a in pure(f(a)) }
     }
 }
 
 extension ResourcePartial: Applicative {
-    public static func pure<A>(_ a: A) -> ResourceOf<F, E, A> {
+    public static func pure<A>(_ a: A) -> ResourceOf<F, A> {
         return RegularResource({ F.pure(a) }, { _, _ in F.pure(()) })
     }
 }
 
 extension ResourcePartial: Monad {
-    public static func flatMap<A, B>(_ fa: ResourceOf<F, E, A>, _ f: @escaping (A) -> ResourceOf<F, E, B>) -> ResourceOf<F, E, B> {
-        return BindResource<F, E, A, B>(fa, f)
+    public static func flatMap<A, B>(_ fa: ResourceOf<F, A>, _ f: @escaping (A) -> ResourceOf<F, B>) -> ResourceOf<F, B> {
+        return BindResource<F, A, B>(fa, f)
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ResourceOf<F, E, Either<A, B>>) -> ResourceOf<F, E, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ResourceOf<F, Either<A, B>>) -> ResourceOf<F, B> {
         return f(a)^.flatMap { either in
             either.fold({ a in tailRecM(a, f)^ }, pure)
         }
@@ -51,22 +51,22 @@ extension ResourcePartial: Monad {
 }
 
 extension Resource where A: Semigroup {
-    public func combine(_ other: Resource<F, E, A>) -> Resource<F, E, A> {
+    public func combine(_ other: Resource<F, A>) -> Resource<F, A> {
         return flatMap { r in other.map { r2 in r.combine(r2) }^ }^
     }
 }
 
 extension Resource where A: Monoid {
-    public static func empty() -> Resource<F, E, A> {
+    public static func empty() -> Resource<F, A> {
         return pure(A.empty())^
     }
 }
 
-private class RegularResource<F: Bracket, E, A>: Resource<F, E, A> where F.E == E {
+private class RegularResource<F: Bracket, A>: Resource<F, A> {
     fileprivate let acquire: () -> Kind<F, A>
-    fileprivate let release: (A, ExitCase<E>) -> Kind<F, ()>
+    fileprivate let release: (A, ExitCase<F.E>) -> Kind<F, ()>
     
-    public init(_ acquire: @escaping () -> Kind<F, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<F, ()>) {
+    public init(_ acquire: @escaping () -> Kind<F, A>, _ release: @escaping (A, ExitCase<F.E>) -> Kind<F, ()>) {
         self.acquire = acquire
         self.release = release
     }
@@ -80,11 +80,11 @@ private class RegularResource<F: Bracket, E, A>: Resource<F, E, A> where F.E == 
     }
 }
 
-private class BindResource<F: Bracket, E, A, B>: Resource<F, E, B> where F.E == E {
-    private let resource: ResourceOf<F, E, A>
-    private let f: (A) -> ResourceOf<F, E, B>
+private class BindResource<F: Bracket, A, B>: Resource<F, B> {
+    private let resource: ResourceOf<F, A>
+    private let f: (A) -> ResourceOf<F, B>
     
-    init(_ resource: ResourceOf<F, E, A>, _ f: @escaping (A) -> ResourceOf<F, E, B>) {
+    init(_ resource: ResourceOf<F, A>, _ f: @escaping (A) -> ResourceOf<F, B>) {
         self.resource = resource
         self.f = f
     }
@@ -97,7 +97,7 @@ private class BindResource<F: Bracket, E, A, B>: Resource<F, E, B> where F.E == 
 }
 
 public extension Kind where F: Bracket {
-    var asResource: Resource<F, F.E, A> {
+    var asResource: Resource<F, A> {
         return RegularResource({ self }, { _ in F.pure(()) })
     }
 }
