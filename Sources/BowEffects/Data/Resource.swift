@@ -4,7 +4,7 @@ public final class ForResource {}
 public final class ResourcePartial<F: Bracket>: Kind<ForResource, F> {}
 public typealias ResourceOf<F: Bracket, A> = Kind<ResourcePartial<F>, A>
 
-public class Resource<F, A>: ResourceOf<F, A> where F: Bracket {
+public class Resource<F: Bracket, A>: ResourceOf<F, A> {
     public static func fix(_ value: ResourceOf<F, A>) -> Resource<F, A> {
         return value as! Resource<F, A>
     }
