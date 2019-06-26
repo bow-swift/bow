@@ -17,7 +17,7 @@ public class Resource<F, A>: ResourceOf<F, A> where F: Bracket {
         return RegularResource(acquire, release)
     }
     
-    public func invoke<C>(_ use: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
+    public func use<C>(_ f: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
         fatalError("Invoke must be implemented in subclasses")
     }
 }
@@ -75,8 +75,8 @@ private class RegularResource<F: Bracket, A>: Resource<F, A> {
         self.init(acquire, { a, _ in release(a) })
     }
     
-    override func invoke<C>(_ use: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
-        return acquire().bracketCase(release, use)
+    override func use<C>(_ f: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
+        return acquire().bracketCase(release, f)
     }
 }
 
@@ -89,9 +89,9 @@ private class BindResource<F: Bracket, A, B>: Resource<F, B> {
         self.f = f
     }
     
-    override func invoke<C>(_ use: @escaping (B) -> Kind<F, C>) -> Kind<F, C> {
-        return resource^.invoke { a in
-            self.f(a)^.invoke(use)
+    override func use<C>(_ f: @escaping (B) -> Kind<F, C>) -> Kind<F, C> {
+        return resource^.use { a in
+            self.f(a)^.use(f)
         }
     }
 }
