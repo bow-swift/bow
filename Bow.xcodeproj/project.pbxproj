@@ -16,6 +16,8 @@
 		1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE022C22E47002C3F78 /* UnsafeRun.swift */; };
 		1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE122C22E47002C3F78 /* Bracket.swift */; };
 		1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE222C22E47002C3F78 /* Concurrent.swift */; };
+		1104BEE822C25869002C3F78 /* UnitDuration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE722C25869002C3F78 /* UnitDuration+Extension.swift */; };
+		1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE922C25AAF002C3F78 /* Resource.swift */; };
 		1116D4F0224E270B00507B54 /* Coproduct3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4EF224E270B00507B54 /* Coproduct3.swift */; };
 		1116D4F2224E2B1600507B54 /* Coproduct4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F1224E2B1600507B54 /* Coproduct4.swift */; };
 		1116D4F4224E2C8A00507B54 /* Coproduct5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F3224E2C8A00507B54 /* Coproduct5.swift */; };
@@ -738,6 +740,8 @@
 		1104BEE022C22E47002C3F78 /* UnsafeRun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeRun.swift; sourceTree = "<group>"; };
 		1104BEE122C22E47002C3F78 /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		1104BEE222C22E47002C3F78 /* Concurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concurrent.swift; sourceTree = "<group>"; };
+		1104BEE722C25869002C3F78 /* UnitDuration+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitDuration+Extension.swift"; sourceTree = "<group>"; };
+		1104BEE922C25AAF002C3F78 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		1116D4EF224E270B00507B54 /* Coproduct3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct3.swift; sourceTree = "<group>"; };
 		1116D4F1224E2B1600507B54 /* Coproduct4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct4.swift; sourceTree = "<group>"; };
 		1116D4F3224E2C8A00507B54 /* Coproduct5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct5.swift; sourceTree = "<group>"; };
@@ -1285,12 +1289,21 @@
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				1104BED422C22DD2002C3F78 /* IO.swift */,
 				1104BED522C22DD2002C3F78 /* Atomic.swift */,
-				1104BED622C22DD2002C3F78 /* KindConnection.swift */,
 				1104BED722C22DD2002C3F78 /* Fiber.swift */,
+				1104BED422C22DD2002C3F78 /* IO.swift */,
+				1104BED622C22DD2002C3F78 /* KindConnection.swift */,
+				1104BEE922C25AAF002C3F78 /* Resource.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		1104BEE622C25817002C3F78 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1104BEE722C25869002C3F78 /* UnitDuration+Extension.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		112097AB22A7EC03007F3D9C /* BowGenerators */ = {
@@ -1404,6 +1417,7 @@
 			children = (
 				1104BED322C22DD2002C3F78 /* Data */,
 				8BA0F469217E2E9200969984 /* Typeclasses */,
+				1104BEE622C25817002C3F78 /* Utilities */,
 			);
 			path = BowEffects;
 			sourceTree = "<group>";
@@ -3046,6 +3060,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				1104BEDF22C22DEC002C3F78 /* Fiber.swift in Sources */,
 				1104BEDD22C22DEC002C3F78 /* Atomic.swift in Sources */,
@@ -3055,6 +3070,7 @@
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
 				1104BEDE22C22DEC002C3F78 /* KindConnection.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
+				1104BEE822C25869002C3F78 /* UnitDuration+Extension.swift in Sources */,
 				11229747219DC557006D66C5 /* MonadDefer.swift in Sources */,
 				1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */,
 			);
