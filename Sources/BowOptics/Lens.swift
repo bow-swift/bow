@@ -459,7 +459,7 @@ private class LensFold<S, T, A, B> : Fold<S, A> {
 private class LensTraversal<S, T, A, B>: PTraversal<S, T, A, B> {
     private let lens: PLens<S, T, A, B>
     
-    init(lens : PLens<S, T, A, B>) {
+    init(lens: PLens<S, T, A, B>) {
         self.lens = lens
     }
     
