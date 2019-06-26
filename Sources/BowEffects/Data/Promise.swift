@@ -29,3 +29,23 @@ public class Promise<F, A> {
 public enum PromiseError: Error {
     case alreadyFulfilled
 }
+
+public extension Promise where F: Concurrent {
+    static var cancelable: Kind<F, Promise<F, A>> {
+        return F.delay { CancelablePromise<F, A>() }
+    }
+    
+    static var unsafeCancelable: Promise<F, A> {
+        return CancelablePromise<F, A>()
+    }
+}
+
+public extension Promise where F: Async {
+    static var uncancelable: Kind<F, Promise<F, A>> {
+        return F.delay { UncancelablePromise<F, A>() }
+    }
+    
+    static var unsafeUncancelable: Promise<F, A> {
+        return UncancelablePromise<F, A>()
+    }
+}
