@@ -45,6 +45,14 @@
   .sidebar-toggle {
     display: none;
   }
+
+  #version-dropdown {
+    .button {
+      width: 100%;
+      padding: ($base-point-grid * 2) 0;
+      border-radius: 0;
+    }
+  }
 }
 
 #wrapper {

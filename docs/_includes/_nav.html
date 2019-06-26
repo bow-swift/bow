@@ -3,9 +3,11 @@
         <div class="navigation-brand">
             <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
         </div>
-        <ul id="myTopnav" class="navigation-menu">
+        <ul class="navigation-menu">
+            <li>
             {% include _navigation-doc-versions.html %}
-            {% for item in site.data.menu.nav%}
+            </li>
+            {% for item in site.data.menu.nav | offset: 1 %}
             <li>
                 <a href="{{ item.url | relative_url }}" title="{{ item.title }}" alt="{{ item.title }}">
                 {% if item.icon != "" %}
