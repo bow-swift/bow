@@ -14,6 +14,6 @@ func +<K: Hashable, V>(lhs: Dictionary<K, V>, rhs: (K, V)) -> Dictionary<K, V> {
 
 extension Dictionary {
     var arrayValues: [Value] {
-        return self.map { x in x.value }
+        return Array(values)
     }
 }
