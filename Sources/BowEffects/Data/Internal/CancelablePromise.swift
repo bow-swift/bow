@@ -61,37 +61,35 @@ internal class CancelablePromise<F: Concurrent, A: Equatable>: Promise<F, A> whe
     
     private func unsafeTryComplete(_ a: A) -> Kind<F, Bool> {
         let current = state.value
-        switch current {
-        case let .pending(joiners: joiners):
-            if state.compare(current, andSet: .complete(value: a)) {
-                if !joiners.values.isEmpty {
-                    return callAll(joiners.arrayValues, with: .right(a)).map { _ in true }
-                } else {
-                    return F.pure(true)
-                }
-            } else {
-                return unsafeTryComplete(a)
-            }
-        default:
+        guard case let .pending(joiners: joiners) = current else {
             return F.pure(false)
+        }
+        
+        if state.compare(current, andSet: .complete(value: a)) {
+            if !joiners.values.isEmpty {
+                return callAll(joiners.arrayValues, with: .right(a)).map { _ in true }
+            } else {
+                return F.pure(true)
+            }
+        } else {
+            return unsafeTryComplete(a)
         }
     }
     
     private func unsafeTryError(_ error: F.E) -> Kind<F, Bool> {
         let current = state.value
-        switch current {
-        case let .pending(joiners: joiners):
-            if state.compare(current, andSet: .error(error)) {
-                if !joiners.values.isEmpty {
-                    return callAll(joiners.arrayValues, with: .left(error)).map { _ in true }
-                } else {
-                    return F.pure(true)
-                }
-            } else {
-                return unsafeTryError(error)
-            }
-        default:
+        guard case let .pending(joiners: joiners) = current else {
             return F.pure(false)
+        }
+        
+        if state.compare(current, andSet: .error(error)) {
+            if !joiners.values.isEmpty {
+                return callAll(joiners.arrayValues, with: .left(error)).map { _ in true }
+            } else {
+                return F.pure(true)
+            }
+        } else {
+            return unsafeTryError(error)
         }
     }
     
@@ -116,12 +114,10 @@ internal class CancelablePromise<F: Concurrent, A: Equatable>: Promise<F, A> whe
     
     private func unregister(_ id: Token) {
         let current = state.value
-        switch current {
-        case let .pending(joiners: joiners):
-            let updated = PromiseState<F.E, A>.pending(joiners: joiners - id)
-            return !state.compare(current, andSet: updated) ? unregister(id) : ()
-        default: return
-        }
+        guard case let .pending(joiners: joiners) = current else { return }
+        
+        let updated = PromiseState<F.E, A>.pending(joiners: joiners - id)
+        return !state.compare(current, andSet: updated) ? unregister(id) : ()
     }
     
     private func callAll(_ array: [(Either<F.E, A>) -> ()], with value: Either<F.E, A>) -> Kind<F, ()> {

@@ -77,18 +77,17 @@ internal class UncancelablePromise<F: Async, A: Equatable>: Promise<F, A> where 
     
     private func unsafeTry(_ newState: PromiseState<F.E, A>, _ result: Either<F.E, A>) -> Kind<F, Bool> {
         let current = state.value
-        switch current {
-        case let .pending(joiners: joiners):
-            if state.compare(current, andSet: newState) {
-                return F.delay {
-                    joiners.forEach { joiner in joiner(result) }
-                    return true
-                }
-            } else {
-                return F.pure(true)
-            }
-        default:
+        guard case let .pending(joiners: joiners) = current else {
             return F.pure(false)
+        }
+        
+        if state.compare(current, andSet: newState) {
+            return F.delay {
+                joiners.forEach { joiner in joiner(result) }
+                return true
+            }
+        } else {
+            return F.pure(true)
         }
     }
 }
