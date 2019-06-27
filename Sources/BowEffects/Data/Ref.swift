@@ -68,7 +68,7 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func set(_ a: A) -> Kind<F, ()> {
-        return F.delay { self.atomic.set(a) }
+        return F.delay { self.atomic.value = a }
     }
     
     override func getAndSet(_ a: A) -> Kind<F, A> {
