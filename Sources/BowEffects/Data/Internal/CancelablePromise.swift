@@ -60,36 +60,27 @@ internal class CancelablePromise<F: Concurrent, A: Equatable>: Promise<F, A> whe
     }
     
     private func unsafeTryComplete(_ a: A) -> Kind<F, Bool> {
-        let current = state.value
-        guard case let .pending(joiners: joiners) = current else {
-            return F.pure(false)
-        }
-        
-        if state.compare(current, andSet: .complete(value: a)) {
-            if !joiners.values.isEmpty {
-                return callAll(joiners.arrayValues, with: .right(a)).map { _ in true }
-            } else {
-                return F.pure(true)
-            }
-        } else {
-            return unsafeTryComplete(a)
-        }
+        return unsafeTry(.complete(value: a), .right(a))
     }
     
     private func unsafeTryError(_ error: F.E) -> Kind<F, Bool> {
+        return unsafeTry(.error(error), .left(error))
+    }
+    
+    private func unsafeTry(_ newState: PromiseState<F.E, A>, _ result: Either<F.E, A>) -> Kind<F, Bool> {
         let current = state.value
         guard case let .pending(joiners: joiners) = current else {
             return F.pure(false)
         }
         
-        if state.compare(current, andSet: .error(error)) {
+        if state.compare(current, andSet: newState) {
             if !joiners.values.isEmpty {
-                return callAll(joiners.arrayValues, with: .left(error)).map { _ in true }
+                return callAll(joiners.arrayValues, with: result).map { _ in true }
             } else {
                 return F.pure(true)
             }
         } else {
-            return unsafeTryError(error)
+            return unsafeTry(newState, result)
         }
     }
     
