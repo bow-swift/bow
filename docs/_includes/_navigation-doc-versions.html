@@ -21,7 +21,7 @@
 
       {% for item in site.data.versions | offset: 1 %}
       <li class="dropdown-item">
-        <a class="dropdown-item-link" href="{{ item.title | append: '/docs' }}">
+        <a class="dropdown-item-link" href="/{{ item.title | append: '/docs' }}">
             <span>
               {{ item.title }}
             </span>
