@@ -12,16 +12,16 @@
 
   .masthead-background {
     background: url("../img/logo_masthead.svg");
-  	position: absolute;
-  	top: 0;
-  	left: 0;
-  	width: 100%;
-  	height: 100%;
-  	background-position: -500px -1350px;
-  	background-size: 1200px;
-  	background-repeat: no-repeat;
-  	right: 0;
-  	bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: -500px -1350px;
+    background-size: 1200px;
+    background-repeat: no-repeat;
+    right: 0;
+    bottom: 0;
   }
 
   .masthead-content {
@@ -34,8 +34,8 @@
 
     .masthead-text {
       @include flex(1 1 75%);
-      position: relative;
 
+      position: relative;
       color: $white;
       margin-right: ($base-point-grid * 3);
 
@@ -45,7 +45,7 @@
         font-size: 3rem;
         font-weight: $font-bold;
 
-        &:before {
+        &::before {
           position: absolute;
           display: block;
           content: "{";
@@ -61,7 +61,6 @@
       }
 
       @include fadeInDown($duration: 1s, $delay: 0.2s, $function: ease);
-
     }
 
     .masthead-brand {
@@ -80,56 +79,10 @@
     .masthead-buttons {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-evenly;
       width: 60%;
       padding: ($base-point-grid * 12) 0 ($base-point-grid * 12);
       margin: auto;
-
-      .button {
-        background: #f58876;
-
-        &:hover {
-          color: $white;
-          background: darken($brand-tertiary, 5%);
-          text-decoration: none;
-        }
-
-        &:active {
-          background: darken($brand-tertiary, 5%);
-        }
-      }
-
-      .button-small {
-        padding: ($base-point-grid * 1.6) ($base-point-grid * 3);
-        background: rgba($brand-tertiary, 0.9);
-        margin: 0px $base-point-grid * 2;
-
-        &:visited {
-          color: $white;
-        }
-
-        &:hover {
-          color: $white;
-          text-decoration: none;
-        }
-
-      }
-
-      span {
-        font-size: 1rem;
-      }
-
-      .secondary-doc-version-text {
-        font-size: 0.750rem;
-      }
-
-      li {
-        display: inline-block;
-      }
-
-      span {
-        display: block;
-      }
     }
 
     .masthead-stars {
@@ -157,7 +110,6 @@
 @include bp(medium) {
   #masthead {
     .masthead-content {
-
       .masthead-top {
         @include flex-wrap(wrap);
       }

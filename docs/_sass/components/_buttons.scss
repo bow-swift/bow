@@ -2,7 +2,10 @@
 // -----------------------------------------------
 // -----------------------------------------------
 .button {
+  border: none;
   display: inline-block;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
   font-weight: $font-semibold;
   text-decoration: none;
   text-transform: uppercase;
@@ -14,6 +17,20 @@
   outline: none;
   z-index: 1;
 
+  &.link-like {
+    background: transparent;
+    color: rgba($white, 0.9);
+    font-weight: $font-regular;
+    padding: ($base-point-grid / 2) ($base-point-grid * 2);
+    text-transform: none;
+
+    &:hover {
+      color: $white;
+      text-decoration: none;
+      background: darken($brand-primary, 5%);
+    }
+  }
+
   &:visited {
     color: $white;
   }
@@ -22,6 +39,7 @@
     color: $white;
     background: darken($brand-tertiary, 5%);
     text-decoration: none;
+    cursor: pointer;
   }
 
   &:active {

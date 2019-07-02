@@ -1,43 +1,32 @@
-<li id="version-dropdown" class="{% if site.data.doc-versions.docMenu.url == category.url %}active {% endif %}">
+<div id="doc-version-dropdown">
 
-    <a href="#" tabindex="0" onclick="displayToggle(event)" title="{{ site.data.doc-versions.docMenu.title }}" alt="{{ item.title }}">
-      {% if site.data.doc-versions.docMenu.icon != "" %}
-        <i class="nav-item-icon fa fa-lg {{ site.data.doc-versions.docMenu.icon }}" aria-hidden="true"></i>
-        <span class="nav-item-text">{{ site.data.doc-versions.docMenu.title }}</span>
+    <button class="button link-like" onclick="displayToggle(event)" title="{{ site.data.menu.nav[0].title }}">
+      {% if site.data.menu.nav[0].icon != "" %}
+        <i class="nav-item-icon fa fa-lg {{ site.data.menu.nav[0].icon }}" aria-hidden="true"></i>
+        <span class="nav-item-text">{{ site.data.menu.nav[0].title }}</span>
       {% else %}
-        <span>{{ site.data.doc-versions.docMenu.title }}</span>
+        <span class="nav-item-text">{{ site.data.menu.nav[0].title }}</span>
       {% endif %}
-    </a>
+    </button>
 
-    <div class="dropdown dropdown-content">
+    <ul class="dropdown dropdown-content">
 
-        <a href="{{ site.data.commons.stable_version | append: 'docs' }}">
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/bow{{ site.data.menu.nav[0].url }}">
             <span>
-              {{ stable_version.title }} -
-              {{ site.data.doc-versions.stable }}
+              {{ site.data.versions[0].title }}
             </span>
         </a>
-        <a href="{{ next_version.url | append: 'docs' }}">
-            <span>
-              {{ next_version.title }} -
-              {{ site.data.doc-versions.next }}
-            </span>
-        </a>
-        <a href="{{ previous_version.url | append: 'docs' }}">
-            <span>
-              {{ previous_version.title }} -
-              {{ site.data.doc-versions.previous }}
-            </span>
-        </a>
+      </li>
 
-        {% for item in site.data.doc-versions.docVersions %}
-            {% if item.url != stable_version.url
-              and item.url != next_version.url
-              and item.url != previous_version.url %}
-              <a href="{{ item.url | append: 'docs' }}">
-                  <span>{{ item.title }}</span>
-              </a>
-            {% endif %}
-        {% endfor %}
-    </div>
-</li>
+      {% for item in site.data.versions | offset: 1 %}
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/bow/{{ item.title | append: site.data.menu.nav[0].url }}">
+            <span>
+              {{ item.title }}
+            </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>

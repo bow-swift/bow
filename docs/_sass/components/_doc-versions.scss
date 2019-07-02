@@ -1,0 +1,50 @@
+div[id$='version-dropdown'] {
+  position: relative;
+
+  .dropdown {
+    display: block;
+    outline: 0;
+    width: 100%;
+
+    a {
+      &:hover {
+        background: darken($brand-primary, 4%);
+      }
+    }
+  }
+
+  /* Documentation Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    font-size: 0.8rem;
+    position: absolute;
+    min-width: 145px;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background: rgba($brand-primary, 0.95);
+    opacity: 0.5;
+    transform: rotate3d(1, 0, 0, 90deg);
+    transition: transform ease 250ms, opacity ease 100ms;
+    transform-origin: top;
+
+    .dropdown-item {
+      width: 100%;
+
+      .dropdown-item-link {
+        padding: 12px 9px;
+        text-decoration: none;
+        display: block;
+        border-radius: 0;
+        color: $white;
+      }
+    }
+  }
+
+  /* Show the documentation dropdown menu (use JS to add this class
+    to the .dropdown-content container when the user clicks on
+    the dropdown button) */
+  .show {
+    transform: rotate3d(1, 0, 0, 0);
+    opacity: 1;
+  }
+}

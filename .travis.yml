@@ -77,7 +77,7 @@ jobs:
         skip-cleanup: true
         github-token: $GITHUB_TOKEN
         keep-history: true
-        local-dir: docs
+        local-dir: pub-dir
 
 cache:
   bundler: true
