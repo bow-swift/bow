@@ -81,7 +81,7 @@ def generate_nef_site(version, versions_list)
   `mkdir -p #{$source_dir}/_data`
   File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
   system "nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md"
-  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./docs/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b bow/#{version}"
+  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./docs/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b #{version}"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
 end
