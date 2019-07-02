@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "117DC10E22AE563900EF65F0"
-               BuildableName = "BowGenerators.framework"
+               BuildableName = "BowFreeGenerators.framework"
                BlueprintName = "Bow-FreeGenerators"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "117DC10E22AE563900EF65F0"
-            BuildableName = "BowGenerators.framework"
+            BuildableName = "BowFreeGenerators.framework"
             BlueprintName = "Bow-FreeGenerators"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "117DC10E22AE563900EF65F0"
-            BuildableName = "BowGenerators.framework"
+            BuildableName = "BowFreeGenerators.framework"
             BlueprintName = "Bow-FreeGenerators"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>

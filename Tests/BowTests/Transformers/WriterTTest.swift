@@ -1,19 +1,14 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class WriterTTest: XCTestCase {
-    var generator: (Int) -> WriterTOf<ForId, Int, Int> {
-        return { a in WriterT.pure(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<WriterTPartial<ForId, Int>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<WriterTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<WriterTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -29,22 +24,30 @@ class WriterTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<WriterTPartial<ForArrayK, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        SemigroupKLaws<WriterTPartial<ForArrayK, Int>>.check()
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<WriterTPartial<ForArrayK, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        MonoidKLaws<WriterTPartial<ForArrayK, Int>>.check()
     }
 
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<WriterTPartial<ForOption, Int>>.check(generator: { (a : Int) in WriterT.pure(a) })
+        FunctorFilterLaws<WriterTPartial<ForOption, Int>>.check()
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<WriterTPartial<ForOption, Int>>.check(generator: { (a: Int) in WriterT.pure(a) })
+        MonadFilterLaws<WriterTPartial<ForOption, Int>>.check()
     }
     
     func testMonadWriterLaws() {
         MonadWriterLaws<WriterTPartial<ForId, Int>>.check()
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
+    }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
     }
 }

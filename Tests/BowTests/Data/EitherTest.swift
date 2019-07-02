@@ -1,21 +1,15 @@
 import XCTest
 import Nimble
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class EitherTest: XCTestCase {
-    
-    var generator : (Int) -> EitherOf<Int, Int> {
-        return { a in Either.pure(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws<EitherPartial<Int>, Int>.check(generator: self.generator)
+        EquatableKLaws<EitherPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<EitherPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -39,22 +33,27 @@ class EitherTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherPartial<Int>>.check(generator: self.generator)
+        SemigroupKLaws<EitherPartial<Int>>.check()
     }
 
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: { (a: Int) in
-            (a % 2 == 0) ?
-                Either<Int, Int>.right(a) :
-                Either<Int, Int>.left(a) })
+        CustomStringConvertibleLaws<Either<Int, Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<EitherPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<EitherPartial<Int>>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<EitherPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<EitherPartial<Int>>.check()
+    }
+    
+    func testSemigroupLaws() {
+        SemigroupLaws<Either<Int, Int>>.check()
+    }
+    
+    func testMonoidLaws() {
+        MonoidLaws<Either<Int, Int>>.check()
     }
     
     func testCheckers() {

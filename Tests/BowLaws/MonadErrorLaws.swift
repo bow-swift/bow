@@ -1,9 +1,8 @@
-import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class MonadErrorLaws<F: MonadError & EquatableK> where F.E: Arbitrary {
-    
+class MonadErrorLaws<F: MonadError & EquatableK & ArbitraryK> where F.E: Arbitrary {
     static func check()  {
         leftZero()
         ensureConsistency()
@@ -17,10 +16,8 @@ class MonadErrorLaws<F: MonadError & EquatableK> where F.E: Arbitrary {
     }
     
     private static func ensureConsistency() {
-        property("Ensure consistency") <- forAll { (a: Int, p: ArrowOf<Int, Bool>, error: F.E) in
-            let fa = F.pure(a)
-            return F.ensure(fa, constant(error), p.getArrow) == F.flatMap(fa, { a in p.getArrow(a) ? F.pure(a) : F.raiseError(error) })
+        property("Ensure consistency") <- forAll { (fa: KindOf<F, Int>, p: ArrowOf<Int, Bool>, error: F.E) in
+            return F.ensure(fa.value, constant(error), p.getArrow) == F.flatMap(fa.value, { a in p.getArrow(a) ? F.pure(a) : F.raiseError(error) })
         }
     }
-    
 }

@@ -97,6 +97,14 @@ extension EitherT where F: Functor {
     public func toOptionT() -> OptionT<F, B> {
         return OptionT<F, B>(value.map { either in either.toOption() } )
     }
+    
+    /// Transforms the left type of the nested `Either`.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: An `EitherT` were the left type has been transformed.
+    public func mapLeft<C>(_ f: @escaping (A) -> C) -> EitherT<F, C, B> {
+        return EitherT<F, C, B>(self.value.map { either in either.bimap(f, id) })
+    }
 }
 
 // MARK: Functions for `EitherT` when the effect has an instance of `Applicative`.
@@ -223,5 +231,23 @@ extension EitherTPartial: SemigroupK where F: Monad {
         return EitherT(EitherT.fix(x).value.flatMap { either in
             either.fold(constant(EitherT.fix(y).value), { b in F.pure(Either.right(b)) })
         })
+    }
+}
+
+// MARK: Instance of `Foldable` for `EitherT`
+extension EitherTPartial: Foldable where F: Foldable {
+    public static func foldLeft<A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa^.value.foldLeft(b, { bb, either in either.foldLeft(bb, f) })
+    }
+    
+    public static func foldRight<A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa^.value.foldRight(b, { either, bb in either.foldRight(bb, f) })
+    }
+}
+
+// MARK: Instance of `Traverse` for `EitherT`
+extension EitherTPartial: Traverse where F: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: Kind<EitherTPartial<F, L>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<EitherTPartial<F, L>, B>> {
+        return fa^.value.traverse { either in either.traverse(f) }.map { x in EitherT(x.map{ b in b^ }) }
     }
 }

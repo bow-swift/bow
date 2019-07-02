@@ -1,61 +1,55 @@
-import Foundation
 import SwiftCheck
-@testable import Bow
+import Bow
+import BowGenerators
 
-class FunctorLaws<F: Functor & EquatableK> {
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
-        InvariantLaws.check(generator: generator)
-        covariantIdentity(generator)
-        covariantComposition(generator)
-        void(generator)
-        fproduct(generator)
-        tupleLeft(generator)
-        tupleRight(generator)
+class FunctorLaws<F: Functor & EquatableK & ArbitraryK> {
+    static func check() {
+        InvariantLaws<F>.check()
+        covariantIdentity()
+        covariantComposition()
+        void()
+        fproduct()
+        tupleLeft()
+        tupleRight()
     }
 
-    private static func covariantIdentity(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Identity is preserved under functor transformation") <- forAll() { (a : Int) in
-            let fa = generator(a)
-            return F.map(fa, id) == id(fa)
+    private static func covariantIdentity() {
+        property("Identity is preserved under functor transformation") <- forAll() { (fa: KindOf<F, Int>) in
+            return F.map(fa.value, id) == id(fa.value)
         }
     }
     
-    private static func covariantComposition(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Composition is preserved under functor transformation") <- forAll() { (a: Int, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
-            let fa = generator(a)
-            return F.map(F.map(fa, f.getArrow), g.getArrow) ==
-                F.map(fa, f.getArrow >>> g.getArrow)
+    private static func covariantComposition() {
+        property("Composition is preserved under functor transformation") <- forAll() { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
+            return F.map(F.map(fa.value, f.getArrow), g.getArrow) ==
+                F.map(fa.value, f.getArrow >>> g.getArrow)
         }
     }
     
-    private static func void(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("Void") <- forAll() { (a: Int, f: ArrowOf<Int, Int>) in
-            let fa = generator(a)
-            return isEqual(F.void(fa), F.void(F.map(fa, f.getArrow)))
+    private static func void() {
+        property("Void") <- forAll() { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            return isEqual(F.void(fa.value), F.void(F.map(fa.value, f.getArrow)))
         }
     }
     
-    private static func fproduct(_ generator: @escaping (Int) -> Kind<F, Int>) {
-        property("fproduct") <- forAll { (a: Int, f: ArrowOf<Int, Int>) in
-            let fa = generator(a)
-            return F.map(F.fproduct(fa, f.getArrow), { x in x.1 }) ==
-                F.map(fa, f.getArrow)
+    private static func fproduct() {
+        property("fproduct") <- forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
+            return F.map(F.fproduct(fa.value, f.getArrow), { x in x.1 }) ==
+                F.map(fa.value, f.getArrow)
         }
     }
     
-    private static func tupleLeft(_ generator : @escaping (Int) -> Kind<F, Int>) {
-        property("tuple left") <- forAll { (a : Int, b : Int) in
-            let fa = generator(a)
-            return F.map(F.tupleLeft(fa, b), { x in x.0 }) ==
-                F.as(fa, b)
+    private static func tupleLeft() {
+        property("tuple left") <- forAll { (fa: KindOf<F, Int>, b: Int) in
+            return F.map(F.tupleLeft(fa.value, b), { x in x.0 }) ==
+                F.as(fa.value, b)
         }
     }
     
-    private static func tupleRight(_ generator : @escaping (Int) -> Kind<F, Int>) {
-        property("tuple right") <- forAll { (a : Int, b : Int) in
-            let fa = generator(a)
-            return F.map(F.tupleRight(fa, b), { x in x.1 }) ==
-                F.as(fa, b)
+    private static func tupleRight() {
+        property("tuple right") <- forAll { (fa: KindOf<F, Int>, b: Int) in
+            return F.map(F.tupleRight(fa.value, b), { x in x.1 }) ==
+                F.as(fa.value, b)
         }
     }
 }

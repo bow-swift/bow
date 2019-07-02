@@ -1,20 +1,15 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class NonEmptyArrayTest: XCTestCase {
-    
-    var generator: (Int) -> NonEmptyArray<Int> {
-        return { a in NonEmptyArray(head: a, tail: []) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForNonEmptyArray, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForNonEmptyArray>.check(generator: self.generator)
+        FunctorLaws<ForNonEmptyArray>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,56 +25,43 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForNonEmptyArray>.check(generator: self.generator)
+        ComonadLaws<ForNonEmptyArray>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForNonEmptyArray>.check(generator: self.generator)
+        BimonadLaws<ForNonEmptyArray>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForNonEmptyArray>.check(generator: self.generator)
+        TraverseLaws<ForNonEmptyArray>.check()
     }
     
     func testSemigroupLaws() {
-        property("NonEmptyArray semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws<NonEmptyArray<Int>>.check(
-                a: NonEmptyArray<Int>(head: a, tail: []),
-                    b: NonEmptyArray<Int>(head: b, tail: []),
-                    c: NonEmptyArray<Int>(head: c, tail: []))
-        }
+        SemigroupLaws<NonEmptyArray<Int>>.check()
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForNonEmptyArray>.check(generator: self.generator)
+        SemigroupKLaws<ForNonEmptyArray>.check()
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<NEA<Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForNonEmptyArray>.check(generator: self.generator)
+        FoldableLaws<ForNonEmptyArray>.check()
     }
     
-    private let neaGenerator = Array<Int>.arbitrary.suchThat { array in array.count > 0 }
-    
     func testConcatenation() {
-        property("The length of the concatenation is equal to the sum of lenghts") <- forAll(self.neaGenerator, self.neaGenerator) { (x: Array<Int>, y: Array<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x)
-            let b = NonEmptyArray.fromArrayUnsafe(y)
+        property("The length of the concatenation is equal to the sum of lenghts") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
             return a.count + b.count == (a + b).count
         }
         
-        property("Adding one element increases length in one") <- forAll(self.neaGenerator, Int.arbitrary) { (array: Array<Int>, element: Int) in
-            let nea = NonEmptyArray.fromArrayUnsafe(array)
+        property("Adding one element increases length in one") <- forAll { (nea: NEA<Int>, element: Int) in
             return (nea + element).count == nea.count + 1
         }
         
-        property("Result of concatenation contains all items from the original arrays") <- forAll(self.neaGenerator, self.neaGenerator) {
-            (x: Array<Int>, y: Array<Int>) in
-            let a = NonEmptyArray.fromArrayUnsafe(x)
-            let b = NonEmptyArray.fromArrayUnsafe(y)
+        property("Result of concatenation contains all items from the original arrays") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
             let concatenation = a + b
             return concatenation.containsAll(elements: a.all()) &&
                     concatenation.containsAll(elements: b.all())

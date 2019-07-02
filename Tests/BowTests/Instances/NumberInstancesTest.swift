@@ -1,7 +1,6 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class NumberInstancesTest: XCTestCase {
 
@@ -102,134 +101,90 @@ class NumberInstancesTest: XCTestCase {
     }
     
     func testIntSemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: Int, b: Int, c: Int) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<Int>.check()
     }
     
     func testInt8SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: Int8, b: Int8, c: Int8) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<Int8>.check()
     }
     
     func testInt16SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: Int16, b: Int16, c: Int16) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<Int16>.check()
     }
     
     func testInt32SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: Int32, b: Int32, c: Int32) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<Int32>.check()
     }
     
     func testInt64SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: Int64, b: Int64, c: Int64) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<Int64>.check()
     }
     
     func testUIntSemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: UInt, b: UInt, c: UInt) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<UInt>.check()
     }
     
     func testUInt8SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: UInt8, b: UInt8, c: UInt8) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<UInt8>.check()
     }
     
     func testUInt16SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: UInt16, b: UInt16, c: UInt16) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<UInt16>.check()
     }
     
     func testUInt32SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: UInt32, b: UInt32, c: UInt32) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<UInt32>.check()
     }
     
     func testUInt64SemigroupLaws() {
-        property("Sum semigroup laws") <- forAll { (a: UInt64, b: UInt64, c: UInt64) in
-            return SemigroupLaws.check(a: a, b: b, c: c)
-        }
+        SemigroupLaws<UInt64>.check()
     }
     
     func testIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int>.check()
     }
     
     func testInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int8) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int8>.check()
     }
     
     func testInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int16) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int16>.check()
     }
     
     func testInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int32) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int32>.check()
     }
     
     func testInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Int64) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Int64>.check()
     }
     
     func testUIntMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt>.check()
     }
     
     func testUInt8MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt8) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt8>.check()
     }
     
     func testUInt16MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt16) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt16>.check()
     }
     
     func testUInt32MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt32) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt32>.check()
     }
     
     func testUInt64MonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: UInt64) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<UInt64>.check()
     }
     
     func testFloatMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Float) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Float>.check()
     }
     
     func testDoubleMonoidLaws() {
-        property("Sum Monoid laws") <- forAll { (a: Double) in
-            return MonoidLaws.check(a: a)
-        }
+        MonoidLaws<Double>.check()
     }
 }

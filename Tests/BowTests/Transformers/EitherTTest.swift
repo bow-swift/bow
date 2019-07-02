@@ -1,21 +1,15 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class EitherTTest: XCTestCase {
-    var generator: (Int) -> EitherT<ForId, Int, Int> {
-        return { a in a % 2 == 0 ? EitherT.right(a)
-                                 : EitherT.left(a)
-        }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<EitherTPartial<ForId, Int>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<EitherTPartial<ForId, Int>>.check(generator: self.generator)
+        FunctorLaws<EitherTPartial<ForId, Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -39,7 +33,15 @@ class EitherTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<EitherTPartial<ForId, Int>>.check(generator: self.generator)
+        SemigroupKLaws<EitherTPartial<ForId, Int>>.check()
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<EitherTPartial<ForId, Int>>.check()
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<EitherTPartial<ForId, Int>>.check()
     }
 
     func testOptionTConversion() {

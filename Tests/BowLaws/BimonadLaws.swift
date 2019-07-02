@@ -1,9 +1,9 @@
-@testable import Bow
+import Bow
+import BowGenerators
 
-class BimonadLaws<F: Bimonad & EquatableK> {
-    
-    static func check(generator: @escaping (Int) -> Kind<F, Int>) {
+class BimonadLaws<F: Bimonad & EquatableK & ArbitraryK> {
+    static func check() {
         MonadLaws<F>.check()
-        ComonadLaws<F>.check(generator: generator)
+        ComonadLaws<F>.check()
     }
 }

@@ -1,7 +1,8 @@
 import XCTest
 @testable import BowLaws
-@testable import Bow
+import Bow
 @testable import BowRx
+import BowRxGenerators
 @testable import BowEffectsLaws
 
 extension ForObservableK: EquatableK {
@@ -11,10 +12,8 @@ extension ForObservableK: EquatableK {
 }
 
 class ObservableKTest: XCTestCase {
-    let generator = { (x : Int) -> ObservableKOf<Int> in ObservableK.pure(x) }
-    
     func testFunctorLaws() {
-        FunctorLaws<ForObservableK>.check(generator: generator)
+        FunctorLaws<ForObservableK>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,10 +29,10 @@ class ObservableKTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForObservableK>.check(generator: generator)
+        FoldableLaws<ForObservableK>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForObservableK>.check(generator: generator)
+        TraverseLaws<ForObservableK>.check()
     }
 }

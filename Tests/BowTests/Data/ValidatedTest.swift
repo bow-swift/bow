@@ -1,20 +1,15 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class ValidatedTest: XCTestCase {
-    
-    var generator: (Int) -> Validated<Int, Int> {
-        return { a in (a % 2 == 0) ? Validated.valid(a) : Validated.invalid(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ValidatedPartial<Int>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        FunctorLaws<ValidatedPartial<Int>>.check()
     }
     
     func testApplicativeLaws() {
@@ -26,15 +21,15 @@ class ValidatedTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        SemigroupKLaws<ValidatedPartial<Int>>.check()
     }
 
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Validated<Int, Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        FoldableLaws<ValidatedPartial<Int>>.check()
     }
     
     func testApplicativeErrorLaws() {
@@ -42,40 +37,37 @@ class ValidatedTest: XCTestCase {
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ValidatedPartial<Int>>.check(generator: self.generator)
+        TraverseLaws<ValidatedPartial<Int>>.check()
+    }
+    
+    func testSemigroupLaws() {
+        SemigroupLaws<Validated<Int, Int>>.check()
     }
     
     func testCheckers() {
-        property("valid and invalid are mutually exclusive") <- forAll { (x: Int) in
-            let input = self.generator(x)
+        property("valid and invalid are mutually exclusive") <- forAll { (input: Validated<Int, Int>) in
             return xor(input.isValid, input.isInvalid)
         }
     }
     
     func testConversionConsistency() {
-        property("Consistency fromOption - toOption") <- forAll { (x: Int?, none: String) in
-            let option = Option<Int>.fromOptional(x)
-            let validated = Validated.fromOption(option, ifNone: constant(none))
-            return validated.toOption() == option
+        property("Consistency fromOption - toOption") <- forAll { (option: Option<Int>, none: String) in
+            return Validated.fromOption(option, ifNone: constant(none)).toOption() == option
         }
         
-        property("Consistency fromEither - toEither") <- forAll { (x: Int) in
-            let either = x % 2 == 0 ? Either.left(x) : Either.right(x)
-            let validated = Validated.fix(Validated.fromEither(either))
-            return validated.toEither() == either
+        property("Consistency fromEither - toEither") <- forAll { (either: Either<Int, Int>) in
+            return Validated.fromEither(either)^.toEither() == either
         }
         
-        property("Consistency fromTry - toList") <- forAll { (x: Int) in
-            let attempt = x % 2 == 0 ? Try.success(x) : Try.failure(TryError.illegalState)
+        property("Consistency fromTry - toList") <- forAll { (attempt: Try<Int>) in
             let validated = Validated<TryError, Int>.fromTry(attempt)
-            return (validated.isValid && validated.toArray() == [x]) ||
+            return (validated.isValid && validated.toArray().count == 1) ||
                     (validated.isInvalid && validated.toArray() == [])
         }
     }
 
     func testSwapIsomorphism() {
-        property("swap twice is equivalent to id") <- forAll { (x : Int) in
-            let input = self.generator(x)
+        property("swap twice is equivalent to id") <- forAll { (input: Validated<Int, Int>) in
             return input.swap().swap() == input
         }
     }

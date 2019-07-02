@@ -1,17 +1,21 @@
-import Foundation
-@testable import Bow
+import Bow
+import SwiftCheck
 
-class MonoidLaws<A: Monoid & Equatable> {
-    
-    static func check(a: A) -> Bool {
-        return leftIdentity(a) && rightIdentity(a)
+class MonoidLaws<A: Monoid & Equatable & Arbitrary> {
+    static func check() {
+        leftIdentity()
+        rightIdentity()
     }
     
-    private static func leftIdentity(_ a: A) -> Bool {
-        return A.empty().combine(a) == a
+    private static func leftIdentity() {
+        property("Left identity") <- forAll { (a: A) in
+            return A.empty().combine(a) == a
+        }
     }
     
-    private static func rightIdentity(_ a: A) -> Bool {
-        return a.combine(A.empty()) == a
+    private static func rightIdentity() {
+        property("Right identity") <- forAll { (a: A) in
+            return a.combine(A.empty()) == a
+        }
     }
 }

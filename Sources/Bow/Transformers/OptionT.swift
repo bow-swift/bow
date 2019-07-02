@@ -261,3 +261,44 @@ extension OptionTPartial: MonoidK where F: Monad {
         return OptionT(F.pure(.none()))
     }
 }
+
+// MARK: Instance of `ApplicativeError` for `OptionT`
+extension OptionTPartial: ApplicativeError where F: ApplicativeError {
+    public typealias E = F.E
+    
+    public static func raiseError<A>(_ e: F.E) -> Kind<OptionTPartial<F>, A> {
+        return OptionT(F.raiseError(e))
+    }
+    
+    public static func handleErrorWith<A>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (F.E) -> Kind<OptionTPartial<F>, A>) -> Kind<OptionTPartial<F>, A> {
+        return OptionT(fa^.value.handleErrorWith { e in f(e)^.value })
+    }
+}
+
+// MARK: Instance of `MonadError` for `OptionT`
+extension OptionTPartial: MonadError where F: MonadError {}
+
+// MARK: Instance of `Foldable` for `OptionT`
+extension OptionTPartial: Foldable where F: Foldable {
+    public static func foldLeft<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        return fa^.value.foldLeft(b, { bb, option in option.foldLeft(bb, f) })
+    }
+    
+    public static func foldRight<A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        return fa^.value.foldRight(b, { option, bb in option.foldRight(bb, f) })
+    }
+}
+
+// MARK: Instance of `Traverse` for `OptionT`
+extension OptionTPartial: Traverse where F: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<OptionTPartial<F>, B>> {
+        return fa^.value.traverse { option in option.traverse(f) }.map { x in OptionT(x.map { b in b^ }) }
+    }
+}
+
+// MARK: Instance of `TraverseFilter` for `OptionT`
+extension OptionTPartial: TraverseFilter where F: TraverseFilter {
+    public static func traverseFilter<A, B, G: Applicative>(_ fa: Kind<OptionTPartial<F>, A>, _ f: @escaping (A) -> Kind<G, Kind<ForOption, B>>) -> Kind<G, Kind<OptionTPartial<F>, B>> {
+        return fa^.value.traverseFilter { option in option.traverseFilter(f) }.map { x in OptionT(x.map(Option.some)) }
+    }
+}

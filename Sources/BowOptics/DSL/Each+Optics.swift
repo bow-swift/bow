@@ -1,44 +1,57 @@
 import Foundation
 import Bow
 
-public extension Lens {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Lens<S, A>) + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Lens where A: Each {
+    /// Provides a traversal over all elements of the focus of this lens.
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Iso {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Iso<S, A>) + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Iso where A: Each {
+    /// Provides a traversal over all elements of the focus of this iso.
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Prism {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Prism<S, A>) + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Prism where A: Each {
+    /// Provides a traversal over all elements of the focus of this prism.
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Optional {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Optional<S, A>) + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Optional where A: Each {
+    /// Provides a traversal over all elements of the focus of this optional.
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Setter {
-    func every<EachType, T>(_ each : EachType) -> Setter<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Setter<S, A>) + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Setter where A: Each {
+    /// Provides a setter over all elements of the focus of this setter.
+    var every: Setter<S, A.EachFoci> {
+        return self.fix + A.each
+    }
+}
+// MARK: Extension when focus has `Each` instance
+public extension Traversal where A: Each {
+    /// Provides a traversal over all elements of the foci of this traversal.
+    var every: Traversal<S, A.EachFoci> {
+        return self.fix + A.each
     }
 }
 
-public extension Traversal {
-    func every<EachType, T>(_ each : EachType) -> Traversal<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return (self as! Traversal<S, A>) + each.each()
-    }
-}
-
-public extension Fold {
-    func every<EachType, T>(_ each : EachType) -> Fold<S, T> where EachType : Each, EachType.S == A, EachType.A == T {
-        return self + each.each()
+// MARK: Extension when focus has `Each` instance
+public extension Fold where A: Each {
+    /// Provides a fold over all elements of the foci of this fold.
+    var every: Fold<S, A.EachFoci> {
+        return self + A.each
     }
 }

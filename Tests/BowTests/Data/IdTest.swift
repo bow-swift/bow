@@ -1,19 +1,14 @@
 import XCTest
-import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class IdTest: XCTestCase {
-    var generator : (Int) -> Id<Int> {
-        return { a in Id<Int>(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<ForId, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForId>.check(generator: self.generator)
+        FunctorLaws<ForId>.check()
     }
     
     func testApplicativeLaws() {
@@ -29,22 +24,30 @@ class IdTest: XCTestCase {
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForId>.check(generator: self.generator)
+        ComonadLaws<ForId>.check()
     }
     
     func testCustomStringConvertibleLaws() {
-        CustomStringConvertibleLaws.check(generator: self.generator)
+        CustomStringConvertibleLaws<Id<Int>>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForId>.check(generator: self.generator)
+        FoldableLaws<ForId>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForId>.check(generator: self.generator)
+        BimonadLaws<ForId>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForId>.check(generator: self.generator)
+        TraverseLaws<ForId>.check()
+    }
+    
+    func testSemigroupLaws() {
+        SemigroupLaws<Id<Int>>.check()
+    }
+    
+    func testMonoidLaws() {
+        MonoidLaws<Id<Int>>.check()
     }
 }

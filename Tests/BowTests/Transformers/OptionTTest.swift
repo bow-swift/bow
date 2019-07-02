@@ -1,20 +1,15 @@
 import XCTest
 import SwiftCheck
 @testable import BowLaws
-@testable import Bow
+import Bow
 
 class OptionTTest: XCTestCase {
-    
-    var generator: (Int) -> OptionTOf<ForId, Int> {
-        return { a in OptionT<ForId, Int>.pure(a) }
-    }
-
     func testEquatableLaws() {
-        EquatableKLaws.check(generator: self.generator)
+        EquatableKLaws<OptionTPartial<ForId>, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        FunctorLaws<OptionTPartial<ForId>>.check()
     }
     
     func testApplicativeLaws() {
@@ -30,17 +25,37 @@ class OptionTTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        SemigroupKLaws<OptionTPartial<ForId>>.check()
     }
 
     func testMonoidKLaws() {
-        MonoidKLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        MonoidKLaws<OptionTPartial<ForId>>.check()
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<OptionTPartial<ForId>>.check(generator: self.generator)
+        FunctorFilterLaws<OptionTPartial<ForId>>.check()
+    }
+    
+    func testApplicativeErrorLaws() {
+        ApplicativeErrorLaws<OptionTPartial<EitherPartial<CategoryError>>>.check()
+    }
+    
+    func testMonadErrorLaws() {
+        MonadErrorLaws<OptionTPartial<EitherPartial<CategoryError>>>.check()
+    }
+    
+    func testFoldableLaws() {
+        FoldableLaws<OptionTPartial<ForId>>.check()
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<OptionTPartial<ForId>>.check()
     }
 
+    func testTraverseFilterLaws() {
+        TraverseFilterLaws<OptionTPartial<ConstPartial<Int>>>.check()
+    }
+    
     func testToLeftWithFunctionWithSome() {
         property("toLeft for .some should build a correct EitherT") <- forAll { (a: Int, b: String) in
             let optionT = OptionT<ForId, Int>.fromOption(.some(a))
