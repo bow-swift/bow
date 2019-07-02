@@ -11,6 +11,9 @@
       location = "group:Patterns.playground">
    </FileRef>
    <FileRef
+      location = "group:Optics.playground">
+   </FileRef>
+   <FileRef
       location = "group:Legal.playground">
    </FileRef>
    <FileRef
