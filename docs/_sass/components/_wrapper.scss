@@ -27,7 +27,6 @@
 }
 
 #sidebar-wrapper {
-  // background: darken($brand-primary, 1%);
   background-image:
     linear-gradient(
       to bottom,
@@ -46,7 +45,7 @@
     display: none;
   }
 
-  #version-dropdown {
+  div[id$='version-dropdown'] {
     .button {
       width: 100%;
       padding: ($base-point-grid * 2) 0;

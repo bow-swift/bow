@@ -1,4 +1,4 @@
-<nav id="navigation">
+<nav id="navigation" class="navigation">
     <div class="content-navigation container">
         <div class="navigation-brand">
             <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
@@ -7,7 +7,10 @@
             <li>
             {% include _navigation-doc-versions.html %}
             </li>
-            {% for item in site.data.menu.nav | offset: 1 %}
+            <li>
+            {% include _navigation-api-versions.html %}
+            </li>
+            {% for item in site.data.menu.nav | offset: 2 %}
             <li>
                 <a href="{{ item.url | relative_url }}" title="{{ item.title }}" alt="{{ item.title }}">
                 {% if item.icon != "" %}
