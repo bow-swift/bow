@@ -7,6 +7,8 @@ class MonadFilterLaws<F: MonadFilter & EquatableK & ArbitraryK> {
         leftEmpty()
         rightEmpty()
         consistency()
+        mapFilter()
+        filter()
     }
     
     private static func leftEmpty() {
@@ -24,6 +26,19 @@ class MonadFilterLaws<F: MonadFilter & EquatableK & ArbitraryK> {
     private static func consistency()  {
         property("Consistency") <- forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Bool>) in
             return F.filter(fa.value, f.getArrow) == F.flatMap(fa.value, { a in f.getArrow(a) ? F.pure(a) : F.empty() })
+        }
+    }
+    
+    private static func mapFilter() {
+        property("mapFilter") <- forAll { (flag: Bool, n: Int) in
+            return F.pure(()).mapFilter { _ in flag ? Option.some(n) : Option.none() } ==
+                (flag ? F.pure(n) : F.empty())
+        }
+    }
+    
+    private static func filter() {
+        property("filter") <- forAll { (flag: Bool, n: Int) in
+            return F.pure(n).filter(constant(flag)) == (flag ? F.pure(n) : F.empty())
         }
     }
 }

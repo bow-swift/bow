@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "117DC0F722AE522000EF65F0"
-               BuildableName = "BowEffectsGenerators.framework"
+               BuildableName = "BowBrightFuturesGenerators.framework"
                BlueprintName = "Bow-BrightFuturesGenerators"
                ReferencedContainer = "container:Bow.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "117DC0F722AE522000EF65F0"
-            BuildableName = "BowEffectsGenerators.framework"
+            BuildableName = "BowBrightFuturesGenerators.framework"
             BlueprintName = "Bow-BrightFuturesGenerators"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "117DC0F722AE522000EF65F0"
-            BuildableName = "BowEffectsGenerators.framework"
+            BuildableName = "BowBrightFuturesGenerators.framework"
             BlueprintName = "Bow-BrightFuturesGenerators"
             ReferencedContainer = "container:Bow.xcodeproj">
          </BuildableReference>

@@ -1,49 +1,26 @@
-import Foundation
-import Bow
-
+/// `Each` provides a `Traversal` that can focus into this structure to see all its foci of type `EachFoci`.
 public protocol Each {
-    associatedtype S
-    associatedtype A
+    associatedtype EachFoci
 
-    func each() -> Traversal<S, A>
+    /// Provides a `Traversal` for this structure with focus on `EachFoci`.
+    static var each: Traversal<Self, EachFoci> { get }
 }
 
+// MARK: Related functions
 public extension Each {
-    static func fromIso<B, EachIn>(_ each : EachIn, _ iso : Iso<S, A>) -> EachFromIso<S, B, A, EachIn> where EachIn : Each, EachIn.S == A, EachIn.A == B {
-        return EachFromIso<S, B, A, EachIn>(each : each, iso : iso)
+    /// Pre-composes the provided `Traversal` from this `Each` with an isomorphism.
+    ///
+    /// - Parameter iso: An isomorphism.
+    /// - Returns: A `Traversal` on a structure that is isomorphic to this structure and has the same foci.
+    static func each<B>(_ iso: Iso<B, Self>) -> Traversal<B, EachFoci> {
+        return iso + each
     }
-}
-
-public extension Each where S: Traverse {
-    static func from() -> EachFromTraverse<S, A>  {
-        return EachFromTraverse<S, A>()
-    }
-}
-
-public class EachFromIso<M, N, O, EachIn> : Each where EachIn : Each, EachIn.S == O, EachIn.A == N {
-    public typealias S = M
-    public typealias A = N
-
-    private let eachObject : EachIn
-    private let iso : Iso<S, O>
-
-    public init(each eachObject : EachIn, iso : Iso<S, O>) {
-        self.eachObject = eachObject
-        self.iso = iso
-    }
-
-    public func each() -> Traversal<M, N> {
-        return iso + eachObject.each()
-    }
-}
-
-public class EachFromTraverse<M: Traverse, N>: Each {
-    public typealias S = Kind<M, N>
-    public typealias A = N
-
-    public init() {}
-
-    public func each() -> Traversal<Kind<M, N>, N> {
-        return Traversal<S, A>.fromTraverse()
+    
+    /// Post-composes the provided `Traversal` from this `Each` with an isomorphism.
+    ///
+    /// - Parameter iso: An isomorphism.
+    /// - Returns: A `Traversal` on this structure with a new foci that is isomorphic to the original one.
+    static func each<B>(_ iso: Iso<EachFoci, B>) -> Traversal<Self, B> {
+        return each + iso
     }
 }

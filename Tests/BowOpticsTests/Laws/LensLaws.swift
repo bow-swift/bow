@@ -1,9 +1,10 @@
 import SwiftCheck
-@testable import Bow
-@testable import BowOptics
+import Bow
+import BowOptics
 
 class LensLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable & Monoid> {
-    static func check(lens : Lens<A, B>) {
+    
+    static func check(lens: Lens<A, B>) {
         getSet(lens)
         setGet(lens)
         setIdempotent(lens)

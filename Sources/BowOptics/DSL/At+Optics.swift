@@ -1,50 +1,90 @@
 import Foundation
 import Bow
 
-public extension Lens {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Lens<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Lens<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Lens where A: At {
+    /// Focuses on a specific index of this lens focus.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A composed lens from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Lens<S, A.AtFoci>  {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Iso {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Lens<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Iso<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Iso where A: At {
+    /// Focuses on a specific index of this iso focus.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A lens from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Lens<S, A.AtFoci> {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Prism {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Optional<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Prism<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Prism where A: At {
+    /// Focuses on a specific index of this prism.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: An optional from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Optional<S, A.AtFoci> {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Optional {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Optional<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Optional<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Optional where A: At {
+    /// Focuses on a specific index of this optional.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: An optional from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Optional<S, A.AtFoci> {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Getter {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Getter<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return self + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Getter where A: At {
+    /// Focuses on a specific index of this getter.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A getter from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Getter<S, A.AtFoci> {
+        return self + A.at(i)
     }
 }
 
-public extension Setter {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Setter<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Setter<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Setter where A: At {
+    /// Focuses on a specific index of this setter.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A setter from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Setter<S, A.AtFoci> {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Traversal {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Traversal<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return (self as! Traversal<S, A>) + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Traversal where A: At {
+    /// Focuses on a specific index of this traversal.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A traversal from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Traversal<S, A.AtFoci> {
+        return self.fix + A.at(i)
     }
 }
 
-public extension Fold {
-    func at<AtType, I, T>(_ at: AtType, _ i: I) -> Fold<S, T> where AtType: At, AtType.S == A, AtType.I == I, AtType.A == T {
-        return self + at.at(i)
+// MARK: Extension when focus has `At` Instance
+public extension Fold where A: At {
+    /// Focuses on a specific index of this fold.
+    ///
+    /// - Parameter i: Index to focus.
+    /// - Returns: A fold from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> Fold<S, A.AtFoci> {
+        return self + A.at(i)
     }
 }

@@ -24,6 +24,14 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
         return fa as! Kleisli<F, D, A>
     }
     
+    /// Creates a constant Kleisli function.
+    ///
+    /// - Parameter fa: Constant value to return.
+    /// - Returns: A constant Kleisli function.
+    public static func liftF(_ fa: Kind<F, A>) -> Kleisli<F, D, A> {
+        return Kleisli(constant(fa))
+    }
+    
     /// Initializes a Kleisli value.
     ///
     /// - Parameter run: Closure to be wrapped in this Kleisli.

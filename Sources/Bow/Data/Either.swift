@@ -310,3 +310,18 @@ extension EitherPartial: SemigroupK {
         return Either.fix(x).fold(constant(Either.fix(y)), Either.right)
     }
 }
+
+// MARK: Instance of `Semigroup` for `Either`.
+extension Either: Semigroup where A: Semigroup, B: Semigroup {
+    public func combine(_ other: Either<A, B>) -> Either<A, B> {
+        return self.fold({ l1 in other.fold({ l2 in .left(l1.combine(l2)) }, { r2 in .left(l1) }) },
+                         { r1 in other.fold({ l2 in .left(l2) }, { r2 in .right(r1.combine(r2)) }) })
+    }
+}
+
+// MARK: Instance of `Monoid` for `Either`.
+extension Either: Monoid where A: Monoid, B: Monoid {
+    public static func empty() -> Either<A, B> {
+        return .right(B.empty())
+    }
+}

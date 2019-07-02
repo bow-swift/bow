@@ -30,4 +30,12 @@ class Function0Test: XCTestCase {
     func testBimonadLaws() {
         BimonadLaws<ForFunction0>.check()
     }
+    
+    func testSemigroupLaws() {
+        SemigroupLaws<Function0<String>>.check()
+    }
+    
+    func testMonoidLaws() {
+        MonoidLaws<Function0<String>>.check()
+    }
 }

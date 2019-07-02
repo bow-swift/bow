@@ -1,38 +1,34 @@
-import Foundation
-import Bow
-
+/// `Index` provides an `Optional` for this structure to focus on an optional `IndexFoci` at a given index `IndexType`.
 public protocol Index {
-    associatedtype S
-    associatedtype I
-    associatedtype A
+    associatedtype IndexType
+    associatedtype IndexFoci
 
-    func index(_ i: I) -> Optional<S, A>
+    /// Provides an `Optional` that focuses on a value at a given index.
+    ///
+    /// - Parameter i: Index to focus on.
+    /// - Returns: An `Optional` optic that focuses on a value of this structure.
+    static func index(_ i: IndexType) -> Optional<Self, IndexFoci>
 }
 
+// MARK: Related functions
 public extension Index {
-    static func index<Idx>(_ idx: Idx, _ i: I) -> Optional<S, A> where Idx: Index, Idx.S == S, Idx.I == I, Idx.A == A {
-        return idx.index(i)
+    /// Pre-composes the `Optional` provided by this `Index` with an isomorphism.
+    ///
+    /// - Parameters:
+    ///   - i: Index to focus this structure.
+    ///   - iso: An isomorphism.
+    /// - Returns: An `Optional` optic between a structure that is isomorphic to this one and the same foci, focused at the provided index.
+    static func index<B>(_ i: IndexType, iso: Iso<B, Self>) -> Optional<B, IndexFoci> {
+        return iso + index(i)
     }
-
-    static func fromIso<Idx, B>(_ idx: Idx, _ iso: Iso<S, A>) -> IndexFromIso<S, I, B, A, Idx> where Idx: Index, Idx.S == A, Idx.I == I, Idx.A == B {
-        return IndexFromIso(index: idx, iso: iso)
-    }
-}
-
-public class IndexFromIso<M, N, O, P, Idx>: Index where Idx: Index, Idx.S == P, Idx.I == N, Idx.A == O {
-    public typealias S = M
-    public typealias I = N
-    public typealias A = O
-
-    private let idx: Idx
-    private let iso: Iso<M, P>
-
-    public init(index: Idx, iso: Iso<M, P>) {
-        self.idx = index
-        self.iso = iso
-    }
-
-    public func index(_ i: N) -> Optional<M, O> {
-        return iso + idx.index(i)
+    
+    /// Post-composes the `Optional` provided by this `Index` with an isomorphism.
+    ///
+    /// - Parameters:
+    ///   - i: Index to focus this structure.
+    ///   - iso: An isomorphism.
+    /// - Returns: An `Optional` between this optic and new foci isomorphic to the original one, focused at the provided index.
+    static func index<B>(_ i: IndexType, iso: Iso<IndexFoci, B>) -> Optional<Self, B> {
+        return index(i) + iso
     }
 }

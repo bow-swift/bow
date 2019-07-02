@@ -117,6 +117,11 @@ public final class Option<A>: OptionOf<A> {
     public func toArray() -> [A] {
         return fold(constant([]), { a in [a] })
     }
+    
+    /// Converts this option into a native Swift optional `A?`
+    public var orNil: A? {
+        return toOptional()
+    }
 }
 
 /// Safe downcasting.
@@ -244,6 +249,23 @@ extension ForOption: TraverseFilter {
     }
 }
 
+// MARK: Instance of `SemigroupK` for `Option`
+extension ForOption: SemigroupK {
+    public static func combineK<A>(_ x: Kind<ForOption, A>, _ y: Kind<ForOption, A>) -> Kind<ForOption, A> {
+        return x^.fold(constant(y), Option.some)
+    }
+}
+
+// MARK: Instance of `MonoidK` for `Option`
+extension ForOption: MonoidK {
+    public static func emptyK<A>() -> Kind<ForOption, A> {
+        return Option.none()
+    }
+}
+
+// MARK: Instance of `MonadCombine` for `Option`
+extension ForOption: MonadCombine {}
+
 // MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
@@ -269,7 +291,7 @@ extension Optional {
     /// This is an alias for `Optional.k()`.
     ///
     /// - Returns: An Option value with the same structure as this value.
-    func toOption() -> Option<Wrapped> {
+    public func toOption() -> Option<Wrapped> {
         return Option<Wrapped>.fromOptional(self)
     }
 
@@ -278,7 +300,91 @@ extension Optional {
     /// This is an alias for `Optional.k()`.
     ///
     /// - Returns: An Option value with the same structure as this value.
-    func k() -> Option<Wrapped> {
+    public func k() -> Option<Wrapped> {
         return toOption()
+    }
+}
+
+extension Collection {
+    /// Obtains the first element of this collection or `Option.none`.
+    public var firstOrNone: Option<Element> {
+        return self.first.toOption()
+    }
+    
+    /// Obtains the first element of this collection that matches a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: First element that matches the predicate or `Option.none`.
+    public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.first(where: predicate).toOption()
+    }
+    
+    /// Returns an element if it is the single one in this collection or `Option.none`
+    public var singleOrNone: Option<Element> {
+        return self.count == 1 ? self.first.toOption() : .none()
+    }
+    
+    /// Returns an element if it is the single one matching a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: A value if it is the single one matching the predicate, or `Option.none`.
+    public func singleOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.filter(predicate).singleOrNone
+    }
+}
+
+extension Sequence {
+    /// Obtains the first element of this sequence or `Option.none`.
+    public var firstOrNone: Option<Element> {
+        return self.first(where: constant(true)).toOption()
+    }
+    
+    /// Obtains the first element of this sequence that matches a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: First element that matches the predicate or `Option.none`.
+    public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.first(where: predicate).toOption()
+    }
+}
+
+extension BidirectionalCollection {
+    /// Obtains the first element of this bidirectional collection or `Option.none`.
+    public var firstOrNone: Option<Element> {
+        return self.first.toOption()
+    }
+    
+    /// Obtains the first element of this bidirectional collection that matches a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: First element that matches the predicate or `Option.none`.
+    public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.first(where: predicate).toOption()
+    }
+    
+    /// Obtains the last element of this bidirectional collection or `Option.none`.
+    public var lastOrNone: Option<Element> {
+        return self.last.toOption()
+    }
+    
+    /// Obtains the last element of this bidirectional collection that matches a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: Last element that matches the predicate or `Option.none`.
+    public func lastOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.last(where: predicate).toOption()
+    }
+    
+    /// Returns an element if it is the single one in this collection or `Option.none`
+    public var singleOrNone: Option<Element> {
+        return self.count == 1 ? self.first.toOption() : .none()
+    }
+    
+    /// Returns an element if it is the single one matching a predicate.
+    ///
+    /// - Parameter predicate: Filtering predicate.
+    /// - Returns: A value if it is the single one matching the predicate, or `Option.none`.
+    public func singleOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
+        return self.filter(predicate).singleOrNone
     }
 }

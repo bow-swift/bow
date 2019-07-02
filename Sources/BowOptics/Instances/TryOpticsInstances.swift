@@ -1,27 +1,29 @@
 import Foundation
 import Bow
 
+// MARK: Optics extensions
 public extension Try {
-    static func traversal() -> Traversal<TryOf<A>, A> {
-        return TryTraversal<A>()
+    /// Provides an Iso to go from/to this type to its `Kind` version.
+    static var fixIso: Iso<Try<A>, TryOf<A>> {
+        return Iso(get: id, reverseGet: Try.fix)
     }
     
-    static func each() -> TryEach<A> {
-        return TryEach<A>()
+    /// Provides a Fold based on the Foldable instance of this type.
+    static var fold: Fold<Try<A>, A> {
+        return fixIso + foldK
     }
     
-    private class TryTraversal<A>: Traversal<TryOf<A>, A> {
-        override func modifyF<F: Applicative>(_ s: Kind<ForTry, A>, _ f: @escaping (A) -> Kind<F, A>) -> Kind<F, Kind<ForTry, A>> {
-            return s.traverse(f)
-        }
+    /// Provides a Traversal based on the Traverse instance of this type.
+    static var traversal: Traversal<Try<A>, A> {
+        return fixIso + traversalK
     }
+}
+
+// MARK: Instance of `Each` for `Try`
+extension Try: Each {
+    public typealias EachFoci = A
     
-    class TryEach<E> : Each {
-        public typealias S = TryOf<E>
-        public typealias A = E
-        
-        public func each() -> Traversal<TryOf<E>, E> {
-            return Try<E>.traversal()
-        }
+    public static var each: PTraversal<Try<A>, Try<A>, A, A> {
+        return traversal
     }
 }

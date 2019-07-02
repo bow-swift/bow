@@ -32,6 +32,14 @@ class OptionTest: XCTestCase {
         MonoidLaws<Option<Int>>.check()
     }
     
+    func testSemigroupKLaws() {
+        SemigroupKLaws<ForOption>.check()
+    }
+    
+    func testMonoidKLaws() {
+        MonoidKLaws<ForOption>.check()
+    }
+    
     func testFunctorFilterLaws() {
         FunctorFilterLaws<ForOption>.check()
     }
@@ -54,6 +62,10 @@ class OptionTest: XCTestCase {
     
     func testTraverseFilterLaws() {
         TraverseFilterLaws<ForOption>.check()
+    }
+    
+    func testMonadCombineLaws() {
+        MonadCombineLaws<ForOption>.check()
     }
     
     func testFromToOption() {

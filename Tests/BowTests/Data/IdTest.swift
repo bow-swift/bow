@@ -42,4 +42,12 @@ class IdTest: XCTestCase {
     func testTraverseLaws() {
         TraverseLaws<ForId>.check()
     }
+    
+    func testSemigroupLaws() {
+        SemigroupLaws<Id<Int>>.check()
+    }
+    
+    func testMonoidLaws() {
+        MonoidLaws<Id<Int>>.check()
+    }
 }

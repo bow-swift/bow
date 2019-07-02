@@ -15,20 +15,12 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     open func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         fatalError("modifyF must be implemented in subclasses")
     }
-
-    public static func identity() -> Traversal<S, S> {
-        return Iso<S, S>.identity().asTraversal()
+    
+    public static var void: Traversal<S, A> {
+        return Optional<S, A>.void.asTraversal
     }
     
-    public static func codiagonal() -> Traversal<Either<S, S>, S> {
-        return CodiagonalTraversal()
-    }
-    
-    public static func void() -> Traversal<S, A> {
-        return Optional<S, A>.void().asTraversal()
-    }
-    
-    public static func fromTraverse<T: Traverse>() -> PTraversal<Kind<T, A>, Kind<T, B>, A, B> {
+    public static func fromTraverse<F: Traverse>() -> PTraversal<Kind<F, A>, Kind<F, B>, A, B> where S: Kind<F, A>, T: Kind<F, B> {
         return TraverseTraversal()
     }
     
@@ -221,34 +213,34 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     }
     
     public func compose<C, D>(_ other : PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
-        return self.asSetter().compose(other)
+        return self.asSetter.compose(other)
     }
     
     public func compose<C>(_ other : Fold<A, C>) -> Fold<S, C> {
-        return self.asFold().compose(other)
+        return self.asFold.compose(other)
     }
     
     public func compose<C, D>(_ other : POptional<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PPrism<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PLens<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
     public func compose<C, D>(_ other : PIso<A, B, C, D>) -> PTraversal<S, T, C, D> {
-        return self.compose(other.asTraversal())
+        return self.compose(other.asTraversal)
     }
     
-    public func asSetter() -> PSetter<S, T, A, B> {
+    public var asSetter: PSetter<S, T, A, B> {
         return PSetter(modify: { f in { s in self.modify(s, f) } })
     }
     
-    public func asFold() -> Fold<S, A> {
+    public var asFold: Fold<S, A> {
         return TraversalFold(traversal: self)
     }
     
@@ -268,6 +260,54 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     
     public func forall(_ s : S, _ predicate : @escaping (A) -> Bool) -> Bool {
         return foldMap(s, predicate)
+    }
+    
+    public func extract() -> State<S, ArrayK<A>> {
+        return State { s in (s, self.getAll(s)) }
+    }
+    
+    public func toState() -> State<S, ArrayK<A>> {
+        return extract()
+    }
+    
+    public func extractMap<C>(_ f: @escaping (A) -> C) -> State<S, ArrayK<C>> {
+        return extract().map { x in x.map(f)^ }^
+    }
+}
+
+public extension Traversal where S == T, A == B {
+    func update(_ f: @escaping (A) -> A) -> State<S, ArrayK<A>> {
+        return updateOld(f).map { x in x.map(f)^ }^
+    }
+    
+    func updateOld(_ f: @escaping (A) -> A) -> State<S, ArrayK<A>> {
+        return State { s in (self.modify(s, f), self.getAll(s)) }
+    }
+    
+    func update_(_ f: @escaping (A) -> A) -> State<S, ()> {
+        return State { s in (self.modify(s, f), ()) }
+    }
+    
+    func assign(_ a: A) -> State<S, ArrayK<A>> {
+        return update(constant(a))
+    }
+    
+    func assignOld(_ a: A) -> State<S, ArrayK<A>> {
+        return updateOld(constant(a))
+    }
+    
+    func assign_(_ a: A) -> State<S, ()> {
+        return update_(constant(a))
+    }
+}
+
+public extension Traversal where S == A {
+    static var identity: Traversal<S, S> {
+        return Iso<S, S>.identity.asTraversal
+    }
+    
+    static var codiagonal: Traversal<Either<S, S>, S> {
+        return CodiagonalTraversal()
     }
 }
 
@@ -610,5 +650,11 @@ private class ComposeTraversal<S, T, A, B, C, D> : PTraversal<S, T, C, D> {
         return self.first.modifyF(s, { a in
             self.second.modifyF(a, f)
         })
+    }
+}
+
+extension Traversal {
+    internal var fix: Traversal<S, A> {
+        return self as! Traversal<S, A>
     }
 }

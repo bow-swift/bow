@@ -1,114 +1,113 @@
 import XCTest
 import SwiftCheck
-@testable import Bow
-@testable import BowOptics
+import Bow
+import BowGenerators
+import BowOptics
 
 class TraversalTest: XCTestCase {
-    let arrayKGen: Gen<ArrayKOf<Int>> = Array<Int>.arbitrary.map{ array in array.k() }
-
-    func arrayKTraversal<F: Traverse>() -> Traversal<Kind<F, Int>, Int>{
-        return Traversal<Int, Int>.fromTraverse()
-    }
-
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: arrayKTraversal(),
-                            generatorA: arrayKGen)
+        TraversalLaws<ArrayK<Int>, Int>.check(traversal: ArrayK<Int>.traversal)
     }
 
     func testSetterLaws() {
-        SetterLaws.check(setter: arrayKTraversal().asSetter(),
-                         generatorA: arrayKGen)
+        SetterLaws.check(setter: ArrayK<Int>.traversal.asSetter)
     }
 
     func testTraversalAsFold() {
-        property("Traversal as Fold: size") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().size(array.k()) == array.count
+        property("Traversal as Fold: size") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.size(array) == array.count
         }
 
-        property("Traversal as Fold: nonEmpty") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().nonEmpty(array.k()) == !array.isEmpty
+        property("Traversal as Fold: nonEmpty") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.nonEmpty(array) == !array.isEmpty
         }
 
-        property("Traversal as Fold: isEmpty") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().isEmpty(array.k()) == array.isEmpty
+        property("Traversal as Fold: isEmpty") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.isEmpty(array) == array.isEmpty
         }
 
-        property("Traversal as Fold: getAll") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().getAll(array.k()) ==
-                array.k()
+        property("Traversal as Fold: getAll") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.getAll(array) == array
         }
 
-        property("Traversal as Fold: combineAll") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().combineAll(array.k()) == array.reduce(0, +)
+        property("Traversal as Fold: combineAll") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.combineAll(array) == array.asArray.reduce(0, +)
         }
 
-        property("Traversal as Fold: fold") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().combineAll(array.k()) == array.reduce(0, +)
+        property("Traversal as Fold: fold") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.combineAll(array) == array.asArray.reduce(0, +)
         }
 
-        property("Traversal as Fold: headOption") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().headOption(array.k()) ==
-                Option.fromOptional(array.first)
+        property("Traversal as Fold: headOption") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.headOption(array) ==
+                array.firstOrNone()
         }
 
-        property("Traversal as Fold: lastOption") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().asFold().lastOption(array.k()) ==
-                Option.fromOptional(array.last)
+        property("Traversal as Fold: lastOption") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.asFold.lastOption(array) ==
+                array.asArray.last.toOption()
         }
     }
 
     func testTraversalProperties() {
-        property("Getting all targets of a traversal") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().getAll(array.k()) == array.k()
+        property("Getting all targets of a traversal") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.getAll(array) == array
         }
 
-        property("Folding all the values from a traversal") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().fold(array.k()) ==
-                array.reduce(0, +)
+        property("Folding all the values from a traversal") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.fold(array) ==
+                array.asArray.reduce(0, +)
         }
 
-        property("Combining all the values from a traversal") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().fold(array.k()) ==
-                array.reduce(0, +)
+        property("Combining all the values from a traversal") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.fold(array) ==
+                array.asArray.reduce(0, +)
         }
 
-        property("Find a target in a traversal") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().find(array.k(), { x in x > 10 }) ==
-                Option.fromOptional(array.filter { x in x > 10 }.first)
+        property("Find a target in a traversal") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.find(array, { x in x > 10 }) ==
+                array.asArray.filter { x in x > 10 }.first.toOption()
         }
 
-        property("Size of a traversal") <- forAll { (array: Array<Int>) in
-            return self.arrayKTraversal().size(array.k()) == array.count
+        property("Size of a traversal") <- forAll { (array: ArrayK<Int>) in
+            return ArrayK<Int>.traversal.size(array) == array.count
         }
     }
 
     func testTraversalComposition() {
-        property("Traversal + Traversal::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + Traversal<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Traversal::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + Traversal<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Iso::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + Iso<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Iso::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + Iso<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Lens::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + Lens<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Lens::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + Lens<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Prism::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + Prism<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Prism::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + Prism<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Optional::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + BowOptics.Optional<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Optional::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + BowOptics.Optional<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Setter::identity") <- forAll { (array: Array<Int>, value: Int) in
-            return (self.arrayKTraversal() + Setter<Int, Int>.identity()).set(array.k(), value) == self.arrayKTraversal().set(array.k(), value)
+        property("Traversal + Setter::identity") <- forAll { (array: ArrayK<Int>, value: Int) in
+            return (ArrayK<Int>.traversal + Setter<Int, Int>.identity).set(array, value) ==
+                ArrayK<Int>.traversal.set(array, value)
         }
 
-        property("Traversal + Fold::identity") <- forAll { (array: Array<Int>) in
-            return (self.arrayKTraversal() + Fold<Int, Int>.identity()).getAll(array.k()).asArray == self.arrayKTraversal().getAll(array.k()).asArray
+        property("Traversal + Fold::identity") <- forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + Fold<Int, Int>.identity).getAll(array) ==
+                ArrayK<Int>.traversal.getAll(array)
         }
     }
 }

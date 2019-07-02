@@ -161,6 +161,16 @@ public final class Validated<E, A>: ValidatedOf<E, A> {
     public func orElse(_ defaultValue: Validated<E, A>) -> Validated<E, A> {
         return fold(constant(defaultValue), Validated.valid)
     }
+    
+    /// Obtains the valid value or nil if it is not present
+    public var orNil: A? {
+        return fold(constant(nil), id)
+    }
+    
+    /// Obtains the valid value or none if it is not present
+    public var orNone: Option<A> {
+        return fold(constant(.none()), Option.some)
+    }
 }
 
 /// Safe downcast.
@@ -274,5 +284,13 @@ extension ValidatedPartial: SemigroupK where I: Semigroup {
         return Validated.fix(x).fold({ e in
             Validated.fix(y).fold({ ee in Validated.invalid(e.combine(ee)) },
                    Validated.valid) }, Validated.valid)
+    }
+}
+
+// MARK: Instance of `Semigroup` for `Validated`
+extension Validated: Semigroup where E: Semigroup, A: Semigroup {
+    public func combine(_ other: Validated<E, A>) -> Validated<E, A> {
+        return self.fold({ e1 in other.fold({ e2 in .invalid(e1.combine(e2)) }, { a2 in .invalid(e1) }) },
+                         { a1 in other.fold({ e2 in .invalid(e2)}, { a2 in .valid(a1.combine(a2)) }) })
     }
 }
