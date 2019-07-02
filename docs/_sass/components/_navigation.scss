@@ -1,11 +1,10 @@
 // Navigation
 // -----------------------------------------------
 // -----------------------------------------------
-#navigation {
+.navigation {
   position: fixed;
   padding: ($base-point-grid * 5) 0;
   width: 100%;
-  overflow: hidden;
   background: rgba($brand-primary, 0);
   transition: all $base-duration $base-timing;
   z-index: 20;
@@ -59,11 +58,6 @@
           &:active {
             color: $white;
           }
-
-          @include bp(medium) {
-            padding: 0;
-            margin: 0 12px;
-          }
         }
       }
 
@@ -80,6 +74,7 @@
             display: inline-block;
         }
       }
+
     }
   }
 }

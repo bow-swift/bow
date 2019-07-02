@@ -1,0 +1,31 @@
+<div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="{{ site.data.menu.nav[0].title }}">
+      <span>Bow version</span>
+      <span id="bow-version">
+        {% assign bow_version = site.data.versions | where: "this", true | first %}
+        {{ bow_version.title }}
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="{{ site.data.menu.nav[0].url }}">
+            <span>
+              {{ site.data.versions[0].title }}
+            </span>
+        </a>
+      </li>
+
+      {% for item in site.data.versions | offset: 1 %}
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="{{ item.title | append: site.data.menu.nav[0].url }}">
+            <span>
+              {{ item.title }}
+            </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+</div>
