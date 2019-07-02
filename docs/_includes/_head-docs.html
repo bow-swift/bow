@@ -1,18 +1,3 @@
-{% for item in site.data.doc-versions.docVersions %}
-  {% if item.url == site.data.commons.stable_version %}
-    {% assign stable_version = item %}
-  {% endif %}
-  {% if item.url == site.data.commons.next_version %}
-    {% assign next_version = item %}
-  {% endif %}
-{% endfor %}
-
-{% for item in site.data.doc-versions.docVersions %}
-  {% if item.url == stable_version.previous %}
-    {% assign previous_version = item %}
-  {% endif %}
-{% endfor %}
-
 <head>
     <meta charset="UTF-8">
     <title>{{site.name}}</title>
