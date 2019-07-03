@@ -21,7 +21,7 @@
 
       {% for item in site.data.versions | offset: 1 %}
       <li class="dropdown-item">
-        <a class="dropdown-item-link" href="{{ item.title | append: site.data.menu.nav[0].url }}">
+        <a class="dropdown-item-link" href="/{{ item.title | append: site.data.menu.nav[0].url }}">
             <span>
               {{ item.title }}
             </span>
