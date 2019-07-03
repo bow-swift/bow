@@ -30,7 +30,7 @@ public protocol PromiseError {
     static var alreadyFulfilled: Self { get }
 }
 
-public extension Promise where F: Concurrent, A: Equatable, F.E: Equatable & PromiseError {
+public extension Promise where F: Concurrent & Bracket, A: Equatable, F.E: Equatable & PromiseError {
     static var cancelable: Kind<F, Promise<F, A>> {
         return F.delay { CancelablePromise<F, A>() }
     }

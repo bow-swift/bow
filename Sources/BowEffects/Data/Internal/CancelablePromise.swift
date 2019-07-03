@@ -1,7 +1,7 @@
 import Bow
 import Foundation
 
-internal class CancelablePromise<F: Concurrent, A: Equatable>: Promise<F, A> where F.E: Equatable & PromiseError {
+internal class CancelablePromise<F: Concurrent & Bracket, A: Equatable>: Promise<F, A> where F.E: Equatable & PromiseError {
     private let state = Atomic<PromiseState<F.E, A>>(.pending(joiners: [:]))
     
     override func get() -> Kind<F, A> {

@@ -30,6 +30,12 @@ public extension Concurrent {
         return asyncF { conn, cb in delay { fa(conn, cb) } }
     }
     
+    static func asyncF<A>(_ procf: @escaping ProcF<Self, E, A>) -> Kind<Self, A> {
+        return asyncF { _, cb in procf(cb) }
+    }
+}
+
+public extension Concurrent where Self: Bracket {
     static func cancelableF<A>(_ k: @escaping (@escaping Callback<E, A>) -> Kind<Self, CancelToken<Self>>) -> Kind<Self, A> {
         return asyncF { cb in
             let state = Atomic<Callback<E, ()>?>(nil)
@@ -59,10 +65,6 @@ public extension Concurrent {
     
     static func cancelable<A>(_ k: @escaping (@escaping Callback<E, A>) -> CancelToken<Self>) -> Kind<Self, A> {
         return cancelableF { cb in delay { k(cb) } }
-    }
-    
-    static func asyncF<A>(_ procf: @escaping ProcF<Self, E, A>) -> Kind<Self, A> {
-        return asyncF { _, cb in procf(cb) }
     }
 }
 
@@ -346,7 +348,7 @@ public func fold<A, B, C, D, E, G, H, I, J, Z>(_ race: Race9<A, B, C, D, E, G, H
 
 // MARK: Syntax for Concurrent
 
-public extension Kind where F: Concurrent {
+public extension Kind where F: Concurrent & Bracket {
     static func asyncF(_ fa: @escaping ConnectedProcF<F, F.E, A>) -> Kind<F, A> {
         return F.asyncF(fa)
     }

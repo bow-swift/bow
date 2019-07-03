@@ -1,7 +1,7 @@
 import Foundation
 import Bow
 
-public protocol MonadDefer: Bracket {
+public protocol MonadDefer: MonadError {
     static func `defer`<A>(_ fa: @escaping () -> Kind<Self, A>) -> Kind<Self, A>
 }
 

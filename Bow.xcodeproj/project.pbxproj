@@ -1892,13 +1892,13 @@
 		8BA0F469217E2E9200969984 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				8BA0F46C217E2E9200969984 /* Async.swift */,
 				1104BEE122C22E47002C3F78 /* Bracket.swift */,
 				1104BEE222C22E47002C3F78 /* Concurrent.swift */,
-				1104BEE022C22E47002C3F78 /* UnsafeRun.swift */,
-				8BA0F46C217E2E9200969984 /* Async.swift */,
 				8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */,
 				8BA0F46B217E2E9200969984 /* Effect.swift */,
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
+				1104BEE022C22E47002C3F78 /* UnsafeRun.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
