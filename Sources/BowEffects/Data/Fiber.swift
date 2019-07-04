@@ -2,7 +2,11 @@ import Foundation
 import Bow
 
 open class Fiber<F, A> {
-    public init() {}
+    public static func create(join: @escaping () -> Kind<F, A>, cancel: @escaping () -> CancelToken<F>) -> Fiber<F, A> {
+        return DefaultFiber(join: join, cancel: cancel)
+    }
+    
+    internal init() {}
 
     open func join() -> Kind<F, A> {
         fatalError("join must be implemented in subclasses")

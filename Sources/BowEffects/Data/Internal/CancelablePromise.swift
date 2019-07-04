@@ -114,8 +114,9 @@ internal class CancelablePromise<F: Concurrent & Bracket, A: Equatable>: Promise
     private func callAll(_ array: [(Either<F.E, A>) -> ()], with value: Either<F.E, A>) -> Kind<F, ()> {
         let queue = DispatchQueue(label: "CancelablePromise")
         let fold = array.k().foldLeft(Option<Kind<F, Fiber<F, ()>>>.none()) { acc, callback in
-            let task = queue.startFiber(F.delay { callback(value) })
-            return acc.map { x in x.flatMap { _ in task } }^.orElse(.some(task))
+            //let task = queue.startFiber(F.delay { callback(value) })
+            //return acc.map { x in x.flatMap { _ in task } }^.orElse(.some(task))
+            fatalError()
         }
         return fold.map { x in x.map { _ in () } }^.getOrElse(F.pure(()))
     }

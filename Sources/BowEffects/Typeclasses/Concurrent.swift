@@ -17,22 +17,29 @@ public typealias Race8<A, B, C, D, E, G, H, I> = Race4<Race2<A, B>, Race2<C, D>,
 public typealias Race9<A, B, C, D, E, G, H, I, J> = Race4<Race3<A, B, C>, Race2<D, E>, Race2<G, H>, Race2<I, J>>
 
 public protocol Concurrent: Async {
-    static func asyncF<A>(_ fa: @escaping ConnectedProcF<Self, E, A>) -> Kind<Self, A>
-    static func startFiber<A>(_ fa: Kind<Self, A>, _ queue: DispatchQueue) -> Kind<Self, Fiber<Self, A>>
-    static func racePair<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ queue: DispatchQueue) -> Kind<Self, RacePair<Self, A, B>>
-    static func raceTriple<A, B, C>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ fc: Kind<Self, C>, _ queue: DispatchQueue) -> Kind<Self, RaceTriple<Self, A, B, C>>
+//    static func asyncF<A>(_ fa: @escaping ConnectedProcF<Self, E, A>) -> Kind<Self, A>
+//    static func startFiber<A>(_ fa: Kind<Self, A>, _ queue: DispatchQueue) -> Kind<Self, Fiber<Self, A>>
+//    static func racePair<A, B>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ queue: DispatchQueue) -> Kind<Self, RacePair<Self, A, B>>
+//    static func raceTriple<A, B, C>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ fc: Kind<Self, C>, _ queue: DispatchQueue) -> Kind<Self, RaceTriple<Self, A, B, C>>
+    static func parMap<A, B, Z>(_ fa: Kind<Self, A>,
+                                _ fb: Kind<Self, B>,
+                                _ f: @escaping (A, B) -> Z) -> Kind<Self, Z>
+    static func parMap<A, B, C, Z>(_ fa: Kind<Self, A>,
+                                   _ fb: Kind<Self, B>,
+                                   _ fc: Kind<Self, C>,
+                                   _ f: @escaping (A, B, C) -> Z) -> Kind<Self, Z>
 }
 
 // MARK: Related functions
 
 public extension Concurrent {
-    static func async<A>(_ fa: @escaping ConnectedProc<Self, E, A>) -> Kind<Self, A> {
-        return asyncF { conn, cb in delay { fa(conn, cb) } }
-    }
-    
-    static func asyncF<A>(_ procf: @escaping ProcF<Self, E, A>) -> Kind<Self, A> {
-        return asyncF { _, cb in procf(cb) }
-    }
+//    static func async<A>(_ fa: @escaping ConnectedProc<Self, E, A>) -> Kind<Self, A> {
+//        return asyncF { conn, cb in delay { fa(conn, cb) } }
+//    }
+//
+//    static func asyncF<A>(_ procf: @escaping ProcF<Self, E, A>) -> Kind<Self, A> {
+//        return asyncF { _, cb in procf(cb) }
+//    }
 }
 
 public extension Concurrent where Self: Bracket {
@@ -71,30 +78,21 @@ public extension Concurrent where Self: Bracket {
 // MARK: Syntax for Concurrent on DispatchQueue
 
 public extension DispatchQueue {
-    func startFiber<F: Concurrent, A>(_ fa: Kind<F, A>) -> Kind<F, Fiber<F, A>> {
-        return F.startFiber(fa, self)
-    }
+//    func startFiber<F: Concurrent, A>(_ fa: Kind<F, A>) -> Kind<F, Fiber<F, A>> {
+//        return F.startFiber(fa, self)
+//    }
     
     func parMap<F: Concurrent, A, B, Z>(_ fa: Kind<F, A>,
                                         _ fb: Kind<F, B>,
                                         _ f: @escaping (A, B) -> Z) -> Kind<F, Z> {
-        return F.racePair(fa, fb, self).flatMap { either in
-            either.fold(
-                { (a, fiberB) in fiberB.join().map { b in f(a, b) } },
-                { (fiberA, b) in fiberA.join().map { a in f(a, b) } })
-        }
+        return F.parMap(fa, fb, f)
     }
     
     func parMap<F: Concurrent, A, B, C, Z>(_ fa: Kind<F, A>,
                                            _ fb: Kind<F, B>,
                                            _ fc: Kind<F, C>,
                                            _ f: @escaping (A, B, C) -> Z) -> Kind<F, Z> {
-        return F.raceTriple(fa, fb, fc, self).flatMap { race in
-            fold(race,
-                 { a, fiberB, fiberC in fiberB.join().flatMap { b in fiberC.join().map { c in f(a, b, c) } } },
-                 { fiberA, b, fiberC in fiberA.join().flatMap { a in fiberC.join().map { c in f(a, b, c) } } },
-                 { fiberA, fiberB, c in fiberA.join().flatMap { a in fiberB.join().map { b in f(a, b, c) } } })
-        }
+        return F.parMap(fa, fb, fc, f)
     }
     
     func parMap<F: Concurrent, A, B, C, D, Z>(_ fa: Kind<F, A>,
@@ -176,95 +174,95 @@ public extension DispatchQueue {
                       { x, y, z in f(x.0, x.1, x.2, y.0, y.1, y.2, z.0, z.1, z.2) })
     }
     
-    func race<F: Concurrent, A, B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>) -> Kind<F, Race2<A, B>> {
-        return F.racePair(fa, fb, self).flatMap { either in
-            either.fold({ x in
-                let (a, fiberB) = x
-                return fiberB.cancel().map { .left(a) }
-            },
-                        { y in
-                            let (fiberA, b) = y
-                            return fiberA.cancel().map { .right(b) }
-            })
-        }
-    }
-    
-    func race<F: Concurrent, A, B, C>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ fc: Kind<F, C>) -> Kind<F, Race3<A, B, C>> {
-        return F.raceTriple(fa, fb, fc, self).flatMap { raceTriple in
-            fold(raceTriple,
-                 { (a, fiberB, fiberC) in fiberB.cancel().flatMap { _ in fiberC.cancel().map { _ in .left(.left(a)) } } },
-                 { (fiberA, b, fiberC) in fiberA.cancel().flatMap { _ in fiberC.cancel().map { _ in .left(.right(b)) } } },
-                 { (fiberA, fiberB, c) in fiberA.cancel().flatMap { _ in fiberB.cancel().map { _ in .right(c) } } })
-        }
-    }
-    
-    func race<F: Concurrent, A, B, C, D>(_ fa: Kind<F, A>,
-                                         _ fb: Kind<F, B>,
-                                         _ fc: Kind<F, C>,
-                                         _ fd: Kind<F, D>) -> Kind<F, Race4<A, B, C, D>> {
-        return race(race(fa, fb),
-                    race(fc, fd))
-    }
-    
-    func race<F: Concurrent, A, B, C, D, E>(_ fa: Kind<F, A>,
-                                            _ fb: Kind<F, B>,
-                                            _ fc: Kind<F, C>,
-                                            _ fd: Kind<F, D>,
-                                            _ fe: Kind<F, E>) -> Kind<F, Race5<A, B, C, D, E>> {
-        return race(race(fa, fb, fc),
-                    race(fd, fe))
-    }
-    
-    func race<F: Concurrent, A, B, C, D, E, G>(_ fa: Kind<F, A>,
-                                               _ fb: Kind<F, B>,
-                                               _ fc: Kind<F, C>,
-                                               _ fd: Kind<F, D>,
-                                               _ fe: Kind<F, E>,
-                                               _ fg: Kind<F, G>) -> Kind<F, Race6<A, B, C, D, E, G>> {
-        return race(race(fa, fb, fc),
-                    race(fd, fe, fg))
-    }
-    
-    func race<F: Concurrent, A, B, C, D, E, G, H>(_ fa: Kind<F, A>,
-                                                  _ fb: Kind<F, B>,
-                                                  _ fc: Kind<F, C>,
-                                                  _ fd: Kind<F, D>,
-                                                  _ fe: Kind<F, E>,
-                                                  _ fg: Kind<F, G>,
-                                                  _ fh: Kind<F, H>) -> Kind<F, Race7<A, B, C, D, E, G, H>> {
-        return race(race(fa, fb, fc),
-                    race(fd, fe),
-                    race(fg, fh))
-    }
-    
-    func race<F: Concurrent, A, B, C, D, E, G, H, I>(_ fa: Kind<F, A>,
-                                                     _ fb: Kind<F, B>,
-                                                     _ fc: Kind<F, C>,
-                                                     _ fd: Kind<F, D>,
-                                                     _ fe: Kind<F, E>,
-                                                     _ fg: Kind<F, G>,
-                                                     _ fh: Kind<F, H>,
-                                                     _ fi: Kind<F, I>) -> Kind<F, Race8<A, B, C, D, E, G, H, I>> {
-        return race(race(fa, fb),
-                    race(fc, fd),
-                    race(fe, fg),
-                    race(fh, fi))
-    }
-    
-    func race<F: Concurrent, A, B, C, D, E, G, H, I, J>(_ fa: Kind<F, A>,
-                                                        _ fb: Kind<F, B>,
-                                                        _ fc: Kind<F, C>,
-                                                        _ fd: Kind<F, D>,
-                                                        _ fe: Kind<F, E>,
-                                                        _ fg: Kind<F, G>,
-                                                        _ fh: Kind<F, H>,
-                                                        _ fi: Kind<F, I>,
-                                                        _ fj: Kind<F, J>) -> Kind<F, Race9<A, B, C, D, E, G, H, I, J>> {
-        return race(race(fa, fb, fc),
-                    race(fd, fe),
-                    race(fg, fh),
-                    race(fi, fj))
-    }
+//    func race<F: Concurrent, A, B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>) -> Kind<F, Race2<A, B>> {
+//        return F.racePair(fa, fb, self).flatMap { either in
+//            either.fold({ x in
+//                let (a, fiberB) = x
+//                return fiberB.cancel().map { .left(a) }
+//            },
+//                        { y in
+//                            let (fiberA, b) = y
+//                            return fiberA.cancel().map { .right(b) }
+//            })
+//        }
+//    }
+//
+//    func race<F: Concurrent, A, B, C>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ fc: Kind<F, C>) -> Kind<F, Race3<A, B, C>> {
+//        return F.raceTriple(fa, fb, fc, self).flatMap { raceTriple in
+//            fold(raceTriple,
+//                 { (a, fiberB, fiberC) in fiberB.cancel().flatMap { _ in fiberC.cancel().map { _ in .left(.left(a)) } } },
+//                 { (fiberA, b, fiberC) in fiberA.cancel().flatMap { _ in fiberC.cancel().map { _ in .left(.right(b)) } } },
+//                 { (fiberA, fiberB, c) in fiberA.cancel().flatMap { _ in fiberB.cancel().map { _ in .right(c) } } })
+//        }
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D>(_ fa: Kind<F, A>,
+//                                         _ fb: Kind<F, B>,
+//                                         _ fc: Kind<F, C>,
+//                                         _ fd: Kind<F, D>) -> Kind<F, Race4<A, B, C, D>> {
+//        return race(race(fa, fb),
+//                    race(fc, fd))
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D, E>(_ fa: Kind<F, A>,
+//                                            _ fb: Kind<F, B>,
+//                                            _ fc: Kind<F, C>,
+//                                            _ fd: Kind<F, D>,
+//                                            _ fe: Kind<F, E>) -> Kind<F, Race5<A, B, C, D, E>> {
+//        return race(race(fa, fb, fc),
+//                    race(fd, fe))
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D, E, G>(_ fa: Kind<F, A>,
+//                                               _ fb: Kind<F, B>,
+//                                               _ fc: Kind<F, C>,
+//                                               _ fd: Kind<F, D>,
+//                                               _ fe: Kind<F, E>,
+//                                               _ fg: Kind<F, G>) -> Kind<F, Race6<A, B, C, D, E, G>> {
+//        return race(race(fa, fb, fc),
+//                    race(fd, fe, fg))
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D, E, G, H>(_ fa: Kind<F, A>,
+//                                                  _ fb: Kind<F, B>,
+//                                                  _ fc: Kind<F, C>,
+//                                                  _ fd: Kind<F, D>,
+//                                                  _ fe: Kind<F, E>,
+//                                                  _ fg: Kind<F, G>,
+//                                                  _ fh: Kind<F, H>) -> Kind<F, Race7<A, B, C, D, E, G, H>> {
+//        return race(race(fa, fb, fc),
+//                    race(fd, fe),
+//                    race(fg, fh))
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D, E, G, H, I>(_ fa: Kind<F, A>,
+//                                                     _ fb: Kind<F, B>,
+//                                                     _ fc: Kind<F, C>,
+//                                                     _ fd: Kind<F, D>,
+//                                                     _ fe: Kind<F, E>,
+//                                                     _ fg: Kind<F, G>,
+//                                                     _ fh: Kind<F, H>,
+//                                                     _ fi: Kind<F, I>) -> Kind<F, Race8<A, B, C, D, E, G, H, I>> {
+//        return race(race(fa, fb),
+//                    race(fc, fd),
+//                    race(fe, fg),
+//                    race(fh, fi))
+//    }
+//
+//    func race<F: Concurrent, A, B, C, D, E, G, H, I, J>(_ fa: Kind<F, A>,
+//                                                        _ fb: Kind<F, B>,
+//                                                        _ fc: Kind<F, C>,
+//                                                        _ fd: Kind<F, D>,
+//                                                        _ fe: Kind<F, E>,
+//                                                        _ fg: Kind<F, G>,
+//                                                        _ fh: Kind<F, H>,
+//                                                        _ fi: Kind<F, I>,
+//                                                        _ fj: Kind<F, J>) -> Kind<F, Race9<A, B, C, D, E, G, H, I, J>> {
+//        return race(race(fa, fb, fc),
+//                    race(fd, fe),
+//                    race(fg, fh),
+//                    race(fi, fj))
+//    }
 }
 
 // MARK: Utilities for folding RaceN
@@ -349,25 +347,25 @@ public func fold<A, B, C, D, E, G, H, I, J, Z>(_ race: Race9<A, B, C, D, E, G, H
 // MARK: Syntax for Concurrent
 
 public extension Kind where F: Concurrent & Bracket {
-    static func asyncF(_ fa: @escaping ConnectedProcF<F, F.E, A>) -> Kind<F, A> {
-        return F.asyncF(fa)
-    }
+//    static func asyncF(_ fa: @escaping ConnectedProcF<F, F.E, A>) -> Kind<F, A> {
+//        return F.asyncF(fa)
+//    }
+//
+//    static func startFiber(_ fa: Kind<F, A>, _ queue: DispatchQueue) -> Kind<F, Fiber<F, A>> {
+//        return F.startFiber(fa, queue)
+//    }
     
-    static func startFiber(_ fa: Kind<F, A>, _ queue: DispatchQueue) -> Kind<F, Fiber<F, A>> {
-        return F.startFiber(fa, queue)
-    }
+//    static func racePair<B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ queue: DispatchQueue) -> Kind<F, RacePair<F, A, B>> {
+//        return F.racePair(fa, fb, queue)
+//    }
+//    
+//    static func raceTriple<B, C>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ queue: DispatchQueue) -> Kind<F, RaceTriple<F, A, B, C>> {
+//        return F.raceTriple(fa, fb, fc, queue)
+//    }
     
-    static func racePair<B>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ queue: DispatchQueue) -> Kind<F, RacePair<F, A, B>> {
-        return F.racePair(fa, fb, queue)
-    }
-    
-    static func raceTriple<B, C>(_ fa: Kind<F, A>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ queue: DispatchQueue) -> Kind<F, RaceTriple<F, A, B, C>> {
-        return F.raceTriple(fa, fb, fc, queue)
-    }
-    
-    static func async(_ fa: @escaping ConnectedProc<F, F.E, A>) -> Kind<F, A> {
-        return F.async(fa)
-    }
+//    static func async(_ fa: @escaping ConnectedProc<F, F.E, A>) -> Kind<F, A> {
+//        return F.async(fa)
+//    }
     
     static func cancelableF(_ k: @escaping (@escaping Callback<F.E, A>) -> Kind<F, CancelToken<F>>) -> Kind<F, A> {
         return F.cancelableF(k)

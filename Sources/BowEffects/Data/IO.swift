@@ -180,6 +180,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
     internal func description() -> String {
         return ""
     }
+    
+    internal func fail(_ error: Error) -> Never {
+        fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+    }
 }
 
 /// Safe downcast.
@@ -256,7 +260,7 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         } catch let error as E {
             return (try on(queue: queue) { throw self.f(error) }, queue)
         } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+            self.fail(error)
         }
     }
     
@@ -349,19 +353,134 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
             let _ = try release(resource, .error(error))^._unsafePerformIO(on: queue)
             throw error
         } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+            self.fail(error)
+        }
+    }
+}
+
+internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
+    private let fa: IO<E, A>
+    private let fb: IO<E, B>
+    private let f: (A, B) -> Z
+    
+    init(_ fa: IO<E, A>, _ fb: IO<E, B>, _ f: @escaping (A, B) -> Z) {
+        self.fa = fa
+        self.fb = fb
+        self.f = f
+    }
+    
+    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+        var a: A?
+        var b: B?
+        let atomic = Atomic<E?>(nil)
+        let group = DispatchGroup()
+        
+        group.enter()
+        queue.async {
+            do {
+                a = try self.fa._unsafePerformIO(on: queue).0
+            } catch let error as E {
+                atomic.value = error
+            } catch {
+                self.fail(error)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        queue.async {
+            do {
+                b = try self.fb._unsafePerformIO(on: queue).0
+            } catch let error as E {
+                atomic.value = error
+            } catch {
+                self.fail(error)
+            }
+            group.leave()
+        }
+        
+        group.wait()
+        if let aa = a, let bb = b {
+            return (f(aa, bb), queue)
+        } else {
+            throw atomic.value!
+        }
+    }
+}
+
+internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
+    private let fa: IO<E, A>
+    private let fb: IO<E, B>
+    private let fc: IO<E, C>
+    private let f: (A, B, C) -> Z
+    
+    init(_ fa: IO<E, A>, _ fb: IO<E, B>, _ fc: IO<E, C>, _ f: @escaping (A, B, C) -> Z) {
+        self.fa = fa
+        self.fb = fb
+        self.fc = fc
+        self.f = f
+    }
+    
+    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+        var a: A?
+        var b: B?
+        var c: C?
+        let atomic = Atomic<E?>(nil)
+        let group = DispatchGroup()
+        
+        group.enter()
+        queue.async {
+            do {
+                a = try self.fa._unsafePerformIO(on: queue).0
+            } catch let error as E {
+                atomic.value = error
+            } catch {
+                self.fail(error)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        queue.async {
+            do {
+                b = try self.fb._unsafePerformIO(on: queue).0
+            } catch let error as E {
+                atomic.value = error
+            } catch {
+                self.fail(error)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        queue.async {
+            do {
+                c = try self.fc._unsafePerformIO(on: queue).0
+            } catch let error as E {
+                atomic.value = error
+            } catch {
+                self.fail(error)
+            }
+            group.leave()
+        }
+        
+        group.wait()
+        if let aa = a, let bb = b, let cc = c {
+            return (f(aa, bb, cc), queue)
+        } else {
+            throw atomic.value!
         }
     }
 }
 
 extension IOPartial: Functor {
-    public static func map<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<IOPartial<E>, B> {
+    public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
         return FMap(f, IO.fix(fa))
     }
 }
 
 extension IOPartial: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<IOPartial<E>, A> {
+    public static func pure<A>(_ a: A) -> IOOf<E, A> {
         return Pure(a)
     }
 }
@@ -370,11 +489,11 @@ extension IOPartial: Applicative {
 extension IOPartial: Selective {}
 
 extension IOPartial: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+    public static func flatMap<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> IOOf<E, B>) -> IOOf<E, B> {
         return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IOPartial<E>, Either<A, B>>) -> Kind<IOPartial<E>, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<E, Either<A, B>>) -> IOOf<E, B> {
         return IO.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO.pure(b) })
@@ -383,7 +502,7 @@ extension IOPartial: Monad {
 }
 
 extension IOPartial: ApplicativeError {
-    public static func raiseError<A>(_ e: E) -> Kind<IOPartial<E>, A> {
+    public static func raiseError<A>(_ e: E) -> IOOf<E, A> {
         return RaiseError(e)
     }
     
@@ -395,7 +514,7 @@ extension IOPartial: ApplicativeError {
         }
     }
     
-    public static func handleErrorWith<A>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (E) -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
         return fold(IO.fix(fa).attempt(), f, IO.pure)
     }
 }
@@ -403,53 +522,53 @@ extension IOPartial: ApplicativeError {
 extension IOPartial: MonadError {}
 
 extension IOPartial: Bracket {
-    public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
+    public static func bracketCase<A, B>(_ fa: IOOf<E, A>, _ release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, _ use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
         return BracketIO<E, A, B>(fa^, release, use)
     }
 }
 
 extension IOPartial: MonadDefer {
-    public static func `defer`<A>(_ fa: @escaping () -> Kind<IOPartial<E>, A>) -> Kind<IOPartial<E>, A> {
+    public static func `defer`<A>(_ fa: @escaping () -> IOOf<E, A>) -> IOOf<E, A> {
         return Pure(()).flatMap(fa)
     }
 }
 
 extension IOPartial: Async {
-    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> IOOf<E, ()>) -> IOOf<E, A> {
         return AsyncIO(procf)
     }
     
-    public static func continueOn<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, A> {
+    public static func continueOn<A>(_ fa: IOOf<E, A>, _ queue: DispatchQueue) -> IOOf<E, A> {
         return ContinueOn(fa^, queue)
     }
 }
 
 extension IOPartial: Concurrent {
+    public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
+        return ParMap2<E, A, B, Z>(fa^, fb^, f)
+    }
+    
+    public static func parMap<A, B, C, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<IOPartial<E>, Z> {
+        return ParMap3<E, A, B, C, Z>(fa^, fb^, fc^, f)
+    }
+    
     public static func asyncF<A>(_ fa: @escaping (KindConnection<IOPartial<E>>, @escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
         fatalError("TODO: Implement this")
     }
     
-    public static func startFiber<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Fiber<IOPartial<E>, A>> {
-        fatalError("TODO: Implement this")
-    }
-    
-    public static func racePair<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Either<(A, Fiber<IOPartial<E>, B>), (Fiber<IOPartial<E>, A>, B)>> {
-        fatalError("TODO: Implement this")
-    }
-    
-    public static func raceTriple<A, B, C>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Either<(A, Fiber<IOPartial<E>, B>, Fiber<IOPartial<E>, C>), Either<(Fiber<IOPartial<E>, A>, B, Fiber<IOPartial<E>, C>), (Fiber<IOPartial<E>, A>, Fiber<IOPartial<E>, B>, C)>>> {
+    public static func startFiber<A>(_ fa: IOOf<E, A>, _ queue: DispatchQueue) -> IOOf<E, Fiber<IOPartial<E>, A>> {
         fatalError("TODO: Implement this")
     }
 }
 
 extension IOPartial: Effect {
-    public static func runAsync<A>(_ fa: Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, ()> {
+    public static func runAsync<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
         fatalError("TODO: Implement this")
     }
 }
 
 extension IOPartial: ConcurrentEffect {
-    public static func runAsyncCancellable<A>(_ fa: Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, Disposable> {
+    public static func runAsyncCancellable<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, Disposable> {
         fatalError("TODO: Implement this")
     }
 }
@@ -461,36 +580,5 @@ extension IOPartial: UnsafeRun {
     
     public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: (Either<E, A>) -> ()) {
         fa()^.unsafeRunAsync(on: queue, callback)
-    }
-}
-
-extension IOPartial: EquatableK where E: Equatable {
-    public static func eq<A: Equatable>(_ lhs: Kind<IOPartial<E>, A>, _ rhs: Kind<IOPartial<E>, A>) -> Bool {
-        var aValue, bValue : A?
-        var aError, bError : E?
-        
-        do {
-            aValue = try IO.fix(lhs).unsafePerformIO()
-        } catch let error as E {
-            aError = error
-        } catch {
-            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
-        }
-        
-        do {
-            bValue = try IO.fix(rhs).unsafePerformIO()
-        } catch let error as E {
-            bError = error
-        } catch {
-            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
-        }
-        
-        if let aV = aValue, let bV = bValue {
-            return aV == bV
-        } else if let aE = aError, let bE = bError {
-            return aE == bE
-        } else {
-            return false
-        }
     }
 }

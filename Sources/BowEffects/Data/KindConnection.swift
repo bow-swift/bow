@@ -61,6 +61,12 @@ public extension KindConnection where F: MonadDefer {
     }
 }
 
+public class IOConnection<E: Error>: KindConnection<IOPartial<E>> {
+    static func create(_ run: @escaping (CancelToken<IOPartial<E>>) -> ()) -> KindConnection<IOPartial<E>> {
+        return KindConnection.default(run)
+    }
+}
+
 private class Uncancelable<F: Applicative>: KindConnection<F> {
     override func cancel() -> CancelToken<F> {
         return F.pure(())
