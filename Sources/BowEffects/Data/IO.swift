@@ -325,6 +325,35 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
     }
 }
 
+internal class BracketIO<E: Error, A, B>: IO<E, B> {
+    let io: IO<E, A>
+    let release: (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>
+    let use: (A) throws -> Kind<IOPartial<E>, B>
+    
+    init(_ io: IO<E, A>,
+         _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>,
+         _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) {
+        self.io = io
+        self.release = release
+        self.use = use
+    }
+    
+    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+        let ioResult = try io._unsafePerformIO(on: queue)
+        let resource = ioResult.0
+        do {
+            let useResult = try use(resource)^._unsafePerformIO(on: queue)
+            let _ = try release(resource, .completed)^._unsafePerformIO(on: queue)
+            return useResult
+        } catch let error as E {
+            let _ = try release(resource, .error(error))^._unsafePerformIO(on: queue)
+            throw error
+        } catch {
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        }
+    }
+}
+
 extension IOPartial: Functor {
     public static func map<A, B>(_ fa: Kind<IOPartial<E>, A>, _ f: @escaping (A) -> B) -> Kind<IOPartial<E>, B> {
         return FMap(f, IO.fix(fa))
@@ -375,7 +404,7 @@ extension IOPartial: MonadError {}
 
 extension IOPartial: Bracket {
     public static func bracketCase<A, B>(_ fa: Kind<IOPartial<E>, A>, _ release: @escaping (A, ExitCase<E>) -> Kind<IOPartial<E>, ()>, _ use: @escaping (A) throws -> Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, B> {
-        fatalError("TODO: Implement this")
+        return BracketIO<E, A, B>(fa^, release, use)
     }
 }
 

@@ -33,22 +33,6 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
             
-//            print("QUEUES: \(id1), \(id2)")
-//
-//            let x = F.pure(())
-//                .continueOn(queue1)
-//                .map { _ -> String in
-//                    let label = QueueLabel().get
-//                    print("QUEUE1: " + label)
-//                    return label
-//                }
-//                .continueOn(queue2)
-//                .map { (x: String) -> String in
-//                    let label = QueueLabel().get
-//                    print("QUEUE2: " + label)
-//                    return x + label }
-//
-//            return x == F.pure(id1 + id2)
             return F.pure(())
                 .continueOn(queue1)
                 .map { _ in QueueLabel().get }

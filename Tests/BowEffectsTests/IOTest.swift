@@ -38,4 +38,8 @@ class IOTest: XCTestCase {
     func testAsyncLaws() {
         AsyncLaws<IOPartial<CategoryError>>.check()
     }
+    
+    func testBracketLaws() {
+        BracketLaws<IOPartial<CategoryError>>.check()
+    }
 }
