@@ -134,17 +134,38 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, J>.invoke(fj)))
     }
     
-    public func unsafePerformIO() throws -> A {
-        fatalError("unsafePerformIO must be implemented in subclasses")
+    public func unsafePerformIO(on queue: DispatchQueue = .main) throws -> A {
+        return try self._unsafePerformIO(on: queue).0
     }
     
-    public func attempt() -> IO<E, A>{
-        fatalError("attempt must be implemented in subclasses")
+    internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        fatalError("_unsafePerformIO must be implemented in subclasses")
     }
     
-    public func unsafeRunAsync(_ callback: Callback<E, A>) {
+    internal func on<T>(queue: DispatchQueue, perform: @escaping () throws -> T) throws -> T {
+        if DispatchQueue.currentLabel == queue.label {
+            return try perform()
+        } else {
+            return try queue.sync {
+                try perform()
+            }
+        }
+    }
+    
+    public func attempt(on queue: DispatchQueue = .main) -> IO<E, A>{
         do {
-            callback(Either.right(try unsafePerformIO()))
+            let result = try self.unsafePerformIO(on: queue)
+            return IO.pure(result)^
+        } catch let error as E {
+            return IO.raiseError(error)^
+        } catch {
+            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+        }
+    }
+    
+    public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: Callback<E, A>) {
+        do {
+            callback(Either.right(try unsafePerformIO(on: queue)))
         } catch let error as E {
             callback(Either.left(error))
         } catch {
@@ -154,6 +175,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
     
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
         return FErrorMap(f, self)
+    }
+    
+    internal func description() -> String {
+        return ""
     }
 }
 
@@ -165,63 +190,58 @@ public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
 }
 
-fileprivate class Pure<E: Error, A>: IO<E, A> {
+internal class Pure<E: Error, A>: IO<E, A> {
     let a: A
     
     init(_ a: A) {
         self.a = a
     }
     
-    override func attempt() -> IO<E, A> {
-        return Pure<E, A>(a)
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        return (try on(queue: queue) { self.a }, queue)
     }
     
-    override func unsafePerformIO() throws -> A {
-        return a
+    override internal func description() -> String {
+        return "Pure(\(a))"
     }
 }
 
-fileprivate class RaiseError<E: Error, A> : IO<E, A> {
+internal class RaiseError<E: Error, A> : IO<E, A> {
     let error: E
     
     init(_ error : E) {
         self.error = error
     }
     
-    override func attempt() -> IO<E, A> {
-        return RaiseError<E, A>(error)
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        return (try on(queue: queue) { throw self.error }, queue)
     }
     
-    override func unsafePerformIO() throws -> A {
-        throw error
+    override internal func description() -> String {
+        return "RaiseError(\(error))"
     }
 }
 
-fileprivate class FMap<E: Error, A, B> : IO<E, B> {
-    let f: (A) throws -> B
+internal class FMap<E: Error, A, B> : IO<E, B> {
+    let f: (A) -> B
     let action: IO<E, A>
     
-    init(_ f: @escaping (A) throws -> B, _ action: IO<E, A>) {
+    init(_ f: @escaping (A) -> B, _ action: IO<E, A>) {
         self.f = f
         self.action = action
     }
     
-    override func attempt() -> IO<E, B> {
-        do {
-            return try Pure<E, B>(self.unsafePerformIO())
-        } catch let error as E {
-            return RaiseError<E, B>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
-        }
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+        let result = try action._unsafePerformIO(on: queue)
+        return (try on(queue: result.1) { self.f(result.0) }, result.1)
     }
     
-    override func unsafePerformIO() throws -> B {
-        return try f(try action.unsafePerformIO())
+    override internal func description() -> String {
+        return "FMap(\(action.description()))"
     }
 }
 
-fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
+internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     let f: (E) -> EE
     let action: IO<E, A>
     
@@ -230,73 +250,78 @@ fileprivate class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         self.action = action
     }
     
-    override func attempt() -> IO<EE, A> {
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         do {
-            return try Pure<EE, A>(self.unsafePerformIO())
+            return try action._unsafePerformIO(on: queue)
         } catch let error as E {
-            return RaiseError<EE, A>(f(error))
-        } catch let error as EE {
-            return RaiseError<EE, A>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) or \(EE.self) are handled.")
-        }
-    }
-    
-    override func unsafePerformIO() throws -> A {
-        do {
-            return try action.unsafePerformIO()
-        } catch let error as E {
-            throw f(error)
+            return (try on(queue: queue) { throw self.f(error) }, queue)
         } catch {
             fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
         }
     }
+    
+    override internal func description() -> String {
+        return "FErrorMap(\(action.description()))"
+    }
 }
 
-fileprivate class Join<E: Error, A> : IO<E, A> {
+internal class Join<E: Error, A> : IO<E, A> {
     let io: IO<E, IO<E, A>>
     
     init(_ io: IO<E, IO<E, A>>) {
         self.io = io
     }
     
-    override func attempt() -> IO<E, A> {
-        do {
-            return Pure<E, A>(try unsafePerformIO())
-        } catch let error as E {
-            return RaiseError<E, A>(error)
-        } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
-        }
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        let result = try io._unsafePerformIO(on: queue)
+        return try result.0._unsafePerformIO(on: result.1)
     }
     
-    override func unsafePerformIO() throws -> A {
-        return try io.unsafePerformIO().unsafePerformIO()
+    override internal func description() -> String {
+        return "Join(\(io.description()))"
     }
 }
 
-fileprivate class AsyncIO<E: Error, A> : IO<E, A> {
-    let f: Proc<E, A>
+internal class AsyncIO<E: Error, A>: IO<E, A> {
+    let f: ProcF<IOPartial<E>, E, A>
     
-    init(_ f: @escaping Proc<E, A>) {
+    init(_ f: @escaping ProcF<IOPartial<E>, E, A>) {
         self.f = f
     }
     
-    override func attempt() -> IO<E, A> {
-        var result: IO<E, A>?
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        var result: Either<E, A>?
+        let group = DispatchGroup()
+        group.enter()
         let callback: Callback<E, A> = { either in
-            result = either.fold(RaiseError.init, Pure.init)
+            result = either
+            group.leave()
         }
-        f(callback)
+        let io = try on(queue: queue) {
+            self.f(callback)
+        }
+        let procResult = try io^._unsafePerformIO(on: queue)
+        group.wait()
         
-        while(result == nil) {}
-        
-        return result!
+        return (try IO.fromEither(result!)^._unsafePerformIO(on: procResult.1).0 , procResult.1)
     }
     
-    override func unsafePerformIO() throws -> A {
-        let result = attempt()
-        return try result.unsafePerformIO()
+    override internal func description() -> String {
+        return "Async"
+    }
+}
+
+internal class ContinueOn<E: Error, A>: IO<E, A> {
+    let io: IO<E, A>
+    let queue: DispatchQueue
+    
+    init(_ io: IO<E, A>, _ queue: DispatchQueue) {
+        self.io = io
+        self.queue = queue
+    }
+    
+    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        return (try io._unsafePerformIO(on: queue).0, self.queue)
     }
 }
 
@@ -362,16 +387,52 @@ extension IOPartial: MonadDefer {
 
 extension IOPartial: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
-        fatalError("TODO: Implement this")
+        return AsyncIO(procf)
     }
     
     public static func continueOn<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, A> {
+        return ContinueOn(fa^, queue)
+    }
+}
+
+extension IOPartial: Concurrent {
+    public static func asyncF<A>(_ fa: @escaping (KindConnection<IOPartial<E>>, @escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
         fatalError("TODO: Implement this")
     }
     
-    //public static func runAsync<A>(_ fa: @escaping ((Either<E, A>) -> ()) throws -> ()) -> Kind<IOPartial<E>, A> {
-    //    return AsyncIO(fa)
-    //}
+    public static func startFiber<A>(_ fa: Kind<IOPartial<E>, A>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Fiber<IOPartial<E>, A>> {
+        fatalError("TODO: Implement this")
+    }
+    
+    public static func racePair<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Either<(A, Fiber<IOPartial<E>, B>), (Fiber<IOPartial<E>, A>, B)>> {
+        fatalError("TODO: Implement this")
+    }
+    
+    public static func raceTriple<A, B, C>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ queue: DispatchQueue) -> Kind<IOPartial<E>, Either<(A, Fiber<IOPartial<E>, B>, Fiber<IOPartial<E>, C>), Either<(Fiber<IOPartial<E>, A>, B, Fiber<IOPartial<E>, C>), (Fiber<IOPartial<E>, A>, Fiber<IOPartial<E>, B>, C)>>> {
+        fatalError("TODO: Implement this")
+    }
+}
+
+extension IOPartial: Effect {
+    public static func runAsync<A>(_ fa: Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, ()> {
+        fatalError("TODO: Implement this")
+    }
+}
+
+extension IOPartial: ConcurrentEffect {
+    public static func runAsyncCancellable<A>(_ fa: Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, Disposable> {
+        fatalError("TODO: Implement this")
+    }
+}
+
+extension IOPartial: UnsafeRun {
+    public static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
+        return try fa()^.unsafePerformIO(on: queue)
+    }
+    
+    public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: (Either<E, A>) -> ()) {
+        fa()^.unsafeRunAsync(on: queue, callback)
+    }
 }
 
 extension IOPartial: EquatableK where E: Equatable {

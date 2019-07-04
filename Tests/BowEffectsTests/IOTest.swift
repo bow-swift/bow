@@ -35,7 +35,7 @@ class IOTest: XCTestCase {
         MonadErrorLaws<IOPartial<CategoryError>>.check()
     }
     
-    func testAsyncContextLaws() {
-        //AsyncLaws<IOPartial<CategoryError>>.check()
+    func testAsyncLaws() {
+        AsyncLaws<IOPartial<CategoryError>>.check()
     }
 }
