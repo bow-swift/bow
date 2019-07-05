@@ -556,14 +556,6 @@ extension IOPartial: Concurrent {
     public static func parMap<A, B, C, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<IOPartial<E>, Z> {
         return ParMap3<E, A, B, C, Z>(fa^, fb^, fc^, f)
     }
-    
-    public static func asyncF<A>(_ fa: @escaping (KindConnection<IOPartial<E>>, @escaping (Either<E, A>) -> ()) -> Kind<IOPartial<E>, ()>) -> Kind<IOPartial<E>, A> {
-        fatalError("TODO: Implement this")
-    }
-    
-    public static func startFiber<A>(_ fa: IOOf<E, A>, _ queue: DispatchQueue) -> IOOf<E, Fiber<IOPartial<E>, A>> {
-        fatalError("TODO: Implement this")
-    }
 }
 
 extension IOPartial: Effect {

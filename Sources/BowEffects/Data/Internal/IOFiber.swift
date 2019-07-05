@@ -1,6 +1,6 @@
-import Bow
-
-class IOFiber<E: Error & Equatable, A: Equatable>: Fiber<IOPartial<E>, A> {
+//import Bow
+//
+//class IOFiber<E: Error & Equatable, A: Equatable>: Fiber<IOPartial<E>, A> {
 //    static func create(promise: UnsafePromise<E, A>, conn: IOConnection<E>) -> Fiber<IOPartial<E>, A> {
 //        return Fiber.create(join: {
 //            IO.async { conn2, callback in
@@ -16,4 +16,4 @@ class IOFiber<E: Error & Equatable, A: Equatable>: Fiber<IOPartial<E>, A> {
 //        },
 //                            cancel: { conn.cancel() })
 //    }
-}
+//}
