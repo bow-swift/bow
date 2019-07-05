@@ -8,11 +8,12 @@ internal class CancelablePromise<F: Concurrent & Bracket, A: Equatable>: Promise
         return F.defer {
             switch self.state.value {
             case let .complete(value: value): return F.pure(value)
-            case .pending: return F.cancelable { callback in
+            /*case .pending: return F.cancelable { callback in
                 let id = self.unsafeRegister(callback)
                 return F.delay { self.unregister(id) }
-            }
+            }*/
             case let .error(error): return F.raiseError(error)
+            default: fatalError()
             }
         }
     }

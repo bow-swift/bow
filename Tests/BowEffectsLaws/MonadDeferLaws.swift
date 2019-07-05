@@ -60,8 +60,6 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
         let sideEffect = SideEffect()
         let df = F.defer { () -> Kind<F, Int> in sideEffect.increment(); return F.pure(sideEffect.counter) }
 
-        sleep(2)
-
         expect(sideEffect.counter).to(equal(0))
         expect(df).to(equal(F.pure(1)))
     }
@@ -69,8 +67,6 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
     private static func delaySuspendsEvaluation() {
         let sideEffect = SideEffect()
         let df = F.delay { () -> Int in sideEffect.increment(); return sideEffect.counter }
-
-        sleep(2)
 
         expect(sideEffect.counter).to(equal(0))
         expect(df).to(equal(F.pure(1)))
@@ -80,8 +76,6 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
         let sideEffect = SideEffect()
         let df = F.pure(0).flatMap { _ -> Kind<F, Int> in sideEffect.increment(); return F.pure(sideEffect.counter) }
 
-        sleep(2)
-
         expect(sideEffect.counter).to(equal(0))
         expect(df).to(equal(F.pure(1)))
     }
@@ -89,8 +83,6 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
     private static func mapSuspendsEvaluation() {
         let sideEffect = SideEffect()
         let df = F.pure(0).map { _ -> Int in sideEffect.increment(); return sideEffect.counter }
-
-        sleep(2)
 
         expect(sideEffect.counter).to(equal(0))
         expect(df).to(equal(F.pure(1)))

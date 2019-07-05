@@ -2,11 +2,15 @@ import XCTest
 import SwiftCheck
 @testable import BowLaws
 import Bow
-import BowEffects
+@testable import BowEffects
 import BowEffectsGenerators
 @testable import BowEffectsLaws
 
 class IOTest: XCTestCase {
+    func testA() throws {
+        print(try IO<Never, Int>.pure(2)^.unsafePerformIO())
+    }
+    
     func testEquatableLaws() {
         EquatableKLaws<IOPartial<CategoryError>, Int>.check()
     }
@@ -33,6 +37,10 @@ class IOTest: XCTestCase {
     
     func testMonadErrorLaws() {
         MonadErrorLaws<IOPartial<CategoryError>>.check()
+    }
+    
+    func testMonadDeferLaws() {
+        MonadDeferLaws<IOPartial<CategoryError>>.check()
     }
     
     func testAsyncLaws() {

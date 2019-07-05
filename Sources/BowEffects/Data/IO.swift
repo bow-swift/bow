@@ -159,17 +159,17 @@ public class IO<E: Error, A>: IOOf<E, A> {
         } catch let error as E {
             return IO.raiseError(error)^
         } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+            fail(error)
         }
     }
     
-    public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: Callback<E, A>) {
+    public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) {
         do {
             callback(Either.right(try unsafePerformIO(on: queue)))
         } catch let error as E {
             callback(Either.left(error))
         } catch {
-            fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+            fail(error)
         }
     }
     
@@ -374,13 +374,15 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         var b: B?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
+        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
         
         group.enter()
-        queue.async {
+        parQueue1.async {
             do {
-                a = try self.fa._unsafePerformIO(on: queue).0
+                a = try self.fa._unsafePerformIO(on: parQueue1).0
             } catch let error as E {
-                atomic.value = error
+                atomic.setIfNil(error)
             } catch {
                 self.fail(error)
             }
@@ -388,11 +390,11 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         }
         
         group.enter()
-        queue.async {
+        parQueue2.async {
             do {
-                b = try self.fb._unsafePerformIO(on: queue).0
+                b = try self.fb._unsafePerformIO(on: parQueue2).0
             } catch let error as E {
-                atomic.value = error
+                atomic.setIfNil(error)
             } catch {
                 self.fail(error)
             }
@@ -427,11 +429,14 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         var c: C?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
+        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
+        let parQueue3 = DispatchQueue(label: queue.label + "parMap3", qos: queue.qos)
         
         group.enter()
-        queue.async {
+        parQueue1.async {
             do {
-                a = try self.fa._unsafePerformIO(on: queue).0
+                a = try self.fa._unsafePerformIO(on: parQueue1).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -441,9 +446,9 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         }
         
         group.enter()
-        queue.async {
+        parQueue2.async {
             do {
-                b = try self.fb._unsafePerformIO(on: queue).0
+                b = try self.fb._unsafePerformIO(on: parQueue2).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -453,9 +458,9 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         }
         
         group.enter()
-        queue.async {
+        parQueue3.async {
             do {
-                c = try self.fc._unsafePerformIO(on: queue).0
+                c = try self.fc._unsafePerformIO(on: parQueue3).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -578,7 +583,7 @@ extension IOPartial: UnsafeRun {
         return try fa()^.unsafePerformIO(on: queue)
     }
     
-    public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: (Either<E, A>) -> ()) {
+    public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> ()) {
         fa()^.unsafeRunAsync(on: queue, callback)
     }
 }
