@@ -103,7 +103,7 @@ let draftPrism = PublicationState.prism(for: .draft)
 /*:
  However, if the focus has associated values, we need to provide a bit of help by providing a pattern matching function that extracts the associated values out of the case we are focusing on:
  */
-let publishedPrism = PublicationState.prism(for: PublicationState.published){ state in
+let publishedPrism = PublicationState.prism(for: PublicationState.published) { state in
     guard case let .published(date) = state else { return nil }
     return date
 }
