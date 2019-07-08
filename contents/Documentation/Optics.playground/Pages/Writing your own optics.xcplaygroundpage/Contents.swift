@@ -28,6 +28,14 @@ struct Article {
     let tags: [String]
 }
 /*:
+ We can also create some sample values to apply our optics to:
+ */
+let state = PublicationState.published(Date())
+let article = Article(title: "Working with optics in Swift",
+                      subtitle: .some("Learn to use BowOptics"),
+                      state: .draft,
+                      tags: ["fp", "swift", "bow"])
+/*:
  In the following sections, we will describe how to create each of the optics for those types, where they are applicable.
  
  ## Iso
@@ -45,14 +53,34 @@ func toTuple(_ article: Article) -> (String, Option<String>, PublicationState, [
  With this function, creating an `Iso` between these types is as easy as:
  */
 let iso = Iso<Article, (String, Option<String>, PublicationState, [String])>(get: toTuple, reverseGet: Article.init)
+
 /*:
  The `Iso` initializer expects two functions: `get`, to go from `S` to `A`, and `reverseGet` to go from `A` to `S`, which is exactly what our two functions are doing.
  
+ #### Using Iso
+ 
+ We can transform an article into a tuple with the `iso` we just created:
+ */
+iso.get(article) // returns ("Working with optics", .some("Learn to use BowOptics"), .draft, ["fp", "swift", "bow"])
+
+/*:
+ Or we can make an `Article` out of a tuple:
+ */
+iso.reverseGet(("FP in Swift", .none(), .draft, [])) // Creates an Article(title: "FP in Swift", subtitle: .none(), state: .draft, tags: [])
+
+/*:
  ## Getter
  
  `Getter<S, A>` allows us to get a value `A` out of a structure `S`. For instance, we can make a `Getter` to extract the `title` of an `Article`. In that case, we need to make a `Getter<Article, String>`:
  */
 let titleGetter = Getter<Article, String>(get: { article in article.title })
+
+/*:
+ #### Using Getter
+ 
+ As you can guess, we can use a Getter to get a property of a structure. Using the recently created `titleGetter`, we can apply it to our `article`:
+ */
+titleGetter.get(article) // Returns "Working with optics in Swift"
 /*:
  ## Setter
  
@@ -77,6 +105,19 @@ extension Article {
 let titleSetter = Setter<Article, String>(
     modify: { article, f in article.copy(withTitle: f(article.title)) },
     set: { article, newTitle in article.copy(withTitle: newTitle) })
+
+/*:
+ #### Using Setter
+ 
+ Similar to Getter, we can use a Setter to set a property in a structure. Using the `titleSetter` created above, we can set a new title for the article we had:
+ */
+titleSetter.set(article, "All about Optics") // Returns Article(title: "All about optics", subtitle: .some("Learn to use BowOptics"), state: .draft, tags: ["fp", "swift", "bow"])
+/*:
+ It is important to note that the original article remains the same; the Setter creates a copy where all values are the same except the one focused by the Setter.
+ 
+ We don't have to pass a new value; we can also transform the title of the article:
+ */
+titleSetter.modify(article, { str in str.uppercased() }) // Returns Article(title: "WORKING WITH OPTICS IN SWIFT", subtitle: .some("Learn to use BowOptics"), state: .draft, tags: ["fp", "swift", "bow"])
 /*:
  ## Lens
  
@@ -88,6 +129,19 @@ let titleLens = Lens<Article, String>(
     get: { article in article.title },
     set: { article, newTitle in article.copy(withTitle: newTitle) })
 /*:
+ #### Using Lens
+ 
+ Using Lens is like using Getter and Setter, in the same optic. You can retrieve and modify the focus of the Lens. Using the Lens we just created:
+ */
+// Gets the title
+titleLens.get(article)
+
+// Sets a new title
+titleLens.set(article, "All about Optics")
+
+// Modifies the existing title
+titleLens.modify(article, { str in str.uppercased() })
+/*:
  ## Optional
  
  In the previous optics, title is always present in an `Article`. However, if we focus on its subtitle, we can see it is an `Option<String>`. We can still write a `Lens` whose focus is `Option<String>`, but for the sake of composition, it would be better to remove that optionality.
@@ -97,6 +151,18 @@ let titleLens = Lens<Article, String>(
 let subtitleOptional = Optional<Article, String>(
     set: { article, newSubtitle in article.copy(withSubtitle: .some(newSubtitle)) },
     getOrModify: { article in article.subtitle.fold({ Either.left(article) }, Either.right) })
+/*:
+ #### Using Optional
+ 
+ Using Optional is quite similar to using a Lens. We can get an Option of the focus or set it to a new value:
+ */
+subtitleOptional.getOption(article) // Returns .some("Learn to use BowOptics")
+subtitleOptional.set(article, "") // Returns Article(title: "Working with optics in Swift", subtitle: .some(""), state: .draft, tags: ["fp", "swift", "bow"])
+/*:
+ If we try to modify an article, it will return a new article with the modified subtitle, or the original article if the subtitle was not present.
+ */
+let articleWithoutSubtitle = Article(title: "Not interesing", subtitle: .none(), state: .draft, tags: [])
+subtitleOptional.modify(articleWithoutSubtitle, { str in str.lowercased() }) // Returns the same article as it does not have a subtitle
 /*:
  ## Prism
  
@@ -114,6 +180,16 @@ let publishedPrism = Prism<PublicationState, Date>(
         return Either.right(date)
     }, reverseGet: PublicationState.published)
 /*:
+ #### Using Prism
+ 
+ We can use the Prism above to get the publication date from a state:
+ */
+publishedPrism.getOption(state) // Returns an Option with the date that we set when we created it
+/*:
+ However, in the case of a `PublishedState.draft`, this Prism cannot get a Date, so it will return an empty Option:
+ */
+publishedPrism.getOption(.draft) // Returns .none()
+/*:
  ## Fold
  
  The optics presented so far have only one focus. Is it possible to have multiple foci? The `Fold` and `Traversal` optics have 0 to n foci.
@@ -130,8 +206,31 @@ let tagsLens = Lens<Article, [String]>(
  */
 let tagsFold: Fold<Article, String> = tagsLens + Array<String>.fold
 /*:
+ #### Using Fold
+ 
+ Once we have a Fold, we can use it for different purposes, like counting the number of tags:
+ */
+tagsFold.size(article) // Returns 3
+/*:
+ Or find a tag with a specific criteria:
+ */
+tagsFold.find(article, { tag in tag.count == 2 }) // Returns .some("fp")
+/*:
  ## Traversal
  
  Finally, `Traversal` is a generalization of `Traverse`. `Traversal<S, A>` lets us focus on multiple `A` values in a structure `S` to get, set or modify them. Like in the case for `Fold`, it is useful for fields that contain collections of elements. Likeways, there is a `Traversal<[A], A>` available for any array in `Array<Element>.traversal`. With that, we can compose it with the `tagsLens` to get a `Traversal`:
  */
 let tagsTraversal: Traversal<Article, String> = tagsLens + Array<String>.traversal
+/*:
+ #### Using Traversal
+ 
+ The Traversal for tags that we have created lets us modify all of them with a function:
+ */
+tagsTraversal.modify(article, { str in str.uppercased() }) // Uppercases all tags
+/*:
+ Or check if there is a tag that matches a predicate:
+ */
+tagsTraversal.exists(article, { str in str == "advanced" }) // Returns false as the article does not have any "advanced" tag
+/*:
+ There are many more operations that are available for each optic that the ones shown in this page. For a complete reference, check the API documentation for each optic.
+ */
