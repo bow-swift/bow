@@ -2,7 +2,7 @@ import XCTest
 import Bow
 import BowFree
 import BowFreeGenerators
-@testable import BowLaws
+import BowLaws
 
 fileprivate final class ForOps {}
 

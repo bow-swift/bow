@@ -4,7 +4,7 @@ import SwiftCheck
 import Bow
 import BowEffects
 import BowEffectsGenerators
-@testable import BowEffectsLaws
+import BowEffectsLaws
 
 class IOTest: XCTestCase {
     func testEquatableLaws() {

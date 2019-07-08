@@ -1,9 +1,9 @@
 import XCTest
-@testable import BowLaws
+import BowLaws
 import Bow
 @testable import BowRx
 import BowRxGenerators
-@testable import BowEffectsLaws
+import BowEffectsLaws
 
 extension ForSingleK: EquatableK {
     public static func eq<A: Equatable>(_ lhs: Kind<ForSingleK, A>, _ rhs: Kind<ForSingleK, A>) -> Bool {

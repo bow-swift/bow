@@ -1,6 +1,6 @@
 import XCTest
 import SwiftCheck
-@testable import BowLaws
+import BowLaws
 import Bow
 
 class NonEmptyArrayTest: XCTestCase {
