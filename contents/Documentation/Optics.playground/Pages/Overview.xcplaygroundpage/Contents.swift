@@ -33,7 +33,7 @@ import BowOptics
  | Setter    | An optic that can focus into a structure and set or modify its focus |
  | Lens      | An optic that can focus into a structure and get, set or modify its focus |
  | Optional  | An optic whose focus is optional and can get, set or modify it |
- | Prism     | An optic whose focus is present under certain circumstances and can get, set or modify it |
+ | Prism     | An optic whose focus is present only in some cases (of a sum type) and can get, set or modify it |
  | Fold      | An optic that can have multiple foci and is able to fold them into a single value |
  | Traversal | An optic that can have multiple foci and get, set or modify them |
 
