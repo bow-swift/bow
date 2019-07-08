@@ -2,9 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class SemigroupKLaws<F: SemigroupK & EquatableK & ArbitraryK> {
-    
-    static func check() {
+public class SemigroupKLaws<F: SemigroupK & EquatableK & ArbitraryK> {
+    public static func check() {
         associative()
     }
     

@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class MonadErrorLaws<F: MonadError & EquatableK & ArbitraryK> where F.E: Arbitrary {
-    static func check()  {
+public class MonadErrorLaws<F: MonadError & EquatableK & ArbitraryK> where F.E: Arbitrary {
+    public static func check()  {
         leftZero()
         ensureConsistency()
     }

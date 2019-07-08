@@ -1,8 +1,8 @@
 import SwiftCheck
 import Bow
 
-class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
-    static func check() {
+public class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
+    public static func check() {
         writerPure()
         tellFusion()
         listenPure()

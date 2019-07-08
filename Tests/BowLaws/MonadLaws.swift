@@ -3,8 +3,8 @@ import Nimble
 import Bow
 import BowGenerators
 
-class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
-    static func check() {
+public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
+    public static func check() {
         leftIdentity()
         rightIdentity()
         kleisliLeftIdentity()

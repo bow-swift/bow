@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class TraverseFilterLaws<F: TraverseFilter & Applicative & EquatableK & ArbitraryK> {
-    static func check() {
+public class TraverseFilterLaws<F: TraverseFilter & Applicative & EquatableK & ArbitraryK> {
+    public static func check() {
         identityTraverseFilter()
         filterAConsistentWithTraverseFilter()
     }

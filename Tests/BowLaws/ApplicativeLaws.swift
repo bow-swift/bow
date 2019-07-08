@@ -3,8 +3,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
-    static func check() {
+public class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
+    public static func check() {
         apIdentity()
         homomorphism()
         interchange()

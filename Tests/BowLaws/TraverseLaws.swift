@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class TraverseLaws<F: Traverse & EquatableK & ArbitraryK> {
-    static func check() {
+public class TraverseLaws<F: Traverse & EquatableK & ArbitraryK> {
+    public static func check() {
         identityTraverse()
         sequentialComposition()
         parallelComposition()

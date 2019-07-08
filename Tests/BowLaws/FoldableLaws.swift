@@ -2,7 +2,7 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
+public class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
     public static func check() {
         leftFoldConsistentWithFoldMap()
         rightFoldConsistentWithFoldMap()

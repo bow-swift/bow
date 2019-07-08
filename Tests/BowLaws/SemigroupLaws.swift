@@ -1,8 +1,8 @@
 import SwiftCheck
 import Bow
 
-class SemigroupLaws<A: Semigroup & Arbitrary & Equatable> {
-    static func check() {
+public class SemigroupLaws<A: Semigroup & Arbitrary & Equatable> {
+    public static func check() {
         associativity()
         reduction()
     }

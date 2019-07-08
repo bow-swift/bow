@@ -1,9 +1,9 @@
 import SwiftCheck
 import Bow
 
-class ComparableLaws<A: Comparable & Arbitrary> {
+public class ComparableLaws<A: Comparable & Arbitrary> {
     
-    static func check() {
+    public static func check() {
         reflexivityOfLessThanOrEqual()
         antisymmetryOfLessThanOrEqual()
         transitivityOfLessThanOrEqual()

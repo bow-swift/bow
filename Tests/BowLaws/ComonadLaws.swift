@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class ComonadLaws<F: Comonad & EquatableK & ArbitraryK> {
-    static func check() {
+public class ComonadLaws<F: Comonad & EquatableK & ArbitraryK> {
+    public static func check() {
         duplicateThenExtractIsId()
         duplicateThenMapExtractIsId()
         mapAndCoflatMapCoherence()

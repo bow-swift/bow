@@ -1,9 +1,8 @@
 import SwiftCheck
 import Bow
 
-class MonadStateLaws<F: MonadState & EquatableK> where F.S == Int {
-    
-    static func check() {
+public class MonadStateLaws<F: MonadState & EquatableK> where F.S == Int {
+    public static func check() {
         getIdempotent()
         setTwice()
         setGet()

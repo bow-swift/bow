@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class MonoidKLaws<F: MonoidK & EquatableK & ArbitraryK> {
-    static func check() {
+public class MonoidKLaws<F: MonoidK & EquatableK & ArbitraryK> {
+    public static func check() {
         leftIdentity()
         rightIdentity()
         fold()

@@ -1,8 +1,8 @@
 import SwiftCheck
 import Bow
 
-class CustomStringConvertibleLaws<A: CustomStringConvertible & Arbitrary> {
-    static func check(){
+public class CustomStringConvertibleLaws<A: CustomStringConvertible & Arbitrary> {
+    public static func check(){
         equality()
     }
     
