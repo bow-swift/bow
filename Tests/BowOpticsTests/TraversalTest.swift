@@ -3,6 +3,7 @@ import SwiftCheck
 import Bow
 import BowGenerators
 import BowOptics
+import BowOpticsLaws
 
 class TraversalTest: XCTestCase {
     func testTraversalLaws() {

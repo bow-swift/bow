@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowOptics
 
-class TraversalLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
+public class TraversalLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
     
-    static func check(traversal: Traversal<A, B>) {
+    public static func check(traversal: Traversal<A, B>) {
         headOption(traversal)
         modifyGetAll(traversal)
         setIdempotent(traversal)
