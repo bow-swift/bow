@@ -14,6 +14,74 @@ public protocol Concurrent: Async {
 // MARK: Related functions
 
 public extension Concurrent {
+    static func parZip<A, B>(_ fa: Kind<Self, A>,
+                             _ fb: Kind<Self, B>) -> Kind<Self, (A, B)> {
+        return Self.parMap(fa, fb, { a, b in (a, b) })
+    }
+    
+    static func parZip<A, B, C>(_ fa: Kind<Self, A>,
+                                _ fb: Kind<Self, B>,
+                                _ fc: Kind<Self, C>) -> Kind<Self, (A, B, C)> {
+        return Self.parMap(fa, fb, fc) { a, b, c in (a, b, c) }
+    }
+    
+    static func parZip<A, B, C, D>(_ fa: Kind<Self, A>,
+                                   _ fb: Kind<Self, B>,
+                                   _ fc: Kind<Self, C>,
+                                   _ fd: Kind<Self, D>) -> Kind<Self, (A, B, C, D)> {
+        return Self.parMap(fa, fb, fc, fd, { a, b, c, d in (a, b, c, d) })
+    }
+    
+    static func parZip<A, B, C, D, E>(_ fa: Kind<Self, A>,
+                                      _ fb: Kind<Self, B>,
+                                      _ fc: Kind<Self, C>,
+                                      _ fd: Kind<Self, D>,
+                                      _ fe: Kind<Self, E>) -> Kind<Self, (A, B, C, D, E)> {
+        return Self.parMap(fa, fb, fc, fd, fe, { a, b, c, d, e in (a, b, c, d, e) })
+    }
+    
+    static func parZip<A, B, C, D, E, G>(_ fa: Kind<Self, A>,
+                                         _ fb: Kind<Self, B>,
+                                         _ fc: Kind<Self, C>,
+                                         _ fd: Kind<Self, D>,
+                                         _ fe: Kind<Self, E>,
+                                         _ fg: Kind<Self, G>) -> Kind<Self, (A, B, C, D, E, G)> {
+        return Self.parMap(fa, fb, fc, fd, fe, fg, { a, b, c, d, e, g in (a, b, c, d, e, g) })
+    }
+    
+    static func parZip<A, B, C, D, E, G, H>(_ fa: Kind<Self, A>,
+                                            _ fb: Kind<Self, B>,
+                                            _ fc: Kind<Self, C>,
+                                            _ fd: Kind<Self, D>,
+                                            _ fe: Kind<Self, E>,
+                                            _ fg: Kind<Self, G>,
+                                            _ fh: Kind<Self, H>) -> Kind<Self, (A, B, C, D, E, G, H)> {
+        return Self.parMap(fa, fb, fc, fd, fe, fg, fh, { a, b, c, d, e, g, h in (a, b, c, d, e, g, h) })
+    }
+    
+    static func parZip<A, B, C, D, E, G, H, I>(_ fa: Kind<Self, A>,
+                                               _ fb: Kind<Self, B>,
+                                               _ fc: Kind<Self, C>,
+                                               _ fd: Kind<Self, D>,
+                                               _ fe: Kind<Self, E>,
+                                               _ fg: Kind<Self, G>,
+                                               _ fh: Kind<Self, H>,
+                                               _ fi: Kind<Self, I>) -> Kind<Self, (A, B, C, D, E, G, H, I)> {
+        return Self.parMap(fa, fb, fc, fd, fe, fg, fh, fi, { a, b, c, d, e, g, h, i in (a, b, c, d, e, g, h, i) })
+    }
+    
+    static func parZip<A, B, C, D, E, G, H, I, J>(_ fa: Kind<Self, A>,
+                                                  _ fb: Kind<Self, B>,
+                                                  _ fc: Kind<Self, C>,
+                                                  _ fd: Kind<Self, D>,
+                                                  _ fe: Kind<Self, E>,
+                                                  _ fg: Kind<Self, G>,
+                                                  _ fh: Kind<Self, H>,
+                                                  _ fi: Kind<Self, I>,
+                                                  _ fj: Kind<Self, J>) -> Kind<Self, (A, B, C, D, E, G, H, I, J)> {
+        return Self.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, { a, b, c, d, e, g, h, i, j in (a, b, c, d, e, g, h, i, j) })
+    }
+    
     static func parMap<A, B, C, D, Z>(_ fa: Kind<Self, A>,
                                       _ fb: Kind<Self, B>,
                                       _ fc: Kind<Self, C>,
@@ -97,6 +165,74 @@ public extension Concurrent {
 // MARK: Syntax for Concurrent
 
 public extension Kind where F: Concurrent {
+    static func parZip<Z, B>(_ fa: Kind<F, Z>,
+                             _ fb: Kind<F, B>) -> Kind<F, (Z, B)> {
+        return F.parMap(fa, fb, { a, b in (a, b) })
+    }
+    
+    static func parZip<Z, B, C>(_ fa: Kind<F, Z>,
+                                _ fb: Kind<F, B>,
+                                _ fc: Kind<F, C>) -> Kind<F, (Z, B, C)> {
+        return F.parMap(fa, fb, fc) { a, b, c in (a, b, c) }
+    }
+    
+    static func parZip<Z, B, C, D>(_ fa: Kind<F, Z>,
+                                   _ fb: Kind<F, B>,
+                                   _ fc: Kind<F, C>,
+                                   _ fd: Kind<F, D>) -> Kind<F, (Z, B, C, D)> {
+        return F.parMap(fa, fb, fc, fd, { a, b, c, d in (a, b, c, d) })
+    }
+    
+    static func parZip<Z, B, C, D, E>(_ fa: Kind<F, Z>,
+                                      _ fb: Kind<F, B>,
+                                      _ fc: Kind<F, C>,
+                                      _ fd: Kind<F, D>,
+                                      _ fe: Kind<F, E>) -> Kind<F, (Z, B, C, D, E)> {
+        return F.parMap(fa, fb, fc, fd, fe, { a, b, c, d, e in (a, b, c, d, e) })
+    }
+    
+    static func parZip<Z, B, C, D, E, G>(_ fa: Kind<F, Z>,
+                                         _ fb: Kind<F, B>,
+                                         _ fc: Kind<F, C>,
+                                         _ fd: Kind<F, D>,
+                                         _ fe: Kind<F, E>,
+                                         _ fg: Kind<F, G>) -> Kind<F, (Z, B, C, D, E, G)> {
+        return F.parMap(fa, fb, fc, fd, fe, fg, { a, b, c, d, e, g in (a, b, c, d, e, g) })
+    }
+    
+    static func parZip<Z, B, C, D, E, G, H>(_ fa: Kind<F, Z>,
+                                            _ fb: Kind<F, B>,
+                                            _ fc: Kind<F, C>,
+                                            _ fd: Kind<F, D>,
+                                            _ fe: Kind<F, E>,
+                                            _ fg: Kind<F, G>,
+                                            _ fh: Kind<F, H>) -> Kind<F, (Z, B, C, D, E, G, H)> {
+        return F.parMap(fa, fb, fc, fd, fe, fg, fh, { a, b, c, d, e, g, h in (a, b, c, d, e, g, h) })
+    }
+    
+    static func parZip<Z, B, C, D, E, G, H, I>(_ fa: Kind<F, Z>,
+                                               _ fb: Kind<F, B>,
+                                               _ fc: Kind<F, C>,
+                                               _ fd: Kind<F, D>,
+                                               _ fe: Kind<F, E>,
+                                               _ fg: Kind<F, G>,
+                                               _ fh: Kind<F, H>,
+                                               _ fi: Kind<F, I>) -> Kind<F, (Z, B, C, D, E, G, H, I)> {
+        return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, { a, b, c, d, e, g, h, i in (a, b, c, d, e, g, h, i) })
+    }
+    
+    static func parZip<Z, B, C, D, E, G, H, I, J>(_ fa: Kind<F, Z>,
+                                                  _ fb: Kind<F, B>,
+                                                  _ fc: Kind<F, C>,
+                                                  _ fd: Kind<F, D>,
+                                                  _ fe: Kind<F, E>,
+                                                  _ fg: Kind<F, G>,
+                                                  _ fh: Kind<F, H>,
+                                                  _ fi: Kind<F, I>,
+                                                  _ fj: Kind<F, J>) -> Kind<F, (Z, B, C, D, E, G, H, I, J)> {
+        return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, { a, b, c, d, e, g, h, i, j in (a, b, c, d, e, g, h, i, j) })
+    }
+    
     static func parMap<B, Z>(_ fa: Kind<F, Z>,
                             _ fb: Kind<F, B>,
                             _ f: @escaping (Z, B) -> A) -> Kind<F, A> {
