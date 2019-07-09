@@ -478,6 +478,30 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
     }
 }
 
+internal class IOEffect<E: Error, A>: IO<E, ()> {
+    let io: IO<E, A>
+    let callback: (Either<E, A>) -> IOOf<E, ()>
+    
+    init(_ io: IO<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) {
+        self.io = io
+        self.callback = callback
+    }
+    
+    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> ((), DispatchQueue) {
+        var result: IOOf<E, ()>
+        do {
+            let (a, nextQueue) = try io._unsafePerformIO(on: queue)
+            result = callback(.right(a))
+            return try result^._unsafePerformIO(on: nextQueue)
+        } catch let error as E {
+            result = callback(.left(error))
+            return try result^._unsafePerformIO(on: queue)
+        } catch {
+            fail(error)
+        }
+    }
+}
+
 extension IOPartial: Functor {
     public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
         return FMap(f, IO.fix(fa))
@@ -560,13 +584,7 @@ extension IOPartial: Concurrent {
 
 extension IOPartial: Effect {
     public static func runAsync<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
-        fatalError("TODO: Implement this")
-    }
-}
-
-extension IOPartial: ConcurrentEffect {
-    public static func runAsyncCancellable<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, Disposable> {
-        fatalError("TODO: Implement this")
+        return IOEffect(fa^, callback)
     }
 }
 
