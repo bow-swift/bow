@@ -2,6 +2,7 @@ import XCTest
 import SwiftCheck
 import Bow
 import BowOptics
+import BowOpticsLaws
 
 class IsoTest: XCTestCase {
     

@@ -1,8 +1,8 @@
 import Bow
 import SwiftCheck
 
-class MonoidLaws<A: Monoid & Equatable & Arbitrary> {
-    static func check() {
+public class MonoidLaws<A: Monoid & Equatable & Arbitrary> {
+    public static func check() {
         leftIdentity()
         rightIdentity()
     }

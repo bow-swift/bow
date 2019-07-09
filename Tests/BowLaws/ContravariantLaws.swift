@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class ContravariantLaws<F: Contravariant & EquatableK & ArbitraryK> {
+public class ContravariantLaws<F: Contravariant & EquatableK & ArbitraryK> {
     
-    static func check() {
+    public static func check() {
         InvariantLaws<F>.check()
         identity()
         composition()

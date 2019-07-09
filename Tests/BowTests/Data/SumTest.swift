@@ -1,6 +1,6 @@
 import XCTest
 import Nimble
-@testable import BowLaws
+import BowLaws
 import Bow
 
 extension SumPartial: EquatableK where F: Comonad, G: Comonad {

@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class FunctorLaws<F: Functor & EquatableK & ArbitraryK> {
-    static func check() {
+public class FunctorLaws<F: Functor & EquatableK & ArbitraryK> {
+    public static func check() {
         InvariantLaws<F>.check()
         covariantIdentity()
         covariantComposition()

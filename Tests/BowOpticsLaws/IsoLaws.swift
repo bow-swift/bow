@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowOptics
 
-class IsoLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable & Monoid> {
+public class IsoLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable & Monoid> {
     
-    static func check(iso: Iso<A, B>) {
+    public static func check(iso: Iso<A, B>) {
         roundTripOneWay(iso)
         roundTripOtherWay(iso)
         modifyIdentity(iso)

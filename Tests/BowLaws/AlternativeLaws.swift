@@ -2,7 +2,7 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class AlternativeLaws<F: Alternative & EquatableK & ArbitraryK> {
+public class AlternativeLaws<F: Alternative & EquatableK & ArbitraryK> {
     public static func check()  {
         rightAbsorption()
         leftDistributivity()

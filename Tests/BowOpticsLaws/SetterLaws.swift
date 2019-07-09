@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowOptics
 
-class SetterLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
+public class SetterLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
     
-    static func check(setter: Setter<A, B>) {
+    public static func check(setter: Setter<A, B>) {
         setIdempotent(setter)
         modifyId(setter)
         composeModify(setter)

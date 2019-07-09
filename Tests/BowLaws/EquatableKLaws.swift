@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class EquatableKLaws<F: EquatableK & ArbitraryK, A: Arbitrary & Equatable> {
+public class EquatableKLaws<F: EquatableK & ArbitraryK, A: Arbitrary & Equatable> {
     
-    static func check() {
+    public static func check() {
         identity()
         commutativity()
         transitivity()

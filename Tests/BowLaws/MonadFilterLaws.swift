@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class MonadFilterLaws<F: MonadFilter & EquatableK & ArbitraryK> {
-    static func check() {
+public class MonadFilterLaws<F: MonadFilter & EquatableK & ArbitraryK> {
+    public static func check() {
         leftEmpty()
         rightEmpty()
         consistency()

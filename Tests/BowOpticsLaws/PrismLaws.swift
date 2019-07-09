@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowOptics
 
-class PrismLaws<A: Arbitrary & Equatable, B: Arbitrary & CoArbitrary & Hashable & Equatable> {
+public class PrismLaws<A: Arbitrary & Equatable, B: Arbitrary & CoArbitrary & Hashable & Equatable> {
     
-    static func check(prism: Prism<A, B>) {
+    public static func check(prism: Prism<A, B>) {
         partialRoundTripOneWay(prism)
         roundTripOtherWay(prism)
         modifyId(prism)

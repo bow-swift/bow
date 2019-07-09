@@ -1,6 +1,6 @@
 import XCTest
-@testable import Bow
-@testable import BowRecursionSchemes
+import Bow
+import BowRecursionSchemes
 
 class RecursionTest: XCTestCase {
     func testA() {

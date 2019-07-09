@@ -1,8 +1,8 @@
 import SwiftCheck
 import Bow
 
-class EquatableLaws<A: Equatable & Arbitrary> {
-    static func check() {
+public class EquatableLaws<A: Equatable & Arbitrary> {
+    public static func check() {
         identity()
         commutativity()
         transitivity()

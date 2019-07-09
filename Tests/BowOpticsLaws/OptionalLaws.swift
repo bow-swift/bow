@@ -2,9 +2,9 @@ import SwiftCheck
 import Bow
 import BowOptics
 
-class OptionalLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
+public class OptionalLaws<A: Equatable & Arbitrary, B: Equatable & Arbitrary & CoArbitrary & Hashable> {
     
-    static func check(optional: BowOptics.Optional<A, B>) {
+    public static func check(optional: BowOptics.Optional<A, B>) {
         getOptionSet(optional)
         setGetOption(optional)
         setIdempotent(optional)

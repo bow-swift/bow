@@ -2,8 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: Equatable, F.E: Arbitrary {
-    static func check()  {
+public class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: Equatable, F.E: Arbitrary {
+    public static func check()  {
         handle()
         handleWith()
         handleWithPure()

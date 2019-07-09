@@ -2,9 +2,8 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-class FunctorFilterLaws<F: FunctorFilter & EquatableK & ArbitraryK> {
-    
-    static func check() {
+public class FunctorFilterLaws<F: FunctorFilter & EquatableK & ArbitraryK> {
+    public static func check() {
         mapFilterComposition()
         mapFilterMapConsistency()
     }
