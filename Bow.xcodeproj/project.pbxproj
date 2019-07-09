@@ -18,7 +18,6 @@
 		1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FB224E332900507B54 /* Coproduct9.swift */; };
 		1116D500224E342200507B54 /* Coproduct10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FF224E342200507B54 /* Coproduct10.swift */; };
 		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
-		112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097AE22A7EE46007F3D9C /* Either+Gen.swift */; };
 		112097B122A7F0E6007F3D9C /* ArrayK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */; };
@@ -171,18 +170,14 @@
 		1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
-		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
-		117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
 		117DC0F622AE504500EF65F0 /* ObservableK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */; };
-		117DC10122AE522000EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */; };
-		117DC12922AE563900EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC12A22AE563900EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC13622AE578A00EF65F0 /* Free+Gen.swift */; };
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
@@ -554,13 +549,6 @@
 			remoteGlobalIDString = 117DC0F722AE522000EF65F0;
 			remoteInfo = "Bow-BrightFuturesGenerators";
 		};
-		1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
-			remoteInfo = "Bow-EffectsGenerators";
-		};
 		1126CA8422B0DE9E00F840CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -574,13 +562,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 117DC0DC22AE4D6C00EF65F0;
 			remoteInfo = "Bow-RxGenerators";
-		};
-		1160D0BF22D38CEC0010323A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
-			remoteInfo = "Bow-Generators";
 		};
 		1160D0C122D38CEC0010323A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -701,12 +682,12 @@
 			remoteGlobalIDString = 11E71817219D81B300B94845;
 			remoteInfo = "Bow-Free";
 		};
-		1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */ = {
+		1191BD0022D4928D0052FEA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
-			remoteInfo = "Bow-Generators";
+			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
+			remoteInfo = "Bow-EffectsGenerators";
 		};
 		11D97EC5219EBAA1008FC004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1125,7 +1106,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */,
 				112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1245,7 +1225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */,
 				117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1254,7 +1233,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */,
 				117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1263,7 +1241,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC10122AE522000EF65F0 /* Nimble.framework in Frameworks */,
 				117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1272,7 +1249,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC12922AE563900EF65F0 /* Nimble.framework in Frameworks */,
 				117DC12A22AE563900EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2256,7 +2232,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1126CA8322B0DE3F00F840CB /* PBXTargetDependency */,
+				1191BD0122D4928D0052FEA8 /* PBXTargetDependency */,
 				11D97EF1219EBBB4008FC004 /* PBXTargetDependency */,
 				11229785219DC95B006D66C5 /* PBXTargetDependency */,
 				11229749219DC88F006D66C5 /* PBXTargetDependency */,
@@ -2363,7 +2339,6 @@
 			);
 			dependencies = (
 				1160D0F222D38E080010323A /* PBXTargetDependency */,
-				1160D0BE22D38CEC0010323A /* PBXTargetDependency */,
 				1160D0C022D38CEC0010323A /* PBXTargetDependency */,
 			);
 			name = "Bow-OpticsLaws";
@@ -2501,7 +2476,6 @@
 			);
 			dependencies = (
 				1160D0F422D38E2A0010323A /* PBXTargetDependency */,
-				1186E15522BA4A9D001F8A5D /* PBXTargetDependency */,
 				11E71806219D7DFB00B94845 /* PBXTargetDependency */,
 				11E7179F219D7D5900B94845 /* PBXTargetDependency */,
 			);
@@ -3615,11 +3589,6 @@
 			target = 117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */;
 			targetProxy = 1126CA8022B0DDD100F840CB /* PBXContainerItemProxy */;
 		};
-		1126CA8322B0DE3F00F840CB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
-			targetProxy = 1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */;
-		};
 		1126CA8522B0DE9E00F840CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */;
@@ -3629,11 +3598,6 @@
 			isa = PBXTargetDependency;
 			target = 117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */;
 			targetProxy = 1126CA8622B0DF2B00F840CB /* PBXContainerItemProxy */;
-		};
-		1160D0BE22D38CEC0010323A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
-			targetProxy = 1160D0BF22D38CEC0010323A /* PBXContainerItemProxy */;
 		};
 		1160D0C022D38CEC0010323A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3720,10 +3684,10 @@
 			target = 11E71817219D81B300B94845 /* Bow-Free */;
 			targetProxy = 117DC13322AE56D800EF65F0 /* PBXContainerItemProxy */;
 		};
-		1186E15522BA4A9D001F8A5D /* PBXTargetDependency */ = {
+		1191BD0122D4928D0052FEA8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
-			targetProxy = 1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */;
+			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
+			targetProxy = 1191BD0022D4928D0052FEA8 /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
