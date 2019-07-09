@@ -26,7 +26,25 @@
  pod "BowBrightFutures",    "~> {version}"
  ```
 
-After that, run the following command in the terminal:
+ Bow also provides some pods for testing that can be consumed with:
+
+ ```ruby
+ pod "BowLaws",        "~> {version}"
+ pod "BowOpticsLaws",  "~> {version}"
+ pod "BowEffectsLaws", "~> {version}"
+ ```
+
+ And generators for property-based testing with SwiftCheck:
+ 
+ ```ruby
+ pod "BowGenerators",              "~> {version}"
+ pod "BowFreeGenerators",          "~> {version}"
+ pod "BowEffectsGenerators",       "~> {version}"
+ pod "BowRxGenerators",            "~> {version}"
+ pod "BowBrightFuturesGenerators", "~> {version}"
+ ```
+
+ After including the pods you would like to use in your Podfile, run the following command in the terminal:
 
 ```
 $ pod install
@@ -76,13 +94,25 @@ let package = Package(
                     "BowGeneric",
                     "BowEffects",
                     "BowRx",
-                    "BowBrightFutures"]
-        )
+                    "BowBrightFutures"]),
+        .testTarget(name: "BowTestProjectTests",
+                    dependencies: [
+                        // Type class laws
+                        "BowLaws",
+                        "BowOpticsLaws",
+                        "BowEffectsLaws",
+ 
+                        // Generators for PBT with SwiftCheck
+                        "BowGenerators",
+                        "BowFreeGenerators",
+                        "BowEffectsGenerators",
+                        "BowRxGenerators",
+                        "BowBrightFuturesGenerators"])
     ]
 )
 ```
 
- To build it, just run the following command in the terminal:
+ Feel free to include or remove the targets above at your convenience. To build the project, just run the following command in the terminal:
 
  ```
  $ swift build
