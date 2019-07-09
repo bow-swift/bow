@@ -177,10 +177,6 @@ public class IO<E: Error, A>: IOOf<E, A> {
         return FErrorMap(f, self)
     }
     
-    internal func description() -> String {
-        return ""
-    }
-    
     internal func fail(_ error: Error) -> Never {
         fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
     }
@@ -204,10 +200,6 @@ internal class Pure<E: Error, A>: IO<E, A> {
     override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         return (try on(queue: queue) { self.a }, queue)
     }
-    
-    override internal func description() -> String {
-        return "Pure(\(a))"
-    }
 }
 
 internal class RaiseError<E: Error, A> : IO<E, A> {
@@ -219,10 +211,6 @@ internal class RaiseError<E: Error, A> : IO<E, A> {
     
     override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         return (try on(queue: queue) { throw self.error }, queue)
-    }
-    
-    override internal func description() -> String {
-        return "RaiseError(\(error))"
     }
 }
 
@@ -238,10 +226,6 @@ internal class FMap<E: Error, A, B> : IO<E, B> {
     override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
         let result = try action._unsafePerformIO(on: queue)
         return (try on(queue: result.1) { self.f(result.0) }, result.1)
-    }
-    
-    override internal func description() -> String {
-        return "FMap(\(action.description()))"
     }
 }
 
@@ -263,10 +247,6 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
             self.fail(error)
         }
     }
-    
-    override internal func description() -> String {
-        return "FErrorMap(\(action.description()))"
-    }
 }
 
 internal class Join<E: Error, A> : IO<E, A> {
@@ -279,10 +259,6 @@ internal class Join<E: Error, A> : IO<E, A> {
     override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         let result = try io._unsafePerformIO(on: queue)
         return try result.0._unsafePerformIO(on: result.1)
-    }
-    
-    override internal func description() -> String {
-        return "Join(\(io.description()))"
     }
 }
 
@@ -308,10 +284,6 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         group.wait()
         
         return (try IO.fromEither(result!)^._unsafePerformIO(on: procResult.1).0 , procResult.1)
-    }
-    
-    override internal func description() -> String {
-        return "Async"
     }
 }
 

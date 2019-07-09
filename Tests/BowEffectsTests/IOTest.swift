@@ -7,10 +7,6 @@ import BowEffectsGenerators
 @testable import BowEffectsLaws
 
 class IOTest: XCTestCase {
-    func testA() throws {
-        print(try IO<Never, Int>.pure(2)^.unsafePerformIO())
-    }
-    
     func testEquatableLaws() {
         EquatableKLaws<IOPartial<CategoryError>, Int>.check()
     }
