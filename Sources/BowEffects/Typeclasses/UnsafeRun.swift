@@ -17,3 +17,15 @@ public extension Kind where F: UnsafeRun {
         return F.runNonBlocking(on: queue, fa, callback)
     }
 }
+
+// MARK: Syntax for DispatchQueue and UnsafeRun
+
+public extension DispatchQueue {
+    func runBlocking<F: UnsafeRun, A>(_ fa: @escaping () -> Kind<F, A>) throws -> A {
+        return try F.runBlocking(on: self, fa)
+    }
+    
+    func runNonBlocking<F: UnsafeRun, A>(_ fa: @escaping () -> Kind<F, A>, _ callback: @escaping Callback<F.E, A>) {
+        return F.runNonBlocking(on: self, fa, callback)
+    }
+}
