@@ -133,34 +133,6 @@
 		112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF322BBC0390032F675 /* AutoFold.swift */; };
 		112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF522BBC17C0032F675 /* AutoTraversal.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
-		1160D0C322D38CEC0010323A /* AlternativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C6217E2DEF00969984 /* AlternativeLaws.swift */; };
-		1160D0C422D38CEC0010323A /* ApplicativeErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */; };
-		1160D0C522D38CEC0010323A /* ApplicativeLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */; };
-		1160D0C622D38CEC0010323A /* BimonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CA217E2DEF00969984 /* BimonadLaws.swift */; };
-		1160D0C722D38CEC0010323A /* ComonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */; };
-		1160D0C822D38CEC0010323A /* ContravariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */; };
-		1160D0C922D38CEC0010323A /* EquatableKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BF217E2DEF00969984 /* EquatableKLaws.swift */; };
-		1160D0CA22D38CEC0010323A /* FoldableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D6217E2DEF00969984 /* FoldableLaws.swift */; };
-		1160D0CB22D38CEC0010323A /* FunctorFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C1217E2DEF00969984 /* FunctorFilterLaws.swift */; };
-		1160D0CC22D38CEC0010323A /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
-		1160D0CD22D38CEC0010323A /* FunctorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CC217E2DEF00969984 /* FunctorLaws.swift */; };
-		1160D0CE22D38CEC0010323A /* InvariantLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D5217E2DEF00969984 /* InvariantLaws.swift */; };
-		1160D0CF22D38CEC0010323A /* MonadCombineLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CD217E2DEF00969984 /* MonadCombineLaws.swift */; };
-		1160D0D022D38CEC0010323A /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
-		1160D0D122D38CEC0010323A /* MonadErrorLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BC217E2DEF00969984 /* MonadErrorLaws.swift */; };
-		1160D0D222D38CEC0010323A /* MonadFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C7217E2DEF00969984 /* MonadFilterLaws.swift */; };
-		1160D0D322D38CEC0010323A /* MonadLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C0217E2DEF00969984 /* MonadLaws.swift */; };
-		1160D0D422D38CEC0010323A /* MonadStateLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CB217E2DEF00969984 /* MonadStateLaws.swift */; };
-		1160D0D522D38CEC0010323A /* MonadWriterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C5217E2DEF00969984 /* MonadWriterLaws.swift */; };
-		1160D0D622D38CEC0010323A /* MonoidKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D4217E2DEF00969984 /* MonoidKLaws.swift */; };
-		1160D0D722D38CEC0010323A /* MonoidLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BD217E2DEF00969984 /* MonoidLaws.swift */; };
-		1160D0D822D38CEC0010323A /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
-		1160D0D922D38CEC0010323A /* ComparableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */; };
-		1160D0DA22D38CEC0010323A /* SemigroupKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3CF217E2DEF00969984 /* SemigroupKLaws.swift */; };
-		1160D0DB22D38CEC0010323A /* SemigroupLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BE217E2DEF00969984 /* SemigroupLaws.swift */; };
-		1160D0DC22D38CEC0010323A /* CustomStringConvertibleLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */; };
-		1160D0DD22D38CEC0010323A /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D3217E2DEF00969984 /* TraverseFilterLaws.swift */; };
-		1160D0DE22D38CEC0010323A /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BB217E2DEF00969984 /* TraverseLaws.swift */; };
 		1160D0E022D38CEC0010323A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		1160D0E122D38CEC0010323A /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
@@ -688,6 +660,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
 			remoteInfo = "Bow-EffectsGenerators";
+		};
+		1191BD0222D4AF4C0052FEA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
 		};
 		11D97EC5219EBAA1008FC004 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2338,6 +2317,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1191BD0322D4AF4C0052FEA8 /* PBXTargetDependency */,
 				1160D0F222D38E080010323A /* PBXTargetDependency */,
 				1160D0C022D38CEC0010323A /* PBXTargetDependency */,
 			);
@@ -3151,40 +3131,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				1160D0C322D38CEC0010323A /* AlternativeLaws.swift in Sources */,
-				1160D0C422D38CEC0010323A /* ApplicativeErrorLaws.swift in Sources */,
-				1160D0C522D38CEC0010323A /* ApplicativeLaws.swift in Sources */,
-				1160D0C622D38CEC0010323A /* BimonadLaws.swift in Sources */,
-				1160D0C722D38CEC0010323A /* ComonadLaws.swift in Sources */,
-				1160D0C822D38CEC0010323A /* ContravariantLaws.swift in Sources */,
-				1160D0C922D38CEC0010323A /* EquatableKLaws.swift in Sources */,
-				1160D0CA22D38CEC0010323A /* FoldableLaws.swift in Sources */,
 				1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */,
 				1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */,
 				1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */,
-				1160D0CB22D38CEC0010323A /* FunctorFilterLaws.swift in Sources */,
 				1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */,
-				1160D0CC22D38CEC0010323A /* EquatableLaws.swift in Sources */,
-				1160D0CD22D38CEC0010323A /* FunctorLaws.swift in Sources */,
-				1160D0CE22D38CEC0010323A /* InvariantLaws.swift in Sources */,
-				1160D0CF22D38CEC0010323A /* MonadCombineLaws.swift in Sources */,
-				1160D0D022D38CEC0010323A /* SelectiveLaws.swift in Sources */,
-				1160D0D122D38CEC0010323A /* MonadErrorLaws.swift in Sources */,
 				1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */,
-				1160D0D222D38CEC0010323A /* MonadFilterLaws.swift in Sources */,
-				1160D0D322D38CEC0010323A /* MonadLaws.swift in Sources */,
-				1160D0D422D38CEC0010323A /* MonadStateLaws.swift in Sources */,
-				1160D0D522D38CEC0010323A /* MonadWriterLaws.swift in Sources */,
-				1160D0D622D38CEC0010323A /* MonoidKLaws.swift in Sources */,
-				1160D0D722D38CEC0010323A /* MonoidLaws.swift in Sources */,
-				1160D0D822D38CEC0010323A /* EqualityFunctions.swift in Sources */,
 				1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */,
-				1160D0D922D38CEC0010323A /* ComparableLaws.swift in Sources */,
-				1160D0DA22D38CEC0010323A /* SemigroupKLaws.swift in Sources */,
-				1160D0DB22D38CEC0010323A /* SemigroupLaws.swift in Sources */,
-				1160D0DC22D38CEC0010323A /* CustomStringConvertibleLaws.swift in Sources */,
-				1160D0DD22D38CEC0010323A /* TraverseFilterLaws.swift in Sources */,
-				1160D0DE22D38CEC0010323A /* TraverseLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3688,6 +3640,11 @@
 			isa = PBXTargetDependency;
 			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
 			targetProxy = 1191BD0022D4928D0052FEA8 /* PBXContainerItemProxy */;
+		};
+		1191BD0322D4AF4C0052FEA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 1191BD0222D4AF4C0052FEA8 /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
