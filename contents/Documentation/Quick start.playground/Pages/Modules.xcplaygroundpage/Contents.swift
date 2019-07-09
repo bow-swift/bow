@@ -34,4 +34,33 @@
  | Recursion Schemes | Recursive data structures, F-algebras and folding / unfolding functions. | `import BowRecursionSchemes` |
  | Free | Free monads. | `import BowFree` |
  | Generic | Data types for generic programming. | `import BowGeneric` |
+ 
+ # Modules for testing
+ 
+ Bow also provides some modules that are used in testing. These modules are:
+ 
+ ## Generators for Property-based Testing with SwiftCheck
+ 
+ {:.intermediate}
+ intermediate
+ 
+ | Module | Description | Swift import |
+ | ------ | ----------- | ------------ |
+ | Generators | Generators for data types in the core module | `import BowGenerators` |
+ | FreeGenerators | Generators for data types in BowFree | `import BowFreeGenerators` |
+ | EffectsGenerators | Generators for data types in BowEffects | `import BowEffectsGenerators` |
+ | RxGenerators | Generators for data types in BowRx | `import BowRxGenerators` |
+ | BrightFuturesGenerators | Generators for data types in BowBrightFutures | `import BowBrightFuturesGenerators` |
+ 
+ ## Laws to test instances of type classes
+ 
+ {:.intermediate}
+ intermediate
+ 
+ | Module | Description | Swift import |
+ | ------ | ----------- | ------------ |
+ | Laws | Laws for type classes in the core module | `import BowLaws` |
+ | OpticsLaws | Laws for optics | `import BowOpticsLaws` |
+ | EffectsLaws | Laws for effects | `import BowEffectsLaws` |
+ 
  */
