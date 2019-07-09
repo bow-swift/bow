@@ -166,20 +166,20 @@ public extension Concurrent {
 
 public extension Kind where F: Concurrent {
     static func parZip<Z, B>(_ fa: Kind<F, Z>,
-                             _ fb: Kind<F, B>) -> Kind<F, (Z, B)> {
+                             _ fb: Kind<F, B>) -> Kind<F, (Z, B)> where A == (Z, B) {
         return F.parMap(fa, fb, { a, b in (a, b) })
     }
     
     static func parZip<Z, B, C>(_ fa: Kind<F, Z>,
                                 _ fb: Kind<F, B>,
-                                _ fc: Kind<F, C>) -> Kind<F, (Z, B, C)> {
+                                _ fc: Kind<F, C>) -> Kind<F, (Z, B, C)> where A == (Z, B, C) {
         return F.parMap(fa, fb, fc) { a, b, c in (a, b, c) }
     }
     
     static func parZip<Z, B, C, D>(_ fa: Kind<F, Z>,
                                    _ fb: Kind<F, B>,
                                    _ fc: Kind<F, C>,
-                                   _ fd: Kind<F, D>) -> Kind<F, (Z, B, C, D)> {
+                                   _ fd: Kind<F, D>) -> Kind<F, (Z, B, C, D)> where A == (Z, B, C, D) {
         return F.parMap(fa, fb, fc, fd, { a, b, c, d in (a, b, c, d) })
     }
     
@@ -187,7 +187,7 @@ public extension Kind where F: Concurrent {
                                       _ fb: Kind<F, B>,
                                       _ fc: Kind<F, C>,
                                       _ fd: Kind<F, D>,
-                                      _ fe: Kind<F, E>) -> Kind<F, (Z, B, C, D, E)> {
+                                      _ fe: Kind<F, E>) -> Kind<F, (Z, B, C, D, E)> where A == (Z, B, C, D, E) {
         return F.parMap(fa, fb, fc, fd, fe, { a, b, c, d, e in (a, b, c, d, e) })
     }
     
@@ -196,7 +196,7 @@ public extension Kind where F: Concurrent {
                                          _ fc: Kind<F, C>,
                                          _ fd: Kind<F, D>,
                                          _ fe: Kind<F, E>,
-                                         _ fg: Kind<F, G>) -> Kind<F, (Z, B, C, D, E, G)> {
+                                         _ fg: Kind<F, G>) -> Kind<F, (Z, B, C, D, E, G)> where A == (Z, B, C, D, E, G) {
         return F.parMap(fa, fb, fc, fd, fe, fg, { a, b, c, d, e, g in (a, b, c, d, e, g) })
     }
     
@@ -206,7 +206,7 @@ public extension Kind where F: Concurrent {
                                             _ fd: Kind<F, D>,
                                             _ fe: Kind<F, E>,
                                             _ fg: Kind<F, G>,
-                                            _ fh: Kind<F, H>) -> Kind<F, (Z, B, C, D, E, G, H)> {
+                                            _ fh: Kind<F, H>) -> Kind<F, (Z, B, C, D, E, G, H)> where A == (Z, B, C, D, E, G, H) {
         return F.parMap(fa, fb, fc, fd, fe, fg, fh, { a, b, c, d, e, g, h in (a, b, c, d, e, g, h) })
     }
     
@@ -217,7 +217,7 @@ public extension Kind where F: Concurrent {
                                                _ fe: Kind<F, E>,
                                                _ fg: Kind<F, G>,
                                                _ fh: Kind<F, H>,
-                                               _ fi: Kind<F, I>) -> Kind<F, (Z, B, C, D, E, G, H, I)> {
+                                               _ fi: Kind<F, I>) -> Kind<F, (Z, B, C, D, E, G, H, I)> where A == (Z, B, C, D, E, G, H, I) {
         return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, { a, b, c, d, e, g, h, i in (a, b, c, d, e, g, h, i) })
     }
     
@@ -229,7 +229,7 @@ public extension Kind where F: Concurrent {
                                                   _ fg: Kind<F, G>,
                                                   _ fh: Kind<F, H>,
                                                   _ fi: Kind<F, I>,
-                                                  _ fj: Kind<F, J>) -> Kind<F, (Z, B, C, D, E, G, H, I, J)> {
+                                                  _ fj: Kind<F, J>) -> Kind<F, (Z, B, C, D, E, G, H, I, J)> where A == (Z, B, C, D, E, G, H, I, J) {
         return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, { a, b, c, d, e, g, h, i, j in (a, b, c, d, e, g, h, i, j) })
     }
     
