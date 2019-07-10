@@ -26,18 +26,21 @@ public postfix func ^<F: Bracket, A>(_ value: ResourceOf<F, A>) -> Resource<F, A
     return Resource.fix(value)
 }
 
+// MARK: Instance of `Functor` for `Resource`
 extension ResourcePartial: Functor {
     public static func map<A, B>(_ fa: ResourceOf<F, A>, _ f: @escaping (A) -> B) -> ResourceOf<F, B> {
         return fa.flatMap { a in pure(f(a)) }
     }
 }
 
+// MARK: Instance of `Applicative` for `Resource`
 extension ResourcePartial: Applicative {
     public static func pure<A>(_ a: A) -> ResourceOf<F, A> {
         return RegularResource({ F.pure(a) }, { _, _ in F.pure(()) })
     }
 }
 
+// MARK: Instance of `Monad` for `Resource`
 extension ResourcePartial: Monad {
     public static func flatMap<A, B>(_ fa: ResourceOf<F, A>, _ f: @escaping (A) -> ResourceOf<F, B>) -> ResourceOf<F, B> {
         return BindResource<F, A, B>(fa, f)
@@ -50,12 +53,14 @@ extension ResourcePartial: Monad {
     }
 }
 
+// MARK: Instance of `Semigroup` for `Resource`
 extension Resource where A: Semigroup {
     public func combine(_ other: Resource<F, A>) -> Resource<F, A> {
         return flatMap { r in other.map { r2 in r.combine(r2) }^ }^
     }
 }
 
+// MARK: Instance of `Monoid` for `Resource`
 extension Resource where A: Monoid {
     public static func empty() -> Resource<F, A> {
         return pure(A.empty())^
@@ -96,6 +101,7 @@ private class BindResource<F: Bracket, A, B>: Resource<F, B> {
     }
 }
 
+// Syntax for `Resource`
 public extension Kind where F: Bracket {
     var asResource: Resource<F, A> {
         return RegularResource({ self }, { _ in F.pure(()) })
