@@ -5,6 +5,12 @@ public final class ForIO {}
 public final class IOPartial<E: Error>: Kind<ForIO, E> {}
 public typealias IOOf<E: Error, A> = Kind<IOPartial<E>, A>
 
+public typealias ForTask = IOPartial<Error>
+public typealias Task<A> = IO<Error, A>
+
+public typealias ForUIO = IOPartial<Never>
+public typealias UIO<A> = IO<Never, A>
+
 public class IO<E: Error, A>: IOOf<E, A> {
     public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
         return fa as! IO<E, A>
