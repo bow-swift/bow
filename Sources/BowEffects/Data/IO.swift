@@ -170,12 +170,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
     
     public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) {
-        do {
-            callback(Either.right(try unsafePerformIO(on: queue)))
-        } catch let error as E {
-            callback(Either.left(error))
-        } catch {
-            fail(error)
+        queue.async {
+            do {
+                callback(Either.right(try self.unsafePerformIO(on: queue)))
+            } catch let error as E {
+                callback(Either.left(error))
+            } catch {
+                self.fail(error)
+            }
         }
     }
     
