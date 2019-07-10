@@ -482,12 +482,14 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
     }
 }
 
+// MARK: Instance of `Functor` for `IO`
 extension IOPartial: Functor {
     public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
         return FMap(f, IO.fix(fa))
     }
 }
 
+// MARK: Instance of `Applicative` for `IO`
 extension IOPartial: Applicative {
     public static func pure<A>(_ a: A) -> IOOf<E, A> {
         return Pure(a)
@@ -497,6 +499,7 @@ extension IOPartial: Applicative {
 // MARK: Instance of `Selective` for `IO`
 extension IOPartial: Selective {}
 
+// MARK: Instance of `Monad` for `IO`
 extension IOPartial: Monad {
     public static func flatMap<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> IOOf<E, B>) -> IOOf<E, B> {
         return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
@@ -510,6 +513,7 @@ extension IOPartial: Monad {
     }
 }
 
+// MARK: Instance of `ApplicativeError` for `IO`
 extension IOPartial: ApplicativeError {
     public static func raiseError<A>(_ e: E) -> IOOf<E, A> {
         return RaiseError(e)
@@ -528,20 +532,24 @@ extension IOPartial: ApplicativeError {
     }
 }
 
+// MARK: Instance of `MonadError` for `IO`
 extension IOPartial: MonadError {}
 
+// MARK: Instance of `Bracket` for `IO`
 extension IOPartial: Bracket {
     public static func bracketCase<A, B>(_ fa: IOOf<E, A>, _ release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, _ use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
         return BracketIO<E, A, B>(fa^, release, use)
     }
 }
 
+// MARK: Instance of `MonadDefer` for `IO`
 extension IOPartial: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> IOOf<E, A>) -> IOOf<E, A> {
         return Pure(()).flatMap(fa)
     }
 }
 
+// MARK: Instance of `Async` for `IO`
 extension IOPartial: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> IOOf<E, ()>) -> IOOf<E, A> {
         return AsyncIO(procf)
@@ -552,6 +560,7 @@ extension IOPartial: Async {
     }
 }
 
+// MARK: Instance of `Concurrent` for `IO`
 extension IOPartial: Concurrent {
     public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
         return ParMap2<E, A, B, Z>(fa^, fb^, f)
@@ -562,12 +571,14 @@ extension IOPartial: Concurrent {
     }
 }
 
+// MARK: Instance of `Effect` for `IO`
 extension IOPartial: Effect {
     public static func runAsync<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
         return IOEffect(fa^, callback)
     }
 }
 
+// MARK: Instance of `UnsafeRun` for `IO`
 extension IOPartial: UnsafeRun {
     public static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
         return try fa()^.unsafePerformIO(on: queue)
