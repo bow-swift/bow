@@ -11,6 +11,9 @@ import BowOptics
 /*:
  # Automatic derivation of optics
  
+ {:.beginner}
+ beginner
+ 
  Writing optics for each data type may involve a lot of boilerplate. In some cases, Bow can help you generate the optics for your data types. This page will go through each optic that can be automatically generated for your data types. Nonetheless, you should read the section on *Writing your own optics* to get familiar with each optic and how they are implemented.
  
  As a running example, consider the following data types:

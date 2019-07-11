@@ -11,6 +11,9 @@ import BowOptics
 /*:
  # Composition
  
+ {:.beginner}
+ beginner
+ 
  Optics can compose to create more powerful optics and access deeply nested data structures in an seamless manner. The result of the composition of the 8 pairs of optics that are included in Bow is shown in the following table. Notice that not all combinations are possible for composition, and that some times the resulting optic is not the same as the optics that were composed.
  
  |               | **Iso**   | **Lens**  | **Prism** | **Optional** | **Getter** | **Setter** | **Fold** | **Traversal** |
