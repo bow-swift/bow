@@ -6,7 +6,7 @@ require 'json'
 # If you want a specific version to be served as default, set this value to the
 # branch/tag you want. Otherwise it will be the latest version on alphabetical order.
 # If there's no tags, then `master` branch content will be served at root path.
-$default_version = "master"
+$default_version = "0.5.0"
 
 # If you want to build the current branch (usually `master`) and serve it,
 # set the path/name in here. If you leave it empty no site will be built for it.
