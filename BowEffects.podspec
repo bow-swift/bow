@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowEffects"
-  s.version     = "0.4.0"
+  s.version     = "0.5.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowEffects provides classes to work with effects in a purely functional way."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
