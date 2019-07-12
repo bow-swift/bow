@@ -1,55 +1,103 @@
 import Foundation
 
+/// Witness for the `Eval<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForEval {}
+
+/// Higher-Kinded Type alias to improve readability over `Kind<ForEval, A>`.
 public typealias EvalOf<A> = Kind<ForEval, A>
 
+/// Eval is a data type that describes a potentially lazy computation that produces a value.
+///
+/// Eval has three different evaluation strategies:
+///     - Now: the computation is evaluated immediately.
+///     - Later: the computation is evaluated when it is needed (typically by calling `Eval.value()`), just once. This value is cached, so subsequent invocations do not trigger additional computations of the value.
+///     - Always: the computation is evaluated every time it is needed (typically by calling `Eval.value()`).
+///
+/// Now is an eager evaluation strategy, whereas Later and Always are lazy.
 public class Eval<A>: EvalOf<A> {
+    /// Creates an Eval value with a value that is immediately evaluated.
+    ///
+    /// - Parameter a: Value to be wrapped in the Eval.
+    /// - Returns: An Eval value.
     public static func now(_ a: A) -> Eval<A> {
         return Now<A>(a)
     }
 
+    /// Creates an Eval value that will be evaluated using the Later evaluation strategy.
+    ///
+    /// - Parameter f: Function producing the value to be wrapped in an Eval.
+    /// - Returns: An Eval value.
     public static func later(_ f: @escaping () -> A) -> Eval<A> {
         return Later<A>(f)
     }
 
+    /// Creates an Eval value that will be evaluated using the Always evaluation strategy.
+    ///
+    /// - Parameter f: Function producing the value to be wrapped in an Eval.
+    /// - Returns: An Eval value.
     public static func always(_ f: @escaping () -> A) -> Eval<A> {
         return Always<A>(f)
     }
 
+    /// Creates an Eval value that defers a computation that produces another Eval.
+    ///
+    /// - Parameter f: Function producing an Eval.
+    /// - Returns: An Eval value.
     public static func `defer`(_ f: @escaping () -> Eval<A>) -> Eval<A> {
         return Defer<A>(f)
     }
 
-    public static var Unit: Eval<()> {
-        return Now<()>(())
-    }
-
-    public static var True: Eval<Bool> {
-        return Now<Bool>(true)
-    }
-
-    public static var False: Eval<Bool> {
-        return Now<Bool>(false)
-    }
-
-    public static var Zero: Eval<Int> {
-        return Now<Int>(0)
-    }
-
-    public static var One: Eval<Int> {
-        return Now<Int>(1)
-    }
-
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to `Eval`.
     public static func fix(_ fa: EvalOf<A>) -> Eval<A> {
         return fa as! Eval<A>
     }
 
+    /// Computes the value wrapped in this Eval.
+    ///
+    /// - Returns: Value wrapped in this Eval.
     public func value() -> A {
         fatalError("Must be implemented by subclass")
     }
 
+    /// Provides an Eval that memoizes the result of its enclosed computation.
+    ///
+    /// - Returns: An Eval value.
     public func memoize() -> Eval<A> {
         fatalError("Must be implemented by subclass")
+    }
+}
+
+public extension Eval where A == () {
+    /// Provides a unit in an Eval.
+    static var unit: Eval<()> {
+        return Now<()>(())
+    }
+}
+
+public extension Eval where A == Bool {
+    /// Provides a true value in an Eval.
+    static var `true`: Eval<Bool> {
+        return Now<Bool>(true)
+    }
+    
+    /// Provides a false value in an Eval.
+    static var `false`: Eval<Bool> {
+        return Now<Bool>(false)
+    }
+}
+
+public extension Eval where A == Int {
+    /// Provides a zero value in an Eval.
+    static var zero: Eval<Int> {
+        return Now<Int>(0)
+    }
+    
+    /// Provides a one value in an Eval.
+    static var one: Eval<Int> {
+        return Now<Int>(1)
     }
 }
 
