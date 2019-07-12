@@ -74,7 +74,7 @@ public extension Cofree where S: Traverse {
 
     func cataM<B, M: Monad>(_ folder: @escaping (A, Kind<S, B>) -> Kind<M, B>, _ inclusion: FunctionK<ForEval, M>) -> Kind<M, B> {
         func loop(_ ev : Cofree<S, A>) -> Eval<Kind<M, B>> {
-            let looped = S.traverse(ev.tailForced(), { cof in  M.flatten(inclusion.invoke(Eval.`defer`({ loop(cof) }))) })
+            let looped = S.traverse(ev.tailForced(), { cof in  M.flatten(inclusion.invoke(Eval.defer({ loop(cof) }))) })
             let folded = M.flatMap(looped, { fb in folder(ev.head, fb) })
             return Eval.now(folded)
         }

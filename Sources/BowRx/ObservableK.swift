@@ -108,12 +108,12 @@ extension ForObservableK: Foldable {
     public static func foldRight<A, B>(_ fa: Kind<ForObservableK, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         func loop(_ fa: ObservableK<A>) -> Eval<B> {
             if let get = fa.value.blockingGet() {
-                return f(get, Eval.`defer` { loop(fa.value.skip(1).k()) } )
+                return f(get, Eval.defer { loop(fa.value.skip(1).k()) } )
             } else {
                 return b
             }
         }
-        return Eval.`defer` { loop(ObservableK.fix(fa)) }
+        return Eval.defer { loop(ObservableK.fix(fa)) }
     }
 }
 
