@@ -1,6 +1,7 @@
 import XCTest
 import SwiftCheck
 import Bow
+import BowLaws
 
 class MemoizationTest: XCTestCase {
 
@@ -13,7 +14,7 @@ class MemoizationTest: XCTestCase {
             return x + 1
         }
         
-        property("Memoized function is only called once for the same input") <- forAll(Int.arbitrary, self.positiveInts) { (input : Int, times : Int) in
+        property("Memoized function is only called once for the same input") <~ forAll(Int.arbitrary, self.positiveInts) { (input : Int, times : Int) in
             timesCalled = 0
             let memoizedFunction = memoize(longRunningOperation)
             
@@ -26,7 +27,7 @@ class MemoizationTest: XCTestCase {
     let smallInts = Int.arbitrary.suchThat { x in x > 0 && x < 20 }
     
     func testMemoizedRecursiveFunctionCachesResult() {
-        property("Memoized function is only called once for the same input") <- forAll(self.smallInts, self.positiveInts) { (input : Int, times : Int) in
+        property("Memoized function is only called once for the same input") <~ forAll(self.smallInts, self.positiveInts) { (input : Int, times : Int) in
             var timesCalled = Dictionary<Int, Int>()
             timesCalled[input] = 0
             

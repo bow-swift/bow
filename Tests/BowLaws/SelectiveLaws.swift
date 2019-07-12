@@ -9,7 +9,7 @@ public class SelectiveLaws<F: Selective & EquatableK> {
     }
 
     private static func identity() {
-        property("Identity") <- forAll { (x: Int) in
+        property("Identity") <~ forAll { (x: Int) in
             let input = F.pure(Either<Int, Int>.right(x))
             return F.select(input, F.pure(id)) ==
                 F.map(input) { x in x.fold(id, id) }
@@ -17,7 +17,7 @@ public class SelectiveLaws<F: Selective & EquatableK> {
     }
 
     private static func distributibity() {
-        property("Distributivity") <- forAll { (a: Int, b: ArrowOf<Int, Int>, c: ArrowOf<Int, Int>) in
+        property("Distributivity") <~ forAll { (a: Int, b: ArrowOf<Int, Int>, c: ArrowOf<Int, Int>) in
             let x = F.pure(Either<Int, Int>.right(a))
             let f = F.pure(b.getArrow)
             let g = F.pure(c.getArrow)
@@ -26,7 +26,7 @@ public class SelectiveLaws<F: Selective & EquatableK> {
     }
 
     private static func associativity() {
-        property("Associativity") <- forAll { (a: Int, b: ArrowOf<Int, Int>, c: ArrowOf<Int, Int>) in
+        property("Associativity") <~ forAll { (a: Int, b: ArrowOf<Int, Int>, c: ArrowOf<Int, Int>) in
             let x = F.pure(Either<Int, Int>.right(a))
             let y = F.pure(Either<Int, (Int) -> Int>.right(b.getArrow))
             let z = F.pure({ (_: Int) in c.getArrow })

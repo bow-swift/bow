@@ -11,7 +11,7 @@ public class BindingExpression<F: Monad> {
 infix operator <- : AssignmentPrecedence
 prefix operator |<-
 
-private func erased<F: Functor, A>(_ value: Kind<F, A>) -> Kind<F, Any> {
+internal func erased<F: Functor, A>(_ value: Kind<F, A>) -> Kind<F, Any> {
     return value.map { x in x as Any }
 }
 

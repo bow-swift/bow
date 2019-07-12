@@ -1,6 +1,7 @@
 import XCTest
 import SwiftCheck
 import Bow
+import BowLaws
 
 class PartialApplicationTest: XCTestCase {
     
@@ -9,7 +10,7 @@ class PartialApplicationTest: XCTestCase {
             return a
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int) in
             let g = a |> f
             return g == f(a)
         }
@@ -20,7 +21,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int) in
             let g = a |> f
             return g(b) == f(a, b)
         }
@@ -31,7 +32,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int) in
             let g = a |> f
             return g(b, c) == f(a, b, c)
         }
@@ -42,7 +43,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c + d
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int, d : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int, d : Int) in
             let g = a |> f
             return g(b, c, d) == f(a, b, c, d)
         }
@@ -53,7 +54,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c + d + e
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int) in
             let g = a |> f
             return g(b, c, d, e) == f(a, b, c, d, e)
         }
@@ -64,7 +65,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c + d + e + h
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int) in
             let g = a |> f
             return g(b, c, d, e, h) == f(a, b, c, d, e, h)
         }
@@ -75,7 +76,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c + d + e + h + i
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int, i : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int, i : Int) in
             let g = a |> f
             return g(b, c, d, e, h, i) == f(a, b, c, d, e, h, i)
         }
@@ -86,7 +87,7 @@ class PartialApplicationTest: XCTestCase {
             return a + b + c + d + e + h + i + j
         }
         
-        property("Partially applies one argument") <- forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int, i : Int, j : Int) in
+        property("Partially applies one argument") <~ forAll() { (a : Int, b : Int, c : Int, d : Int, e : Int, h : Int, i : Int, j : Int) in
             let g = a |> f
             return g(b, c, d, e, h, i, j) == f(a, b, c, d, e, h, i, j)
         }

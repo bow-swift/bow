@@ -20,6 +20,12 @@ public class BoundVar<F: Monad, A> {
     }
 }
 
+public extension Monad {
+    static func `var`<A>(_ type: A.Type) -> BoundVar<Self, A> {
+        return BoundVar.make()
+    }
+}
+
 private class ErasedBoundVar<F: Monad, A>: BoundVar<F, Any> {
     private var boundVar: BoundVar<F, A>
     

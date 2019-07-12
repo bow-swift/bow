@@ -9,19 +9,19 @@ public class EquatableLaws<A: Equatable & Arbitrary> {
     }
 
     private static func identity() {
-        property("Identity: Every object is equal to itself") <- forAll { (a: A) in
+        property("Identity: Every object is equal to itself") <~ forAll { (a: A) in
             return a == a
         }
     }
 
     private static func commutativity() {
-        property("Equality is commutative") <- forAll { (a: A, b: A) in
+        property("Equality is commutative") <~ forAll { (a: A, b: A) in
             return (a == b) == (b == a)
         }
     }
     
     private static func transitivity() {
-        property("Equality is transitive") <- forAll { (a: A, b: A, c: A) in
+        property("Equality is transitive") <~ forAll { (a: A, b: A, c: A) in
             // (a == b) && (b == c) --> (a == c)
             return not((a == b) && (b == c)) || (a == c)
         }

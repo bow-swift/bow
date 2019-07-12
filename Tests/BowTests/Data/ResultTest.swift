@@ -1,6 +1,7 @@
 import XCTest
 import SwiftCheck
 import Bow
+import BowLaws
 
 enum ResultError: Int, Error {
     case warning
@@ -16,13 +17,13 @@ extension ResultError: Arbitrary {
 
 class ResultTest: XCTestCase {
     func testResultEitherIsomorphism() {
-        property("Either and Result are isomorphic") <- forAll { (x: Either<ResultError, Int>) in
+        property("Either and Result are isomorphic") <~ forAll { (x: Either<ResultError, Int>) in
             return x.toResult().toEither() == x
         }
     }
     
     func testResultValidateIsomorphism() {
-        property("Validated and Result are isomorphic") <- forAll { (x: Validated<ResultError, Int>) in
+        property("Validated and Result are isomorphic") <~ forAll { (x: Validated<ResultError, Int>) in
             return x.toResult().toValidated() == x
         }
     }
