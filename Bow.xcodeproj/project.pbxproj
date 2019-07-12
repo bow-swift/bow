@@ -736,6 +736,20 @@
 			remoteGlobalIDString = "Bow::Bow";
 			remoteInfo = Bow;
 		};
+		11E7F5E722D8914F00C78F06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
+		11E7F5E922D891B600C78F06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
 		D653FC452067C58D00535EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -2340,6 +2354,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				11E7F5E822D8914F00C78F06 /* PBXTargetDependency */,
 				1191BD0322D4AF4C0052FEA8 /* PBXTargetDependency */,
 				1160D0F222D38E080010323A /* PBXTargetDependency */,
 				1160D0C022D38CEC0010323A /* PBXTargetDependency */,
@@ -2442,6 +2457,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				11E7F5EA22D891B600C78F06 /* PBXTargetDependency */,
 				11D97EEF219EBBA6008FC004 /* PBXTargetDependency */,
 				11D97EC4219EBAA1008FC004 /* PBXTargetDependency */,
 			);
@@ -3718,6 +3734,16 @@
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
 			targetProxy = 11E7188C219D82AE00B94845 /* PBXContainerItemProxy */;
+		};
+		11E7F5E822D8914F00C78F06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 11E7F5E722D8914F00C78F06 /* PBXContainerItemProxy */;
+		};
+		11E7F5EA22D891B600C78F06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 11E7F5E922D891B600C78F06 /* PBXContainerItemProxy */;
 		};
 		OBJ_299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
