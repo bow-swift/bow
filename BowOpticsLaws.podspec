@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
   s.source_files = "Tests/BowOpticsLaws/**/*.swift"
   s.dependency "Bow", "~> #{s.version}"
   s.dependency "BowOptics", "~> #{s.version}"
+  s.dependency "BowLaws", "~> #{s.version}"
   s.dependency "SwiftCheck", "~> 0.12.0"
   s.dependency "Nimble", "~> 8.0.1"
 end
