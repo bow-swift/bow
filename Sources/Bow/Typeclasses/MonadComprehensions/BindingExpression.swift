@@ -62,3 +62,7 @@ public func <-<F: Monad, A, B, C, D, E, G, H, I, J, K>(_ bounds: (BoundVar<F, A>
 public prefix func |<-<F: Monad, A>(_ fa: @autoclosure @escaping () -> Kind<F, A>) -> BindingExpression<F> {
     return BindingExpression(BoundVar(), fa >>> erased)
 }
+
+public prefix func |<-<F: Monad, A>(_ fa: @autoclosure @escaping () -> A) -> BindingExpression<F> {
+    return BindingExpression(BoundVar(), fa >>> F.pure)
+}
