@@ -45,13 +45,13 @@ class EitherTTest: XCTestCase {
     }
 
     func testOptionTConversion() {
-        property("Left converted to none") <- forAll { (x: Int) in
+        property("Left converted to none") <~ forAll { (x: Int) in
             let eitherT = EitherT<ForId, Int, Int>.left(x)
             let expected = OptionT<ForId, Int>.none()
             return eitherT.toOptionT() == expected
         }
         
-        property("Right converted to some") <- forAll { (x: Int) in
+        property("Right converted to some") <~ forAll { (x: Int) in
             let eitherT = EitherT<ForId, Int, Int>.right(x)
             let expected = OptionT<ForId, Int>.pure(x)
             return eitherT.toOptionT() == expected

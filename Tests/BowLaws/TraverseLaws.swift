@@ -11,14 +11,14 @@ public class TraverseLaws<F: Traverse & EquatableK & ArbitraryK> {
     }
     
     private static func identityTraverse() {
-        property("Identity traverse") <- forAll { (fa: KindOf<F, Int>, y: Int) in
+        property("Identity traverse") <~ forAll { (fa: KindOf<F, Int>, y: Int) in
             let f: (Int) -> Kind<ForId, Int> = { _ in Id<Int>(y) }
             return Id.fix(F.traverse(fa.value, f)).value == F.map(F.map(fa.value, f), { a in Id.fix(a).value })
         }
     }
     
     private static func sequentialComposition() {
-        property("Sequential composition") <- forAll { (f: ArrowOf<Int, Id<Int>>, g: ArrowOf<Int, Id<Int>>, x: KindOf<F, Int>) in
+        property("Sequential composition") <~ forAll { (f: ArrowOf<Int, Id<Int>>, g: ArrowOf<Int, Id<Int>>, x: KindOf<F, Int>) in
             let fa = x.value.traverse(f.getArrow)
             let composed = fa.map { a in a.traverse(g.getArrow) }^.value^.value
             let expected = x.value.traverse { a in f.getArrow(a).map(g.getArrow) }^.value.map { a in a.value }
@@ -27,7 +27,7 @@ public class TraverseLaws<F: Traverse & EquatableK & ArbitraryK> {
     }
     
     private static func parallelComposition() {
-        property("Parallel composition") <- forAll { (f: ArrowOf<Int, Id<Int>>, g: ArrowOf<Int, Id<Int>>, x: KindOf<F, Int>) in
+        property("Parallel composition") <~ forAll { (f: ArrowOf<Int, Id<Int>>, g: ArrowOf<Int, Id<Int>>, x: KindOf<F, Int>) in
             let actual = TupleK.fix(x.value.traverse { a in TupleK((f.getArrow(a), g.getArrow(a))) })
             let expected = TupleK((x.value.traverse(f.getArrow)^, x.value.traverse(g.getArrow)^))
             return actual == expected
@@ -35,7 +35,7 @@ public class TraverseLaws<F: Traverse & EquatableK & ArbitraryK> {
     }
     
     private static func foldMapDerived() {
-        property("foldMap derived") <- forAll { (f: ArrowOf<Int, Int>, fa: KindOf<F, Int>) in
+        property("foldMap derived") <~ forAll { (f: ArrowOf<Int, Int>, fa: KindOf<F, Int>) in
             let traversed = fa.value.traverse { a in Const<Int, Int>(f.getArrow(a)) }^.value
             let mapped = fa.value.foldMap(f.getArrow)
             return traversed == mapped

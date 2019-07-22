@@ -54,8 +54,8 @@ let package = Package(
 
         // Type class Laws
         .testTarget(name:"BowLaws",        dependencies: ["Bow", "BowGenerators", "SwiftCheck", "Nimble"]),
-        .testTarget(name:"BowEffectsLaws", dependencies: ["Bow", "BowEffects", "SwiftCheck", "Nimble"]),
-        .testTarget(name:"BowOpticsLaws",  dependencies: ["Bow", "BowOptics", "SwiftCheck", "Nimble"]),
+        .testTarget(name:"BowEffectsLaws", dependencies: ["Bow", "BowEffects", "BowLaws", "SwiftCheck", "Nimble"]),
+        .testTarget(name:"BowOpticsLaws",  dependencies: ["Bow", "BowOptics", "BowLaws", "SwiftCheck", "Nimble"]),
 
         // Generators for Property-based Testing
         .testTarget(name: "BowGenerators",              dependencies: ["Bow", "SwiftCheck"]),
