@@ -1,14 +1,14 @@
 import Foundation
 import SwiftCheck
 import Bow
-import BowEffects
+@testable import BowEffects
 
 public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     
     public static func check() {
         success()
         error()
-        continueOnJumpsThreads()
+        continueOnJumpsQueues()
         asyncConstructor()
         continueOnComprehension()
         asyncCanBeDerivedFromAsyncF()
@@ -27,16 +27,17 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
         }
     }
 
-    private static func continueOnJumpsThreads() {
-        property("continueOnJumpsThreads") <- forAll { (id1: String, id2: String) in
+    private static func nonEmpty() -> Gen<String> { return String.arbitrary.suchThat { str in str.count > 5 } }
+    private static func continueOnJumpsQueues() {
+        property("continueOnJumpsThreads") <- forAll(nonEmpty(), nonEmpty()) { (id1: String, id2: String) in
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
-
+            
             return F.pure(())
                 .continueOn(queue1)
-                .map { _ in currentQueueLabel }
+                .map { _ in QueueLabel().get }
                 .continueOn(queue2)
-                .map { x in x + currentQueueLabel } == F.pure(id1 + id2)
+                .map { x in x + QueueLabel().get } == F.pure(id1 + id2)
         }
     }
 
@@ -45,8 +46,8 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
 
-            return F.delay(queue1) { currentQueueLabel }
-                .flatMap { x in F.delay(queue2) { x + currentQueueLabel } }
+            return F.later(queue1) { currentQueueLabel() }
+                .flatMap { x in F.later(queue2) { x + currentQueueLabel() } }
                 == F.pure(id1 + id2)
         }
     }
@@ -58,9 +59,9 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let fa = F.pure(())
             return F.binding(
                 { fa.continueOn(queue1) },
-                { _ in F.pure(currentQueueLabel) },
+                { _ in F.pure(self.currentQueueLabel()) },
                 { _, b in F.pure(b).continueOn(queue2) },
-                { _, _, c in F.pure(c + currentQueueLabel) }
+                { _, _, c in F.pure(c + currentQueueLabel()) }
             ) == F.pure(id1 + id2)
         }
     }
@@ -74,7 +75,13 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
         }
     }
 
-    private static var currentQueueLabel: String {
-        return OperationQueue.current?.underlyingQueue?.label ?? ""
+    private static func currentQueueLabel() -> String {
+        return DispatchQueue.currentLabel
+    }
+}
+
+struct QueueLabel {
+    var get: String {
+        return DispatchQueue.currentLabel
     }
 }

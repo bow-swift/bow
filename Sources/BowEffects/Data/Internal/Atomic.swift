@@ -49,6 +49,7 @@ final class Atomic<A> {
         return newValue!
     }
 
+    @discardableResult
     func setIfNil<AA>(_ newValue: AA) -> Bool where A == AA? {
         var result = false
         queue.sync {

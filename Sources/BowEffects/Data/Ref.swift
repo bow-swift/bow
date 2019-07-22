@@ -47,7 +47,7 @@ public class Ref<F, A> {
 }
 
 public extension Ref where F: MonadDefer, A: Equatable {
-    static func later(_ f: @escaping () -> A) -> Kind<F, Ref<F, A>> {
+    static func of(_ f: @autoclosure @escaping () -> A) -> Kind<F, Ref<F, A>> {
         return F.delay { unsafe(f()) }
     }
     

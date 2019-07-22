@@ -20,10 +20,10 @@ public extension Async {
     }
     
     static func `defer`<A>(_ queue: DispatchQueue, _ f: @escaping () -> Kind<Self, A>) -> Kind<Self, A> {
-        return pure(()).continueOn(queue).flatMap { Self.defer(f) }
+        return pure(()).continueOn(queue).flatMap(f)
     }
     
-    static func delay<A>(_ queue: DispatchQueue, _ f: @escaping () throws -> A) -> Kind<Self, A> {
+    static func later<A>(_ queue: DispatchQueue, _ f: @escaping () throws -> A) -> Kind<Self, A> {
         return Self.defer(queue) {
             do {
                 return pure(try f())
@@ -64,7 +64,7 @@ public extension Kind where F: Async {
     }
     
     static func delay(_ queue: DispatchQueue, _ f: @escaping () throws -> A) -> Kind<F, A> {
-        return F.delay(queue, f)
+        return F.later(queue, f)
     }
     
     static func delayOrRaise<A>(_ queue: DispatchQueue, _ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
@@ -80,7 +80,7 @@ public extension Kind where F: Async {
 
 public extension DispatchQueue {
     func shift<F: Async>() -> Kind<F, ()> {
-        return F.delay(self, constant(()))
+        return F.later(self, constant(()))
     }
 }
 
