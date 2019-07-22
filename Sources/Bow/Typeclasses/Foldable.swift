@@ -141,8 +141,8 @@ public extension Foldable {
     ///   - predicate: Predicate.
     /// - Returns: A boolean value indicating if any elements in the structure match the predicate.
     static func exists<A>(_ fa: Kind<Self, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
-        return foldRight(fa, Eval<Bool>.False, { a, lb in
-            predicate(a) ? Eval<Bool>.True : lb
+        return foldRight(fa, Eval.false, { a, lb in
+            predicate(a) ? Eval.true : lb
         }).value()
     }
 
@@ -153,8 +153,8 @@ public extension Foldable {
     ///   - predicate: Predicate.
     /// - Returns: A boolean value indicating if all elements in the structure match the predicate.
     static func forall<A>(_ fa: Kind<Self, A>, _ predicate: @escaping (A) -> Bool) -> Bool {
-        return foldRight(fa, Eval<Bool>.True, { a, lb in
-            predicate(a) ? lb : Eval<Bool>.False
+        return foldRight(fa, Eval.true, { a, lb in
+            predicate(a) ? lb : Eval.false
         }).value()
     }
 
@@ -163,7 +163,7 @@ public extension Foldable {
     /// - Parameter fa: Structure of values.
     /// - Returns: `false` if the structure contains any value, `true` otherwise.
     static func isEmpty<A>(_ fa: Kind<Self, A>) -> Bool {
-        return foldRight(fa, Eval<Bool>.True, { _, _ in Eval<Bool>.False }).value()
+        return foldRight(fa, Eval.true, { _, _ in Eval.false }).value()
     }
 
     /// Checks if a structure of values is not empty.

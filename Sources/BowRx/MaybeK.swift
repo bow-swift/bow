@@ -82,7 +82,7 @@ extension ForMaybeK: Foldable {
     }
 
     public static func foldRight<A, B>(_ fa: Kind<ForMaybeK, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Eval.deferEvaluation { MaybeK.fix(fa).fold(constant(b), { a in f(a, b) }) }
+        return Eval.defer { MaybeK.fix(fa).fold(constant(b), { a in f(a, b) }) }
     }
 }
 

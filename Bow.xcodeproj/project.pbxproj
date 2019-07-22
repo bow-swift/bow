@@ -217,6 +217,7 @@
 		11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
+		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
 		11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		8BA0F386217E2D3400969984 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -889,6 +890,7 @@
 		11E7188A219D81B300B94845 /* Bow-Free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Free-Info.plist"; sourceTree = "<absolute>"; };
 		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
 		11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Laws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Laws-Info.plist"; sourceTree = "<absolute>"; };
+		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
 		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
 		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
@@ -1326,6 +1328,7 @@
 				112097CB22A819E9007F3D9C /* Day+Gen.swift */,
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
 				112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */,
+				11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */,
 				112097B422A7F21F007F3D9C /* Id+Gen.swift */,
 				112097B822A7FAF6007F3D9C /* Ior+Gen.swift */,
 				112097D122A8FFC0007F3D9C /* Moore+Gen.swift */,
@@ -3015,6 +3018,7 @@
 				112097B322A7F17F007F3D9C /* Const+Gen.swift in Sources */,
 				112097C922A80870007F3D9C /* ArbitraryK.swift in Sources */,
 				112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */,
+				11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

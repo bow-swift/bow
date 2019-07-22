@@ -208,10 +208,10 @@ extension ForArrayK: Foldable {
             if lkw.array.isEmpty {
                 return b
             } else {
-                return f(lkw.array[0], Eval.deferEvaluation({ loop(ArrayK([A](lkw.array.dropFirst())))  }))
+                return f(lkw.array[0], Eval.defer({ loop(ArrayK([A](lkw.array.dropFirst())))  }))
             }
         }
-        return Eval.deferEvaluation({ loop(ArrayK.fix(fa)) })
+        return Eval.defer({ loop(ArrayK.fix(fa)) })
     }
 }
 
