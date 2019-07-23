@@ -17,6 +17,14 @@ class MonadComprehension<F: Monad> {
     }
 }
 
+/// Monad comprehension.
+///
+/// Chains multiple binding expressions in imperative-style syntax by using the `flatMap` operation of the contextual `Monad`, and yields a final result.
+///
+/// - Parameters:
+///   - instructions: A variable number of binding expressions.
+///   - value: Value to be yield by the monad comprehension.
+/// - Returns: An effect resulting from the chaining of all the effects included in this monad comprehension.
 public func binding<F: Monad, A>(_ instructions: BindingExpression<F>..., yield value: @autoclosure @escaping () -> A) -> Kind<F, A> {
     return MonadComprehension<F>.buildBlock(instructions, yield: value)
 }

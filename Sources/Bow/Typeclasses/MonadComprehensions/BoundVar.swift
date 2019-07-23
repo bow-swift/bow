@@ -1,6 +1,10 @@
+/// A bound variable is a variable to be used in a monad comprehesion to bind the produced values by a monadic effect.
 public class BoundVar<F: Monad, A> {
     private var value: A? = nil
     
+    /// Makes a bound variable.
+    ///
+    /// - Returns: A bound variable.
     public static func make() -> BoundVar<F, A> {
         return BoundVar<F, A>()
     }
@@ -11,6 +15,9 @@ public class BoundVar<F: Monad, A> {
         self.value = value
     }
     
+    /// Obtains the value that has been bound to this variable.
+    ///
+    /// If no value has been bound to the variable when this property is invoked, a fatal error is triggered.
     public var get: A {
         return value!
     }
@@ -20,13 +27,22 @@ public class BoundVar<F: Monad, A> {
     }
 }
 
+// MARK: Creation of variables for Monad Comprehensions
 public extension Monad {
+    /// Creates a bound variable in this monadic context for the specified type.
+    ///
+    /// - Parameter type: Type of the variable.
+    /// - Returns: A bound variable.
     static func `var`<A>(_ type: A.Type) -> BoundVar<Self, A> {
         return BoundVar.make()
     }
 }
 
+// MARK: Creation of variables for Monad Comprehensions
 public extension Kind where F: Monad {
+    /// Creates a bound variable in the monadic context of this kind for the specified type.
+    ///
+    /// - Returns: A bound variable.
     static func `var`() -> BoundVar<F, A> {
         return F.var(A.self)
     }
