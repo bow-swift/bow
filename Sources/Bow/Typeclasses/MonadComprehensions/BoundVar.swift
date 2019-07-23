@@ -26,6 +26,12 @@ public extension Monad {
     }
 }
 
+public extension Kind where F: Monad {
+    static func `var`() -> BoundVar<F, A> {
+        return F.var(A.self)
+    }
+}
+
 private class ErasedBoundVar<F: Monad, A>: BoundVar<F, Any> {
     private var boundVar: BoundVar<F, A>
     

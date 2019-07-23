@@ -64,10 +64,10 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
             let fc = F.pure(c)
             let fd = F.pure(d)
             
-            let x = F.var(Int.self)
-            let y = F.var(Int.self)
-            let z = F.var(Int.self)
-            let w = F.var(Int.self)
+            let x = Kind<F, Int>.var()
+            let y = Kind<F, Int>.var()
+            let z = Kind<F, Int>.var()
+            let w = Kind<F, Int>.var()
             
             let result = binding(
                 x <-- fa,
