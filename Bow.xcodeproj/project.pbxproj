@@ -165,6 +165,7 @@
 		11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDCF22E5C79F00FF7821 /* BindingOperator.swift */; };
 		11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */; };
 		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
+		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -876,6 +877,7 @@
 		11A5FDCF22E5C79F00FF7821 /* BindingOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingOperator.swift; sourceTree = "<group>"; };
 		11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBindingExpression.swift; sourceTree = "<group>"; };
+		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1562,6 +1564,7 @@
 				1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */,
 				11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */,
 				11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */,
+				11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */,
 			);
 			path = MonadComprehensions;
 			sourceTree = "<group>";
@@ -3440,6 +3443,7 @@
 				8BA0F50B217E2E9200969984 /* OptionT.swift in Sources */,
 				8BA0F57F217E2E9200969984 /* Either.swift in Sources */,
 				11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */,
+				11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */,
 				8BA0F5EF217E2E9200969984 /* Contravariant.swift in Sources */,
 				8BA0F5BB217E2E9200969984 /* Validated.swift in Sources */,
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
