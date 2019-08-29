@@ -1,6 +1,6 @@
 import XCTest
 import Nimble
-@testable import BowLaws
+import BowLaws
 import Bow
 
 extension DayPartial: EquatableK where F == ForId, G == ForId {

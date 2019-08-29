@@ -2,6 +2,7 @@ import Foundation
 import SwiftCheck
 import Bow
 import BowEffects
+import BowLaws
 import Nimble
 
 public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & Equatable & Error {
@@ -21,37 +22,37 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
     }
 
     private static func delayConstantEqualsPure() {
-        property("delayConstantEqualsPure") <- forAll { (x: Int) in
+        property("delayConstantEqualsPure") <~ forAll { (x: Int) in
             return F.delay { x } == F.pure(x)
         }
     }
 
     private static func deferConstantEqualsPure() {
-        property("deferConstantEqualsPure") <- forAll { (x: Int) in
+        property("deferConstantEqualsPure") <~ forAll { (x: Int) in
             return F.defer { F.pure(x) } == F.pure(x)
         }
     }
 
     private static func delayOrRaiseConstantRightEqualsPure() {
-        property("delayOrRaiseConstantRightEqualsPure") <- forAll { (x: Int) in
+        property("delayOrRaiseConstantRightEqualsPure") <~ forAll { (x: Int) in
             return F.delayOrRaise { .right(x) } == F.pure(x)
         }
     }
 
     private static func delayOrRaiseConstantLeftEqualsRaiseError() {
-        property("delayOrRaiseConstantLeftEqualsRaiseError") <- forAll { (e: F.E) in
+        property("delayOrRaiseConstantLeftEqualsRaiseError") <~ forAll { (e: F.E) in
             return F.delayOrRaise { .left(e) } == Kind<F, Int>.raiseError(e)
         }
     }
 
     private static func delayThrowEqualsRaiseError() {
-        property("delayThrowEqualsRaiseError") <- forAll { (e: F.E) in
+        property("delayThrowEqualsRaiseError") <~ forAll { (e: F.E) in
             return F.delay { throw e } == Kind<F, Int>.raiseError(e)
         }
     }
 
     private static func propagateErrorsThroughBind() {
-        property("propagateErrorsThroughBind") <- forAll { (e: F.E) in
+        property("propagateErrorsThroughBind") <~ forAll { (e: F.E) in
             return F.delay { throw e }.flatMap(F.pure) == Kind<F, Int>.raiseError(e)
         }
     }

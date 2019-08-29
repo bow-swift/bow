@@ -1,22 +1,22 @@
 PODS:
-  - Bow (0.4.0)
-  - BowBrightFutures (0.4.0):
-    - Bow (~> 0.4.0)
-    - BowEffects (~> 0.4.0)
+  - Bow (0.5.0)
+  - BowBrightFutures (0.5.0):
+    - Bow (~> 0.5.0)
+    - BowEffects (~> 0.5.0)
     - BrightFutures (~> 8.0.0)
-  - BowEffects (0.4.0):
-    - Bow (~> 0.4.0)
-  - BowFree (0.4.0):
-    - Bow (~> 0.4.0)
-  - BowGeneric (0.4.0):
-    - Bow (~> 0.4.0)
-  - BowOptics (0.4.0):
-    - Bow (~> 0.4.0)
-  - BowRecursionSchemes (0.4.0):
-    - Bow (~> 0.4.0)
-  - BowRx (0.4.0):
-    - Bow (~> 0.4.0)
-    - BowEffects (~> 0.4.0)
+  - BowEffects (0.5.0):
+    - Bow (~> 0.5.0)
+  - BowFree (0.5.0):
+    - Bow (~> 0.5.0)
+  - BowGeneric (0.5.0):
+    - Bow (~> 0.5.0)
+  - BowOptics (0.5.0):
+    - Bow (~> 0.5.0)
+  - BowRecursionSchemes (0.5.0):
+    - Bow (~> 0.5.0)
+  - BowRx (0.5.0):
+    - Bow (~> 0.5.0)
+    - BowEffects (~> 0.5.0)
     - RxSwift (~> 5.0.0)
   - BrightFutures (8.0.0)
   - RxSwift (5.0.0)
@@ -55,17 +55,17 @@ EXTERNAL SOURCES:
     :path: "../.."
 
 SPEC CHECKSUMS:
-  Bow: c52be0840aa176b9a45f1f772efa52777bbd8288
-  BowBrightFutures: cbe827092c0aabf1199766ffddf4db83a66ad72c
-  BowEffects: 47f37c306eff490ab771136e0cb148afcc6c542c
-  BowFree: 2349a3d870aeb49caf3df59d506cff712e3ff1c4
-  BowGeneric: e25e63851ed2f55d64055ece34021876c84c60b7
-  BowOptics: e17a21fbebffe17e6a7997a6d1bafb3e303fdac4
-  BowRecursionSchemes: c7ce26acdfdbb529c9d973ea6342e8cd4b886ee7
-  BowRx: 872b09d0b26d42e56c40d04121d6fc7c7e2a639c
+  Bow: 74386868e5d013de697c1996b0f3f02081087063
+  BowBrightFutures: a487fc1204308a0b77c6bf6602223cc759197212
+  BowEffects: 9c0f25efbb38cdf6a7b0c2b59932a0202ef03108
+  BowFree: 1103ce271b8462df127bbc9d82d65cd5122f907b
+  BowGeneric: c8b7f796b547a2c9476247a035de45519e9ca1ab
+  BowOptics: 47261ee07a7a123bced56956140365f4f97a760a
+  BowRecursionSchemes: 445661b658f4c086116b9a6715543eea9bc30c58
+  BowRx: 6d01527d1da23d8d2f1403616c755c24b3177b83
   BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
 PODFILE CHECKSUM: 0fdd192b8f28a6797f9bd131a05f2e2bce19d4c1
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.7.4

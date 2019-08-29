@@ -65,4 +65,4 @@ _site
 **/*/nef
 
 ## Needed due to a bug in GH Pages Travis/Jekyll process
-ffitarget.h
+**/*/ffitarget.h

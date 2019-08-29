@@ -2,14 +2,14 @@ import XCTest
 import Bow
 import BowFree
 import BowFreeGenerators
-@testable import BowLaws
+import BowLaws
 
 fileprivate final class ForOps {}
 
 extension ForOps: EquatableK {
-    static func eq<A>(_ lhs: Kind<ForOps, A>, _ rhs: Kind<ForOps, A>) -> Bool where A : Equatable {
-        let x = lhs as! Ops<A>
-        let y = rhs as! Ops<A>
+    static func eq<A: Equatable>(_ lhs: Kind<ForOps, A>, _ rhs: Kind<ForOps, A>) -> Bool {
+        let x = lhs^
+        let y = rhs^
         switch (x, y) {
         case (let vx as Value, let vy as Value): return vx.a == vy.a
         case (let ax as Add, let ay as Add): return ax.a == ay.a && ax.b == ay.b
@@ -70,9 +70,16 @@ private class Subtract: Ops<Int> {
     }
 }
 
-fileprivate let program = Free.fix(Free<ForOps, Int>.binding({ Ops<Any>.value(10) },
-                                                           { value in Ops<Any>.add(value, 10) },
-                                                           { _ , added in Ops<Any>.subtract(added, 50) }))
+fileprivate func program() -> Free<ForOps, Int> {
+    let value = FreePartial<ForOps>.var(Int.self)
+    let added = FreePartial<ForOps>.var(Int.self)
+    let subtracted = FreePartial<ForOps>.var(Int.self)
+    return binding(
+        value <- Ops<Any>.value(10),
+        added <- Ops<Any>.add(value.get, 10),
+        subtracted <- Ops<Any>.subtract(added.get, 50),
+        yield: subtracted.get)^
+}
 
 private class OptionInterpreter: FunctionK<ForOps, ForOption> {
     override func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
@@ -108,8 +115,8 @@ extension FreePartial: EquatableK where S: Monad & EquatableK {
 
 class FreeTest: XCTestCase {
     func testInterpretsFreeProgram() {
-        let x = program.foldMapK(OptionInterpreter())
-        let y = program.foldMapK(IdInterpreter())
+        let x = program().foldMapK(OptionInterpreter())
+        let y = program().foldMapK(IdInterpreter())
         XCTAssertEqual(x, Option.some(-30))
         XCTAssertEqual(y, Id.pure(-30))
     }

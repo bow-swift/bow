@@ -27,7 +27,6 @@
 }
 
 #sidebar-wrapper {
-  // background: darken($brand-primary, 1%);
   background-image:
     linear-gradient(
       to bottom,
@@ -44,6 +43,14 @@
 
   .sidebar-toggle {
     display: none;
+  }
+
+  div[id$='version-dropdown'] {
+    .button {
+      width: 100%;
+      padding: ($base-point-grid * 2) 0;
+      border-radius: 0;
+    }
   }
 }
 

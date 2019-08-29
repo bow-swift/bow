@@ -1,6 +1,6 @@
 import XCTest
 import SwiftCheck
-@testable import BowLaws
+import BowLaws
 import Bow
 
 class NonEmptyArrayTest: XCTestCase {
@@ -53,15 +53,15 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testConcatenation() {
-        property("The length of the concatenation is equal to the sum of lenghts") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
+        property("The length of the concatenation is equal to the sum of lenghts") <~ forAll { (a: NEA<Int>, b: NEA<Int>) in
             return a.count + b.count == (a + b).count
         }
         
-        property("Adding one element increases length in one") <- forAll { (nea: NEA<Int>, element: Int) in
+        property("Adding one element increases length in one") <~ forAll { (nea: NEA<Int>, element: Int) in
             return (nea + element).count == nea.count + 1
         }
         
-        property("Result of concatenation contains all items from the original arrays") <- forAll { (a: NEA<Int>, b: NEA<Int>) in
+        property("Result of concatenation contains all items from the original arrays") <~ forAll { (a: NEA<Int>, b: NEA<Int>) in
             let concatenation = a + b
             return concatenation.containsAll(elements: a.all()) &&
                     concatenation.containsAll(elements: b.all())

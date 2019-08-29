@@ -10,7 +10,6 @@
 		0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		0DE29CA121A7258100DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BED422C22DD2002C3F78 /* IO.swift */; };
-		1104BEDD22C22DEC002C3F78 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BED522C22DD2002C3F78 /* Atomic.swift */; };
 		1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE022C22E47002C3F78 /* UnsafeRun.swift */; };
 		1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE122C22E47002C3F78 /* Bracket.swift */; };
 		1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE222C22E47002C3F78 /* Concurrent.swift */; };
@@ -24,7 +23,6 @@
 		1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FB224E332900507B54 /* Coproduct9.swift */; };
 		1116D500224E342200507B54 /* Coproduct10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FF224E342200507B54 /* Coproduct10.swift */; };
 		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
-		112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097AE22A7EE46007F3D9C /* Either+Gen.swift */; };
 		112097B122A7F0E6007F3D9C /* ArrayK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */; };
@@ -139,31 +137,39 @@
 		112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF322BBC0390032F675 /* AutoFold.swift */; };
 		112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF522BBC17C0032F675 /* AutoTraversal.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
-		114545D7225F805500EA8755 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		114545D9225F935300EA8755 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		114D4EA622C3692600BEE850 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D4EA522C3692600BEE850 /* Ref.swift */; };
-		114D4EB122C3A97500BEE850 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D4EB022C3A97500BEE850 /* Dictionary+Extensions.swift */; };
+		1160D0E022D38CEC0010323A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
+		1160D0E122D38CEC0010323A /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
+		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
+		1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
+		1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
+		1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */; };
+		1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
+		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
-		117C56D422CE0D380022C468 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C56D322CE0D380022C468 /* DispatchQueue+Extensions.swift */; };
-		117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
-		117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
 		117DC0F622AE504500EF65F0 /* ObservableK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */; };
-		117DC10122AE522000EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */; };
-		117DC12922AE563900EF65F0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		117DC12A22AE563900EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC13622AE578A00EF65F0 /* Free+Gen.swift */; };
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
 		1186E15722BA8A77001F8A5D /* Cons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15622BA8A77001F8A5D /* Cons.swift */; };
 		1186E15922BA8ECA001F8A5D /* Snoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15822BA8ECA001F8A5D /* Snoc.swift */; };
+		1191BD0A22D77C510052FEA8 /* BoundVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0922D77C510052FEA8 /* BoundVar.swift */; };
+		1191BD0C22D77FED0052FEA8 /* BindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */; };
+		1191BD0E22D784630052FEA8 /* MonadComprenhensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */; };
+		1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0F22D78C0A0052FEA8 /* PropertyOperatorOverload.swift */; };
+		1191BD1422D78F760052FEA8 /* BindingOperatorOverload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD1122D78F640052FEA8 /* BindingOperatorOverload.swift */; };
 		11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A435602212C59F000C5E31 /* EquatableLaws.swift */; };
 		11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4356322131ACC000C5E31 /* BoolInstances.swift */; };
+		11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDCF22E5C79F00FF7821 /* BindingOperator.swift */; };
+		11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */; };
+		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
+		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
@@ -215,20 +221,19 @@
 		11E7180E219D7ECC00B94845 /* SetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E1217E2DEF00969984 /* SetterTest.swift */; };
 		11E7180F219D7ECC00B94845 /* TestDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E7217E2DEF00969984 /* TestDomain.swift */; };
 		11E71810219D7ECC00B94845 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E2217E2DEF00969984 /* TraversalTest.swift */; };
-		11E71811219D7ECC00B94845 /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
-		11E71812219D7ECC00B94845 /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
-		11E71813219D7ECC00B94845 /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
-		11E71814219D7ECC00B94845 /* PrismLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */; };
-		11E71815219D7ECC00B94845 /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
-		11E71816219D7ECC00B94845 /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		11E7188E219D82BD00B94845 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F440217E2E9200969984 /* Cofree.swift */; };
 		11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
-		11EBC09222CCFDB800A4400C /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBC08F22CCFD5A00A4400C /* BracketLaws.swift */; };
-		11EBC09322CCFDB800A4400C /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EBC08E22CCFD5A00A4400C /* MonadDeferLaws.swift */; };
+		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
 		11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
+		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
+		11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C94231816AD00BD1E87 /* Atomic.swift */; };
+		11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */; };
+		11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */; };
+		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
+		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
 		8BA0F386217E2D3400969984 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		8BA0F387217E2D3400969984 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
@@ -536,13 +541,6 @@
 			remoteGlobalIDString = 117DC0F722AE522000EF65F0;
 			remoteInfo = "Bow-BrightFuturesGenerators";
 		};
-		1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
-			remoteInfo = "Bow-EffectsGenerators";
-		};
 		1126CA8422B0DE9E00F840CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -556,6 +554,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 117DC0DC22AE4D6C00EF65F0;
 			remoteInfo = "Bow-RxGenerators";
+		};
+		1160D0C122D38CEC0010323A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		1160D0F122D38E080010323A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11E71683219D704F00B94845;
+			remoteInfo = "Bow-Optics";
+		};
+		1160D0F322D38E2A0010323A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1160D0BD22D38CEC0010323A;
+			remoteInfo = "Bow-OpticsLaws";
 		};
 		117DC0B422AE492700EF65F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -655,7 +674,14 @@
 			remoteGlobalIDString = 11E71817219D81B300B94845;
 			remoteInfo = "Bow-Free";
 		};
-		1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */ = {
+		1191BD0022D4928D0052FEA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
+			remoteInfo = "Bow-EffectsGenerators";
+		};
+		1191BD0222D4AF4C0052FEA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -724,6 +750,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = "Bow::Bow";
 			remoteInfo = Bow;
+		};
+		11E7F5E722D8914F00C78F06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
+		11E7F5E922D891B600C78F06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
 		};
 		D653FC452067C58D00535EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -823,10 +863,9 @@
 		112D0CEF22BB88F20032F675 /* Result+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Optics.swift"; sourceTree = "<group>"; };
 		112D0CF322BBC0390032F675 /* AutoFold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFold.swift; sourceTree = "<group>"; };
 		112D0CF522BBC17C0032F675 /* AutoTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoTraversal.swift; sourceTree = "<group>"; };
-		114D4EA522C3692600BEE850 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
-		114D4EB022C3A97500BEE850 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
-		117C56D322CE0D380022C468 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -844,8 +883,17 @@
 		1186E14E22BA38CD001F8A5D /* Index+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Index+Optics.swift"; sourceTree = "<group>"; };
 		1186E15622BA8A77001F8A5D /* Cons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cons.swift; sourceTree = "<group>"; };
 		1186E15822BA8ECA001F8A5D /* Snoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snoc.swift; sourceTree = "<group>"; };
+		1191BD0922D77C510052FEA8 /* BoundVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundVar.swift; sourceTree = "<group>"; };
+		1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExpression.swift; sourceTree = "<group>"; };
+		1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadComprenhensions.swift; sourceTree = "<group>"; };
+		1191BD0F22D78C0A0052FEA8 /* PropertyOperatorOverload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyOperatorOverload.swift; sourceTree = "<group>"; };
+		1191BD1122D78F640052FEA8 /* BindingOperatorOverload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingOperatorOverload.swift; sourceTree = "<group>"; };
 		11A435602212C59F000C5E31 /* EquatableLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableLaws.swift; sourceTree = "<group>"; };
 		11A4356322131ACC000C5E31 /* BoolInstances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstances.swift; sourceTree = "<group>"; };
+		11A5FDCF22E5C79F00FF7821 /* BindingOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingOperator.swift; sourceTree = "<group>"; };
+		11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateBindingExpression.swift; sourceTree = "<group>"; };
+		11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBindingExpression.swift; sourceTree = "<group>"; };
+		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -866,9 +914,14 @@
 		11E7188A219D81B300B94845 /* Bow-Free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Free-Info.plist"; sourceTree = "<absolute>"; };
 		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
 		11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Laws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Laws-Info.plist"; sourceTree = "<absolute>"; };
-		11EBC08E22CCFD5A00A4400C /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
-		11EBC08F22CCFD5A00A4400C /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
+		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
 		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
+		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
+		11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
+		11F41C94231816AD00BD1E87 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		11F41C9E231818AE00BD1E87 /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
+		11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
 		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -1088,7 +1141,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				112097A322A7EBC7007F3D9C /* Nimble.framework in Frameworks */,
 				112097A422A7EBC7007F3D9C /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1195,11 +1247,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1160D0DF22D38CEC0010323A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				1160D0E022D38CEC0010323A /* Nimble.framework in Frameworks */,
+				1160D0E122D38CEC0010323A /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		117DC0CC22AE492700EF65F0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC0CD22AE492700EF65F0 /* Nimble.framework in Frameworks */,
 				117DC0CE22AE492700EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1208,7 +1268,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC0E622AE4D6C00EF65F0 /* Nimble.framework in Frameworks */,
 				117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1217,7 +1276,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC10122AE522000EF65F0 /* Nimble.framework in Frameworks */,
 				117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1226,7 +1284,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				117DC12922AE563900EF65F0 /* Nimble.framework in Frameworks */,
 				117DC12A22AE563900EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1286,6 +1343,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F468217E2E9200969984 /* IO.swift */,
+				1104BED522C22DD2002C3F78 /* Atomic.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1293,10 +1351,10 @@
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				114D4EA922C3A2A800BEE850 /* Internal */,
 				1104BED422C22DD2002C3F78 /* IO.swift */,
+				11F41C91231816AD00BD1E87 /* Ref.swift */,
 				1104BEE922C25AAF002C3F78 /* Resource.swift */,
-				114D4EA522C3692600BEE850 /* Ref.swift */,
+				11F41C92231816AD00BD1E87 /* Internal */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1320,6 +1378,7 @@
 				112097CB22A819E9007F3D9C /* Day+Gen.swift */,
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
 				112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */,
+				11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */,
 				112097B422A7F21F007F3D9C /* Id+Gen.swift */,
 				112097B822A7FAF6007F3D9C /* Ior+Gen.swift */,
 				112097D122A8FFC0007F3D9C /* Moore+Gen.swift */,
@@ -1491,14 +1550,17 @@
 			path = Tuple;
 			sourceTree = "<group>";
 		};
-		114D4EA922C3A2A800BEE850 /* Internal */ = {
+		1160D0E822D38DA80010323A /* BowOpticsLaws */ = {
 			isa = PBXGroup;
 			children = (
-				1104BED522C22DD2002C3F78 /* Atomic.swift */,
-				114D4EB022C3A97500BEE850 /* Dictionary+Extensions.swift */,
-				117C56D322CE0D380022C468 /* DispatchQueue+Extensions.swift */,
+				8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */,
+				8BA0F3DB217E2DEF00969984 /* LensLaws.swift */,
+				8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */,
+				8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */,
+				8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */,
+				8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */,
 			);
-			path = Internal;
+			path = BowOpticsLaws;
 			sourceTree = "<group>";
 		};
 		117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */ = {
@@ -1535,12 +1597,26 @@
 			path = BowFreeGenerators;
 			sourceTree = "<group>";
 		};
+		1191BD0822D77C3A0052FEA8 /* MonadComprehensions */ = {
+			isa = PBXGroup;
+			children = (
+				1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */,
+				11A5FDCF22E5C79F00FF7821 /* BindingOperator.swift */,
+				1191BD0922D77C510052FEA8 /* BoundVar.swift */,
+				1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */,
+				11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */,
+				11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */,
+				11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */,
+			);
+			path = MonadComprehensions;
+			sourceTree = "<group>";
+		};
 		11D97EEC219EBB35008FC004 /* BowEffectsLaws */ = {
 			isa = PBXGroup;
 			children = (
-				11EBC08F22CCFD5A00A4400C /* BracketLaws.swift */,
-				11EBC08E22CCFD5A00A4400C /* MonadDeferLaws.swift */,
 				8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */,
+				11F41C9E231818AE00BD1E87 /* BracketLaws.swift */,
+				11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */,
 			);
 			path = BowEffectsLaws;
 			sourceTree = "<group>";
@@ -1606,7 +1682,6 @@
 				8BA0F3E1217E2DEF00969984 /* SetterTest.swift */,
 				8BA0F3E7217E2DEF00969984 /* TestDomain.swift */,
 				8BA0F3E2217E2DEF00969984 /* TraversalTest.swift */,
-				8BA0F3DA217E2DEF00969984 /* Laws */,
 			);
 			path = BowOpticsTests;
 			sourceTree = "<group>";
@@ -1637,6 +1712,7 @@
 				8BA0F3C4217E2DEF00969984 /* ApplicativeErrorLaws.swift */,
 				8BA0F3CE217E2DEF00969984 /* ApplicativeLaws.swift */,
 				8BA0F3CA217E2DEF00969984 /* BimonadLaws.swift */,
+				1191BD1122D78F640052FEA8 /* BindingOperatorOverload.swift */,
 				8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */,
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
@@ -1656,6 +1732,7 @@
 				8BA0F3C5217E2DEF00969984 /* MonadWriterLaws.swift */,
 				8BA0F3D4217E2DEF00969984 /* MonoidKLaws.swift */,
 				8BA0F3BD217E2DEF00969984 /* MonoidLaws.swift */,
+				1191BD0F22D78C0A0052FEA8 /* PropertyOperatorOverload.swift */,
 				11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */,
 				8BA0F3CF217E2DEF00969984 /* SemigroupKLaws.swift */,
 				8BA0F3BE217E2DEF00969984 /* SemigroupLaws.swift */,
@@ -1684,6 +1761,7 @@
 				11ED7A2D226E0E7600C27994 /* Bow-Info.plist */,
 				11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */,
 				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
+				1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */,
 				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
 				112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */,
 				11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */,
@@ -1693,6 +1771,16 @@
 				11E71804219D7D9500B94845 /* Bow-Test-Info.plist */,
 			);
 			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		11F41C92231816AD00BD1E87 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				11F41C94231816AD00BD1E87 /* Atomic.swift */,
+				11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */,
+				11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */,
+			);
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		8BA0F363217E2CB100969984 /* Frameworks */ = {
@@ -1784,19 +1872,6 @@
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		8BA0F3DA217E2DEF00969984 /* Laws */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */,
-				8BA0F3DB217E2DEF00969984 /* LensLaws.swift */,
-				8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */,
-				8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */,
-				8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */,
-				8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */,
-			);
-			path = Laws;
 			sourceTree = "<group>";
 		};
 		8BA0F43B217E2E9200969984 /* Bow */ = {
@@ -1910,6 +1985,7 @@
 		8BA0F48C217E2E9200969984 /* Typeclasses */ = {
 			isa = PBXGroup;
 			children = (
+				1191BD0822D77C3A0052FEA8 /* MonadComprehensions */,
 				8BA0F48D217E2E9200969984 /* Alternative.swift */,
 				8BA0F4A8217E2E9200969984 /* Applicative.swift */,
 				8BA0F48E217E2E9200969984 /* ApplicativeError.swift */,
@@ -2028,6 +2104,7 @@
 				117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */,
 				117DC10722AE522000EF65F0 /* BowBrightFuturesGenerators.framework */,
 				117DC12F22AE563900EF65F0 /* BowFreeGenerators.framework */,
+				1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -2073,6 +2150,7 @@
 				112097AB22A7EC03007F3D9C /* BowGenerators */,
 				11229625219D95D2006D66C5 /* BowGenericTests */,
 				11E719FD219D888800B94845 /* BowLaws */,
+				1160D0E822D38DA80010323A /* BowOpticsLaws */,
 				11E71807219D7E0500B94845 /* BowOpticsTests */,
 				11229536219D9013006D66C5 /* BowRecursionSchemesTests */,
 				117DC0F022AE4DDF00EF65F0 /* BowRxGenerators */,
@@ -2243,7 +2321,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1126CA8322B0DE3F00F840CB /* PBXTargetDependency */,
+				1191BD0122D4928D0052FEA8 /* PBXTargetDependency */,
 				11D97EF1219EBBB4008FC004 /* PBXTargetDependency */,
 				11229785219DC95B006D66C5 /* PBXTargetDependency */,
 				11229749219DC88F006D66C5 /* PBXTargetDependency */,
@@ -2338,6 +2416,27 @@
 			productReference = 11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1160D0BD22D38CEC0010323A /* Bow-OpticsLaws */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1160D0E322D38CEC0010323A /* Build configuration list for PBXNativeTarget "Bow-OpticsLaws" */;
+			buildPhases = (
+				1160D0C222D38CEC0010323A /* Sources */,
+				1160D0DF22D38CEC0010323A /* Frameworks */,
+				1160D0E222D38CEC0010323A /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11E7F5E822D8914F00C78F06 /* PBXTargetDependency */,
+				1191BD0322D4AF4C0052FEA8 /* PBXTargetDependency */,
+				1160D0F222D38E080010323A /* PBXTargetDependency */,
+				1160D0C022D38CEC0010323A /* PBXTargetDependency */,
+			);
+			name = "Bow-OpticsLaws";
+			productName = Bow;
+			productReference = 1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 117DC0D022AE492700EF65F0 /* Build configuration list for PBXNativeTarget "Bow-EffectsGenerators" */;
@@ -2431,6 +2530,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				11E7F5EA22D891B600C78F06 /* PBXTargetDependency */,
 				11D97EEF219EBBA6008FC004 /* PBXTargetDependency */,
 				11D97EC4219EBAA1008FC004 /* PBXTargetDependency */,
 			);
@@ -2467,7 +2567,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1186E15522BA4A9D001F8A5D /* PBXTargetDependency */,
+				1160D0F422D38E2A0010323A /* PBXTargetDependency */,
 				11E71806219D7DFB00B94845 /* PBXTargetDependency */,
 				11E7179F219D7D5900B94845 /* PBXTargetDependency */,
 			);
@@ -2626,16 +2726,17 @@
 				1122957A219D94C9006D66C5 /* Bow-Generic */,
 				112295E9219D9593006D66C5 /* Bow-GenericTests */,
 				11E71683219D704F00B94845 /* Bow-Optics */,
+				1160D0BD22D38CEC0010323A /* Bow-OpticsLaws */,
 				11E7179E219D7D5900B94845 /* Bow-OpticsTests */,
 				11229480219D8EF4006D66C5 /* Bow-RecursionSchemes */,
 				1122953D219D9186006D66C5 /* Bow-RecursionSchemesTests */,
 				112296D7219DC4B3006D66C5 /* Bow-Effects */,
+				11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */,
 				11229748219DC88F006D66C5 /* Bow-EffectsTests */,
 				11229791219DCE76006D66C5 /* Bow-Rx */,
 				112297B1219DCFDE006D66C5 /* Bow-RxTests */,
 				112297D3219DD148006D66C5 /* Bow-BrightFutures */,
 				112297EB219DD2AB006D66C5 /* Bow-BrightFuturesTests */,
-				11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */,
 			);
 		};
 /* End PBXProject section */
@@ -2808,6 +2909,26 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		1160D0E222D38CEC0010323A /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		117DC0CF22AE492700EF65F0 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -2967,6 +3088,7 @@
 				112097B322A7F17F007F3D9C /* Const+Gen.swift in Sources */,
 				112097C922A80870007F3D9C /* ArbitraryK.swift in Sources */,
 				112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */,
+				11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2977,6 +3099,7 @@
 				1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */,
 				11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */,
 				11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */,
+				1191BD1422D78F760052FEA8 /* BindingOperatorOverload.swift in Sources */,
 				11229423219D8BDE006D66C5 /* BimonadLaws.swift in Sources */,
 				11229425219D8BDE006D66C5 /* ComonadLaws.swift in Sources */,
 				11229426219D8BDE006D66C5 /* ContravariantLaws.swift in Sources */,
@@ -3001,6 +3124,7 @@
 				11229437219D8BDE006D66C5 /* SemigroupLaws.swift in Sources */,
 				11229438219D8BDE006D66C5 /* CustomStringConvertibleLaws.swift in Sources */,
 				11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */,
+				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
 				1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3067,16 +3191,16 @@
 			buildActionMask = 0;
 			files = (
 				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
-				114D4EA622C3692600BEE850 /* Ref.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
-				1104BEDD22C22DEC002C3F78 /* Atomic.swift in Sources */,
-				117C56D422CE0D380022C468 /* DispatchQueue+Extensions.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
-				114D4EB122C3A97500BEE850 /* Dictionary+Extensions.swift in Sources */,
+				11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */,
+				11F41C9A231816D800BD1E87 /* Ref.swift in Sources */,
 				1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
+				11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
+				11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */,
 				11229747219DC557006D66C5 /* MonadDefer.swift in Sources */,
 				1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */,
 			);
@@ -3126,6 +3250,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1160D0C222D38CEC0010323A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */,
+				1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */,
+				1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */,
+				1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */,
+				1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */,
+				1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		117DC0B522AE492700EF65F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -3164,11 +3301,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11EBC09322CCFDB800A4400C /* MonadDeferLaws.swift in Sources */,
 				11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */,
-				114545D9225F935300EA8755 /* (null) in Sources */,
-				114545D7225F805500EA8755 /* (null) in Sources */,
-				11EBC09222CCFDB800A4400C /* BracketLaws.swift in Sources */,
+				11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */,
+				11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3250,12 +3385,6 @@
 				11E7180E219D7ECC00B94845 /* SetterTest.swift in Sources */,
 				11E7180F219D7ECC00B94845 /* TestDomain.swift in Sources */,
 				11E71810219D7ECC00B94845 /* TraversalTest.swift in Sources */,
-				11E71811219D7ECC00B94845 /* IsoLaws.swift in Sources */,
-				11E71812219D7ECC00B94845 /* LensLaws.swift in Sources */,
-				11E71813219D7ECC00B94845 /* OptionalLaws.swift in Sources */,
-				11E71814219D7ECC00B94845 /* PrismLaws.swift in Sources */,
-				11E71815219D7ECC00B94845 /* SetterLaws.swift in Sources */,
-				11E71816219D7ECC00B94845 /* TraversalLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3317,6 +3446,7 @@
 				8BA0F637217E2E9200969984 /* Monad.swift in Sources */,
 				8BA0F60F217E2E9200969984 /* TraverseFilter.swift in Sources */,
 				8BA0F5FF217E2E9200969984 /* SemigroupK.swift in Sources */,
+				1191BD0A22D77C510052FEA8 /* BoundVar.swift in Sources */,
 				8BA0F5DF217E2E9200969984 /* ApplicativeError.swift in Sources */,
 				8BA0F5C3217E2E9200969984 /* Store.swift in Sources */,
 				8BA0F64F217E2E9200969984 /* Functor.swift in Sources */,
@@ -3333,6 +3463,7 @@
 				8BA0F5D7217E2E9200969984 /* HigherKinds.swift in Sources */,
 				8BA0F4D3217E2E9200969984 /* Curry.swift in Sources */,
 				8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */,
+				1191BD0C22D77FED0052FEA8 /* BindingExpression.swift in Sources */,
 				8BA0F593217E2E9200969984 /* NonEmptyArray.swift in Sources */,
 				8BA0F58F217E2E9200969984 /* Option.swift in Sources */,
 				8BA0F5F3217E2E9200969984 /* Comparable.swift in Sources */,
@@ -3353,6 +3484,7 @@
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
 				8BA0F5DB217E2E9200969984 /* Alternative.swift in Sources */,
+				1191BD0E22D784630052FEA8 /* MonadComprenhensions.swift in Sources */,
 				8BA0F50F217E2E9200969984 /* WriterT.swift in Sources */,
 				8BA0F54B217E2E9200969984 /* StringInstances.swift in Sources */,
 				8BA0F5C7217E2E9200969984 /* SetK.swift in Sources */,
@@ -3365,6 +3497,7 @@
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
+				11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */,
 				8BA0F597217E2E9200969984 /* EitherK.swift in Sources */,
 				1125054D220DD92B00861131 /* EquatableK.swift in Sources */,
 				8BA0F603217E2E9200969984 /* MonadWriter.swift in Sources */,
@@ -3373,9 +3506,12 @@
 				8BA0F583217E2E9200969984 /* Id.swift in Sources */,
 				8BA0F60B217E2E9200969984 /* Invariant.swift in Sources */,
 				8BA0F537217E2E9200969984 /* PartialApplication.swift in Sources */,
+				11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */,
 				8BA0F5A7217E2E9200969984 /* Eval.swift in Sources */,
 				8BA0F50B217E2E9200969984 /* OptionT.swift in Sources */,
 				8BA0F57F217E2E9200969984 /* Either.swift in Sources */,
+				11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */,
+				11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */,
 				8BA0F5EF217E2E9200969984 /* Contravariant.swift in Sources */,
 				8BA0F5BB217E2E9200969984 /* Validated.swift in Sources */,
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
@@ -3537,11 +3673,6 @@
 			target = 117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */;
 			targetProxy = 1126CA8022B0DDD100F840CB /* PBXContainerItemProxy */;
 		};
-		1126CA8322B0DE3F00F840CB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
-			targetProxy = 1126CA8222B0DE3F00F840CB /* PBXContainerItemProxy */;
-		};
 		1126CA8522B0DE9E00F840CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */;
@@ -3551,6 +3682,21 @@
 			isa = PBXTargetDependency;
 			target = 117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */;
 			targetProxy = 1126CA8622B0DF2B00F840CB /* PBXContainerItemProxy */;
+		};
+		1160D0C022D38CEC0010323A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 1160D0C122D38CEC0010323A /* PBXContainerItemProxy */;
+		};
+		1160D0F222D38E080010323A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11E71683219D704F00B94845 /* Bow-Optics */;
+			targetProxy = 1160D0F122D38E080010323A /* PBXContainerItemProxy */;
+		};
+		1160D0F422D38E2A0010323A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1160D0BD22D38CEC0010323A /* Bow-OpticsLaws */;
+			targetProxy = 1160D0F322D38E2A0010323A /* PBXContainerItemProxy */;
 		};
 		117DC0B322AE492700EF65F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3622,10 +3768,15 @@
 			target = 11E71817219D81B300B94845 /* Bow-Free */;
 			targetProxy = 117DC13322AE56D800EF65F0 /* PBXContainerItemProxy */;
 		};
-		1186E15522BA4A9D001F8A5D /* PBXTargetDependency */ = {
+		1191BD0122D4928D0052FEA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
+			targetProxy = 1191BD0022D4928D0052FEA8 /* PBXContainerItemProxy */;
+		};
+		1191BD0322D4AF4C0052FEA8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
-			targetProxy = 1186E15422BA4A9D001F8A5D /* PBXContainerItemProxy */;
+			targetProxy = 1191BD0222D4AF4C0052FEA8 /* PBXContainerItemProxy */;
 		};
 		11D97EC4219EBAA1008FC004 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3671,6 +3822,16 @@
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
 			targetProxy = 11E7188C219D82AE00B94845 /* PBXContainerItemProxy */;
+		};
+		11E7F5E822D8914F00C78F06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 11E7F5E722D8914F00C78F06 /* PBXContainerItemProxy */;
+		};
+		11E7F5EA22D891B600C78F06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 11E7F5E922D891B600C78F06 /* PBXContainerItemProxy */;
 		};
 		OBJ_299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4268,6 +4429,54 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowBrightFuturesTests;
+			};
+			name = Release;
+		};
+		1160D0E422D38CEC0010323A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-OpticsLaws-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics-laws";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowOpticsLaws;
+			};
+			name = Debug;
+		};
+		1160D0E522D38CEC0010323A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "Bow-OpticsLaws-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics-laws";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = BowOpticsLaws;
 			};
 			name = Release;
 		};
@@ -4966,6 +5175,15 @@
 			buildConfigurations = (
 				11229802219DD2AB006D66C5 /* Debug */,
 				11229803219DD2AB006D66C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		1160D0E322D38CEC0010323A /* Build configuration list for PBXNativeTarget "Bow-OpticsLaws" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1160D0E422D38CEC0010323A /* Debug */,
+				1160D0E522D38CEC0010323A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

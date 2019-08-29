@@ -1,8 +1,8 @@
 import Bow
 import BowGenerators
 
-class BimonadLaws<F: Bimonad & EquatableK & ArbitraryK> {
-    static func check() {
+public class BimonadLaws<F: Bimonad & EquatableK & ArbitraryK> {
+    public static func check() {
         MonadLaws<F>.check()
         ComonadLaws<F>.check()
     }

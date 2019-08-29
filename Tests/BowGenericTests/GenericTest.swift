@@ -1,6 +1,6 @@
 import XCTest
-@testable import Bow
-@testable import BowGeneric
+import Bow
+import BowGeneric
 
 class GenericTest : XCTestCase {
     

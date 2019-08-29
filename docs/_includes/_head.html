@@ -18,6 +18,11 @@
     <meta name="twitter:site" content="@bow_swift">
     <meta name="twitter:creator" content="@bow_swift">
     <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    {% assign bow_version = site.data.versions | where: "this", true | first %}
+    <meta name="bow-version" data-title="{{ bow_version.title }}" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ '/js/functions.js' | relative_url }}"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -28,6 +33,9 @@
     <link rel="shortcut icon" href="{{ '/img/favicon.png' | relative_url }}">
     <!-- Main css -->
     <link rel="stylesheet" type="text/css" href="{{ '/css/styles.css' | relative_url }}">
+
+    <!-- Code to manage version information -->
+    <script src="{{ '/js/doc-versions.js' | relative_url }}" defer></script>
 
     {% if jekyll.environment == 'production' and site.google_analytics %}
         {% include _google-tag-manager.html %}

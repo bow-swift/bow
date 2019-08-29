@@ -12,16 +12,16 @@
 
   .masthead-background {
     background: url("../img/logo_masthead.svg");
-  	position: absolute;
-  	top: 0;
-  	left: 0;
-  	width: 100%;
-  	height: 100%;
-  	background-position: -500px -1350px;
-  	background-size: 1200px;
-  	background-repeat: no-repeat;
-  	right: 0;
-  	bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: -500px -1350px;
+    background-size: 1200px;
+    background-repeat: no-repeat;
+    right: 0;
+    bottom: 0;
   }
 
   .masthead-content {
@@ -34,8 +34,8 @@
 
     .masthead-text {
       @include flex(1 1 75%);
-      position: relative;
 
+      position: relative;
       color: $white;
       margin-right: ($base-point-grid * 3);
 
@@ -45,7 +45,7 @@
         font-size: 3rem;
         font-weight: $font-bold;
 
-        &:before {
+        &::before {
           position: absolute;
           display: block;
           content: "{";
@@ -61,7 +61,6 @@
       }
 
       @include fadeInDown($duration: 1s, $delay: 0.2s, $function: ease);
-
     }
 
     .masthead-brand {
@@ -111,7 +110,6 @@
 @include bp(medium) {
   #masthead {
     .masthead-content {
-
       .masthead-top {
         @include flex-wrap(wrap);
       }

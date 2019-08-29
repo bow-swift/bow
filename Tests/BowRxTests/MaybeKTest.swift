@@ -1,9 +1,9 @@
 import XCTest
-@testable import BowLaws
+import BowLaws
 import Bow
 @testable import BowRx
 import BowRxGenerators
-@testable import BowEffectsLaws
+import BowEffectsLaws
 
 extension ForMaybeK: EquatableK {
     public static func eq<A: Equatable>(_ lhs: Kind<ForMaybeK, A>, _ rhs: Kind<ForMaybeK, A>) -> Bool {

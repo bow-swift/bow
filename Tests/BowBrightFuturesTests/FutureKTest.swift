@@ -4,7 +4,7 @@ import BrightFutures
 import Bow
 import BowBrightFutures
 import BowBrightFuturesGenerators
-@testable import BowEffectsLaws
+import BowEffectsLaws
 
 private let forcedFutureQueue = DispatchQueue(label: "forcedFutureQueue", attributes: .concurrent)
 

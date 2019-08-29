@@ -1,6 +1,7 @@
 import Foundation
 import SwiftCheck
 import Bow
+import BowLaws
 @testable import BowEffects
 
 public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
@@ -15,13 +16,13 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     }
     
     private static func success() {
-        property("Success equivalence") <- forAll { (a: Int) in
+        property("Success equivalence") <~ forAll { (a: Int) in
             return F.async({ ff in ff(Either<F.E, Int>.right(a)) }) == F.pure(a)
         }
     }
     
     private static func error() {
-        property("Error equivalence") <- forAll { (error: F.E) in
+        property("Error equivalence") <~ forAll { (error: F.E) in
             return F.async({ ff in ff(Either<F.E, Int>.left(error)) }) ==
                 F.raiseError(error)
         }
@@ -29,7 +30,7 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
 
     private static func nonEmpty() -> Gen<String> { return String.arbitrary.suchThat { str in str.count > 5 } }
     private static func continueOnJumpsQueues() {
-        property("continueOnJumpsThreads") <- forAll(nonEmpty(), nonEmpty()) { (id1: String, id2: String) in
+        property("continueOnJumpsThreads") <~ forAll(nonEmpty(), nonEmpty()) { (id1: String, id2: String) in
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
             
@@ -42,7 +43,7 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     }
 
     private static func asyncConstructor() {
-        property("asyncConstructor") <- forAll { (id1: String, id2: String) in
+        property("asyncConstructor") <~ forAll { (id1: String, id2: String) in
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
 
@@ -53,21 +54,23 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     }
 
     private static func continueOnComprehension() {
-        property("continueOnComprehension") <- forAll { (id1: String, id2: String) in
+        property("continueOnComprehension") <~ forAll { (id1: String, id2: String) in
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
-            let fa = F.pure(())
-            return F.binding(
-                { fa.continueOn(queue1) },
-                { _ in F.pure(self.currentQueueLabel()) },
-                { _, b in F.pure(b).continueOn(queue2) },
-                { _, _, c in F.pure(c + currentQueueLabel()) }
-            ) == F.pure(id1 + id2)
+            let l1 = F.var(String.self)
+            let l2 = F.var(String.self)
+            
+            return binding(
+                   |<-F.lazy().continueOn(queue1),
+                l1 <-- currentQueueLabel(),
+                   |<-F.lazy().continueOn(queue2),
+                l2 <-- currentQueueLabel(),
+                yield: l1.get + l2.get) == F.pure(id1 + id2)
         }
     }
 
     private static func asyncCanBeDerivedFromAsyncF() {
-        property("asyncCanBeDerivedFromAsyncF") <- forAll { (x: Int) in
+        property("asyncCanBeDerivedFromAsyncF") <~ forAll { (x: Int) in
             let either = Either<F.E, Int>.right(x)
             let k: Proc<F.E, Int> = { f in f(either) }
 
