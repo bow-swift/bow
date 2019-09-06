@@ -16,9 +16,9 @@ Bow is a library for Typed Functional Programming in Swift.
 
 ## Modules
 
-Bow is split in multiple modules that can be consumed independently. These modules are:
+Bow is split into multiple modules that can be consumed independently. These modules are:
 
-- `Bow`: core library. Contains Higher Kinded Types emulation, function manipulation utilities, Typeclasses, Data Types, Monad Transformers and instances for primitive types.
+- `Bow`: core library. Contains Higher Kinded Types emulation, function manipulation utilities, Typeclasses, Data Types, Monad Transformers, and instances for primitive types.
 - `BowOptics`: module to work with different optics.
 - `BowRecursionSchemes`: module to work with recursion schemes.
 - `BowFree`: module to work with Free Monads.
@@ -38,7 +38,7 @@ There are also some modules for testing:
 - `BowRxGenerators`: generators for Property-based Testing for data types in BowRx.
 - `BowBrightFuturesGenerators`: generators for Property-based Testing for data types in BowBrightFutures.
 
-Bow is available using CocoaPods, Carthage and Swift Package Manager.
+Bow is available using CocoaPods, Carthage, and Swift Package Manager.
 
 ### CocoaPods
 
@@ -131,11 +131,11 @@ $ swift build
 
 ## Contributing
 
-If you want to contribute to this library, you can check the [Issues](https://github.com/arrow-kt/bow/issues) to see some of the pending task.
+If you want to contribute to this library, you can check the [Issues](https://github.com/arrow-kt/bow/issues) to see some of the pending tasks.
 
 ### How to run the project
 
-If you don't have carthage, install it first:
+If you don't have Carthage, install it first:
 
 `brew install carthage`
 
@@ -147,7 +147,7 @@ Now, you can open `Bow.xcodeproj` with Xcode and run the test to see that everyt
 
 # License
 
-    Copyright (C) 2018 The Bow Authors
+    Copyright (C) 2018-2019 The Bow Authors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
