@@ -229,6 +229,7 @@
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
 		11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0367E2327D08900B39A80 /* EffectComprehensions.swift */; };
+		11F036822327D4AC00B39A80 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036812327D4AC00B39A80 /* URLSession.swift */; };
 		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
 		11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C94231816AD00BD1E87 /* Atomic.swift */; };
 		11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */; };
@@ -918,6 +919,7 @@
 		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
 		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
 		11F0367E2327D08900B39A80 /* EffectComprehensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectComprehensions.swift; sourceTree = "<group>"; };
+		11F036812327D4AC00B39A80 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
 		11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C94231816AD00BD1E87 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
@@ -1473,6 +1475,7 @@
 			isa = PBXGroup;
 			children = (
 				1104BED322C22DD2002C3F78 /* Data */,
+				11F036802327D49900B39A80 /* Foundation */,
 				8BA0F469217E2E9200969984 /* Typeclasses */,
 			);
 			path = BowEffects;
@@ -1774,6 +1777,14 @@
 				11E71804219D7D9500B94845 /* Bow-Test-Info.plist */,
 			);
 			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		11F036802327D49900B39A80 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				11F036812327D4AC00B39A80 /* URLSession.swift */,
+			);
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 		11F41C92231816AD00BD1E87 /* Internal */ = {
@@ -3195,6 +3206,7 @@
 			files = (
 				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
+				11F036822327D4AC00B39A80 /* URLSession.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
 				11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */,
 				11F41C9A231816D800BD1E87 /* Ref.swift in Sources */,
