@@ -1353,6 +1353,7 @@
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				11F41C94231816AD00BD1E87 /* Atomic.swift */,
 				1104BED422C22DD2002C3F78 /* IO.swift */,
 				11F41C91231816AD00BD1E87 /* Ref.swift */,
 				1104BEE922C25AAF002C3F78 /* Resource.swift */,
@@ -1778,7 +1779,6 @@
 		11F41C92231816AD00BD1E87 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				11F41C94231816AD00BD1E87 /* Atomic.swift */,
 				11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */,
 				11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */,
 			);
