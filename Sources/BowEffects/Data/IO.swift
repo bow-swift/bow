@@ -11,13 +11,17 @@ public typealias Task<A> = IO<Error, A>
 public typealias ForUIO = IOPartial<Never>
 public typealias UIO<A> = IO<Never, A>
 
+public enum IOError: Error {
+    case timeout
+}
+
 public class IO<E: Error, A>: IOOf<E, A> {
     public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
         return fa as! IO<E, A>
     }
     
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
-        return IO.fix(IO.suspend({
+        return IO.defer {
             do {
                 return Pure<E, A>(try f())
             } catch let error as E {
@@ -25,7 +29,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
             } catch {
                 fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
             }
-        }))
+        }^
     }
     
     public static func merge<B>(_ fa: @escaping () throws -> A,
@@ -482,6 +486,20 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
     }
 }
 
+internal class Suspend<E: Error, A>: IO<E, A> {
+    let thunk: () -> IOOf<E, A>
+    
+    init(_ thunk: @escaping () -> IOOf<E, A>) {
+        self.thunk = thunk
+    }
+    
+    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        return try on(queue: queue) {
+            try self.thunk()^._unsafePerformIO(on: queue)
+        }
+    }
+}
+
 // MARK: Instance of `Functor` for `IO`
 extension IOPartial: Functor {
     public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
@@ -545,7 +563,7 @@ extension IOPartial: Bracket {
 // MARK: Instance of `MonadDefer` for `IO`
 extension IOPartial: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> IOOf<E, A>) -> IOOf<E, A> {
-        return Pure(()).flatMap(fa)
+        return Suspend(fa)
     }
 }
 

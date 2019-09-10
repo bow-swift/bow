@@ -1,13 +1,13 @@
 import Foundation
 
-final class Atomic<A> {
+public final class Atomic<A> {
     private let queue = DispatchQueue(label: "Atomic serial queue")
     private var _value: A
-    init(_ value: A) {
+    public init(_ value: A) {
         self._value = value
     }
 
-    var value: A {
+    public var value: A {
         get {
             return queue.sync { self._value }
         }
@@ -16,13 +16,13 @@ final class Atomic<A> {
         }
     }
 
-    func mutate(_ transform: (inout A) -> ()) {
+    public func mutate(_ transform: (inout A) -> ()) {
         queue.sync {
             transform(&self._value)
         }
     }
 
-    func getAndSet(_ newValue: A) -> A {
+    public func getAndSet(_ newValue: A) -> A {
         var oldValue: A? = nil
         queue.sync {
             oldValue = self._value
@@ -31,7 +31,7 @@ final class Atomic<A> {
         return oldValue!
     }
     
-    func getAndUpdate(_ f: @escaping (A) -> A) -> A {
+    public func getAndUpdate(_ f: @escaping (A) -> A) -> A {
         var oldValue: A? = nil
         queue.sync {
             oldValue = self._value
@@ -40,7 +40,7 @@ final class Atomic<A> {
         return oldValue!
     }
     
-    func updateAndGet(_ f: @escaping (A) -> A) -> A {
+    public func updateAndGet(_ f: @escaping (A) -> A) -> A {
         var newValue: A? = nil
         queue.sync {
             self._value = f(self._value)
@@ -50,7 +50,7 @@ final class Atomic<A> {
     }
 
     @discardableResult
-    func setIfNil<AA>(_ newValue: AA) -> Bool where A == AA? {
+    public func setIfNil<AA>(_ newValue: AA) -> Bool where A == AA? {
         var result = false
         queue.sync {
             if self._value == nil {
@@ -61,7 +61,7 @@ final class Atomic<A> {
         return result
     }
 
-    func setNil<AA>() where A == AA? {
+    public func setNil<AA>() where A == AA? {
         queue.sync {
             self._value = nil
         }
@@ -69,7 +69,7 @@ final class Atomic<A> {
 }
 
 extension Atomic where A: Equatable {
-    func compare(_ test: A, andSet newValue: A) -> Bool {
+    public func compare(_ test: A, andSet newValue: A) -> Bool {
         var equals = false
         queue.sync {
             if _value == test {
