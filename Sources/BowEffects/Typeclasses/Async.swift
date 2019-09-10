@@ -13,7 +13,7 @@ public protocol Async: MonadDefer {
 public extension Async {
     static func async<A>(_ proc: @escaping Proc<E, A>) -> Kind<Self, A> {
         return asyncF { cb in
-            delay {
+            later {
                 proc(cb)
             }
         }
@@ -80,7 +80,7 @@ public extension Kind where F: Async {
 
 public extension DispatchQueue {
     func shift<F: Async>() -> Kind<F, ()> {
-        return F.later(self, constant(()))
+        return F.later(self) {}
     }
 }
 

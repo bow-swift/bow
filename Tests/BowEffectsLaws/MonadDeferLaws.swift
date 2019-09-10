@@ -23,7 +23,7 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
 
     private static func delayConstantEqualsPure() {
         property("delayConstantEqualsPure") <~ forAll { (x: Int) in
-            return F.delay { x } == F.pure(x)
+            return F.later { x } == F.pure(x)
         }
     }
 
@@ -35,25 +35,25 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
 
     private static func delayOrRaiseConstantRightEqualsPure() {
         property("delayOrRaiseConstantRightEqualsPure") <~ forAll { (x: Int) in
-            return F.delayOrRaise { .right(x) } == F.pure(x)
+            return F.laterOrRaise { .right(x) } == F.pure(x)
         }
     }
 
     private static func delayOrRaiseConstantLeftEqualsRaiseError() {
         property("delayOrRaiseConstantLeftEqualsRaiseError") <~ forAll { (e: F.E) in
-            return F.delayOrRaise { .left(e) } == Kind<F, Int>.raiseError(e)
+            return F.laterOrRaise { .left(e) } == Kind<F, Int>.raiseError(e)
         }
     }
 
     private static func delayThrowEqualsRaiseError() {
         property("delayThrowEqualsRaiseError") <~ forAll { (e: F.E) in
-            return F.delay { throw e } == Kind<F, Int>.raiseError(e)
+            return F.later { throw e } == Kind<F, Int>.raiseError(e)
         }
     }
 
     private static func propagateErrorsThroughBind() {
         property("propagateErrorsThroughBind") <~ forAll { (e: F.E) in
-            return F.delay { throw e }.flatMap(F.pure) == Kind<F, Int>.raiseError(e)
+            return F.later { throw e }.flatMap(F.pure) == Kind<F, Int>.raiseError(e)
         }
     }
 
@@ -67,7 +67,7 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
 
     private static func delaySuspendsEvaluation() {
         let sideEffect = SideEffect()
-        let df = F.delay { () -> Int in sideEffect.increment(); return sideEffect.counter }
+        let df = F.later { () -> Int in sideEffect.increment(); return sideEffect.counter }
 
         expect(sideEffect.counter).to(equal(0))
         expect(df).to(equal(F.pure(1)))
@@ -91,7 +91,7 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
 
     private static func repeatedSyncEvaluationNotMemoized() {
         let sideEffect = SideEffect()
-        let df = F.delay { () -> Int in sideEffect.increment(); return sideEffect.counter }
+        let df = F.later { () -> Int in sideEffect.increment(); return sideEffect.counter }
 
         expect(df.flatMap { _ in df }.flatMap { _ in df }).to(equal(F.pure(3)))
     }

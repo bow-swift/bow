@@ -48,7 +48,7 @@ public class Ref<F, A> {
 
 public extension Ref where F: MonadDefer, A: Equatable {
     static func of(_ f: @autoclosure @escaping () -> A) -> Kind<F, Ref<F, A>> {
-        return F.delay { unsafe(f()) }
+        return F.later { unsafe(f()) }
     }
     
     static func unsafe(_ a: A) -> Ref<F, A> {
@@ -64,15 +64,15 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func get() -> Kind<F, A> {
-        return F.delay { self.atomic.value }
+        return F.later { self.atomic.value }
     }
     
     override func set(_ a: A) -> Kind<F, ()> {
-        return F.delay { self.atomic.value = a }
+        return F.later { self.atomic.value = a }
     }
     
     override func getAndSet(_ a: A) -> Kind<F, A> {
-        return F.delay { self.atomic.getAndSet(a) }
+        return F.later { self.atomic.getAndSet(a) }
     }
     
     override func setAndGet(_ a: A) -> Kind<F, A> {
@@ -84,11 +84,11 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func getAndUpdate(_ f: @escaping (A) -> A) -> Kind<F, A> {
-        return F.delay { self.atomic.getAndUpdate(f) }
+        return F.later { self.atomic.getAndUpdate(f) }
     }
     
     override func updateAndGet(_ f: @escaping (A) -> A) -> Kind<F, A> {
-        return F.delay { self.atomic.updateAndGet(f) }
+        return F.later { self.atomic.updateAndGet(f) }
     }
     
     override func modify<B>(_ f: @escaping (A) -> (A, B)) -> Kind<F, B> {
@@ -98,7 +98,7 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
             return atomic.compare(a, andSet: u) ? b : go()
         }
         
-        return F.delay(go)
+        return F.later(go)
     }
     
     override func tryUpdate(_ f: @escaping (A) -> A) -> Kind<F, Bool> {
@@ -106,7 +106,7 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func tryModify<B>(_ f: @escaping (A) -> (A, B)) -> Kind<F, Option<B>> {
-        return F.delay {
+        return F.later {
             let a = self.atomic.value
             let (u, b) = f(a)
             return self.atomic.compare(a, andSet: u) ? Option.some(b) : Option.none()
@@ -114,10 +114,10 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func access() -> Kind<F, (A, (A) -> Kind<F, Bool>)> {
-        return F.delay {
+        return F.later {
             let snapshot = self.atomic.value
             let hasBeenCalled = Atomic(false)
-            let setter = { (a: A) in F.delay { hasBeenCalled.compare(false, andSet: true) && self.atomic.compare(snapshot, andSet: a) } }
+            let setter = { (a: A) in F.later { hasBeenCalled.compare(false, andSet: true) && self.atomic.compare(snapshot, andSet: a) } }
             return (snapshot, setter)
         }
     }
