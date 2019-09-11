@@ -38,8 +38,24 @@ public final class ObservableK<A>: ObservableKOf<A> {
         return value as! ObservableK<A>
     }
 
-    public static func from(_ f: @escaping () -> A) -> ObservableK<A> {
-        return ObservableK.fix(suspend { pure(f()) })
+    public static func from(_ f: @escaping () throws -> A) -> ObservableK<A> {
+        return ForObservableK.defer {
+            do {
+                return pure(try f())
+            } catch {
+                return raiseError(error)
+            }
+        }^
+    }
+    
+    public static func invoke(_ f: @escaping () throws -> ObservableKOf<A>) -> ObservableK<A> {
+        return ForObservableK.defer {
+            do {
+                return try f()
+            } catch {
+                return raiseError(error)
+            }
+        }^
     }
     
     public init(_ value: Observable<A>) {
@@ -47,7 +63,7 @@ public final class ObservableK<A>: ObservableKOf<A> {
     }
     
     public func concatMap<B>(_ f: @escaping (A) -> ObservableKOf<B>) -> ObservableK<B> {
-        return value.concatMap { a in ObservableK<B>.fix(f(a)).value }.k()
+        return value.concatMap { a in f(a)^.value }.k()
     }
 }
 
@@ -59,12 +75,14 @@ public postfix func ^<A>(_ value: ObservableKOf<A>) -> ObservableK<A> {
     return ObservableK.fix(value)
 }
 
+// MARK: Instance of `Functor` for `ObservableK`
 extension ForObservableK: Functor {
     public static func map<A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> B) -> Kind<ForObservableK, B> {
         return ObservableK.fix(fa).value.map(f).k()
     }
 }
 
+// MARK: Instance of `Applicative` for `ObservableK`
 extension ForObservableK: Applicative {
     public static func pure<A>(_ a: A) -> Kind<ForObservableK, A> {
         return Observable.just(a).k()
@@ -74,6 +92,7 @@ extension ForObservableK: Applicative {
 // MARK: Instance of `Selective` for `ObservableK`
 extension ForObservableK: Selective {}
 
+// MARK: Instance of `Monad` for `ObservableK`
 extension ForObservableK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
         return ObservableK.fix(fa).value.flatMap { a in ObservableK<B>.fix(f(a)).value }.k()
@@ -86,6 +105,7 @@ extension ForObservableK: Monad {
     }
 }
 
+// MARK: Instance of `ApplicativeError` for `ObservableK`
 extension ForObservableK: ApplicativeError {
     public typealias E = Error
 
@@ -98,8 +118,10 @@ extension ForObservableK: ApplicativeError {
     }
 }
 
+// MARK: Instance of `MonadError` for `ObservableK`
 extension ForObservableK: MonadError {}
 
+// MARK: Instance of `Foldable` for `ObservableK`
 extension ForObservableK: Foldable {
     public static func foldLeft<A, B>(_ fa: Kind<ForObservableK, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         return ObservableK.fix(fa).value.reduce(b, accumulator: f).blockingGet()!
@@ -117,6 +139,7 @@ extension ForObservableK: Foldable {
     }
 }
 
+// MARK: Instance of `Traverse` for `ObservableK`
 extension ForObservableK: Traverse {
     public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForObservableK, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForObservableK, B>> {
         return fa.foldRight(Eval.always { G.pure(Observable<B>.empty().k() as ObservableKOf<B>) }, { a, eval in
@@ -127,27 +150,27 @@ extension ForObservableK: Traverse {
     }
 }
 
+// MARK: Instance of `MonadDefer` for `ObservableK`
 extension ForObservableK: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> Kind<ForObservableK, A>) -> Kind<ForObservableK, A> {
-        fatalError("TODO: implement this")
-    }
-
-    public static func bracketCase<A, B>(_ fa: Kind<ForObservableK, A>, _ release: @escaping (A, ExitCase<Error>) -> Kind<ForObservableK, ()>, _ use: @escaping (A) throws -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
-        fatalError("TODO: implement this")
-    }
-
-    public static func suspend<A>(_ fa: @escaping () -> Kind<ForObservableK, A>) -> Kind<ForObservableK, A> {
         return Observable.deferred { ObservableK<A>.fix(fa()).value }.k()
     }
 }
 
+// MARK: Instance of `Async` for `ObservableK`
 extension ForObservableK: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForObservableK, ()>) -> Kind<ForObservableK, A> {
-        fatalError("TODO: implement this")
+        return Observable.create { emitter in
+            procf { either in
+                either.fold(
+                    { error in emitter.on(.error(error)) },
+                    { value in emitter.on(.next(value)); emitter.on(.completed) })
+            }^.value.subscribe(onError: { e in emitter.on(.error(e)) })
+        }.k()
     }
 
     public static func continueOn<A>(_ fa: Kind<ForObservableK, A>, _ queue: DispatchQueue) -> Kind<ForObservableK, A> {
-        fatalError("TODO: implement this")
+        return fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
 
     public static func runAsync<A>(_ fa: @escaping ((Either<ForObservableK.E, A>) -> ()) throws -> ()) -> Kind<ForObservableK, A> {
@@ -163,6 +186,7 @@ extension ForObservableK: Async {
     }
 }
 
+// MARK: Instance of `Effect` for `ObservableK`
 extension ForObservableK: Effect {
     public static func runAsync<A>(_ fa: Kind<ForObservableK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForObservableK, ()>) -> Kind<ForObservableK, ()> {
         return ObservableK.fix(fa).value.flatMap { a in ObservableK<()>.fix(callback(Either.right(a))).value }
@@ -170,6 +194,18 @@ extension ForObservableK: Effect {
     }
 }
 
+// MARK: Instance of `Concurrent` for `ObservableK`
+extension ForObservableK: Concurrent {
+    public static func parMap<A, B, Z>(_ fa: Kind<ForObservableK, A>, _ fb: Kind<ForObservableK, B>, _ f: @escaping (A, B) -> Z) -> Kind<ForObservableK, Z> {
+        return Observable.zip(fa^.value, fb^.value, resultSelector: f).k()
+    }
+    
+    public static func parMap<A, B, C, Z>(_ fa: Kind<ForObservableK, A>, _ fb: Kind<ForObservableK, B>, _ fc: Kind<ForObservableK, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<ForObservableK, Z> {
+        return Observable.zip(fa^.value, fb^.value, fc^.value, resultSelector: f).k()
+    }
+}
+
+// MARK: Instance of `ConcurrentEffect` for `ObservableK`
 extension ForObservableK: ConcurrentEffect {
     public static func runAsyncCancellable<A>(_ fa: Kind<ForObservableK, A>, _ callback: @escaping (Either<ForObservableK.E, A>) -> Kind<ForObservableK, ()>) -> Kind<ForObservableK, BowEffects.Disposable> {
         return Observable.create { _ in
@@ -178,5 +214,32 @@ extension ForObservableK: ConcurrentEffect {
                 disposable.dispose()
             }
         }.k()
+    }
+}
+
+// MARK: Instance of `Bracket` for `ObservableK`
+extension ForObservableK: Bracket {
+    public static func bracketCase<A, B>(
+        _ fa: Kind<ForObservableK, A>,
+        _ release: @escaping (A, ExitCase<Error>) -> Kind<ForObservableK, ()>,
+        _ use: @escaping (A) throws -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
+        return Observable.create { emitter in
+            fa.handleErrorWith { e in ObservableK.from { emitter.on(.error(e)) }.value.flatMap { _ in Observable.error(e) }.k() }^
+                .concatMap { a in
+                    ObservableK.invoke { try use(a)^ }
+                        .value
+                        .do(onError: { t in
+                                _ = ObservableK.defer { release(a, .error(t)) }^.value
+                                    .subscribe(onNext: { emitter.onError(t) },
+                                               onError: { e in emitter.onError(e) })
+                            },
+                            onCompleted: {
+                                _ = ObservableK.defer { release(a, .completed) }^.value.subscribe(onNext: { emitter.onCompleted() }, onError: emitter.onError)
+                            },
+                            onDispose: {
+                                _ = ObservableK.defer { release(a, .canceled) }^.value.subscribe()
+                            }).k()
+                }.value.subscribe(onNext: emitter.onNext)
+            }.k()
     }
 }
