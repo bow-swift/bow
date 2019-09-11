@@ -231,6 +231,7 @@
 		11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0367E2327D08900B39A80 /* EffectComprehensions.swift */; };
 		11F036822327D4AC00B39A80 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036812327D4AC00B39A80 /* URLSession.swift */; };
 		11F036842327E1C900B39A80 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036832327E1C900B39A80 /* ConsoleIO.swift */; };
+		11F036862327EA1F00B39A80 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036852327EA1F00B39A80 /* FileManager.swift */; };
 		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
 		11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C94231816AD00BD1E87 /* Atomic.swift */; };
 		11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */; };
@@ -922,6 +923,7 @@
 		11F0367E2327D08900B39A80 /* EffectComprehensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectComprehensions.swift; sourceTree = "<group>"; };
 		11F036812327D4AC00B39A80 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		11F036832327E1C900B39A80 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
+		11F036852327EA1F00B39A80 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
 		11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C94231816AD00BD1E87 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
@@ -1785,6 +1787,7 @@
 			isa = PBXGroup;
 			children = (
 				11F036832327E1C900B39A80 /* ConsoleIO.swift */,
+				11F036852327EA1F00B39A80 /* FileManager.swift */,
 				11F036812327D4AC00B39A80 /* URLSession.swift */,
 			);
 			path = Foundation;
@@ -3207,6 +3210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11F036862327EA1F00B39A80 /* FileManager.swift in Sources */,
 				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				11F036822327D4AC00B39A80 /* URLSession.swift in Sources */,
