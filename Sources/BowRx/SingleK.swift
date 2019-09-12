@@ -187,9 +187,9 @@ extension ForSingleK: Concurrent {
 // MARK: Instance of `Bracket` for `SingleK`
 extension ForSingleK: Bracket {
     public static func bracketCase<A, B>(
-        _ fa: Kind<ForSingleK, A>,
-        _ release: @escaping (A, ExitCase<Error>) -> Kind<ForSingleK, ()>,
-        _ use: @escaping (A) throws -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
+        acquire fa: Kind<ForSingleK, A>,
+        release: @escaping (A, ExitCase<Error>) -> Kind<ForSingleK, ()>,
+        use: @escaping (A) throws -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
         return Single.create { emitter in
             fa.handleErrorWith { t in SingleK.from { emitter(.error(t)) }.value.flatMap { _ in Single.error(t) }.k() }
                 .flatMap { a in

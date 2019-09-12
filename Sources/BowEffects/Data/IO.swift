@@ -555,7 +555,7 @@ extension IOPartial: MonadError {}
 
 // MARK: Instance of `Bracket` for `IO`
 extension IOPartial: Bracket {
-    public static func bracketCase<A, B>(_ fa: IOOf<E, A>, _ release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, _ use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
+    public static func bracketCase<A, B>(acquire fa: IOOf<E, A>, release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
         return BracketIO<E, A, B>(fa^, release, use)
     }
 }

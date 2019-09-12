@@ -81,7 +81,7 @@ private class RegularResource<F: Bracket, A>: Resource<F, A> {
     }
     
     override func use<C>(_ f: @escaping (A) -> Kind<F, C>) -> Kind<F, C> {
-        return acquire().bracketCase(release, f)
+        return acquire().bracketCase(release: release, use: f)
     }
 }
 

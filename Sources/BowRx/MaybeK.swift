@@ -179,9 +179,9 @@ extension ForMaybeK: Concurrent {
 // MARK: Instance of `Bracket` for `MaybeK`
 extension ForMaybeK: Bracket {
     public static func bracketCase<A, B>(
-        _ fa: Kind<ForMaybeK, A>,
-        _ release: @escaping (A, ExitCase<Error>) -> Kind<ForMaybeK, ()>,
-        _ use: @escaping (A) throws -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
+        acquire fa: Kind<ForMaybeK, A>,
+        release: @escaping (A, ExitCase<Error>) -> Kind<ForMaybeK, ()>,
+        use: @escaping (A) throws -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
         return Maybe.create { emitter in
             return fa.handleErrorWith { t in MaybeK.from { emitter(.error(t)) }.value.flatMap { Maybe.error(t) }.k() }
                 .flatMap { a in
