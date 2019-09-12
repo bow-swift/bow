@@ -1,9 +1,5 @@
 PODS:
   - Bow (0.5.0)
-  - BowBrightFutures (0.5.0):
-    - Bow (~> 0.5.0)
-    - BowEffects (~> 0.5.0)
-    - BrightFutures (~> 8.0.0)
   - BowEffects (0.5.0):
     - Bow (~> 0.5.0)
   - BowFree (0.5.0):
@@ -18,12 +14,10 @@ PODS:
     - Bow (~> 0.5.0)
     - BowEffects (~> 0.5.0)
     - RxSwift (~> 5.0.0)
-  - BrightFutures (8.0.0)
   - RxSwift (5.0.0)
 
 DEPENDENCIES:
   - Bow (from `../..`)
-  - BowBrightFutures (from `../..`)
   - BowEffects (from `../..`)
   - BowFree (from `../..`)
   - BowGeneric (from `../..`)
@@ -33,13 +27,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - BrightFutures
     - RxSwift
 
 EXTERNAL SOURCES:
   Bow:
-    :path: "../.."
-  BowBrightFutures:
     :path: "../.."
   BowEffects:
     :path: "../.."
@@ -56,16 +47,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Bow: 74386868e5d013de697c1996b0f3f02081087063
-  BowBrightFutures: a487fc1204308a0b77c6bf6602223cc759197212
   BowEffects: 9c0f25efbb38cdf6a7b0c2b59932a0202ef03108
   BowFree: 1103ce271b8462df127bbc9d82d65cd5122f907b
   BowGeneric: c8b7f796b547a2c9476247a035de45519e9ca1ab
   BowOptics: 47261ee07a7a123bced56956140365f4f97a760a
   BowRecursionSchemes: 445661b658f4c086116b9a6715543eea9bc30c58
   BowRx: 6d01527d1da23d8d2f1403616c755c24b3177b83
-  BrightFutures: f8427b46feabaf73c5e71ace7d86d65dfbb47696
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
 
-PODFILE CHECKSUM: 0fdd192b8f28a6797f9bd131a05f2e2bce19d4c1
+PODFILE CHECKSUM: 2a236e889c6c9ab260a8113679418a7d2963fe8b
 
 COCOAPODS: 1.7.4
