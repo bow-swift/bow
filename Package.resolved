@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "BrightFutures",
-        "repositoryURL": "https://github.com/Thomvis/BrightFutures.git",
-        "state": {
-          "branch": null,
-          "revision": "9279defa6bdc21501ce740266e5a14d0119ddc63",
-          "version": "8.0.1"
-        }
-      },
-      {
         "package": "FileCheck",
         "repositoryURL": "https://github.com/llvm-swift/FileCheck.git",
         "state": {

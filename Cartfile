@@ -1,2 +1,1 @@
 github "ReactiveX/RxSwift" ~> 5.0.0
-github "Thomvis/BrightFutures" ~> 8.0.0
