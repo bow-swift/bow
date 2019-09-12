@@ -54,7 +54,7 @@ extension IOPartial: EquatableK where E: Equatable {
         var aError, bError : E?
         
         do {
-            aValue = try IO.fix(lhs).unsafePerformIO()
+            aValue = try IO.fix(lhs).unsafeRunSync()
         } catch let error as E {
             aError = error
         } catch {
@@ -62,7 +62,7 @@ extension IOPartial: EquatableK where E: Equatable {
         }
         
         do {
-            bValue = try IO.fix(rhs).unsafePerformIO()
+            bValue = try IO.fix(rhs).unsafeRunSync()
         } catch let error as E {
             bError = error
         } catch {
