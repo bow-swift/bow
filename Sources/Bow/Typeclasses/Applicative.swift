@@ -154,7 +154,7 @@ public extension Applicative {
     ///   - a: 1st value of the tuple.
     ///   - b: 2nd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B>(_ a: Kind<Self, A>,
+    static func zip<A, B>(_ a: Kind<Self, A>,
                              _ b : Kind<Self, B>) -> Kind<Self, (A, B)> {
         return product(a, b)
     }
@@ -166,7 +166,7 @@ public extension Applicative {
     ///   - b: 2nd value of the tuple.
     ///   - c: 3rd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C>(_ a: Kind<Self, A>,
+    static func zip<A, B, C>(_ a: Kind<Self, A>,
                                 _ b: Kind<Self, B>,
                                 _ c: Kind<Self, C>) -> Kind<Self, (A, B, C)> {
         return product(product(a, b), c)
@@ -180,7 +180,7 @@ public extension Applicative {
     ///   - c: 3rd value of the tuple.
     ///   - d: 4th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D>(_ a: Kind<Self, A>,
                                    _ b: Kind<Self, B>,
                                    _ c: Kind<Self, C>,
                                    _ d: Kind<Self, D>) -> Kind<Self, (A, B, C, D)> {
@@ -196,7 +196,7 @@ public extension Applicative {
     ///   - d: 4th value of the tuple.
     ///   - e: 5th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D, E>(_ a: Kind<Self, A>,
                                       _ b: Kind<Self, B>,
                                       _ c: Kind<Self, C>,
                                       _ d: Kind<Self, D>,
@@ -214,7 +214,7 @@ public extension Applicative {
     ///   - e: 5th value of the tuple.
     ///   - g: 6th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D, E, G>(_ a: Kind<Self, A>,
                                          _ b: Kind<Self, B>,
                                          _ c: Kind<Self, C>,
                                          _ d: Kind<Self, D>,
@@ -234,7 +234,7 @@ public extension Applicative {
     ///   - g: 6th value of the tuple.
     ///   - h: 7th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D, E, G, H>(_ a: Kind<Self, A>,
                                             _ b: Kind<Self, B>,
                                             _ c: Kind<Self, C>,
                                             _ d: Kind<Self, D>,
@@ -256,7 +256,7 @@ public extension Applicative {
     ///   - h: 7th value of the tuple.
     ///   - i: 8th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D, E, G, H, I>(_ a: Kind<Self, A>,
                                                _ b: Kind<Self, B>,
                                                _ c: Kind<Self, C>,
                                                _ d: Kind<Self, D>,
@@ -280,7 +280,7 @@ public extension Applicative {
     ///   - i: 8th value of the tuple.
     ///   - j: 9th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<Self, A>,
+    static func zip<A, B, C, D, E, G, H, I, J>(_ a: Kind<Self, A>,
                                                   _ b: Kind<Self, B>,
                                                   _ c: Kind<Self, C>,
                                                   _ d: Kind<Self, D>,
@@ -302,7 +302,7 @@ public extension Applicative {
     static func map<A, B, Z>(_ a: Kind<Self, A>,
                              _ b: Kind<Self, B>,
                              _ f: @escaping (A, B) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b), f)
+        return map(zip(a, b), f)
     }
 
     /// Combines the result of three computations in the context implementing this instance, using the provided function.
@@ -317,7 +317,7 @@ public extension Applicative {
                                 _ b: Kind<Self, B>,
                                 _ c: Kind<Self, C>,
                                 _ f: @escaping (A, B, C) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c), f)
+        return map(zip(a, b, c), f)
     }
 
     /// Combines the result of four computations in the context implementing this instance, using the provided function.
@@ -334,7 +334,7 @@ public extension Applicative {
                                    _ c: Kind<Self, C>,
                                    _ d: Kind<Self, D>,
                                    _ f: @escaping (A, B, C, D) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d), f)
+        return map(zip(a, b, c, d), f)
     }
 
     /// Combines the result of five computations in the context implementing this instance, using the provided function.
@@ -353,7 +353,7 @@ public extension Applicative {
                                       _ d: Kind<Self, D>,
                                       _ e: Kind<Self, E>,
                                       _ f: @escaping (A, B, C, D, E) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d, e), f)
+        return map(zip(a, b, c, d, e), f)
     }
 
     /// Combines the result of six computations in the context implementing this instance, using the provided function.
@@ -374,7 +374,7 @@ public extension Applicative {
                                          _ e: Kind<Self, E>,
                                          _ g: Kind<Self, G>,
                                          _ f: @escaping (A, B, C, D, E, G) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d, e, g), f)
+        return map(zip(a, b, c, d, e, g), f)
     }
 
     /// Combines the result of seven computations in the context implementing this instance, using the provided function.
@@ -397,7 +397,7 @@ public extension Applicative {
                                             _ g: Kind<Self, G>,
                                             _ h: Kind<Self, H>,
                                             _ f: @escaping (A, B, C, D, E, G, H) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d, e, g, h), f)
+        return map(zip(a, b, c, d, e, g, h), f)
     }
 
     /// Combines the result of eight computations in the context implementing this instance, using the provided function.
@@ -422,7 +422,7 @@ public extension Applicative {
                                                _ h: Kind<Self, H>,
                                                _ i: Kind<Self, I>,
                                                _ f: @escaping (A, B, C, D, E, G, H, I) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d, e, g, h, i), f)
+        return map(zip(a, b, c, d, e, g, h, i), f)
     }
 
     /// Combines the result of nine computations in the context implementing this instance, using the provided function.
@@ -449,7 +449,7 @@ public extension Applicative {
                                                   _ i: Kind<Self, I>,
                                                   _ j: Kind<Self, J>,
                                                   _ f: @escaping (A, B, C, D, E, G, H, I, J) -> Z) -> Kind<Self, Z> {
-        return map(tupled(a, b, c, d, e, g, h, i, j), f)
+        return map(zip(a, b, c, d, e, g, h, i, j), f)
     }
 }
 
@@ -574,35 +574,35 @@ public extension Kind where F: Applicative {
 
     /// Creates a tuple out of two values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
     ///   - b: 2nd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B>(_ a: Kind<F, A>,
-                             _ b : Kind<F, B>) -> Kind<F, (A, B)> {
-        return F.tupled(a, b)
+    static func zip<A, B>(_ a: Kind<F, A>,
+                          _ b : Kind<F, B>) -> Kind<F, (A, B)> {
+        return F.zip(a, b)
     }
 
     /// Creates a tuple out of three values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
     ///   - b: 2nd value of the tuple.
     ///   - c: 3rd value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C>(_ a: Kind<F, A>,
-                                _ b: Kind<F, B>,
-                                _ c: Kind<F, C>) -> Kind<F, (A, B, C)> {
-        return F.tupled(a, b, c)
+    static func zip<A, B, C>(_ a: Kind<F, A>,
+                             _ b: Kind<F, B>,
+                             _ c: Kind<F, C>) -> Kind<F, (A, B, C)> {
+        return F.zip(a, b, c)
     }
 
     /// Creates a tuple out of four values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -610,16 +610,16 @@ public extension Kind where F: Applicative {
     ///   - c: 3rd value of the tuple.
     ///   - d: 4th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D>(_ a: Kind<F, A>,
-                                   _ b: Kind<F, B>,
-                                   _ c: Kind<F, C>,
-                                   _ d: Kind<F, D>) -> Kind<F, (A, B, C, D)> {
-        return F.tupled(a, b, c, d)
+    static func zip<A, B, C, D>(_ a: Kind<F, A>,
+                                _ b: Kind<F, B>,
+                                _ c: Kind<F, C>,
+                                _ d: Kind<F, D>) -> Kind<F, (A, B, C, D)> {
+        return F.zip(a, b, c, d)
     }
 
     /// Creates a tuple out of five values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -628,17 +628,17 @@ public extension Kind where F: Applicative {
     ///   - d: 4th value of the tuple.
     ///   - e: 5th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E>(_ a: Kind<F, A>,
-                                      _ b: Kind<F, B>,
-                                      _ c: Kind<F, C>,
-                                      _ d: Kind<F, D>,
-                                      _ e: Kind<F, E>) -> Kind<F, (A, B, C, D, E)> {
-        return F.tupled(a, b, c, d, e)
+    static func zip<A, B, C, D, E>(_ a: Kind<F, A>,
+                                   _ b: Kind<F, B>,
+                                   _ c: Kind<F, C>,
+                                   _ d: Kind<F, D>,
+                                   _ e: Kind<F, E>) -> Kind<F, (A, B, C, D, E)> {
+        return F.zip(a, b, c, d, e)
     }
 
     /// Creates a tuple out of six values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -648,18 +648,18 @@ public extension Kind where F: Applicative {
     ///   - e: 5th value of the tuple.
     ///   - g: 6th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G>(_ a: Kind<F, A>,
-                                         _ b: Kind<F, B>,
-                                         _ c: Kind<F, C>,
-                                         _ d: Kind<F, D>,
-                                         _ e: Kind<F, E>,
-                                         _ g: Kind<F, G>) -> Kind<F, (A, B, C, D, E, G)> {
-        return F.tupled(a, b, c, d, e, g)
+    static func zip<A, B, C, D, E, G>(_ a: Kind<F, A>,
+                                      _ b: Kind<F, B>,
+                                      _ c: Kind<F, C>,
+                                      _ d: Kind<F, D>,
+                                      _ e: Kind<F, E>,
+                                      _ g: Kind<F, G>) -> Kind<F, (A, B, C, D, E, G)> {
+        return F.zip(a, b, c, d, e, g)
     }
 
     /// Creates a tuple out of seven values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -670,19 +670,19 @@ public extension Kind where F: Applicative {
     ///   - g: 6th value of the tuple.
     ///   - h: 7th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H>(_ a: Kind<F, A>,
-                                            _ b: Kind<F, B>,
-                                            _ c: Kind<F, C>,
-                                            _ d: Kind<F, D>,
-                                            _ e: Kind<F, E>,
-                                            _ g: Kind<F, G>,
-                                            _ h: Kind<F, H>) -> Kind<F, (A, B, C, D, E, G, H)> {
-        return F.tupled(a, b, c, d, e, g, h)
+    static func zip<A, B, C, D, E, G, H>(_ a: Kind<F, A>,
+                                         _ b: Kind<F, B>,
+                                         _ c: Kind<F, C>,
+                                         _ d: Kind<F, D>,
+                                         _ e: Kind<F, E>,
+                                         _ g: Kind<F, G>,
+                                         _ h: Kind<F, H>) -> Kind<F, (A, B, C, D, E, G, H)> {
+        return F.zip(a, b, c, d, e, g, h)
     }
 
     /// Creates a tuple out of eight values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -694,20 +694,20 @@ public extension Kind where F: Applicative {
     ///   - h: 7th value of the tuple.
     ///   - i: 8th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H, I>(_ a: Kind<F, A>,
-                                               _ b: Kind<F, B>,
-                                               _ c: Kind<F, C>,
-                                               _ d: Kind<F, D>,
-                                               _ e: Kind<F, E>,
-                                               _ g: Kind<F, G>,
-                                               _ h: Kind<F, H>,
-                                               _ i: Kind<F, I>) -> Kind<F, (A, B, C, D, E, G, H, I)> {
-        return F.tupled(a, b, c, d, e, g, h, i)
+    static func zip<A, B, C, D, E, G, H, I>(_ a: Kind<F, A>,
+                                            _ b: Kind<F, B>,
+                                            _ c: Kind<F, C>,
+                                            _ d: Kind<F, D>,
+                                            _ e: Kind<F, E>,
+                                            _ g: Kind<F, G>,
+                                            _ h: Kind<F, H>,
+                                            _ i: Kind<F, I>) -> Kind<F, (A, B, C, D, E, G, H, I)> {
+        return F.zip(a, b, c, d, e, g, h, i)
     }
 
     /// Creates a tuple out of nine values in the context implementing this instance.
     ///
-    /// This is a convenience method to call `Applicative.tupled` as a static method of this type.
+    /// This is a convenience method to call `Applicative.zip` as a static method of this type.
     ///
     /// - Parameters:
     ///   - a: 1st value of the tuple.
@@ -720,16 +720,16 @@ public extension Kind where F: Applicative {
     ///   - i: 8th value of the tuple.
     ///   - j: 9th value of the tuple.
     /// - Returns: A tuple in the context implementing this instance.
-    static func tupled<A, B, C, D, E, G, H, I, J>(_ a: Kind<F, A>,
-                                                  _ b: Kind<F, B>,
-                                                  _ c: Kind<F, C>,
-                                                  _ d: Kind<F, D>,
-                                                  _ e: Kind<F, E>,
-                                                  _ g: Kind<F, G>,
-                                                  _ h: Kind<F, H>,
-                                                  _ i: Kind<F, I>,
-                                                  _ j: Kind<F, J>) -> Kind<F, (A, B, C, D, E, G, H, I, J)> {
-        return F.tupled(a, b, c, d, e, g, h, i, j)
+    static func zip<A, B, C, D, E, G, H, I, J>(_ a: Kind<F, A>,
+                                               _ b: Kind<F, B>,
+                                               _ c: Kind<F, C>,
+                                               _ d: Kind<F, D>,
+                                               _ e: Kind<F, E>,
+                                               _ g: Kind<F, G>,
+                                               _ h: Kind<F, H>,
+                                               _ i: Kind<F, I>,
+                                               _ j: Kind<F, J>) -> Kind<F, (A, B, C, D, E, G, H, I, J)> {
+        return F.zip(a, b, c, d, e, g, h, i, j)
     }
 
     /// Combines the result of two computations in the context implementing this instance, using the provided function.
