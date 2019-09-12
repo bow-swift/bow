@@ -11,6 +11,15 @@ public typealias Task<A> = IO<Error, A>
 public typealias ForUIO = IOPartial<Never>
 public typealias UIO<A> = IO<Never, A>
 
+public typealias EnvIOPartial<D, E: Error> = KleisliPartial<IOPartial<E>, D>
+public typealias EnvIO<D, E: Error, A> = Kleisli<IOPartial<E>, D, A>
+
+public typealias RIOPartial<D, A> = EnvIOPartial<D, Error>
+public typealias RIO<D, A> = EnvIO<D, Error, A>
+
+public typealias URIOPartial<D, A> = EnvIOPartial<D, Never>
+public typealias URIO<D, A> = EnvIO<D, Never, A>
+
 public enum IOError: Error {
     case timeout
 }
