@@ -33,8 +33,8 @@ public extension Selective {
     ///
     /// - Parameters:
     ///   - fab: Computation producing an `Either` value, to decide which computation is executed afterwards.
-    ///   - fa: Computation that will be executed if `fab` evaluates to an `Either.left` value.
-    ///   - fb: Computation that will be executed if `fab` evaluates to an `Either.right` value.
+    ///   - ifLeft: Computation that will be executed if `fab` evaluates to an `Either.left` value.
+    ///   - ifRight: Computation that will be executed if `fab` evaluates to an `Either.right` value.
     /// - Returns: Composition of the computations.
     static func branch<A, B, C>(_ fab: Kind<Self, Either<A, B>>, ifLeft fa: Kind<Self, (A) -> C>, ifRight fb: Kind<Self, (B) -> C>) -> Kind<Self, C> {
         let x = map(fab) { eab in Either.fix(eab.map(Either<B, C>.left)) }
@@ -46,8 +46,8 @@ public extension Selective {
     ///
     /// - Parameters:
     ///   - x: Computation producing a boolean value to decide which computation is exectured afterwards.
-    ///   - t: Computation that will be executed if the first evaluates to `true`.
-    ///   - e: Computation that will be executed if the first evaluates to `false`.
+    ///   - then: Computation that will be executed if the first evaluates to `true`.
+    ///   - else: Computation that will be executed if the first evaluates to `false`.
     /// - Returns: Composition of the computations.
     static func ifS<A>(_ x: Kind<Self, Bool>, then t: Kind<Self, A>, else e: Kind<Self, A>) -> Kind<Self, A> {
         return branch(selector(x), ifLeft: map(t, { tt in constant(tt) }), ifRight: map(e, { ee in constant(ee) }))
