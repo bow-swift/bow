@@ -41,6 +41,26 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }^
     }
     
+    public static func invoke(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
+        return IO.defer {
+            do {
+                return try f().fold(IO.raiseError, IO.pure)
+            } catch let error as E {
+                return raiseError(error)
+            } catch {
+                fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
+            }
+        }^
+    }
+    
+    public static func invoke(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
+        return invoke { try f().toEither() }
+    }
+    
+    public static func invoke(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
+        return invoke { try f().toEither() }
+    }
+    
     public static func merge<B>(_ fa: @escaping () throws -> A,
                                 _ fb: @escaping () throws -> B) -> IO<E, (A, B)> {
         return IO.tupled(
