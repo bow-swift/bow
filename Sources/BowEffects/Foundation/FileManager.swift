@@ -112,6 +112,7 @@ public extension FileManager {
     // MARK: Accessing File Provider Services
     
     /// IO suspended version of `FileManager.getFileProviderServicesForItem(at:completionHandler:)`. Refer to that method for further documentation.
+    @available(OSX 10.13, *)
     func getFileProviderServicesForItemIO(at url: URL) -> IO<Error, [NSFileProviderServiceName: NSFileProviderService]> {
         return IO.async { callback in
             self.getFileProviderServicesForItem(at: url) { services, error in

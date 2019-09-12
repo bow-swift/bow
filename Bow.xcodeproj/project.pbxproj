@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		0DE29CA121A7258100DC781E /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
 		1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BED422C22DD2002C3F78 /* IO.swift */; };
 		1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE022C22E47002C3F78 /* UnsafeRun.swift */; };
@@ -108,10 +107,6 @@
 		112297BB219DCFDE006D66C5 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */; };
 		112297BC219DCFDE006D66C5 /* SingleKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */; };
 		112297BD219DCFDE006D66C5 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */; };
-		112297DA219DD148006D66C5 /* FutureK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F467217E2E9200969984 /* FutureK.swift */; };
-		112297E0219DD148006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
-		112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F39F217E2DEF00969984 /* FutureKTest.swift */; };
-		112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F364217E2CB100969984 /* BrightFutures.framework */; };
 		1125054D220DD92B00861131 /* EquatableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125054C220DD92B00861131 /* EquatableK.swift */; };
 		1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8922B1144200F840CB /* AutoOptics.swift */; };
 		1126CA8C22B115E100F840CB /* AutoLens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8B22B115E100F840CB /* AutoLens.swift */; };
@@ -152,8 +147,6 @@
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
 		117DC0F622AE504500EF65F0 /* ObservableK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */; };
-		117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
-		117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */; };
 		117DC12A22AE563900EF65F0 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC13622AE578A00EF65F0 /* Free+Gen.swift */; };
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
@@ -489,61 +482,12 @@
 			remoteGlobalIDString = 11229791219DCE76006D66C5;
 			remoteInfo = "Bow-Rx";
 		};
-		112297D7219DD148006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Bow::Bow";
-			remoteInfo = Bow;
-		};
-		112297E9219DD1B8006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
-			remoteInfo = "Bow-Effects";
-		};
-		112297EF219DD2AB006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
-			remoteInfo = "Bow-Effects";
-		};
-		112297F1219DD2AB006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112293AD219D8B86006D66C5;
-			remoteInfo = BowLaws;
-		};
-		112297F3219DD2AB006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Bow::Bow";
-			remoteInfo = Bow;
-		};
-		11229807219DD31E006D66C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112297D3219DD148006D66C5;
-			remoteInfo = "Bow-BrightFutures";
-		};
 		1126CA7C22AFBB6C00F840CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
 			remoteInfo = "Bow-Generators";
-		};
-		1126CA8022B0DDD100F840CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 117DC0F722AE522000EF65F0;
-			remoteInfo = "Bow-BrightFuturesGenerators";
 		};
 		1126CA8422B0DE9E00F840CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -629,34 +573,6 @@
 			remoteGlobalIDString = 11229791219DCE76006D66C5;
 			remoteInfo = "Bow-Rx";
 		};
-		117DC0F922AE522000EF65F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
-			remoteInfo = "Bow-Generators";
-		};
-		117DC0FB22AE522000EF65F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
-			remoteInfo = "Bow-Effects";
-		};
-		117DC0FD22AE522000EF65F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "Bow::Bow";
-			remoteInfo = Bow;
-		};
-		117DC10922AE525B00EF65F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 112297D3219DD148006D66C5;
-			remoteInfo = "Bow-BrightFutures";
-		};
 		117DC11022AE563900EF65F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -720,13 +636,6 @@
 			remoteGlobalIDString = 11D97EC3219EBAA1008FC004;
 			remoteInfo = "Bow-EffectsLaws";
 		};
-		11D97EF5219EBCE1008FC004 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 11D97EC3219EBAA1008FC004;
-			remoteInfo = "Bow-EffectsLaws";
-		};
 		11E71735219D79A100B94845 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -780,7 +689,6 @@
 
 /* Begin PBXFileReference section */
 		1104BED422C22DD2002C3F78 /* IO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
-		1104BED522C22DD2002C3F78 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		1104BEE022C22E47002C3F78 /* UnsafeRun.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeRun.swift; sourceTree = "<group>"; };
 		1104BEE122C22E47002C3F78 /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		1104BEE222C22E47002C3F78 /* Concurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concurrent.swift; sourceTree = "<group>"; };
@@ -839,10 +747,6 @@
 		112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Rx-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Rx-Info.plist"; sourceTree = "<absolute>"; };
 		112297CD219DCFDE006D66C5 /* BowRxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-RxTests-Info.plist"; sourceTree = "<absolute>"; };
-		112297E6219DD148006D66C5 /* BowBrightFutures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowBrightFutures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		112297E7219DD149006D66C5 /* Bow-BrightFutures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFutures-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-BrightFutures-Info.plist"; sourceTree = "<absolute>"; };
-		11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowBrightFuturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-BrightFuturesTests-Info.plist"; sourceTree = "<absolute>"; };
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
 		1126CA8922B1144200F840CB /* AutoOptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptics.swift; sourceTree = "<group>"; };
 		1126CA8B22B115E100F840CB /* AutoLens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLens.swift; sourceTree = "<group>"; };
@@ -878,9 +782,6 @@
 		117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleK+Gen.swift"; sourceTree = "<group>"; };
 		117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaybeK+Gen.swift"; sourceTree = "<group>"; };
 		117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableK+Gen.swift"; sourceTree = "<group>"; };
-		117DC10722AE522000EF65F0 /* BowBrightFuturesGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowBrightFuturesGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		117DC10822AE522100EF65F0 /* Bow-BrightFuturesGenerators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-BrightFuturesGenerators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-BrightFuturesGenerators-Info.plist"; sourceTree = "<absolute>"; };
-		117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FutureK+Gen.swift"; sourceTree = "<group>"; };
 		117DC12F22AE563900EF65F0 /* BowFreeGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowFreeGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC13022AE563900EF65F0 /* Bow-Free-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Free-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC13622AE578A00EF65F0 /* Free+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Free+Gen.swift"; sourceTree = "<group>"; };
@@ -930,22 +831,14 @@
 		11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C9E231818AE00BD1E87 /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
 		11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
-		8BA0F364217E2CB100969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
-		8BA0F365217E2CB100969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		8BA0F36C217E2CBF00969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/Mac/BrightFutures.framework; sourceTree = "<group>"; };
-		8BA0F36D217E2CBF00969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/Mac/Result.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36F217E2CBF00969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F374217E2CD000969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/tvOS/RxCocoa.framework; sourceTree = "<group>"; };
-		8BA0F375217E2CD000969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
-		8BA0F376217E2CD000969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/tvOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F377217E2CD000969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F37C217E2D0700969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/watchOS/RxCocoa.framework; sourceTree = "<group>"; };
-		8BA0F37D217E2D0700969984 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/watchOS/BrightFutures.framework; sourceTree = "<group>"; };
 		8BA0F37E217E2D0700969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/watchOS/RxSwift.framework; sourceTree = "<group>"; };
-		8BA0F37F217E2D0700969984 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
 		8BA0F384217E2D3400969984 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		8BA0F385217E2D3400969984 /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanFunctionsTest.swift; sourceTree = "<group>"; };
@@ -961,7 +854,6 @@
 		8BA0F398217E2DEF00969984 /* OptionTTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionTTest.swift; sourceTree = "<group>"; };
 		8BA0F39B217E2DEF00969984 /* StringInstancesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInstancesTest.swift; sourceTree = "<group>"; };
 		8BA0F39C217E2DEF00969984 /* NumberInstancesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInstancesTest.swift; sourceTree = "<group>"; };
-		8BA0F39F217E2DEF00969984 /* FutureKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureKTest.swift; sourceTree = "<group>"; };
 		8BA0F3A0217E2DEF00969984 /* IOTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOTest.swift; sourceTree = "<group>"; };
 		8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncLaws.swift; sourceTree = "<group>"; };
 		8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableKTest.swift; sourceTree = "<group>"; };
@@ -1054,8 +946,6 @@
 		8BA0F462217E2E9200969984 /* StringInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringInstances.swift; sourceTree = "<group>"; };
 		8BA0F463217E2E9200969984 /* OptionInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionInstances.swift; sourceTree = "<group>"; };
 		8BA0F464217E2E9200969984 /* NumberInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberInstances.swift; sourceTree = "<group>"; };
-		8BA0F467217E2E9200969984 /* FutureK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureK.swift; sourceTree = "<group>"; };
-		8BA0F468217E2E9200969984 /* IO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
 		8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentEffect.swift; sourceTree = "<group>"; };
 		8BA0F46B217E2E9200969984 /* Effect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		8BA0F46C217E2E9200969984 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -1238,23 +1128,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		112297DF219DD148006D66C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				112297E0219DD148006D66C5 /* BrightFutures.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		112297F8219DD2AB006D66C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				0DE29CA021A7252C00DC781E /* Bow.framework in Frameworks */,
-				112297FD219DD2AB006D66C5 /* BrightFutures.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1160D0DF22D38CEC0010323A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
@@ -1277,14 +1150,6 @@
 			buildActionMask = 0;
 			files = (
 				117DC0E722AE4D6C00EF65F0 /* SwiftCheck.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		117DC10022AE522000EF65F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-				117DC10222AE522000EF65F0 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,15 +1212,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1104BECA22C22D8B002C3F78 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F468217E2E9200969984 /* IO.swift */,
-				1104BED522C22DD2002C3F78 /* Atomic.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1513,22 +1369,6 @@
 			path = BowRxTests;
 			sourceTree = "<group>";
 		};
-		112297E8219DD169006D66C5 /* BowBrightFutures */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F467217E2E9200969984 /* FutureK.swift */,
-			);
-			path = BowBrightFutures;
-			sourceTree = "<group>";
-		};
-		11229806219DD2F5006D66C5 /* BowBrightFuturesTests */ = {
-			isa = PBXGroup;
-			children = (
-				8BA0F39F217E2DEF00969984 /* FutureKTest.swift */,
-			);
-			path = BowBrightFuturesTests;
-			sourceTree = "<group>";
-		};
 		1126CA8822B1139B00F840CB /* Auto */ = {
 			isa = PBXGroup;
 			children = (
@@ -1589,14 +1429,6 @@
 				117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */,
 			);
 			path = BowRxGenerators;
-			sourceTree = "<group>";
-		};
-		117DC10B22AE52FE00EF65F0 /* BowBrightFuturesGenerators */ = {
-			isa = PBXGroup;
-			children = (
-				117DC10C22AE533700EF65F0 /* FutureK+Gen.swift */,
-			);
-			path = BowBrightFuturesGenerators;
 			sourceTree = "<group>";
 		};
 		117DC13522AE570E00EF65F0 /* BowFreeGenerators */ = {
@@ -1755,9 +1587,6 @@
 		11ED7A2C226E0BF200C27994 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				112297E7219DD149006D66C5 /* Bow-BrightFutures-Info.plist */,
-				117DC10822AE522100EF65F0 /* Bow-BrightFuturesGenerators-Info.plist */,
-				11229805219DD2AB006D66C5 /* Bow-BrightFuturesTests-Info.plist */,
 				117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */,
 				1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */,
 				11D97EEB219EBAA1008FC004 /* Bow-EffectsLaws-Info.plist */,
@@ -1807,20 +1636,12 @@
 			children = (
 				8BA0F384217E2D3400969984 /* Nimble.framework */,
 				8BA0F385217E2D3400969984 /* SwiftCheck.framework */,
-				8BA0F37D217E2D0700969984 /* BrightFutures.framework */,
-				8BA0F37F217E2D0700969984 /* Result.framework */,
 				8BA0F37C217E2D0700969984 /* RxCocoa.framework */,
 				8BA0F37E217E2D0700969984 /* RxSwift.framework */,
-				8BA0F376217E2CD000969984 /* BrightFutures.framework */,
-				8BA0F375217E2CD000969984 /* Result.framework */,
 				8BA0F374217E2CD000969984 /* RxCocoa.framework */,
 				8BA0F377217E2CD000969984 /* RxSwift.framework */,
-				8BA0F36C217E2CBF00969984 /* BrightFutures.framework */,
-				8BA0F36D217E2CBF00969984 /* Result.framework */,
 				8BA0F36F217E2CBF00969984 /* RxCocoa.framework */,
 				8BA0F36E217E2CBF00969984 /* RxSwift.framework */,
-				8BA0F364217E2CB100969984 /* BrightFutures.framework */,
-				8BA0F365217E2CB100969984 /* Result.framework */,
 				8BA0F366217E2CB100969984 /* RxCocoa.framework */,
 				8BA0F367217E2CB100969984 /* RxSwift.framework */,
 			);
@@ -2116,13 +1937,10 @@
 				11229782219DC88F006D66C5 /* BowEffectsTests.xctest */,
 				112297A9219DCE76006D66C5 /* BowRx.framework */,
 				112297CD219DCFDE006D66C5 /* BowRxTests.xctest */,
-				112297E6219DD148006D66C5 /* BowBrightFutures.framework */,
-				11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */,
 				11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */,
 				112097A922A7EBC7007F3D9C /* BowGenerators.framework */,
 				117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */,
 				117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */,
-				117DC10722AE522000EF65F0 /* BowBrightFuturesGenerators.framework */,
 				117DC12F22AE563900EF65F0 /* BowFreeGenerators.framework */,
 				1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */,
 			);
@@ -2138,7 +1956,6 @@
 				OBJ_218 /* Products */,
 				11ED7A2C226E0BF200C27994 /* Support Files */,
 				8BA0F363217E2CB100969984 /* Frameworks */,
-				1104BECA22C22D8B002C3F78 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2146,7 +1963,6 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F43B217E2E9200969984 /* Bow */,
-				112297E8219DD169006D66C5 /* BowBrightFutures */,
 				1122973C219DC4F1006D66C5 /* BowEffects */,
 				11E7188B219D825200B94845 /* BowFree */,
 				112295E3219D94DD006D66C5 /* BowGeneric */,
@@ -2160,8 +1976,6 @@
 		OBJ_87 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				117DC10B22AE52FE00EF65F0 /* BowBrightFuturesGenerators */,
-				11229806219DD2F5006D66C5 /* BowBrightFuturesTests */,
 				117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */,
 				11D97EEC219EBB35008FC004 /* BowEffectsLaws */,
 				11229786219DC968006D66C5 /* BowEffectsTests */,
@@ -2394,48 +2208,6 @@
 			productReference = 112297CD219DCFDE006D66C5 /* BowRxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		112297D3219DD148006D66C5 /* Bow-BrightFutures */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 112297E3219DD148006D66C5 /* Build configuration list for PBXNativeTarget "Bow-BrightFutures" */;
-			buildPhases = (
-				112297D8219DD148006D66C5 /* Sources */,
-				112297DF219DD148006D66C5 /* Frameworks */,
-				112297E2219DD148006D66C5 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				112297EA219DD1B8006D66C5 /* PBXTargetDependency */,
-				112297D6219DD148006D66C5 /* PBXTargetDependency */,
-			);
-			name = "Bow-BrightFutures";
-			productName = Bow;
-			productReference = 112297E6219DD148006D66C5 /* BowBrightFutures.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		112297EB219DD2AB006D66C5 /* Bow-BrightFuturesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 11229801219DD2AB006D66C5 /* Build configuration list for PBXNativeTarget "Bow-BrightFuturesTests" */;
-			buildPhases = (
-				112297F4219DD2AB006D66C5 /* Sources */,
-				112297F8219DD2AB006D66C5 /* Frameworks */,
-				11229800219DD2AB006D66C5 /* Run Script */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1126CA8122B0DDD100F840CB /* PBXTargetDependency */,
-				11D97EF6219EBCE1008FC004 /* PBXTargetDependency */,
-				11229808219DD31E006D66C5 /* PBXTargetDependency */,
-				112297EE219DD2AB006D66C5 /* PBXTargetDependency */,
-				112297F0219DD2AB006D66C5 /* PBXTargetDependency */,
-				112297F2219DD2AB006D66C5 /* PBXTargetDependency */,
-			);
-			name = "Bow-BrightFuturesTests";
-			productName = BowTests;
-			productReference = 11229804219DD2AB006D66C5 /* BowBrightFuturesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		1160D0BD22D38CEC0010323A /* Bow-OpticsLaws */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1160D0E322D38CEC0010323A /* Build configuration list for PBXNativeTarget "Bow-OpticsLaws" */;
@@ -2496,27 +2268,6 @@
 			name = "Bow-RxGenerators";
 			productName = Bow;
 			productReference = 117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 117DC10422AE522000EF65F0 /* Build configuration list for PBXNativeTarget "Bow-BrightFuturesGenerators" */;
-			buildPhases = (
-				117DC0FE22AE522000EF65F0 /* Sources */,
-				117DC10022AE522000EF65F0 /* Frameworks */,
-				117DC10322AE522000EF65F0 /* Run Script */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				117DC10A22AE525B00EF65F0 /* PBXTargetDependency */,
-				117DC0F822AE522000EF65F0 /* PBXTargetDependency */,
-				117DC0FA22AE522000EF65F0 /* PBXTargetDependency */,
-				117DC0FC22AE522000EF65F0 /* PBXTargetDependency */,
-			);
-			name = "Bow-BrightFuturesGenerators";
-			productName = Bow;
-			productReference = 117DC10722AE522000EF65F0 /* BowBrightFuturesGenerators.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */ = {
@@ -2689,15 +2440,6 @@
 					112297B1219DCFDE006D66C5 = {
 						LastSwiftMigration = 1020;
 					};
-					112297D3219DD148006D66C5 = {
-						LastSwiftMigration = 1020;
-					};
-					112297EB219DD2AB006D66C5 = {
-						LastSwiftMigration = 1020;
-					};
-					117DC0F722AE522000EF65F0 = {
-						LastSwiftMigration = 1020;
-					};
 					117DC10E22AE563900EF65F0 = {
 						LastSwiftMigration = 1020;
 					};
@@ -2727,6 +2469,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_218 /* Products */;
@@ -2738,7 +2481,6 @@
 				117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */,
 				117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */,
 				117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */,
-				117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */,
 				112293AD219D8B86006D66C5 /* BowLaws */,
 				"Bow::BowTests" /* BowTests */,
 				11E71817219D81B300B94845 /* Bow-Free */,
@@ -2755,8 +2497,6 @@
 				11229748219DC88F006D66C5 /* Bow-EffectsTests */,
 				11229791219DCE76006D66C5 /* Bow-Rx */,
 				112297B1219DCFDE006D66C5 /* Bow-RxTests */,
-				112297D3219DD148006D66C5 /* Bow-BrightFutures */,
-				112297EB219DD2AB006D66C5 /* Bow-BrightFuturesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2894,41 +2634,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		112297E2219DD148006D66C5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		11229800219DD2AB006D66C5 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		1160D0E222D38CEC0010323A /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -2970,26 +2675,6 @@
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		117DC0E822AE4D6C00EF65F0 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
-			);
-			name = "Run Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-		117DC10322AE522000EF65F0 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
@@ -3258,22 +2943,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		112297D8219DD148006D66C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				112297DA219DD148006D66C5 /* FutureK.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		112297F4219DD2AB006D66C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				112297F5219DD2AB006D66C5 /* FutureKTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1160D0C222D38CEC0010323A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -3302,14 +2971,6 @@
 				117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */,
 				117DC0F622AE504500EF65F0 /* ObservableK+Gen.swift in Sources */,
 				117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		117DC0FE22AE522000EF65F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				117DC10D22AE533700EF65F0 /* FutureK+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3657,45 +3318,10 @@
 			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
 			targetProxy = 112297CF219DCFF9006D66C5 /* PBXContainerItemProxy */;
 		};
-		112297D6219DD148006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::Bow" /* Bow */;
-			targetProxy = 112297D7219DD148006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297EA219DD1B8006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
-			targetProxy = 112297E9219DD1B8006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297EE219DD2AB006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
-			targetProxy = 112297EF219DD2AB006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297F0219DD2AB006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112293AD219D8B86006D66C5 /* BowLaws */;
-			targetProxy = 112297F1219DD2AB006D66C5 /* PBXContainerItemProxy */;
-		};
-		112297F2219DD2AB006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::Bow" /* Bow */;
-			targetProxy = 112297F3219DD2AB006D66C5 /* PBXContainerItemProxy */;
-		};
-		11229808219DD31E006D66C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112297D3219DD148006D66C5 /* Bow-BrightFutures */;
-			targetProxy = 11229807219DD31E006D66C5 /* PBXContainerItemProxy */;
-		};
 		1126CA7D22AFBB6C00F840CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
 			targetProxy = 1126CA7C22AFBB6C00F840CB /* PBXContainerItemProxy */;
-		};
-		1126CA8122B0DDD100F840CB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 117DC0F722AE522000EF65F0 /* Bow-BrightFuturesGenerators */;
-			targetProxy = 1126CA8022B0DDD100F840CB /* PBXContainerItemProxy */;
 		};
 		1126CA8522B0DE9E00F840CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3757,26 +3383,6 @@
 			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
 			targetProxy = 117DC0EE22AE4DB800EF65F0 /* PBXContainerItemProxy */;
 		};
-		117DC0F822AE522000EF65F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
-			targetProxy = 117DC0F922AE522000EF65F0 /* PBXContainerItemProxy */;
-		};
-		117DC0FA22AE522000EF65F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
-			targetProxy = 117DC0FB22AE522000EF65F0 /* PBXContainerItemProxy */;
-		};
-		117DC0FC22AE522000EF65F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "Bow::Bow" /* Bow */;
-			targetProxy = 117DC0FD22AE522000EF65F0 /* PBXContainerItemProxy */;
-		};
-		117DC10A22AE525B00EF65F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 112297D3219DD148006D66C5 /* Bow-BrightFutures */;
-			targetProxy = 117DC10922AE525B00EF65F0 /* PBXContainerItemProxy */;
-		};
 		117DC10F22AE563900EF65F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
@@ -3821,11 +3427,6 @@
 			isa = PBXTargetDependency;
 			target = 11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */;
 			targetProxy = 11D97EF3219EBC54008FC004 /* PBXContainerItemProxy */;
-		};
-		11D97EF6219EBCE1008FC004 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */;
-			targetProxy = 11D97EF5219EBCE1008FC004 /* PBXContainerItemProxy */;
 		};
 		11E71736219D79A100B94845 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4368,94 +3969,6 @@
 			};
 			name = Release;
 		};
-		112297E4219DD148006D66C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Support Files/Bow-BrightFutures-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-bright-futures";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFutures;
-			};
-			name = Debug;
-		};
-		112297E5219DD148006D66C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Support Files/Bow-BrightFutures-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-bright-futures";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFutures;
-			};
-			name = Release;
-		};
-		11229802219DD2AB006D66C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Support Files/Bow-BrightFuturesTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFuturesTests;
-			};
-			name = Debug;
-		};
-		11229803219DD2AB006D66C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Support Files/Bow-BrightFuturesTests-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFuturesTests;
-			};
-			name = Release;
-		};
 		1160D0E422D38CEC0010323A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4607,59 +4120,6 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxGenerators;
-			};
-			name = Release;
-		};
-		117DC10522AE522000EF65F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-BrightFuturesGenerators-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-brightfutures-generators";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFuturesGenerators;
-			};
-			name = Debug;
-		};
-		117DC10622AE522000EF65F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEFINES_MODULE = YES;
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-BrightFuturesGenerators-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @executable_path/Frameworks";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-brightfutures-generators";
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGET_NAME = BowBrightFuturesGenerators;
 			};
 			name = Release;
 		};
@@ -5185,24 +4645,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		112297E3219DD148006D66C5 /* Build configuration list for PBXNativeTarget "Bow-BrightFutures" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				112297E4219DD148006D66C5 /* Debug */,
-				112297E5219DD148006D66C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		11229801219DD2AB006D66C5 /* Build configuration list for PBXNativeTarget "Bow-BrightFuturesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				11229802219DD2AB006D66C5 /* Debug */,
-				11229803219DD2AB006D66C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		1160D0E322D38CEC0010323A /* Build configuration list for PBXNativeTarget "Bow-OpticsLaws" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -5226,15 +4668,6 @@
 			buildConfigurations = (
 				117DC0EA22AE4D6C00EF65F0 /* Debug */,
 				117DC0EB22AE4D6C00EF65F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		117DC10422AE522000EF65F0 /* Build configuration list for PBXNativeTarget "Bow-BrightFuturesGenerators" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				117DC10522AE522000EF65F0 /* Debug */,
-				117DC10622AE522000EF65F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -12,5 +12,5 @@ content:
       icon: /img/feature-icon-tertiary.svg
       
     - title: Integrations
-      description: Bow integrates nicely with popular Swift libraries like RxSwift or Result.
+      description: Bow integrates nicely with popular Swift libraries like RxSwift.
       icon: /img/feature-icon-quarter.svg
