@@ -46,6 +46,22 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     public func invoke(_ value: D) -> Kind<F, A> {
         return run(value)
     }
+    
+    /// Pre-composes this Kleisli function with a function transforming the input type.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: Composition of the two functions.
+    public func contramap<DD>(_ f: @escaping (DD) -> D) -> Kleisli<F, DD, A> {
+        return Kleisli<F, DD, A> { d in self.invoke(f(d)) }
+    }
+    
+    /// Pre-composes this Kleisli function with a function transforming the input type obtained from a key path.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: Composition of the two functions.
+    public func contramap<DD>(_ keyPath: KeyPath<DD, D>) -> Kleisli<F, DD, A> {
+        return Kleisli<F, DD, A> { d in self.invoke(d[keyPath: keyPath]) }
+    }
 }
 
 /// Safe downcast.
