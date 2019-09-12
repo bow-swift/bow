@@ -18,7 +18,6 @@ env:
     - ACTION="test"
   secure: LatJH8j809/6dhEO6WhpQyU3lAjtkOYHAqWD14+bU6lfAc5oRrRFO4B7h56gnIDu6tvYJS0Qa/IhIuB3zZQ/GlG12oivgE/FKp1xXxxHwqjmhPHdetX9YkeAbicJ8YrSQ+C0UC6NMmP1WtU7cmLBV4Q1VwdPnVvRIrOVuWdh3ITUzUz/qQMTZwi+6Z1w92QvxbyytXDqti62NrUq81ba2c7pvBbFBujMp5hyd6+EcuZojYWGNN3cIR2DcPVXD9j4kwLyDPVAcN/OROAwaJlOZ63FbsoUcZULOAX/6s5bmcU1CuYc+eBrXX7KifSqj3yUW00Ea0ynyvsn2GWldAw5b8cYgiLuqQBp3jxtPVH/tEWRdO5TdFtMl8CDEJQiblINjFCXRbnAh8fnk/9jxKTkK+e1DXNQEk/w61+vUB21j74Zw8PhPRvCsoV8XgPkd34UiSlG5XkPaj+vImRpB2/kemYxynpY2Sjq+qoK4iUJy/DXhX/agThWCpjY1hWL2LNL/24mk6DbUHZGVH+4RgoBJxBFCI7ucSp14Og0cCFmhFfsq0nttN+xNegosmHnEcv1Z4tRW750rPf2dgGlXkf6s4msbZ/kyRnccs2zlh3JYYac509Fk98FRNfLb9q0C/jLb0xpg6qf9WbI1QbMcxPHKakyGEUuo+7FO+CLzrJ0qns=
 
-
 jobs:
   include:
     # No matrix support in Stages, but this is a matrix hack:
@@ -31,40 +30,21 @@ jobs:
         - gem install cocoapods
       script:
         - nef compile contents/Documentation
-    - &test
-      stage: test
-      env:
-        - SCHEME="Bow"
+    - stage: test
       before_install:
         - brew update
         - brew outdated carthage || brew upgrade carthage
         - carthage update --platform iOS --cache-builds
       script:
         - set -o pipefail
-        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow"         -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow-Free"    -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow-Generic" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow-Optics"  -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow-Effects" -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
+        - xcodebuild "$ACTION" -project "$PROJECT" -scheme "Bow-Rx"      -sdk "$SDK" ONLY_ACTIVE_ARCH=NO -destination "$DEST" | xcpretty -c
       after_success:
         - bash <(curl -s https://codecov.io/bash)
-    - <<: *test
-      env:
-        - SCHEME="Bow-Free"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Generic"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Optics"
-    - <<: *test
-      env:
-        - SCHEME="Bow-RecursionSchemes"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Effects"
-    - <<: *test
-      env:
-        - SCHEME="Bow-Rx"
-    - <<: *test
-      env:
-        - SCHEME="Bow-BrightFutures"
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       before_install:
