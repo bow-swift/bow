@@ -220,9 +220,9 @@ extension ForObservableK: ConcurrentEffect {
 // MARK: Instance of `Bracket` for `ObservableK`
 extension ForObservableK: Bracket {
     public static func bracketCase<A, B>(
-        _ fa: Kind<ForObservableK, A>,
-        _ release: @escaping (A, ExitCase<Error>) -> Kind<ForObservableK, ()>,
-        _ use: @escaping (A) throws -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
+        acquire fa: Kind<ForObservableK, A>,
+        release: @escaping (A, ExitCase<Error>) -> Kind<ForObservableK, ()>,
+        use: @escaping (A) throws -> Kind<ForObservableK, B>) -> Kind<ForObservableK, B> {
         return Observable.create { emitter in
             fa.handleErrorWith { e in ObservableK.from { emitter.on(.error(e)) }.value.flatMap { _ in Observable.error(e) }.k() }^
                 .concatMap { a in

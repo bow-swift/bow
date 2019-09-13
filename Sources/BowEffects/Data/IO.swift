@@ -11,6 +11,15 @@ public typealias Task<A> = IO<Error, A>
 public typealias ForUIO = IOPartial<Never>
 public typealias UIO<A> = IO<Never, A>
 
+public typealias EnvIOPartial<D, E: Error> = KleisliPartial<IOPartial<E>, D>
+public typealias EnvIO<D, E: Error, A> = Kleisli<IOPartial<E>, D, A>
+
+public typealias RIOPartial<D, A> = EnvIOPartial<D, Error>
+public typealias RIO<D, A> = EnvIO<D, Error, A>
+
+public typealias URIOPartial<D, A> = EnvIOPartial<D, Never>
+public typealias URIO<D, A> = EnvIO<D, Never, A>
+
 public enum IOError: Error {
     case timeout
 }
@@ -32,54 +41,74 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }^
     }
     
-    public static func merge<B>(_ fa: @escaping () throws -> A,
-                                _ fb: @escaping () throws -> B) -> IO<E, (A, B)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func invoke(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
+        return IO.defer {
+            do {
+                return try f().fold(IO.raiseError, IO.pure)
+            } catch let error as E {
+                return raiseError(error)
+            } catch {
+                fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
+            }
+        }^
+    }
+    
+    public static func invoke(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
+        return invoke { try f().toEither() }
+    }
+    
+    public static func invoke(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
+        return invoke { try f().toEither() }
+    }
+    
+    public static func merge<Z, B>(_ fa: @escaping () throws -> Z,
+                                   _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb))^
     }
     
-    public static func merge<B, C>(_ fa: @escaping () throws -> A,
-                                   _ fb: @escaping () throws -> B,
-                                   _ fc: @escaping () throws -> C) -> IO<E, (A, B, C)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C>(_ fa: @escaping () throws -> Z,
+                                      _ fb: @escaping () throws -> B,
+                                      _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc))^
     }
     
-    public static func merge<B, C, D>(_ fa: @escaping () throws -> A,
-                                      _ fb: @escaping () throws -> B,
-                                      _ fc: @escaping () throws -> C,
-                                      _ fd: @escaping () throws -> D) -> IO<E, (A, B, C, D)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D>(_ fa: @escaping () throws -> Z,
+                                         _ fb: @escaping () throws -> B,
+                                         _ fc: @escaping () throws -> C,
+                                         _ fd: @escaping () throws -> D) -> IO<E, (Z, B, C, D)> where A == (Z, B, C, D) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd))^
     }
     
-    public static func merge<B, C, D, F>(_ fa: @escaping () throws -> A,
-                                         _ fb: @escaping () throws -> B,
-                                         _ fc: @escaping () throws -> C,
-                                         _ fd: @escaping () throws -> D,
-                                         _ ff: @escaping () throws -> F) -> IO<E, (A, B, C, D, F)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F>(_ fa: @escaping () throws -> Z,
+                                            _ fb: @escaping () throws -> B,
+                                            _ fc: @escaping () throws -> C,
+                                            _ fd: @escaping () throws -> D,
+                                            _ ff: @escaping () throws -> F) -> IO<E, (Z, B, C, D, F)> where A == (Z, B, C, D, F) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
             IO<E, F>.invoke(ff))^
     }
     
-    public static func merge<B, C, D, F, G>(_ fa: @escaping () throws -> A,
-                                            _ fb: @escaping () throws -> B,
-                                            _ fc: @escaping () throws -> C,
-                                            _ fd: @escaping () throws -> D,
-                                            _ ff: @escaping () throws -> F,
-                                            _ fg: @escaping () throws -> G) -> IO<E, (A, B, C, D, F, G)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G>(_ fa: @escaping () throws -> Z,
+                                               _ fb: @escaping () throws -> B,
+                                               _ fc: @escaping () throws -> C,
+                                               _ fd: @escaping () throws -> D,
+                                               _ ff: @escaping () throws -> F,
+                                               _ fg: @escaping () throws -> G) -> IO<E, (Z, B, C, D, F, G)> where A == (Z, B, C, D, F, G){
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -87,15 +116,15 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, G>.invoke(fg))^
     }
     
-    public static func merge<B, C, D, F, G, H>(_ fa: @escaping () throws -> A,
-                                               _ fb: @escaping () throws -> B,
-                                               _ fc: @escaping () throws -> C,
-                                               _ fd: @escaping () throws -> D,
-                                               _ ff: @escaping () throws -> F,
-                                               _ fg: @escaping () throws -> G,
-                                               _ fh: @escaping () throws -> H ) -> IO<E, (A, B, C, D, F, G, H)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H>(_ fa: @escaping () throws -> Z,
+                                                  _ fb: @escaping () throws -> B,
+                                                  _ fc: @escaping () throws -> C,
+                                                  _ fd: @escaping () throws -> D,
+                                                  _ ff: @escaping () throws -> F,
+                                                  _ fg: @escaping () throws -> G,
+                                                  _ fh: @escaping () throws -> H ) -> IO<E, (Z, B, C, D, F, G, H)> where A == (Z, B, C, D, F, G, H) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -104,16 +133,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, H>.invoke(fh))^
     }
     
-    public static func merge<B, C, D, F, G, H, I>(_ fa: @escaping () throws -> A,
-                                                  _ fb: @escaping () throws -> B,
-                                                  _ fc: @escaping () throws -> C,
-                                                  _ fd: @escaping () throws -> D,
-                                                  _ ff: @escaping () throws -> F,
-                                                  _ fg: @escaping () throws -> G,
-                                                  _ fh: @escaping () throws -> H,
-                                                  _ fi: @escaping () throws -> I) -> IO<E, (A, B, C, D, F, G, H, I)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H, I>(_ fa: @escaping () throws -> Z,
+                                                     _ fb: @escaping () throws -> B,
+                                                     _ fc: @escaping () throws -> C,
+                                                     _ fd: @escaping () throws -> D,
+                                                     _ ff: @escaping () throws -> F,
+                                                     _ fg: @escaping () throws -> G,
+                                                     _ fh: @escaping () throws -> H,
+                                                     _ fi: @escaping () throws -> I) -> IO<E, (Z, B, C, D, F, G, H, I)> where A == (Z, B, C, D, F, G, H, I) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -123,17 +152,17 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, I>.invoke(fi))^
     }
     
-    public static func merge<B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> A,
-                                                     _ fb: @escaping () throws -> B,
-                                                     _ fc: @escaping () throws -> C,
-                                                     _ fd: @escaping () throws -> D,
-                                                     _ ff: @escaping () throws -> F,
-                                                     _ fg: @escaping () throws -> G,
-                                                     _ fh: @escaping () throws -> H,
-                                                     _ fi: @escaping () throws -> I,
-                                                     _ fj: @escaping () throws -> J ) -> IO<E, (A, B, C, D, F, G, H, I, J)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> Z,
+                                                        _ fb: @escaping () throws -> B,
+                                                        _ fc: @escaping () throws -> C,
+                                                        _ fd: @escaping () throws -> D,
+                                                        _ ff: @escaping () throws -> F,
+                                                        _ fg: @escaping () throws -> G,
+                                                        _ fh: @escaping () throws -> H,
+                                                        _ fi: @escaping () throws -> I,
+                                                        _ fj: @escaping () throws -> J ) -> IO<E, (Z, B, C, D, F, G, H, I, J)> where A == (Z, B, C, D, F, G, H, I, J) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -144,12 +173,22 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, J>.invoke(fj))^
     }
     
-    public func unsafePerformIO(on queue: DispatchQueue = .main) throws -> A {
-        return try self._unsafePerformIO(on: queue).0
+    public func unsafeRunSync(on queue: DispatchQueue = .main) throws -> A {
+        return try self._unsafeRunSync(on: queue).0
     }
     
-    internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        fatalError("_unsafePerformIO must be implemented in subclasses")
+    public func unsafeRunSyncEither(on queue: DispatchQueue = .main) throws -> Either<E, A> {
+        do {
+            return .right(try self.unsafeRunSync())
+        } catch let e as E {
+            return .left(e)
+        } catch {
+            throw error
+        }
+    }
+    
+    internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        fatalError("_unsafeRunSync must be implemented in subclasses")
     }
     
     internal func on<T>(queue: DispatchQueue, perform: @escaping () throws -> T) throws -> T {
@@ -164,7 +203,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     
     public func attempt(on queue: DispatchQueue = .main) -> IO<E, A>{
         do {
-            let result = try self.unsafePerformIO(on: queue)
+            let result = try self.unsafeRunSync(on: queue)
             return IO.pure(result)^
         } catch let error as E {
             return IO.raiseError(error)^
@@ -176,7 +215,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) {
         queue.async {
             do {
-                callback(Either.right(try self.unsafePerformIO(on: queue)))
+                callback(Either.right(try self.unsafeRunSync(on: queue)))
             } catch let error as E {
                 callback(Either.left(error))
             } catch {
@@ -191,6 +230,18 @@ public class IO<E: Error, A>: IOOf<E, A> {
     
     internal func fail(_ error: Error) -> Never {
         fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
+    }
+}
+
+public extension IO where E == Error {
+    static func invoke(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
+        return invoke { try f().toEither() }
+    }
+}
+
+public extension Kleisli {
+    func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
+        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
     }
 }
 
@@ -209,7 +260,7 @@ internal class Pure<E: Error, A>: IO<E, A> {
         self.a = a
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         return (try on(queue: queue) { self.a }, queue)
     }
 }
@@ -221,7 +272,7 @@ internal class RaiseError<E: Error, A> : IO<E, A> {
         self.error = error
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         return (try on(queue: queue) { throw self.error }, queue)
     }
 }
@@ -235,8 +286,8 @@ internal class FMap<E: Error, A, B> : IO<E, B> {
         self.action = action
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
-        let result = try action._unsafePerformIO(on: queue)
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+        let result = try action._unsafeRunSync(on: queue)
         return (try on(queue: result.1) { self.f(result.0) }, result.1)
     }
 }
@@ -250,9 +301,9 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         self.action = action
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         do {
-            return try action._unsafePerformIO(on: queue)
+            return try action._unsafeRunSync(on: queue)
         } catch let error as E {
             return (try on(queue: queue) { throw self.f(error) }, queue)
         } catch {
@@ -268,9 +319,9 @@ internal class Join<E: Error, A> : IO<E, A> {
         self.io = io
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        let result = try io._unsafePerformIO(on: queue)
-        return try result.0._unsafePerformIO(on: result.1)
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        let result = try io._unsafeRunSync(on: queue)
+        return try result.0._unsafeRunSync(on: result.1)
     }
 }
 
@@ -281,7 +332,7 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         self.f = f
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         var result: Either<E, A>?
         let group = DispatchGroup()
         group.enter()
@@ -292,10 +343,10 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         let io = try on(queue: queue) {
             self.f(callback)
         }
-        let procResult = try io^._unsafePerformIO(on: queue)
+        let procResult = try io^._unsafeRunSync(on: queue)
         group.wait()
         
-        return (try IO.fromEither(result!)^._unsafePerformIO(on: procResult.1).0 , procResult.1)
+        return (try IO.fromEither(result!)^._unsafeRunSync(on: procResult.1).0 , procResult.1)
     }
 }
 
@@ -308,8 +359,8 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
         self.queue = queue
     }
     
-    override internal func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return (try io._unsafePerformIO(on: queue).0, self.queue)
+    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+        return (try io._unsafeRunSync(on: queue).0, self.queue)
     }
 }
 
@@ -326,15 +377,15 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
         self.use = use
     }
     
-    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
-        let ioResult = try io._unsafePerformIO(on: queue)
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+        let ioResult = try io._unsafeRunSync(on: queue)
         let resource = ioResult.0
         do {
-            let useResult = try use(resource)^._unsafePerformIO(on: queue)
-            let _ = try release(resource, .completed)^._unsafePerformIO(on: queue)
+            let useResult = try use(resource)^._unsafeRunSync(on: queue)
+            let _ = try release(resource, .completed)^._unsafeRunSync(on: queue)
             return useResult
         } catch let error as E {
-            let _ = try release(resource, .error(error))^._unsafePerformIO(on: queue)
+            let _ = try release(resource, .error(error))^._unsafeRunSync(on: queue)
             throw error
         } catch {
             self.fail(error)
@@ -353,7 +404,7 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
         var a: A?
         var b: B?
         let atomic = Atomic<E?>(nil)
@@ -364,7 +415,7 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         group.enter()
         parQueue1.async {
             do {
-                a = try self.fa._unsafePerformIO(on: parQueue1).0
+                a = try self.fa._unsafeRunSync(on: parQueue1).0
             } catch let error as E {
                 atomic.setIfNil(error)
             } catch {
@@ -376,7 +427,7 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         group.enter()
         parQueue2.async {
             do {
-                b = try self.fb._unsafePerformIO(on: parQueue2).0
+                b = try self.fb._unsafeRunSync(on: parQueue2).0
             } catch let error as E {
                 atomic.setIfNil(error)
             } catch {
@@ -407,7 +458,7 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
         var a: A?
         var b: B?
         var c: C?
@@ -420,7 +471,7 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         group.enter()
         parQueue1.async {
             do {
-                a = try self.fa._unsafePerformIO(on: parQueue1).0
+                a = try self.fa._unsafeRunSync(on: parQueue1).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -432,7 +483,7 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         group.enter()
         parQueue2.async {
             do {
-                b = try self.fb._unsafePerformIO(on: parQueue2).0
+                b = try self.fb._unsafeRunSync(on: parQueue2).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -444,7 +495,7 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         group.enter()
         parQueue3.async {
             do {
-                c = try self.fc._unsafePerformIO(on: parQueue3).0
+                c = try self.fc._unsafeRunSync(on: parQueue3).0
             } catch let error as E {
                 atomic.value = error
             } catch {
@@ -471,15 +522,15 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
         self.callback = callback
     }
     
-    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> ((), DispatchQueue) {
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> ((), DispatchQueue) {
         var result: IOOf<E, ()>
         do {
-            let (a, nextQueue) = try io._unsafePerformIO(on: queue)
+            let (a, nextQueue) = try io._unsafeRunSync(on: queue)
             result = callback(.right(a))
-            return try result^._unsafePerformIO(on: nextQueue)
+            return try result^._unsafeRunSync(on: nextQueue)
         } catch let error as E {
             result = callback(.left(error))
-            return try result^._unsafePerformIO(on: queue)
+            return try result^._unsafeRunSync(on: queue)
         } catch {
             fail(error)
         }
@@ -493,9 +544,9 @@ internal class Suspend<E: Error, A>: IO<E, A> {
         self.thunk = thunk
     }
     
-    override func _unsafePerformIO(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
         return try on(queue: queue) {
-            try self.thunk()^._unsafePerformIO(on: queue)
+            try self.thunk()^._unsafeRunSync(on: queue)
         }
     }
 }
@@ -555,7 +606,7 @@ extension IOPartial: MonadError {}
 
 // MARK: Instance of `Bracket` for `IO`
 extension IOPartial: Bracket {
-    public static func bracketCase<A, B>(_ fa: IOOf<E, A>, _ release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, _ use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
+    public static func bracketCase<A, B>(acquire fa: IOOf<E, A>, release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
         return BracketIO<E, A, B>(fa^, release, use)
     }
 }
@@ -599,7 +650,7 @@ extension IOPartial: Effect {
 // MARK: Instance of `UnsafeRun` for `IO`
 extension IOPartial: UnsafeRun {
     public static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
-        return try fa()^.unsafePerformIO(on: queue)
+        return try fa()^.unsafeRunSync(on: queue)
     }
     
     public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> ()) {

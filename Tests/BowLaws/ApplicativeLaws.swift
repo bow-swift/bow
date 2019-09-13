@@ -49,7 +49,7 @@ public class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
     
     private static func cartesianBuilderTupled() {
         property("cartesian builder map") <~ forAll() { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int) in
-            let left: Kind<F, Int> = F.map(F.tupled(F.pure(a), F.pure(b), F.pure(c), F.pure(d), F.pure(e), F.pure(f)), { x, y, z, u, v, w in x + y + z - u - v - w })
+            let left: Kind<F, Int> = F.map(F.zip(F.pure(a), F.pure(b), F.pure(c), F.pure(d), F.pure(e), F.pure(f)), { x, y, z, u, v, w in x + y + z - u - v - w })
             let right: Kind<F, Int> = F.pure(a + b + c - d - e - f)
             return left == right
         }
