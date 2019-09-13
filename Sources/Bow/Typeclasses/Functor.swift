@@ -29,6 +29,16 @@ public extension Functor {
     static func imap<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<Self, B> {
         return map(fa, f)
     }
+    
+    /// Creates a new value transforming the type using the provided key path, preserving the structure of the original type.
+    ///
+    /// - Parameters:
+    ///   - fa: A value in the context of the type implementing this instance of `Functor`.
+    ///   - keyPath: A key path.
+    /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the original value.
+    static func map<A, B>(_ fa: Kind<Self, A>, _ keyPath: KeyPath<A, B>) -> Kind<Self, B> {
+        return map(fa, { a in a[keyPath: keyPath] })
+    }
 
     /// Given a function, provides a new function lifted to the context type implementing this instance of `Functor`.
     ///
@@ -99,6 +109,17 @@ public extension Kind where F: Functor {
     /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the original value.
     func map<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         return F.map(self, f)
+    }
+    
+    /// Creates a new value transforming the type using the provided key path, preserving the structure of the original type.
+    ///
+    /// This is a convenience method to call `Functor.map` as an instance method in this type.
+    ///
+    /// - Parameters:
+    ///   - keyPath: A key path.
+    /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the original value.
+    func map<B>(_ keyPath: KeyPath<A, B>) -> Kind<F, B> {
+        return F.map(self, keyPath)
     }
 
     /// Given a function, provides a new function lifted to the context type implementing this instance of `Functor`.

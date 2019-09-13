@@ -22,7 +22,7 @@ intermediate
 - **Monad transformers**: work with nested effects in an easy and seamless way with types like `StateT` or `WriterT`.
 - **Effects**: encapsulate side effects in the `IO` data type and manipulate it with the corresponding type classes.
 - **Optics**: utilities to work with immutable data structures such as `Lenses` and `Prisms`.
-- **Integrations**: Bow is compatible with `Result`, `RxSwift` and `BrightFutures`.
+- **Integrations**: Bow is compatible with `RxSwift`.
 
 {:.advanced}
 advanced
