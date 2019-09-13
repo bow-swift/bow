@@ -3,10 +3,16 @@ import RxSwift
 import Bow
 import BowEffects
 
+/// Witness for the `SingleK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForSingleK {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<ForSingleK, A>`.
 public typealias SingleKOf<A> = Kind<ForSingleK, A>
 
 public extension PrimitiveSequence where Trait == SingleTrait {
+    /// Creates a higher-kinded version of this object.
+    ///
+    /// - Returns: A `SingleK` wrapping this object.
     func k() -> SingleK<Element> {
         return SingleK<Element>(value: self)
     }
@@ -31,13 +37,23 @@ extension PrimitiveSequence {
     }
 }
 
+/// SingleK is a Higher Kinded Type wrapper over RxSwift's `SingleK` data type.
 public final class SingleK<A>: SingleKOf<A> {
+    /// Wrapped `Single` value.
     public let value: Single<A>
     
+    /// Safe downcast.
+    ///
+    /// - Parameter value: Value in the higher-kind form.
+    /// - Returns: Value cast to SingleK.
     public static func fix(_ value: SingleKOf<A>) -> SingleK<A> {
         return value as! SingleK<A>
     }
     
+    /// Creates a `SingleK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter fa: Function providing the value to be provided in the underlying `Single`.
+    /// - Returns: A `SingleK` that provides the value obtained from the closure.
     public static func from(_ fa: @escaping () throws -> A) -> SingleK<A> {
         return ForSingleK.defer {
             do {
@@ -48,6 +64,10 @@ public final class SingleK<A>: SingleKOf<A> {
         }^
     }
     
+    /// Creates a `SingleK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter fa: Function providing the value to be provided in the underlying `Single`.
+    /// - Returns: A `SingleK` that provides the value obtained from the closure.
     public static func invoke(_ fa: @escaping () throws -> SingleKOf<A>) -> SingleK<A> {
         return ForSingleK.defer {
             do {
@@ -58,6 +78,9 @@ public final class SingleK<A>: SingleKOf<A> {
         }^
     }
     
+    /// Initializes a value of this type with the underlying `Single` value.
+    ///
+    /// - Parameter value: Wrapped `Single` value.
     public init(value: Single<A>) {
         self.value = value
     }
