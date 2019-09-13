@@ -3,22 +3,45 @@ import RxSwift
 import Bow
 import BowEffects
 
+/// Witness for the `MaybeK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForMaybeK {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<ForMaybeK, A>`.
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>
 
 public extension PrimitiveSequence where Trait == MaybeTrait {
+    /// Creates a higher-kinded version of this object.
+    ///
+    /// - Returns: A `MaybeK` wrapping this object.
     func k() -> MaybeK<Element> {
         return MaybeK(self)
     }
 }
 
+/// MaybeK is a Higher Kinded Type wrapper over RxSwift's `Maybe` data type.
 public final class MaybeK<A>: MaybeKOf<A> {
+    /// Wrapped `Maybe` value.
     public let value: Maybe<A>
 
+    /// Safe downcast.
+    ///
+    /// - Parameter value: Value in the higher-kind form.
+    /// - Returns: Value cast to MaybeK.
     public static func fix(_ value: MaybeKOf<A>) -> MaybeK<A> {
         return value as! MaybeK<A>
     }
 
+    /// Provides an empty `MaybeK`.
+    ///
+    /// - Returns: A `MaybeK` that does not provide any value.
+    public static func empty() -> MaybeK<A> {
+        return Maybe.empty().k()
+    }
+    
+    /// Creates a `MaybeK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter f: Function providing the value to be provided in the underlying `Maybe`.
+    /// - Returns: A `MaybeK` that provides the value obtained from the closure.
     public static func from(_ f: @escaping () throws -> A) -> MaybeK<A> {
         return ForMaybeK.defer {
             do {
@@ -29,6 +52,10 @@ public final class MaybeK<A>: MaybeKOf<A> {
         }^
     }
     
+    /// Creates a `MaybeK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter f: Function providing the value to be provided by the underlying `Maybe`.
+    /// - Returns: A `MaybeK` that provides the value obtained from the closure.
     public static func invoke(_ f: @escaping () throws -> MaybeKOf<A>) -> MaybeK<A> {
         return ForMaybeK.defer {
             do {
@@ -39,21 +66,25 @@ public final class MaybeK<A>: MaybeKOf<A> {
         }^
     }
 
+    /// Initializes a value of this type with the underlying `Maybe` value.
+    ///
+    /// - Parameter value: Wrapped `Maybe` value.
     public init(_ value: Maybe<A>) {
         self.value = value
     }
 
+    /// Performs an action based on the result of the execution of the underlying `Maybe`.
+    ///
+    /// - Parameters:
+    ///   - ifEmpty: Action to be performed if the underlying `Maybe` is empty.
+    ///   - ifSome: Action to be perfomed if the underlying `Maybe` has a value.
+    /// - Returns: Result of performing either operation.
     public func fold<B>(_ ifEmpty: @escaping () -> B, _ ifSome: @escaping (A) -> B) -> B {
         if let result = value.blockingGet() {
             return ifSome(result)
         } else {
             return ifEmpty()
         }
-    }
-
-    public func runAsync(_ callback: @escaping (Either<Error, A>) -> MaybeKOf<()>) -> MaybeK<()> {
-        return value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
-            .catchError { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
     }
 }
 
@@ -161,7 +192,8 @@ extension ForMaybeK: Async {
 // MARK: Instance of `Effect` for `MaybeK`
 extension ForMaybeK: Effect {
     public static func runAsync<A>(_ fa: Kind<ForMaybeK, A>, _ callback: @escaping (Either<ForMaybeK.E, A>) -> Kind<ForMaybeK, ()>) -> Kind<ForMaybeK, ()> {
-        return MaybeK<A>.fix(fa).runAsync(callback)
+        return fa^.value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
+            .catchError { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
     }
 }
 
