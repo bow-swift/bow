@@ -3,10 +3,16 @@ import RxSwift
 import Bow
 import BowEffects
 
+/// Witness for the `ObservableK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForObservableK {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<ForObservableK, A>`.
 public typealias ObservableKOf<A> = Kind<ForObservableK, A>
 
 public extension Observable {
+    /// Creates a higher-kinded version of this object.
+    ///
+    /// - Returns: An `ObservableK` wrapping this object.
     func k() -> ObservableK<Element> {
         return ObservableK<Element>(self)
     }
@@ -33,13 +39,30 @@ extension Observable {
     }
 }
 
+/// ObservableK is a Higher Kinded Type wrapper over RxSwift's `Observable` data type.
 public final class ObservableK<A>: ObservableKOf<A> {
+    /// Wrapped `Observable` value.
     public let value: Observable<A>
     
+    /// Safe downcast.
+    ///
+    /// - Parameter value: Value in the higher-kind form.
+    /// - Returns: Value cast to ObservableK.
     public static func fix(_ value: ObservableKOf<A>) -> ObservableK<A> {
         return value as! ObservableK<A>
     }
+    
+    /// Provides an empry `ObservableK`.
+    ///
+    /// - Returns: An `ObservableK` that does not provide any value.
+    public static func empty() -> ObservableK<A> {
+        return Observable.empty().k()
+    }
 
+    /// Creates an `ObservableK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter f: Function providing the value to be provided in the underlying `Observable`.
+    /// - Returns: An `ObservableK` that provides the value obtained from the closure.
     public static func from(_ f: @escaping () throws -> A) -> ObservableK<A> {
         return ForObservableK.defer {
             do {
@@ -49,7 +72,11 @@ public final class ObservableK<A>: ObservableKOf<A> {
             }
         }^
     }
-    
+
+    /// Creates an `ObservableK` from the result of evaluating a function, suspending its execution.
+    ///
+    /// - Parameter f: Function providing the value to be provided in the underlying `Observable`.
+    /// - Returns: An `ObservableK` that provides the value obtained from the closure.
     public static func invoke(_ f: @escaping () throws -> ObservableKOf<A>) -> ObservableK<A> {
         return ForObservableK.defer {
             do {
@@ -60,10 +87,17 @@ public final class ObservableK<A>: ObservableKOf<A> {
         }^
     }
     
+    /// Initializes a value of this type with the underlying `Observable` value.
+    ///
+    /// - Parameter value: Wrapped `Observable` value.
     public init(_ value: Observable<A>) {
         self.value = value
     }
     
+    /// Wrapper over `Observable.concatMap(_:)`.
+    ///
+    /// - Parameter f: Function to be mapped.
+    /// - Returns: An ObservableK resulting from the application of the function.
     public func concatMap<B>(_ f: @escaping (A) -> ObservableKOf<B>) -> ObservableK<B> {
         return value.concatMap { a in f(a)^.value }.k()
     }
