@@ -61,54 +61,54 @@ public class IO<E: Error, A>: IOOf<E, A> {
         return invoke { try f().toEither() }
     }
     
-    public static func merge<B>(_ fa: @escaping () throws -> A,
-                                _ fb: @escaping () throws -> B) -> IO<E, (A, B)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B>(_ fa: @escaping () throws -> Z,
+                                   _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb))^
     }
     
-    public static func merge<B, C>(_ fa: @escaping () throws -> A,
-                                   _ fb: @escaping () throws -> B,
-                                   _ fc: @escaping () throws -> C) -> IO<E, (A, B, C)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C>(_ fa: @escaping () throws -> Z,
+                                      _ fb: @escaping () throws -> B,
+                                      _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc))^
     }
     
-    public static func merge<B, C, D>(_ fa: @escaping () throws -> A,
-                                      _ fb: @escaping () throws -> B,
-                                      _ fc: @escaping () throws -> C,
-                                      _ fd: @escaping () throws -> D) -> IO<E, (A, B, C, D)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D>(_ fa: @escaping () throws -> Z,
+                                         _ fb: @escaping () throws -> B,
+                                         _ fc: @escaping () throws -> C,
+                                         _ fd: @escaping () throws -> D) -> IO<E, (Z, B, C, D)> where A == (Z, B, C, D) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd))^
     }
     
-    public static func merge<B, C, D, F>(_ fa: @escaping () throws -> A,
-                                         _ fb: @escaping () throws -> B,
-                                         _ fc: @escaping () throws -> C,
-                                         _ fd: @escaping () throws -> D,
-                                         _ ff: @escaping () throws -> F) -> IO<E, (A, B, C, D, F)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F>(_ fa: @escaping () throws -> Z,
+                                            _ fb: @escaping () throws -> B,
+                                            _ fc: @escaping () throws -> C,
+                                            _ fd: @escaping () throws -> D,
+                                            _ ff: @escaping () throws -> F) -> IO<E, (Z, B, C, D, F)> where A == (Z, B, C, D, F) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
             IO<E, F>.invoke(ff))^
     }
     
-    public static func merge<B, C, D, F, G>(_ fa: @escaping () throws -> A,
-                                            _ fb: @escaping () throws -> B,
-                                            _ fc: @escaping () throws -> C,
-                                            _ fd: @escaping () throws -> D,
-                                            _ ff: @escaping () throws -> F,
-                                            _ fg: @escaping () throws -> G) -> IO<E, (A, B, C, D, F, G)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G>(_ fa: @escaping () throws -> Z,
+                                               _ fb: @escaping () throws -> B,
+                                               _ fc: @escaping () throws -> C,
+                                               _ fd: @escaping () throws -> D,
+                                               _ ff: @escaping () throws -> F,
+                                               _ fg: @escaping () throws -> G) -> IO<E, (Z, B, C, D, F, G)> where A == (Z, B, C, D, F, G){
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -116,15 +116,15 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, G>.invoke(fg))^
     }
     
-    public static func merge<B, C, D, F, G, H>(_ fa: @escaping () throws -> A,
-                                               _ fb: @escaping () throws -> B,
-                                               _ fc: @escaping () throws -> C,
-                                               _ fd: @escaping () throws -> D,
-                                               _ ff: @escaping () throws -> F,
-                                               _ fg: @escaping () throws -> G,
-                                               _ fh: @escaping () throws -> H ) -> IO<E, (A, B, C, D, F, G, H)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H>(_ fa: @escaping () throws -> Z,
+                                                  _ fb: @escaping () throws -> B,
+                                                  _ fc: @escaping () throws -> C,
+                                                  _ fd: @escaping () throws -> D,
+                                                  _ ff: @escaping () throws -> F,
+                                                  _ fg: @escaping () throws -> G,
+                                                  _ fh: @escaping () throws -> H ) -> IO<E, (Z, B, C, D, F, G, H)> where A == (Z, B, C, D, F, G, H) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -133,16 +133,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, H>.invoke(fh))^
     }
     
-    public static func merge<B, C, D, F, G, H, I>(_ fa: @escaping () throws -> A,
-                                                  _ fb: @escaping () throws -> B,
-                                                  _ fc: @escaping () throws -> C,
-                                                  _ fd: @escaping () throws -> D,
-                                                  _ ff: @escaping () throws -> F,
-                                                  _ fg: @escaping () throws -> G,
-                                                  _ fh: @escaping () throws -> H,
-                                                  _ fi: @escaping () throws -> I) -> IO<E, (A, B, C, D, F, G, H, I)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H, I>(_ fa: @escaping () throws -> Z,
+                                                     _ fb: @escaping () throws -> B,
+                                                     _ fc: @escaping () throws -> C,
+                                                     _ fd: @escaping () throws -> D,
+                                                     _ ff: @escaping () throws -> F,
+                                                     _ fg: @escaping () throws -> G,
+                                                     _ fh: @escaping () throws -> H,
+                                                     _ fi: @escaping () throws -> I) -> IO<E, (Z, B, C, D, F, G, H, I)> where A == (Z, B, C, D, F, G, H, I) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
@@ -152,17 +152,17 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, I>.invoke(fi))^
     }
     
-    public static func merge<B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> A,
-                                                     _ fb: @escaping () throws -> B,
-                                                     _ fc: @escaping () throws -> C,
-                                                     _ fd: @escaping () throws -> D,
-                                                     _ ff: @escaping () throws -> F,
-                                                     _ fg: @escaping () throws -> G,
-                                                     _ fh: @escaping () throws -> H,
-                                                     _ fi: @escaping () throws -> I,
-                                                     _ fj: @escaping () throws -> J ) -> IO<E, (A, B, C, D, F, G, H, I, J)> {
-        return IO.tupled(
-            IO<E, A>.invoke(fa),
+    public static func merge<Z, B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> Z,
+                                                        _ fb: @escaping () throws -> B,
+                                                        _ fc: @escaping () throws -> C,
+                                                        _ fd: @escaping () throws -> D,
+                                                        _ ff: @escaping () throws -> F,
+                                                        _ fg: @escaping () throws -> G,
+                                                        _ fh: @escaping () throws -> H,
+                                                        _ fi: @escaping () throws -> I,
+                                                        _ fj: @escaping () throws -> J ) -> IO<E, (Z, B, C, D, F, G, H, I, J)> where A == (Z, B, C, D, F, G, H, I, J) {
+        return IO.zip(
+            IO<E, Z>.invoke(fa),
             IO<E, B>.invoke(fb),
             IO<E, C>.invoke(fc),
             IO<E, D>.invoke(fd),
