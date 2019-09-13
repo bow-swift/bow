@@ -10,23 +10,25 @@ public extension Observable {
     func k() -> ObservableK<Element> {
         return ObservableK<Element>(self)
     }
-    
+}
+
+extension Observable {
     func blockingGet() -> Element? {
         var result: Element?
-        var flag = false
+        let flag = Atomic(false)
         let _ = self.asObservable().subscribe(onNext: { element in
             if result == nil {
                 result = element
             }
-            flag = true
+            flag.value = true
         }, onError: { _ in
-            flag = true
+            flag.value = true
         }, onCompleted: {
-            flag = true
+            flag.value = true
         }, onDisposed: {
-            flag = true
+            flag.value = true
         })
-        while(!flag) {}
+        while(!flag.value) {}
         return result
     }
 }

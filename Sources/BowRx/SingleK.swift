@@ -12,24 +12,21 @@ public extension PrimitiveSequence where Trait == SingleTrait {
     }
 }
 
-// There should be a better way to do this...
 extension PrimitiveSequence {
     func blockingGet() -> Element? {
-        var result : Element?
-        var flag = false
+        var result: Element?
+        let group = DispatchGroup()
+        group.enter()
+        
         let _ = self.asObservable().subscribe(onNext: { element in
             if result == nil {
                 result = element
             }
-            flag = true
+            group.leave()
         }, onError: { _ in
-            flag = true
-        }, onCompleted: {
-            flag = true
-        }, onDisposed: {
-            flag = true
+            group.leave()
         })
-        while(!flag) {}
+        group.wait()
         return result
     }
 }
