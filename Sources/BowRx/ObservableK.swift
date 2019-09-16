@@ -52,7 +52,7 @@ public final class ObservableK<A>: ObservableKOf<A> {
         return value as! ObservableK<A>
     }
     
-    /// Provides an empry `ObservableK`.
+    /// Provides an empty `ObservableK`.
     ///
     /// - Returns: An `ObservableK` that does not provide any value.
     public static func empty() -> ObservableK<A> {
