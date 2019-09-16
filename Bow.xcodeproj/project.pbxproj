@@ -1789,9 +1789,9 @@
 				1104BEE222C22E47002C3F78 /* Concurrent.swift */,
 				8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */,
 				8BA0F46B217E2E9200969984 /* Effect.swift */,
+				11F0367E2327D08900B39A80 /* EffectComprehensions.swift */,
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
 				1104BEE022C22E47002C3F78 /* UnsafeRun.swift */,
-				11F0367E2327D08900B39A80 /* EffectComprehensions.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
