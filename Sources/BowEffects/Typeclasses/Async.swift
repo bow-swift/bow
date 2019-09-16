@@ -131,7 +131,7 @@ public extension Kind where F: Async {
     
     /// Provides a computation that evaluates the provided function on every run.
     ///
-    /// - Parameter queue: Dispatch queeu which the computation must be sent to.
+    /// - Parameter queue: Dispatch queue which the computation must be sent to.
     /// - Parameter f: A function that provides a value or an error.
     /// - Returns: A computation that defers the execution of the provided value.
     static func delayOrRaise<A>(_ queue: DispatchQueue, _ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
