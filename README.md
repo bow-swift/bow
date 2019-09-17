@@ -24,7 +24,6 @@ Bow is split into multiple modules that can be consumed independently. These mod
 - `BowFree`: module to work with Free Monads.
 - `BowGeneric`: module to work with generic data types.
 - `BowEffects`: module to work with effects.
-- `BowBrightFutures`: module to provide an integration with BrightFutures.
 - `BowRx`: module to provide an integration with RxSwift.
 
 There are also some modules for testing:
@@ -36,7 +35,6 @@ There are also some modules for testing:
 - `BowFreeGenerators`: generators for Property-based Testing for data types in BowFree.
 - `BowEffectsGenerators`: generators for Property-based Testing for data types in BowEffects.
 - `BowRxGenerators`: generators for Property-based Testing for data types in BowRx.
-- `BowBrightFuturesGenerators`: generators for Property-based Testing for data types in BowBrightFutures.
 
 Bow is available using CocoaPods, Carthage, and Swift Package Manager.
 
@@ -52,7 +50,6 @@ pod "BowFree",             "~> {version}"
 pod "BowGeneric",          "~> {version}"
 pod "BowEffects",          "~> {version}"
 pod "BowRx",               "~> {version}"
-pod "BowBrightFutures",    "~> {version}"
 ```
 
 Testing laws:
@@ -70,7 +67,6 @@ pod "BowGenerators",              "~> {version}"
 pod "BowFreeGenerators",          "~> {version}"
 pod "BowEffectsGenerators",       "~> {version}"
 pod "BowRxGenerators",            "~> {version}"
-pod "BowBrightFuturesGenerators", "~> {version}"
 ```
 
 ### Carthage
@@ -104,8 +100,7 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowRx",
-                    "BowBrightFutures"]),
+                    "BowRx"]),
         .testTarget(name: "BowTestProjectTests",
                     dependencies: [
                         // Type class laws
@@ -117,8 +112,7 @@ let package = Package(
                         "BowGenerators",
                         "BowFreeGenerators",
                         "BowEffectsGenerators",
-                        "BowRxGenerators",
-                        "BowBrightFuturesGenerators"])
+                        "BowRxGenerators"])
     ]
 )
 ```
