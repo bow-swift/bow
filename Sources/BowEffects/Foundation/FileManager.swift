@@ -54,6 +54,7 @@ public extension FileManager {
     }
     
     /// IO suspended version of `FileManager.trashItem(at:resultingItemURL:)`. Refer to that method for further documentation.
+    @available(iOS 11.0, *)
     func trashItemIO(at url: URL, resultingItemURL outResultingURL: AutoreleasingUnsafeMutablePointer<NSURL?>?) -> IO<Error, ()> {
         return IO.invoke { try self.trashItem(at: url, resultingItemURL: outResultingURL) }
     }
@@ -113,6 +114,7 @@ public extension FileManager {
     
     /// IO suspended version of `FileManager.getFileProviderServicesForItem(at:completionHandler:)`. Refer to that method for further documentation.
     @available(OSX 10.13, *)
+    @available(iOS 11.0, *)
     func getFileProviderServicesForItemIO(at url: URL) -> IO<Error, [NSFileProviderServiceName: NSFileProviderService]> {
         return IO.async { callback in
             self.getFileProviderServicesForItem(at: url) { services, error in
