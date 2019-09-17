@@ -37,7 +37,7 @@ $json_files_dir = "json-files"
 
 # This a list of modules in which the Swift project is split on
 $modules = ["BowOptics", "BowRecursionSchemes", "BowGeneric", "BowFree", \
-  "BowEffects", "BowRx", "BowBrightFutures", "Bow"]
+  "BowEffects", "BowRx", "Bow"]
 
 
 
