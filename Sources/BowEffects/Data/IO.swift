@@ -400,7 +400,7 @@ public extension IO where E == Error {
 public extension Kleisli {
     /// Transforms the error type of this EnvIO
     ///
-    /// - Parameter f: Function transforming the rror.
+    /// - Parameter f: Function transforming the error.
     /// - Returns: An EnvIO value with the new error type.
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
         return EnvIO { env in self.invoke(env)^.mapLeft(f) }
