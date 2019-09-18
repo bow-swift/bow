@@ -1,34 +1,66 @@
 import Foundation
 import Bow
 
+/// Witness for the `IO<E, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForIO {}
+
+/// Partial application of the `IO` type constructor, omitting the last parameters.
 public final class IOPartial<E: Error>: Kind<ForIO, E> {}
+
+/// Higher Kinded Type alias to improve readability over `Kind<IOPartial<E>, A>`.
 public typealias IOOf<E: Error, A> = Kind<IOPartial<E>, A>
 
+/// Witness for the `Task<A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForTask = IOPartial<Error>
+
+/// A Task is an IO with no explicit error type, resorting to the `Error` protocol to handle them.
 public typealias Task<A> = IO<Error, A>
 
+/// Witness for the `UIO<A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForUIO = IOPartial<Never>
+
+/// An UIO is an IO operation that never fails; i.e. it never produces errors.
 public typealias UIO<A> = IO<Never, A>
 
+/// Partial application of the `EnvIO` type constructor, omitting the last type parameter.
 public typealias EnvIOPartial<D, E: Error> = KleisliPartial<IOPartial<E>, D>
+
+/// EnvIO is a data type to perform IO operations that produce errors of type `E` and values of type `A`, having access to an immutable environment of type `D`. It can be seen as a Kleisli function `(D) -> IO<E, A>`.
 public typealias EnvIO<D, E: Error, A> = Kleisli<IOPartial<E>, D, A>
 
-public typealias RIOPartial<D, A> = EnvIOPartial<D, Error>
+/// Partial application of the EnvIO data type, omitting the last parameter.
+public typealias RIOPartial<D> = EnvIOPartial<D, Error>
+
+/// A RIO is a data type like EnvIO with no explicit error type, resorting to the `Error` protocol to handle them.
 public typealias RIO<D, A> = EnvIO<D, Error, A>
 
-public typealias URIOPartial<D, A> = EnvIOPartial<D, Never>
+/// Partial application of the URIO data type, omitting the last parameter.
+public typealias URIOPartial<D> = EnvIOPartial<D, Never>
+
+/// An URIO is a data type like EnvIO that never fails; i.e. it never produces errors.
 public typealias URIO<D, A> = EnvIO<D, Never, A>
 
+/// Models errors that can happen during IO evaluation.
+///
+/// - timeout: The evaluation of the IO produced a timeout.
 public enum IOError: Error {
     case timeout
 }
 
+/// An IO is a data type that encapsulates and suspends side effects producing values of type `A` or errors of type `E`.
 public class IO<E: Error, A>: IOOf<E, A> {
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in higher-kind form.
+    /// - Returns: Value casted to IO.
     public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
         return fa as! IO<E, A>
     }
     
+    /// Creates an IO from a side-effectful function.
+    ///
+    /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An IO function suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
         return IO.defer {
             do {
@@ -41,6 +73,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }^
     }
     
+    /// Creates an IO from a side-effectful function.
+    ///
+    /// - Parameter f: Side-effectful function returning an `Either`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An IO suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
         return IO.defer {
             do {
@@ -53,14 +89,28 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }^
     }
     
+    /// Creates an IO from a side-effectful function.
+    ///
+    /// - Parameter f: Side-effectful function returning a `Result`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An IO suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
         return invoke { try f().toEither() }
     }
     
+    /// Creates an IO from a side-effectful function.
+    ///
+    /// - Parameter f: Side-effectful function returning an `Validated`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An IO suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
         return invoke { try f().toEither() }
     }
     
+    /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B>(_ fa: @escaping () throws -> Z,
                                    _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
         return IO.zip(
@@ -68,6 +118,13 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, B>.invoke(fb))^
     }
     
+    /// Creates an IO from 3 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C>(_ fa: @escaping () throws -> Z,
                                       _ fb: @escaping () throws -> B,
                                       _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
@@ -77,6 +134,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, C>.invoke(fc))^
     }
     
+    /// Creates an IO from 4 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D>(_ fa: @escaping () throws -> Z,
                                          _ fb: @escaping () throws -> B,
                                          _ fc: @escaping () throws -> C,
@@ -88,6 +153,15 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, D>.invoke(fd))^
     }
     
+    /// Creates an IO from 5 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    ///   - ff: 5th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D, F>(_ fa: @escaping () throws -> Z,
                                             _ fb: @escaping () throws -> B,
                                             _ fc: @escaping () throws -> C,
@@ -101,6 +175,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, F>.invoke(ff))^
     }
     
+    /// Creates an IO from 6 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    ///   - ff: 5th side-effectful function.
+    ///   - fg: 6th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D, F, G>(_ fa: @escaping () throws -> Z,
                                                _ fb: @escaping () throws -> B,
                                                _ fc: @escaping () throws -> C,
@@ -116,6 +200,17 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, G>.invoke(fg))^
     }
     
+    /// Creates an IO from 7 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    ///   - ff: 5th side-effectful function.
+    ///   - fg: 6th side-effectful function.
+    ///   - fh: 7th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D, F, G, H>(_ fa: @escaping () throws -> Z,
                                                   _ fb: @escaping () throws -> B,
                                                   _ fc: @escaping () throws -> C,
@@ -133,6 +228,18 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, H>.invoke(fh))^
     }
     
+    /// Creates an IO from 8 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    ///   - ff: 5th side-effectful function.
+    ///   - fg: 6th side-effectful function.
+    ///   - fh: 7th side-effectful function.
+    ///   - fi: 8th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D, F, G, H, I>(_ fa: @escaping () throws -> Z,
                                                      _ fb: @escaping () throws -> B,
                                                      _ fc: @escaping () throws -> C,
@@ -152,6 +259,19 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, I>.invoke(fi))^
     }
     
+    /// Creates an IO from 9 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st side-effectful function.
+    ///   - fb: 2nd side-effectful function.
+    ///   - fc: 3rd side-effectful function.
+    ///   - fd: 4th side-effectful function.
+    ///   - ff: 5th side-effectful function.
+    ///   - fg: 6th side-effectful function.
+    ///   - fh: 7th side-effectful function.
+    ///   - fi: 8th side-effectful function.
+    ///   - fj: 9th side-effectful function.
+    /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> Z,
                                                         _ fb: @escaping () throws -> B,
                                                         _ fc: @escaping () throws -> C,
@@ -173,17 +293,26 @@ public class IO<E: Error, A>: IOOf<E, A> {
             IO<E, J>.invoke(fj))^
     }
     
+    /// Performs the side effects that are suspended in this IO in a synchronous manner.
+    ///
+    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: Value produced after running the suspended side effects.
+    /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunSync(on queue: DispatchQueue = .main) throws -> A {
         return try self._unsafeRunSync(on: queue).0
     }
     
-    public func unsafeRunSyncEither(on queue: DispatchQueue = .main) throws -> Either<E, A> {
+    /// Performs the side effects that are suspended in this IO in a synchronous manner.
+    ///
+    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    public func unsafeRunSyncEither(on queue: DispatchQueue = .main) -> Either<E, A> {
         do {
             return .right(try self.unsafeRunSync())
         } catch let e as E {
             return .left(e)
         } catch {
-            throw error
+            fail(error)
         }
     }
     
@@ -201,6 +330,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
+    /// Flattens the internal structure of this IO by performing the side effects and wrapping them again in an IO structure containing the result or the error produced.
+    ///
+    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: An IO that either contains the value produced or an error. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func attempt(on queue: DispatchQueue = .main) -> IO<E, A>{
         do {
             let result = try self.unsafeRunSync(on: queue)
@@ -212,6 +345,11 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
+    /// Performs the side effects that are suspended in this IO in an asynchronous manner.
+    ///
+    /// - Parameters:
+    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) {
         queue.async {
             do {
@@ -224,6 +362,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
+    /// Transforms the error type of this IO.
+    ///
+    /// - Parameter f: Function transforming the error.
+    /// - Returns: An IO value with the new error type.
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
         return FErrorMap(f, self)
     }
@@ -233,24 +375,36 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
 }
 
-public extension IO where E == Error {
-    static func invoke(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
-        return invoke { try f().toEither() }
-    }
-}
-
-public extension Kleisli {
-    func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
-    }
-}
-
 /// Safe downcast.
 ///
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to IO.
 public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
+}
+
+// MARK: Functions for Task
+
+public extension IO where E == Error {
+    /// Creates an IO from a side-effectful function.
+    ///
+    /// - Parameter f: Side-effectful function returning a `Try`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An IO suspending the execution of the side effect.
+    static func invoke(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
+        return invoke { try f().toEither() }
+    }
+}
+
+// MARK: Functions for EnvIO
+
+public extension Kleisli {
+    /// Transforms the error type of this EnvIO
+    ///
+    /// - Parameter f: Function transforming the error.
+    /// - Returns: An EnvIO value with the new error type.
+    func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
+        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
+    }
 }
 
 internal class Pure<E: Error, A>: IO<E, A> {
