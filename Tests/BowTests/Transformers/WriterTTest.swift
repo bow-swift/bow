@@ -50,4 +50,15 @@ class WriterTTest: XCTestCase {
     func testMonadErrorLaws() {
         MonadErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
     }
+    
+    func testCensor() {
+        let x = Writer.writer(("A", 1))
+        let result = x.censor { x in x.lowercased() }
+        let expected = Writer.writer(("a", 1))
+        
+        print(result^.run)
+        print(expected^.run)
+        
+        XCTAssertEqual(result, expected)
+    }
 }
