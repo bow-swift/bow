@@ -1,7 +1,14 @@
-//: [Previous](@previous)
-
-import Foundation
-
-var str = "Hello, playground"
-
-//: [Next](@next)
+// nef:begin:header
+/*
+ layout: docs
+ title: Manipulating side effects
+ */
+// nef:end
+/*:
+ # Manipulating side effects
+ 
+ {:.beginner}
+ beginner
+ 
+ > Content under development
+ */
