@@ -410,6 +410,14 @@ public extension Kleisli {
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
         return EnvIO { env in self.invoke(env)^.mapLeft(f) }
     }
+    
+    /// Provides the required environment.
+    ///
+    /// - Parameter d: Environment.
+    /// - Returns: An IO resulting from running this computation with the provided environment.
+    func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
+        return self.invoke(d)^
+    }
 }
 
 internal class Pure<E: Error, A>: IO<E, A> {
