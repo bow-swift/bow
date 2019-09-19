@@ -4,28 +4,24 @@
 /// monadic effect that we want to bind to the variable.
 public class BindingExpression<F: Monad> {
     internal let bound: BoundVar<F, Any>
-    
-    init(_ bound: BoundVar<F, Any>) {
-        self.bound = bound
-    }
-    
-    func bind(_ fa: Kind<F, Any>, in bound: BoundVar<F, Any>) -> Kind<F, Any> {
-        fatalError("bind must be implemented in subclasses")
-    }
-}
-
-class MonadBindingExpression<F: Monad>: BindingExpression<F> {
     internal let fa: () -> Kind<F, Any>
     
-    public init(_ bound: BoundVar<F, Any>, _ fa: @escaping () -> Kind<F, Any>) {
+    init(_ bound: BoundVar<F, Any>, _ fa: @escaping () -> Kind<F, Any>) {
+        self.bound = bound
         self.fa = fa
-        super.init(bound)
     }
     
-    override func bind(_ fa: Kind<F, Any>, in bound: BoundVar<F, Any>) -> Kind<F, Any> {
-        return fa.flatMap{ x in
-            bound.bind(x)
-            return self.fa()
+    internal func yield<A>(_ f: @escaping () -> A) -> Kind<F, A> {
+        return fa().map { x in
+            self.bound.bind(x)
+            return f()
+        }
+    }
+    
+    internal func bind<A>(_ partial: Eval<Kind<F, A>>) -> Kind<F, A> {
+        return fa().flatMap { x in
+            self.bound.bind(x)
+            return partial.value()
         }
     }
 }
