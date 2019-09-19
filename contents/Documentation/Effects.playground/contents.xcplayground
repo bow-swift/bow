@@ -2,8 +2,12 @@
 <playground version='6.0' target-platform='macos' display-mode='raw'>
     <pages>
         <page name='Overview'/>
-        <page name='Working with IO'/>
+        <page name='Suspending side effects'/>
+        <page name='Manipulating side effects'/>
+        <page name='Concurrent and Asynchronous execution'/>
+        <page name='Testing side effects'/>
+        <page name='Running side effects'/>
+        <page name='Handling resources'/>
         <page name='Foundation extensions'/>
-        <page name='Resources'/>
     </pages>
 </playground>

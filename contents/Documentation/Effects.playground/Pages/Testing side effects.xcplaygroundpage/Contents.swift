@@ -1,11 +1,11 @@
 // nef:begin:header
 /*
  layout: docs
- title: Resources
+ title: Testing side effects
  */
 // nef:end
 /*:
- # Resources
+ # Testing side effects
  
  {:.beginner}
  beginner
