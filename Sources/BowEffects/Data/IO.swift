@@ -77,7 +77,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///
     /// - Parameter f: Side-effectful function returning an `Either`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
-    public static func invoke(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
+    public static func invokeEither(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
         return IO.defer {
             do {
                 return try f().fold(IO.raiseError, IO.pure)
@@ -93,16 +93,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///
     /// - Parameter f: Side-effectful function returning a `Result`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
-    public static func invoke(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
-        return invoke { try f().toEither() }
+    public static func invokeResult(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
+        return invokeEither { try f().toEither() }
     }
     
     /// Creates an IO from a side-effectful function.
     ///
     /// - Parameter f: Side-effectful function returning an `Validated`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
-    public static func invoke(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
-        return invoke { try f().toEither() }
+    public static func invokeValidated(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
+        return invokeEither { try f().toEither() }
     }
     
     /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -370,6 +370,11 @@ public class IO<E: Error, A>: IOOf<E, A> {
         return FErrorMap(f, self)
     }
     
+    /// Returns this `IO` erasing the error type information
+    public var anyError: IO<Error, A> {
+        return self.mapLeft { e in e as Error }
+    }
+    
     internal func fail(_ error: Error) -> Never {
         fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
     }
@@ -390,8 +395,8 @@ public extension IO where E == Error {
     ///
     /// - Parameter f: Side-effectful function returning a `Try`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
-    static func invoke(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
-        return invoke { try f().toEither() }
+    static func invokeTry(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
+        return invokeEither { try f().toEither() }
     }
 }
 
@@ -404,6 +409,14 @@ public extension Kleisli {
     /// - Returns: An EnvIO value with the new error type.
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
         return EnvIO { env in self.invoke(env)^.mapLeft(f) }
+    }
+    
+    /// Provides the required environment.
+    ///
+    /// - Parameter d: Environment.
+    /// - Returns: An IO resulting from running this computation with the provided environment.
+    func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
+        return self.invoke(d)^
     }
 }
 

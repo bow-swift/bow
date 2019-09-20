@@ -9,6 +9,15 @@ public final class WriterTPartial<F, W>: Kind2<ForWriterT, F, W> {}
 /// Higher Kinded Type alias to improve readability over `Kind<WriterTPartial<F, W>, A>`.
 public typealias WriterTOf<F, W, A> = Kind<WriterTPartial<F, W>, A>
 
+/// Partial application of the Writer type constructor, omitting the last parameter.
+public typealias WriterPartial<W> = WriterTPartial<ForId, W>
+
+/// Higher Kinded Type alias to improve readability over `Kind<WriterTPartial<ForId, W>, A>`.
+public typealias WriterOf<W, A> = WriterTOf<ForId, W, A>
+
+/// Writer is a WriterT where the effect is `Id`.
+public typealias Writer<W, A> = WriterT<ForId, W, A>
+
 /// WriterT transformer represents operations that accumulate values through a computation or effect, without reading them.
 public final class WriterT<F, W, A>: WriterTOf<F, W, A> {
     fileprivate let value: Kind<F, (W, A)>
@@ -27,6 +36,11 @@ public final class WriterT<F, W, A>: WriterTOf<F, W, A> {
     public init(_ value: Kind<F, (W, A)>) {
         self.value = value
     }
+    
+    /// Provides the values wrapped in this WriterT
+    public var runT: Kind<F, (W, A)> {
+        return value
+    }
 }
 
 /// Safe downcast.
@@ -35,6 +49,14 @@ public final class WriterT<F, W, A>: WriterTOf<F, W, A> {
 /// - Returns: Value cast to WriterT.
 public postfix func ^<F, W, A>(_ fa : WriterTOf<F, W, A>) -> WriterT<F, W, A> {
     return WriterT.fix(fa)
+}
+
+// MARK: Functions for `Writer`
+extension WriterT where F == ForId {
+    /// Provides the values wrapped in this Writer
+    public var run: (W, A) {
+        return value^.value
+    }
 }
 
 // MARK: Functions for `WriterT` when the effect has an instance of `Functor`
@@ -59,7 +81,7 @@ extension WriterT where F: Functor {
     /// Obtains an effect with the accumulator value.
     ///
     /// - Returns: Effect with the accumulator value.
-    public func write() -> Kind<F, W> {
+    public func written() -> Kind<F, W> {
         return value.map { pair in pair.0 }
     }
 }
@@ -128,7 +150,7 @@ extension WriterT where F: Applicative, W: Monoid {
     ///
     /// - Parameter a: Initial value for the result.
     /// - Returns: A `WriterT` wrapping the provided value and using the empty value of the `Monoid` for the accumulator.
-    public static func value(_ a : A) -> WriterT<F, W, A> {
+    public static func value(_ a: A) -> WriterT<F, W, A> {
         return WriterT.put(a, W.empty())
     }
 }
@@ -181,7 +203,7 @@ extension WriterT where F: Monad {
     /// - Returns: A `WriterT` where the result is paired with the accumulator.
     public func listen() -> Kind<WriterTPartial<F, W>, (W, A)> {
         return WriterT<F, W, (W, A)>(content().flatMap { a in
-            self.write().map { l in
+            self.written().map { l in
                 (l, (l, a))
             }
         })
@@ -302,7 +324,7 @@ extension WriterTPartial: MonadWriter where F: Monad, W: Monoid {
 
     public static func listen<A>(_ fa: Kind<WriterTPartial<F, W>, A>) -> Kind<WriterTPartial<F, W>, (W, A)> {
         return WriterT(WriterT.fix(fa).content().flatMap { a in
-            WriterT.fix(fa).write().map { l in
+            WriterT.fix(fa).written().map { l in
                 (l, (l, a))
             }
         })
@@ -311,7 +333,7 @@ extension WriterTPartial: MonadWriter where F: Monad, W: Monoid {
     public static func pass<A>(_ fa: Kind<WriterTPartial<F, W>, ((W) -> W, A)>) -> Kind<WriterTPartial<F, W>, A> {
         let wa = WriterT.fix(fa)
         return WriterT(wa.content().flatMap { tuple2FA in
-            wa.write().map { l in
+            wa.written().map { l in
                 (tuple2FA.0(l), tuple2FA.1)
             }
         })
