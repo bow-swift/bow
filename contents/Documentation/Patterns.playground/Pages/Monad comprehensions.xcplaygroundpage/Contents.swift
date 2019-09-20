@@ -249,16 +249,21 @@ func join<F: Monad>(_ a: Kind<F, Int>, _ b: Kind<F, Double>, _ c: Kind<F, String
  With this implementation, we can invoke the function using whatever monadic type we would like:
  */
 // Option<_>
-join(Option.some(1), Option.some(.pi), Option.some("Hello"))
+join(Option.some(1), Option.some(.pi), Option.some("Hello")) // Option.some("1, 3.141592, Hello")
 
 // Either<Error, _>
-join(Either<Error, Int>.right(1), Either<Error, Double>.right(.pi), Either<Error, String>.right("Hello"))
+join(Either<Error, Int>.right(1), Either<Error, Double>.right(.pi), Either<Error, String>.right("Hello")) // Either.right("1, 3.141592, Hello")
 
 // Id<_>
-join(Id(1), Id(.pi), Id("Hello"))
+join(Id(1), Id(.pi), Id("Hello")) // Id("1, 3.141592, Hello")
 
 // Ior<String, _>
-join(Ior<String, Int>.right(1), Ior<String, Double>.right(.pi), Ior<String, String>.right("Hello"))
+join(Ior<String, Int>.right(1), Ior<String, Double>.right(.pi), Ior<String, String>.right("Hello")) // Ior.right("1, 3.141592, Hello")
 
 // ArrayK<_>
-join(ArrayK(1, 2, 3), ArrayK(Double.pi), ArrayK("Hello", "Bye"))
+join(ArrayK(1, 2, 3), ArrayK(Double.pi), ArrayK("Hello", "Bye")) // ArrayK("1, 3.141592, Hello",
+                                                                 //        "1, 3.141592, Bye",
+                                                                 //        "2, 3.141592, Hello",
+                                                                 //        "2, 3.141592, Bye",
+                                                                 //        "3, 3.141592, Hello",
+                                                                 //        "3, 3.141592, Bye")
