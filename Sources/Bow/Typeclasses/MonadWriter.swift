@@ -50,7 +50,7 @@ public extension MonadWriter {
     ///   - f: Transforming function.
     /// - Returns: A computation with the same result as the provided one, with the transformed side stream of data.
     static func censor<A>(_ fa: Kind<Self, A>, _ f: @escaping (W) -> W) -> Kind<Self, A> {
-        return self.flatMap(self.listen(fa), { pair in writer((f(pair.0), pair.1)) })
+        return pass(fa.map { a in (f, a) })
     }
 }
 
