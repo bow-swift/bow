@@ -5,7 +5,7 @@
         <page name='Suspending side effects'/>
         <page name='Manipulating side effects'/>
         <page name='Handling errors'/>
-        <page name='Concurrent and Asynchronous execution'/>
+        <page name='Concurrency'/>
         <page name='Testing side effects'/>
         <page name='Running side effects'/>
         <page name='Handling resources'/>
