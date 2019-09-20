@@ -49,7 +49,7 @@ public extension FileManager {
     }
     
     /// IO suspended version of `FileManager.removeItem(atPath:)`. Refer to that method for further documentation.
-    func removeItem(atPath path: String) -> IO<Error, ()> {
+    func removeItemIO(atPath path: String) -> IO<Error, ()> {
         return IO.invoke { try self.removeItem(atPath: path) }
     }
     
