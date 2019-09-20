@@ -87,7 +87,7 @@ func findUser_fromEither(by id: String) -> IO<DatabaseError, User> {
         return .right(fetch(id: id))
     }
 }
-/*
+/*:
  The functional versions above have an additional benefit: they are explicit about the type of the errors that may happen during their execution.
  
  Besides `invoke`, `IO` has other methods to create a suspended side effect, like the `invokeEither` above, `invokeResult`, `invokeValidated` and `invokeTry`.
