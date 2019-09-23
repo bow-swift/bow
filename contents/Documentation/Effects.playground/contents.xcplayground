@@ -6,7 +6,6 @@
         <page name='Manipulating side effects'/>
         <page name='Handling errors'/>
         <page name='Concurrency'/>
-        <page name='Testing side effects'/>
         <page name='Running side effects'/>
         <page name='Handling resources'/>
         <page name='Foundation extensions'/>
