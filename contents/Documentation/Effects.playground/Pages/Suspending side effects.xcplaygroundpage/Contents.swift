@@ -153,25 +153,25 @@ func cacheUser(by id: String) -> EnvIO<Environment, Error, ()> {
 // nef:begin:hidden
 struct ProductionAPI: API {
     func getUser(by id: String) -> IO<Error, User> {
-        fatalError() // Provide an implementation
+        return IO.never()^ // Provide an implementation
     }
 }
 
 struct TestAPI: API {
     func getUser(by id: String) -> IO<Error, User> {
-        fatalError() // Provide an implementation
+        return IO.never()^ // Provide an implementation
     }
 }
 
 struct ProductionDatabase: Database {
     func save(user: User) -> IO<Error, Void> {
-        fatalError() // Provide an implementation
+        return IO.never()^ // Provide an implementation
     }
 }
 
 struct TestDatabase: Database {
     func save(user: User) -> IO<Error, Void> {
-        fatalError() // Provide an implementation
+        return IO.never()^ // Provide an implementation
     }
 }
 // nef:end

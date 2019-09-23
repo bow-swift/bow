@@ -98,12 +98,12 @@ let program3: IO<Error, Void> = ConsoleIO.print("Fetching Bow's main page").foll
  
  In summary, Monad comprehensions provide a better syntax in imperative-like style to chain computations. The program above can be rewritten as:
  */
-let html = IO<Error, String>.var()
+let htmlCode = IO<Error, String>.var()
 
 let program4: IO<Error, Void> = binding(
-         |<-ConsoleIO.print("Fetching Bow's main page"),
-    html <- fetchHTML(from: URL(string: "https://bow-swift.io")!),
-         |<-ConsoleIO.print("Received \(html.get.count) characters."),
+             |<-ConsoleIO.print("Fetching Bow's main page"),
+    htmlCode <- fetchHTML(from: URL(string: "https://bow-swift.io")!),
+             |<-ConsoleIO.print("Received \(htmlCode.get.count) characters."),
     yield: ()
 )^
 /*:

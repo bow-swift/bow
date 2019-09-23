@@ -72,7 +72,7 @@ let bow = IO<Error, String>.var()
 let apple = IO<Error, String>.var()
 let github = IO<Error, String>.var()
 
-let program = binding(
+let websites = binding(
     continueOn(.global(qos: .background)),
     (bow, apple, github) <- parallel(fetchHTML(from: URL(string: "https://bow-swift.io")!),
                                      fetchHTML(from: URL(string: "https:www.apple.com")!),

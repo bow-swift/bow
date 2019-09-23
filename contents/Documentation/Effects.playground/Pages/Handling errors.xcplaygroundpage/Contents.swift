@@ -59,7 +59,7 @@ let resolved: IO<NetworkError, String> = networkError.handleError { error in
  */
 func fetchData(from: URL) -> IO<NetworkError, String>
 // nef:begin:hidden
-{ return IO.raiseError(.notFound) }
+{ return IO.raiseError(.notFound)^ }
 // nef:end
 
 fetchData(from: URL(string: "http://my-server.com")!)
