@@ -35,7 +35,7 @@ func fetchArticles(from category: Category, page: UInt, limit: UInt) -> IO<APIEr
 /*:
  ## Synchronous run
  
- We can run the function above synchronously using the `unsafePerformSync` method on `IO`:
+ We can run the function above synchronously using the `unsafeRunSync ` method on `IO`:
  */
 let articles: [Article] = try fetchArticles(from: .boardgames, page: 1, limit: 30).unsafeRunSync()
 /*:
