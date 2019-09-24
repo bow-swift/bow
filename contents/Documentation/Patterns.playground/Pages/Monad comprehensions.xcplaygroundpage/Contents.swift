@@ -33,7 +33,7 @@ func join_ifLet(_ a: Int?, _ b: Double?, _ c: String?) -> String? {
  This is equivalent to the following implementation:
  */
 func join_flatMap(_ a: Int?, _ b: Double?, _ c: String?) -> String? {
-    return a.flatMap { x in
+    return a.flatMap { x in
         b.flatMap { y in
             c.map { z in
                 "\(x), \(y), \(z)"
@@ -215,7 +215,7 @@ let program = binding(
  The program above is equivalent to the following version using `flatMap`:
  */
 let program2 = write("What's your name?").flatMap { _ in
-    read().flatMap { name in
+    read().flatMap { name in
         write("Hello \(name)")
     }
 }

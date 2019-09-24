@@ -29,16 +29,6 @@ public class Resource<F: Bracket, A>: ResourceOf<F, A> {
         return RegularResource(acquire, release)
     }
     
-    /// Initializes a resource.
-    ///
-    /// - Parameters:
-    ///   - acquire: Function to acquire the resource.
-    ///   - release: Function to release the resource, ignoring the exit reason.
-    /// - Returns: A Resource that will run the provided functions to acquire and release it.
-    public static func from(acquire: @escaping () -> Kind<F, A>, release: @escaping (A) -> Kind<F, ()>) -> Resource<F, A> {
-        return RegularResource(acquire, release)
-    }
-    
     /// Uses the resource.
     ///
     /// - Parameter f: Function to use the resource.

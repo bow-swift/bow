@@ -26,7 +26,7 @@ DEPENDENCIES:
   - BowRx (from `../..`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - RxSwift
 
 EXTERNAL SOURCES:
@@ -57,4 +57,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2a236e889c6c9ab260a8113679418a7d2963fe8b
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.8.0
