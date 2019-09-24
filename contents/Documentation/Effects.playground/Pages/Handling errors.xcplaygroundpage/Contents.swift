@@ -48,7 +48,7 @@ let domainError: IO<DomainError, String> = networkError.mapLeft { error in
  `IO` provides mechanisms to recover from errors once they have potentially happened. One of the methods that it provides is the `handleError` method, which lets us provide a value as a response to the error that happened. For instance, we can provide a default value for a `notFound` error:
  */
 let defaultContent = "Default content"
-let resolved: IO<NetworkError, String> = networkError.handleError { error in
+let resolved: IO<NetworkError, String> = networkError.handleError { error in
     switch error {
     case .notFound: return defaultContent
     // Handle other cases
@@ -63,7 +63,7 @@ func fetchData(from: URL) -> IO<NetworkError, String>
 // nef:end
 
 fetchData(from: URL(string: "http://my-server.com")!)
-    .handleErrorWith { error in
+    .handleErrorWith { error in
         switch error {
         case .notFound: return fetchData(from: URL(string: "http://another-server.com")!)
         // Handle other cases

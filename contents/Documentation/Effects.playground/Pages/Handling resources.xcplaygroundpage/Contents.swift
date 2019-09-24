@@ -49,7 +49,7 @@ func getUsersOver18(from db: Database) -> IO<Error, [User]> {
 /*:
  Now, we can sequence the open-query-close operations using `flatMap` from `Monad`:
  */
-openDatabase().flatMap { db in
+openDatabase().flatMap { db in
     getUsersOver18(from: db)
         .forEffect(close(database: db))
 }

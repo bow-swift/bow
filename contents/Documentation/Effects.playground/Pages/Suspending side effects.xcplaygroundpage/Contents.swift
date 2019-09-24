@@ -147,7 +147,7 @@ struct Environment {
 func cacheUser(by id: String) -> EnvIO<Environment, Error, ()> {
     return EnvIO { environment in
         environment.api.getUser(by: id)
-            .flatMap { user in environment.database.save(user: user) }
+            .flatMap { user in environment.database.save(user: user) }
     }
 }
 // nef:begin:hidden

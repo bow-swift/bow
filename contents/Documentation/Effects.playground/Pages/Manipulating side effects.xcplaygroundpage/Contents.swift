@@ -31,7 +31,7 @@ let request: IO<Error, (response: URLResponse, data: Data)> = URLSession.shared.
  */
 let stringIO: IO<Error, String> =
     request.map { result in result.data }
-           .map { data in String.init(data: data, encoding: .utf8) ?? "" }^
+           .map { data in String(data: data, encoding: .utf8) ?? "" }^
 /*:
  ## Combining independent computations
  
@@ -39,8 +39,8 @@ let stringIO: IO<Error, String> =
  */
 func fetchHTML(from url: URL) -> IO<Error, String> {
     return URLSession.shared.dataTaskIO(with: url)
-        .map { result in result.data }
-        .map { data in String.init(data: data, encoding: .utf8) ?? "" }^
+        .map { result in result.data }
+        .map { data in String(data: data, encoding: .utf8) ?? "" }^
 }
 /*:
  Let's say that now we need to fetch the HTML code from multiple URLs. Each fetching operation is independent from each other. How can we run multiple `IO` operations that are independent? The answer is the `zip` combinator, present in `Applicative`. This combinator performs the different `IO` operations and returns a single `IO` that tuples the results:

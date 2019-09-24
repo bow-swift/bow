@@ -41,7 +41,7 @@ func fetchHTML(from url: URL) -> IO<Error, String>
 // nef:begin:hidden
 {
     return URLSession.shared.dataTaskIO(with: url)
-        .map { result in result.data }
+        .map { result in result.data }
         .map { data in String.init(data: data, encoding: .utf8) ?? "" }^
 }
 // nef:end
