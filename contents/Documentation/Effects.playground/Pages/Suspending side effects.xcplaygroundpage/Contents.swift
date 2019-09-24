@@ -94,7 +94,7 @@ func findUser_fromEither(by id: String) -> IO<DatabaseError, User> {
  
  ## Creating an IO from an asynchronous call
  
- Let's look now at the `homePage` function. It provides a generic (non-typed) error or a `Data` value, but it does it through a callback. How can an asynchronous call can be suspended into an `IO` value?
+ Let's look now at the `homePage` function. It provides a generic (non-typed) error or a `Data` value, but it does it through a callback. How can an asynchronous call be suspended into an `IO` value?
  
  `IO` has a method called `async` that serves to this purpose:
  */
