@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 @testable import BowLaws
 import Bow
 
@@ -60,18 +59,18 @@ class EitherTest: XCTestCase {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(left.isLeft).to(beTrue())
-        expect(left.isRight).to(beFalse())
-        expect(right.isLeft).to(beFalse())
-        expect(right.isRight).to(beTrue())
+        XCTAssertTrue(left.isLeft)
+        XCTAssertFalse(left.isRight)
+        XCTAssertFalse(right.isLeft)
+        XCTAssertTrue(right.isRight)
     }
     
     func testSwap() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(left.swap()).to(equal(Either<Int, String>.right("Hello")))
-        expect(right.swap()).to(equal(Either<Int, String>.left(5)))
+        XCTAssertEqual(left.swap(), Either<Int, String>.right("Hello"))
+        XCTAssertEqual(right.swap(), Either<Int, String>.left(5))
     }
     
     func testExists() {
@@ -79,25 +78,25 @@ class EitherTest: XCTestCase {
         let right = Either<String, Int>.right(5)
         let isPositive = { (x : Int) in x >= 0 }
         
-        expect(left.exists(isPositive)).to(beFalse())
-        expect(right.exists(isPositive)).to(beTrue())
-        expect(right.exists(not <<< isPositive)).to(beFalse())
+        XCTAssertFalse(left.exists(isPositive))
+        XCTAssertTrue(right.exists(isPositive))
+        XCTAssertFalse(right.exists(not <<< isPositive))
     }
     
     func testToOption() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
 
-        expect(left.toOption()).to(equal(Option<Int>.none()))
-        expect(right.toOption()).to(equal(Option<Int>.some(5)))
+        XCTAssertEqual(left.toOption(), Option<Int>.none())
+        XCTAssertEqual(right.toOption(), Option<Int>.some(5))
     }
     
     func testGetOrElse() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(left.getOrElse(10)).to(be(10))
-        expect(right.getOrElse(10)).to(be(5))
+        XCTAssertEqual(left.getOrElse(10), 10)
+        XCTAssertEqual(right.getOrElse(10), 5)
     }
     
     func testFilterOrElse() {
@@ -105,16 +104,16 @@ class EitherTest: XCTestCase {
         let right = Either<String, Int>.right(5)
         let isPositive = { (x : Int) in x >= 0 }
         
-        expect(left.filterOrElse(isPositive, "10")).to(equal(Either<String, Int>.left("Hello")))
-        expect(right.filterOrElse(isPositive, "10")).to(equal(Either<String, Int>.right(5)))
-        expect(right.filterOrElse(not <<< isPositive, "10")).to(equal(Either<String, Int>.left("10")))
+        XCTAssertEqual(left.filterOrElse(isPositive, "10"), Either<String, Int>.left("Hello"))
+        XCTAssertEqual(right.filterOrElse(isPositive, "10"), Either<String, Int>.right(5))
+        XCTAssertEqual(right.filterOrElse(not <<< isPositive, "10"), Either<String, Int>.left("10"))
     }
     
     func testConversionToString() {
         let left = Either<String, Int>.left("Hello")
         let right = Either<String, Int>.right(5)
         
-        expect(left.description).to(equal("Left(Hello)"))
-        expect(right.description).to(equal("Right(5)"))
+        XCTAssertEqual(left.description, "Left(Hello)")
+        XCTAssertEqual(right.description, "Right(5)")
     }
 }

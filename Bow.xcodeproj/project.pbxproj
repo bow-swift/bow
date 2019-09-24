@@ -71,9 +71,7 @@
 		11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D3217E2DEF00969984 /* TraverseFilterLaws.swift */; };
 		1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3BB217E2DEF00969984 /* TraverseLaws.swift */; };
 		1122943B219D8C14006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
-		1122943C219D8C21006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11229470219D8DF3006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		11229471219D8DF3006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11229472219D8DF3006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38D217E2DEF00969984 /* FreeTest.swift */; };
 		112294F3219D8FAE006D66C5 /* Recursion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F452217E2E9200969984 /* Recursion.swift */; };
@@ -84,7 +82,6 @@
 		112294F8219D8FAE006D66C5 /* Corecursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45A217E2E9200969984 /* Corecursive.swift */; };
 		112294F9219D8FAE006D66C5 /* Recursive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F458217E2E9200969984 /* Recursive.swift */; };
 		1122956C219D9186006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		1122956D219D9186006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		1122956E219D9186006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11229579219D91BA006D66C5 /* RecursionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11229539219D90C5006D66C5 /* RecursionTest.swift */; };
 		112295E6219D9528006D66C5 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F45F217E2E9200969984 /* Generic.swift */; };
@@ -97,7 +94,6 @@
 		11229746219DC557006D66C5 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46B217E2E9200969984 /* Effect.swift */; };
 		11229747219DC557006D66C5 /* MonadDefer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F46D217E2E9200969984 /* MonadDefer.swift */; };
 		11229777219DC88F006D66C5 /* Bow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Bow::Bow::Product" /* Bow.framework */; };
-		11229778219DC88F006D66C5 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11229779219DC88F006D66C5 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11229787219DCA18006D66C5 /* IOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A0217E2DEF00969984 /* IOTest.swift */; };
 		112297A4219DCE76006D66C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
@@ -132,8 +128,6 @@
 		112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF322BBC0390032F675 /* AutoFold.swift */; };
 		112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112D0CF522BBC17C0032F675 /* AutoTraversal.swift */; };
 		113CD8F4219DD82F00730E58 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F367217E2CB100969984 /* RxSwift.framework */; };
-		1160D0E022D38CEC0010323A /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
-		1160D0E122D38CEC0010323A /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
 		1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
 		1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
@@ -165,7 +159,6 @@
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
-		11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		11D97EE5219EBAA1008FC004 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
@@ -231,7 +224,6 @@
 		11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */; };
 		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
 		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
-		8BA0F386217E2D3400969984 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F384217E2D3400969984 /* Nimble.framework */; };
 		8BA0F387217E2D3400969984 /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA0F385217E2D3400969984 /* SwiftCheck.framework */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
@@ -1047,7 +1039,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				1122943C219D8C21006D66C5 /* Nimble.framework in Frameworks */,
 				1122943B219D8C14006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1057,7 +1048,6 @@
 			buildActionMask = 0;
 			files = (
 				11229470219D8DF3006D66C5 /* Bow.framework in Frameworks */,
-				11229471219D8DF3006D66C5 /* Nimble.framework in Frameworks */,
 				11229472219D8DF3006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1074,7 +1064,6 @@
 			buildActionMask = 0;
 			files = (
 				1122956C219D9186006D66C5 /* Bow.framework in Frameworks */,
-				1122956D219D9186006D66C5 /* Nimble.framework in Frameworks */,
 				1122956E219D9186006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1106,7 +1095,6 @@
 			buildActionMask = 0;
 			files = (
 				11229777219DC88F006D66C5 /* Bow.framework in Frameworks */,
-				11229778219DC88F006D66C5 /* Nimble.framework in Frameworks */,
 				11229779219DC88F006D66C5 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1132,8 +1120,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				1160D0E022D38CEC0010323A /* Nimble.framework in Frameworks */,
-				1160D0E122D38CEC0010323A /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,7 +1151,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11D97EE4219EBAA1008FC004 /* Nimble.framework in Frameworks */,
 				11D97EE5219EBAA1008FC004 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1197,7 +1182,6 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_294 /* Bow.framework in Frameworks */,
-				8BA0F386217E2D3400969984 /* Nimble.framework in Frameworks */,
 				8BA0F387217E2D3400969984 /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2511,7 +2495,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2531,7 +2514,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2548,7 +2530,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
@@ -2563,7 +2544,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
@@ -2591,7 +2571,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
@@ -2624,7 +2603,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 			);
@@ -2643,7 +2621,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2663,7 +2640,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2683,7 +2659,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2703,7 +2678,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2723,7 +2697,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			name = "Run Script";
 			outputFileListPaths = (
@@ -2741,7 +2714,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 			);
 			outputPaths = (
 			);
@@ -2755,7 +2727,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
 			);
 			outputPaths = (
