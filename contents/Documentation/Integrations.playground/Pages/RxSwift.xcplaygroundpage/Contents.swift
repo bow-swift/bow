@@ -15,7 +15,7 @@ import RxSwift
  
  RxSwift is a popular streaming library with counterparts in many other programming languages. It is used for Reactive Functional Programming and counts with many combinators that are already present in Bow.
  
- It provides three data types to model different semantics in streams: `Single`, `Maybe` and `Observable`. However, these types do no have support for HKTs and therefore do not provide instances for the type classes provided in the core module or the effects module.
+ It provides three data types to model different semantics in streams: `Single`, `Maybe` and `Observable`. However, these types do not have support for HKTs and therefore do not provide instances for the type classes provided in the core module or the effects module.
  
  Bow Rx is a module that we provide to bridge this gap between the abstractions provided by Bow and the widely used RxSwift library. In order to use it, you need to import:
  */
