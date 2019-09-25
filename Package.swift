@@ -44,7 +44,7 @@ let package = Package(
         .testTarget(name: "BowFreeTests",             dependencies: ["Bow", "BowFree", "BowFreeGenerators", "BowLaws", "SwiftCheck"]),
         .testTarget(name: "BowGenericTests",          dependencies: ["Bow", "BowGeneric"]),
         .testTarget(name: "BowEffectsTests",          dependencies: ["Bow", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowLaws", "SwiftCheck"]),
-        .testTarget(name: "BowRxTests",               dependencies: ["Bow", "BowRx", "RxSwift", "RxCocoa", "BowLaws", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "SwiftCheck"]),
+        .testTarget(name: "BowRxTests",               dependencies: ["Bow", "BowRx", "RxSwift", "RxCocoa", "BowLaws", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowRxGenerators", "SwiftCheck"]),
 
         // Type class Laws
         .testTarget(name:"BowLaws",        dependencies: ["Bow", "BowGenerators", "SwiftCheck"]),
