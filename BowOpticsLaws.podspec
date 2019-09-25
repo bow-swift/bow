@@ -27,5 +27,4 @@ Pod::Spec.new do |s|
   s.dependency "BowOptics", "~> #{s.version}"
   s.dependency "BowLaws", "~> #{s.version}"
   s.dependency "SwiftCheck", "~> 0.12.0"
-  s.dependency "Nimble", "~> 8.0.1"
 end
