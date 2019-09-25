@@ -129,15 +129,15 @@ If you want to contribute to this library, you can check the [Issues](https://gi
 
 ### How to run the project
 
-If you don't have Carthage, install it first:
+Open `Bow.xcodeproj` and you are ready to go. Bow uses the Swift Package Manager to handle its dependencies.
 
-`brew install carthage`
+### How to run the documentation project
 
-After this, grab all the project dependencies running:
+- Go to the directory `contents/Documentation`.
+- Run `pod install` to get all dependencies.
+- Open `Documentation.xcworkspace`.
 
-`carthage bootstrap`
-
-Now, you can open `Bow.xcodeproj` with Xcode and run the test to see that everything is working.
+For further information, refer to our [Contribution guidelines](CONTRIBUTING.md).
 
 # License
 

@@ -23,7 +23,6 @@
  pod "BowGeneric",          "~> {version}"
  pod "BowEffects",          "~> {version}"
  pod "BowRx",               "~> {version}"
- pod "BowBrightFutures",    "~> {version}"
  ```
 
  Bow also provides some pods for testing that can be consumed with:
@@ -41,7 +40,6 @@
  pod "BowFreeGenerators",          "~> {version}"
  pod "BowEffectsGenerators",       "~> {version}"
  pod "BowRxGenerators",            "~> {version}"
- pod "BowBrightFuturesGenerators", "~> {version}"
  ```
 
  After including the pods you would like to use in your Podfile, run the following command in the terminal:
@@ -93,8 +91,7 @@ let package = Package(
                     "BowFree",
                     "BowGeneric",
                     "BowEffects",
-                    "BowRx",
-                    "BowBrightFutures"]),
+                    "BowRx"]),
         .testTarget(name: "BowTestProjectTests",
                     dependencies: [
                         // Type class laws
@@ -106,8 +103,7 @@ let package = Package(
                         "BowGenerators",
                         "BowFreeGenerators",
                         "BowEffectsGenerators",
-                        "BowRxGenerators",
-                        "BowBrightFuturesGenerators"])
+                        "BowRxGenerators"])
     ]
 )
 ```
