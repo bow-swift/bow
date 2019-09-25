@@ -135,7 +135,7 @@ Open `Bow.xcodeproj` and you are ready to go. Bow uses the Swift Package Manager
 
 - Go to the directory `contents/Documentation`.
 - Run `pod install` to get all dependencies.
-- Open `Documentation.xcworkspace`.
+- Open `Documentation.xcworkspace` and run the project.
 
 For further information, refer to our [Contribution guidelines](CONTRIBUTING.md).
 
