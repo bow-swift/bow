@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 import BowLaws
 import Bow
 
@@ -22,7 +21,7 @@ class StoreTest: XCTestCase {
     
     func testExtractRendersCurrentState() {
         let result = greetingStore("Bow")
-        expect(result.extract()).to(equal("Hi Bow!"))
+        XCTAssertEqual(result.extract(), "Hi Bow!")
     }
     
     func testCoflatMapCreatesNewStore() {
@@ -33,11 +32,11 @@ class StoreTest: XCTestCase {
                 return "This is not my master"
             }
         }
-        expect(result.extract()).to(equal("This is my master"))
+        XCTAssertEqual(result.extract(), "This is my master")
     }
     
     func testMapModifiesRenderResult() {
         let result = greetingStore("Bow").map { str in str.uppercased() }
-        expect(result.extract()).to(equal("HI BOW!"))
+        XCTAssertEqual(result.extract(), "HI BOW!")
     }
 }

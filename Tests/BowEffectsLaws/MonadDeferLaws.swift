@@ -3,7 +3,7 @@ import SwiftCheck
 import Bow
 import BowEffects
 import BowLaws
-import Nimble
+import XCTest
 
 public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & Equatable & Error {
 
@@ -61,39 +61,39 @@ public class MonadDeferLaws<F: MonadDefer & EquatableK> where F.E: Arbitrary & E
         let sideEffect = SideEffect()
         let df = F.defer { () -> Kind<F, Int> in sideEffect.increment(); return F.pure(sideEffect.counter) }
 
-        expect(sideEffect.counter).to(equal(0))
-        expect(df).to(equal(F.pure(1)))
+        XCTAssertEqual(sideEffect.counter, 0)
+        XCTAssertEqual(df, F.pure(1))
     }
 
     private static func delaySuspendsEvaluation() {
         let sideEffect = SideEffect()
         let df = F.later { () -> Int in sideEffect.increment(); return sideEffect.counter }
 
-        expect(sideEffect.counter).to(equal(0))
-        expect(df).to(equal(F.pure(1)))
+        XCTAssertEqual(sideEffect.counter, 0)
+        XCTAssertEqual(df, F.pure(1))
     }
 
     private static func flatMapSuspendsEvaluation() {
         let sideEffect = SideEffect()
         let df = F.pure(0).flatMap { _ -> Kind<F, Int> in sideEffect.increment(); return F.pure(sideEffect.counter) }
 
-        expect(sideEffect.counter).to(equal(0))
-        expect(df).to(equal(F.pure(1)))
+        XCTAssertEqual(sideEffect.counter, 0)
+        XCTAssertEqual(df, F.pure(1))
     }
 
     private static func mapSuspendsEvaluation() {
         let sideEffect = SideEffect()
         let df = F.pure(0).map { _ -> Int in sideEffect.increment(); return sideEffect.counter }
 
-        expect(sideEffect.counter).to(equal(0))
-        expect(df).to(equal(F.pure(1)))
+        XCTAssertEqual(sideEffect.counter, 0)
+        XCTAssertEqual(df, F.pure(1))
     }
 
     private static func repeatedSyncEvaluationNotMemoized() {
         let sideEffect = SideEffect()
         let df = F.later { () -> Int in sideEffect.increment(); return sideEffect.counter }
 
-        expect(df.flatMap { _ in df }.flatMap { _ in df }).to(equal(F.pure(3)))
+        XCTAssertEqual(df.flatMap { _ in df }.flatMap { _ in df }, F.pure(3))
     }
 }
 

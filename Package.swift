@@ -24,7 +24,6 @@ let package = Package(
 
     dependencies: [
         .package(url: "https://github.com/typelift/SwiftCheck.git",   from: "0.12.0"),
-        .package(url: "https://github.com/Quick/Nimble.git",          from: "8.0.1"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git",     from: "5.0.1"),
     ],
 
@@ -39,18 +38,18 @@ let package = Package(
         .target(name:"BowRx",               dependencies: ["RxSwift", "RxCocoa", "Bow", "BowEffects"]),
 
         // Test targets
-        .testTarget(name: "BowTests",                 dependencies: ["Bow", "BowLaws", "SwiftCheck", "Nimble"]),
+        .testTarget(name: "BowTests",                 dependencies: ["Bow", "BowLaws", "SwiftCheck"]),
         .testTarget(name: "BowOpticsTests",           dependencies: ["Bow", "BowOptics", "BowOpticsLaws", "SwiftCheck"]),
-        .testTarget(name: "BowRecursionSchemesTests", dependencies: ["Bow", "BowRecursionSchemes", "BowLaws", "SwiftCheck", "Nimble"]),
-        .testTarget(name: "BowFreeTests",             dependencies: ["Bow", "BowFree", "BowFreeGenerators", "BowLaws", "SwiftCheck", "Nimble"]),
+        .testTarget(name: "BowRecursionSchemesTests", dependencies: ["Bow", "BowRecursionSchemes", "BowLaws", "SwiftCheck"]),
+        .testTarget(name: "BowFreeTests",             dependencies: ["Bow", "BowFree", "BowFreeGenerators", "BowLaws", "SwiftCheck"]),
         .testTarget(name: "BowGenericTests",          dependencies: ["Bow", "BowGeneric"]),
-        .testTarget(name: "BowEffectsTests",          dependencies: ["Bow", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowLaws", "SwiftCheck", "Nimble"]),
-        .testTarget(name: "BowRxTests",               dependencies: ["Bow", "BowRx", "RxSwift", "RxCocoa", "BowLaws", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "SwiftCheck", "Nimble"]),
+        .testTarget(name: "BowEffectsTests",          dependencies: ["Bow", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowLaws", "SwiftCheck"]),
+        .testTarget(name: "BowRxTests",               dependencies: ["Bow", "BowRx", "RxSwift", "RxCocoa", "BowLaws", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowRxGenerators", "SwiftCheck"]),
 
         // Type class Laws
-        .testTarget(name:"BowLaws",        dependencies: ["Bow", "BowGenerators", "SwiftCheck", "Nimble"]),
-        .testTarget(name:"BowEffectsLaws", dependencies: ["Bow", "BowEffects", "BowLaws", "SwiftCheck", "Nimble"]),
-        .testTarget(name:"BowOpticsLaws",  dependencies: ["Bow", "BowOptics", "BowLaws", "SwiftCheck", "Nimble"]),
+        .testTarget(name:"BowLaws",        dependencies: ["Bow", "BowGenerators", "SwiftCheck"]),
+        .testTarget(name:"BowEffectsLaws", dependencies: ["Bow", "BowEffects", "BowLaws", "SwiftCheck"]),
+        .testTarget(name:"BowOpticsLaws",  dependencies: ["Bow", "BowOptics", "BowLaws", "SwiftCheck"]),
 
         // Generators for Property-based Testing
         .testTarget(name: "BowGenerators",              dependencies: ["Bow", "SwiftCheck"]),

@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 import BowLaws
 import Bow
 
@@ -31,8 +30,9 @@ class DayTest: XCTestCase {
 
     func testDayExtract() {
         let result = day.extract()
-        expect(result.0).to(equal(1))
-        expect(result.1).to(equal(1))
+        
+        XCTAssertEqual(result.0, 1)
+        XCTAssertEqual(result.1, 1)
     }
 
     func testDayCoflatMap() {
@@ -40,11 +40,12 @@ class DayTest: XCTestCase {
             let result = Day.fix(x).extract()
             return self.compareSides(result.0, result.1)
         }
-        expect(transformed.extract()).to(equal("Both sides are equal"))
+        
+        XCTAssertEqual(transformed.extract(), "Both sides are equal")
     }
 
     func testDayMap() {
         let mapped = day.map { x in self.compareSides(x.0, x.1) }
-        expect(mapped.extract()).to(equal("Both sides are equal"))
+        XCTAssertEqual(mapped.extract(), "Both sides are equal")
     }
 }
