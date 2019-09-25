@@ -14,7 +14,7 @@ public extension PrimitiveSequence where Trait == SingleTrait {
     ///
     /// - Returns: A `SingleK` wrapping this object.
     func k() -> SingleK<Element> {
-        return SingleK<Element>(value: self)
+        return SingleK<Element>(self)
     }
 }
 
@@ -81,7 +81,7 @@ public final class SingleK<A>: SingleKOf<A> {
     /// Initializes a value of this type with the underlying `Single` value.
     ///
     /// - Parameter value: Wrapped `Single` value.
-    public init(value: Single<A>) {
+    public init(_ value: Single<A>) {
         self.value = value
     }
 }
