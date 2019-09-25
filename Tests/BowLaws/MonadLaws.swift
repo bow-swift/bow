@@ -1,7 +1,7 @@
 import SwiftCheck
-import Nimble
 import Bow
 import BowGenerators
+import XCTest
 
 public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     public static func check() {
@@ -54,7 +54,8 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     private static func stackSafety() {
         let iterations = 2000
         let res = F.tailRecM(0, { i in F.pure( i < iterations ? Either.left(i + 1) : Either.right(i) )})
-        expect(res == F.pure(iterations)).to(beTrue())
+        
+        XCTAssertEqual(res, F.pure(iterations))
     }
     
     private static func monadComprehensions() {

@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 import BowLaws
 import Bow
 
@@ -21,8 +20,8 @@ class SumTest: XCTestCase {
     let abSum = Sum.left(Id("A"), Id("B"))
     
     func testSumExtractReturnsViewOfCurrentSide() {
-        expect(self.abSum.extract()).to(equal("A"))
-        expect(self.abSum.change(side: .right).extract()).to(equal("B"))
+        XCTAssertEqual(self.abSum.extract(), "A")
+        XCTAssertEqual(self.abSum.change(side: .right).extract(), "B")
     }
     
     func testCoflatMapTransformsViewType() {
@@ -34,12 +33,12 @@ class SumTest: XCTestCase {
             case .right: return firstCharacter(Id.fix(s.right).extract())
             }
         }
-        expect(result.extract()).to(equal(Character("A")))
+        XCTAssertEqual(result.extract(), Character("A"))
     }
     
     func testMapTransformsViewType() {
         let firstCharacter = { (x : String) in x.first! }
         let result = abSum.map(firstCharacter)
-        expect(result.extract()).to(equal(Character("A")))
+        XCTAssertEqual(result.extract(), Character("A"))
     }
 }

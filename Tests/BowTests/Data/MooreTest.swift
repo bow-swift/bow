@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 import BowLaws
 import Bow
 
@@ -34,12 +33,12 @@ class MooreTest: XCTestCase {
     
     func testViewAfterHandle() {
         let currentRoute = routerMoore.handle("About").extract().extract()
-        expect(currentRoute).to(equal("About"))
+        XCTAssertEqual(currentRoute, "About")
     }
     
     func testViewAfterSeveralHandle() {
         let currentRoute = routerMoore.handle("About").handle("Home").extract().extract()
-        expect(currentRoute).to(equal("Home"))
+        XCTAssertEqual(currentRoute, "Home")
     }
     
     func testViewAfterCoflatMap() {
@@ -51,7 +50,7 @@ class MooreTest: XCTestCase {
             }
         }.extract()
         
-        expect(currentRoute).to(equal(0))
+        XCTAssertEqual(currentRoute, 0)
     }
     
     func testViewAfterMap() {
@@ -62,6 +61,6 @@ class MooreTest: XCTestCase {
             default: return 0
             }
         }.extract()
-        expect(currentRoute).to(equal(0))
+        XCTAssertEqual(currentRoute, 0)
     }
 }

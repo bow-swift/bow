@@ -1,5 +1,4 @@
 import XCTest
-import Nimble
 import SwiftCheck
 @testable import BowLaws
 import Bow
