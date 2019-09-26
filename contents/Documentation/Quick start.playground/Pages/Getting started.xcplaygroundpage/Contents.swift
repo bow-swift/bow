@@ -11,6 +11,52 @@
 
  You will need to replace `{version}` below by the version of the modules that you would like to use in your project. For a list of available versions, check the [releases page](https://github.com/bow-swift/bow/releases) in the GitHub repository.
 
+  ## Swift Package Manager
+
+  Starting on Xcode 11, you can use the integration in the IDE with Swift Package manager to bring the dependencies into your project. You only need the repository URL: [https://github.com/bow-swift/bow.git](https://github.com/bow-swift/bow.git). For earlier versions of Xcode, create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
+
+ ```swift
+ // swift-tools-version:5.0
+
+ import PackageDescription
+
+ let package = Package(
+     name: "BowTestProject",
+     dependencies: [
+         .package(url: "https://github.com/bow-swift/bow.git", from: "{version}")
+     ],
+     targets: [
+         .target(name: "BowTestProject",
+                 dependencies: [
+                     "Bow",
+                     "BowOptics",
+                     "BowRecursionSchemes",
+                     "BowFree",
+                     "BowGeneric",
+                     "BowEffects",
+                     "BowRx"]),
+         .testTarget(name: "BowTestProjectTests",
+                     dependencies: [
+                         // Type class laws
+                         "BowLaws",
+                         "BowOpticsLaws",
+                         "BowEffectsLaws",
+  
+                         // Generators for PBT with SwiftCheck
+                         "BowGenerators",
+                         "BowFreeGenerators",
+                         "BowEffectsGenerators",
+                         "BowRxGenerators"])
+     ]
+ )
+ ```
+
+  Feel free to include or remove the targets above at your convenience. To build the project, just run the following command in the terminal:
+
+  ```
+  $ swift build
+  ```
+ 
  ## CocoaPods
 
  You can consume each Bow module as a separate pod. You can add these lines to your Podfile at your convenience:
@@ -67,50 +113,4 @@ $ carthage bootstrap
 ```
 
  For further instructions on how to get Carthage installed and troubleshooting, and how to link the compiled frameworks into your project, visit their [GitHub repository](https://github.com/Carthage/Carthage).
-
- ## Swift Package Manager
-
- Create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
-
-```swift
-// swift-tools-version:5.0
-
-import PackageDescription
-
-let package = Package(
-    name: "BowTestProject",
-    dependencies: [
-        .package(url: "https://github.com/bow-swift/bow.git", from: "{version}")
-    ],
-    targets: [
-        .target(name: "BowTestProject",
-                dependencies: [
-                    "Bow",
-                    "BowOptics",
-                    "BowRecursionSchemes",
-                    "BowFree",
-                    "BowGeneric",
-                    "BowEffects",
-                    "BowRx"]),
-        .testTarget(name: "BowTestProjectTests",
-                    dependencies: [
-                        // Type class laws
-                        "BowLaws",
-                        "BowOpticsLaws",
-                        "BowEffectsLaws",
- 
-                        // Generators for PBT with SwiftCheck
-                        "BowGenerators",
-                        "BowFreeGenerators",
-                        "BowEffectsGenerators",
-                        "BowRxGenerators"])
-    ]
-)
-```
-
- Feel free to include or remove the targets above at your convenience. To build the project, just run the following command in the terminal:
-
- ```
- $ swift build
- ```
  */
