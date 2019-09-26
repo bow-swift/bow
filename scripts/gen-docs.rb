@@ -15,7 +15,7 @@ $current_branch_path = "next"
 # This is a list to filter -out- tags we know are not valuable to generate docs
 # for. If you set one tag in the default_version, you can add it here, so it's
 # not generated twice. Unless you want to have the same content at two paths.
-$invalid_tags = ["0.1.0", "0.2.0", "0.3.0"]
+$invalid_tags = ["0.1.0", "0.2.0", "0.3.0", "0.5.0"]
 
 # This is a list to filter -in- tags. Unless it's empty, where it will be ignored.
 # If you want an empty tags list in the end (for some reason ¯\_(ツ)_/¯)

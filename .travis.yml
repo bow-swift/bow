@@ -1,6 +1,8 @@
 language: objective-c
 osx_image: xcode11
 sudo: required
+git:
+  depth: 200
 addons:
   homebrew:
     taps:
@@ -37,5 +39,4 @@ jobs:
         provider: pages
         skip-cleanup: true
         github-token: $GITHUB_TOKEN
-        keep-history: true
         local-dir: pub-dir
