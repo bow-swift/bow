@@ -68,4 +68,6 @@ try fetchArticles(from: .comics, page: 10, limit: 25).unsafeRunSync(on: .global(
 fetchArticles(from: .boardgames, page: 1, limit: 5).unsafeRunSyncEither(on: DispatchQueue(label: "MyQueue"))
 
 // On the main queue, equivalent to omitting the parameter
-fetchArticles(from: .technology, page: 8, limit: 10).unsafeRunAsync(on: .main) { result in /* ... */ }
+fetchArticles(from: .technology, page: 8, limit: 10).unsafeRunAsync(on: .main) { result in
+    // ... Process result ...
+}
