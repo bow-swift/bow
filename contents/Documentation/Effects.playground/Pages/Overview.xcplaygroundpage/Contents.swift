@@ -54,7 +54,7 @@ import BowEffects
  | -------------------- | ----------- |
  | EnvIO&lt;D, E, A&gt; | A side effect depending on context `D` that produces values of type `A` and errors of type `E` |
  | URIO&lt;D, A&gt;     | A side effect depending on context `D` that produces values of type `A` and will never fail |
- | RIO&ltD, A&gt;       | A side effect depending on context `D` that produces values of type `A` and no explicit error type (using `Error`) |
+ | RIO&lt;D, A&gt;       | A side effect depending on context `D` that produces values of type `A` and no explicit error type (using `Error`) |
  
  ## Utilities
  
