@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowGenerators"
-  s.version     = "0.5.0"
+  s.version     = "0.6.0"
   s.summary     = "PBT Generators for data types in Bow."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
