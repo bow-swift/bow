@@ -2350,7 +2350,6 @@
 			buildPhases = (
 				OBJ_245 /* Sources */,
 				OBJ_291 /* Frameworks */,
-				D66B91BB20680771001A5B64 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2470,23 +2469,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D66B91BB20680771001A5B64 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftCheck.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1120978522A7EBC7007F3D9C /* Sources */ = {

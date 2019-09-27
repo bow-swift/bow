@@ -15,16 +15,6 @@ public func <--<F: Monad, A>(_ bound: BoundVar<F, A>, _ fa: @autoclosure @escapi
 /// Creates a binding expression.
 ///
 /// - Parameters:
-///   - bound: Variable to be bound in the expression.
-///   - fa: Plain value.
-/// - Returns: A binding expression.
-public func <--<F: Monad, A>(_ bound: BoundVar<F, A>, _ fa: @autoclosure @escaping () -> A) -> BindingExpression<F> {
-    return bound <- fa()
-}
-
-/// Creates a binding expression.
-///
-/// - Parameters:
 ///   - bounds: A 2-ary tuple of variables to be bound to the values produced by the effect.
 ///   - fa: Monadic effect.
 /// - Returns: A binding expresssion.
