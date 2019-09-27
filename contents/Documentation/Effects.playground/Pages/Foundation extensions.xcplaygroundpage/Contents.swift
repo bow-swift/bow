@@ -16,7 +16,7 @@
  
  ## Console
  
- Functions `print` and `readLine` are global functions that write to and read form the standard input/output, producing side effects. Bow Effects wrap them under `ConsoleIO`, which provides methods with the exact same signature but returning an `IO` value that describes the operation.
+ Functions `print` and `readLine` are global functions that write to and read form the standard input/output, producing side effects. Bow Effects wraps them under `ConsoleIO`, which provides methods with the exact same signature but returning an `IO` value that describes the operation.
  
  ## URLSession
  

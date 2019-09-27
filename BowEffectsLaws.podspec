@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowEffectsLaws"
-  s.version     = "0.5.0"
+  s.version     = "0.6.0"
   s.summary     = "Laws for type classes included in BowEffects."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE

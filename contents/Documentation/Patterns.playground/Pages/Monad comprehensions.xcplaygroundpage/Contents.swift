@@ -63,7 +63,7 @@ func join_flatMap(_ a: Result<Int, Error>, _ b: Result<Double, Error>, _ c: Resu
  There are multiple types in the different modules in Bow that already implement `Monad`:
  
  | Module     | Types                        |
- ! ---------- | ---------------------------- |
+ | ---------- | ---------------------------- |
  | Bow        | Cokleisli, Function0, Function1, Kleisli, ArrayK, Either, Eval, Id, Ior, NonEmptyArray, Option, Try, EitherT, OptionT, StateT, WriterT       |
  | BowEffects | IO, Resource                 |
  | BowRx      | SingleK, MaybeK, ObservableK |
