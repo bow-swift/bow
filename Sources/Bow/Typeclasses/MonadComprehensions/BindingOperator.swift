@@ -18,16 +18,6 @@ public func <-<F: Monad, A>(_ bound: BoundVar<F, A>, _ fa: @autoclosure @escapin
 /// Creates a binding expression.
 ///
 /// - Parameters:
-///   - bound: Variable to be bound in the expression.
-///   - fa: Plain value.
-/// - Returns: A binding expression.
-public func <-<F: Monad, A>(_ bound: BoundVar<F, A>, _ fa: @autoclosure @escaping () -> A) -> BindingExpression<F> {
-    return BindingExpression(bound.erased, fa >>> F.pure >>> erased)
-}
-
-/// Creates a binding expression.
-///
-/// - Parameters:
 ///   - bounds: A 2-ary tuple of variables to be bound to the values produced by the effect.
 ///   - fa: Monadic effect.
 /// - Returns: A binding expresssion.
@@ -121,12 +111,4 @@ public func <-<F: Monad, A, B, C, D, E, G, H, I, J, K>(_ bounds: (BoundVar<F, A>
 /// - Returns: A binding expression.
 public prefix func |<-<F: Monad, A>(_ fa: @autoclosure @escaping () -> Kind<F, A>) -> BindingExpression<F> {
     return BindingExpression(BoundVar(), fa >>> erased)
-}
-
-/// Creates a binding expression that discards the produced value.
-///
-/// - Parameter fa: Plain value.
-/// - Returns: A binding expression.
-public prefix func |<-<F: Monad, A>(_ fa: @autoclosure @escaping () -> A) -> BindingExpression<F> {
-    return BindingExpression(BoundVar(), fa >>> F.pure)
 }

@@ -61,10 +61,10 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let l2 = F.var(String.self)
             
             return binding(
-                   |<-F.lazy().continueOn(queue1),
-                l1 <-- currentQueueLabel(),
-                   |<-F.lazy().continueOn(queue2),
-                l2 <-- currentQueueLabel(),
+                continueOn(queue1),
+                l1 <-- F.pure(currentQueueLabel()),
+                continueOn(queue2),
+                l2 <-- F.pure(currentQueueLabel()),
                 yield: l1.get + l2.get) == F.pure(id1 + id2)
         }
     }
