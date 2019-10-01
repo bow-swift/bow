@@ -4,7 +4,7 @@ import Foundation
 
 extension Dictionary: Semigroup {
     public func combine(_ other: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
-        self.merging(other, uniquingKeysWith: { _, x in x })
+        self.merging(other, uniquingKeysWith: { _, otherValue in otherValue })
     }
 }
 
