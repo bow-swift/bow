@@ -36,7 +36,7 @@ public class FoldableLaws<F: Foldable & EquatableK & ArbitraryK> {
     private static func existsIsLazy() {
         property("Exists is lazy") <~ forAll { (fa: KindOf<F, Int>) in
             var x = 0
-            let _ = fa.value.exists { _ in x += 1; return true }
+            let _ = fa.value.exists { _ in x = 1; return true }
             let expected = fa.value.isEmpty ? 0 : 1
             return x == expected
         }
