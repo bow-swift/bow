@@ -2,7 +2,7 @@ import XCTest
 import Bow
 import BowLaws
 
-class ArrayTests: XCTestCase {
+class ArrayTest: XCTestCase {
     func testSemigroupLaws() {
         SemigroupLaws<[Int]>.check()
     }
