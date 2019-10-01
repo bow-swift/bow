@@ -4,13 +4,13 @@ import Foundation
 public final class ForDictionaryK {}
 
 /// Partial application of the DictionaryK type constructor, omitting the last parameter.
-public final class DictionaryKPartial<K>: Kind<ForDictionaryK, K> {}
+public final class DictionaryKPartial<K: Hashable>: Kind<ForDictionaryK, K> {}
 
 /// Higher Kinded Type alias to improve readability over `Kind<DictionaryKPartial<K>, A>`
-public typealias DictionaryKOf<K, A> = Kind<DictionaryKPartial<K>, A>
+public typealias DictionaryKOf<K: Hashable, A> = Kind<DictionaryKPartial<K>, A>
 
 /// DictionaryK is a Higher Kinded Type wrapper over Swift dictionaries.
-public class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
+public final class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     private let dictionary: [K: A]
 
     /// Safe downcast.
@@ -133,5 +133,29 @@ public extension Dictionary {
     /// - Returns: A `DictionaryK` wrapping this Swift dictionary.
     func k() -> DictionaryK<Key, Value> {
         return DictionaryK<Key, Value>(self)
+    }
+}
+
+// MARK: Instance of `Semigroup` for `DictionaryK`
+
+extension DictionaryK: Semigroup {
+    public func combine(_ other: DictionaryK<K, A>) -> DictionaryK<K, A> {
+        (self.dictionary.combine(other.dictionary)).k()
+    }
+}
+
+// MARK: Instance of `Monoid` for `DictionaryK`
+
+extension DictionaryK: Monoid {
+    public static func empty() -> DictionaryK<K, A> {
+        [:].k()
+    }
+}
+
+// MARK: Instance of `EquatableK` for `DictionaryK`
+
+extension DictionaryKPartial: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: Kind<DictionaryKPartial<K>, A>, _ rhs: Kind<DictionaryKPartial<K>, A>) -> Bool {
+        lhs^.asDictionary() == rhs^.asDictionary()
     }
 }

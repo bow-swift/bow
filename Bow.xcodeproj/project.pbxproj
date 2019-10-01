@@ -120,6 +120,8 @@
 		1137469C234345F400D9C1AD /* ArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137469A234345EE00D9C1AD /* ArrayTest.swift */; };
 		1137469E2343592300D9C1AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137469D2343592300D9C1AD /* Dictionary.swift */; };
 		113746A1234359C800D9C1AD /* DictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137469F234359C000D9C1AD /* DictionaryTest.swift */; };
+		113746A423435BA600D9C1AD /* DictionaryKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113746A223435BA300D9C1AD /* DictionaryKTest.swift */; };
+		113746A623435C0B00D9C1AD /* DictionaryK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */; };
 		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
 		1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
 		1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
@@ -754,6 +756,8 @@
 		1137469A234345EE00D9C1AD /* ArrayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTest.swift; sourceTree = "<group>"; };
 		1137469D2343592300D9C1AD /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		1137469F234359C000D9C1AD /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
+		113746A223435BA300D9C1AD /* DictionaryKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryKTest.swift; sourceTree = "<group>"; };
+		113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DictionaryK+Gen.swift"; sourceTree = "<group>"; };
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
@@ -1199,6 +1203,7 @@
 				112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */,
 				112097B222A7F17F007F3D9C /* Const+Gen.swift */,
 				112097CB22A819E9007F3D9C /* Day+Gen.swift */,
+				113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */,
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
 				112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */,
 				11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */,
@@ -1655,6 +1660,7 @@
 				1137469A234345EE00D9C1AD /* ArrayTest.swift */,
 				8BA0F3B9217E2DEF00969984 /* ConstTest.swift */,
 				8BA0F3B7217E2DEF00969984 /* DayTest.swift */,
+				113746A223435BA300D9C1AD /* DictionaryKTest.swift */,
 				1137469F234359C000D9C1AD /* DictionaryTest.swift */,
 				8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */,
 				8BA0F3AB217E2DEF00969984 /* EitherTest.swift */,
@@ -2493,6 +2499,7 @@
 				112097C522A805CE007F3D9C /* Function0+Gen.swift in Sources */,
 				112097C722A80730007F3D9C /* Function1+Gen.swift in Sources */,
 				112097DF22A90972007F3D9C /* StateT+Gen.swift in Sources */,
+				113746A623435C0B00D9C1AD /* DictionaryK+Gen.swift in Sources */,
 				112097E122A90AAA007F3D9C /* WriterT+Gen.swift in Sources */,
 				112097C122A7FF37007F3D9C /* Validated+Gen.swift in Sources */,
 				112097B922A7FAF6007F3D9C /* Ior+Gen.swift in Sources */,
@@ -2823,6 +2830,7 @@
 				11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */,
 				8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */,
 				8BA0F407217E2DEF00969984 /* IorTest.swift in Sources */,
+				113746A423435BA600D9C1AD /* DictionaryKTest.swift in Sources */,
 				8BA0F3F1217E2DEF00969984 /* StateTTest.swift in Sources */,
 				11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */,
 				8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */,
