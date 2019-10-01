@@ -218,10 +218,18 @@ public extension Foldable {
         return foldMap(fa, constant(1))
     }
     
+    /// Combines the elements of an structure using their `MonoidK` instance.
+    /// 
+    /// - Parameter fga: Structure to be reduced.
+    /// - Returns: A value in the context providing the `MonoidK` instance.
     static func foldK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
         return reduceK(fga)
     }
     
+    /// Combines the elements of an structure using their `MonoidK` instance.
+    ///
+    /// - Parameter fga: Structure to be reduced.
+    /// - Returns: A value in the context providing the `MonoidK` instance.
     static func reduceK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
         return foldLeft(fga, Kind<G, A>.emptyK(), { b, a in b.combineK(a) })
     }
