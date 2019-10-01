@@ -35,14 +35,6 @@ public final class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
         return self.dictionary
     }
 
-    /// Creates a new value transforming the type using the provided function, preserving the structure of the dictionary.
-    ///
-    /// - Parameter f: Transforming function.
-    /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the dictionary.
-    public func map<B>(_ f : (A) -> B) -> DictionaryK<K, B> {
-        return DictionaryK<K, B>(self.dictionary.mapValues(f))
-    }
-
     /// Zips this dictionary with another one and combines their values with the provided function.
     ///
     /// - Parameters:
@@ -74,7 +66,7 @@ public final class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
     /// - Parameter fa: A dictionary.
     /// - Returns: A dictionary with the result of applying the functions in this dictionary to the values in the argument.
     public func ap<AA, B>(_ fa: DictionaryK<K, AA>) -> DictionaryK<K, B> where A == (AA) -> B {
-        return flatMap(fa.map)
+        return flatMap { f in fa.map { a in f(a) }^ }
     }
 
     /// Applies the provided function to all values in this dictionary, flattening the final result.
@@ -85,36 +77,6 @@ public final class DictionaryK<K: Hashable, A>: DictionaryKOf<K, A> {
         return Dictionary<K, B>(uniqueKeysWithValues: self.dictionary.compactMap { k, a in
             f(a).dictionary[k].map { v in (k, v) }
         }).k()
-    }
-
-    /// Eagerly reduces the values of this dictionary to a summary value.
-    ///
-    /// - Parameters:
-    ///   - b: Initial value for the folding process.
-    ///   - f: Folding function.
-    /// - Returns: A summary value resulting from the folding process.
-    public func foldLeft<B>(_ b: B, _ f: (B, A) -> B) -> B {
-        return self.dictionary.values.reduce(b, f)
-    }
-
-    /// Lazily reduces the values of this dictionary to a summary value.
-    ///
-    /// - Parameters:
-    ///   - b: Initial value for the folding process.
-    ///   - f: Folding function.
-    /// - Returns: A summary value resulting from the folding process.
-    public func foldRight<B>(_ b: Eval<B>, _ f: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return self.dictionary.values.reversed().reduce(b) { b, a in f(a, b) }
-    }
-
-    /// Eagerly reduces the values of this dictionary to a summary dictionary.
-    ///
-    /// - Parameters:
-    ///   - b: Initial value for the folding process.
-    ///   - f: Folding function.
-    /// - Returns: A summary dictionary resulting from the folding process.
-    public func foldLeft<B>(_ b: DictionaryK<K, B>, _ f: (DictionaryK<K, B>, (K, A)) -> DictionaryK<K, B>) -> DictionaryK<K, B> {
-        return self.dictionary.reduce(b) { m, pair in f(m, pair) }
     }
 }
 
@@ -157,5 +119,47 @@ extension DictionaryK: Monoid {
 extension DictionaryKPartial: EquatableK {
     public static func eq<A: Equatable>(_ lhs: Kind<DictionaryKPartial<K>, A>, _ rhs: Kind<DictionaryKPartial<K>, A>) -> Bool {
         lhs^.asDictionary() == rhs^.asDictionary()
+    }
+}
+
+// MARK: Instance of `Functor` for `DictionaryK`
+
+extension DictionaryKPartial: Functor {
+    public static func map<A, B>(_ fa: Kind<DictionaryKPartial<K>, A>, _ f: @escaping (A) -> B) -> Kind<DictionaryKPartial<K>, B> {
+        fa^.asDictionary().mapValues(f).k()
+    }
+}
+
+// MARK: Instance of `FunctorFilter` for `DictionaryK`
+
+extension DictionaryKPartial: FunctorFilter {
+    public static func mapFilter<A, B>(_ fa: Kind<DictionaryKPartial<K>, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<DictionaryKPartial<K>, B> {
+        fa.map(f).sequence()^.fold({ DictionaryK.empty() }, id)
+    }
+}
+
+// MARK: Instance of `Foldable` for `DictionaryK`
+
+extension DictionaryKPartial: Foldable {
+    public static func foldLeft<A, B>(_ fa: Kind<DictionaryKPartial<K>, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        fa^.asDictionary().values.lazy.reduce(b, f)
+    }
+    
+    public static func foldRight<A, B>(_ fa: Kind<DictionaryKPartial<K>, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        fa^.asDictionary().values.reversed().lazy.reduce(b) { b, a in f(a, b) }
+    }
+}
+
+// MARK: Instance of `Traverse` for `DictionaryK`
+
+extension DictionaryKPartial: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: Kind<DictionaryKPartial<K>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<DictionaryKPartial<K>, B>> {
+        var result = G.pure([K: B]())
+        fa^.asDictionary().forEach { item in
+            result = G.map(f(item.value), result) { x, y in
+                y.combine([item.key: x])
+            }
+        }
+        return result.map { x in x.k() }
     }
 }
