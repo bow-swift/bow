@@ -33,6 +33,7 @@ jobs:
       before_install:
         - gem update --system
         - gem install bundler
+        - gem install cocoapods
       script:
         - ./scripts/gen-docs.rb
       deploy:
