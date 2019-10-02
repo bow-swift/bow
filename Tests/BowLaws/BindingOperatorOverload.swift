@@ -1,4 +1,4 @@
-@testable import Bow
+import Bow
 
 infix operator <-- : AssignmentPrecedence
 

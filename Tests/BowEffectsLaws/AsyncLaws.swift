@@ -2,7 +2,7 @@ import Foundation
 import SwiftCheck
 import Bow
 import BowLaws
-@testable import BowEffects
+import BowEffects
 
 public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     
