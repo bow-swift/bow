@@ -25,4 +25,5 @@ Pod::Spec.new do |s|
   s.source_files = "Tests/BowGenerators/**/*.swift"
   s.dependency "Bow", "~> #{s.version}"
   s.dependency "SwiftCheck", "~> 0.12.0"
+  s.swift_versions = ["5.0", "5.1"]
 end

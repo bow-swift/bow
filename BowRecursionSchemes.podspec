@@ -25,4 +25,5 @@ Pod::Spec.new do |s|
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowRecursionSchemes/**/*.swift"
   s.dependency "Bow", "~> #{s.version}"
+  s.swift_versions = ["5.0", "5.1"]
 end

@@ -27,4 +27,5 @@ Pod::Spec.new do |s|
   s.dependency "RxSwift", "~> 5.0.0"
   s.dependency "Bow", "~> #{s.version}"
   s.dependency "BowEffects", "~> #{s.version}"
+  s.swift_versions = ["5.0", "5.1"]
 end
