@@ -85,7 +85,7 @@ def generate_nef_site(version, versions_list)
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
   system "nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md"
-  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b bow/#{version}"
+  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b #{version}"
   system "rm -rf #{$source_dir}/docs"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
