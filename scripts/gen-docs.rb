@@ -82,8 +82,10 @@ def generate_nef_site(version, versions_list)
   };
   `mkdir -p #{$source_dir}/_data`
   File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
+  # Removing lockfile to avoid conflict in case it differs between versions
+  system "rm {$source_dir}/Gemfile.lock"
   system "nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md"
-  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./docs/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b #{version}"
+  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./{$source_dir}/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b bow/#{version}"
   system "rm -rf #{$source_dir}/docs"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
@@ -95,6 +97,8 @@ end
 # @return [nil] nil.
 def generate_api_site(version)
   system "echo == Generating API site for #{version}"
+  # Removing lockfile to avoid conflict in case it differs between versions
+  system "rm {$source_dir}/Gemfile.lock"
   system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
