@@ -16,9 +16,9 @@ import BowEffects
 /*:
  This module includes multiple facilities to work with side effects:
  
- - Type classes: abstractions to suspend side effects and execute them asynchronous and concurrently.
- - IO: a powerful data type to encapsulate side effects and work with them in a functional manner.
- - Utilities: data types to work with resources and shared state functionally.
+ - **Type classes**: abstractions to suspend side effects and execute them asynchronous and concurrently.
+ - **IO**: a powerful data type to encapsulate side effects and work with them in a functional manner.
+ - **Utilities**: data types to work with resources and shared state functionally.
  
  ## Type classes
  
