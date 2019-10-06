@@ -19,7 +19,7 @@ platform :ios do
   desc "Prepare for release"
   lane :release  do |options|
     version_bump_podspec(path: "Bow.podspec", version_number: options[:version_number])
-    add_git_tag(tag: options[:version_number], message: options[:description])
+    add_git_tag(tag: options[:version_number], message: (File.read("../CHANGELOG") rescue "No changelog provided"))
     push_git_tags
   end
 end
