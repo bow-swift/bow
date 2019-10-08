@@ -33,7 +33,7 @@ func fetchArticles(from category: Category, page: UInt, limit: UInt) -> IO<APIEr
 { return IO.pure([])^ }
 // nef:end
 /*:
- ## Synchronous run
+ ## Synchronous run
  
  We can run the function above synchronously using the `unsafeRunSync ` method on `IO`:
  */
