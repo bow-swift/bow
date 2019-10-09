@@ -264,7 +264,18 @@ extension Float: Monoid {
     }
 }
 
-/// Instance of `Semigroup` for `Double`. Uses sum as combination of elements.
+/// Instance of `Semiring` for `Float`. Uses multiplication as multiplication of elements and one as one element.
+extension Float: Semiring {
+    public func multiply(_ other: Float) -> Float {
+        return self * other
+    }
+    
+    public static func one() -> Float {
+        return 1
+    }
+}
+
+/// Instance of `Semigroup` for `Double`. Uses addition as combination of elements.
 extension Double: Semigroup {
     public func combine(_ other: Double) -> Double {
         return self + other
@@ -275,5 +286,16 @@ extension Double: Semigroup {
 extension Double: Monoid {
     public static func empty() -> Double {
         return 0
+    }
+}
+
+/// Instance of `Semiring` for `Double`. Uses addition as multiplication of elements and one as one element.
+extension Double: Semiring {
+    public func multiply(_ other: Double) -> Double {
+        return self * other
+    }
+    
+    public static func one() -> Double {
+        return 1
     }
 }
