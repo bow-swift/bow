@@ -21,6 +21,8 @@
 		1116D4FC224E332900507B54 /* Coproduct9.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FB224E332900507B54 /* Coproduct9.swift */; };
 		1116D500224E342200507B54 /* Coproduct10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4FF224E342200507B54 /* Coproduct10.swift */; };
 		1116D502224E3A2300507B54 /* Coproduct2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D501224E3A2300507B54 /* Coproduct2.swift */; };
+		111F84FB234DBF95003FE646 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F84FA234DBF95003FE646 /* Set.swift */; };
+		111F84FE234DC00F003FE646 /* SetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111F84FC234DC00C003FE646 /* SetTest.swift */; };
 		112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097AE22A7EE46007F3D9C /* Either+Gen.swift */; };
 		112097B122A7F0E6007F3D9C /* ArrayK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */; };
 		112097B322A7F17F007F3D9C /* Const+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097B222A7F17F007F3D9C /* Const+Gen.swift */; };
@@ -683,6 +685,8 @@
 		1116D4FB224E332900507B54 /* Coproduct9.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct9.swift; sourceTree = "<group>"; };
 		1116D4FF224E342200507B54 /* Coproduct10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct10.swift; sourceTree = "<group>"; };
 		1116D501224E3A2300507B54 /* Coproduct2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct2.swift; sourceTree = "<group>"; };
+		111F84FA234DBF95003FE646 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
+		111F84FC234DC00C003FE646 /* SetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTest.swift; sourceTree = "<group>"; };
 		112097A922A7EBC7007F3D9C /* BowGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		112097AE22A7EE46007F3D9C /* Either+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Either+Gen.swift"; sourceTree = "<group>"; };
@@ -1672,6 +1676,7 @@
 				8BA0F3B5217E2DEF00969984 /* OptionTest.swift */,
 				112296D3219DC1EF006D66C5 /* ResultTest.swift */,
 				8BA0F3AC217E2DEF00969984 /* SetKTest.swift */,
+				111F84FC234DC00C003FE646 /* SetTest.swift */,
 				8BA0F3B1217E2DEF00969984 /* StoreTest.swift */,
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
@@ -1782,6 +1787,7 @@
 				8BA0F478217E2E9200969984 /* Option.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
+				111F84FA234DBF95003FE646 /* Set.swift */,
 				8BA0F487217E2E9200969984 /* SetK.swift */,
 				8BA0F486217E2E9200969984 /* Store.swift */,
 				8BA0F483217E2E9200969984 /* Sum.swift */,
@@ -2835,6 +2841,7 @@
 				11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */,
 				8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */,
 				8BA0F408217E2DEF00969984 /* ValidatedTest.swift in Sources */,
+				111F84FE234DC00F003FE646 /* SetTest.swift in Sources */,
 				8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */,
 				8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */,
 				8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */,
@@ -2855,6 +2862,7 @@
 			files = (
 				8BA0F4EF217E2E9200969984 /* Function0.swift in Sources */,
 				8BA0F637217E2E9200969984 /* Monad.swift in Sources */,
+				111F84FB234DBF95003FE646 /* Set.swift in Sources */,
 				8BA0F60F217E2E9200969984 /* TraverseFilter.swift in Sources */,
 				8BA0F5FF217E2E9200969984 /* SemigroupK.swift in Sources */,
 				1137469E2343592300D9C1AD /* Dictionary.swift in Sources */,
