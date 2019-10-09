@@ -62,6 +62,13 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     public func contramap<DD>(_ keyPath: KeyPath<DD, D>) -> Kleisli<F, DD, A> {
         return Kleisli<F, DD, A> { d in self.invoke(d[keyPath: keyPath]) }
     }
+    
+    /// Narrows the scope of the context of this Kleisli from `Any` to a concrete type
+    ///
+    /// - Returns: A copy of this Kleisli working on a more precise context.
+    func narrow<DD>() -> Kleisli<F, DD, A> where D == Any {
+        self.contramap(id)
+    }
 }
 
 /// Safe downcast.
