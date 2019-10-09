@@ -418,6 +418,32 @@ public extension Kleisli {
     func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
         return self.invoke(d)^
     }
+    
+    /// Performs the side effects that are suspended in this IO in a synchronous manner.
+    ///
+    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: Value produced after running the suspended side effects.
+    /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunSync<E: Error>(on queue: DispatchQueue = .main) throws -> A where D == Any, F == IOPartial<E> {
+        try self.provide(()).unsafeRunSync(on: queue)
+    }
+    
+    /// Performs the side effects that are suspended in this EnvIO in a synchronous manner.
+    ///
+    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunSyncEither<E: Error>(on queue: DispatchQueue = .main) -> Either<E, A> where D == Any, F == IOPartial<E> {
+        self.provide(()).unsafeRunSyncEither(on: queue)
+    }
+    
+    /// Performs the side effects that are suspended in this EnvIO in an asynchronous manner.
+    ///
+    /// - Parameters:
+    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunAsync<E: Error>(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where D == Any, F == IOPartial<E> {
+        self.provide(()).unsafeRunAsync(on: queue, callback)
+    }
 }
 
 internal class Pure<E: Error, A>: IO<E, A> {
