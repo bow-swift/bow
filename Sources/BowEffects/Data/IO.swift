@@ -57,6 +57,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
         return fa as! IO<E, A>
     }
     
+    /// Creates an EnvIO with no dependencies from this IO.
     public var env: EnvIO<Any, E, A> {
         EnvIO { _ in self }
     }
