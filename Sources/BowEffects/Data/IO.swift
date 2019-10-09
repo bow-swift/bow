@@ -57,6 +57,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
         return fa as! IO<E, A>
     }
     
+    public var env: EnvIO<Any, E, A> {
+        EnvIO { _ in self }
+    }
+    
     /// Creates an IO from a side-effectful function.
     ///
     /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
