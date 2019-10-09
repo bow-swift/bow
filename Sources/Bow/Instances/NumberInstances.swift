@@ -14,6 +14,17 @@ extension Int: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `Int`. Uses multiplication as multiplication of elements and one as one element.
+extension Int: Semiring {
+    public func multiply(_ other: Int) -> Int {
+        return self * other
+    }
+    
+    public static func one() -> Int {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `Int8`. Uses sum as combination of elements.
 extension Int8: Semigroup {
     public func combine(_ other: Int8) -> Int8 {
@@ -25,6 +36,17 @@ extension Int8: Semigroup {
 extension Int8: Monoid {
     public static func empty() -> Int8 {
         return 0
+    }
+}
+
+/// Instance of `Semiring` for `Int8`. Uses multiplication as multiplication of elements and one as one element.
+extension Int8: Semiring {
+    public func multiply(_ other: Int8) -> Int8 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> Int8 {
+        return 1
     }
 }
 
@@ -42,6 +64,17 @@ extension Int16: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `Int16`. Uses multiplication as multiplication of elements and one as one element.
+extension Int16: Semiring {
+    public func multiply(_ other: Int16) -> Int16 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> Int16 {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `Int32`. Uses sum as combination of elements.
 extension Int32: Semigroup {
     public func combine(_ other: Int32) -> Int32 {
@@ -56,6 +89,17 @@ extension Int32: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `Int32`. Uses multiplication as multiplication of elements and one as one element.
+extension Int32: Semiring {
+    public func multiply(_ other: Int32) -> Int32 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> Int32 {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `Int64`. Uses sum as combination of elements.
 extension Int64: Semigroup {
     public func combine(_ other: Int64) -> Int64 {
@@ -67,6 +111,17 @@ extension Int64: Semigroup {
 extension Int64: Monoid {
     public static func empty() -> Int64 {
         return 0
+    }
+}
+
+/// Instance of `Semiring` for `Int64`. Uses multiplication as multiplication of elements and one as one element.
+extension Int64: Semiring {
+    public func multiply(_ other: Int64) -> Int64 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> Int64 {
+        return 1
     }
 }
 

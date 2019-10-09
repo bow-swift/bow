@@ -11,7 +11,7 @@ class NumberInstancesTest: XCTestCase {
     func testIntOrderLaws() {
         ComparableLaws<Int>.check()
     }
-    
+
     func testInt8EqLaws() {
         EquatableLaws<Int8>.check()
     }
@@ -19,7 +19,7 @@ class NumberInstancesTest: XCTestCase {
     func testInt8OrderLaws() {
         ComparableLaws<Int8>.check()
     }
-    
+
     func testInt16EqLaws() {
         EquatableLaws<Int16>.check()
     }
@@ -35,7 +35,7 @@ class NumberInstancesTest: XCTestCase {
     func testInt32OrderLaws() {
         ComparableLaws<Int32>.check()
     }
-    
+
     func testInt64EqLaws() {
         EquatableLaws<Int64>.check()
     }
@@ -43,7 +43,7 @@ class NumberInstancesTest: XCTestCase {
     func testInt64OrderLaws() {
         ComparableLaws<Int64>.check()
     }
-    
+
     func testUIntEqLaws() {
         EquatableLaws<UInt>.check()
     }
@@ -186,5 +186,25 @@ class NumberInstancesTest: XCTestCase {
     
     func testDoubleMonoidLaws() {
         MonoidLaws<Double>.check()
+    }
+
+    func testIntSemiringLaws() {
+        SemiringLaws<Int>.check()
+    }
+
+    func testInt8SemiringLaws() {
+        SemiringLaws<Int8>.check()
+    }
+
+    func testInt16SemiringLaws() {
+        SemiringLaws<Int16>.check()
+    }
+
+    func testInt32SemiringLaws() {
+        SemiringLaws<Int32>.check()
+    }
+
+    func testInt64SemiringLaws() {
+        SemiringLaws<Int64>.check()
     }
 }
