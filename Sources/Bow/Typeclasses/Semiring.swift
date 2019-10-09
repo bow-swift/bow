@@ -6,17 +6,17 @@ public protocol Semiring: Monoid {
     ///
     /// This operation must satisfy the semigroup laws:
     ///
-    ///     a.times(b).times(c) == a.times(b.times(c))
+    ///     a.multiply(b).multiply(c) == a.multiply(b.multiply(c))
     ///
     /// - Parameter other: Value to multipy with the receiver.
     /// - Returns: Multiplication of the receiver value with the parameter value.
-    func times(_ other: Self) -> Self
+    func multiply(_ other: Self) -> Self
     
     /// Zero element.
     ///
     /// The zero element must obey the semirings laws:
     ///
-    ///     a.times(zero()) == zero().times(a) == zero()
+    ///     a.multiply(zero()) == zero().multiply(a) == zero()
     ///
     /// That is, multiplying any element with `zero` must return the `zero`.
     /// It is also an alias for `empty` of `Monoid`.
@@ -28,7 +28,7 @@ public protocol Semiring: Monoid {
     ///
     /// The one element must obey the semirings laws:
     ///
-    ///     a.times(one()) == one().times(a) == a
+    ///     a.multiply(one()) == one().multiply(a) == a
     ///
     /// That is, multiplying any element with `one` must return the original element.
     ///

@@ -16,7 +16,7 @@ extension Bool: Monoid {
 
 /// Instance of `Semiring` for `Bool`. Uses conjunction as multiplication of elements and `true` as empty element.
 extension Bool: Semiring {
-    public func times(_ other: Bool) -> Bool {
+    public func multiply(_ other: Bool) -> Bool {
         return self && other
     }
     
