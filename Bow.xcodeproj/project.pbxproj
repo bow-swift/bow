@@ -308,6 +308,8 @@
 		8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AC217E2E9200969984 /* Semigroup.swift */; };
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
+		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
+		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1020,6 +1022,8 @@
 		8BA0F4D0217E2E9200969984 /* At+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "At+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D1217E2E9200969984 /* Each+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D2217E2E9200969984 /* Lens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
+		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		"Bow::Bow::Product" /* Bow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bow::BowTests::Product" /* BowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -1547,6 +1551,7 @@
 				8BA0F3BE217E2DEF00969984 /* SemigroupLaws.swift */,
 				8BA0F3D3217E2DEF00969984 /* TraverseFilterLaws.swift */,
 				8BA0F3BB217E2DEF00969984 /* TraverseLaws.swift */,
+				B8B910C3234D846900E44271 /* SemiringLaws.swift */,
 			);
 			path = BowLaws;
 			sourceTree = "<group>";
@@ -1829,6 +1834,7 @@
 				8BA0F496217E2E9200969984 /* SemigroupK.swift */,
 				8BA0F49B217E2E9200969984 /* Traverse.swift */,
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
+				B8B910BF234D7F2600E44271 /* Semiring.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -2560,6 +2566,7 @@
 				11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */,
 				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
 				1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */,
+				B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2938,6 +2945,7 @@
 				8BA0F62F217E2E9200969984 /* Bimonad.swift in Sources */,
 				8BA0F627217E2E9200969984 /* Foldable.swift in Sources */,
 				8BA0F587217E2E9200969984 /* DictionaryK.swift in Sources */,
+				B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
