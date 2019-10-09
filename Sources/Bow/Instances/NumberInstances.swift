@@ -139,6 +139,17 @@ extension UInt: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `UInt`. Uses multiplication as multiplication of elements and one as one element.
+extension UInt: Semiring {
+    public func multiply(_ other: UInt) -> UInt {
+        return self * other
+    }
+    
+    public static func one() -> UInt {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `UInt8`. Uses sum as combination of elements.
 extension UInt8: Semigroup {
     public func combine(_ other: UInt8) -> UInt8 {
@@ -150,6 +161,17 @@ extension UInt8: Semigroup {
 extension UInt8: Monoid {
     public static func empty() -> UInt8 {
         return 0
+    }
+}
+
+/// Instance of `Semiring` for `UInt8`. Uses multiplication as multiplication of elements and one as one element.
+extension UInt8: Semiring {
+    public func multiply(_ other: UInt8) -> UInt8 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> UInt8 {
+        return 1
     }
 }
 
@@ -167,6 +189,17 @@ extension UInt16: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `UInt16`. Uses multiplication as multiplication of elements and one as one element.
+extension UInt16: Semiring {
+    public func multiply(_ other: UInt16) -> UInt16 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> UInt16 {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `UInt32`. Uses sum as combination of elements.
 extension UInt32: Semigroup {
     public func combine(_ other: UInt32) -> UInt32 {
@@ -181,6 +214,17 @@ extension UInt32: Monoid {
     }
 }
 
+/// Instance of `Semiring` for `UInt32`. Uses multiplication as multiplication of elements and one as one element.
+extension UInt32: Semiring {
+    public func multiply(_ other: UInt32) -> UInt32 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> UInt32 {
+        return 1
+    }
+}
+
 /// Instance of `Semigroup` for `UInt64`. Uses sum as combination of elements.
 extension UInt64: Semigroup {
     public func combine(_ other: UInt64) -> UInt64 {
@@ -192,6 +236,17 @@ extension UInt64: Semigroup {
 extension UInt64: Monoid {
     public static func empty() -> UInt64 {
         return 0
+    }
+}
+
+/// Instance of `Semiring` for `UInt64`. Uses multiplication as multiplication of elements and one as one element.
+extension UInt64: Semiring {
+    public func multiply(_ other: UInt64) -> UInt64 {
+        return self.multipliedReportingOverflow(by: other).partialValue
+    }
+    
+    public static func one() -> UInt64 {
+        return 1
     }
 }
 

@@ -207,4 +207,24 @@ class NumberInstancesTest: XCTestCase {
     func testInt64SemiringLaws() {
         SemiringLaws<Int64>.check()
     }
+    
+    func testUIntSemiringLaws() {
+        SemiringLaws<UInt>.check()
+    }
+
+    func testUInt8SemiringLaws() {
+        SemiringLaws<UInt8>.check()
+    }
+
+    func testUInt16SemiringLaws() {
+        SemiringLaws<UInt16>.check()
+    }
+
+    func testUInt32SemiringLaws() {
+        SemiringLaws<UInt32>.check()
+    }
+
+    func testUInt64SemiringLaws() {
+        SemiringLaws<UInt64>.check()
+    }
 }
