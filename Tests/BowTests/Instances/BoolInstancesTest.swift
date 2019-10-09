@@ -11,5 +11,4 @@ class BoolInstancesTest: XCTestCase {
     func testBoolSemiringLaws() {
         SemiringLaws<Bool>.check()
     }
-
 }
