@@ -133,7 +133,7 @@ open class Fold<S, A>: FoldOf<S, A> {
     /// - Parameter s: Source.
     /// - Returns: True if the source has no foci; false otherwise.
     public func isEmpty(_ s: S) -> Bool {
-        return foldMap(s, constant(false))
+        return !nonEmpty(s)
     }
 
     /// Checks if a source is non-empty.
@@ -141,7 +141,7 @@ open class Fold<S, A>: FoldOf<S, A> {
     /// - Parameter s: Source.
     /// - Returns: False is the source has no foci; true otherwise.
     public func nonEmpty(_ s: S) -> Bool {
-        return !isEmpty(s)
+        return foldMap(s, constant(true))
     }
 
     /// Retrieves the first focus, if any.
