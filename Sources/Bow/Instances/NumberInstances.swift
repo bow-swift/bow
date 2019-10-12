@@ -14,7 +14,7 @@ extension Int: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Int`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Int`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Int: Semiring {
     public func multiply(_ other: Int) -> Int {
         return self * other
@@ -39,7 +39,7 @@ extension Int8: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Int8`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Int8`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Int8: Semiring {
     public func multiply(_ other: Int8) -> Int8 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -64,7 +64,7 @@ extension Int16: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Int16`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Int16`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Int16: Semiring {
     public func multiply(_ other: Int16) -> Int16 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -89,7 +89,7 @@ extension Int32: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Int32`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Int32`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Int32: Semiring {
     public func multiply(_ other: Int32) -> Int32 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -114,7 +114,7 @@ extension Int64: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Int64`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Int64`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Int64: Semiring {
     public func multiply(_ other: Int64) -> Int64 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -139,7 +139,7 @@ extension UInt: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `UInt`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `UInt`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension UInt: Semiring {
     public func multiply(_ other: UInt) -> UInt {
         return self * other
@@ -164,7 +164,7 @@ extension UInt8: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `UInt8`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `UInt8`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension UInt8: Semiring {
     public func multiply(_ other: UInt8) -> UInt8 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -189,7 +189,7 @@ extension UInt16: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `UInt16`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `UInt16`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension UInt16: Semiring {
     public func multiply(_ other: UInt16) -> UInt16 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -214,7 +214,7 @@ extension UInt32: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `UInt32`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `UInt32`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension UInt32: Semiring {
     public func multiply(_ other: UInt32) -> UInt32 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -239,7 +239,7 @@ extension UInt64: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `UInt64`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `UInt64`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension UInt64: Semiring {
     public func multiply(_ other: UInt64) -> UInt64 {
         return self.multipliedReportingOverflow(by: other).partialValue
@@ -264,7 +264,7 @@ extension Float: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Float`. Uses multiplication as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Float`. Uses product (`*`) as multiplication of elements and `1` as one element.
 extension Float: Semiring {
     public func multiply(_ other: Float) -> Float {
         return self * other
@@ -289,7 +289,7 @@ extension Double: Monoid {
     }
 }
 
-/// Instance of `Semiring` for `Double`. Uses addition as multiplication of elements and one as one element.
+/// Instance of `Semiring` for `Double`. Uses addition as multiplication of elements and `1` as one element.
 extension Double: Semiring {
     public func multiply(_ other: Double) -> Double {
         return self * other
