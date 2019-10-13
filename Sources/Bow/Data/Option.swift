@@ -276,6 +276,19 @@ extension Option: Semigroup where A: Semigroup {
     }
 }
 
+// MARK: Instance of `Semigroupal` for `Option`,
+extension ForOption: Semigroupal {
+	public static func product<A, B>(_ a: Kind<ForOption, A>, _ b: Kind<ForOption, B>) -> Kind<ForOption, Tuple2<A, B>> {
+		let optionA = Option.fix(a)
+		let optionB = Option.fix(b)
+		return optionA.flatMap { a in
+			optionB.map { b in
+				Tuple2(a, b)
+			}
+		}
+	}
+}
+
 // MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {

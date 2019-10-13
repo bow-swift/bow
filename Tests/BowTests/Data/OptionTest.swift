@@ -67,6 +67,20 @@ class OptionTest: XCTestCase {
     func testMonadCombineLaws() {
         MonadCombineLaws<ForOption>.check()
     }
+	
+	func testSemigroupalLaws() {
+		func bijection(a: Kind<ForOption, Tuple2<Tuple2<Int, Int>, Int>>) -> Kind<ForOption, Tuple2<Int, Tuple2<Int, Int>>> {
+			let optionA = Option.fix(a)
+			return optionA.map { tuple in
+				Tuple2(tuple.a.a, Tuple2(tuple.a.b, tuple.b))
+			}
+		}
+		
+		SemigroupalLaws.check(
+			using: bijection,
+			and: Option<Int>.some
+		)
+	}
     
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <~ forAll { (x: Int?, option: Option<Int>) in
