@@ -13,13 +13,43 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+PODSPEC_FILE_PATHS = [
+  "Bow.podspec",
+  "BowEffects.podspec",
+  "BowOptics.podspec",
+  "BowRx.podspec",
+  "BowFree.podspec",
+  "BowGeneric.podspec",
+  "BowRecursionSchemes.podspec",
+  "BowGenerators.podspec",
+  "BowEffectsGenerators.podspec",
+  "BowRxGenerators.podspec",
+  "BowFreeGenerators.podspec",
+  "BowLaws.podspec",
+  "BowEffectsLaws.podspec",
+  "BowOpticsLaws.podspec",
+].freeze
+
 default_platform(:ios)
 
 platform :ios do
   desc "Prepare for release"
   lane :release  do |options|
-    version_bump_podspec(path: "Bow.podspec", version_number: options[:version_number])
+    bump_podspec_versions(version_number: options[:version_number])
     add_git_tag(tag: options[:version_number], message: (File.read("../CHANGELOG") rescue "No changelog provided"))
     push_git_tags
+    push_pods
+  end
+
+  private_lane :bump_podspec_versions do |options|
+    PODSPEC_FILE_PATHS.each do |podspec_file_path|
+      version_bump_podspec(path: podspec_file_path, version_number: options[:version_number])
+    end
+  end
+
+  private_lane :push_pods do
+    PODSPEC_FILE_PATHS.each do |podspec_file_path|
+      pod_push(path: podspec_file_path)
+    end
   end
 end
