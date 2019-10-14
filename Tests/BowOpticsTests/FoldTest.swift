@@ -42,7 +42,7 @@ class FoldTest: XCTestCase {
         
         property("Check if all targets match the predicate") <~ forAll { (array: ArrayK<Int>) in
             return ArrayK<Int>.foldK.forAll(array, { x in x % 2 == 0 }) ==
-                array.asArray.map { x in x % 2 == 0 }.reduce(true, and)
+                array.asArray.map { x in x % 2 == 0 }.reduce(false, or)
         }
         
         property("Check if there is no target") <~ forAll { (array: ArrayK<Int>) in
