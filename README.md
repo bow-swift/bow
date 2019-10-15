@@ -150,6 +150,16 @@ Open `Bow.xcodeproj` in Xcode 11 (or newer) and you are ready to go. Bow uses th
 
 For further information, refer to our [Contribution guidelines](CONTRIBUTING.md).
 
+## How to create a new release
+
+You can create a new release by running `bundle exec fastlane release version_number:`. For example, `bundle exec fastlane release version_number: 0.6.0`.
+
+The following steps would be run:
+
+- Update the `version` in `*.podspec` files.
+- Create a tag with message added in the `CHANGELOG` file.
+- Deploy podspec files and make them publicly available.
+
 # License
 
     Copyright (C) 2018-2019 The Bow Authors
