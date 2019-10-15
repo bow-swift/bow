@@ -66,3 +66,9 @@ _site
 
 ## Needed due to a bug in GH Pages Travis/Jekyll process
 **/*/ffitarget.h
+
+## bundle specific
+vendor/
+
+# fastlane specific
+**/fastlane/report.xml
