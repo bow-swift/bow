@@ -14,6 +14,17 @@
 
 Bow is a library for Typed Functional Programming in Swift.
 
+## Documentation
+
+All documentation and API reference is published in [our website](https://bow-swift.io/). Some links to key aspects of the library:
+
+- [Higher Kinded Type emulation](https://bow-swift.io/next/docs/fp-concepts/higher-kinded-types/)
+- [Type classes](https://bow-swift.io/next/docs/fp-concepts/type-classes/)
+- [Data types](https://bow-swift.io/next/docs/fp-concepts/data-types/)
+- [Optics](https://bow-swift.io/next/docs/optics/overview/)
+- [Effects](https://bow-swift.io/next/docs/effects/overview/)
+- [Streams](https://bow-swift.io/next/docs/integrations/rxswift-streams/)
+
 ## Modules
 
 Bow is split into multiple modules that can be consumed independently. These modules are:
