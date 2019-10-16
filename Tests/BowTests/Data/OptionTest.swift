@@ -67,6 +67,10 @@ class OptionTest: XCTestCase {
     func testMonadCombineLaws() {
         MonadCombineLaws<ForOption>.check()
     }
+	
+	func testSemigroupalLaws() {
+        SemigroupalLaws<ForOption>.check(isEqual: isEqual(_:_:))
+	}
     
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <~ forAll { (x: Int?, option: Option<Int>) in
