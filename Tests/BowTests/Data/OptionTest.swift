@@ -69,17 +69,7 @@ class OptionTest: XCTestCase {
     }
 	
 	func testSemigroupalLaws() {
-		func bijection(a: Kind<ForOption, Tuple2<Tuple2<Int, Int>, Int>>) -> Kind<ForOption, Tuple2<Int, Tuple2<Int, Int>>> {
-			let optionA = Option.fix(a)
-			return optionA.map { tuple in
-				Tuple2(tuple.a.a, Tuple2(tuple.a.b, tuple.b))
-			}
-		}
-		
-		SemigroupalLaws.check(
-			using: bijection,
-			and: Option<Int>.some
-		)
+        SemigroupalLaws<ForOption>.check(isEqual: isEqual(_:_:))
 	}
     
     func testFromToOption() {

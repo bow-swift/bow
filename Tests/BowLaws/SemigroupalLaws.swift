@@ -1,27 +1,20 @@
-import SwiftCheck
 import Bow
+import BowGenerators
+import SwiftCheck
 
-public class SemigroupalLaws<A: Semigroupal & EquatableK> {
+public final class SemigroupalLaws<F: Semigroupal & ArbitraryK & EquatableK> {
 	public static func check(
-		using bijection: @escaping (Kind<A, Tuple2<Tuple2<Int, Int>, Int>>) -> Kind<A, Tuple2<Int, Tuple2<Int, Int>>>,
-		and transform: @escaping (Int) -> Kind<A, Int>
+		isEqual: @escaping (Kind<F, ((Int, Int), Int)>, Kind<F, (Int, (Int, Int))>) -> Bool
 	) {
-		associativity(under: bijection, and: transform)
+        associativity(isEqual: isEqual)
 	}
 	
 	private static func associativity(
-		under bijection: @escaping (Kind<A, Tuple2<Tuple2<Int, Int>, Int>>) -> Kind<A, Tuple2<Int, Tuple2<Int, Int>>>,
-		and transform: @escaping (Int) -> Kind<A, Int>
+        isEqual: @escaping (Kind<F, ((Int, Int), Int)>, Kind<F, (Int, (Int, Int))>) -> Bool
 	) {
-		property("Associativity") <~ forAll { (a: Int, b: Int, c: Int) in
-			let fa = transform(a)
-			let fb = transform(b)
-			let fc = transform(c)
-			
-			let productOfAB = A.product(fa, fb)
-			let productOfBC = A.product(fb, fc)
-						
-			return A.product(fa, productOfBC) == bijection(A.product(productOfAB, fc))
-		}
+        property("Associativity") <~ forAll { (fa: KindOf<F, Int>, fb: KindOf<F, Int>, fc: KindOf<F, Int>) in
+            isEqual(fa.value.product(fb.value).product(fc.value),
+                    fa.value.product(fb.value.product(fc.value)))
+        }
 	}
 }
