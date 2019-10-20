@@ -283,6 +283,13 @@ extension ForOption: Semigroupal {
 	}
 }
 
+// MARK: Instance of `Monoidal` for `Option`,
+extension ForOption: Monoidal {
+    public static func identity<A>() -> Kind<ForOption, A> {
+        Option.none()
+    }
+}
+
 // MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {

@@ -72,6 +72,13 @@ class OptionTest: XCTestCase {
         SemigroupalLaws<ForOption>.check(isEqual: isEqual(_:_:))
 	}
     
+    func testMonoidalLaws() {
+        func isMonoidalEqual<A, B>(_ fa: Kind<ForOption, A>, _ fb: Kind<ForOption, B>) -> Bool {
+            fa.isEmpty && fb.isEmpty
+        }
+        MonoidalLaws<ForOption>.check(isEqual: isMonoidalEqual, associatveSemigroupalEqual: isEqual(_:_:))
+    }
+    
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <~ forAll { (x: Int?, option: Option<Int>) in
             return Option.fromOptional(x).toOptional() == x &&
