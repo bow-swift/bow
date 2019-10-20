@@ -278,9 +278,9 @@ extension Option: Semigroup where A: Semigroup {
 
 // MARK: Instance of `Semigroupal` for `Option`,
 extension ForOption: Semigroupal {
-	public static func product<A, B>(_ a: Kind<ForOption, A>, _ b: Kind<ForOption, B>) -> Kind<ForOption, (A, B)> {
+    public static func product<A, B>(_ a: Kind<ForOption, A>, _ b: Kind<ForOption, B>) -> Kind<ForOption, (A, B)> {
         ForOption.zip(a, b)
-	}
+    }
 }
 
 // MARK: Instance of `Monoidal` for `Option`,
