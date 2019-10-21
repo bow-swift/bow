@@ -76,7 +76,7 @@ class OptionTest: XCTestCase {
         func isMonoidalEqual<A, B>(_ fa: Kind<ForOption, A>, _ fb: Kind<ForOption, B>) -> Bool {
             fa.isEmpty && fb.isEmpty
         }
-        MonoidalLaws<ForOption>.check(isEqual: isMonoidalEqual, associatveSemigroupalEqual: isEqual(_:_:))
+        MonoidalLaws<ForOption>.check(isEqual: isMonoidalEqual)
     }
     
     func testFromToOption() {
