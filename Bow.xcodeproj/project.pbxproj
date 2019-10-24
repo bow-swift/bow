@@ -132,7 +132,6 @@
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		1167127E235EEC260067FB0D /* SemigroupalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30442352D03400F7B64B /* SemigroupalLaws.swift */; };
-		11671280235EEC590067FB0D /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1167127F235EEC580067FB0D /* Monoidal.swift */; };
 		11671283235EECDB0067FB0D /* MonoidalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11671281235EECBC0067FB0D /* MonoidalLaws.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
@@ -221,6 +220,11 @@
 		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
 		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
 		600D30432352C08F00F7B64B /* Semigroupal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30422352C08F00F7B64B /* Semigroupal.swift */; };
+		606B29EA23607607002334B2 /* Divide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29E923607607002334B2 /* Divide.swift */; };
+		606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30442352D03400F7B64B /* SemigroupalLaws.swift */; };
+		606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29EC2360764D002334B2 /* DivideLaws.swift */; };
+		606B29F023607745002334B2 /* MonoidalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29EF23607745002334B2 /* MonoidalLaws.swift */; };
+		606B29F22360776A002334B2 /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29F12360776A002334B2 /* Monoidal.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -772,7 +776,6 @@
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
-		1167127F235EEC580067FB0D /* Monoidal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoidal.swift; sourceTree = "<group>"; };
 		11671281235EECBC0067FB0D /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
@@ -834,6 +837,10 @@
 		600D30422352C08F00F7B64B /* Semigroupal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroupal.swift; sourceTree = "<group>"; };
 		600D30442352D03400F7B64B /* SemigroupalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupalLaws.swift; sourceTree = "<group>"; };
 		601914CB2352F2B5007ACE81 /* TupleN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleN.swift; sourceTree = "<group>"; };
+		606B29E923607607002334B2 /* Divide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divide.swift; sourceTree = "<group>"; };
+		606B29EC2360764D002334B2 /* DivideLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideLaws.swift; sourceTree = "<group>"; };
+		606B29EF23607745002334B2 /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
+		606B29F12360776A002334B2 /* Monoidal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoidal.swift; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -1541,6 +1548,7 @@
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
+				606B29EC2360764D002334B2 /* DivideLaws.swift */,
 				1166A07822119E640032CD4E /* EqualityFunctions.swift */,
 				8BA0F3BF217E2DEF00969984 /* EquatableKLaws.swift */,
 				11A435602212C59F000C5E31 /* EquatableLaws.swift */,
@@ -1554,7 +1562,7 @@
 				8BA0F3C0217E2DEF00969984 /* MonadLaws.swift */,
 				8BA0F3CB217E2DEF00969984 /* MonadStateLaws.swift */,
 				8BA0F3C5217E2DEF00969984 /* MonadWriterLaws.swift */,
-				11671281235EECBC0067FB0D /* MonoidalLaws.swift */,
+				606B29EF23607745002334B2 /* MonoidalLaws.swift */,
 				8BA0F3D4217E2DEF00969984 /* MonoidKLaws.swift */,
 				8BA0F3BD217E2DEF00969984 /* MonoidLaws.swift */,
 				1191BD0F22D78C0A0052FEA8 /* PropertyOperatorOverload.swift */,
@@ -1827,6 +1835,7 @@
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
+				606B29E923607607002334B2 /* Divide.swift */,
 				1125054C220DD92B00861131 /* EquatableK.swift */,
 				8BA0F4A0217E2E9200969984 /* Foldable.swift */,
 				8BA0F4AB217E2E9200969984 /* Functor.swift */,
@@ -1840,7 +1849,7 @@
 				8BA0F491217E2E9200969984 /* MonadState.swift */,
 				8BA0F497217E2E9200969984 /* MonadWriter.swift */,
 				8BA0F4A3217E2E9200969984 /* Monoid.swift */,
-				1167127F235EEC580067FB0D /* Monoidal.swift */,
+				606B29F12360776A002334B2 /* Monoidal.swift */,
 				8BA0F48F217E2E9200969984 /* MonoidK.swift */,
 				8BA0F4A1217E2E9200969984 /* NonEmptyReducible.swift */,
 				8BA0F49D217E2E9200969984 /* Reducible.swift */,
@@ -2562,15 +2571,15 @@
 				11229426219D8BDE006D66C5 /* ContravariantLaws.swift in Sources */,
 				11229427219D8BDE006D66C5 /* EquatableKLaws.swift in Sources */,
 				11229428219D8BDE006D66C5 /* FoldableLaws.swift in Sources */,
-				11671283235EECDB0067FB0D /* MonoidalLaws.swift in Sources */,
 				11229429219D8BDE006D66C5 /* FunctorFilterLaws.swift in Sources */,
 				11A435622212C60A000C5E31 /* EquatableLaws.swift in Sources */,
 				1122942A219D8BDE006D66C5 /* FunctorLaws.swift in Sources */,
 				1122942B219D8BDE006D66C5 /* InvariantLaws.swift in Sources */,
 				1122942C219D8BDE006D66C5 /* MonadCombineLaws.swift in Sources */,
 				11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */,
-				1167127E235EEC260067FB0D /* SemigroupalLaws.swift in Sources */,
+				606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */,
 				1122942D219D8BDE006D66C5 /* MonadErrorLaws.swift in Sources */,
+				606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */,
 				1122942E219D8BDE006D66C5 /* MonadFilterLaws.swift in Sources */,
 				1122942F219D8BDE006D66C5 /* MonadLaws.swift in Sources */,
 				11229430219D8BDE006D66C5 /* MonadStateLaws.swift in Sources */,
@@ -2586,6 +2595,7 @@
 				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
 				1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */,
 				B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */,
+				606B29F023607745002334B2 /* MonoidalLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2939,6 +2949,7 @@
 				8BA0F5C7217E2E9200969984 /* SetK.swift in Sources */,
 				8BA0F647217E2E9200969984 /* Comonad.swift in Sources */,
 				8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */,
+				606B29EA23607607002334B2 /* Divide.swift in Sources */,
 				8BA0F5AF217E2E9200969984 /* Try.swift in Sources */,
 				8BA0F62B217E2E9200969984 /* NonEmptyReducible.swift in Sources */,
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
@@ -2954,9 +2965,9 @@
 				8BA0F5D3217E2E9200969984 /* ArrayK.swift in Sources */,
 				8BA0F583217E2E9200969984 /* Id.swift in Sources */,
 				8BA0F60B217E2E9200969984 /* Invariant.swift in Sources */,
+				606B29F22360776A002334B2 /* Monoidal.swift in Sources */,
 				8BA0F537217E2E9200969984 /* PartialApplication.swift in Sources */,
 				11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */,
-				11671280235EEC590067FB0D /* Monoidal.swift in Sources */,
 				8BA0F5A7217E2E9200969984 /* Eval.swift in Sources */,
 				8BA0F50B217E2E9200969984 /* OptionT.swift in Sources */,
 				8BA0F57F217E2E9200969984 /* Either.swift in Sources */,
