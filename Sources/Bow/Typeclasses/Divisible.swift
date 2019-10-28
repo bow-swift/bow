@@ -6,7 +6,7 @@ public protocol Divisible: Divide {
 
 // MARK: Syntax for Divisible
 public extension Kind where F: Divisible {
-    func conquer() -> Kind<F, A> {
+    static func conquer() -> Kind<F, A> {
         F.conquer()
     }
 }
