@@ -8,7 +8,7 @@ public protocol Decidable: Divisible {
     static func choose<A, B, Z>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ f: (Z) -> Either<A, B>) -> Kind<Self, Z>
 }
 
-// MARK: - Decidable syntax
+// MARK: Related functions
 public extension Decidable {
     static func choose<A, B, C, Z>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ fc: Kind<Self, C>, _ f: (Z) -> Either<A, Either<B, C>>) -> Kind<Self, Z> {
         choose(fa, choose(fb, fc, id), f)
@@ -158,52 +158,56 @@ public extension Decidable {
 
 // MARK: - Syntax for Decidable
 public extension Kind where F: Decidable {
-    func choose<B, Z>(_ fb: Kind<F, B>, _ f: (Z) -> Either<A, B>) -> Kind<F, Z> {
-        F.choose(self, fb, f)
+    static func choose<B, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ f: (A) -> Either<Z, B>) -> Kind<F, A> {
+        F.choose(fa, fb, f)
     }
     
-    func choose<B, C, Z>(_ fb: Kind<F, B>, _ fc: Kind<F, C>, _ f: (Z) -> Either<A, Either<B, C>>) -> Kind<F, Z> {
-        F.choose(self, fb, fc, f)
+    static func choose<B, C, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ f: (A) -> Either<Z, Either<B, C>>) -> Kind<F, A> {
+        F.choose(fa, fb, fc, f)
     }
     
-    func choose<B, C, D, Z>(_ fb: Kind<F, B>, _ fc: Kind<F, C>, _ fd: Kind<F, D>, _ f: (Z) -> Either<A, Either<B, Either<C, D>>>) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, f)
+    static func choose<B, C, D, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ fd: Kind<F, D>, _ f: (A) -> Either<Z, Either<B, Either<C, D>>>) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, f)
     }
     
-    func choose<B, C, D, E, Z>(
+    static func choose<B, C, D, E, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
         _ fe: Kind<F, E>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, E>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, E>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, f)
     }
     
-    func choose<B, C, D, E, FF, Z>(
+    static func choose<B, C, D, E, FF, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
         _ fe: Kind<F, E>,
         _ ff: Kind<F, FF>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, Either<E, FF>>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, ff, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, Either<E, FF>>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, ff, f)
     }
     
-    func choose<B, C, D, E, FF, G, Z>(
+    static func choose<B, C, D, E, FF, G, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
         _ fe: Kind<F, E>,
         _ ff: Kind<F, FF>,
         _ fg: Kind<F, G>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, G>>>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, ff, fg, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, G>>>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, ff, fg, f)
     }
     
-    func choose<B, C, D, E, FF, G, H, Z>(
+    static func choose<B, C, D, E, FF, G, H, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
@@ -211,12 +215,13 @@ public extension Kind where F: Decidable {
         _ ff: Kind<F, FF>,
         _ fg: Kind<F, G>,
         _ fh: Kind<F, H>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, H>>>>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, ff, fg, fh, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, H>>>>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, ff, fg, fh, f)
     }
     
-    func choose<B, C, D, E, FF, G, H, I, Z>(
+    static func choose<B, C, D, E, FF, G, H, I, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
@@ -225,12 +230,13 @@ public extension Kind where F: Decidable {
         _ fg: Kind<F, G>,
         _ fh: Kind<F, H>,
         _ fi: Kind<F, I>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, I>>>>>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, ff, fg, fh, fi, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, I>>>>>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, ff, fg, fh, fi, f)
     }
     
-    func choose<B, C, D, E, FF, G, H, I, J, Z>(
+    static func choose<B, C, D, E, FF, G, H, I, J, Z>(
+        _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
         _ fc: Kind<F, C>,
         _ fd: Kind<F, D>,
@@ -240,8 +246,8 @@ public extension Kind where F: Decidable {
         _ fh: Kind<F, H>,
         _ fi: Kind<F, I>,
         _ fj: Kind<F, J>,
-        _ f: (Z) -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, Either<I, J>>>>>>>>>
-    ) -> Kind<F, Z> {
-        F.choose(self, fb, fc, fd, fe, ff, fg, fh, fi, fj, f)
+        _ f: (A) -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, Either<I, J>>>>>>>>>
+    ) -> Kind<F, A> {
+        F.choose(fa, fb, fc, fd, fe, ff, fg, fh, fi, fj, f)
     }
 }
