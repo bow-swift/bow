@@ -131,8 +131,6 @@
 		1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
-		1167127E235EEC260067FB0D /* SemigroupalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30442352D03400F7B64B /* SemigroupalLaws.swift */; };
-		11671283235EECDB0067FB0D /* MonoidalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11671281235EECBC0067FB0D /* MonoidalLaws.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -225,6 +223,8 @@
 		606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29EC2360764D002334B2 /* DivideLaws.swift */; };
 		606B29F023607745002334B2 /* MonoidalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29EF23607745002334B2 /* MonoidalLaws.swift */; };
 		606B29F22360776A002334B2 /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29F12360776A002334B2 /* Monoidal.swift */; };
+		609CC1472364F9A200096D5D /* Divisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1462364F9A200096D5D /* Divisible.swift */; };
+		609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1482364FC5B00096D5D /* DivisibleLaws.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -776,7 +776,6 @@
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
-		11671281235EECBC0067FB0D /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -841,6 +840,8 @@
 		606B29EC2360764D002334B2 /* DivideLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideLaws.swift; sourceTree = "<group>"; };
 		606B29EF23607745002334B2 /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
 		606B29F12360776A002334B2 /* Monoidal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoidal.swift; sourceTree = "<group>"; };
+		609CC1462364F9A200096D5D /* Divisible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisible.swift; sourceTree = "<group>"; };
+		609CC1482364FC5B00096D5D /* DivisibleLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivisibleLaws.swift; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -1549,6 +1550,7 @@
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
 				606B29EC2360764D002334B2 /* DivideLaws.swift */,
+				609CC1482364FC5B00096D5D /* DivisibleLaws.swift */,
 				1166A07822119E640032CD4E /* EqualityFunctions.swift */,
 				8BA0F3BF217E2DEF00969984 /* EquatableKLaws.swift */,
 				11A435602212C59F000C5E31 /* EquatableLaws.swift */,
@@ -1861,6 +1863,7 @@
 				8BA0F49B217E2E9200969984 /* Traverse.swift */,
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
 				1191BD0822D77C3A0052FEA8 /* MonadComprehensions */,
+				609CC1462364F9A200096D5D /* Divisible.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -2587,6 +2590,7 @@
 				11229432219D8BDE006D66C5 /* MonoidKLaws.swift in Sources */,
 				11229433219D8BDE006D66C5 /* MonoidLaws.swift in Sources */,
 				1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */,
+				609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */,
 				11229434219D8BDE006D66C5 /* ComparableLaws.swift in Sources */,
 				11229436219D8BDE006D66C5 /* SemigroupKLaws.swift in Sources */,
 				11229437219D8BDE006D66C5 /* SemigroupLaws.swift in Sources */,
@@ -2942,6 +2946,7 @@
 				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
+				609CC1472364F9A200096D5D /* Divisible.swift in Sources */,
 				8BA0F5DB217E2E9200969984 /* Alternative.swift in Sources */,
 				1191BD0E22D784630052FEA8 /* MonadComprenhensions.swift in Sources */,
 				8BA0F50F217E2E9200969984 /* WriterT.swift in Sources */,
