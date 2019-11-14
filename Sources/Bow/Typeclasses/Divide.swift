@@ -1,10 +1,10 @@
 /// Divide is a typeclass that models the divide part of divide and conquer.
 ///
 /// Divide basically states: Given a Kind<F, A> and a Kind<F, B> and a way to turn C into a tuple of A and B it gives you a Kind<F, C>.
-///
 public protocol Divide: Contravariant {
-    /// divide takes two data-types of type Kind<Self, A> and Kind<Self, B> and produces a type of Kind<Self, C> when given
+    /// Divide takes two data-types of type Kind<Self, A> and Kind<Self, B> and produces a type of Kind<Self, C> when given
     /// a function from (C) -> (A, B).
+    ///
     /// - Parameter fa: data of type Kind<Self, A>
     /// - Parameter fb: data of type Kind<Self, B>
     /// - Parameter f: a function to transform C into (A, B)
@@ -14,8 +14,9 @@ public protocol Divide: Contravariant {
 
 // MARK: Syntax for Divide
 public extension Kind where F: Divide {
-    /// divide takes a data-type of type Kind<F, B> and produces a type of Kind<F, C> when given
+    /// Divide takes a data-type of type Kind<F, B> and produces a type of Kind<F, C> when given
     /// a function from (C) -> (A, B).
+    ///
     /// - Parameter fb: data of type Kind<F, B>
     /// - Parameter f: a function to transform C into (A, B)
     /// - Returns: Kind<F, C>

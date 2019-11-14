@@ -229,6 +229,7 @@
 		606B29F22360776A002334B2 /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29F12360776A002334B2 /* Monoidal.swift */; };
 		609CC1472364F9A200096D5D /* Divisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1462364F9A200096D5D /* Divisible.swift */; };
 		609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1482364FC5B00096D5D /* DivisibleLaws.swift */; };
+		8B719310237DAEE300EDB5CC /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -321,7 +322,6 @@
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
-		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -1850,6 +1850,7 @@
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
 				606B29E923607607002334B2 /* Divide.swift */,
+				609CC1462364F9A200096D5D /* Divisible.swift */,
 				1125054C220DD92B00861131 /* EquatableK.swift */,
 				8BA0F4A0217E2E9200969984 /* Foldable.swift */,
 				8BA0F4AB217E2E9200969984 /* Functor.swift */,
@@ -1875,7 +1876,6 @@
 				8BA0F49B217E2E9200969984 /* Traverse.swift */,
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
 				1191BD0822D77C3A0052FEA8 /* MonadComprehensions */,
-				609CC1462364F9A200096D5D /* Divisible.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -2581,6 +2581,7 @@
 				1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */,
 				11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */,
 				11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */,
+				8B719310237DAEE300EDB5CC /* SemiringLaws.swift in Sources */,
 				1191BD1422D78F760052FEA8 /* BindingOperatorOverload.swift in Sources */,
 				11229423219D8BDE006D66C5 /* BimonadLaws.swift in Sources */,
 				11229425219D8BDE006D66C5 /* ComonadLaws.swift in Sources */,
@@ -2611,7 +2612,6 @@
 				11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */,
 				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
 				1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */,
-				B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */,
 				606B29F023607745002334B2 /* MonoidalLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4296,7 +4296,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
