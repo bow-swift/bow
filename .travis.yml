@@ -21,7 +21,7 @@ jobs:
         - gem update --system
         - gem install cocoapods
       script:
-        - nef compile contents/Documentation
+        - nef compile Documentation.app
     - stage: test
       script:
         - set -o pipefail
