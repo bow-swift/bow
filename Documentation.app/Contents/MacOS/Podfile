@@ -1,0 +1,13 @@
+target 'Documentation' do
+  platform :osx, '10.14'
+  use_frameworks!
+
+  pod "Bow", :path => '../../../'
+  pod "BowEffects", :path => '../../../'
+  pod "BowRx", :path => '../../../'
+  pod "BowOptics", :path => '../../../'
+  pod "BowGeneric", :path => '../../../'
+  pod "BowRecursionSchemes", :path => '../../../'
+  pod "BowFree", :path => '../../../'
+end
+workspace 'nef'

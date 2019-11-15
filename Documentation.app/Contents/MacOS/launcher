@@ -1,0 +1,6 @@
+#!/bin/bash
+
+workspace="nef.xcworkspace"
+workspacePath=$(echo "$0" | rev | cut -f2- -d '/' | rev)
+
+open "`pwd`/$workspacePath/$workspace"
