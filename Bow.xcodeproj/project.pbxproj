@@ -229,6 +229,7 @@
 		606B29F22360776A002334B2 /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29F12360776A002334B2 /* Monoidal.swift */; };
 		609CC1472364F9A200096D5D /* Divisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1462364F9A200096D5D /* Divisible.swift */; };
 		609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1482364FC5B00096D5D /* DivisibleLaws.swift */; };
+		609CC14D2365410500096D5D /* Decidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC14C2365410500096D5D /* Decidable.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -850,6 +851,7 @@
 		606B29F12360776A002334B2 /* Monoidal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoidal.swift; sourceTree = "<group>"; };
 		609CC1462364F9A200096D5D /* Divisible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisible.swift; sourceTree = "<group>"; };
 		609CC1482364FC5B00096D5D /* DivisibleLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivisibleLaws.swift; sourceTree = "<group>"; };
+		609CC14C2365410500096D5D /* Decidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decidable.swift; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -1876,6 +1878,7 @@
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
 				1191BD0822D77C3A0052FEA8 /* MonadComprehensions */,
 				609CC1462364F9A200096D5D /* Divisible.swift */,
+				609CC14C2365410500096D5D /* Decidable.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";
@@ -2976,6 +2979,7 @@
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
+				609CC14D2365410500096D5D /* Decidable.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
 				11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */,
