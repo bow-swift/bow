@@ -844,7 +844,6 @@
 		11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
 		600D30422352C08F00F7B64B /* Semigroupal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroupal.swift; sourceTree = "<group>"; };
 		600D30442352D03400F7B64B /* SemigroupalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupalLaws.swift; sourceTree = "<group>"; };
-		601914CB2352F2B5007ACE81 /* TupleN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleN.swift; sourceTree = "<group>"; };
 		606B29E923607607002334B2 /* Divide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divide.swift; sourceTree = "<group>"; };
 		606B29EC2360764D002334B2 /* DivideLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideLaws.swift; sourceTree = "<group>"; };
 		606B29EF23607745002334B2 /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
@@ -1813,6 +1812,7 @@
 			children = (
 				1137469823433E5800D9C1AD /* Array.swift */,
 				8BA0F48A217E2E9200969984 /* ArrayK.swift */,
+				09CEF84D236E28150070CF43 /* Co.swift */,
 				8BA0F489217E2E9200969984 /* Const.swift */,
 				8BA0F485217E2E9200969984 /* Coreader.swift */,
 				8BA0F47B217E2E9200969984 /* Day.swift */,
@@ -1826,6 +1826,7 @@
 				8BA0F47D217E2E9200969984 /* Moore.swift */,
 				8BA0F479217E2E9200969984 /* NonEmptyArray.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
+				09CEF850236E28680070CF43 /* Pairing.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
 				111F84FA234DBF95003FE646 /* Set.swift */,
@@ -1834,9 +1835,6 @@
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
-				601914CB2352F2B5007ACE81 /* TupleN.swift */,
-				09CEF84D236E28150070CF43 /* Co.swift */,
-				09CEF850236E28680070CF43 /* Pairing.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1851,7 +1849,9 @@
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
+				609CC14C2365410500096D5D /* Decidable.swift */,
 				606B29E923607607002334B2 /* Divide.swift */,
+				609CC1462364F9A200096D5D /* Divisible.swift */,
 				1125054C220DD92B00861131 /* EquatableK.swift */,
 				8BA0F4A0217E2E9200969984 /* Foldable.swift */,
 				8BA0F4AB217E2E9200969984 /* Functor.swift */,
@@ -1877,8 +1877,6 @@
 				8BA0F49B217E2E9200969984 /* Traverse.swift */,
 				8BA0F49A217E2E9200969984 /* TraverseFilter.swift */,
 				1191BD0822D77C3A0052FEA8 /* MonadComprehensions */,
-				609CC1462364F9A200096D5D /* Divisible.swift */,
-				609CC14C2365410500096D5D /* Decidable.swift */,
 			);
 			path = Typeclasses;
 			sourceTree = "<group>";

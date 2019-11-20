@@ -42,7 +42,7 @@ let article = Article(title: "Working with optics in Swift",
  
  `Iso<S, A>` represents an isomorphism between types `S` and `A`. That means we can transform from an `S` to an `A` and back to `S` with a pair of functions, and we will get the original value. Similarly, we can start with an `A`, transform it to an `S` and back to an `A` without losing information. This does not mean `S` and `A` are equal, but it implies their structures are equivalent.
  
- An example of an `Iso` can be found in product types. In our running example, `Article` is a product type composed of a `String`, an optional `String`, a `PublicationState` and an `Array` of `String`. But we could also represent the same information using a tuple of 4 elements, and we would be able to get a tuple from an article, and vice versa. That is, we can build an `Iso<Article, (String, Option<String>, PublicationState, [String])>.
+ An example of an `Iso` can be found in product types. In our running example, `Article` is a product type composed of a `String`, an optional `String`, a `PublicationState` and an `Array` of `String`. But we could also represent the same information using a tuple of 4 elements, and we would be able to get a tuple from an article, and vice versa. That is, we can build an `Iso<Article, (String, Option<String>, PublicationState, [String])>`.
  
  To do so, we need a pair of functions. To go from tuple to `Article`, we can use `Article.init`, since the types in the tuple are already in the same order the initializer expects them. To go from `Article` to tuple we need to destructure the `Article`:
  */
