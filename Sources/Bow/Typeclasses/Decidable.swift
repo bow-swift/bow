@@ -1,26 +1,51 @@
 /// Decidable is a typeclass modeling contravariant decision. Decidable is the contravariant version of Alternative.
-///
-/// Decidable basically states: Given a Kind<F, A> and a Kind<F, B> and a way to turn Z into either A or B it gives you a Kind<F, Z>.
 public protocol Decidable: Divisible {
+    /// Takes 2 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes two data-types of type `Kind<F, A>` and `Kind<F, B>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, B>`.
-    static func choose<A, B, Z>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ f: (Z) -> Either<A, B>) -> Kind<Self, Z>
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<A, B, Z>(
+        _ fa: Kind<Self, A>,
+        _ fb: Kind<Self, B>,
+        _ f: (Z) -> Either<A, B>) -> Kind<Self, Z>
 }
 
 // MARK: Related functions
 public extension Decidable {
+    /// Takes 3 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes three data-types of type `Kind<F, A>`, `Kind<F, B>` and  `Kind<F, C>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, C>>`.
-    static func choose<A, B, C, Z>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ fc: Kind<Self, C>, _ f: (Z) -> Either<A, Either<B, C>>) -> Kind<Self, Z> {
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<A, B, C, Z>(
+        _ fa: Kind<Self, A>,
+        _ fb: Kind<Self, B>,
+        _ fc: Kind<Self, C>,
+        _ f: (Z) -> Either<A, Either<B, C>>) -> Kind<Self, Z> {
         choose(fa, choose(fb, fc, id), f)
     }
     
+    /// Takes 4 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes four data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>` and  `Kind<F, D>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, D>>>`.
-    static func choose<A, B, C, D, Z>(_ fa: Kind<Self, A>, _ fb: Kind<Self, B>, _ fc: Kind<Self, C>, _ fd: Kind<Self, D>, _ f: (Z) -> Either<A, Either<B, Either<C, D>>>) -> Kind<Self, Z> {
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<A, B, C, D, Z>(
+        _ fa: Kind<Self, A>,
+        _ fb: Kind<Self, B>,
+        _ fc: Kind<Self, C>,
+        _ fd: Kind<Self, D>,
+        _ f: (Z) -> Either<A, Either<B, Either<C, D>>>) -> Kind<Self, Z> {
         choose(
             fa,
             fb,
@@ -29,9 +54,16 @@ public extension Decidable {
         )
     }
     
+    /// Takes 5 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes five data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>` and `Kind<F, E>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, E>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -49,9 +81,17 @@ public extension Decidable {
         )
     }
     
+    /// Takes 6 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes six data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E` and `Kind<F, FF>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, Either<E, FF>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, FF, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -71,9 +111,18 @@ public extension Decidable {
         )
     }
     
+    /// Takes 7 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes seven data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E`, `Kind<F, FF>` and `Kind<F, G>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, G>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, FF, G, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -95,9 +144,19 @@ public extension Decidable {
         )
     }
     
+    /// Takes 8 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes eight data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E`, `Kind<F, FF>`, `Kind<F, G>` and `Kind<F, H>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, H>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, FF, G, H, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -121,9 +180,20 @@ public extension Decidable {
         )
     }
     
+    /// Takes 9 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes nine data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E`, `Kind<F, FF>`, `Kind<F, G>`, `Kind<F, H>` and `Kind<F, I>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, I>>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - fi: 9th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, FF, G, H, I, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -149,9 +219,21 @@ public extension Decidable {
         )
     }
     
+    /// Takes 10 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes ten data-types of type `Kind<F, A>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E`, `Kind<F, FF>`, `Kind<F, G>`, `Kind<F, H>`, `Kind<F, I>` and `Kind<F, J>` and produces a type of `Kind<F, Z>` when given
-    /// a function from `Z -> Either<A, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, Either<I, J>>>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - fi: 9th computation
+    ///   - fj: 10th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<A, B, C, D, E, FF, G, H, I, J, Z>(
         _ fa: Kind<Self, A>,
         _ fb: Kind<Self, B>,
@@ -182,30 +264,64 @@ public extension Decidable {
 
 // MARK: - Syntax for Decidable
 public extension Kind where F: Decidable {
+    /// Takes 2 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes two data-types of type `Kind<F, Z>` and  `Kind<F, B>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, B>`.
-    static func choose<B, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ f: (A) -> Either<Z, B>) -> Kind<F, A> {
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<B, Z>(
+        _ fa: Kind<F, Z>,
+        _ fb: Kind<F, B>,
+        _ f: (A) -> Either<Z, B>) -> Kind<F, A> {
         F.choose(fa, fb, f)
     }
     
+    /// Takes 3 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes three data-types of type `Kind<F, Z>`, `Kind<F, B>` and  `Kind<F, C>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, C>>`.
-    static func choose<B, C, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ f: (A) -> Either<Z, Either<B, C>>) -> Kind<F, A> {
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<B, C, Z>(
+        _ fa: Kind<F, Z>,
+        _ fb: Kind<F, B>,
+        _ fc: Kind<F, C>,
+        _ f: (A) -> Either<Z, Either<B, C>>) -> Kind<F, A> {
         F.choose(fa, fb, fc, f)
     }
     
+    /// Takes 4 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes four data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>` and  `Kind<F, D>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, D>>>`.
-    static func choose<B, C, D, Z>(_ fa: Kind<F, Z>, _ fb: Kind<F, B>, _ fc: Kind<F, C>, _ fd: Kind<F, D>, _ f: (A) -> Either<Z, Either<B, Either<C, D>>>) -> Kind<F, A> {
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
+    static func choose<B, C, D, Z>(
+        _ fa: Kind<F, Z>,
+        _ fb: Kind<F, B>,
+        _ fc: Kind<F, C>,
+        _ fd: Kind<F, D>,
+        _ f: (A) -> Either<Z, Either<B, Either<C, D>>>) -> Kind<F, A> {
         F.choose(fa, fb, fc, fd, f)
     }
     
+    /// Takes 5 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes five data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>` and  `Kind<F, E>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, E>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
@@ -217,9 +333,17 @@ public extension Kind where F: Decidable {
         F.choose(fa, fb, fc, fd, fe, f)
     }
     
+    /// Takes 6 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes six data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E>` and  `Kind<F, FF>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, Either<E, FF>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, FF, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
@@ -232,9 +356,18 @@ public extension Kind where F: Decidable {
         F.choose(fa, fb, fc, fd, fe, ff, f)
     }
     
+    /// Takes 7 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes seven data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E>`, `Kind<F, FF>` and  `Kind<F, G>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, G>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, FF, G, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
@@ -248,9 +381,19 @@ public extension Kind where F: Decidable {
         F.choose(fa, fb, fc, fd, fe, ff, fg, f)
     }
     
+    /// Takes 8 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes eight data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E>`, `Kind<F, FF>`, `Kind<F, G>` and  `Kind<F, H>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, H>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, FF, G, H, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
@@ -265,9 +408,20 @@ public extension Kind where F: Decidable {
         F.choose(fa, fb, fc, fd, fe, ff, fg, fh, f)
     }
     
+    /// Takes 9 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes nine data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E>`, `Kind<F, FF>`, `Kind<F, G>`, `Kind<F, H>` and  `Kind<F, I>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, I>>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - fi: 9th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, FF, G, H, I, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
@@ -283,9 +437,21 @@ public extension Kind where F: Decidable {
         F.choose(fa, fb, fc, fd, fe, ff, fg, fh, fi, f)
     }
     
+    /// Takes 10 computations and produces a new one that decides which one will be run, based on a provided function.
     ///
-    /// choose takes ten data-types of type `Kind<F, Z>`, `Kind<F, B>`, `Kind<F, C>`, `Kind<F, D>`, `Kind<F, E>`, `Kind<F, FF>`, `Kind<F, G>`, `Kind<F, H>`, `Kind<F, I>` and  `Kind<F, J>` and produces a type of `Kind<F, A>` when given
-    /// a function from `A -> Either<Z, Either<B, Either<C, Either<D, Either<E, Either<FF, Either<G, Either<H, Either<I, J>>>>>>>>>`.
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    ///   - fc: 3rd computation
+    ///   - fd: 4th computation
+    ///   - fe: 5th computation
+    ///   - ff: 6th computation
+    ///   - fg: 7th computation
+    ///   - fh: 8th computation
+    ///   - fi: 9th computation
+    ///   - fj: 10th computation
+    ///   - f: Deciding function
+    /// - Returns: A computation that decides which of the provided arguments should run.
     static func choose<B, C, D, E, FF, G, H, I, J, Z>(
         _ fa: Kind<F, Z>,
         _ fb: Kind<F, B>,
