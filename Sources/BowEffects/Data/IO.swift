@@ -553,6 +553,62 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
     }
 }
 
+internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
+    private let fa: IO<E, A>
+    private let fb: IO<E, B>
+    
+    init(_ fa: IO<E, A>, _ fb: IO<E, B>) {
+        self.fa = fa
+        self.fb = fb
+    }
+    
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Either<A, B>, DispatchQueue) {
+        let result = Atomic<Either<A, B>?>(nil)
+        let atomic = Atomic<E?>(nil)
+        let group = DispatchGroup()
+        let parQueue1 = DispatchQueue(label: queue.label + "raceA", qos: queue.qos)
+        let parQueue2 = DispatchQueue(label: queue.label + "raceB", qos: queue.qos)
+        
+        group.enter()
+        parQueue1.async {
+            do {
+                let a = try self.fa._unsafeRunSync(on: parQueue1).0
+                if result.setIfNil(.left(a)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        parQueue2.async {
+            do {
+                let b = try self.fb._unsafeRunSync(on: parQueue2).0
+                if result.setIfNil(.right(b)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        group.wait()
+        if let value = result.value {
+            return (value, queue)
+        } else {
+            throw atomic.value!
+        }
+    }
+}
+
 internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
     private let fa: IO<E, A>
     private let fb: IO<E, B>
@@ -791,6 +847,10 @@ extension IOPartial: Async {
 
 // MARK: Instance of `Concurrent` for `IO`
 extension IOPartial: Concurrent {
+    public static func race<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, Either<A, B>> {
+        Race(fa^, fb^)
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
         return ParMap2<E, A, B, Z>(fa^, fb^, f)
     }
