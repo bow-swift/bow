@@ -22,24 +22,6 @@ public typealias ForUIO = IOPartial<Never>
 /// An UIO is an IO operation that never fails; i.e. it never produces errors.
 public typealias UIO<A> = IO<Never, A>
 
-/// Partial application of the `EnvIO` type constructor, omitting the last type parameter.
-public typealias EnvIOPartial<D, E: Error> = KleisliPartial<IOPartial<E>, D>
-
-/// EnvIO is a data type to perform IO operations that produce errors of type `E` and values of type `A`, having access to an immutable environment of type `D`. It can be seen as a Kleisli function `(D) -> IO<E, A>`.
-public typealias EnvIO<D, E: Error, A> = Kleisli<IOPartial<E>, D, A>
-
-/// Partial application of the EnvIO data type, omitting the last parameter.
-public typealias RIOPartial<D> = EnvIOPartial<D, Error>
-
-/// A RIO is a data type like EnvIO with no explicit error type, resorting to the `Error` protocol to handle them.
-public typealias RIO<D, A> = EnvIO<D, Error, A>
-
-/// Partial application of the URIO data type, omitting the last parameter.
-public typealias URIOPartial<D> = EnvIOPartial<D, Never>
-
-/// An URIO is a data type like EnvIO that never fails; i.e. it never produces errors.
-public typealias URIO<D, A> = EnvIO<D, Never, A>
-
 /// Models errors that can happen during IO evaluation.
 ///
 /// - timeout: The evaluation of the IO produced a timeout.
@@ -393,6 +375,32 @@ public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
 }
 
+public extension IO where A == Void {
+    /// Sleeps for the specified amount of time.
+    ///
+    /// - Parameter interval: Interval of time to sleep.
+    /// - Returns: An IO that sleeps for the specified amount of time.
+    static func sleep(_ interval: DispatchTimeInterval) -> IO<E, Void> {
+        if let timeInterval = interval.toDouble() {
+            return IO.invoke {
+                Thread.sleep(forTimeInterval: timeInterval)
+            }
+        } else {
+            return IO.never()^
+        }
+    }
+    
+    /// Sleeps for the specified amount of time.
+    ///
+    /// - Parameter interval: Interval of time to sleep.
+    /// - Returns: An IO that sleeps for the specified amount of time.
+    static func sleep(_ interval: TimeInterval) -> IO<E, Void> {
+        IO.invoke {
+            Thread.sleep(forTimeInterval: interval)
+        }
+    }
+}
+
 // MARK: Functions for Task
 
 public extension IO where E == Error {
@@ -402,52 +410,6 @@ public extension IO where E == Error {
     /// - Returns: An IO suspending the execution of the side effect.
     static func invokeTry(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
         return invokeEither { try f().toEither() }
-    }
-}
-
-// MARK: Functions for EnvIO
-
-public extension Kleisli {
-    /// Transforms the error type of this EnvIO
-    ///
-    /// - Parameter f: Function transforming the error.
-    /// - Returns: An EnvIO value with the new error type.
-    func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
-    }
-    
-    /// Provides the required environment.
-    ///
-    /// - Parameter d: Environment.
-    /// - Returns: An IO resulting from running this computation with the provided environment.
-    func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
-        return self.invoke(d)^
-    }
-    
-    /// Performs the side effects that are suspended in this IO in a synchronous manner.
-    ///
-    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    /// - Returns: Value produced after running the suspended side effects.
-    /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunSync<E: Error>(on queue: DispatchQueue = .main) throws -> A where D == Any, F == IOPartial<E> {
-        try self.provide(()).unsafeRunSync(on: queue)
-    }
-    
-    /// Performs the side effects that are suspended in this EnvIO in a synchronous manner.
-    ///
-    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunSyncEither<E: Error>(on queue: DispatchQueue = .main) -> Either<E, A> where D == Any, F == IOPartial<E> {
-        self.provide(()).unsafeRunSyncEither(on: queue)
-    }
-    
-    /// Performs the side effects that are suspended in this EnvIO in an asynchronous manner.
-    ///
-    /// - Parameters:
-    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunAsync<E: Error>(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where D == Any, F == IOPartial<E> {
-        self.provide(()).unsafeRunAsync(on: queue, callback)
     }
 }
 
