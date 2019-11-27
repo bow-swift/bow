@@ -104,6 +104,12 @@ extension KleisliPartial: Async where F: Async {
 // MARK: Instance of `Concurrent` for `Kleisli`
 
 extension KleisliPartial: Concurrent where F: Concurrent {
+    public static func race<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, Either<A, B>> {
+        Kleisli { d in
+            F.race(fa^.invoke(d), fb^.invoke(d))
+        }
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>, _ f: @escaping (A, B) -> Z) -> Kind<KleisliPartial<F, D>, Z> {
         Kleisli { d in
             F.parMap(fa^.invoke(d), fb^.invoke(d), f)
