@@ -371,52 +371,19 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
     
     public func retry<S, O>(_ policy: Schedule<Any, E, S, O>) -> IO<E, A> {
-        retry(policy, orElse: { e, _ in IO.raiseError(e)^ })
-            .map { x in x.fold(id, id) }^
+        self.env.retry(policy).provide(())
     }
     
     public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
-        func loop(_ state: S) -> IO<E, Either<B, A>> {
-            self.foldM(
-                { err in
-                    policy.update(err, state).provide(())
-                        .mapLeft { _ in err }
-                        .foldM({ _ in orElse(err, policy.extract(err, state)).map(Either<B, A>.left)^ },
-                               loop)
-                    
-                },
-                { a in IO<E, Either<B, A>>.pure(.right(a))^ })
-        }
-        
-        return policy.initial.provide(())
-            .mapLeft { x in x as! E }
-            .flatMap(loop)^
+        self.env.retry(policy, orElse: { e, o in orElse(e, o).env }).provide(())
     }
     
     public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
-        self.repeat(policy, onUpdateError: onUpdateError) { e, _ in
-            IO<E, O>.raiseError(e)^
-        }.map { x in x.fold(id, id) }^
+        self.env.repeat(policy, onUpdateError: onUpdateError).provide(())
     }
     
     public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
-        func loop(_ last: A, _ state: S) -> IO<E, Either<B, O>> {
-            policy.update(last, state).provide(())
-                .mapLeft { _ in onUpdateError() }
-                .foldM(
-                    { _ in IO<E, Either<B, O>>.pure(.right(policy.extract(last, state)))^ },
-                    { s in
-                        self.foldM(
-                            { e in orElse(e, policy.extract(last, state)).map(Either.left)^ },
-                            { a in loop(a, s) })
-                })
-        }
-        
-        return self.foldM(
-            { e in orElse(e, nil).map(Either.left)^ },
-            { a in policy.initial.provide(())
-                .mapLeft { x in x as! E }
-                .flatMap { s in loop(a, s) }^ })
+        self.env.repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env }).provide(())
     }
 }
 
