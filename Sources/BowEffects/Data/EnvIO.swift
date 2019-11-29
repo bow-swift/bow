@@ -38,15 +38,35 @@ public extension Kleisli {
         return self.invoke(d)^
     }
     
+    /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
+    ///
+    /// - Parameters:
+    ///   - f: Function to run in case of error.
+    ///   - g: Function to run in case of success.
+    /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
     func foldM<B, E: Error>(_ f: @escaping (E) -> EnvIO<D, E, B>, _ g: @escaping (A) -> EnvIO<D, E, B>) -> EnvIO<D, E, B> where F == IOPartial<E> {
         self.flatMap(g).handleErrorWith(f)^
     }
     
+    /// Retries this computation if it fails based on the provided retrial policy.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameter policy: Retrial policy.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
     func retry<S, O, E: Error>(_ policy: Schedule<D, E, S, O>) -> EnvIO<D, E, A> where F == IOPartial<E> {
         retry(policy, orElse: { e, _ in EnvIO.raiseError(e)^ })
             .map { x in x.fold(id, id) }^
     }
     
+    /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Retrial policy.
+    ///   - orElse: Function to handle errors after retrying.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
     func retry<S, O, B, E: Error>(_ policy: Schedule<D, E, S, O>, orElse: @escaping (E, O) -> EnvIO<D, E, B>) -> EnvIO<D, E, Either<B, A>> where F == IOPartial<E> {
         func loop(_ state: S) -> EnvIO<D, E, Either<B, A>> {
             self.foldM(
@@ -65,12 +85,27 @@ public extension Kleisli {
             .flatMap(loop)^
     }
     
+    /// Repeats this computation until the provided repeating policy completes, or until it fails.
+    ///
+    /// This computation will be at least executed once, and if it succeeds, it will be repeated additional times according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     func `repeat`<S, O, E: Error>(_ policy: Schedule<D, A, S, O>, onUpdateError: @escaping () -> E) -> EnvIO<D, E, O> where F == IOPartial<E> {
         self.repeat(policy, onUpdateError: onUpdateError) { e, _ in
             EnvIO<D, E, O>.raiseError(e)^
         }.map { x in x.fold(id, id) }^
     }
     
+    /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    ///   - orElse: A function to return a computation in case of error.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     func `repeat`<S, O, B, E: Error>(_ policy: Schedule<D, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> EnvIO<D, E, B>) -> EnvIO<D, E, Either<B, O>> where F == IOPartial<E> {
         func loop(_ last: A, _ state: S) -> EnvIO<D, E, Either<B, O>> {
             policy.update(last, state)
@@ -121,10 +156,18 @@ public extension Kleisli where D == Any {
 }
 
 public extension Kleisli where A == Void {
+    /// Sleep for the specified amount of time.
+    ///
+    /// - Parameter interval: Time to sleep.
+    /// - Returns: A computation that sleeps for the specified amount of time.
     static func sleep<E: Error>(_ interval: DispatchTimeInterval) -> EnvIO<D, E, Void> where F == IOPartial<E> {
         EnvIO { _ in IO.sleep(interval) }
     }
     
+    /// Sleep for the specified amount of time.
+    ///
+    /// - Parameter interval: Time to sleep.
+    /// - Returns: A computation that sleeps for the specified amount of time.
     static func sleep<E: Error>(_ interval: TimeInterval) -> EnvIO<D, E, Void> where F == IOPartial<E> {
         EnvIO { _ in IO.sleep(interval) }
     }
