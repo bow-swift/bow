@@ -22,24 +22,6 @@ public typealias ForUIO = IOPartial<Never>
 /// An UIO is an IO operation that never fails; i.e. it never produces errors.
 public typealias UIO<A> = IO<Never, A>
 
-/// Partial application of the `EnvIO` type constructor, omitting the last type parameter.
-public typealias EnvIOPartial<D, E: Error> = KleisliPartial<IOPartial<E>, D>
-
-/// EnvIO is a data type to perform IO operations that produce errors of type `E` and values of type `A`, having access to an immutable environment of type `D`. It can be seen as a Kleisli function `(D) -> IO<E, A>`.
-public typealias EnvIO<D, E: Error, A> = Kleisli<IOPartial<E>, D, A>
-
-/// Partial application of the EnvIO data type, omitting the last parameter.
-public typealias RIOPartial<D> = EnvIOPartial<D, Error>
-
-/// A RIO is a data type like EnvIO with no explicit error type, resorting to the `Error` protocol to handle them.
-public typealias RIO<D, A> = EnvIO<D, Error, A>
-
-/// Partial application of the URIO data type, omitting the last parameter.
-public typealias URIOPartial<D> = EnvIOPartial<D, Never>
-
-/// An URIO is a data type like EnvIO that never fails; i.e. it never produces errors.
-public typealias URIO<D, A> = EnvIO<D, Never, A>
-
 /// Models errors that can happen during IO evaluation.
 ///
 /// - timeout: The evaluation of the IO produced a timeout.
@@ -383,6 +365,61 @@ public class IO<E: Error, A>: IOOf<E, A> {
     internal func fail(_ error: Error) -> Never {
         fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
     }
+    
+    /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
+    ///
+    /// - Parameters:
+    ///   - f: Function to run in case of error.
+    ///   - g: Function to run in case of success.
+    /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
+    public func foldM<B>(_ f: @escaping (E) -> IO<E, B>, _ g: @escaping (A) -> IO<E, B>) -> IO<E, B> {
+        self.flatMap(g).handleErrorWith(f)^
+    }
+    
+    /// Retries this computation if it fails based on the provided retrial policy.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameter policy: Retrial policy.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
+    public func retry<S, O>(_ policy: Schedule<Any, E, S, O>) -> IO<E, A> {
+        self.env.retry(policy).provide(())
+    }
+    
+    /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Retrial policy.
+    ///   - orElse: Function to handle errors after retrying.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
+    public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
+        self.env.retry(policy, orElse: { e, o in orElse(e, o).env }).provide(())
+    }
+    
+    /// Repeats this computation until the provided repeating policy completes, or until it fails.
+    ///
+    /// This computation will be at least executed once, and if it succeeds, it will be repeated additional times according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
+    public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
+        self.env.repeat(policy, onUpdateError: onUpdateError).provide(())
+    }
+    
+    /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    ///   - orElse: A function to return a computation in case of error.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
+    public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
+        self.env.repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env }).provide(())
+    }
 }
 
 /// Safe downcast.
@@ -391,6 +428,32 @@ public class IO<E: Error, A>: IOOf<E, A> {
 /// - Returns: Value cast to IO.
 public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
     return IO.fix(fa)
+}
+
+public extension IO where A == Void {
+    /// Sleeps for the specified amount of time.
+    ///
+    /// - Parameter interval: Interval of time to sleep.
+    /// - Returns: An IO that sleeps for the specified amount of time.
+    static func sleep(_ interval: DispatchTimeInterval) -> IO<E, Void> {
+        if let timeInterval = interval.toDouble() {
+            return IO.invoke {
+                Thread.sleep(forTimeInterval: timeInterval)
+            }
+        } else {
+            return IO.never()^
+        }
+    }
+    
+    /// Sleeps for the specified amount of time.
+    ///
+    /// - Parameter interval: Interval of time to sleep.
+    /// - Returns: An IO that sleeps for the specified amount of time.
+    static func sleep(_ interval: TimeInterval) -> IO<E, Void> {
+        IO.invoke {
+            Thread.sleep(forTimeInterval: interval)
+        }
+    }
 }
 
 // MARK: Functions for Task
@@ -402,52 +465,6 @@ public extension IO where E == Error {
     /// - Returns: An IO suspending the execution of the side effect.
     static func invokeTry(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
         return invokeEither { try f().toEither() }
-    }
-}
-
-// MARK: Functions for EnvIO
-
-public extension Kleisli {
-    /// Transforms the error type of this EnvIO
-    ///
-    /// - Parameter f: Function transforming the error.
-    /// - Returns: An EnvIO value with the new error type.
-    func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
-    }
-    
-    /// Provides the required environment.
-    ///
-    /// - Parameter d: Environment.
-    /// - Returns: An IO resulting from running this computation with the provided environment.
-    func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
-        return self.invoke(d)^
-    }
-    
-    /// Performs the side effects that are suspended in this IO in a synchronous manner.
-    ///
-    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    /// - Returns: Value produced after running the suspended side effects.
-    /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunSync<E: Error>(on queue: DispatchQueue = .main) throws -> A where D == Any, F == IOPartial<E> {
-        try self.provide(()).unsafeRunSync(on: queue)
-    }
-    
-    /// Performs the side effects that are suspended in this EnvIO in a synchronous manner.
-    ///
-    /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunSyncEither<E: Error>(on queue: DispatchQueue = .main) -> Either<E, A> where D == Any, F == IOPartial<E> {
-        self.provide(()).unsafeRunSyncEither(on: queue)
-    }
-    
-    /// Performs the side effects that are suspended in this EnvIO in an asynchronous manner.
-    ///
-    /// - Parameters:
-    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
-    ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunAsync<E: Error>(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where D == Any, F == IOPartial<E> {
-        self.provide(()).unsafeRunAsync(on: queue, callback)
     }
 }
 
@@ -587,6 +604,62 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
             throw error
         } catch {
             self.fail(error)
+        }
+    }
+}
+
+internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
+    private let fa: IO<E, A>
+    private let fb: IO<E, B>
+    
+    init(_ fa: IO<E, A>, _ fb: IO<E, B>) {
+        self.fa = fa
+        self.fb = fb
+    }
+    
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Either<A, B>, DispatchQueue) {
+        let result = Atomic<Either<A, B>?>(nil)
+        let atomic = Atomic<E?>(nil)
+        let group = DispatchGroup()
+        let parQueue1 = DispatchQueue(label: queue.label + "raceA", qos: queue.qos)
+        let parQueue2 = DispatchQueue(label: queue.label + "raceB", qos: queue.qos)
+        
+        group.enter()
+        parQueue1.async {
+            do {
+                let a = try self.fa._unsafeRunSync(on: parQueue1).0
+                if result.setIfNil(.left(a)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        parQueue2.async {
+            do {
+                let b = try self.fb._unsafeRunSync(on: parQueue2).0
+                if result.setIfNil(.right(b)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        group.wait()
+        if let value = result.value {
+            return (value, queue)
+        } else {
+            throw atomic.value!
         }
     }
 }
@@ -829,6 +902,10 @@ extension IOPartial: Async {
 
 // MARK: Instance of `Concurrent` for `IO`
 extension IOPartial: Concurrent {
+    public static func race<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, Either<A, B>> {
+        Race(fa^, fb^)
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
         return ParMap2<E, A, B, Z>(fa^, fb^, f)
     }

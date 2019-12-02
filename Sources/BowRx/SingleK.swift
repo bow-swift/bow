@@ -47,7 +47,7 @@ public final class SingleK<A>: SingleKOf<A> {
     /// - Parameter value: Value in the higher-kind form.
     /// - Returns: Value cast to SingleK.
     public static func fix(_ value: SingleKOf<A>) -> SingleK<A> {
-        return value as! SingleK<A>
+        value as! SingleK<A>
     }
     
     /// Creates a `SingleK` from the result of evaluating a function, suspending its execution.
@@ -55,7 +55,7 @@ public final class SingleK<A>: SingleKOf<A> {
     /// - Parameter fa: Function providing the value to be provided in the underlying `Single`.
     /// - Returns: A `SingleK` that provides the value obtained from the closure.
     public static func from(_ fa: @escaping () throws -> A) -> SingleK<A> {
-        return ForSingleK.defer {
+        ForSingleK.defer {
             do {
                 return pure(try fa())
             } catch {
@@ -69,7 +69,7 @@ public final class SingleK<A>: SingleKOf<A> {
     /// - Parameter fa: Function providing the value to be provided in the underlying `Single`.
     /// - Returns: A `SingleK` that provides the value obtained from the closure.
     public static func invoke(_ fa: @escaping () throws -> SingleKOf<A>) -> SingleK<A> {
-        return ForSingleK.defer {
+        ForSingleK.defer {
             do {
                 return try fa()
             } catch {
@@ -91,20 +91,20 @@ public final class SingleK<A>: SingleKOf<A> {
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to SingleK.
 public postfix func ^<A>(_ value: SingleKOf<A>) -> SingleK<A> {
-    return SingleK.fix(value)
+    SingleK.fix(value)
 }
 
 // MARK: Instance of `Functor` for `SingleK`
 extension ForSingleK: Functor {
     public static func map<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> B) -> Kind<ForSingleK, B> {
-        return SingleK.fix(fa).value.map(f).k()
+        SingleK.fix(fa).value.map(f).k()
     }
 }
 
 // MARK: Instance of `Applicative` for `SingleK`
 extension ForSingleK: Applicative {
     public static func pure<A>(_ a: A) -> Kind<ForSingleK, A> {
-        return Single.just(a).k()
+        Single.just(a).k()
     }
 }
 
@@ -114,7 +114,7 @@ extension ForSingleK: Selective {}
 // MARK: Instance of `Monad` for `SingleK`
 extension ForSingleK: Monad {
     public static func flatMap<A, B>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (A) -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
-        return SingleK.fix(fa).value.flatMap { x in SingleK.fix(f(x)).value }.k()
+        SingleK.fix(fa).value.flatMap { x in SingleK.fix(f(x)).value }.k()
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForSingleK, Either<A, B>>) -> Kind<ForSingleK, B> {
@@ -129,11 +129,11 @@ extension ForSingleK: ApplicativeError {
     public typealias E = Error
 
     public static func raiseError<A>(_ e: Error) -> Kind<ForSingleK, A> {
-        return Single<A>.error(e).k()
+        Single<A>.error(e).k()
     }
 
     public static func handleErrorWith<A>(_ fa: Kind<ForSingleK, A>, _ f: @escaping (Error) -> Kind<ForSingleK, A>) -> Kind<ForSingleK, A> {
-        return SingleK.fix(fa).value.catchError { e in SingleK.fix(f(e)).value }.k()
+        SingleK.fix(fa).value.catchError { e in SingleK.fix(f(e)).value }.k()
     }
 }
 
@@ -143,14 +143,14 @@ extension ForSingleK: MonadError {}
 // MARK: Instance of `MonadDefer` for `SingleK`
 extension ForSingleK: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> Kind<ForSingleK, A>) -> Kind<ForSingleK, A> {
-        return Single.deferred { SingleK<A>.fix(fa()).value }.k()
+        Single.deferred { SingleK<A>.fix(fa()).value }.k()
     }
 }
 
 // MARK: Instance of `Async` for `SingleK`
 extension ForSingleK: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, A> {
-        return Single.create { emitter in
+        Single.create { emitter in
             procf { either in
                 either.fold(
                     { error in emitter(.error(error)) },
@@ -160,11 +160,11 @@ extension ForSingleK: Async {
     }
 
     public static func continueOn<A>(_ fa: Kind<ForSingleK, A>, _ queue: DispatchQueue) -> Kind<ForSingleK, A> {
-        return fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
+        fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
 
     public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForSingleK, A> {
-        return Single<A>.create { emitter in
+        Single<A>.create { emitter in
             do {
                 try fa { (either : Either<Error, A>) in
                     either.fold({ e in emitter(.error(e)) },
@@ -179,7 +179,7 @@ extension ForSingleK: Async {
 // MARK: Instance of `Effect` for `SingleK`
 extension ForSingleK: Effect {
     public static func runAsync<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, ()> {
-        return SingleK.fix(fa).value.flatMap { a in SingleK<()>.fix(callback(Either.right(a))).value }
+        SingleK.fix(fa).value.flatMap { a in SingleK<()>.fix(callback(Either.right(a))).value }
             .catchError{ e in SingleK<()>.fix(callback(Either.left(e))).value }.k()
     }
 }
@@ -187,20 +187,26 @@ extension ForSingleK: Effect {
 // MARK: Instance of `ConcurrentEffect` for `SingleK`
 extension ForSingleK: ConcurrentEffect {
     public static func runAsyncCancellable<A>(_ fa: Kind<ForSingleK, A>, _ callback: @escaping (Either<Error, A>) -> Kind<ForSingleK, ()>) -> Kind<ForSingleK, BowEffects.Disposable> {
-        return Single<BowEffects.Disposable>.create { _ in
-            return SingleK.fix(SingleK.fix(fa).runAsync(callback)).value.subscribe()
-            }.k()
+        Single<BowEffects.Disposable>.create { _ in
+            SingleK.fix(SingleK.fix(fa).runAsync(callback)).value.subscribe()
+        }.k()
     }
 }
 
 // MARK: Instance of `Concurrent` for `SingleK`
 extension ForSingleK: Concurrent {
+    public static func race<A, B>(_ fa: Kind<ForSingleK, A>, _ fb: Kind<ForSingleK, B>) -> Kind<ForSingleK, Either<A, B>> {
+        let left = fa.map(Either<A, B>.left)^.value.asObservable()
+        let right = fb.map(Either<A, B>.right)^.value.asObservable()
+        return left.amb(right).asSingle().k()
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<ForSingleK, A>, _ fb: Kind<ForSingleK, B>, _ f: @escaping (A, B) -> Z) -> Kind<ForSingleK, Z> {
-        return Single.zip(fa^.value, fb^.value, resultSelector: f).k()
+        Single.zip(fa^.value, fb^.value, resultSelector: f).k()
     }
     
     public static func parMap<A, B, C, Z>(_ fa: Kind<ForSingleK, A>, _ fb: Kind<ForSingleK, B>, _ fc: Kind<ForSingleK, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<ForSingleK, Z> {
-        return Single.zip(fa^.value, fb^.value, fc^.value, resultSelector: f).k()
+        Single.zip(fa^.value, fb^.value, fc^.value, resultSelector: f).k()
     }
 }
 
@@ -210,7 +216,7 @@ extension ForSingleK: Bracket {
         acquire fa: Kind<ForSingleK, A>,
         release: @escaping (A, ExitCase<Error>) -> Kind<ForSingleK, ()>,
         use: @escaping (A) throws -> Kind<ForSingleK, B>) -> Kind<ForSingleK, B> {
-        return Single.create { emitter in
+        Single.create { emitter in
             fa.handleErrorWith { t in SingleK.from { emitter(.error(t)) }.value.flatMap { _ in Single.error(t) }.k() }
                 .flatMap { a in
                     SingleK.invoke { try use(a) }^

@@ -143,6 +143,7 @@
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
 		1186E15722BA8A77001F8A5D /* Cons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15622BA8A77001F8A5D /* Cons.swift */; };
 		1186E15922BA8ECA001F8A5D /* Snoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15822BA8ECA001F8A5D /* Snoc.swift */; };
+		11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */; };
 		1191BD0A22D77C510052FEA8 /* BoundVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0922D77C510052FEA8 /* BoundVar.swift */; };
 		1191BD0C22D77FED0052FEA8 /* BindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */; };
 		1191BD0E22D784630052FEA8 /* MonadComprenhensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */; };
@@ -221,6 +222,10 @@
 		11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */; };
 		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
 		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
+		11FB4612238EB78200EA60BF /* EnvIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4610238EB78200EA60BF /* EnvIO.swift */; };
+		11FB4614238EBF2300EA60BF /* EnvIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4613238EBF2300EA60BF /* EnvIOTest.swift */; };
+		11FB4616238ED14F00EA60BF /* ConcurrentTraverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */; };
+		11FDD68F23867D9800EA8A4D /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FDD68E23867D9800EA8A4D /* Schedule.swift */; };
 		600D30432352C08F00F7B64B /* Semigroupal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30422352C08F00F7B64B /* Semigroupal.swift */; };
 		606B29EA23607607002334B2 /* Divide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29E923607607002334B2 /* Divide.swift */; };
 		606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30442352D03400F7B64B /* SemigroupalLaws.swift */; };
@@ -799,6 +804,7 @@
 		1186E14E22BA38CD001F8A5D /* Index+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Index+Optics.swift"; sourceTree = "<group>"; };
 		1186E15622BA8A77001F8A5D /* Cons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cons.swift; sourceTree = "<group>"; };
 		1186E15822BA8ECA001F8A5D /* Snoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snoc.swift; sourceTree = "<group>"; };
+		11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		1191BD0922D77C510052FEA8 /* BoundVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundVar.swift; sourceTree = "<group>"; };
 		1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExpression.swift; sourceTree = "<group>"; };
 		1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadComprenhensions.swift; sourceTree = "<group>"; };
@@ -842,6 +848,10 @@
 		11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C9E231818AE00BD1E87 /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
 		11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
+		11FB4610238EB78200EA60BF /* EnvIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvIO.swift; sourceTree = "<group>"; };
+		11FB4613238EBF2300EA60BF /* EnvIOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvIOTest.swift; sourceTree = "<group>"; };
+		11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentTraverse.swift; sourceTree = "<group>"; };
+		11FDD68E23867D9800EA8A4D /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		600D30422352C08F00F7B64B /* Semigroupal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroupal.swift; sourceTree = "<group>"; };
 		600D30442352D03400F7B64B /* SemigroupalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupalLaws.swift; sourceTree = "<group>"; };
 		606B29E923607607002334B2 /* Divide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divide.swift; sourceTree = "<group>"; };
@@ -1214,9 +1224,11 @@
 			isa = PBXGroup;
 			children = (
 				11F41C94231816AD00BD1E87 /* Atomic.swift */,
+				11FB4610238EB78200EA60BF /* EnvIO.swift */,
 				1104BED422C22DD2002C3F78 /* IO.swift */,
 				11F41C91231816AD00BD1E87 /* Ref.swift */,
 				1104BEE922C25AAF002C3F78 /* Resource.swift */,
+				11FDD68E23867D9800EA8A4D /* Schedule.swift */,
 				11F41C92231816AD00BD1E87 /* Internal */,
 			);
 			path = Data;
@@ -1344,6 +1356,7 @@
 		11229786219DC968006D66C5 /* BowEffectsTests */ = {
 			isa = PBXGroup;
 			children = (
+				11FB4613238EBF2300EA60BF /* EnvIOTest.swift */,
 				8BA0F3A0217E2DEF00969984 /* IOTest.swift */,
 			);
 			path = BowEffectsTests;
@@ -1632,6 +1645,7 @@
 			children = (
 				11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */,
 				11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */,
+				11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -1799,6 +1813,7 @@
 				1104BEE122C22E47002C3F78 /* Bracket.swift */,
 				1104BEE222C22E47002C3F78 /* Concurrent.swift */,
 				8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */,
+				11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */,
 				8BA0F46B217E2E9200969984 /* Effect.swift */,
 				11F0367E2327D08900B39A80 /* EffectComprehensions.swift */,
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
@@ -2683,13 +2698,17 @@
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				11F036822327D4AC00B39A80 /* URLSession.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
+				11FB4612238EB78200EA60BF /* EnvIO.swift in Sources */,
 				11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */,
 				11F036842327E1C900B39A80 /* ConsoleIO.swift in Sources */,
+				11FB4616238ED14F00EA60BF /* ConcurrentTraverse.swift in Sources */,
+				11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */,
 				11F41C9A231816D800BD1E87 /* Ref.swift in Sources */,
 				1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
 				11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */,
+				11FDD68F23867D9800EA8A4D /* Schedule.swift in Sources */,
 				11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
 				11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */,
@@ -2703,6 +2722,7 @@
 			buildActionMask = 0;
 			files = (
 				11229787219DCA18006D66C5 /* IOTest.swift in Sources */,
+				11FB4614238EBF2300EA60BF /* EnvIOTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
