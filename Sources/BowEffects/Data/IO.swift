@@ -365,6 +365,61 @@ public class IO<E: Error, A>: IOOf<E, A> {
     internal func fail(_ error: Error) -> Never {
         fatalError("IO did not handle error: \(error). Only errors of type \(E.self) are handled.")
     }
+    
+    /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
+    ///
+    /// - Parameters:
+    ///   - f: Function to run in case of error.
+    ///   - g: Function to run in case of success.
+    /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
+    public func foldM<B>(_ f: @escaping (E) -> IO<E, B>, _ g: @escaping (A) -> IO<E, B>) -> IO<E, B> {
+        self.flatMap(g).handleErrorWith(f)^
+    }
+    
+    /// Retries this computation if it fails based on the provided retrial policy.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameter policy: Retrial policy.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
+    public func retry<S, O>(_ policy: Schedule<Any, E, S, O>) -> IO<E, A> {
+        self.env.retry(policy).provide(())
+    }
+    
+    /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
+    ///
+    /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Retrial policy.
+    ///   - orElse: Function to handle errors after retrying.
+    /// - Returns: A computation that is retried based on the provided policy when it fails.
+    public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
+        self.env.retry(policy, orElse: { e, o in orElse(e, o).env }).provide(())
+    }
+    
+    /// Repeats this computation until the provided repeating policy completes, or until it fails.
+    ///
+    /// This computation will be at least executed once, and if it succeeds, it will be repeated additional times according to the policy.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
+    public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
+        self.env.repeat(policy, onUpdateError: onUpdateError).provide(())
+    }
+    
+    /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
+    ///
+    /// - Parameters:
+    ///   - policy: Repeating policy.
+    ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
+    ///   - orElse: A function to return a computation in case of error.
+    /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
+    public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
+        self.env.repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env }).provide(())
+    }
 }
 
 /// Safe downcast.
@@ -549,6 +604,62 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
             throw error
         } catch {
             self.fail(error)
+        }
+    }
+}
+
+internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
+    private let fa: IO<E, A>
+    private let fb: IO<E, B>
+    
+    init(_ fa: IO<E, A>, _ fb: IO<E, B>) {
+        self.fa = fa
+        self.fb = fb
+    }
+    
+    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Either<A, B>, DispatchQueue) {
+        let result = Atomic<Either<A, B>?>(nil)
+        let atomic = Atomic<E?>(nil)
+        let group = DispatchGroup()
+        let parQueue1 = DispatchQueue(label: queue.label + "raceA", qos: queue.qos)
+        let parQueue2 = DispatchQueue(label: queue.label + "raceB", qos: queue.qos)
+        
+        group.enter()
+        parQueue1.async {
+            do {
+                let a = try self.fa._unsafeRunSync(on: parQueue1).0
+                if result.setIfNil(.left(a)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        parQueue2.async {
+            do {
+                let b = try self.fb._unsafeRunSync(on: parQueue2).0
+                if result.setIfNil(.right(b)) {
+                    group.leave()
+                }
+            } catch let error as E {
+                if !atomic.setIfNil(error) {
+                    group.leave()
+                }
+            } catch {
+                self.fail(error)
+            }
+        }
+        
+        group.wait()
+        if let value = result.value {
+            return (value, queue)
+        } else {
+            throw atomic.value!
         }
     }
 }
@@ -791,6 +902,10 @@ extension IOPartial: Async {
 
 // MARK: Instance of `Concurrent` for `IO`
 extension IOPartial: Concurrent {
+    public static func race<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, Either<A, B>> {
+        Race(fa^, fb^)
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
         return ParMap2<E, A, B, Z>(fa^, fb^, f)
     }
