@@ -5,8 +5,8 @@ extension DispatchTimeInterval {
         switch self {
         case .seconds(let value): return Double(value)
         case .milliseconds(let value): return Double(value) * 0.001
-        case .microseconds(let value): return Double(value) * 0.000001
-        case .nanoseconds(let value): return Double(value) * 0.000000001
+        case .microseconds(let value): return Double(value) * 0.000_001
+        case .nanoseconds(let value): return Double(value) * 0.000_000_001
         case .never: return nil
         @unknown default: return nil
         }
