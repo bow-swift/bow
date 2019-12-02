@@ -70,7 +70,7 @@ public class Schedule<R, A, State, B> {
     ///
     /// - Parameter that: Schedule to be composed with this one.
     public func choose<State2, C>(_ that: Schedule<R, C, State2, B>) -> Schedule<R, Either<A, C>, (State, State2), B> {
-        self.choose(that).map { b in b.fold(id, id) }
+        self.choose(that).map { b in b.merge() }
     }
     
     /// Composes this schedule with another one, providing a new schedule that continues as long as both continue, using the maximum delay of the two schedules.
@@ -179,7 +179,7 @@ public class Schedule<R, A, State, B> {
     ///
     /// - Parameter that: Schedule to be composed with this one.
     public func andThen<State2>(_ that: Schedule<R, A, State2, B>) -> Schedule<R, A, Either<State, State2>, B> {
-        andThenEither(that).map { x in x.fold(id, id) }
+        andThenEither(that).map { x in x.merge() }
     }
     
     /// Composes two schedules with the same input but different outputs by applying them sequentially. It executes the first to completion, and then executes the second.

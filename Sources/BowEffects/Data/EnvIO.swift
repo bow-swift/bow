@@ -56,7 +56,7 @@ public extension Kleisli {
     /// - Returns: A computation that is retried based on the provided policy when it fails.
     func retry<S, O, E: Error>(_ policy: Schedule<D, E, S, O>) -> EnvIO<D, E, A> where F == IOPartial<E> {
         retry(policy, orElse: { e, _ in EnvIO.raiseError(e)^ })
-            .map { x in x.fold(id, id) }^
+            .map { x in x.merge() }^
     }
     
     /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
@@ -96,7 +96,7 @@ public extension Kleisli {
     func `repeat`<S, O, E: Error>(_ policy: Schedule<D, A, S, O>, onUpdateError: @escaping () -> E) -> EnvIO<D, E, O> where F == IOPartial<E> {
         self.repeat(policy, onUpdateError: onUpdateError) { e, _ in
             EnvIO<D, E, O>.raiseError(e)^
-        }.map { x in x.fold(id, id) }^
+        }.map { x in x.merge() }^
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
