@@ -208,6 +208,7 @@
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
 		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
+		11E8E07A2395580F0029BC92 /* Array+TraverseConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */; };
 		11E9788E233A7123002AAC60 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11E9788D233A7123002AAC60 /* RxSwift */; };
 		11E97895233A720A002AAC60 /* SwiftCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 11E97894233A720A002AAC60 /* SwiftCheck */; };
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
@@ -837,6 +838,7 @@
 		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
 		11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Laws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Laws-Info.plist"; sourceTree = "<absolute>"; };
 		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
+		11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TraverseConcurrent.swift"; sourceTree = "<group>"; };
 		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
 		11F0367E2327D08900B39A80 /* EffectComprehensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectComprehensions.swift; sourceTree = "<group>"; };
 		11F036812327D4AC00B39A80 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
@@ -1223,6 +1225,7 @@
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */,
 				11F41C94231816AD00BD1E87 /* Atomic.swift */,
 				11FB4610238EB78200EA60BF /* EnvIO.swift */,
 				1104BED422C22DD2002C3F78 /* IO.swift */,
@@ -2704,6 +2707,7 @@
 				11FB4616238ED14F00EA60BF /* ConcurrentTraverse.swift in Sources */,
 				11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */,
 				11F41C9A231816D800BD1E87 /* Ref.swift in Sources */,
+				11E8E07A2395580F0029BC92 /* Array+TraverseConcurrent.swift in Sources */,
 				1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
