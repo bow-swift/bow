@@ -585,7 +585,7 @@ public extension Traversal where S == T, A == B {
     }
 }
 
-public extension Traversal where S == A {
+public extension Traversal where S == A, S == T, A == B {
     /// Provides an identity Traversal
     static var identity: Traversal<S, S> {
         return Iso<S, S>.identity.asTraversal

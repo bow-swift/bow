@@ -430,7 +430,7 @@ public extension Lens where S == T, A == B {
     }
 }
 
-public extension Lens where S == A {
+public extension Lens where S == A, S == T, A == B {
     /// Obtains an identity lens; i.e. a no-op lens.
     static var identity: Lens<S, S> {
         return Iso<S, S>.identity.asLens
