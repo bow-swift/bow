@@ -286,7 +286,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: Value produced after running the suspended side effects.
     /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunSync(on queue: DispatchQueue = .main) throws -> A {
-        return try self._unsafeRunSync(on: queue).0
+        return try self._unsafeRunSync(on: .queue(queue)).0
     }
     
     /// Performs the side effects that are suspended in this IO in a synchronous manner.
@@ -303,17 +303,13 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
-    internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        fatalError("_unsafeRunSync must be implemented in subclasses")
+    internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        fatalError("_unsafeRunSync(on:) must be implemented in subclasses")
     }
     
-    internal func on<T>(queue: DispatchQueue, perform: @escaping () throws -> T) throws -> T {
-        if DispatchQueue.currentLabel == queue.label {
-            return try perform()
-        } else {
-            return try queue.sync {
-                try perform()
-            }
+    internal func on<T>(queue: Queue, perform: @escaping () throws -> T) throws -> T {
+        return try queue.sync {
+            try perform()
         }
     }
     
@@ -321,9 +317,20 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///
     /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
     /// - Returns: An IO that either contains the value produced or an error. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    public func attempt(on queue: DispatchQueue = .main) -> IO<E, A>{
+    public func attempt(on queue: DispatchQueue = .main) -> IO<E, A> {
         do {
             let result = try self.unsafeRunSync(on: queue)
+            return IO.pure(result)^
+        } catch let error as E {
+            return IO.raiseError(error)^
+        } catch {
+            fail(error)
+        }
+    }
+    
+    internal func _attempt(on queue: Queue = .queue()) -> IO<E, A> {
+        do {
+            let result = try self._unsafeRunSync(on: queue).0
             return IO.pure(result)^
         } catch let error as E {
             return IO.raiseError(error)^
@@ -475,7 +482,7 @@ internal class Pure<E: Error, A>: IO<E, A> {
         self.a = a
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         return (try on(queue: queue) { self.a }, queue)
     }
 }
@@ -487,7 +494,7 @@ internal class RaiseError<E: Error, A> : IO<E, A> {
         self.error = error
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         return (try on(queue: queue) { throw self.error }, queue)
     }
 }
@@ -501,7 +508,7 @@ internal class FMap<E: Error, A, B> : IO<E, B> {
         self.action = action
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (B, Queue) {
         let result = try action._unsafeRunSync(on: queue)
         return (try on(queue: result.1) { self.f(result.0) }, result.1)
     }
@@ -516,7 +523,7 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         self.action = action
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         do {
             return try action._unsafeRunSync(on: queue)
         } catch let error as E {
@@ -534,7 +541,7 @@ internal class Join<E: Error, A> : IO<E, A> {
         self.io = io
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         let result = try io._unsafeRunSync(on: queue)
         return try result.0._unsafeRunSync(on: result.1)
     }
@@ -547,7 +554,7 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         self.f = f
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         var result: Either<E, A>?
         let group = DispatchGroup()
         group.enter()
@@ -574,8 +581,8 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
         self.queue = queue
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return (try io._unsafeRunSync(on: queue).0, self.queue)
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        return (try io._unsafeRunSync(on: queue).0, .queue(self.queue))
     }
 }
 
@@ -592,7 +599,7 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
         self.use = use
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (B, Queue) {
         let ioResult = try io._unsafeRunSync(on: queue)
         let resource = ioResult.0
         do {
@@ -617,12 +624,12 @@ internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
         self.fb = fb
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Either<A, B>, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Either<A, B>, Queue) {
         let result = Atomic<Either<A, B>?>(nil)
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "raceA", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "raceB", qos: queue.qos)
+        let parQueue1 = Queue.queue(label: queue.label + "raceA", qos: queue.qos)
+        let parQueue2 = Queue.queue(label: queue.label + "raceB", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -675,13 +682,13 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Z, Queue) {
         var a: A?
         var b: B?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
+        let parQueue1 = Queue.queue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2 = Queue.queue(label: queue.label + "parMap2", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -729,15 +736,15 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Z, Queue) {
         var a: A?
         var b: B?
         var c: C?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
-        let parQueue3 = DispatchQueue(label: queue.label + "parMap3", qos: queue.qos)
+        let parQueue1 = Queue.queue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2 = Queue.queue(label: queue.label + "parMap2", qos: queue.qos)
+        let parQueue3 = Queue.queue(label: queue.label + "parMap3", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -793,7 +800,7 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
         self.callback = callback
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> ((), DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> ((), Queue) {
         var result: IOOf<E, ()>
         do {
             let (a, nextQueue) = try io._unsafeRunSync(on: queue)
@@ -815,7 +822,7 @@ internal class Suspend<E: Error, A>: IO<E, A> {
         self.thunk = thunk
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         return try on(queue: queue) {
             try self.thunk()^._unsafeRunSync(on: queue)
         }
@@ -867,8 +874,8 @@ extension IOPartial: ApplicativeError {
         }
     }
     
-    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
-        return fold(IO.fix(fa).attempt(), f, IO.pure)
+    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ fe: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
+        fold(fa^._attempt(on: .current), fe, IO.pure)
     }
 }
 
