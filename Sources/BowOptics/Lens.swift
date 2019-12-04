@@ -444,6 +444,18 @@ public extension Lens where S == A, S == T, A == B {
     }
 }
 
+extension PLens where S == T {
+    /// Combine this lens with another with the same source but different focus.
+    ///
+    /// - Parameter other: A lens with the same source but different focus.
+    /// - Returns: A lens that lets us focus on the two foci at the same time.
+    func merge<AA, BB>(_ other: PLens<S, S, AA, BB>) -> PLens<S, S, (A, AA), (B, BB)> {
+        PLens<S, T, (A, AA), (B, BB)>(get: { s in (self.get(s), other.get(s)) },
+                                      set: { s, b in other.set(self.set(s, b.0), b.1) }
+        )
+    }
+}
+
 private class LensFold<S, T, A, B> : Fold<S, A> {
     private let lens: PLens<S, T, A, B>
     
