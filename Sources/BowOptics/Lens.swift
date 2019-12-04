@@ -467,9 +467,3 @@ private class LensTraversal<S, T, A, B>: PTraversal<S, T, A, B> {
         return F.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
     }
 }
-
-extension Lens {
-    internal var fix: Lens<S, A> {
-        return self as! Lens<S, A>
-    }
-}
