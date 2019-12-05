@@ -444,7 +444,7 @@ public extension Lens where S == A, S == T, A == B {
     }
 }
 
-extension PLens where S == T {
+public extension PLens where S == T {
     /// Combine this lens with another with the same source but different focus.
     ///
     /// - Parameter other: A lens with the same source but different focus.
