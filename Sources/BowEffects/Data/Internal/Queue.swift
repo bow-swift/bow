@@ -5,15 +5,6 @@ internal enum Queue {
     case current
     
     // MARK: properties
-    var dispatchQueue: DispatchQueue {
-        switch self {
-        case .queue(let queue):
-            return queue
-        case .current:
-            fatalError("can not extract queue from current context")
-        }
-    }
-    
     var label: String {
         switch self {
         case .queue(let queue):
@@ -66,5 +57,11 @@ internal enum Queue {
 internal extension DispatchQueue {
     var queue: Queue {
         .queue(self)
+    }
+}
+
+fileprivate extension DispatchQueue {
+    static var currentLabel: String {
+        String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
     }
 }

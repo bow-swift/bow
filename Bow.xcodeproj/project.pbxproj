@@ -220,7 +220,6 @@
 		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
 		11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C94231816AD00BD1E87 /* Atomic.swift */; };
 		11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */; };
-		11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */; };
 		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
 		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
 		11FB4612238EB78200EA60BF /* EnvIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4610238EB78200EA60BF /* EnvIO.swift */; };
@@ -846,7 +845,6 @@
 		11F036832327E1C900B39A80 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
 		11F036852327EA1F00B39A80 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
-		11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C94231816AD00BD1E87 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C9E231818AE00BD1E87 /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
@@ -1649,7 +1647,6 @@
 			isa = PBXGroup;
 			children = (
 				11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */,
-				11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */,
 				11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */,
 				8BB969AB239863F0005520D6 /* Queue.swift */,
 			);
@@ -2714,7 +2711,6 @@
 				1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
-				11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */,
 				11FDD68F23867D9800EA8A4D /* Schedule.swift in Sources */,
 				11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
