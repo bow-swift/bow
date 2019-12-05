@@ -287,7 +287,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunSyncEither(on queue: DispatchQueue = .main) -> Either<E, A> {
         do {
-            return .right(try self.unsafeRunSync())
+            return .right(try self.unsafeRunSync(on: queue))
         } catch let e as E {
             return .left(e)
         } catch {
