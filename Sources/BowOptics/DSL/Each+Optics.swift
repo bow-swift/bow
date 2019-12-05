@@ -2,10 +2,10 @@ import Foundation
 import Bow
 
 // MARK: Extension when focus has `Each` instance
-public extension Lens where A: Each {
+public extension Lens where A: Each, S == T, A == B {
     /// Provides a traversal over all elements of the focus of this lens.
     var every: Traversal<S, A.EachFoci> {
-        return self.fix + A.each
+        return self + A.each
     }
 }
 
