@@ -318,17 +318,6 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
-    internal func _attempt(on queue: Queue) -> IO<E, A> {
-        do {
-            let result = try self._unsafeRunSync(on: queue).0
-            return IO.pure(result)^
-        } catch let error as E {
-            return IO.raiseError(error)^
-        } catch {
-            fail(error)
-        }
-    }
-    
     /// Performs the side effects that are suspended in this IO in an asynchronous manner.
     ///
     /// - Parameters:
@@ -486,6 +475,32 @@ internal class RaiseError<E: Error, A> : IO<E, A> {
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         (try on(queue: queue) { throw self.error }, queue)
+    }
+}
+
+internal class HandleErrorWith<E: Error, A>: IO<E, A> {
+    let fa: IO<E, A>
+    let f: (E) -> IO<E, A>
+    
+    init(_ fa: IO<E, A>, _ f: @escaping (E) -> IO<E, A>) {
+        self.fa = fa
+        self.f = f
+    }
+    
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        do {
+            return try fa._unsafeRunSync(on: queue)
+        } catch let e as E {
+            do {
+                return try f(e)._unsafeRunSync(on: queue)
+            } catch let e2 as E {
+                throw e2
+            } catch {
+                self.fail(error)
+            }
+        } catch {
+            self.fail(error)
+        }
     }
 }
 
@@ -856,16 +871,8 @@ extension IOPartial: ApplicativeError {
         RaiseError(e)
     }
     
-    private static func fold<A, B>(_ io: IO<E, A>, _ fe: @escaping (E) -> B, _ fa: @escaping (A) -> B) -> B {
-        switch io {
-        case let pure as Pure<E, A>: return fa(pure.a)
-        case let raise as RaiseError<E, A>: return fe(raise.error)
-        default: fatalError("Invoke attempt before fold")
-        }
-    }
-    
-    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ fe: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
-        fold(fa^._attempt(on: .current), fe, IO.pure)
+    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
+        HandleErrorWith(fa^) { e in f(e)^ }
     }
 }
 
