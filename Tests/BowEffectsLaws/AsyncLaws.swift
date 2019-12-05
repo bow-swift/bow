@@ -36,9 +36,9 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             
             return F.pure(())
                 .continueOn(queue1)
-                .map { _ in QueueLabel().get }
+                .map { _ in QueueLabel.get }
                 .continueOn(queue2)
-                .map { x in x + QueueLabel().get } == F.pure(id1 + id2)
+                .map { x in x + QueueLabel.get } == F.pure(id1 + id2)
         }
     }
 
@@ -47,8 +47,8 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
 
-            return F.later(queue1) { currentQueueLabel() }
-                .flatMap { x in F.later(queue2) { x + currentQueueLabel() } }
+            return F.later(queue1) { QueueLabel.get }
+                .flatMap { x in F.later(queue2) { x + QueueLabel.get } }
                 == F.pure(id1 + id2)
         }
     }
@@ -62,9 +62,9 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             
             return binding(
                 continueOn(queue1),
-                l1 <-- F.pure(currentQueueLabel()),
+                l1 <-- F.pure(QueueLabel.get),
                 continueOn(queue2),
-                l2 <-- F.pure(currentQueueLabel()),
+                l2 <-- F.pure(QueueLabel.get),
                 yield: l1.get + l2.get) == F.pure(id1 + id2)
         }
     }
@@ -77,14 +77,11 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             return F.async(k) == F.asyncF { cb in F.later { k(cb) } }
         }
     }
-
-    private static func currentQueueLabel() -> String {
-        return DispatchQueue.currentLabel
-    }
 }
 
-struct QueueLabel {
-    var get: String {
-        return DispatchQueue.currentLabel
+
+private struct QueueLabel {
+    static var get: String {
+        String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
     }
 }

@@ -36,7 +36,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter fa: Value in higher-kind form.
     /// - Returns: Value casted to IO.
     public static func fix(_ fa: IOOf<E, A>) -> IO<E, A> {
-        return fa as! IO<E, A>
+        fa as! IO<E, A>
     }
     
     /// Creates an EnvIO with no dependencies from this IO.
@@ -49,7 +49,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO function suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
-        return IO.defer {
+        IO.defer {
             do {
                 return Pure<E, A>(try f())
             } catch let error as E {
@@ -65,7 +65,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter f: Side-effectful function returning an `Either`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
     public static func invokeEither(_ f: @escaping () throws -> Either<E, A>) -> IO<E, A> {
-        return IO.defer {
+        IO.defer {
             do {
                 return try f().fold(IO.raiseError, IO.pure)
             } catch let error as E {
@@ -81,7 +81,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter f: Side-effectful function returning a `Result`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
     public static func invokeResult(_ f: @escaping () throws -> Result<A, E>) -> IO<E, A> {
-        return invokeEither { try f().toEither() }
+        invokeEither { try f().toEither() }
     }
     
     /// Creates an IO from a side-effectful function.
@@ -89,7 +89,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter f: Side-effectful function returning an `Validated`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
     public static func invokeValidated(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
-        return invokeEither { try f().toEither() }
+        invokeEither { try f().toEither() }
     }
     
     /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -100,9 +100,8 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: An IO suspending the execution of the side effects.
     public static func merge<Z, B>(_ fa: @escaping () throws -> Z,
                                    _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb))^
     }
     
     /// Creates an IO from 3 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -115,10 +114,9 @@ public class IO<E: Error, A>: IOOf<E, A> {
     public static func merge<Z, B, C>(_ fa: @escaping () throws -> Z,
                                       _ fb: @escaping () throws -> B,
                                       _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc))^
     }
     
     /// Creates an IO from 4 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -133,11 +131,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                          _ fb: @escaping () throws -> B,
                                          _ fc: @escaping () throws -> C,
                                          _ fd: @escaping () throws -> D) -> IO<E, (Z, B, C, D)> where A == (Z, B, C, D) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd))^
     }
     
     /// Creates an IO from 5 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -154,12 +151,11 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                             _ fc: @escaping () throws -> C,
                                             _ fd: @escaping () throws -> D,
                                             _ ff: @escaping () throws -> F) -> IO<E, (Z, B, C, D, F)> where A == (Z, B, C, D, F) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd),
-            IO<E, F>.invoke(ff))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd),
+               IO<E, F>.invoke(ff))^
     }
     
     /// Creates an IO from 6 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -178,13 +174,12 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                                _ fd: @escaping () throws -> D,
                                                _ ff: @escaping () throws -> F,
                                                _ fg: @escaping () throws -> G) -> IO<E, (Z, B, C, D, F, G)> where A == (Z, B, C, D, F, G){
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd),
-            IO<E, F>.invoke(ff),
-            IO<E, G>.invoke(fg))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd),
+               IO<E, F>.invoke(ff),
+               IO<E, G>.invoke(fg))^
     }
     
     /// Creates an IO from 7 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -205,14 +200,13 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                                   _ ff: @escaping () throws -> F,
                                                   _ fg: @escaping () throws -> G,
                                                   _ fh: @escaping () throws -> H ) -> IO<E, (Z, B, C, D, F, G, H)> where A == (Z, B, C, D, F, G, H) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd),
-            IO<E, F>.invoke(ff),
-            IO<E, G>.invoke(fg),
-            IO<E, H>.invoke(fh))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd),
+               IO<E, F>.invoke(ff),
+               IO<E, G>.invoke(fg),
+               IO<E, H>.invoke(fh))^
     }
     
     /// Creates an IO from 8 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -235,15 +229,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                                      _ fg: @escaping () throws -> G,
                                                      _ fh: @escaping () throws -> H,
                                                      _ fi: @escaping () throws -> I) -> IO<E, (Z, B, C, D, F, G, H, I)> where A == (Z, B, C, D, F, G, H, I) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd),
-            IO<E, F>.invoke(ff),
-            IO<E, G>.invoke(fg),
-            IO<E, H>.invoke(fh),
-            IO<E, I>.invoke(fi))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd),
+               IO<E, F>.invoke(ff),
+               IO<E, G>.invoke(fg),
+               IO<E, H>.invoke(fh),
+               IO<E, I>.invoke(fi))^
     }
     
     /// Creates an IO from 9 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -268,16 +261,15 @@ public class IO<E: Error, A>: IOOf<E, A> {
                                                         _ fh: @escaping () throws -> H,
                                                         _ fi: @escaping () throws -> I,
                                                         _ fj: @escaping () throws -> J ) -> IO<E, (Z, B, C, D, F, G, H, I, J)> where A == (Z, B, C, D, F, G, H, I, J) {
-        return IO.zip(
-            IO<E, Z>.invoke(fa),
-            IO<E, B>.invoke(fb),
-            IO<E, C>.invoke(fc),
-            IO<E, D>.invoke(fd),
-            IO<E, F>.invoke(ff),
-            IO<E, G>.invoke(fg),
-            IO<E, H>.invoke(fh),
-            IO<E, I>.invoke(fi),
-            IO<E, J>.invoke(fj))^
+        IO.zip(IO<E, Z>.invoke(fa),
+               IO<E, B>.invoke(fb),
+               IO<E, C>.invoke(fc),
+               IO<E, D>.invoke(fd),
+               IO<E, F>.invoke(ff),
+               IO<E, G>.invoke(fg),
+               IO<E, H>.invoke(fh),
+               IO<E, I>.invoke(fi),
+               IO<E, J>.invoke(fj))^
     }
     
     /// Performs the side effects that are suspended in this IO in a synchronous manner.
@@ -286,7 +278,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: Value produced after running the suspended side effects.
     /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunSync(on queue: DispatchQueue = .main) throws -> A {
-        return try self._unsafeRunSync(on: queue).0
+        try self._unsafeRunSync(on: .queue(queue)).0
     }
     
     /// Performs the side effects that are suspended in this IO in a synchronous manner.
@@ -295,7 +287,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
     public func unsafeRunSyncEither(on queue: DispatchQueue = .main) -> Either<E, A> {
         do {
-            return .right(try self.unsafeRunSync())
+            return .right(try self.unsafeRunSync(on: queue))
         } catch let e as E {
             return .left(e)
         } catch {
@@ -303,25 +295,19 @@ public class IO<E: Error, A>: IOOf<E, A> {
         }
     }
     
-    internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        fatalError("_unsafeRunSync must be implemented in subclasses")
+    internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        fatalError("_unsafeRunSync(on:) must be implemented in subclasses")
     }
     
-    internal func on<T>(queue: DispatchQueue, perform: @escaping () throws -> T) throws -> T {
-        if DispatchQueue.currentLabel == queue.label {
-            return try perform()
-        } else {
-            return try queue.sync {
-                try perform()
-            }
-        }
+    internal func on<T>(queue: Queue, perform: @escaping () throws -> T) throws -> T {
+        try queue.sync { try perform() }
     }
     
     /// Flattens the internal structure of this IO by performing the side effects and wrapping them again in an IO structure containing the result or the error produced.
     ///
     /// - Parameter queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
     /// - Returns: An IO that either contains the value produced or an error. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    public func attempt(on queue: DispatchQueue = .main) -> IO<E, A>{
+    public func attempt(on queue: DispatchQueue = .main) -> IO<E, A> {
         do {
             let result = try self.unsafeRunSync(on: queue)
             return IO.pure(result)^
@@ -354,12 +340,12 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter f: Function transforming the error.
     /// - Returns: An IO value with the new error type.
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
-        return FErrorMap(f, self)
+        FErrorMap(f, self)
     }
     
     /// Returns this `IO` erasing the error type information
     public var anyError: IO<Error, A> {
-        return self.mapLeft { e in e as Error }
+        self.mapLeft { e in e as Error }
     }
     
     internal func fail(_ error: Error) -> Never {
@@ -427,7 +413,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to IO.
 public postfix func ^<E, A>(_ fa: IOOf<E, A>) -> IO<E, A> {
-    return IO.fix(fa)
+    IO.fix(fa)
 }
 
 public extension IO where A == Void {
@@ -464,7 +450,7 @@ public extension IO where E == Error {
     /// - Parameter f: Side-effectful function returning a `Try`. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
     /// - Returns: An IO suspending the execution of the side effect.
     static func invokeTry(_ f: @escaping () throws -> Try<A>) -> IO<Error, A> {
-        return invokeEither { try f().toEither() }
+        invokeEither { try f().toEither() }
     }
 }
 
@@ -475,8 +461,8 @@ internal class Pure<E: Error, A>: IO<E, A> {
         self.a = a
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return (try on(queue: queue) { self.a }, queue)
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        (try on(queue: queue) { self.a }, queue)
     }
 }
 
@@ -487,8 +473,34 @@ internal class RaiseError<E: Error, A> : IO<E, A> {
         self.error = error
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return (try on(queue: queue) { throw self.error }, queue)
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        (try on(queue: queue) { throw self.error }, queue)
+    }
+}
+
+internal class HandleErrorWith<E: Error, A>: IO<E, A> {
+    let fa: IO<E, A>
+    let f: (E) -> IO<E, A>
+    
+    init(_ fa: IO<E, A>, _ f: @escaping (E) -> IO<E, A>) {
+        self.fa = fa
+        self.f = f
+    }
+    
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        do {
+            return try fa._unsafeRunSync(on: queue)
+        } catch let e as E {
+            do {
+                return try f(e)._unsafeRunSync(on: queue)
+            } catch let e2 as E {
+                throw e2
+            } catch {
+                self.fail(error)
+            }
+        } catch {
+            self.fail(error)
+        }
     }
 }
 
@@ -501,7 +513,7 @@ internal class FMap<E: Error, A, B> : IO<E, B> {
         self.action = action
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (B, Queue) {
         let result = try action._unsafeRunSync(on: queue)
         return (try on(queue: result.1) { self.f(result.0) }, result.1)
     }
@@ -516,7 +528,7 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         self.action = action
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         do {
             return try action._unsafeRunSync(on: queue)
         } catch let error as E {
@@ -534,7 +546,7 @@ internal class Join<E: Error, A> : IO<E, A> {
         self.io = io
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         let result = try io._unsafeRunSync(on: queue)
         return try result.0._unsafeRunSync(on: result.1)
     }
@@ -547,7 +559,7 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         self.f = f
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
         var result: Either<E, A>?
         let group = DispatchGroup()
         group.enter()
@@ -574,8 +586,8 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
         self.queue = queue
     }
     
-    override internal func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return (try io._unsafeRunSync(on: queue).0, self.queue)
+    override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        (try io._unsafeRunSync(on: queue).0, .queue(self.queue))
     }
 }
 
@@ -592,7 +604,7 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
         self.use = use
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (B, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (B, Queue) {
         let ioResult = try io._unsafeRunSync(on: queue)
         let resource = ioResult.0
         do {
@@ -617,12 +629,12 @@ internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
         self.fb = fb
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Either<A, B>, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Either<A, B>, Queue) {
         let result = Atomic<Either<A, B>?>(nil)
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "raceA", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "raceB", qos: queue.qos)
+        let parQueue1: Queue = .queue(label: queue.label + "raceA", qos: queue.qos)
+        let parQueue2: Queue = .queue(label: queue.label + "raceB", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -675,13 +687,13 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Z, Queue) {
         var a: A?
         var b: B?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
+        let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -729,15 +741,15 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         self.f = f
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (Z, DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (Z, Queue) {
         var a: A?
         var b: B?
         var c: C?
         let atomic = Atomic<E?>(nil)
         let group = DispatchGroup()
-        let parQueue1 = DispatchQueue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2 = DispatchQueue(label: queue.label + "parMap2", qos: queue.qos)
-        let parQueue3 = DispatchQueue(label: queue.label + "parMap3", qos: queue.qos)
+        let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
+        let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
+        let parQueue3: Queue = .queue(label: queue.label + "parMap3", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
@@ -793,7 +805,7 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
         self.callback = callback
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> ((), DispatchQueue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> ((), Queue) {
         var result: IOOf<E, ()>
         do {
             let (a, nextQueue) = try io._unsafeRunSync(on: queue)
@@ -815,8 +827,8 @@ internal class Suspend<E: Error, A>: IO<E, A> {
         self.thunk = thunk
     }
     
-    override func _unsafeRunSync(on queue: DispatchQueue = .main) throws -> (A, DispatchQueue) {
-        return try on(queue: queue) {
+    override func _unsafeRunSync(on queue: Queue = .queue()) throws -> (A, Queue) {
+        try on(queue: queue) {
             try self.thunk()^._unsafeRunSync(on: queue)
         }
     }
@@ -825,14 +837,14 @@ internal class Suspend<E: Error, A>: IO<E, A> {
 // MARK: Instance of `Functor` for `IO`
 extension IOPartial: Functor {
     public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
-        return FMap(f, IO.fix(fa))
+        FMap(f, IO.fix(fa))
     }
 }
 
 // MARK: Instance of `Applicative` for `IO`
 extension IOPartial: Applicative {
     public static func pure<A>(_ a: A) -> IOOf<E, A> {
-        return Pure(a)
+        Pure(a)
     }
 }
 
@@ -842,11 +854,11 @@ extension IOPartial: Selective {}
 // MARK: Instance of `Monad` for `IO`
 extension IOPartial: Monad {
     public static func flatMap<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> IOOf<E, B>) -> IOOf<E, B> {
-        return Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
+        Join(IO.fix(IO.fix(fa).map { x in IO.fix(f(x)) }))
     }
     
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<E, Either<A, B>>) -> IOOf<E, B> {
-        return IO.fix(f(a)).flatMap { either in
+        IO.fix(f(a)).flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO.pure(b) })
         }
@@ -856,19 +868,11 @@ extension IOPartial: Monad {
 // MARK: Instance of `ApplicativeError` for `IO`
 extension IOPartial: ApplicativeError {
     public static func raiseError<A>(_ e: E) -> IOOf<E, A> {
-        return RaiseError(e)
-    }
-    
-    private static func fold<A, B>(_ io: IO<E, A>, _ fe: @escaping (E) -> B, _ fa: @escaping (A) -> B) -> B {
-        switch io {
-        case let pure as Pure<E, A>: return fa(pure.a)
-        case let raise as RaiseError<E, A>: return fe(raise.error)
-        default: fatalError("Invoke attempt before fold")
-        }
+        RaiseError(e)
     }
     
     public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
-        return fold(IO.fix(fa).attempt(), f, IO.pure)
+        HandleErrorWith(fa^) { e in f(e)^ }
     }
 }
 
@@ -878,25 +882,25 @@ extension IOPartial: MonadError {}
 // MARK: Instance of `Bracket` for `IO`
 extension IOPartial: Bracket {
     public static func bracketCase<A, B>(acquire fa: IOOf<E, A>, release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
-        return BracketIO<E, A, B>(fa^, release, use)
+        BracketIO<E, A, B>(fa^, release, use)
     }
 }
 
 // MARK: Instance of `MonadDefer` for `IO`
 extension IOPartial: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> IOOf<E, A>) -> IOOf<E, A> {
-        return Suspend(fa)
+        Suspend(fa)
     }
 }
 
 // MARK: Instance of `Async` for `IO`
 extension IOPartial: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> IOOf<E, ()>) -> IOOf<E, A> {
-        return AsyncIO(procf)
+        AsyncIO(procf)
     }
     
     public static func continueOn<A>(_ fa: IOOf<E, A>, _ queue: DispatchQueue) -> IOOf<E, A> {
-        return ContinueOn(fa^, queue)
+        ContinueOn(fa^, queue)
     }
 }
 
@@ -907,25 +911,25 @@ extension IOPartial: Concurrent {
     }
     
     public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
-        return ParMap2<E, A, B, Z>(fa^, fb^, f)
+        ParMap2<E, A, B, Z>(fa^, fb^, f)
     }
     
     public static func parMap<A, B, C, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<IOPartial<E>, Z> {
-        return ParMap3<E, A, B, C, Z>(fa^, fb^, fc^, f)
+        ParMap3<E, A, B, C, Z>(fa^, fb^, fc^, f)
     }
 }
 
 // MARK: Instance of `Effect` for `IO`
 extension IOPartial: Effect {
     public static func runAsync<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
-        return IOEffect(fa^, callback)
+        IOEffect(fa^, callback)
     }
 }
 
 // MARK: Instance of `UnsafeRun` for `IO`
 extension IOPartial: UnsafeRun {
     public static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
-        return try fa()^.unsafeRunSync(on: queue)
+        try fa()^.unsafeRunSync(on: queue)
     }
     
     public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> ()) {
