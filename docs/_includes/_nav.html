@@ -10,7 +10,7 @@
             <li>
             {% include _navigation-api-versions.html %}
             </li>
-            {% for item in site.data.menu.nav | offset: 2 %}
+            {% for item in site.data.menu.nav offset: 2 %}
             <li>
                 <a href="{{ item.url | relative_url }}" title="{{ item.title }}" alt="{{ item.title }}">
                 {% if item.icon != "" %}

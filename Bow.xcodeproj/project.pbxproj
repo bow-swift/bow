@@ -143,6 +143,7 @@
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
 		1186E15722BA8A77001F8A5D /* Cons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15622BA8A77001F8A5D /* Cons.swift */; };
 		1186E15922BA8ECA001F8A5D /* Snoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15822BA8ECA001F8A5D /* Snoc.swift */; };
+		11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */; };
 		1191BD0A22D77C510052FEA8 /* BoundVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0922D77C510052FEA8 /* BoundVar.swift */; };
 		1191BD0C22D77FED0052FEA8 /* BindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */; };
 		1191BD0E22D784630052FEA8 /* MonadComprenhensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */; };
@@ -207,6 +208,7 @@
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
 		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
+		11E8E07A2395580F0029BC92 /* Array+TraverseConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */; };
 		11E9788E233A7123002AAC60 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11E9788D233A7123002AAC60 /* RxSwift */; };
 		11E97895233A720A002AAC60 /* SwiftCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 11E97894233A720A002AAC60 /* SwiftCheck */; };
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
@@ -218,9 +220,12 @@
 		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
 		11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C94231816AD00BD1E87 /* Atomic.swift */; };
 		11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */; };
-		11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */; };
 		11F41CA2231818DB00BD1E87 /* BracketLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9E231818AE00BD1E87 /* BracketLaws.swift */; };
 		11F41CA3231818DB00BD1E87 /* MonadDeferLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */; };
+		11FB4612238EB78200EA60BF /* EnvIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4610238EB78200EA60BF /* EnvIO.swift */; };
+		11FB4614238EBF2300EA60BF /* EnvIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4613238EBF2300EA60BF /* EnvIOTest.swift */; };
+		11FB4616238ED14F00EA60BF /* ConcurrentTraverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */; };
+		11FDD68F23867D9800EA8A4D /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FDD68E23867D9800EA8A4D /* Schedule.swift */; };
 		600D30432352C08F00F7B64B /* Semigroupal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30422352C08F00F7B64B /* Semigroupal.swift */; };
 		606B29EA23607607002334B2 /* Divide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29E923607607002334B2 /* Divide.swift */; };
 		606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600D30442352D03400F7B64B /* SemigroupalLaws.swift */; };
@@ -229,7 +234,7 @@
 		606B29F22360776A002334B2 /* Monoidal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606B29F12360776A002334B2 /* Monoidal.swift */; };
 		609CC1472364F9A200096D5D /* Divisible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1462364F9A200096D5D /* Divisible.swift */; };
 		609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC1482364FC5B00096D5D /* DivisibleLaws.swift */; };
-		8B719310237DAEE300EDB5CC /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
+		609CC14D2365410500096D5D /* Decidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609CC14C2365410500096D5D /* Decidable.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -321,7 +326,9 @@
 		8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AC217E2E9200969984 /* Semigroup.swift */; };
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
+		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
+		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -798,6 +805,7 @@
 		1186E14E22BA38CD001F8A5D /* Index+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Index+Optics.swift"; sourceTree = "<group>"; };
 		1186E15622BA8A77001F8A5D /* Cons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cons.swift; sourceTree = "<group>"; };
 		1186E15822BA8ECA001F8A5D /* Snoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snoc.swift; sourceTree = "<group>"; };
+		11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		1191BD0922D77C510052FEA8 /* BoundVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundVar.swift; sourceTree = "<group>"; };
 		1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExpression.swift; sourceTree = "<group>"; };
 		1191BD0D22D784630052FEA8 /* MonadComprenhensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadComprenhensions.swift; sourceTree = "<group>"; };
@@ -830,26 +838,30 @@
 		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
 		11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Laws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Laws-Info.plist"; sourceTree = "<absolute>"; };
 		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
+		11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TraverseConcurrent.swift"; sourceTree = "<group>"; };
 		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
 		11F0367E2327D08900B39A80 /* EffectComprehensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectComprehensions.swift; sourceTree = "<group>"; };
 		11F036812327D4AC00B39A80 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		11F036832327E1C900B39A80 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
 		11F036852327EA1F00B39A80 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
-		11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C94231816AD00BD1E87 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		11F41C9E231818AE00BD1E87 /* BracketLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BracketLaws.swift; sourceTree = "<group>"; };
 		11F41C9F231818AF00BD1E87 /* MonadDeferLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadDeferLaws.swift; sourceTree = "<group>"; };
+		11FB4610238EB78200EA60BF /* EnvIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvIO.swift; sourceTree = "<group>"; };
+		11FB4613238EBF2300EA60BF /* EnvIOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvIOTest.swift; sourceTree = "<group>"; };
+		11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentTraverse.swift; sourceTree = "<group>"; };
+		11FDD68E23867D9800EA8A4D /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		600D30422352C08F00F7B64B /* Semigroupal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semigroupal.swift; sourceTree = "<group>"; };
 		600D30442352D03400F7B64B /* SemigroupalLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupalLaws.swift; sourceTree = "<group>"; };
-		601914CB2352F2B5007ACE81 /* TupleN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleN.swift; sourceTree = "<group>"; };
 		606B29E923607607002334B2 /* Divide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Divide.swift; sourceTree = "<group>"; };
 		606B29EC2360764D002334B2 /* DivideLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivideLaws.swift; sourceTree = "<group>"; };
 		606B29EF23607745002334B2 /* MonoidalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonoidalLaws.swift; sourceTree = "<group>"; };
 		606B29F12360776A002334B2 /* Monoidal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monoidal.swift; sourceTree = "<group>"; };
 		609CC1462364F9A200096D5D /* Divisible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divisible.swift; sourceTree = "<group>"; };
 		609CC1482364FC5B00096D5D /* DivisibleLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivisibleLaws.swift; sourceTree = "<group>"; };
+		609CC14C2365410500096D5D /* Decidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decidable.swift; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -1048,6 +1060,7 @@
 		8BA0F4D0217E2E9200969984 /* At+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "At+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D1217E2E9200969984 /* Each+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D2217E2E9200969984 /* Lens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		8BB969AB239863F0005520D6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1212,10 +1225,13 @@
 		1104BED322C22DD2002C3F78 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */,
 				11F41C94231816AD00BD1E87 /* Atomic.swift */,
+				11FB4610238EB78200EA60BF /* EnvIO.swift */,
 				1104BED422C22DD2002C3F78 /* IO.swift */,
 				11F41C91231816AD00BD1E87 /* Ref.swift */,
 				1104BEE922C25AAF002C3F78 /* Resource.swift */,
+				11FDD68E23867D9800EA8A4D /* Schedule.swift */,
 				11F41C92231816AD00BD1E87 /* Internal */,
 			);
 			path = Data;
@@ -1343,6 +1359,7 @@
 		11229786219DC968006D66C5 /* BowEffectsTests */ = {
 			isa = PBXGroup;
 			children = (
+				11FB4613238EBF2300EA60BF /* EnvIOTest.swift */,
 				8BA0F3A0217E2DEF00969984 /* IOTest.swift */,
 			);
 			path = BowEffectsTests;
@@ -1630,7 +1647,8 @@
 			isa = PBXGroup;
 			children = (
 				11F41C95231816AD00BD1E87 /* Dictionary+Extensions.swift */,
-				11F41C93231816AD00BD1E87 /* DispatchQueue+Extensions.swift */,
+				11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */,
+				8BB969AB239863F0005520D6 /* Queue.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -1798,6 +1816,7 @@
 				1104BEE122C22E47002C3F78 /* Bracket.swift */,
 				1104BEE222C22E47002C3F78 /* Concurrent.swift */,
 				8BA0F46A217E2E9200969984 /* ConcurrentEffect.swift */,
+				11FB4615238ED14F00EA60BF /* ConcurrentTraverse.swift */,
 				8BA0F46B217E2E9200969984 /* Effect.swift */,
 				11F0367E2327D08900B39A80 /* EffectComprehensions.swift */,
 				8BA0F46D217E2E9200969984 /* MonadDefer.swift */,
@@ -1811,6 +1830,7 @@
 			children = (
 				1137469823433E5800D9C1AD /* Array.swift */,
 				8BA0F48A217E2E9200969984 /* ArrayK.swift */,
+				09CEF84D236E28150070CF43 /* Co.swift */,
 				8BA0F489217E2E9200969984 /* Const.swift */,
 				8BA0F485217E2E9200969984 /* Coreader.swift */,
 				8BA0F47B217E2E9200969984 /* Day.swift */,
@@ -1824,6 +1844,7 @@
 				8BA0F47D217E2E9200969984 /* Moore.swift */,
 				8BA0F479217E2E9200969984 /* NonEmptyArray.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
+				09CEF850236E28680070CF43 /* Pairing.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
 				111F84FA234DBF95003FE646 /* Set.swift */,
@@ -1832,9 +1853,6 @@
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
-				601914CB2352F2B5007ACE81 /* TupleN.swift */,
-				09CEF84D236E28150070CF43 /* Co.swift */,
-				09CEF850236E28680070CF43 /* Pairing.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1849,6 +1867,7 @@
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
+				609CC14C2365410500096D5D /* Decidable.swift */,
 				606B29E923607607002334B2 /* Divide.swift */,
 				609CC1462364F9A200096D5D /* Divisible.swift */,
 				1125054C220DD92B00861131 /* EquatableK.swift */,
@@ -2581,7 +2600,6 @@
 				1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */,
 				11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */,
 				11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */,
-				8B719310237DAEE300EDB5CC /* SemiringLaws.swift in Sources */,
 				1191BD1422D78F760052FEA8 /* BindingOperatorOverload.swift in Sources */,
 				11229423219D8BDE006D66C5 /* BimonadLaws.swift in Sources */,
 				11229425219D8BDE006D66C5 /* ComonadLaws.swift in Sources */,
@@ -2612,6 +2630,7 @@
 				11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */,
 				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
 				1122943A219D8BDE006D66C5 /* TraverseLaws.swift in Sources */,
+				B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */,
 				606B29F023607745002334B2 /* MonoidalLaws.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2682,18 +2701,23 @@
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				11F036822327D4AC00B39A80 /* URLSession.swift in Sources */,
 				11229744219DC557006D66C5 /* Async.swift in Sources */,
+				11FB4612238EB78200EA60BF /* EnvIO.swift in Sources */,
 				11F41C9B231816F000BD1E87 /* Atomic.swift in Sources */,
 				11F036842327E1C900B39A80 /* ConsoleIO.swift in Sources */,
+				11FB4616238ED14F00EA60BF /* ConcurrentTraverse.swift in Sources */,
+				11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */,
 				11F41C9A231816D800BD1E87 /* Ref.swift in Sources */,
+				11E8E07A2395580F0029BC92 /* Array+TraverseConcurrent.swift in Sources */,
 				1104BEE322C22E47002C3F78 /* UnsafeRun.swift in Sources */,
 				11229745219DC557006D66C5 /* ConcurrentEffect.swift in Sources */,
 				1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */,
-				11F41C9D231816F000BD1E87 /* DispatchQueue+Extensions.swift in Sources */,
+				11FDD68F23867D9800EA8A4D /* Schedule.swift in Sources */,
 				11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */,
 				11229746219DC557006D66C5 /* Effect.swift in Sources */,
 				11F41C9C231816F000BD1E87 /* Dictionary+Extensions.swift in Sources */,
 				11229747219DC557006D66C5 /* MonadDefer.swift in Sources */,
 				1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */,
+				8BB969AD2398661D005520D6 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2702,6 +2726,7 @@
 			buildActionMask = 0;
 			files = (
 				11229787219DCA18006D66C5 /* IOTest.swift in Sources */,
+				11FB4614238EBF2300EA60BF /* EnvIOTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2976,6 +3001,7 @@
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
+				609CC14D2365410500096D5D /* Decidable.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
 				11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */,
@@ -3283,7 +3309,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenerators;
@@ -3309,7 +3337,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenerators;
 			};
@@ -3332,7 +3362,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowLaws;
 			};
@@ -3355,7 +3387,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowLaws;
 			};
@@ -3376,6 +3410,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeTests;
@@ -3397,6 +3432,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeTests;
@@ -3420,7 +3456,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-recursion-schemes";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemes;
 			};
@@ -3443,7 +3481,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-recursion-schemes";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemes;
 			};
@@ -3464,6 +3504,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemesTests;
@@ -3485,6 +3526,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRecursionSchemesTests;
@@ -3508,7 +3550,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generic";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGeneric;
 			};
@@ -3531,7 +3575,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-generic";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGeneric;
 			};
@@ -3552,6 +3598,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenericTests;
@@ -3573,6 +3620,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowGenericTests;
@@ -3596,7 +3644,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffects;
 			};
@@ -3619,7 +3669,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffects;
 			};
@@ -3640,6 +3692,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsTests;
@@ -3661,6 +3714,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsTests;
@@ -3684,7 +3738,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRx;
 			};
@@ -3707,7 +3763,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRx;
 			};
@@ -3728,6 +3786,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxTests;
@@ -3749,6 +3808,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxTests;
@@ -3772,7 +3832,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsLaws;
 			};
@@ -3795,7 +3857,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsLaws;
 			};
@@ -3820,7 +3884,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsGenerators;
@@ -3846,7 +3912,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsGenerators;
 			};
@@ -3871,7 +3939,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxGenerators;
@@ -3897,7 +3967,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-rx-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowRxGenerators;
 			};
@@ -3922,7 +3994,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeGenerators;
@@ -3948,7 +4022,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free-generators";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFreeGenerators;
 			};
@@ -3971,7 +4047,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsLaws;
 			};
@@ -3994,7 +4072,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-effects-laws";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowEffectsLaws;
 			};
@@ -4017,7 +4097,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOptics;
 			};
@@ -4040,7 +4122,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-optics";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOptics;
 			};
@@ -4061,6 +4145,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsTests;
@@ -4082,6 +4167,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowOpticsTests;
@@ -4105,7 +4191,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFree;
 			};
@@ -4128,7 +4216,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow-free";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowFree;
 			};
@@ -4148,6 +4238,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowTests;
@@ -4168,6 +4259,7 @@
 				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = BowTests;
@@ -4240,7 +4332,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Bow;
 			};
@@ -4263,7 +4357,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bow-swift.bow";
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = Bow;
 			};
@@ -4296,7 +4392,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

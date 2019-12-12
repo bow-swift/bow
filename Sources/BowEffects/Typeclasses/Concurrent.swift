@@ -26,6 +26,15 @@ public protocol Concurrent: Async {
                                    _ fb: Kind<Self, B>,
                                    _ fc: Kind<Self, C>,
                                    _ f: @escaping (A, B, C) -> Z) -> Kind<Self, Z>
+    
+    /// Runs 2 computations in parallel and returns the result of the first one finishing.
+    ///
+    /// - Parameters:
+    ///   - fa: 1st computation
+    ///   - fb: 2nd computation
+    /// - Returns: A computation with the result of the first computation that finished.
+    static func race<A, B>(_ fa: Kind<Self, A>,
+                           _ fb: Kind<Self, B>) -> Kind<Self, Either<A, B>>
 }
 
 // MARK: Related functions
@@ -468,7 +477,18 @@ public extension Kind where F: Concurrent {
                                                   _ fh: Kind<F, H>,
                                                   _ fi: Kind<F, I>,
                                                   _ fj: Kind<F, J>) -> Kind<F, (Z, B, C, D, E, G, H, I, J)> where A == (Z, B, C, D, E, G, H, I, J) {
-        return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, { a, b, c, d, e, g, h, i, j in (a, b, c, d, e, g, h, i, j) })
+        F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, { a, b, c, d, e, g, h, i, j in (a, b, c, d, e, g, h, i, j) })
+    }
+    
+    /// Runs 2 computations in parallel and returns the result of the first one finishing.
+    ///
+    /// - Parameters:
+    ///   - fb: 1st computation
+    ///   - fc: 2nd computation
+    /// - Returns: A computation with the result of the first computation that finished.
+    static func race<B, C>(_ fb: Kind<F, B>,
+                           _ fc: Kind<F, C>) -> Kind<F, A> where A == Either<B, C> {
+        F.race(fb, fc)
     }
     
     /// Runs 2 computations in parallel and combines their results using the provided function.
@@ -481,7 +501,7 @@ public extension Kind where F: Concurrent {
     static func parMap<B, Z>(_ fa: Kind<F, Z>,
                             _ fb: Kind<F, B>,
                             _ f: @escaping (Z, B) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, f)
+        F.parMap(fa, fb, f)
     }
     
     /// Runs 3 computations in parallel and combines their results using the provided function.
@@ -496,7 +516,7 @@ public extension Kind where F: Concurrent {
                                 _ fb: Kind<F, B>,
                                 _ fc: Kind<F, C>,
                                 _ f: @escaping (Z, B, C) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, f)
+        F.parMap(fa, fb, fc, f)
     }
     
     /// Runs 4 computations in parallel and combines their results using the provided function.
@@ -513,7 +533,7 @@ public extension Kind where F: Concurrent {
                                    _ fc: Kind<F, C>,
                                    _ fd: Kind<F, D>,
                                    _ f: @escaping (Z, B, C, D) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, f)
+        F.parMap(fa, fb, fc, fd, f)
     }
     
     /// Runs 5 computations in parallel and combines their results using the provided function.
@@ -532,7 +552,7 @@ public extension Kind where F: Concurrent {
                                       _ fd: Kind<F, D>,
                                       _ fe: Kind<F, E>,
                                       _ f: @escaping (Z, B, C, D, E) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, fe, f)
+        F.parMap(fa, fb, fc, fd, fe, f)
     }
     
     /// Runs 6 computations in parallel and combines their results using the provided function.
@@ -553,7 +573,7 @@ public extension Kind where F: Concurrent {
                                          _ fe: Kind<F, E>,
                                          _ fg: Kind<F, G>,
                                          _ f: @escaping (Z, B, C, D, E, G) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, fe, fg, f)
+        F.parMap(fa, fb, fc, fd, fe, fg, f)
     }
     
     /// Runs 7 computations in parallel and combines their results using the provided function.
@@ -576,7 +596,7 @@ public extension Kind where F: Concurrent {
                                             _ fg: Kind<F, G>,
                                             _ fh: Kind<F, H>,
                                             _ f: @escaping (Z, B, C, D, E, G, H) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, fe, fg, fh, f)
+        F.parMap(fa, fb, fc, fd, fe, fg, fh, f)
     }
     
     /// Runs 8 computations in parallel and combines their results using the provided function.
@@ -601,7 +621,7 @@ public extension Kind where F: Concurrent {
                                                _ fh: Kind<F, H>,
                                                _ fi: Kind<F, I>,
                                                _ f: @escaping (Z, B, C, D, E, G, H, I) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, f)
+        F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, f)
     }
     
     /// Runs 9 computations in parallel and combines their results using the provided function.
@@ -628,6 +648,6 @@ public extension Kind where F: Concurrent {
                                                   _ fi: Kind<F, I>,
                                                   _ fj: Kind<F, J>,
                                                   _ f: @escaping (Z, B, C, D, E, G, H, I, J) -> A) -> Kind<F, A> {
-        return F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, f)
+        F.parMap(fa, fb, fc, fd, fe, fg, fh, fi, fj, f)
     }
 }

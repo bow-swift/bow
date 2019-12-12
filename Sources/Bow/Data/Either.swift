@@ -183,6 +183,13 @@ public extension Either where B: Equatable {
     }
 }
 
+public extension Either where A == B {
+    /// Returns a value from either side.
+    func merge() -> A {
+        fold(id, id)
+    }
+}
+
 // MARK: Either from Optional
 public extension Optional {
     /// Converts this optional to an `Either.right` value, providing a default value if it is nil.

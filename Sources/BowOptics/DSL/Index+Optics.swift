@@ -1,13 +1,13 @@
 import Bow
 
 // MARK: Extension when focus has instance of `Index`
-public extension Lens where A: Index {
+public extension Lens where A: Index, S == T, A == B {
     /// Provides an optional focused on an index of the focus of this lens.
     ///
     /// - Parameter i: Index to focus.
     /// - Returns: An optional focused on an index of the focus of this lens.
     func index(_ i: A.IndexType) -> Optional<S, A.IndexFoci> {
-        return self.fix + A.index(i)
+        return self + A.index(i)
     }
     
     /// Provides an optional focused on an index of the focus of this lens.

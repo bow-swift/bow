@@ -396,7 +396,7 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
     }
 }
 
-public extension Prism where S == A {
+public extension Prism where S == A, S == T, A == B {
     /// Provides an identity Prism.
     static var identity: Prism<S, S> {
         return Iso<S, S>.identity.asPrism

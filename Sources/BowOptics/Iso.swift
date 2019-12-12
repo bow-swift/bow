@@ -371,7 +371,7 @@ public class PIso<S, T, A, B>: PIsoOf<S, T, A, B> {
     }
 }
 
-public extension Iso where S == A, S == T {
+public extension Iso where S == A, S == T, A == B {
     /// Provides an identity `Iso`.
     static var identity: Iso<S, S> {
         return Iso<S, S>(get: id, reverseGet: id)

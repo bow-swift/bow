@@ -6,9 +6,6 @@
 /// fa.product(identity) == identity.product(fa) == identity
 ///
 /// In addition, the laws of Semigroupal type class also apply.
-/// 
-/// - Note:
-/// Currently, Monoidal instance is defined for Option
 ///
 public protocol Monoidal: Semigroupal {
     
