@@ -156,19 +156,20 @@ let exponential = io.retry(Schedule.exponential(.milliseconds(250)))
  As more iterations of this algorithm are performed, the waiting time becomes larger and larger. We may want to use it for the initial retries, and then switch to evenly spaced retries. This can be achieved with the `Schedule.spaced(t)` policy and the `or` combinator. This will keep retrying as long as either of them want to keep retrying, using the minimum of both delays between iterations:
  */
 let exponentialOrFixed = io.retry(
-    Schedule.exponential(.milliseconds(250)).or(Schedule.spaced(.seconds(3)))
-)
+    Schedule.exponential(.milliseconds(250))
+        .or(Schedule.spaced(.seconds(3))))
 /*:
  This will attempt to retry the effect with the exponential backoff algorithm, waiting at most 3 seconds between each attempt. Nevertheless, this will keep running forever. We can limit it in time, using the `Schedule.duration(t)` policy, to set a timeout, or limit the number of iterations with the `Schedule.recurs(n)` policy. For instance, we can limit it to 10 attempts like:
  */
 let exponentialOrFixedMax10Times = io.retry(
-    Schedule.exponential(.milliseconds(250)).or(Schedule.spaced(.seconds(3)))
-        .and(Schedule.recurs(10))
-)
+    Schedule.exponential(.milliseconds(250))
+        .or(Schedule.spaced(.seconds(3)))
+        .and(Schedule.recurs(10)))
 /*:
  Finally, if all retries are performed, and still the effect does not succeed, it will fail with an error. There is an overload of `retry` that lets us provide a closure to deal with this error and provide a default value:
  */
 let exponentialOrFixedMax10Times_withDefaultResponse = io.retry(
-    Schedule.exponential(.milliseconds(250)).or(Schedule.spaced(.seconds(3)))
+    Schedule.exponential(.milliseconds(250))
+        .or(Schedule.spaced(.seconds(3)))
         .and(Schedule.recurs(10)),
     orElse: { error, state in EnvIO.pure(Either<String, String>.left("Default value"))^ })
