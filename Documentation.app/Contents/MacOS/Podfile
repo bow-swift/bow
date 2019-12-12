@@ -10,4 +10,3 @@ target 'Documentation' do
   pod "BowRecursionSchemes", :path => '../../../'
   pod "BowFree", :path => '../../../'
 end
-workspace 'nef'
