@@ -25,10 +25,10 @@ brew tap bow-swift/nef
 brew install nef
 ```
 
-- Clone the repository for Bow.
-- Go to the folder where you have cloned Bow and open `contents/Documentation`.
-- Run `pod install` to set up the project.
-- Open `Documentation.xcworkspace`.
+- Clone the repository for Bow
+- Go to the folder where you have cloned Bow
+- Run `nefc install Documentation.app` to set up the project with its dependencies
+- Open `Documentation.app`
 
 ### Adding content
 
@@ -45,7 +45,7 @@ In order to add documentation, use the standard Markdown format used in Xcode Pl
 Once you are done, you can check that your document compiles properly by moving to the root directory of the Bow project and running the following command:
 
 ```
-nef compile contents/Documentation
+nef compile Documentation.app
 ```
 
 If everything is correct, your document should be ready for publication.
@@ -57,7 +57,7 @@ If you want to check how your documentation will be rendered once it is publishe
 - Run the following command from the root directory to generate the site:
 
 ```
-nef jekyll --project contents/Documentation --output docs --main-page contents/Home.md
+nef jekyll --project Documentation.app --output docs --main-page Documentation.app/Jekyll/Home.md
 ```
 
 - You can install the dependencies you need with:
