@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='raw'>
+    <pages>
+        <page name='Overview'/>
+        <page name='Suspending side effects'/>
+        <page name='Manipulating side effects'/>
+        <page name='Handling errors'/>
+        <page name='Concurrency'/>
+        <page name='Running side effects'/>
+        <page name='Retrying and repeating effects'/>
+        <page name='Handling resources'/>
+        <page name='Foundation extensions'/>
+    </pages>
+</playground>
