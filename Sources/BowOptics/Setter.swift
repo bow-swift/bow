@@ -214,7 +214,7 @@ public class PSetter<S, T, A, B>: PSetterOf<S, T, A, B> {
     }
 }
 
-public extension Setter where S == A {
+public extension Setter where S == A, S == T, A == B {
     /// Provides an identity `Setter`.
     static var identity: Setter<S, S> {
         return Iso<S, S>.identity.asSetter

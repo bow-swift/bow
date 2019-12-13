@@ -232,6 +232,12 @@ extension ForObservableK: Effect {
 
 // MARK: Instance of `Concurrent` for `ObservableK`
 extension ForObservableK: Concurrent {
+    public static func race<A, B>(_ fa: Kind<ForObservableK, A>, _ fb: Kind<ForObservableK, B>) -> Kind<ForObservableK, Either<A, B>> {
+        let left = fa.map(Either<A, B>.left)^.value
+        let right = fb.map(Either<A, B>.right)^.value
+        return left.amb(right).k()
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<ForObservableK, A>, _ fb: Kind<ForObservableK, B>, _ f: @escaping (A, B) -> Z) -> Kind<ForObservableK, Z> {
         return Observable.zip(fa^.value, fb^.value, resultSelector: f).k()
     }

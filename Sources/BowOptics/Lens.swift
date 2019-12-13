@@ -430,7 +430,7 @@ public extension Lens where S == T, A == B {
     }
 }
 
-public extension Lens where S == A {
+public extension Lens where S == A, S == T, A == B {
     /// Obtains an identity lens; i.e. a no-op lens.
     static var identity: Lens<S, S> {
         return Iso<S, S>.identity.asLens
@@ -441,6 +441,18 @@ public extension Lens where S == A {
         return Lens<Either<S, S>, S>(
             get: { ess in ess.fold(id, id) },
             set: { ess, s in ess.bimap(constant(s), constant(s)) })
+    }
+}
+
+public extension PLens where S == T {
+    /// Combine this lens with another with the same source but different focus.
+    ///
+    /// - Parameter other: A lens with the same source but different focus.
+    /// - Returns: A lens that lets us focus on the two foci at the same time.
+    func merge<AA, BB>(_ other: PLens<S, S, AA, BB>) -> PLens<S, S, (A, AA), (B, BB)> {
+        PLens<S, T, (A, AA), (B, BB)>(get: { s in (self.get(s), other.get(s)) },
+                                      set: { s, b in other.set(self.set(s, b.0), b.1) }
+        )
     }
 }
 
@@ -465,11 +477,5 @@ private class LensTraversal<S, T, A, B>: PTraversal<S, T, A, B> {
     
     override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
         return F.map(f(self.lens.get(s)), { b in self.lens.set(s, b)})
-    }
-}
-
-extension Lens {
-    internal var fix: Lens<S, A> {
-        return self as! Lens<S, A>
     }
 }

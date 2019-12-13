@@ -1,20 +1,20 @@
 // newtype Co w a = Co (forall r. w (a -> r) -> r)
 
-public final class ForCo {}
-public final class CoPartial<W: Comonad>: Kind<ForCo, W> {}
-public typealias CoOf<W: Comonad, A> = Kind<CoPartial<W>, A>
+final class ForCo {}
+final class CoPartial<W: Comonad>: Kind<ForCo, W> {}
+typealias CoOf<W: Comonad, A> = Kind<CoPartial<W>, A>
 
 /// (Co w) gives you "the best" pairing monad for any comonad w
 /// In other words, an explorer for the state space given by w
-public class Co<W: Comonad, A> : CoOf<W, A> {
+class Co<W: Comonad, A> : CoOf<W, A> {
     internal let cow : (Kind<W, (A) -> Any>) -> Any
     
-    public static func fix(_ value : CoOf<W, A>) -> Co<W, A> {
+    static func fix(_ value : CoOf<W, A>) -> Co<W, A> {
         value as! Co<W, A>
     }
     
     /// - Returns: The pairing between the underlying comonad, `w`, and the monad `Co<w>`.
-    public static func pair() -> Pairing<W, CoPartial<W>> {
+    static func pair() -> Pairing<W, CoPartial<W>> {
         Pairing{ wab in
             { cowa in
                 Co<W, /*A*/Any>.fix(cowa).runCo(wab)
@@ -22,11 +22,11 @@ public class Co<W: Comonad, A> : CoOf<W, A> {
         }
     }
     
-    public init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> /*R*/Any>) -> /*R*/Any) {
+    init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> /*R*/Any>) -> /*R*/Any) {
         self.cow = cow
     }
     
-    public func runCo<R>(_ w: Kind<W, (A) -> R>) -> R {
+    func runCo<R>(_ w: Kind<W, (A) -> R>) -> R {
         unsafeBitCast(self.cow, to:((Kind<W, (A) -> R>) -> R).self) (w)
     }
 }
@@ -35,12 +35,12 @@ public class Co<W: Comonad, A> : CoOf<W, A> {
 ///
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to Co.
-public postfix func ^<W, A>(_ value: CoOf<W, A>) -> Co<W, A> {
+postfix func ^<W, A>(_ value: CoOf<W, A>) -> Co<W, A> {
     return Co.fix(value)
 }
 
 extension CoPartial: Functor {
-    public static func map<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> B) -> CoOf<W, B> {
+    static func map<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> B) -> CoOf<W, B> {
         Co<W, B> { b in
             Co<W, A>.fix(fa).runCo(b.map({$0 <<< f}))
         }
@@ -48,7 +48,7 @@ extension CoPartial: Functor {
 }
 
 extension CoPartial: Applicative {
-    public static func ap<A, B>(_ ff: CoOf<W, (A) -> B>, _ fa: CoOf<W, A>) -> CoOf<W, B> {
+    static func ap<A, B>(_ ff: CoOf<W, (A) -> B>, _ fa: CoOf<W, A>) -> CoOf<W, B> {
         let f = Co<W, (A) -> B>.fix(ff).cow
         let a = Co<W, A>.fix(fa).cow
         return Co<W, B> { w in
@@ -62,7 +62,7 @@ extension CoPartial: Applicative {
         }
     }
     
-    public static func pure<A>(_ a: A) -> CoOf<W, A> {
+    static func pure<A>(_ a: A) -> CoOf<W, A> {
         return Co<W, A> { w in
             w.extract()(a)
         }
@@ -70,7 +70,7 @@ extension CoPartial: Applicative {
 }
 
 extension CoPartial: Monad {
-    public static func flatMap<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> CoOf<W, B>) -> CoOf<W, B> {
+    static func flatMap<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> CoOf<W, B>) -> CoOf<W, B> {
         let k: (Kind<W, (A) -> Any>) -> Any = Co<W, A>.fix(fa).cow
         return Co<W, B> { w in
             k (
@@ -83,7 +83,7 @@ extension CoPartial: Monad {
         }
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<CoPartial<W>, Either<A, B>>) -> Kind<CoPartial<W>, B> {
+    static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<CoPartial<W>, Either<A, B>>) -> Kind<CoPartial<W>, B> {
         // TODO: Please help
         fatalError("TODO")
     }
@@ -91,7 +91,7 @@ extension CoPartial: Monad {
 
 extension Co {
     // I don't remember what this function does, but including it for reference.
-    public static func select<A, B>(
+    static func select<A, B>(
         co : Co<W, (A) -> B>,
         wa : Kind<W, A>
         ) -> Kind<W, B> {

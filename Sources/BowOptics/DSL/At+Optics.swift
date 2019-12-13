@@ -2,13 +2,13 @@ import Foundation
 import Bow
 
 // MARK: Extension when focus has `At` Instance
-public extension Lens where A: At {
+public extension Lens where A: At, S == T, A == B {
     /// Focuses on a specific index of this lens focus.
     ///
     /// - Parameter i: Index to focus.
     /// - Returns: A composed lens from this structure to the focused index.
     func at(_ i: A.AtIndex) -> Lens<S, A.AtFoci>  {
-        return self.fix + A.at(i)
+        return self + A.at(i)
     }
 }
 

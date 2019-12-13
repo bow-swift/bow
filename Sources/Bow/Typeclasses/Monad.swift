@@ -115,6 +115,16 @@ public extension Monad {
     static func ifM<B>(_ fa: Kind<Self, Bool>, _ ifTrue: @escaping () -> Kind<Self, B>, _ ifFalse: @escaping () -> Kind<Self, B>) -> Kind<Self, B> {
         return flatMap(fa, { a in a ? ifTrue() : ifFalse() })
     }
+    
+    /// Applies a monadic function and discard the result while keeping the effect.
+    ///
+    /// - Parameters:
+    ///   - fa: A computation.
+    ///   - f: A monadic function which result will be discarded.
+    /// - Returns: A computation with the result of the initial computation and the effect caused by the function application.
+    static func flatTap<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<Self, B>) -> Kind<Self, A> {
+        flatMap(fa) { a in f(a).as(a) }
+    }
 }
 
 // MARK: Syntax for Monad
@@ -206,6 +216,15 @@ public extension Kind where F: Monad {
     /// - Returns: A tuple of the result of this computation paired with the result of the function, in the context implementing this instance.
     func mproduct<B>(_ f: @escaping (A) -> Kind<F, B>) -> Kind<F, (A, B)> {
         return F.mproduct(self, f)
+    }
+    
+    /// Applies a monadic function and discard the result while keeping the effect.
+    ///
+    /// - Parameters:
+    ///   - f: A monadic function which result will be discarded.
+    /// - Returns: A computation with the result of the initial computation and the effect caused by the function application.
+    func flatTap<B>(_ f: @escaping (A) -> Kind<F, B>) -> Kind<F, A> {
+        F.flatTap(self, f)
     }
 }
 

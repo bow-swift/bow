@@ -448,7 +448,7 @@ public extension Optional where S == T, A == B {
     }
 }
 
-public extension Optional where S == A {
+public extension Optional where S == A, S == T, A == B {
     /// Obtains an identity Optional.
     static var identity: Optional<S, S> {
         return Iso<S, S>.identity.asOptional

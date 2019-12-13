@@ -199,6 +199,12 @@ extension ForMaybeK: Effect {
 
 // MARK: Instance of `Concurrent` for `MaybeK`
 extension ForMaybeK: Concurrent {
+    public static func race<A, B>(_ fa: Kind<ForMaybeK, A>, _ fb: Kind<ForMaybeK, B>) -> Kind<ForMaybeK, Either<A, B>> {
+        let left = fa.map(Either<A, B>.left)^.value.asObservable()
+        let right = fb.map(Either<A, B>.right)^.value.asObservable()
+        return left.amb(right).asMaybe().k()
+    }
+    
     public static func parMap<A, B, Z>(_ fa: Kind<ForMaybeK, A>, _ fb: Kind<ForMaybeK, B>, _ f: @escaping (A, B) -> Z) -> Kind<ForMaybeK, Z> {
         return Maybe.zip(fa^.value, fb^.value, resultSelector: f).k()
     }
