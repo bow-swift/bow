@@ -7,6 +7,7 @@
         <page name='Handling errors'/>
         <page name='Concurrency'/>
         <page name='Running side effects'/>
+        <page name='Retrying and repeating effects'/>
         <page name='Handling resources'/>
         <page name='Foundation extensions'/>
     </pages>
