@@ -27,7 +27,7 @@ brew install nef
 
 - Clone the repository for Bow
 - Go to the folder where you have cloned Bow
-- Run `nefc install Documentation.app` to set up the project with its dependencies
+- Run `nef compile Documentation.app` to set up the project with its dependencies
 - Open `Documentation.app`
 
 ### Adding content
