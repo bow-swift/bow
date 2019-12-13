@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E1663F0610915488EEBDB54C /* Pods_Documentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EAAA622B396396746B5408 /* Pods_Documentation.framework */; };
+		BD8DC08A4F07113C09DD2DD2 /* Pods_Documentation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1827557F4144407D7FAA92D0 /* Pods_Documentation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E0CE514F83405F0437852ED /* Pods-Documentation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Documentation.release.xcconfig"; path = "Target Support Files/Pods-Documentation/Pods-Documentation.release.xcconfig"; sourceTree = "<group>"; };
-		8B39A28521D410C200DE2643 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1454FD0611377949FA76450F /* Pods-Documentation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Documentation.release.xcconfig"; path = "Target Support Files/Pods-Documentation/Pods-Documentation.release.xcconfig"; sourceTree = "<group>"; };
+		1827557F4144407D7FAA92D0 /* Pods_Documentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Documentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCD708921D654BE006D6565 /* Documentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Documentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCD708C21D654BE006D6565 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF58D06D907C29FDC8897AF4 /* Pods-Documentation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Documentation.debug.xcconfig"; path = "Target Support Files/Pods-Documentation/Pods-Documentation.debug.xcconfig"; sourceTree = "<group>"; };
-		F6EAAA622B396396746B5408 /* Pods_Documentation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Documentation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F0426F773A6391A13F562E /* Pods-Documentation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Documentation.debug.xcconfig"; path = "Target Support Files/Pods-Documentation/Pods-Documentation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,17 +23,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1663F0610915488EEBDB54C /* Pods_Documentation.framework in Frameworks */,
+				BD8DC08A4F07113C09DD2DD2 /* Pods_Documentation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6333ABAD3698D8BBB24260A9 /* Frameworks */ = {
+		3E94A5F85E9224190F2A675C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F6EAAA622B396396746B5408 /* Pods_Documentation.framework */,
+				1827557F4144407D7FAA92D0 /* Pods_Documentation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -42,11 +41,10 @@
 		8B39A26221D40F8700DE2643 = {
 			isa = PBXGroup;
 			children = (
-				8B39A28321D410C200DE2643 /* Config */,
 				8BCD708A21D654BE006D6565 /* Documentation */,
 				8B39A26C21D40F8700DE2643 /* Products */,
-				C5C8ADE6CE9E7AA657ABD69E /* Pods */,
-				6333ABAD3698D8BBB24260A9 /* Frameworks */,
+				CA7B588138D2E56061C82207 /* Pods */,
+				3E94A5F85E9224190F2A675C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,14 +56,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8B39A28321D410C200DE2643 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				8B39A28521D410C200DE2643 /* Info.plist */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		8BCD708A21D654BE006D6565 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,12 +64,13 @@
 			path = Documentation;
 			sourceTree = "<group>";
 		};
-		C5C8ADE6CE9E7AA657ABD69E /* Pods */ = {
+		CA7B588138D2E56061C82207 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CF58D06D907C29FDC8897AF4 /* Pods-Documentation.debug.xcconfig */,
-				5E0CE514F83405F0437852ED /* Pods-Documentation.release.xcconfig */,
+				E7F0426F773A6391A13F562E /* Pods-Documentation.debug.xcconfig */,
+				1454FD0611377949FA76450F /* Pods-Documentation.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -100,7 +91,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BCD709021D654BE006D6565 /* Build configuration list for PBXNativeTarget "Documentation" */;
 			buildPhases = (
-				9D7FA973F0A963C1ECF3876C /* [CP] Check Pods Manifest.lock */,
+				23BBEAA0BB17854E5B46C657 /* [CP] Check Pods Manifest.lock */,
 				8BCD708421D654BE006D6565 /* Headers */,
 				8BCD708521D654BE006D6565 /* Sources */,
 				8BCD708621D654BE006D6565 /* Frameworks */,
@@ -123,7 +114,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = "Miguel Ángel Díaz";
+				ORGANIZATIONNAME = "47 Degrees";
 				TargetAttributes = {
 					8BCD708821D654BE006D6565 = {
 						CreatedOnToolsVersion = 10.1;
@@ -159,7 +150,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9D7FA973F0A963C1ECF3876C /* [CP] Check Pods Manifest.lock */ = {
+		23BBEAA0BB17854E5B46C657 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,28 +302,30 @@
 		};
 		8BCD708E21D654BE006D6565 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF58D06D907C29FDC8897AF4 /* Pods-Documentation.debug.xcconfig */;
+			baseConfigurationReference = E7F0426F773A6391A13F562E /* Pods-Documentation.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_Documentation_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Documentation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Documentation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.Documentation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.macosx.Documentation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -340,28 +333,30 @@
 		};
 		8BCD708F21D654BE006D6565 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E0CE514F83405F0437852ED /* Pods-Documentation.release.xcconfig */;
+			baseConfigurationReference = 1454FD0611377949FA76450F /* Pods-Documentation.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_Documentation_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Documentation/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Documentation/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.Documentation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.47deg.macosx.Documentation;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 5;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};

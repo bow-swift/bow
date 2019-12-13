@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../Jekyll/Home.md">
+   </FileRef>
+   <FileRef
       location = "group:Quick start.playground">
    </FileRef>
    <FileRef

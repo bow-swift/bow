@@ -14,36 +14,36 @@ PODS:
     - Bow (~> 0.6.0)
     - BowEffects (~> 0.6.0)
     - RxSwift (~> 5.0.0)
-  - RxSwift (5.0.0)
+  - RxSwift (5.0.1)
 
 DEPENDENCIES:
-  - Bow (from `../..`)
-  - BowEffects (from `../..`)
-  - BowFree (from `../..`)
-  - BowGeneric (from `../..`)
-  - BowOptics (from `../..`)
-  - BowRecursionSchemes (from `../..`)
-  - BowRx (from `../..`)
+  - Bow (from `../../..`)
+  - BowEffects (from `../../..`)
+  - BowFree (from `../../..`)
+  - BowGeneric (from `../../..`)
+  - BowOptics (from `../../..`)
+  - BowRecursionSchemes (from `../../..`)
+  - BowRx (from `../../..`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - RxSwift
 
 EXTERNAL SOURCES:
   Bow:
-    :path: "../.."
+    :path: "../../.."
   BowEffects:
-    :path: "../.."
+    :path: "../../.."
   BowFree:
-    :path: "../.."
+    :path: "../../.."
   BowGeneric:
-    :path: "../.."
+    :path: "../../.."
   BowOptics:
-    :path: "../.."
+    :path: "../../.."
   BowRecursionSchemes:
-    :path: "../.."
+    :path: "../../.."
   BowRx:
-    :path: "../.."
+    :path: "../../.."
 
 SPEC CHECKSUMS:
   Bow: 2a42ff7c2b0bf72a2f16491aff170e5069b3ebe6
@@ -53,8 +53,8 @@ SPEC CHECKSUMS:
   BowOptics: 1bcd0d97b8f1a03e6c1314aa689e151caf07f110
   BowRecursionSchemes: ad78f3395af32b06b72d76a081ecb9f868dd3774
   BowRx: e21ccc42aea8a5a6b40c87cded59cec74997135d
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: 2a236e889c6c9ab260a8113679418a7d2963fe8b
+PODFILE CHECKSUM: c776910e1659fef526505f3385fe27e8c3a2e42d
 
-COCOAPODS: 1.8.1
+COCOAPODS: 1.8.4
