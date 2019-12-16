@@ -19,7 +19,7 @@ jobs:
     - stage: compile-docs
       before_install:
         - gem update --system --conservative
-        - gem install cocoapods
+        - gem install cocoapods --conservative
       script:
         - nef compile Documentation.app
     - stage: test
