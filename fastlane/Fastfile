@@ -49,7 +49,7 @@ platform :ios do
 
   private_lane :push_pods do
     PODSPEC_FILE_PATHS.each do |podspec_file_path|
-      pod_push(path: podspec_file_path)
+      pod_push(path: podspec_file_path, allow_warnings: true, use_bundle_exec: true)
     end
   end
 end
