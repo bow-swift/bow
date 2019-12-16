@@ -33,7 +33,7 @@ jobs:
       before_install:
         - gem update --system --conservative
         - gem install bundler --conservative
-        - gem install cocoapods
+        - gem install cocoapods --conservative
       script:
         - ./scripts/gen-docs.rb
       deploy:
