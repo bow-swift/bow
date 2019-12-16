@@ -18,8 +18,8 @@ jobs:
   include:
     - stage: compile-docs
       before_install:
-        - gem update --system --conservative
-        - gem install cocoapods --conservative
+        - gem update --system --force
+        - gem install cocoapods --force
       script:
         - nef compile Documentation.app
     - stage: test
@@ -31,9 +31,9 @@ jobs:
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       before_install:
-        - gem update --system --conservative
-        - gem install bundler --conservative
-        - gem install cocoapods --conservative
+        - gem update --system --force
+        - gem install bundler --force
+        - gem install cocoapods --force
       script:
         - ./scripts/gen-docs.rb
       deploy:
