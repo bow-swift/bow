@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowGeneric"
-  s.version     = "0.6.0"
+  s.version     = "0.7.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowGeneric provides classes for generic programming."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
