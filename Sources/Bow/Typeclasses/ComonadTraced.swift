@@ -2,7 +2,12 @@ public protocol ComonadTraced: Comonad {
     associatedtype W
     
     static func trace<M, A>(_ wa: Kind<Self, A>, _ m: M) -> A
-    static func traces<M, A>(_ wa: Kind<Self, A>, _ f: @escaping (A) -> M) -> A
+}
+
+public extension ComonadTraced {
+    static func traces<M, A>(_ wa: Kind<Self, A>, _ f: @escaping (A) -> M) -> A {
+        trace(wa, f(wa.extract()))
+    }
 }
 
 // MARK: Syntax for ComonadTraced
