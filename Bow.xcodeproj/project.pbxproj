@@ -15,6 +15,7 @@
 		1104BEE422C22E47002C3F78 /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE122C22E47002C3F78 /* Bracket.swift */; };
 		1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE222C22E47002C3F78 /* Concurrent.swift */; };
 		1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE922C25AAF002C3F78 /* Resource.swift */; };
+		110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */; };
 		1116D4F0224E270B00507B54 /* Coproduct3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4EF224E270B00507B54 /* Coproduct3.swift */; };
 		1116D4F2224E2B1600507B54 /* Coproduct4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F1224E2B1600507B54 /* Coproduct4.swift */; };
 		1116D4F4224E2C8A00507B54 /* Coproduct5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F3224E2C8A00507B54 /* Coproduct5.swift */; };
@@ -700,6 +701,7 @@
 		1104BEE122C22E47002C3F78 /* Bracket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
 		1104BEE222C22E47002C3F78 /* Concurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concurrent.swift; sourceTree = "<group>"; };
 		1104BEE922C25AAF002C3F78 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStore.swift; sourceTree = "<group>"; };
 		1116D4EF224E270B00507B54 /* Coproduct3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct3.swift; sourceTree = "<group>"; };
 		1116D4F1224E2B1600507B54 /* Coproduct4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct4.swift; sourceTree = "<group>"; };
 		1116D4F3224E2C8A00507B54 /* Coproduct5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct5.swift; sourceTree = "<group>"; };
@@ -1862,6 +1864,7 @@
 				8BA0F48E217E2E9200969984 /* ApplicativeError.swift */,
 				8BA0F4A2217E2E9200969984 /* Bimonad.swift */,
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
+				110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
 				609CC14C2365410500096D5D /* Decidable.swift */,
@@ -2991,6 +2994,7 @@
 				8BA0F5C7217E2E9200969984 /* SetK.swift in Sources */,
 				8BA0F647217E2E9200969984 /* Comonad.swift in Sources */,
 				8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */,
+				110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */,
 				606B29EA23607607002334B2 /* Divide.swift in Sources */,
 				8BA0F5AF217E2E9200969984 /* Try.swift in Sources */,
 				8BA0F62B217E2E9200969984 /* NonEmptyReducible.swift in Sources */,
