@@ -16,6 +16,7 @@
 		1104BEE522C22E47002C3F78 /* Concurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE222C22E47002C3F78 /* Concurrent.swift */; };
 		1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1104BEE922C25AAF002C3F78 /* Resource.swift */; };
 		110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */; };
+		110DE5CE23ACE5AD00E5DB36 /* ComonadEnv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110DE5CD23ACE5AD00E5DB36 /* ComonadEnv.swift */; };
 		1116D4F0224E270B00507B54 /* Coproduct3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4EF224E270B00507B54 /* Coproduct3.swift */; };
 		1116D4F2224E2B1600507B54 /* Coproduct4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F1224E2B1600507B54 /* Coproduct4.swift */; };
 		1116D4F4224E2C8A00507B54 /* Coproduct5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1116D4F3224E2C8A00507B54 /* Coproduct5.swift */; };
@@ -702,6 +703,7 @@
 		1104BEE222C22E47002C3F78 /* Concurrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concurrent.swift; sourceTree = "<group>"; };
 		1104BEE922C25AAF002C3F78 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStore.swift; sourceTree = "<group>"; };
+		110DE5CD23ACE5AD00E5DB36 /* ComonadEnv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadEnv.swift; sourceTree = "<group>"; };
 		1116D4EF224E270B00507B54 /* Coproduct3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct3.swift; sourceTree = "<group>"; };
 		1116D4F1224E2B1600507B54 /* Coproduct4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct4.swift; sourceTree = "<group>"; };
 		1116D4F3224E2C8A00507B54 /* Coproduct5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coproduct5.swift; sourceTree = "<group>"; };
@@ -1864,6 +1866,7 @@
 				8BA0F48E217E2E9200969984 /* ApplicativeError.swift */,
 				8BA0F4A2217E2E9200969984 /* Bimonad.swift */,
 				8BA0F4A9217E2E9200969984 /* Comonad.swift */,
+				110DE5CD23ACE5AD00E5DB36 /* ComonadEnv.swift */,
 				110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
@@ -2952,6 +2955,7 @@
 				8BA0F517217E2E9200969984 /* Predef.swift in Sources */,
 				1137469923433E5800D9C1AD /* Array.swift in Sources */,
 				8BA0F4FB217E2E9200969984 /* Cokleisli.swift in Sources */,
+				110DE5CE23ACE5AD00E5DB36 /* ComonadEnv.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
 				8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
