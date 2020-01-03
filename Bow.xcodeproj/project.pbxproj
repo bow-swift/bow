@@ -130,6 +130,7 @@
 		113746A1234359C800D9C1AD /* DictionaryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1137469F234359C000D9C1AD /* DictionaryTest.swift */; };
 		113746A423435BA600D9C1AD /* DictionaryKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113746A223435BA300D9C1AD /* DictionaryKTest.swift */; };
 		113746A623435C0B00D9C1AD /* DictionaryK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */; };
+		115488CF23BF9FEF00A6DE92 /* ComonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115488CE23BF9FEF00A6DE92 /* ComonadTrans.swift */; };
 		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
 		1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
 		1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
@@ -792,6 +793,7 @@
 		1137469F234359C000D9C1AD /* DictionaryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTest.swift; sourceTree = "<group>"; };
 		113746A223435BA300D9C1AD /* DictionaryKTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryKTest.swift; sourceTree = "<group>"; };
 		113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DictionaryK+Gen.swift"; sourceTree = "<group>"; };
+		115488CE23BF9FEF00A6DE92 /* ComonadTrans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTrans.swift; sourceTree = "<group>"; };
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
@@ -1871,6 +1873,7 @@
 				110DE5CD23ACE5AD00E5DB36 /* ComonadEnv.swift */,
 				110DE5CB23ACE29D00E5DB36 /* ComonadStore.swift */,
 				110DE5CF23ACE6B800E5DB36 /* ComonadTraced.swift */,
+				115488CE23BF9FEF00A6DE92 /* ComonadTrans.swift */,
 				8BA0F493217E2E9200969984 /* Comparable.swift */,
 				8BA0F492217E2E9200969984 /* Contravariant.swift */,
 				609CC14C2365410500096D5D /* Decidable.swift */,
@@ -3001,6 +3004,7 @@
 				8BA0F54B217E2E9200969984 /* StringInstances.swift in Sources */,
 				8BA0F5C7217E2E9200969984 /* SetK.swift in Sources */,
 				8BA0F647217E2E9200969984 /* Comonad.swift in Sources */,
+				115488CF23BF9FEF00A6DE92 /* ComonadTrans.swift in Sources */,
 				8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */,
 				110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */,
 				606B29EA23607607002334B2 /* Divide.swift in Sources */,
