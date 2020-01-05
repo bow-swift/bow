@@ -36,6 +36,17 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
         return NonEmptyArray(head: lhs.head, tail: lhs.tail + rhs)
     }
 
+    /// Concatenates a Swift array with a non-empty array with.
+    ///
+    /// - Parameters:
+    ///   - lhs: A Swift array.
+    ///   - rhs: A non-empty array.
+    /// - Returns: A non-empty array that contains the elements of the two arguments in the same order.
+    public static func +(lhs: [A], rhs: NonEmptyArray<A>) -> NonEmptyArray<A> {
+        guard let leftArray = NonEmptyArray.fromArray(lhs).toOptional() else { return rhs }
+        return leftArray + rhs
+    }
+
     /// Appends an element to a non-empty array.
     ///
     /// - Parameters:
@@ -102,6 +113,11 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     /// - Returns: A Swift array with the elements in this value.
     public func all() -> [A] {
         return [head] + tail
+    }
+
+    /// Last element of the array.
+    public var last: A {
+        return tail.last ?? head
     }
 
     /// Obtains an element from its position in this non-empty array.
