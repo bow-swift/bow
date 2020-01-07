@@ -140,6 +140,7 @@
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		1171ED4B23C48985005362E0 /* StoreT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4A23C48985005362E0 /* StoreT.swift */; };
+		1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4C23C4CB7C005362E0 /* TracedT.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -801,6 +802,7 @@
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		1171ED4A23C48985005362E0 /* StoreT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreT.swift; sourceTree = "<group>"; };
+		1171ED4C23C4CB7C005362E0 /* TracedT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedT.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1784,6 +1786,7 @@
 				8BA0F44D217E2E9200969984 /* OptionT.swift */,
 				8BA0F44F217E2E9200969984 /* StateT.swift */,
 				1171ED4A23C48985005362E0 /* StoreT.swift */,
+				1171ED4C23C4CB7C005362E0 /* TracedT.swift */,
 				8BA0F44E217E2E9200969984 /* WriterT.swift */,
 			);
 			path = Transformers;
@@ -3026,6 +3029,7 @@
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
 				11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */,
 				8BA0F597217E2E9200969984 /* EitherK.swift in Sources */,
+				1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */,
 				1125054D220DD92B00861131 /* EquatableK.swift in Sources */,
 				8BA0F603217E2E9200969984 /* MonadWriter.swift in Sources */,
 				8BA0F633217E2E9200969984 /* Monoid.swift in Sources */,
