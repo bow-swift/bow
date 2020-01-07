@@ -1,6 +1,9 @@
 public final class ForEnvT {}
 public final class EnvTPartial<E, W>: Kind2<ForEnvT, E, W> {}
 public typealias EnvTOf<E, W, A> = Kind<EnvTPartial<E, W>, A>
+
+public typealias ForEnv = ForEnvT
+public typealias EnvPartial<E> = EnvTPartial<E, ForId>
 public typealias Env<E, A> = EnvT<E, ForId, A>
 
 public final class EnvT<E, W, A>: EnvTOf<E, W, A> {
