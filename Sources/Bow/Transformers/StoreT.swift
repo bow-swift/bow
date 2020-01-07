@@ -2,6 +2,10 @@ public final class ForStoreT {}
 public final class StoreTPartial<S, W>: Kind2<ForStoreT, S, W> {}
 public typealias StoreTOf<S, W, A> = Kind<StoreTPartial<S, W>, A>
 
+public typealias ForStore = ForStoreT
+public typealias StorePartial<S> = StoreTPartial<S, ForId>
+public typealias Store<S, A> = StoreT<S, ForId, A>
+
 public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
     public let render: Kind<W, (S) -> A>
     public let state: S
@@ -24,6 +28,14 @@ public extension StoreT where W: Comonad {
 
 public postfix func ^<S, W, A>(_ value: StoreTOf<S, W, A>) -> StoreT<S, W, A> {
     StoreT.fix(value)
+}
+
+// MARK: Syntax for Store
+
+extension StoreT where W == ForId {
+    public convenience init(_ state: S, _ render: @escaping (S) -> A) {
+        self.init(state, Id(render))
+    }
 }
 
 // MARK: Instance of `Invariant` for `StoreT`
