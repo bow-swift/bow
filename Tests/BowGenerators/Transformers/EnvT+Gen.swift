@@ -9,7 +9,7 @@ extension EnvT: Arbitrary where E: Arbitrary, W: ArbitraryK, A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Store`
+// MARK: Instance of `ArbitraryK` for `EnvT`
 
 extension EnvTPartial: ArbitraryK where E: Arbitrary, W: ArbitraryK {
     public static func generate<A: Arbitrary>() -> EnvTOf<E, W, A> {
