@@ -44,7 +44,7 @@
 		112097CC22A819E9007F3D9C /* Day+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097CB22A819E9007F3D9C /* Day+Gen.swift */; };
 		112097CE22A81BE8007F3D9C /* EitherK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */; };
 		112097D222A8FFC0007F3D9C /* Moore+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D122A8FFC0007F3D9C /* Moore+Gen.swift */; };
-		112097D422A9029B007F3D9C /* Store+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D322A9029B007F3D9C /* Store+Gen.swift */; };
+		112097D422A9029B007F3D9C /* StoreT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D322A9029B007F3D9C /* StoreT+Gen.swift */; };
 		112097D622A904AC007F3D9C /* Sum+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D522A904AC007F3D9C /* Sum+Gen.swift */; };
 		112097D822A90644007F3D9C /* Kleisli+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097D722A90644007F3D9C /* Kleisli+Gen.swift */; };
 		112097DB22A9078B007F3D9C /* EitherT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112097DA22A9078B007F3D9C /* EitherT+Gen.swift */; };
@@ -141,6 +141,8 @@
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		1171ED4B23C48985005362E0 /* StoreT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4A23C48985005362E0 /* StoreT.swift */; };
 		1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4C23C4CB7C005362E0 /* TracedT.swift */; };
+		1171ED5023C4E1CB005362E0 /* EnvTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4E23C4E19A005362E0 /* EnvTTest.swift */; };
+		1171ED5223C4E20A005362E0 /* EnvT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -737,7 +739,7 @@
 		112097CB22A819E9007F3D9C /* Day+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Gen.swift"; sourceTree = "<group>"; };
 		112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EitherK+Gen.swift"; sourceTree = "<group>"; };
 		112097D122A8FFC0007F3D9C /* Moore+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moore+Gen.swift"; sourceTree = "<group>"; };
-		112097D322A9029B007F3D9C /* Store+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+Gen.swift"; sourceTree = "<group>"; };
+		112097D322A9029B007F3D9C /* StoreT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreT+Gen.swift"; sourceTree = "<group>"; };
 		112097D522A904AC007F3D9C /* Sum+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sum+Gen.swift"; sourceTree = "<group>"; };
 		112097D722A90644007F3D9C /* Kleisli+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kleisli+Gen.swift"; sourceTree = "<group>"; };
 		112097DA22A9078B007F3D9C /* EitherT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EitherT+Gen.swift"; sourceTree = "<group>"; };
@@ -802,6 +804,8 @@
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		1171ED4A23C48985005362E0 /* StoreT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreT.swift; sourceTree = "<group>"; };
 		1171ED4C23C4CB7C005362E0 /* TracedT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedT.swift; sourceTree = "<group>"; };
+		1171ED4E23C4E19A005362E0 /* EnvTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvTTest.swift; sourceTree = "<group>"; };
+		1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvT+Gen.swift"; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1273,7 +1277,6 @@
 				112097D122A8FFC0007F3D9C /* Moore+Gen.swift */,
 				112097BA22A7FC86007F3D9C /* NonEmptyArray+Gen.swift */,
 				112097BC22A7FD6F007F3D9C /* Option+Gen.swift */,
-				112097D322A9029B007F3D9C /* Store+Gen.swift */,
 				112097D522A904AC007F3D9C /* Sum+Gen.swift */,
 				112097BE22A7FDEF007F3D9C /* Try+Gen.swift */,
 				112097C022A7FF37007F3D9C /* Validated+Gen.swift */,
@@ -1303,8 +1306,10 @@
 			isa = PBXGroup;
 			children = (
 				112097DA22A9078B007F3D9C /* EitherT+Gen.swift */,
+				1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */,
 				112097DC22A90899007F3D9C /* OptionT+Gen.swift */,
 				112097DE22A90972007F3D9C /* StateT+Gen.swift */,
+				112097D322A9029B007F3D9C /* StoreT+Gen.swift */,
 				112097E022A90AAA007F3D9C /* WriterT+Gen.swift */,
 			);
 			path = Transformers;
@@ -1705,6 +1710,7 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F397217E2DEF00969984 /* EitherTTest.swift */,
+				1171ED4E23C4E19A005362E0 /* EnvTTest.swift */,
 				8BA0F398217E2DEF00969984 /* OptionTTest.swift */,
 				8BA0F396217E2DEF00969984 /* StateTTest.swift */,
 				8BA0F3B1217E2DEF00969984 /* StoreTTest.swift */,
@@ -2598,9 +2604,10 @@
 				112097D222A8FFC0007F3D9C /* Moore+Gen.swift in Sources */,
 				112097CC22A819E9007F3D9C /* Day+Gen.swift in Sources */,
 				112097B522A7F21F007F3D9C /* Id+Gen.swift in Sources */,
-				112097D422A9029B007F3D9C /* Store+Gen.swift in Sources */,
+				112097D422A9029B007F3D9C /* StoreT+Gen.swift in Sources */,
 				112097DB22A9078B007F3D9C /* EitherT+Gen.swift in Sources */,
 				112097B322A7F17F007F3D9C /* Const+Gen.swift in Sources */,
+				1171ED5223C4E20A005362E0 /* EnvT+Gen.swift in Sources */,
 				112097C922A80870007F3D9C /* ArbitraryK.swift in Sources */,
 				112097AF22A7EE46007F3D9C /* Either+Gen.swift in Sources */,
 				11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */,
@@ -2926,6 +2933,7 @@
 				8BA0F405217E2DEF00969984 /* IdTest.swift in Sources */,
 				8BA0F3EF217E2DEF00969984 /* PredefTest.swift in Sources */,
 				11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */,
+				1171ED5023C4E1CB005362E0 /* EnvTTest.swift in Sources */,
 				8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */,
 				8BA0F407217E2DEF00969984 /* IorTest.swift in Sources */,
 				113746A423435BA600D9C1AD /* DictionaryKTest.swift in Sources */,
