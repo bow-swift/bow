@@ -144,6 +144,7 @@
 		1171ED5023C4E1CB005362E0 /* EnvTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4E23C4E19A005362E0 /* EnvTTest.swift */; };
 		1171ED5223C4E20A005362E0 /* EnvT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */; };
 		1171ED5423C4E4B0005362E0 /* TracedT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */; };
+		1171ED5723C4E614005362E0 /* TracedTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5523C4E5F2005362E0 /* TracedTTest.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -808,6 +809,7 @@
 		1171ED4E23C4E19A005362E0 /* EnvTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvTTest.swift; sourceTree = "<group>"; };
 		1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TracedT+Gen.swift"; sourceTree = "<group>"; };
+		1171ED5523C4E5F2005362E0 /* TracedTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedTTest.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1717,6 +1719,7 @@
 				8BA0F398217E2DEF00969984 /* OptionTTest.swift */,
 				8BA0F396217E2DEF00969984 /* StateTTest.swift */,
 				8BA0F3B1217E2DEF00969984 /* StoreTTest.swift */,
+				1171ED5523C4E5F2005362E0 /* TracedTTest.swift */,
 				8BA0F395217E2DEF00969984 /* WriterTTest.swift */,
 			);
 			path = Transformers;
@@ -2923,6 +2926,7 @@
 				8BA0F409217E2DEF00969984 /* TryTest.swift in Sources */,
 				8BA0F406217E2DEF00969984 /* StoreTTest.swift in Sources */,
 				8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */,
+				1171ED5723C4E614005362E0 /* TracedTTest.swift in Sources */,
 				8BA0F3F3217E2DEF00969984 /* OptionTTest.swift in Sources */,
 				8BA0F40A217E2DEF00969984 /* OptionTest.swift in Sources */,
 				8BA0F3FF217E2DEF00969984 /* MooreTest.swift in Sources */,
