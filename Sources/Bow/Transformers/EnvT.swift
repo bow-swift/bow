@@ -34,7 +34,7 @@ public postfix func ^<E, W, A>(_ value: EnvTOf<E, W, A>) -> EnvT<E, W, A> {
     EnvT.fix(value)
 }
 
-// MARK: Extensions for Env
+// MARK: Syntax for Env
 
 public extension EnvT where W == ForId {
     convenience init(_ e: E, _ a: A) {

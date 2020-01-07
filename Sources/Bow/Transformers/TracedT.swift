@@ -2,6 +2,10 @@ public final class ForTracedT {}
 public final class TracedTPartial<M, W>: Kind2<ForTracedT, M, W> {}
 public typealias TracedTOf<M, W, A> = Kind<TracedTPartial<M, W>, A>
 
+public typealias ForTraced = ForTracedT
+public typealias TracedPartial<M> = TracedTPartial<M, ForId>
+public typealias Traced<M, A> = TracedT<M, ForId, A>
+
 public final class TracedT<M, W, A>: TracedTOf<M, W, A> {
     public let value: Kind<W, (M) -> A>
     
@@ -16,6 +20,14 @@ public final class TracedT<M, W, A>: TracedTOf<M, W, A> {
 
 public postfix func ^<M, W, A>(_ value: TracedTOf<M, W, A>) -> TracedT<M, W, A> {
     TracedT.fix(value)
+}
+
+// MARK: Syntax for Traced
+
+extension TracedT where W == ForId {
+    public convenience init(_ f: @escaping (M) -> A) {
+        self.init(Id(f))
+    }
 }
 
 // MARK: Instance of `Invariant` for `TracedT`
