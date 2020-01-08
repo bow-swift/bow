@@ -146,6 +146,7 @@
 		1171ED5423C4E4B0005362E0 /* TracedT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */; };
 		1171ED5723C4E614005362E0 /* TracedTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5523C4E5F2005362E0 /* TracedTTest.swift */; };
 		1171ED5E23C62C5E005362E0 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5D23C62C5E005362E0 /* Zipper.swift */; };
+		1171ED6123C636AC005362E0 /* Zipper+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -812,6 +813,7 @@
 		1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TracedT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5523C4E5F2005362E0 /* TracedTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedTTest.swift; sourceTree = "<group>"; };
 		1171ED5D23C62C5E005362E0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
+		1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Zipper+Gen.swift"; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1286,6 +1288,7 @@
 				112097D522A904AC007F3D9C /* Sum+Gen.swift */,
 				112097BE22A7FDEF007F3D9C /* Try+Gen.swift */,
 				112097C022A7FF37007F3D9C /* Validated+Gen.swift */,
+				1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2605,6 +2608,7 @@
 				113746A623435C0B00D9C1AD /* DictionaryK+Gen.swift in Sources */,
 				112097E122A90AAA007F3D9C /* WriterT+Gen.swift in Sources */,
 				112097C122A7FF37007F3D9C /* Validated+Gen.swift in Sources */,
+				1171ED6123C636AC005362E0 /* Zipper+Gen.swift in Sources */,
 				112097B922A7FAF6007F3D9C /* Ior+Gen.swift in Sources */,
 				112097CE22A81BE8007F3D9C /* EitherK+Gen.swift in Sources */,
 				112097BD22A7FD6F007F3D9C /* Option+Gen.swift in Sources */,
