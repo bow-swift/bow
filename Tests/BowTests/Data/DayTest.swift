@@ -3,8 +3,9 @@ import BowLaws
 import Bow
 
 extension DayPartial: EquatableK where F == ForId, G == ForId {
-    public static func eq<A>(_ lhs: Kind<DayPartial<F, G>, A>, _ rhs: Kind<DayPartial<F, G>, A>) -> Bool where A : Equatable {
-        return Day.fix(lhs).extract() == Day.fix(rhs).extract()
+    public static func eq<A: Equatable>(_ lhs: DayOf<F, G, A>,
+                                        _ rhs: DayOf<F, G, A>) -> Bool {
+        Day.fix(lhs).extract() == Day.fix(rhs).extract()
     }
 }
 
@@ -13,12 +14,21 @@ class DayTest: XCTestCase {
         FunctorLaws<DayPartial<ForId, ForId>>.check()
     }
 
+    func testApplicativeLaws() {
+        ApplicativeLaws<DayPartial<ForId, ForId>>.check()
+    }
+    
     func testComonadLaws() {
         ComonadLaws<DayPartial<ForId, ForId>>.check()
     }
 
-    let day = Day.from(left: Id(1), right: Id(1), f: { (left : Int, right : Int) in (left, right) })
-    let compareSides = { (left : Int, right : Int) -> String in
+    let day = Day<ForId, ForId, (Int, Int)>(
+        left: Id(1 as Any),
+        right: Id(1 as Any)) { left, right in
+            (left as! Int, right as! Int)
+        }
+    
+    let compareSides = { (left: Int, right: Int) -> String in
         if left > right {
             return "Left is greater"
         } else if right > left {
