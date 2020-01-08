@@ -145,6 +145,7 @@
 		1171ED5223C4E20A005362E0 /* EnvT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */; };
 		1171ED5423C4E4B0005362E0 /* TracedT+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */; };
 		1171ED5723C4E614005362E0 /* TracedTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5523C4E5F2005362E0 /* TracedTTest.swift */; };
+		1171ED5E23C62C5E005362E0 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5D23C62C5E005362E0 /* Zipper.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -810,6 +811,7 @@
 		1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TracedT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5523C4E5F2005362E0 /* TracedTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedTTest.swift; sourceTree = "<group>"; };
+		1171ED5D23C62C5E005362E0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1876,6 +1878,7 @@
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
+				1171ED5D23C62C5E005362E0 /* Zipper.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2984,6 +2987,7 @@
 				8BA0F4FB217E2E9200969984 /* Cokleisli.swift in Sources */,
 				110DE5CE23ACE5AD00E5DB36 /* ComonadEnv.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
+				1171ED5E23C62C5E005362E0 /* Zipper.swift in Sources */,
 				8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
