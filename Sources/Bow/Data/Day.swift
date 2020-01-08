@@ -9,12 +9,12 @@ public final class Day<F: Comonad, G: Comonad, A> : DayOf<F, G, A> {
     internal let right: Kind<G, Any /*C*/>
     internal let f: (Any /*B*/, Any /*C*/) -> A
 
-    public init(left: Kind<F, Any>,
-                right: Kind<G, Any>,
-                _ f: @escaping (Any, Any) -> A) {
-        self.left = left
-        self.right = right
-        self.f = f
+    public init<B, C>(left: Kind<F, B>,
+                      right: Kind<G, C>,
+                      _ f: @escaping (B, C) -> A) {
+        self.left = left.map { b in b as Any }
+        self.right = right.map { c in c as Any }
+        self.f = { b, c in f(b as! B, c as! C) }
     }
     
     public static func fix(_ value: DayOf<F, G, A>) -> Day<F, G, A> {

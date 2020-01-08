@@ -23,9 +23,9 @@ class DayTest: XCTestCase {
     }
 
     let day = Day<ForId, ForId, (Int, Int)>(
-        left: Id(1 as Any),
-        right: Id(1 as Any)) { left, right in
-            (left as! Int, right as! Int)
+        left: Id(1),
+        right: Id(1)) { left, right in
+            (left, right)
         }
     
     let compareSides = { (left: Int, right: Int) -> String in
