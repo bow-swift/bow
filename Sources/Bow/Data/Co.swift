@@ -37,8 +37,8 @@ public class Co<W: Comonad, A>: CoOf<W, A> {
 ///
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to Co.
-postfix func ^<W, A>(_ value: CoOf<W, A>) -> Co<W, A> {
-    return Co.fix(value)
+public postfix func ^<W, A>(_ value: CoOf<W, A>) -> Co<W, A> {
+    Co.fix(value)
 }
 
 extension CoPartial: Functor {
