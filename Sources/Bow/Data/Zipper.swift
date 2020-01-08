@@ -66,6 +66,14 @@ public postfix func ^<A>(_ value: ZipperOf<A>) -> Zipper<A> {
     Zipper.fix(value)
 }
 
+extension ForZipper: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: ZipperOf<A>, _ rhs: ZipperOf<A>) -> Bool {
+        lhs^.left == rhs^.left &&
+            lhs^.focus == rhs^.focus &&
+            lhs^.right == rhs^.right
+    }
+}
+
 // MARK: Instance of `Invariant` for `Zipper`
 
 extension ForZipper: Invariant {}
