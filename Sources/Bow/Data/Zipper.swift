@@ -66,6 +66,12 @@ public postfix func ^<A>(_ value: ZipperOf<A>) -> Zipper<A> {
     Zipper.fix(value)
 }
 
+extension Zipper: CustomStringConvertible where A: CustomStringConvertible {
+    public var description: String {
+        "Zipper(left: \(left), focus: \(focus), right: \(right))"
+    }
+}
+
 extension ForZipper: EquatableK {
     public static func eq<A: Equatable>(_ lhs: ZipperOf<A>, _ rhs: ZipperOf<A>) -> Bool {
         lhs^.left == rhs^.left &&
@@ -100,7 +106,7 @@ extension ForZipper: Comonad {
         let newFocus: B = f(fa)
         let leftCount = fa^.left.count + 1
         let newRight: [B] = fa^.right.enumerated().map { item in
-            let l = Array(array[leftCount ..< item.offset + leftCount])
+            let l = Array(array[0 ..< item.offset + leftCount])
             let focus = array[item.offset + leftCount]
             let r = Array(array[(item.offset + 1 + leftCount)...])
             return f(Zipper(left: l, focus: focus, right: r))

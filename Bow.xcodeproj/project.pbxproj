@@ -147,6 +147,7 @@
 		1171ED5723C4E614005362E0 /* TracedTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5523C4E5F2005362E0 /* TracedTTest.swift */; };
 		1171ED5E23C62C5E005362E0 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5D23C62C5E005362E0 /* Zipper.swift */; };
 		1171ED6123C636AC005362E0 /* Zipper+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */; };
+		1171ED6423C6385D005362E0 /* ZipperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED6223C6385A005362E0 /* ZipperTest.swift */; };
 		117DC0D722AE49C200EF65F0 /* IO+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0D622AE49C200EF65F0 /* IO+Gen.swift */; };
 		117DC0F222AE4E1C00EF65F0 /* SingleK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */; };
 		117DC0F422AE4F3500EF65F0 /* MaybeK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */; };
@@ -814,6 +815,7 @@
 		1171ED5523C4E5F2005362E0 /* TracedTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedTTest.swift; sourceTree = "<group>"; };
 		1171ED5D23C62C5E005362E0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
 		1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Zipper+Gen.swift"; sourceTree = "<group>"; };
+		1171ED6223C6385A005362E0 /* ZipperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipperTest.swift; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -1746,6 +1748,7 @@
 				8BA0F3B6217E2DEF00969984 /* ArrayKTest.swift */,
 				1137469A234345EE00D9C1AD /* ArrayTest.swift */,
 				8BA0F3B9217E2DEF00969984 /* ConstTest.swift */,
+				09CEF853236E2CFB0070CF43 /* CoTest.swift */,
 				8BA0F3B7217E2DEF00969984 /* DayTest.swift */,
 				113746A223435BA300D9C1AD /* DictionaryKTest.swift */,
 				1137469F234359C000D9C1AD /* DictionaryTest.swift */,
@@ -1763,7 +1766,7 @@
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
-				09CEF853236E2CFB0070CF43 /* CoTest.swift */,
+				1171ED6223C6385A005362E0 /* ZipperTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2970,6 +2973,7 @@
 				8BA0F40B217E2DEF00969984 /* ArrayKTest.swift in Sources */,
 				8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */,
 				8BA0F3FD217E2DEF00969984 /* CurryTest.swift in Sources */,
+				1171ED6423C6385D005362E0 /* ZipperTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
