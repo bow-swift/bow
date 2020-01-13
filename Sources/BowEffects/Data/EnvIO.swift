@@ -125,6 +125,16 @@ public extension Kleisli {
                 .mapError { x in x as! E }
                 .flatMap { s in loop(a, s) }^ })
     }
+    
+    /// Transforms the type arguments of this EnvIO.
+    ///
+    /// - Parameters:
+    ///   - fe: Function to transform the error type argument.
+    ///   - fa: Function to transform the output type argument.
+    /// - Returns: An EnvIO with both type arguments transformed.
+    func bimap<E: Error, EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> EnvIO<D, EE, B> where F == IOPartial<E> {
+        self.mapError(fe).map(fa)^
+    }
 }
 
 public extension Kleisli where D == Any {
