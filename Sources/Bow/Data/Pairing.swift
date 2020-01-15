@@ -5,13 +5,13 @@ public final class PairingPartial<F: Functor>: Kind<ForPairing, F> {}
 public typealias PairingOf<F: Functor, G: Functor> =  Kind<PairingPartial<F>, G>
 
 public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
-    internal let pair: (Kind<F, (/*A*/Any) -> /*B*/Any>) -> (Kind<G, /*A*/Any>) -> /*B*/Any
+    internal let pair: (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any
     
     public static func fix(_ value : PairingOf<F, G>) -> Pairing<F, G> {
         value as! Pairing<F, G>
     }
     
-    public init(_ pair: @escaping (Kind<F, (/*A*/Any) -> /*B*/Any>) -> (Kind<G, /*A*/Any>) -> /*B*/Any) {
+    public init(_ pair: @escaping (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any) {
         self.pair = pair
     }
     
@@ -25,7 +25,7 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
         let fany =
             fab.map{ aArrb in { (any: Any) in
                 aArrb(any as! A) as Any}}
-        return self.pair(fany)(gany) as! B
+        return self.pair(fany, gany) as! B
     }
     
     public func pair<A, B, C>(_ fa: Kind<F, A>, _ gb: Kind<G, B>, _ f: @escaping (A, B) -> C) -> C {
