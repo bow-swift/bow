@@ -44,3 +44,11 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
 public postfix func ^<F, G>(_ value: PairingOf<F, G>) -> Pairing<F, G> {
     Pairing.fix(value)
 }
+
+public extension Pairing where F == ForId, G == ForId {
+    static func pairId() -> Pairing<ForId, ForId> {
+        Pairing { fa, gb in
+            fa^.value(gb^.value)
+        }
+    }
+}
