@@ -20,12 +20,20 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
     /// - Parameter fab: An `F`-effectful `A -> B`
     /// - Parameter ga: A `G`-effectful `A`
     /// - Returns: A pure `B`
-    public func zap<A, B>(_ fab: Kind<F, (A) -> B>, ga: Kind<G, A>) -> B {
+    public func zap<A, B>(_ fab: Kind<F, (A) -> B>, _ ga: Kind<G, A>) -> B {
         let gany = ga.map{ $0 as Any }
         let fany =
             fab.map{ aArrb in { (any: Any) in
                 aArrb(any as! A) as Any}}
         return self.pair(fany)(gany) as! B
+    }
+    
+    public func pair<A, B, C>(_ fa: Kind<F, A>, _ gb: Kind<G, B>, _ f: @escaping (A, B) -> C) -> C {
+        zap(fa.map(curry(f)), (gb))
+    }
+    
+    public func pairFlipped<A, B, C>(_ ga: Kind<G, A>, _ fb: Kind<F, B>, _ f: @escaping (A, B) -> C) -> C {
+        pair(fb, ga, flip(f))
     }
 }
 
