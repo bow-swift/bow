@@ -133,7 +133,7 @@ public extension Kleisli {
     ///   - fa: Function to transform the output type argument.
     /// - Returns: An EnvIO with both type arguments transformed.
     func bimap<E: Error, EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> EnvIO<D, EE, B> where F == IOPartial<E> {
-        self.mapError(fe).map(fa)^
+        mapError(fe).map(fa)^
     }
 }
 

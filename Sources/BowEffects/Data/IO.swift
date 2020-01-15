@@ -92,6 +92,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
         invokeEither { try f().toEither() }
     }
     
+    /// Transforms the type arguments of this IO.
+    ///
+    /// - Parameters:
+    ///   - fe: Function to transform the error type argument.
+    ///   - fa: Function to transform the output type argument.
+    /// - Returns: An IO with both type arguments transformed.
+    func bimap<EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> IO<EE, B> {
+        mapLeft(fe).map(fa)^
+    }
+    
     /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
     ///
     /// - Parameters:
