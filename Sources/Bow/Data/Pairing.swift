@@ -5,7 +5,6 @@ public final class PairingPartial<F: Functor>: Kind<ForPairing, F> {}
 public typealias PairingOf<F: Functor, G: Functor> =  Kind<PairingPartial<F>, G>
 
 public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
-    // internal let pair: (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any
     internal let pairing: (Kind<F, /*A*/Any>,
                            Kind<G, /*B*/Any>,
                            @escaping (/*A*/Any, /*B*/Any) -> /*C*/Any) -> /*C*/Any
