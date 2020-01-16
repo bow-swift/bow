@@ -60,6 +60,22 @@ public extension Pairing where F == ForId, G == ForId {
     }
 }
 
+// MARK: Pairing for State and Store
+
+public extension Pairing {
+    static func pairStateTStoreT<S, FF, GG>(_ pairing: Pairing<FF, GG>) -> Pairing<StateTPartial<FF, S>, StoreTPartial<S, GG>> where F == StateTPartial<FF, S>, G == StoreTPartial<S, GG> {
+        Pairing { state, store, f in
+            pairing.pair(state^.runM(store^.state), store^.render) { a, b in
+                f(a.1, b(a.0))
+            }
+        }
+    }
+    
+    static func pairStateStore<S>() -> Pairing<StatePartial<S>, StorePartial<S>> where F == StatePartial<S>, G == StorePartial<S> {
+        .pairStateTStoreT(.pairId())
+    }
+}
+
 // MARK: Pairing for Writer and Traced
 
 public extension Pairing {
@@ -70,7 +86,7 @@ public extension Pairing {
     }
     
     static func pairWriterTraced<W>() -> Pairing<WriterPartial<W>, TracedPartial<W>> where F == WriterPartial<W>, G == TracedPartial<W> {
-        Pairing.pairWriterTTracedT(.pairId())
+        .pairWriterTTracedT(.pairId())
     }
 }
 
@@ -84,6 +100,6 @@ public extension Pairing {
     }
     
     static func pairReaderEnv<R>() -> Pairing<ReaderPartial<R>, EnvPartial<R>> where F == ReaderPartial<R>, G == EnvPartial<R> {
-        Pairing.pairReaderTEnvT(.pairId())
+        .pairReaderTEnvT(.pairId())
     }
 }
