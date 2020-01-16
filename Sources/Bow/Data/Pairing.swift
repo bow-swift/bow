@@ -70,6 +70,20 @@ public extension Pairing {
     }
     
     static func pairWriterTraced<W>() -> Pairing<WriterPartial<W>, TracedPartial<W>> where F == WriterPartial<W>, G == TracedPartial<W> {
-        Pairing<WriterTPartial<ForId, W>, TracedTPartial<W, ForId>>.pairWriterTTracedT(.pairId())
+        Pairing.pairWriterTTracedT(.pairId())
+    }
+}
+
+// MARK: Pairing for Reader and Env
+
+public extension Pairing {
+    static func pairReaderTEnvT<R, FF, GG>(_ pairing: Pairing<FF, GG>) -> Pairing<ReaderTPartial<FF, R>, EnvTPartial<R, GG>> where F == ReaderTPartial<FF, R>, G == EnvTPartial<R, GG> {
+        Pairing { reader, env, f in
+            pairing.pair(reader^.run(env^.runT().0), env^.runT().1, f)
+        }
+    }
+    
+    static func pairReaderEnv<R>() -> Pairing<ReaderPartial<R>, EnvPartial<R>> where F == ReaderPartial<R>, G == EnvPartial<R> {
+        Pairing.pairReaderTEnvT(.pairId())
     }
 }
