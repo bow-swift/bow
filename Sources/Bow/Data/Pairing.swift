@@ -50,10 +50,26 @@ public postfix func ^<F, G>(_ value: PairingOf<F, G>) -> Pairing<F, G> {
     Pairing.fix(value)
 }
 
+// MARK: Pairing for Id
+
 public extension Pairing where F == ForId, G == ForId {
     static func pairId() -> Pairing<ForId, ForId> {
         Pairing { fa, gb in
             fa^.value(gb^.value)
         }
+    }
+}
+
+// MARK: Pairing for Writer and Traced
+
+public extension Pairing {
+    static func pairWriterTTracedT<W, FF, GG>(_ pairing: Pairing<FF, GG>) -> Pairing<WriterTPartial<FF, W>, TracedTPartial<W, GG>> where F == WriterTPartial<FF, W>, G == TracedTPartial<W, GG> {
+        Pairing { writer, traced, f in
+            pairing.pair(writer^.runT, traced^.value) { a, b in f(a.1, b(a.0)) }
+        }
+    }
+    
+    static func pairWriterTraced<W>() -> Pairing<WriterPartial<W>, TracedPartial<W>> where F == WriterPartial<W>, G == TracedPartial<W> {
+        Pairing<WriterTPartial<ForId, W>, TracedTPartial<W, ForId>>.pairWriterTTracedT(.pairId())
     }
 }
