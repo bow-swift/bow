@@ -5,14 +5,22 @@ public final class PairingPartial<F: Functor>: Kind<ForPairing, F> {}
 public typealias PairingOf<F: Functor, G: Functor> =  Kind<PairingPartial<F>, G>
 
 public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
-    internal let pair: (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any
+    // internal let pair: (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any
+    internal let pairing: (Kind<F, /*A*/Any>,
+                           Kind<G, /*B*/Any>,
+                           @escaping (/*A*/Any, /*B*/Any) -> /*C*/Any) -> /*C*/Any
     
-    public static func fix(_ value : PairingOf<F, G>) -> Pairing<F, G> {
+    
+    public static func fix(_ value: PairingOf<F, G>) -> Pairing<F, G> {
         value as! Pairing<F, G>
     }
     
-    public init(_ pair: @escaping (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any) {
-        self.pair = pair
+    public init(_ zap: @escaping (Kind<F, (/*A*/Any) -> /*B*/Any>, Kind<G, /*A*/Any>) -> /*B*/Any) {
+        self.pairing = { fa, gb, fab in zap(fa.map(curry(fab)), gb) }
+    }
+    
+    public init(_ pairing: @escaping (Kind<F, /*A*/Any>, Kind<G, /*B*/Any>, @escaping (/*A*/Any, /*B*/Any) -> /*C*/Any) -> /*C*/Any) {
+        self.pairing = pairing
     }
     
     /// Annihilate the `F` and `G` effects effectively calling the wrapped function in `F` with the wrapped value
@@ -21,15 +29,12 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
     /// - Parameter ga: A `G`-effectful `A`
     /// - Returns: A pure `B`
     public func zap<A, B>(_ fab: Kind<F, (A) -> B>, _ ga: Kind<G, A>) -> B {
-        let gany = ga.map{ $0 as Any }
-        let fany =
-            fab.map{ aArrb in { (any: Any) in
-                aArrb(any as! A) as Any}}
-        return self.pair(fany, gany) as! B
+        pair(fab, ga) { f, a in f(a) }
     }
     
     public func pair<A, B, C>(_ fa: Kind<F, A>, _ gb: Kind<G, B>, _ f: @escaping (A, B) -> C) -> C {
-        zap(fa.map(curry(f)), (gb))
+        pairing(fa.map { a in a as Any },
+                gb.map { b in b as Any }) { a, b in f(a as! A, b as! B) } as! C
     }
     
     public func pairFlipped<A, B, C>(_ ga: Kind<G, A>, _ fb: Kind<F, B>, _ f: @escaping (A, B) -> C) -> C {
