@@ -40,6 +40,18 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
     public func pairFlipped<A, B, C>(_ ga: Kind<G, A>, _ fb: Kind<F, B>, _ f: @escaping (A, B) -> C) -> C {
         pair(fb, ga, flip(f))
     }
+    
+    public func pairStateTStoreT<S>() -> Pairing<StateTPartial<F, S>, StoreTPartial<S, G>> {
+        Pairing<StateTPartial<F, S>, StoreTPartial<S, G>>.pairStateTStoreT(self)
+    }
+    
+    public func pairWriterTTracedT<W>() -> Pairing<WriterTPartial<F, W>, TracedTPartial<W, G>> {
+        Pairing<WriterTPartial<F, W>, TracedTPartial<W, G>>.pairWriterTTracedT(self)
+    }
+    
+    public func pairReaderTEnvT<R>() -> Pairing<ReaderTPartial<F, R>, EnvTPartial<R, G>> {
+        Pairing<ReaderTPartial<F, R>, EnvTPartial<R, G>>.pairReaderTEnvT(self)
+    }
 }
 
 /// Safe downcast.
