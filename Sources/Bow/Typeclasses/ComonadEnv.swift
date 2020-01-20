@@ -2,6 +2,7 @@ public protocol ComonadEnv: Comonad {
     associatedtype E
     
     static func ask<A>(_ wa: Kind<Self, A>) -> E
+    static func local<A>(_ wa: Kind<Self, A>, _ f: @escaping (E) -> E) -> Kind<Self, A>
 }
 
 public extension ComonadEnv {
@@ -19,5 +20,9 @@ public extension Kind where F: ComonadEnv {
     
     func asks<EE>(_ f: @escaping (F.E) -> EE) -> EE {
         F.asks(self, f)
+    }
+    
+    func local(_ f: @escaping (F.E) -> F.E) -> Kind<F, A> {
+        F.local(self, f)
     }
 }

@@ -81,7 +81,7 @@ extension EnvTPartial: Comonad where W: Comonad {
         EnvT(fa^.e, fa^.wa.coflatMap { a in f(EnvT(fa^.e, a)) })
     }
     
-    public static func extract<A>(_ fa: Kind<EnvTPartial<E, W>, A>) -> A {
+    public static func extract<A>(_ fa: EnvTOf<E, W, A>) -> A {
         fa^.wa.extract()
     }
 }
@@ -89,8 +89,12 @@ extension EnvTPartial: Comonad where W: Comonad {
 // MARK: Instance of `ComonadEnv` for `EnvT`
 
 extension EnvTPartial: ComonadEnv where W: Comonad {
-    public static func ask<A>(_ wa: Kind<EnvTPartial<E, W>, A>) -> E {
+    public static func ask<A>(_ wa: EnvTOf<E, W, A>) -> E {
         wa^.e
+    }
+    
+    public static func local<A>(_ wa: EnvTOf<E, W, A>, _ f: @escaping (E) -> E) -> EnvTOf<E, W, A> {
+        EnvT(f(wa^.e), wa^.wa)
     }
 }
 
