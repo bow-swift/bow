@@ -22,6 +22,38 @@ public typealias URIO<D, A> = EnvIO<D, Never, A>
 // MARK: Functions for EnvIO
 
 public extension Kleisli {
+    /// Creates an EnvIO from a side-effectful function that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invoke<E: Error>(_ f: @escaping (D) throws -> A) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invoke { try f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning an Either that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeEither<E: Error>(_ f: @escaping (D) -> Either<E, A>) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invokeEither { f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning a Result that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeResult<E: Error>(_ f: @escaping (D) -> Result<A, E>) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invokeResult { f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning a Validated that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeValidated<E: Error>(_ f: @escaping (D) -> Validated<E, A>) -> EnvIO<D, E, A> {
+        EnvIO { env in IO.invokeValidated { f(env) } }
+    }
+    
     /// Transforms the error type of this EnvIO
     ///
     /// - Parameter f: Function transforming the error.
@@ -134,6 +166,16 @@ public extension Kleisli {
     /// - Returns: An EnvIO with both type arguments transformed.
     func bimap<E: Error, EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> EnvIO<D, EE, B> where F == IOPartial<E> {
         mapError(fe).map(fa)^
+    }
+}
+
+public extension Kleisli where F == IOPartial<Error> {
+    /// Creates an EnvIO from a side-effectful function returning a Try that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeTry(_ f: @escaping (D) -> Try<A>) -> EnvIO<D, Error, A> {
+        EnvIO { env in IO.invokeTry { f(env) } }
     }
 }
 
