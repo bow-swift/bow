@@ -32,14 +32,14 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     private static func kleisliLeftIdentity() {
         property("Kleisli left identity") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
-            return Kleisli({ (n : Int) in F.pure(n) }).andThen(Kleisli(g)).invoke(a) == g(a)
+            return Kleisli({ (n : Int) in F.pure(n) }).andThen(Kleisli(g)).run(a) == g(a)
         }
     }
     
     private static func kleisliRightIdentity() {
         property("Kleisli right identity") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
-            return Kleisli(g).andThen(F.pure).invoke(a) == g(a)
+            return Kleisli(g).andThen(F.pure).run(a) == g(a)
         }
     }
     

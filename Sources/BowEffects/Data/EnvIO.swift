@@ -27,7 +27,7 @@ public extension Kleisli {
     /// - Parameter f: Function transforming the error.
     /// - Returns: An EnvIO value with the new error type.
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
+        return EnvIO { env in self.run(env)^.mapLeft(f) }
     }
     
     /// Provides the required environment.
@@ -35,7 +35,7 @@ public extension Kleisli {
     /// - Parameter d: Environment.
     /// - Returns: An IO resulting from running this computation with the provided environment.
     func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
-        return self.invoke(d)^
+        return self.run(d)^
     }
     
     /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
@@ -187,7 +187,7 @@ public extension Kleisli where A == Void {
 
 extension KleisliPartial: MonadDefer where F: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> Kind<KleisliPartial<F, D>, A>) -> Kind<KleisliPartial<F, D>, A> {
-        Kleisli { d in F.defer { fa()^.invoke(d) } }
+        Kleisli { d in F.defer { fa()^.run(d) } }
     }
 }
 
@@ -197,14 +197,14 @@ extension KleisliPartial: Async where F: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<F.E, A>) -> ()) -> Kind<KleisliPartial<F, D>, ()>) -> Kind<KleisliPartial<F, D>, A> {
         Kleisli { d in
             F.asyncF { callback in
-                procf(callback)^.invoke(d)
+                procf(callback)^.run(d)
             }
         }
     }
     
     public static func continueOn<A>(_ fa: Kind<KleisliPartial<F, D>, A>, _ queue: DispatchQueue) -> Kind<KleisliPartial<F, D>, A> {
         Kleisli { d in
-            fa^.invoke(d).continueOn(queue)
+            fa^.run(d).continueOn(queue)
         }
     }
 }
@@ -214,19 +214,19 @@ extension KleisliPartial: Async where F: Async {
 extension KleisliPartial: Concurrent where F: Concurrent {
     public static func race<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, Either<A, B>> {
         Kleisli { d in
-            F.race(fa^.invoke(d), fb^.invoke(d))
+            F.race(fa^.run(d), fb^.run(d))
         }
     }
     
     public static func parMap<A, B, Z>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>, _ f: @escaping (A, B) -> Z) -> Kind<KleisliPartial<F, D>, Z> {
         Kleisli { d in
-            F.parMap(fa^.invoke(d), fb^.invoke(d), f)
+            F.parMap(fa^.run(d), fb^.run(d), f)
         }
     }
     
     public static func parMap<A, B, C, Z>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>, _ fc: Kind<KleisliPartial<F, D>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<KleisliPartial<F, D>, Z> {
         Kleisli { d in
-            F.parMap(fa^.invoke(d), fb^.invoke(d), fc^.invoke(d), f)
+            F.parMap(fa^.run(d), fb^.run(d), fc^.run(d), f)
         }
     }
 }
