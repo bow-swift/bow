@@ -23,4 +23,8 @@ class EnvTTest: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<EnvPartial<Int>>.check()
     }
+    
+    func testComonadEnvLaws() {
+        ComonadEnvLaws<EnvPartial<Int>>.check()
+    }
 }
