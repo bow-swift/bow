@@ -25,6 +25,6 @@ class EnvTTest: XCTestCase {
     }
     
     func testComonadEnvLaws() {
-        ComonadEnvLaws<EnvPartial<Int>>.check()
+        ComonadEnvLaws<EnvPartial<Int>, Int>.check()
     }
 }
