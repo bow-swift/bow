@@ -167,6 +167,7 @@
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
 		11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */; };
+		11BA21C023D6FA3600F3EE78 /* ComonadTracedLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -841,6 +842,7 @@
 		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
 		11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadEnvLaws.swift; sourceTree = "<group>"; };
 		11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStoreLaws.swift; sourceTree = "<group>"; };
+		11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTracedLaws.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1601,6 +1603,7 @@
 				11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */,
 				8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */,
 				11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */,
+				11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */,
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
@@ -2639,6 +2642,7 @@
 				1122941F219D8BDE006D66C5 /* AlternativeLaws.swift in Sources */,
 				11229420219D8BDE006D66C5 /* ApplicativeErrorLaws.swift in Sources */,
 				11229421219D8BDE006D66C5 /* ApplicativeLaws.swift in Sources */,
+				11BA21C023D6FA3600F3EE78 /* ComonadTracedLaws.swift in Sources */,
 				1191BD1422D78F760052FEA8 /* BindingOperatorOverload.swift in Sources */,
 				11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */,
 				11229423219D8BDE006D66C5 /* BimonadLaws.swift in Sources */,
