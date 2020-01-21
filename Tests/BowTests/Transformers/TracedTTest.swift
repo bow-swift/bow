@@ -21,4 +21,8 @@ class TracedTTest: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<TracedPartial<Int>>.check()
     }
+    
+    func testComonadTraced() {
+        ComonadTracedLaws<TracedPartial<String>, String>.check()
+    }
 }
