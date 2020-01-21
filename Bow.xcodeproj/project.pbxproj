@@ -166,6 +166,7 @@
 		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
+		11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -839,6 +840,7 @@
 		11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
 		11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadEnvLaws.swift; sourceTree = "<group>"; };
+		11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStoreLaws.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1598,6 +1600,7 @@
 				1191BD1122D78F640052FEA8 /* BindingOperatorOverload.swift */,
 				11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */,
 				8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */,
+				11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */,
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
@@ -2660,6 +2663,7 @@
 				11229433219D8BDE006D66C5 /* MonoidLaws.swift in Sources */,
 				1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */,
 				609CC1492364FC5B00096D5D /* DivisibleLaws.swift in Sources */,
+				11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */,
 				11229434219D8BDE006D66C5 /* ComparableLaws.swift in Sources */,
 				11229436219D8BDE006D66C5 /* SemigroupKLaws.swift in Sources */,
 				11229437219D8BDE006D66C5 /* SemigroupLaws.swift in Sources */,
