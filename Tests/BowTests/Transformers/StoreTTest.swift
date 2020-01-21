@@ -23,7 +23,7 @@ class StoreTTest: XCTestCase {
     }
     
     func testComonadStoreLaws() {
-        ComonadStoreLaws<StorePartial<Int>>.check()
+        ComonadStoreLaws<StorePartial<Int>, Int>.check()
     }
     
     let greetingStore = { (name: String) in Store(name, { name in "Hi \(name)!"}) }

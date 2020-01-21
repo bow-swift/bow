@@ -2,7 +2,7 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-public class ComonadStoreLaws<F: ComonadStore & EquatableK & ArbitraryK> where F.S == Int {
+public class ComonadStoreLaws<F: ComonadStore & EquatableK & ArbitraryK, A: Arbitrary & CoArbitrary & Hashable> where F.S == A {
 
     public static func check() {
         positionCoflatMap()
