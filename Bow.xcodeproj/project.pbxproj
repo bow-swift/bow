@@ -168,6 +168,7 @@
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
 		11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */; };
 		11BA21C023D6FA3600F3EE78 /* ComonadTracedLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */; };
+		11BA21C223D75B5200F3EE78 /* ZipperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21C123D75B5200F3EE78 /* ZipperTest.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -814,6 +815,8 @@
 		1171ED5123C4E20A005362E0 /* EnvT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5323C4E4B0005362E0 /* TracedT+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TracedT+Gen.swift"; sourceTree = "<group>"; };
 		1171ED5523C4E5F2005362E0 /* TracedTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedTTest.swift; sourceTree = "<group>"; };
+		1171ED5D23C62C5E005362E0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
+		1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Zipper+Gen.swift"; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
@@ -843,6 +846,7 @@
 		11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadEnvLaws.swift; sourceTree = "<group>"; };
 		11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStoreLaws.swift; sourceTree = "<group>"; };
 		11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTracedLaws.swift; sourceTree = "<group>"; };
+		11BA21C123D75B5200F3EE78 /* ZipperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipperTest.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1294,6 +1298,7 @@
 				112097D522A904AC007F3D9C /* Sum+Gen.swift */,
 				112097BE22A7FDEF007F3D9C /* Try+Gen.swift */,
 				112097C022A7FF37007F3D9C /* Validated+Gen.swift */,
+				1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1772,6 +1777,7 @@
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
+				11BA21C123D75B5200F3EE78 /* ZipperTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1889,6 +1895,7 @@
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
+				1171ED5D23C62C5E005362E0 /* Zipper.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -3003,6 +3010,7 @@
 				110DE5CE23ACE5AD00E5DB36 /* ComonadEnv.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
 				8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */,
+				11BA21C223D75B5200F3EE78 /* ZipperTest.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
 				8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */,
