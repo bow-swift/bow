@@ -15,6 +15,6 @@ extension StateTPartial: ArbitraryK where F: ArbitraryK & Applicative, S: Arbitr
     public static func generate<A: Arbitrary>() -> Kind<StateTPartial<F, S>, A> {
         let a = A.arbitrary.generate
         let f: (S) -> Kind<F, (S, A)> = { s in F.pure((s, a)) }
-        return StateT(F.pure(f))
+        return StateT(f)
     }
 }

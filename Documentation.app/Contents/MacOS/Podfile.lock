@@ -1,18 +1,18 @@
 PODS:
-  - Bow (0.6.0)
-  - BowEffects (0.6.0):
-    - Bow (~> 0.6.0)
-  - BowFree (0.6.0):
-    - Bow (~> 0.6.0)
-  - BowGeneric (0.6.0):
-    - Bow (~> 0.6.0)
-  - BowOptics (0.6.0):
-    - Bow (~> 0.6.0)
-  - BowRecursionSchemes (0.6.0):
-    - Bow (~> 0.6.0)
-  - BowRx (0.6.0):
-    - Bow (~> 0.6.0)
-    - BowEffects (~> 0.6.0)
+  - Bow (0.7.0)
+  - BowEffects (0.7.0):
+    - Bow (~> 0.7.0)
+  - BowFree (0.7.0):
+    - Bow (~> 0.7.0)
+  - BowGeneric (0.7.0):
+    - Bow (~> 0.7.0)
+  - BowOptics (0.7.0):
+    - Bow (~> 0.7.0)
+  - BowRecursionSchemes (0.7.0):
+    - Bow (~> 0.7.0)
+  - BowRx (0.7.0):
+    - Bow (~> 0.7.0)
+    - BowEffects (~> 0.7.0)
     - RxSwift (~> 5.0.0)
   - RxSwift (5.0.1)
 
@@ -46,13 +46,13 @@ EXTERNAL SOURCES:
     :path: "../../.."
 
 SPEC CHECKSUMS:
-  Bow: 2a42ff7c2b0bf72a2f16491aff170e5069b3ebe6
-  BowEffects: 12f4e2ad8e3fb32704de2ad5c7645f265efa93e3
-  BowFree: ec5e4d71f4f8fd1bd9afea24be26962ef75b14c3
-  BowGeneric: 4477520f8be1a4ce958322c2eb74f75e8cca366a
-  BowOptics: 1bcd0d97b8f1a03e6c1314aa689e151caf07f110
-  BowRecursionSchemes: ad78f3395af32b06b72d76a081ecb9f868dd3774
-  BowRx: e21ccc42aea8a5a6b40c87cded59cec74997135d
+  Bow: 3561cae6b993e4c37f507e03dd89859538d8ec12
+  BowEffects: 235d503f2e438ab9fdf84e074f586c806d8dec31
+  BowFree: 2c0ef44f40bf12f63edc8b60ec881fada1145dfd
+  BowGeneric: 8ad67728410b2a50cf681b3bfbf92b86b6b8a07b
+  BowOptics: 1d6c742c8144117b7ff76d2ce14839aac2619d82
+  BowRecursionSchemes: a62b201be5440e95e2e514b08c163e55e5dc9195
+  BowRx: 9b0e395c92f47f2c7f6f8b4a42adf37ffd5c897a
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
 PODFILE CHECKSUM: c776910e1659fef526505f3385fe27e8c3a2e42d

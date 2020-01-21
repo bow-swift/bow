@@ -221,7 +221,7 @@ public class Getter<S, A>: GetterOf<S, A> {
     ///
     /// - Returns: A `State` of the source and target.
     public func extract() -> State<S, A> {
-        return State({ s in (s, self.get(s)) })
+        return State { s in (s, self.get(s)) } 
     }
     
     /// Extracts the focus view through the `Getter`.

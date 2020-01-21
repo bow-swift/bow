@@ -3,10 +3,9 @@ import XCTest
 import Bow
 
 extension StateTPartial: EquatableK where F: EquatableK & Monad, S == Int {
-    public static func eq<A>(_ lhs: Kind<StateTPartial<F, S>, A>, _ rhs: Kind<StateTPartial<F, S>, A>) -> Bool where A : Equatable {
-        let x = StateT.fix(lhs).runM(1)
-        let y = StateT.fix(rhs).runM(1)
-        return isEqual(x, y)
+    public static func eq<A: Equatable>(_ lhs: Kind<StateTPartial<F, S>, A>, _ rhs: Kind<StateTPartial<F, S>, A>) -> Bool {
+        isEqual(lhs^.runM(1),
+                rhs^.runM(1))
     }
 }
 
