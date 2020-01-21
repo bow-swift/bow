@@ -47,7 +47,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// Creates an IO from a side-effectful function.
     ///
     /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
-    /// - Returns: An IO function suspending the execution of the side effect.
+    /// - Returns: An IO suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
         IO.defer {
             do {
