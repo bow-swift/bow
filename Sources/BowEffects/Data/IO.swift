@@ -379,7 +379,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter policy: Retrial policy.
     /// - Returns: A computation that is retried based on the provided policy when it fails.
     public func retry<S, O>(_ policy: Schedule<Any, E, S, O>) -> IO<E, A> {
-        self.env.retry(policy).provide(())
+        self.env().retry(policy).provide(())
     }
     
     /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
@@ -391,7 +391,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - orElse: Function to handle errors after retrying.
     /// - Returns: A computation that is retried based on the provided policy when it fails.
     public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
-        self.env.retry(policy, orElse: { e, o in orElse(e, o).env }).provide(())
+        self.env().retry(policy, orElse: { e, o in orElse(e, o).env() }).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails.
@@ -403,7 +403,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
-        self.env.repeat(policy, onUpdateError: onUpdateError).provide(())
+        self.env().repeat(policy, onUpdateError: onUpdateError).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
@@ -414,7 +414,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - orElse: A function to return a computation in case of error.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
-        self.env.repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env }).provide(())
+        self.env().repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env() }).provide(())
     }
 }
 
