@@ -40,7 +40,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
     
     /// Creates an EnvIO with no dependencies from this IO.
-    public var env: EnvIO<Any, E, A> {
+    public func env<D>() -> EnvIO<D, E, A> {
         EnvIO { _ in self }
     }
     
