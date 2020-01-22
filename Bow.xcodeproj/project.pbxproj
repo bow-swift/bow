@@ -168,7 +168,9 @@
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
 		11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */; };
 		11BA21C023D6FA3600F3EE78 /* ComonadTracedLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */; };
-		11BA21C223D75B5200F3EE78 /* ZipperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21C123D75B5200F3EE78 /* ZipperTest.swift */; };
+		11BA21C323D83DA200F3EE78 /* ZipperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21C123D75B5200F3EE78 /* ZipperTest.swift */; };
+		11BA21C423D83DC800F3EE78 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5D23C62C5E005362E0 /* Zipper.swift */; };
+		11BA21C523D83EA100F3EE78 /* Zipper+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -2618,6 +2620,7 @@
 				112097D622A904AC007F3D9C /* Sum+Gen.swift in Sources */,
 				112097C522A805CE007F3D9C /* Function0+Gen.swift in Sources */,
 				112097C722A80730007F3D9C /* Function1+Gen.swift in Sources */,
+				11BA21C523D83EA100F3EE78 /* Zipper+Gen.swift in Sources */,
 				112097DF22A90972007F3D9C /* StateT+Gen.swift in Sources */,
 				113746A623435C0B00D9C1AD /* DictionaryK+Gen.swift in Sources */,
 				112097E122A90AAA007F3D9C /* WriterT+Gen.swift in Sources */,
@@ -2986,6 +2989,7 @@
 				8BA0F3ED217E2DEF00969984 /* KleisliTest.swift in Sources */,
 				8BA0F40D217E2DEF00969984 /* NonEmptyArrayTest.swift in Sources */,
 				8BA0F40B217E2DEF00969984 /* ArrayKTest.swift in Sources */,
+				11BA21C323D83DA200F3EE78 /* ZipperTest.swift in Sources */,
 				8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */,
 				8BA0F3FD217E2DEF00969984 /* CurryTest.swift in Sources */,
 			);
@@ -3009,8 +3013,8 @@
 				8BA0F4FB217E2E9200969984 /* Cokleisli.swift in Sources */,
 				110DE5CE23ACE5AD00E5DB36 /* ComonadEnv.swift in Sources */,
 				8BA0F57B217E2E9200969984 /* Reader.swift in Sources */,
+				11BA21C423D83DC800F3EE78 /* Zipper.swift in Sources */,
 				8BA0F54F217E2E9200969984 /* OptionInstances.swift in Sources */,
-				11BA21C223D75B5200F3EE78 /* ZipperTest.swift in Sources */,
 				8BA0F4EB217E2E9200969984 /* Kleisli.swift in Sources */,
 				8BA0F59B217E2E9200969984 /* Day.swift in Sources */,
 				8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */,
