@@ -26,6 +26,10 @@ public class Co<W: Comonad, A>: CoOf<W, A> {
     func run<R>(_ w: Kind<W, (A) -> R>) -> R {
         unsafeBitCast(self.cow, to:((Kind<W, (A) -> R>) -> R).self)(w)
     }
+    
+    func hoist<V>(_ transform: FunctionK<V, W>) -> Co<V, A> {
+        Co<V, A>(self.cow <<< transform.invoke)
+    }
 }
 
 /// Safe downcast.
