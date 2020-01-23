@@ -5,8 +5,8 @@ import BowGenerators
 
 extension CoPartial: EquatableK where W == ForId {
     public static func eq<A: Equatable>(_ lhs: CoOf<W, A>, _ rhs: CoOf<W, A>) -> Bool {
-        Co<W, A>.pair().zap(Id(id), lhs^) ==
-            Co<W, A>.pair().zap(Id(id), rhs^)
+        ForId.pair().zap(Id(id), lhs^) ==
+            ForId.pair().zap(Id(id), rhs^)
     }
 }
 
