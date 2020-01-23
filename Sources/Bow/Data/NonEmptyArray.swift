@@ -260,6 +260,12 @@ extension ForNonEmptyArray: Traverse {
     }
 }
 
+public extension NEA {
+    func traverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, NEA<B>> {
+        ForNonEmptyArray.traverse(self, f).map { $0^ }
+    }
+}
+
 // MARK: Instance of `SemigroupK` for `NonEmptyArray`
 extension ForNonEmptyArray: SemigroupK {
     public static func combineK<A>(_ x: Kind<ForNonEmptyArray, A>, _ y: Kind<ForNonEmptyArray, A>) -> Kind<ForNonEmptyArray, A> {
