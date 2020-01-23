@@ -118,3 +118,17 @@ public extension Pairing {
         .pairReaderTEnvT(.pairId())
     }
 }
+
+// MARK: Pairing for any Comonad
+
+public extension Comonad {
+    static func pair() -> Pairing<Self, CoPartial<Self>> {
+        Pairing { wab, cowa in cowa^.run(wab) }
+    }
+}
+
+public extension Kind where F: Comonad {
+    static func pair() -> Pairing<F, CoPartial<F>> {
+        F.pair()
+    }
+}

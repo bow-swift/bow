@@ -19,11 +19,6 @@ public class Co<W: Comonad, A>: CoOf<W, A> {
         })
     }
     
-    /// - Returns: The pairing between the underlying comonad, `w`, and the monad `Co<w>`.
-    public static func pair() -> Pairing<W, CoPartial<W>> {
-        Pairing { wab, cowa in cowa^.run(wab) }
-    }
-    
     public init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> /*R*/Any>) -> /*R*/Any) {
         self.cow = cow
     }
