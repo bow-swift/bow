@@ -33,4 +33,25 @@ class PairingTest: XCTestCase {
         
         XCTAssertEqual(w2.extract(), "*************")
     }
+    
+    func testPairingReaderEnv() {
+        let w = Env<Int, Double>(10, .pi)
+        
+        let e1 = Reader<Int, Int>.var()
+        let e2 = Reader<Int, Int>.var()
+        var res = 0
+        
+        let actions: Reader<Int, Int> = binding(
+            e1 <- Reader.ask().local { x in 2 * x },
+            e2 <- Reader.pure(e1.get * 3),
+            |<-Reader<Int, Void> { _ in
+                res = e2.get
+                return Id(())
+            },
+            yield: e2.get)^
+        
+        let _ = Pairing.pairReaderEnv().select(actions, w.duplicate())
+        
+        XCTAssertEqual(res, 60)
+    }
 }
