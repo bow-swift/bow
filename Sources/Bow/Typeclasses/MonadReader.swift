@@ -31,7 +31,7 @@ public extension MonadReader {
 
 // MARK: Syntax for MonadReader
 
-public extension Kind where F: MonadReader {
+public extension Kind where F: MonadReader, A == F.D {
     /// Retrieves the shared environment.
     ///
     /// This is a convenience method to call `MonadReader.ask` as a static method of this type.
@@ -40,7 +40,9 @@ public extension Kind where F: MonadReader {
     static func ask() -> Kind<F, F.D> {
         return F.ask()
     }
+}
 
+public extension Kind where F: MonadReader {
     /// Executes this computation in a modified environment.
     ///
     /// This is a convenience method to call `MonadReader.local` as an instance method of this type.
