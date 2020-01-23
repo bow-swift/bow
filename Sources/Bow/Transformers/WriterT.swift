@@ -127,14 +127,6 @@ extension WriterT where F: Applicative {
         return WriterT.putT(F.pure(a), w)
     }
 
-    /// Creates a `WriterT` from an initial value for the accumulator.
-    ///
-    /// - Parameter l: Initial value for the accumulator.
-    /// - Returns: A `WriterT` wrapping the provided value and unit for the result value.
-    public static func tell(_ l: W) -> WriterT<F, W, Unit>  {
-        return WriterT<F, W, Unit>.put(unit, l)
-    }
-
     /// Lifts an effect using the accumulator value of this `WriterT`.
     ///
     /// - Parameter fb: Effect to be lifted.
@@ -207,17 +199,6 @@ extension WriterT where F: Monad {
                 (l, (l, a))
             }
         })
-    }
-}
-
-// MARK: Functions for `WriterT` when the effect has an instance of `Monad` and the accumulator type has an instance of `Semigroup`
-extension WriterT where F: Monad, W: Semigroup {
-    /// Combines the accumulator with a new value.
-    ///
-    /// - Parameter w: New value to combine the accumulator with.
-    /// - Returns: A `WriterT` with the same result and combined accumulator.
-    public func tell(_ w: W) -> WriterT<F, W, A> {
-        return mapAcc({ inW in inW.combine(w) })
     }
 }
 
