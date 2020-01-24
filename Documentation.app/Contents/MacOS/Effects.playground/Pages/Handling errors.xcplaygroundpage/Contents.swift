@@ -34,9 +34,9 @@ let networkError: IO<NetworkError, String> = IO.raiseError(.notFound)^
 /*:
  ## Transforming errors
  
- Similar to transforming the data inside an `IO` using the `map` operator, you can transform the error type using `mapLeft`. This is useful to handle errors at different layers of your application. For instance, you may want to map a `NetworkError` to a `DomainError` when you move from your network layer to your domain layer:
+ Similar to transforming the data inside an `IO` using the `map` operator, you can transform the error type using `mapError`. This is useful to handle errors at different layers of your application. For instance, you may want to map a `NetworkError` to a `DomainError` when you move from your network layer to your domain layer:
  */
-let domainError: IO<DomainError, String> = networkError.mapLeft { error in
+let domainError: IO<DomainError, String> = networkError.mapError { error in
     switch error {
     case .notFound: return .missingUser
     // Map other cases
