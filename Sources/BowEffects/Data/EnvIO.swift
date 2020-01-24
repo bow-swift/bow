@@ -59,7 +59,7 @@ public extension Kleisli {
     /// - Parameter f: Function transforming the error.
     /// - Returns: An EnvIO value with the new error type.
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.run(env)^.mapLeft(f) }
+        return EnvIO { env in self.run(env)^.mapError(f) }
     }
     
     /// Provides the required environment.
