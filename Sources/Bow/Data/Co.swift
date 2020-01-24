@@ -34,6 +34,12 @@ public class CoT<W: Comonad, M, A>: CoTOf<W, M, A> {
     }
 }
 
+public extension CoT where M: Applicative {
+    func lowerT<B>(_ input: Kind<W, B>) -> Kind<M, A> {
+        (self.runT <<< { wbma in wbma.as(M.pure) })(input)
+    }
+}
+
 public extension CoT where M == ForId {
     static func select<A, B>(_ co: Co<W, (A) -> B>, _ wa: Kind<W, A>) -> Kind<W, B> {
         co.run(wa.coflatMap { wa in
@@ -53,6 +59,10 @@ public extension CoT where M == ForId {
     func hoist<V>(_ transform: FunctionK<V, W>) -> Co<V, A> {
         Co<V, A>(self.cow <<< transform.invoke)
     }
+    
+    func lower<B>(_ input: Kind<W, B>) -> A {
+        lowerT(input)^.value
+    }
 }
 
 /// Safe downcast.
@@ -63,6 +73,8 @@ public postfix func ^<W, M, A>(_ value: CoTOf<W, M, A>) -> CoT<W, M, A> {
     CoT.fix(value)
 }
 
+// MARK: Instance of `Functor` for `Co`
+
 extension CoTPartial: Functor {
     public static func map<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> B) -> CoTOf<W, M, B> {
         CoT<W, M, B> { b in
@@ -70,6 +82,8 @@ extension CoTPartial: Functor {
         }
     }
 }
+
+// MARK: Instance of `Applicative` for `Co`
 
 extension CoTPartial: Applicative {
     public static func ap<A, B>(_ ff: CoTOf<W, M, (A) -> B>, _ fa: CoTOf<W, M, A>) -> CoTOf<W, M, B> {
@@ -86,6 +100,8 @@ extension CoTPartial: Applicative {
         CoT<W, M, A> { w in w.extract()(a) }
     }
 }
+
+// MARK: Instance of `Monad` for `Co`
 
 extension CoTPartial: Monad {
     public static func flatMap<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> CoTOf<W, M, B>) -> CoTOf<W, M, B> {
