@@ -3,8 +3,8 @@ import BowLaws
 import Bow
 import BowGenerators
 
-extension CoPartial: EquatableK where W == ForId {
-    public static func eq<A: Equatable>(_ lhs: CoOf<W, A>, _ rhs: CoOf<W, A>) -> Bool {
+extension CoTPartial: EquatableK where W == ForId, M == ForId {
+    public static func eq<A>(_ lhs: Kind<CoTPartial<W, M>, A>, _ rhs: Kind<CoTPartial<W, M>, A>) -> Bool where A : Equatable {
         ForId.pair().zap(Id(id), lhs^) ==
             ForId.pair().zap(Id(id), rhs^)
     }
