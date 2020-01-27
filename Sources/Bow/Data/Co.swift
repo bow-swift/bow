@@ -89,7 +89,7 @@ public postfix func ^<W, M, A>(_ value: CoTOf<W, M, A>) -> CoT<W, M, A> {
     CoT.fix(value)
 }
 
-// MARK: Instance of `Functor` for `Co`
+// MARK: Instance of `Functor` for `CoT`
 
 extension CoTPartial: Functor {
     public static func map<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> B) -> CoTOf<W, M, B> {
@@ -99,7 +99,7 @@ extension CoTPartial: Functor {
     }
 }
 
-// MARK: Instance of `Applicative` for `Co`
+// MARK: Instance of `Applicative` for `CoT`
 
 extension CoTPartial: Applicative {
     public static func ap<A, B>(_ ff: CoTOf<W, M, (A) -> B>, _ fa: CoTOf<W, M, A>) -> CoTOf<W, M, B> {
@@ -117,7 +117,7 @@ extension CoTPartial: Applicative {
     }
 }
 
-// MARK: Instance of `Monad` for `Co`
+// MARK: Instance of `Monad` for `CoT`
 
 extension CoTPartial: Monad {
     public static func flatMap<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> CoTOf<W, M, B>) -> CoTOf<W, M, B> {
@@ -136,5 +136,19 @@ extension CoTPartial: Monad {
                 { aa in tailRecM(aa, f) },
                 { b in CoT.pure(b) })
         }
+    }
+}
+
+// MARK: Instance of `MonadReader` for `CoT`
+
+extension CoTPartial: MonadReader where W: ComonadEnv {
+    public typealias D = W.E
+    
+    public static func ask() -> CoTOf<W, M, W.E> {
+        CoT.liftT(W.ask)
+    }
+    
+    public static func local<A>(_ fa: CoTOf<W, M, A>, _ f: @escaping (W.E) -> W.E) -> CoTOf<W, M, A> {
+        CoT(fa^.cow <<< { wa in wa.local(f) })
     }
 }
