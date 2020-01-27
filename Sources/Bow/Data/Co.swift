@@ -21,6 +21,18 @@ public class CoT<W: Comonad, M, A>: CoTOf<W, M, A> {
         value as! CoT<W, M, A>
     }
     
+    public static func liftT(_ f: @escaping (Kind<W, Any/*S*/>) -> A) -> CoT<W, M, A> {
+        let extract = Function1<Kind<W, (Any) -> Kind<M, Any>>, (Any) -> Kind<M, Any>> { x in x.extract() }
+        let ff = Function1<Kind<W, (Any) -> Kind<M, Any>>, A> { x in f(x.map { xx in xx as Any }) }.map { a in a as Any }
+        let g: (Any) -> A = { a in a as! A }
+        let adapt: (Kind<W, (A) -> Kind<M, Any>>) -> Kind<W, (Any) -> Kind<M, Any>> = { wf in
+            wf.map { f in g >>> f }
+        }
+        let ap: (Kind<W, (Any) -> Kind<M, Any>>) -> Kind<M, Any> = extract.ap(ff)^.f
+        
+        return CoT(adapt >>> ap)
+    }
+    
     public init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> Kind<M, /*R*/Any>>) -> Kind<M, /*R*/Any>) {
         self.cow = cow
     }
@@ -29,7 +41,7 @@ public class CoT<W: Comonad, M, A>: CoTOf<W, M, A> {
         unsafeBitCast(self.cow, to:((Kind<W, (A) -> Kind<M, R>>) -> Kind<M, R>).self)(w)
     }
     
-    func hoistT<V>(_ transform: FunctionK<V, W>) -> CoT<V, M, A> {
+    func hoistT<V: Comonad>(_ transform: FunctionK<V, W>) -> CoT<V, M, A> {
         CoT<V, M, A>(self.cow <<< transform.invoke)
     }
 }
@@ -45,6 +57,10 @@ public extension CoT where M == ForId {
         co.run(wa.coflatMap { wa in
             { f in wa.map(f) }
         })
+    }
+    
+    static func lift(_ f: @escaping (Kind<W, Any>) -> A) -> Co<W, A> {
+        liftT(f)
     }
     
     /// - Returns: The pairing between the underlying comonad, `w`, and the monad `Co<w>`.

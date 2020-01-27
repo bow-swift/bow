@@ -11,7 +11,7 @@ public typealias Function1Of<I, O> = Kind<Function1Partial<I>, O>
 
 /// This data type acts as a wrapper over functions. It receives two type parameters representing the input and output type of the function. The wrapper adds capabilities to use a function as a Higher Kinded Type and conform to typeclasses that have this requirement.
 public final class Function1<I, O>: Function1Of<I, O> {
-    fileprivate let f: (I) -> O
+    internal let f: (I) -> O
     
     /// Safe downcast.
     ///
