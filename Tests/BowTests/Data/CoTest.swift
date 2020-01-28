@@ -3,10 +3,10 @@ import BowLaws
 import Bow
 import BowGenerators
 
-extension CoTPartial: EquatableK where W == ForId, M == ForId {
-    public static func eq<A>(_ lhs: Kind<CoTPartial<W, M>, A>, _ rhs: Kind<CoTPartial<W, M>, A>) -> Bool where A : Equatable {
-        ForId.pair().zap(Id(id), lhs^) ==
-            ForId.pair().zap(Id(id), rhs^)
+extension CoTPartial: EquatableK where W: Applicative & EquatableK, M == ForId {
+    public static func eq<A: Equatable>(_ lhs: CoTOf<W, M, A>, _ rhs: CoTOf<W, M, A>) -> Bool {
+        W.pair().zap(W.pure(id), lhs^) ==
+            W.pair().zap(W.pure(id), rhs^)
     }
 }
 
@@ -21,5 +21,9 @@ class CoTest: XCTestCase {
 
     func testMonadLaws() {
         MonadLaws<CoPartial<ForId>>.check()
+    }
+    
+    func testMonadStateLaws() {
+        MonadStateLaws<CoPartial<StorePartial<Int>>>.check()
     }
 }

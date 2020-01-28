@@ -152,3 +152,17 @@ extension CoTPartial: MonadReader where W: ComonadEnv {
         CoT(fa^.cow <<< { wa in wa.local(f) })
     }
 }
+
+// MARK: Instance of `MonadState` for `CoT`
+
+extension CoTPartial: MonadState where W: ComonadStore {
+    public typealias S = W.S
+    
+    public static func get() -> CoTOf<W, M, W.S> {
+        CoT.liftT { wa in wa.position }
+    }
+    
+    public static func set(_ s: W.S) -> CoTOf<W, M, ()> {
+        CoT { wa in wa.peek(s)(()) }
+    }
+}
