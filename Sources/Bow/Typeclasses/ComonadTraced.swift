@@ -3,7 +3,6 @@ public protocol ComonadTraced: Comonad {
     
     static func trace<A>(_ wa: Kind<Self, A>, _ m: M) -> A
     static func listens<A, B>(_ wa: Kind<Self, A>, _ f: @escaping (M) -> B) -> Kind<Self, (B, A)>
-    static func censor<A>(_ wa: Kind<Self, A>, _ f: @escaping (M) -> M) -> Kind<Self, A>
     static func pass<A>(_ wa: Kind<Self, A>) -> Kind<Self, ((M) -> M) -> A>
 }
 
@@ -14,6 +13,10 @@ public extension ComonadTraced {
     
     static func listen<A>(_ wa: Kind<Self, A>) -> Kind<Self, (M, A)> {
         listens(wa, id)
+    }
+    
+    static func censor<A>(_ wa: Kind<Self, A>, _ f: @escaping (M) -> M) -> Kind<Self, A> {
+        pass(wa).map { trace in trace(f) }
     }
 }
 

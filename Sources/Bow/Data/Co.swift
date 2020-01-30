@@ -184,8 +184,8 @@ extension CoTPartial: MonadWriter where W: ComonadTraced {
     }
     
     public static func pass<A>(_ fa: CoTOf<W, M, ((W.M) -> W.M, A)>) -> CoTOf<W, M, A> {
-        CoT { (wa: Kind<W, (A) -> Kind<M, Any>>) -> Kind<M, Any> in
-            let passed: Kind<W, (((W.M) -> W.M, A)) -> Kind<M, Any>> = wa.pass().map { xx in { tuple in xx(tuple.0)(tuple.1) } }
+        CoT { wa in
+            let passed: Kind<W, (((W.M) -> W.M, A)) -> Kind<M, Any>> = wa.pass().map { f in { tuple in f(tuple.0)(tuple.1) } }
             return fa^.runT(passed)
         }
     }
