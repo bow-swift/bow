@@ -94,7 +94,7 @@ public class BracketLaws<F: Bracket & EquatableK> where F.E: Equatable & Arbitra
     private static func bracketMustRunReleaseTask() {
         property("bracketMustRunReleaseTask") <~ forAll { (a: Int, e: F.E) in
             var msg = 0
-            return F.pure(a).bracket(release: { i in F.pure(()).map { msg = i } }, use: { _ -> Kind<F, Int> in throw e })
+            return F.pure(a).bracket(release: { i in F.pure(msg = i) }, use: { _ -> Kind<F, Int> in throw e })
                 .attempt()
                 .map { _ in msg } == F.pure(a)
         }
@@ -103,7 +103,7 @@ public class BracketLaws<F: Bracket & EquatableK> where F.E: Equatable & Arbitra
     private static func guaranteeMustRunFinalizerOnError() {
         property("guaranteeMustRunReleaseOnError") <~ forAll { (a: Int, e: F.E) in
             var msg = 0
-            let finalizer: Kind<F, ()> = F.pure(()).map { msg = a }
+            let finalizer: Kind<F, ()> = F.pure(msg = a)
             return Kind<F, Int>.raiseError(e).guarantee(finalizer)
                 .attempt()
                 .map { _ in msg } == F.pure(a)
