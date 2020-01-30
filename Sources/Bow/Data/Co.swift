@@ -166,3 +166,27 @@ extension CoTPartial: MonadState where W: ComonadStore {
         CoT { wa in wa.peek(s)(()) }
     }
 }
+
+// MARK: Instance of `MonadWriter` for `CoT`
+
+extension CoTPartial: MonadWriter where W: ComonadTraced {
+    public typealias W = W.M
+    
+    public static func writer<A>(_ aw: (W.M, A)) -> CoTOf<W, M, A> {
+        CoT { wa in wa.trace(aw.0)(aw.1) }
+    }
+    
+    public static func listen<A>(_ fa: CoTOf<W, M, A>) -> CoTOf<W, M, (W.M, A)> {
+        CoT { wa in
+            let listened = wa.listen().map { tuple in { a in tuple.1((tuple.0, a)) } }
+            return fa^.runT(listened)
+        }
+    }
+    
+    public static func pass<A>(_ fa: CoTOf<W, M, ((W.M) -> W.M, A)>) -> CoTOf<W, M, A> {
+        CoT { (wa: Kind<W, (A) -> Kind<M, Any>>) -> Kind<M, Any> in
+            let passed: Kind<W, (((W.M) -> W.M, A)) -> Kind<M, Any>> = wa.pass().map { xx in { tuple in xx(tuple.0)(tuple.1) } }
+            return fa^.runT(passed)
+        }
+    }
+}
