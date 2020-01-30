@@ -7,6 +7,7 @@ public class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
         tellFusion()
         listenPure()
         listenWriterProperty()
+        censorTell()
     }
     
     private static func writerPure() {
@@ -34,4 +35,12 @@ public class MonadWriterLaws<F: MonadWriter & EquatableK> where F.W == Int {
             return isEqual(F.listen(F.writer(tuple)), F.map(F.tell(tuple.0), { _ in tuple }))
         }
     }
+    
+    private static func censorTell() {
+        property("Censor tell") <~ forAll { (a: Int, w: Int, f: ArrowOf<Int, Int>) in
+            isEqual(F.writer((f.getArrow(w), a)).listen(),
+                    F.writer((w, a)).censor(f.getArrow).listen())
+        }
+    }
+    
 }
