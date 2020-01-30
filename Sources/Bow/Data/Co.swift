@@ -72,7 +72,7 @@ public extension CoT where M == ForId {
         self.runT(w.map { f in f >>> Id.pure })^.value
     }
     
-    func hoist<V>(_ transform: FunctionK<V, W>) -> Co<V, A> {
+    func hoist<V: Comonad>(_ transform: FunctionK<V, W>) -> Co<V, A> {
         Co<V, A>(self.cow <<< transform.invoke)
     }
     
