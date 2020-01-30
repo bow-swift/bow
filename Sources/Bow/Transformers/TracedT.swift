@@ -80,4 +80,24 @@ extension TracedTPartial: ComonadTraced where W: Comonad, M: Monoid {
     public static func trace<A>(_ wa: TracedTOf<M, W, A>, _ m: M) -> A {
         wa^.value.extract()(m)
     }
+
+    public static func listens<A, B>(_ wa: TracedTOf<M, W, A>, _ f: @escaping (M) -> B) -> TracedTOf<M, W, (B, A)> {
+        TracedT(wa^.value.map { g in
+            { m in (f(m), g(m)) }
+        })
+    }
+    
+    public static func censor<A>(_ wa: TracedTOf<M, W, A>, _ f: @escaping (M) -> M) -> TracedTOf<M, W, A> {
+        TracedT(wa^.value.map { g in f >>> g })
+    }
+    
+    public static func pass<A>(_ wa: TracedTOf<M, W, A>) -> TracedTOf<M, W, ((M) -> M) -> A> {
+        TracedT(wa^.value.map { trace in
+            { m in
+                { f in
+                    trace(f(m))
+                }
+            }
+        })
+    }
 }
