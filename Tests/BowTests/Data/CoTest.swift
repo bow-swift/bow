@@ -2,6 +2,7 @@ import XCTest
 import BowLaws
 import Bow
 import BowGenerators
+import SwiftCheck
 
 extension CoTPartial: EquatableK where W: Applicative & EquatableK, M == ForId {
     public static func eq<A: Equatable>(_ lhs: CoTOf<W, M, A>, _ rhs: CoTOf<W, M, A>) -> Bool {
@@ -25,5 +26,9 @@ class CoTest: XCTestCase {
     
     func testMonadStateLaws() {
         MonadStateLaws<CoPartial<StorePartial<Int>>>.check()
+    }
+    
+    func testMonadWriterLaws() {
+        MonadWriterLaws<CoPartial<TracedPartial<Int>>>.check()
     }
 }
