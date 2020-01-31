@@ -26,7 +26,7 @@ public func constant<A>(_ a: @autoclosure @escaping () -> A) -> () -> A {
 /// - Parameter a: Constant value to return.
 /// - Returns: A 1-ary function that constantly return the value provided as argument, regardless of its input parameter.
 public func constant<A, B>(_ a: @autoclosure @escaping () -> A) -> (B) -> A {
-    return { _ in return a() }
+    return { _ in a() }
 }
 
 /// Provides a constant function.

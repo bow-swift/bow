@@ -91,7 +91,7 @@ public extension Bracket {
     /// - Returns: A computation describing the resouce that will invoke the finalizer when it is released.
     static func guarantee<A>(_ fa: Kind<Self, A>,
                              finalizer: Kind<Self, ()>) -> Kind<Self, A> {
-        return bracket(acquire: fa, release: constant(finalizer), use: constant(fa))
+        return guaranteeCase(fa, finalizer: constant(finalizer))
     }
     
     /// Executes the given finalizer when the source is finished, either in success, error or cancelation, alowing to differentiate between exit conditions.
@@ -102,7 +102,7 @@ public extension Bracket {
     /// - Returns: A computation describing the resource that will invoke the finalizer when it is released.
     static func guaranteeCase<A>(_ fa: Kind<Self, A>,
                                  finalizer: @escaping (ExitCase<Self.E>) -> Kind<Self, ()>) -> Kind<Self, A> {
-        return bracketCase(acquire: fa, release: { _, e in finalizer(e) }, use: constant(fa))
+        return bracketCase(acquire: pure(()), release: { _, e in finalizer(e) }, use: { fa })
     }
 }
 
