@@ -154,6 +154,8 @@
 		11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */; };
 		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
+		11B2F98723AA2ACA00403D57 /* Trampoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2F98623AA2ACA00403D57 /* Trampoline.swift */; };
+		11B2F98A23AA3E6F00403D57 /* TrampolineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2F98823AA3E5000403D57 /* TrampolineTest.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
@@ -815,6 +817,8 @@
 		11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
+		11B2F98623AA2ACA00403D57 /* Trampoline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trampoline.swift; sourceTree = "<group>"; };
+		11B2F98823AA3E5000403D57 /* TrampolineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrampolineTest.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1716,6 +1720,7 @@
 				8BA0F3B6217E2DEF00969984 /* ArrayKTest.swift */,
 				1137469A234345EE00D9C1AD /* ArrayTest.swift */,
 				8BA0F3B9217E2DEF00969984 /* ConstTest.swift */,
+				09CEF853236E2CFB0070CF43 /* CoTest.swift */,
 				8BA0F3B7217E2DEF00969984 /* DayTest.swift */,
 				113746A223435BA300D9C1AD /* DictionaryKTest.swift */,
 				1137469F234359C000D9C1AD /* DictionaryTest.swift */,
@@ -1732,9 +1737,9 @@
 				111F84FC234DC00C003FE646 /* SetTest.swift */,
 				8BA0F3B1217E2DEF00969984 /* StoreTest.swift */,
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
+				11B2F98823AA3E5000403D57 /* TrampolineTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
-				09CEF853236E2CFB0070CF43 /* CoTest.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1848,6 +1853,7 @@
 				8BA0F487217E2E9200969984 /* SetK.swift */,
 				8BA0F486217E2E9200969984 /* Store.swift */,
 				8BA0F483217E2E9200969984 /* Sum.swift */,
+				11B2F98623AA2ACA00403D57 /* Trampoline.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
 			);
@@ -2911,6 +2917,7 @@
 				8BA0F401217E2DEF00969984 /* SetKTest.swift in Sources */,
 				8BA0F407217E2DEF00969984 /* IorTest.swift in Sources */,
 				113746A423435BA600D9C1AD /* DictionaryKTest.swift in Sources */,
+				11B2F98A23AA3E6F00403D57 /* TrampolineTest.swift in Sources */,
 				8BA0F3F1217E2DEF00969984 /* StateTTest.swift in Sources */,
 				11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */,
 				B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */,
@@ -2957,6 +2964,7 @@
 				8BA0F553217E2E9200969984 /* NumberInstances.swift in Sources */,
 				8BA0F4E7217E2E9200969984 /* FunctionK.swift in Sources */,
 				8BA0F617217E2E9200969984 /* MonadReader.swift in Sources */,
+				11B2F98723AA2ACA00403D57 /* Trampoline.swift in Sources */,
 				8BA0F5D7217E2E9200969984 /* HigherKinds.swift in Sources */,
 				8BA0F4D3217E2E9200969984 /* Curry.swift in Sources */,
 				8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */,
