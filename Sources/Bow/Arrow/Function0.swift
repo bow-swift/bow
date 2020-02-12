@@ -73,13 +73,15 @@ extension ForFunction0: Monad {
         return f(Function0.fix(fa).f())
     }
 
-    private static func loop<A, B>(_ a: A, _ f: (A) -> Function0Of<Either<A, B>>) -> B {
-        let result = Function0.fix(f(a)).extract()
-        return result.fold({ a in loop(a, f) }, id)
+    private static func loop<A, B>(_ a: A, _ f: @escaping (A) -> Function0Of<Either<A, B>>) -> Trampoline<B> {
+        .defer {
+            f(a)^.extract().fold({ a in loop(a, f) },
+                                 { b in .done(b) })
+        }
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForFunction0, Either<A, B>>) -> Kind<ForFunction0, B> {
-        return Function0<B>({ loop(a, f) })
+        return Function0<B>({ try! loop(a, f).run() })
     }
 }
 
