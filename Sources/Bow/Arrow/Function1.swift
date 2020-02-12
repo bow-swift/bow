@@ -94,12 +94,15 @@ extension Function1Partial: Monad {
         return Function1<I, B>({ i in Function1.fix(f(Function1.fix(fa).f(i))).f(i) })
     }
 
-    private static func step<A, B>(_ a: A, _ t: I, _ f: (A) -> Function1Of<I, Either<A, B>>) -> B {
-        return Function1.fix(f(a)).f(t).fold({ a in step(a, t, f) }, id)
+    private static func step<A, B>(_ a: A, _ t: I, _ f: @escaping (A) -> Function1Of<I, Either<A, B>>) -> Trampoline<B> {
+        .defer {
+            f(a)^.f(t).fold({ a in step(a, t, f) },
+                           { b in .done(b) })
+        }
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Function1Partial<I>, Either<A, B>>) -> Kind<Function1Partial<I>, B> {
-        return Function1<I, B>({ t in step(a, t, f) })
+        return Function1<I, B>({ t in try! step(a, t, f).run() })
     }
 }
 
