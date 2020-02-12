@@ -81,9 +81,15 @@ extension ForId: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForId, Either<A, B>>) -> Kind<ForId, B> {
-        return Id<Either<A, B>>.fix(f(a)).value
-            .fold({ left in tailRecM(left, f)},
-                  Id<B>.pure)
+        try! _tailRecM(a, f).run()
+    }
+    
+    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> Trampoline<IdOf<B>> {
+        .defer {
+            f(a)^.value.fold(
+                { left in _tailRecM(left, f) },
+                { right in .done(Id(right)) })
+        }
     }
 }
 
