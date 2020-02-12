@@ -383,10 +383,7 @@ public extension Lens where S == T, A == B {
     /// - Parameter f: Updating function.
     /// - Returns: A `State` with the new value.
     func update(_ f: @escaping (A) -> A) -> State<S, A> {
-        return State { s in
-            let b = f(self.get(s))
-            return (self.set(s, b), b)
-        }
+        State { s in (self.set(s, f(self.get(s))), f(self.get(s))) }
     }
     
     /// Updates the focus viewed through the `Lens` and returns its old value.

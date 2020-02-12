@@ -12,10 +12,10 @@ import BowEffects
 let formatter = DateFormatter()
 formatter.dateFormat = "HH:mm:ss"
 
-let io = Task<String>.invoke {
+let io = RIO<Any, String>.invoke { _ in
     let date = Date()
     return formatter.string(from: date)
-}.env
+}
 
 enum AnyError: Error {
     case unknown

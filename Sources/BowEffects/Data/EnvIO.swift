@@ -22,12 +22,44 @@ public typealias URIO<D, A> = EnvIO<D, Never, A>
 // MARK: Functions for EnvIO
 
 public extension Kleisli {
+    /// Creates an EnvIO from a side-effectful function that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invoke<E: Error>(_ f: @escaping (D) throws -> A) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invoke { try f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning an Either that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeEither<E: Error>(_ f: @escaping (D) -> Either<E, A>) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invokeEither { f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning a Result that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeResult<E: Error>(_ f: @escaping (D) -> Result<A, E>) -> EnvIO<D, E, A> where F == IOPartial<E> {
+        EnvIO { env in IO.invokeResult { f(env) } }
+    }
+    
+    /// Creates an EnvIO from a side-effectful function returning a Validated that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeValidated<E: Error>(_ f: @escaping (D) -> Validated<E, A>) -> EnvIO<D, E, A> {
+        EnvIO { env in IO.invokeValidated { f(env) } }
+    }
+    
     /// Transforms the error type of this EnvIO
     ///
     /// - Parameter f: Function transforming the error.
     /// - Returns: An EnvIO value with the new error type.
     func mapError<E: Error, EE: Error>(_ f: @escaping (E) -> EE) -> EnvIO<D, EE, A> where F == IOPartial<E> {
-        return EnvIO { env in self.invoke(env)^.mapLeft(f) }
+        return EnvIO { env in self.run(env)^.mapError(f) }
     }
     
     /// Provides the required environment.
@@ -35,7 +67,7 @@ public extension Kleisli {
     /// - Parameter d: Environment.
     /// - Returns: An IO resulting from running this computation with the provided environment.
     func provide<E: Error>(_ d: D) -> IO<E, A> where F == IOPartial<E> {
-        return self.invoke(d)^
+        return self.run(d)^
     }
     
     /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
@@ -125,6 +157,57 @@ public extension Kleisli {
                 .mapError { x in x as! E }
                 .flatMap { s in loop(a, s) }^ })
     }
+    
+    /// Transforms the type arguments of this EnvIO.
+    ///
+    /// - Parameters:
+    ///   - fe: Function to transform the error type argument.
+    ///   - fa: Function to transform the output type argument.
+    /// - Returns: An EnvIO with both type arguments transformed.
+    func bimap<E: Error, EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> EnvIO<D, EE, B> where F == IOPartial<E> {
+        mapError(fe).map(fa)^
+    }
+    
+    /// Performs the side effects that are suspended in this IO in a synchronous manner.
+    ///
+    /// - Parameters:
+    ///   - d: Dependencies needed in this operation.
+    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: Value produced after running the suspended side effects.
+    /// - Throws: Error of type `E` that may happen during the evaluation of the side-effects. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunSync<E: Error>(with d: D, on queue: DispatchQueue = .main) throws -> A where F == IOPartial<E> {
+        try self.provide(d).unsafeRunSync(on: queue)
+    }
+    
+    /// Performs the side effects that are suspended in this EnvIO in a synchronous manner.
+    ///
+    /// - Parameters:
+    ///   - d: Dependencies needed in this operation.
+    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    /// - Returns: An Either wrapping errors in the left side and values on the right side. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunSyncEither<E: Error>(with d: D, on queue: DispatchQueue = .main) -> Either<E, A> where F == IOPartial<E> {
+        self.provide(d).unsafeRunSyncEither(on: queue)
+    }
+    
+    /// Performs the side effects that are suspended in this EnvIO in an asynchronous manner.
+    ///
+    /// - Parameters:
+    ///   - d: Dependencies needed in this operation.
+    ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
+    ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
+    func unsafeRunAsync<E: Error>(with d: D, on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where F == IOPartial<E> {
+        self.provide(d).unsafeRunAsync(on: queue, callback)
+    }
+}
+
+public extension Kleisli where F == IOPartial<Error> {
+    /// Creates an EnvIO from a side-effectful function returning a Try that has a dependency.
+    ///
+    /// - Parameter f: Side-effectful function.
+    /// - Returns: An EnvIO value suspending the execution of the side effect.
+    static func invokeTry(_ f: @escaping (D) -> Try<A>) -> EnvIO<D, Error, A> {
+        EnvIO { env in IO.invokeTry { f(env) } }
+    }
 }
 
 public extension Kleisli where D == Any {
@@ -177,7 +260,7 @@ public extension Kleisli where A == Void {
 
 extension KleisliPartial: MonadDefer where F: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> Kind<KleisliPartial<F, D>, A>) -> Kind<KleisliPartial<F, D>, A> {
-        Kleisli { d in F.defer { fa()^.invoke(d) } }
+        Kleisli { d in F.defer { fa()^.run(d) } }
     }
 }
 
@@ -187,14 +270,14 @@ extension KleisliPartial: Async where F: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<F.E, A>) -> ()) -> Kind<KleisliPartial<F, D>, ()>) -> Kind<KleisliPartial<F, D>, A> {
         Kleisli { d in
             F.asyncF { callback in
-                procf(callback)^.invoke(d)
+                procf(callback)^.run(d)
             }
         }
     }
     
     public static func continueOn<A>(_ fa: Kind<KleisliPartial<F, D>, A>, _ queue: DispatchQueue) -> Kind<KleisliPartial<F, D>, A> {
         Kleisli { d in
-            fa^.invoke(d).continueOn(queue)
+            fa^.run(d).continueOn(queue)
         }
     }
 }
@@ -204,19 +287,19 @@ extension KleisliPartial: Async where F: Async {
 extension KleisliPartial: Concurrent where F: Concurrent {
     public static func race<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, Either<A, B>> {
         Kleisli { d in
-            F.race(fa^.invoke(d), fb^.invoke(d))
+            F.race(fa^.run(d), fb^.run(d))
         }
     }
     
     public static func parMap<A, B, Z>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>, _ f: @escaping (A, B) -> Z) -> Kind<KleisliPartial<F, D>, Z> {
         Kleisli { d in
-            F.parMap(fa^.invoke(d), fb^.invoke(d), f)
+            F.parMap(fa^.run(d), fb^.run(d), f)
         }
     }
     
     public static func parMap<A, B, C, Z>(_ fa: Kind<KleisliPartial<F, D>, A>, _ fb: Kind<KleisliPartial<F, D>, B>, _ fc: Kind<KleisliPartial<F, D>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<KleisliPartial<F, D>, Z> {
         Kleisli { d in
-            F.parMap(fa^.invoke(d), fb^.invoke(d), fc^.invoke(d), f)
+            F.parMap(fa^.run(d), fb^.run(d), fc^.run(d), f)
         }
     }
 }

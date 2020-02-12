@@ -40,14 +40,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     }
     
     /// Creates an EnvIO with no dependencies from this IO.
-    public var env: EnvIO<Any, E, A> {
+    public func env<D>() -> EnvIO<D, E, A> {
         EnvIO { _ in self }
     }
     
     /// Creates an IO from a side-effectful function.
     ///
     /// - Parameter f: Side-effectful function. Errors thrown from this function must be of type `E`; otherwise, a fatal error will happen.
-    /// - Returns: An IO function suspending the execution of the side effect.
+    /// - Returns: An IO suspending the execution of the side effect.
     public static func invoke(_ f: @escaping () throws -> A) -> IO<E, A> {
         IO.defer {
             do {
@@ -90,6 +90,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Returns: An IO suspending the execution of the side effect.
     public static func invokeValidated(_ f: @escaping () throws -> Validated<E, A>) -> IO<E, A> {
         invokeEither { try f().toEither() }
+    }
+    
+    /// Transforms the type arguments of this IO.
+    ///
+    /// - Parameters:
+    ///   - fe: Function to transform the error type argument.
+    ///   - fa: Function to transform the output type argument.
+    /// - Returns: An IO with both type arguments transformed.
+    func bimap<EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> IO<EE, B> {
+        mapError(fe).map(fa)^
     }
     
     /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -339,13 +349,22 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///
     /// - Parameter f: Function transforming the error.
     /// - Returns: An IO value with the new error type.
+    @available(*, deprecated, renamed: "mapError")
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
+        FErrorMap(f, self)
+    }
+    
+    /// Transforms the error type of this IO.
+    ///
+    /// - Parameter f: Function transforming the error.
+    /// - Returns: An IO value with the new error type.
+    public func mapError<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
         FErrorMap(f, self)
     }
     
     /// Returns this `IO` erasing the error type information
     public var anyError: IO<Error, A> {
-        self.mapLeft { e in e as Error }
+        self.mapError { e in e as Error }
     }
     
     internal func fail(_ error: Error) -> Never {
@@ -369,7 +388,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameter policy: Retrial policy.
     /// - Returns: A computation that is retried based on the provided policy when it fails.
     public func retry<S, O>(_ policy: Schedule<Any, E, S, O>) -> IO<E, A> {
-        self.env.retry(policy).provide(())
+        self.env().retry(policy).provide(())
     }
     
     /// Retries this computation if it fails based on the provided retrial policy, providing a default computation to handle failures after retrial.
@@ -381,7 +400,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - orElse: Function to handle errors after retrying.
     /// - Returns: A computation that is retried based on the provided policy when it fails.
     public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
-        self.env.retry(policy, orElse: { e, o in orElse(e, o).env }).provide(())
+        self.env().retry(policy, orElse: { e, o in orElse(e, o).env() }).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails.
@@ -393,7 +412,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
-        self.env.repeat(policy, onUpdateError: onUpdateError).provide(())
+        self.env().repeat(policy, onUpdateError: onUpdateError).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
@@ -404,7 +423,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - orElse: A function to return a computation in case of error.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
     public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
-        self.env.repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env }).provide(())
+        self.env().repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env() }).provide(())
     }
 }
 

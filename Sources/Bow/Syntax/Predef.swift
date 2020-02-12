@@ -26,7 +26,7 @@ public func constant<A>(_ a: @autoclosure @escaping () -> A) -> () -> A {
 /// - Parameter a: Constant value to return.
 /// - Returns: A 1-ary function that constantly return the value provided as argument, regardless of its input parameter.
 public func constant<A, B>(_ a: @autoclosure @escaping () -> A) -> (B) -> A {
-    return { _ in return a() }
+    return { _ in a() }
 }
 
 /// Provides a constant function.
@@ -446,3 +446,10 @@ public func <<<<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) th
     return f >>> g
 }
 
+/// Flips the arguments of a binary function.
+///
+/// - Parameter f: Function whose arguments must be flipped.
+/// - Returns: A function with the same behavior as the input, but with arguments flipped.
+public func flip<A, B, C>(_ f: @escaping (A, B) -> C) -> (B, A) -> C {
+    { b, a in f(a, b) }
+}

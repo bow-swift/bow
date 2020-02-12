@@ -2,22 +2,31 @@ import XCTest
 import BowLaws
 import Bow
 
-extension StorePartial: EquatableK {
-    public static func eq<A>(_ lhs: Kind<StorePartial<S>, A>, _ rhs: Kind<StorePartial<S>, A>) -> Bool where A: Equatable {
-        return Store.fix(lhs).extract() == Store.fix(rhs).extract()
+extension StoreTPartial: EquatableK where W: Comonad & EquatableK {
+    public static func eq<A: Equatable>(_ lhs: StoreTOf<S, W, A>,
+                                        _ rhs: StoreTOf<S, W, A>) -> Bool {
+        lhs^.extract() == rhs^.extract()
     }
 }
 
-class StoreTest: XCTestCase {
+class StoreTTest: XCTestCase {
     func testFunctorLaws() {
         FunctorLaws<StorePartial<Int>>.check()
+    }
+    
+    func testApplicativeLaws() {
+        ApplicativeLaws<StorePartial<Int>>.check()
     }
     
     func testComonadLaws() {
         ComonadLaws<StorePartial<Int>>.check()
     }
     
-    let greetingStore = { (name : String) in Store(state: name, render: { name in "Hi \(name)!"}) }
+    func testComonadStoreLaws() {
+        ComonadStoreLaws<StorePartial<Int>, Int>.check()
+    }
+    
+    let greetingStore = { (name: String) in Store(name, { name in "Hi \(name)!"}) }
     
     func testExtractRendersCurrentState() {
         let result = greetingStore("Bow")

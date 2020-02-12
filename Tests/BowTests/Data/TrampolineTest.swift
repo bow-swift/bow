@@ -6,14 +6,6 @@ class TrampolineTest: XCTestCase {
         XCTAssert(isEven(200000))
     }
     
-    func step(_ n: Int) -> Trampoline<Void> {
-        if n == 10 {
-            return .done(())
-        } else {
-            return step(n + 1)
-        }
-    }
-    
     func isEven(_ n: Int) -> Bool {
         try! _isEven(n).run()
     }
