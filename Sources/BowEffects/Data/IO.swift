@@ -507,18 +507,20 @@ internal class HandleErrorWith<E: Error, A>: IO<E, A> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        do {
-            return try fa._unsafeRunSync(on: queue)
-        } catch let e as E {
+        .defer {
             do {
-                return try f(e)._unsafeRunSync(on: queue)
-            } catch let e2 as E {
-                throw e2
+                return try self.fa._unsafeRunSync(on: queue)
+            } catch let e as E {
+                do {
+                    return try self.f(e)._unsafeRunSync(on: queue)
+                } catch let e2 as E {
+                    throw e2
+                } catch {
+                    self.fail(error)
+                }
             } catch {
                 self.fail(error)
             }
-        } catch {
-            self.fail(error)
         }
     }
 }
@@ -533,8 +535,10 @@ internal class FMap<E: Error, A, B> : IO<E, B> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(B, Queue)> {
-        try action._unsafeRunSync(on: queue).map { result in
-            (try self.on(queue: result.1) { self.f(result.0) }, result.1)
+        .defer {
+            try self.action._unsafeRunSync(on: queue).map { result in
+                (try self.on(queue: result.1) { self.f(result.0) }, result.1)
+            }
         }
     }
 }
@@ -549,12 +553,14 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        do {
-            return try action._unsafeRunSync(on: queue)
-        } catch let error as E {
-            return .done((try on(queue: queue) { throw self.f(error) }, queue))
-        } catch {
-            self.fail(error)
+        .defer {
+            do {
+                return try self.action._unsafeRunSync(on: queue)
+            } catch let error as E {
+                return .done((try self.on(queue: queue) { throw self.f(error) }, queue))
+            } catch {
+                self.fail(error)
+            }
         }
     }
 }
@@ -567,9 +573,11 @@ internal class Join<E: Error, A> : IO<E, A> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        let result = try io._unsafeRunSync(on: queue)
-        return try result.flatMap { res in
-            try res.0._unsafeRunSync(on: res.1)
+        .defer {
+            let result = try self.io._unsafeRunSync(on: queue)
+            return try result.flatMap { res in
+                try res.0._unsafeRunSync(on: res.1)
+            }
         }
     }
 }
@@ -582,22 +590,24 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        var result: Either<E, A>?
-        let group = DispatchGroup()
-        group.enter()
-        let callback: Callback<E, A> = { either in
-            result = either
-            group.leave()
-        }
-        let io = try on(queue: queue) {
-            self.f(callback)
-        }
-        let procResult = try io^._unsafeRunSync(on: queue)
-        group.wait()
-        
-        return try procResult.flatMap { procRes in
-            try IO.fromEither(result!)^._unsafeRunSync(on: procRes.1).map { res in
-                (res.0, procRes.1)
+        .defer {
+            var result: Either<E, A>?
+            let group = DispatchGroup()
+            group.enter()
+            let callback: Callback<E, A> = { either in
+                result = either
+                group.leave()
+            }
+            let io = try self.on(queue: queue) {
+                self.f(callback)
+            }
+            let procResult = try io^._unsafeRunSync(on: queue)
+            group.wait()
+            
+            return try procResult.flatMap { procRes in
+                try IO.fromEither(result!)^._unsafeRunSync(on: procRes.1).map { res in
+                    (res.0, procRes.1)
+                }
             }
         }
     }
@@ -613,8 +623,10 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
     }
     
     override internal func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        try io._unsafeRunSync(on: queue).map { result in
-            (result.0, .queue(self.queue))
+        .defer {
+            try self.io._unsafeRunSync(on: queue).map { result in
+                (result.0, .queue(self.queue))
+            }
         }
     }
 }
@@ -633,18 +645,20 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(B, Queue)> {
-        let ioResult = try io._unsafeRunSync(on: queue)
-        return try ioResult.flatMap { ioRes in
-            let resource = ioRes.0
-            do {
-                let useResult = try self.use(resource)^._unsafeRunSync(on: queue)
-                let _ = try self.release(resource, .completed)^._unsafeRunSync(on: queue)
-                return useResult
-            } catch let error as E {
-                let _ = try self.release(resource, .error(error))^._unsafeRunSync(on: queue)
-                throw error
-            } catch {
-                self.fail(error)
+        .defer {
+            let ioResult = try self.io._unsafeRunSync(on: queue)
+            return try ioResult.flatMap { ioRes in
+                let resource = ioRes.0
+                do {
+                    let useResult = try self.use(resource)^._unsafeRunSync(on: queue)
+                    let _ = try self.release(resource, .completed)^._unsafeRunSync(on: queue)
+                    return useResult
+                } catch let error as E {
+                    let _ = try self.release(resource, .error(error))^._unsafeRunSync(on: queue)
+                    throw error
+                } catch {
+                    self.fail(error)
+                }
             }
         }
     }
@@ -660,50 +674,52 @@ internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(Either<A, B>, Queue)> {
-        let result = Atomic<Either<Trampoline<(A, Queue)>, Trampoline<(B, Queue)>>?>(nil)
-        let atomic = Atomic<E?>(nil)
-        let group = DispatchGroup()
-        let parQueue1: Queue = .queue(label: queue.label + "raceA", qos: queue.qos)
-        let parQueue2: Queue = .queue(label: queue.label + "raceB", qos: queue.qos)
-        
-        group.enter()
-        parQueue1.async {
-            do {
-                let a = try self.fa._unsafeRunSync(on: parQueue1)
-                if result.setIfNil(.left(a)) {
-                    group.leave()
+        .defer {
+            let result = Atomic<Either<Trampoline<(A, Queue)>, Trampoline<(B, Queue)>>?>(nil)
+            let atomic = Atomic<E?>(nil)
+            let group = DispatchGroup()
+            let parQueue1: Queue = .queue(label: queue.label + "raceA", qos: queue.qos)
+            let parQueue2: Queue = .queue(label: queue.label + "raceB", qos: queue.qos)
+            
+            group.enter()
+            parQueue1.async {
+                do {
+                    let a = try self.fa._unsafeRunSync(on: parQueue1)
+                    if result.setIfNil(.left(a)) {
+                        group.leave()
+                    }
+                } catch let error as E {
+                    if !atomic.setIfNil(error) {
+                        group.leave()
+                    }
+                } catch {
+                    self.fail(error)
                 }
-            } catch let error as E {
-                if !atomic.setIfNil(error) {
-                    group.leave()
-                }
-            } catch {
-                self.fail(error)
             }
-        }
-        
-        parQueue2.async {
-            do {
-                let b = try self.fb._unsafeRunSync(on: parQueue2)
-                if result.setIfNil(.right(b)) {
-                    group.leave()
+            
+            parQueue2.async {
+                do {
+                    let b = try self.fb._unsafeRunSync(on: parQueue2)
+                    if result.setIfNil(.right(b)) {
+                        group.leave()
+                    }
+                } catch let error as E {
+                    if !atomic.setIfNil(error) {
+                        group.leave()
+                    }
+                } catch {
+                    self.fail(error)
                 }
-            } catch let error as E {
-                if !atomic.setIfNil(error) {
-                    group.leave()
-                }
-            } catch {
-                self.fail(error)
             }
-        }
-        
-        group.wait()
-        if let value = result.value {
-            return try value.unsafeFold(
-                { ta in try ta.map { a in (.left(a.0), a.1) } },
-                { tb in try tb.map { b in (.right(b.0), b.1) } })
-        } else {
-            throw atomic.value!
+            
+            group.wait()
+            if let value = result.value {
+                return try value.unsafeFold(
+                    { ta in try ta.map { a in (.left(a.0), a.1) } },
+                    { tb in try tb.map { b in (.right(b.0), b.1) } })
+            } else {
+                throw atomic.value!
+            }
         }
     }
 }
@@ -720,46 +736,48 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(Z, Queue)> {
-        var a: Trampoline<(A, Queue)>?
-        var b: Trampoline<(B, Queue)>?
-        let atomic = Atomic<E?>(nil)
-        let group = DispatchGroup()
-        let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
-        
-        group.enter()
-        parQueue1.async {
-            do {
-                a = try self.fa._unsafeRunSync(on: parQueue1)
-            } catch let error as E {
-                atomic.setIfNil(error)
-            } catch {
-                self.fail(error)
-            }
-            group.leave()
-        }
-        
-        group.enter()
-        parQueue2.async {
-            do {
-                b = try self.fb._unsafeRunSync(on: parQueue2)
-            } catch let error as E {
-                atomic.setIfNil(error)
-            } catch {
-                self.fail(error)
-            }
-            group.leave()
-        }
-        
-        group.wait()
-        if let aa = a, let bb = b {
-            return try aa.flatMap { a in
-                try bb.map { b in
-                    (self.f(a.0, b.0), queue)
+        .defer {
+            var a: Trampoline<(A, Queue)>?
+            var b: Trampoline<(B, Queue)>?
+            let atomic = Atomic<E?>(nil)
+            let group = DispatchGroup()
+            let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
+            let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
+            
+            group.enter()
+            parQueue1.async {
+                do {
+                    a = try self.fa._unsafeRunSync(on: parQueue1)
+                } catch let error as E {
+                    atomic.setIfNil(error)
+                } catch {
+                    self.fail(error)
                 }
+                group.leave()
             }
-        } else {
-            throw atomic.value!
+            
+            group.enter()
+            parQueue2.async {
+                do {
+                    b = try self.fb._unsafeRunSync(on: parQueue2)
+                } catch let error as E {
+                    atomic.setIfNil(error)
+                } catch {
+                    self.fail(error)
+                }
+                group.leave()
+            }
+            
+            group.wait()
+            if let aa = a, let bb = b {
+                return try aa.flatMap { a in
+                    try bb.map { b in
+                        (self.f(a.0, b.0), queue)
+                    }
+                }
+            } else {
+                throw atomic.value!
+            }
         }
     }
 }
@@ -778,62 +796,64 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(Z, Queue)> {
-        var a: Trampoline<(A, Queue)>?
-        var b: Trampoline<(B, Queue)>?
-        var c: Trampoline<(C, Queue)>?
-        let atomic = Atomic<E?>(nil)
-        let group = DispatchGroup()
-        let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
-        let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
-        let parQueue3: Queue = .queue(label: queue.label + "parMap3", qos: queue.qos)
-        
-        group.enter()
-        parQueue1.async {
-            do {
-                a = try self.fa._unsafeRunSync(on: parQueue1)
-            } catch let error as E {
-                atomic.value = error
-            } catch {
-                self.fail(error)
+        .defer {
+            var a: Trampoline<(A, Queue)>?
+            var b: Trampoline<(B, Queue)>?
+            var c: Trampoline<(C, Queue)>?
+            let atomic = Atomic<E?>(nil)
+            let group = DispatchGroup()
+            let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
+            let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
+            let parQueue3: Queue = .queue(label: queue.label + "parMap3", qos: queue.qos)
+            
+            group.enter()
+            parQueue1.async {
+                do {
+                    a = try self.fa._unsafeRunSync(on: parQueue1)
+                } catch let error as E {
+                    atomic.value = error
+                } catch {
+                    self.fail(error)
+                }
+                group.leave()
             }
-            group.leave()
-        }
-        
-        group.enter()
-        parQueue2.async {
-            do {
-                b = try self.fb._unsafeRunSync(on: parQueue2)
-            } catch let error as E {
-                atomic.value = error
-            } catch {
-                self.fail(error)
+            
+            group.enter()
+            parQueue2.async {
+                do {
+                    b = try self.fb._unsafeRunSync(on: parQueue2)
+                } catch let error as E {
+                    atomic.value = error
+                } catch {
+                    self.fail(error)
+                }
+                group.leave()
             }
-            group.leave()
-        }
-        
-        group.enter()
-        parQueue3.async {
-            do {
-                c = try self.fc._unsafeRunSync(on: parQueue3)
-            } catch let error as E {
-                atomic.value = error
-            } catch {
-                self.fail(error)
+            
+            group.enter()
+            parQueue3.async {
+                do {
+                    c = try self.fc._unsafeRunSync(on: parQueue3)
+                } catch let error as E {
+                    atomic.value = error
+                } catch {
+                    self.fail(error)
+                }
+                group.leave()
             }
-            group.leave()
-        }
-        
-        group.wait()
-        if let aa = a, let bb = b, let cc = c {
-            return try aa.flatMap { a in
-                try bb.flatMap { b in
-                    try cc.map { c in
-                        (self.f(a.0, b.0, c.0), queue)
+            
+            group.wait()
+            if let aa = a, let bb = b, let cc = c {
+                return try aa.flatMap { a in
+                    try bb.flatMap { b in
+                        try cc.map { c in
+                            (self.f(a.0, b.0, c.0), queue)
+                        }
                     }
                 }
+            } else {
+                throw atomic.value!
             }
-        } else {
-            throw atomic.value!
         }
     }
 }
@@ -848,18 +868,20 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(Void, Queue)> {
-        do {
-            let trampoline = try io._unsafeRunSync(on: queue)
-            return try trampoline.flatMap { t in
-                let (a, nextQueue) = t
-                let result = self.callback(.right(a))
-                return try result^._unsafeRunSync(on: nextQueue)
+        .defer {
+            do {
+                let trampoline = try self.io._unsafeRunSync(on: queue)
+                return try trampoline.flatMap { t in
+                    let (a, nextQueue) = t
+                    let result = self.callback(.right(a))
+                    return try result^._unsafeRunSync(on: nextQueue)
+                }
+            } catch let error as E {
+                let result = self.callback(.left(error))
+                return try result^._unsafeRunSync(on: queue)
+            } catch {
+                self.fail(error)
             }
-        } catch let error as E {
-            let result = callback(.left(error))
-            return try result^._unsafeRunSync(on: queue)
-        } catch {
-            fail(error)
         }
     }
 }
@@ -872,8 +894,10 @@ internal class Suspend<E: Error, A>: IO<E, A> {
     }
     
     override func _unsafeRunSync(on queue: Queue = .queue()) throws -> Trampoline<(A, Queue)> {
-        try on(queue: queue) {
-            try self.thunk()^._unsafeRunSync(on: queue)
+        .defer {
+            try self.on(queue: queue) {
+                try self.thunk()^._unsafeRunSync(on: queue)
+            }
         }
     }
 }
