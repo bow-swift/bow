@@ -250,25 +250,27 @@ extension IorPartial: Monad where L: Semigroup {
         })
     }
 
-    private static func loop<A, B>(_ v : Ior<L, Either<A, B>>,
-                                      _ f : @escaping (A) -> Ior<L, Either<A, B>>) -> Ior<L, B> {
-            return v.fold({ left in .left(left) },
+    private static func loop<A, B>(_ v: Ior<L, Either<A, B>>,
+                                   _ f: @escaping (A) -> Ior<L, Either<A, B>>) -> Trampoline<Ior<L, B>> {
+        .defer {
+            return v.fold({ left in .done(.left(left)) },
                           { right in
                             right.fold({ a in loop(f(a), f) },
-                                       { b in .right(b) })
+                                       { b in .done(.right(b)) })
             },
                           { left, right in
                             right.fold({ a in
-                                f(a).fold({ aLeft in .left(aLeft.combine(left)) },
+                                f(a).fold({ aLeft in .done(.left(aLeft.combine(left))) },
                                           { aRight in loop(.both(left, aRight), f) },
                                           { aLeft, aRight in loop(.both(left.combine(aLeft), aRight), f) })
                                         },
-                                       { b in .both(left, b) })
+                                       { b in .done(.both(left, b)) })
             })
+        }
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IorPartial<L>, Either<A, B>>) -> Kind<IorPartial<L>, B> {
-        return loop(Ior.fix(f(a)), { a in Ior.fix(f(a)) })
+        try! loop(f(a)^, { a in f(a)^ }).run()
     }
 }
 
