@@ -46,35 +46,6 @@ class IOTest: XCTestCase {
     func testBracketLaws() {
         BracketLaws<IOPartial<CategoryError>>.check()
     }
-    
-    func testStackOverflow() {
-        var i = 0
-        let io = Task.invoke {
-            i += 1
-            print("Hello \(i)")
-            throw CategoryError.unknown
-        }
-        let retried = io.retry(Schedule.recurs(1000))
-        print(retried)
-        
-        var io2 = IO<CategoryError, Int>.pure(1)
-        for _ in 0 ..< 20000 {
-            io2 = io2.map { print($0); return $0 + 1 }
-        }
-        print(io2)
-        _ = io2^.unsafeRunSyncEither()
-    }
-    
-    func testFlatmapOverflow() {
-        var io: Int? = 0
-        for _ in 0 ..< 200000 {
-            io = io.map { print($0); return $0 + 1 }
-        }
-        print(io)
-        //let result = io^.unsafeRunSyncEither()
-        //print(result)
-        //XCTAssertEqual(result, Either<CategoryError, Int>.right(200000))
-    }
 }
 
 extension IOPartial: EquatableK where E: Equatable {
