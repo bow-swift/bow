@@ -198,19 +198,23 @@ extension ForNonEmptyArray: Monad {
         return NEA.fix(f(nea.head)) + nea.tail.flatMap{ a in NEA.fix(f(a)).all() }
     }
 
-    private static func go<A, B>(_ buf: [B], _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>, _ v: NonEmptyArray<Either<A, B>>) -> [B] {
-        let head = v.head
-        return head.fold({ a in go(buf, f, NonEmptyArray.fix(f(a)) + v.tail) },
-                         { b in
-                            let newBuf = buf + [b]
-                            let x = NonEmptyArray<Either<A, B>>.fromArray(v.tail)
-                            return x.fold({ newBuf },
-                                          { value in go(newBuf, f, value) })
-        })
+    private static func go<A, B>(_ buf: [B],
+                                 _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>,
+                                 _ v: NonEmptyArray<Either<A, B>>) -> Trampoline<[B]> {
+        .defer {
+            let head = v.head
+            return head.fold({ a in go(buf, f, NonEmptyArray.fix(f(a)) + v.tail) },
+                             { b in
+                                let newBuf = buf + [b]
+                                let x = NonEmptyArray<Either<A, B>>.fromArray(v.tail)
+                                return x.fold({ .done(newBuf) },
+                                              { value in go(newBuf, f, value) })
+            })
+        }
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForNonEmptyArray, Either<A, B>>) -> Kind<ForNonEmptyArray, B> {
-        return NonEmptyArray.fromArrayUnsafe(go([], f, NonEmptyArray.fix(f(a))))
+        return NonEmptyArray.fromArrayUnsafe(try! go([], f, f(a)^).run())
     }
 }
 
