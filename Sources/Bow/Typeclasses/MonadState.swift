@@ -48,16 +48,7 @@ public extension MonadState {
 
 // MARK: Syntax for MonadState
 
-public extension Kind where F: MonadState {
-    /// Retrieves the state from the internals of the monad.
-    ///
-    /// This is a convenience method to call `MonadState.get` as a static method of this type.
-    ///
-    /// - Returns: Maintained state.
-    static func get() -> Kind<F, F.S> {
-        return F.get()
-    }
-
+public extension Kind where F: MonadState, A == Void {
     /// Replaces the state inside the monad.
     ///
     /// This is a convenience method to call `MonadState.set` as a static method of this type.
@@ -67,17 +58,7 @@ public extension Kind where F: MonadState {
     static func set(_ s: F.S) -> Kind<F, ()> {
         return F.set(s)
     }
-
-    /// Embeds a state action into the monad.
-    ///
-    /// This is a convenience method to call `MonadState.state` as a static method of this type.
-    ///
-    /// - Parameter f: A function that receives the state and computes a value and a new state.
-    /// - Returns: A value with the output of the function and the new state.
-    static func state(_ f: @escaping (F.S) -> (F.S, A)) -> Kind<F, A> {
-        return F.state(f)
-    }
-
+    
     /// Modifies the internal state.
     ///
     /// This is a convenience method to call `MonadState.modify` as a static method of this type.
@@ -86,6 +67,29 @@ public extension Kind where F: MonadState {
     /// - Returns: Unit.
     static func modify(_ f: @escaping (F.S) -> F.S) -> Kind<F, ()> {
         return F.modify(f)
+    }
+}
+
+public extension Kind where F: MonadState, A == F.S {
+    /// Retrieves the state from the internals of the monad.
+    ///
+    /// This is a convenience method to call `MonadState.get` as a static method of this type.
+    ///
+    /// - Returns: Maintained state.
+    static func get() -> Kind<F, F.S> {
+        return F.get()
+    }
+}
+
+public extension Kind where F: MonadState {
+    /// Embeds a state action into the monad.
+    ///
+    /// This is a convenience method to call `MonadState.state` as a static method of this type.
+    ///
+    /// - Parameter f: A function that receives the state and computes a value and a new state.
+    /// - Returns: A value with the output of the function and the new state.
+    static func state(_ f: @escaping (F.S) -> (F.S, A)) -> Kind<F, A> {
+        return F.state(f)
     }
 
     /// Retrieves a specific component of the state.

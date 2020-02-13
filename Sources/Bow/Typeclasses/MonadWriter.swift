@@ -56,6 +56,18 @@ public extension MonadWriter {
 
 // MARK: Syntax for MonadWriter
 
+public extension Kind where F: MonadWriter, A == Void {
+    /// Produces a new value of the side stream of data.
+    ///
+    /// This is a convenience method to call `MonadWriter.tell` as a static method of this type.
+    ///
+    /// - Parameter w: New value.
+    /// - Returns: Unit.
+    static func tell(_ w: F.W) -> Kind<F, ()> {
+        return F.tell(w)
+    }
+}
+
 public extension Kind where F: MonadWriter {
     /// Embeds a writer action.
     ///
@@ -84,16 +96,6 @@ public extension Kind where F: MonadWriter {
     /// - Returns: Result of the computation.
     static func pass(_ fa: Kind<F, ((F.W) -> F.W, A)>) -> Kind<F, A> {
         return F.pass(fa)
-    }
-
-    /// Produces a new value of the side stream of data.
-    ///
-    /// This is a convenience method to call `MonadWriter.tell` as a static method of this type.
-    ///
-    /// - Parameter w: New value.
-    /// - Returns: Unit.
-    static func tell(_ w: F.W) -> Kind<F, ()> {
-        return F.tell(w)
     }
 
     /// Performs this computation and transforms the side stream of data, pairing it with the result of this computation.

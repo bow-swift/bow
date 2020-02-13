@@ -36,6 +36,10 @@ public class Pairing<F: Functor, G: Functor>: PairingOf<F, G> {
                 gb.map { b in b as Any }) { a, b in f(a as! A, b as! B) } as! C
     }
     
+    public func select<A, B>(_ fa: Kind<F, A>, _ ggb: Kind<G, Kind<G, B>>) -> Kind<G, B> {
+        pair(fa, ggb) { _, gb in gb }
+    }
+    
     public func pairFlipped<A, B, C>(_ ga: Kind<G, A>, _ fb: Kind<F, B>, _ f: @escaping (A, B) -> C) -> C {
         pair(fb, ga, flip(f))
     }
@@ -112,5 +116,19 @@ public extension Pairing {
     
     static func pairReaderEnv<R>() -> Pairing<ReaderPartial<R>, EnvPartial<R>> where F == ReaderPartial<R>, G == EnvPartial<R> {
         .pairReaderTEnvT(.pairId())
+    }
+}
+
+// MARK: Pairing for any Comonad
+
+public extension Comonad {
+    static func pair() -> Pairing<Self, CoPartial<Self>> {
+        Pairing { wab, cowa in cowa^.run(wab) }
+    }
+}
+
+public extension Kind where F: Comonad {
+    static func pair() -> Pairing<F, CoPartial<F>> {
+        F.pair()
     }
 }

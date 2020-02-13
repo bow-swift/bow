@@ -1,35 +1,83 @@
-// newtype Co w a = Co (forall r. w (a -> r) -> r)
+// newtype CoT w m a = Co (forall r. w (a -> m r) -> m r)
 
-public final class ForCo {}
-public final class CoPartial<W: Comonad>: Kind<ForCo, W> {}
-public typealias CoOf<W: Comonad, A> = Kind<CoPartial<W>, A>
+public final class ForCoT {}
+public final class CoTPartial<W: Comonad, M>: Kind2<ForCoT, W, M> {}
+public typealias CoTOf<W: Comonad, M, A> = Kind<CoTPartial<W, M>, A>
 
-/// (Co w) gives you "the best" pairing monad for any comonad w
+public typealias ForCo = ForCoT
+public typealias CoPartial<W: Comonad> = CoTPartial<W, ForId>
+public typealias CoOf<W: Comonad, A> = CoTOf<W, ForId, A>
+public typealias Co<W: Comonad, A> = CoT<W, ForId, A>
+
+public typealias Transition<W: Comonad, A> = Co<W, A>
+public typealias TransitionT<W: Comonad, M, A> = CoT<W, M, A>
+
+/// (CoT w) gives you "the best" pairing monad transformer for any comonad w
 /// In other words, an explorer for the state space given by w
-public class Co<W: Comonad, A>: CoOf<W, A> {
-    internal let cow: (Kind<W, (A) -> Any>) -> Any
+public class CoT<W: Comonad, M, A>: CoTOf<W, M, A> {
+    internal let cow: (Kind<W, (A) -> Kind<M, Any>>) -> Kind<M, Any>
     
-    public static func fix(_ value: CoOf<W, A>) -> Co<W, A> {
-        value as! Co<W, A>
+    public static func fix(_ value: CoTOf<W, M, A>) -> CoT<W, M, A> {
+        value as! CoT<W, M, A>
     }
     
-    public static func select<A, B>(_ co: Co<W, (A) -> B>, _ wa: Kind<W, A>) -> Kind<W, B> {
+    public static func liftT(_ f: @escaping (Kind<W, Any/*S*/>) -> A) -> CoT<W, M, A> {
+        let extract = Function1<Kind<W, (Any) -> Kind<M, Any>>, (Any) -> Kind<M, Any>> { x in x.extract() }
+        let ff = Function1<Kind<W, (Any) -> Kind<M, Any>>, A> { x in f(x.map { xx in xx as Any }) }.map { a in a as Any }
+        let g: (Any) -> A = { a in a as! A }
+        let adapt: (Kind<W, (A) -> Kind<M, Any>>) -> Kind<W, (Any) -> Kind<M, Any>> = { wf in
+            wf.map { f in g >>> f }
+        }
+        let ap: (Kind<W, (Any) -> Kind<M, Any>>) -> Kind<M, Any> = extract.ap(ff)^.f
+        
+        return CoT(adapt >>> ap)
+    }
+    
+    public init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> Kind<M, /*R*/Any>>) -> Kind<M, /*R*/Any>) {
+        self.cow = cow
+    }
+    
+    func runT<R>(_ w: Kind<W, (A) -> Kind<M, R>>) -> Kind<M, R> {
+        unsafeBitCast(self.cow, to:((Kind<W, (A) -> Kind<M, R>>) -> Kind<M, R>).self)(w)
+    }
+    
+    func hoistT<V: Comonad>(_ transform: FunctionK<V, W>) -> CoT<V, M, A> {
+        CoT<V, M, A>(self.cow <<< transform.invoke)
+    }
+}
+
+public extension CoT where M: Applicative {
+    func lowerT<B>(_ input: Kind<W, B>) -> Kind<M, A> {
+        (self.runT <<< { wbma in wbma.as(M.pure) })(input)
+    }
+}
+
+public extension CoT where M == ForId {
+    static func select<A, B>(_ co: Co<W, (A) -> B>, _ wa: Kind<W, A>) -> Kind<W, B> {
         co.run(wa.coflatMap { wa in
             { f in wa.map(f) }
         })
     }
     
+    static func lift(_ f: @escaping (Kind<W, Any>) -> A) -> Co<W, A> {
+        liftT(f)
+    }
+    
     /// - Returns: The pairing between the underlying comonad, `w`, and the monad `Co<w>`.
-    public static func pair() -> Pairing<W, CoPartial<W>> {
+    static func pair() -> Pairing<W, CoPartial<W>> {
         Pairing { wab, cowa in cowa^.run(wab) }
     }
     
-    public init(_ cow: @escaping /*forall R.*/(Kind<W, (A) -> /*R*/Any>) -> /*R*/Any) {
-        self.cow = cow
+    func run<R>(_ w: Kind<W, (A) -> R>) -> R {
+        self.runT(w.map { f in f >>> Id.pure })^.value
     }
     
-    func run<R>(_ w: Kind<W, (A) -> R>) -> R {
-        unsafeBitCast(self.cow, to:((Kind<W, (A) -> R>) -> R).self)(w)
+    func hoist<V: Comonad>(_ transform: FunctionK<V, W>) -> Co<V, A> {
+        Co<V, A>(self.cow <<< transform.invoke)
+    }
+    
+    func lower<B>(_ input: Kind<W, B>) -> A {
+        lowerT(input)^.value
     }
 }
 
@@ -37,21 +85,25 @@ public class Co<W: Comonad, A>: CoOf<W, A> {
 ///
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to Co.
-public postfix func ^<W, A>(_ value: CoOf<W, A>) -> Co<W, A> {
-    Co.fix(value)
+public postfix func ^<W, M, A>(_ value: CoTOf<W, M, A>) -> CoT<W, M, A> {
+    CoT.fix(value)
 }
 
-extension CoPartial: Functor {
-    public static func map<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> B) -> CoOf<W, B> {
-        Co<W, B> { b in
-            fa^.run(b.map { bb in bb <<< f })
+// MARK: Instance of `Functor` for `CoT`
+
+extension CoTPartial: Functor {
+    public static func map<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> B) -> CoTOf<W, M, B> {
+        CoT<W, M, B> { b in
+            fa^.runT(b.map { bb in bb <<< f })
         }
     }
 }
 
-extension CoPartial: Applicative {
-    public static func ap<A, B>(_ ff: CoOf<W, (A) -> B>, _ fa: CoOf<W, A>) -> CoOf<W, B> {
-        Co<W, B> { w in
+// MARK: Instance of `Applicative` for `CoT`
+
+extension CoTPartial: Applicative {
+    public static func ap<A, B>(_ ff: CoTOf<W, M, (A) -> B>, _ fa: CoTOf<W, M, A>) -> CoTOf<W, M, B> {
+        CoT<W, M, B> { w in
             ff^.cow(w.coflatMap { wf in
                 { g in
                     fa^.cow(wf.map { ff in ff <<< g})
@@ -60,27 +112,81 @@ extension CoPartial: Applicative {
         }
     }
     
-    public static func pure<A>(_ a: A) -> CoOf<W, A> {
-        Co<W, A> { w in w.extract()(a) }
+    public static func pure<A>(_ a: A) -> CoTOf<W, M, A> {
+        CoT<W, M, A> { w in w.extract()(a) }
     }
 }
 
-extension CoPartial: Monad {
-    public static func flatMap<A, B>(_ fa: CoOf<W, A>, _ f: @escaping (A) -> CoOf<W, B>) -> CoOf<W, B> {
-        Co { w in
+// MARK: Instance of `Monad` for `CoT`
+
+extension CoTPartial: Monad {
+    public static func flatMap<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> CoTOf<W, M, B>) -> CoTOf<W, M, B> {
+        CoT { w in
             fa^.cow(w.coflatMap { wa in
                 { a in
-                    Co<W, B>.fix(f(a)).run(wa)
+                    f(a)^.runT(wa)
                 }
             })
         }
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> CoOf<W, Either<A, B>>) -> CoOf<W, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> CoTOf<W, M, Either<A, B>>) -> CoTOf<W, M, B> {
         f(a).flatMap { either in
             either.fold(
                 { aa in tailRecM(aa, f) },
-                { b in Co.pure(b) })
+                { b in CoT.pure(b) })
+        }
+    }
+}
+
+// MARK: Instance of `MonadReader` for `CoT`
+
+extension CoTPartial: MonadReader where W: ComonadEnv {
+    public typealias D = W.E
+    
+    public static func ask() -> CoTOf<W, M, W.E> {
+        CoT.liftT(W.ask)
+    }
+    
+    public static func local<A>(_ fa: CoTOf<W, M, A>, _ f: @escaping (W.E) -> W.E) -> CoTOf<W, M, A> {
+        CoT(fa^.cow <<< { wa in wa.local(f) })
+    }
+}
+
+// MARK: Instance of `MonadState` for `CoT`
+
+extension CoTPartial: MonadState where W: ComonadStore {
+    public typealias S = W.S
+    
+    public static func get() -> CoTOf<W, M, W.S> {
+        CoT.liftT { wa in wa.position }
+    }
+    
+    public static func set(_ s: W.S) -> CoTOf<W, M, ()> {
+        CoT { wa in wa.peek(s)(()) }
+    }
+}
+
+// MARK: Instance of `MonadWriter` for `CoT`
+
+extension CoTPartial: MonadWriter where W: ComonadTraced {
+    public typealias W = W.M
+    
+    public static func writer<A>(_ aw: (W.M, A)) -> CoTOf<W, M, A> {
+        CoT { wa in wa.trace(aw.0)(aw.1) }
+    }
+    
+    public static func listen<A>(_ fa: CoTOf<W, M, A>) -> CoTOf<W, M, (W.M, A)> {
+        CoT { wa in
+            let listened = wa.listen().map { tuple in { a in tuple.1((tuple.0, a)) } }
+            return fa^.runT(listened)
+        }
+    }
+    
+    public static func pass<A>(_ fa: CoTOf<W, M, ((W.M) -> W.M, A)>) -> CoTOf<W, M, A> {
+        CoT { wa in
+            let passed: Kind<W, (((W.M) -> W.M, A)) -> Kind<M, Any>> = wa.pass().map { f in { tuple in f(tuple.0)(tuple.1) } }
+            return fa^.runT(passed)
         }
     }
 }
