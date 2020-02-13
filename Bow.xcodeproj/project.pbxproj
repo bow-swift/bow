@@ -1094,6 +1094,9 @@
 		8BA0F4D1217E2E9200969984 /* Each+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D2217E2E9200969984 /* Lens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
 		8BB969AB239863F0005520D6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		8BD6974823F5AD2E000A512F /* BowTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BowTests.xctestplan; sourceTree = "<group>"; };
+		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BD6975123F5AE18000A512F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1234,6 +1237,13 @@
 		11E71880219D81B300B94845 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD6974A23F5AE18000A512F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2008,6 +2018,15 @@
 			path = DSL;
 			sourceTree = "<group>";
 		};
+		8BD6974E23F5AE18000A512F /* BowAllTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BD6974823F5AD2E000A512F /* BowTests.xctestplan */,
+				8BD6975123F5AE18000A512F /* Info.plist */,
+			);
+			path = BowAllTests;
+			sourceTree = "<group>";
+		};
 		OBJ_218 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2032,6 +2051,7 @@
 				117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */,
 				117DC12F22AE563900EF65F0 /* BowFreeGenerators.framework */,
 				1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */,
+				8BD6974D23F5AE18000A512F /* BowAllTests.xctest */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -2065,6 +2085,7 @@
 		OBJ_87 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8BD6974E23F5AE18000A512F /* BowAllTests */,
 				117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */,
 				11D97EEC219EBB35008FC004 /* BowEffectsLaws */,
 				11229786219DC968006D66C5 /* BowEffectsTests */,
@@ -2467,6 +2488,23 @@
 			productReference = 11E71889219D81B300B94845 /* BowFree.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		8BD6974C23F5AE18000A512F /* BowAllTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BD6975223F5AE18000A512F /* Build configuration list for PBXNativeTarget "BowAllTests" */;
+			buildPhases = (
+				8BD6974923F5AE18000A512F /* Sources */,
+				8BD6974A23F5AE18000A512F /* Frameworks */,
+				8BD6974B23F5AE18000A512F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BowAllTests;
+			productName = BowAllTests;
+			productReference = 8BD6974D23F5AE18000A512F /* BowAllTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		"Bow::Bow" /* Bow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_377 /* Build configuration list for PBXNativeTarget "Bow" */;
@@ -2509,6 +2547,7 @@
 		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
 					1120978222A7EBC7007F3D9C = {
@@ -2559,6 +2598,9 @@
 					11E71817219D81B300B94845 = {
 						LastSwiftMigration = 1020;
 					};
+					8BD6974C23F5AE18000A512F = {
+						CreatedOnToolsVersion = 11.3;
+					};
 					"Bow::Bow" = {
 						LastSwiftMigration = 1020;
 					};
@@ -2605,9 +2647,20 @@
 				11229791219DCE76006D66C5 /* Bow-Rx */,
 				117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */,
 				112297B1219DCFDE006D66C5 /* Bow-RxTests */,
+				8BD6974C23F5AE18000A512F /* BowAllTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8BD6974B23F5AE18000A512F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1120978522A7EBC7007F3D9C /* Sources */ = {
@@ -2943,6 +2996,13 @@
 				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BD6974923F5AE18000A512F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4176,6 +4236,84 @@
 			};
 			name = Release;
 		};
+		8BD6975323F5AE18000A512F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = P548S5LU96;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = BowAllTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fortysevendegrees.BowAllTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8BD6975423F5AE18000A512F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = P548S5LU96;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = BowAllTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fortysevendegrees.BowAllTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		OBJ_243 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4522,6 +4660,15 @@
 			buildConfigurations = (
 				11E71887219D81B300B94845 /* Debug */,
 				11E71888219D81B300B94845 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8BD6975223F5AE18000A512F /* Build configuration list for PBXNativeTarget "BowAllTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BD6975323F5AE18000A512F /* Debug */,
+				8BD6975423F5AE18000A512F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
