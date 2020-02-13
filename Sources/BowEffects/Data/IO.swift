@@ -99,7 +99,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fa: Function to transform the output type argument.
     /// - Returns: An IO with both type arguments transformed.
     func bimap<EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> IO<EE, B> {
-        mapLeft(fe).map(fa)^
+        mapError(fe).map(fa)^
     }
     
     /// Creates an IO from 2 side-effectful functions, tupling their results. Errors thrown from the functions must be of type `E`; otherwise, a fatal error will happen.
@@ -349,13 +349,22 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///
     /// - Parameter f: Function transforming the error.
     /// - Returns: An IO value with the new error type.
+    @available(*, deprecated, renamed: "mapError")
     public func mapLeft<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
+        FErrorMap(f, self)
+    }
+    
+    /// Transforms the error type of this IO.
+    ///
+    /// - Parameter f: Function transforming the error.
+    /// - Returns: An IO value with the new error type.
+    public func mapError<EE>(_ f: @escaping (E) -> EE) -> IO<EE, A> {
         FErrorMap(f, self)
     }
     
     /// Returns this `IO` erasing the error type information
     public var anyError: IO<Error, A> {
-        self.mapLeft { e in e as Error }
+        self.mapError { e in e as Error }
     }
     
     internal func fail(_ error: Error) -> Never {
