@@ -120,9 +120,15 @@ extension ForMaybeK: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForMaybeK, Either<A, B>>) -> Kind<ForMaybeK, B> {
-        let either = MaybeK.fix(f(a)).value.blockingGet()!
-        return either.fold({ a in tailRecM(a, f) },
-                           { b in Maybe.just(b).k() })
+        try! _tailRecM(a, f).run()
+    }
+    
+    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> MaybeKOf<Either<A, B>>) -> Trampoline<MaybeKOf<B>> {
+        .defer {
+            let either = f(a)^.value.blockingGet()!
+            return either.fold({ a in _tailRecM(a, f) },
+                               { b in .done(Maybe.just(b).k()) })
+        }
     }
 }
 
