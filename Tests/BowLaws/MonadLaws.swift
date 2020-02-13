@@ -4,13 +4,15 @@ import BowGenerators
 import XCTest
 
 public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
-    public static func check() {
+    public static func check(withStackSafety: Bool = true) {
         leftIdentity()
         rightIdentity()
         kleisliLeftIdentity()
         kleisliRightIdentity()
         flatMapCoherence()
-        //stackSafety() FIXME truizlop: some implementations are not 100% stack safe
+        if withStackSafety { #warning("All implementations should be stack safe, this is temporary")
+            stackSafety()
+        }
         monadComprehensions()
         flatten()
     }
@@ -52,7 +54,7 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     }
     
     private static func stackSafety() {
-        let iterations = 2000
+        let iterations = 200000
         let res = F.tailRecM(0, { i in F.pure( i < iterations ? Either.left(i + 1) : Either.right(i) )})
         
         XCTAssertEqual(res, F.pure(iterations))
