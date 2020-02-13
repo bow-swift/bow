@@ -118,9 +118,15 @@ extension ForSingleK: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForSingleK, Either<A, B>>) -> Kind<ForSingleK, B> {
-        let either = SingleK<Either<A, B>>.fix(f(a)).value.blockingGet()!
-        return either.fold({ a in tailRecM(a, f) },
-                           { b in Single.just(b).k() })
+        try! _tailRecM(a, f).run()
+    }
+    
+    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> SingleKOf<Either<A, B>>) -> Trampoline<SingleKOf<B>> {
+        .defer {
+            let either = f(a)^.value.blockingGet()!
+            return either.fold({ a in _tailRecM(a, f) },
+                               { b in .done(Single.just(b).k()) })
+        }
     }
 }
 
