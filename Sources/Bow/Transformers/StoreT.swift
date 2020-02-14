@@ -4,6 +4,7 @@ public typealias StoreTOf<S, W, A> = Kind<StoreTPartial<S, W>, A>
 
 public typealias ForStore = ForStoreT
 public typealias StorePartial<S> = StoreTPartial<S, ForId>
+public typealias StoreOf<S, A> = StoreTOf<S, ForId, A>
 public typealias Store<S, A> = StoreT<S, ForId, A>
 
 public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
