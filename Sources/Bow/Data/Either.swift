@@ -268,11 +268,17 @@ extension EitherPartial: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<EitherPartial<L>, Either<A, B>>) -> Kind<EitherPartial<L>, B> {
-        return Either.fix(f(a)).fold(Either<L, B>.left,
-                  { either in
-                    either.fold({ left in tailRecM(left, f)},
-                                Either<L, B>.right)
-        })
+        _tailRecM(a, f).run()
+    }
+    
+    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<L, Either<A, B>>) -> Trampoline<EitherOf<L, B>> {
+        .defer {
+            f(a)^.fold({ l in .done(Either.left(l)) },
+                      { either in
+                        either.fold({ left in _tailRecM(left, f) },
+                                    { right in .done(Either.right(right)) })
+            })
+        }
     }
 }
 

@@ -2,7 +2,7 @@ import SwiftCheck
 import Bow
 import BowGenerators
 
-public class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: Equatable, F.E: Arbitrary {
+public class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: Equatable & Arbitrary {
     public static func check()  {
         handle()
         handleWith()
@@ -36,7 +36,7 @@ public class ApplicativeErrorLaws<F: ApplicativeError & EquatableK> where F.E: E
     }
     
     private static func attemptError() {
-        property("Attempt error") <~ forAll { (_: Int, error: F.E) in
+        property("Attempt error") <~ forAll { (error: F.E) in
             return F.attempt(F.raiseError(error)) == F.pure(Either<F.E, Int>.left(error))
         }
     }

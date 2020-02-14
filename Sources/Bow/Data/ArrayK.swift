@@ -180,20 +180,26 @@ extension ForArrayK: Monad {
         return ArrayK<B>(fixed.array.flatMap({ a in ArrayK.fix(f(a)).array }))
     }
 
-    private static func go<A, B>(_ buf : [B], _ f : (A) -> ArrayKOf<Either<A, B>>, _ v : ArrayK<Either<A, B>>) -> [B] {
-        if !v.isEmpty {
-            let head = v.array[0]
-            return head.fold({ a in go(buf, f, ArrayK<Either<A, B>>(ArrayK<Either<A, B>>.fix(f(a)).array + v.array.dropFirst())) },
-                             { b in
-                                let newBuf = buf + [b]
-                                return go(newBuf, f, ArrayK<Either<A, B>>([Either<A, B>](v.array.dropFirst())))
-            })
+    private static func go<A, B>(_ buf: [B],
+                                 _ f: @escaping (A) -> ArrayKOf<Either<A, B>>,
+                                 _ v: ArrayK<Either<A, B>>) -> Trampoline<[B]> {
+        .defer {
+            if !v.isEmpty {
+                let head = v.array[0]
+                return head.fold(
+                    { a in
+                        go(buf, f, ArrayK(f(a)^.array + v.array.dropFirst())) },
+                    { b in
+                        let newBuf = buf + [b]
+                        return go(newBuf, f, ArrayK([Either<A, B>](v.array.dropFirst())))
+                })
+            }
+            return .done(buf)
         }
-        return buf
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForArrayK, Either<A, B>>) -> Kind<ForArrayK, B> {
-        return ArrayK<B>(go([], f, ArrayK.fix(f(a))))
+        return ArrayK(go([], f, f(a)^).run())
     }
 }
 

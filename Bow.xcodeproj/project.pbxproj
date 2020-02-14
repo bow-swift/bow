@@ -137,6 +137,8 @@
 		1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */; };
 		1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
+		1165E1A923F414350052F0C7 /* Trampoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1165E1A823F414350052F0C7 /* Trampoline.swift */; };
+		1165E1AC23F417260052F0C7 /* TrampolineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1165E1AA23F414540052F0C7 /* TrampolineTest.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
 		1171ED4B23C48985005362E0 /* StoreT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4A23C48985005362E0 /* StoreT.swift */; };
 		1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4C23C4CB7C005362E0 /* TracedT.swift */; };
@@ -811,6 +813,8 @@
 		115488D023BFA0CC00A6DE92 /* EnvT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvT.swift; sourceTree = "<group>"; };
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
+		1165E1A823F414350052F0C7 /* Trampoline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trampoline.swift; sourceTree = "<group>"; };
+		1165E1AA23F414540052F0C7 /* TrampolineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrampolineTest.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
 		1171ED4A23C48985005362E0 /* StoreT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreT.swift; sourceTree = "<group>"; };
 		1171ED4C23C4CB7C005362E0 /* TracedT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedT.swift; sourceTree = "<group>"; };
@@ -1790,6 +1794,7 @@
 				8BA0F3AC217E2DEF00969984 /* SetKTest.swift */,
 				111F84FC234DC00C003FE646 /* SetTest.swift */,
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
+				1165E1AA23F414540052F0C7 /* TrampolineTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
 				11BA21C123D75B5200F3EE78 /* ZipperTest.swift */,
@@ -1908,6 +1913,7 @@
 				111F84FA234DBF95003FE646 /* Set.swift */,
 				8BA0F487217E2E9200969984 /* SetK.swift */,
 				8BA0F483217E2E9200969984 /* Sum.swift */,
+				1165E1A823F414350052F0C7 /* Trampoline.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
 				1171ED5D23C62C5E005362E0 /* Zipper.swift */,
@@ -3039,6 +3045,7 @@
 				11F0F8DE23C725D100B2EA2E /* CoTest.swift in Sources */,
 				11DDCD28217F1FC200844D9D /* ReverseTest.swift in Sources */,
 				B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */,
+				1165E1AC23F417260052F0C7 /* TrampolineTest.swift in Sources */,
 				8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */,
 				8BA0F408217E2DEF00969984 /* ValidatedTest.swift in Sources */,
 				111F84FE234DC00F003FE646 /* SetTest.swift in Sources */,
@@ -3085,6 +3092,7 @@
 				8BA0F553217E2E9200969984 /* NumberInstances.swift in Sources */,
 				8BA0F4E7217E2E9200969984 /* FunctionK.swift in Sources */,
 				8BA0F617217E2E9200969984 /* MonadReader.swift in Sources */,
+				1165E1A923F414350052F0C7 /* Trampoline.swift in Sources */,
 				8BA0F5D7217E2E9200969984 /* HigherKinds.swift in Sources */,
 				8BA0F4D3217E2E9200969984 /* Curry.swift in Sources */,
 				8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */,

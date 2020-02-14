@@ -21,7 +21,7 @@ class CoTest: XCTestCase {
     }
 
     func testMonadLaws() {
-        MonadLaws<CoPartial<ForId>>.check()
+        MonadLaws<CoPartial<ForId>>.check(withStackSafety: false)
     }
     
     func testMonadStateLaws() {

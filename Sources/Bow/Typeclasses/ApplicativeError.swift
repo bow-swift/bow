@@ -40,7 +40,9 @@ public extension ApplicativeError {
     /// - Parameter fa: A computation that may have an error.
     /// - Returns: An either wrapped in the context implementing this instance.
     static func attempt<A>(_ fa: Kind<Self, A>) -> Kind<Self, Either<E, A>> {
-        return handleErrorWith(map(fa, Either<E, A>.right), { e in self.pure(Either<E, A>.left(e)) })
+        handleErrorWith(fa.map(Either.right)) { e in
+            self.pure(Either.left(e))
+        }
     }
 
     /// Converts an `Either` value into a value in the context implementing this instance.

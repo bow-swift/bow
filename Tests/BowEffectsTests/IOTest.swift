@@ -49,32 +49,9 @@ class IOTest: XCTestCase {
 }
 
 extension IOPartial: EquatableK where E: Equatable {
-    public static func eq<A: Equatable>(_ lhs: Kind<IOPartial<E>, A>, _ rhs: Kind<IOPartial<E>, A>) -> Bool {
-        var aValue, bValue : A?
-        var aError, bError : E?
-        
-        do {
-            aValue = try IO.fix(lhs).unsafeRunSync()
-        } catch let error as E {
-            aError = error
-        } catch {
-            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
-        }
-        
-        do {
-            bValue = try IO.fix(rhs).unsafeRunSync()
-        } catch let error as E {
-            bError = error
-        } catch {
-            fatalError("IO did not handle error \(error). Only errors of type \(E.self) are handled.")
-        }
-        
-        if let aV = aValue, let bV = bValue {
-            return aV == bV
-        } else if let aE = aError, let bE = bError {
-            return aE == bE
-        } else {
-            return false
-        }
+    public static func eq<A: Equatable>(_ lhs: IOOf<E, A>, _ rhs: IOOf<E, A>) -> Bool {
+        let x = lhs^.unsafeRunSyncEither()
+        let y = rhs^.unsafeRunSyncEither()
+        return x == y
     }
 }

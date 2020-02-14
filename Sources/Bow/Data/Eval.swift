@@ -59,6 +59,10 @@ public class Eval<A>: EvalOf<A> {
     ///
     /// - Returns: Value wrapped in this Eval.
     public func value() -> A {
+        _value().run()
+    }
+    
+    internal func _value() -> Trampoline<A> {
         fatalError("Must be implemented by subclass")
     }
 
@@ -116,8 +120,8 @@ private class Now<A>: Eval<A> {
         self.a = a
     }
 
-    override func value() -> A {
-        return a
+    override func _value() -> Trampoline<A> {
+        return .done(a)
     }
 
     override func memoize() -> Eval<A> {
@@ -133,8 +137,8 @@ private class Later<A>: Eval<A> {
         self.f = f
     }
 
-    override func value() -> A {
-        return a
+    override func _value() -> Trampoline<A> {
+        return .done(a)
     }
 
     override func memoize() -> Eval<A> {
@@ -149,8 +153,8 @@ private class Always<A>: Eval<A> {
         self.f = f
     }
 
-    override func value() -> A {
-        return f()
+    override func _value() -> Trampoline<A> {
+        return .later(f)
     }
 
     override func memoize() -> Eval<A> {
@@ -159,7 +163,7 @@ private class Always<A>: Eval<A> {
 }
 
 private class Defer<A>: Eval<A> {
-    private  let thunk: () -> Eval<A>
+    private let thunk: () -> Eval<A>
 
     init(_ thunk: @escaping () -> Eval<A>) {
         self.thunk = thunk
@@ -169,8 +173,8 @@ private class Defer<A>: Eval<A> {
         return Eval<A>.later(value)
     }
 
-    override func value() -> A {
-        return thunk().value()
+    override func _value() -> Trampoline<A> {
+        return .defer { self.thunk()._value() }
     }
 }
 
@@ -187,8 +191,8 @@ private class FMap<A, B>: Eval<B> {
         return Eval<B>.later { self.value() }
     }
     
-    override func value() -> B {
-        return f(eval.value())
+    override func _value() -> Trampoline<B> {
+        return .later { self.f(self.eval.value()) }
     }
 }
 
@@ -205,8 +209,8 @@ private class Bind<A, B>: Eval<B> {
         return Eval.later { self.value() }
     }
     
-    override func value() -> B {
-        return f(eval.value())^.value()
+    override func _value() -> Trampoline<B> {
+        return .later { self.f(self.eval.value())^.value() }
     }
 }
 
@@ -234,9 +238,13 @@ extension ForEval: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForEval, Either<A, B>>) -> Kind<ForEval, B> {
-        return f(a).flatMap{ either in
-            either.fold({ a in tailRecM(a, f) },
-                        Eval<B>.pure)
+        _tailRecM(a, f).run()
+    }
+    
+    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> Trampoline<EvalOf<B>> {
+        .defer {
+            f(a)^.value().fold({ a in _tailRecM(a, f) },
+                               { b in .done(Eval<B>.pure(b)) })
         }
     }
 }
