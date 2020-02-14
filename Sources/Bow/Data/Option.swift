@@ -183,7 +183,7 @@ extension ForOption: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForOption, Either<A, B>>) -> Kind<ForOption, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> Trampoline<OptionOf<B>> {

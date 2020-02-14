@@ -81,7 +81,7 @@ extension ForId: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForId, Either<A, B>>) -> Kind<ForId, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> Trampoline<IdOf<B>> {

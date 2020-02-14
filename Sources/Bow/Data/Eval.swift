@@ -59,7 +59,7 @@ public class Eval<A>: EvalOf<A> {
     ///
     /// - Returns: Value wrapped in this Eval.
     public func value() -> A {
-        try! _value().run()
+        _value().run()
     }
     
     internal func _value() -> Trampoline<A> {
@@ -238,7 +238,7 @@ extension ForEval: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForEval, Either<A, B>>) -> Kind<ForEval, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> Trampoline<EvalOf<B>> {

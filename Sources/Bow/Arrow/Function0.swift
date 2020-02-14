@@ -81,7 +81,7 @@ extension ForFunction0: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForFunction0, Either<A, B>>) -> Kind<ForFunction0, B> {
-        return Function0<B>({ try! loop(a, f).run() })
+        return Function0<B>({ loop(a, f).run() })
     }
 }
 

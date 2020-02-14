@@ -199,7 +199,7 @@ extension ForArrayK: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForArrayK, Either<A, B>>) -> Kind<ForArrayK, B> {
-        return ArrayK(try! go([], f, f(a)^).run())
+        return ArrayK(go([], f, f(a)^).run())
     }
 }
 

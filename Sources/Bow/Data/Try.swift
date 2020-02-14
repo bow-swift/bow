@@ -240,7 +240,7 @@ extension ForTry: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForTry, Either<A, B>>) -> Kind<ForTry, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> Trampoline<TryOf<B>> {

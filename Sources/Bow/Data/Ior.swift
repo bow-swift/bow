@@ -270,7 +270,7 @@ extension IorPartial: Monad where L: Semigroup {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<IorPartial<L>, Either<A, B>>) -> Kind<IorPartial<L>, B> {
-        try! loop(f(a)^, { a in f(a)^ }).run()
+        loop(f(a)^, { a in f(a)^ }).run()
     }
 }
 

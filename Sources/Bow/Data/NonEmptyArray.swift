@@ -214,7 +214,7 @@ extension ForNonEmptyArray: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForNonEmptyArray, Either<A, B>>) -> Kind<ForNonEmptyArray, B> {
-        return NonEmptyArray.fromArrayUnsafe(try! go([], f, f(a)^).run())
+        return NonEmptyArray.fromArrayUnsafe(go([], f, f(a)^).run())
     }
 }
 

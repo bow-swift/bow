@@ -268,7 +268,7 @@ extension EitherPartial: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<EitherPartial<L>, Either<A, B>>) -> Kind<EitherPartial<L>, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<L, Either<A, B>>) -> Trampoline<EitherOf<L, B>> {

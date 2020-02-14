@@ -102,7 +102,7 @@ extension Function1Partial: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<Function1Partial<I>, Either<A, B>>) -> Kind<Function1Partial<I>, B> {
-        return Function1<I, B>({ t in try! step(a, t, f).run() })
+        return Function1<I, B>({ t in step(a, t, f).run() })
     }
 }
 

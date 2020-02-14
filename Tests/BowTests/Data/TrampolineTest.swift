@@ -7,7 +7,7 @@ class TrampolineTest: XCTestCase {
     }
     
     func isEven(_ n: Int) -> Bool {
-        try! _isEven(n).run()
+        _isEven(n).run()
     }
     
     func _isEven(_ n: Int) -> Trampoline<Bool> {

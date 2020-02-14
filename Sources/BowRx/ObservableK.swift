@@ -135,7 +135,7 @@ extension ForObservableK: Monad {
     }
 
     public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForObservableK, Either<A, B>>) -> Kind<ForObservableK, B> {
-        try! _tailRecM(a, f).run()
+        _tailRecM(a, f).run()
     }
     
     private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ObservableKOf<Either<A, B>>) -> Trampoline<ObservableKOf<B>> {
