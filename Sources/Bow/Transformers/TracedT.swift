@@ -4,6 +4,7 @@ public typealias TracedTOf<M, W, A> = Kind<TracedTPartial<M, W>, A>
 
 public typealias ForTraced = ForTracedT
 public typealias TracedPartial<M> = TracedTPartial<M, ForId>
+public typealias TracedOf<M, A> = TracedTOf<M, ForId, A>
 public typealias Traced<M, A> = TracedT<M, ForId, A>
 
 public final class TracedT<M, W, A>: TracedTOf<M, W, A> {

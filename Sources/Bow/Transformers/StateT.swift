@@ -41,14 +41,17 @@ public postfix func ^<F, S, A>(_ fa : StateTOf<F, S, A>) -> StateT<F, S, A> {
     StateT.fix(fa)
 }
 
+/// Witness for the `State<S, A>` data type. To be used in simulated Higher Kinded Types.
+public typealias ForState = ForStateT
+
 /// Partial application of the `StateT` type constructor, omitting the last parameter.
 public typealias StatePartial<S> = StateTPartial<ForId, S>
 
 /// Higher Kinded Type alias to improve readability over `StateT<ForId, S, A>`.
-public typealias StateOf<S, A> = StateT<ForId, S, A>
+public typealias StateOf<S, A> = StateTOf<ForId, S, A>
 
 /// State is a convenience data type over the `StateT` transformer, when the effect is `Id`.
-public typealias State<S, A> = StateOf<S, A>
+public typealias State<S, A> = StateT<ForId, S, A>
 
 // MARK: Convenience functions when the effect is `Id`
 public extension StateT where F == ForId {
