@@ -54,4 +54,38 @@ class PairingTest: XCTestCase {
         
         XCTAssertEqual(res, 60)
     }
+    
+    func testPairingActionMoore() {
+        func render(_ n: Int) -> String {
+            (n % 2 == 0) ?
+                "\(n) is even" :
+                "\(n) is odd"
+        }
+        
+        func update(_ state: Int, _ action: Input) -> Int {
+            switch action {
+            case .increment: return state + 1
+            case .decrement: return state - 1
+            }
+        }
+        
+        enum Input {
+            case increment
+            case decrement
+        }
+        
+        let w = Moore<Input, String>.from(initialState: 0, render: render, update: update)
+        
+        let actions: Action<Input, Void> = binding(
+            |<-Action.from(.increment),
+            |<-Action.from(.increment),
+            |<-Action.from(.decrement),
+            |<-Action.from(.increment),
+            |<-Action.from(.increment),
+            yield: ())^
+        
+        let w2 = Pairing.pairActionMoore().select(actions, w.duplicate())^
+        
+        XCTAssertEqual(w2.view, "3 is odd")
+    }
 }
