@@ -119,6 +119,16 @@ public extension Pairing {
     }
 }
 
+// MARK: Pairing for Action and Moore
+
+public extension Pairing {
+    static func pairActionMoore<I>() -> Pairing<ActionPartial<I>, MoorePartial<I>> where F == ActionPartial<I>, G == MoorePartial<I> {
+        Pairing { action, moore, f in
+            MoorePartial<I>.pair().pairFlipped(action, moore, f)
+        }
+    }
+}
+
 // MARK: Pairing for any Comonad
 
 public extension Comonad {
