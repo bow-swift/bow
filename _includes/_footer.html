@@ -1,0 +1,19 @@
+<footer id="footer">
+    <div class="content-footer container">
+        <p>{{ site.title }} is designed and developed by <a href="https://github.com/bow-swift">{{ site.title }}</a> <br>with support from <a href="https://www.47deg.com/">47 Degrees</a></p>
+        <ul>
+            {% for item in site.data.menu.nav %}
+            <li>
+              <a href="{{ item.url | relative_url }}" title="{{ item.title }}" alt="{{ item.title }}">
+              {% if item.icon != "" %}
+                <i class="foot-item-icon fa fa-lg {{ item.icon }}" aria-hidden="true"></i>
+                <span class="foot-item-text">{{ item.title }}</span>
+              {% else %}
+                <span>{{ item.title }}</span>
+              {% endif %}
+              </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</footer>

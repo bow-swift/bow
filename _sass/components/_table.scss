@@ -1,0 +1,29 @@
+table {
+  font-size: 1rem;
+  text-align: left;
+  overflow-x: auto;
+
+  th {
+    border-bottom: 3px solid rgba($brand-primary, 0.3);
+    border-radius: 0;
+    font-weight: $font-semibold;
+  }
+
+  tr {
+    border-bottom: 1px solid rgba($brand-primary, 0.3);
+    border-radius: 0;
+  }
+
+  th,
+  td {
+    padding: $base-point-grid $base-point-grid * 4;
+
+    &:first-of-type {
+      padding-left: $base-point-grid * 2;
+    }
+
+    &:last-of-type {
+      padding-right: $base-point-grid * 2;
+    }
+  }
+}

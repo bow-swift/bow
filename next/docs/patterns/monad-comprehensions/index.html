@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.5.0/docs">
+            <span>
+              0.5.0
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.6.0/docs">
+            <span>
+              0.6.0
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="monad-comprehensions">Monad comprehensions</h1>
+
+<p class="beginner">beginner</p>
+
+<p>Monad comprehensions are a generalization over the syntax provided in Swift to unwrap <code class="highlighter-rouge">Optional</code>s using <code class="highlighter-rouge">if let</code> or <code class="highlighter-rouge">guard let</code>, or to safely run throwing functions using <code class="highlighter-rouge">try?</code>. This page shows how Bow provides an uniform syntax to have direct, imperative-like style of working with monadic values.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>For instance, consider the following function receiving three optional values of types <code class="highlighter-rouge">Int</code>, <code class="highlighter-rouge">Double</code> and <code class="highlighter-rouge">String</code>. The purpose of the function is to unwrap the three values and make a <code class="highlighter-rouge">String</code> with the contents of all three, or return <code class="highlighter-rouge">nil</code> if any of them does not have a value. It can be implemented using the <code class="highlighter-rouge">if let</code> syntax to safely unwrap the optionals:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_ifLet</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span>
+       <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span>
+       <span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="n">c</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is equivalent to the following implementation:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_flatMap</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">y</span> <span class="k">in</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">z</span> <span class="k">in</span>
+                <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="se">)</span><span class="s">"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">if let</code> syntax is just a sugared version over nested <code class="highlighter-rouge">flatMap</code> operations that makes it more natural for an imperative way of writing code. However, consider now that, instead of <code class="highlighter-rouge">Optional</code> values, the function works with <code class="highlighter-rouge">Result</code> type. The <code class="highlighter-rouge">if let</code> syntax is not avaiable in that case, so the only option is to use <code class="highlighter-rouge">flatMap</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_flatMap</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Double</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">y</span> <span class="k">in</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">z</span> <span class="k">in</span>
+                <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="se">)</span><span class="s">"</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As you can see, the implementation of the two functions is <strong>exactly</strong> the same. So, if the <code class="highlighter-rouge">if let</code> construction is equivalent to the flatMap version, why can’t we use it with other types that have a <code class="highlighter-rouge">flatMap</code> operation?</p>
+
+<h2 id="monadic-values">Monadic values</h2>
+
+<p>The <code class="highlighter-rouge">if let</code> syntax is a particular case of a bigger pattern known as <strong>Monad comprehensions</strong>. Despite its name, it is a very simple idea. It lets us work with the potential values in monadic types without nesting <code class="highlighter-rouge">flatMap</code> calls. For now, when we refer to <em>monadic types</em>, it is enough to know that are types that conform to the <code class="highlighter-rouge">Monad</code> type class and therefore have a <code class="highlighter-rouge">map</code> and <code class="highlighter-rouge">flatMap</code> operation. Note that having those methods is not enough; <code class="highlighter-rouge">Monad</code> can only be implemented by types that have HKT simulation, so this does not work with Swift <code class="highlighter-rouge">Optional</code> and <code class="highlighter-rouge">Result</code> as they do not have HKT support.</p>
+
+<p>There are multiple types in the different modules in Bow that already implement <code class="highlighter-rouge">Monad</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Types</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Bow</td>
+      <td>Cokleisli, Function0, Function1, Kleisli, ArrayK, Either, Eval, Id, Ior, NonEmptyArray, Option, Try, EitherT, OptionT, StateT, WriterT</td>
+    </tr>
+    <tr>
+      <td>BowEffects</td>
+      <td>IO, Resource</td>
+    </tr>
+    <tr>
+      <td>BowRx</td>
+      <td>SingleK, MaybeK, ObservableK</td>
+    </tr>
+    <tr>
+      <td>BowFree</td>
+      <td>Free, Cofree</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This means that, for any of these types, you can use monad comprehensions.</p>
+
+<h2 id="bindings">Bindings</h2>
+
+<p>So far, we know what types provide support for monad comprehensions. In this section, we are going through how monad comprehensions look like in Bow.</p>
+
+<p>Revisiting the previous example, let’s try to write it again using <code class="highlighter-rouge">Option</code> as a data type:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_comprehensions</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Create variables for binding</span>
+    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="c1">// Operate over the contents of an Option in direct syntax</span>
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">a</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="p">,</span>
+        <span class="n">z</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">,</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can also write this function for the <code class="highlighter-rouge">Either</code> type:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_comprehensions</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Create variables for binding</span>
+    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="c1">// Operate over the contents of an Either in direct syntax</span>
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">a</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="p">,</span>
+        <span class="n">z</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">,</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Or even for <code class="highlighter-rouge">ArrayK</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">join_comprehensions</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Create variables for binding</span>
+    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">Double</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="c1">// Operate over the contents of an ArrayK in direct syntax</span>
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">a</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="p">,</span>
+        <span class="n">z</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">,</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Looking at the implementation of each function, we can see a similar structure in each of them. We will try to break it down and explain each part involved in a monad comprehension.</p>
+
+<h3 id="variables-for-binding">Variables for binding</h3>
+
+<p>Variables that will be assigned in the monad comprehension need to be created before running it. This is a limitation over the <code class="highlighter-rouge">if let</code> syntax, but it is the best we can get at the moment. In order to create a variable, you can use the <code class="highlighter-rouge">var</code> method:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>           <span class="c1">// A variable of type Int that works on comprehensions on Option&lt;_&gt;</span>
+<span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span> <span class="c1">// A variable of type Double that works on comprehensions on Either&lt;Error, _&gt;</span>
+<span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="kt">ArrayK</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>        <span class="c1">// A variable of type String that works on comprehensions on ArrayK&lt;_&gt;</span>
+</code></pre></div></div>
+
+<p>In order to work with monad comprehensions, all variables have to work on the same type; i.e. you cannot mix Option and Either in the same comprehension. Also, you cannot mix, for instance, <code class="highlighter-rouge">Either&lt;Error, _&gt;</code> and <code class="highlighter-rouge">Either&lt;String, _&gt;</code>. They are two different monadic contexts that cannot compose with each other.</p>
+
+<p>Variables can hold a value of a type. This value can be retrieved in the comprehension using <code class="highlighter-rouge">x.get</code> after it has been bound to a value.</p>
+
+<p><strong>Important:</strong> Trying to access a variable that does not have a bound value will cause a fatal error.</p>
+
+<h3 id="binding-expressions">Binding expressions</h3>
+
+<p>Once that we have created variables, we can assign them using the <code class="highlighter-rouge">&lt;-</code> operator. This operator lets us assign a value from a monadic context in a similar way as we would do it using the assignment operator <code class="highlighter-rouge">=</code>. The left side of the operator must be a variable, created as explained above. The right side of the operator must be a value in a monadic context.</p>
+
+<p>For instance, for the variables <code class="highlighter-rouge">x</code>, <code class="highlighter-rouge">y</code> and <code class="highlighter-rouge">z</code> created above, we could write binding expressions like:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="kt">ArrayK</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Or we could assign them to the output of a function:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">parse</span><span class="p">(</span><span class="n">_</span> <span class="nv">str</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="n">str</span><span class="p">)</span><span class="o">.</span><span class="nf">toOption</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">parse</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the expression above, <code class="highlighter-rouge">x</code> will contain the value <code class="highlighter-rouge">1</code>, and we won’t need to worry about unwrapping it from the option.</p>
+
+<h3 id="sequencing-operations">Sequencing operations</h3>
+
+<p>Binding expressions do not do anything unless they are sequenced. To do so, they need to be invoked in a <code class="highlighter-rouge">binding</code> function. The <code class="highlighter-rouge">binding</code> function accepts any number of binding expressions and finishes with a <code class="highlighter-rouge">yield</code> parameter that provides the value that the monad comprehension will return.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">v1</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">v2</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">v3</span> <span class="o">=</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+
+<span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">binding</span><span class="p">(</span>
+    <span class="n">v1</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1">// v1 is bound to 1</span>
+    <span class="n">v2</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="c1">// v2 is bound to 5</span>
+    <span class="n">v3</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="c1">// v3 is bound to 8</span>
+    <span class="nv">yield</span><span class="p">:</span> <span class="n">v1</span><span class="o">.</span><span class="k">get</span> <span class="o">+</span> <span class="n">v2</span><span class="o">.</span><span class="k">get</span> <span class="o">+</span> <span class="n">v3</span><span class="o">.</span><span class="k">get</span> <span class="c1">// 1 + 5 + 8</span>
+<span class="p">)</span> <span class="c1">// result contains Option.some(14)</span>
+</code></pre></div></div>
+
+<p>If a binding expression cannot be bound to a value, because, for instance, it is bound to <code class="highlighter-rouge">Option.none</code>, <code class="highlighter-rouge">Either.left</code> or and empty <code class="highlighter-rouge">ArrayK</code>, the binding stops proceeding forward.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">nothing</span> <span class="o">=</span> <span class="nf">binding</span><span class="p">(</span>
+    <span class="n">v1</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1">// v1 is bound to 1</span>
+    <span class="n">v2</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">none</span><span class="p">(),</span>  <span class="c1">// v2 cannot be bound to a value</span>
+    <span class="n">v3</span> <span class="o">&lt;-</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="c1">// this is never bound as the previous step failed</span>
+    <span class="nv">yield</span><span class="p">:</span> <span class="n">v1</span><span class="o">.</span><span class="k">get</span> <span class="o">+</span> <span class="n">v2</span><span class="o">.</span><span class="k">get</span> <span class="o">+</span> <span class="n">v3</span><span class="o">.</span><span class="k">get</span>
+<span class="p">)</span> <span class="c1">// result contains Option.none()</span>
+</code></pre></div></div>
+
+<h3 id="ignoring-the-result">Ignoring the result</h3>
+
+<p>Sometimes we may be interested in running a monadic effect but disregard its produced result. That is the case of printing something to the standard output; the value it produces is of type <code class="highlighter-rouge">Void</code>, so we do not need to assign it. We could still create a variable to do so, like:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">voidVar</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+<span class="n">voidVar</span> <span class="o">&lt;-</span> <span class="kt">ConsoleIO</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But that boilerplate code can be avoided. Bow provides the prefix operator <code class="highlighter-rouge">|&lt;-</code> to sequence a monadic effect and disregard its produced result. Thus, we can write a program to greet the user:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="n">_</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">invoke</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">invoke</span> <span class="p">{</span> <span class="s">"Tomás"</span> <span class="p">}</span> <span class="c1">// Hardcoded value, it should call Swift.readLine</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">name</span> <span class="o">=</span> <span class="kt">IOPartial</span><span class="o">&lt;</span><span class="kt">Error</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">(</span><span class="nv">String</span><span class="err">.</span><span class="nv">self</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">program</span> <span class="o">=</span> <span class="nf">binding</span><span class="p">(</span>
+         <span class="o">|&lt;-</span><span class="nf">write</span><span class="p">(</span><span class="s">"What's your name?"</span><span class="p">),</span>
+    <span class="n">name</span> <span class="o">&lt;-</span> <span class="nf">read</span><span class="p">(),</span>
+         <span class="o">|&lt;-</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello </span><span class="se">\(</span><span class="n">name</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span><span class="p">),</span>
+    <span class="nv">yield</span><span class="p">:</span> <span class="p">()</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The program above is equivalent to the following version using <code class="highlighter-rouge">flatMap</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">program2</span> <span class="o">=</span> <span class="nf">write</span><span class="p">(</span><span class="s">"What's your name?"</span><span class="p">)</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+    <span class="nf">read</span><span class="p">()</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">name</span> <span class="k">in</span>
+        <span class="nf">write</span><span class="p">(</span><span class="s">"Hello </span><span class="se">\(</span><span class="n">name</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Although the two versions are equivalent, the monad comprehension version is easier to read using direct syntax and avoiding the nested <code class="highlighter-rouge">flatMap</code> operations.</p>
+
+<p class="intermediate">intermediate</p>
+
+<h2 id="polymorphic-monad-comprehensions">Polymorphic monad comprehensions</h2>
+
+<p>If we revisit the <code class="highlighter-rouge">join</code> function above, we can see that we have three implementations for <code class="highlighter-rouge">Option</code>, <code class="highlighter-rouge">Either</code> and <code class="highlighter-rouge">ArrayK</code> that are almost the same. The only difference between them is the input types and how the variables are created. The binding process is exactly the same code.</p>
+
+<p>This is not a coincidence and it is thanks to the use of the <code class="highlighter-rouge">Monad</code> abstraction. In fact, we can write a single function that is not aware of the types we want to invoke it with, as long as it has an instance of <code class="highlighter-rouge">Monad</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">join</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Monad</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Create variables for binding</span>
+    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">z</span> <span class="o">=</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="c1">// Operate over the contents of a monadic value in direct syntax</span>
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">a</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="p">,</span>
+        <span class="n">z</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">,</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="s">"</span><span class="se">\(</span><span class="n">x</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">y</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">, </span><span class="se">\(</span><span class="n">z</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With this implementation, we can invoke the function using whatever monadic type we would like:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Option&lt;_&gt;</span>
+<span class="nf">join</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">))</span> <span class="c1">// Option.some("1, 3.141592, Hello")</span>
+
+<span class="c1">// Either&lt;Error, _&gt;</span>
+<span class="nf">join</span><span class="p">(</span><span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">))</span> <span class="c1">// Either.right("1, 3.141592, Hello")</span>
+
+<span class="c1">// Id&lt;_&gt;</span>
+<span class="nf">join</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kt">Id</span><span class="p">(</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="kt">Id</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">))</span> <span class="c1">// Id("1, 3.141592, Hello")</span>
+
+<span class="c1">// Ior&lt;String, _&gt;</span>
+<span class="nf">join</span><span class="p">(</span><span class="kt">Ior</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="kt">Ior</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Double</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="kt">Ior</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;.</span><span class="nf">right</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">))</span> <span class="c1">// Ior.right("1, 3.141592, Hello")</span>
+
+<span class="c1">// ArrayK&lt;_&gt;</span>
+<span class="nf">join</span><span class="p">(</span><span class="kt">ArrayK</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="kt">ArrayK</span><span class="p">(</span><span class="kt">Double</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="kt">ArrayK</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">,</span> <span class="s">"Bye"</span><span class="p">))</span> <span class="c1">// ArrayK("1, 3.141592, Hello",</span>
+                                                                 <span class="c1">//        "1, 3.141592, Bye",</span>
+                                                                 <span class="c1">//        "2, 3.141592, Hello",</span>
+                                                                 <span class="c1">//        "2, 3.141592, Bye",</span>
+                                                                 <span class="c1">//        "3, 3.141592, Hello",</span>
+                                                                 <span class="c1">//        "3, 3.141592, Bye")</span>
+</code></pre></div></div>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>
