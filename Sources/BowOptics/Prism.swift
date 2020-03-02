@@ -158,6 +158,14 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
     public func getOption(_ s: S) -> Option<A> {
         return getOrModify(s).toOption()
     }
+    
+    /// Retrieves the focus.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: An optional value that is present if the focus exists.
+    public func getOptional(_ s: S) -> A? {
+        getOption(s).toOptional()
+    }
 
     /// Obtains a modified source.
     ///
@@ -177,6 +185,16 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
     /// - Returns: Optional modified source.
     public func setOption(_ s: S, _ b: B) -> Option<T> {
         return modifyOption(s, constant(b))
+    }
+    
+    /// Sets a modified focus.
+    ///
+    /// - Parameters:
+    ///   - s: Source.
+    ///   - b: Modified focus.
+    /// - Returns: Optional modified source.
+    public func setOptional(_ s: S, _ b: B) -> T? {
+        setOption(s, b).toOptional()
     }
 
     /// Checks if the provided source is non-empty.
