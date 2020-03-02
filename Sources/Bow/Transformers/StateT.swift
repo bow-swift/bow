@@ -99,7 +99,7 @@ extension StateT where F: Functor {
         )
     }
     
-    /// Generalizes this StateT to a bigger state, given functions to get and set the inner state into the general state.
+    /// Generalizes this StateT to a parent state, given functions to get and set the inner state into the general state.
     ///
     /// - Parameters:
     ///   - getter: Function to get the state from the parent.

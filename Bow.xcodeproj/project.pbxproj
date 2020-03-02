@@ -141,6 +141,7 @@
 		1165E1A923F414350052F0C7 /* Trampoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1165E1A823F414350052F0C7 /* Trampoline.swift */; };
 		1165E1AC23F417260052F0C7 /* TrampolineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1165E1AA23F414540052F0C7 /* TrampolineTest.swift */; };
 		1166A07A22119F720032CD4E /* EqualityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1166A07822119E640032CD4E /* EqualityFunctions.swift */; };
+		116B8262240D2597003313CA /* StateT+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116B8261240D2597003313CA /* StateT+Optics.swift */; };
 		1171ED4B23C48985005362E0 /* StoreT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4A23C48985005362E0 /* StoreT.swift */; };
 		1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4C23C4CB7C005362E0 /* TracedT.swift */; };
 		1171ED5023C4E1CB005362E0 /* EnvTTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED4E23C4E19A005362E0 /* EnvTTest.swift */; };
@@ -821,6 +822,7 @@
 		1165E1A823F414350052F0C7 /* Trampoline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trampoline.swift; sourceTree = "<group>"; };
 		1165E1AA23F414540052F0C7 /* TrampolineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrampolineTest.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
+		116B8261240D2597003313CA /* StateT+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateT+Optics.swift"; sourceTree = "<group>"; };
 		1171ED4A23C48985005362E0 /* StoreT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreT.swift; sourceTree = "<group>"; };
 		1171ED4C23C4CB7C005362E0 /* TracedT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracedT.swift; sourceTree = "<group>"; };
 		1171ED4E23C4E19A005362E0 /* EnvTTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvTTest.swift; sourceTree = "<group>"; };
@@ -1490,6 +1492,14 @@
 			path = BowOpticsLaws;
 			sourceTree = "<group>";
 		};
+		116B8260240D2575003313CA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				116B8261240D2597003313CA /* StateT+Optics.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		117DC0D522AE499E00EF65F0 /* BowEffectsGenerators */ = {
 			isa = PBXGroup;
 			children = (
@@ -1581,6 +1591,7 @@
 				8BA0F4B4217E2E9200969984 /* Traversal.swift */,
 				1126CA8822B1139B00F840CB /* Auto */,
 				8BA0F4CF217E2E9200969984 /* DSL */,
+				116B8260240D2575003313CA /* Extensions */,
 				8BA0F4C1217E2E9200969984 /* Instances */,
 				8BA0F4B5217E2E9200969984 /* STD */,
 				1126CA9122B12D7F00F840CB /* Tuple */,
@@ -2985,6 +2996,7 @@
 				11E7172E219D722900B94845 /* At.swift in Sources */,
 				1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */,
 				1126CA8C22B115E100F840CB /* AutoLens.swift in Sources */,
+				116B8262240D2597003313CA /* StateT+Optics.swift in Sources */,
 				112D0CF022BB88F20032F675 /* Result+Optics.swift in Sources */,
 				11E7172F219D722900B94845 /* Each.swift in Sources */,
 				112D0CEE22BB85560032F675 /* Ior+Optics.swift in Sources */,
