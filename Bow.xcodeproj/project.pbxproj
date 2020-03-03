@@ -156,6 +156,7 @@
 		1186E15122BA395D001F8A5D /* Index+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E14E22BA38CD001F8A5D /* Index+Optics.swift */; };
 		1186E15722BA8A77001F8A5D /* Cons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15622BA8A77001F8A5D /* Cons.swift */; };
 		1186E15922BA8ECA001F8A5D /* Snoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1186E15822BA8ECA001F8A5D /* Snoc.swift */; };
+		118C35DD240E5C2200113C66 /* CoSum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118C35DC240E5C2200113C66 /* CoSum.swift */; };
 		11912B0B238C2068007D90A2 /* DispatchTimeInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */; };
 		1191BD0A22D77C510052FEA8 /* BoundVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0922D77C510052FEA8 /* BoundVar.swift */; };
 		1191BD0C22D77FED0052FEA8 /* BindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */; };
@@ -843,6 +844,7 @@
 		1186E14E22BA38CD001F8A5D /* Index+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Index+Optics.swift"; sourceTree = "<group>"; };
 		1186E15622BA8A77001F8A5D /* Cons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cons.swift; sourceTree = "<group>"; };
 		1186E15822BA8ECA001F8A5D /* Snoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snoc.swift; sourceTree = "<group>"; };
+		118C35DC240E5C2200113C66 /* CoSum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoSum.swift; sourceTree = "<group>"; };
 		11912B09238C1FB4007D90A2 /* DispatchTimeInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Extensions.swift"; sourceTree = "<group>"; };
 		1191BD0922D77C510052FEA8 /* BoundVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundVar.swift; sourceTree = "<group>"; };
 		1191BD0B22D77FED0052FEA8 /* BindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExpression.swift; sourceTree = "<group>"; };
@@ -1907,6 +1909,7 @@
 				09CEF84D236E28150070CF43 /* Co.swift */,
 				8BA0F489217E2E9200969984 /* Const.swift */,
 				8BA0F485217E2E9200969984 /* Coreader.swift */,
+				118C35DC240E5C2200113C66 /* CoSum.swift */,
 				8BA0F47B217E2E9200969984 /* Day.swift */,
 				1137469D2343592300D9C1AD /* Dictionary.swift */,
 				8BA0F476217E2E9200969984 /* DictionaryK.swift */,
@@ -3135,6 +3138,7 @@
 				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				1171ED4B23C48985005362E0 /* StoreT.swift in Sources */,
+				118C35DD240E5C2200113C66 /* CoSum.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
 				609CC1472364F9A200096D5D /* Divisible.swift in Sources */,
 				8BA0F5DB217E2E9200969984 /* Alternative.swift in Sources */,
