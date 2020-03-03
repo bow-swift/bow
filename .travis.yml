@@ -3,6 +3,7 @@ osx_image: xcode11
 sudo: required
 git:
   depth: 200
+  
 addons:
   homebrew:
     packages:
