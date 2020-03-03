@@ -35,6 +35,30 @@ public final class Sum<F, G, V> : SumOf<F, G, V> {
     public func change(side: Side) -> Sum<F, G, V> {
         Sum(left: self.left, right: self.right, side: side)
     }
+    
+    public func lower() -> EitherK<F, G, V> {
+        switch side {
+        case .left: return .init(left)
+        case .right: return .init(right)
+        }
+    }
+    
+    public func lowerLeft() -> Kind<F, V> {
+        left
+    }
+    
+    public func lowerRight() -> Kind<G, V> {
+        right
+    }
+}
+
+public extension Sum where F: Comonad, G: Comonad {
+    func extractOther() -> V {
+        switch side {
+        case .left: return right.extract()
+        case .right: return left.extract()
+        }
+    }
 }
 
 /// Safe downcast.
