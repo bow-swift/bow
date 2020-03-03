@@ -1,0 +1,18 @@
+name: nef Compilation
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Compile documentation
+      run: |
+        brew tap bow-swift/nef
+        brew install sourcekitten
+        brew install nef
+        gem install cocoapods -v 1.8.4
+        nef compile Documentation.app
