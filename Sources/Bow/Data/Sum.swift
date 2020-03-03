@@ -4,6 +4,10 @@ public final class ForSum {}
 public final class SumPartial<F, G>: Kind2<ForSum, F, G> {}
 public typealias SumOf<F, G, V> = Kind<SumPartial<F, G>, V>
 
+public typealias SumOptPartial<G> = SumPartial<ForId, G>
+public typealias SumOptOf<G, A> = SumOf<ForId, G, A>
+public typealias SumOpt<G, A> = Sum<ForId, G, A>
+
 public enum Side {
     case left
     case right
