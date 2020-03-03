@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.5.0/docs">
+            <span>
+              0.5.0
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.6.0/docs">
+            <span>
+              0.6.0
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="suspending-side-effects">Suspending side effects</h1>
+
+<p class="beginner">beginner</p>
+
+<p>In Functional Programming, functions must honor its mathematical definition: they must be total, deterministic and pure. However, this is not the situation in many cases; in fact, programs are useful when side-effects happen. The issue is not having side-effects <em>per se</em>, but the moment and the circumstances when they are executed. If they happen in the moment we invoke them, reasoning about their outcome becomes much more difficult. In addition to that, composition becomes harder, if not impossible, to achieve.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>Consider the following two functions:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">greet</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Hello </span><span class="se">\(</span><span class="n">name</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">homePage</span><span class="p">(</span><span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Either</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Data</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://bow-swift.io"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span> <span class="p">{</span>
+                <span class="nf">callback</span><span class="p">(</span><span class="o">.</span><span class="nf">right</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+                <span class="nf">callback</span><span class="p">(</span><span class="o">.</span><span class="nf">left</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="p">}</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Function <code class="highlighter-rouge">greet</code> has a side effect (printing to the console) and does not produce any value, making it harder to compose this function with any other function. Function <code class="highlighter-rouge">homePage</code> does produce values, but they are returned through a callback as it is an asynchronous operation, making it difficult to be composed as well, besides having another side effect (network call).</p>
+
+<h2 id="creating-an-io-from-a-synchronous-call">Creating an IO from a synchronous call</h2>
+
+<p>Dealing with this type of functions is usual in our programming routine, either because we have some non-functional legacy code or because we are using libraries that do not provide a functional API. What can we do to overcome this issue?</p>
+
+<p>Bow Effects provides the IO data type. It is a data type that lets us suspend the execution of side effects, providing us a value that describes the side effect, but it has not been performed yet. That way, we can convert our programs into values that we can combine and compose.</p>
+
+<p><code class="highlighter-rouge">IO</code> has a method called <code class="highlighter-rouge">invoke</code> that can help us suspend a side effect. For instance, the <code class="highlighter-rouge">greet</code> function above can be rewritten as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">greetIO</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Never</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">invoke</span> <span class="p">{</span> <span class="nf">greet</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="n">name</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>It may seem like we haven’t done much, as we are still calling the old function, but its execution is deferred. It has been wrapped in an <code class="highlighter-rouge">IO</code> value that cannot produce errors (the <code class="highlighter-rouge">Never</code> type) and that do not produce any value (the <code class="highlighter-rouge">Void</code> type). Function <code class="highlighter-rouge">greetIO</code> is pure and provides a value as its output that can be composed with other <code class="highlighter-rouge">IO</code> values to make a bigger program.</p>
+
+<p>We can also wrap functions throwing errors in an IO using <code class="highlighter-rouge">invoke</code>. The function <code class="highlighter-rouge">findUser(by:)</code> below is impure:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">findUser</span><span class="p">(</span><span class="n">by</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="kt">DatabaseError</span><span class="o">.</span><span class="nf">missing</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Its pure counterpart can be written as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Making use of the impure version</span>
+<span class="kd">func</span> <span class="nf">findUserIO</span><span class="p">(</span><span class="n">by</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">DatabaseError</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">invoke</span> <span class="p">{</span> <span class="k">try</span> <span class="nf">findUser</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Writing a new pure version</span>
+<span class="kd">func</span> <span class="nf">findUser_fromEither</span><span class="p">(</span><span class="n">by</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">DatabaseError</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">invokeEither</span> <span class="p">{</span>
+        <span class="k">guard</span> <span class="nf">exists</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">.</span><span class="nf">left</span><span class="p">(</span><span class="o">.</span><span class="nf">missing</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">.</span><span class="nf">right</span><span class="p">(</span><span class="nf">fetch</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The functional versions above have an additional benefit: they are explicit about the type of the errors that may happen during their execution.</p>
+
+<p>Besides <code class="highlighter-rouge">invoke</code>, <code class="highlighter-rouge">IO</code> has other methods to create a suspended side effect, like the <code class="highlighter-rouge">invokeEither</code> above, <code class="highlighter-rouge">invokeResult</code>, <code class="highlighter-rouge">invokeValidated</code> and <code class="highlighter-rouge">invokeTry</code>.</p>
+
+<h2 id="creating-an-io-from-an-asynchronous-call">Creating an IO from an asynchronous call</h2>
+
+<p>Let’s look now at the <code class="highlighter-rouge">homePage</code> function. It provides a generic (non-typed) error or a <code class="highlighter-rouge">Data</code> value, but it does it through a callback. How can an asynchronous call be suspended into an <code class="highlighter-rouge">IO</code> value?</p>
+
+<p><code class="highlighter-rouge">IO</code> has a method called <code class="highlighter-rouge">async</code> that serves to this purpose:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">homePageIO</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Data</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">IO</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span> <span class="n">callback</span> <span class="k">in</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://bow-swift.io"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+                <span class="k">if</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">data</span> <span class="p">{</span>
+                    <span class="nf">callback</span><span class="p">(</span><span class="o">.</span><span class="nf">right</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+                    <span class="nf">callback</span><span class="p">(</span><span class="o">.</span><span class="nf">left</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+                <span class="p">}</span>
+            <span class="p">}</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This new function provides an <code class="highlighter-rouge">IO&lt;Error, Data&gt;</code> value that suspend this asynchronous call and that can be transformed or composed.</p>
+
+<p class="intermediate">intermediate</p>
+
+<h2 id="creating-an-io-that-depends-on-a-context">Creating an IO that depends on a context</h2>
+
+<p>So far we have seen how to create an <code class="highlighter-rouge">IO</code> suspending a side effect. There are other cases where we may be interested on creating an <code class="highlighter-rouge">IO</code> that depends on a context that we still do not have.</p>
+
+<p>To this purpose, Bow Effects provides the <code class="highlighter-rouge">EnvIO&lt;D, E, A&gt;</code> type, which models an <code class="highlighter-rouge">IO&lt;E, A&gt;</code> that depends on some context <code class="highlighter-rouge">D</code>. This type is useful to have a sort of dependency injection, where we can write our programs without worrying too much about where the context is coming from, and later, when we can provide such context, we run the program.</p>
+
+<p>For instance, consider the following services: a network API to fetch users by their id and a database to save the user.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">API</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">getUser</span><span class="p">(</span><span class="n">by</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span>
+    <span class="c1">// ... Other methods ...</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">Database</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">save</span><span class="p">(</span><span class="nv">user</span><span class="p">:</span> <span class="kt">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span>
+    <span class="c1">// ... Other methods ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can create an Environment that provides these abstractions:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Environment</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">database</span><span class="p">:</span> <span class="kt">Database</span>
+    <span class="k">let</span> <span class="nv">api</span><span class="p">:</span> <span class="kt">API</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, let’s say that we want to implement a function that gets a user from the API and stores it in the database. We can create an <code class="highlighter-rouge">EnvIO</code> that depends on the <code class="highlighter-rouge">Environment</code> that we created above to get the <code class="highlighter-rouge">API</code> and <code class="highlighter-rouge">Database</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">cacheUser</span><span class="p">(</span><span class="n">by</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">EnvIO</span> <span class="p">{</span> <span class="n">environment</span> <span class="k">in</span>
+        <span class="n">environment</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="nf">getUser</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">user</span> <span class="k">in</span> <span class="n">environment</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">user</span><span class="p">:</span> <span class="n">user</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This will allow us to run the program that we have created under different environments; e.g. we can provide different implementations for production and testing:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Providing production implementations</span>
+<span class="k">let</span> <span class="nv">prodEnv</span> <span class="o">=</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">database</span><span class="p">:</span> <span class="kt">ProductionDatabase</span><span class="p">(),</span>
+                          <span class="nv">api</span><span class="p">:</span> <span class="kt">ProductionAPI</span><span class="p">())</span>
+<span class="nf">cacheUser</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="s">"12345"</span><span class="p">)</span><span class="o">.</span><span class="nf">provide</span><span class="p">(</span><span class="n">prodEnv</span><span class="p">)</span>
+
+<span class="c1">// Providing testing implementations</span>
+<span class="k">let</span> <span class="nv">testEnv</span> <span class="o">=</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">database</span><span class="p">:</span> <span class="kt">TestDatabase</span><span class="p">(),</span>
+                          <span class="nv">api</span><span class="p">:</span> <span class="kt">TestAPI</span><span class="p">())</span>
+<span class="nf">cacheUser</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="s">"12345"</span><span class="p">)</span><span class="o">.</span><span class="nf">provide</span><span class="p">(</span><span class="n">testEnv</span><span class="p">)</span>
+</code></pre></div></div>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

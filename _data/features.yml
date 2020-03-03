@@ -1,0 +1,16 @@
+content:
+    - title: Patterns
+      description: Solutions to recurrent problems, in a purely Functional Programming manner.
+      icon: /img/feature-icon-primary.svg
+
+    - title: Typeclasses
+      description: Enable ad-hoc polymorphism with protocols like Functor, Applicative, Monad and many others.
+      icon: /img/feature-icon-secondary.svg
+
+    - title: Data Types
+      description: Take advantage of numerous data types based on algebraic properties.
+      icon: /img/feature-icon-tertiary.svg
+      
+    - title: Integrations
+      description: Bow integrates nicely with popular Swift libraries like RxSwift.
+      icon: /img/feature-icon-quarter.svg

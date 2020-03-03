@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.5.0/docs">
+            <span>
+              0.5.0
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.6.0/docs">
+            <span>
+              0.6.0
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="retrying-and-repeating-effects">Retrying and repeating effects</h1>
+
+<p>A common demand when working with effects is to retry or repeat them when certain circumstances happen. Usually, the retrial or repetition does not happen right away; rather, it is done based on a policy. For instance, when fetching content from a network request, we may want to retry it when it fails, using an exponential backoff algorithm, for a maximum of 15 seconds or 5 attempts, whatever happens first.</p>
+
+<p>Fortunately, Bow Effects provides a composable way to achieve this easily. Both <code class="highlighter-rouge">IO</code> and <code class="highlighter-rouge">EnvIO</code> provide methods to retry and repeat themselves based on a scheduling policy. The semantics of each one are:</p>
+
+<ul>
+  <li>
+    <p><strong>retry</strong>: The effect is executed once, and if it fails, it will be reattempted based on the scheduling policy passed as an argument. It will stop if the effect ever succeeds, or the policy determines it should not be reattempted again. It will return the success value of the effect, or the last returned error.</p>
+  </li>
+  <li>
+    <p><strong>repeat</strong>: The effect is executed once, and if it succeeds, it will be executed again based on the scheduling policy passed as an argument. It will stop if the effect ever fails, or the policy determines it should not be executed again. It will return the last internal state of the scheduling policy, or the error that happened running the effect. Returning the last internal state of the scheduling policy will let us use different strategies to return the result of the effect, as we will see below.</p>
+  </li>
+</ul>
+
+<h2 id="basic-scheduling-policies">Basic scheduling policies</h2>
+
+<p>As stated above, the scheduling policies provided in Bow Effects are highly composable, leading to very powerful and complex policies, written in a very simple manner.</p>
+
+<p>The library provides a number of simple policies that serve as building blocks to build more complex ones. These units are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scheduling policy</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">forever()</code></td>
+      <td>A policy that recurs forever, emitting the number of iterations it has performed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">never()</code></td>
+      <td>A policy that never recurs.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">recurs(n)</code></td>
+      <td>A policy that recurs <code class="highlighter-rouge">n</code> times. Notice that the original effect will be executed once, and then potentially <code class="highlighter-rouge">n</code> more times according to the policy.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">once()</code></td>
+      <td>A policy that recurs once. It is an alias to <code class="highlighter-rouge">recurs(1)</code>. Notice that the original effect will be executed once, and potentially once more according to the policy.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">duration(time)</code></td>
+      <td>A policy that recurs for the specified amount of time.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">spaced(time)</code></td>
+      <td>A policy that recurs forever, waiting the specified amount of time between iterations.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">linear(time)</code></td>
+      <td>A policy that recurs forever, incrementing linearly the waiting time between iterations, using the specified time as a base increment. For instance, if the base time is one second, the policy will wait one second for the first attempt, two for the second, 3 for the third, and so on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">exponential(time, factor)</code></td>
+      <td>A policy that recurs forever, incrementing exponentially the waiting time between iterations, using the specified time as a base increment, and the provided factor as the power for the exponential backoff algorithm. The default value for the factor is 2.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">fibonacci(time)</code></td>
+      <td>A policy that recurs forever, incrementing the waiting time between iterations following the Fibonacci sequence, using the specified time as a base increment.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">doWhile(predicate)</code></td>
+      <td>A policy that recurs while the result of the effect satisfies the provided predicate.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">doWhileEquals(value)</code></td>
+      <td>A policy that recurs while the result of the effect is equal to the specified value.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">doUntil(predicate)</code></td>
+      <td>A policy that recurs until the result of the effect satisfies the provided predicate.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">doUntilEquals(value)</code></td>
+      <td>A policy that recurs until the result of the effect is equal to the specified value.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">collectAll()</code></td>
+      <td>A policy that recurs forever and collects all results provided by the effect while recursing.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">collectWhile(predicate)</code></td>
+      <td>A policy that recurs while the result of the effect satisfies the provided predicate, collecting all the intermediate results.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">collectUntil(predicate)</code></td>
+      <td>A policy that recurs until the result of the effect satisfies the provided predicate, collecting all the intermediate results.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="combining-scheduling-policies">Combining scheduling policies</h2>
+
+<p>These building blocks can be composed in different ways to form more powerful scheduling policies. These are the combinators that Bow Effects provides to compose scheduling policies:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Combinator</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">s1.and(s2)</code></td>
+      <td>Provides a policy that recurs as long as both policies agree to recurs, using the maximum waiting time between both policies.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.or(s2)</code></td>
+      <td>Provides a policy that recurs as long as one of the policies agree to recurs, using the minimum waiting time between both policies.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.zipLeft(s2)</code></td>
+      <td>Provides a policy that behaves as <code class="highlighter-rouge">s1.and(s2)</code>, but only keeps the results provided by the left scheduling policy.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.zipRight(s2)</code></td>
+      <td>Provides a policy that behaves as <code class="highlighter-rouge">s1.and(s2)</code> but only keeps the results provided by the right scheduling policy.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.andThen(s2)</code></td>
+      <td>Provides a policy that first consumes <code class="highlighter-rouge">s1</code> until it determines not to recurs, and then consumes <code class="highlighter-rouge">s2</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.forever()</code></td>
+      <td>Provides a policy that consumes <code class="highlighter-rouge">s1</code> until it determines no to recurs, and reinitializes it to run it again, forever.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">s1.addDelay(f)</code></td>
+      <td>Provides a policy that adds a delay between each iteration of <code class="highlighter-rouge">s1</code>, determined by a provided function that computes the delay from the last output of the policy.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="common-use-cases">Common use cases</h2>
+
+<p>Once we have building blocks and ways to combine them, let’s see how we can use them to solve some use cases.</p>
+
+<h3 id="repeating-an-effect-and-dealing-with-its-result">Repeating an effect and dealing with its result</h3>
+
+<p>When we repeat an effect, we do it as long as it keeps providing successful results and the scheduling policy tells us to keep recursing. But then, there is a question on what to do with the results provided by each iteration of the repetition.</p>
+
+<p>There are at least 3 possible things we would like to do:</p>
+
+<ul>
+  <li>Discard all results; i.e., return <code class="highlighter-rouge">Void</code>.</li>
+  <li>Discard all intermediate results and just keep the last produced result.</li>
+  <li>Keep all intermediate results.</li>
+</ul>
+
+<p>Assuming we have an effect in <code class="highlighter-rouge">io</code>, and we want to repeat it 3 times after its first successful execution, we can do:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">repeated3Times</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+                               <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>However, when running this new effect, its output will be the number of iterations it has performed, as stated in the documentation of the function. Notice also that we need to provide an error to return when the schedule fails to update. The type of this error must be the same as the error type our original <code class="highlighter-rouge">IO</code> knows how to handle.</p>
+
+<p>If we want to discard the values provided by the repetition of the effect, we can combine our policy with <code class="highlighter-rouge">Schedule.void()</code>, using the <code class="highlighter-rouge">zipLeft</code> or <code class="highlighter-rouge">zipRight</code> combinators, which will keep just the output of one of the policies:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">discardedResult1</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">void</span><span class="p">()</span><span class="o">.</span><span class="nf">zipLeft</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+                                 <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+
+<span class="c1">// Equivalent to:</span>
+<span class="k">let</span> <span class="nv">discardedResult2</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="nf">zipRight</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">void</span><span class="p">()),</span>
+                                 <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>Following the same strategy, we can zip it with the <code class="highlighter-rouge">Schedule.identity()</code> policy to keep only the last provided result by the effect.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">lastResult1</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">identity</span><span class="p">()</span><span class="o">.</span><span class="nf">zipLeft</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+
+<span class="c1">// Equivalent to:</span>
+<span class="k">let</span> <span class="nv">lastResult2</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="nf">zipRight</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">identity</span><span class="p">()),</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>Finally, if we want to keep all intermediate results, we can zip the policy with <code class="highlighter-rouge">Schedule.collectAll()</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">allResults1</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">collectAll</span><span class="p">()</span><span class="o">.</span><span class="nf">zipLeft</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+
+<span class="c1">// Equivalent to:</span>
+<span class="k">let</span> <span class="nv">allResults2</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="nf">zipRight</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">collectAll</span><span class="p">()),</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="repeating-an-effect-untilwhile-it-produces-a-certain-value">Repeating an effect until/while it produces a certain value</h3>
+
+<p>We can make use of the policies <code class="highlighter-rouge">doWhile</code> or <code class="highlighter-rouge">doUntil</code> to repeat an effect while or until its produced result matches a given predicate.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">repeatWhile</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="n">doWhile</span> <span class="p">{</span> <span class="n">str</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">},</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+
+<span class="k">let</span> <span class="nv">repeatUntil</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="n">doUntil</span> <span class="p">{</span> <span class="n">str</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">},</span>
+                            <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>However, this may never terminate. In this cases, we can usually add a timeout. We can do this with the <code class="highlighter-rouge">Schedule.duration(t)</code> policy, that runs an effect for the specified time duration. The examples above can be combined with the <code class="highlighter-rouge">and</code> combinator to have a timeout, for instance, after 3 seconds:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">repeatWhileTimeout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="n">doWhile</span> <span class="p">{</span> <span class="n">str</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">}</span>
+                                    <span class="o">.</span><span class="nf">and</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))),</span>
+                                   <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+
+<span class="k">let</span> <span class="nv">repeatUntilTimeout</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">repeat</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="n">doUntil</span> <span class="p">{</span> <span class="n">str</span> <span class="k">in</span> <span class="n">str</span><span class="o">.</span><span class="n">isEmpty</span> <span class="p">}</span>
+                                    <span class="o">.</span><span class="nf">and</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">duration</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))),</span>
+                                   <span class="nv">onUpdateError</span><span class="p">:</span> <span class="p">{</span> <span class="kt">AnyError</span><span class="o">.</span><span class="n">unknown</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="exponential-backoff-retries">Exponential backoff retries</h3>
+
+<p>A common algorithm to retry effectful operations, as network requests, is the <a href="https://en.wikipedia.org/wiki/Exponential_backoff">exponential backoff algorithm</a>. There is a scheduling policy that implements this algorithm and can be used as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">exponential</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">retry</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">exponential</span><span class="p">(</span><span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">250</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>As more iterations of this algorithm are performed, the waiting time becomes larger and larger. We may want to use it for the initial retries, and then switch to evenly spaced retries. This can be achieved with the <code class="highlighter-rouge">Schedule.spaced(t)</code> policy and the <code class="highlighter-rouge">or</code> combinator. This will keep retrying as long as either of them want to keep retrying, using the minimum of both delays between iterations:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">exponentialOrFixed</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">retry</span><span class="p">(</span>
+    <span class="kt">Schedule</span><span class="o">.</span><span class="nf">exponential</span><span class="p">(</span><span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">250</span><span class="p">))</span>
+        <span class="o">.</span><span class="nf">or</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">spaced</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>This will attempt to retry the effect with the exponential backoff algorithm, waiting at most 3 seconds between each attempt. Nevertheless, this will keep running forever. We can limit it in time, using the <code class="highlighter-rouge">Schedule.duration(t)</code> policy, to set a timeout, or limit the number of iterations with the <code class="highlighter-rouge">Schedule.recurs(n)</code> policy. For instance, we can limit it to 10 attempts like:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">exponentialOrFixedMax10Times</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">retry</span><span class="p">(</span>
+    <span class="kt">Schedule</span><span class="o">.</span><span class="nf">exponential</span><span class="p">(</span><span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">250</span><span class="p">))</span>
+        <span class="o">.</span><span class="nf">or</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">spaced</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+        <span class="o">.</span><span class="nf">and</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>Finally, if all retries are performed, and still the effect does not succeed, it will fail with an error. There is an overload of <code class="highlighter-rouge">retry</code> that lets us provide a closure to deal with this error and provide a default value:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">exponentialOrFixedMax10Times_withDefaultResponse</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="nf">retry</span><span class="p">(</span>
+    <span class="kt">Schedule</span><span class="o">.</span><span class="nf">exponential</span><span class="p">(</span><span class="o">.</span><span class="nf">milliseconds</span><span class="p">(</span><span class="mi">250</span><span class="p">))</span>
+        <span class="o">.</span><span class="nf">or</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">spaced</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+        <span class="o">.</span><span class="nf">and</span><span class="p">(</span><span class="kt">Schedule</span><span class="o">.</span><span class="nf">recurs</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span>
+    <span class="nv">orElse</span><span class="p">:</span> <span class="p">{</span> <span class="n">error</span><span class="p">,</span> <span class="n">state</span> <span class="k">in</span> <span class="kt">EnvIO</span><span class="o">.</span><span class="nf">pure</span><span class="p">(</span><span class="kt">Either</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;.</span><span class="nf">left</span><span class="p">(</span><span class="s">"Default value"</span><span class="p">))</span><span class="o">^</span> <span class="p">})</span>
+</code></pre></div></div>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

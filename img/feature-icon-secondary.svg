@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="72px" viewBox="0 0 64 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>feature-icon-secondary</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="feature-icon-secondary" transform="translate(-4.000000, 0.000000)">
+            <polygon id="Polygon" fill="#FF4A33" points="36 0 67.1769145 18 67.1769145 54 36 72 4.82308546 54 4.82308546 18"></polygon>
+            <g id="icon-copy" transform="translate(22.000000, 28.000000)">
+                <polyline id="path" stroke="#FFFFFF" stroke-width="2" points="8 -1.63709046e-11 1.00044417e-11 6 8 12"></polyline>
+                <polyline id="path" stroke="#FFFFFF" stroke-width="2" transform="translate(25.000000, 6.000000) rotate(-180.000000) translate(-25.000000, -6.000000) " points="29 8.8817842e-16 21 6 29 12"></polyline>
+                <rect id="path" fill="#FFFFFF" fill-rule="nonzero" x="10" y="15" width="9" height="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

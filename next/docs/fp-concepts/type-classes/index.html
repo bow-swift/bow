@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.5.0/docs">
+            <span>
+              0.5.0
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.6.0/docs">
+            <span>
+              0.6.0
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="type-classes">Type classes</h1>
+
+<p class="intermediate">intermediate</p>
+
+<p><strong>Type classes</strong>, also known as extension interfaces, are usually represented in Swift as protocols with associated types and/or <code class="highlighter-rouge">Self</code> requirements. They are groups of functions that operate on generic type parameters and are governed by algebraic laws.</p>
+
+<p>Type classes can be used to enable <strong>ad hoc polymorphism</strong>; they act as constraints added to type parameters in parametrically polymorphic types or functions.</p>
+
+<p>Consider, for instance, the <code class="highlighter-rouge">Equatable</code> protocol. It is a type class that adds some functionality to existing types; more precisely, it enables to check for equality of values of a type. It is governed by the following laws:</p>
+
+<ul>
+  <li>Identity: a value is equal to itself (<code class="highlighter-rouge">a == a</code>).</li>
+  <li>Symmetry: if <code class="highlighter-rouge">a == b</code>, then <code class="highlighter-rouge">b == a</code>.</li>
+  <li>Transitivity: if <code class="highlighter-rouge">a == b</code> and <code class="highlighter-rouge">b == c</code>, then <code class="highlighter-rouge">a == c</code>.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">Equatable</code> type class can be used to constrain implementations of parametrically polymorphic functions; e.g:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">allEqual</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">array</span><span class="p">:</span> <span class="p">[</span><span class="kt">A</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">first</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">first</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">false</span> <span class="p">}</span>
+    <span class="k">return</span> <span class="n">array</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span> <span class="n">partial</span><span class="p">,</span> <span class="n">next</span> <span class="k">in</span> <span class="n">partial</span> <span class="o">&amp;&amp;</span> <span class="n">next</span> <span class="o">==</span> <span class="n">first</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The function above is parametrically polymorphic; it operates of values of type <code class="highlighter-rouge">A</code>. Valid types to fill this type parameter need to conform to <code class="highlighter-rouge">Equatable</code> and enable the possibility to use the <code class="highlighter-rouge">==</code> operator.</p>
+
+<h2 id="type-classes-of-higher-kind">Type classes of higher kind</h2>
+
+<p><code class="highlighter-rouge">Equatable</code>, like many other protocols provided by Foundation or any other Swift framework, operates at the type level. However, there are many other interesting abstractions as type classes that need to operate at higher kind level. This is not possible by default in Swift, but Bow simulates HKTs and enables type classes to work at this level.</p>
+
+<p>Let us consider the following example. We can try to define a type class that enables transforming values in containers; i.e., given an <code class="highlighter-rouge">F&lt;A&gt;</code>, we would like to obtain an <code class="highlighter-rouge">F&lt;B&gt;</code>, provided that we know how to transform from <code class="highlighter-rouge">A</code> to <code class="highlighter-rouge">B</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">F&lt;A&gt;</code> is not possible to be written natively in Swift. Bow supports this feature by writing it as <code class="highlighter-rouge">Kind&lt;F, A&gt;</code>.</li>
+  <li>Transforming from <code class="highlighter-rouge">A</code> to <code class="highlighter-rouge">B</code> corresponds to a function <code class="highlighter-rouge">(A) -&gt; B</code>.</li>
+  <li>Since this type class is intended to work on kinds <code class="highlighter-rouge">* -&gt; *</code>, it should be implemented by <code class="highlighter-rouge">F</code>, so in the context of the definition of the type class, we can refer to <code class="highlighter-rouge">F</code> as a <code class="highlighter-rouge">Self</code> requirement.</li>
+</ul>
+
+<p>Therefore, the definition of the type class may be:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Transformer</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="type-class-laws">Type class laws</h2>
+
+<p>As we mentioned above, type classes are governed by <strong>algebraic laws</strong>. This means that all implementations of the type class must behave on a certain and satisfy some properties. Each type class has its own laws, as the ones we presented for <code class="highlighter-rouge">Equatable</code> above.</p>
+
+<p>For the <code class="highlighter-rouge">Transformer</code> type class that we are defining, we can consider some laws as well:</p>
+
+<ul>
+  <li><strong>Identity</strong>: if we transform using the identity function (<code class="highlighter-rouge">id</code>), we must obtain the original value; i.e., <code class="highlighter-rouge">F.transform(fa, id) == fa</code>.</li>
+  <li><strong>Composition</strong>: if we apply two transformations to a value, we must obtain the same result as if we apply a single transformation with the composition of the two transforming functions; i.e., <code class="highlighter-rouge">F.transform(F.transform(fa, f), g) == F.transform(fa, g &lt;&lt;&lt; f)</code>.</li>
+</ul>
+
+<p>Swift does not provide a way of encoding these laws and enforcing them in every implementation. To do this, Bow type classes encode their laws as property-based tests using <a href="https://github.com/typelift/SwiftCheck">SwiftCheck</a>. Then, each implementation can be tested against these laws to guarantee that the implementation satisfies them. Type class laws help us have a better reasoning about our code and some times help us rewrite pieces for optimization (like in the case of <code class="highlighter-rouge">Transformer</code> where we can compose functions and apply a single transformation instead of two).</p>
+
+<p>Notice that sometimes you can provide an implementation for a given type class that does not satisfy the laws. Those are called <strong>lawless instances</strong>, in contrast to the ones that satisfy them, which are called <strong>lawful instances</strong>.</p>
+
+<h2 id="type-class-instances">Type class instances</h2>
+
+<p>A <strong>type class instance</strong> is a concrete implementation of a type class for a given type. Instances are usually created through the extension mechanisms that Swift provides. For instance, let us provide an instance of <code class="highlighter-rouge">Transformer</code> for the <code class="highlighter-rouge">Option</code> data type in Bow:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">ForOption</span><span class="p">:</span> <span class="kt">Transformer</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">ForOption</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">ForOption</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">fa</span><span class="o">^.</span><span class="nf">fold</span><span class="p">(</span><span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="k">none</span><span class="p">,</span>                <span class="c1">// It is empty, no transformation</span>
+                        <span class="p">{</span> <span class="n">a</span> <span class="k">in</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="nf">some</span><span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">})</span> <span class="c1">// Transformed with f and wrapped in an Option&lt;B&gt;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Notice that, since the type class works at the kind level, it is not an extension of <code class="highlighter-rouge">Option</code>, but an extension of <code class="highlighter-rouge">ForOption</code>. Revisiting the definition of <code class="highlighter-rouge">Transformer</code>, the <code class="highlighter-rouge">Self</code> requirement is used in <code class="highlighter-rouge">Kind&lt;Self, A&gt;</code>. If we dissect the definition of <code class="highlighter-rouge">Option&lt;A&gt;</code>, it extends <code class="highlighter-rouge">Kind&lt;ForOption, A&gt;</code>. By doing some sort of pattern matching between <code class="highlighter-rouge">Kind&lt;Self, A&gt;</code> and <code class="highlighter-rouge">Kind&lt;ForOption, A&gt;</code>, we can see that it must be <code class="highlighter-rouge">ForOption</code> the candidate to do the extension.</p>
+
+<p>In the case of types with a higher kind, like <code class="highlighter-rouge">Either</code>, we can resort to the same strategy: <code class="highlighter-rouge">Either&lt;L, R&gt;</code> is equivalent to Kind&lt;EitherPartial<L>, R&gt;`, so the extension should be made on `EitherPartial<L>`. Take a look at the following table for examples on some of the types in the core module for Bow.</L></L></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>What to extend for a type class like Transformer?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ArrayK</td>
+      <td>extension ForArrayK: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Const</td>
+      <td>extension ConstPartial: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Either</td>
+      <td>extension EitherPartial: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Id</td>
+      <td>extension ForId: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Ior</td>
+      <td>extension IorPartial: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>NonEmptyArray</td>
+      <td>extension ForNonEmptyArray : Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Option</td>
+      <td>extension ForOption: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Try</td>
+      <td>extension ForTry: Transformer { … }</td>
+    </tr>
+    <tr>
+      <td>Validated</td>
+      <td>extension ValidatedPartial: Transformer { … }</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="projecting-syntax-on-kind">Projecting syntax on <code class="highlighter-rouge">Kind</code></h2>
+
+<p>Type classes that operate on kinds can project some methods on this type so that they are easier to use. This is achieved through extension too; we can extend <code class="highlighter-rouge">Kind</code> with a constraint on its <code class="highlighter-rouge">F</code> type, and enable the syntax for transformer as an instance method:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Kind</span> <span class="k">where</span> <span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This way, every type that its witness has an instance of <code class="highlighter-rouge">Transformer</code>, will be able to use <code class="highlighter-rouge">transform</code> as an instance method. We have two ways of using this type class; consider a function to multiply by two the values contained in some structure:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">multiplyByTwo_firstVersion</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="n">multiplyByTwo_secondVersion</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">transform</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Both versions are equivalent. Type classes defined in Bow project their methods as instance or static methods in Kind to make them easier to find and use. Notice that the compiler is able to resolve which instance it needs to provide based on the type that we use to call the function:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">some</span> <span class="o">=</span> <span class="nf">multiplyByTwo_firstVersion</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">let</span> <span class="nv">none</span> <span class="o">=</span> <span class="nf">multiplyByTwo_secondVersion</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">none</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="existing-type-classes-in-bow">Existing type classes in Bow</h2>
+
+<p>The reader may have guessed that the <code class="highlighter-rouge">Transformer</code> type class that we have created above is, in fact, the <code class="highlighter-rouge">Functor</code> type class, and <code class="highlighter-rouge">transform</code> corresponds to <code class="highlighter-rouge">map</code>. Bow modules include multiple type classes, like <code class="highlighter-rouge">Functor</code>, with their corresponding instances. The following tables summarize some of them; for further information, refer to the API reference for each one of them.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type class</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Semigroup</td>
+      <td>Combine two objects of the same type</td>
+    </tr>
+    <tr>
+      <td>Monoid</td>
+      <td>Combinable objects have an empty value</td>
+    </tr>
+    <tr>
+      <td>SemigroupK</td>
+      <td>Combine two kinds of the same type</td>
+    </tr>
+    <tr>
+      <td>MonoidK</td>
+      <td>Combinable kinds have an empty value</td>
+    </tr>
+    <tr>
+      <td>Functor</td>
+      <td>Transform the contents of an effect, preserving its structure</td>
+    </tr>
+    <tr>
+      <td>Applicative</td>
+      <td>Perform independent computations</td>
+    </tr>
+    <tr>
+      <td>Monad</td>
+      <td>Perform sequential computations</td>
+    </tr>
+    <tr>
+      <td>ApplicativeError</td>
+      <td>Recover from errors in independent computations</td>
+    </tr>
+    <tr>
+      <td>MonadError</td>
+      <td>Recover from errors in sequential computations</td>
+    </tr>
+    <tr>
+      <td>Comonad</td>
+      <td>Extract values from a structure</td>
+    </tr>
+    <tr>
+      <td>Bimonad</td>
+      <td>Monad and Comonad behavior</td>
+    </tr>
+    <tr>
+      <td>Foldable</td>
+      <td>Summarize values of a structure into a single value</td>
+    </tr>
+    <tr>
+      <td>Traverse</td>
+      <td>Apply effects on the values of a structure</td>
+    </tr>
+    <tr>
+      <td>FunctorFilter</td>
+      <td>Transform values based on a predicate</td>
+    </tr>
+    <tr>
+      <td>MonadFilter</td>
+      <td>Execute values that pass a predicate, sequentially</td>
+    </tr>
+    <tr>
+      <td>TraverseFilter</td>
+      <td>Traverse values that pass a predicate</td>
+    </tr>
+    <tr>
+      <td>MonadReader</td>
+      <td>A Monad with capabilities to read from a shared environment</td>
+    </tr>
+    <tr>
+      <td>MonadWriter</td>
+      <td>A Monad with the ability to produce a stream of data in addition to the computed values</td>
+    </tr>
+    <tr>
+      <td>MonadState</td>
+      <td>A Monad with the ability to maintain (read and write) a state</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>
