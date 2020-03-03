@@ -86,7 +86,7 @@ public extension Kind where F: MonadDefer {
     }
 }
 
-public extension Kind where A == Void {
+public extension Kind where F: MonadDefer, A == Void {
     /// Provides a lazy computation that returns void.
     ///
     /// - Returns: A deferred computation of the void value.
