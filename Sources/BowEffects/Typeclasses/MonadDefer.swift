@@ -77,18 +77,20 @@ public extension Kind where F: MonadDefer {
         return F.later(self)
     }
     
-    /// Provides a lazy computation that returns void.
-    ///
-    /// - Returns: A deferred computation of the void value.
-    static func lazy() -> Kind<F, ()> {
-        return F.lazy()
-    }
-    
     /// Provides a computation that evaluates the provided function on every run.
     ///
     /// - Parameter f: A function that provides a value or an error.
     /// - Returns: A computation that defers the execution of the provided value.
     static func laterOrRaise(_ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
         return F.laterOrRaise(f)
+    }
+}
+
+public extension Kind where F: MonadDefer, A == Void {
+    /// Provides a lazy computation that returns void.
+    ///
+    /// - Returns: A deferred computation of the void value.
+    static func lazy() -> Kind<F, Void> {
+        return F.lazy()
     }
 }

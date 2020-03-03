@@ -175,6 +175,14 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
         return getOrModify(s).toOption()
     }
     
+    /// Gets the focus or `nil` if it is not present.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: Focus or `nil` if it is not present.
+    public func getOptional(_ s: S) -> A? {
+        getOption(s).toOptional()
+    }
+    
     /// Sets a new value for the focus.
     ///
     /// - Parameters:
@@ -183,6 +191,16 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     /// - Returns: Optional modified source.
     public func setOption(_ s: S, _ b: B) -> Option<T> {
         return modifyOption(s, constant(b))
+    }
+    
+    /// Sets a new value for the focus.
+    ///
+    /// - Parameters:
+    ///   - s: Source.
+    ///   - b: New focus.
+    /// - Returns: Optional modified source.
+    public func setOptional(_ s: S, _ b: B) -> T? {
+        setOption(s, b).toOptional()
     }
     
     /// Checks if the provided source is empty (i.e. does not have a focus).

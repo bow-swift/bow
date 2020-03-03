@@ -98,6 +98,18 @@ extension StateT where F: Functor {
             runF >>> F.lift(f)
         )
     }
+    
+    /// Generalizes this StateT to a parent state, given functions to get and set the inner state into the general state.
+    ///
+    /// - Parameters:
+    ///   - getter: Function to get the state from the parent.
+    ///   - setter: Function to set the state into the parent.
+    /// - Returns: An `StateT` that produces the same computation but updates the state in a parent state.
+    public func focus<SS>(_ getter: @escaping (SS) -> S, _ setter: @escaping (SS, S) -> SS) -> StateT<F, SS, A> {
+        StateT<F, SS, A> { state in
+            self.runF(getter(state)).map { pair in (setter(state, pair.0), pair.1) }
+        }
+    }
 }
 
 // MARK: Functions for `StateT` when the effect has an instance of `Functor`

@@ -20,11 +20,6 @@ public extension AutoPrism {
     ///   - matching: Closure that matches the focused case of this prism and returns its associated values.
     /// - Returns: A Prism focusing on the provided case.
     static func prism<A>(for constructor: @escaping (A) -> Self, matching: @escaping (Self) -> A?) -> Prism<Self, A> {
-        return prism(for: constructor, matching: matching >>> Option.fromOptional)
-    }
-    
-    private static func prism<A>(for constructor: @escaping (A) -> Self, matching: @escaping (Self) -> Option<A>) -> Prism<Self, A> {
-        return Prism<Self, A>(getOrModify: { whole in matching(whole).fold({ Either.left(whole) }, Either.right) },
-                              reverseGet: constructor)
+        Prism(extract: matching, embed: constructor)
     }
 }
