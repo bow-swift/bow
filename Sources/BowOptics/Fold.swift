@@ -151,6 +151,14 @@ open class Fold<S, A>: FoldOf<S, A> {
     public func headOption(_ s: S) -> Option<A> {
         return foldMap(s, FirstOption.init).const.value
     }
+    
+    /// Retrieves the first focus, if any.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: An optional value with the first focus.
+    public func headOptional(_ s: S) -> A? {
+        headOption(s).toOptional()
+    }
 
     /// Retrieves the last focus, if any.
     ///
@@ -158,6 +166,14 @@ open class Fold<S, A>: FoldOf<S, A> {
     /// - Returns: An optional value with the last focus.
     public func lastOption(_ s: S) -> Option<A> {
         return foldMap(s, LastOption.init).const.value
+    }
+    
+    /// Retrieves the last focus, if any.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: An optional value with the last focus.
+    public func lastOptional(_ s: S) -> A? {
+        lastOption(s).toOptional()
     }
 
     /// Gets all foci.

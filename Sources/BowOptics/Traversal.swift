@@ -389,12 +389,28 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
         return foldMap(s, FirstOption.init).const.value
     }
     
+    /// Retrieves the first focus of this Traversal, if any.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: An optional value with the first focus of the source, if any.
+    public func headOptional(_ s: S) -> A? {
+        headOption(s).toOptional()
+    }
+    
     /// Retrieves the last focus of this Traversal, if any.
     ///
     /// - Parameter s: Source.
     /// - Returns: An optional value with the last focus of the source, if any.
     public func lastOption(_ s: S) -> Option<A> {
         return foldMap(s, LastOption.init).const.value
+    }
+    
+    /// Retrieves the last focus of this Traversal, if any.
+    ///
+    /// - Parameter s: Source.
+    /// - Returns: An optional value with the last focus of the source, if any.
+    public func lastOptional(_ s: S) -> A? {
+        lastOption(s).toOptional()
     }
     
     /// Joins two Traversal with the same focus.
