@@ -139,6 +139,16 @@ public extension Pairing {
     }
 }
 
+// MARK: Pairing for CoSumOpt and SumOpt
+
+public extension Pairing {
+    static func pairCoSumOptSumOpt<FF>() -> Pairing<CoSumOptPartial<FF>, SumOptPartial<FF>> where F == CoSumOptPartial<FF>, G == SumOptPartial<FF> {
+        Pairing { cosumopt, sumopt, f in
+            SumOptPartial<FF>.pair().pairFlipped(cosumopt, sumopt, f)
+        }
+    }
+}
+
 // MARK: Pairing for any Comonad
 
 public extension Comonad {
