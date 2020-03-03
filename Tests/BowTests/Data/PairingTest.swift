@@ -104,4 +104,18 @@ class PairingTest: XCTestCase {
         
         XCTAssertEqual(w2.extract(), 20)
     }
+    
+    func testPairingCoSumOptSumOpt() {
+        let w = SumOpt<ForId, Int>(left: Id(0), right: Id(25))
+        
+        let actions: CoSumOpt<ForId, Void> = binding(
+            |<-CoSumOpt.show(),
+            |<-CoSumOpt.hide(),
+            |<-CoSumOpt.toggle(),
+            yield: ())^
+        
+        let w2 = Pairing.pairCoSumOptSumOpt().select(actions, w.duplicate())^
+        
+        XCTAssertEqual(w2.extract(), 25)
+    }
 }
