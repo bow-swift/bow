@@ -21,12 +21,6 @@ jobs:
         - gem install cocoapods -v 1.8.4
       script:
         - nef compile Documentation.app
-    - stage: test
-      script:
-        - set -o pipefail
-        - swift test
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
     - stage: deploy-docs
       if: branch = master AND type != pull_request
       before_install:
