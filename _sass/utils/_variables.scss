@@ -1,0 +1,53 @@
+// Variables
+// -----------------------------------------------
+// -----------------------------------------------
+
+// Google Fonts
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700");
+
+// Colors
+$brand-primary: #ff4650;
+$brand-secondary: #ff4b2c;
+$brand-tertiary: #ff7361;
+$brand-quaternary: rgb(250, 137, 64);
+$gray-primary: rgb(49, 45, 44);
+$white: rgb(255, 255, 255);
+//--
+$link-color: $brand-primary;
+$link-hover: darken($brand-primary, 4%);
+
+// Typography
+$base-font-family: "Poppins", sans-serif;
+$brand-font-family: "Poppins", sans-serif;
+$header-font-family: $base-font-family;
+$base-font-color: $gray-primary;
+$header-font-color: $gray-primary;
+$code-font-family: Menlo, Bitstream Vera Sans Mono, Monaco, Consolas, monospace;
+
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+//---
+$base-font-size: 14px;
+$base-line-height: 1.6;
+//---
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+
+// Sizes
+$base-point-grid: 8px;
+// Animations
+$base-duration: 350ms;
+$base-timing: ease;
+
+// Breakpoint
+$bp-small: 480px;
+$bp-medium: 768px;
+$bp-large: 992px;
+$bp-xlarge: 1130px;
+// Border
+$border-color: rgba($gray-primary, 0.1);

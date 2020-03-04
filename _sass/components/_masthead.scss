@@ -1,0 +1,178 @@
+// Masthead
+// -----------------------------------------------
+// -----------------------------------------------
+#masthead {
+  position: relative;
+  background-image:
+    linear-gradient(
+      to bottom,
+      $brand-primary,
+      $brand-secondary
+    );
+
+  .masthead-background {
+    background: url("../img/logo_masthead.svg");
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: -500px -1350px;
+    background-size: 1200px;
+    background-repeat: no-repeat;
+    right: 0;
+    bottom: 0;
+  }
+
+  .masthead-content {
+    padding: ($base-point-grid * 20) 0 0;
+
+    .masthead-top {
+      @include flexbox;
+      @include align-items(center);
+    }
+
+    .masthead-text {
+      @include flex(1 1 75%);
+
+      position: relative;
+      color: $white;
+      margin-right: ($base-point-grid * 3);
+
+      h2 {
+        padding-left: ($base-point-grid * 8);
+        margin-bottom: ($base-point-grid * 4);
+        font-size: 3rem;
+        font-weight: $font-bold;
+
+        &::before {
+          position: absolute;
+          display: block;
+          content: "{";
+          left: -16px;
+          font-size: 12rem;
+          font-weight: normal;
+          top: -30px;
+        }
+      }
+
+      .button {
+        margin-right: $base-point-grid;
+      }
+
+      @include fadeInDown($duration: 1s, $delay: 0.2s, $function: ease);
+    }
+
+    .masthead-brand {
+      text-align: center;
+
+      @include flex(1 1 25%);
+
+      img {
+        width: 160px;
+        height: auto;
+      }
+
+      @include fadeInDown($duration: 1s, $delay: 0.6s, $function: ease);
+    }
+
+    .masthead-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 60%;
+      padding: ($base-point-grid * 12) 0 ($base-point-grid * 12);
+      margin: auto;
+    }
+
+    .masthead-stars {
+      margin: ($base-point-grid * 2) 0;
+      font-size: 1.3rem;
+      text-align: center;
+
+      a {
+        color: $white;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  svg {
+    position: absolute;
+    bottom: -2px;
+  }
+}
+
+// Responsive mode
+@include bp(medium) {
+  #masthead {
+    .masthead-content {
+      .masthead-top {
+        @include flex-wrap(wrap);
+      }
+
+      .masthead-text,
+      .masthead-brand {
+        @include flex(0 0 100%);
+
+        text-align: center;
+      }
+
+      .masthead-text {
+        @include order(2);
+
+        h2 {
+          font-size: 2.2rem;
+          padding-left: 0;
+          &:before {
+            display: none;
+          }
+        }
+
+        .masthead-stars {
+          padding-left: 0;
+        }
+      }
+
+      .masthead-brand {
+        @include order(1);
+
+        img {
+          width: 160px;
+          height: auto;
+        }
+      }
+
+      .masthead-buttons {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include bp(small) {
+  .masthead-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+@include bp(medium) {
+  display: inline-block;
+
+  .button + .button {
+    margin-top: 0;
+  }
+}
+
+@include bp(small) {
+  .button {
+    flex: 1 1 100%;
+  }
+
+  .button + .button {
+    margin-top: $base-point-grid * 2;
+  }
+}

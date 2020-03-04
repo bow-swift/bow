@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.5.0/docs">
+            <span>
+              0.5.0
+            </span>
+        </a>
+      </li>
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/0.6.0/docs">
+            <span>
+              0.6.0
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="running-side-effects">Running side effects</h1>
+
+<p class="beginner">beginner</p>
+
+<p><code class="highlighter-rouge">IO</code> suspends side effects; i.e. it prevents them from running. But at some point they need to be actually evaluated in order to produce the expected outcome of the program. This section shows the different ways you have to execute an <code class="highlighter-rouge">IO</code> program.</p>
+
+<p>For the rest of this page, consider the following function from a shopping service that fetches articles from the network, from a given category on a specific page and providing a limit to the number of articles that are received:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">fetchArticles</span><span class="p">(</span><span class="n">from</span> <span class="nv">category</span><span class="p">:</span> <span class="kt">Category</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="kt">UInt</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">APIError</span><span class="p">,</span> <span class="p">[</span><span class="kt">Article</span><span class="p">]</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="synchronous-run">Synchronous run</h2>
+
+<p>We can run the function above synchronously using the <code class="highlighter-rouge">unsafeRunSync </code> method on <code class="highlighter-rouge">IO</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">articles</span><span class="p">:</span> <span class="p">[</span><span class="kt">Article</span><span class="p">]</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">boardgames</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunSync</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>This function will return the array of articles that it fetched if everything went well, or will throw an <code class="highlighter-rouge">APIError</code> if there was any problem (thus, we need to invoke this function using the <code class="highlighter-rouge">try</code> keyword). If, for some reason, an error of a different type arises, it will cause a fatal error, as our <code class="highlighter-rouge">IO</code> will not know how to handle it.</p>
+
+<p>If we prefer, there is a safer version of this method, called <code class="highlighter-rouge">unsafeRunSyncEither</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">APIError</span><span class="p">,</span> <span class="p">[</span><span class="kt">Article</span><span class="p">]</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">technology</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunSyncEither</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>This way, the result of the execution will be wrapped in an <code class="highlighter-rouge">Either</code> value; on the right side, we can find the successful value, and on the left side, the error that may happen.</p>
+
+<p>Both versions will block the execution until the evaluation of the <code class="highlighter-rouge">IO</code> value finishes.</p>
+
+<h2 id="asynchronous-run">Asynchronous run</h2>
+
+<p>If we want to avoid blocking the execution, we can run the <code class="highlighter-rouge">IO</code> value using <code class="highlighter-rouge">unsafePerformAsync</code> and passing a callback:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">boardgames</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">unsafeRunAsync</span> <span class="p">{</span> <span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kt">Either</span><span class="o">&lt;</span><span class="kt">APIError</span><span class="p">,</span> <span class="p">[</span><span class="kt">Article</span><span class="p">]</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">in</span>
+    <span class="c1">// Process result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="running-on-a-different-dispatchqueue">Running on a different <code class="highlighter-rouge">DispatchQueue</code></h2>
+
+<p>By default, all options to run an <code class="highlighter-rouge">IO</code> will use <code class="highlighter-rouge">DispatchQueue.main</code> to run. If you want to specify your own queue, you can provide it as a parameter to the call:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// On the background queue</span>
+<span class="k">try</span> <span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">comics</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunSync</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="o">.</span><span class="nf">global</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">))</span>
+
+<span class="c1">// On a custom queue</span>
+<span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">boardgames</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunSyncEither</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"MyQueue"</span><span class="p">))</span>
+
+<span class="c1">// On the main queue, equivalent to omitting the parameter</span>
+<span class="nf">fetchArticles</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="o">.</span><span class="n">technology</span><span class="p">,</span> <span class="nv">page</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nv">limit</span><span class="p">:</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunAsync</span><span class="p">(</span><span class="nv">on</span><span class="p">:</span> <span class="o">.</span><span class="n">main</span><span class="p">)</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+    <span class="c1">// ... Process result ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

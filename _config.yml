@@ -1,0 +1,23 @@
+title: Bow
+#-------------------------
+name: Bow
+#-------------------------
+description: Bow is a library for Typed Functional Programming in Swift
+#-------------------------
+author: 47 Degrees
+keywords: functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory
+#-------------------------
+url: https://www.47deg.com
+#-------------------------
+markdown: kramdown
+sass:
+    sass_dir: _sass
+    style: compressed
+#-------------------------
+permalink: pretty
+#-------------------------
+exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor', 'Procfile', 'Rakefile', '.bundle', 'extra']
+#-------------------------
+google_analytics: UA-18433785-19
+#-------------------------
+github_repository: https://github.com/bow-swift/bow

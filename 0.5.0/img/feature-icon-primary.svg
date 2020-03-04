@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="72px" viewBox="0 0 64 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>feature-icon-primary</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="feature-icon-primary" transform="translate(-4.000000, 0.000000)">
+            <polygon id="Polygon" fill="#FF4B30" points="36 0 67.1769145 18 67.1769145 54 36 72 4.82308546 54 4.82308546 18"></polygon>
+            <g id="line-copy" transform="translate(17.000000, 22.000000)" stroke="#FFFFFF" stroke-width="2">
+                <circle id="path" cx="19" cy="14" r="4"></circle>
+                <path d="M7.53632299,22.0384913 C10.0690523,25.6437483 14.2593601,28 19,28 C26.7319865,28 33,21.7319865 33,14 C33,13.439785 32.9670954,12.8872553 32.9031133,12.3442381 M30.5103679,6.02838383 C27.9826347,2.38541732 23.7698894,0 19,0 C11.2680135,0 5,6.2680135 5,14 C5,15.0795387 5.12218678,16.1305392 5.35348514,17.1399263" id="path"></path>
+                <polyline id="path" points="38.0007673 16 32.9857788 11 28 16"></polyline>
+                <polyline id="path" transform="translate(5.000000, 15.500000) rotate(-180.000000) translate(-5.000000, -15.500000) " points="10.0003836 18 4.98539521 13 -0.0003836 18"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

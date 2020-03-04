@@ -1,0 +1,64 @@
+// Footer
+// -----------------------------------------------
+// -----------------------------------------------
+#footer {
+  padding: ($base-point-grid * 6) 0;
+  font-size: 0.975rem;
+  flex: 0 0 0;
+
+  .content-footer {
+    @include flexbox;
+    @include justify-content(space-between);
+    @include align-items(center);
+
+    p {
+      color: rgba($white, 0.4);
+    }
+
+    ul {
+      @include bp(medium) {
+        display: inline-flex;
+        margin-left: ($base-point-grid * 2);
+      }
+
+      li {
+        display: inline-block;
+        margin-right: 20px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .foot-item-text {
+        @include bp(medium) {
+        display: none;
+        }
+      }
+
+      .foot-item-icon {
+        display: none;
+
+        @include bp(medium) {
+            display: inline-block;
+        }
+      }
+    }
+
+    a {
+      color: rgba($white, 0.6);
+
+      &:visited {
+        color: rgba($white, 0.6);
+      }
+
+      &:hover {
+        color: rgba($white, 0.8);
+      }
+
+      &:active {
+        color: rgba($white, 0.8);
+      }
+    }
+  }
+}
