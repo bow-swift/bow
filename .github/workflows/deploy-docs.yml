@@ -23,6 +23,7 @@ jobs:
     - name: Deploy microsite
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_GH_PAGES_BOW }}
+        deploy_key: ${{ secrets.DEPLOY_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: ./gen-docs
+        publish_dir: ./pub-dir
+        disable_nojekyll: true
