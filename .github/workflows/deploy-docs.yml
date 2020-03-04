@@ -26,3 +26,4 @@ jobs:
         deploy_key: ${{ secrets.DEPLOY_TOKEN }}
         publish_branch: gh-pages
         publish_dir: ./pub-dir
+        disable_nojekyll: true
