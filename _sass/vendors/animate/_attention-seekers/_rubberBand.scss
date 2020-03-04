@@ -1,0 +1,19 @@
+@include keyframes(rubberBand) {
+	  0% {@include transform(scale3d(1, 1, 1));}
+   30% {@include transform(scale3d(1.25, 0.75, 1));}
+	 40% {@include transform(scale3d(0.75, 1.25, 1));}
+	 50% {@include transform(scale3d(1.15, 0.85, 1));}
+	 65% {@include transform(scale3d(.95, 1.05, 1));}
+	 75% {@include transform(scale3d(1.05, .95, 1));}
+	100% {@include transform(scale3d(1, 1, 1));}
+}
+
+@mixin rubberBand($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) {
+	@include animation-name(rubberBand);
+  @include count($count);
+  @include duration($duration);
+	@include delay($delay);
+	@include function($function);
+	@include fill-mode($fill);
+	@include visibility($visibility);
+}

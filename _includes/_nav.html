@@ -1,0 +1,27 @@
+<nav id="navigation" class="navigation">
+    <div class="content-navigation container">
+        <div class="navigation-brand">
+            <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        </div>
+        <ul class="navigation-menu">
+            <li>
+            {% include _navigation-doc-versions.html %}
+            </li>
+            <li>
+            {% include _navigation-api-versions.html %}
+            </li>
+            {% for item in site.data.menu.nav offset: 2 %}
+            <li>
+                <a href="{{ item.url | relative_url }}" title="{{ item.title }}" alt="{{ item.title }}">
+                {% if item.icon != "" %}
+                  <i class="nav-item-icon fa fa-lg {{ item.icon }}" aria-hidden="true"></i>
+                  <span class="nav-item-text">{{ item.title }}</span>
+                {% else %}
+                  <span>{{ item.title }}</span>
+                {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

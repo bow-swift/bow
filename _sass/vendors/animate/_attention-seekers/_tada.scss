@@ -1,0 +1,17 @@
+@include keyframes(tada) {
+	0% {@include transform(scale(1));}
+	10%, 20% {@include transform(scale(0.9) rotate(-3deg));}
+	30%, 50%, 70%, 90% {@include transform(scale(1.1) rotate(3deg));}
+	40%, 60%, 80% {@include transform(scale(1.1) rotate(-3deg));}
+	100% {@include transform(scale(1) rotate(0));}
+}
+
+@mixin tada($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) {
+	@include animation-name(tada);
+	@include count($count);
+	@include duration($duration);
+	@include delay($delay);
+	@include function($function);
+	@include fill-mode($fill);
+	@include visibility($visibility);
+}
