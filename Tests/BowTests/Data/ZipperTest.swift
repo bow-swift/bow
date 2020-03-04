@@ -38,13 +38,25 @@ class ZipperTest: XCTestCase {
         XCTAssertEqual(moved, expected, "Focus should be 5")
     }
     
+    func testMoveToFirst() {
+        property("After moving to first, zipper must be at beginning") <~ forAll { (zipper: Zipper<Int>) in
+            zipper.moveToFirst().isBeginning()
+        }
+    }
+    
+    func testMoveToLast() {
+        property("After moving to last, zipper must be at end") <~ forAll { (zipper: Zipper<Int>) in
+            zipper.moveToLast().isEnding()
+        }
+    }
+    
     func testCoflatMap() {
         let zipper = Zipper(left: [1, 2, 3], focus: 4, right: [5, 6])
         // f computes each element plus its neighbors
         let f = { (zipper: ZipperOf<Int>) -> Int in
             zipper.extract()
-                + (zipper^.moveLeft()?.extract() ?? 0)
-                + (zipper^.moveRight()?.extract() ?? 0)
+                + (zipper^.isBeginning() ? 0 : zipper^.moveLeft().extract())
+                + (zipper^.isEnding() ? 0 : zipper^.moveRight().extract())
         }
         let expected = Zipper(left: [3, 6, 9], focus: 12, right: [15, 11])
         let result = zipper.coflatMap(f)

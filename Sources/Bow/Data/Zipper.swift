@@ -29,9 +29,9 @@ public final class Zipper<A>: ZipperOf<A> {
         self.init(left: [], focus: array[0], right: Array(array[1...]))
     }
     
-    public func moveLeft() -> Zipper<A>? {
+    public func moveLeft() -> Zipper<A> {
         guard !left.isEmpty else {
-            return nil
+            return self
         }
         
         return Zipper(left: Array(left[0 ..< left.count - 1]),
@@ -39,14 +39,30 @@ public final class Zipper<A>: ZipperOf<A> {
                       right: [focus] + right)
     }
     
-    public func moveRight() -> Zipper<A>? {
+    public func moveRight() -> Zipper<A> {
         guard !right.isEmpty else {
-            return nil
+            return self
         }
         
         return Zipper(left: left + [focus],
                       focus: right[0],
                       right: Array(right[1...]))
+    }
+    
+    public func moveToFirst() -> Zipper<A> {
+        if isBeginning() {
+            return self
+        } else {
+            return self.moveLeft().moveToFirst()
+        }
+    }
+    
+    public func moveToLast() -> Zipper<A> {
+        if isEnding() {
+            return self
+        } else {
+            return self.moveRight().moveToLast()
+        }
     }
     
     public func asArray() -> [A] {
