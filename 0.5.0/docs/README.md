@@ -1,7 +1,0 @@
-
----
-layout: docs
-permalink: /docs/
----
-
-
