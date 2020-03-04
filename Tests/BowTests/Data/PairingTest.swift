@@ -88,4 +88,34 @@ class PairingTest: XCTestCase {
         
         XCTAssertEqual(w2.view, "3 is odd")
     }
+    
+    func testPairingCoSumSum() {
+        let w = Sum<ForId, ForId, Int>(left: Id(10), right: Id(20))
+        
+        let actions: CoSum<ForId, ForId, Void> = binding(
+            |<-CoSum.moveRight(),
+            |<-CoSum.moveLeft(),
+            |<-CoSum.moveLeft(),
+            |<-CoSum.moveRight(),
+            yield: ()
+        )^
+        
+        let w2 = Pairing.pairCoSumSum().select(actions, w.duplicate())^
+        
+        XCTAssertEqual(w2.extract(), 20)
+    }
+    
+    func testPairingCoSumOptSumOpt() {
+        let w = SumOpt<ForId, Int>(left: Id(0), right: Id(25))
+        
+        let actions: CoSumOpt<ForId, Void> = binding(
+            |<-CoSumOpt.show(),
+            |<-CoSumOpt.hide(),
+            |<-CoSumOpt.toggle(),
+            yield: ())^
+        
+        let w2 = Pairing.pairCoSumOptSumOpt().select(actions, w.duplicate())^
+        
+        XCTAssertEqual(w2.extract(), 25)
+    }
 }
