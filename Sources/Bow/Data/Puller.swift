@@ -4,7 +4,7 @@ public typealias ForPuller = CoPartial<ForZipper>
 public typealias PullerOf<A> = CoOf<ForZipper, A>
 public typealias Puller<A> = Co<ForZipper, A>
 
-public extension Puller where M == ForId {
+public extension Puller where M == ForId, W == ForZipper, A == Void  {
     static func moveLeft() -> Puller<Void> {
         Puller { cow in cow^.moveLeft().extract()(()) }
     }
