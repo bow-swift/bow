@@ -100,6 +100,7 @@
 		112297BB219DCFDE006D66C5 /* ObservableKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A4217E2DEF00969984 /* ObservableKTest.swift */; };
 		112297BC219DCFDE006D66C5 /* SingleKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A6217E2DEF00969984 /* SingleKTest.swift */; };
 		112297BD219DCFDE006D66C5 /* MaybeKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A5217E2DEF00969984 /* MaybeKTest.swift */; };
+		1123686F240FC316005D4CF4 /* Puller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1123686E240FC316005D4CF4 /* Puller.swift */; };
 		1125054D220DD92B00861131 /* EquatableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125054C220DD92B00861131 /* EquatableK.swift */; };
 		1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8922B1144200F840CB /* AutoOptics.swift */; };
 		1126CA8C22B115E100F840CB /* AutoLens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8B22B115E100F840CB /* AutoLens.swift */; };
@@ -786,6 +787,7 @@
 		112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Rx-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Rx-Info.plist"; sourceTree = "<absolute>"; };
 		112297CD219DCFDE006D66C5 /* BowRxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-RxTests-Info.plist"; sourceTree = "<absolute>"; };
+		1123686E240FC316005D4CF4 /* Puller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puller.swift; sourceTree = "<group>"; };
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
 		1126CA8922B1144200F840CB /* AutoOptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptics.swift; sourceTree = "<group>"; };
 		1126CA8B22B115E100F840CB /* AutoLens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLens.swift; sourceTree = "<group>"; };
@@ -1934,6 +1936,7 @@
 				8BA0F479217E2E9200969984 /* NonEmptyArray.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
 				09CEF850236E28680070CF43 /* Pairing.swift */,
+				1123686E240FC316005D4CF4 /* Puller.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
 				111F84FA234DBF95003FE646 /* Set.swift */,
@@ -3122,6 +3125,7 @@
 				8BA0F4E7217E2E9200969984 /* FunctionK.swift in Sources */,
 				8BA0F617217E2E9200969984 /* MonadReader.swift in Sources */,
 				1165E1A923F414350052F0C7 /* Trampoline.swift in Sources */,
+				1123686F240FC316005D4CF4 /* Puller.swift in Sources */,
 				8BA0F5D7217E2E9200969984 /* HigherKinds.swift in Sources */,
 				8BA0F4D3217E2E9200969984 /* Curry.swift in Sources */,
 				8BA0F653217E2E9200969984 /* Semigroup.swift in Sources */,

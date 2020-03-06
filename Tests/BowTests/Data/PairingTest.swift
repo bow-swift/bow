@@ -118,4 +118,20 @@ class PairingTest: XCTestCase {
         
         XCTAssertEqual(w2.extract(), 25)
     }
+    
+    func testPairingPullerZipper() {
+        let w = Zipper(left: [1, 2, 3], focus: 4, right: [5, 6, 7])
+        
+        let actions: Puller<Void> = binding(
+            |<-Puller.moveToFirst(),
+            |<-Puller.moveToLast(),
+            |<-Puller.moveLeft(),
+            |<-Puller.moveLeft(),
+            |<-Puller.moveRight(),
+            yield: ())^
+        
+        let w2 = Pairing.pairPullerZipper().select(actions, w.duplicate())^
+        
+        XCTAssertEqual(w2.extract(), 6)
+    }
 }

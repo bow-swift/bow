@@ -149,6 +149,16 @@ public extension Pairing {
     }
 }
 
+// MARK: Pairing for Puller and Zipper
+
+public extension Pairing where F == ForPuller, G == ForZipper {
+    static func pairPullerZipper() -> Pairing<ForPuller, ForZipper>  {
+        Pairing { puller, zipper, f in
+            ForZipper.pair().pairFlipped(puller, zipper, f)
+        }
+    }
+}
+
 // MARK: Pairing for any Comonad
 
 public extension Comonad {
