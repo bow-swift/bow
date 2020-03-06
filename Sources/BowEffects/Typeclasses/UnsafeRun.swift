@@ -28,21 +28,19 @@ public extension Kind where F: UnsafeRun {
     ///
     /// - Parameters:
     ///   - queue: Dispatch queue used to run the computation. Defaults to the main queue.
-    ///   - fa: Computation to be run.
     /// - Returns: Result of running the computation.
     /// - Throws: Error happened during the execution of the computation, of the error type of the underlying `MonadError`.
-    static func runBlocking(on queue: DispatchQueue = .main, _ fa: @escaping () -> Kind<F, A>) throws -> A {
-        return try F.runBlocking(on: queue, fa)
+    func runBlocking(on queue: DispatchQueue = .main) throws -> A {
+        return try F.runBlocking(on: queue, { self })
     }
 
     /// Unsafely runs a computation in an asynchronous manner.
     ///
     /// - Parameters:
     ///   - queue: Dispatch queue used to run the computation. Defaults to the main queue.
-    ///   - fa: Computation to be run.
     ///   - callback: Callback to report the result of the evaluation.
-    static func runNonBlocking(on queue: DispatchQueue = .main, _ fa: @escaping () -> Kind<F, A>, _ callback: @escaping Callback<F.E, A>) {
-        return F.runNonBlocking(on: queue, fa, callback)
+    func runNonBlocking(on queue: DispatchQueue = .main, _ callback: @escaping Callback<F.E, A> = { _ in }) {
+        return F.runNonBlocking(on: queue, { self }, callback)
     }
 }
 
