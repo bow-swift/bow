@@ -891,15 +891,85 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Pairing.swift",
+      "line": 154,
+      "symbol": "Pairing",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Pairing.swift",
       "line": 155,
+      "symbol": "Pairing.pairPullerZipper()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Pairing.swift",
+      "line": 165,
       "symbol": "Comonad.pair()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Pairing.swift",
-      "line": 161,
+      "line": 171,
       "symbol": "Kind.pair()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 3,
+      "symbol": "ForPuller",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 4,
+      "symbol": "PullerOf",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 5,
+      "symbol": "Puller",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 7,
+      "symbol": "Puller",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 8,
+      "symbol": "Puller.moveLeft()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 12,
+      "symbol": "Puller.moveRight()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 16,
+      "symbol": "Puller.moveToFirst()",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
+      "line": 20,
+      "symbol": "Puller.moveToLast()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
@@ -1214,55 +1284,69 @@
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
       "line": 52,
-      "symbol": "Zipper.asArray()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 56,
-      "symbol": "Zipper.isBeginning()",
+      "symbol": "Zipper.moveToFirst()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
       "line": 60,
+      "symbol": "Zipper.moveToLast()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
+      "line": 68,
+      "symbol": "Zipper.asArray()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
+      "line": 72,
+      "symbol": "Zipper.isBeginning()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
+      "line": 76,
       "symbol": "Zipper.isEnding()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 65,
+      "line": 81,
       "symbol": "^(_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 69,
+      "line": 85,
       "symbol": "Zipper",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 75,
+      "line": 91,
       "symbol": "ForZipper",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 89,
+      "line": 105,
       "symbol": "ForZipper",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 97,
+      "line": 113,
       "symbol": "ForZipper",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
