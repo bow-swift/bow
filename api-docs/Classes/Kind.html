@@ -5455,10 +5455,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE11runBlocking2on_q_So17OS_dispatch_queueC_ACyxq_GyctKFZ"></a>
-                    <a name="//apple_ref/swift/Method/runBlocking(on:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE11runBlocking2on_q_So17OS_dispatch_queueC_ACyxq_GyctKFZ">
-                      <span class="token-name">runBlocking(on:_:)</span>
+                    <a name="/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE11runBlocking2onq_So17OS_dispatch_queueC_tKF"></a>
+                    <a name="//apple_ref/swift/Method/runBlocking(on:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE11runBlocking2onq_So17OS_dispatch_queueC_tKF">
+                      <span class="token-name">runBlocking(on:)</span>
                       <span class="token-icon" /></a>
                     </code>
                   </div>
@@ -5477,7 +5477,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">runBlocking</span><span class="p">(</span><span class="n">on</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">runBlocking</span><span class="p">(</span><span class="n">on</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
                       </div>
@@ -5494,18 +5494,6 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                               <td>
                                 <div>
                                   <p>Dispatch queue used to run the computation. Defaults to the main queue.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                  fa
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Computation to be run.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5522,10 +5510,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE14runNonBlocking2on__ySo17OS_dispatch_queueC_ACyxq_GycyAA6EitherCy1EQzq_GctFZ"></a>
-                    <a name="//apple_ref/swift/Method/runNonBlocking(on:_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE14runNonBlocking2on__ySo17OS_dispatch_queueC_ACyxq_GycyAA6EitherCy1EQzq_GctFZ">
-                      <span class="token-name">runNonBlocking(on:_:_:)</span>
+                    <a name="/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE14runNonBlocking2on_ySo17OS_dispatch_queueC_yAA6EitherCy1EQzq_GctF"></a>
+                    <a name="//apple_ref/swift/Method/runNonBlocking(on:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow4KindC0A7EffectsAD9UnsafeRunRzrlE14runNonBlocking2on_ySo17OS_dispatch_queueC_yAA6EitherCy1EQzq_GctF">
+                      <span class="token-name">runNonBlocking(on:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                   </div>
@@ -5539,7 +5527,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">runNonBlocking</span><span class="p">(</span><span class="n">on</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:10BowEffects8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="o">.</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">runNonBlocking</span><span class="p">(</span><span class="n">on</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="o">.</span><span class="n">main</span><span class="p">,</span> <span class="n">_</span> <span class="nv">callback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:10BowEffects8Callbacka">Callback</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="o">.</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="p">})</span></code></pre>
 
                         </div>
                       </div>
@@ -5556,18 +5544,6 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                               <td>
                                 <div>
                                   <p>Dispatch queue used to run the computation. Defaults to the main queue.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                  fa
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Computation to be run.</p>
                                 </div>
                               </td>
                             </tr>
@@ -15442,7 +15418,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-04)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-06)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>

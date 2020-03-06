@@ -92,7 +92,7 @@ GEM
       sass (~> 3.4)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.3.0)
+    json (2.2.0)
     kramdown (1.17.0)
     liferaft (0.0.6)
     liquid (4.0.3)
