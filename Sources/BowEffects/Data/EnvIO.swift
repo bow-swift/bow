@@ -195,7 +195,7 @@ public extension Kleisli {
     ///   - d: Dependencies needed in this operation.
     ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
     ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunAsync<E: Error>(with d: D, on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where F == IOPartial<E> {
+    func unsafeRunAsync<E: Error>(with d: D, on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A> = { _ in }) where F == IOPartial<E> {
         self.provide(d).unsafeRunAsync(on: queue, callback)
     }
 }
@@ -233,7 +233,7 @@ public extension Kleisli where D == Any {
     /// - Parameters:
     ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
     ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    func unsafeRunAsync<E: Error>(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) where F == IOPartial<E> {
+    func unsafeRunAsync<E: Error>(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A> = { _ in }) where F == IOPartial<E> {
         self.provide(()).unsafeRunAsync(on: queue, callback)
     }
 }
