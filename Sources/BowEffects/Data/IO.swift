@@ -332,7 +332,7 @@ public class IO<E: Error, A>: IOOf<E, A> {
     /// - Parameters:
     ///   - queue: Dispatch queue used to execute the side effects. Defaults to the main queue.
     ///   - callback: A callback function to receive the results of the evaluation. Errors of other types thrown from the evaluation of this IO will cause a fatal error.
-    public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A>) {
+    public func unsafeRunAsync(on queue: DispatchQueue = .main, _ callback: @escaping Callback<E, A> = { _ in }) {
         queue.async {
             callback(self.unsafeRunSyncEither(on: queue))
         }
