@@ -1,20 +1,45 @@
+/// Witness for the `StoreT<S, W, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForStoreT {}
+
+/// Partial application of the `StoreT` type constructor, omitting the last parameter.
 public final class StoreTPartial<S, W>: Kind2<ForStoreT, S, W> {}
+
+/// Higher Kinded Type alias to improve readability of `Kind<StoreTPartial<S, W>, A>`.
 public typealias StoreTOf<S, W, A> = Kind<StoreTPartial<S, W>, A>
 
+/// Witness for the `Store<S, A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForStore = ForStoreT
+
+/// Partial application of the `Store` type constructor, omitting the last parameter.
 public typealias StorePartial<S> = StoreTPartial<S, ForId>
+
+/// Higher Kinded Type alias to improve readability of `Kind<StorePartial<S>, A>`.
 public typealias StoreOf<S, A> = StoreTOf<S, ForId, A>
+
+/// The Store type is equivalent to the StoreT type, with the base Comonad being Id.
 public typealias Store<S, A> = StoreT<S, ForId, A>
 
+/// The Store Comonad Transformer. This Comonad Transformer extends the context of a value in the base Comonad so that it depends on a position of the type of the state.
 public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
+    /// Rendering function in the context of the base Comonad.
     public let render: Kind<W, (S) -> A>
+    
+    /// Current focus of this Store.
     public let state: S
     
-    public static func fix(_ value: StoreTOf<S, W, A>)-> StoreT<S, W, A> {
+    /// Safe downcast.
+    ///
+    /// - Parameter value: Value in the higher-kind form.
+    /// - Returns: Value cast to StoreT.
+    public static func fix(_ value: StoreTOf<S, W, A>) -> StoreT<S, W, A> {
         value as! StoreT<S, W, A>
     }
     
+    /// Initializes a StoreT.
+    ///
+    /// - Parameters:
+    ///   - state: Current focus of the Store.
+    ///   - render: Rendering function of the Store.
     public init(_ state: S, _ render: Kind<W, (S) -> A>) {
         self.state = state
         self.render = render
@@ -22,11 +47,19 @@ public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
 }
 
 public extension StoreT where W: Comonad {
+    /// Moves the store into a new state.
+    ///
+    /// - Parameter newState: New state for the store.
+    /// - Returns: A new store focused on the provided state.
     func move(_ newState: S) -> StoreT<S, W, A> {
         self.duplicate()^.peek(newState)^
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in the higher-kind form.
+/// - Returns: Value cast to StoreT.
 public postfix func ^<S, W, A>(_ value: StoreTOf<S, W, A>) -> StoreT<S, W, A> {
     StoreT.fix(value)
 }
@@ -34,6 +67,11 @@ public postfix func ^<S, W, A>(_ value: StoreTOf<S, W, A>) -> StoreT<S, W, A> {
 // MARK: Syntax for Store
 
 extension StoreT where W == ForId {
+    /// Initializes a Store.
+    ///
+    /// - Parameters:
+    ///   - state: Current focus of the store.
+    ///   - render: Rendering function.
     public convenience init(_ state: S, _ render: @escaping (S) -> A) {
         self.init(state, Id(render))
     }
