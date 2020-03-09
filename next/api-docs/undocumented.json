@@ -519,48 +519,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 4,
-      "symbol": "EndoOf",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 6,
-      "symbol": "Endo",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 7,
-      "symbol": "Endo.run",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 17,
-      "symbol": "Endo.init(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 23,
-      "symbol": "Endo",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Endo.swift",
-      "line": 30,
-      "symbol": "Endo",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Moore.swift",
       "line": 3,
       "symbol": "ForMoore",
