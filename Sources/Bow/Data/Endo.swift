@@ -1,9 +1,12 @@
-///  The monoid of endomorphisms under composition.
+/// Witness for the `Endo<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForEndo {}
 
+/// Higher Kinded Type alias to improve readability over `Kind<ForEndo, A>`.
 public typealias EndoOf<A> = Kind<ForEndo, A>
 
+///  Endo represents an Endomorphism; i.e., a function where the input and output type is the same.
 public final class Endo<A>: EndoOf<A> {
+    /// Underlying function describing the endomorphism.
     public let run: (A) -> A
     
     /// Safe downcast.
@@ -14,6 +17,8 @@ public final class Endo<A>: EndoOf<A> {
         fa as! Endo<A>
     }
     
+    /// Initializes an endomorphism from a plain Swift function.
+    /// - Parameter run: Function describing the endomorphism.
     public init(_ run: @escaping (A) -> A) {
         self.run = run
     }
