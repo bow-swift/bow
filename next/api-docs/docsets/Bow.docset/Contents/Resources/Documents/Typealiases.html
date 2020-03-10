@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 89% documented</span>
+          <span class="header-tag"> 90% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -1689,6 +1689,9 @@
               </li>
               <li class="nav-group-task" data-name="ForStore" data-url="Typealiases.html#/s:3Bow8ForStorea">
                 <a title="ForStore" class="nav-group-task-link" href="Typealiases.html#/s:3Bow8ForStorea">ForStore</a>
+              </li>
+              <li class="nav-group-task" data-name="ForSumOpt" data-url="Typealiases.html#/s:3Bow9ForSumOpta">
+                <a title="ForSumOpt" class="nav-group-task-link" href="Typealiases.html#/s:3Bow9ForSumOpta">ForSumOpt</a>
               </li>
               <li class="nav-group-task" data-name="ForTask" data-url="Typealiases.html#/s:10BowEffects7ForTaska">
                 <a title="ForTask" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects7ForTaska">ForTask</a>
@@ -4795,7 +4798,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the CoSum type constructor, omitting the last parameter.</p>
 
                       </div>
                       <div class="declaration">
@@ -4822,7 +4825,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Higher Kinded Type alias to improve readability of <code>CoOf&lt;SumPartial&lt;F, G&gt;, A&gt;</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4849,7 +4852,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>CoSum is the dual Monad of the Sum Comonad, obtained automatically from the Co data type.</p>
 
                       </div>
                       <div class="declaration">
@@ -4876,7 +4879,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the CoSumOpt type constructor, omitting the last parameter.</p>
 
                       </div>
                       <div class="declaration">
@@ -4903,7 +4906,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Higher Kinded Type alias to improve readability of <code>Co&lt;SumOptPartial&lt;G&gt;, A&gt;</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4930,7 +4933,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>CoSumOpt is the dual Monad of the SumOpt Comonad, obtained automatically from the Co data type.</p>
 
                       </div>
                       <div class="declaration">
@@ -5565,7 +5568,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Higher Kinded Type alias to improve readability of <code>Kind&lt;SumPartial&lt;F, G&gt;, V&gt;</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -5573,6 +5576,33 @@
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">SumOf</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt"><a href="Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow9ForSumOpta"></a>
+                    <a name="//apple_ref/swift/Alias/ForSumOpt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow9ForSumOpta">
+                      <span class="token-name">ForSumOpt</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Witness for the <code>SumOpt&lt;G, A&gt;</code> data type. To be used in simulated Higher Kinded Types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">ForSumOpt</span> <span class="o">=</span> <span class="kt"><a href="Classes.html#/s:3Bow6ForSumC">ForSum</a></span></code></pre>
 
                         </div>
                       </div>
@@ -5592,7 +5622,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the SumOpt type constructor, omitting the last parameter.</p>
 
                       </div>
                       <div class="declaration">
@@ -5619,7 +5649,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Higher Kinded Type alias to improve readability of <code>Kind&lt;SumPartial&lt;G&gt;, A&gt;</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -5646,7 +5676,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>SumOpt is equivalent to Sum where the left side is fixed to Id.</p>
 
                       </div>
                       <div class="declaration">

@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 89% documented</span>
+          <span class="header-tag"> 90% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -1690,6 +1690,9 @@
               <li class="nav-group-task" data-name="ForStore" data-url="Typealiases.html#/s:3Bow8ForStorea">
                 <a title="ForStore" class="nav-group-task-link" href="../Typealiases.html#/s:3Bow8ForStorea">ForStore</a>
               </li>
+              <li class="nav-group-task" data-name="ForSumOpt" data-url="Typealiases.html#/s:3Bow9ForSumOpta">
+                <a title="ForSumOpt" class="nav-group-task-link" href="../Typealiases.html#/s:3Bow9ForSumOpta">ForSumOpt</a>
+              </li>
               <li class="nav-group-task" data-name="ForTask" data-url="Typealiases.html#/s:10BowEffects7ForTaska">
                 <a title="ForTask" class="nav-group-task-link" href="../Typealiases.html#/s:10BowEffects7ForTaska">ForTask</a>
               </li>
@@ -2129,7 +2132,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Co value into a left value of CoSum</p>
 
                       </div>
                       <div class="declaration">
@@ -2139,6 +2142,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">liftLeft</span><span class="o">&lt;</span><span class="kt">G</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5CoSuma">CoSum</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">G</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A CoSum left value.</p>
                       </div>
                     </section>
                   </div>
@@ -2156,7 +2163,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Co value into a right value of CoSum</p>
 
                       </div>
                       <div class="declaration">
@@ -2166,6 +2173,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">liftRight</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5CoSuma">CoSum</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A CoSum right value.</p>
                       </div>
                     </section>
                   </div>
@@ -2187,7 +2198,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Co value into the visible value of CoSumOpt.</p>
 
                       </div>
                       <div class="declaration">
@@ -2197,6 +2208,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">liftSumOpt</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8CoSumOpta">CoSumOpt</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A CoSumOpt visible value.</p>
                       </div>
                     </section>
                   </div>

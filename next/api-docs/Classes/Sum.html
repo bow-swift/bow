@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 89% documented</span>
+          <span class="header-tag"> 90% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -1690,6 +1690,9 @@
               <li class="nav-group-task" data-name="ForStore" data-url="Typealiases.html#/s:3Bow8ForStorea">
                 <a title="ForStore" class="nav-group-task-link" href="../Typealiases.html#/s:3Bow8ForStorea">ForStore</a>
               </li>
+              <li class="nav-group-task" data-name="ForSumOpt" data-url="Typealiases.html#/s:3Bow9ForSumOpta">
+                <a title="ForSumOpt" class="nav-group-task-link" href="../Typealiases.html#/s:3Bow9ForSumOpta">ForSumOpt</a>
+              </li>
               <li class="nav-group-task" data-name="ForTask" data-url="Typealiases.html#/s:10BowEffects7ForTaska">
                 <a title="ForTask" class="nav-group-task-link" href="../Typealiases.html#/s:10BowEffects7ForTaska">ForTask</a>
               </li>
@@ -2023,7 +2026,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The Sum type models a Comonad that contains two different Comonadic values, where only one of them can be selected at a given moment.</p>
 
           </div>
         </section>
@@ -2045,7 +2048,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Left side of this value.</p>
 
                       </div>
                       <div class="declaration">
@@ -2072,7 +2075,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Right side of this value.</p>
 
                       </div>
                       <div class="declaration">
@@ -2099,7 +2102,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Selected side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2126,7 +2129,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2136,6 +2139,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5SumOfa">SumOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Sum</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Sum.</p>
                       </div>
                     </section>
                   </div>
@@ -2153,7 +2179,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Constructs a Sum value selecting the left side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2163,6 +2189,41 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">left</span><span class="p">(</span><span class="n">_</span> <span class="nv">left</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">right</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Sum</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  left
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Sum of both values, with left selected.</p>
                       </div>
                     </section>
                   </div>
@@ -2180,7 +2241,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Constructs a Sum value selecting the right side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2190,6 +2251,41 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">right</span><span class="p">(</span><span class="n">_</span> <span class="nv">left</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">right</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Sum</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  left
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Sum of both values, with right selected.</p>
                       </div>
                     </section>
                   </div>
@@ -2207,7 +2303,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Sum value.</p>
 
                       </div>
                       <div class="declaration">
@@ -2217,6 +2313,49 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">left</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">side</span><span class="p">:</span> <span class="kt"><a href="../Enums/Side.html">Side</a></span> <span class="o">=</span> <span class="o">.</span><span class="n"><a href="../Classes/Sum.html#/s:3Bow3SumC4leftAA4KindCyxq0_Gvp">left</a></span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  left
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Left side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Right side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  side
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Selected side of the Sum.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2234,7 +2373,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Changes the selected side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2244,6 +2383,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">change</span><span class="p">(</span><span class="nv">side</span><span class="p">:</span> <span class="kt"><a href="../Enums/Side.html">Side</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Sum</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  side
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New selected side.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new Sum with the same contents and the new selected side.</p>
                       </div>
                     </section>
                   </div>
@@ -2261,7 +2423,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Converts this Sum to an EitherK.</p>
 
                       </div>
                       <div class="declaration">
@@ -2271,6 +2433,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lower</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/EitherK.html">EitherK</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An EitherK.left if the left side of the Sum is selected, or an EitherK.right otherwise.</p>
                       </div>
                     </section>
                   </div>
@@ -2288,7 +2454,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the left side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2298,6 +2464,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lowerLeft</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Left side of the Sum.</p>
                       </div>
                     </section>
                   </div>
@@ -2315,7 +2485,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the right side.</p>
 
                       </div>
                       <div class="declaration">
@@ -2325,6 +2495,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lowerRight</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Right side of the Sum.</p>
                       </div>
                     </section>
                   </div>
@@ -2346,7 +2520,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts the value inside the comonadic value that is not selected.</p>
 
                       </div>
                       <div class="declaration">
@@ -2356,6 +2530,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">extractOther</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">V</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value contained in the not selected comonadic value.</p>
                       </div>
                     </section>
                   </div>
