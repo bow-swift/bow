@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 90% documented</span>
+          <span class="header-tag"> 91% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -685,6 +685,9 @@
           <li class="nav-group-name" data-name="Extensions">
             <a class="small-heading" href="../Extensions.html">Extensions<span class="anchor-icon" /></a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task" data-name="Action" data-url="Extensions/Action.html">
+                <a title="Action" class="nav-group-task-link" href="../Extensions/Action.html">Action</a>
+              </li>
               <li class="nav-group-task" data-name="Array" data-url="Extensions/Array.html">
                 <a title="Array" class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
               </li>
@@ -2026,7 +2029,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Partial application of the Moore type constructor, omitting the last parameter.</p>
 
           </div>
         </section>
@@ -2034,6 +2037,13 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Functor%20for%20Moore"></a>
+                <a name="//apple_ref/swift/Section/Instance of Functor for Moore" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Functor%20for%20Moore">
+                  <h3 id="Instance%20of%20Functor%20for%20Moore" class="section-name">Instance of Functor for Moore<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2054,7 +2064,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2064,6 +2074,13 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Comonad%20for%20Moore"></a>
+                <a name="//apple_ref/swift/Section/Instance of Comonad for Moore" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Comonad%20for%20Moore">
+                  <h3 id="Instance%20of%20Comonad%20for%20Moore" class="section-name">Instance of Comonad for Moore<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2084,7 +2101,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">coflatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">coflatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2110,7 +2127,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">extract</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">MoorePartial</span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">extract</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
                       </div>

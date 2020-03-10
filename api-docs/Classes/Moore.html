@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 90% documented</span>
+          <span class="header-tag"> 91% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -685,6 +685,9 @@
           <li class="nav-group-name" data-name="Extensions">
             <a class="small-heading" href="../Extensions.html">Extensions<span class="anchor-icon" /></a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task" data-name="Action" data-url="Extensions/Action.html">
+                <a title="Action" class="nav-group-task-link" href="../Extensions/Action.html">Action</a>
+              </li>
               <li class="nav-group-task" data-name="Array" data-url="Extensions/Array.html">
                 <a title="Array" class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
               </li>
@@ -2026,7 +2029,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Moore represents Moore machines that hold values of type <code>V</code> and handle inputs of type <code>E</code>.</p>
 
           </div>
         </section>
@@ -2048,7 +2051,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Value hold in this Moore machine.</p>
 
                       </div>
                       <div class="declaration">
@@ -2075,7 +2078,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Function to handle inputs to the Moore machine.</p>
 
                       </div>
                       <div class="declaration">
@@ -2102,7 +2105,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2112,6 +2115,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow7MooreOfa">MooreOf</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Moore.</p>
                       </div>
                     </section>
                   </div>
@@ -2129,7 +2155,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a Moore machine from a hidden initial state and a function that provides the next value and handling function.</p>
 
                       </div>
                       <div class="declaration">
@@ -2139,6 +2165,41 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">unfold</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="n">_</span> <span class="nv">next</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">V</span><span class="p">,</span> <span class="p">(</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">S</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  state
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Initial state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  next
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to determine the next value and handling function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Moore machine described from the input values.</p>
                       </div>
                     </section>
                   </div>
@@ -2156,7 +2217,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a Moore machine from an initial state, a rendering function and an update function.</p>
 
                       </div>
                       <div class="declaration">
@@ -2166,6 +2227,53 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">from</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">initialState</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">render</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">V</span><span class="p">,</span> <span class="nv">update</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">S</span><span class="p">,</span> <span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  initialState
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Initial state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  render
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Rendering function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  update
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Update function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Moore machine described from the input functions.</p>
                       </div>
                     </section>
                   </div>
@@ -2183,7 +2291,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a Moore machine from an initial state, a rendering function and an update function.</p>
 
                       </div>
                       <div class="declaration">
@@ -2193,6 +2301,53 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">from</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">initialState</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">render</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">V</span><span class="p">,</span> <span class="nv">update</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5Statea">State</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  initialState
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Initial state.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  render
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Rendering function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  update
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Update function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Moore machine described from the input functions.</p>
                       </div>
                     </section>
                   </div>
@@ -2210,7 +2365,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Moore machine.</p>
 
                       </div>
                       <div class="declaration">
@@ -2220,6 +2375,37 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">view</span><span class="p">:</span> <span class="kt">V</span><span class="p">,</span> <span class="nv">handle</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  view
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value wrapped in the machine.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  handle
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to handle inputs to the machine.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2237,7 +2423,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Transforms the inputs this machine is able to handle.</p>
 
                       </div>
                       <div class="declaration">
@@ -2247,6 +2433,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">contramapInput</span><span class="o">&lt;</span><span class="kt">EE</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">EE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Moore</span><span class="o">&lt;</span><span class="kt">EE</span><span class="p">,</span> <span class="kt">V</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming funtion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Moore machine that works on the new type of inputs.</p>
                       </div>
                     </section>
                   </div>
@@ -2268,7 +2477,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a Moore machine that logs the inputs it receives.</p>
 
                       </div>
                       <div class="declaration">
