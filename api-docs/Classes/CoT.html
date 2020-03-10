@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 88% documented</span>
+          <span class="header-tag"> 89% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -2023,8 +2023,11 @@
 
                 </div>
               </div>
-            <p>(CoT w) gives you <q>the best</q> pairing monad transformer for any comonad w
-In other words, an explorer for the state space given by w</p>
+            <p>CoT gives you <q>the best</q> pairing monad transformer for any Comonad W
+In other words, an explorer for the state space given by W. It can also provide:
+    - A MonadReader from a ComonadEnv
+    - A MonadWriter from a ComonadTraced
+    - A MonadState from a ComonadStore</p>
 
           </div>
         </section>
@@ -2046,7 +2049,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2056,6 +2059,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5CoTOfa">CoTOf</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CoT</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to CoT.</p>
                       </div>
                     </section>
                   </div>
@@ -2073,7 +2099,10 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts a comonadic query into a CoT.</p>
+
+<p>The original signature of this function is:
+    <code>(forall s. w s -&gt; a) -&gt; CoT w m a</code></p>
 
                       </div>
                       <div class="declaration">
@@ -2083,6 +2112,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">liftT</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">Any</span><span class="cm">/*S*/</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CoT</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comonadic query.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A CoT from the Comonadic query.</p>
                       </div>
                     </section>
                   </div>
@@ -2100,7 +2152,8 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a CoT. It embeds a function with the signature:
+    <code>forall r. w (a -&gt; m r) -&gt; m r</code></p>
 
                       </div>
                       <div class="declaration">
@@ -2110,6 +2163,125 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">cow</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="cm">/*forall R.*/</span><span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="cm">/*R*/</span><span class="kt">Any</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="cm">/*R*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  cow
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Inner function of this CoT.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow3CoTC4runTyAA4KindCyq_qd__GAFyxAGq0_cGlF"></a>
+                    <a name="//apple_ref/swift/Method/runT(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow3CoTC4runTyAA4KindCyq_qd__GAFyxAGq0_cGlF">
+                      <span class="token-name">runT(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Runs the inner function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">runT</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">w</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  w
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Argument for the inner function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value in the base Monad context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow3CoTC6hoistTyACyqd__q_q0_GAA9FunctionKCyqd__xGAA7ComonadRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/hoistT(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow3CoTC6hoistTyACyqd__q_q0_GAA9FunctionKCyqd__xGAA7ComonadRd__lF">
+                      <span class="token-name">hoistT(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Performs a natural transformation on the Comonad of this CoT.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">hoistT</span><span class="o">&lt;</span><span class="kt">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="kt"><a href="../Classes/FunctionK.html">FunctionK</a></span><span class="o">&lt;</span><span class="kt">V</span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">CoT</span><span class="o">&lt;</span><span class="kt">V</span><span class="p">,</span> <span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">V</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  transform
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Natural transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new CoT with the transformed Comonad.</p>
                       </div>
                     </section>
                   </div>
@@ -2131,7 +2303,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Runs the inner function with a value that does not runs on the base Monad.</p>
 
                       </div>
                       <div class="declaration">
@@ -2141,6 +2313,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">lowerT</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  input
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value in the Comonad context.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value in the base Monad context.</p>
                       </div>
                     </section>
                   </div>
@@ -2162,7 +2357,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Explores the space of a Comonad with a given Monad.</p>
 
                       </div>
                       <div class="declaration">
@@ -2172,6 +2367,41 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">co</span><span class="p">:</span> <span class="kt">Co</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  co
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Monadic actions to explore the Comonad.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comonadic space to explore.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new Comonadic space resulting from the exploration.</p>
                       </div>
                     </section>
                   </div>
@@ -2189,7 +2419,10 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts a comonadic query into a CoT.</p>
+
+<p>The original signature of this function is:
+    <code>(forall s. w s -&gt; a) -&gt; Co w a</code></p>
 
                       </div>
                       <div class="declaration">
@@ -2199,6 +2432,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">lift</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Co</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Comonadic query.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Co from the Comonadic query.</p>
                       </div>
                     </section>
                   </div>
@@ -2216,7 +2472,8 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        
+                        <p>Obtains a Pairing between a Comonad and its dual Monad.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -2228,7 +2485,7 @@ In other words, an explorer for the state space given by w</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>The pairing between the underlying comonad, <code>w</code>, and the monad <code>Co&lt;w&gt;</code>.</p>
+                        <p>The pairing between the underlying comonad, W, and the monad <code>Co&lt;w&gt;</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -2246,7 +2503,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Runs the inner function.</p>
 
                       </div>
                       <div class="declaration">
@@ -2256,6 +2513,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">run</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">w</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">R</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">R</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  w
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Argument for the inner function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A plain value.</p>
                       </div>
                     </section>
                   </div>
@@ -2273,7 +2553,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Performs a natural transformation on the Comonad of this Co.</p>
 
                       </div>
                       <div class="declaration">
@@ -2283,6 +2563,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">hoist</span><span class="o">&lt;</span><span class="kt">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">transform</span><span class="p">:</span> <span class="kt"><a href="../Classes/FunctionK.html">FunctionK</a></span><span class="o">&lt;</span><span class="kt">V</span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Co</span><span class="o">&lt;</span><span class="kt">V</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">V</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  transform
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Natural transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new Co with the transformed Comonad.</p>
                       </div>
                     </section>
                   </div>
@@ -2300,7 +2603,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Runs the inner function with a value that does not runs on the base Monad.</p>
 
                       </div>
                       <div class="declaration">
@@ -2310,6 +2613,29 @@ In other words, an explorer for the state space given by w</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">lower</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  input
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value in the Comonad context.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A plain value.</p>
                       </div>
                     </section>
                   </div>

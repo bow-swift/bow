@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 88% documented</span>
+          <span class="header-tag"> 89% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -5652,7 +5652,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Witness for the <code>CoT&lt;W, M, A&gt;</code> data type. To be used in simulated Higher Kinded Types</p>
 
                       </div>
                       <div class="declaration">
@@ -5679,7 +5679,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the CoT type constructor, omitting the last parameter.</p>
 
                         <a href="Classes/CoTPartial.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5707,8 +5707,11 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>(CoT w) gives you <q>the best</q> pairing monad transformer for any comonad w
-In other words, an explorer for the state space given by w</p>
+                        <p>CoT gives you <q>the best</q> pairing monad transformer for any Comonad W
+In other words, an explorer for the state space given by W. It can also provide:
+    - A MonadReader from a ComonadEnv
+    - A MonadWriter from a ComonadTraced
+    - A MonadState from a ComonadStore</p>
 
                         <a href="Classes/CoT.html" class="slightly-smaller">See more</a>
                       </div>
@@ -6391,7 +6394,7 @@ In other words, an explorer for the state space given by w</p>
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The Trampoline type helps us overcome stack safety issues of recursive calls by transforming them into loops.</p>
 
                         <a href="Classes/Trampoline.html" class="slightly-smaller">See more</a>
                       </div>
