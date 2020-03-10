@@ -1,24 +1,49 @@
+/// Witness for the `TracedT<M, W, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForTracedT {}
+
+/// Partial application of the `TracedT` type constructor, omitting the last parameter.
 public final class TracedTPartial<M, W>: Kind2<ForTracedT, M, W> {}
+
+/// Higher Kinded Type alias to improve readability of `Kind<TracedTPartial<M, W>, A>`.
 public typealias TracedTOf<M, W, A> = Kind<TracedTPartial<M, W>, A>
 
+/// Witness for the `Traced<M, A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForTraced = ForTracedT
+
+/// Partial application of the `Traced` type constructor, omitting the last parameter.
 public typealias TracedPartial<M> = TracedTPartial<M, ForId>
+
+/// Higher Kinded Type alias to improve readability of `Kind<TracedPartial<M>, A>`.
 public typealias TracedOf<M, A> = TracedTOf<M, ForId, A>
+
+/// The Traced type is equivalent to the TracedT type, with the base comonad being Id.
 public typealias Traced<M, A> = TracedT<M, ForId, A>
 
+/// The cowriter Comonad Transformer. This Comonad Transformer extends the context of a value in the base Comonad so that the value depends on a monoidal position.
 public final class TracedT<M, W, A>: TracedTOf<M, W, A> {
+    /// Function to access values relative to a monoidal position, in the context of the base Comonad.
     public let value: Kind<W, (M) -> A>
     
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to TracedT.
     public static func fix(_ fa: TracedTOf<M, W, A>) -> TracedT<M, W, A> {
         fa as! TracedT<M, W, A>
     }
     
+    /// Initializes a TracedT value.
+    ///
+    /// - Parameter value: Function in the context of the base Comonad.
     public init(_ value: Kind<W, (M) -> A>) {
         self.value = value
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter fa: Value in the higher-kind form.
+/// - Returns: Value cast to TracedT.
 public postfix func ^<M, W, A>(_ value: TracedTOf<M, W, A>) -> TracedT<M, W, A> {
     TracedT.fix(value)
 }
@@ -26,6 +51,9 @@ public postfix func ^<M, W, A>(_ value: TracedTOf<M, W, A>) -> TracedT<M, W, A> 
 // MARK: Syntax for Traced
 
 extension TracedT where W == ForId {
+    /// Initializes a Traced value.
+    ///
+    /// - Parameter f: Function to access values from a monoidal position.
     public convenience init(_ f: @escaping (M) -> A) {
         self.init(Id(f))
     }

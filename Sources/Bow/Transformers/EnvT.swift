@@ -1,39 +1,74 @@
+/// Witness for the `EnvT<E, W, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForEnvT {}
+
+/// Partial application of the `EnvT` type constructor, omitting the last parameter.
 public final class EnvTPartial<E, W>: Kind2<ForEnvT, E, W> {}
+
+/// Higher Kinded Type alias to improve readability of `Kind<EnvTPartial<E, W>, A>`.
 public typealias EnvTOf<E, W, A> = Kind<EnvTPartial<E, W>, A>
 
+/// Witness for the `Env<E, A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForEnv = ForEnvT
+
+/// Partial application of the `Env` type constructor, omitting the last parameter.
 public typealias EnvPartial<E> = EnvTPartial<E, ForId>
+
+/// Higher Kinded Type alias to improve readability of `Kind<EnvPartial<E>, A>`.
 public typealias EnvOf<E, A> = EnvTOf<E, ForId, A>
+
+/// The Env type is equivalent to the EnvT type, with the base comonad being Id.
 public typealias Env<E, A> = EnvT<E, ForId, A>
 
+/// The environment Comonad Transformer. This Comonad Transformer extends the context of a value in the base Comonad with a global environment.
 public final class EnvT<E, W, A>: EnvTOf<E, W, A> {
     fileprivate let e: E
     fileprivate let wa: Kind<W, A>
     
+    /// Safe downcast.
+    ///
+    /// - Parameter value: Value in the higher-kind form.
+    /// - Returns: Value cast to EnvT.
     public static func fix(_ value: EnvTOf<E, W, A>) -> EnvT<E, W, A> {
         value as! EnvT<E, W, A>
     }
     
+    /// Initializes an EnvT with an environment and a value of the base Comonad.
+    ///
+    /// - Parameters:
+    ///   - e: Environment.
+    ///   - wa: Value of the base comonad.
     public init(_ e: E, _ wa: Kind<W, A>) {
         self.e = e
         self.wa = wa
     }
     
+    /// Initializes an EnvT with a pair containing an environment and a value of the base Comonad.
+    ///
+    /// - Parameter pair: Tuple with the environment and a value of the base Comonad.
     public init(_ pair: (E, Kind<W, A>)) {
         self.e = pair.0
         self.wa = pair.1
     }
     
+    /// Obtains a tuple with the environment and a value of the base Comonad.
+    ///
+    /// - Returns: A tuple with the environment and a value of the base Comonad.
     public func runT() -> (E, Kind<W, A>) {
         (e, wa)
     }
     
+    /// Changes the type of the environment.
+    ///
+    /// - Parameter f: Function to transform the current environment.
     public func local<EE>(_ f: @escaping (E) -> EE) -> EnvT<EE, W, A> {
         EnvT<EE, W, A>(f(e), wa)
     }
 }
 
+/// Safe downcast.
+///
+/// - Parameter value: Value in the higher-kind form.
+/// - Returns: Value cast to EnvT.
 public postfix func ^<E, W, A>(_ value: EnvTOf<E, W, A>) -> EnvT<E, W, A> {
     EnvT.fix(value)
 }
@@ -41,10 +76,17 @@ public postfix func ^<E, W, A>(_ value: EnvTOf<E, W, A>) -> EnvT<E, W, A> {
 // MARK: Syntax for Env
 
 public extension EnvT where W == ForId {
+    /// Initializes an Env with an environment and a value.
+    /// - Parameters:
+    ///   - e: Environment.
+    ///   - a: Value in the base Comonad.
     convenience init(_ e: E, _ a: A) {
         self.init(e, Id(a))
     }
     
+    /// Obtains a tuple with the environment and the wrapped value.
+    ///
+    /// - Returns: A tuple with the environment and the wrapped value.
     func run() -> (E, A) {
         let (e, wa) = runT()
         return (e, wa^.value)
