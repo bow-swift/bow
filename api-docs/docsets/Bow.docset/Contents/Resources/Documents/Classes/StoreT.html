@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 86% documented</span>
+          <span class="header-tag"> 88% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -2023,7 +2023,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The Store Comonad Transformer. This Comonad Transformer extends the context of a value in the base Comonad so that it depends on a position of the type of the state.</p>
 
           </div>
         </section>
@@ -2045,7 +2045,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Rendering function in the context of the base Comonad.</p>
 
                       </div>
                       <div class="declaration">
@@ -2072,7 +2072,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Current focus of this Store.</p>
 
                       </div>
                       <div class="declaration">
@@ -2099,7 +2099,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2109,6 +2109,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8StoreTOfa">StoreTOf</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">StoreT</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to StoreT.</p>
                       </div>
                     </section>
                   </div>
@@ -2126,7 +2149,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a StoreT.</p>
 
                       </div>
                       <div class="declaration">
@@ -2136,6 +2159,37 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="n">_</span> <span class="nv">render</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="p">(</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  state
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Current focus of the Store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  render
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Rendering function of the Store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2157,7 +2211,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Moves the store into a new state.</p>
 
                       </div>
                       <div class="declaration">
@@ -2167,6 +2221,29 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">move</span><span class="p">(</span><span class="n">_</span> <span class="nv">newState</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">StoreT</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">W</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  newState
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New state for the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new store focused on the provided state.</p>
                       </div>
                     </section>
                   </div>
@@ -2195,7 +2272,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Store.</p>
 
                       </div>
                       <div class="declaration">
@@ -2205,6 +2282,37 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="n">_</span> <span class="nv">render</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  state
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Current focus of the store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  render
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Rendering function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
