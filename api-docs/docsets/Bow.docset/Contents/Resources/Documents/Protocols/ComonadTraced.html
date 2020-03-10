@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 85% documented</span>
+          <span class="header-tag"> 86% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -2023,7 +2023,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The ComonadTraced type class represents those comonads which support relative (monoidal) position information.</p>
 
           </div>
         </section>
@@ -2045,7 +2045,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Index type to access values inside the Comonad</p>
 
                       </div>
                       <div class="declaration">
@@ -2072,7 +2072,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts a value at the specified relative position.</p>
 
                       </div>
                       <div class="declaration">
@@ -2082,6 +2082,41 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">trace</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">m</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  m
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Relative position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value corresponding to the specified position.</p>
                       </div>
                     </section>
                   </div>
@@ -2099,7 +2134,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Gets a value that depends on the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -2109,6 +2144,41 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">listens</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute a value from the current position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple with the current and computed value in the context of this ComonadTraced.</p>
                       </div>
                     </section>
                   </div>
@@ -2126,7 +2196,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains a Trace that can modify the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -2136,6 +2206,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pass</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="p">((</span><span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Trace that can modify the current position.</p>
                       </div>
                     </section>
                   </div>
@@ -2160,7 +2253,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts a value at a relative position which depends on the current value.</p>
 
                       </div>
                       <div class="declaration">
@@ -2170,6 +2263,41 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">traces</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute the position based on the current value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value corresponding to the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -2190,7 +2318,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the current position together with the current value.</p>
 
                       </div>
                       <div class="declaration">
@@ -2200,6 +2328,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">listen</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="p">(</span><span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple with the current position and value in the context of this ComonadTraced.</p>
                       </div>
                     </section>
                   </div>
@@ -2220,7 +2371,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Apply a function to the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -2230,6 +2381,41 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">censor</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">wa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Protocols/ComonadTraced.html#/s:3Bow13ComonadTracedP1MQa">M</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Trace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to transform the current position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Trace focused in the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -2247,7 +2433,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-09)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-10)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>

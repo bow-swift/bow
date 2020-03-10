@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 85% documented</span>
+          <span class="header-tag"> 86% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -8772,7 +8772,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Gets the underlying global environment from this value.</p>
 
                       </div>
                       <div class="declaration">
@@ -8782,6 +8782,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">ask</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">E</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Global environment.</p>
                       </div>
                     </section>
                   </div>
@@ -8799,7 +8803,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains a value that depends on the environment.</p>
 
                       </div>
                       <div class="declaration">
@@ -8809,6 +8813,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">asks</span><span class="o">&lt;</span><span class="kt">EE</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EE</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to obtain a value from the environment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value that depends on the environment.</p>
                       </div>
                     </section>
                   </div>
@@ -8826,7 +8853,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Transforms the environment into a local one.</p>
 
                       </div>
                       <div class="declaration">
@@ -8836,6 +8863,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">local</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value with the transformed environment.</p>
                       </div>
                     </section>
                   </div>
@@ -8864,7 +8914,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the current position of the store.</p>
 
                       </div>
                       <div class="declaration">
@@ -8891,7 +8941,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the value stored in the provided position.</p>
 
                       </div>
                       <div class="declaration">
@@ -8901,6 +8951,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peek</span><span class="p">(</span><span class="n">_</span> <span class="nv">s</span><span class="p">:</span> <span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  s
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Position within the Store.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value stored in the provided position.</p>
                       </div>
                     </section>
                   </div>
@@ -8918,7 +8991,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains a value in a position relative to the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -8928,6 +9001,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peeks</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute the relative position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value located in a relative position to the current one.</p>
                       </div>
                     </section>
                   </div>
@@ -8945,7 +9041,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Moves to a new position.</p>
 
                       </div>
                       <div class="declaration">
@@ -8955,6 +9051,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">seek</span><span class="p">(</span><span class="n">_</span> <span class="nv">s</span><span class="p">:</span> <span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  s
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Store focused into the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -8972,7 +9091,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Moves to a new position relative to the current one.</p>
 
                       </div>
                       <div class="declaration">
@@ -8982,6 +9101,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">seeks</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute the new position, relative to the current one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Store focused into the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -8999,7 +9141,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts a collection of values from positions that depend on the current one.</p>
 
                       </div>
                       <div class="declaration">
@@ -9009,6 +9151,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">experiment</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">F</span><span class="o">.</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Effectful function computing new positions based on the current one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A collection of values located a the specified positions.</p>
                       </div>
                     </section>
                   </div>
@@ -9037,7 +9202,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts a value at the specified relative position.</p>
 
                       </div>
                       <div class="declaration">
@@ -9047,6 +9212,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">trace</span><span class="p">(</span><span class="n">_</span> <span class="nv">m</span><span class="p">:</span> <span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  m
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Relative position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value corresponding to the specified position.</p>
                       </div>
                     </section>
                   </div>
@@ -9064,7 +9252,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Extracts a value at a relative position which depends on the current value.</p>
 
                       </div>
                       <div class="declaration">
@@ -9074,6 +9262,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">traces</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute the position based on the current value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value corresponding to the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -9091,7 +9302,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Gets a value that depends on the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -9101,6 +9312,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">listens</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to compute a value from the current position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple with the current and computed value in the context of this ComonadTraced.</p>
                       </div>
                     </section>
                   </div>
@@ -9118,7 +9352,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the current position together with the current value.</p>
 
                       </div>
                       <div class="declaration">
@@ -9128,6 +9362,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">listen</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple with the current position and value in the context of this ComonadTraced.</p>
                       </div>
                     </section>
                   </div>
@@ -9145,7 +9383,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Apply a function to the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -9155,6 +9393,29 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">censor</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to transform the current position.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Trace focused in the new position.</p>
                       </div>
                     </section>
                   </div>
@@ -9172,7 +9433,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains a Trace that can modify the current position.</p>
 
                       </div>
                       <div class="declaration">
@@ -9182,6 +9443,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">pass</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="p">((</span><span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">F</span><span class="o">.</span><span class="kt">M</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Trace that can modify the current position.</p>
                       </div>
                     </section>
                   </div>
@@ -9210,7 +9475,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the comonadic value contained in the provided comonad transformer.</p>
 
                       </div>
                       <div class="declaration">
@@ -9220,6 +9485,10 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">lower</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">A</span> <span class="o">==</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">W</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Contained comonadic value within the transformer.</p>
                       </div>
                     </section>
                   </div>
@@ -15430,7 +15699,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-09)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-10)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
