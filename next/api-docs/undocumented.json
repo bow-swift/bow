@@ -414,62 +414,6 @@
       "warning": "undocumented"
     },
     {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 3,
-      "symbol": "ForPuller",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 4,
-      "symbol": "PullerOf",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 5,
-      "symbol": "Puller",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 7,
-      "symbol": "Puller",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 8,
-      "symbol": "Puller.moveLeft()",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 12,
-      "symbol": "Puller.moveRight()",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 16,
-      "symbol": "Puller.moveToFirst()",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Puller.swift",
-      "line": 20,
-      "symbol": "Puller.moveToLast()",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Sum.swift",
       "line": 26,
       "symbol": "Side.left",
@@ -506,135 +450,23 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 1,
-      "symbol": "ForZipper",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 2,
-      "symbol": "ZipperOf",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 4,
-      "symbol": "Zipper",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
       "line": 9,
-      "symbol": "Zipper.fix(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "symbol": "Zipper.left",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 13,
-      "symbol": "Zipper.init(left:focus:right:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "line": 10,
+      "symbol": "Zipper.focus",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 19,
-      "symbol": "Zipper.init(fromNEA:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 25,
-      "symbol": "Zipper.init(fromArray:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 32,
-      "symbol": "Zipper.moveLeft()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 42,
-      "symbol": "Zipper.moveRight()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 52,
-      "symbol": "Zipper.moveToFirst()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 60,
-      "symbol": "Zipper.moveToLast()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 68,
-      "symbol": "Zipper.asArray()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 72,
-      "symbol": "Zipper.isBeginning()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 76,
-      "symbol": "Zipper.isEnding()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 81,
-      "symbol": "^(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 85,
-      "symbol": "Zipper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 91,
-      "symbol": "ForZipper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 105,
-      "symbol": "ForZipper",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 113,
-      "symbol": "ForZipper",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "line": 11,
+      "symbol": "Zipper.right",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
