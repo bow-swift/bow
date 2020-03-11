@@ -32,7 +32,7 @@ permalink: /docs/fp-concepts/data-types/
 
  | Data type | Purpose |
  | --------- | ------- |
- | ArrayK&lt;A&gt; | Represents an array of values of type `A`. It is like `Array&lt;A&gt;` or `[A]`, but with HKT support.|
+ | ArrayK&lt;A&gt; | Represents an array of values of type `A`. It is like `Array<A>;` or `[A]`, but with HKT support.|
  | Const<A, T> | Represents a constant value of type `A` and a phantom type `T`.|
  | DictionaryK<K, A> | Represents a dictionary where keys have type `K` and values have type `A`. It is like `Dictionary<K, A>` or `[K: A]`, but with HKT support.|
  | Either<A, B> | Represents the sum type of `A` and `B`; i.e., it holds a value of either one of those types.|
@@ -40,8 +40,8 @@ permalink: /docs/fp-concepts/data-types/
  | Id&lt;A&gt; | Represents a value of type `A` with no further context.|
  | Ior<A, B> | Represents a value of either `A` or `B`, or both values at the same time.|
  | NonEmptyArray&lt;A&gt; | Represents an array of one or more elements of type `A`.|
- | Option&lt;A&gt; | Represents a value of type `A` that may or may not be present. It is like `Optional&lt;A&gt;` or `A?`, but with HKT support.|
- | SetK&lt;A&gt; | Represents an unordered collection of unique values of type `A`. It is like `Set&lt;A&gt;` but with HKT support. |
+ | Option&lt;A&gt; | Represents a value of type `A` that may or may not be present. It is like `Optional<A>` or `A?`, but with HKT support.|
+ | SetK&lt;A&gt; | Represents an unordered collection of unique values of type `A`. It is like `Set<A>` but with HKT support. |
  | Try&lt;A&gt; | Represents a computation that may have provided a value of type `A` or thrown an error.|
  | Validated<A, B> | Represents a value that may be invalid, with an error value of type `A`, or a valid value of type `B`.
 
@@ -50,7 +50,7 @@ permalink: /docs/fp-concepts/data-types/
  | Data type | Purpose |
  | --------- | ------- |
  | EitherT<F, A, B> | Represents an `Either<A, B>` nested in an arbitrary effect `F`.|
- | OptionT<F, A> | Represents an `Option&lt;A&gt;` nested in an arbitrary effect `F`.|
+ | OptionT<F, A> | Represents an `Option<A>` nested in an arbitrary effect `F`.|
  | StateT<F, S, A> | Represents a function that receives an effect of type `S` and produces a new state of the same type and an output value of type `A`, all wrapped in an effect of type `F`.|
  | State<S, A> | Represents a StateT where the effect is Id.|
  | WriterT<F, W, A> | Represents a value of type `A` under the effect `F` that produces a side stream of data of type `W`.|
