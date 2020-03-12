@@ -410,7 +410,9 @@
 
 <p class="beginner">beginner</p>
 
-<p>A data type is an abstraction that encapsulates a reusable coding pattern. Data types are generalized by one or more type parameters. Data types in Bow have Higher Kinded Type support by extending <code class="highlighter-rouge">Kind</code>. Their functionality works on their own structure, never on the values defined by its generic type parameters.</p>
+<p>A data type is an abstraction that encapsulates a reusable coding pattern. Data types are generalized by one or more type parameters. Data types in Bow have Higher Kinded Type support by extending <code class="highlighter-rouge">Kind</code>.</p>
+
+<p>All data types included in Bow are immutable; that is, you can only set their state during the initialization of the value. Whenever one of the methods need to change the state of the receiving value, a new copy of that value is returned. This way, we can easily reason about the behavior of our code.</p>
 
 <h2 id="data-types-in-bow">Data types in Bow</h2>
 
@@ -472,6 +474,10 @@
   </thead>
   <tbody>
     <tr>
+      <td>Action&lt;A&gt;</td>
+      <td>Represents an input on a Moore machine.</td>
+    </tr>
+    <tr>
       <td>ArrayK&lt;A&gt;</td>
       <td>Represents an array of values of type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Array&lt;A&gt;;</code> or <code class="highlighter-rouge">[A]</code>, but with HKT support.</td>
     </tr>
@@ -480,12 +486,24 @@
       <td>Represents a constant value of type <code class="highlighter-rouge">A</code> and a phantom type <code class="highlighter-rouge">T</code>.</td>
     </tr>
     <tr>
+      <td>CoSum&lt;F, G, A&gt;</td>
+      <td>Represents an action to change the selected content in a <code class="highlighter-rouge">Sum</code> value.</td>
+    </tr>
+    <tr>
+      <td>Day&lt;F, G, A&gt;</td>
+      <td>Represents the Day convolution of functors <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code>.</td>
+    </tr>
+    <tr>
       <td>DictionaryK&lt;K, A&gt;</td>
       <td>Represents a dictionary where keys have type <code class="highlighter-rouge">K</code> and values have type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Dictionary&lt;K, A&gt;</code> or <code class="highlighter-rouge">[K: A]</code>, but with HKT support.</td>
     </tr>
     <tr>
       <td>Either&lt;A, B&gt;</td>
       <td>Represents the sum type of <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code>; i.e., it holds a value of either one of those types.</td>
+    </tr>
+    <tr>
+      <td>Endo&lt;A&gt;</td>
+      <td>Represents an endomorphism on type <code class="highlighter-rouge">A</code>; i.e. a function where the input and output have the same type.</td>
     </tr>
     <tr>
       <td>Eval&lt;A&gt;</td>
@@ -500,6 +518,10 @@
       <td>Represents a value of either <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">B</code>, or both values at the same time.</td>
     </tr>
     <tr>
+      <td>Moore&lt;E, V&gt;</td>
+      <td>Represents a Moore machine rendering items of type <code class="highlighter-rouge">V</code> and handling inputs of type <code class="highlighter-rouge">E</code>.</td>
+    </tr>
+    <tr>
       <td>NonEmptyArray&lt;A&gt;</td>
       <td>Represents an array of one or more elements of type <code class="highlighter-rouge">A</code>.</td>
     </tr>
@@ -508,8 +530,24 @@
       <td>Represents a value of type <code class="highlighter-rouge">A</code> that may or may not be present. It is like <code class="highlighter-rouge">Optional&lt;A&gt;</code> or <code class="highlighter-rouge">A?</code>, but with HKT support.</td>
     </tr>
     <tr>
+      <td>Pairing&lt;F, G&gt;</td>
+      <td>Represents a relationship between Functors <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code> where they can annihilate each other to yield a value.</td>
+    </tr>
+    <tr>
+      <td>Puller&lt;A&gt;</td>
+      <td>Represents an action to move the focus of a <code class="highlighter-rouge">Zipper</code>.</td>
+    </tr>
+    <tr>
       <td>SetK&lt;A&gt;</td>
       <td>Represents an unordered collection of unique values of type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Set&lt;A&gt;</code> but with HKT support.</td>
+    </tr>
+    <tr>
+      <td>Sum&lt;F, G, A&gt;</td>
+      <td>Represents two values in the contexts of <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code>, where only one of them is selected.</td>
+    </tr>
+    <tr>
+      <td>Trampoline&lt;A&gt;</td>
+      <td>Represents a recursive computation that can be converted into a loop.</td>
     </tr>
     <tr>
       <td>Try&lt;A&gt;</td>
@@ -518,6 +556,10 @@
     <tr>
       <td>Validated&lt;A, B&gt;</td>
       <td>Represents a value that may be invalid, with an error value of type <code class="highlighter-rouge">A</code>, or a valid value of type <code class="highlighter-rouge">B</code>.</td>
+    </tr>
+    <tr>
+      <td>Zipper&lt;A&gt;</td>
+      <td>Represents an array of values that is focused at a specific position.</td>
     </tr>
   </tbody>
 </table>
@@ -533,8 +575,24 @@
   </thead>
   <tbody>
     <tr>
+      <td>CoT&lt;W, M, A&gt;</td>
+      <td>Represents the dual MonadTransformer of the <code class="highlighter-rouge">W</code> Comonad, with <code class="highlighter-rouge">M</code> as the base Monad.</td>
+    </tr>
+    <tr>
+      <td>Co&lt;W, A&gt;</td>
+      <td>Represents a CoT where the base Monad is Id.</td>
+    </tr>
+    <tr>
       <td>EitherT&lt;F, A, B&gt;</td>
       <td>Represents an <code class="highlighter-rouge">Either&lt;A, B&gt;</code> nested in an arbitrary effect <code class="highlighter-rouge">F</code>.</td>
+    </tr>
+    <tr>
+      <td>EnvT&lt;E, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended with a global environment.</td>
+    </tr>
+    <tr>
+      <td>Env&lt;E, A&gt;</td>
+      <td>Represents an EnvT where the base Comonad is Id.</td>
     </tr>
     <tr>
       <td>OptionT&lt;F, A&gt;</td>
@@ -547,6 +605,22 @@
     <tr>
       <td>State&lt;S, A&gt;</td>
       <td>Represents a StateT where the effect is Id.</td>
+    </tr>
+    <tr>
+      <td>StoreT&lt;S, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended with a focus of type <code class="highlighter-rouge">S</code>.</td>
+    </tr>
+    <tr>
+      <td>Store&lt;S, A&gt;</td>
+      <td>Represents a StoreT where the base Comonad is Id.</td>
+    </tr>
+    <tr>
+      <td>TracedT&lt;M, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended to depend in a monoidal position.</td>
+    </tr>
+    <tr>
+      <td>Traced&lt;M, A&gt;</td>
+      <td>Represents a TracedT where the base Comonad is Id.</td>
     </tr>
     <tr>
       <td>WriterT&lt;F, W, A&gt;</td>
