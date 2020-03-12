@@ -2171,10 +2171,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow9SemigroupPAAE10combineAllyxxd_tFZ"></a>
-                    <a name="//apple_ref/swift/Method/combineAll(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow9SemigroupPAAE10combineAllyxxd_tFZ">
-                      <span class="token-name">combineAll(_:)</span>
+                    <a name="/s:3Bow9SemigroupPAAE10combineAllyxx_xdtFZ"></a>
+                    <a name="//apple_ref/swift/Method/combineAll(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow9SemigroupPAAE10combineAllyxx_xdtFZ">
+                      <span class="token-name">combineAll(_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2184,14 +2184,14 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Combines a variable number of values of the implementing type, in the order provided in the call.</p>
+                        <p>Combines a variable number of values (at least one) of the implementing type, in the order provided in the call.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">combineAll</span><span class="p">(</span><span class="n">_</span> <span class="nv">elems</span><span class="p">:</span> <span class="k">Self</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">combineAll</span><span class="p">(</span><span class="n">_</span> <span class="nv">first</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">_</span> <span class="nv">elems</span><span class="p">:</span> <span class="k">Self</span><span class="o">...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2199,6 +2199,18 @@
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  first
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>First value of the implementing type.</p>
+                                </div>
+                              </td>
+                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -2224,10 +2236,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow9SemigroupPAAE10combineAllyxSayxGFZ"></a>
-                    <a name="//apple_ref/swift/Method/combineAll(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow9SemigroupPAAE10combineAllyxSayxGFZ">
-                      <span class="token-name">combineAll(_:)</span>
+                    <a name="/s:3Bow9SemigroupPAAE10combineAllyxx_SayxGtFZ"></a>
+                    <a name="//apple_ref/swift/Method/combineAll(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow9SemigroupPAAE10combineAllyxx_SayxGtFZ">
+                      <span class="token-name">combineAll(_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2244,7 +2256,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">combineAll</span><span class="p">(</span><span class="n">_</span> <span class="nv">elems</span><span class="p">:</span> <span class="p">[</span><span class="k">Self</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">combineAll</span><span class="p">(</span><span class="n">_</span> <span class="nv">first</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="n">_</span> <span class="nv">elems</span><span class="p">:</span> <span class="p">[</span><span class="k">Self</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -2255,12 +2267,24 @@
                             <tr>
                               <td>
                                 <code>
+                                  first
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>First value of the implementing type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                   elems
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Array of values of the implementing type.</p>
+                                  <p>Values of the implementing type.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2287,7 +2311,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-11)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-12)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
