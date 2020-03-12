@@ -7,6 +7,9 @@
 /*:
  # Composition: The essence of Functional Programming
 
+ {:.beginner}
+ beginner
+ 
  The unit of work in Functional Programming is a function. It is the smallest building block that we can create to solve a programming problem. Functions, as they are understood in FP, must have the following characteristics:
  
  - **Total**: they must be defined for every possible input.
@@ -26,6 +29,7 @@
  | One or more elements of `A` | Combine them into a single `A` | `combine` / `combineAll` | Semigroup |
  | Zero or more elements of `A` | Combine them into a single `A` | `combine` / `combineAll` + `empty` | Monoid |
  | A value `F<A>` and a function `(A) -> B` | Obtain a value `F<B>` | `map` | Functor |
+ | A value of `A` | A value of `F<A>` | `pure` | Applicative |
  | Several values `F<A1> ... F<An>` | Combine them into `F<(A1, ..., An)>` | `zip` | Applicative |
  | Several values `F<A1> ... F<An>` and a function `(A1 ... An) -> B` | Combine them into `F<B>` | `map` | Applicative |
  | A value `F<A>` and a function `(A) -> F<B>` | Obtain a value `F<B>` | `flatMap` | Monad |
