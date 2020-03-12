@@ -11,6 +11,9 @@
       location = "group:FP concepts.playground">
    </FileRef>
    <FileRef
+      location = "group:Composition.playground">
+   </FileRef>
+   <FileRef
       location = "group:Patterns.playground">
    </FileRef>
    <FileRef
