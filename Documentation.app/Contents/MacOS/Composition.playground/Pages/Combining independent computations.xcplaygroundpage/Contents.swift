@@ -85,9 +85,9 @@ func readEmail(from view: View) -> Option<String>
 /*:
  If we want to create a `User` object from the information the user has entered in the UI, we need both name and email to be present. Using `map`, we can achieve this:
  */
-let user = Option<User>.map(readName(from: view),
-                            readEmail(from: view),
-                            User.init)^
+let user = Option.map(readName(from: view),
+                      readEmail(from: view),
+                      User.init)^
 /*:
  If both functions `readName` and `readEmail` return a present `Option`, the User initializer will be called and a User will be created. If any of them returns `none`, the end result will be `none`.
  */
