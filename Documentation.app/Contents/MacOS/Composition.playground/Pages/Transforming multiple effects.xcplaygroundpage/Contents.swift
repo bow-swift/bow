@@ -64,8 +64,13 @@ let arrayOfOptions: Array<Option<Int>> = array.map(parseInt)
  
  If we take the previous example, where we have an `Array<Option<Int>>` and we want to have an `Option<Array<Int>>`, which will be present if all elements in the array are present, or `none` if any of the elements is `none, we need to apply the `sequence` function:
  */
+// Returns Option.some([1, 5, 3])
 let optionArray: Option<Array<Int>> = arrayOfOptions.sequence()^
-
+/*:
+ If any of the elements of the array is `none`, the result of `sequence` is `none`:
+ */
+let arrayWithNone: Array<Option<Int>> = [.some(1), .none()]
+let noneArray: Option<Array<Int>> = arrayWithNone.sequence()^
 /*:
  ## Transforming and swapping with an effectful function
  
@@ -82,6 +87,16 @@ let optionArray: Option<Array<Int>> = arrayOfOptions.sequence()^
  
  #### Solution
  
+ Looking at the type signatures we have above, this pattern is equivalent to doing `map` and then `sequence`. There is a function that does this in a single step: `traverse`, provided by the `Traverse` type class.
+ 
  #### Example
  
+ We can run the previous examples in a single step:
  */
+let numbers = ["1", "5", "3"]
+// Returns Option.some([1, 5, 3])
+let parsedNumbers: Option<[Int]> = numbers.traverse(parseInt)^
+
+let nonNumbers = ["9", "abc", "3"]
+// Returns Option.none()
+let notParsedNumbers: Option<[Int]> = nonNumbers.traverse(parseInt)^
