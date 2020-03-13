@@ -4,7 +4,7 @@
  title: Combining independent computations
  */
 // nef:end
-// nef:begin:end
+// nef:begin:hidden
 import Bow
 // nef:end
 /*:

@@ -1,7 +1,7 @@
 // nef:begin:header
 /*
  layout: docs
- title: Composition: The essence of Functional Programming
+ title: Composition - The essence of Functional Programming
  */
 // nef:end
 /*:
@@ -35,5 +35,5 @@
  | A value `F<A>` and a function `(A) -> F<B>` | Obtain a value `F<B>` | `flatMap` | Monad |
  | A value `F<A>` and a function `(A) -> G<B>` | Obtain a value `F<G<B>>` | `map` | Functor |
  | A value `F<A>` and  a function `(A) -> G<B>` | Obtain a value `G<F<B>>` | `traverse` | Traverse |
- | A value `F<G<A>>` | Flip the effects to get `G<F<A>>` | sequence | Traverse |
+ | A value `F<G<A>>` | Flip the effects to get `G<F<A>>` | `sequence` | Traverse |
  */
