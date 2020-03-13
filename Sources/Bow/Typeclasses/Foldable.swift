@@ -118,7 +118,7 @@ public extension Foldable {
     ///
     /// - Parameter fga: Structure of effects.
     /// - Returns: Unit in the context of the effects contained in the structure.
-    static func sequence_<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Unit> {
+    static func sequence_<G: Applicative, A, B>(_ fga: Kind<Self, B>) -> Kind<G, Unit> where B: Kind<G, A> {
         return traverse_(fga, id)
     }
 
@@ -222,7 +222,7 @@ public extension Foldable {
     /// 
     /// - Parameter fga: Structure to be reduced.
     /// - Returns: A value in the context providing the `MonoidK` instance.
-    static func foldK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
+    static func foldK<A, G: MonoidK, B>(_ fga: Kind<Self, B>) -> Kind<G, A> where B: Kind<G, A> {
         return reduceK(fga)
     }
     
@@ -230,7 +230,7 @@ public extension Foldable {
     ///
     /// - Parameter fga: Structure to be reduced.
     /// - Returns: A value in the context providing the `MonoidK` instance.
-    static func reduceK<A, G: MonoidK>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, A> {
+    static func reduceK<A, G: MonoidK, B>(_ fga: Kind<Self, B>) -> Kind<G, A> where B: Kind<G, A> {
         return foldLeft(fga, Kind<G, A>.emptyK(), { b, a in b.combineK(a) })
     }
 }
@@ -318,7 +318,7 @@ public extension Kind where F: Foldable {
     /// Traverses this structure of effects, performing them and discarding their result.
     ///
     /// - Returns: Unit in the context of the effects contained in the structure.
-    func sequence_<G: Applicative, AA>() -> Kind<G, Unit> where A == Kind<G, AA> {
+    func sequence_<G: Applicative, AA>() -> Kind<G, Unit> where A: Kind<G, AA> {
         return F.sequence_(self)
     }
 
@@ -398,11 +398,11 @@ public extension Kind where F: Foldable {
         return F.count(self)
     }
     
-    func foldK<G: MonoidK, B>() -> Kind<G, B> where A == Kind<G, B> {
+    func foldK<G: MonoidK, B>() -> Kind<G, B> where A: Kind<G, B> {
         return F.foldK(self)
     }
     
-    func reduceK<G: MonoidK, B>() -> Kind<G, B> where A == Kind<G, B> {
+    func reduceK<G: MonoidK, B>() -> Kind<G, B> where A: Kind<G, B> {
         return F.reduceK(self)
     }
 }

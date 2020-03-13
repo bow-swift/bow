@@ -14,3 +14,24 @@ public protocol Monoid: Semigroup {
     /// - Returns: A value of the implementing type satisfying the monoid laws.
     static func empty() -> Self
 }
+
+// MARK: Monoid syntax
+public extension Monoid {
+    /// Combines a variable number of values of the implementing type, in the order provided in the call.
+    ///
+    /// - Parameters:
+    ///     - elems: Values of the implementing type.
+    /// - Returns: A single value of the implementing type representing the combination of all the parameter values.
+    static func combineAll(_ elems: Self...) -> Self {
+        combineAll(elems)
+    }
+
+    /// Combines an array of values of the implementing type, in the order provided in the call.
+    ///
+    /// - Parameters:
+    ///     - elems: Values of the implementing type.
+    /// - Returns: A single value of the implementing type representing the combination of all the parameter values.
+    static func combineAll(_ elems: [Self]) -> Self {
+        elems.reduce(empty(), Self.combine)
+    }
+}

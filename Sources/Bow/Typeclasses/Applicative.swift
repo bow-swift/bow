@@ -741,9 +741,9 @@ public extension Kind where F: Applicative {
     ///   - b: 2nd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, Z>(_ a: Kind<F, Z>,
-                             _ b: Kind<F, B>,
-                             _ f: @escaping (Z, B) -> A) -> Kind<F, A> {
+    static func map<B, Z>(_ a: Kind<F, Z>,
+                          _ b: Kind<F, B>,
+                          _ f: @escaping (Z, B) -> A) -> Kind<F, A> {
         return F.map(a, b, f)
     }
 
@@ -757,10 +757,10 @@ public extension Kind where F: Applicative {
     ///   - c: 3rd computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, Z>(_ a: Kind<F, Z>,
-                                _ b: Kind<F, B>,
-                                _ c: Kind<F, C>,
-                                _ f: @escaping (Z, B, C) -> A) -> Kind<F, A> {
+    static func map<B, C, Z>(_ a: Kind<F, Z>,
+                             _ b: Kind<F, B>,
+                             _ c: Kind<F, C>,
+                             _ f: @escaping (Z, B, C) -> A) -> Kind<F, A> {
         return F.map(a, b, c, f)
     }
 
@@ -775,11 +775,11 @@ public extension Kind where F: Applicative {
     ///   - d: 4th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, Z>(_ a: Kind<F, Z>,
-                                   _ b: Kind<F, B>,
-                                   _ c: Kind<F, C>,
-                                   _ d: Kind<F, D>,
-                                   _ f: @escaping (Z, B, C, D) -> A) -> Kind<F, A> {
+    static func map<B, C, D, Z>(_ a: Kind<F, Z>,
+                                _ b: Kind<F, B>,
+                                _ c: Kind<F, C>,
+                                _ d: Kind<F, D>,
+                                _ f: @escaping (Z, B, C, D) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, f)
     }
 
@@ -795,12 +795,12 @@ public extension Kind where F: Applicative {
     ///   - e: 5th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, E, Z>(_ a: Kind<F, Z>,
-                                      _ b: Kind<F, B>,
-                                      _ c: Kind<F, C>,
-                                      _ d: Kind<F, D>,
-                                      _ e: Kind<F, E>,
-                                      _ f: @escaping (Z, B, C, D, E) -> A) -> Kind<F, A> {
+    static func map<B, C, D, E, Z>(_ a: Kind<F, Z>,
+                                   _ b: Kind<F, B>,
+                                   _ c: Kind<F, C>,
+                                   _ d: Kind<F, D>,
+                                   _ e: Kind<F, E>,
+                                   _ f: @escaping (Z, B, C, D, E) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, e, f)
     }
 
@@ -817,13 +817,13 @@ public extension Kind where F: Applicative {
     ///   - g: 6th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, E, G, Z>(_ a: Kind<F, Z>,
-                                         _ b: Kind<F, B>,
-                                         _ c: Kind<F, C>,
-                                         _ d: Kind<F, D>,
-                                         _ e: Kind<F, E>,
-                                         _ g: Kind<F, G>,
-                                         _ f: @escaping (Z, B, C, D, E, G) -> A) -> Kind<F, A> {
+    static func map<B, C, D, E, G, Z>(_ a: Kind<F, Z>,
+                                      _ b: Kind<F, B>,
+                                      _ c: Kind<F, C>,
+                                      _ d: Kind<F, D>,
+                                      _ e: Kind<F, E>,
+                                      _ g: Kind<F, G>,
+                                      _ f: @escaping (Z, B, C, D, E, G) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, e, g, f)
     }
 
@@ -841,14 +841,14 @@ public extension Kind where F: Applicative {
     ///   - h: 7th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, E, G, H, Z>(_ a: Kind<F, Z>,
-                                            _ b: Kind<F, B>,
-                                            _ c: Kind<F, C>,
-                                            _ d: Kind<F, D>,
-                                            _ e: Kind<F, E>,
-                                            _ g: Kind<F, G>,
-                                            _ h: Kind<F, H>,
-                                            _ f: @escaping (Z, B, C, D, E, G, H) -> A) -> Kind<F, A> {
+    static func map<B, C, D, E, G, H, Z>(_ a: Kind<F, Z>,
+                                         _ b: Kind<F, B>,
+                                         _ c: Kind<F, C>,
+                                         _ d: Kind<F, D>,
+                                         _ e: Kind<F, E>,
+                                         _ g: Kind<F, G>,
+                                         _ h: Kind<F, H>,
+                                         _ f: @escaping (Z, B, C, D, E, G, H) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, e, g, h, f)
     }
 
@@ -867,15 +867,15 @@ public extension Kind where F: Applicative {
     ///   - i: 8th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, E, G, H, I, Z>(_ a: Kind<F, Z>,
-                                               _ b: Kind<F, B>,
-                                               _ c: Kind<F, C>,
-                                               _ d: Kind<F, D>,
-                                               _ e: Kind<F, E>,
-                                               _ g: Kind<F, G>,
-                                               _ h: Kind<F, H>,
-                                               _ i: Kind<F, I>,
-                                               _ f: @escaping (Z, B, C, D, E, G, H, I) -> A) -> Kind<F, A> {
+    static func map<B, C, D, E, G, H, I, Z>(_ a: Kind<F, Z>,
+                                            _ b: Kind<F, B>,
+                                            _ c: Kind<F, C>,
+                                            _ d: Kind<F, D>,
+                                            _ e: Kind<F, E>,
+                                            _ g: Kind<F, G>,
+                                            _ h: Kind<F, H>,
+                                            _ i: Kind<F, I>,
+                                            _ f: @escaping (Z, B, C, D, E, G, H, I) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, e, g, h, i, f)
     }
 
@@ -895,16 +895,16 @@ public extension Kind where F: Applicative {
     ///   - j: 9th computation.
     ///   - f: Combination function.
     /// - Returns: Result of combining the provided computations, in the context implementing this instance.
-    static func map<A, B, C, D, E, G, H, I, J, Z>(_ a: Kind<F, Z>,
-                                                  _ b: Kind<F, B>,
-                                                  _ c: Kind<F, C>,
-                                                  _ d: Kind<F, D>,
-                                                  _ e: Kind<F, E>,
-                                                  _ g: Kind<F, G>,
-                                                  _ h: Kind<F, H>,
-                                                  _ i: Kind<F, I>,
-                                                  _ j: Kind<F, J>,
-                                                  _ f: @escaping (Z, B, C, D, E, G, H, I, J) -> A) -> Kind<F, A> {
+    static func map<B, C, D, E, G, H, I, J, Z>(_ a: Kind<F, Z>,
+                                               _ b: Kind<F, B>,
+                                               _ c: Kind<F, C>,
+                                               _ d: Kind<F, D>,
+                                               _ e: Kind<F, E>,
+                                               _ g: Kind<F, G>,
+                                               _ h: Kind<F, H>,
+                                               _ i: Kind<F, I>,
+                                               _ j: Kind<F, J>,
+                                               _ f: @escaping (Z, B, C, D, E, G, H, I, J) -> A) -> Kind<F, A> {
         return F.map(a, b, c, d, e, g, h, i, j, f)
     }
 }
