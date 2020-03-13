@@ -87,5 +87,6 @@ When you add a code contribution to Bow, you need to open a new pull request. Pl
 - Use the pull request template and fill all the sections that are applicable.
 - If you are contributing a **new typeclass**, make sure its methods are properly documented. Also, any laws that instances of the typeclass must obey need to be implemented and included in the same PR.
 - If you are contributing a **new data type**, make sure it includes instances for typeclasses where applicable. Add tests to verify the instances of typeclasses for this data type satisfy the corresponding laws.
-- If you are adding a **new integration with a library or framework**, make sure it is in a separate target and it has the minimum dependencies it needs in order to work. It must have its own test target. Be sure to update [Travis](https://github.com/bow-swift/bow/blob/master/.travis.yml) to build this new target.
+- If you are adding a **new integration with a library or framework**, make sure it is in a separate target and it has the minimum dependencies it needs in order to work. It must have its own test target. Be sure to update the `Package.swift` to build this new target with its dependencies.
 - In general, all code that is committed to the project should be tested. Use property-based testing where applicable.
+- In general, all code that is committed to the project should be documented. Refer to other files to see the formatting and style of the documentation.
