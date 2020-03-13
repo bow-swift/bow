@@ -71,8 +71,8 @@ public extension Array {
     /// Evaluate each effect in this array of values and collects the results.
     ///
     /// - Returns: Results collected under the context of the effects.
-    func sequence<G: Applicative, A>() -> Kind<G, [A]> where Element == Kind<G, A> {
-        self.k().sequence().map { array in array^.asArray }
+    func sequence<G: Applicative, A>() -> Kind<G, [A]> where Element: Kind<G, A> {
+        self.k().map { x in x.map(id) }.sequence().map { array in array^.asArray }
     }
     
     /// A traverse followed by flattening the inner result.
