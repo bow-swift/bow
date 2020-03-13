@@ -16,7 +16,7 @@ public extension Traverse {
     ///
     /// - Parameter fga: A structure of values.
     /// - Returns: Results collected under the context of the effects.
-    static func sequence<G: Applicative, A>(_ fga: Kind<Self, Kind<G, A>>) -> Kind<G, Kind<Self, A>> {
+    static func sequence<G: Applicative, A, B>(_ fga: Kind<Self, B>) -> Kind<G, Kind<Self, A>> where B: Kind<G, A> {
         return traverse(fga, id)
     }
 }
@@ -48,7 +48,7 @@ public extension Kind where F: Traverse {
     /// Evaluate each effect in this structure of values and collects the results.
     ///
     /// - Returns: Results collected under the context of the effects.
-    func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>> where A == Kind<G, AA>{
+    func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>> where A: Kind<G, AA>{
         return F.sequence(self)
     }
 }
