@@ -55,7 +55,7 @@ public extension Array {
     ///
     /// - Parameter fga: Structure to be reduced.
     /// - Returns: A value in the context providing the `MonoidK` instance.
-    func reduceK<G: MonoidK, A>() -> Kind<G, A> where Element == Kind<G, A> {
+    func reduceK<G: MonoidK, A>() -> Kind<G, A> where Element: Kind<G, A> {
         self.k().reduceK()
     }
     
