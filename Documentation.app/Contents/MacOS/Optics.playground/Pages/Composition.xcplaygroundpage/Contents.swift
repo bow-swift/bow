@@ -47,10 +47,7 @@ enum NTree<A> {
 extension NTree: AutoPrism {}
 
 func nodePrism<A>() -> Prism<NTree<A>, (A, NEA<NTree<A>>)> {
-    return NTree.prism(for: NTree.node) { tree in
-        guard case let .node(value, branches: branches) = tree else { return nil }
-        return (value, branches)
-    }
+    NTree.prism(for: NTree.node)
 }
 /*:
  `nodePrism` gives us a `Prism` to look into a `NTree` and get a pair of `(A, NEA<NTree<A>>)`, but we are only interested in the branches part. Given we have a tuple, we would need an optic that lets us focus on one of the components of a tuple.
@@ -60,20 +57,19 @@ func nodePrism<A>() -> Prism<NTree<A>, (A, NEA<NTree<A>>)> {
  Then, we can compose the previous `Prism` with this `Lens` to get an `Optional` (see table above) that focuses only on the branches of a node:
  */
 func branchesOptional<A>() -> Optional<NTree<A>, NEA<NTree<A>>> {
-    return nodePrism() + Tuple2._1
+    nodePrism() + Tuple2._1
 }
 /*:
  Now, we would like to be able to traverse each individual branch and modify them in isolation. This would give us a way of visiting the branches under the first level of the tree. If we look into the focus of the `branchesOptional` we can see that it is a `NonEmptyArray`, which already has a `Traversal` to visit each element. Therefore, if we compose them, we can get a `Traversal` with foci in each node of the first level under the provided node:
  */
 func levelTraversal<A>() -> Traversal<NTree<A>, NTree<A>> {
-    return branchesOptional() + NEA.traversal
+    branchesOptional() + NEA.traversal
 }
 /*:
  Looking at `levelTraversal` we can see that its source and focus types match. That means we can compose with itself in order to go further down in the tree structure, level by level. We can write a function that gets us a `Traversal` focused on the nodes of the `m` level, just by composing the `levelTraversal` with itself `m` times:
  */
 func level<A>(_ m: UInt) -> Traversal<NTree<A>, NTree<A>> {
-    guard m > 0 else { return Traversal.identity }
-    return (0 ..< m)
+    (0 ..< m)
         .map { _ in levelTraversal() }
         .reduce(Traversal.identity, +)
 }
@@ -83,7 +79,7 @@ func level<A>(_ m: UInt) -> Traversal<NTree<A>, NTree<A>> {
  We wanted to combine values of the nodes at level `m`. First, we would need to extract the values out of the `NTrees`. Since all cases in `NTree` have a value, we can write a custom `Getter` to do this:
  */
 func valueGetter<A>() -> Getter<NTree<A>, A> {
-    return Getter(get: { state in
+    Getter(get: { state in
         switch state {
         case .leaf(let value), .node(let value, branches: _): return value
         }
@@ -93,13 +89,13 @@ func valueGetter<A>() -> Getter<NTree<A>, A> {
  We can convert the `Traversal` to a `Fold` using the `asFold` property. We can get a `Fold` to combine values at level `m` as:
  */
 func levelFold<A>(_ m: UInt) -> Fold<NTree<A>, A> {
-    return level(m).asFold + valueGetter()
+    level(m).asFold + valueGetter()
 }
 /*:
  Finally, if we get a tree whose values have an instance of `Monoid`, we can combine all its values at level `m` by:
  */
 func combineValues<A: Monoid>(of tree: NTree<A>, at level: UInt) -> A {
-    return levelFold(level).combineAll(tree)
+    levelFold(level).combineAll(tree)
 }
 /*:
  ## Summary
