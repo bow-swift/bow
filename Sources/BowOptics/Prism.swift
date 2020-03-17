@@ -421,19 +421,6 @@ public extension Prism where S == A, S == T, A == B {
     }
 }
 
-public extension Prism where S == T, A == B {
-    /// Creates a prism based on functions to extract and embed a value into a sum type.
-    ///
-    /// - Parameters:
-    ///   - extract: Function to extract a value from the source.
-    ///   - embed: Function to embed a value into the source.
-    convenience init(extract: @escaping (S) -> A?, embed: @escaping (A) -> S) {
-        self.init(
-            getOrModify: { s in extract(s).flatMap(Either.right) ?? .left(s) },
-            reverseGet: embed)
-    }
-}
-
 public extension Prism where A: Equatable {
     /// Provides a prism that checks equality with a value.
     ///
