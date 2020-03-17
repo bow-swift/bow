@@ -144,7 +144,7 @@ extension Option: CustomStringConvertible {
 extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription : String {
         return fold(constant("None"),
-                    { a in "Some(\(a.debugDescription)" })
+                    { a in "Some(\(a.debugDescription))" })
     }
 }
 
