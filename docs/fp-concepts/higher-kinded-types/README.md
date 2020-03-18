@@ -203,7 +203,6 @@ let swapped = either.map { value in value.description }^.swap() // swapped is of
  | ArrayK      | Bow               | Array         |               |
  | DictionaryK | Bow               | Dictionary    |               |
  | SetK        | Bow               | Set           |               |
- | FutureK     | BowBrightFutures  | Future        | BrightFutures |
  | MaybeK      | BowRx             | Maybe         | RxSwift       |
  | ObservableK | BowRx             | Observable    | RxSwift       |
  | SingleK     | BowRx             | Single        | RxSwift       |
