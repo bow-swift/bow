@@ -31,7 +31,7 @@ import Bow
  
  If you have more than two elements, you can either chain multiple `combine` calls, or use `combineAll`, which accepts a variadic number of parameters.
  
- This operation is available in the `Semigroup` type class, and it is an associative operation. Your type must conform to `Semigroup` in order to have `combine` available.
+ This operation is available in the [Semigroup type class](https://bow-swift.io/next/api-docs/Protocols/Semigroup.html), and it is an associative operation. Your type must conform to `Semigroup` in order to have `combine` available.
  
  #### Example
  
@@ -70,7 +70,7 @@ a.combine(b) != b.combine(a)
  
  The problem described here is similar to the problem above, with the difference of potentially having no values. We can use `combine`, but we need to provide a *default* value when no values are combined.
  
- This default value is `empty` and it is available in the `Monoid` type class. `empty` has the property of being combinable with any other element of the type, yielding the same value it is combined with.
+ This default value is `empty` and it is available in the [Monoid type class](https://bow-swift.io/next/api-docs/Protocols/Monoid.html). `empty` has the property of being combinable with any other element of the type, yielding the same value it is combined with.
  
  #### Example
  

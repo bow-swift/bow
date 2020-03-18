@@ -27,7 +27,7 @@ import Bow
  
  #### Solution
  
- We can use the `pure` function present in the `Applicative` type class to embed a value into an effect.
+ We can use the `pure` function present in the [Applicative type class](https://bow-swift.io/next/api-docs/Protocols/Applicative.html) to embed a value into an effect.
  
  #### Examples
  

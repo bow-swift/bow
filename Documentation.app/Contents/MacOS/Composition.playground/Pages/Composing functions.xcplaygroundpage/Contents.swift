@@ -71,7 +71,7 @@ prettyCircumference(3) // Returns "18.85"
  
  The previous composition functions and operators do not work here. If we inspect the return type of `f`, it does not match with the input type of `g`, since the functions are effectful.
  
- These effectful functions are called **Kleisli** functions, and there is a type in Bow to represent them. The `Kleisli` type provides the `andThen` method to compose them.
+ These effectful functions are called [**Kleisli** functions](https://bow-swift.io/next/api-docs/Classes/Kleisli.html), and there is a type in Bow to represent them. The `Kleisli` type provides the `andThen` method to compose them.
  
  #### Example
  
@@ -95,7 +95,9 @@ func nextTalk(at conference: Conference) -> Option<Talk>
 /*:
  Both functions are Kleisli functions, as their result are effectful, with Option being the effect. We can compose them into a function that provides the next Talk after a certain date, if it exists:
  */
-let nextTalkAfterDate = Kleisli(nextConference(after:))
+// Kleisli<ForOption, Date, Talk> is equivalent to a function:
+// (Date) -> Option<Talk>
+let nextTalkAfterDate: Kleisli<ForOption, Date, Talk> = Kleisli(nextConference(after:))
     .andThen(Kleisli(nextTalk(at:)))
 /*:
  And we can invoke this function as:

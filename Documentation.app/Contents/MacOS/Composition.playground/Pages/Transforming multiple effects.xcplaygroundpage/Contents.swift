@@ -28,7 +28,7 @@ import Bow
  
  #### Solution
  
- Despite having two different effects, they do not interact with each other. This is a regular `map` transformation, as provided in the `Functor` type class.
+ Despite having two different effects, they do not interact with each other. This is a regular `map` transformation, as provided in the [Functor type class](https://bow-swift.io/next/api-docs/Protocols/Functor.html).
  
  #### Example
  
@@ -58,7 +58,7 @@ let arrayOfOptions: Array<Option<Int>> = array.map(parseInt)
  
  #### Solution
  
- If we want to swap the relative order of the applied effects, we can use the `sequence` function, provided in the `Traverse` type class.
+ If we want to swap the relative order of the applied effects, we can use the `sequence` function, provided in the [Traverse type class](https://bow-swift.io/next/api-docs/Protocols/Traverse.html).
  
  #### Example
  
@@ -87,7 +87,7 @@ let noneArray: Option<Array<Int>> = arrayWithNone.sequence()^
  
  #### Solution
  
- Looking at the type signatures we have above, this pattern is equivalent to doing `map` and then `sequence`. There is a function that does this in a single step: `traverse`, provided by the `Traverse` type class.
+ Looking at the type signatures we have above, this pattern is equivalent to doing `map` and then `sequence`. There is a function that does this in a single step: `traverse`, provided by the [Traverse type class](https://bow-swift.io/next/api-docs/Protocols/Traverse.html).
  
  #### Example
  

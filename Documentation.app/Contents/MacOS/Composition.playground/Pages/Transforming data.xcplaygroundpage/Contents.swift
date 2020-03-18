@@ -30,7 +30,7 @@ import Bow
  
  You can transform the inner type of an effect with the `map` function. Instead of unwrapping the value/s potentially wrapped in your effect type, you pass the function to `map` and it will be able to apply the transformation.
  
- `map` is available in the `Functor` type class and most of the types in Bow provide an instance for `Functor`.
+ `map` is available in the [Functor type class](https://bow-swift.io/next/api-docs/Protocols/Functor.html) and most of the types in Bow provide an instance for `Functor`.
  
  #### Example
  
@@ -70,7 +70,7 @@ Either<Bool, Int>.left(false).map(toString)^ // Returns Either<Bool, String>.lef
  
  #### Solution
  
- You can still use `map` and pass a function that returns the value of `B`, ignoring the input; however, the `Functor` type class provides the function `as`, that behaves like `map` but takes constant values instead of a transforming function.
+ You can still use `map` and pass a function that returns the value of `B`, ignoring the input; however, the [Functor type class](https://bow-swift.io/next/api-docs/Protocols/Functor.html) provides the function `as`, that behaves like `map` but takes constant values instead of a transforming function.
  
  ## Clearing the type in the transformation
  

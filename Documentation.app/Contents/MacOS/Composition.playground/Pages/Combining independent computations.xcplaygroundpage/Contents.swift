@@ -27,7 +27,7 @@ import Bow
  
  #### Solution
  
- You can `zip` values of different types inside an effect. `zip` is an operation in the `Applicative` type class that will access the internals of each effectful value and provide a single effectful value with a tuple with all of them, if possible.
+ You can `zip` values of different types inside an effect. `zip` is an operation in the [Applicative type class](https://bow-swift.io/next/api-docs/Protocols/Applicative.html) that will access the internals of each effectful value and provide a single effectful value with a tuple with all of them, if possible.
  
  #### Example
  
@@ -56,7 +56,7 @@ let result: ArrayK<(Int, String, Bool)> = ArrayK.zip(x, y, z)^
  
  #### Solution
  
- This case is similar to the above, but transforming the tuple into a single value using a function. The `Applicative` type class provides the `map` function to achieve this purpose. It accepts several effectful values and a function. It will access the internals of each effectful value and feed all inputs, if possible, into the provided function.
+ This case is similar to the above, but transforming the tuple into a single value using a function. The [Applicative type class](https://bow-swift.io/next/api-docs/Protocols/Applicative.html) provides the `map` function to achieve this purpose. It accepts several effectful values and a function. It will access the internals of each effectful value and feed all inputs, if possible, into the provided function.
  
  #### Example
  
