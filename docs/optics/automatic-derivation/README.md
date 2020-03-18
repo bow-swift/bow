@@ -129,13 +129,10 @@ extension PublicationState: AutoPrism {}
 let draftPrism = PublicationState.prism(for: .draft)
 ```
 
- However, if the focus has associated values, we need to provide a bit of help by providing a pattern matching function that extracts the associated values out of the case we are focusing on:
+ In case the focus has associated values, it works the same. Bow will auto extract for you the associated values:
 
 ```swift
-let publishedPrism = PublicationState.prism(for: PublicationState.published) { state in
-    guard case let .published(date) = state else { return nil }
-    return date
-}
+let publishedPrism = PublicationState.prism(for: PublicationState.published)
 ```
 
 ## Summary

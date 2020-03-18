@@ -515,12 +515,9 @@
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">draftPrism</span> <span class="o">=</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="nf">prism</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">draft</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>However, if the focus has associated values, we need to provide a bit of help by providing a pattern matching function that extracts the associated values out of the case we are focusing on:</p>
+<p>In case the focus has associated values, it works the same. Bow will auto extract for you the associated values:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">publishedPrism</span> <span class="o">=</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="nf">prism</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="n">published</span><span class="p">)</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
-    <span class="k">guard</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">published</span><span class="p">(</span><span class="n">date</span><span class="p">)</span> <span class="o">=</span> <span class="n">state</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
-    <span class="k">return</span> <span class="n">date</span>
-<span class="p">}</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">publishedPrism</span> <span class="o">=</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="nf">prism</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="summary">Summary</h2>

@@ -45,10 +45,7 @@ enum NTree<A> {
 extension NTree: AutoPrism {}
 
 func nodePrism<A>() -> Prism<NTree<A>, (A, NEA<NTree<A>>)> {
-    return NTree.prism(for: NTree.node) { tree in
-        guard case let .node(value, branches: branches) = tree else { return nil }
-        return (value, branches)
-    }
+    NTree.prism(for: NTree.node)
 }
 ```
 
@@ -60,7 +57,7 @@ func nodePrism<A>() -> Prism<NTree<A>, (A, NEA<NTree<A>>)> {
 
 ```swift
 func branchesOptional<A>() -> Optional<NTree<A>, NEA<NTree<A>>> {
-    return nodePrism() + Tuple2._1
+    nodePrism() + Tuple2._1
 }
 ```
 
@@ -68,7 +65,7 @@ func branchesOptional<A>() -> Optional<NTree<A>, NEA<NTree<A>>> {
 
 ```swift
 func levelTraversal<A>() -> Traversal<NTree<A>, NTree<A>> {
-    return branchesOptional() + NEA.traversal
+    branchesOptional() + NEA.traversal
 }
 ```
 
@@ -76,8 +73,7 @@ func levelTraversal<A>() -> Traversal<NTree<A>, NTree<A>> {
 
 ```swift
 func level<A>(_ m: UInt) -> Traversal<NTree<A>, NTree<A>> {
-    guard m > 0 else { return Traversal.identity }
-    return (0 ..< m)
+    (0 ..< m)
         .map { _ in levelTraversal() }
         .reduce(Traversal.identity, +)
 }
@@ -89,7 +85,7 @@ func level<A>(_ m: UInt) -> Traversal<NTree<A>, NTree<A>> {
 
 ```swift
 func valueGetter<A>() -> Getter<NTree<A>, A> {
-    return Getter(get: { state in
+    Getter(get: { state in
         switch state {
         case .leaf(let value), .node(let value, branches: _): return value
         }
@@ -101,7 +97,7 @@ func valueGetter<A>() -> Getter<NTree<A>, A> {
 
 ```swift
 func levelFold<A>(_ m: UInt) -> Fold<NTree<A>, A> {
-    return level(m).asFold + valueGetter()
+    level(m).asFold + valueGetter()
 }
 ```
 
@@ -109,7 +105,7 @@ func levelFold<A>(_ m: UInt) -> Fold<NTree<A>, A> {
 
 ```swift
 func combineValues<A: Monoid>(of tree: NTree<A>, at level: UInt) -> A {
-    return levelFold(level).combineAll(tree)
+    levelFold(level).combineAll(tree)
 }
 ```
 
