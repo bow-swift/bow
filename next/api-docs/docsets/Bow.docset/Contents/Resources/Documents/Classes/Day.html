@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 92% documented</span>
+          <span class="header-tag"> 93% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -2029,7 +2029,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Day convolution of two Functors. It can be seen as the suspended version of a Pairing between Functors F and G, applied to specific values.</p>
 
           </div>
         </section>
@@ -2051,7 +2051,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes the Day convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2063,6 +2063,49 @@
                   <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  left
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An F-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A G-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function to combine the values provided by both effectful computations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2080,7 +2123,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2090,6 +2133,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5DayOfa">DayOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Day.</p>
                       </div>
                     </section>
                   </div>
@@ -2107,7 +2173,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Runs the Day convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2117,6 +2183,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the convolution.</p>
                       </div>
                     </section>
                   </div>
@@ -2134,7 +2204,9 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Associates the convolution of three Functors to the left.</p>
+
+<p>It goes from <code>Day f (Day g h) a</code> to <code>Day (Day f g) h a</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2144,6 +2216,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">assoc</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/DayPartial.html">DayPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">FF</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">GG</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/DayPartial.html">DayPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Left associated Day convolution.</p>
                       </div>
                     </section>
                   </div>
@@ -2161,7 +2237,9 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Associates the convolution of three Functors to the right.</p>
+
+<p>It goes from <code>Day (Day f g) h a</code> to <code>Day f (Day g h) a</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2171,6 +2249,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">disassoc</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt"><a href="../Classes/DayPartial.html">DayPartial</a></span><span class="o">&lt;</span><span class="kt">GG</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/DayPartial.html">DayPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Right associated Day convolution.</p>
                       </div>
                     </section>
                   </div>
@@ -2188,7 +2270,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Swaps the convoluted Functors.</p>
 
                       </div>
                       <div class="declaration">
@@ -2198,6 +2280,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">swapped</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Day convolution with Functors swapped.</p>
                       </div>
                     </section>
                   </div>
@@ -2215,7 +2301,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Applies a natural transformation on the first Functor.</p>
 
                       </div>
                       <div class="declaration">
@@ -2225,6 +2311,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">trans1</span><span class="o">&lt;</span><span class="kt">H</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">nat</span><span class="p">:</span> <span class="kt"><a href="../Classes/FunctionK.html">FunctionK</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">H</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">H</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">H</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  nat
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Natural transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Day convolution with the first Functor transformed.</p>
                       </div>
                     </section>
                   </div>
@@ -2242,7 +2351,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Applies a natural transformation on the second Functor.</p>
 
                       </div>
                       <div class="declaration">
@@ -2252,6 +2361,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">trans2</span><span class="o">&lt;</span><span class="kt">H</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">nat</span><span class="p">:</span> <span class="kt"><a href="../Classes/FunctionK.html">FunctionK</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">H</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  nat
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Natural transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Day convolution with the second Functor transformed.</p>
                       </div>
                     </section>
                   </div>
@@ -2273,7 +2405,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Collapses the convolution using Applicative.map.</p>
 
                       </div>
                       <div class="declaration">
@@ -2283,6 +2415,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">dap</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the convolution.</p>
                       </div>
                     </section>
                   </div>
@@ -2304,7 +2440,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Introduces Id at the left to make a Day convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2314,6 +2450,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">intro1</span><span class="p">(</span><span class="n">_</span> <span class="nv">right</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value for the right side of the convolution.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A convolution with the provided value on the right.</p>
                       </div>
                     </section>
                   </div>
@@ -2331,7 +2490,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Eliminates Id from the left of this convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2341,6 +2500,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">elim1</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of eliminating Id from the left of the convolution.</p>
                       </div>
                     </section>
                   </div>
@@ -2362,7 +2525,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Introduces Id at the right to make a Day convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2372,6 +2535,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">intro2</span><span class="p">(</span><span class="n">_</span> <span class="nv">left</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Day</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  right
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value for the left side of the convolution.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A convolution with the provided value on the left.</p>
                       </div>
                     </section>
                   </div>
@@ -2389,7 +2575,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Eliminates Id from the right of this convolution.</p>
 
                       </div>
                       <div class="declaration">
@@ -2399,6 +2585,10 @@
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">elim2</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of eliminating Id from the right of the convolution.</p>
                       </div>
                     </section>
                   </div>

@@ -44,6 +44,9 @@ options:
         - title: Monad comprehensions
           url: /docs/patterns/monad-comprehensions/
 
+        - title: Tail recursion
+          url: /docs/patterns/tail-recursion/
+
         - title: Dependency injection
           url: /docs/patterns/dependency-injection/
 
