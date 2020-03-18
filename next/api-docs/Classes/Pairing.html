@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 91% documented</span>
+          <span class="header-tag"> 93% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -2029,7 +2029,14 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>The Pairing type represents a relationship between Functors F and G, where the sums in one can annihilate the products in the other.</p>
+
+<p>The internals of this type embed a function of the following shape:
+    <code>forall a b c. f a -&gt; g b -&gt; (a -&gt; b -&gt; c) -&gt; c</code>
+Or equivalently:
+    <code>forall a b. f (a -&gt; b) -&gt; g a -&gt; b</code></p>
+
+<p>Swift lacks universal quantifiers, so these types are replaced by <code>Any</code>.</p>
 
           </div>
         </section>
@@ -2051,7 +2058,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2061,6 +2068,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow9PairingOfa">PairingOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  value
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Pairing.</p>
                       </div>
                     </section>
                   </div>
@@ -2078,7 +2108,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Pairing.</p>
 
                       </div>
                       <div class="declaration">
@@ -2088,6 +2118,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">zap</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="p">(</span><span class="cm">/*A*/</span><span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="cm">/*A*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  zap
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Relationship between the Functors, captured as a function of the form: <code>forall a b. f (a -&gt; b) -&gt; g a -&gt; b</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2105,7 +2154,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Pairing.</p>
 
                       </div>
                       <div class="declaration">
@@ -2115,6 +2164,25 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">pairing</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="cm">/*A*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">,</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="cm">/*A*/</span><span class="kt">Any</span><span class="p">,</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/*C*/</span><span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/*C*/</span><span class="kt">Any</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  pairing
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Relationship between the Functors, captured as a function of the form: <code>forall a b c. f a -&gt; g b -&gt; (a -&gt; b -&gt; c) -&gt; c</code></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2132,7 +2200,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Annihilate the <code>F</code> and <code>G</code> effects effectively calling the wrapped function in <code>F</code> with the wrapped value</p>
+                        <p>Annihilate the <code>F</code> and <code>G</code> effects by calling the wrapped function in <code>F</code> with the wrapped value</p>
 
                       </div>
                       <div class="declaration">
@@ -2194,7 +2262,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Annilate the <code>F</code> and <code>G</code> effects by extracting the values in their contexts and using the combination function.</p>
 
                       </div>
                       <div class="declaration">
@@ -2204,6 +2272,53 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">gb</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An F-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  gb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A G-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function to combine the values in both contexts.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of annihilating both effectful values and combining them with the provided function.</p>
                       </div>
                     </section>
                   </div>
@@ -2221,7 +2336,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Explores the space given by one Functor, using the other as an explorer.</p>
 
                       </div>
                       <div class="declaration">
@@ -2231,6 +2346,41 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">select</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">ggb</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Explorer Functorial value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  ggb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Spact Functorial value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of the exploration.</p>
                       </div>
                     </section>
                   </div>
@@ -2248,7 +2398,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Annihilates the F and G effectful values with arguments flipped.</p>
 
                       </div>
                       <div class="declaration">
@@ -2258,6 +2408,53 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pairFlipped</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">ga</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  ga
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A G-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An F-effectful value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of annihilating both effectful values and combining them with the provided function.</p>
                       </div>
                     </section>
                   </div>
@@ -2275,7 +2472,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Pairing to use it for a StateT-StoreT pairing.</p>
 
                       </div>
                       <div class="declaration">
@@ -2285,6 +2482,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pairStateTStoreT</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/StateTPartial.html">StateTPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/StoreTPartial.html">StoreTPartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A pairing for StateT-StoreT where their base Monad and Comonad are paired with this pairing.</p>
                       </div>
                     </section>
                   </div>
@@ -2302,7 +2503,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Pairing to use it for a WriterT-TracedT pairing.</p>
 
                       </div>
                       <div class="declaration">
@@ -2312,6 +2513,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pairWriterTTracedT</span><span class="o">&lt;</span><span class="kt">W</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/WriterTPartial.html">WriterTPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/TracedTPartial.html">TracedTPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A pairing for WriterT-TracedT where their base Monad and Comonad are paired with this pairing.</p>
                       </div>
                     </section>
                   </div>
@@ -2329,7 +2534,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lifts this Pairing to use it for a ReaderT-EnvT pairing.</p>
 
                       </div>
                       <div class="declaration">
@@ -2339,6 +2544,10 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">pairReaderTEnvT</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow14ReaderTPartiala">ReaderTPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/EnvTPartial.html">EnvTPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A pairing for ReaderT-EnvT where their base Monad and Comonad are paired with this pairing.</p>
                       </div>
                     </section>
                   </div>
@@ -2367,7 +2576,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for Id-Id.</p>
 
                       </div>
                       <div class="declaration">
@@ -2377,6 +2586,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">pairId</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for Id-Id.</p>
                       </div>
                     </section>
                   </div>
@@ -2405,7 +2618,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for StateT-StoreT.</p>
 
                       </div>
                       <div class="declaration">
@@ -2415,6 +2628,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairStateTStoreT</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pairing</span><span class="p">:</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/StateTPartial.html">StateTPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/StoreTPartial.html">StoreTPartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/StateTPartial.html">StateTPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/StoreTPartial.html">StoreTPartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  pairing
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Pairing for the base Monad and Comonad in StateT-StoreT.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for StateT-StoreT using the provided Pairing to annihilate their internal base Monad and Comonad.</p>
                       </div>
                     </section>
                   </div>
@@ -2432,7 +2668,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for State-Store.</p>
 
                       </div>
                       <div class="declaration">
@@ -2442,6 +2678,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairStateStore</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow12StatePartiala">StatePartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow12StorePartiala">StorePartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/StateTPartial.html">StateTPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/StoreTPartial.html">StoreTPartial</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for State-Store.</p>
                       </div>
                     </section>
                   </div>
@@ -2470,7 +2710,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for WriterT-TracedT.</p>
 
                       </div>
                       <div class="declaration">
@@ -2480,6 +2720,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairWriterTTracedT</span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pairing</span><span class="p">:</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/WriterTPartial.html">WriterTPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/TracedTPartial.html">TracedTPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/WriterTPartial.html">WriterTPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/TracedTPartial.html">TracedTPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  pairing
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Pairing for the base Monad and Comonad in WriterT-TracedT.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for WriterT-TracedT using the provided Pairing to annihilate their internal base Monad and Comonad.</p>
                       </div>
                     </section>
                   </div>
@@ -2497,7 +2760,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for Writer-Traced.</p>
 
                       </div>
                       <div class="declaration">
@@ -2507,6 +2770,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairWriterTraced</span><span class="o">&lt;</span><span class="kt">W</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow13WriterPartiala">WriterPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow13TracedPartiala">TracedPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/WriterTPartial.html">WriterTPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">W</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/TracedTPartial.html">TracedTPartial</a></span><span class="o">&lt;</span><span class="kt">W</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for Writer-Traced.</p>
                       </div>
                     </section>
                   </div>
@@ -2535,7 +2802,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for ReaderT-EnvT.</p>
 
                       </div>
                       <div class="declaration">
@@ -2545,6 +2812,29 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairReaderTEnvT</span><span class="o">&lt;</span><span class="kt">R</span><span class="p">,</span> <span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">pairing</span><span class="p">:</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow14ReaderTPartiala">ReaderTPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/EnvTPartial.html">EnvTPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/KleisliPartial.html">KleisliPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/EnvTPartial.html">EnvTPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  pairing
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Pairing for the base Monad and Comonad in ReaderT-EnvT.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for ReaderT-EnvT using the provided Pairing to annihilate their internal base Monad and Comonad.</p>
                       </div>
                     </section>
                   </div>
@@ -2562,7 +2852,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for Reader-Env.</p>
 
                       </div>
                       <div class="declaration">
@@ -2572,6 +2862,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairReaderEnv</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow13ReaderPartiala">ReaderPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow10EnvPartiala">EnvPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/KleisliPartial.html">KleisliPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/EnvTPartial.html">EnvTPartial</a></span><span class="o">&lt;</span><span class="kt">R</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for Reader-Env.</p>
                       </div>
                     </section>
                   </div>
@@ -2600,7 +2894,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for Action-Moore.</p>
 
                       </div>
                       <div class="declaration">
@@ -2610,6 +2904,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairActionMoore</span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow13ActionPartiala">ActionPartial</a></span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/MoorePartial.html">MoorePartial</a></span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/CoTPartial.html">CoTPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/MoorePartial.html">MoorePartial</a></span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/MoorePartial.html">MoorePartial</a></span><span class="o">&lt;</span><span class="kt">I</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for Action-Moore.</p>
                       </div>
                     </section>
                   </div>
@@ -2638,7 +2936,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for CoSum-Sum.</p>
 
                       </div>
                       <div class="declaration">
@@ -2648,6 +2946,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairCoSumSum</span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow12CoSumPartiala">CoSumPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/CoTPartial.html">CoTPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="p">,</span> <span class="kt">GG</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span><span class="p">,</span> <span class="kt">GG</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for CoSum-Sum.</p>
                       </div>
                     </section>
                   </div>
@@ -2676,7 +2978,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for CoSumOpt-SumOpt.</p>
 
                       </div>
                       <div class="declaration">
@@ -2686,6 +2988,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">pairCoSumOptSumOpt</span><span class="o">&lt;</span><span class="kt">FF</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow15CoSumOptPartiala">CoSumOptPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow13SumOptPartiala">SumOptPartial</a></span><span class="o">&lt;</span><span class="kt">FF</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="o">==</span> <span class="kt"><a href="../Classes/CoTPartial.html">CoTPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">FF</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">G</span> <span class="o">==</span> <span class="kt"><a href="../Classes/SumPartial.html">SumPartial</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/ForId.html">ForId</a></span><span class="p">,</span> <span class="kt">FF</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">FF</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Comonad.html">Comonad</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for CoSumOpt-SumOpt.</p>
                       </div>
                     </section>
                   </div>
@@ -2714,7 +3020,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Provides a Pairing for Puller-Zipper.</p>
 
                       </div>
                       <div class="declaration">
@@ -2724,6 +3030,10 @@
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">pairPullerZipper</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pairing</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:3Bow9ForPullera">ForPuller</a></span><span class="p">,</span> <span class="kt"><a href="../Classes/ForZipper.html">ForZipper</a></span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Pairing for Puller-Zipper.</p>
                       </div>
                     </section>
                   </div>

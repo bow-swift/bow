@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 91% documented</span>
+          <span class="header-tag"> 93% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -5781,7 +5781,7 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Witness for the <code>Day&lt;F, G, A&gt;</code> data type. To be used in simulated Higher Kinded Types.</p>
 
                       </div>
                       <div class="declaration">
@@ -5808,7 +5808,7 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the Day type constructor, omitting the last parameter.</p>
 
                         <a href="Classes/DayPartial.html" class="slightly-smaller">See more</a>
                       </div>
@@ -5836,7 +5836,7 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Day convolution of two Functors. It can be seen as the suspended version of a Pairing between Functors F and G, applied to specific values.</p>
 
                         <a href="Classes/Day.html" class="slightly-smaller">See more</a>
                       </div>
@@ -6168,7 +6168,7 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Witness for the <code>Pairing&lt;F, G&gt;</code> data type. To be used in simulated Higher Kinded Types.</p>
 
                       </div>
                       <div class="declaration">
@@ -6195,7 +6195,7 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Partial application of the Pairing type constructor, omitting the last parameter.</p>
 
                       </div>
                       <div class="declaration">
@@ -6222,7 +6222,14 @@ In other words, an explorer for the state space given by W. It can also provide:
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The Pairing type represents a relationship between Functors F and G, where the sums in one can annihilate the products in the other.</p>
+
+<p>The internals of this type embed a function of the following shape:
+    <code>forall a b c. f a -&gt; g b -&gt; (a -&gt; b -&gt; c) -&gt; c</code>
+Or equivalently:
+    <code>forall a b. f (a -&gt; b) -&gt; g a -&gt; b</code></p>
+
+<p>Swift lacks universal quantifiers, so these types are replaced by <code>Any</code>.</p>
 
                         <a href="Classes/Pairing.html" class="slightly-smaller">See more</a>
                       </div>
