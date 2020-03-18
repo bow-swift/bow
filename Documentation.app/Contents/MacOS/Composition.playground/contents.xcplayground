@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='macos' display-mode='raw'>
+    <pages>
+        <page name='Overview'/>
+        <page name='Composing functions'/>
+        <page name='Combining values of the same type'/>
+        <page name='Transforming data'/>
+        <page name='Lifting values to an effect'/>
+        <page name='Combining independent computations'/>
+        <page name='Sequencing dependent computations'/>
+        <page name='Transforming multiple effects'/>
+    </pages>
+</playground>
