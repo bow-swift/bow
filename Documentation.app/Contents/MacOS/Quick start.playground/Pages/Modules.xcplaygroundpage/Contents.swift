@@ -23,7 +23,6 @@
  | Module | Description | Swift import |
  | ------ | ----------- | ------------ |
  | Optics | Immutable data structures manipulation. | `import BowOptics` |
- | BrightFutures | Integration with the BrightFutures library. | `import BowBrightFutures` |
  | RxSwift | Integration with the RxSwift library. | `import BowRx` |
 
  {:.advanced}
@@ -50,7 +49,6 @@
  | FreeGenerators | Generators for data types in BowFree | `import BowFreeGenerators` |
  | EffectsGenerators | Generators for data types in BowEffects | `import BowEffectsGenerators` |
  | RxGenerators | Generators for data types in BowRx | `import BowRxGenerators` |
- | BrightFuturesGenerators | Generators for data types in BowBrightFutures | `import BowBrightFuturesGenerators` |
  
  ## Laws to test instances of type classes
  
