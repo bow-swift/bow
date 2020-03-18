@@ -122,4 +122,42 @@ class PrismTest: XCTestCase {
             return (sumPrism + Setter<String, String>.identity).set(sum, def) == sumPrism.set(sum, def)
         }
     }
+    
+    enum Authentication: AutoPrism {
+        case unathorized(String)
+        case authorized(Int, String)
+        case requested(Int, info: String)
+        case unkown
+    }
+    
+    enum EnumLabeled: AutoPrism {
+        case labeled(label: String)
+        case labeled(anotherLabel: String)
+    }
+    
+    func testAutoDerivatePrism_WithoutAssociatedTypes() {
+        let prism = Authentication.prism(for: Authentication.unkown)
+        XCTAssertTrue(prism.getOption(.unkown).isDefined)
+    }
+    
+    func testAutoDerivatePrism_WithAssociatedTypes() {
+        let prism = Authentication.prism(for: Authentication.authorized)
+        let result = prism.getOption(.authorized(8, "information")).toOptional() ?? (0, "")
+        XCTAssertTrue(result == (8, "information"))
+    }
+    
+    func testAutoDerivatePrism_WithLabeledAssociatedTypes() {
+        let prism = Authentication.prism(for: Authentication.requested)
+        let result = prism.getOption(.requested(1, info: "information")).toOptional() ?? (0, "")
+        XCTAssertTrue(result == (1, "information"))
+    }
+    
+    func testAutoDerivatePrism_SameCaseName_DifferentLabeledAssociatedTypes() {
+        let labeledPrism = EnumLabeled.prism(for: EnumLabeled.labeled(label:))
+        let labelResult = labeledPrism.getOption(.labeled(label: "7")).toOptional()
+        let anotherLabelResult = labeledPrism.getOption(.labeled(anotherLabel: "7")).toOptional()
+        
+        XCTAssertEqual(labelResult, "7")
+        XCTAssertNil(anotherLabelResult)
+    }
 }
