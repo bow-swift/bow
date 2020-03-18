@@ -137,19 +137,19 @@ class PrismTest: XCTestCase {
     
     func testAutoDerivatePrism_WithoutAssociatedTypes() {
         let prism = Authentication.prism(for: Authentication.unkown)
-        XCTAssert(prism.getOption(.unkown).isDefined)
+        XCTAssertTrue(prism.getOption(.unkown).isDefined)
     }
     
     func testAutoDerivatePrism_WithAssociatedTypes() {
         let prism = Authentication.prism(for: Authentication.authorized)
         let result = prism.getOption(.authorized(8, "information")).toOptional() ?? (0, "")
-        XCTAssert(result == (8, "information"))
+        XCTAssertTrue(result == (8, "information"))
     }
     
     func testAutoDerivatePrism_WithLabeledAssociatedTypes() {
         let prism = Authentication.prism(for: Authentication.requested)
         let result = prism.getOption(.requested(1, info: "information")).toOptional() ?? (0, "")
-        XCTAssert(result == (1, "information"))
+        XCTAssertTrue(result == (1, "information"))
     }
     
     func testAutoDerivatePrism_SameCaseName_DifferentLabeledAssociatedTypes() {
