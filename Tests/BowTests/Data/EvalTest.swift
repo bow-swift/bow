@@ -4,30 +4,30 @@ import Bow
 
 class EvalTest: XCTestCase {
     func testFunctorLaws() {
-        FunctorLaws<ForEval>.check()
+        FunctorLaws<EvalPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForEval>.check()
+        ApplicativeLaws<EvalPartial>.check()
     }
     
     func testSelectiveLaws() {
-        SelectiveLaws<ForEval>.check()
+        SelectiveLaws<EvalPartial>.check()
     }
     
     func testMonadLaws() {
-        MonadLaws<ForEval>.check()
+        MonadLaws<EvalPartial>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForEval>.check()
+        ComonadLaws<EvalPartial>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForEval>.check()
+        BimonadLaws<EvalPartial>.check()
     }
     
     func testEquatableKLaws() {
-        EquatableKLaws<ForEval, Int>.check()
+        EquatableKLaws<EvalPartial, Int>.check()
     }
 }

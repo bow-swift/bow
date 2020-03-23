@@ -3,6 +3,9 @@ import Foundation
 /// Witness for the `SetK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForSetK {}
 
+/// Partial application of the SetK type constructor, omitting the last type parameter.
+public typealias SetKPartial = ForSetK
+
 /// Higher Kinded Type alias to improve readability over `Kind<ForSetK, A>`.
 public typealias SetKOf<A> = Kind<ForSetK, A>
 

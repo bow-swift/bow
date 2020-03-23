@@ -13,8 +13,8 @@ extension Option: Arbitrary where A: Arbitrary {
 
 // MARK: Instance of `ArbitraryK` for `Option`
 
-extension ForOption: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForOption, A> {
-        return Option.arbitrary.generate
+extension OptionPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> OptionOf<A> {
+        Option.arbitrary.generate
     }
 }

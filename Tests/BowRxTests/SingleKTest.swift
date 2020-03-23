@@ -5,26 +5,28 @@ import Bow
 import BowRxGenerators
 import BowEffectsLaws
 
-extension ForSingleK: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: Kind<ForSingleK, A>, _ rhs: Kind<ForSingleK, A>) -> Bool {
-        return SingleK.fix(lhs).value.blockingGet() == SingleK.fix(rhs).value.blockingGet()
+extension SingleKPartial: EquatableK {
+    public static func eq<A: Equatable>(
+        _ lhs: SingleKOf<A>,
+        _ rhs: SingleKOf<A>) -> Bool {
+        lhs^.value.blockingGet() == rhs^.value.blockingGet()
     }
 }
 
 class SingleKTest: XCTestCase {
     func testFunctorLaws() {
-        FunctorLaws<ForSingleK>.check()
+        FunctorLaws<SingleKPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForSingleK>.check()
+        ApplicativeLaws<SingleKPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForSingleK>.check()
+        SelectiveLaws<SingleKPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForSingleK>.check()
+        MonadLaws<SingleKPartial>.check()
     }
 }

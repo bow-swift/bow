@@ -2,11 +2,12 @@ import Foundation
 import Bow
 
 public final class ForNu {}
+public typealias NuPartial = ForNu
 public typealias NuOf<F> = Kind<ForNu, F>
 
 public class Nu<F>: NuOf<F> {
     public static func fix(_ value: NuOf<F>) -> Nu<F> {
-        return value as! Nu<F>
+        value as! Nu<F>
     }
     
     public let a: Any
@@ -23,23 +24,21 @@ public class Nu<F>: NuOf<F> {
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to Nu.
 public postfix func ^<F>(_ value: NuOf<F>) -> Nu<F> {
-    return Nu.fix(value)
+    Nu.fix(value)
 }
 
-extension ForNu: Recursive {
-    public static func projectT<F: Functor>(_ tf: Kind<ForNu, F>) -> Kind<F, Kind<ForNu, F>> {
-        let fix = Nu.fix(tf)
-        let unNu = fix.unNu
-        return F.map(unNu(fix.a), { x in Nu<F>(x, unNu) })
+extension NuPartial: Recursive {
+    public static func projectT<F: Functor>(_ tf: NuOf<F>) -> Kind<F, NuOf<F>> {
+        tf^.unNu(tf^.a).map { x in Nu<F>(x, tf^.unNu) }
     }
 }
 
-extension ForNu: Corecursive {
-    public static func embedT<F: Functor>(_ tf: Kind<F, Eval<Kind<ForNu, F>>>) -> Eval<Kind<ForNu, F>> {
-        return Eval.now(Nu<F>(tf, { f in
-            F.map(f, { nu in
-                F.map(projectT(nu.value()), Eval.now)
-            })
+extension NuPartial: Corecursive {
+    public static func embedT<F: Functor>(_ tf: Kind<F, Eval<NuOf<F>>>) -> Eval<NuOf<F>> {
+        .now(Nu<F>(tf, { f in
+            f.map { nu in
+                projectT(nu.value()).map(Eval.now)
+            }
         }))
     }
 }

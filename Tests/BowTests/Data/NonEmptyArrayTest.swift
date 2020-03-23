@@ -5,35 +5,35 @@ import Bow
 
 class NonEmptyArrayTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForNonEmptyArray, Int>.check()
+        EquatableKLaws<NonEmptyArrayPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForNonEmptyArray>.check()
+        FunctorLaws<NonEmptyArrayPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForNonEmptyArray>.check()
+        ApplicativeLaws<NonEmptyArrayPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForNonEmptyArray>.check()
+        SelectiveLaws<NonEmptyArrayPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForNonEmptyArray>.check()
+        MonadLaws<NonEmptyArrayPartial>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForNonEmptyArray>.check()
+        ComonadLaws<NonEmptyArrayPartial>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForNonEmptyArray>.check()
+        BimonadLaws<NonEmptyArrayPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForNonEmptyArray>.check()
+        TraverseLaws<NonEmptyArrayPartial>.check()
     }
     
     func testSemigroupLaws() {
@@ -41,7 +41,7 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForNonEmptyArray>.check()
+        SemigroupKLaws<NonEmptyArrayPartial>.check()
     }
     
     func testCustomStringConvertibleLaws() {
@@ -49,16 +49,16 @@ class NonEmptyArrayTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForNonEmptyArray>.check()
+        FoldableLaws<NonEmptyArrayPartial>.check()
     }
     
     func testConcatenation() {
         property("The length of the concatenation is equal to the sum of lenghts") <~ forAll { (a: NEA<Int>, b: NEA<Int>) in
-            return a.count + b.count == (a + b).count
+            a.count + b.count == (a + b).count
         }
         
         property("Adding one element increases length in one") <~ forAll { (nea: NEA<Int>, element: Int) in
-            return (nea + element).count == nea.count + 1
+            (nea + element).count == nea.count + 1
         }
         
         property("Result of concatenation contains all items from the original arrays") <~ forAll { (a: NEA<Int>, b: NEA<Int>) in

@@ -5,30 +5,32 @@ import Bow
 import BowRxGenerators
 import BowEffectsLaws
 
-extension ForMaybeK: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: Kind<ForMaybeK, A>, _ rhs: Kind<ForMaybeK, A>) -> Bool {
-        return MaybeK.fix(lhs).value.blockingGet() == MaybeK.fix(rhs).value.blockingGet()
+extension MaybeKPartial: EquatableK {
+    public static func eq<A: Equatable>(
+        _ lhs: MaybeKOf<A>,
+        _ rhs: MaybeKOf<A>) -> Bool {
+        lhs^.value.blockingGet() == rhs^.value.blockingGet()
     }
 }
 
 class MaybeKTest: XCTestCase {
     func testFunctorLaws() {
-        FunctorLaws<ForMaybeK>.check()
+        FunctorLaws<MaybeKPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForMaybeK>.check()
+        ApplicativeLaws<MaybeKPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForMaybeK>.check()
+        SelectiveLaws<MaybeKPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForMaybeK>.check()
+        MonadLaws<MaybeKPartial>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForMaybeK>.check()
+        FoldableLaws<MaybeKPartial>.check()
     }
 }

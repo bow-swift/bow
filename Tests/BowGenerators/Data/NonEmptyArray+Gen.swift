@@ -5,7 +5,7 @@ import SwiftCheck
 
 extension NonEmptyArray: Arbitrary where A: Arbitrary {
     public static var arbitrary: Gen<NonEmptyArray<A>> {
-        return Array.arbitrary
+        Array.arbitrary
             .suchThat { array in array.count > 0 }
             .map(NonEmptyArray.fromArrayUnsafe)
     }
@@ -13,8 +13,8 @@ extension NonEmptyArray: Arbitrary where A: Arbitrary {
 
 // MARK: Instance of `ArbitraryK` for `NonEmptyArray`
 
-extension ForNonEmptyArray: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForNonEmptyArray, A> {
-        return NonEmptyArray.arbitrary.generate
+extension NonEmptyArrayPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> NonEmptyArrayOf<A> {
+        NonEmptyArray.arbitrary.generate
     }
 }

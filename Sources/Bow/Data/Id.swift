@@ -3,6 +3,9 @@ import Foundation
 /// Witness for the `Id<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForId {}
 
+/// Partial application of the Id type constructor, omitting the last type parameter.
+public typealias IdPartial = ForId
+
 /// Higher Kinded Type alias to improve readability of `Kind<ForId, A>`.
 public typealias IdOf<A> = Kind<ForId, A>
 
@@ -16,7 +19,7 @@ public final class Id<A>: IdOf<A> {
     /// - Parameter fa: Value in the higher-kind form.
     /// - Returns: Value cast to `Id`.
     public static func fix(_ fa: IdOf<A>) -> Id<A> {
-        return fa as! Id<A>
+        fa as! Id<A>
     }
     
     /// Constructs a value of `Id`.
@@ -32,55 +35,54 @@ public final class Id<A>: IdOf<A> {
 /// - Parameter fa: Value in the higher-kind form.
 /// - Returns: Value cast to `Id`.
 public postfix func ^<A>(_ fa: IdOf<A>) -> Id<A> {
-    return Id.fix(fa)
+    Id.fix(fa)
 }
 
 // MARK: Conformance of `Id` to `CustomStringConvertible`.
 extension Id: CustomStringConvertible {
     public var description: String {
-        return "Id(\(value))"
+        "Id(\(value))"
     }
 }
 
 // MARK: Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
 extension Id: CustomDebugStringConvertible where A : CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "Id(\(value.debugDescription))"
+        "Id(\(value.debugDescription))"
     }
 }
 
 // MARK: Instance of `EquatableK` for `Id`
-extension ForId: EquatableK {
-    public static func eq<A>(_ lhs: Kind<ForId, A>, _ rhs: Kind<ForId, A>) -> Bool where A : Equatable {
-        return Id.fix(lhs).value == Id.fix(rhs).value
+extension IdPartial: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: IdOf<A>, _ rhs: IdOf<A>) -> Bool {
+        lhs^.value == rhs^.value
     }
 }
 
 // MARK: Instance of `Functor` for `Id`
-extension ForId: Functor {
-    public static func map<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> B) -> Kind<ForId, B> {
-        return Id(f(Id.fix(fa).value))
+extension IdPartial: Functor {
+    public static func map<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> B) -> IdOf<B> {
+        Id(f(fa^.value))
     }
 }
 
 // MARK: Instance of `Applicative` for `Id`
-extension ForId: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<ForId, A> {
-        return Id(a)
+extension IdPartial: Applicative {
+    public static func pure<A>(_ a: A) -> IdOf<A> {
+        Id(a)
     }
 }
 
 // MARK: Instance of `Selective` for `Id`
-extension ForId: Selective {}
+extension IdPartial: Selective {}
 
 // MARK: Instance of `Monad` for `Id`
-extension ForId: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<ForId, B>) -> Kind<ForId, B> {
-        let id = Id<A>.fix(fa)
-        return f(id.value)
+extension IdPartial: Monad {
+    public static func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
+        f(fa^.value)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForId, Either<A, B>>) -> Kind<ForId, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
         _tailRecM(a, f).run()
     }
     
@@ -94,50 +96,47 @@ extension ForId: Monad {
 }
 
 // MARK: Instance of `Comonad` for `Id`
-extension ForId: Comonad {
-    public static func coflatMap<A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (Kind<ForId, A>) -> B) -> Kind<ForId, B> {
-        return fa.map{ _ in f(fa) }
+extension IdPartial: Comonad {
+    public static func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
+        fa.map { a in f(Id(a)) }
     }
 
-    public static func extract<A>(_ fa: Kind<ForId, A>) -> A {
-        return Id.fix(fa).value
+    public static func extract<A>(_ fa: IdOf<A>) -> A {
+        fa^.value
     }
 }
 
 // MARK: Instance of `Bimonad` for `Id`
-extension ForId: Bimonad {}
+extension IdPartial: Bimonad {}
 
 // MARK: Instance of `Foldable` for `Id`
-extension ForId: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<ForId, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        let id = Id<A>.fix(fa)
-        return f(b, id.value)
+extension IdPartial: Foldable {
+    public static func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        f(b, fa^.value)
     }
 
-    public static func foldRight<A, B>(_ fa: Kind<ForId, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        let id = Id<A>.fix(fa)
-        return f(id.value, b)
+    public static func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        f(fa^.value, b)
     }
 }
 
 // MARK: Instance of `Traverse` for `Id`
-extension ForId: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForId, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForId, B>> {
-        let id = Id<A>.fix(fa)
-        return G.map(f(id.value), Id<B>.init)
+extension IdPartial: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, IdOf<B>> {
+        G.map(f(fa^.value), Id<B>.init)
     }
 }
 
 // MARK: Instance of `Semigroup` for `Id`
 extension Id: Semigroup where A: Semigroup {
     public func combine(_ other: Id<A>) -> Id<A> {
-        return Id(self.value.combine(other.value))
+        Id(self.value.combine(other.value))
     }
 }
 
 // MARK: Instance of `Monoid` for `Id`
 extension Id: Monoid where A: Monoid {
     public static func empty() -> Id<A> {
-        return Id(A.empty())
+        Id(A.empty())
     }
 }

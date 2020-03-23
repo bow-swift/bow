@@ -5,14 +5,14 @@ import SwiftCheck
 
 extension ArrayK: Arbitrary where A: Arbitrary {
     public static var arbitrary: Gen<ArrayK<A>> {
-        return Array.arbitrary.map(ArrayK.init)
+        Array.arbitrary.map(ArrayK.init)
     }
 }
 
 // MARK: Instance of `ArbitraryK` for `ArrayK`
 
-extension ForArrayK: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForArrayK, A> {
-        return ArrayK.arbitrary.generate
+extension ArrayKPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> ArrayKOf<A> {
+        ArrayK.arbitrary.generate
     }
 }

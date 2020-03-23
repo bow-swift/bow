@@ -1,8 +1,8 @@
 import Bow
 import SwiftCheck
 
-extension ForEval: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForEval, A> {
+extension EvalPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> EvalOf<A> {
         let nowGen = A.arbitrary.map(Eval.now)
         let laterGen = A.arbitrary.map { x in Eval.later { x } }
         let alwaysGen = A.arbitrary.map { x in Eval.always { x } }

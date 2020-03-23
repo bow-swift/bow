@@ -10,7 +10,7 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
         kleisliLeftIdentity()
         kleisliRightIdentity()
         flatMapCoherence()
-        if withStackSafety { #warning("All implementations should be stack safe, this is temporary")
+        if withStackSafety { 
             stackSafety()
         }
         monadComprehensions()

@@ -3,6 +3,9 @@ import Foundation
 /// Witness for the `ArrayK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForArrayK {}
 
+/// Partial application of the ArrayK type constructor, omitting the last type parameter.
+public typealias ArrayKPartial = ForArrayK
+
 /// Higher Kinded Type alias to improve readability over `Kind<ForArrayK, A>`
 public typealias ArrayKOf<A> = Kind<ForArrayK, A>
 
@@ -17,7 +20,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
     ///   - rhs: Right hand side of the concatenation.
     /// - Returns: An array that contains the elements of the two arrays in the order they appear in the original ones.
     public static func +(lhs: ArrayK<A>, rhs: ArrayK<A>) -> ArrayK<A> {
-        return ArrayK(lhs.array + rhs.array)
+        ArrayK(lhs.array + rhs.array)
     }
     
     /// Prepends an element to an array.
@@ -27,7 +30,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
     ///   - rhs: Array.
     /// - Returns: An array containing the prepended element at the head and the other array as the tail.
     public static func +(lhs: A, rhs: ArrayK<A>) -> ArrayK<A> {
-        return ArrayK(lhs) + rhs
+        ArrayK(lhs) + rhs
     }
     
     /// Appends an element to an array.
@@ -37,7 +40,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
     ///   - rhs: Element to append.
     /// - Returns: An array containing all elements of the first array and the appended element as the last element.
     public static func +(lhs: ArrayK<A>, rhs: A) -> ArrayK<A> {
-        return lhs + ArrayK(rhs)
+        lhs + ArrayK(rhs)
     }
 
     /// Safe downcast.
@@ -45,7 +48,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
     /// - Parameter fa: Value in the higher-kind form.
     /// - Returns: Value cast to ArrayK.
     public static func fix(_ fa: ArrayKOf<A>) -> ArrayK<A> {
-        return fa as! ArrayK<A>
+        fa as! ArrayK<A>
     }
 
     /// Initializes an `ArrayK`.
@@ -64,21 +67,21 @@ public final class ArrayK<A>: ArrayKOf<A> {
 
     /// Obtains the wrapped array.
     public var asArray: [A] {
-        return array
+        array
     }
 
     /// Obtains the first element of this array, or `Option.none` if it is empty.
     ///
     /// - Returns: An optional value containing the first element of the array, if present.
     public func firstOrNone() -> Option<A> {
-        return asArray.first.toOption()
+        asArray.first.toOption()
     }
 
     /// Obtains the last element of this array, or `Option.none` if it is empty.
     ///
     /// - Returns: An optional value containing the first element of the array, if present.
     public func lastOrNone() -> Option<A> {
-        return asArray.last.toOption()
+        asArray.last.toOption()
     }
     
     /// Obtains the element in the position passed as an argument, if any.
@@ -97,21 +100,21 @@ public final class ArrayK<A>: ArrayKOf<A> {
     ///
     /// - Parameter index: Index of the element to obtain.
     public subscript(index: Int) -> Option<A> {
-        return getOrNone(index)
+        getOrNone(index)
     }
     
     /// Drops the first element of this array.
     ///
     /// - Returns: A new array that contains all elements but the first.
     public func dropFirst() -> ArrayK<A> {
-        return ArrayK(Array(asArray.dropFirst()))
+        ArrayK(Array(asArray.dropFirst()))
     }
     
     /// Drops the last element of this array.
     ///
     /// - Returns: A new array that contains all elements but the last.
     public func dropLast() -> ArrayK<A> {
-        return ArrayK(Array(asArray.dropLast()))
+        ArrayK(Array(asArray.dropLast()))
     }
 }
 
@@ -120,7 +123,7 @@ public final class ArrayK<A>: ArrayKOf<A> {
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to ArrayK.
 public postfix func ^<A>(_ fa: ArrayKOf<A>) -> ArrayK<A> {
-    return ArrayK.fix(fa)
+    ArrayK.fix(fa)
 }
 
 // MARK: Convenience methods to convert to ArrayK
@@ -129,7 +132,7 @@ public extension Array {
     ///
     /// - Returns: An `ArrayK` wrapping this array.
     func k() -> ArrayK<Element> {
-        return ArrayK(self)
+        ArrayK(self)
     }
 }
 
@@ -150,34 +153,33 @@ extension ArrayK: CustomDebugStringConvertible where A: CustomDebugStringConvert
 }
 
 // MARK: Instance of `EquatableK` for `ArrayK`
-extension ForArrayK: EquatableK {
-    public static func eq<A>(_ lhs: Kind<ForArrayK, A>, _ rhs: Kind<ForArrayK, A>) -> Bool where A : Equatable {
-        return ArrayK.fix(lhs).array == ArrayK.fix(rhs).array
+extension ArrayKPartial: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: ArrayKOf<A>, _ rhs: ArrayKOf<A>) -> Bool {
+        lhs^.array == rhs^.array
     }
 }
 
 // MARK: Instance of `Functor` for `ArrayK`
-extension ForArrayK: Functor {
-    public static func map<A, B>(_ fa: Kind<ForArrayK, A>, _ f: @escaping (A) -> B) -> Kind<ForArrayK, B> {
-        return ArrayK(ArrayK.fix(fa).array.map(f))
+extension ArrayKPartial: Functor {
+    public static func map<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> B) -> ArrayKOf<B> {
+        ArrayK(fa^.array.map(f))
     }
 }
 
 // MARK: Instance of `Applicative` for `ArrayK`
-extension ForArrayK: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<ForArrayK, A> {
-        return ArrayK([a])
+extension ArrayKPartial: Applicative {
+    public static func pure<A>(_ a: A) -> ArrayKOf<A> {
+        ArrayK([a])
     }
 }
 
 // MARK: Instance of `Selective` for `ArrayK`
-extension ForArrayK: Selective {}
+extension ArrayKPartial: Selective {}
 
 // MARK: Instance of `Monad` for `ArrayK`
-extension ForArrayK: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<ForArrayK, A>, _ f: @escaping (A) -> Kind<ForArrayK, B>) -> Kind<ForArrayK, B> {
-        let fixed = ArrayK<A>.fix(fa)
-        return ArrayK<B>(fixed.array.flatMap({ a in ArrayK.fix(f(a)).array }))
+extension ArrayKPartial: Monad {
+    public static func flatMap<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
+        ArrayK<B>(fa^.array.flatMap { a in f(a)^.array })
     }
 
     private static func go<A, B>(_ buf: [B],
@@ -198,18 +200,18 @@ extension ForArrayK: Monad {
         }
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForArrayK, Either<A, B>>) -> Kind<ForArrayK, B> {
-        return ArrayK(go([], f, f(a)^).run())
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
+        ArrayK(go([], f, f(a)^).run())
     }
 }
 
 // MARK: Instance of `Foldable` for `ArrayK`
-extension ForArrayK: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<ForArrayK, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return ArrayK.fix(fa).array.reduce(b, f)
+extension ArrayKPartial: Foldable {
+    public static func foldLeft<A, B>(_ fa: ArrayKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        fa^.array.reduce(b, f)
     }
 
-    public static func foldRight<A, B>(_ fa: Kind<ForArrayK, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(_ fa: ArrayKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         func loop(_ lkw : ArrayK<A>) -> Eval<B> {
             if lkw.array.isEmpty {
                 return b
@@ -222,8 +224,8 @@ extension ForArrayK: Foldable {
 }
 
 // MARK: Instance of `Traverse` for `ArrayK`
-extension ForArrayK: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForArrayK, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForArrayK, B>> {
+extension ArrayKPartial: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, ArrayKOf<B>> {
         let x = foldRight(fa, Eval.always({ G.pure(ArrayK<B>([])) }),
                           { a, eval in G.map2Eval(f(a), eval, { x, y in ArrayK<B>([x]) + y }) }).value()
         return G.map(x, { a in a as ArrayKOf<B> })
@@ -231,42 +233,42 @@ extension ForArrayK: Traverse {
 }
 
 // MARK: Instance of `SemigroupK` for `ArrayK`
-extension ForArrayK: SemigroupK {
-    public static func combineK<A>(_ x: Kind<ForArrayK, A>, _ y: Kind<ForArrayK, A>) -> Kind<ForArrayK, A> {
-        return ArrayK.fix(x) + ArrayK.fix(y)
+extension ArrayKPartial: SemigroupK {
+    public static func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
+        x^ + y^
     }
 }
 
 // MARK: Instance of `MonoidK` for `ArrayK`
-extension ForArrayK: MonoidK {
-    public static func emptyK<A>() -> Kind<ForArrayK, A> {
-        return ArrayK([])
+extension ArrayKPartial: MonoidK {
+    public static func emptyK<A>() -> ArrayKOf<A> {
+        ArrayK([])
     }
 }
 
 // MARK: Instance of `FunctorFilter` for `ArrayK`
-extension ForArrayK: FunctorFilter {}
+extension ArrayKPartial: FunctorFilter {}
 
 // MARK: Instance of `MonadFilter` for `ArrayK`
-extension ForArrayK: MonadFilter {
-    public static func empty<A>() -> Kind<ForArrayK, A> {
-        return ArrayK([])
+extension ArrayKPartial: MonadFilter {
+    public static func empty<A>() -> ArrayKOf<A> {
+        ArrayK([])
     }
 }
 
 // MARK: Instance of `MonadCombine` for `ArrayK`
-extension ForArrayK: MonadCombine {}
+extension ArrayKPartial: MonadCombine {}
 
 // MARK: Instance of `Semigroup` for `ArrayK`
 extension ArrayK: Semigroup {
     public func combine(_ other: ArrayK<A>) -> ArrayK {
-        return self + other
+        self + other
     }
 }
 
 // MARK: Instance of `Monoid` for `ArrayK`
 extension ArrayK: Monoid {
     public static func empty() -> ArrayK {
-        return ArrayK([])
+        ArrayK([])
     }
 }

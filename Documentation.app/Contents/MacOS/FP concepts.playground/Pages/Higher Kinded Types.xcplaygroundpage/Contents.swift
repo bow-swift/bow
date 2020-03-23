@@ -121,17 +121,17 @@ class Xor<Left, Right>: XorOf<Left, Right> {}
 
  | Data type        | Witness          | Partial application | Type alias         |
  | ---------------- | ---------------- | ------------------- | ------------------ |
- | Function0&lt;A&gt;     | ForFunction0     |                     | Function0Of&lt;A&gt;     |
- | Function1<I, O>  | ForFunction1     | Function1Partial<I> | Function1Of<I, O>  |
- | ArrayK&lt;A&gt;        | ForArrayK        |                     | ArrayKOf&lt;A&gt;        |
- | Const<A, T>      | ForConst         | ConstPartial&lt;A&gt;     | ConstOf<A, T>      |
- | Either<L, R>     | ForEither        | EitherPartial<L>    | EitherOf<L, R>     |
- | Id&lt;A&gt;            | ForId            |                     | IdOf&lt;A&gt;            |
- | Ior<L, R>        | ForIor           | IorPartial<L>       | IorOf<L, R>        |
- | NonEmptyArray&lt;A&gt; | ForNonEmptyArray |                     | NonEmptyArrayOf&lt;A&gt; |
- | Option&lt;A&gt;        | ForOption        |                     | OptionOf&lt;A&gt;        |
- | Try&lt;A&gt;           | ForTry           |                     | TryOf&lt;A&gt;           |
- | Validated<E, A>  | ForValidated     | ValidatedPartial<E> | ValidatedOf<E, A>  |
+ | Function0&lt;A&gt; | ForFunction0 | Function0Partial | Function0Of&lt;A&gt; |
+ | Function1<I, O>  | ForFunction1 | Function1Partial<I> | Function1Of<I, O> |
+ | ArrayK&lt;A&gt; | ForArrayK | ArrayKPartial | ArrayKOf&lt;A&gt; |
+ | Const<A, T> | ForConst | ConstPartial&lt;A&gt; | ConstOf<A, T> |
+ | Either<L, R> | ForEither | EitherPartial<L> | EitherOf<L, R> |
+ | Id&lt;A&gt; | ForId | IdPartial | IdOf&lt;A&gt; |
+ | Ior<L, R> | ForIor | IorPartial<L> | IorOf<L, R> |
+ | NonEmptyArray&lt;A&gt; | ForNonEmptyArray | NonEmptyArrayPartial | NonEmptyArrayOf&lt;A&gt; |
+ | Option&lt;A&gt; | ForOption | OptionPartial | OptionOf&lt;A&gt; |
+ | Try&lt;A&gt; | ForTry | TryPartial | TryOf&lt;A&gt; |
+ | Validated<E, A> | ForValidated | ValidatedPartial<E> | ValidatedOf<E, A> |
 
  ### Casting and the ^ operator
 
@@ -141,14 +141,14 @@ class Xor<Left, Right>: XorOf<Left, Right> {}
  */
 extension Xor {
     static func fix(_ value: XorOf<Left, Right>) -> Xor<Left, Right> {
-        return value as! Xor<Left, Right>
+        value as! Xor<Left, Right>
     }
 }
 /*:
  To simplify things even further, Bow has introduced the `^` postfix operator, that calls `fix` to avoid boilerplate. In our example:
  */
 postfix func ^<A, B>(_ value: XorOf<A, B>) -> Xor<A, B> {
-    return Xor.fix(value)
+    Xor.fix(value)
 }
 /*:
  This operator can be used with any of the existing types in Bow and lets us chain method calls in a similar manner as we do with the `?.` operator. For instance, consider the `Either` type and its `map` combinator. `map` is defined to operate at the kind level, so an invocation to this combinator returns something of type `Kind`, instead of `Either`.

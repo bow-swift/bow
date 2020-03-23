@@ -5,23 +5,23 @@ import Bow
 
 class ArrayKTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForArrayK, Int>.check()
+        EquatableKLaws<ArrayKPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForArrayK>.check()
+        FunctorLaws<ArrayKPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForArrayK>.check()
+        ApplicativeLaws<ArrayKPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForArrayK>.check()
+        SelectiveLaws<ArrayKPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForArrayK>.check()
+        MonadLaws<ArrayKPartial>.check()
     }
     
     func testSemigroupLaws() {
@@ -29,7 +29,7 @@ class ArrayKTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForArrayK>.check()
+        SemigroupKLaws<ArrayKPartial>.check()
     }
     
     func testMonoidLaws() {
@@ -37,27 +37,27 @@ class ArrayKTest: XCTestCase {
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<ForArrayK>.check()
+        MonoidKLaws<ArrayKPartial>.check()
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForArrayK>.check()
+        FunctorFilterLaws<ArrayKPartial>.check()
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForArrayK>.check()
+        MonadFilterLaws<ArrayKPartial>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForArrayK>.check()
+        FoldableLaws<ArrayKPartial>.check()
     }
     
     func testMonadCombineLaws() {
-        MonadCombineLaws<ForArrayK>.check()
+        MonadCombineLaws<ArrayKPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForArrayK>.check()
+        TraverseLaws<ArrayKPartial>.check()
     }
     
     func testMonadComprehensions() {

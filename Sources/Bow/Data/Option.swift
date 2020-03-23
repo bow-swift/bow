@@ -3,6 +3,9 @@ import Foundation
 /// Witness for the `Option<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForOption {}
 
+/// Partial application of the Option type constructor, omitting the last type parameter.
+public typealias OptionPartial = ForOption
+
 /// Higher Kinded Type alias to improve readability of `Kind<ForOption, A>`.
 public typealias OptionOf<A> = Kind<ForOption, A>
 
@@ -11,12 +14,12 @@ public final class Option<A>: OptionOf<A> {
     private let value: A?
     /// Constructs an instance of `Option` with presence of a value of the type parameter.
     ///
-    /// It is an alias for `Option<A>.pure(_:)`
+    /// It equivalent to `Option<A>.pure(_:)`.
     ///
     /// - Parameter a: Value to be wrapped in an `Option`.
     /// - Returns: An option wrapping the value passed as an argument.
     public static func some(_ a: A) -> Option<A> {
-        return Option(a)
+        Option(a)
     }
 
     /// Constucts an instance of `Option` with absence of a value.
@@ -25,7 +28,7 @@ public final class Option<A>: OptionOf<A> {
     ///
     /// - Returns: An option with no present value
     public static func none() -> Option<A> {
-        return Option(nil)
+        Option(nil)
     }
 
     /// Converts a native Swift optional into a value of `Option<A>`.
@@ -33,7 +36,7 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter a: Optional value to be converted.
     /// - Returns: An Option with the same structure as the argument.
     public static func fromOptional(_ a: A?) -> Option<A> {
-        return Option(a)
+        Option(a)
     }
 
     private init(_ value: A?) {
@@ -45,12 +48,12 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter fa: Option in higher-kind form.
     /// - Returns: Value cast to Option.
     public static func fix(_ fa: OptionOf<A>) -> Option<A> {
-        return fa as! Option<A>
+        fa as! Option<A>
     }
 
     /// Checks if this option contains a value
     public var isDefined: Bool {
-        return !isEmpty
+        !isEmpty
     }
 
     /// Applies a function based on the presence or absence of a value.
@@ -68,8 +71,8 @@ public final class Option<A>: OptionOf<A> {
     ///
     /// - Parameter predicate: Boolean predicate to test the wrapped value.
     /// - Returns: This value if it does not match the predicate, or none otherwise.
-    public func filterNot(_ predicate: @escaping (A) -> Bool) -> Kind<ForOption, A> {
-        return filter(predicate >>> not)
+    public func filterNot(_ predicate: @escaping (A) -> Bool) -> OptionOf<A> {
+        filter(predicate >>> not)
     }
 
     /// Obtains the wrapped value, or a default value if absent.
@@ -77,7 +80,7 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter defaultValue: Value to be returned if this option is empty.
     /// - Returns: The value wrapped in this Option, if present, or the value provided as an argument, otherwise.
     public func getOrElse(_ defaultValue: A) -> A {
-        return getOrElse(constant(defaultValue))
+        getOrElse(constant(defaultValue))
     }
     
     /// Obtains the wrapped value, or a default value if absent.
@@ -85,7 +88,7 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter defaultValue: Closure to be evaluated if there is no wrapped value in this option.
     /// - Returns: The value wrapped in this Option, if present, or the result of running the closure provided as an argument, otherwise.
     public func getOrElse(_ defaultValue: () -> A) -> A {
-        return fold(defaultValue, id)
+        fold(defaultValue, id)
     }
 
     /// Obtains this option, or a default value if this option is empty.
@@ -93,7 +96,7 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter defaultValue: Default option value to be returned if this option is empty.
     /// - Returns: This option, if has a present value, or the value provided as an argument, otherwise.
     public func orElse(_ defaultValue: Option<A>) -> Option<A> {
-        return orElse(constant(defaultValue))
+        orElse(constant(defaultValue))
     }
 
     /// Obtains this option, or a default value if this option is empty.
@@ -101,26 +104,26 @@ public final class Option<A>: OptionOf<A> {
     /// - Parameter defaultValue: Closure returning an option for the empty case.
     /// - Returns: This option, if has a present value, or the result of running the closure provided as an argument, otherwise.
     public func orElse(_ defaultValue: () -> Option<A>) -> Option<A> {
-        return fold(defaultValue, Option.some)
+        fold(defaultValue, Option.some)
     }
 
     /// Converts this option into a native Swift optional `A?`.
     ///
     /// - Returns: A Swift Optional with the same structure as this value.
     public func toOptional() -> A? {
-        return fold(constant(nil), id)
+        fold(constant(nil), id)
     }
 
     /// Converts this option into an array.
     ///
     /// - Returns: An empty array if this value is absent, or a singleton array, if present.
     public func toArray() -> [A] {
-        return fold(constant([]), { a in [a] })
+        fold(constant([]), { a in [a] })
     }
     
     /// Converts this option into a native Swift optional `A?`
     public var orNil: A? {
-        return toOptional()
+        toOptional()
     }
 }
 
@@ -129,60 +132,57 @@ public final class Option<A>: OptionOf<A> {
 /// - Parameter fa: Option in higher-kind form.
 /// - Returns: Value cast to Option.
 public postfix func ^<A>(_ fa: OptionOf<A>) -> Option<A> {
-    return Option.fix(fa)
+    Option.fix(fa)
 }
 
 // MARK: Conformance of `Option` to `CustomStringConvertible`.
 extension Option: CustomStringConvertible {
     public var description: String {
-        return fold({ "None" },
-                    { a in "Some(\(a))" })
+        fold({ "None" },
+             { a in "Some(\(a))" })
     }
 }
 
 // MARK: Conformance of `Option` to `CustomDebugStringConvertible`.
 extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription : String {
-        return fold(constant("None"),
-                    { a in "Some(\(a.debugDescription))" })
+        fold(constant("None"),
+             { a in "Some(\(a.debugDescription))" })
     }
 }
 
 // MARK: Instance of `EquatableK` for `Option`.
-extension ForOption: EquatableK {
-    public static func eq<A>(_ lhs: Kind<ForOption, A>, _ rhs: Kind<ForOption, A>) -> Bool where A : Equatable {
-        let ol = Option.fix(lhs)
-        let or = Option.fix(rhs)
-        return ol.fold({ or.fold(constant(true), constant(false)) },
-                       { a in or.fold(constant(false), { b in a == b })})
+extension OptionPartial: EquatableK {
+    public static func eq<A: Equatable>(_ lhs: OptionOf<A>, _ rhs: OptionOf<A>) -> Bool {
+        lhs^.fold({ rhs^.fold(constant(true), constant(false)) },
+                  { a in rhs^.fold(constant(false), { b in a == b })})
     }
 }
 
 // MARK: Instance of `Functor` for `Option`.
-extension ForOption: Functor {
-    public static func map<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> B) -> Kind<ForOption, B> {
-        return Option.fix(fa).fold(Option.none, Option.some <<< f)
+extension OptionPartial: Functor {
+    public static func map<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> B) -> OptionOf<B> {
+        fa^.fold(Option.none, Option.some <<< f)
     }
 }
 
 // MARK: Instance of `Applicative` for `Option`.
-extension ForOption: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<ForOption, A> {
-        return Option.some(a)
+extension OptionPartial: Applicative {
+    public static func pure<A>(_ a: A) -> OptionOf<A> {
+        Option.some(a)
     }
 }
 
 // MARK: Instance of `Selective` for `Option`
-extension ForOption: Selective {}
+extension OptionPartial: Selective {}
 
 // MARK: Instance of `Monad` for `Option`.
-extension ForOption: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<ForOption, B>) -> Kind<ForOption, B> {
-        let option = Option.fix(fa)
-        return option.fold(Option<B>.none, f)
+extension OptionPartial: Monad {
+    public static func flatMap<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
+        fa^.fold(Option<B>.none, f)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForOption, Either<A, B>>) -> Kind<ForOption, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
         _tailRecM(a, f).run()
     }
     
@@ -198,100 +198,96 @@ extension ForOption: Monad {
 }
 
 // MARK: Instance of `ApplicativeError` for `Option`.
-extension ForOption: ApplicativeError {
+extension OptionPartial: ApplicativeError {
     public typealias E = Unit
 
-    public static func raiseError<A>(_ e: Unit) -> Kind<ForOption, A> {
-        return Option.none()
+    public static func raiseError<A>(_ e: Unit) -> OptionOf<A> {
+        Option.none()
     }
 
-    public static func handleErrorWith<A>(_ fa: Kind<ForOption, A>, _ f: @escaping (Unit) -> Kind<ForOption, A>) -> Kind<ForOption, A> {
-        return Option<A>.fix(fa).orElse(Option<A>.fix(f(unit)))
+    public static func handleErrorWith<A>(_ fa: OptionOf<A>, _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
+        fa^.orElse(f(unit)^)
     }
 }
 
 // MARK: Instance of `MonadError` for `Option`.
-extension ForOption: MonadError {}
+extension OptionPartial: MonadError {}
 
 // MARK: Instance of `FunctorFilter` for `Option`.
-extension ForOption: FunctorFilter {}
+extension OptionPartial: FunctorFilter {}
 
 // MARK: Instance of `MonadFilter` for `Option`.
-extension ForOption: MonadFilter {
-    public static func empty<A>() -> Kind<ForOption, A> {
-        return Option.none()
+extension OptionPartial: MonadFilter {
+    public static func empty<A>() -> OptionOf<A> {
+        Option.none()
     }
 }
 
 // MARK: Instance of `Foldable` for `Option`.
-extension ForOption: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<ForOption, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        let option = Option.fix(fa)
-        return option.fold({ b },
-                           { a in f(b, a) })
+extension OptionPartial: Foldable {
+    public static func foldLeft<A, B>(_ fa: OptionOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+        fa^.fold({ b },
+                 { a in f(b, a) })
     }
 
-    public static func foldRight<A, B>(_ fa: Kind<ForOption, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        let option = Option.fix(fa)
-        return option.fold(constant(b),
-                           { a in f(a, b) })
+    public static func foldRight<A, B>(_ fa: OptionOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        fa^.fold(constant(b),
+                 { a in f(a, b) })
     }
 }
 
 // MARK: Instance of `Traverse` for `Option`.
-extension ForOption: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<ForOption, B>> {
-        let option = Option.fix(fa)
-        return option.fold({ G.pure(Option<B>.none()) },
-                           { a in G.map(f(a), Option<B>.some)})
+extension OptionPartial: Traverse {
+    public static func traverse<G: Applicative, A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, OptionOf<B>> {
+        fa^.fold({ G.pure(Option<B>.none()) },
+                 { a in G.map(f(a), Option<B>.some)})
     }
 }
 
 // MARK: Instance of `TraverseFilter` for `Option`.
-extension ForOption: TraverseFilter {
-    public static func traverseFilter<A, B, G: Applicative>(_ fa: Kind<ForOption, A>, _ f: @escaping (A) -> Kind<G, Kind<ForOption, B>>) -> Kind<G, Kind<ForOption, B>> {
-        let option = Option.fix(fa)
-        return option.fold({ G.pure(Option<B>.none()) }, f)
+extension OptionPartial: TraverseFilter {
+    public static func traverseFilter<A, B, G: Applicative>(_ fa: OptionOf<A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, OptionOf<B>> {
+        fa^.fold({ G.pure(Option<B>.none()) }, f)
     }
 }
 
 // MARK: Instance of `SemigroupK` for `Option`
-extension ForOption: SemigroupK {
-    public static func combineK<A>(_ x: Kind<ForOption, A>, _ y: Kind<ForOption, A>) -> Kind<ForOption, A> {
-        return x^.fold(constant(y), Option.some)
+extension OptionPartial: SemigroupK {
+    public static func combineK<A>(_ x: OptionOf<A>, _ y: OptionOf<A>) -> OptionOf<A> {
+        x^.fold(constant(y), Option.some)
     }
 }
 
 // MARK: Instance of `MonoidK` for `Option`
-extension ForOption: MonoidK {
-    public static func emptyK<A>() -> Kind<ForOption, A> {
-        return Option.none()
+extension OptionPartial: MonoidK {
+    public static func emptyK<A>() -> OptionOf<A> {
+        Option.none()
     }
 }
 
 // MARK: Instance of `MonadCombine` for `Option`
-extension ForOption: MonadCombine {}
+extension OptionPartial: MonadCombine {}
 
 // MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
-        return self.fold(constant(other),
-                         { x in other.fold(constant(self),
-                                           { y in .some(x.combine(y)) })
+        self.fold(constant(other),
+                  { x in other.fold(constant(self),
+                                    { y in .some(x.combine(y)) })
         })
     }
 }
 
 // MARK: Instance of `Semigroupal` for `Option`,
-extension ForOption: Semigroupal {
-    public static func product<A, B>(_ a: Kind<ForOption, A>, _ b: Kind<ForOption, B>) -> Kind<ForOption, (A, B)> {
+extension OptionPartial: Semigroupal {
+    public static func product<A, B>(_ a: OptionOf<A>, _ b: OptionOf<B>) -> OptionOf<(A, B)> {
         ForOption.zip(a, b)
     }
 }
 
 // MARK: Instance of `Monoidal` for `Option`,
-extension ForOption: Monoidal {
-    public static func identity<A>() -> Kind<ForOption, A> {
+extension OptionPartial: Monoidal {
+    public static func identity<A>() -> OptionOf<A> {
         Option.none()
     }
 }
@@ -299,7 +295,7 @@ extension ForOption: Monoidal {
 // MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {
-        return Option.none()
+        .none()
     }
 }
 
@@ -312,7 +308,7 @@ extension Optional {
     ///
     /// - Returns: An Option value with the same structure as this value.
     public func toOption() -> Option<Wrapped> {
-        return Option<Wrapped>.fromOptional(self)
+        Option<Wrapped>.fromOptional(self)
     }
 
     /// Converts this Optional value into a `Bow.Option`.
@@ -321,14 +317,14 @@ extension Optional {
     ///
     /// - Returns: An Option value with the same structure as this value.
     public func k() -> Option<Wrapped> {
-        return toOption()
+        toOption()
     }
 }
 
 extension Collection {
     /// Obtains the first element of this collection or `Option.none`.
     public var firstOrNone: Option<Element> {
-        return self.first.toOption()
+        self.first.toOption()
     }
     
     /// Obtains the first element of this collection that matches a predicate.
@@ -336,12 +332,12 @@ extension Collection {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: First element that matches the predicate or `Option.none`.
     public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.first(where: predicate).toOption()
+        self.first(where: predicate).toOption()
     }
     
     /// Returns an element if it is the single one in this collection or `Option.none`
     public var singleOrNone: Option<Element> {
-        return self.count == 1 ? self.first.toOption() : .none()
+        self.count == 1 ? self.first.toOption() : .none()
     }
     
     /// Returns an element if it is the single one matching a predicate.
@@ -349,14 +345,14 @@ extension Collection {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: A value if it is the single one matching the predicate, or `Option.none`.
     public func singleOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.filter(predicate).singleOrNone
+        self.filter(predicate).singleOrNone
     }
 }
 
 extension Sequence {
     /// Obtains the first element of this sequence or `Option.none`.
     public var firstOrNone: Option<Element> {
-        return self.first(where: constant(true)).toOption()
+        self.first(where: constant(true)).toOption()
     }
     
     /// Obtains the first element of this sequence that matches a predicate.
@@ -364,14 +360,14 @@ extension Sequence {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: First element that matches the predicate or `Option.none`.
     public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.first(where: predicate).toOption()
+        self.first(where: predicate).toOption()
     }
 }
 
 extension BidirectionalCollection {
     /// Obtains the first element of this bidirectional collection or `Option.none`.
     public var firstOrNone: Option<Element> {
-        return self.first.toOption()
+        self.first.toOption()
     }
     
     /// Obtains the first element of this bidirectional collection that matches a predicate.
@@ -379,12 +375,12 @@ extension BidirectionalCollection {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: First element that matches the predicate or `Option.none`.
     public func firstOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.first(where: predicate).toOption()
+        self.first(where: predicate).toOption()
     }
     
     /// Obtains the last element of this bidirectional collection or `Option.none`.
     public var lastOrNone: Option<Element> {
-        return self.last.toOption()
+        self.last.toOption()
     }
     
     /// Obtains the last element of this bidirectional collection that matches a predicate.
@@ -392,12 +388,12 @@ extension BidirectionalCollection {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: Last element that matches the predicate or `Option.none`.
     public func lastOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.last(where: predicate).toOption()
+        self.last(where: predicate).toOption()
     }
     
     /// Returns an element if it is the single one in this collection or `Option.none`
     public var singleOrNone: Option<Element> {
-        return self.count == 1 ? self.first.toOption() : .none()
+        self.count == 1 ? self.first.toOption() : .none()
     }
     
     /// Returns an element if it is the single one matching a predicate.
@@ -405,6 +401,6 @@ extension BidirectionalCollection {
     /// - Parameter predicate: Filtering predicate.
     /// - Returns: A value if it is the single one matching the predicate, or `Option.none`.
     public func singleOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
-        return self.filter(predicate).singleOrNone
+        self.filter(predicate).singleOrNone
     }
 }

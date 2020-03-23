@@ -1,6 +1,9 @@
 /// Witness for the `Endo<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForEndo {}
 
+/// Partial application of the Endo type constructor, omitting the last type parameter.
+public typealias EndoPartial = ForEndo
+
 /// Higher Kinded Type alias to improve readability over `Kind<ForEndo, A>`.
 public typealias EndoOf<A> = Kind<ForEndo, A>
 

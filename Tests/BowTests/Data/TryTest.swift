@@ -4,23 +4,23 @@ import Bow
 
 class TryTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForTry, Int>.check()
+        EquatableKLaws<TryPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForTry>.check()
+        FunctorLaws<TryPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForTry>.check()
+        ApplicativeLaws<TryPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForTry>.check()
+        SelectiveLaws<TryPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForTry>.check()
+        MonadLaws<TryPartial>.check()
     }
     
     func testCustomStringConvertibleLaws() {
@@ -28,15 +28,15 @@ class TryTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForTry>.check()
+        FoldableLaws<TryPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForTry>.check()
+        TraverseLaws<TryPartial>.check()
     }
 
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForTry>.check()
+        FunctorFilterLaws<TryPartial>.check()
     }
 
     func testSemigroupLaws() {
