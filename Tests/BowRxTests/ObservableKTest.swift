@@ -5,34 +5,36 @@ import Bow
 import BowRxGenerators
 import BowEffectsLaws
 
-extension ForObservableK: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: Kind<ForObservableK, A>, _ rhs: Kind<ForObservableK, A>) -> Bool {
-        return ObservableK.fix(lhs).value.blockingGet() == ObservableK.fix(rhs).value.blockingGet()
+extension ObservableKPartial: EquatableK {
+    public static func eq<A: Equatable>(
+        _ lhs: ObservableKOf<A>,
+        _ rhs: ObservableKOf<A>) -> Bool {
+        lhs^.value.blockingGet() == rhs^.value.blockingGet()
     }
 }
 
 class ObservableKTest: XCTestCase {
     func testFunctorLaws() {
-        FunctorLaws<ForObservableK>.check()
+        FunctorLaws<ObservableKPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForObservableK>.check()
+        ApplicativeLaws<ObservableKPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForObservableK>.check()
+        SelectiveLaws<ObservableKPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForObservableK>.check()
+        MonadLaws<ObservableKPartial>.check()
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForObservableK>.check()
+        FoldableLaws<ObservableKPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForObservableK>.check()
+        TraverseLaws<ObservableKPartial>.check()
     }
 }
