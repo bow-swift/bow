@@ -4,27 +4,27 @@ import Bow
 
 class IdTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForId, Int>.check()
+        EquatableKLaws<IdPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForId>.check()
+        FunctorLaws<IdPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForId>.check()
+        ApplicativeLaws<IdPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForId>.check()
+        SelectiveLaws<IdPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForId>.check()
+        MonadLaws<IdPartial>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForId>.check()
+        ComonadLaws<IdPartial>.check()
     }
     
     func testCustomStringConvertibleLaws() {
@@ -32,15 +32,15 @@ class IdTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForId>.check()
+        FoldableLaws<IdPartial>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForId>.check()
+        BimonadLaws<IdPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForId>.check()
+        TraverseLaws<IdPartial>.check()
     }
     
     func testSemigroupLaws() {
