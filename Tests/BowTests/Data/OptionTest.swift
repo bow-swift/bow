@@ -5,23 +5,23 @@ import Bow
 
 class OptionTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForOption, Int>.check()
+        EquatableKLaws<OptionPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForOption>.check()
+        FunctorLaws<OptionPartial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForOption>.check()
+        ApplicativeLaws<OptionPartial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForOption>.check()
+        SelectiveLaws<OptionPartial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForOption>.check()
+        MonadLaws<OptionPartial>.check()
     }
     
     func testSemigroupLaws() {
@@ -33,19 +33,19 @@ class OptionTest: XCTestCase {
     }
     
     func testSemigroupKLaws() {
-        SemigroupKLaws<ForOption>.check()
+        SemigroupKLaws<OptionPartial>.check()
     }
     
     func testMonoidKLaws() {
-        MonoidKLaws<ForOption>.check()
+        MonoidKLaws<OptionPartial>.check()
     }
     
     func testFunctorFilterLaws() {
-        FunctorFilterLaws<ForOption>.check()
+        FunctorFilterLaws<OptionPartial>.check()
     }
     
     func testMonadFilterLaws() {
-        MonadFilterLaws<ForOption>.check()
+        MonadFilterLaws<OptionPartial>.check()
     }
     
     func testCustomStringConvertibleLaws() {
@@ -53,48 +53,48 @@ class OptionTest: XCTestCase {
     }
     
     func testFoldableLaws() {
-        FoldableLaws<ForOption>.check()
+        FoldableLaws<OptionPartial>.check()
     }
     
     func testTraverseLaws() {
-        TraverseLaws<ForOption>.check()
+        TraverseLaws<OptionPartial>.check()
     }
     
     func testTraverseFilterLaws() {
-        TraverseFilterLaws<ForOption>.check()
+        TraverseFilterLaws<OptionPartial>.check()
     }
     
     func testMonadCombineLaws() {
-        MonadCombineLaws<ForOption>.check()
+        MonadCombineLaws<OptionPartial>.check()
     }
 	
 	func testSemigroupalLaws() {
-        SemigroupalLaws<ForOption>.check(isEqual: isEqual(_:_:))
+        SemigroupalLaws<OptionPartial>.check(isEqual: isEqual(_:_:))
 	}
     
     func testMonoidalLaws() {
-        func isMonoidalEqual<A, B>(_ fa: Kind<ForOption, A>, _ fb: Kind<ForOption, B>) -> Bool {
+        func isMonoidalEqual<A, B>(_ fa: OptionOf<A>, _ fb: OptionOf<B>) -> Bool {
             fa.isEmpty && fb.isEmpty
         }
-        MonoidalLaws<ForOption>.check(isEqual: isMonoidalEqual)
+        MonoidalLaws<OptionPartial>.check(isEqual: isMonoidalEqual)
     }
     
     func testFromToOption() {
         property("fromOption - toOption isomorphism") <~ forAll { (x: Int?, option: Option<Int>) in
-            return Option.fromOptional(x).toOptional() == x &&
+            Option.fromOptional(x).toOptional() == x &&
                 Option.fromOptional(option.toOptional()) == option
         }
     }
     
     func testDefinedOrEmpty() {
         property("Option cannot be simultaneously empty and defined") <~ forAll { (option: Option<Int>) in
-            return xor(option.isEmpty, option.isDefined)
+            xor(option.isEmpty, option.isDefined)
         }
     }
     
     func testGetOrElse() {
         property("getOrElse consistent with orElse") <~ forAll { (option: Option<Int>, y: Int) in
-            return Option<Int>.pure(option.getOrElse(y)) == Option.fix(option).orElse(Option.some(y))
+            Option<Int>.pure(option.getOrElse(y)) == option.orElse(Option.some(y))
         }
     }
     
@@ -107,7 +107,7 @@ class OptionTest: XCTestCase {
     
     func testExistForAll() {
         property("exists and forall are equivalent") <~ forAll { (option: Option<Int>, predicate: ArrowOf<Int, Bool>) in
-            return option.exists(predicate.getArrow) == option.forall(predicate.getArrow) || option.isEmpty
+            option.exists(predicate.getArrow) == option.forall(predicate.getArrow) || option.isEmpty
         }
     }
 }
