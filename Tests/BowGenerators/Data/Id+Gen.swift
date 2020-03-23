@@ -5,14 +5,14 @@ import SwiftCheck
 
 extension Id: Arbitrary where A: Arbitrary {
     public static var arbitrary: Gen<Id<A>> {
-        return A.arbitrary.map(Id.init)
+        A.arbitrary.map(Id.init)
     }
 }
 
 // MARK: Instance of `ArbitraryK` for `Id`
 
-extension ForId: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForId, A> {
-        return Id.arbitrary.generate
+extension IdPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> IdOf<A> {
+        Id.arbitrary.generate
     }
 }
