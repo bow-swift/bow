@@ -280,7 +280,7 @@ extension Option: Semigroup where A: Semigroup {
 
 // MARK: Instance of `Semigroupal` for `Option`,
 extension OptionPartial: Semigroupal {
-    public static func product<A, B>(_ a: OptionOf<A>, _ b: Kind<ForOption, B>) -> OptionOf<(A, B)> {
+    public static func product<A, B>(_ a: OptionOf<A>, _ b: OptionOf<B>) -> OptionOf<(A, B)> {
         ForOption.zip(a, b)
     }
 }
