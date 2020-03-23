@@ -1,6 +1,9 @@
 /// Witness for the `Puller<A>` data type. To be used in simulated Higher Kinded Types.
 public typealias ForPuller = CoPartial<ForZipper>
 
+/// Partial application of the Puller type constructor, omitting the last type parameter.
+public typealias PullerPartial = ForPuller
+
 /// Higher Kinded Type alias to improve readability of `CoOf<ForZipper, A>`.
 public typealias PullerOf<A> = CoOf<ForZipper, A>
 
