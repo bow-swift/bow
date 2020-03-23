@@ -6,6 +6,9 @@ import BowEffects
 /// Witness for the `MaybeK<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForMaybeK {}
 
+/// Partial application of the MaybeK type constructor, omitting the last type parameter.
+public typealias MaybeKPartial = ForMaybeK
+
 /// Higher Kinded Type alias to improve readability over `Kind<ForMaybeK, A>`.
 public typealias MaybeKOf<A> = Kind<ForMaybeK, A>
 
@@ -14,7 +17,7 @@ public extension PrimitiveSequence where Trait == MaybeTrait {
     ///
     /// - Returns: A `MaybeK` wrapping this object.
     func k() -> MaybeK<Element> {
-        return MaybeK(self)
+        MaybeK(self)
     }
 }
 
@@ -28,14 +31,14 @@ public final class MaybeK<A>: MaybeKOf<A> {
     /// - Parameter value: Value in the higher-kind form.
     /// - Returns: Value cast to MaybeK.
     public static func fix(_ value: MaybeKOf<A>) -> MaybeK<A> {
-        return value as! MaybeK<A>
+        value as! MaybeK<A>
     }
 
     /// Provides an empty `MaybeK`.
     ///
     /// - Returns: A `MaybeK` that does not provide any value.
     public static func empty() -> MaybeK<A> {
-        return Maybe.empty().k()
+        Maybe.empty().k()
     }
     
     /// Creates a `MaybeK` from the result of evaluating a function, suspending its execution.
@@ -43,7 +46,7 @@ public final class MaybeK<A>: MaybeKOf<A> {
     /// - Parameter f: Function providing the value to be provided in the underlying `Maybe`.
     /// - Returns: A `MaybeK` that provides the value obtained from the closure.
     public static func from(_ f: @escaping () throws -> A) -> MaybeK<A> {
-        return ForMaybeK.defer {
+        ForMaybeK.defer {
             do {
                 return pure(try f())
             } catch {
@@ -57,7 +60,7 @@ public final class MaybeK<A>: MaybeKOf<A> {
     /// - Parameter f: Function providing the value to be provided by the underlying `Maybe`.
     /// - Returns: A `MaybeK` that provides the value obtained from the closure.
     public static func invoke(_ f: @escaping () throws -> MaybeKOf<A>) -> MaybeK<A> {
-        return ForMaybeK.defer {
+        ForMaybeK.defer {
             do {
                 return try f()
             } catch {
@@ -93,33 +96,39 @@ public final class MaybeK<A>: MaybeKOf<A> {
 /// - Parameter value: Value in higher-kind form.
 /// - Returns: Value cast to MaybeK.
 public postfix func ^<A>(_ value: MaybeKOf<A>) -> MaybeK<A> {
-    return MaybeK.fix(value)
+    MaybeK.fix(value)
 }
 
 // MARK: Instance of `Functor` for `MaybeK`
-extension ForMaybeK: Functor {
-    public static func map<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> B) -> Kind<ForMaybeK, B> {
-        return MaybeK.fix(fa).value.map(f).k()
+extension MaybeKPartial: Functor {
+    public static func map<A, B>(
+        _ fa: MaybeKOf<A>,
+        _ f: @escaping (A) -> B) -> MaybeKOf<B> {
+        fa^.value.map(f).k()
     }
 }
 
 // MARK: Instance of `Applicative` for `MaybeK`
-extension ForMaybeK: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<ForMaybeK, A> {
-        return Maybe.just(a).k()
+extension MaybeKPartial: Applicative {
+    public static func pure<A>(_ a: A) -> MaybeKOf<A> {
+        Maybe.just(a).k()
     }
 }
 
 // MARK: Instance of `Selective` for `MaybeK`
-extension ForMaybeK: Selective {}
+extension MaybeKPartial: Selective {}
 
 // MARK: Instance of `Monad` for `MaybeK`
-extension ForMaybeK: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (A) -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
-        return MaybeK.fix(fa).value.flatMap { a in MaybeK<B>.fix(f(a)).value }.k()
+extension MaybeKPartial: Monad {
+    public static func flatMap<A, B>(
+        _ fa: MaybeKOf<A>,
+        _ f: @escaping (A) -> MaybeKOf<B>) -> MaybeKOf<B> {
+        fa^.value.flatMap { a in f(a)^.value }.k()
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ForMaybeK, Either<A, B>>) -> Kind<ForMaybeK, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> MaybeKOf<Either<A, B>>) -> MaybeKOf<B> {
         _tailRecM(a, f).run()
     }
     
@@ -127,50 +136,58 @@ extension ForMaybeK: Monad {
         .defer {
             let either = f(a)^.value.blockingGet()!
             return either.fold({ a in _tailRecM(a, f) },
-                               { b in .done(Maybe.just(b).k()) })
+                        { b in .done(Maybe.just(b).k()) })
         }
     }
 }
 
 // MARK: Instance of `Foldable` for `MaybeK`
-extension ForMaybeK: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<ForMaybeK, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
-        return MaybeK.fix(fa).fold(constant(b), { a in f(b, a) })
+extension MaybeKPartial: Foldable {
+    public static func foldLeft<A, B>(
+        _ fa: MaybeKOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
+        fa^.fold(constant(b), { a in f(b, a) })
     }
 
-    public static func foldRight<A, B>(_ fa: Kind<ForMaybeK, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Eval.defer { MaybeK.fix(fa).fold(constant(b), { a in f(a, b) }) }
+    public static func foldRight<A, B>(
+        _ fa: MaybeKOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        Eval.defer { fa^.fold(constant(b), { a in f(a, b) }) }
     }
 }
 
 // MARK: Instance of `ApplicativeError` for `MaybeK`
-extension ForMaybeK: ApplicativeError {
+extension MaybeKPartial: ApplicativeError {
     public typealias E = Error
 
-    public static func raiseError<A>(_ e: Error) -> Kind<ForMaybeK, A> {
-        return Maybe.error(e).k()
+    public static func raiseError<A>(_ e: Error) -> MaybeKOf<A> {
+        Maybe.error(e).k()
     }
 
-    public static func handleErrorWith<A>(_ fa: Kind<ForMaybeK, A>, _ f: @escaping (Error) -> Kind<ForMaybeK, A>) -> Kind<ForMaybeK, A> {
-        return MaybeK.fix(fa).value.catchError { e in MaybeK.fix(f(e)).value }.k()
+    public static func handleErrorWith<A>(
+        _ fa: MaybeKOf<A>,
+        _ f: @escaping (Error) -> MaybeKOf<A>) -> MaybeKOf<A> {
+        fa^.value.catchError { e in f(e)^.value }.k()
     }
 }
 
 // MARK: Instance of `MonadError` for `MaybeK`
-extension ForMaybeK: MonadError {}
+extension MaybeKPartial: MonadError {}
 
 // MARK: Instance of `MonadDefer` for `MaybeK`
-extension ForMaybeK: MonadDefer {
-    public static func `defer`<A>(_ fa: @escaping () -> Kind<ForMaybeK, A>) -> Kind<ForMaybeK, A> {
-        return Maybe.deferred { fa()^.value }.k()
+extension MaybeKPartial: MonadDefer {
+    public static func `defer`<A>(_ fa: @escaping () -> MaybeKOf<A>) -> MaybeKOf<A> {
+        Maybe.deferred { fa()^.value }.k()
     }
 }
 
 // MARK: Instance of `Async` for `MaybeK`
-extension ForMaybeK: Async {
-    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> ()) -> Kind<ForMaybeK, ()>) -> Kind<ForMaybeK, A> {
-        return Maybe<A>.create { emitter in
-            return procf { either in
+extension MaybeKPartial: Async {
+    public static func asyncF<A>(_ procf: @escaping (@escaping (Either<Error, A>) -> Void) -> MaybeKOf<Void>) -> MaybeKOf<A> {
+        Maybe<A>.create { emitter in
+            procf { either in
                 either.fold(
                     { error in emitter(.error(error)) },
                     { value in emitter(.success(value)) })
@@ -178,12 +195,14 @@ extension ForMaybeK: Async {
         }.k()
     }
     
-    public static func continueOn<A>(_ fa: Kind<ForMaybeK, A>, _ queue: DispatchQueue) -> Kind<ForMaybeK, A> {
-        return fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
+    public static func continueOn<A>(
+        _ fa: MaybeKOf<A>,
+        _ queue: DispatchQueue) -> MaybeKOf<A> {
+        fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
     
-    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> ()) throws -> ()) -> Kind<ForMaybeK, A> {
-        return Maybe.create { emitter in
+    public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Void) throws -> ()) -> MaybeKOf<A> {
+        Maybe.create { emitter in
             do {
                 try fa { either in
                     either.fold({ e in emitter(.error(e)) },
@@ -196,38 +215,49 @@ extension ForMaybeK: Async {
 }
 
 // MARK: Instance of `Effect` for `MaybeK`
-extension ForMaybeK: Effect {
-    public static func runAsync<A>(_ fa: Kind<ForMaybeK, A>, _ callback: @escaping (Either<ForMaybeK.E, A>) -> Kind<ForMaybeK, ()>) -> Kind<ForMaybeK, ()> {
-        return fa^.value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
+extension MaybeKPartial: Effect {
+    public static func runAsync<A>(
+        _ fa: MaybeKOf<A>,
+        _ callback: @escaping (Either<ForMaybeK.E, A>) -> MaybeKOf<Void>) -> MaybeKOf<Void> {
+        fa^.value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
             .catchError { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
     }
 }
 
 // MARK: Instance of `Concurrent` for `MaybeK`
-extension ForMaybeK: Concurrent {
-    public static func race<A, B>(_ fa: Kind<ForMaybeK, A>, _ fb: Kind<ForMaybeK, B>) -> Kind<ForMaybeK, Either<A, B>> {
+extension MaybeKPartial: Concurrent {
+    public static func race<A, B>(
+        _ fa: MaybeKOf<A>,
+        _ fb: MaybeKOf<B>) -> MaybeKOf<Either<A, B>> {
         let left = fa.map(Either<A, B>.left)^.value.asObservable()
         let right = fb.map(Either<A, B>.right)^.value.asObservable()
         return left.amb(right).asMaybe().k()
     }
     
-    public static func parMap<A, B, Z>(_ fa: Kind<ForMaybeK, A>, _ fb: Kind<ForMaybeK, B>, _ f: @escaping (A, B) -> Z) -> Kind<ForMaybeK, Z> {
-        return Maybe.zip(fa^.value, fb^.value, resultSelector: f).k()
+    public static func parMap<A, B, Z>(
+        _ fa: MaybeKOf<A>,
+        _ fb: MaybeKOf<B>,
+        _ f: @escaping (A, B) -> Z) -> MaybeKOf<Z> {
+        Maybe.zip(fa^.value, fb^.value, resultSelector: f).k()
     }
     
-    public static func parMap<A, B, C, Z>(_ fa: Kind<ForMaybeK, A>, _ fb: Kind<ForMaybeK, B>, _ fc: Kind<ForMaybeK, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<ForMaybeK, Z> {
-        return Maybe.zip(fa^.value, fb^.value, fc^.value, resultSelector: f).k()
+    public static func parMap<A, B, C, Z>(
+        _ fa: MaybeKOf<A>,
+        _ fb: MaybeKOf<B>,
+        _ fc: MaybeKOf<C>,
+        _ f: @escaping (A, B, C) -> Z) -> MaybeKOf<Z> {
+        Maybe.zip(fa^.value, fb^.value, fc^.value, resultSelector: f).k()
     }
 }
 
 // MARK: Instance of `Bracket` for `MaybeK`
-extension ForMaybeK: Bracket {
+extension MaybeKPartial: Bracket {
     public static func bracketCase<A, B>(
-        acquire fa: Kind<ForMaybeK, A>,
-        release: @escaping (A, ExitCase<Error>) -> Kind<ForMaybeK, ()>,
-        use: @escaping (A) throws -> Kind<ForMaybeK, B>) -> Kind<ForMaybeK, B> {
-        return Maybe.create { emitter in
-            return fa.handleErrorWith { t in MaybeK.from { emitter(.error(t)) }.value.flatMap { Maybe.error(t) }.k() }
+        acquire fa: MaybeKOf<A>,
+        release: @escaping (A, ExitCase<Error>) -> MaybeKOf<Void>,
+        use: @escaping (A) throws -> MaybeKOf<B>) -> MaybeKOf<B> {
+        Maybe.create { emitter in
+            fa.handleErrorWith { t in MaybeK.from { emitter(.error(t)) }.value.flatMap { Maybe.error(t) }.k() }
                 .flatMap { a in
                     MaybeK.invoke { try use(a)^ }^
                     .value
