@@ -95,9 +95,9 @@ func nextTalk(at conference: Conference) -> Option<Talk>
 /*:
  Both functions are Kleisli functions, as their result are effectful, with Option being the effect. We can compose them into a function that provides the next Talk after a certain date, if it exists:
  */
-// Kleisli<ForOption, Date, Talk> is equivalent to a function:
+// Kleisli<OptionPartial, Date, Talk> is equivalent to a function:
 // (Date) -> Option<Talk>
-let nextTalkAfterDate: Kleisli<ForOption, Date, Talk> = Kleisli(nextConference(after:))
+let nextTalkAfterDate: Kleisli<OptionPartial, Date, Talk> = Kleisli(nextConference(after:))
     .andThen(Kleisli(nextTalk(at:)))
 /*:
  And we can invoke this function as:
