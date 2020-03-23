@@ -1,6 +1,9 @@
 /// Witness for the `Zipper<A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForZipper {}
 
+/// Partial application of the Zipper type constructor, omitting the last type parameter.
+public typealias ZipperPartial = ForZipper
+
 /// Higher Kinded Type alias to improve readability over `Kind<ForZipper, A>`
 public typealias ZipperOf<A> = Kind<ForZipper, A>
 
@@ -137,7 +140,7 @@ extension Zipper: CustomStringConvertible where A: CustomStringConvertible {
 
 // MARK: Instance of `EquatableK` for `Zipper`
 
-extension ForZipper: EquatableK {
+extension ZipperPartial: EquatableK {
     public static func eq<A: Equatable>(_ lhs: ZipperOf<A>, _ rhs: ZipperOf<A>) -> Bool {
         lhs^.left == rhs^.left &&
             lhs^.focus == rhs^.focus &&
@@ -147,11 +150,11 @@ extension ForZipper: EquatableK {
 
 // MARK: Instance of `Invariant` for `Zipper`
 
-extension ForZipper: Invariant {}
+extension ZipperPartial: Invariant {}
 
 // MARK: Instance of `Functor` for `Zipper`
 
-extension ForZipper: Functor {
+extension ZipperPartial: Functor {
     public static func map<A, B>(_ fa: ZipperOf<A>, _ f: @escaping (A) -> B) -> ZipperOf<B> {
         Zipper(left: fa^.left.map(f), focus: f(fa^.focus), right: fa^.right.map(f))
     }
@@ -159,7 +162,7 @@ extension ForZipper: Functor {
 
 // MARK: Instance of `Comonad` for `Zipper`
 
-extension ForZipper: Comonad {
+extension ZipperPartial: Comonad {
     public static func coflatMap<A, B>(_ fa: ZipperOf<A>, _ f: @escaping (ZipperOf<A>) -> B) -> ZipperOf<B> {
         let array = fa^.asArray()
         let newLeft: [B] = fa^.left.enumerated().map { item in
