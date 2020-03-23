@@ -7,14 +7,14 @@ import SwiftCheck
 
 extension ObservableK: Arbitrary where A: Arbitrary {
     public static var arbitrary: Gen<ObservableK<A>> {
-        return A.arbitrary.map { x in ObservableK.pure(x)^ }
+        A.arbitrary.map { x in ObservableK.pure(x)^ }
     }
 }
 
 // MARK: Instance of `ArbitraryK` for `ObservableK`
 
-extension ForObservableK: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForObservableK, A> {
-        return ObservableK.arbitrary.generate
+extension ObservableKPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> ObservableKOf<A> {
+        ObservableK.arbitrary.generate
     }
 }
