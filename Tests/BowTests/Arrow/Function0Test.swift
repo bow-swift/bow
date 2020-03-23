@@ -4,31 +4,31 @@ import Bow
 
 class Function0Test: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForFunction0, Int>.check()
+        EquatableKLaws<Function0Partial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForFunction0>.check()
+        FunctorLaws<Function0Partial>.check()
     }
     
     func testApplicativeLaws() {
-        ApplicativeLaws<ForFunction0>.check()
+        ApplicativeLaws<Function0Partial>.check()
     }
 
     func testSelectiveLaws() {
-        SelectiveLaws<ForFunction0>.check()
+        SelectiveLaws<Function0Partial>.check()
     }
 
     func testMonadLaws() {
-        MonadLaws<ForFunction0>.check()
+        MonadLaws<Function0Partial>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForFunction0>.check()
+        ComonadLaws<Function0Partial>.check()
     }
     
     func testBimonadLaws() {
-        BimonadLaws<ForFunction0>.check()
+        BimonadLaws<Function0Partial>.check()
     }
     
     func testSemigroupLaws() {
