@@ -5,15 +5,15 @@ import Bow
 
 class ZipperTest: XCTestCase {
     func testEquatableLaws() {
-        EquatableKLaws<ForZipper, Int>.check()
+        EquatableKLaws<ZipperPartial, Int>.check()
     }
     
     func testFunctorLaws() {
-        FunctorLaws<ForZipper>.check()
+        FunctorLaws<ZipperPartial>.check()
     }
     
     func testComonadLaws() {
-        ComonadLaws<ForZipper>.check()
+        ComonadLaws<ZipperPartial>.check()
     }
     
     let nonEmptyArrayGen = [Int].arbitrary.suchThat { x in x.count > 0 }
