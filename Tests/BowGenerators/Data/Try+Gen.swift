@@ -13,8 +13,8 @@ extension Try: Arbitrary where A: Arbitrary {
 
 // MARK: Instance of `ArbitraryK` for `Try`
 
-extension ForTry: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<ForTry, A> {
-        return Try.arbitrary.generate
+extension TryPartial: ArbitraryK {
+    public static func generate<A: Arbitrary>() -> TryOf<A> {
+        Try.arbitrary.generate
     }
 }
