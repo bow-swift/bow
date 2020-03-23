@@ -111,7 +111,7 @@ extension IdPartial: Bimonad {}
 
 // MARK: Instance of `Foldable` for `Id`
 extension IdPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<ForId, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
         f(b, fa^.value)
     }
 
