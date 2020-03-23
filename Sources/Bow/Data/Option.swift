@@ -71,7 +71,7 @@ public final class Option<A>: OptionOf<A> {
     ///
     /// - Parameter predicate: Boolean predicate to test the wrapped value.
     /// - Returns: This value if it does not match the predicate, or none otherwise.
-    public func filterNot(_ predicate: @escaping (A) -> Bool) -> Kind<ForOption, A> {
+    public func filterNot(_ predicate: @escaping (A) -> Bool) -> OptionOf<A> {
         filter(predicate >>> not)
     }
 
