@@ -616,7 +616,7 @@
     <tr>
       <td>Function0&lt;A&gt;</td>
       <td>ForFunction0</td>
-      <td> </td>
+      <td>Function0Partial</td>
       <td>Function0Of&lt;A&gt;</td>
     </tr>
     <tr>
@@ -628,7 +628,7 @@
     <tr>
       <td>ArrayK&lt;A&gt;</td>
       <td>ForArrayK</td>
-      <td> </td>
+      <td>ArrayKPartial</td>
       <td>ArrayKOf&lt;A&gt;</td>
     </tr>
     <tr>
@@ -646,7 +646,7 @@
     <tr>
       <td>Id&lt;A&gt;</td>
       <td>ForId</td>
-      <td> </td>
+      <td>IdPartial</td>
       <td>IdOf&lt;A&gt;</td>
     </tr>
     <tr>
@@ -658,19 +658,19 @@
     <tr>
       <td>NonEmptyArray&lt;A&gt;</td>
       <td>ForNonEmptyArray</td>
-      <td> </td>
+      <td>NonEmptyArrayPartial</td>
       <td>NonEmptyArrayOf&lt;A&gt;</td>
     </tr>
     <tr>
       <td>Option&lt;A&gt;</td>
       <td>ForOption</td>
-      <td> </td>
+      <td>OptionPartial</td>
       <td>OptionOf&lt;A&gt;</td>
     </tr>
     <tr>
       <td>Try&lt;A&gt;</td>
       <td>ForTry</td>
-      <td> </td>
+      <td>TryPartial</td>
       <td>TryOf&lt;A&gt;</td>
     </tr>
     <tr>
@@ -690,7 +690,7 @@
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Xor</span> <span class="p">{</span>
     <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">XorOf</span><span class="o">&lt;</span><span class="kt">Left</span><span class="p">,</span> <span class="kt">Right</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Xor</span><span class="o">&lt;</span><span class="kt">Left</span><span class="p">,</span> <span class="kt">Right</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">value</span> <span class="k">as!</span> <span class="kt">Xor</span><span class="o">&lt;</span><span class="kt">Left</span><span class="p">,</span> <span class="kt">Right</span><span class="o">&gt;</span>
+        <span class="n">value</span> <span class="k">as!</span> <span class="kt">Xor</span><span class="o">&lt;</span><span class="kt">Left</span><span class="p">,</span> <span class="kt">Right</span><span class="o">&gt;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -698,7 +698,7 @@
 <p>To simplify things even further, Bow has introduced the <code class="highlighter-rouge">^</code> postfix operator, that calls <code class="highlighter-rouge">fix</code> to avoid boilerplate. In our example:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">postfix</span> <span class="kd">func</span> <span class="o">^&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">XorOf</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Xor</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="kt">Xor</span><span class="o">.</span><span class="nf">fix</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="kt">Xor</span><span class="o">.</span><span class="nf">fix</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
 

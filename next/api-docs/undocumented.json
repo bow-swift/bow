@@ -9,7 +9,7 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/NonEmptyArray.swift",
-      "line": 268,
+      "line": 269,
       "symbol": "NEA.traverse(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -51,21 +51,21 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 9,
+      "line": 12,
       "symbol": "Zipper.left",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 10,
+      "line": 13,
       "symbol": "Zipper.focus",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/Zipper.swift",
-      "line": 11,
+      "line": 14,
       "symbol": "Zipper.right",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1319,63 +1319,70 @@
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
       "line": 5,
+      "symbol": "FixPartial",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
+      "line": 6,
       "symbol": "FixOf",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 7,
+      "line": 8,
       "symbol": "Fix",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 8,
+      "line": 9,
       "symbol": "Fix.unFix",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 10,
+      "line": 11,
       "symbol": "Fix.fix(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 14,
+      "line": 15,
       "symbol": "Fix.init(unFix:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 27,
-      "symbol": "ForFix",
+      "line": 28,
+      "symbol": "FixPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 28,
-      "symbol": "ForFix.projectT(_:)",
+      "line": 29,
+      "symbol": "FixPartial.projectT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 33,
-      "symbol": "ForFix",
+      "line": 34,
+      "symbol": "FixPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Fix.swift",
-      "line": 34,
-      "symbol": "ForFix.embedT(_:)",
+      "line": 35,
+      "symbol": "FixPartial.embedT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
@@ -1389,56 +1396,63 @@
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
       "line": 5,
+      "symbol": "MuPartial",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
+      "line": 6,
       "symbol": "MuOf",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 7,
+      "line": 8,
       "symbol": "Mu",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 8,
+      "line": 9,
       "symbol": "Mu.fix(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 12,
+      "line": 13,
       "symbol": "Mu.unMu(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 25,
-      "symbol": "ForMu",
+      "line": 26,
+      "symbol": "MuPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 26,
-      "symbol": "ForMu.projectT(_:)",
+      "line": 27,
+      "symbol": "MuPartial.projectT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 37,
-      "symbol": "ForMu",
+      "line": 38,
+      "symbol": "MuPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Mu.swift",
-      "line": 38,
-      "symbol": "ForMu.embedT(_:)",
+      "line": 39,
+      "symbol": "MuPartial.embedT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
@@ -1452,70 +1466,77 @@
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
       "line": 5,
+      "symbol": "NuPartial",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
+      "line": 6,
       "symbol": "NuOf",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 7,
+      "line": 8,
       "symbol": "Nu",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 8,
+      "line": 9,
       "symbol": "Nu.fix(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 12,
+      "line": 13,
       "symbol": "Nu.a",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 13,
+      "line": 14,
       "symbol": "Nu.unNu",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 15,
+      "line": 16,
       "symbol": "Nu.init(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 29,
-      "symbol": "ForNu",
+      "line": 30,
+      "symbol": "NuPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 30,
-      "symbol": "ForNu.projectT(_:)",
+      "line": 31,
+      "symbol": "NuPartial.projectT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 37,
-      "symbol": "ForNu",
+      "line": 36,
+      "symbol": "NuPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRecursionSchemes/Data/Nu.swift",
-      "line": 38,
-      "symbol": "ForNu.embedT(_:)",
+      "line": 37,
+      "symbol": "NuPartial.embedT(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
@@ -1668,22 +1689,22 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRx/MaybeK.swift",
-      "line": 185,
-      "symbol": "ForMaybeK.runAsync(_:)",
+      "line": 204,
+      "symbol": "MaybeKPartial.runAsync(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRx/ObservableK.swift",
-      "line": 218,
-      "symbol": "ForObservableK.runAsync(_:)",
+      "line": 242,
+      "symbol": "ObservableKPartial.runAsync(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowRx/SingleK.swift",
-      "line": 172,
-      "symbol": "ForSingleK.runAsync(_:)",
+      "line": 183,
+      "symbol": "SingleKPartial.runAsync(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     }

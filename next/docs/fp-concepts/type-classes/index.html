@@ -507,7 +507,7 @@
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>The function above is parametrically polymorphic; it operates of values of type <code class="highlighter-rouge">A</code>. Valid types to fill this type parameter need to conform to <code class="highlighter-rouge">Equatable</code> and enable the possibility to use the <code class="highlighter-rouge">==</code> operator.</p>
+<p>The function above is parametrically polymorphic; it operates on values of type <code class="highlighter-rouge">A</code>. Valid types to fill this type parameter need to conform to <code class="highlighter-rouge">Equatable</code> and enable the possibility to use the <code class="highlighter-rouge">==</code> operator.</p>
 
 <h2 id="type-classes-of-higher-kind">Type classes of higher kind</h2>
 
@@ -524,13 +524,15 @@
 <p>Therefore, the definition of the type class may be:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Transformer</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+        <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h2 id="type-class-laws">Type class laws</h2>
 
-<p>As we mentioned above, type classes are governed by <strong>algebraic laws</strong>. This means that all implementations of the type class must behave on a certain and satisfy some properties. Each type class has its own laws, as the ones we presented for <code class="highlighter-rouge">Equatable</code> above.</p>
+<p>As we mentioned above, type classes are governed by <strong>algebraic laws</strong>. This means that all implementations of the type class must behave on a certain manner and satisfy some properties. Each type class has its own laws, as the ones we presented for <code class="highlighter-rouge">Equatable</code> above.</p>
 
 <p>For the <code class="highlighter-rouge">Transformer</code> type class that we are defining, we can consider some laws as well:</p>
 
@@ -547,15 +549,15 @@
 
 <p>A <strong>type class instance</strong> is a concrete implementation of a type class for a given type. Instances are usually created through the extension mechanisms that Swift provides. For instance, let us provide an instance of <code class="highlighter-rouge">Transformer</code> for the <code class="highlighter-rouge">Option</code> data type in Bow:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">ForOption</span><span class="p">:</span> <span class="kt">Transformer</span> <span class="p">{</span>
-    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">ForOption</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">ForOption</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">fa</span><span class="o">^.</span><span class="nf">fold</span><span class="p">(</span><span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="k">none</span><span class="p">,</span>                <span class="c1">// It is empty, no transformation</span>
-                        <span class="p">{</span> <span class="n">a</span> <span class="k">in</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="nf">some</span><span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">})</span> <span class="c1">// Transformed with f and wrapped in an Option&lt;B&gt;</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">OptionPartial</span><span class="p">:</span> <span class="kt">Transformer</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">OptionOf</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">OptionOf</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="n">fa</span><span class="o">^.</span><span class="nf">fold</span><span class="p">(</span><span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="k">none</span><span class="p">,</span>                <span class="c1">// It is empty, no transformation</span>
+                 <span class="p">{</span> <span class="n">a</span> <span class="k">in</span> <span class="kt">Option</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;.</span><span class="nf">some</span><span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">})</span> <span class="c1">// Transformed with f and wrapped in an Option&lt;B&gt;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Notice that, since the type class works at the kind level, it is not an extension of <code class="highlighter-rouge">Option</code>, but an extension of <code class="highlighter-rouge">ForOption</code>. Revisiting the definition of <code class="highlighter-rouge">Transformer</code>, the <code class="highlighter-rouge">Self</code> requirement is used in <code class="highlighter-rouge">Kind&lt;Self, A&gt;</code>. If we dissect the definition of <code class="highlighter-rouge">Option&lt;A&gt;</code>, it extends <code class="highlighter-rouge">Kind&lt;ForOption, A&gt;</code>. By doing some sort of pattern matching between <code class="highlighter-rouge">Kind&lt;Self, A&gt;</code> and <code class="highlighter-rouge">Kind&lt;ForOption, A&gt;</code>, we can see that it must be <code class="highlighter-rouge">ForOption</code> the candidate to do the extension.</p>
+<p>Notice that, since the type class works at the kind level, it is not an extension of <code class="highlighter-rouge">Option</code>, but an extension of <code class="highlighter-rouge">OptionPartial</code>. Revisiting the definition of <code class="highlighter-rouge">Transformer</code>, the <code class="highlighter-rouge">Self</code> requirement is used in <code class="highlighter-rouge">Kind&lt;Self, A&gt;</code>. Therefore, it must be implemented by the <code class="highlighter-rouge">Partial</code> version of the type, omitting the last parameter. In the case of Option, as it only has one type argument, it should be <code class="highlighter-rouge">OptionPartial</code>, with no type arguments.</p>
 
 <p>In the case of types with a higher kind, like <code class="highlighter-rouge">Either</code>, we can resort to the same strategy: <code class="highlighter-rouge">Either&lt;L, R&gt;</code> is equivalent to Kind&lt;EitherPartial<L>, R&gt;`, so the extension should be made on `EitherPartial<L>`. Take a look at the following table for examples on some of the types in the core module for Bow.</L></L></p>
 
@@ -569,7 +571,7 @@
   <tbody>
     <tr>
       <td>ArrayK</td>
-      <td>extension ForArrayK: Transformer { … }</td>
+      <td>extension ArrayKPartial: Transformer { … }</td>
     </tr>
     <tr>
       <td>Const</td>
@@ -581,7 +583,7 @@
     </tr>
     <tr>
       <td>Id</td>
-      <td>extension ForId: Transformer { … }</td>
+      <td>extension IdPartial: Transformer { … }</td>
     </tr>
     <tr>
       <td>Ior</td>
@@ -589,15 +591,15 @@
     </tr>
     <tr>
       <td>NonEmptyArray</td>
-      <td>extension ForNonEmptyArray : Transformer { … }</td>
+      <td>extension NonEmptyArrayPartial : Transformer { … }</td>
     </tr>
     <tr>
       <td>Option</td>
-      <td>extension ForOption: Transformer { … }</td>
+      <td>extension OptionPartial: Transformer { … }</td>
     </tr>
     <tr>
       <td>Try</td>
-      <td>extension ForTry: Transformer { … }</td>
+      <td>extension TryPartial: Transformer { … }</td>
     </tr>
     <tr>
       <td>Validated</td>
@@ -612,31 +614,31 @@
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Kind</span> <span class="k">where</span> <span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span> <span class="p">{</span>
     <span class="kd">func</span> <span class="n">transform</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>This way, every type that its witness has an instance of <code class="highlighter-rouge">Transformer</code>, will be able to use <code class="highlighter-rouge">transform</code> as an instance method. We have two ways of using this type class; consider a function to multiply by two the values contained in some structure:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">multiplyByTwo_firstVersion</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">})</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">multiplyByTwo_v1</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">F</span><span class="o">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">})</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="n">multiplyByTwo_secondVersion</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">transform</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">}</span>
+<span class="kd">func</span> <span class="n">multiplyByTwo_v2</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">:</span> <span class="kt">Transformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kind</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">value</span><span class="o">.</span><span class="n">transform</span> <span class="p">{</span> <span class="n">x</span> <span class="k">in</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>Both versions are equivalent. Type classes defined in Bow project their methods as instance or static methods in Kind to make them easier to find and use. Notice that the compiler is able to resolve which instance it needs to provide based on the type that we use to call the function:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">some</span> <span class="o">=</span> <span class="nf">multiplyByTwo_firstVersion</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<span class="k">let</span> <span class="nv">none</span> <span class="o">=</span> <span class="nf">multiplyByTwo_secondVersion</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">none</span><span class="p">())</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">some</span> <span class="o">=</span> <span class="nf">multiplyByTwo_v1</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">some</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">let</span> <span class="nv">none</span> <span class="o">=</span> <span class="nf">multiplyByTwo_v2</span><span class="p">(</span><span class="kt">Option</span><span class="o">.</span><span class="nf">none</span><span class="p">())</span>
 </code></pre></div></div>
 
 <h2 id="existing-type-classes-in-bow">Existing type classes in Bow</h2>
 
-<p>The reader may have guessed that the <code class="highlighter-rouge">Transformer</code> type class that we have created above is, in fact, the <code class="highlighter-rouge">Functor</code> type class, and <code class="highlighter-rouge">transform</code> corresponds to <code class="highlighter-rouge">map</code>. Bow modules include multiple type classes, like <code class="highlighter-rouge">Functor</code>, with their corresponding instances. The following tables summarize some of them; for further information, refer to the API reference for each one of them.</p>
+<p>The reader may have guessed that the <code class="highlighter-rouge">Transformer</code> type class that we have created above is, in fact, the <code class="highlighter-rouge">Functor</code> type class, and <code class="highlighter-rouge">transform</code> corresponds to <code class="highlighter-rouge">map</code>. Bow modules include multiple type classes, like <code class="highlighter-rouge">Functor</code>, with their corresponding instances. The following table summarizes some of them; for further information, refer to the API reference for each one of them.</p>
 
 <table>
   <thead>

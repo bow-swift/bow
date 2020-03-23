@@ -28,7 +28,7 @@ func allEqual<A: Equatable>(_ array: [A]) -> Bool {
 }
 ```
 
- The function above is parametrically polymorphic; it operates of values of type `A`. Valid types to fill this type parameter need to conform to `Equatable` and enable the possibility to use the `==` operator.
+ The function above is parametrically polymorphic; it operates on values of type `A`. Valid types to fill this type parameter need to conform to `Equatable` and enable the possibility to use the `==` operator.
 
 ## Type classes of higher kind
 
@@ -44,13 +44,15 @@ func allEqual<A: Equatable>(_ array: [A]) -> Bool {
 
 ```swift
 protocol Transformer {
-    static func transform<A, B>(_ fa: Kind<Self, A>, _ f: (A) -> B) -> Kind<Self, B>
+    static func transform<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: (A) -> B) -> Kind<Self, B>
 }
 ```
 
 ## Type class laws
 
- As we mentioned above, type classes are governed by **algebraic laws**. This means that all implementations of the type class must behave on a certain and satisfy some properties. Each type class has its own laws, as the ones we presented for `Equatable` above.
+ As we mentioned above, type classes are governed by **algebraic laws**. This means that all implementations of the type class must behave on a certain manner and satisfy some properties. Each type class has its own laws, as the ones we presented for `Equatable` above.
 
  For the `Transformer` type class that we are defining, we can consider some laws as well:
 
@@ -66,28 +68,28 @@ protocol Transformer {
  A **type class instance** is a concrete implementation of a type class for a given type. Instances are usually created through the extension mechanisms that Swift provides. For instance, let us provide an instance of `Transformer` for the `Option` data type in Bow:
 
 ```swift
-extension ForOption: Transformer {
-    static func transform<A, B>(_ fa: Kind<ForOption, A>, _ f: (A) -> B) -> Kind<ForOption, B> {
-        return fa^.fold(Option<B>.none,                // It is empty, no transformation
-                        { a in Option<B>.some(f(a)) }) // Transformed with f and wrapped in an Option<B>
+extension OptionPartial: Transformer {
+    static func transform<A, B>(_ fa: OptionOf<A>, _ f: (A) -> B) -> OptionOf<B> {
+        fa^.fold(Option<B>.none,                // It is empty, no transformation
+                 { a in Option<B>.some(f(a)) }) // Transformed with f and wrapped in an Option<B>
     }
 }
 ```
 
- Notice that, since the type class works at the kind level, it is not an extension of `Option`, but an extension of `ForOption`. Revisiting the definition of `Transformer`, the `Self` requirement is used in `Kind<Self, A>`. If we dissect the definition of `Option<A>`, it extends `Kind<ForOption, A>`. By doing some sort of pattern matching between `Kind<Self, A>` and `Kind<ForOption, A>`, we can see that it must be `ForOption` the candidate to do the extension.
+ Notice that, since the type class works at the kind level, it is not an extension of `Option`, but an extension of `OptionPartial`. Revisiting the definition of `Transformer`, the `Self` requirement is used in `Kind<Self, A>`. Therefore, it must be implemented by the `Partial` version of the type, omitting the last parameter. In the case of Option, as it only has one type argument, it should be `OptionPartial`, with no type arguments.
 
  In the case of types with a higher kind, like `Either`, we can resort to the same strategy: `Either<L, R>` is equivalent to Kind<EitherPartial<L>, R>`, so the extension should be made on `EitherPartial<L>`. Take a look at the following table for examples on some of the types in the core module for Bow.
 
  | Type          | What to extend for a type class like Transformer? |
  | ------------- | ------------------------------------------------- |
- | ArrayK        | extension ForArrayK: Transformer { ... }          |
+ | ArrayK        | extension ArrayKPartial: Transformer { ... }          |
  | Const         | extension ConstPartial: Transformer { ... }       |
  | Either        | extension EitherPartial: Transformer { ... }      |
- | Id            | extension ForId: Transformer { ... }              |
+ | Id            | extension IdPartial: Transformer { ... }              |
  | Ior           | extension IorPartial: Transformer { ... }         |
- | NonEmptyArray | extension ForNonEmptyArray : Transformer { ... }  |
- | Option        | extension ForOption: Transformer { ... }          |
- | Try           | extension ForTry: Transformer { ... }             |
+ | NonEmptyArray | extension NonEmptyArrayPartial : Transformer { ... }  |
+ | Option        | extension OptionPartial: Transformer { ... }          |
+ | Try           | extension TryPartial: Transformer { ... }             |
  | Validated     | extension ValidatedPartial: Transformer { ... }   |
 
 ## Projecting syntax on `Kind`
@@ -97,7 +99,7 @@ extension ForOption: Transformer {
 ```swift
 extension Kind where F: Transformer {
     func transform<B>(_ f: (A) -> B) -> Kind<F, B> {
-        return F.transform(self, f)
+        F.transform(self, f)
     }
 }
 ```
@@ -105,25 +107,25 @@ extension Kind where F: Transformer {
  This way, every type that its witness has an instance of `Transformer`, will be able to use `transform` as an instance method. We have two ways of using this type class; consider a function to multiply by two the values contained in some structure:
 
 ```swift
-func multiplyByTwo_firstVersion<F: Transformer>(_ value: Kind<F, Int>) -> Kind<F, Int> {
-    return F.transform(value, { x in 2 * x })
+func multiplyByTwo_v1<F: Transformer>(_ value: Kind<F, Int>) -> Kind<F, Int> {
+    F.transform(value, { x in 2 * x })
 }
 
-func multiplyByTwo_secondVersion<F: Transformer>(_ value: Kind<F, Int>) -> Kind<F, Int> {
-    return value.transform { x in 2 * x }
+func multiplyByTwo_v2<F: Transformer>(_ value: Kind<F, Int>) -> Kind<F, Int> {
+    value.transform { x in 2 * x }
 }
 ```
 
  Both versions are equivalent. Type classes defined in Bow project their methods as instance or static methods in Kind to make them easier to find and use. Notice that the compiler is able to resolve which instance it needs to provide based on the type that we use to call the function:
 
 ```swift
-let some = multiplyByTwo_firstVersion(Option.some(1))
-let none = multiplyByTwo_secondVersion(Option.none())
+let some = multiplyByTwo_v1(Option.some(1))
+let none = multiplyByTwo_v2(Option.none())
 ```
 
 ## Existing type classes in Bow
 
- The reader may have guessed that the `Transformer` type class that we have created above is, in fact, the `Functor` type class, and `transform` corresponds to `map`. Bow modules include multiple type classes, like `Functor`, with their corresponding instances. The following tables summarize some of them; for further information, refer to the API reference for each one of them.
+ The reader may have guessed that the `Transformer` type class that we have created above is, in fact, the `Functor` type class, and `transform` corresponds to `map`. Bow modules include multiple type classes, like `Functor`, with their corresponding instances. The following table summarizes some of them; for further information, refer to the API reference for each one of them.
 
  | Type class | Purpose |
  | ---------- | ------- |
