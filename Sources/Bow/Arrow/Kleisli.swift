@@ -24,7 +24,7 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     /// - Parameter fa: Value in the higher-kind form.
     /// - Returns: Value cast to Kleisli.
     public static func fix(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
-        return fa as! Kleisli<F, D, A>
+        fa as! Kleisli<F, D, A>
     }
     
     /// Creates a constant Kleisli function.
@@ -32,7 +32,7 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     /// - Parameter fa: Constant value to return.
     /// - Returns: A constant Kleisli function.
     public static func liftF(_ fa: Kind<F, A>) -> Kleisli<F, D, A> {
-        return Kleisli(constant(fa))
+        Kleisli(constant(fa))
     }
     
     /// Initializes a Kleisli value.
@@ -47,7 +47,7 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     /// - Parameter value: Input to the function.
     /// - Returns: Output of the Kleisli.
     public func run(_ value: D) -> Kind<F, A> {
-        return f(value)
+        f(value)
     }
     
     /// Pre-composes this Kleisli function with a function transforming the input type.
@@ -55,7 +55,7 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     /// - Parameter f: Transforming function.
     /// - Returns: Composition of the two functions.
     public func contramap<DD>(_ f: @escaping (DD) -> D) -> Kleisli<F, DD, A> {
-        return Kleisli<F, DD, A> { d in self.run(f(d)) }
+        Kleisli<F, DD, A> { d in self.run(f(d)) }
     }
     
     /// Pre-composes this Kleisli function with a function transforming the input type obtained from a key path.
@@ -63,14 +63,22 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
     /// - Parameter f: Transforming function.
     /// - Returns: Composition of the two functions.
     public func contramap<DD>(_ keyPath: KeyPath<DD, D>) -> Kleisli<F, DD, A> {
-        return Kleisli<F, DD, A> { d in self.run(d[keyPath: keyPath]) }
+        Kleisli<F, DD, A> { d in self.run(d[keyPath: keyPath]) }
     }
     
     /// Narrows the scope of the context of this Kleisli from `Any` to a concrete type
     ///
     /// - Returns: A copy of this Kleisli working on a more precise context.
-    func narrow<DD>() -> Kleisli<F, DD, A> where D == Any {
+    public func narrow<DD>() -> Kleisli<F, DD, A> where D == Any {
         self.contramap(id)
+    }
+    
+    /// Transforms the result of this Kleisli function.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: A Kleisli function that behaves as the original one, with its result transformed.
+    public func transformT<G, B>(_ f: @escaping (Kind<F, A>) -> Kind<G, B>) -> Kleisli<G, D, B> {
+        Kleisli<G, D, B>(self.f >>> f)
     }
 }
 
@@ -79,19 +87,19 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to Kleisli.
 public postfix func ^<F, D, A>(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
-    return Kleisli.fix(fa)
+    Kleisli.fix(fa)
 }
 
-// MARK: Functions when F has an instance of `Monad`.
+// MARK: Functions when F has an instance of Monad.
 extension Kleisli where F: Monad {
     /// Zips this Kleisli function with another one with the same input type.
     ///
     /// - Parameter o: Kleisli function to be zipped with this one.
     /// - Returns: A Kleisli function that pairs the output of the two Kleisli functions zipped in this operation.
     public func zip<B>(_ o: Kleisli<F, D, B>) -> Kleisli<F, D, (A, B)> {
-        return Kleisli<F, D, (A, B)>.fix(self.flatMap({ a in
-            Kleisli<F, D, (A, B)>.fix(o.map({ b in (a, b) }))
-        }))
+        self.flatMap { a in
+            o.map { b in (a, b) }^
+        }^
     }
 
     /// Composes this Kleisli with another one.
@@ -99,7 +107,7 @@ extension Kleisli where F: Monad {
     /// - Parameter f: Kleisli function to be composed after the this one.
     /// - Returns: A Kleisli function that is equivalent to running this Kleisli and then the received one.
     public func andThen<C>(_ f: Kleisli<F, A, C>) -> Kleisli<F, D, C> {
-        return andThen(f.f)
+        andThen(f.f)
     }
 
     /// Composes this Kleisli with a function in Kleisli form.
@@ -107,83 +115,118 @@ extension Kleisli where F: Monad {
     /// - Parameter f: A function to be composed after this Kleisli.
     /// - Returns: A Kleisli function that is equivalent to running this Kleisli and then the received one.
     public func andThen<B>(_ f: @escaping (A) -> Kind<F, B>) -> Kleisli<F, D, B> {
-        return Kleisli<F, D, B>({ d in self.f(d).flatMap(f) })
+        Kleisli<F, D, B> { d in self.f(d).flatMap(f) }
     }
 
     /// Composes this Kleisli with a constant value.
     ///
-    /// - Parameter a: Constant value.
+    /// - Parameter fb: Constant value.
     /// - Returns: A Kleisli function that is equivalent to running this Kleisli and ommitting its result, returning the constant value produced.
-    public func andThen<B>(_ a: Kind<F, B>) -> Kleisli<F, D, B> {
-        return andThen(constant(a))
+    public func andThen<B>(_ fb: Kind<F, B>) -> Kleisli<F, D, B> {
+        andThen(constant(fb))
     }
 }
 
-// MARK: Instance of `EquatableK` for `Kleisli`
+// MARK: Instance of EquatableK for Kleisli
 extension KleisliPartial: EquatableK where F: EquatableK, D == Int {
-    public static func eq<A: Equatable>(_ lhs: Kind<KleisliPartial<F, D>, A>, _ rhs: Kind<KleisliPartial<F, D>, A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: KleisliOf<F, D, A>,
+        _ rhs: KleisliOf<F, D, A>) -> Bool {
         lhs^.run(1) == rhs^.run(1)
     }
 }
 
-// MARK: Instance of `Invariant` for `Kleisli`
+// MARK: Instance of Invariant for Kleisli
 extension KleisliPartial: Invariant where F: Functor {}
 
-// MARK: Instance of `Functor` for `Kleisli`
+// MARK: Instance of Functor for Kleisli
 extension KleisliPartial: Functor where F: Functor {
-    public static func map<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (A) -> B) -> Kind<KleisliPartial<F, D>, B> {
-        return Kleisli<F, D, B>({ d in Kleisli.fix(fa).f(d).map(f) })
+    public static func map<A, B>(
+        _ fa: KleisliOf<F, D, A>,
+        _ f: @escaping (A) -> B) -> KleisliOf<F, D, B> {
+        Kleisli<F, D, B> { d in fa^.f(d).map(f) }
     }
 }
 
-// MARK: Instance of `Applicative` for `Kleisli`
+// MARK: Instance of Applicative for Kleisli
 extension KleisliPartial: Applicative where F: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<KleisliPartial<F, D>, A> {
-        return Kleisli(constant(F.pure(a)))
+    public static func pure<A>(_ a: A) -> KleisliOf<F, D, A> {
+        Kleisli(constant(F.pure(a)))
     }
 
-    public static func ap<A, B>(_ ff: Kind<KleisliPartial<F, D>, (A) -> B>, _ fa: Kind<KleisliPartial<F, D>, A>) -> Kind<KleisliPartial<F, D>, B> {
-        return Kleisli<F, D, B>({ d in Kleisli.fix(ff).f(d).ap(Kleisli.fix(fa).f(d)) })
+    public static func ap<A, B>(
+        _ ff: KleisliOf<F, D, (A) -> B>,
+        _ fa: KleisliOf<F, D, A>) -> KleisliOf<F, D, B> {
+        Kleisli<F, D, B>({ d in ff^.f(d).ap(fa^.f(d)) })
     }
 }
 
-// MARK: Instance of `Selective` for `Kleisli`
+// MARK: Instance of Selective for Kleisli
 extension KleisliPartial: Selective where F: Monad {}
 
-// MARK: Instance of `Monad` for `Kleisli`
+// MARK: Instance of Monad for Kleisli
 extension KleisliPartial: Monad where F: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (A) -> Kind<KleisliPartial<F, D>, B>) -> Kind<KleisliPartial<F, D>, B> {
-        return Kleisli<F, D, B>({ d in Kleisli.fix(fa).f(d).flatMap { a in Kleisli.fix(f(a)).f(d) } })
+    public static func flatMap<A, B>(
+        _ fa: KleisliOf<F, D, A>,
+        _ f: @escaping (A) -> KleisliOf<F, D, B>) -> KleisliOf<F, D, B> {
+        Kleisli<F, D, B> { d in
+            fa^.f(d).flatMap { a in
+                f(a)^.f(d)
+            }
+        }
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<KleisliPartial<F, D>, Either<A, B>>) -> Kind<KleisliPartial<F, D>, B> {
-        return Kleisli({ b in F.tailRecM(a, { a in Kleisli.fix(f(a)).f(b) })})
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> KleisliOf<F, D, Either<A, B>>) -> KleisliOf<F, D, B> {
+        Kleisli { b in F.tailRecM(a, { a in f(a)^.f(b) }) }
     }
 }
 
-// MARK: Instance of `MonadReader` for `Kleisli`
+// MARK: Instance of MonadReader for Kleisli
 extension KleisliPartial: MonadReader where F: Monad {
-    public static func ask() -> Kind<KleisliPartial<F, D>, D> {
-        return Kleisli<F, D, D>(F.pure)
+    public static func ask() -> KleisliOf<F, D, D> {
+        Kleisli<F, D, D>(F.pure)
     }
 
-    public static func local<A>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (D) -> D) -> Kind<KleisliPartial<F, D>, A> {
-        return Kleisli({ dd in Kleisli.fix(fa).f(f(dd)) })
+    public static func local<A>(_ fa: KleisliOf<F, D, A>, _ f: @escaping (D) -> D) -> KleisliOf<F, D, A> {
+        Kleisli { dd in fa^.f(f(dd)) }
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `Kleisli`
+// MARK: Instance of ApplicativeError for Kleisli
 extension KleisliPartial: ApplicativeError where F: ApplicativeError {
     public typealias E = F.E
 
-    public static func raiseError<A>(_ e: F.E) -> Kind<KleisliPartial<F, D>, A> {
-        return Kleisli(constant(F.raiseError(e)))
+    public static func raiseError<A>(_ e: F.E) -> KleisliOf<F, D, A> {
+        Kleisli(constant(F.raiseError(e)))
     }
 
-    public static func handleErrorWith<A>(_ fa: Kind<KleisliPartial<F, D>, A>, _ f: @escaping (F.E) -> Kind<KleisliPartial<F, D>, A>) -> Kind<KleisliPartial<F, D>, A> {
-        return Kleisli<F, D, A>({ d in Kleisli.fix(fa).f(d).handleErrorWith { e in Kleisli.fix(f(e)).f(d) } })
+    public static func handleErrorWith<A>(
+        _ fa: KleisliOf<F, D, A>,
+        _ f: @escaping (F.E) -> KleisliOf<F, D, A>) -> KleisliOf<F, D, A> {
+        Kleisli<F, D, A> { d in
+            fa^.f(d).handleErrorWith { e in
+                f(e)^.f(d)
+            }
+        }
     }
 }
 
-// MARK: Instance of `MonadError` for `Kleisli`
+// MARK: Instance of MonadError for Kleisli
 extension KleisliPartial: MonadError where F: MonadError {}
+
+// MARK: Instance of MonadWriter for Kleisli
+extension KleisliPartial: MonadWriter where F: MonadWriter {
+    public typealias W = F.W
+    
+    public static func writer<A>(_ aw: (F.W, A)) -> KleisliOf<F, D, A> {
+        Kleisli.liftF(F.writer(aw))
+    }
+    
+    public static func listen<A>(_ fa: KleisliOf<F, D, A>) -> KleisliOf<F, D, (F.W, A)> {
+        fa^.transformT { a in F.listen(a) }
+    }
+    
+    public static func pass<A>(_ fa: KleisliOf<F, D, ((F.W) -> F.W, A)>) -> KleisliOf<F, D, A> {
+        fa^.transformT { a in F.pass(a) }
+    }
+}
