@@ -99,11 +99,10 @@ def generate_api_site(version)
   system "echo == Generating API site for #{version}"
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
-  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --github_url https://github.com/bow-swift/bow --module Bow --root-url https://bow-swift.io/#{version}/api-docs --dash_url https://bow-swift.io/#{version}/api-docs/docsets/Bow.xml --theme docs/extra/bow-jazzy-theme"
+  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --module Bow --root-url https://bow-swift.io/#{version}/api-docs/ --github_url https://github.com/bow-swift/bow --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$source_dir}"
   system "ls -la #{$gen_docs_dir}/#{version}"
 end
-
 
 # Initially, we save the name of the current branch/tag to be used later
 current_branch_tag = `git name-rev --name-only HEAD`
