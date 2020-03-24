@@ -357,3 +357,17 @@ extension OptionTPartial: MonadWriter where F: MonadWriter {
         }
     }
 }
+
+// MARK: Instance of MonadState for OptionT
+
+extension OptionTPartial: MonadState where F: MonadState {
+    public typealias S = F.S
+    
+    public static func get() -> OptionTOf<F, F.S> {
+        OptionT.liftF(F.get())
+    }
+    
+    public static func set(_ s: F.S) -> OptionTOf<F, Void> {
+        OptionT.liftF(F.set(s))
+    }
+}
