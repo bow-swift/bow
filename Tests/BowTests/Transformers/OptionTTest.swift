@@ -56,6 +56,10 @@ class OptionTTest: XCTestCase {
         TraverseFilterLaws<OptionTPartial<ConstPartial<Int>>>.check()
     }
     
+    func testMonadWriterLaws() {
+        MonadWriterLaws<OptionTPartial<WriterPartial<Int>>>.check()
+    }
+    
     func testToLeftWithFunctionWithSome() {
         property("toLeft for .some should build a correct EitherT") <~ forAll { (a: Int, b: String) in
             let optionT = OptionT<ForId, Int>.fromOption(.some(a))
