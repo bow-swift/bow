@@ -43,6 +43,10 @@ class WriterTTest: XCTestCase {
         MonadWriterLaws<WriterTPartial<ForId, Int>>.check()
     }
     
+    func testMonadStateLaws() {
+        MonadStateLaws<WriterTPartial<StatePartial<Int>, Int>>.check()
+    }
+    
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<WriterTPartial<EitherPartial<CategoryError>, Int>>.check()
     }
