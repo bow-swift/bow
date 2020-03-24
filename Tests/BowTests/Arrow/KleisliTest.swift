@@ -3,7 +3,6 @@ import XCTest
 import Bow
 import SwiftCheck
 
-// MARK: Instance of EquatableK for Kleisli
 extension KleisliPartial: EquatableK where F: EquatableK, D == Int {
     public static func eq<A: Equatable>(
         _ lhs: KleisliOf<F, D, A>,
