@@ -305,3 +305,30 @@ extension StateTPartial: MonadReader where F: MonadReader {
         fa^.transformT { a in F.local(a, f) }
     }
 }
+
+// MARK: Instance of MonadWriter for StateT
+extension StateTPartial: MonadWriter where F: MonadWriter {
+    public typealias W = F.W
+    
+    public static func writer<A>(_ aw: (F.W, A)) -> StateTOf<F, S, A> {
+        StateT.liftF(F.writer(aw))
+    }
+    
+    public static func listen<A>(_ fa: StateTOf<F, S, A>) -> StateTOf<F, S, (F.W, A)> {
+        StateT { s in
+            fa^.runM(s).listen().map { result in
+                let (w, (s, a)) = result
+                return (s, (w, a))
+            }
+        }
+    }
+    
+    public static func pass<A>(_ fa: StateTOf<F, S, ((F.W) -> F.W, A)>) -> StateTOf<F, S, A> {
+        StateT { s in
+            F.pass(fa^.runM(s).map { result in
+                let (f, (s, a)) = result
+                return (s, (f, a))
+            })
+        }
+    }
+}
