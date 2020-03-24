@@ -330,3 +330,30 @@ extension OptionTPartial: MonadReader where F: MonadReader {
         fa^.transformT { a in F.local(a, f) }
     }
 }
+
+// MARK: Instance of MonadWriter for OptionT
+extension OptionTPartial: MonadWriter where F: MonadWriter {
+    public typealias W = F.W
+    
+    public static func writer<A>(_ aw: (F.W, A)) -> OptionTOf<F, A> {
+        OptionT.liftF(F.writer(aw))
+    }
+    
+    public static func listen<A>(_ fa: OptionTOf<F, A>) -> OptionTOf<F, (F.W, A)> {
+        fa^.transformT { a in
+            F.listen(a).map { result in
+                let (w, option) = result
+                return option.map { a in (w, a) }^
+            }
+        }
+    }
+    
+    public static func pass<A>(_ fa: OptionTOf<F, ((F.W) -> F.W, A)>) -> OptionTOf<F, A> {
+        fa^.transformT { a in
+            F.pass(a.map { option in
+                option.fold({ (id, Option.none()) },
+                            { x in (x.0, Option.some(x.1)) })
+            })
+        }
+    }
+}
