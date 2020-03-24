@@ -221,3 +221,17 @@ extension KleisliPartial: MonadWriter where F: MonadWriter {
         fa^.transformT { a in F.pass(a) }
     }
 }
+
+// MARK: Instance of MonadState for Kleisli
+
+extension KleisliPartial: MonadState where F: MonadState {
+    public typealias S = F.S
+    
+    public static func get() -> KleisliOf<F, D, F.S> {
+        Kleisli.liftF(F.get())
+    }
+    
+    public static func set(_ s: F.S) -> KleisliOf<F, D, Void> {
+        Kleisli.liftF(F.set(s))
+    }
+}
