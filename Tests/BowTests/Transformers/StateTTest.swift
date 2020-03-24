@@ -45,4 +45,8 @@ class StateTTest: XCTestCase {
     func testMonadCombineLaws() {
         MonadCombineLaws<StateTPartial<ForArrayK, Int>>.check()
     }
+    
+    func testMonadWriterLaws() {
+        MonadWriterLaws<StateTPartial<WriterTPartial<ForId, Int>, Int>>.check()
+    }
 }
