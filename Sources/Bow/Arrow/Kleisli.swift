@@ -127,15 +127,6 @@ extension Kleisli where F: Monad {
     }
 }
 
-// MARK: Instance of EquatableK for Kleisli
-extension KleisliPartial: EquatableK where F: EquatableK, D == Int {
-    public static func eq<A: Equatable>(
-        _ lhs: KleisliOf<F, D, A>,
-        _ rhs: KleisliOf<F, D, A>) -> Bool {
-        lhs^.run(1) == rhs^.run(1)
-    }
-}
-
 // MARK: Instance of Invariant for Kleisli
 extension KleisliPartial: Invariant where F: Functor {}
 
