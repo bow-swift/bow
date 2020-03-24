@@ -40,4 +40,8 @@ class KleisliTest: XCTestCase {
     func testMonadWriterLaws() {
         MonadWriterLaws<KleisliPartial<WriterPartial<Int>, Int>>.check()
     }
+    
+    func testMonadStateLaws() {
+        MonadStateLaws<KleisliPartial<StatePartial<Int>, Int>>.check()
+    }
 }
