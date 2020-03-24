@@ -364,3 +364,16 @@ extension WriterTPartial: MonadReader where F: MonadReader, W: Monoid {
         fa^.transformT { a in F.local(a, f) }
     }
 }
+
+// MARK: Instance of MonadState for WriterT
+extension WriterTPartial: MonadState where F: MonadState, W: Monoid {
+    public typealias S = F.S
+    
+    public static func get() -> WriterTOf<F, W, F.S> {
+        WriterT.liftF(F.get())
+    }
+    
+    public static func set(_ s: F.S) -> WriterTOf<F, W, Void> {
+        WriterT.liftF(F.set(s))
+    }
+}
