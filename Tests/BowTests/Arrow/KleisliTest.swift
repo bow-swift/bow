@@ -27,4 +27,8 @@ class KleisliTest: XCTestCase {
     func testMonadErrorLaws() {
         MonadErrorLaws<KleisliPartial<EitherPartial<CategoryError>, Int>>.check()
     }
+    
+    func testMonadWriterLaws() {
+        MonadWriterLaws<KleisliPartial<WriterPartial<Int>, Int>>.check()
+    }
 }
