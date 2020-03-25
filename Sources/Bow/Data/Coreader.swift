@@ -6,7 +6,7 @@ public class Coreader<A, B>: CoreaderT<ForId, A, B> {
     ///
     /// - Parameter run: Function to be enclosed in this Coreader.
     public init(_ run: @escaping (A) -> B) {
-        super.init({ idA in run((idA as! Id<A>).extract()) })
+        super.init { idA in run(idA^.value) }
     }
     
     /// Runs this Coreader function with the given input.
@@ -14,7 +14,7 @@ public class Coreader<A, B>: CoreaderT<ForId, A, B> {
     /// - Parameter a: Input value for the function.
     /// - Returns: Output of the function.
     public func runId(_ a: A) -> B {
-        return self.run(Id<A>.pure(a))
+        self.run(Id(a))
     }
 }
 
