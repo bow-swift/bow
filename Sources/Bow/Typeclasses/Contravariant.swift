@@ -14,7 +14,7 @@ public protocol Contravariant: Invariant {
 public extension Contravariant {
     // Docs inherited from `Invariant`.
     static func imap<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<Self, B> {
-        return contramap(fa, g)
+        contramap(fa, g)
     }
 
     /// Given a function, provides a new function lifted to the context type implementing this instance of `Contravariant`, but reversing the direction of the arrow.
@@ -22,7 +22,7 @@ public extension Contravariant {
     /// - Parameter f: Function to be lifted.
     /// - Returns: Function in the context implementing this instance.
     static func contralift<A, B>(_ f: @escaping (A) -> B) -> (Kind<Self, B>) -> Kind<Self, A> {
-        return { fa in contramap(fa, f) }
+        { fa in contramap(fa, f) }
     }
 }
 
@@ -34,15 +34,15 @@ public extension Kind where F: Contravariant {
     /// - Parameters:
     ///   - f: Transforming function.
     /// - Returns: The result of transforming the value type using the provided function, maintaining the structure of the original value.
-    func contramap<B>(_ f : @escaping (B) -> A) -> Kind<F, B> {
-        return F.contramap(self, f)
+    func contramap<B>(_ f: @escaping (B) -> A) -> Kind<F, B> {
+        F.contramap(self, f)
     }
 
     /// Given a function, provides a new function lifted to the context type implementing this instance of `Contravariant`, but reversing the direction of the arrow.
     ///
     /// - Parameter f: Function to be lifted.
     /// - Returns: Function in the context implementing this instance.
-    static func contralift<B>(_ f : @escaping (A) -> B) -> (Kind<F, B>) -> Kind<F, A> {
-        return F.contralift(f)
+    static func contralift<B>(_ f: @escaping (A) -> B) -> (Kind<F, B>) -> Kind<F, A> {
+        F.contralift(f)
     }
 }
