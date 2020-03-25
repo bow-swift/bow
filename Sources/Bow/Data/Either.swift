@@ -22,7 +22,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter a: Value to be wrapped in a left of this Either type.
     /// - Returns: A left value of Either.
     public static func left(_ a: A) -> Either<A, B> {
-        return Either(.left(a))
+        Either(.left(a))
     }
 
     /// Constructs a right value
@@ -30,7 +30,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter b: Value to be wrapped in a right of this Either type.
     /// - Returns: A right value of Either.
     public static func right(_ b: B) -> Either<A, B> {
-        return Either(.right(b))
+        Either(.right(b))
     }
 
     /// Safe downcast.
@@ -38,7 +38,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter fa: Value in the higher-kind form.
     /// - Returns: Value cast to Either.
     public static func fix(_ fa: EitherOf<A, B>) -> Either<A, B> {
-        return fa as! Either<A, B>
+        fa as! Either<A, B>
     }
 
     /// Applies the provided closures based on the content of this `Either` value.
@@ -56,38 +56,38 @@ public final class Either<A, B>: EitherOf<A, B> {
 
     /// Checks if this value belongs to the left type.
     public var isLeft: Bool {
-        return fold(constant(true), constant(false))
+        fold(constant(true), constant(false))
     }
 
     /// Checks if this value belongs to the right type.
     public var isRight: Bool {
-        return !isLeft
+        !isLeft
     }
 
     /// Attempts to obtain a value of the left type.
     ///
     /// This propery is unsafe and can cause fatal errors if it is invoked on a right value.
     public var leftValue: A {
-        return fold(id, { _ in fatalError("Attempted to obtain leftValue on a right instance") })
+        fold(id, { _ in fatalError("Attempted to obtain leftValue on a right instance") })
     }
     
     /// Attempts to obtain a value of the right type.
     ///
     /// This property is unsafe and can cause fatal errors if it is invoked on a left value.
     public var rightValue: B {
-        return fold({ _ in fatalError("Attempted to obtain rightValue on a left instance") }, id)
+        fold({ _ in fatalError("Attempted to obtain rightValue on a left instance") }, id)
     }
 
     /// Returns the value of the right type, or `nil` if it is a left value.
     public var orNil: B? {
-        return fold(constant(nil), id)
+        fold(constant(nil), id)
     }
 
     /// Reverses the types of this either. Left values become right values and vice versa.
     ///
     /// - Returns: An either value with its types reversed respect to this one.
     public func swap() -> Either<B, A> {
-        return fold(Either<B, A>.right, Either<B, A>.left)
+        fold(Either<B, A>.right, Either<B, A>.left)
     }
 
     /// Transforms both type parameters, preserving the structure of this value.
@@ -97,8 +97,8 @@ public final class Either<A, B>: EitherOf<A, B> {
     ///   - fb: Closure to be applied when there is a right value.
     /// - Returns: Result of applying the corresponding closure to this value.
     public func bimap<C, D>(_ fa: (A) -> C, _ fb: (B) -> D) -> Either<C, D> {
-        return fold({ a in Either<C, D>.left(fa(a)) },
-                    { b in Either<C, D>.right(fb(b)) })
+        fold({ a in Either<C, D>.left(fa(a)) },
+             { b in Either<C, D>.right(fb(b)) })
     }
 
     /// Transforms the left type parameter, preserving the structure of this value.
@@ -106,7 +106,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter f: Transforming closure.
     /// - Returns: Result of appliying the transformation to any left value in this value.
     public func mapLeft<C>(_ f: (A) -> C) -> Either<C, B> {
-        return bimap(f, id)
+        bimap(f, id)
     }
 
     /// Returns the value from this `Either.right` value or allows callers to transform the `Either.left` to `Either.right`.
@@ -114,7 +114,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter f: Left transforming function.
     /// - Returns: Value of this `Either.right` or transformation of this `Either.left`.
     public func getOrHandle(_ f: (A) -> B) -> B {
-        return fold(f, id)
+        fold(f, id)
     }
 
     /// Converts this `Either` to an `Option`.
@@ -123,7 +123,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     ///
     /// - Returns: An option containing a right value, or none if there is a left value.
     public func toOption() -> Option<B> {
-        return fold(constant(Option<B>.none()), Option<B>.some)
+        fold(constant(Option<B>.none()), Option<B>.some)
     }
 
     /// Obtains the value wrapped if it is a right value, or the default value provided as an argument.
@@ -131,7 +131,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter defaultValue: Value to be returned if this value is left.
     /// - Returns: The wrapped value if it is right; otherwise, the default value.
     public func getOrElse(_ defaultValue: B) -> B {
-        return fold(constant(defaultValue), id)
+        fold(constant(defaultValue), id)
     }
 
     /// Filters the right values, providing a default left value if the do not match the provided predicate.
@@ -141,10 +141,10 @@ public final class Either<A, B>: EitherOf<A, B> {
     ///   - defaultValue: Value to be returned if the right value does not satisfies the predicate.
     /// - Returns: This value, if it matches the predicate or is left; otherwise, a left value wrapping the default value.
     public func filterOrElse(_ predicate : @escaping (B) -> Bool, _ defaultValue : A) -> Either<A, B> {
-        return fold(Either<A, B>.left,
-                    { b in predicate(b) ?
-                        Either<A, B>.right(b) :
-                        Either<A, B>.left(defaultValue) })
+        fold(Either<A, B>.left,
+             { b in predicate(b) ?
+                Either<A, B>.right(b) :
+                Either<A, B>.left(defaultValue) })
     }
 
     /// Filters the right values, providing a function to transform those that do not match the predicate into a left-type value.
@@ -154,7 +154,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     ///   - f: Transforming function.
     /// - Returns: This value, if it matches the predicate or is left; otherwise, a left value wrapping the transformation of the right value.
     public func filterOrOther(_ predicate: @escaping (B) -> Bool, _ f: @escaping (B) -> A) -> Either<A, B> {
-        return flatMap { b in predicate(b) ? Either.right(b) : Either.left(f(b)) }^
+        flatMap { b in predicate(b) ? Either.right(b) : Either.left(f(b)) }^
     }
 
     /// Flattens the right side of this value, providing a default value in case the wrapped value is not present.
@@ -162,7 +162,7 @@ public final class Either<A, B>: EitherOf<A, B> {
     /// - Parameter f: Function providing a default value.
     /// - Returns: An Either value where the right side is not optional.
     public func leftIfNull<BB>(_ f: @escaping @autoclosure () -> A) -> Either<A, BB> where B == Optional<BB> {
-        return flatMap { b in
+        flatMap { b in
             if let some = b {
                 return Either<A, BB>.right(some)
             } else {
@@ -179,7 +179,7 @@ public extension Either where B: Equatable {
     /// - Parameter element: Element to check.
     /// - Returns: Boolean value indicating if the element was found or not.
     func contains(_ element: B) -> Bool {
-        return fold(constant(false), { b in b == element })
+        fold(constant(false), { b in b == element })
     }
 }
 
@@ -210,7 +210,7 @@ public extension Optional {
 /// - Parameter fa: Value in the higher-kind form.
 /// - Returns: Value cast to Either.
 public postfix func ^<A, B>(_ fa: EitherOf<A, B>) -> Either<A, B> {
-    return Either.fix(fa)
+    Either.fix(fa)
 }
 
 private enum _Either<A, B> {
@@ -218,60 +218,75 @@ private enum _Either<A, B> {
     case right(B)
 }
 
-// MARK: Conformance of `Either` to `CustomStringConvertible`
+// MARK: Conformance of Either to CustomStringConvertible
 extension Either: CustomStringConvertible {
     public var description: String {
-        return fold({ a in "Left(\(a))"},
-                    { b in "Right(\(b))"})
+        fold({ a in "Left(\(a))"},
+             { b in "Right(\(b))"})
     }
 }
 
-// MARK: Conformance of `Either` to `CustomDebugStringConvertible`, provided that both of its type arguments conform to `CustomDebugStringConvertible`.
+// MARK: Conformance of Either to CustomDebugStringConvertible
 extension Either: CustomDebugStringConvertible where A: CustomDebugStringConvertible, B: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return fold({ a in "Left(\(a.debugDescription)"},
-                    { b in "Right(\(b.debugDescription))"})
+        fold({ a in "Left(\(a.debugDescription)"},
+             { b in "Right(\(b.debugDescription))"})
     }
 }
 
-// MARK: Instance of `EquatableK` for `Either`.
+// MARK: Instance of EquatableK for Either
 extension EitherPartial: EquatableK where L: Equatable {
-    public static func eq<A>(_ lhs: Kind<EitherPartial<L>, A>, _ rhs: Kind<EitherPartial<L>, A>) -> Bool where A : Equatable {
-        let el = Either.fix(lhs)
-        let er = Either.fix(rhs)
-        return el.fold({ la in er.fold({ lb in la == lb }, constant(false)) },
-                       { ra in er.fold(constant(false), { rb in ra == rb })})
+    public static func eq<A: Equatable>(
+        _ lhs: EitherOf<L, A>,
+        _ rhs: EitherOf<L, A>) -> Bool {
+        lhs^.fold(
+            { la in rhs^.fold(
+                { lb in la == lb },
+                constant(false))
+            },
+            { ra in rhs^.fold(
+                constant(false),
+                { rb in ra == rb })
+        })
     }
 }
 
-// MARK: Instance of `Functor` for `Either`.
+// MARK: Instance of Functor for Either
 extension EitherPartial: Functor {
-    public static func map<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> B) -> Kind<EitherPartial<L>, B> {
-        return Either.fix(fa).fold(Either.left, Either.right <<< f)
+    public static func map<A, B>(
+        _ fa: EitherOf<L, A>,
+        _ f: @escaping (A) -> B) -> EitherOf<L, B> {
+        fa^.fold(Either.left, Either.right <<< f)
     }
 }
 
-// MARK: Instance of `Applicative` for `Either`.
+// MARK: Instance of Applicative for Either
 extension EitherPartial: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<EitherPartial<L>, A> {
-        return Either.right(a)
+    public static func pure<A>(_ a: A) -> EitherOf<L, A> {
+        Either.right(a)
     }
 }
 
-// MARK: Instance of `Selective` for `Either`
+// MARK: Instance of Selective for Either
 extension EitherPartial: Selective {}
 
-// MARK: Instance of `Monad` for `Either`.
+// MARK: Instance of Monad for Either
 extension EitherPartial: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> Kind<EitherPartial<L>, B>) -> Kind<EitherPartial<L>, B> {
-        return Either.fix(fa).fold(Either.left, f)
+    public static func flatMap<A, B>(
+        _ fa: EitherOf<L, A>,
+        _ f: @escaping (A) -> EitherOf<L, B>) -> EitherOf<L, B> {
+        fa^.fold(Either.left, f)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<EitherPartial<L>, Either<A, B>>) -> Kind<EitherPartial<L>, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> EitherOf<L, Either<A, B>>) -> EitherOf<L, B> {
         _tailRecM(a, f).run()
     }
     
-    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EitherOf<L, Either<A, B>>) -> Trampoline<EitherOf<L, B>> {
+    private static func _tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> EitherOf<L, Either<A, B>>) -> Trampoline<EitherOf<L, B>> {
         .defer {
             f(a)^.fold({ l in .done(Either.left(l)) },
                       { either in
@@ -282,59 +297,81 @@ extension EitherPartial: Monad {
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `Either`.
+// MARK: Instance of ApplicativeError for Either
 extension EitherPartial: ApplicativeError {
     public typealias E = L
 
-    public static func raiseError<A>(_ e: L) -> Kind<EitherPartial<L>, A> {
-        return Either.left(e)
+    public static func raiseError<A>(_ e: L) -> EitherOf<L, A> {
+        Either.left(e)
     }
 
-    public static func handleErrorWith<A>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (L) -> Kind<EitherPartial<L>, A>) -> Kind<EitherPartial<L>, A> {
-        return Either.fix(fa).fold(f, constant(Either.fix(fa)))
+    public static func handleErrorWith<A>(
+        _ fa: EitherOf<L, A>,
+        _ f: @escaping (L) -> EitherOf<L, A>) -> EitherOf<L, A> {
+        fa^.fold(f, constant(fa^))
     }
 }
 
-// MARK: Instance of `MonadError` for `Either`.
+// MARK: Instance of MonadError for Either
 extension EitherPartial: MonadError {}
 
-// MARK: Instance of `Foldable` for `Either`.
+// MARK: Instance of Foldable for Either
 extension EitherPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ c: B, _ f: @escaping (B, A) -> B) -> B {
-        return Either.fix(fa).fold(constant(c), { b in f(c, b) })
+    public static func foldLeft<A, B>(
+        _ fa: EitherOf<L, A>,
+        _ c: B,
+        _ f: @escaping (B, A) -> B) -> B {
+        fa^.fold(constant(c),
+                 { b in f(c, b) })
     }
 
-    public static func foldRight<A, B>(_ fa: Kind<EitherPartial<L>, A>, _ c: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return Either.fix(fa).fold(constant(c), { b in f(b, c) })
+    public static func foldRight<A, B>(
+        _ fa: EitherOf<L, A>,
+        _ c: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        fa^.fold(constant(c),
+                 { b in f(b, c) })
     }
 }
 
-// MARK: Instance of `Traverse` for `Either`.
+// MARK: Instance of Traverse for Either
 extension EitherPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: Kind<EitherPartial<L>, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<EitherPartial<L>, B>> {
-        return Either.fix(fa).fold({ a in G.pure(Either.left(a)) },
-                                   { b in G.map(f(b), { c in Either.right(c) }) })
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: EitherOf<L, A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, EitherOf<L, B>> {
+        fa^.fold(
+            { a in G.pure(Either.left(a)) },
+            { b in f(b).map { c in Either.right(c) } })
     }
 }
 
-// MARK: Instance of `SemigroupK` for `Either`.
+// MARK: Instance of SemigroupK for Either
 extension EitherPartial: SemigroupK {
-    public static func combineK<A>(_ x: Kind<EitherPartial<L>, A>, _ y: Kind<EitherPartial<L>, A>) -> Kind<EitherPartial<L>, A> {
-        return Either.fix(x).fold(constant(Either.fix(y)), Either.right)
+    public static func combineK<A>(
+        _ x: EitherOf<L, A>,
+        _ y: EitherOf<L, A>) -> EitherOf<L, A> {
+        x^.fold(constant(y^),
+                Either.right)
     }
 }
 
-// MARK: Instance of `Semigroup` for `Either`.
+// MARK: Instance of Semigroup for Either
 extension Either: Semigroup where A: Semigroup, B: Semigroup {
     public func combine(_ other: Either<A, B>) -> Either<A, B> {
-        return self.fold({ l1 in other.fold({ l2 in .left(l1.combine(l2)) }, { r2 in .left(l1) }) },
-                         { r1 in other.fold({ l2 in .left(l2) }, { r2 in .right(r1.combine(r2)) }) })
+        self.fold(
+            { l1 in
+                other.fold({ l2 in .left(l1.combine(l2)) },
+                           { r2 in .left(l1) }) },
+            { r1 in
+                other.fold({ l2 in .left(l2) },
+                           { r2 in .right(r1.combine(r2)) }) }
+        )
     }
 }
 
-// MARK: Instance of `Monoid` for `Either`.
+// MARK: Instance of Monoid for Either
 extension Either: Monoid where A: Monoid, B: Monoid {
     public static func empty() -> Either<A, B> {
-        return .right(B.empty())
+        .right(B.empty())
     }
 }
