@@ -21,13 +21,12 @@ Bow provides a section in its microsite where its documentation is [published](h
 - Install [nef](https://nef.bow-swift.io). `nef` is a tool that we use to enforce compile-time correctness of the docs to conform to the latest version of the library. In order to install it, you need to run:
 
 ```
-brew tap bow-swift/nef
 brew install nef
 ```
 
 - Clone the repository for Bow
 - Go to the folder where you have cloned Bow
-- Run `nef compile Documentation.app` to set up the project with its dependencies
+- Run `nef compile --project Documentation.app` to set up the project with its dependencies
 - Open `Documentation.app`
 
 ### Adding content
@@ -45,7 +44,7 @@ In order to add documentation, use the standard Markdown format used in Xcode Pl
 Once you are done, you can check that your document compiles properly by moving to the root directory of the Bow project and running the following command:
 
 ```
-nef compile Documentation.app
+nef compile --project Documentation.app
 ```
 
 If everything is correct, your document should be ready for publication.
