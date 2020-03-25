@@ -20,7 +20,7 @@ open class FunctionK<F, G> {
     /// - Parameter g: Function to compose with this one.
     /// - Returns: A function that transform the input with this function and the received one afterwards.
     public func andThen<H>(_ g: FunctionK<G, H>) -> FunctionK<F, H> {
-        return ComposedFunctionK<F, G, H>(self, g)
+        ComposedFunctionK<F, G, H>(self, g)
     }
 
     /// Composes this function with another one.
@@ -28,7 +28,7 @@ open class FunctionK<F, G> {
     /// - Parameter g: Function to compose with this one.
     /// - Returns: A function that transform the input with the received function and this one afterwards.
     public func compose<H>(_ g: FunctionK<H, F>) -> FunctionK<H, G> {
-        return ComposedFunctionK<H, F, G>(g, self)
+        ComposedFunctionK<H, F, G>(g, self)
     }
 }
 
@@ -47,7 +47,7 @@ public extension FunctionK where F == G {
 
 private class IdFunctionK<F>: FunctionK<F, F> {
     override func invoke<A>(_ fa: Kind<F, A>) -> Kind<F, A> {
-        return fa
+        fa
     }
 }
 
@@ -61,6 +61,6 @@ private class ComposedFunctionK<F, G, H>: FunctionK<F, H> {
     }
 
     override func invoke<A>(_ fa: Kind<F, A>) -> Kind<H, A> {
-        return g.invoke(f.invoke(fa))
+        g.invoke(f.invoke(fa))
     }
 }
