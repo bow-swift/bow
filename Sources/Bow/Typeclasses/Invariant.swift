@@ -14,7 +14,10 @@ public protocol Invariant {
     ///   - f: Transforming function.
     ///   - g: Transforming function.
     /// - Returns: A new value in the same context as the original value, with the value type transformed.
-    static func imap<A, B>(_ fa : Kind<Self, A>, _ f : @escaping (A) -> B, _ g : @escaping (B) -> A) -> Kind<Self, B>
+    static func imap<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> B,
+        _ g: @escaping (B) -> A) -> Kind<Self, B>
 }
 
 // MARK: Syntax for Invariant
@@ -28,7 +31,7 @@ public extension Kind where F: Invariant {
     ///   - f: Transforming function.
     ///   - g: Transforming function.
     /// - Returns: A new value in the same context as the original value, with the value type transformed.
-    func imap<B>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> A) -> Kind<F, B> {
-        return F.imap(self, f, g)
+    func imap<B>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> Kind<F, B> {
+        F.imap(self, f, g)
     }
 }
