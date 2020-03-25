@@ -149,3 +149,17 @@ extension TracedTPartial: ComonadStore where W: ComonadStore, M: Monoid {
         wa^.lower().peek(s)
     }
 }
+
+// MARK: Instance of ComonadEnv for TracedT
+
+extension TracedTPartial: ComonadEnv where W: ComonadEnv, M: Monoid {
+    public typealias E = W.E
+    
+    public static func ask<A>(_ wa: TracedTOf<M, W, A>) -> W.E {
+        wa^.lower().ask()
+    }
+    
+    public static func local<A>(_ wa: TracedTOf<M, W, A>, _ f: @escaping (W.E) -> W.E) -> TracedTOf<M, W, A> {
+        TracedT(wa^.value.local(f))
+    }
+}
