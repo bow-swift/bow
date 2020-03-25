@@ -22,7 +22,7 @@ public final class Moore<E, V>: MooreOf<E, V> {
     /// - Parameter value: Value in the higher-kind form.
     /// - Returns: Value cast to Moore.
     public static func fix(_ value: MooreOf<E, V>) -> Moore<E, V> {
-        return value as! Moore<E, V>
+        value as! Moore<E, V>
     }
     
     /// Creates a Moore machine from a hidden initial state and a function that provides the next value and handling function.
@@ -31,7 +31,9 @@ public final class Moore<E, V>: MooreOf<E, V> {
     ///   - state: Initial state.
     ///   - next: Function to determine the next value and handling function.
     /// - Returns: A Moore machine described from the input values.
-    public static func unfold<S>(_ state: S, _ next: @escaping (S) -> (V, (E) -> S)) -> Moore<E, V> {
+    public static func unfold<S>(
+        _ state: S,
+        _ next: @escaping (S) -> (V, (E) -> S)) -> Moore<E, V> {
         let (a, transition) = next(state)
         return Moore(view: a) { input in
             unfold(transition(input), next)
@@ -45,7 +47,10 @@ public final class Moore<E, V>: MooreOf<E, V> {
     ///   - render: Rendering function.
     ///   - update: Update function.
     /// - Returns: A Moore machine described from the input functions.
-    public static func from<S>(initialState: S, render: @escaping (S) -> V, update: @escaping (S, E) -> S) -> Moore<E, V> {
+    public static func from<S>(
+        initialState: S,
+        render: @escaping (S) -> V,
+        update: @escaping (S, E) -> S) -> Moore<E, V> {
         unfold(initialState) { state in
             (render(state), { input in update(state, input) })
         }
@@ -58,7 +63,10 @@ public final class Moore<E, V>: MooreOf<E, V> {
     ///   - render: Rendering function.
     ///   - update: Update function.
     /// - Returns: A Moore machine described from the input functions.
-    public static func from<S>(initialState: S, render: @escaping (S) -> V, update: @escaping (E) -> State<S, S>) -> Moore<E, V> {
+    public static func from<S>(
+        initialState: S,
+        render: @escaping (S) -> V,
+        update: @escaping (E) -> State<S, S>) -> Moore<E, V> {
         from(initialState: initialState, render: render, update: { s, e in update(e).run(s).0 })
     }
     
@@ -102,7 +110,9 @@ public postfix func ^<E, V>(_ value: MooreOf<E, V>) -> Moore<E, V> {
 // MARK: Instance of Functor for Moore
 
 extension MoorePartial: Functor {
-    public static func map<A, B>(_ fa: MooreOf<E, A>, _ f: @escaping (A) -> B) -> MooreOf<E, B> {
+    public static func map<A, B>(
+        _ fa: MooreOf<E, A>,
+        _ f: @escaping (A) -> B) -> MooreOf<E, B> {
         Moore<E, B>(view: f(fa^.view),
                     handle: { update in fa^.handle(update).map(f)^ })
     }
@@ -111,7 +121,9 @@ extension MoorePartial: Functor {
 // MARK: Instance of Comonad for Moore
 
 extension MoorePartial: Comonad {
-    public static func coflatMap<A, B>(_ fa: MooreOf<E, A>, _ f: @escaping (MooreOf<E, A>) -> B) -> MooreOf<E, B> {
+    public static func coflatMap<A, B>(
+        _ fa: MooreOf<E, A>,
+        _ f: @escaping (MooreOf<E, A>) -> B) -> MooreOf<E, B> {
         Moore<E, B>(view: f(fa^),
                     handle: { update in fa^.handle(update).coflatMap(f)^ })
     }
