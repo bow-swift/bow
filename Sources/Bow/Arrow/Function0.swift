@@ -44,33 +44,35 @@ public postfix func ^<A>(_ fa: Function0Of<A>) -> Function0<A> {
     Function0.fix(fa)
 }
 
-// MARK: Protocol conformances
-
-// MARK: Instance of `EquatableK` for `Function0`
+// MARK: Instance of EquatableK for Function0
 extension Function0Partial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: Function0Of<A>, _ rhs: Function0Of<A>) -> Bool {
-        Function0.fix(lhs).extract() == Function0.fix(rhs).extract()
+    public static func eq<A: Equatable>(
+        _ lhs: Function0Of<A>,
+        _ rhs: Function0Of<A>) -> Bool {
+        lhs^.extract() == rhs^.extract()
     }
 }
 
-// MARK: Instance of `Functor` for `Function0`
+// MARK: Instance of Functor for Function0
 extension Function0Partial: Functor {
-    public static func map<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> B) -> Function0Of<B> {
-        Function0(Function0.fix(fa).f >>> f)
+    public static func map<A, B>(
+        _ fa: Function0Of<A>,
+        _ f: @escaping (A) -> B) -> Function0Of<B> {
+        Function0(fa^.f >>> f)
     }
 }
 
-// MARK: Instance of `Applicative` for `Function0`
+// MARK: Instance of Applicative for Function0
 extension Function0Partial: Applicative {
     public static func pure<A>(_ a: A) -> Function0Of<A> {
         Function0(constant(a))
     }
 }
 
-// MARK: Instance of `Selective` for `Function0`
+// MARK: Instance of Selective for Function0
 extension Function0Partial: Selective {}
 
-// MARK: Instance of `Monad` for `Function0`
+// MARK: Instance of Monad for Function0
 extension Function0Partial: Monad {
     public static func flatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (A) -> Function0Of<B>) -> Function0Of<B> {
         f(fa^.f())
@@ -88,7 +90,7 @@ extension Function0Partial: Monad {
     }
 }
 
-// MARK: Instance of `Comonad` for `Function0`
+// MARK: Instance of Comonad for Function0
 extension Function0Partial: Comonad {
     public static func coflatMap<A, B>(_ fa: Function0Of<A>, _ f: @escaping (Function0Of<A>) -> B) -> Function0Of<B> {
         Function0<B> { f(fa^) }
@@ -99,17 +101,17 @@ extension Function0Partial: Comonad {
     }
 }
 
-// MARK: Instance of `Bimonad` for `Function0`
+// MARK: Instance of Bimonad for Function0
 extension Function0Partial: Bimonad {}
 
-// MARK: Instance of `Semigroup` for `Function0`
+// MARK: Instance of Semigroup for Function0
 extension Function0: Semigroup where A: Semigroup {
     public func combine(_ other: Function0<A>) -> Function0<A> {
         Function0 { self.invoke().combine(other.invoke()) }
     }
 }
 
-// MARK: Instance of `Monoid` for `Function0`
+// MARK: Instance of Monoid for Function0
 extension Function0: Monoid where A: Monoid {
     public static func empty() -> Function0<A> {
         Function0(constant(A.empty()))
