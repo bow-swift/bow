@@ -29,4 +29,8 @@ class TracedTTest: XCTestCase {
     func testComonadStoreLaws() {
         ComonadStoreLaws<TracedTPartial<Int, StorePartial<Int>>, Int>.check()
     }
+    
+    func testComonadEnvLaws() {
+        ComonadEnvLaws<TracedTPartial<Int, EnvPartial<Int>>, Int>.check()
+    }
 }
