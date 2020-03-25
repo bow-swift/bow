@@ -9,7 +9,7 @@ import Foundation
 ///   - f: Function to be memoized. This function must be pure and deterministic in order to have consistent results.
 ///   - a: Function input.
 /// - Returns: A function that behaves like `f` but saves already computed results.
-public func memoize<A, B>(_ f : @escaping (_ a: A) -> B) -> (A) -> B where A : Hashable {
+public func memoize<A, B>(_ f: @escaping (_ a: A) -> B) -> (A) -> B where A: Hashable {
     var cached = Dictionary<A, B>()
     
     return { a in
@@ -37,10 +37,10 @@ public func memoize<A, B>(_ f : @escaping (_ a: A) -> B) -> (A) -> B where A : H
 ///   - a: Input to the recursive step.
 ///   - input: Current value for the recursion.
 /// - Returns: A function that behaves like `f` but saves already computed results.
-public func memoize<A, B>(_ f : @escaping (_ step: (_ a: A) -> B, _ input: A) -> B) -> (A) -> B where A : Hashable {
+public func memoize<A, B>(_ f: @escaping (_ step: (_ a: A) -> B, _ input: A) -> B) -> (A) -> B where A: Hashable {
     var cached = Dictionary<A, B>()
     
-    func wrap(_ a : A) -> B {
+    func wrap(_ a: A) -> B {
         if let cachedResult = cached[a] {
             return cachedResult
         }
