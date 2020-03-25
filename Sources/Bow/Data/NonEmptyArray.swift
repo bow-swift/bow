@@ -29,7 +29,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     ///   - rhs: Right hand side of the concatenation.
     /// - Returns: A non-empty array that contains the elements of the two arguments in the same order.
     public static func +(lhs: NonEmptyArray<A>, rhs: NonEmptyArray<A>) -> NonEmptyArray<A> {
-        NonEmptyArray(head: lhs.head, tail: lhs.tail + [rhs.head] + rhs.tail)
+        NEA(head: lhs.head, tail: lhs.tail + [rhs.head] + rhs.tail)
     }
 
     /// Concatenates a non-empty array with a Swift array.
@@ -39,7 +39,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     ///   - rhs: A Swift array.
     /// - Returns: A non-empty array that contains the elements of the two arguments in the same order.
     public static func +(lhs: NonEmptyArray<A>, rhs: [A]) -> NonEmptyArray<A> {
-        NonEmptyArray(head: lhs.head, tail: lhs.tail + rhs)
+        NEA(head: lhs.head, tail: lhs.tail + rhs)
     }
 
     /// Appends an element to a non-empty array.
@@ -49,7 +49,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     ///   - rhs: An element.
     /// - Returns: A non-empty array that has the new element at the end.
     public static func +(lhs: NonEmptyArray<A>, rhs: A) -> NonEmptyArray<A> {
-        NonEmptyArray(head: lhs.head, tail: lhs.tail + [rhs])
+        NEA(head: lhs.head, tail: lhs.tail + [rhs])
     }
 
     /// Creates a non-empty array from several values.
@@ -59,7 +59,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     ///   - tail: Variable number of values for the rest of the non-empty array.
     /// - Returns: A non-empty array that contains all elements in the specified order.
     public static func of(_ head: A, _ tail: A...) -> NonEmptyArray<A> {
-        NonEmptyArray(head: head, tail: tail)
+        NEA(head: head, tail: tail)
     }
 
     /// Creates a non-empty array from a Swift array.
@@ -67,7 +67,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     /// - Parameter array: A Swift array.
     /// - Returns: An optional non-empty array with the contents of the argument, or `Option.none` if it was empty.
     public static func fromArray(_ array: [A]) -> Option<NonEmptyArray<A>> {
-        array.isEmpty ? Option<NonEmptyArray<A>>.none() : Option<NonEmptyArray<A>>.some(NonEmptyArray(all: array))
+        array.isEmpty ? Option.none() : Option.some(NEA(all: array))
     }
 
     /// Unsafely creates a non-empty array from a Swift array.
@@ -77,7 +77,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     /// - Parameter array: A Swift array.
     /// - Returns: A non-empty array with the contents of the argument.
     public static func fromArrayUnsafe(_ array: [A]) -> NonEmptyArray<A> {
-        NonEmptyArray(all: array)
+        NEA(all: array)
     }
 
     /// Safe downcast.
@@ -85,7 +85,7 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     /// - Parameter fa: Value in higher-kind form.
     /// - Returns: Value cast to NonEmptyArray.
     public static func fix(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
-        fa as! NonEmptyArray<A>
+        fa as! NEA<A>
     }
 
     /// Initializes a non-empty array.
@@ -117,9 +117,9 @@ public final class NonEmptyArray<A>: NonEmptyArrayOf<A> {
     public func getOrNone(_ i: Int) -> Option<A> {
         let a = all()
         if i >= 0 && i < a.count {
-            return Option<A>.some(a[i])
+            return .some(a[i])
         } else {
-            return Option<A>.none()
+            return .none()
         }
     }
 
@@ -139,7 +139,6 @@ public postfix func ^<A>(_ fa: NonEmptyArrayOf<A>) -> NonEmptyArray<A> {
     NonEmptyArray.fix(fa)
 }
 
-// MARK: Functions for `NonEmptyArray` when the type conforms to `Equatable`
 public extension NonEmptyArray where A: Equatable {
     /// Checks if an element appears in this array.
     ///
@@ -158,14 +157,14 @@ public extension NonEmptyArray where A: Equatable {
     }
 }
 
-// Conformance of `NonEmptyArray` to `CustomStringConvertible`
+// MARK: Conformance of NonEmptyArray to CustomStringConvertible
 extension NonEmptyArray: CustomStringConvertible {
     public var description: String {
         "NonEmptyArray(\(self.all()))"
     }
 }
 
-// Conformance of `NonEmptyArray` to `CustomDebugStringConvertible`
+// MARK: Conformance of NonEmptyArray to CustomDebugStringConvertible
 extension NonEmptyArray: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription: String {
         let contentsString = self.all().map { x in x.debugDescription }.joined(separator: ", ")
@@ -173,57 +172,66 @@ extension NonEmptyArray: CustomDebugStringConvertible where A: CustomDebugString
     }
 }
 
-// MARK: Instance of `EquatableK` for `NonEmptyArray`
+// MARK: Instance of EquatableK for NonEmptyArray
 extension NonEmptyArrayPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: NonEmptyArrayOf<A>, _ rhs: NonEmptyArrayOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: NonEmptyArrayOf<A>,
+        _ rhs: NonEmptyArrayOf<A>) -> Bool {
         lhs^.all() == rhs^.all()
     }
 }
 
-// MARK: Instance of `Functor` for `NonEmptyArray`
+// MARK: Instance of Functor for NonEmptyArray
 extension NonEmptyArrayPartial: Functor {
-    public static func map<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> B) -> NonEmptyArrayOf<B> {
-        NonEmptyArray.fromArrayUnsafe(fa^.all().map(f))
+    public static func map<A, B>(
+        _ fa: NonEmptyArrayOf<A>,
+        _ f: @escaping (A) -> B) -> NonEmptyArrayOf<B> {
+        NEA.fromArrayUnsafe(fa^.all().map(f))
     }
 }
 
-// MARK: Instance of `Applicative` for `NonEmptyArray`
+// MARK: Instance of Applicative for NonEmptyArray
 extension NonEmptyArrayPartial: Applicative {
     public static func pure<A>(_ a: A) -> NonEmptyArrayOf<A> {
-        NonEmptyArray(head: a, tail: [])
+        NEA(head: a, tail: [])
     }
 }
 
-// MARK: Instance of `Selective` for `NonEmptyArray`
+// MARK: Instance of Selective for NonEmptyArray
 extension NonEmptyArrayPartial: Selective {}
 
-// MARK: Instance of `Monad` for `NonEmptyArray`
+// MARK: Instance of Monad for NonEmptyArray
 extension NonEmptyArrayPartial: Monad {
-    public static func flatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> NonEmptyArrayOf<B>) -> NonEmptyArrayOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: NonEmptyArrayOf<A>,
+        _ f: @escaping (A) -> NonEmptyArrayOf<B>) -> NonEmptyArrayOf<B> {
         f(fa^.head)^ + fa^.tail.flatMap{ a in f(a)^.all() }
     }
 
-    private static func go<A, B>(_ buf: [B],
-                                 _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>,
-                                 _ v: NonEmptyArray<Either<A, B>>) -> Trampoline<[B]> {
+    private static func go<A, B>(
+        _ buf: [B],
+        _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>,
+        _ v: NonEmptyArray<Either<A, B>>) -> Trampoline<[B]> {
         .defer {
             let head = v.head
             return head.fold({ a in go(buf, f, NonEmptyArray.fix(f(a)) + v.tail) },
                              { b in
                                 let newBuf = buf + [b]
-                                let x = NonEmptyArray<Either<A, B>>.fromArray(v.tail)
+                                let x = NEA<Either<A, B>>.fromArray(v.tail)
                                 return x.fold({ .done(newBuf) },
                                               { value in go(newBuf, f, value) })
             })
         }
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>) -> NonEmptyArrayOf<B> {
-        NonEmptyArray.fromArrayUnsafe(go([], f, f(a)^).run())
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> NonEmptyArrayOf<Either<A, B>>) -> NonEmptyArrayOf<B> {
+        NEA.fromArrayUnsafe(go([], f, f(a)^).run())
     }
 }
 
-// MARK: Instance of `Comonad` for `NonEmptyArray`
+// MARK: Instance of Comonad for NonEmptyArray
 extension NonEmptyArrayPartial: Comonad {
     public static func coflatMap<A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (NonEmptyArrayOf<A>) -> B) -> NonEmptyArrayOf<B> {
         func consume(_ array: [A], _ buf: [B] = []) -> [B] {
@@ -235,7 +243,7 @@ extension NonEmptyArrayPartial: Comonad {
                 return consume(tail, newBuf)
             }
         }
-        return NonEmptyArray(head: f(fa^), tail: consume(fa^.tail))
+        return NEA(head: f(fa^), tail: consume(fa^.tail))
     }
 
     public static func extract<A>(_ fa: NonEmptyArrayOf<A>) -> A {
@@ -243,25 +251,33 @@ extension NonEmptyArrayPartial: Comonad {
     }
 }
 
-// MARK: Instance of `Bimonad` for `NonEmptyArray`
+// MARK: Instance of Bimonad for NonEmptyArray
 extension NonEmptyArrayPartial: Bimonad {}
 
-// MARK: Instance of `Foldable` for `NonEmptyArray`
+// MARK: Instance of Foldable for NonEmptyArray
 extension NonEmptyArrayPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: NonEmptyArrayOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         fa^.tail.reduce(f(b, fa^.head), f)
     }
 
-    public static func foldRight<A, B>(_ fa: NonEmptyArrayOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: NonEmptyArrayOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         fa^.all().k().foldRight(b, f)
     }
 }
 
-// MARK: Instance of `Traverse` for `NonEmptyArray`
+// MARK: Instance of Traverse for NonEmptyArray
 extension NonEmptyArrayPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: NonEmptyArrayOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, NonEmptyArrayOf<B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: NonEmptyArrayOf<A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, NonEmptyArrayOf<B>> {
         let arrayTraverse = fa^.all().k().traverse(f)
-        return G.map(arrayTraverse, { x in NonEmptyArray.fromArrayUnsafe(x^.asArray) })
+        return G.map(arrayTraverse, { x in NEA.fromArrayUnsafe(x^.asArray) })
     }
 }
 
@@ -271,14 +287,16 @@ public extension NEA {
     }
 }
 
-// MARK: Instance of `SemigroupK` for `NonEmptyArray`
+// MARK: Instance of SemigroupK for NonEmptyArray
 extension NonEmptyArrayPartial: SemigroupK {
-    public static func combineK<A>(_ x: NonEmptyArrayOf<A>, _ y: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<A> {
+    public static func combineK<A>(
+        _ x: NonEmptyArrayOf<A>,
+        _ y: NonEmptyArrayOf<A>) -> NonEmptyArrayOf<A> {
         x^ + y^
     }
 }
 
-// MARK: Instance of `Semigroup` for `NonEmptyArray`
+// MARK: Instance of Semigroup for NonEmptyArray
 extension NonEmptyArray: Semigroup {
     public func combine(_ other: NonEmptyArray<A>) -> NonEmptyArray<A> {
         self + other
