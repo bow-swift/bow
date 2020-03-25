@@ -24,7 +24,19 @@ class EnvTTest: XCTestCase {
         ComonadLaws<EnvPartial<Int>>.check()
     }
     
+    func testFoldableLaws() {
+        FoldableLaws<EnvTPartial<Int, NEAPartial>>.check()
+    }
+    
+    func testTraverseLaws() {
+        TraverseLaws<EnvTPartial<Int, NEAPartial>>.check()
+    }
+    
     func testComonadEnvLaws() {
         ComonadEnvLaws<EnvPartial<Int>, Int>.check()
+    }
+    
+    func testComonadStoreLaws() {
+        ComonadStoreLaws<EnvTPartial<Int, StorePartial<Int>>, Int>.check()
     }
 }
