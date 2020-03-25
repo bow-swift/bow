@@ -12,7 +12,7 @@ extension Function1: Arbitrary where I: CoArbitrary & Hashable, O: Arbitrary {
 // MARK: Instance of `ArbitraryK` for `Function1`
 
 extension Function1Partial: ArbitraryK where I: CoArbitrary & Hashable {
-    public static func generate<A: Arbitrary>() -> Kind<Function1Partial<I>, A> {
+    public static func generate<A: Arbitrary>() -> Function1Of<I, A> {
         return Function1.arbitrary.generate
     }
 }
