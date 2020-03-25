@@ -49,7 +49,9 @@ public final class Zipper<A>: ZipperOf<A> {
         guard !array.isEmpty else {
             return nil
         }
-        self.init(left: [], focus: array[0], right: Array(array[1...]))
+        self.init(left: [],
+                  focus: array[0],
+                  right: Array(array[1...]))
     }
     
     /// Moves the focus one step to the left. If it is already in the leftmost position, it does nothing.
@@ -138,38 +140,49 @@ extension Zipper: CustomStringConvertible where A: CustomStringConvertible {
     }
 }
 
-// MARK: Instance of `EquatableK` for `Zipper`
+// MARK: Instance of EquatableK for Zipper
 
 extension ZipperPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: ZipperOf<A>, _ rhs: ZipperOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: ZipperOf<A>,
+        _ rhs: ZipperOf<A>) -> Bool {
         lhs^.left == rhs^.left &&
             lhs^.focus == rhs^.focus &&
             lhs^.right == rhs^.right
     }
 }
 
-// MARK: Instance of `Invariant` for `Zipper`
+// MARK: Instance of Invariant for Zipper
 
 extension ZipperPartial: Invariant {}
 
-// MARK: Instance of `Functor` for `Zipper`
+// MARK: Instance of Functor for Zipper
 
 extension ZipperPartial: Functor {
-    public static func map<A, B>(_ fa: ZipperOf<A>, _ f: @escaping (A) -> B) -> ZipperOf<B> {
-        Zipper(left: fa^.left.map(f), focus: f(fa^.focus), right: fa^.right.map(f))
+    public static func map<A, B>(
+        _ fa: ZipperOf<A>,
+        _ f: @escaping (A) -> B) -> ZipperOf<B> {
+        Zipper(left: fa^.left.map(f),
+               focus: f(fa^.focus),
+               right: fa^.right.map(f))
     }
 }
 
-// MARK: Instance of `Comonad` for `Zipper`
+// MARK: Instance of Comonad for Zipper
 
 extension ZipperPartial: Comonad {
-    public static func coflatMap<A, B>(_ fa: ZipperOf<A>, _ f: @escaping (ZipperOf<A>) -> B) -> ZipperOf<B> {
+    public static func coflatMap<A, B>(
+        _ fa: ZipperOf<A>,
+        _ f: @escaping (ZipperOf<A>) -> B) -> ZipperOf<B> {
         let array = fa^.asArray()
         let newLeft: [B] = fa^.left.enumerated().map { item in
             let l = Array(array[0 ..< item.offset])
             let focus = array[item.offset]
             let r = Array(array[(item.offset + 1)...])
-            return f(Zipper(left: l, focus: focus, right: r))
+            
+            return f(Zipper(left: l,
+                            focus: focus,
+                            right: r))
         }
         let newFocus: B = f(fa)
         let leftCount = fa^.left.count + 1
@@ -177,9 +190,14 @@ extension ZipperPartial: Comonad {
             let l = Array(array[0 ..< item.offset + leftCount])
             let focus = array[item.offset + leftCount]
             let r = Array(array[(item.offset + 1 + leftCount)...])
-            return f(Zipper(left: l, focus: focus, right: r))
+            
+            return f(Zipper(left: l,
+                            focus: focus,
+                            right: r))
         }
-        return Zipper(left: newLeft, focus: newFocus, right: newRight)
+        return Zipper(left: newLeft,
+                      focus: newFocus,
+                      right: newRight)
     }
     
     public static func extract<A>(_ fa: ZipperOf<A>) -> A {
