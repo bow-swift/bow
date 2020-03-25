@@ -41,30 +41,30 @@ public final class LastOption<A> {
     }
 }
 
-/// Instance of `Semigroup` for `FirstOption`. Keeps the first element that is not `Option.none()`.
+// MARK: Instance of Semigroup for FirstOption. Keeps the first element that is not Option.none()
 extension FirstOption: Semigroup {
     public func combine(_ other: FirstOption<A>) -> FirstOption<A> {
-        return self.const.value.fold(constant(false), constant(true)) ? self : other
+        self.const.value.fold(constant(false), constant(true)) ? self : other
     }
 }
 
-/// Instance of `Monoid` for `FirstOption`. Keeps the first element that is not `Option.none()`.
+// MARK: Instance of Monoid for FirstOption. Keeps the first element that is not Option.none()
 extension FirstOption: Monoid {
     public static func empty() -> FirstOption<A> {
-        return FirstOption(Option.none())
+        FirstOption(Option.none())
     }
 }
 
-/// Instance of `Semigroup` for `LastOption`. Keeps the last element that is not `Option.none()`.
+// MARK: Instance of Semigroup for LastOption. Keeps the last element that is not Option.none()
 extension LastOption: Semigroup {
     public func combine(_ other: LastOption<A>) -> LastOption<A> {
-        return other.const.value.fold(constant(false), constant(true)) ? other : self
+        other.const.value.fold(constant(false), constant(true)) ? other : self
     }
 }
 
-/// Instance of `Monoid` for `LastOption`. Keeps the first element that is not `Option.none()`.
+// MARK: Instance of Monoid for LastOption. Keeps the first element that is not Option.none()
 extension LastOption: Monoid {
     public static func empty() -> LastOption<A> {
-        return LastOption(Option.none())
+        LastOption(Option.none())
     }
 }
