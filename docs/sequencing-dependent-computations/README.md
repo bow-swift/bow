@@ -71,6 +71,9 @@ let talkOption = conferenceOption.flatMap { conference in
 ```swift
 // Performs a network call, returning an error or the content of the response
 func networkCall() -> IO<Error, String>
+```
+
+```swift
 let program: IO<Error, Void> = networkCall()
     .followedBy(ConsoleIO.print("Finished successfully"))^
 ```

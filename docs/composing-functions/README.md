@@ -79,6 +79,9 @@ prettyCircumference(3) // Returns "18.85"
 ```swift
 // Provides the next conference after a certain date, if it exists.
 func nextConference(after date: Date) -> Option<Conference>
+```
+
+```swift
 // Provides the next talk for a Conference, if it exists.
 func nextTalk(at conference: Conference) -> Option<Talk>
 ```

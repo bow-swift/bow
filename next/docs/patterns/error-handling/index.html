@@ -610,7 +610,9 @@
         <span class="p">}</span>
         <span class="k">return</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
     <span class="p">}</span>
-<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span>
 </code></pre></div></div>
 
 <p>This way, we still maintain referential transparency (our validation function is pure) and we have a concrete type describing the possible errors that may happen. If our failure type changes, we will get compiler errors everywhere we are calling this function and we will not miss them.</p>
@@ -661,7 +663,9 @@
     <span class="p">}</span>
     
     <span class="c1">// Implementation of the rest of validation functions</span>
-<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span>
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">Either</code> has a method that lets us map over multiple values. We can pass it multiple values and a function, and it will invoke it if every one of them is successful. In case one or more values are unsuccessful, the first failure is returned. In our case, the combination function is the initializer of the <code class="highlighter-rouge">Form</code> that we need to creat. The implementation of the combination function using a fail-fast strategy is:</p>
@@ -720,7 +724,9 @@
     <span class="p">}</span>
     
     <span class="c1">// Implementation of the rest of validation functions</span>
-<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span>
 </code></pre></div></div>
 
 <p>And finally, making use of <code class="highlighter-rouge">Validated.map</code>, we can write our validation function that combines all successful results into a Form or accumulates all errors found:</p>
@@ -761,7 +767,9 @@
     <span class="p">}</span>
     
     <span class="c1">// Implementation of the rest of validation functions</span>
-<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span>
 
 <span class="kd">extension</span> <span class="kt">OptionValidation</span> <span class="p">{</span>
     <span class="kd">static</span> <span class="kd">func</span> <span class="nf">validate</span><span class="p">(</span><span class="nv">firstName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
@@ -842,7 +850,9 @@
     <span class="p">}</span>
     
     <span class="c1">// Implementation of the rest of validation functions</span>
-<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">}</span>
 
 <span class="kd">extension</span> <span class="kt">GeneralValidationRules</span> <span class="p">{</span>
     <span class="kd">static</span> <span class="kd">func</span> <span class="nf">validate</span><span class="p">(</span><span class="nv">firstName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>

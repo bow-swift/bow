@@ -70,6 +70,9 @@ struct User {
 
 // Gets the name entered by the user in the UI, if any.
 func readName(from view: View) -> Option<String>
+```
+
+```swift
 // Gets the email entered by the user in the UI, if any.
 func readEmail(from view: View) -> Option<String>
 ```

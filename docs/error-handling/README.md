@@ -139,6 +139,9 @@ class ValidationRules {
         }
         return .success(email)
     }
+```
+
+```swift
 }
 ```
 
@@ -191,6 +194,9 @@ class FailFast {
     }
     
     // Implementation of the rest of validation functions
+```
+
+```swift
 }
 ```
 
@@ -254,6 +260,9 @@ class ErrorAccumulation {
     }
     
     // Implementation of the rest of validation functions
+```
+
+```swift
 }
 ```
 
@@ -298,6 +307,9 @@ class OptionValidation {
     }
     
     // Implementation of the rest of validation functions
+```
+
+```swift
 }
 
 extension OptionValidation {
@@ -364,6 +376,9 @@ class GeneralValidationRules<F: ApplicativeError> where F.E == NEA<ValidationErr
     }
     
     // Implementation of the rest of validation functions
+```
+
+```swift
 }
 
 extension GeneralValidationRules {

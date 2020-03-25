@@ -554,7 +554,9 @@
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Performs a network call, returning an error or the content of the response</span>
 <span class="kd">func</span> <span class="nf">networkCall</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span>
-<span class="k">let</span> <span class="nv">program</span><span class="p">:</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nf">networkCall</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">program</span><span class="p">:</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nf">networkCall</span><span class="p">()</span>
     <span class="o">.</span><span class="nf">followedBy</span><span class="p">(</span><span class="kt">ConsoleIO</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"Finished successfully"</span><span class="p">))</span><span class="o">^</span>
 </code></pre></div></div>
 

@@ -21,6 +21,9 @@ protocol Database {
 }
 
 func openDatabase() -> IO<Error, Database>
+```
+
+```swift
 func close(database: Database) -> IO<Error, Void>
 ```
 

@@ -50,6 +50,9 @@ let resolved: IO<NetworkError, String> = networkError.handleError { error in
 
 ```swift
 func fetchData(from: URL) -> IO<NetworkError, String>
+```
+
+```swift
 fetchData(from: URL(string: "http://my-server.com")!)
     .handleErrorWith { error in
         switch error {
