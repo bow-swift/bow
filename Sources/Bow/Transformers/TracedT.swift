@@ -40,6 +40,15 @@ public final class TracedT<M, W, A>: TracedTOf<M, W, A> {
     }
 }
 
+extension TracedT where M: Monoid, W: Functor {
+    /// Obtains the comonadic value without the Traced support.
+    ///
+    /// - Returns: Comonadic value without Traced support.
+    public func lower() -> Kind<W, A> {
+        value.map { f in f(M.empty()) }
+    }
+}
+
 /// Safe downcast.
 ///
 /// - Parameter fa: Value in the higher-kind form.
@@ -59,11 +68,11 @@ extension TracedT where W == ForId {
     }
 }
 
-// MARK: Instance of `Invariant` for `TracedT`
+// MARK: Instance of Invariant for TracedT
 
 extension TracedTPartial: Invariant where W: Functor {}
 
-// MARK: Instance of `Functor` for `TracedT`
+// MARK: Instance of Functor for TracedT
 
 extension TracedTPartial: Functor where W: Functor {
     public static func map<A, B>(_ fa: TracedTOf<M, W, A>, _ f: @escaping (A) -> B) -> TracedTOf<M, W, B> {
@@ -71,7 +80,7 @@ extension TracedTPartial: Functor where W: Functor {
     }
 }
 
-// MARK: Instance of `Applicative` for `TracedT`
+// MARK: Instance of Applicative for TracedT
 
 extension TracedTPartial: Applicative where W: Applicative {
     public static func pure<A>(_ a: A) -> TracedTOf<M, W, A> {
@@ -85,7 +94,7 @@ extension TracedTPartial: Applicative where W: Applicative {
     }
 }
 
-// MARK: Instance of `Comonad` for `TracedT`
+// MARK: Instance of Comonad for TracedT
 
 extension TracedTPartial: Comonad where W: Comonad, M: Monoid {
     public static func coflatMap<A, B>(_ fa: TracedTOf<M, W, A>, _ f: @escaping (TracedTOf<M, W, A>) -> B) -> TracedTOf<M, W, B> {
@@ -103,7 +112,7 @@ extension TracedTPartial: Comonad where W: Comonad, M: Monoid {
     }
 }
 
-// MARK: Instance of `ComonadTraced` for `TracedT`
+// MARK: Instance of ComonadTraced for TracedT
 
 extension TracedTPartial: ComonadTraced where W: Comonad, M: Monoid {
     public static func trace<A>(_ wa: TracedTOf<M, W, A>, _ m: M) -> A {
@@ -124,5 +133,19 @@ extension TracedTPartial: ComonadTraced where W: Comonad, M: Monoid {
                 }
             }
         })
+    }
+}
+
+// MARK: Instance of ComonadStore for TracedT
+
+extension TracedTPartial: ComonadStore where W: ComonadStore, M: Monoid {
+    public typealias S = W.S
+    
+    public static func position<A>(_ wa: TracedTOf<M, W, A>) -> W.S {
+        wa^.lower().position
+    }
+    
+    public static func peek<A>(_ wa: TracedTOf<M, W, A>, _ s: W.S) -> A {
+        wa^.lower().peek(s)
     }
 }
