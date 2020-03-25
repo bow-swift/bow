@@ -2234,10 +2234,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Functor%60"></a>
-                <a name="//apple_ref/swift/Section/Functions for `OptionT` when the effect has an instance of `Functor`" class="dashAnchor"></a>
-                <a href="#/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Functor%60">
-                  <h3 id="Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Functor%60" class="section-name">Functions for `OptionT` when the effect has an instance of `Functor`<span class="anchor-icon" /></h3>
+                <a name="/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Functor"></a>
+                <a name="//apple_ref/swift/Section/Functions for OptionT when the effect has an instance of Functor" class="dashAnchor"></a>
+                <a href="#/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Functor">
+                  <h3 id="Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Functor" class="section-name">Functions for OptionT when the effect has an instance of Functor<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2545,6 +2545,56 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:3Bow7OptionTCA2A7FunctorRzrlE10transformTyACyqd__qd_0_GAA4KindCyqd__AA0B0Cyqd_0_GGAHyxAJyq_GGcr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/transformT(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow7OptionTCA2A7FunctorRzrlE10transformTyACyqd__qd_0_GAA4KindCyqd__AA0B0Cyqd_0_GGAHyxAJyq_GGcr0_lF">
+                      <span class="token-name">transformT(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the wrapped value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">transformT</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt"><a href="../Classes/Option.html">Option</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Option.html">Option</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">OptionT</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An OptionT where the wrapped value has been transformed using the provided function.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:3Bow7OptionTCA2A7FunctorRzrlE10subflatMapyACyxqd__GAA0B0Cyqd__Gq_clF"></a>
                     <a name="//apple_ref/swift/Method/subflatMap(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:3Bow7OptionTCA2A7FunctorRzrlE10subflatMapyACyxqd__GAA0B0Cyqd__Gq_clF">
@@ -2623,7 +2673,7 @@
                             <tr>
                               <td>
                                 <code>
-                                  defaultRigth
+                                  defaultRight
                                 </code>
                               </td>
                               <td>
@@ -2637,7 +2687,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>Returns: An <code><a href="../Classes/EitherT.html">EitherT</a></code> containing the value as left or as right with the default value if the <code>OptionT</code> contains a none.</p>
+                        <p>An <code><a href="../Classes/EitherT.html">EitherT</a></code> containing the value as left or as right with the default value if the <code>OptionT</code> contains a none.</p>
                       </div>
                     </section>
                   </div>
@@ -2665,6 +2715,29 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">toLeft</span><span class="o">&lt;</span><span class="kt">R</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="n">defaultRight</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/EitherT.html">EitherT</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">R</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  defaultRight
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function returning a default value to use as right if the <code>OptionT</code> is none.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code><a href="../Classes/EitherT.html">EitherT</a></code> containing the value as left or as right with the default value if the <code>OptionT</code> contains a none.</p>
                       </div>
                     </section>
                   </div>
@@ -2743,6 +2816,29 @@
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  defaultLeft
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function returning a default value to use as left if the <code>OptionT</code> is none.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Returns: An <code><a href="../Classes/EitherT.html">EitherT</a></code> containing the value as right or as left with the default value if the <code>OptionT</code> contains a none.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -2750,10 +2846,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Applicative%60"></a>
-                <a name="//apple_ref/swift/Section/Functions for `OptionT` when the effect has an instance of `Applicative`" class="dashAnchor"></a>
-                <a href="#/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Applicative%60">
-                  <h3 id="Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Applicative%60" class="section-name">Functions for `OptionT` when the effect has an instance of `Applicative`<span class="anchor-icon" /></h3>
+                <a name="/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Applicative"></a>
+                <a name="//apple_ref/swift/Section/Functions for OptionT when the effect has an instance of Applicative" class="dashAnchor"></a>
+                <a href="#/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Applicative">
+                  <h3 id="Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Applicative" class="section-name">Functions for OptionT when the effect has an instance of Applicative<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2892,10 +2988,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Monad%60"></a>
-                <a name="//apple_ref/swift/Section/Functions for `OptionT` when the effect has an instance of `Monad`" class="dashAnchor"></a>
-                <a href="#/Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Monad%60">
-                  <h3 id="Functions%20for%20%60OptionT%60%20when%20the%20effect%20has%20an%20instance%20of%20%60Monad%60" class="section-name">Functions for `OptionT` when the effect has an instance of `Monad`<span class="anchor-icon" /></h3>
+                <a name="/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Monad"></a>
+                <a name="//apple_ref/swift/Section/Functions for OptionT when the effect has an instance of Monad" class="dashAnchor"></a>
+                <a href="#/Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Monad">
+                  <h3 id="Functions%20for%20OptionT%20when%20the%20effect%20has%20an%20instance%20of%20Monad" class="section-name">Functions for OptionT when the effect has an instance of Monad<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">

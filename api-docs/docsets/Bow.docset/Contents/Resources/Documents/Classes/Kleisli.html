@@ -2430,6 +2430,87 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow7KleisliC6narrowACyxqd__q0_GyypRs_lF"></a>
+                    <a name="//apple_ref/swift/Method/narrow()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow7KleisliC6narrowACyxqd__q0_GyypRs_lF">
+                      <span class="token-name">narrow()</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Narrows the scope of the context of this Kleisli from <code>Any</code> to a concrete type</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">narrow</span><span class="o">&lt;</span><span class="kt">DD</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Kleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">DD</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">D</span> <span class="o">==</span> <span class="kt">Any</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A copy of this Kleisli working on a more precise context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow7KleisliC10transformTyACyqd__q_qd_0_GAA4KindCyqd__qd_0_GAGyxq0_Gcr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/transformT(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow7KleisliC10transformTyACyqd__q_qd_0_GAA4KindCyqd__qd_0_GAGyxq0_Gcr0_lF">
+                      <span class="token-name">transformT(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the result of this Kleisli function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">transformT</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kleisli</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Kleisli function that behaves as the original one, with its result transformed.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -3668,10 +3749,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Functions%20when%20F%20has%20an%20instance%20of%20%60Monad%60."></a>
-                <a name="//apple_ref/swift/Section/Functions when F has an instance of `Monad`." class="dashAnchor"></a>
-                <a href="#/Functions%20when%20F%20has%20an%20instance%20of%20%60Monad%60.">
-                  <h3 id="Functions%20when%20F%20has%20an%20instance%20of%20%60Monad%60." class="section-name">Functions when F has an instance of `Monad`.<span class="anchor-icon" /></h3>
+                <a name="/Functions%20when%20F%20has%20an%20instance%20of%20Monad."></a>
+                <a name="//apple_ref/swift/Section/Functions when F has an instance of Monad." class="dashAnchor"></a>
+                <a href="#/Functions%20when%20F%20has%20an%20instance%20of%20Monad.">
+                  <h3 id="Functions%20when%20F%20has%20an%20instance%20of%20Monad." class="section-name">Functions when F has an instance of Monad.<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -3845,7 +3926,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">andThen</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">andThen</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Kleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -3856,7 +3937,7 @@
                             <tr>
                               <td>
                                 <code>
-                                  a
+                                  fb
                                 </code>
                               </td>
                               <td>
