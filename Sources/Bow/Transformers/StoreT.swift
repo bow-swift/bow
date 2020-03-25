@@ -162,3 +162,17 @@ extension StoreTPartial: ComonadTraced where W: ComonadTraced {
         })
     }
 }
+
+// MARK: Instace of ComonadEnv for StoreT
+
+extension StoreTPartial: ComonadEnv where W: ComonadEnv {
+    public typealias E = W.E
+    
+    public static func ask<A>(_ wa: StoreTOf<S, W, A>) -> W.E {
+        wa^.lower().ask()
+    }
+    
+    public static func local<A>(_ wa: StoreTOf<S, W, A>, _ f: @escaping (W.E) -> W.E) -> StoreTOf<S, W, A> {
+        StoreT(wa^.state, wa^.render.local(f))
+    }
+}
