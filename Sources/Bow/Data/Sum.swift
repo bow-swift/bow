@@ -131,24 +131,34 @@ public postfix func ^<F, G, V>(_ value: SumOf<F, G, V>) -> Sum<F, G, V> {
     Sum.fix(value)
 }
 
+// MARK: Instance of Invariant for Sum
+
 extension SumPartial: Invariant where F: Functor, G: Functor {}
 
+// MARK: Instance of Functor for Sum
+
 extension SumPartial: Functor where F: Functor, G: Functor {
-    public static func map<A, B>(_ fa: Kind<SumPartial<F, G>, A>, _ f: @escaping (A) -> B) -> Kind<SumPartial<F, G>, B> {
+    public static func map<A, B>(
+        _ fa: SumOf<F, G, A>,
+        _ f: @escaping (A) -> B) -> SumOf<F, G, B> {
         Sum(left: fa^.left.map(f),
             right: fa^.right.map(f),
             side: fa^.side)
     }
 }
 
+// MARK: Instance of Comonad for Sum
+
 extension SumPartial: Comonad where F: Comonad, G: Comonad {
-    public static func coflatMap<A, B>(_ fa: Kind<SumPartial<F, G>, A>, _ f: @escaping (Kind<SumPartial<F, G>, A>) -> B) -> Kind<SumPartial<F, G>, B> {
+    public static func coflatMap<A, B>(
+        _ fa: SumOf<F, G, A>,
+        _ f: @escaping (SumOf<F, G, A>) -> B) -> SumOf<F, G, B> {
         Sum(left: fa^.left.coflatMap { l in f(Sum(left: l, right: fa^.right, side: .left)) },
             right: fa^.right.coflatMap { r in f(Sum(left: fa^.left, right: r, side: .right)) },
             side: fa^.side)
     }
 
-    public static func extract<A>(_ fa: Kind<SumPartial<F, G>, A>) -> A {
+    public static func extract<A>(_ fa: SumOf<F, G, A>) -> A {
         switch fa^.side {
         case .left: return fa^.left.extract()
         case .right: return fa^.right.extract()
