@@ -38,55 +38,65 @@ public postfix func ^<A>(_ fa: IdOf<A>) -> Id<A> {
     Id.fix(fa)
 }
 
-// MARK: Conformance of `Id` to `CustomStringConvertible`.
+// MARK: Conformance of Id to CustomStringConvertible.
 extension Id: CustomStringConvertible {
     public var description: String {
         "Id(\(value))"
     }
 }
 
-// MARK: Conformance of `Id` to `CustomDebugStringConvertible`, given that type parameter also conforms to `CustomDebugStringConvertible`.
+// MARK: Conformance of Id to CustomDebugStringConvertible
 extension Id: CustomDebugStringConvertible where A : CustomDebugStringConvertible {
     public var debugDescription: String {
         "Id(\(value.debugDescription))"
     }
 }
 
-// MARK: Instance of `EquatableK` for `Id`
+// MARK: Instance of EquatableK for Id
 extension IdPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: IdOf<A>, _ rhs: IdOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: IdOf<A>,
+        _ rhs: IdOf<A>) -> Bool {
         lhs^.value == rhs^.value
     }
 }
 
-// MARK: Instance of `Functor` for `Id`
+// MARK: Instance of Functor for Id
 extension IdPartial: Functor {
-    public static func map<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> B) -> IdOf<B> {
+    public static func map<A, B>(
+        _ fa: IdOf<A>,
+        _ f: @escaping (A) -> B) -> IdOf<B> {
         Id(f(fa^.value))
     }
 }
 
-// MARK: Instance of `Applicative` for `Id`
+// MARK: Instance of Applicative for Id
 extension IdPartial: Applicative {
     public static func pure<A>(_ a: A) -> IdOf<A> {
         Id(a)
     }
 }
 
-// MARK: Instance of `Selective` for `Id`
+// MARK: Instance of Selective for Id
 extension IdPartial: Selective {}
 
-// MARK: Instance of `Monad` for `Id`
+// MARK: Instance of Monad for Id
 extension IdPartial: Monad {
-    public static func flatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: IdOf<A>,
+        _ f: @escaping (A) -> IdOf<B>) -> IdOf<B> {
         f(fa^.value)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> IdOf<Either<A, B>>) -> IdOf<B> {
         _tailRecM(a, f).run()
     }
     
-    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IdOf<Either<A, B>>) -> Trampoline<IdOf<B>> {
+    private static func _tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> IdOf<Either<A, B>>) -> Trampoline<IdOf<B>> {
         .defer {
             f(a)^.value.fold(
                 { left in _tailRecM(left, f) },
@@ -95,9 +105,11 @@ extension IdPartial: Monad {
     }
 }
 
-// MARK: Instance of `Comonad` for `Id`
+// MARK: Instance of Comonad for Id
 extension IdPartial: Comonad {
-    public static func coflatMap<A, B>(_ fa: IdOf<A>, _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
+    public static func coflatMap<A, B>(
+        _ fa: IdOf<A>,
+        _ f: @escaping (IdOf<A>) -> B) -> IdOf<B> {
         fa.map { a in f(Id(a)) }
     }
 
@@ -106,35 +118,43 @@ extension IdPartial: Comonad {
     }
 }
 
-// MARK: Instance of `Bimonad` for `Id`
+// MARK: Instance of Bimonad for Id
 extension IdPartial: Bimonad {}
 
-// MARK: Instance of `Foldable` for `Id`
+// MARK: Instance of Foldable for Id
 extension IdPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: IdOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: IdOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         f(b, fa^.value)
     }
 
-    public static func foldRight<A, B>(_ fa: IdOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: IdOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         f(fa^.value, b)
     }
 }
 
-// MARK: Instance of `Traverse` for `Id`
+// MARK: Instance of Traverse for Id
 extension IdPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: IdOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, IdOf<B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: IdOf<A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, IdOf<B>> {
         G.map(f(fa^.value), Id<B>.init)
     }
 }
 
-// MARK: Instance of `Semigroup` for `Id`
+// MARK: Instance of Semigroup for Id
 extension Id: Semigroup where A: Semigroup {
     public func combine(_ other: Id<A>) -> Id<A> {
         Id(self.value.combine(other.value))
     }
 }
 
-// MARK: Instance of `Monoid` for `Id`
+// MARK: Instance of Monoid for Id
 extension Id: Monoid where A: Monoid {
     public static func empty() -> Id<A> {
         Id(A.empty())
