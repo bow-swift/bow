@@ -16,7 +16,9 @@ public protocol MonadReader: Monad {
     ///   - fa: Computation to execute.
     ///   - f: Funtion to modify the environment.
     /// - Returns: Computation in the modified environment.
-    static func local<A>(_ fa: Kind<Self, A>, _ f: @escaping (D) -> D) -> Kind<Self, A>
+    static func local<A>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (D) -> D) -> Kind<Self, A>
 }
 
 public extension MonadReader {
@@ -25,7 +27,7 @@ public extension MonadReader {
     /// - Parameter f: Selector function to apply to the environment.
     /// - Returns: A value extracted from the environment, in the context implementing this instance.
     static func reader<A>(_ f: @escaping (D) -> A) -> Kind<Self, A> {
-        return map(ask(), f)
+        map(ask(), f)
     }
 }
 
@@ -38,7 +40,7 @@ public extension Kind where F: MonadReader, A == F.D {
     ///
     /// - Returns: Shared environment.
     static func ask() -> Kind<F, F.D> {
-        return F.ask()
+        F.ask()
     }
 }
 
@@ -51,7 +53,7 @@ public extension Kind where F: MonadReader {
     ///   - f: Funtion to modify the environment.
     /// - Returns: Computation in the modified environment.
     func local(_ f: @escaping (F.D) -> F.D) -> Kind<F, A> {
-        return F.local(self, f)
+        F.local(self, f)
     }
 
     /// Retrieves a function of the current environment.
@@ -61,6 +63,6 @@ public extension Kind where F: MonadReader {
     /// - Parameter f: Selector function to apply to the environment.
     /// - Returns: A value extracted from the environment, in the context implementing this instance.
     static func reader(_ f: @escaping (F.D) -> A) -> Kind<F, A> {
-        return F.reader(f)
+        F.reader(f)
     }
 }
