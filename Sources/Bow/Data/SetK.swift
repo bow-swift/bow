@@ -20,7 +20,7 @@ public final class SetK<A: Hashable>: SetKOf<A> {
     ///   - rhs: Right hand side of the union.
     /// - Returns: A new set that includes all elements present in both sets.
     public static func +(lhs: SetK<A>, rhs: SetK<A>) -> SetK<A> {
-        return SetK(lhs.set.union(rhs.set))
+        SetK(lhs.set.union(rhs.set))
     }
 
     /// Safe downcast.
@@ -28,7 +28,7 @@ public final class SetK<A: Hashable>: SetKOf<A> {
     /// - Parameter fa: Value in the higher-kind form.
     /// - Returns: Value cast to SetK.
     public static func fix(_ fa: SetKOf<A>) -> SetK<A> {
-        return fa as! SetK<A>
+        fa as! SetK<A>
     }
 
     /// Initializes a `SetK` with the elements of a `Swift.Set`.
@@ -47,7 +47,7 @@ public final class SetK<A: Hashable>: SetKOf<A> {
 
     /// Extracts a `Swift.Set` from this wrapper.
     public var asSet: Set<A> {
-        return set
+        self.set
     }
 
     /// Combines this set with another using the union of the underlying `Swift.Set`s.
@@ -55,7 +55,7 @@ public final class SetK<A: Hashable>: SetKOf<A> {
     /// - Parameter y: A set
     /// - Returns: A set containing the elements of the two sets.
     public func combineK(_ y: SetK<A>) -> SetK<A> {
-        return self + y
+        self + y
     }
 }
 
@@ -64,20 +64,20 @@ public final class SetK<A: Hashable>: SetKOf<A> {
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to SetK.
 public postfix func ^<A>(_ fa: SetKOf<A>) -> SetK<A> {
-    return SetK.fix(fa)
+    SetK.fix(fa)
 }
 
-// MARK: Instance of `Semigroup` for `SetK`
+// MARK: Instance of Semigroup for SetK
 extension SetK: Semigroup {
     public func combine(_ other: SetK<A>) -> SetK<A> {
-        return self + other
+        self + other
     }
 }
 
-// MARK: Instance of `Monoid` for `SetK`
+// MARK: Instance of Monoid for SetK
 extension SetK: Monoid {
     public static func empty() -> SetK<A> {
-        return SetK(Set([]))
+        SetK(Set([]))
     }
 }
 
@@ -87,6 +87,6 @@ public extension Set {
     ///
     /// - Returns: A `SetK` that contains the elements of this set.
     func k() -> SetK<Element> {
-        return SetK(self)
+        SetK(self)
     }
 }
