@@ -5,14 +5,12 @@ on: [pull_request]
 jobs:
   build:
 
-    runs-on: macOS-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Compile documentation
       run: |
-        brew tap bow-swift/nef
-        brew install sourcekitten
         brew install nef
-        gem install cocoapods -v 1.8.4
-        nef compile Documentation.app
+        gem install cocoapods -v 1.9.1
+        nef compile --project Documentation.app

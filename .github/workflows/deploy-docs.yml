@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: 
+    branches:
     - master
 
 jobs:
@@ -14,11 +14,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Generate microsite
       run: |
-        brew tap bow-swift/nef
-        brew install sourcekitten
         brew install nef
+        brew install sourcekitten
         gem install bundler -v 2.0.2
-        gem install cocoapods -v 1.8.4
+        gem install cocoapods -v 1.9.1
         ./scripts/gen-docs.rb
     - name: Deploy microsite
       uses: peaceiris/actions-gh-pages@v3

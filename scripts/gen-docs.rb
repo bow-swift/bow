@@ -84,7 +84,7 @@ def generate_nef_site(version, versions_list)
   File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
-  system "nef jekyll --project Documentation.app --output docs --main-page Documentation.app/Jekyll/Home.md"
+  system "nef jekyll --project Documentation.app --output #{$source_dir} --main-page Documentation.app/Jekyll/Home.md"
   system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b #{version}"
   system "rm -rf #{$source_dir}/docs"
   system "ls -la #{$source_dir}"
