@@ -48,7 +48,7 @@ public postfix func ^<F, A, B>(_ value: CokleisliOf<F, A, B>) -> Cokleisli<F, A,
     Cokleisli.fix(value)
 }
 
-// MARK: Functions for `Cokleisli` when the effect has a `Comonad` instance.
+// MARK: Functions for Cokleisli when the effect has a Comonad instance.
 extension Cokleisli where F: Comonad {
     /// Creates a Cokleisli that extracts the value of a `Comonad`.
     ///
