@@ -30,7 +30,7 @@ public extension MonadWriter {
     /// - Parameter w: New value.
     /// - Returns: Unit.
     static func tell(_ w: W) -> Kind<Self, ()> {
-        return writer((w, ()))
+        writer((w, ()))
     }
     
     /// Performs a computation and transforms the side stream of data, pairing it with the result of the computation.
@@ -39,8 +39,10 @@ public extension MonadWriter {
     ///   - fa: A computation.
     ///   - f: A function to transform the side stream of data.
     /// - Returns: A tuple of the transformation of the side stream and the result of the computation.
-    static func listens<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (W) -> B) -> Kind<Self, (B, A)> {
-        return map(listen(fa), { pair in (f(pair.0), pair.1) })
+    static func listens<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (W) -> B) -> Kind<Self, (B, A)> {
+        map(listen(fa), { pair in (f(pair.0), pair.1) })
     }
     
     /// Transforms the side stream of data of a given computation.
@@ -49,8 +51,10 @@ public extension MonadWriter {
     ///   - fa: A computation.
     ///   - f: Transforming function.
     /// - Returns: A computation with the same result as the provided one, with the transformed side stream of data.
-    static func censor<A>(_ fa: Kind<Self, A>, _ f: @escaping (W) -> W) -> Kind<Self, A> {
-        return pass(fa.map { a in (f, a) })
+    static func censor<A>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (W) -> W) -> Kind<Self, A> {
+        pass(fa.map { a in (f, a) })
     }
 }
 
@@ -64,7 +68,7 @@ public extension Kind where F: MonadWriter, A == Void {
     /// - Parameter w: New value.
     /// - Returns: Unit.
     static func tell(_ w: F.W) -> Kind<F, ()> {
-        return F.tell(w)
+        F.tell(w)
     }
 }
 
@@ -76,7 +80,7 @@ public extension Kind where F: MonadWriter {
     /// - Parameter aw: A tupe of the writer type and a value.
     /// - Returns: The writer action embedded in the context implementing this instance.
     static func writer(_ aw: (F.W, A)) -> Kind<F, A> {
-        return F.writer(aw)
+        F.writer(aw)
     }
 
     /// Adds the side stream of data to the result of this computation.
@@ -85,7 +89,7 @@ public extension Kind where F: MonadWriter {
     ///
     /// - Returns: The result of the computation paired with the side stream of data.
     func listen() -> Kind<F, (F.W, A)> {
-        return F.listen(self)
+        F.listen(self)
     }
 
     /// Performs a computation and transforms the side stream of data.
@@ -95,7 +99,7 @@ public extension Kind where F: MonadWriter {
     /// - Parameter fa: A computation that transform the stream of data.
     /// - Returns: Result of the computation.
     static func pass(_ fa: Kind<F, ((F.W) -> F.W, A)>) -> Kind<F, A> {
-        return F.pass(fa)
+        F.pass(fa)
     }
 
     /// Performs this computation and transforms the side stream of data, pairing it with the result of this computation.
@@ -106,7 +110,7 @@ public extension Kind where F: MonadWriter {
     ///   - f: A function to transform the side stream of data.
     /// - Returns: A tuple of the transformation of the side stream and the result of the computation.
     func listens<B>(_ f: @escaping (F.W) -> B) -> Kind<F, (B, A)> {
-        return F.listens(self, f)
+        F.listens(self, f)
     }
 
     /// Transforms the side stream of data of this computation.
@@ -117,6 +121,6 @@ public extension Kind where F: MonadWriter {
     ///   - f: Transforming function.
     /// - Returns: A computation with the same result as the provided one, with the transformed side stream of data.
     func censor(_ f: @escaping (F.W) -> F.W) -> Kind<F, A> {
-        return F.censor(self, f)
+        F.censor(self, f)
     }
 }
