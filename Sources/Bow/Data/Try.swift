@@ -138,7 +138,9 @@ public final class Try<A>: TryOf<A> {
     /// - Parameter f: Transformation function.
     /// - Returns: A failure if the transformation of this value provides no result, or a success with the result of the transformation.
     public func mapFilter<B>(_ f: @escaping (A) -> Option<B>) -> Try<B> {
-        self.flatMap { a in f(a).fold(constant(Try<B>.raiseError(TryError.predicateDoesNotMatch)), Try<B>.pure) }^
+        self.flatMap { a in f(a).fold(constant(Try<B>.raiseError(TryError.predicateDoesNotMatch)),
+                      Try<B>.pure)
+        }^
     }
 
     /// Converts this value to an `Option`.
@@ -192,15 +194,15 @@ private enum _Try<A> {
     case failure(Error)
 }
 
-// MARK: Conformance of `Try` to `CustomStringConvertible`
-extension Try: CustomStringConvertible {
+// MARK: Conformance of Try to CustomStringConvertible
+extension Try: CustomStringConvertible where A: CustomStringConvertible {
     public var description : String {
         fold({ error in "Failure(\(error))" },
-             { value in "Success(\(value))" })
+             { value in "Success(\(value.description))" })
     }
 }
 
-// MARK: Conformance of `Try` to `CustomDebugStringConvertible`
+// MARK: Conformance of Try to CustomDebugStringConvertible
 extension Try: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription: String {
         fold({ error in "Failure(\(error))" },
@@ -208,9 +210,11 @@ extension Try: CustomDebugStringConvertible where A: CustomDebugStringConvertibl
     }
 }
 
-// MARK: Instance of `EquatableK` for `Try`
+// MARK: Instance of EquatableK for Try
 extension TryPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: TryOf<A>, _ rhs: TryOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: TryOf<A>,
+        _ rhs: TryOf<A>) -> Bool {
         lhs^.fold(
             { aError in rhs^.fold({ bError in "\(aError)" == "\(bError)"},
                                   constant(false))},
@@ -219,34 +223,42 @@ extension TryPartial: EquatableK {
     }
 }
 
-// MARK: Instance of `Functor` for `Try`
+// MARK: Instance of Functor for Try
 extension TryPartial: Functor {
-    public static func map<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> B) -> TryOf<B> {
+    public static func map<A, B>(
+        _ fa: TryOf<A>,
+        _ f: @escaping (A) -> B) -> TryOf<B> {
         fa^.fold(Try.failure, Try.success <<< f)
     }
 }
 
-// MARK: Instance of `Applicative` for `Try`
+// MARK: Instance of Applicative for Try
 extension TryPartial: Applicative {
     public static func pure<A>(_ a: A) -> TryOf<A> {
         Try.success(a)
     }
 }
 
-// MARK: Instance of `Selective` for `Try`
+// MARK: Instance of Selective for Try
 extension TryPartial: Selective {}
 
-// MARK: Instance of `Monad` for `Try`
+// MARK: Instance of Monad for Try
 extension TryPartial: Monad {
-    public static func flatMap<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: TryOf<A>,
+        _ f: @escaping (A) -> TryOf<B>) -> TryOf<B> {
         fa^.fold(Try<B>.raise, f)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> TryOf<Either<A, B>>) -> TryOf<B> {
         _tailRecM(a, f).run()
     }
     
-    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TryOf<Either<A, B>>) -> Trampoline<TryOf<B>> {
+    private static func _tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> TryOf<Either<A, B>>) -> Trampoline<TryOf<B>> {
         .defer {
             f(a)^.fold({ err in .done(Try.raise(err)) },
                        { either in
@@ -257,7 +269,7 @@ extension TryPartial: Monad {
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `Try`
+// MARK: Instance of ApplicativeError for Try
 extension TryPartial: ApplicativeError {
     public typealias E = Error
 
@@ -265,38 +277,50 @@ extension TryPartial: ApplicativeError {
         Try.failure(e)
     }
 
-    public static func handleErrorWith<A>(_ fa: TryOf<A>, _ f: @escaping (Error) -> TryOf<A>) -> TryOf<A> {
+    public static func handleErrorWith<A>(
+        _ fa: TryOf<A>,
+        _ f: @escaping (Error) -> TryOf<A>) -> TryOf<A> {
         fa^.recoverWith { e in f(e)^ }
     }
 }
 
-// MARK: Instance of `MonadError` for `Try`
+// MARK: Instance of MonadError for Try
 extension TryPartial: MonadError {}
 
-// MARK: Instance of `Foldable` for `Try`
+// MARK: Instance of Foldable for Try
 extension TryPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: TryOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: TryOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         fa^.fold(constant(b),
                  { a in f(b, a) })
     }
 
-    public static func foldRight<A, B>(_ fa: TryOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: TryOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         fa^.fold(constant(b),
                  { a in f(a, b) })
     }
 }
 
-// MARK: Instance of `Traverse` for `Try`
+// MARK: Instance of Traverse for Try
 extension TryPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, TryOf<B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: TryOf<A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, TryOf<B>> {
         fa^.fold({ _ in G.pure(Try.raise(TryError.illegalState)) },
                  { a in G.map(f(a), { b in Try.invoke{ b } }) })
     }
 }
 
-// MARK: Instance of `FunctorFilter` for `Try`
+// MARK: Instance of FunctorFilter for Try
 extension TryPartial: FunctorFilter {
-    public static func mapFilter<A, B>(_ fa: TryOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> TryOf<B> {
+    public static func mapFilter<A, B>(
+        _ fa: TryOf<A>,
+        _ f: @escaping (A) -> OptionOf<B>) -> TryOf<B> {
         fa^.flatMap { a in
             f(a)^.fold(constant(raiseError(TryError.predicateDoesNotMatch)), pure)
         }
@@ -304,7 +328,7 @@ extension TryPartial: FunctorFilter {
 }
 
 
-// MARK: Instance of `Semigroup` for `Try`
+// MARK: Instance of Semigroup for Try
 extension Try: Semigroup where A: Semigroup {
     public func combine(_ other: Try<A>) -> Try<A> {
         self.fold(constant(other),
@@ -314,7 +338,7 @@ extension Try: Semigroup where A: Semigroup {
     }
 }
 
-// MARK: Instance of `Monoid` for `Try`
+// MARK: Instance of Monoid for Try
 extension Try: Monoid where A: Monoid {
     public static func empty() -> Try<A> {
         Try.failure(TryError.illegalState)
