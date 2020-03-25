@@ -39,4 +39,8 @@ class EnvTTest: XCTestCase {
     func testComonadStoreLaws() {
         ComonadStoreLaws<EnvTPartial<Int, StorePartial<Int>>, Int>.check()
     }
+    
+    func testComonadTracedLaws() {
+        ComonadTracedLaws<EnvTPartial<Int, TracedPartial<Int>>, Int>.check()
+    }
 }
