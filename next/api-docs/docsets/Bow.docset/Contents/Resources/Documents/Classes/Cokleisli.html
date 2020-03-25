@@ -2181,7 +2181,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes/CokleisliPartial.html">CokleisliPartial</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Cokleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow11CokleisliOfa">CokleisliOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Cokleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2311,10 +2311,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Functions%20for%20%60Cokleisli%60%20when%20the%20effect%20has%20a%20%60Comonad%60%20instance."></a>
-                <a name="//apple_ref/swift/Section/Functions for `Cokleisli` when the effect has a `Comonad` instance." class="dashAnchor"></a>
-                <a href="#/Functions%20for%20%60Cokleisli%60%20when%20the%20effect%20has%20a%20%60Comonad%60%20instance.">
-                  <h3 id="Functions%20for%20%60Cokleisli%60%20when%20the%20effect%20has%20a%20%60Comonad%60%20instance." class="section-name">Functions for `Cokleisli` when the effect has a `Comonad` instance.<span class="anchor-icon" /></h3>
+                <a name="/Functions%20for%20Cokleisli%20when%20the%20effect%20has%20a%20Comonad%20instance."></a>
+                <a name="//apple_ref/swift/Section/Functions for Cokleisli when the effect has a Comonad instance." class="dashAnchor"></a>
+                <a href="#/Functions%20for%20Cokleisli%20when%20the%20effect%20has%20a%20Comonad%20instance.">
+                  <h3 id="Functions%20for%20Cokleisli%20when%20the%20effect%20has%20a%20Comonad%20instance." class="section-name">Functions for Cokleisli when the effect has a Comonad instance.<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2369,7 +2369,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">bimap</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">g</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span> <span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Cokleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">bimap</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">g</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Cokleisli</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
