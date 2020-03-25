@@ -53,7 +53,7 @@ public typealias StateOf<S, A> = StateTOf<ForId, S, A>
 /// State is a convenience data type over the `StateT` transformer, when the effect is `Id`.
 public typealias State<S, A> = StateT<ForId, S, A>
 
-// MARK: Convenience functions when the effect is `Id`
+// MARK: Convenience functions when the effect is Id
 public extension StateT where F == ForId {
     /// Initializes a `State` value.
     ///
@@ -67,7 +67,7 @@ public extension StateT where F == ForId {
     /// - Parameter initialState: Initial state for this computation.
     /// - Returns: A pair with the updated state and the produced value.
     func run(_ initialState: S) -> (S, A) {
-        Id.fix(self.runM(initialState)).value
+        self.runM(initialState)^.value
     }
 
     /// Runs this computation provided an initial state.
@@ -87,16 +87,22 @@ public extension StateT where F == ForId {
     }
 }
 
-// MARK: Functions for `StateT` when the effect has an instance of `Functor`
+// MARK: Functions for StateT when the effect has an instance of Functor
 extension StateT where F: Functor {
     /// Transforms the return value and final state of a computation using a provided function.
     ///
     /// - Parameter f: Transforming function.
     /// - Returns: An `StateT` where the final state and produced value have been transformed using the provided function.
     public func transform<B>(_ f: @escaping (S, A) -> (S, B)) -> StateT<F, S, B> {
-        return StateT<F, S, B>(
-            runF >>> F.lift(f)
-        )
+        StateT<F, S, B>(runF >>> F.lift(f))
+    }
+    
+    /// Transforms the wrapped value using a provided function.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: An `StateT` where the final state and produced value have been transformed using the provided function.
+    public func transformT<G, B>(_ f: @escaping (Kind<F, (S, A)>) -> Kind<G, (S, B)>) -> StateT<G, S, B> {
+        StateT<G, S, B>(self.runF >>> f)
     }
     
     /// Generalizes this StateT to a parent state, given functions to get and set the inner state into the general state.
@@ -112,7 +118,7 @@ extension StateT where F: Functor {
     }
 }
 
-// MARK: Functions for `StateT` when the effect has an instance of `Functor`
+// MARK: Functions for StateT when the effect has an instance of Functor
 
 extension StateT where F: Functor {
     /// Lifts an effect by wrapping the contained value into a function that depends on some state.
@@ -164,7 +170,7 @@ extension StateT where F: Functor {
     }
 }
 
-// MARK: Functions for `StateT` when the effect has an instance of `Functor`
+// MARK: Functions for StateT when the effect has an instance of Functor
 
 extension StateT where F: Monad {
     /// Flatmaps a function that produces an effect and lifts if back to `StateT`.
@@ -182,29 +188,29 @@ extension StateT where F: Monad {
     }
 }
 
-// MARK: Instance of `Invariant` for `StateT`
+// MARK: Instance of Invariant for StateT
 extension StateTPartial: Invariant where F: Functor {}
 
-// MARK: Instance of `Functor` for `StateT`
+// MARK: Instance of Functor for StateT
 extension StateTPartial: Functor where F: Functor {
-    public static func map<A, B>(_ fa: Kind<StateTPartial<F, S>, A>, _ f: @escaping (A) -> B) -> Kind<StateTPartial<F, S>, B> {
+    public static func map<A, B>(_ fa: StateTOf<F, S, A>, _ f: @escaping (A) -> B) -> StateTOf<F, S, B> {
         fa^.transform({ (s, a) in (s, f(a)) })
     }
 }
 
-// MARK: Instance of `Applicative` for `StateT`
+// MARK: Instance of Applicative for StateT
 extension StateTPartial: Applicative where F: Monad {
-    public static func pure<A>(_ a: A) -> Kind<StateTPartial<F, S>, A> {
+    public static func pure<A>(_ a: A) -> StateTOf<F, S, A> {
         StateT { s in F.pure((s, a)) }
     }
 }
 
-// MARK: Instance of `Selective` for `StateT`
+// MARK: Instance of Selective for StateT
 extension StateTPartial: Selective where F: Monad {}
 
-// MARK: Instance of `Monad` for `StateT`
+// MARK: Instance of Monad for StateT
 extension StateTPartial: Monad where F: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<StateTPartial<F, S>, A>, _ f: @escaping (A) -> Kind<StateTPartial<F, S>, B>) -> Kind<StateTPartial<F, S>, B> {
+    public static func flatMap<A, B>(_ fa: StateTOf<F, S, A>, _ f: @escaping (A) -> StateTOf<F, S, B>) -> StateTOf<F, S, B> {
         StateT<F, S, B>(
             fa^.runF >>> { fsa in
                 fsa.flatMap { (s, a) in
@@ -213,10 +219,10 @@ extension StateTPartial: Monad where F: Monad {
             })
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<StateTPartial<F, S>, Either<A, B>>) -> Kind<StateTPartial<F, S>, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<F, S, Either<A, B>>) -> StateTOf<F, S, B> {
         StateT<F, S, B> { s in
             F.tailRecM((s, a), { pair in
-                F.map(StateT.fix(f(pair.1)).runM(pair.0), { sss, ab in
+                F.map(f(pair.1)^.runM(pair.0), { sss, ab in
                     ab.bimap({ left in (sss, left) }, { right in (sss, right) })
                 })
             })
@@ -224,63 +230,105 @@ extension StateTPartial: Monad where F: Monad {
     }
 }
 
-// MARK: Instance of `MonadState` for `StateT`
+// MARK: Instance of MonadState for StateT
 extension StateTPartial: MonadState where F: Monad {
-    public static func get() -> Kind<StateTPartial<F, S>, S> {
+    public static func get() -> StateTOf<F, S, S> {
         StateT { s in F.pure((s, s)) }
     }
 
-    public static func set(_ s: S) -> Kind<StateTPartial<F, S>, ()> {
+    public static func set(_ s: S) -> StateTOf<F, S, ()> {
         StateT { _ in F.pure((s, ())) }
     }
 }
 
-// MARK: Instance of `SemigroupK` for `StateT`
+// MARK: Instance of SemigroupK for StateT
 extension StateTPartial: SemigroupK where F: Monad & SemigroupK {
-    public static func combineK<A>(_ x: Kind<StateTPartial<F, S>, A>, _ y: Kind<StateTPartial<F, S>, A>) -> Kind<StateTPartial<F, S>, A> {
+    public static func combineK<A>(_ x: StateTOf<F, S, A>, _ y: StateTOf<F, S, A>) -> StateTOf<F, S, A> {
         StateT { s in x^.runM(s).combineK(y^.runM(s)) }
     }
 }
 
-// MARK: Instance of `MonoidK` for `StateT`
+// MARK: Instance of MonoidK for StateT
 extension StateTPartial: MonoidK where F: MonadCombine {
-    public static func emptyK<A>() -> Kind<StateTPartial<F, S>, A> {
+    public static func emptyK<A>() -> StateTOf<F, S, A> {
         StateT.liftF(F.empty())
     }
 }
 
-// MARK: Instance of `Alternative` for `StateT`
+// MARK: Instance of Alternative for StateT
 extension StateTPartial: Alternative where F: MonadCombine {}
 
-// MARK: Instance of `FunctiorFilter` for `StateT`
+// MARK: Instance of FunctiorFilter for StateT
 extension StateTPartial: FunctorFilter where F: MonadCombine {}
 
-// MARK: Instance of `MonadFilter` for `StateT`
+// MARK: Instance of MonadFilter for StateT
 extension StateTPartial: MonadFilter where F: MonadCombine {}
 
-// MARK: Instance of `MonadCombine` for `StateT`
+// MARK: Instance of MonadCombine for StateT
 extension StateTPartial: MonadCombine where F: MonadCombine {
-    public static func empty<A>() -> Kind<StateTPartial<F, S>, A> {
+    public static func empty<A>() -> StateTOf<F, S, A> {
         StateT.liftF(F.empty())
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `StateT`
+// MARK: Instance of ApplicativeError for StateT
 extension StateTPartial: ApplicativeError where F: MonadError {
     public typealias E = F.E
 
-    public static func raiseError<A>(_ e: F.E) -> Kind<StateTPartial<F, S>, A> {
+    public static func raiseError<A>(_ e: F.E) -> StateTOf<F, S, A> {
         StateT.liftF(F.raiseError(e))
     }
 
-    public static func handleErrorWith<A>(_ fa: Kind<StateTPartial<F, S>, A>, _ f: @escaping (F.E) -> Kind<StateTPartial<F, S>, A>) -> Kind<StateTPartial<F, S>, A> {
+    public static func handleErrorWith<A>(
+        _ fa: StateTOf<F, S, A>,
+        _ f: @escaping (F.E) -> StateTOf<F, S, A>) -> StateTOf<F, S, A> {
         StateT { s in
-            StateT.fix(fa).runM(s).handleErrorWith { e in
-                StateT.fix(f(e)).runM(s)
+            fa^.runM(s).handleErrorWith { e in
+                f(e)^.runM(s)
             }
         }
     }
 }
 
-// MARK: Instance of `MonadError` for `StateT`
+// MARK: Instance of MonadError for StateT
 extension StateTPartial: MonadError where F: MonadError {}
+
+// MARK: Instance of MonadReader for StateT
+extension StateTPartial: MonadReader where F: MonadReader {
+    public typealias D = F.D
+    
+    public static func ask() -> StateTOf<F, S, F.D> {
+        StateT.liftF(F.ask())
+    }
+    
+    public static func local<A>(_ fa: StateTOf<F, S, A>, _ f: @escaping (F.D) -> F.D) -> StateTOf<F, S, A> {
+        fa^.transformT { a in F.local(a, f) }
+    }
+}
+
+// MARK: Instance of MonadWriter for StateT
+extension StateTPartial: MonadWriter where F: MonadWriter {
+    public typealias W = F.W
+    
+    public static func writer<A>(_ aw: (F.W, A)) -> StateTOf<F, S, A> {
+        StateT.liftF(F.writer(aw))
+    }
+    
+    public static func listen<A>(_ fa: StateTOf<F, S, A>) -> StateTOf<F, S, (F.W, A)> {
+        StateT { s in
+            fa^.runM(s).listen().map { result in
+                let (w, (s, a)) = result
+                return (s, (w, a))
+            }
+        }
+    }
+    
+    public static func pass<A>(_ fa: StateTOf<F, S, ((F.W) -> F.W, A)>) -> StateTOf<F, S, A> {
+        StateT { s in
+            F.pass(fa^.runM(s).map { result in
+                let (f, (s, a)) = result
+                return (s, (f, a))
+            })
+        }
+    }
+}
