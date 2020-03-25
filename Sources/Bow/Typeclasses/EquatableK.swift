@@ -37,15 +37,14 @@ public extension Kind where F: EquatableK, A: Equatable {
     ///   - rhs: Right hand side of the equality check.
     /// - Returns: A boolean value indicating if the two values are equal or not.
     func eq(_ rhs: Kind<F, A>) -> Bool {
-        return F.eq(self, rhs)
+        F.eq(self, rhs)
     }
 }
 
 // MARK: Syntax for Equatable
 
 extension Kind: Equatable where F: EquatableK, A: Equatable {
-    // Docs inherited from `Equatable`.
     public static func ==(lhs: Kind<F, A>, rhs: Kind<F, A>) -> Bool {
-        return F.eq(lhs, rhs)
+        F.eq(lhs, rhs)
     }
 }
