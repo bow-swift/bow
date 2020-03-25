@@ -86,7 +86,7 @@ extension WriterT where F: Functor {
     }
 }
 
-// MARK: Functions for WriterT when the effect has an instance of Functor and the accumulator type has an instance of `Monoid`
+// MARK: Functions for WriterT when the effect has an instance of Functor and the accumulator type has an instance of Monoid
 extension WriterT where F: Functor, W: Monoid {
     /// Lifts an effect to a `WriterT` using the empty value of the `Monoid` as the accumulator.
     ///
@@ -238,7 +238,9 @@ extension WriterT where F: Monad, W: Monoid {
 
 // MARK: Instance of EquatableK for WriterT
 extension WriterTPartial: EquatableK where F: EquatableK & Functor, W: Equatable {
-    public static func eq<A: Equatable>(_ lhs: WriterTOf<F, W, A>, _ rhs: WriterTOf<F, W, A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: WriterTOf<F, W, A>,
+        _ rhs: WriterTOf<F, W, A>) -> Bool {
         let wl0 = lhs^.value.map { t in t.0 }
         let wl1 = lhs^.value.map { t in t.1 }
         let wr0 = rhs^.value.map { t in t.0 }
@@ -252,7 +254,9 @@ extension WriterTPartial: Invariant where F: Functor {}
 
 // MARK: Instance of Functor for WriterT
 extension WriterTPartial: Functor where F: Functor {
-    public static func map<A, B>(_ fa: WriterTOf<F, W, A>, _ f: @escaping (A) -> B) -> WriterTOf<F, W, B> {
+    public static func map<A, B>(
+        _ fa: WriterTOf<F, W, A>,
+        _ f: @escaping (A) -> B) -> WriterTOf<F, W, B> {
         WriterT(fa^.value.map { pair in (pair.0, f(pair.1)) })
     }
 }
@@ -269,7 +273,9 @@ extension WriterTPartial: Selective where F: Monad, W: Monoid {}
 
 // MARK: Instance of Monad for WriterT
 extension WriterTPartial: Monad where F: Monad, W: Monoid {
-    public static func flatMap<A, B>(_ fa: WriterTOf<F, W, A>, _ f: @escaping (A) -> WriterTOf<F, W, B>) -> WriterTOf<F, W, B> {
+    public static func flatMap<A, B>(
+        _ fa: WriterTOf<F, W, A>,
+        _ f: @escaping (A) -> WriterTOf<F, W, B>) -> WriterTOf<F, W, B> {
         WriterT(fa^.value.flatMap { pair in
             f(pair.1)^.value.map { pair2 in
                 (pair.0.combine(pair2.0), pair2.1)
@@ -277,7 +283,9 @@ extension WriterTPartial: Monad where F: Monad, W: Monoid {
         })
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> WriterTOf<F, W, Either<A, B>>) -> WriterTOf<F, W, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> WriterTOf<F, W, Either<A, B>>) -> WriterTOf<F, W, B> {
         WriterT(F.tailRecM(a, { inA in
             f(inA)^.value.map { pair in
                 pair.1.fold(Either.left,
@@ -299,7 +307,9 @@ extension WriterTPartial: MonadFilter where F: MonadFilter, W: Monoid {
 
 // MARK: Instance of SemigroupK for WriterT
 extension WriterTPartial: SemigroupK where F: SemigroupK {
-    public static func combineK<A>(_ x: WriterTOf<F, W, A>, _ y: WriterTOf<F, W, A>) -> WriterTOf<F, W, A> {
+    public static func combineK<A>(
+        _ x: WriterTOf<F, W, A>,
+        _ y: WriterTOf<F, W, A>) -> WriterTOf<F, W, A> {
         WriterT(x^.value.combineK(y^.value))
     }
 }
@@ -360,7 +370,9 @@ extension WriterTPartial: MonadReader where F: MonadReader, W: Monoid {
         WriterT.liftF(F.ask())
     }
     
-    public static func local<A>(_ fa: WriterTOf<F, W, A>, _ f: @escaping (F.D) -> F.D) -> WriterTOf<F, W, A> {
+    public static func local<A>(
+        _ fa: WriterTOf<F, W, A>,
+        _ f: @escaping (F.D) -> F.D) -> WriterTOf<F, W, A> {
         fa^.transformT { a in F.local(a, f) }
     }
 }
