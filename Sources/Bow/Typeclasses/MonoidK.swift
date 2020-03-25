@@ -25,6 +25,6 @@ public extension Kind where F: MonoidK {
     ///
     /// - Returns: A value representing the empty element of this MonoidK instance.
     static func emptyK() -> Kind<F, A> {
-        return F.emptyK()
+        F.emptyK()
     }
 }
