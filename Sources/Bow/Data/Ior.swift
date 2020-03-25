@@ -212,15 +212,19 @@ extension IorPartial: EquatableK where L: Equatable {
     public static func eq<A: Equatable>(
         _ lhs: IorOf<L, A>,
         _ rhs: IorOf<L, A>) -> Bool {
-        lhs^.fold({ la in rhs^.fold({ ra in la == ra },
-                                    constant(false),
-                                    constant(false)) },
-                  { lb in rhs^.fold(constant(false),
-                                    { rb in lb == rb },
-                                    constant(false)) },
-                  { la, lb in rhs^.fold(constant(false),
-                                        constant(false),
-                                        { ra, rb in la == ra && lb == rb }) }
+        lhs^.fold(
+            { (la: L) -> Bool in
+                rhs^.fold({ ra in la == ra },
+                          constant(false),
+                          constant(false)) },
+            { (lb: A) -> Bool in
+                rhs^.fold(constant(false),
+                          { rb in lb == rb },
+                          constant(false)) },
+            { (la: L, lb: A) -> Bool in
+                rhs^.fold(constant(false),
+                          constant(false),
+                          { ra, rb in la == ra && lb == rb }) }
         )
     }
 }
