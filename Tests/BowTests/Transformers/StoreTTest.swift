@@ -26,6 +26,10 @@ class StoreTTest: XCTestCase {
         ComonadStoreLaws<StorePartial<Int>, Int>.check()
     }
     
+    func testComonadTracedLaws() {
+        ComonadTracedLaws<StoreTPartial<Int, TracedPartial<Int>>, Int>.check()
+    }
+    
     let greetingStore = { (name: String) in Store(name, { name in "Hi \(name)!"}) }
     
     func testExtractRendersCurrentState() {
