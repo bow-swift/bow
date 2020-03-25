@@ -32,7 +32,7 @@ public extension ApplicativeError {
     ///   - f: A recovery function.
     /// - Returns: A value where the possible errors have been recovered using the provided function.
     static func handleError<A>(_ fa: Kind<Self, A>, _ f: @escaping (E) -> A) -> Kind<Self, A> {
-        return handleErrorWith(fa, { a in self.pure(f(a)) })
+        handleErrorWith(fa, { a in self.pure(f(a)) })
     }
 
     /// Handles errors by converting them into `Either` values in the context implementing this instance.
@@ -50,7 +50,7 @@ public extension ApplicativeError {
     /// - Parameter fea: An `Either` value.
     /// - Returns: A value in the context implementing this instance.
     static func fromEither<A>(_ fea: Either<E, A>) -> Kind<Self, A> {
-        return fea.fold(raiseError, pure)
+        fea.fold(raiseError, pure)
     }
     
     /// Converts an `Option` value into a value in the context implementing this instance.
@@ -60,7 +60,7 @@ public extension ApplicativeError {
     ///   - f: A function providing the error value in case the option is empty.
     /// - Returns: A value in the context implementing this instance.
     static func fromOption<A>(_ oa: Option<A>, _ f: () -> E) -> Kind<Self, A> {
-        return oa.fold({ Self.raiseError(f()) }, Self.pure)
+        oa.fold({ Self.raiseError(f()) }, Self.pure)
     }
     
     /// Converts a `Try` value into a value in the context implementing this instance.
@@ -70,7 +70,7 @@ public extension ApplicativeError {
     ///   - f: A function transforming the error contained in `Try` to the error type of this instance.
     /// - Returns: A value in the context implementing this instance.
     static func fromTry<A>(_ ta: Try<A>, _ f: (Error) -> E) -> Kind<Self, A> {
-        return ta.fold({ e in Self.raiseError(f(e)) }, Self.pure)
+        ta.fold({ e in Self.raiseError(f(e)) }, Self.pure)
     }
 
     /// Evaluates a throwing function, catching and mapping errors.
@@ -110,7 +110,7 @@ public extension Kind where F: ApplicativeError {
     /// - Parameter e: A value of the error type.
     /// - Returns: A value representing the error in the context implementing this instance.
     static func raiseError(_ e: F.E) -> Kind<F, A> {
-        return F.raiseError(e)
+        F.raiseError(e)
     }
 
     /// Handles an error, potentially recovering from it by mapping it to a value in the context implementing this instance.
@@ -121,7 +121,7 @@ public extension Kind where F: ApplicativeError {
     ///   - f: A recovery function.
     /// - Returns: A value where the possible errors have been recovered using the provided function.
     func handleErrorWith(_ f: @escaping (F.E) -> Kind<F, A>) -> Kind<F, A> {
-        return F.handleErrorWith(self, f)
+        F.handleErrorWith(self, f)
     }
 
     /// Handles an error, potentially recovering from it by mapping it to a value.
@@ -132,7 +132,7 @@ public extension Kind where F: ApplicativeError {
     ///   - f: A recovery function.
     /// - Returns: A value where the possible errors have been recovered using the provided function.
     func handleError(_ f: @escaping (F.E) -> A) -> Kind<F, A> {
-        return F.handleError(self, f)
+        F.handleError(self, f)
     }
 
     /// Handles errors by converting them into `Either` values in the context implementing this instance.
@@ -141,7 +141,7 @@ public extension Kind where F: ApplicativeError {
     ///
     /// - Returns: An either wrapped in the context implementing this instance.
     func attempt() -> Kind<F, Either<F.E, A>> {
-        return F.attempt(self)
+        F.attempt(self)
     }
 
     /// Converts an `Either` value into a value in the context implementing this instance.
@@ -151,7 +151,7 @@ public extension Kind where F: ApplicativeError {
     /// - Parameter fea: An `Either` value.
     /// - Returns: A value in the context implementing this instance.
     static func fromEither(_ fea: Either<F.E, A>) -> Kind<F, A> {
-        return F.fromEither(fea)
+        F.fromEither(fea)
     }
 
     /// Converts an `Option` value into a value in the context implementing this instance.
@@ -161,7 +161,7 @@ public extension Kind where F: ApplicativeError {
     ///   - f: A function providing the error value in case the option is empty.
     /// - Returns: A value in the context implementing this instance.
     static func fromOption(_ oa: Option<A>, _ f: () -> F.E) -> Kind<F, A> {
-        return F.fromOption(oa, f)
+        F.fromOption(oa, f)
     }
 
     /// Converts a `Try` value into a value in the context implementing this instance.
@@ -171,7 +171,7 @@ public extension Kind where F: ApplicativeError {
     ///   - f: A function transforming the error contained in `Try` to the error type of this instance.
     /// - Returns: A value in the context implementing this instance.
     static func fromTry(_ ta: Try<A>, _ f: (Error) -> F.E) -> Kind<F, A> {
-        return F.fromTry(ta, f)
+        F.fromTry(ta, f)
     }
     
     /// Evaluates a throwing function, catching and mapping errors.
@@ -183,7 +183,7 @@ public extension Kind where F: ApplicativeError {
     ///   - recover: A function that maps from `Error` to the type that this instance is able to handle.
     /// - Returns: A value in the context implementing this instance.
     static func catchError(_ f: () throws -> A, _ recover: (Error) -> F.E) -> Kind<F, A> {
-        return F.catchError(f, recover)
+        F.catchError(f, recover)
     }
 }
 
@@ -195,6 +195,6 @@ public extension Kind where F: ApplicativeError, F.E == Error {
     /// - Parameter f: A throwing function.
     /// - Returns: A value in the context implementing this instance.
     static func catchError(_ f: () throws -> A) -> Kind<F, A> {
-        return F.catchError(f)
+        F.catchError(f)
     }
 }
