@@ -79,8 +79,8 @@ public class Eval<A>: EvalOf<A> {
 
 public extension Eval where A == () {
     /// Provides a unit in an Eval.
-    static var unit: Eval<()> {
-        Now<()>(())
+    static var unit: Eval<Void> {
+        Now<Void>(())
     }
 }
 
@@ -217,34 +217,42 @@ private class Bind<A, B>: Eval<B> {
     }
 }
 
-// MARK: Instance of `Functor` for `Eval`
+// MARK: Instance of Functor for Eval
 extension EvalPartial: Functor {
-    public static func map<A, B>(_ fa: EvalOf<A>, _ f: @escaping (A) -> B) -> EvalOf<B> {
+    public static func map<A, B>(
+        _ fa: EvalOf<A>,
+        _ f: @escaping (A) -> B) -> EvalOf<B> {
         FMap(fa^, f)
     }
 }
 
-// MARK: Instance of `Applicative` for `Eval`
+// MARK: Instance of Applicative for Eval
 extension EvalPartial: Applicative {
     public static func pure<A>(_ a: A) -> EvalOf<A> {
         Eval.now(a)
     }
 }
 
-// MARK: Instance of `Selective` for `Eval`
+// MARK: Instance of Selective for Eval
 extension EvalPartial: Selective {}
 
-// MARK: Instance of `Monad` for `Eval`
+// MARK: Instance of Monad for Eval
 extension EvalPartial: Monad {
-    public static func flatMap<A, B>(_ fa: EvalOf<A>, _ f: @escaping (A) -> EvalOf<B>) -> EvalOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: EvalOf<A>,
+        _ f: @escaping (A) -> EvalOf<B>) -> EvalOf<B> {
         Bind(fa^, f)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> EvalOf<B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> EvalOf<B> {
         _tailRecM(a, f).run()
     }
     
-    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> Trampoline<EvalOf<B>> {
+    private static func _tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> EvalOf<Either<A, B>>) -> Trampoline<EvalOf<B>> {
         .defer {
             f(a)^.value().fold({ a in _tailRecM(a, f) },
                                { b in .done(Eval<B>.pure(b)) })
@@ -252,9 +260,11 @@ extension EvalPartial: Monad {
     }
 }
 
-// MARK: Instance of `Comonad` for `Eval`
+// MARK: Instance of Comonad for Eval
 extension EvalPartial: Comonad {
-    public static func coflatMap<A, B>(_ fa: EvalOf<A>, _ f: @escaping (EvalOf<A>) -> B) -> EvalOf<B> {
+    public static func coflatMap<A, B>(
+        _ fa: EvalOf<A>,
+        _ f: @escaping (EvalOf<A>) -> B) -> EvalOf<B> {
         Eval.later { f(fa) }
     }
     
@@ -263,12 +273,14 @@ extension EvalPartial: Comonad {
     }
 }
 
-// MARK: Instance of `Bimonad` for `Eval`
+// MARK: Instance of Bimonad for Eval
 extension EvalPartial: Bimonad {}
 
-// MARK: Instance of `EquatableK` for `Eval`
+// MARK: Instance of EquatableK for Eval
 extension EvalPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: EvalOf<A>, _ rhs: EvalOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: EvalOf<A>,
+        _ rhs: EvalOf<A>) -> Bool {
         lhs^.value() == rhs^.value()
     }
 }
