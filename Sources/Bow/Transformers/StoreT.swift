@@ -46,6 +46,15 @@ public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
     }
 }
 
+extension StoreT where W: Functor {
+    /// Obtains the comonadic value, removing the Store support.
+    ///
+    /// - Returns: Comonadic value without Store support.
+    public func lower() -> Kind<W, A> {
+        render.map { f in f(self.state) }
+    }
+}
+
 public extension StoreT where W: Comonad {
     /// Moves the store into a new state.
     ///
@@ -77,11 +86,11 @@ extension StoreT where W == ForId {
     }
 }
 
-// MARK: Instance of `Invariant` for `StoreT`
+// MARK: Instance of Invariant for StoreT
 
 extension StoreTPartial: Invariant where W: Functor {}
 
-// MARK: Instance of `Functor` for `StoreT`
+// MARK: Instance of Functor for StoreT
 
 extension StoreTPartial: Functor where W: Functor {
     public static func map<A, B>(_ fa: StoreTOf<S, W, A>, _ f: @escaping (A) -> B) -> StoreTOf<S, W, B> {
@@ -89,7 +98,7 @@ extension StoreTPartial: Functor where W: Functor {
     }
 }
 
-// MARK: Instance of `Applicative` for `StoreT`
+// MARK: Instance of Applicative for StoreT
 
 extension StoreTPartial: Applicative where W: Applicative, S: Monoid {
     public static func pure<A>(_ a: A) -> StoreTOf<S, W, A> {
@@ -102,7 +111,7 @@ extension StoreTPartial: Applicative where W: Applicative, S: Monoid {
     }
 }
 
-// MARK: Instance of `Comonad` for `StoreT`
+// MARK: Instance of Comonad for StoreT
 
 extension StoreTPartial: Comonad where W: Comonad {
     public static func coflatMap<A, B>(_ fa: StoreTOf<S, W, A>, _ f: @escaping (StoreTOf<S, W, A>) -> B) -> StoreTOf<S, W, B> {
@@ -115,7 +124,7 @@ extension StoreTPartial: Comonad where W: Comonad {
     }
 }
 
-// MARK: Instance of `ComonadStore` for `StoreT`
+// MARK: Instance of ComonadStore for StoreT
 
 extension StoreTPartial: ComonadStore where W: Comonad {
     public static func position<A>(_ wa: StoreTOf<S, W, A>) -> S {
@@ -124,5 +133,46 @@ extension StoreTPartial: ComonadStore where W: Comonad {
     
     public static func peek<A>(_ wa: StoreTOf<S, W, A>, _ s: S) -> A {
         wa^.render.extract()(s)
+    }
+}
+
+// MARK: Instance of ComonadTraced for StoreT
+
+extension StoreTPartial: ComonadTraced where W: ComonadTraced {
+    public typealias M = W.M
+    
+    public static func trace<A>(_ wa: StoreTOf<S, W, A>, _ m: W.M) -> A {
+        wa^.lower().trace(m)
+    }
+    
+    public static func listens<A, B>(_ wa: StoreTOf<S, W, A>, _ f: @escaping (W.M) -> B) -> StoreTOf<S, W, (B, A)> {
+        StoreT(wa^.state, wa^.render.listens(f).map { result in
+            let (b, f) = result
+            return f >>> { a in (b, a) }
+        })
+    }
+    
+    public static func pass<A>(_ wa: StoreTOf<S, W, A>) -> StoreTOf<S, W, ((W.M) -> W.M) -> A> {
+        StoreT(wa^.state, wa^.render.pass().map { f in
+            { s in
+                { wf in
+                    f(wf)(s)
+                }
+            }
+        })
+    }
+}
+
+// MARK: Instace of ComonadEnv for StoreT
+
+extension StoreTPartial: ComonadEnv where W: ComonadEnv {
+    public typealias E = W.E
+    
+    public static func ask<A>(_ wa: StoreTOf<S, W, A>) -> W.E {
+        wa^.lower().ask()
+    }
+    
+    public static func local<A>(_ wa: StoreTOf<S, W, A>, _ f: @escaping (W.E) -> W.E) -> StoreTOf<S, W, A> {
+        StoreT(wa^.state, wa^.render.local(f))
     }
 }
