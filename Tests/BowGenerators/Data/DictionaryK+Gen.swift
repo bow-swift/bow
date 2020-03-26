@@ -9,7 +9,7 @@ extension DictionaryK: Arbitrary where A: Arbitrary, K: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `DictionaryK`
+// MARK: Instance of ArbitraryK for DictionaryK
 
 extension DictionaryKPartial: ArbitraryK where K: Hashable & Arbitrary {
     public static func generate<A: Arbitrary>() -> DictionaryKOf<K, A> {
