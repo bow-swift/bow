@@ -1,26 +1,26 @@
 import Foundation
 
-/// Instance of `Semigroup` for `Bool`. Uses disjunction as combination of elements.
+// MARK: Instance of Semigroup for Bool. Uses disjunction as combination of elements.
 extension Bool: Semigroup {
     public func combine(_ other: Bool) -> Bool {
-        return self || other
+        self || other
     }
 }
 
-/// Instance of `Monoid` for `Bool`. Uses disjunction as combination of elements and `false` as empty element.
+// MARK: Instance of Monoid for Bool. Uses false as empty element.
 extension Bool: Monoid {
     public static func empty() -> Bool {
-        return false
+        false
     }
 }
 
-/// Instance of `Semiring` for `Bool`. Uses conjunction as multiplication of elements and `true` as empty element.
+// MARK: Instance of Semiring for Bool. Uses conjunction as multiplication of elements and true as unit element.
 extension Bool: Semiring {
     public func multiply(_ other: Bool) -> Bool {
-        return self && other
+        self && other
     }
     
     public static func one() -> Bool {
-        return true
+        true
     }
 }
