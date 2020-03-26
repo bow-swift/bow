@@ -20,28 +20,40 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     private static func leftIdentity() {
         property("Monad left identity") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
-            return F.flatMap(F.pure(a), g) == g(a)
+            
+            return F.pure(a).flatMap(g)
+                ==
+            g(a)
         }
     }
     
     private static func rightIdentity() {
         property("Monad right identity") <~ forAll { (a: Int) in
             let fa = F.pure(a)
-            return F.flatMap(fa, F.pure) == fa
+            return fa.flatMap(F.pure)
+                ==
+            fa
         }
     }
     
     private static func kleisliLeftIdentity() {
         property("Kleisli left identity") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
-            return Kleisli({ (n : Int) in F.pure(n) }).andThen(Kleisli(g)).run(a) == g(a)
+            
+            return Kleisli { (n: Int) in F.pure(n) }
+                .andThen(Kleisli(g)).run(a)
+                ==
+            g(a)
         }
     }
     
     private static func kleisliRightIdentity() {
         property("Kleisli right identity") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
-            return Kleisli(g).andThen(F.pure).run(a) == g(a)
+            
+            return Kleisli(g).andThen(F.pure).run(a)
+                ==
+            g(a)
         }
     }
     
@@ -49,13 +61,20 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
         property("Monad flatMap coherence") <~ forAll { (a: Int, f: ArrowOf<Int, Int>) in
             let g = f.getArrow >>> F.pure
             let fa = F.pure(a)
-            return F.flatMap(fa, g) == F.map(fa, f.getArrow)
+            
+            return fa.flatMap(g)
+                ==
+            fa.map(f.getArrow)
         }
     }
     
     private static func stackSafety() {
         let iterations = 200000
-        let res = F.tailRecM(0, { i in F.pure( i < iterations ? Either.left(i + 1) : Either.right(i) )})
+        let res = Kind<F, Int>.tailRecM(0) { i in
+            F.pure( i < iterations ?
+                Either.left(i + 1) :
+                Either.right(i) )
+        }
         
         XCTAssertEqual(res, F.pure(iterations))
     }
@@ -78,6 +97,7 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
                 z <-- fc,
                 w <-- fd,
                 yield: x.get + y.get + z.get + w.get)
+            
             return result == F.pure(a + b + c + d)
         }
         
@@ -105,7 +125,9 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
     
     private static func flatten() {
         property("Flatten") <~ forAll { (a: Int) in
-            return F.flatten(F.pure(F.pure(a))) == F.pure(a)
+            F.pure(F.pure(a)).flatten()
+                ==
+            F.pure(a)
         }
     }
 }

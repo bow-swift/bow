@@ -184,8 +184,8 @@ public extension Kind where F: Monad {
     ///
     /// - Parameter ffa: Value with a nested structure.
     /// - Returns: Value with a single context structure.
-    static func flatten(_ ffa: Kind<F, Kind<F, A>>) -> Kind<F, A> {
-        F.flatten(ffa)
+    func flatten<AA>() -> Kind<F, AA> where A == Kind<F, AA> {
+        F.flatten(self)
     }
 
     /// Sequentially compose with another computation, discarding the value produced by the this one.
