@@ -9,7 +9,7 @@ extension EitherK: Arbitrary where F: ArbitraryK, G: ArbitraryK, A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `EitherK`
+// MARK: Instance of ArbitraryK for EitherK
 
 extension EitherKPartial: ArbitraryK where F: ArbitraryK, G: ArbitraryK {
     public static func generate<A: Arbitrary>() -> EitherKOf<F, G, A> {
