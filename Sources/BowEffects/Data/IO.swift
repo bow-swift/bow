@@ -98,7 +98,9 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fe: Function to transform the error type argument.
     ///   - fa: Function to transform the output type argument.
     /// - Returns: An IO with both type arguments transformed.
-    func bimap<EE: Error, B>(_ fe: @escaping (E) -> EE, _ fa: @escaping (A) -> B) -> IO<EE, B> {
+    func bimap<EE: Error, B>(
+        _ fe: @escaping (E) -> EE,
+        _ fa: @escaping (A) -> B) -> IO<EE, B> {
         mapError(fe).map(fa)^
     }
     
@@ -108,8 +110,9 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fa: 1st side-effectful function.
     ///   - fb: 2nd side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B>(_ fa: @escaping () throws -> Z,
-                                   _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
+    public static func merge<Z, B>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B) -> IO<E, (Z, B)> where A == (Z, B) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb))^
     }
@@ -121,9 +124,10 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fb: 2nd side-effectful function.
     ///   - fc: 3rd side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C>(_ fa: @escaping () throws -> Z,
-                                      _ fb: @escaping () throws -> B,
-                                      _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
+    public static func merge<Z, B, C>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C) -> IO<E, (Z, B, C)> where A == (Z, B, C) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc))^
@@ -137,10 +141,11 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fc: 3rd side-effectful function.
     ///   - fd: 4th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D>(_ fa: @escaping () throws -> Z,
-                                         _ fb: @escaping () throws -> B,
-                                         _ fc: @escaping () throws -> C,
-                                         _ fd: @escaping () throws -> D) -> IO<E, (Z, B, C, D)> where A == (Z, B, C, D) {
+    public static func merge<Z, B, C, D>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D) -> IO<E, (Z, B, C, D)> where A == (Z, B, C, D) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -156,11 +161,12 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fd: 4th side-effectful function.
     ///   - ff: 5th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D, F>(_ fa: @escaping () throws -> Z,
-                                            _ fb: @escaping () throws -> B,
-                                            _ fc: @escaping () throws -> C,
-                                            _ fd: @escaping () throws -> D,
-                                            _ ff: @escaping () throws -> F) -> IO<E, (Z, B, C, D, F)> where A == (Z, B, C, D, F) {
+    public static func merge<Z, B, C, D, F>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D,
+        _ ff: @escaping () throws -> F) -> IO<E, (Z, B, C, D, F)> where A == (Z, B, C, D, F) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -178,12 +184,13 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - ff: 5th side-effectful function.
     ///   - fg: 6th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D, F, G>(_ fa: @escaping () throws -> Z,
-                                               _ fb: @escaping () throws -> B,
-                                               _ fc: @escaping () throws -> C,
-                                               _ fd: @escaping () throws -> D,
-                                               _ ff: @escaping () throws -> F,
-                                               _ fg: @escaping () throws -> G) -> IO<E, (Z, B, C, D, F, G)> where A == (Z, B, C, D, F, G){
+    public static func merge<Z, B, C, D, F, G>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D,
+        _ ff: @escaping () throws -> F,
+        _ fg: @escaping () throws -> G) -> IO<E, (Z, B, C, D, F, G)> where A == (Z, B, C, D, F, G){
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -203,13 +210,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fg: 6th side-effectful function.
     ///   - fh: 7th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D, F, G, H>(_ fa: @escaping () throws -> Z,
-                                                  _ fb: @escaping () throws -> B,
-                                                  _ fc: @escaping () throws -> C,
-                                                  _ fd: @escaping () throws -> D,
-                                                  _ ff: @escaping () throws -> F,
-                                                  _ fg: @escaping () throws -> G,
-                                                  _ fh: @escaping () throws -> H ) -> IO<E, (Z, B, C, D, F, G, H)> where A == (Z, B, C, D, F, G, H) {
+    public static func merge<Z, B, C, D, F, G, H>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D,
+        _ ff: @escaping () throws -> F,
+        _ fg: @escaping () throws -> G,
+        _ fh: @escaping () throws -> H ) -> IO<E, (Z, B, C, D, F, G, H)> where A == (Z, B, C, D, F, G, H) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -231,14 +239,15 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fh: 7th side-effectful function.
     ///   - fi: 8th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D, F, G, H, I>(_ fa: @escaping () throws -> Z,
-                                                     _ fb: @escaping () throws -> B,
-                                                     _ fc: @escaping () throws -> C,
-                                                     _ fd: @escaping () throws -> D,
-                                                     _ ff: @escaping () throws -> F,
-                                                     _ fg: @escaping () throws -> G,
-                                                     _ fh: @escaping () throws -> H,
-                                                     _ fi: @escaping () throws -> I) -> IO<E, (Z, B, C, D, F, G, H, I)> where A == (Z, B, C, D, F, G, H, I) {
+    public static func merge<Z, B, C, D, F, G, H, I>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D,
+        _ ff: @escaping () throws -> F,
+        _ fg: @escaping () throws -> G,
+        _ fh: @escaping () throws -> H,
+        _ fi: @escaping () throws -> I) -> IO<E, (Z, B, C, D, F, G, H, I)> where A == (Z, B, C, D, F, G, H, I) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -262,15 +271,16 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - fi: 8th side-effectful function.
     ///   - fj: 9th side-effectful function.
     /// - Returns: An IO suspending the execution of the side effects.
-    public static func merge<Z, B, C, D, F, G, H, I, J>(_ fa: @escaping () throws -> Z,
-                                                        _ fb: @escaping () throws -> B,
-                                                        _ fc: @escaping () throws -> C,
-                                                        _ fd: @escaping () throws -> D,
-                                                        _ ff: @escaping () throws -> F,
-                                                        _ fg: @escaping () throws -> G,
-                                                        _ fh: @escaping () throws -> H,
-                                                        _ fi: @escaping () throws -> I,
-                                                        _ fj: @escaping () throws -> J ) -> IO<E, (Z, B, C, D, F, G, H, I, J)> where A == (Z, B, C, D, F, G, H, I, J) {
+    public static func merge<Z, B, C, D, F, G, H, I, J>(
+        _ fa: @escaping () throws -> Z,
+        _ fb: @escaping () throws -> B,
+        _ fc: @escaping () throws -> C,
+        _ fd: @escaping () throws -> D,
+        _ ff: @escaping () throws -> F,
+        _ fg: @escaping () throws -> G,
+        _ fh: @escaping () throws -> H,
+        _ fi: @escaping () throws -> I,
+        _ fj: @escaping () throws -> J ) -> IO<E, (Z, B, C, D, F, G, H, I, J)> where A == (Z, B, C, D, F, G, H, I, J) {
         IO.zip(IO<E, Z>.invoke(fa),
                IO<E, B>.invoke(fb),
                IO<E, C>.invoke(fc),
@@ -370,7 +380,9 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - f: Function to run in case of error.
     ///   - g: Function to run in case of success.
     /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
-    public func foldM<B>(_ f: @escaping (E) -> IO<E, B>, _ g: @escaping (A) -> IO<E, B>) -> IO<E, B> {
+    public func foldM<B>(
+        _ f: @escaping (E) -> IO<E, B>,
+        _ g: @escaping (A) -> IO<E, B>) -> IO<E, B> {
         self.flatMap(g).handleErrorWith(f)^
     }
     
@@ -392,8 +404,12 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - policy: Retrial policy.
     ///   - orElse: Function to handle errors after retrying.
     /// - Returns: A computation that is retried based on the provided policy when it fails.
-    public func retry<S, O, B>(_ policy: Schedule<Any, E, S, O>, orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
-        self.env().retry(policy, orElse: { e, o in orElse(e, o).env() }).provide(())
+    public func retry<S, O, B>(
+        _ policy: Schedule<Any, E, S, O>,
+        orElse: @escaping (E, O) -> IO<E, B>) -> IO<E, Either<B, A>> {
+        self.env().retry(
+            policy,
+            orElse: { e, o in orElse(e, o).env() }).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails.
@@ -404,8 +420,12 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - policy: Repeating policy.
     ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
-    public func `repeat`<S, O>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E) -> IO<E, O> {
-        self.env().repeat(policy, onUpdateError: onUpdateError).provide(())
+    public func `repeat`<S, O>(
+        _ policy: Schedule<Any, A, S, O>,
+        onUpdateError: @escaping () -> E = { fatalError("Impossible to update error on repeat.") }) -> IO<E, O> {
+        self.env().repeat(
+            policy,
+            onUpdateError: onUpdateError).provide(())
     }
     
     /// Repeats this computation until the provided repeating policy completes, or until it fails, with a function to handle potential failures.
@@ -415,8 +435,14 @@ public class IO<E: Error, A>: IOOf<E, A> {
     ///   - onUpdateError: A function providing an error in case the policy fails to update properly.
     ///   - orElse: A function to return a computation in case of error.
     /// - Returns: A computation that is repeated based on the provided policy when it succeeds.
-    public func `repeat`<S, O, B>(_ policy: Schedule<Any, A, S, O>, onUpdateError: @escaping () -> E, orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
-        self.env().repeat(policy, onUpdateError: onUpdateError, orElse: { e, o in orElse(e, o).env() }).provide(())
+    public func `repeat`<S, O, B>(
+        _ policy: Schedule<Any, A, S, O>,
+        onUpdateError: @escaping () -> E = { fatalError("Impossible to update error on repeat.") },
+        orElse: @escaping (E, O?) -> IO<E, B>) -> IO<E, Either<B, O>> {
+        self.env().repeat(
+            policy,
+            onUpdateError: onUpdateError,
+            orElse: { e, o in orElse(e, o).env() }).provide(())
     }
 }
 
@@ -478,10 +504,10 @@ internal class Pure<E: Error, A>: IO<E, A> {
     }
 }
 
-internal class RaiseError<E: Error, A> : IO<E, A> {
+internal class RaiseError<E: Error, A>: IO<E, A> {
     let error: E
     
-    init(_ error : E) {
+    init(_ error: E) {
         self.error = error
     }
     
@@ -509,7 +535,7 @@ internal class HandleErrorWith<E: Error, A>: IO<E, A> {
     }
 }
 
-internal class FMap<E: Error, A, B> : IO<E, B> {
+internal class FMap<E: Error, A, B>: IO<E, B> {
     let f: (A) -> B
     let action: IO<E, A>
     
@@ -545,7 +571,7 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
     }
 }
 
-internal class Join<E: Error, A> : IO<E, A> {
+internal class Join<E: Error, A>: IO<E, A> {
     let io: IO<E, IO<E, A>>
     
     init(_ io: IO<E, IO<E, A>>) {
@@ -809,30 +835,36 @@ internal class Suspend<E: Error, A>: IO<E, A> {
     }
 }
 
-// MARK: Instance of `Functor` for `IO`
+// MARK: Instance of Functor for IO
 extension IOPartial: Functor {
-    public static func map<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> B) -> IOOf<E, B> {
+    public static func map<A, B>(
+        _ fa: IOOf<E, A>,
+        _ f: @escaping (A) -> B) -> IOOf<E, B> {
         FMap(f, fa^)
     }
 }
 
-// MARK: Instance of `Applicative` for `IO`
+// MARK: Instance of Applicative for IO
 extension IOPartial: Applicative {
     public static func pure<A>(_ a: A) -> IOOf<E, A> {
         Pure(a)
     }
 }
 
-// MARK: Instance of `Selective` for `IO`
+// MARK: Instance of Selective for IO
 extension IOPartial: Selective {}
 
-// MARK: Instance of `Monad` for `IO`
+// MARK: Instance of Monad for IO
 extension IOPartial: Monad {
-    public static func flatMap<A, B>(_ fa: IOOf<E, A>, _ f: @escaping (A) -> IOOf<E, B>) -> IOOf<E, B> {
+    public static func flatMap<A, B>(
+        _ fa: IOOf<E, A>,
+        _ f: @escaping (A) -> IOOf<E, B>) -> IOOf<E, B> {
         Join(fa^.map { x in f(x)^ }^)
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> IOOf<E, Either<A, B>>) -> IOOf<E, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> IOOf<E, Either<A, B>>) -> IOOf<E, B> {
         f(a)^.flatMap { either in
             either.fold({ a in tailRecM(a, f) },
                         { b in IO.pure(b) })
@@ -840,74 +872,97 @@ extension IOPartial: Monad {
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `IO`
+// MARK: Instance of ApplicativeError for IO
 extension IOPartial: ApplicativeError {
     public static func raiseError<A>(_ e: E) -> IOOf<E, A> {
         RaiseError(e)
     }
     
-    public static func handleErrorWith<A>(_ fa: IOOf<E, A>, _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
+    public static func handleErrorWith<A>(
+        _ fa: IOOf<E, A>,
+        _ f: @escaping (E) -> IOOf<E, A>) -> IOOf<E, A> {
         HandleErrorWith(fa^) { e in f(e)^ }
     }
 }
 
-// MARK: Instance of `MonadError` for `IO`
+// MARK: Instance of MonadError for IO
 extension IOPartial: MonadError {}
 
-// MARK: Instance of `Bracket` for `IO`
+// MARK: Instance of Bracket for IO
 extension IOPartial: Bracket {
-    public static func bracketCase<A, B>(acquire fa: IOOf<E, A>, release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>, use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
+    public static func bracketCase<A, B>(
+        acquire fa: IOOf<E, A>,
+        release: @escaping (A, ExitCase<E>) -> IOOf<E, ()>,
+        use: @escaping (A) throws -> IOOf<E, B>) -> IOOf<E, B> {
         BracketIO<E, A, B>(fa^, release, use)
     }
 }
 
-// MARK: Instance of `MonadDefer` for `IO`
+// MARK: Instance of MonadDefer for IO
 extension IOPartial: MonadDefer {
     public static func `defer`<A>(_ fa: @escaping () -> IOOf<E, A>) -> IOOf<E, A> {
         Suspend(fa)
     }
 }
 
-// MARK: Instance of `Async` for `IO`
+// MARK: Instance of Async for IO
 extension IOPartial: Async {
     public static func asyncF<A>(_ procf: @escaping (@escaping (Either<E, A>) -> ()) -> IOOf<E, ()>) -> IOOf<E, A> {
         AsyncIO(procf)
     }
     
-    public static func continueOn<A>(_ fa: IOOf<E, A>, _ queue: DispatchQueue) -> IOOf<E, A> {
+    public static func continueOn<A>(
+        _ fa: IOOf<E, A>,
+        _ queue: DispatchQueue) -> IOOf<E, A> {
         ContinueOn(fa^, queue)
     }
 }
 
-// MARK: Instance of `Concurrent` for `IO`
+// MARK: Instance of Concurrent for IO
 extension IOPartial: Concurrent {
-    public static func race<A, B>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, Either<A, B>> {
+    public static func race<A, B>(
+        _ fa: Kind<IOPartial<E>, A>,
+        _ fb: Kind<IOPartial<E>, B>) -> Kind<IOPartial<E>, Either<A, B>> {
         Race(fa^, fb^)
     }
     
-    public static func parMap<A, B, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
+    public static func parMap<A, B, Z>(
+        _ fa: Kind<IOPartial<E>, A>,
+        _ fb: Kind<IOPartial<E>, B>,
+        _ f: @escaping (A, B) -> Z) -> Kind<IOPartial<E>, Z> {
         ParMap2<E, A, B, Z>(fa^, fb^, f)
     }
     
-    public static func parMap<A, B, C, Z>(_ fa: Kind<IOPartial<E>, A>, _ fb: Kind<IOPartial<E>, B>, _ fc: Kind<IOPartial<E>, C>, _ f: @escaping (A, B, C) -> Z) -> Kind<IOPartial<E>, Z> {
+    public static func parMap<A, B, C, Z>(
+        _ fa: Kind<IOPartial<E>, A>,
+        _ fb: Kind<IOPartial<E>, B>,
+        _ fc: Kind<IOPartial<E>, C>,
+        _ f: @escaping (A, B, C) -> Z) -> Kind<IOPartial<E>, Z> {
         ParMap3<E, A, B, C, Z>(fa^, fb^, fc^, f)
     }
 }
 
-// MARK: Instance of `Effect` for `IO`
+// MARK: Instance of Effect for IO
 extension IOPartial: Effect {
-    public static func runAsync<A>(_ fa: IOOf<E, A>, _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
+    public static func runAsync<A>(
+        _ fa: IOOf<E, A>,
+        _ callback: @escaping (Either<E, A>) -> IOOf<E, ()>) -> IOOf<E, ()> {
         IOEffect(fa^, callback)
     }
 }
 
-// MARK: Instance of `UnsafeRun` for `IO`
+// MARK: Instance of UnsafeRun for IO
 extension IOPartial: UnsafeRun {
-    public static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
+    public static func runBlocking<A>(
+        on queue: DispatchQueue,
+        _ fa: @escaping () -> Kind<IOPartial<E>, A>) throws -> A {
         try fa()^.unsafeRunSync(on: queue)
     }
     
-    public static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<IOPartial<E>, A>, _ callback: @escaping (Either<E, A>) -> ()) {
+    public static func runNonBlocking<A>(
+        on queue: DispatchQueue,
+        _ fa: @escaping () -> Kind<IOPartial<E>, A>,
+        _ callback: @escaping (Either<E, A>) -> ()) {
         fa()^.unsafeRunAsync(on: queue, callback)
     }
 }
