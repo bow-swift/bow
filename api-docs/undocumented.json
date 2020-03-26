@@ -9,7 +9,7 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Data/NonEmptyArray.swift",
-      "line": 269,
+      "line": 285,
       "symbol": "NEA.traverse(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -2134,10 +2134,10 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60EquatableK%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `EquatableK` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60EquatableK%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60EquatableK%60%20for%20%60Either%60." class="section-name">Instance of `EquatableK` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20EquatableK%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of EquatableK for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20EquatableK%20for%20Either">
+                  <h3 id="Instance%20of%20EquatableK%20for%20Either" class="section-name">Instance of EquatableK for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2160,7 +2160,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">eq</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">lhs</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="k">where</span> <span class="kt">A</span> <span class="p">:</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">eq</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">lhs</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -2171,10 +2173,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Functor%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `Functor` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Functor%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60Functor%60%20for%20%60Either%60." class="section-name">Instance of `Functor` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Functor%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of Functor for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Functor%20for%20Either">
+                  <h3 id="Instance%20of%20Functor%20for%20Either" class="section-name">Instance of Functor for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2197,7 +2199,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2208,10 +2212,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Applicative%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `Applicative` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Applicative%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60Applicative%60%20for%20%60Either%60." class="section-name">Instance of `Applicative` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Applicative%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of Applicative for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Applicative%20for%20Either">
+                  <h3 id="Instance%20of%20Applicative%20for%20Either" class="section-name">Instance of Applicative for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2234,7 +2238,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">pure</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">pure</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2245,10 +2249,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Monad%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `Monad` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Monad%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60Monad%60%20for%20%60Either%60." class="section-name">Instance of `Monad` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Monad%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of Monad for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Monad%20for%20Either">
+                  <h3 id="Instance%20of%20Monad%20for%20Either" class="section-name">Instance of Monad for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2271,7 +2275,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2297,7 +2303,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">tailRecM</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">tailRecM</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2308,10 +2316,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60ApplicativeError%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `ApplicativeError` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60ApplicativeError%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60ApplicativeError%60%20for%20%60Either%60." class="section-name">Instance of `ApplicativeError` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20ApplicativeError%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of ApplicativeError for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20ApplicativeError%20for%20Either">
+                  <h3 id="Instance%20of%20ApplicativeError%20for%20Either" class="section-name">Instance of ApplicativeError for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2360,7 +2368,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">raiseError</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">e</span><span class="p">:</span> <span class="kt">L</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">raiseError</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">e</span><span class="p">:</span> <span class="kt">L</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2386,7 +2394,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">handleErrorWith</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">L</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">handleErrorWith</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">L</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2397,10 +2407,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Foldable%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `Foldable` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Foldable%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60Foldable%60%20for%20%60Either%60." class="section-name">Instance of `Foldable` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Foldable%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of Foldable for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Foldable%20for%20Either">
+                  <h3 id="Instance%20of%20Foldable%20for%20Either" class="section-name">Instance of Foldable for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2423,7 +2433,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldLeft</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">B</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldLeft</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt">B</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span></code></pre>
 
                         </div>
                       </div>
@@ -2449,7 +2462,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldRight</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldRight</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">c</span><span class="p">:</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2460,10 +2476,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Traverse%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `Traverse` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Traverse%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60Traverse%60%20for%20%60Either%60." class="section-name">Instance of `Traverse` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Traverse%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of Traverse for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Traverse%20for%20Either">
+                  <h3 id="Instance%20of%20Traverse%20for%20Either" class="section-name">Instance of Traverse for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2486,7 +2502,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">traverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">traverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2497,10 +2515,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60SemigroupK%60%20for%20%60Either%60."></a>
-                <a name="//apple_ref/swift/Section/Instance of `SemigroupK` for `Either`." class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60SemigroupK%60%20for%20%60Either%60.">
-                  <h3 id="Instance%20of%20%60SemigroupK%60%20for%20%60Either%60." class="section-name">Instance of `SemigroupK` for `Either`.<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20SemigroupK%20for%20Either"></a>
+                <a name="//apple_ref/swift/Section/Instance of SemigroupK for Either" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20SemigroupK%20for%20Either">
+                  <h3 id="Instance%20of%20SemigroupK%20for%20Either" class="section-name">Instance of SemigroupK for Either<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2523,7 +2541,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">combineK</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">EitherPartial</span><span class="o">&lt;</span><span class="kt">L</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">combineK</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">y</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow8EitherOfa">EitherOf</a></span><span class="o">&lt;</span><span class="kt">L</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2543,7 +2563,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-25)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-03-26)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
