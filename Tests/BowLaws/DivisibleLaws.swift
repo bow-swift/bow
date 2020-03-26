@@ -9,16 +9,20 @@ public final class DivisibleLaws<F: Divisible & ArbitraryK & EquatableK> {
     }
     
     private static func leftIdentity(isEqual: @escaping (Kind<F, (Int, Int)>, Kind<F, Int>) -> Bool) {
-        property("Divisible left identity") <~ forAll { (fa: KindOf<F, Int>) in
-            let a = fa.value.divide(Kind<F, Int>.conquer(), tuple(_:_:))
-            return isEqual(a, fa.value)
+        property("Left identity") <~ forAll { (fa: KindOf<F, Int>) in
+            
+            isEqual(
+                fa.value.divide(Kind<F, Int>.conquer(), tuple),
+                fa.value)
         }
     }
     
     private static func rightIdentity(isEqual: @escaping (Kind<F, (Int, Int)>, Kind<F, Int>) -> Bool) {
-        property("Divisible right identity") <~ forAll { (fa: KindOf<F, Int>) in
-            let a = Kind<F, Int>.conquer().divide(fa.value, tuple(_:_:))
-            return isEqual(a, fa.value)
+        property("Right identity") <~ forAll { (fa: KindOf<F, Int>) in
+            
+            isEqual(
+                Kind<F, Int>.conquer().divide(fa.value, tuple),
+                fa.value)
         }
     }
 
