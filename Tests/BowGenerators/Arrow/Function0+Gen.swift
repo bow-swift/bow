@@ -9,7 +9,7 @@ extension Function0: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Function0`
+// MARK: Instance of ArbitraryK for Function0
 
 extension Function0Partial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> Function0Of<A> {
