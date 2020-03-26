@@ -8,7 +8,9 @@ public protocol Traverse: Functor, Foldable {
     ///   - fa: A structure of values.
     ///   - f: A function producing an effect.
     /// - Returns: Results collected under the context of the effect provided by the function.
-    static func traverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<Self, B>>
+    static func traverse<G: Applicative, A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<Self, B>>
 }
 
 public extension Traverse {
@@ -16,8 +18,9 @@ public extension Traverse {
     ///
     /// - Parameter fga: A structure of values.
     /// - Returns: Results collected under the context of the effects.
-    static func sequence<G: Applicative, A, B>(_ fga: Kind<Self, B>) -> Kind<G, Kind<Self, A>> where B: Kind<G, A> {
-        return traverse(fga, id)
+    static func sequence<G: Applicative, A, B>(_ fga: Kind<Self, B>) -> Kind<G, Kind<Self, A>>
+        where B: Kind<G, A> {
+        traverse(fga, id)
     }
 }
 
@@ -28,8 +31,10 @@ public extension Traverse where Self: Monad {
     ///   - fa: A structure of values.
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
-    static func flatTraverse<G: Applicative, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
-        return G.map(traverse(fa, f), Self.flatten)
+    static func flatTraverse<G: Applicative, A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
+        G.map(traverse(fa, f), Self.flatten)
     }
 }
 
@@ -42,14 +47,15 @@ public extension Kind where F: Traverse {
     ///   - f: A function producing an effect.
     /// - Returns: Results collected under the context of the effect provided by the function.
     func traverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<F, B>> {
-        return F.traverse(self, f)
+        F.traverse(self, f)
     }
 
     /// Evaluate each effect in this structure of values and collects the results.
     ///
     /// - Returns: Results collected under the context of the effects.
-    func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>> where A: Kind<G, AA>{
-        return F.sequence(self)
+    func sequence<G: Applicative, AA>() -> Kind<G, Kind<F, AA>>
+        where A: Kind<G, AA>{
+        F.sequence(self)
     }
 }
 
@@ -60,7 +66,7 @@ public extension Kind where F: Traverse & Monad {
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
     func flatTraverse<G: Applicative, B>(_ f: @escaping (A) -> Kind<G, Kind<F, B>>) -> Kind<G, Kind<F, B>> {
-        return F.flatTraverse(self, f)
+        F.flatTraverse(self, f)
     }
 }
 
@@ -75,10 +81,10 @@ public extension Traverse {
     /// - Returns: A new structure with the results of the function.
     static func scanLeft<A, B, S>(
         _ fa: Kind<Self, A>,
-        initialState: S,
-        f: @escaping (A) -> State<S, B>) -> Kind<Self, B> {
+        _ initialState: S,
+        _ f: @escaping (A) -> State<S, B>) -> Kind<Self, B> {
 
-        return Self.traverse(fa, f)^.runA(initialState)
+        Self.traverse(fa, f)^.runA(initialState)
     }
 
     /// Maps each element of a structure using a stateful function.
@@ -89,21 +95,21 @@ public extension Traverse {
     /// - Returns: A new structure with the results of the function.
     static func scanLeft<A, B>(
         _ fa: Kind<Self, A>,
-        initialState: B,
-        f: @escaping (B, A) -> B) -> Kind<Self, B> {
+        _ initialState: B,
+        _ f: @escaping (B, A) -> B) -> Kind<Self, B> {
 
         let stateStep: (A) -> State<B, B> = { a in
             let previousValue = State<B, B>.var()
             let nextValue = State<B, B>.var()
 
             return binding(
-                previousValue <- StateTPartial<ForId, B>.get(),
-                nextValue     <- StateTPartial<ForId, B>.pure(f(previousValue.get, a)),
-                              |<-StateTPartial<ForId, B>.set(nextValue.get),
+                previousValue <- .get(),
+                nextValue     <- .pure(f(previousValue.get, a)),
+                              |<-.set(nextValue.get),
                 yield: nextValue.get)^
         }
 
-        return scanLeft(fa, initialState: initialState, f: stateStep)
+        return scanLeft(fa, initialState, stateStep)
     }
 
     /// Maps each element of a structure to an effect using a stateful function.
@@ -114,10 +120,10 @@ public extension Traverse {
     /// - Returns: Results collected under the context of the effect provided by the function.
     static func scanLeftM<M: Monad, A, B, S>(
         _ fa: Kind<Self, A>,
-        initialState: Kind<M, S>,
-        f: @escaping (A) -> StateT<M, S, B>) -> Kind<M, Kind<Self, B>> {
+        _ initialState: Kind<M, S>,
+        _ f: @escaping (A) -> StateT<M, S, B>) -> Kind<M, Kind<Self, B>> {
 
-        return initialState.flatMap(traverse(fa, f)^.runA)
+        initialState.flatMap(traverse(fa, f)^.runA)
     }
 
     /// Maps each element of a structure to an effect using a stateful function.
@@ -128,20 +134,20 @@ public extension Traverse {
     /// - Returns: Results collected under the context of the effect provided by the function.
     static func scanLeftM<M: Monad, A, B>(
         _ fa: Kind<Self, A>,
-        initialState: Kind<M, B>,
-        f: @escaping (B, A) -> Kind<M, B>) -> Kind<M, Kind<Self, B>> {
+        _ initialState: Kind<M, B>,
+        _ f: @escaping (B, A) -> Kind<M, B>) -> Kind<M, Kind<Self, B>> {
 
         let stateStep: (A) -> StateT<M, B, B> = { a in
             let previousValue = StateT<M, B, B>.var()
             let nextValue = StateT<M, B, B>.var()
 
             return binding(
-                previousValue <- StateT<M, B, B>.get(),
-                nextValue     <- StateT<M, B, B>.liftF(f(previousValue.get, a)),
-                             |<-StateTPartial<M, B>.set(nextValue.get),
+                previousValue <- .get(),
+                nextValue     <- StateT.liftF(f(previousValue.get, a)),
+                             |<-.set(nextValue.get),
                 yield: nextValue.get)^
         }
-        return scanLeftM(fa, initialState: initialState, f: stateStep)
+        return scanLeftM(fa, initialState, stateStep)
     }
 }
 
@@ -156,7 +162,7 @@ public extension Kind where F: Traverse {
         initialState: S,
         f: @escaping (A) -> State<S, B>) -> Kind<F, B> {
 
-        F.scanLeft(self, initialState: initialState, f: f)
+        F.scanLeft(self, initialState, f)
     }
 
     /// Maps each element of this structure using a stateful function.
@@ -168,7 +174,7 @@ public extension Kind where F: Traverse {
         initialState: B,
         f: @escaping (B, A) -> B) -> Kind<F, B> {
 
-        F.scanLeft(self, initialState: initialState, f: f)
+        F.scanLeft(self, initialState, f)
     }
 
     /// Maps each element of this structure to an effect using a stateful function.
@@ -180,7 +186,7 @@ public extension Kind where F: Traverse {
         initialState: Kind<M, S>,
         f: @escaping (A) -> StateT<M, S, B>) -> Kind<M, Kind<F, B>> {
 
-        F.scanLeftM(self, initialState: initialState, f: f)
+        F.scanLeftM(self, initialState, f)
     }
 
     /// Maps each element of this structure to an effect using a stateful function.
@@ -192,7 +198,7 @@ public extension Kind where F: Traverse {
         initialState: Kind<M, B>,
         f: @escaping (B, A) -> Kind<M, B>) -> Kind<M, Kind<F, B>> {
 
-        F.scanLeftM(self, initialState: initialState, f: f)
+        F.scanLeftM(self, initialState, f)
     }
 }
 

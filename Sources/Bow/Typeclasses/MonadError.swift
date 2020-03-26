@@ -13,8 +13,11 @@ public extension MonadError {
     ///   - error: A function that produces an error of the type this instance is able to handle.
     ///   - predicate: A boolean predicate to test the value of the computation.
     /// - Returns: A value or an error in the context implementing this instance.
-    static func ensure<A>(_ fa: Kind<Self, A>, _ error: @escaping () -> E, _ predicate: @escaping (A) -> Bool) -> Kind<Self, A> {
-        return flatMap(fa, { a in
+    static func ensure<A>(
+        _ fa: Kind<Self, A>,
+        _ error: @escaping () -> E,
+        _ predicate: @escaping (A) -> Bool) -> Kind<Self, A> {
+        flatMap(fa, { a in
             predicate(a) ? pure(a) : raiseError(error())
         })
     }
@@ -31,7 +34,9 @@ public extension Kind where F: MonadError {
     ///   - error: A function that produces an error of the type this instance is able to handle.
     ///   - predicate: A boolean predicate to test the value of the computation.
     /// - Returns: A value or an error in the context implementing this instance.
-    func ensure(_ error: @escaping () -> F.E, _ predicate: @escaping (A) -> Bool) -> Kind<F, A> {
-        return F.ensure(self, error, predicate)
+    func ensure(
+        _ error: @escaping () -> F.E,
+        _ predicate: @escaping (A) -> Bool) -> Kind<F, A> {
+        F.ensure(self, error, predicate)
     }
 }

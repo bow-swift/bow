@@ -23,7 +23,7 @@ public extension MonadState {
     /// - Parameter f: A function that receives the state and computes a value and a new state.
     /// - Returns: A value with the output of the function and the new state.
     static func state<A>(_ f: @escaping (S) -> (S, A)) -> Kind<Self, A> {
-        return flatMap(get(), { s in
+        flatMap(get(), { s in
             let result = f(s)
             return map(set(result.0), { _ in result.1 })
         })
@@ -34,7 +34,7 @@ public extension MonadState {
     /// - Parameter f: Function that modifies the state.
     /// - Returns: Unit.
     static func modify(_ f: @escaping (S) -> S) -> Kind<Self, ()> {
-        return flatMap(get(), { s in set(f(s))})
+        flatMap(get(), { s in set(f(s))})
     }
 
     /// Retrieves a specific component of the state.
@@ -42,7 +42,7 @@ public extension MonadState {
     /// - Parameter f: Projection function to obtain part of the state.
     /// - Returns: A specific part of the state.
     static func inspect<A>(_ f: @escaping (S) -> A) -> Kind<Self, A> {
-        return map(get(), f)
+        map(get(), f)
     }
 }
 
@@ -56,7 +56,7 @@ public extension Kind where F: MonadState, A == Void {
     /// - Parameter s: New state.
     /// - Returns: Unit.
     static func set(_ s: F.S) -> Kind<F, ()> {
-        return F.set(s)
+        F.set(s)
     }
     
     /// Modifies the internal state.
@@ -66,7 +66,7 @@ public extension Kind where F: MonadState, A == Void {
     /// - Parameter f: Function that modifies the state.
     /// - Returns: Unit.
     static func modify(_ f: @escaping (F.S) -> F.S) -> Kind<F, ()> {
-        return F.modify(f)
+        F.modify(f)
     }
 }
 
@@ -77,7 +77,7 @@ public extension Kind where F: MonadState, A == F.S {
     ///
     /// - Returns: Maintained state.
     static func get() -> Kind<F, F.S> {
-        return F.get()
+        F.get()
     }
 }
 
@@ -89,7 +89,7 @@ public extension Kind where F: MonadState {
     /// - Parameter f: A function that receives the state and computes a value and a new state.
     /// - Returns: A value with the output of the function and the new state.
     static func state(_ f: @escaping (F.S) -> (F.S, A)) -> Kind<F, A> {
-        return F.state(f)
+        F.state(f)
     }
 
     /// Retrieves a specific component of the state.
@@ -99,6 +99,6 @@ public extension Kind where F: MonadState {
     /// - Parameter f: Projection function to obtain part of the state.
     /// - Returns: A specific part of the state.
     static func inspect(_ f: @escaping (F.S) -> A) -> Kind<F, A> {
-        return F.inspect(f)
+        F.inspect(f)
     }
 }

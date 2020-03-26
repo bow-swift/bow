@@ -12,7 +12,9 @@ public protocol SemigroupK {
     ///   - x: Left value in the combination.
     ///   - y: Right value in the combination.
     /// - Returns: Combination of the two values.
-    static func combineK<A>(_ x: Kind<Self, A>, _ y: Kind<Self, A>) -> Kind<Self, A>
+    static func combineK<A>(
+        _ x: Kind<Self, A>,
+        _ y: Kind<Self, A>) -> Kind<Self, A>
 }
 
 // MARK: Syntax for SemigroupK
@@ -26,6 +28,6 @@ public extension Kind where F: SemigroupK {
     ///   - y: Right value in the combination.
     /// - Returns: Combination of the two values.
     func combineK(_ y: Kind<F, A>) -> Kind<F, A> {
-        return F.combineK(self, y)
+        F.combineK(self, y)
     }
 }

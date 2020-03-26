@@ -20,7 +20,9 @@ public protocol Semigroupal {
     ///   - x: First factor.
     ///   - y: Second factor.
     /// - Returns: Tupled result of combining the values provided by both arguments.
-	static func product<A, B>(_ x: Kind<Self, A>, _ y: Kind<Self, B>) -> Kind<Self, (A, B)>
+	static func product<A, B>(
+        _ x: Kind<Self, A>,
+        _ y: Kind<Self, B>) -> Kind<Self, (A, B)>
 }
 
 // MARK: Syntax for Semigroupal

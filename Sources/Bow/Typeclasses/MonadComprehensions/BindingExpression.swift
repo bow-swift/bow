@@ -12,14 +12,14 @@ public class BindingExpression<F: Monad> {
     }
     
     internal func yield<A>(_ f: @escaping () -> A) -> Kind<F, A> {
-        return fa().map { x in
+        fa().map { x in
             self.bound.bind(x)
             return f()
         }
     }
     
     internal func bind<A>(_ partial: Eval<Kind<F, A>>) -> Kind<F, A> {
-        return fa().flatMap { x in
+        fa().flatMap { x in
             self.bound.bind(x)
             return partial.value()
         }
