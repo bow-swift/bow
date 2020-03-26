@@ -12,14 +12,19 @@ public class ContravariantLaws<F: Contravariant & EquatableK & ArbitraryK> {
     
     private static func identity() {
         property("Identity") <~ forAll { (fa: KindOf<F, Int>) in
-            return F.contramap(fa.value, id) == id(fa.value)
+            
+            fa.value.contramap(id)
+                ==
+            id(fa.value)
         }
     }
     
     private static func composition() {
         property("Composition") <~ forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
-            return F.contramap(F.contramap(fa.value, f.getArrow), g.getArrow) ==
-                F.contramap(fa.value, f.getArrow <<< g.getArrow)
+            
+            fa.value.contramap(f.getArrow).contramap(g.getArrow)
+                ==
+            fa.value.contramap(f.getArrow <<< g.getArrow)
         }
     }
 }
