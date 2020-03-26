@@ -205,7 +205,7 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/BowEffects/Typeclasses/Bracket.swift",
-      "line": 42,
+      "line": 39,
       "symbol": "==(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
