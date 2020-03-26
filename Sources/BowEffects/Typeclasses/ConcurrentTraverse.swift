@@ -9,7 +9,9 @@ public extension Traverse {
     ///   - fa: A structure of values.
     ///   - f: A function producing an effect.
     /// - Returns: Results collected under the context of the effect provided by the function.
-    static func parTraverse<G: Concurrent, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<Self, B>> {
+    static func parTraverse<G: Concurrent, A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, Kind<Self, B>> {
         let ff = f >>> ParApplicative.init
         return fa.traverse(ff)^.fa
     }
@@ -32,7 +34,9 @@ public extension Traverse where Self: Monad {
     ///   - fa: A structure of values.
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
-    static func parFlatTraverse<G: Concurrent, A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
+    static func parFlatTraverse<G: Concurrent, A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, Kind<Self, B>>) -> Kind<G, Kind<Self, B>> {
         G.map(parTraverse(fa, f), Self.flatten)
     }
 }
@@ -52,7 +56,8 @@ public extension Kind where F: Traverse {
     /// Evaluate each effect in this structure of values in parallel and collects the results.
     ///
     /// - Returns: Results collected under the context of the effects.
-    func parSequence<G: Concurrent, AA>() -> Kind<G, Kind<F, AA>> where A == Kind<G, AA> {
+    func parSequence<G: Concurrent, AA>() -> Kind<G, Kind<F, AA>>
+        where A == Kind<G, AA> {
         F.parSequence(self)
     }
 }
@@ -66,7 +71,7 @@ public extension Kind where F: Traverse & Monad {
     ///   - f: A transforming function yielding nested effects.
     /// - Returns: Results collected and flattened under the context of the effects.
     func parFlatTraverse<G: Concurrent, B>(_ f: @escaping (A) -> Kind<G, Kind<F, B>>) -> Kind<G, Kind<F, B>> {
-        return F.parFlatTraverse(self, f)
+        F.parFlatTraverse(self, f)
     }
 }
 
@@ -87,17 +92,19 @@ fileprivate postfix func ^<F, A>(_ value: ParApplicativeOf<F, A>) -> ParApplicat
 }
 
 extension ParApplicativePartial: Functor {
-    static func map<A, B>(_ fa: Kind<ParApplicativePartial<F>, A>, _ f: @escaping (A) -> B) -> Kind<ParApplicativePartial<F>, B> {
+    static func map<A, B>(
+        _ fa: ParApplicativeOf<F, A>,
+        _ f: @escaping (A) -> B) -> ParApplicativeOf<F, B> {
         ParApplicative(fa^.fa.map(f))
     }
 }
 
 extension ParApplicativePartial: Applicative {
-    static func pure<A>(_ a: A) -> Kind<ParApplicativePartial<F>, A> {
+    static func pure<A>(_ a: A) -> ParApplicativeOf<F, A> {
         ParApplicative(F.pure(a))
     }
     
-    static func ap<A, B>(_ ff: Kind<ParApplicativePartial<F>, (A) -> B>, _ fa: Kind<ParApplicativePartial<F>, A>) -> Kind<ParApplicativePartial<F>, B> {
+    static func ap<A, B>(_ ff: ParApplicativeOf<F, (A) -> B>, _ fa: ParApplicativeOf<F, A>) -> ParApplicativeOf<F, B> {
         ParApplicative(F.parMap(ff^.fa, fa^.fa) { f, a in f(a) })
     }
 }
