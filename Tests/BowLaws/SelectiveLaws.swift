@@ -11,8 +11,10 @@ public class SelectiveLaws<F: Selective & EquatableK> {
     private static func identity() {
         property("Identity") <~ forAll { (x: Int) in
             let input = F.pure(Either<Int, Int>.right(x))
-            return F.select(input, F.pure(id)) ==
-                F.map(input) { x in x.fold(id, id) }
+            
+            return input.select(F.pure(id))
+                ==
+            input.map { x in x.fold(id, id) }
         }
     }
 
@@ -21,7 +23,10 @@ public class SelectiveLaws<F: Selective & EquatableK> {
             let x = F.pure(Either<Int, Int>.right(a))
             let f = F.pure(b.getArrow)
             let g = F.pure(c.getArrow)
-            return F.select(x, F.zipRight(f, g)) == F.zipRight(F.select(x, f), F.select(x, g))
+            
+            return x.select(F.zipRight(f, g))
+                ==
+            x.select(f).zipRight(x.select(g))
         }
     }
 
@@ -31,12 +36,13 @@ public class SelectiveLaws<F: Selective & EquatableK> {
             let y = F.pure(Either<Int, (Int) -> Int>.right(b.getArrow))
             let z = F.pure({ (_: Int) in c.getArrow })
 
-            let m : Kind<F, Either<Int, Either<(Int, Int), Int>>> = F.map(x) { x in Either.fix(x.map(Either<(Int, Int), Int>.right)) }
-            let n : Kind<F, (Int) -> Either<(Int, Int), Int>> = F.map(y) { y in { a in y.bimap({ l in (l, a) }, { r in r(a) }) }}
-            let q : Kind<F, ((Int, Int)) -> Int> = F.map(z) { z in { a in z(a.0)(a.1) } }
+            let m: Kind<F, Either<Int, Either<(Int, Int), Int>>> = x.map { x in x.map(Either.right)^ }
+            let n: Kind<F, (Int) -> Either<(Int, Int), Int>> = y.map { y in { a in y.bimap({ l in (l, a) }, { r in r(a) }) }}
+            let q: Kind<F, ((Int, Int)) -> Int> = z.map { z in { a in z(a.0)(a.1) } }
 
-            return F.select(x, F.select(y, z)) ==
-                F.select(F.select(m, n), q)
+            return x.select(y.select(z))
+                ==
+            m.select(n).select(q)
         }
     }
 }
