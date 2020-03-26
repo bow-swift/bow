@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: Instance of `Semigroup` for `Dictionary`
+// MARK: Instance of Semigroup for Dictionary
 
 extension Dictionary: Semigroup {
     public func combine(_ other: Dictionary<Key, Value>) -> Dictionary<Key, Value> {
@@ -8,7 +8,7 @@ extension Dictionary: Semigroup {
     }
 }
 
-// MARK: Instances of `Monoid` for `Dictionary`
+// MARK: Instances of Monoid for Dictionary
 
 extension Dictionary: Monoid {
     public static func empty() -> Dictionary<Key, Value> {

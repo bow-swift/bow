@@ -53,7 +53,8 @@ public final class Day<F: Comonad, G: Comonad, A>: DayOf<F, G, A> {
     /// It goes from `Day f (Day g h) a` to `Day (Day f g) h a`.
     ///
     /// - Returns: Left associated Day convolution.
-    public func assoc<FF: Comonad, GG: Comonad>() -> Day<DayPartial<F, FF>, GG, A> where G == DayPartial<FF, GG> {
+    public func assoc<FF: Comonad, GG: Comonad>() -> Day<DayPartial<F, FF>, GG, A>
+        where G == DayPartial<FF, GG> {
         let newLeft = Day<F, FF, Any>(
             left: self.left,
             right: self.right^.left) { a, b in (a, b) }
@@ -71,7 +72,8 @@ public final class Day<F: Comonad, G: Comonad, A>: DayOf<F, G, A> {
     /// It goes from `Day (Day f g) h a` to `Day f (Day g h) a`.
     ///
     /// - Returns: Right associated Day convolution.
-    public func disassoc<FF: Comonad, GG: Comonad>() -> Day<FF, DayPartial<GG, G>, A> where F == DayPartial<FF, GG> {
+    public func disassoc<FF: Comonad, GG: Comonad>() -> Day<FF, DayPartial<GG, G>, A>
+        where F == DayPartial<FF, GG> {
         let newRight = Day<GG, G, Any>(
             left: self.left^.right,
             right: self.right) { a, b in (a, b) }
@@ -162,7 +164,9 @@ public postfix func ^<F, G, A>(_ value: DayOf<F, G, A>) -> Day<F, G, A> {
 // MARK: Instance of Functor for Day
 
 extension DayPartial: Functor {
-    public static func map<A, B>(_ fa: DayOf<F, G, A>, _ f: @escaping (A) -> B) -> DayOf<F, G, B> {
+    public static func map<A, B>(
+        _ fa: DayOf<F, G, A>,
+        _ f: @escaping (A) -> B) -> DayOf<F, G, B> {
         fa^.step { left, right, get in
             Day(left: left, right: right) { b, c in f(get(b, c)) }
         }
@@ -176,7 +180,9 @@ extension DayPartial: Applicative where F: Applicative, G: Applicative {
         Day(left: F.pure(()), right: G.pure(())) { _, _ in a }
     }
     
-    public static func ap<A, B>(_ ff: DayOf<F, G, (A) -> B>, _ fa: DayOf<F, G, A>) -> DayOf<F, G, B> {
+    public static func ap<A, B>(
+        _ ff: DayOf<F, G, (A) -> B>,
+        _ fa: DayOf<F, G, A>) -> DayOf<F, G, B> {
         fa^.step { left, right, get in
             ff^.step { lf, rf, getf in
                 let l = F.map(left, lf) { x, y in (x, y) as Any }
@@ -194,7 +200,9 @@ extension DayPartial: Applicative where F: Applicative, G: Applicative {
 // MARK: Instance of Comonad for Day
 
 extension DayPartial: Comonad {
-    public static func coflatMap<A, B>(_ fa: DayOf<F, G, A>, _ f: @escaping (DayOf<F, G, A>) -> B) -> DayOf<F, G, B> {
+    public static func coflatMap<A, B>(
+        _ fa: DayOf<F, G, A>,
+        _ f: @escaping (DayOf<F, G, A>) -> B) -> DayOf<F, G, B> {
         fa^.step { left, right, get in
             let l = left.duplicate().map { x in x as Any }
             let r = right.duplicate().map { x in x as Any }

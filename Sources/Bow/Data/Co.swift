@@ -108,7 +108,9 @@ public extension CoT where M == ForId {
     ///   - co: Monadic actions to explore the Comonad.
     ///   - wa: Comonadic space to explore.
     /// - Returns: A new Comonadic space resulting from the exploration.
-    static func select<A, B>(_ co: Co<W, (A) -> B>, _ wa: Kind<W, A>) -> Kind<W, B> {
+    static func select<A, B>(
+        _ co: Co<W, (A) -> B>,
+        _ wa: Kind<W, A>) -> Kind<W, B> {
         co.run(wa.coflatMap { wa in
             { f in wa.map(f) }
         })
@@ -166,20 +168,24 @@ public postfix func ^<W, M, A>(_ value: CoTOf<W, M, A>) -> CoT<W, M, A> {
     CoT.fix(value)
 }
 
-// MARK: Instance of `Functor` for `CoT`
+// MARK: Instance of Functor for CoT
 
 extension CoTPartial: Functor {
-    public static func map<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> B) -> CoTOf<W, M, B> {
+    public static func map<A, B>(
+        _ fa: CoTOf<W, M, A>,
+        _ f: @escaping (A) -> B) -> CoTOf<W, M, B> {
         CoT<W, M, B> { b in
             fa^.runT(b.map { bb in bb <<< f })
         }
     }
 }
 
-// MARK: Instance of `Applicative` for `CoT`
+// MARK: Instance of Applicative for CoT
 
 extension CoTPartial: Applicative {
-    public static func ap<A, B>(_ ff: CoTOf<W, M, (A) -> B>, _ fa: CoTOf<W, M, A>) -> CoTOf<W, M, B> {
+    public static func ap<A, B>(
+        _ ff: CoTOf<W, M, (A) -> B>,
+        _ fa: CoTOf<W, M, A>) -> CoTOf<W, M, B> {
         CoT<W, M, B> { w in
             ff^.cow(w.coflatMap { wf in
                 { g in
@@ -194,10 +200,12 @@ extension CoTPartial: Applicative {
     }
 }
 
-// MARK: Instance of `Monad` for `CoT`
+// MARK: Instance of Monad for CoT
 
 extension CoTPartial: Monad {
-    public static func flatMap<A, B>(_ fa: CoTOf<W, M, A>, _ f: @escaping (A) -> CoTOf<W, M, B>) -> CoTOf<W, M, B> {
+    public static func flatMap<A, B>(
+        _ fa: CoTOf<W, M, A>,
+        _ f: @escaping (A) -> CoTOf<W, M, B>) -> CoTOf<W, M, B> {
         CoT { w in
             fa^.cow(w.coflatMap { wa in
                 { a in
@@ -207,7 +215,9 @@ extension CoTPartial: Monad {
         }
     }
     
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> CoTOf<W, M, Either<A, B>>) -> CoTOf<W, M, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> CoTOf<W, M, Either<A, B>>) -> CoTOf<W, M, B> {
         f(a).flatMap { either in
             either.fold(
                 { aa in tailRecM(aa, f) },
@@ -216,7 +226,7 @@ extension CoTPartial: Monad {
     }
 }
 
-// MARK: Instance of `MonadReader` for `CoT`
+// MARK: Instance of MonadReader for CoT
 
 extension CoTPartial: MonadReader where W: ComonadEnv {
     public typealias D = W.E
@@ -225,12 +235,14 @@ extension CoTPartial: MonadReader where W: ComonadEnv {
         CoT.liftT(W.ask)
     }
     
-    public static func local<A>(_ fa: CoTOf<W, M, A>, _ f: @escaping (W.E) -> W.E) -> CoTOf<W, M, A> {
+    public static func local<A>(
+        _ fa: CoTOf<W, M, A>,
+        _ f: @escaping (W.E) -> W.E) -> CoTOf<W, M, A> {
         CoT(fa^.cow <<< { wa in wa.local(f) })
     }
 }
 
-// MARK: Instance of `MonadState` for `CoT`
+// MARK: Instance of MonadState for CoT
 
 extension CoTPartial: MonadState where W: ComonadStore {
     public typealias S = W.S
@@ -244,7 +256,7 @@ extension CoTPartial: MonadState where W: ComonadStore {
     }
 }
 
-// MARK: Instance of `MonadWriter` for `CoT`
+// MARK: Instance of MonadWriter for CoT
 
 extension CoTPartial: MonadWriter where W: ComonadTraced {
     public typealias W = W.M

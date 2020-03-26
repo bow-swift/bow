@@ -135,7 +135,7 @@ public postfix func ^<A>(_ fa: OptionOf<A>) -> Option<A> {
     Option.fix(fa)
 }
 
-// MARK: Conformance of `Option` to `CustomStringConvertible`.
+// MARK: Conformance of Option to CustomStringConvertible
 extension Option: CustomStringConvertible {
     public var description: String {
         fold({ "None" },
@@ -143,7 +143,7 @@ extension Option: CustomStringConvertible {
     }
 }
 
-// MARK: Conformance of `Option` to `CustomDebugStringConvertible`.
+// MARK: Conformance of Option to CustomDebugStringConvertible
 extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription : String {
         fold(constant("None"),
@@ -151,42 +151,52 @@ extension Option: CustomDebugStringConvertible where A: CustomDebugStringConvert
     }
 }
 
-// MARK: Instance of `EquatableK` for `Option`.
+// MARK: Instance of EquatableK for Option
 extension OptionPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: OptionOf<A>, _ rhs: OptionOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: OptionOf<A>,
+        _ rhs: OptionOf<A>) -> Bool {
         lhs^.fold({ rhs^.fold(constant(true), constant(false)) },
                   { a in rhs^.fold(constant(false), { b in a == b })})
     }
 }
 
-// MARK: Instance of `Functor` for `Option`.
+// MARK: Instance of Functor for Option
 extension OptionPartial: Functor {
-    public static func map<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> B) -> OptionOf<B> {
+    public static func map<A, B>(
+        _ fa: OptionOf<A>,
+        _ f: @escaping (A) -> B) -> OptionOf<B> {
         fa^.fold(Option.none, Option.some <<< f)
     }
 }
 
-// MARK: Instance of `Applicative` for `Option`.
+// MARK: Instance of Applicative for Option
 extension OptionPartial: Applicative {
     public static func pure<A>(_ a: A) -> OptionOf<A> {
         Option.some(a)
     }
 }
 
-// MARK: Instance of `Selective` for `Option`
+// MARK: Instance of Selective for Option
 extension OptionPartial: Selective {}
 
-// MARK: Instance of `Monad` for `Option`.
+// MARK: Instance of Monad for Option
 extension OptionPartial: Monad {
-    public static func flatMap<A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: OptionOf<A>,
+        _ f: @escaping (A) -> OptionOf<B>) -> OptionOf<B> {
         fa^.fold(Option<B>.none, f)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> OptionOf<B> {
         _tailRecM(a, f).run()
     }
     
-    private static func _tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> Trampoline<OptionOf<B>> {
+    private static func _tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> OptionOf<Either<A, B>>) -> Trampoline<OptionOf<B>> {
         .defer {
             f(a)^.fold({ .done(Option.none()) },
                        { either in
@@ -197,7 +207,7 @@ extension OptionPartial: Monad {
     }
 }
 
-// MARK: Instance of `ApplicativeError` for `Option`.
+// MARK: Instance of ApplicativeError for Option
 extension OptionPartial: ApplicativeError {
     public typealias E = Unit
 
@@ -205,70 +215,84 @@ extension OptionPartial: ApplicativeError {
         Option.none()
     }
 
-    public static func handleErrorWith<A>(_ fa: OptionOf<A>, _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
+    public static func handleErrorWith<A>(
+        _ fa: OptionOf<A>,
+        _ f: @escaping (Unit) -> OptionOf<A>) -> OptionOf<A> {
         fa^.orElse(f(unit)^)
     }
 }
 
-// MARK: Instance of `MonadError` for `Option`.
+// MARK: Instance of MonadError for Option
 extension OptionPartial: MonadError {}
 
-// MARK: Instance of `FunctorFilter` for `Option`.
+// MARK: Instance of FunctorFilter for Option
 extension OptionPartial: FunctorFilter {}
 
-// MARK: Instance of `MonadFilter` for `Option`.
+// MARK: Instance of MonadFilter for Option
 extension OptionPartial: MonadFilter {
     public static func empty<A>() -> OptionOf<A> {
         Option.none()
     }
 }
 
-// MARK: Instance of `Foldable` for `Option`.
+// MARK: Instance of Foldable for Option
 extension OptionPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: OptionOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: OptionOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         fa^.fold({ b },
                  { a in f(b, a) })
     }
 
-    public static func foldRight<A, B>(_ fa: OptionOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: OptionOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         fa^.fold(constant(b),
                  { a in f(a, b) })
     }
 }
 
-// MARK: Instance of `Traverse` for `Option`.
+// MARK: Instance of Traverse for Option
 extension OptionPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: OptionOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, OptionOf<B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: OptionOf<A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, OptionOf<B>> {
         fa^.fold({ G.pure(Option<B>.none()) },
                  { a in G.map(f(a), Option<B>.some)})
     }
 }
 
-// MARK: Instance of `TraverseFilter` for `Option`.
+// MARK: Instance of TraverseFilter for Option
 extension OptionPartial: TraverseFilter {
-    public static func traverseFilter<A, B, G: Applicative>(_ fa: OptionOf<A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, OptionOf<B>> {
+    public static func traverseFilter<A, B, G: Applicative>(
+        _ fa: OptionOf<A>,
+        _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, OptionOf<B>> {
         fa^.fold({ G.pure(Option<B>.none()) }, f)
     }
 }
 
-// MARK: Instance of `SemigroupK` for `Option`
+// MARK: Instance of SemigroupK for Option
 extension OptionPartial: SemigroupK {
-    public static func combineK<A>(_ x: OptionOf<A>, _ y: OptionOf<A>) -> OptionOf<A> {
+    public static func combineK<A>(
+        _ x: OptionOf<A>,
+        _ y: OptionOf<A>) -> OptionOf<A> {
         x^.fold(constant(y), Option.some)
     }
 }
 
-// MARK: Instance of `MonoidK` for `Option`
+// MARK: Instance of MonoidK for Option
 extension OptionPartial: MonoidK {
     public static func emptyK<A>() -> OptionOf<A> {
         Option.none()
     }
 }
 
-// MARK: Instance of `MonadCombine` for `Option`
+// MARK: Instance of MonadCombine for Option
 extension OptionPartial: MonadCombine {}
 
-// MARK: Instance of `Semigroup` for `Option`, provided that `A` has an instance of `Semigroup`.
+// MARK: Instance of Semigroup for Option
 extension Option: Semigroup where A: Semigroup {
     public func combine(_ other: Option<A>) -> Option<A> {
         self.fold(constant(other),
@@ -278,21 +302,23 @@ extension Option: Semigroup where A: Semigroup {
     }
 }
 
-// MARK: Instance of `Semigroupal` for `Option`,
+// MARK: Instance of Semigroupal for Option
 extension OptionPartial: Semigroupal {
-    public static func product<A, B>(_ a: OptionOf<A>, _ b: OptionOf<B>) -> OptionOf<(A, B)> {
+    public static func product<A, B>(
+        _ a: OptionOf<A>,
+        _ b: OptionOf<B>) -> OptionOf<(A, B)> {
         ForOption.zip(a, b)
     }
 }
 
-// MARK: Instance of `Monoidal` for `Option`,
+// MARK: Instance of Monoidal for Option
 extension OptionPartial: Monoidal {
     public static func identity<A>() -> OptionOf<A> {
         Option.none()
     }
 }
 
-// MARK: Instance of `Monoid` for `Option`, provided that `A` has an instance of `Monoid`.
+// MARK: Instance of Monoid for Option
 extension Option: Monoid where A: Monoid {
     public static func empty() -> Option<A> {
         .none()

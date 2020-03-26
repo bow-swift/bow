@@ -136,7 +136,7 @@ public extension Array {
     }
 }
 
-// MARK: Conformance of `ArrayK` to `CustomStringConvertible`.
+// MARK: Conformance of ArrayK to CustomStringConvertible.
 extension ArrayK: CustomStringConvertible {
     public var description: String {
         let contentsString = self.array.map { x in "\(x)" }.joined(separator: ", ")
@@ -144,7 +144,7 @@ extension ArrayK: CustomStringConvertible {
     }
 }
 
-// MARK: Conformance of `ArrayK` to `CustomDebugStringConvertible`.
+// MARK: Conformance of ArrayK to CustomDebugStringConvertible.
 extension ArrayK: CustomDebugStringConvertible where A: CustomDebugStringConvertible {
     public var debugDescription: String {
         let contentsString = self.array.map { x in x.debugDescription }.joined(separator: ", ")
@@ -152,39 +152,46 @@ extension ArrayK: CustomDebugStringConvertible where A: CustomDebugStringConvert
     }
 }
 
-// MARK: Instance of `EquatableK` for `ArrayK`
+// MARK: Instance of EquatableK for ArrayK
 extension ArrayKPartial: EquatableK {
-    public static func eq<A: Equatable>(_ lhs: ArrayKOf<A>, _ rhs: ArrayKOf<A>) -> Bool {
+    public static func eq<A: Equatable>(
+        _ lhs: ArrayKOf<A>,
+        _ rhs: ArrayKOf<A>) -> Bool {
         lhs^.array == rhs^.array
     }
 }
 
-// MARK: Instance of `Functor` for `ArrayK`
+// MARK: Instance of Functor for ArrayK
 extension ArrayKPartial: Functor {
-    public static func map<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> B) -> ArrayKOf<B> {
+    public static func map<A, B>(
+        _ fa: ArrayKOf<A>,
+        _ f: @escaping (A) -> B) -> ArrayKOf<B> {
         ArrayK(fa^.array.map(f))
     }
 }
 
-// MARK: Instance of `Applicative` for `ArrayK`
+// MARK: Instance of Applicative for ArrayK
 extension ArrayKPartial: Applicative {
     public static func pure<A>(_ a: A) -> ArrayKOf<A> {
         ArrayK([a])
     }
 }
 
-// MARK: Instance of `Selective` for `ArrayK`
+// MARK: Instance of Selective for ArrayK
 extension ArrayKPartial: Selective {}
 
-// MARK: Instance of `Monad` for `ArrayK`
+// MARK: Instance of Monad for ArrayK
 extension ArrayKPartial: Monad {
-    public static func flatMap<A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
+    public static func flatMap<A, B>(
+        _ fa: ArrayKOf<A>,
+        _ f: @escaping (A) -> ArrayKOf<B>) -> ArrayKOf<B> {
         ArrayK<B>(fa^.array.flatMap { a in f(a)^.array })
     }
 
-    private static func go<A, B>(_ buf: [B],
-                                 _ f: @escaping (A) -> ArrayKOf<Either<A, B>>,
-                                 _ v: ArrayK<Either<A, B>>) -> Trampoline<[B]> {
+    private static func go<A, B>(
+        _ buf: [B],
+        _ f: @escaping (A) -> ArrayKOf<Either<A, B>>,
+        _ v: ArrayK<Either<A, B>>) -> Trampoline<[B]> {
         .defer {
             if !v.isEmpty {
                 let head = v.array[0]
@@ -200,73 +207,86 @@ extension ArrayKPartial: Monad {
         }
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> ArrayKOf<Either<A, B>>) -> ArrayKOf<B> {
         ArrayK(go([], f, f(a)^).run())
     }
 }
 
 // MARK: Instance of `Foldable` for `ArrayK`
 extension ArrayKPartial: Foldable {
-    public static func foldLeft<A, B>(_ fa: ArrayKOf<A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: ArrayKOf<A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         fa^.array.reduce(b, f)
     }
 
-    public static func foldRight<A, B>(_ fa: ArrayKOf<A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        func loop(_ lkw : ArrayK<A>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: ArrayKOf<A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        func loop(_ lkw: ArrayK<A>) -> Eval<B> {
             if lkw.array.isEmpty {
                 return b
             } else {
-                return f(lkw.array[0], Eval.defer({ loop(ArrayK([A](lkw.array.dropFirst())))  }))
+                return f(lkw.array[0],
+                         Eval.defer { loop(ArrayK([A](lkw.array.dropFirst()))) })
             }
         }
-        return Eval.defer({ loop(ArrayK.fix(fa)) })
+        return Eval.defer({ loop(fa^) })
     }
 }
 
-// MARK: Instance of `Traverse` for `ArrayK`
+// MARK: Instance of Traverse for ArrayK
 extension ArrayKPartial: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: ArrayKOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, ArrayKOf<B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: ArrayKOf<A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, ArrayKOf<B>> {
         let x = foldRight(fa, Eval.always({ G.pure(ArrayK<B>([])) }),
                           { a, eval in G.map2Eval(f(a), eval, { x, y in ArrayK<B>([x]) + y }) }).value()
         return G.map(x, { a in a as ArrayKOf<B> })
     }
 }
 
-// MARK: Instance of `SemigroupK` for `ArrayK`
+// MARK: Instance of SemigroupK for ArrayK
 extension ArrayKPartial: SemigroupK {
-    public static func combineK<A>(_ x: ArrayKOf<A>, _ y: ArrayKOf<A>) -> ArrayKOf<A> {
+    public static func combineK<A>(
+        _ x: ArrayKOf<A>,
+        _ y: ArrayKOf<A>) -> ArrayKOf<A> {
         x^ + y^
     }
 }
 
-// MARK: Instance of `MonoidK` for `ArrayK`
+// MARK: Instance of MonoidK for ArrayK
 extension ArrayKPartial: MonoidK {
     public static func emptyK<A>() -> ArrayKOf<A> {
         ArrayK([])
     }
 }
 
-// MARK: Instance of `FunctorFilter` for `ArrayK`
+// MARK: Instance of FunctorFilter for ArrayK
 extension ArrayKPartial: FunctorFilter {}
 
-// MARK: Instance of `MonadFilter` for `ArrayK`
+// MARK: Instance of MonadFilter for ArrayK
 extension ArrayKPartial: MonadFilter {
     public static func empty<A>() -> ArrayKOf<A> {
         ArrayK([])
     }
 }
 
-// MARK: Instance of `MonadCombine` for `ArrayK`
+// MARK: Instance of MonadCombine for ArrayK
 extension ArrayKPartial: MonadCombine {}
 
-// MARK: Instance of `Semigroup` for `ArrayK`
+// MARK: Instance of Semigroup for ArrayK
 extension ArrayK: Semigroup {
     public func combine(_ other: ArrayK<A>) -> ArrayK {
         self + other
     }
 }
 
-// MARK: Instance of `Monoid` for `ArrayK`
+// MARK: Instance of Monoid for ArrayK
 extension ArrayK: Monoid {
     public static func empty() -> ArrayK {
         ArrayK([])

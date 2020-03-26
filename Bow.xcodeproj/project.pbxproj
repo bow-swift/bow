@@ -188,6 +188,7 @@
 		11E4190B22B90FE2009BDFB3 /* AutoGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4190A22B90FE2009BDFB3 /* AutoGetter.swift */; };
 		11E4190F22B91169009BDFB3 /* AutoSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4190E22B91169009BDFB3 /* AutoSetter.swift */; };
 		11E4191222B935AE009BDFB3 /* Kind+Optics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4191022B93596009BDFB3 /* Kind+Optics.swift */; };
+		11E5F3D3242BB16C005CF07A /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F477217E2E9200969984 /* Ior.swift */; };
 		11E71715219D722900B94845 /* BoundSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B2217E2E9200969984 /* BoundSetter.swift */; };
 		11E71716219D722900B94845 /* Fold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BE217E2E9200969984 /* Fold.swift */; };
 		11E71717219D722900B94845 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B3217E2E9200969984 /* Getter.swift */; };
@@ -312,7 +313,6 @@
 		8BA0F57F217E2E9200969984 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F474217E2E9200969984 /* Either.swift */; };
 		8BA0F583217E2E9200969984 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F475217E2E9200969984 /* Id.swift */; };
 		8BA0F587217E2E9200969984 /* DictionaryK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F476217E2E9200969984 /* DictionaryK.swift */; };
-		8BA0F58B217E2E9200969984 /* Ior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F477217E2E9200969984 /* Ior.swift */; };
 		8BA0F58F217E2E9200969984 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F478217E2E9200969984 /* Option.swift */; };
 		8BA0F593217E2E9200969984 /* NonEmptyArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F479217E2E9200969984 /* NonEmptyArray.swift */; };
 		8BA0F597217E2E9200969984 /* EitherK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F47A217E2E9200969984 /* EitherK.swift */; };
@@ -3151,7 +3151,6 @@
 				11D36A19223261EC00CBD85F /* Selective.swift in Sources */,
 				8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */,
 				11ED7A2A226E094C00C27994 /* Result.swift in Sources */,
-				8BA0F58B217E2E9200969984 /* Ior.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				1171ED4B23C48985005362E0 /* StoreT.swift in Sources */,
 				118C35DD240E5C2200113C66 /* CoSum.swift in Sources */,
@@ -3177,6 +3176,7 @@
 				609CC14D2365410500096D5D /* Decidable.swift in Sources */,
 				8BA0F5EB217E2E9200969984 /* MonadState.swift in Sources */,
 				8BA0F607217E2E9200969984 /* MonadError.swift in Sources */,
+				11E5F3D3242BB16C005CF07A /* Ior.swift in Sources */,
 				11A5FDD022E5C79F00FF7821 /* BindingOperator.swift in Sources */,
 				8BA0F597217E2E9200969984 /* EitherK.swift in Sources */,
 				1171ED4D23C4CB7C005362E0 /* TracedT.swift in Sources */,
