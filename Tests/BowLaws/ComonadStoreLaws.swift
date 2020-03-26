@@ -13,14 +13,18 @@ public class ComonadStoreLaws<F: ComonadStore & EquatableK & ArbitraryK, A: Arbi
         property("coflatMap does not change position") <~ forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, Int>) in
             let ff: (Kind<F, Int>) -> Int = { wa in f.getArrow(wa.extract()) }
             
-            return fa.value.coflatMap(ff).position ==
-                fa.value.position
+            return fa.value.coflatMap(ff).position
+                ==
+            fa.value.position
         }
     }
     
     static func peekPosition() {
         property("peek at position is equal to extract") <~ forAll { (fa: KindOf<F, Int>) in
-            fa.value.peek(fa.value.position) == fa.value.extract()
+            
+            fa.value.peek(fa.value.position)
+                ==
+            fa.value.extract()
         }
     }
 }
