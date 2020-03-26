@@ -5,14 +5,14 @@ import SwiftCheck
 
 extension OptionT: Arbitrary where F: ArbitraryK, A: Arbitrary {
     public static var arbitrary: Gen<OptionT<F, A>> {
-        return Gen.from(OptionTPartial.generate >>> OptionT.fix)
+        Gen.from(OptionTPartial.generate >>> OptionT.fix)
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `OptionT`
+// MARK: Instance of ArbitraryK for OptionT
 
 extension OptionTPartial: ArbitraryK where F: ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<OptionTPartial<F>, A> {
-        return OptionT(F.generate())
+    public static func generate<A: Arbitrary>() -> OptionTOf<F, A> {
+        OptionT(F.generate())
     }
 }
