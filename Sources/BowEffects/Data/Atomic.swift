@@ -15,7 +15,7 @@ public final class Atomic<A> {
     /// Gets or sets the underlying value in a thread-safe manner.
     public var value: A {
         get {
-            return queue.sync { self._value }
+            queue.sync { self._value }
         }
         set {
             self._value = newValue
@@ -62,7 +62,7 @@ public final class Atomic<A> {
     /// - Parameter newValue: Value to be set in this atomic reference.
     /// - Returns: Newly set value.
     public func setAndGet(_ newValue: A) -> A {
-        return updateAndGet { _ in newValue }
+        updateAndGet { _ in newValue }
     }
     
     /// Sets a new value transforming the underlying one using a function and gets the new value.
