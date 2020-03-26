@@ -9,7 +9,7 @@ extension Id: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Id`
+// MARK: Instance of ArbitraryK for Id
 
 extension IdPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> IdOf<A> {
