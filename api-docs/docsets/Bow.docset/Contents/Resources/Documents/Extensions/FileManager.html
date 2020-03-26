@@ -2160,7 +2160,11 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlIO</span><span class="p">(</span><span class="k">for</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">SearchPathDirectory</span><span class="p">,</span> <span class="k">in</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">SearchPathDomainMask</span><span class="p">,</span> <span class="n">appropriateFor</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">create</span> <span class="nv">shouldCreate</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlIO</span><span class="p">(</span>
+    <span class="k">for</span> <span class="nv">directory</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">SearchPathDirectory</span><span class="p">,</span>
+    <span class="k">in</span> <span class="nv">domain</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">SearchPathDomainMask</span><span class="p">,</span>
+    <span class="n">appropriateFor</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">create</span> <span class="nv">shouldCreate</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2198,7 +2202,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">contentsOfDirectoryIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">includingPropertiesForKeys</span> <span class="nv">keys</span><span class="p">:</span> <span class="p">[</span><span class="kt">URLResourceKey</span><span class="p">]?,</span> <span class="n">options</span> <span class="nv">mask</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">DirectoryEnumerationOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">[</span><span class="kt">URL</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">contentsOfDirectoryIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">includingPropertiesForKeys</span> <span class="nv">keys</span><span class="p">:</span> <span class="p">[</span><span class="kt">URLResourceKey</span><span class="p">]?,</span>
+    <span class="n">options</span> <span class="nv">mask</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">DirectoryEnumerationOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">[</span><span class="kt">URL</span><span class="p">]</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2290,7 +2297,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createDirectoryIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">withIntermediateDirectories</span> <span class="nv">createIntermediates</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createDirectoryIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">withIntermediateDirectories</span> <span class="nv">createIntermediates</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+    <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2317,7 +2327,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createDirectoryIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">withIntermediateDirectories</span> <span class="nv">createIntermediates</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createDirectoryIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withIntermediateDirectories</span> <span class="nv">createIntermediates</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+    <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2344,7 +2357,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createFileIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">contents</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createFileIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contents</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span>
+    <span class="nv">attributes</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2426,7 +2442,9 @@
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
-<span class="kd">func</span> <span class="nf">trashItemIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">resultingItemURL</span> <span class="nv">outResultingURL</span><span class="p">:</span> <span class="kt">AutoreleasingUnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">NSURL</span><span class="p">?</span><span class="o">&gt;</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+<span class="kd">func</span> <span class="nf">trashItemIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">resultingItemURL</span> <span class="nv">outResultingURL</span><span class="p">:</span> <span class="kt">AutoreleasingUnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">NSURL</span><span class="p">?</span><span class="o">&gt;</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2464,7 +2482,11 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">replaceItemIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">withItemAt</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">backupItemName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">ItemReplacementOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="p">?</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">replaceItemIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">withItemAt</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">backupItemName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">options</span><span class="p">:</span> <span class="kt">FileManager</span><span class="o">.</span><span class="kt">ItemReplacementOptions</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="p">?</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2502,7 +2524,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">copyItemIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">to</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">copyItemIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2529,7 +2553,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">copyItemIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">originalItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">toPath</span> <span class="nv">newItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">copyItemIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">originalItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">toPath</span> <span class="nv">newItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2556,7 +2582,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">moveItemIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">to</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">moveItemIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">originalItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">newItemURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2583,7 +2611,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">moveItemIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">originalItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">to</span> <span class="nv">newItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">moveItemIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">originalItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">newItemPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2621,7 +2651,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUbiquitousIO</span><span class="p">(</span><span class="n">_</span> <span class="nv">flag</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="n">itemAt</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setUbiquitousIO</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">flag</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span>
+    <span class="n">itemAt</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2702,7 +2735,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlIO</span><span class="p">(</span><span class="n">forPublishingUbiquitousItemAt</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">expiration</span> <span class="nv">outDate</span><span class="p">:</span> <span class="kt">AutoreleasingUnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">NSDate</span><span class="p">?</span><span class="o">&gt;</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlIO</span><span class="p">(</span>
+    <span class="n">forPublishingUbiquitousItemAt</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">expiration</span> <span class="nv">outDate</span><span class="p">:</span> <span class="kt">AutoreleasingUnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">NSDate</span><span class="p">?</span><span class="o">&gt;</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">URL</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2779,7 +2814,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSymbolicLinkIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">withDestinationURL</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSymbolicLinkIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">withDestinationURL</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2806,7 +2843,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSymbolicLinkIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">withDestinationPath</span> <span class="nv">destinationPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">createSymbolicLinkIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">withDestinationPath</span> <span class="nv">destinationPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2833,7 +2872,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">linkItemIO</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="n">to</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">linkItemIO</span><span class="p">(</span>
+    <span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">destinationURL</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2860,7 +2901,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">linkItemIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">toPath</span> <span class="nv">destinationPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">linkItemIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">toPath</span> <span class="nv">destinationPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -3033,7 +3076,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setAttributesIO</span><span class="p">(</span><span class="n">_</span> <span class="nv">attrs</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="n">ofItemAtPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">setAttributesIO</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">attrs</span><span class="p">:</span> <span class="p">[</span><span class="kt">FileAttributeKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span>
+    <span class="n">ofItemAtPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">()</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -3098,7 +3143,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">contentsEqualIO</span><span class="p">(</span><span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">andPath</span> <span class="nv">otherPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">contentsEqualIO</span><span class="p">(</span>
+    <span class="n">atPath</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">andPath</span> <span class="nv">otherPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/IO.html">IO</a></span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">Bool</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
