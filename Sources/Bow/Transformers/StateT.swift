@@ -193,7 +193,9 @@ extension StateTPartial: Invariant where F: Functor {}
 
 // MARK: Instance of Functor for StateT
 extension StateTPartial: Functor where F: Functor {
-    public static func map<A, B>(_ fa: StateTOf<F, S, A>, _ f: @escaping (A) -> B) -> StateTOf<F, S, B> {
+    public static func map<A, B>(
+        _ fa: StateTOf<F, S, A>,
+        _ f: @escaping (A) -> B) -> StateTOf<F, S, B> {
         fa^.transform({ (s, a) in (s, f(a)) })
     }
 }
@@ -210,7 +212,9 @@ extension StateTPartial: Selective where F: Monad {}
 
 // MARK: Instance of Monad for StateT
 extension StateTPartial: Monad where F: Monad {
-    public static func flatMap<A, B>(_ fa: StateTOf<F, S, A>, _ f: @escaping (A) -> StateTOf<F, S, B>) -> StateTOf<F, S, B> {
+    public static func flatMap<A, B>(
+        _ fa: StateTOf<F, S, A>,
+        _ f: @escaping (A) -> StateTOf<F, S, B>) -> StateTOf<F, S, B> {
         StateT<F, S, B>(
             fa^.runF >>> { fsa in
                 fsa.flatMap { (s, a) in
@@ -219,7 +223,9 @@ extension StateTPartial: Monad where F: Monad {
             })
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> StateTOf<F, S, Either<A, B>>) -> StateTOf<F, S, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> StateTOf<F, S, Either<A, B>>) -> StateTOf<F, S, B> {
         StateT<F, S, B> { s in
             F.tailRecM((s, a), { pair in
                 F.map(f(pair.1)^.runM(pair.0), { sss, ab in
@@ -243,7 +249,9 @@ extension StateTPartial: MonadState where F: Monad {
 
 // MARK: Instance of SemigroupK for StateT
 extension StateTPartial: SemigroupK where F: Monad & SemigroupK {
-    public static func combineK<A>(_ x: StateTOf<F, S, A>, _ y: StateTOf<F, S, A>) -> StateTOf<F, S, A> {
+    public static func combineK<A>(
+        _ x: StateTOf<F, S, A>,
+        _ y: StateTOf<F, S, A>) -> StateTOf<F, S, A> {
         StateT { s in x^.runM(s).combineK(y^.runM(s)) }
     }
 }
@@ -301,7 +309,9 @@ extension StateTPartial: MonadReader where F: MonadReader {
         StateT.liftF(F.ask())
     }
     
-    public static func local<A>(_ fa: StateTOf<F, S, A>, _ f: @escaping (F.D) -> F.D) -> StateTOf<F, S, A> {
+    public static func local<A>(
+        _ fa: StateTOf<F, S, A>,
+        _ f: @escaping (F.D) -> F.D) -> StateTOf<F, S, A> {
         fa^.transformT { a in F.local(a, f) }
     }
 }

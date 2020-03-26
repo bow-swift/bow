@@ -93,7 +93,9 @@ extension StoreTPartial: Invariant where W: Functor {}
 // MARK: Instance of Functor for StoreT
 
 extension StoreTPartial: Functor where W: Functor {
-    public static func map<A, B>(_ fa: StoreTOf<S, W, A>, _ f: @escaping (A) -> B) -> StoreTOf<S, W, B> {
+    public static func map<A, B>(
+        _ fa: StoreTOf<S, W, A>,
+        _ f: @escaping (A) -> B) -> StoreTOf<S, W, B> {
         StoreT(fa^.state, fa^.render.map { ff in ff >>> f })
     }
 }
@@ -105,7 +107,9 @@ extension StoreTPartial: Applicative where W: Applicative, S: Monoid {
         StoreT(S.empty(), W.pure(constant(a)))
     }
     
-    public static func ap<A, B>(_ ff: StoreTOf<S, W, (A) -> B>, _ fa: StoreTOf<S, W, A>) -> StoreTOf<S, W, B> {
+    public static func ap<A, B>(
+        _ ff: StoreTOf<S, W, (A) -> B>,
+        _ fa: StoreTOf<S, W, A>) -> StoreTOf<S, W, B> {
         StoreT(ff^.state.combine(fa^.state),
                W.map(ff^.render, fa^.render) { rf, ra in { s in rf(s)(ra(s)) } })
     }
@@ -114,7 +118,9 @@ extension StoreTPartial: Applicative where W: Applicative, S: Monoid {
 // MARK: Instance of Comonad for StoreT
 
 extension StoreTPartial: Comonad where W: Comonad {
-    public static func coflatMap<A, B>(_ fa: StoreTOf<S, W, A>, _ f: @escaping (StoreTOf<S, W, A>) -> B) -> StoreTOf<S, W, B> {
+    public static func coflatMap<A, B>(
+        _ fa: StoreTOf<S, W, A>,
+        _ f: @escaping (StoreTOf<S, W, A>) -> B) -> StoreTOf<S, W, B> {
         StoreT(fa^.state,
                fa^.render.coflatMap { wa in { s in f(StoreT(s, wa)) } })
     }
@@ -131,7 +137,9 @@ extension StoreTPartial: ComonadStore where W: Comonad {
         wa^.state
     }
     
-    public static func peek<A>(_ wa: StoreTOf<S, W, A>, _ s: S) -> A {
+    public static func peek<A>(
+        _ wa: StoreTOf<S, W, A>,
+        _ s: S) -> A {
         wa^.render.extract()(s)
     }
 }
@@ -141,11 +149,15 @@ extension StoreTPartial: ComonadStore where W: Comonad {
 extension StoreTPartial: ComonadTraced where W: ComonadTraced {
     public typealias M = W.M
     
-    public static func trace<A>(_ wa: StoreTOf<S, W, A>, _ m: W.M) -> A {
+    public static func trace<A>(
+        _ wa: StoreTOf<S, W, A>,
+        _ m: W.M) -> A {
         wa^.lower().trace(m)
     }
     
-    public static func listens<A, B>(_ wa: StoreTOf<S, W, A>, _ f: @escaping (W.M) -> B) -> StoreTOf<S, W, (B, A)> {
+    public static func listens<A, B>(
+        _ wa: StoreTOf<S, W, A>,
+        _ f: @escaping (W.M) -> B) -> StoreTOf<S, W, (B, A)> {
         StoreT(wa^.state, wa^.render.listens(f).map { result in
             let (b, f) = result
             return f >>> { a in (b, a) }
@@ -172,7 +184,9 @@ extension StoreTPartial: ComonadEnv where W: ComonadEnv {
         wa^.lower().ask()
     }
     
-    public static func local<A>(_ wa: StoreTOf<S, W, A>, _ f: @escaping (W.E) -> W.E) -> StoreTOf<S, W, A> {
+    public static func local<A>(
+        _ wa: StoreTOf<S, W, A>,
+        _ f: @escaping (W.E) -> W.E) -> StoreTOf<S, W, A> {
         StoreT(wa^.state, wa^.render.local(f))
     }
 }

@@ -11,7 +11,7 @@ public typealias OptionTOf<F, A> = Kind<OptionTPartial<F>, A>
 
 /// The OptionT transformer represents the nesting of an `Option` value inside any other effect. It is equivalent to `Kind<F, Option<A>>`.
 public final class OptionT<F, A>: OptionTOf<F, A> {
-    fileprivate let value : Kind<F, Option<A>>
+    fileprivate let value: Kind<F, Option<A>>
 
     /// Safe downcast.
     ///
@@ -33,7 +33,7 @@ public final class OptionT<F, A>: OptionTOf<F, A> {
 ///
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to OptionT.
-public postfix func ^<F, A>(_ fa : OptionTOf<F, A>) -> OptionT<F, A> {
+public postfix func ^<F, A>(_ fa: OptionTOf<F, A>) -> OptionT<F, A> {
     OptionT.fix(fa)
 }
 
@@ -101,7 +101,7 @@ extension OptionT where F: Functor {
     /// - Parameter f: Function for the flatmap operation.
     /// - Returns: Result of flatmapping the provided function to the nested `Option`, wrapped in the effect.
     public func subflatMap<B>(_ f: @escaping (A) -> Option<B>) -> OptionT<F, B> {
-        transform { option in Option.fix(option.flatMap(f)) }
+        transform { option in option.flatMap(f)^ }
     }
 
     /// Convert this `OptionT` to an `EitherT`.
@@ -214,14 +214,18 @@ extension OptionTPartial: Invariant where F: Functor {}
 
 // MARK: Instance of Functor for OptionT
 extension OptionTPartial: Functor where F: Functor {
-    public static func map<A, B>(_ fa: OptionTOf<F, A>, _ f: @escaping (A) -> B) -> OptionTOf<F, B> {
+    public static func map<A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (A) -> B) -> OptionTOf<F, B> {
         OptionT(fa^.value.map { a in a.map(f)^ })
     }
 }
 
 // MARK: Instance of FunctorFilter for OptionT
 extension OptionTPartial: FunctorFilter where F: Functor {
-    public static func mapFilter<A, B>(_ fa: OptionTOf<F, A>, _ f: @escaping (A) -> OptionOf<B>) -> OptionTOf<F, B> {
+    public static func mapFilter<A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (A) -> OptionOf<B>) -> OptionTOf<F, B> {
         OptionT(fa^.value.map { option in option.flatMap(f)^ })
     }
 }
@@ -232,7 +236,9 @@ extension OptionTPartial: Applicative where F: Applicative {
         OptionT(F.pure(.some(a)))
     }
 
-    public static func ap<A, B>(_ ff: OptionTOf<F, (A) -> B>, _ fa: OptionTOf<F, A>) -> OptionTOf<F, B> {
+    public static func ap<A, B>(
+        _ ff: OptionTOf<F, (A) -> B>,
+        _ fa: OptionTOf<F, A>) -> OptionTOf<F, B> {
         OptionT(F.map(ff^.value, fa^.value) { of, oa in
             of.ap(oa)^
         })
@@ -244,14 +250,18 @@ extension OptionTPartial: Selective where F: Monad {}
 
 // MARK: Instance of Monad for OptionT
 extension OptionTPartial: Monad where F: Monad {
-    public static func flatMap<A, B>(_ fa: OptionTOf<F, A>, _ f: @escaping (A) -> OptionTOf<F, B>) -> OptionTOf<F, B> {
+    public static func flatMap<A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (A) -> OptionTOf<F, B>) -> OptionTOf<F, B> {
         OptionT(fa^.value.flatMap { option in
             option.fold({ F.pure(Option<B>.none()) },
                         { a in f(a)^.value })
         })
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> OptionTOf<F, Either<A, B>>) -> OptionTOf<F, B> {
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> OptionTOf<F, Either<A, B>>) -> OptionTOf<F, B> {
         OptionT(F.tailRecM(a, { aa in
             f(aa)^.value.map { option in
                 option.fold({ Either.right(Option.none())},
@@ -263,8 +273,10 @@ extension OptionTPartial: Monad where F: Monad {
 
 // MARK: Instance of SemigroupK for OptionT
 extension OptionTPartial: SemigroupK where F: Monad {
-    public static func combineK<A>(_ x: OptionTOf<F, A>, _ y: OptionTOf<F, A>) -> OptionTOf<F, A> {
-        OptionT.fix(x).orElse(OptionT.fix(y))
+    public static func combineK<A>(
+        _ x: OptionTOf<F, A>,
+        _ y: OptionTOf<F, A>) -> OptionTOf<F, A> {
+        x^.orElse(y^)
     }
 }
 
@@ -283,7 +295,9 @@ extension OptionTPartial: ApplicativeError where F: ApplicativeError {
         OptionT(F.raiseError(e))
     }
     
-    public static func handleErrorWith<A>(_ fa: OptionTOf<F, A>, _ f: @escaping (F.E) -> OptionTOf<F, A>) -> OptionTOf<F, A> {
+    public static func handleErrorWith<A>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (F.E) -> OptionTOf<F, A>) -> OptionTOf<F, A> {
         OptionT(fa^.value.handleErrorWith { e in f(e)^.value })
     }
 }
@@ -293,18 +307,26 @@ extension OptionTPartial: MonadError where F: MonadError {}
 
 // MARK: Instance of Foldable for OptionT
 extension OptionTPartial: Foldable where F: Foldable {
-    public static func foldLeft<A, B>(_ fa: OptionTOf<F, A>, _ b: B, _ f: @escaping (B, A) -> B) -> B {
+    public static func foldLeft<A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ b: B,
+        _ f: @escaping (B, A) -> B) -> B {
         fa^.value.foldLeft(b, { bb, option in option.foldLeft(bb, f) })
     }
     
-    public static func foldRight<A, B>(_ fa: OptionTOf<F, A>, _ b: Eval<B>, _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+    public static func foldRight<A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ b: Eval<B>,
+        _ f: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<B> {
         fa^.value.foldRight(b, { option, bb in option.foldRight(bb, f) })
     }
 }
 
 // MARK: Instance of Traverse for OptionT
 extension OptionTPartial: Traverse where F: Traverse {
-    public static func traverse<G: Applicative, A, B>(_ fa: OptionTOf<F, A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, OptionTOf<F, B>> {
+    public static func traverse<G: Applicative, A, B>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, OptionTOf<F, B>> {
         fa^.value.traverse { option in option.traverse(f) }
             .map { x in OptionT(x.map { b in b^ }) }
     }
@@ -312,7 +334,9 @@ extension OptionTPartial: Traverse where F: Traverse {
 
 // MARK: Instance of TraverseFilter for OptionT
 extension OptionTPartial: TraverseFilter where F: TraverseFilter {
-    public static func traverseFilter<A, B, G: Applicative>(_ fa: OptionTOf<F, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, OptionTOf<F, B>> {
+    public static func traverseFilter<A, B, G: Applicative>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, OptionTOf<F, B>> {
         fa^.value.traverseFilter { option in option.traverseFilter(f) }
             .map { x in OptionT(x.map(Option.some)) }
     }
@@ -326,7 +350,9 @@ extension OptionTPartial: MonadReader where F: MonadReader {
         OptionT.liftF(F.ask())
     }
     
-    public static func local<A>(_ fa: OptionTOf<F, A>, _ f: @escaping (F.D) -> F.D) -> OptionTOf<F, A> {
+    public static func local<A>(
+        _ fa: OptionTOf<F, A>,
+        _ f: @escaping (F.D) -> F.D) -> OptionTOf<F, A> {
         fa^.transformT { a in F.local(a, f) }
     }
 }

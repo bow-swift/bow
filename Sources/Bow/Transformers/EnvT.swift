@@ -191,7 +191,9 @@ extension EnvTPartial: ComonadStore where W: ComonadStore {
         wa^.lower().position
     }
     
-    public static func peek<A>(_ wa: EnvTOf<E, W, A>, _ s: W.S) -> A {
+    public static func peek<A>(
+        _ wa: EnvTOf<E, W, A>,
+        _ s: W.S) -> A {
         wa^.lower().peek(s)
     }
 }
@@ -201,11 +203,15 @@ extension EnvTPartial: ComonadStore where W: ComonadStore {
 extension EnvTPartial: ComonadTraced where W: ComonadTraced {
     public typealias M = W.M
     
-    public static func trace<A>(_ wa: EnvTOf<E, W, A>, _ m: W.M) -> A {
+    public static func trace<A>(
+        _ wa: EnvTOf<E, W, A>,
+        _ m: W.M) -> A {
         wa^.lower().trace(m)
     }
     
-    public static func listens<A, B>(_ wa: EnvTOf<E, W, A>, _ f: @escaping (W.M) -> B) -> EnvTOf<E, W, (B, A)> {
+    public static func listens<A, B>(
+        _ wa: EnvTOf<E, W, A>,
+        _ f: @escaping (W.M) -> B) -> EnvTOf<E, W, (B, A)> {
         EnvT(wa^.e, wa^.lower().listens(f))
     }
     

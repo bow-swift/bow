@@ -75,7 +75,9 @@ extension TracedTPartial: Invariant where W: Functor {}
 // MARK: Instance of Functor for TracedT
 
 extension TracedTPartial: Functor where W: Functor {
-    public static func map<A, B>(_ fa: TracedTOf<M, W, A>, _ f: @escaping (A) -> B) -> TracedTOf<M, W, B> {
+    public static func map<A, B>(
+        _ fa: TracedTOf<M, W, A>,
+        _ f: @escaping (A) -> B) -> TracedTOf<M, W, B> {
         TracedT(fa^.value.map { ff in ff >>> f })
     }
 }
@@ -87,7 +89,9 @@ extension TracedTPartial: Applicative where W: Applicative {
         TracedT(W.pure(constant(a)))
     }
     
-    public static func ap<A, B>(_ ff: TracedTOf<M, W, (A) -> B>, _ fa: TracedTOf<M, W, A>) -> TracedTOf<M, W, B> {
+    public static func ap<A, B>(
+        _ ff: TracedTOf<M, W, (A) -> B>,
+        _ fa: TracedTOf<M, W, A>) -> TracedTOf<M, W, B> {
         TracedT(W.map(ff^.value, fa^.value) { vf, va in
             { m in vf(m)(va(m))}
         })
@@ -97,7 +101,9 @@ extension TracedTPartial: Applicative where W: Applicative {
 // MARK: Instance of Comonad for TracedT
 
 extension TracedTPartial: Comonad where W: Comonad, M: Monoid {
-    public static func coflatMap<A, B>(_ fa: TracedTOf<M, W, A>, _ f: @escaping (TracedTOf<M, W, A>) -> B) -> TracedTOf<M, W, B> {
+    public static func coflatMap<A, B>(
+        _ fa: TracedTOf<M, W, A>,
+        _ f: @escaping (TracedTOf<M, W, A>) -> B) -> TracedTOf<M, W, B> {
         TracedT(fa^.value.coflatMap { wma in
             { m in
                 f(TracedT(wma.map { ma in
@@ -115,11 +121,15 @@ extension TracedTPartial: Comonad where W: Comonad, M: Monoid {
 // MARK: Instance of ComonadTraced for TracedT
 
 extension TracedTPartial: ComonadTraced where W: Comonad, M: Monoid {
-    public static func trace<A>(_ wa: TracedTOf<M, W, A>, _ m: M) -> A {
+    public static func trace<A>(
+        _ wa: TracedTOf<M, W, A>,
+        _ m: M) -> A {
         wa^.value.extract()(m)
     }
 
-    public static func listens<A, B>(_ wa: TracedTOf<M, W, A>, _ f: @escaping (M) -> B) -> TracedTOf<M, W, (B, A)> {
+    public static func listens<A, B>(
+        _ wa: TracedTOf<M, W, A>,
+        _ f: @escaping (M) -> B) -> TracedTOf<M, W, (B, A)> {
         TracedT(wa^.value.map { g in
             { m in (f(m), g(m)) }
         })
@@ -145,7 +155,9 @@ extension TracedTPartial: ComonadStore where W: ComonadStore, M: Monoid {
         wa^.lower().position
     }
     
-    public static func peek<A>(_ wa: TracedTOf<M, W, A>, _ s: W.S) -> A {
+    public static func peek<A>(
+        _ wa: TracedTOf<M, W, A>,
+        _ s: W.S) -> A {
         wa^.lower().peek(s)
     }
 }
@@ -159,7 +171,9 @@ extension TracedTPartial: ComonadEnv where W: ComonadEnv, M: Monoid {
         wa^.lower().ask()
     }
     
-    public static func local<A>(_ wa: TracedTOf<M, W, A>, _ f: @escaping (W.E) -> W.E) -> TracedTOf<M, W, A> {
+    public static func local<A>(
+        _ wa: TracedTOf<M, W, A>,
+        _ f: @escaping (W.E) -> W.E) -> TracedTOf<M, W, A> {
         TracedT(wa^.value.local(f))
     }
 }
