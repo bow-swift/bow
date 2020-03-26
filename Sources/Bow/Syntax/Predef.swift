@@ -1,7 +1,7 @@
 import Foundation
 
 public typealias Unit = ()
-public let unit : Unit = ()
+public let unit: Unit = ()
 
 /// Identity function.
 ///
@@ -9,8 +9,8 @@ public let unit : Unit = ()
 ///
 /// - Parameter a: A value.
 /// - Returns: The value received as input, with no modifications.
-public func id<A>(_ a : A) -> A {
-    return a
+public func id<A>(_ a: A) -> A {
+    a
 }
 
 /// Provides a constant function.
@@ -18,7 +18,7 @@ public func id<A>(_ a : A) -> A {
 /// - Parameter a: Constant value to return.
 /// - Returns: A 0-ary function that constantly return the value provided as argument.
 public func constant<A>(_ a: @autoclosure @escaping () -> A) -> () -> A {
-    return a
+    a
 }
 
 /// Provides a constant function.
@@ -26,7 +26,7 @@ public func constant<A>(_ a: @autoclosure @escaping () -> A) -> () -> A {
 /// - Parameter a: Constant value to return.
 /// - Returns: A 1-ary function that constantly return the value provided as argument, regardless of its input parameter.
 public func constant<A, B>(_ a: @autoclosure @escaping () -> A) -> (B) -> A {
-    return { _ in a() }
+    { _ in a() }
 }
 
 /// Provides a constant function.
@@ -34,7 +34,7 @@ public func constant<A, B>(_ a: @autoclosure @escaping () -> A) -> (B) -> A {
 /// - Parameter a: Constant value to return.
 /// - Returns: A 2-ary function that constantly return the value provided as argument, regardless of its input parameters.
 public func constant<A, B, C>(_ a: @autoclosure @escaping () -> A) -> (B, C) -> A {
-    return { _, _ in a() }
+    { _, _ in a() }
 }
 
 /// Provides a constant function.
@@ -42,7 +42,7 @@ public func constant<A, B, C>(_ a: @autoclosure @escaping () -> A) -> (B, C) -> 
 /// - Parameter a: Constant value to return.
 /// - Returns: A 3-ary function that constantly return the value provided as argument, regardless of its input parameters.
 public func constant<A, B, C, D>(_ a: @autoclosure @escaping () -> A) -> (B, C, D) -> A {
-    return { _, _, _ in a() }
+    { _, _, _ in a() }
 }
 
 /// Provides a constant function.
@@ -50,7 +50,7 @@ public func constant<A, B, C, D>(_ a: @autoclosure @escaping () -> A) -> (B, C, 
 /// - Parameter a: Constant value to return.
 /// - Returns: A 4-ary function that constantly return the value provided as argument, regardless of its input parameters.
 public func constant<A, B, C, D, E>(_ a: @autoclosure @escaping () -> A) -> (B, C, D, E) -> A {
-    return { _, _, _, _ in a() }
+    { _, _, _, _ in a() }
 }
 
 /**
@@ -67,8 +67,8 @@ public func constant<A, B, C, D, E>(_ a: @autoclosure @escaping () -> A) -> (B, 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
-    return andThen(f, g)
+public func compose<A, B>(_ g: @escaping (A) -> B, _ f: @escaping () -> A) -> () -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -79,8 +79,8 @@ public func compose<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () -> A) -> () throws -> B {
-    return andThen(f, g)
+public func compose<A, B>(_ g: @escaping (A) throws -> B, _ f: @escaping () -> A) -> () throws -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -91,8 +91,8 @@ public func compose<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () throws -> A) -> () throws -> B {
-    return andThen(f, g)
+public func compose<A, B>(_ g: @escaping (A) -> B, _ f: @escaping () throws -> A) -> () throws -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -103,8 +103,8 @@ public func compose<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () throws ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () throws -> A) -> () throws -> B {
-    return andThen(f, g)
+public func compose<A, B>(_ g: @escaping (A) throws -> B, _ f: @escaping () throws -> A) -> () throws -> B {
+    andThen(f, g)
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -115,8 +115,8 @@ public func compose<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () th
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
-    return andThen(f, g)
+public func compose<A, B, C>(_ g: @escaping (B) -> C, _ f: @escaping (A) -> B) -> (A) -> C {
+    andThen(f, g)
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -127,8 +127,8 @@ public func compose<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B)
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) -> B) -> (A) throws -> C {
-    return andThen(f, g)
+public func compose<A, B, C>(_ g: @escaping (B) throws -> C, _ f: @escaping (A) -> B) -> (A) throws -> C {
+    andThen(f, g)
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -139,8 +139,8 @@ public func compose<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) throws -> B) -> (A) throws -> C {
-    return andThen(f, g)
+public func compose<A, B, C>(_ g: @escaping (B) -> C, _ f: @escaping (A) throws -> B) -> (A) throws -> C {
+    andThen(f, g)
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -151,8 +151,8 @@ public func compose<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) throw
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func compose<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) throws -> B) -> (A) throws -> C {
-    return andThen(f, g)
+public func compose<A, B, C>(_ g: @escaping (B) throws -> C, _ f: @escaping (A) throws -> B) -> (A) throws -> C {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -163,8 +163,8 @@ public func compose<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
-    return { g(f()) }
+public func andThen<A, B>(_ f: @escaping () -> A, _ g: @escaping (A) -> B) -> () -> B {
+    { g(f()) }
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -175,8 +175,8 @@ public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) -> B) -> () throws -> B {
-    return { g(try f()) }
+public func andThen<A, B>(_ f: @escaping () throws -> A, _ g: @escaping (A) -> B) -> () throws -> B {
+    { g(try f()) }
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -187,8 +187,8 @@ public func andThen<A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) throws -> B) -> () throws -> B {
-    return { try g(f()) }
+public func andThen<A, B>(_ f: @escaping () -> A, _ g: @escaping (A) throws -> B) -> () throws -> B {
+    { try g(f()) }
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -199,8 +199,8 @@ public func andThen<A, B>(_ f : @escaping () -> A, _ g : @escaping (A) throws ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) throws -> B) -> () throws -> B {
-    return { try g(try f()) }
+public func andThen<A, B>(_ f: @escaping () throws -> A, _ g: @escaping (A) throws -> B) -> () throws -> B {
+    { try g(try f()) }
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -211,8 +211,8 @@ public func andThen<A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) th
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
-    return { x in g(f(x)) }
+public func andThen<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
+    { x in g(f(x)) }
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -223,8 +223,8 @@ public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C)
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B) -> C) -> (A) throws -> C {
-    return { x in g(try f(x)) }
+public func andThen<A, B, C>(_ f: @escaping (A) throws -> B, _ g: @escaping (B) -> C) -> (A) throws -> C {
+    { x in g(try f(x)) }
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -235,8 +235,8 @@ public func andThen<A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) throws -> C) -> (A) throws -> C {
-    return { x in try g(f(x)) }
+public func andThen<A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) throws -> C) -> (A) throws -> C {
+    { x in try g(f(x)) }
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -247,12 +247,12 @@ public func andThen<A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) throw
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func andThen<A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B) throws -> C) -> (A) throws -> C {
-    return { x in try g(try f(x)) }
+public func andThen<A, B, C>(_ f: @escaping (A) throws -> B, _ g: @escaping (B) throws -> C) -> (A) throws -> C {
+    { x in try g(try f(x)) }
 }
 
-infix operator >>> : AdditionPrecedence
-infix operator <<< : AdditionPrecedence
+infix operator >>>: AdditionPrecedence
+infix operator <<<: AdditionPrecedence
 
 /// Composes a 0-ary function with a 1-ary function.
 ///
@@ -262,20 +262,8 @@ infix operator <<< : AdditionPrecedence
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) -> B) -> () -> B {
-    return andThen(f, g)
-}
-
-/// Composes a 0-ary function with a 1-ary function.
-///
-/// Returns a function that is the result of applying `g` to the output of `f`.
-///
-/// - Parameters:
-///   - g: Left-hand side of the function composition.
-///   - f: Right-hand side of the function composition.
-/// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) -> B) -> () throws -> B {
-    return andThen(f, g)
+public func >>><A, B>(_ f: @escaping () -> A, _ g: @escaping (A) -> B) -> () -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -286,8 +274,8 @@ public func >>><A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) -> B) 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) throws -> B) -> () throws -> B {
-    return andThen(f, g)
+public func >>><A, B>(_ f: @escaping () throws -> A, _ g: @escaping (A) -> B) -> () throws -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -298,56 +286,8 @@ public func >>><A, B>(_ f : @escaping () -> A, _ g : @escaping (A) throws -> B) 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B>(_ f : @escaping () throws -> A, _ g : @escaping (A) throws -> B) -> () throws -> B {
-    return andThen(f, g)
-}
-
-/// Composes a 1-ary function with a 1-ary function.
-///
-/// Returns a function that is the result of applying `g` to the output of `f`.
-///
-/// - Parameters:
-///   - g: Left-hand side of the function composition.
-///   - f: Right-hand side of the function composition.
-/// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) -> C) -> (A) -> C {
-    return andThen(f, g)
-}
-
-/// Composes a 1-ary function with a 1-ary function.
-///
-/// Returns a function that is the result of applying `g` to the output of `f`.
-///
-/// - Parameters:
-///   - g: Left-hand side of the function composition.
-///   - f: Right-hand side of the function composition.
-/// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B) -> C) -> (A) throws -> C {
-    return andThen(f, g)
-}
-
-/// Composes a 1-ary function with a 1-ary function.
-///
-/// Returns a function that is the result of applying `g` to the output of `f`.
-///
-/// - Parameters:
-///   - g: Left-hand side of the function composition.
-///   - f: Right-hand side of the function composition.
-/// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B, C>(_ f : @escaping (A) -> B, _ g : @escaping (B) throws -> C) -> (A) throws -> C {
-    return andThen(f, g)
-}
-
-/// Composes a 1-ary function with a 1-ary function.
-///
-/// Returns a function that is the result of applying `g` to the output of `f`.
-///
-/// - Parameters:
-///   - g: Left-hand side of the function composition.
-///   - f: Right-hand side of the function composition.
-/// - Returns: A function that applies `g` to the output of `f`.
-public func >>><A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B) throws -> C) -> (A) throws -> C {
-    return andThen(f, g)
+public func >>><A, B>(_ f: @escaping () -> A, _ g: @escaping (A) throws -> B) -> () throws -> B {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -358,8 +298,56 @@ public func >>><A, B, C>(_ f : @escaping (A) throws -> B, _ g : @escaping (B) th
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -> B {
-    return f >>> g
+public func >>><A, B>(_ f: @escaping () throws -> A, _ g: @escaping (A) throws -> B) -> () throws -> B {
+    andThen(f, g)
+}
+
+/// Composes a 1-ary function with a 1-ary function.
+///
+/// Returns a function that is the result of applying `g` to the output of `f`.
+///
+/// - Parameters:
+///   - g: Left-hand side of the function composition.
+///   - f: Right-hand side of the function composition.
+/// - Returns: A function that applies `g` to the output of `f`.
+public func >>><A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) -> C) -> (A) -> C {
+    andThen(f, g)
+}
+
+/// Composes a 1-ary function with a 1-ary function.
+///
+/// Returns a function that is the result of applying `g` to the output of `f`.
+///
+/// - Parameters:
+///   - g: Left-hand side of the function composition.
+///   - f: Right-hand side of the function composition.
+/// - Returns: A function that applies `g` to the output of `f`.
+public func >>><A, B, C>(_ f: @escaping (A) throws -> B, _ g: @escaping (B) -> C) -> (A) throws -> C {
+    andThen(f, g)
+}
+
+/// Composes a 1-ary function with a 1-ary function.
+///
+/// Returns a function that is the result of applying `g` to the output of `f`.
+///
+/// - Parameters:
+///   - g: Left-hand side of the function composition.
+///   - f: Right-hand side of the function composition.
+/// - Returns: A function that applies `g` to the output of `f`.
+public func >>><A, B, C>(_ f: @escaping (A) -> B, _ g: @escaping (B) throws -> C) -> (A) throws -> C {
+    andThen(f, g)
+}
+
+/// Composes a 1-ary function with a 1-ary function.
+///
+/// Returns a function that is the result of applying `g` to the output of `f`.
+///
+/// - Parameters:
+///   - g: Left-hand side of the function composition.
+///   - f: Right-hand side of the function composition.
+/// - Returns: A function that applies `g` to the output of `f`.
+public func >>><A, B, C>(_ f: @escaping (A) throws -> B, _ g: @escaping (B) throws -> C) -> (A) throws -> C {
+    andThen(f, g)
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -370,8 +358,8 @@ public func <<<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () -> A) -> () -
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () -> A) -> () throws -> B {
-    return f >>> g
+public func <<<<A, B>(_ g: @escaping (A) -> B, _ f: @escaping () -> A) -> () -> B {
+    f >>> g
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -382,8 +370,8 @@ public func <<<<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () -> A) 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () throws -> A) -> () throws -> B {
-    return f >>> g
+public func <<<<A, B>(_ g: @escaping (A) throws -> B, _ f: @escaping () -> A) -> () throws -> B {
+    f >>> g
 }
 
 /// Composes a 0-ary function with a 1-ary function.
@@ -394,8 +382,20 @@ public func <<<<A, B>(_ g : @escaping (A) -> B, _ f : @escaping () throws -> A) 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () throws -> A) -> () throws -> B {
-    return f >>> g
+public func <<<<A, B>(_ g: @escaping (A) -> B, _ f: @escaping () throws -> A) -> () throws -> B {
+    f >>> g
+}
+
+/// Composes a 0-ary function with a 1-ary function.
+///
+/// Returns a function that is the result of applying `g` to the output of `f`.
+///
+/// - Parameters:
+///   - g: Left-hand side of the function composition.
+///   - f: Right-hand side of the function composition.
+/// - Returns: A function that applies `g` to the output of `f`.
+public func <<<<A, B>(_ g: @escaping (A) throws -> B, _ f: @escaping () throws -> A) -> () throws -> B {
+    f >>> g
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -406,8 +406,8 @@ public func <<<<A, B>(_ g : @escaping (A) throws -> B, _ f : @escaping () throws
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> (A) -> C {
-    return f >>> g
+public func <<<<A, B, C>(_ g: @escaping (B) -> C, _ f: @escaping (A) -> B) -> (A) -> C {
+    f >>> g
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -418,8 +418,8 @@ public func <<<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) -> B) -> 
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) -> B) -> (A) throws -> C {
-    return f >>> g
+public func <<<<A, B, C>(_ g: @escaping (B) throws -> C, _ f: @escaping (A) -> B) -> (A) throws -> C {
+    f >>> g
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -430,8 +430,8 @@ public func <<<<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) throws -> B) -> (A) throws -> C {
-    return f >>> g
+public func <<<<A, B, C>(_ g: @escaping (B) -> C, _ f: @escaping (A) throws -> B) -> (A) throws -> C {
+    f >>> g
 }
 
 /// Composes a 1-ary function with a 1-ary function.
@@ -442,8 +442,8 @@ public func <<<<A, B, C>(_ g : @escaping (B) -> C, _ f : @escaping (A) throws ->
 ///   - g: Left-hand side of the function composition.
 ///   - f: Right-hand side of the function composition.
 /// - Returns: A function that applies `g` to the output of `f`.
-public func <<<<A, B, C>(_ g : @escaping (B) throws -> C, _ f : @escaping (A) throws -> B) -> (A) throws -> C {
-    return f >>> g
+public func <<<<A, B, C>(_ g: @escaping (B) throws -> C, _ f: @escaping (A) throws -> B) -> (A) throws -> C {
+    f >>> g
 }
 
 /// Flips the arguments of a binary function.
