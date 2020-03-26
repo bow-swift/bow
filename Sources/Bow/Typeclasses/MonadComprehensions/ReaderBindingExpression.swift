@@ -2,5 +2,5 @@
 ///
 /// - Returns: Result of `MonadReader.ask`.
 public func ask<F: MonadReader>() -> Kind<F, F.D> {
-    return F.ask()
+    F.ask()
 }
