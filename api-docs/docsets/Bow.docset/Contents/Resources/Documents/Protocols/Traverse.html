@@ -2154,7 +2154,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">traverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">traverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2428,7 +2430,8 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">sequence</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fga</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;&gt;</span> <span class="k">where</span> <span class="kt">G</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">B</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">sequence</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fga</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;&gt;</span>
+    <span class="k">where</span> <span class="kt">B</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2485,7 +2488,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">flatTraverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">flatTraverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2541,10 +2546,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow8TraversePAAE8scanLeft_12initialState1fAA4KindCyxqd_0_GAHyxqd__G_qd_1_AA0F1TCyAA5ForIdCqd_1_qd_0_Gqd__ctr1_lFZ"></a>
-                    <a name="//apple_ref/swift/Method/scanLeft(_:initialState:f:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow8TraversePAAE8scanLeft_12initialState1fAA4KindCyxqd_0_GAHyxqd__G_qd_1_AA0F1TCyAA5ForIdCqd_1_qd_0_Gqd__ctr1_lFZ">
-                      <span class="token-name">scanLeft(_:initialState:f:)</span>
+                    <a name="/s:3Bow8TraversePAAE8scanLeftyAA4KindCyxqd_0_GAFyxqd__G_qd_1_AA6StateTCyAA5ForIdCqd_1_qd_0_Gqd__ctr1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/scanLeft(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8TraversePAAE8scanLeftyAA4KindCyxqd_0_GAFyxqd__G_qd_1_AA6StateTCyAA5ForIdCqd_1_qd_0_Gqd__ctr1_lFZ">
+                      <span class="token-name">scanLeft(_:_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2563,8 +2568,8 @@
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">scanLeft</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">initialState</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span>
-    <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5Statea">State</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+    <span class="n">_</span> <span class="nv">initialState</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow5Statea">State</a></span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2621,10 +2626,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow8TraversePAAE8scanLeft_12initialState1fAA4KindCyxqd_0_GAHyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ"></a>
-                    <a name="//apple_ref/swift/Method/scanLeft(_:initialState:f:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow8TraversePAAE8scanLeft_12initialState1fAA4KindCyxqd_0_GAHyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ">
-                      <span class="token-name">scanLeft(_:initialState:f:)</span>
+                    <a name="/s:3Bow8TraversePAAE8scanLeftyAA4KindCyxqd_0_GAFyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/scanLeft(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8TraversePAAE8scanLeftyAA4KindCyxqd_0_GAFyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ">
+                      <span class="token-name">scanLeft(_:_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2643,8 +2648,8 @@
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">scanLeft</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">initialState</span><span class="p">:</span> <span class="kt">B</span><span class="p">,</span>
-    <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+    <span class="n">_</span> <span class="nv">initialState</span><span class="p">:</span> <span class="kt">B</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2701,10 +2706,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow8TraversePAAE9scanLeftM_12initialState1fAA4KindCyqd__AHyxqd_1_GGAHyxqd_0_G_AHyqd__qd_2_GAA0F1TCyqd__qd_2_qd_1_Gqd_0_ctAA5MonadRd__r2_lFZ"></a>
-                    <a name="//apple_ref/swift/Method/scanLeftM(_:initialState:f:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow8TraversePAAE9scanLeftM_12initialState1fAA4KindCyqd__AHyxqd_1_GGAHyxqd_0_G_AHyqd__qd_2_GAA0F1TCyqd__qd_2_qd_1_Gqd_0_ctAA5MonadRd__r2_lFZ">
-                      <span class="token-name">scanLeftM(_:initialState:f:)</span>
+                    <a name="/s:3Bow8TraversePAAE9scanLeftMyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_2_GAA6StateTCyqd__qd_2_qd_1_Gqd_0_ctAA5MonadRd__r2_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/scanLeftM(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8TraversePAAE9scanLeftMyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_2_GAA6StateTCyqd__qd_2_qd_1_Gqd_0_ctAA5MonadRd__r2_lFZ">
+                      <span class="token-name">scanLeftM(_:_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2723,8 +2728,8 @@
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">scanLeftM</span><span class="o">&lt;</span><span class="kt">M</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Monad.html">Monad</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">initialState</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/StateT.html">StateT</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">S</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
+    <span class="n">_</span> <span class="nv">initialState</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/StateT.html">StateT</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">S</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2781,10 +2786,10 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:3Bow8TraversePAAE9scanLeftM_12initialState1fAA4KindCyqd__AHyxqd_1_GGAHyxqd_0_G_AHyqd__qd_1_GALqd_1__qd_0_tctAA5MonadRd__r1_lFZ"></a>
-                    <a name="//apple_ref/swift/Method/scanLeftM(_:initialState:f:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:3Bow8TraversePAAE9scanLeftM_12initialState1fAA4KindCyqd__AHyxqd_1_GGAHyxqd_0_G_AHyqd__qd_1_GALqd_1__qd_0_tctAA5MonadRd__r1_lFZ">
-                      <span class="token-name">scanLeftM(_:initialState:f:)</span>
+                    <a name="/s:3Bow8TraversePAAE9scanLeftMyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_1_GAJqd_1__qd_0_tctAA5MonadRd__r1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/scanLeftM(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8TraversePAAE9scanLeftMyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_1_GAJqd_1__qd_0_tctAA5MonadRd__r1_lFZ">
+                      <span class="token-name">scanLeftM(_:_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
                       <span class="declaration-note">
@@ -2803,8 +2808,8 @@
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">scanLeftM</span><span class="o">&lt;</span><span class="kt">M</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Monad.html">Monad</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">initialState</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
+    <span class="n">_</span> <span class="nv">initialState</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">M</span><span class="p">,</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="k">Self</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>

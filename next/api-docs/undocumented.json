@@ -114,14 +114,14 @@
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Typeclasses/Foldable.swift",
-      "line": 401,
+      "line": 450,
       "symbol": "Kind.foldK()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.165.2/work/bow/bow/Sources/Bow/Typeclasses/Foldable.swift",
-      "line": 405,
+      "line": 455,
       "symbol": "Kind.reduceK()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
