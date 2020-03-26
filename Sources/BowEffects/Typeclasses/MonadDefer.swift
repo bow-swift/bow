@@ -18,7 +18,7 @@ public extension MonadDefer {
     /// - Parameter f: Function returning a value.
     /// - Returns: A computation that defers the execution of the provided function.
     static func later<A>(_ f: @escaping () throws -> A) -> Kind<Self, A> {
-        return self.defer {
+        self.defer {
             do {
                 return try pure(f())
             } catch {
@@ -32,14 +32,14 @@ public extension MonadDefer {
     /// - Parameter fa: A value describing a computation to be deferred.
     /// - Returns: A computation that defers the execution of the provided value.
     static func later<A>(_ fa: Kind<Self, A>) -> Kind<Self, A> {
-        return self.defer { fa }
+        self.defer { fa }
     }
     
     /// Provides a lazy computation that returns void.
     ///
     /// - Returns: A deferred computation of the void value.
-    static func lazy() -> Kind<Self, ()> {
-        return later { }
+    static func lazy() -> Kind<Self, Void> {
+        later { }
     }
     
     /// Provides a computation that evaluates the provided function on every run.
@@ -47,8 +47,8 @@ public extension MonadDefer {
     /// - Parameter f: A function that provides a value or an error.
     /// - Returns: A computation that defers the execution of the provided value.
     static func laterOrRaise<A>(_ f: @escaping () -> Either<E, A>) -> Kind<Self, A> {
-        return self.defer { f().fold({ e in self.raiseError(e) },
-                                     { a in self.pure(a) }) }
+        self.defer { f().fold({ e in self.raiseError(e) },
+                              { a in self.pure(a) }) }
     }
 }
 
@@ -60,21 +60,21 @@ public extension Kind where F: MonadDefer {
     /// - Parameter fa: Function returning a computation to be deferred.
     /// - Returns: A computation that defers the execution of the provided function.
     static func `defer`(_ fa: @escaping () -> Kind<F, A>) -> Kind<F, A> {
-        return F.defer(fa)
+        F.defer(fa)
     }
     
     /// Provides a computation that evaluates the provided function on every run.
     ///
     /// - Returns: A computation that defers the execution of the provided function.
     static func later(_ f: @escaping () throws -> A) -> Kind<F, A> {
-        return F.later(f)
+        F.later(f)
     }
     
     /// Provides a computation that evaluates this computation on every run.
     ///
     /// - Returns: A computation that defers the execution of the provided value.
     func later() -> Kind<F, A> {
-        return F.later(self)
+        F.later(self)
     }
     
     /// Provides a computation that evaluates the provided function on every run.
@@ -82,7 +82,7 @@ public extension Kind where F: MonadDefer {
     /// - Parameter f: A function that provides a value or an error.
     /// - Returns: A computation that defers the execution of the provided value.
     static func laterOrRaise(_ f: @escaping () -> Either<F.E, A>) -> Kind<F, A> {
-        return F.laterOrRaise(f)
+        F.laterOrRaise(f)
     }
 }
 
@@ -91,6 +91,6 @@ public extension Kind where F: MonadDefer, A == Void {
     ///
     /// - Returns: A deferred computation of the void value.
     static func lazy() -> Kind<F, Void> {
-        return F.lazy()
+        F.lazy()
     }
 }

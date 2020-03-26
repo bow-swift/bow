@@ -9,7 +9,9 @@ public protocol Effect: Async {
     ///   - fa: Computation to be evaluated.
     ///   - callback: Callback to process the result of the computation.
     /// - Returns: A computation describing the evaluation.
-    static func runAsync<A>(_ fa: Kind<Self, A>, _ callback: @escaping (Either<E, A>) -> Kind<Self, ()>) -> Kind<Self, ()>
+    static func runAsync<A>(
+        _ fa: Kind<Self, A>,
+        _ callback: @escaping (Either<E, A>) -> Kind<Self, Void>) -> Kind<Self, Void>
 }
 
 // MARK: Syntax for Effect
@@ -18,7 +20,7 @@ public extension Kind where F: Effect {
     ///
     /// - Parameter callback: Callback to process the result of the computation.
     /// - Returns: A computation describing the evaluation.
-    func runAsync(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, ()> {
-        return F.runAsync(self, callback)
+    func runAsync(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, Void> {
+        F.runAsync(self, callback)
     }
 }
