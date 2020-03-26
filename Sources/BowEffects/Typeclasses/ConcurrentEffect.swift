@@ -2,7 +2,7 @@ import Foundation
 import Bow
 
 /// Describes a function to cancel an effect
-public typealias Disposable = () -> ()
+public typealias Disposable = () -> Void
 
 /// ConcurrentEffect describes computations that can be cancelled and evaluated concurrently.
 public protocol ConcurrentEffect: Effect {
@@ -12,7 +12,9 @@ public protocol ConcurrentEffect: Effect {
     ///   - fa: Computation.
     ///   - callback: Callback to process the result of the evaluation.
     /// - Returns: A computation describing the evaluation, providing a means to cancel it.
-    static func runAsyncCancellable<A>(_ fa: Kind<Self, A>, _ callback: @escaping (Either<E, A>) -> Kind<Self, ()>) -> Kind<Self, Disposable>
+    static func runAsyncCancellable<A>(
+        _ fa: Kind<Self, A>,
+        _ callback: @escaping (Either<E, A>) -> Kind<Self, Void>) -> Kind<Self, Disposable>
 }
 
 // MARK: Syntax for ConcurrentEffect
@@ -21,7 +23,7 @@ public extension Kind where F: ConcurrentEffect {
     ///
     /// - Parameter callback: Callback to process the result of the evaluation.
     /// - Returns: A computation describing the evaluation, providing a means to cancel it.
-    func runAsyncCancellable(_ callback: @escaping (Either<F.E, A>) -> Kind<F, ()>) -> Kind<F, Disposable> {
-        return F.runAsyncCancellable(self, callback)
+    func runAsyncCancellable(_ callback: @escaping (Either<F.E, A>) -> Kind<F, Void>) -> Kind<F, Disposable> {
+        F.runAsyncCancellable(self, callback)
     }
 }
