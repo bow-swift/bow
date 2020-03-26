@@ -21,7 +21,7 @@ public class SelectiveLaws<F: Selective & EquatableK> {
             let x = F.pure(Either<Int, Int>.right(a))
             let f = F.pure(b.getArrow)
             let g = F.pure(c.getArrow)
-            return F.select(x, F.sequenceRight(f, g)) == F.sequenceRight(F.select(x, f), F.select(x, g))
+            return F.select(x, F.zipRight(f, g)) == F.zipRight(F.select(x, f), F.select(x, g))
         }
     }
 
