@@ -12,10 +12,10 @@ extension Ior: Arbitrary where A: Arbitrary, B: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Ior`
+// MARK: Instance of ArbitraryK for Ior
 
 extension IorPartial: ArbitraryK where L: Arbitrary {
-    public static func generate<A: Arbitrary>() -> Kind<IorPartial<L>, A> {
-        return Ior.arbitrary.generate
+    public static func generate<A: Arbitrary>() -> IorOf<L, A> {
+        Ior.arbitrary.generate
     }
 }

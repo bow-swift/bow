@@ -11,7 +11,7 @@ extension Option: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Option`
+// MARK: Instance of ArbitraryK for Option
 
 extension OptionPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> OptionOf<A> {

@@ -9,7 +9,7 @@ extension TracedT: Arbitrary where M: Arbitrary & Hashable & CoArbitrary, W: Arb
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `TracedT`
+// MARK: Instance of ArbitraryK for TracedT
 
 extension TracedTPartial: ArbitraryK where M: Arbitrary & Hashable & CoArbitrary, W: ArbitraryK & Functor {
     

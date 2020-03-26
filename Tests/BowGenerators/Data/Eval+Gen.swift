@@ -1,6 +1,8 @@
 import Bow
 import SwiftCheck
 
+// MARK: Generator for Property-based Testing
+
 extension EvalPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> EvalOf<A> {
         let nowGen = A.arbitrary.map(Eval.now)

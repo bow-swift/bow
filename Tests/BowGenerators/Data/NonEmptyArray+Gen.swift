@@ -11,7 +11,7 @@ extension NonEmptyArray: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `NonEmptyArray`
+// MARK: Instance of ArbitraryK for NonEmptyArray
 
 extension NonEmptyArrayPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> NonEmptyArrayOf<A> {

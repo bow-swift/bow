@@ -9,7 +9,7 @@ extension ArrayK: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `ArrayK`
+// MARK: Instance of ArbitraryK for ArrayK
 
 extension ArrayKPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> ArrayKOf<A> {

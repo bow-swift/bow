@@ -11,7 +11,7 @@ extension Try: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Try`
+// MARK: Instance of ArbitraryK for Try
 
 extension TryPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> TryOf<A> {

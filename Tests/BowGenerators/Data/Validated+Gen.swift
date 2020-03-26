@@ -11,10 +11,10 @@ extension Validated: Arbitrary where E: Arbitrary, A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Validated`
+// MARK: Instance of ArbitraryK for Validated
 
 extension ValidatedPartial: ArbitraryK where I: Arbitrary {
-    public static func generate<A: Arbitrary>() -> Kind<ValidatedPartial<I>, A> {
-        return Validated.arbitrary.generate
+    public static func generate<A: Arbitrary>() -> ValidatedOf<I, A> {
+        Validated.arbitrary.generate
     }
 }

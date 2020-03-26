@@ -10,7 +10,7 @@ extension Zipper: Arbitrary where A: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `ArrayK`
+// MARK: Instance of ArbitraryK for ArrayK
 
 extension ZipperPartial: ArbitraryK {
     public static func generate<A: Arbitrary>() -> ZipperOf<A> {
