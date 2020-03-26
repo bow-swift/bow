@@ -8,7 +8,9 @@ public protocol TraverseFilter: Traverse, FunctorFilter {
     ///   - fa: A value in the context implementing this instance.
     ///   - f: A function to traverse and filter each value.
     /// - Returns: Result of traversing this structure and filter values using the provided function.
-    static func traverseFilter<A, B, G: Applicative>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, Kind<Self, B>>
+    static func traverseFilter<A, B, G: Applicative>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, Kind<Self, B>>
 }
 
 // MARK: Related functions
@@ -20,8 +22,14 @@ public extension TraverseFilter {
     ///   - fa: A value in the context implementing this instance.
     ///   - f: A function to filter each value.
     /// - Returns: Result of traversing this structure and filter values using the provided function.
-    static func filterA<A, G: Applicative>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Kind<G, Bool>) -> Kind<G, Kind<Self, A>> {
-        return traverseFilter(fa, { a in G.map(f(a), { b in b ? Option.some(a) : Option.none() }) })
+    static func filterA<A, G: Applicative>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<G, Bool>) -> Kind<G, Kind<Self, A>> {
+        fa.traverseFilter { a in
+            f(a).map { b in
+                b ? Option.some(a) : Option.none()
+            }
+        }
     }
 
     /// Filters values using a predicate.
@@ -30,8 +38,10 @@ public extension TraverseFilter {
     ///   - fa: A value in the context implementing this instance.
     ///   - f: A boolean predicate.
     /// - Returns: Result of traversing this structure and filter values using the provided function.
-    static func filter<A>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> Bool) -> Kind<Self, A> {
-        return (filterA(fa, { a in Id.pure(f(a)) })).extract()
+    static func filter<A>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Bool) -> Kind<Self, A> {
+        fa.filterA { a in Id.pure(f(a)) }^.value
     }
 }
 
@@ -47,7 +57,7 @@ public extension Kind where F: TraverseFilter {
     ///   - f: A function to traverse and filter each value.
     /// - Returns: Result of traversing this structure and filter values using the provided function.
     func traverseFilter<B, G: Applicative>(_ f: @escaping (A) -> Kind<G, OptionOf<B>>) -> Kind<G, Kind<F, B>> {
-        return F.traverseFilter(self, f)
+        F.traverseFilter(self, f)
     }
 
     /// Filters values in a different context.
@@ -59,6 +69,6 @@ public extension Kind where F: TraverseFilter {
     ///   - f: A function to filter each value.
     /// - Returns: Result of traversing this structure and filter values using the provided function.
     func filterA<G: Applicative>(_ f: @escaping (A) -> Kind<G, Bool>) -> Kind<G, Kind<F, A>> {
-        return F.filterA(self, f)
+        F.filterA(self, f)
     }
 }
