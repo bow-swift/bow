@@ -5,14 +5,14 @@ import SwiftCheck
 
 extension StateT: Arbitrary where F: ArbitraryK & Applicative, S: Arbitrary, A: Arbitrary {
     public static var arbitrary: Gen<StateT<F, S, A>> {
-        return Gen.from(StateTPartial.generate >>> StateT.fix)
+        Gen.from(StateTPartial.generate >>> StateT.fix)
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `StateT`
+// MARK: Instance of ArbitraryK for StateT
 
 extension StateTPartial: ArbitraryK where F: ArbitraryK & Applicative, S: Arbitrary {
-    public static func generate<A: Arbitrary>() -> Kind<StateTPartial<F, S>, A> {
+    public static func generate<A: Arbitrary>() -> StateTOf<F, S, A> {
         let a = A.arbitrary.generate
         let f: (S) -> Kind<F, (S, A)> = { s in F.pure((s, a)) }
         return StateT(f)
