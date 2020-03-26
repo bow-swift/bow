@@ -1,7 +1,7 @@
 import Bow
 import SwiftCheck
 
-// MARK: Instance of `ArbitraryK` for `Day`
+// MARK: Instance of ArbitraryK for Day
 
 extension DayPartial: ArbitraryK where F: ArbitraryK, G: ArbitraryK {
     public static func generate<A: Arbitrary>() -> DayOf<F, G, A> {
