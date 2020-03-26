@@ -9,7 +9,10 @@ public protocol Reducible: Foldable {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Summary value of this reduction.
-    static func reduceLeftTo<A, B>(_ fa : Kind<Self, A>, _ f : (A) -> B, _ g : (B, A) -> B) -> B
+    static func reduceLeftTo<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: (A) -> B,
+        _ g: (B, A) -> B) -> B
     
     /// Lazily reduces a structure of values from right to left, also performing a transformation of values.
     ///
@@ -18,7 +21,10 @@ public protocol Reducible: Foldable {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Potentially lazy summary value of this reduction.
-    static func reduceRightTo<A, B>(_ fa : Kind<Self, A>, _ f : (A) -> B, _ g : (A, Eval<B>) -> Eval<B>) -> Eval<B>
+    static func reduceRightTo<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: (A) -> B,
+        _ g: (A, Eval<B>) -> Eval<B>) -> Eval<B>
 }
 
 // MARK: Related methods
@@ -30,8 +36,10 @@ public extension Reducible {
     ///   - fa: Structure of values.
     ///   - f: Folding function.
     /// - Returns: Summary value of this reduction.
-    static func reduceLeft<A>(_ fa : Kind<Self, A>, _ f : (A, A) -> A) -> A {
-        return reduceLeftTo(fa, id, f)
+    static func reduceLeft<A>(
+        _ fa: Kind<Self, A>,
+        _ f: (A, A) -> A) -> A {
+        reduceLeftTo(fa, id, f)
     }
 
     /// Lazily reduces a structure of values from right to left without transforming them.
@@ -40,8 +48,10 @@ public extension Reducible {
     ///   - fa: Structure of values.
     ///   - f: Folding function.
     /// - Returns: Potentially lazy summary value of this reduction.
-    static func reduceRight<A>(_ fa : Kind<Self, A>, _ f : (A, Eval<A>) -> Eval<A>) -> Eval<A> {
-        return reduceRightTo(fa, id, f)
+    static func reduceRight<A>(
+        _ fa: Kind<Self, A>,
+        _ f: (A, Eval<A>) -> Eval<A>) -> Eval<A> {
+        reduceRightTo(fa, id, f)
     }
 
     /// Reduces the elements of a structure down to a single value by applying the provided transformation and aggregation funtions in a left-associative manner.
@@ -51,8 +61,11 @@ public extension Reducible {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Optional summary value resulting from the folding process. It will be an `Option.none` if the structure is empty, or a value if not.
-    static func reduceLeftToOption<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (B, A) -> B) -> Option<B> {
-        return Option<B>.some(reduceLeftTo(fa, f, g))
+    static func reduceLeftToOption<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> B,
+        _ g: @escaping (B, A) -> B) -> Option<B> {
+        Option<B>.some(reduceLeftTo(fa, f, g))
     }
 
     /// Reduces the elements of a structure down to a single value by applying the provided transformation and aggregation functions in a right-associative manner.
@@ -62,8 +75,11 @@ public extension Reducible {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Optional summary value resulting from the folding process. It will be an `Option.none` if the structure is empty, or a value if not.
-    static func reduceRightToOption<A, B>(_ fa: Kind<Self, A>, _ f: @escaping (A) -> B, _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
-        return Eval<Option<B>>.fix(reduceRightTo(fa, f, g).map(Option<B>.some))
+    static func reduceRightToOption<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> B,
+        _ g: @escaping (A, Eval<B>) -> Eval<B>) -> Eval<Option<B>> {
+        reduceRightTo(fa, f, g).map(Option<B>.some)^
     }
 
     /// Checks if a structure of values is empty.
@@ -73,7 +89,7 @@ public extension Reducible {
     /// - Parameter fa: Structure of values.
     /// - Returns: `false` if the structure contains any value, `true` otherwise.
     static func isEmpty<A>(_ fa: Kind<Self, A>) -> Bool {
-        return false
+        false
     }
 
     /// Checks if a structure of values is not empty.
@@ -83,7 +99,7 @@ public extension Reducible {
     /// - Parameter fa: Structure of values.
     /// - Returns: `true` if the structure contains any value, `false` otherwise.
     static func nonEmpty<A>(_ fa: Kind<Self, A>) -> Bool {
-        return true
+        true
     }
 
     /// Reduces a structure of values to a summary value using the combination capabilities of the `Semigroup` instance of the underlying type.
@@ -91,7 +107,7 @@ public extension Reducible {
     /// - Parameter fa: Structure of values.
     /// - Returns: Summary value of this reduction.
     static func reduce<A: Semigroup>(_ fa: Kind<Self, A>) -> A {
-        return reduceLeft(fa, { b, a in a.combine(b) })
+        reduceLeft(fa, { b, a in a.combine(b) })
     }
 
     /// Reduces a structure of values by mapping them to a type with a `Semigroup` instance, and using its combination capabilities.
@@ -100,8 +116,10 @@ public extension Reducible {
     ///   - fa: Structure of values.
     ///   - f: Mapping function.
     /// - Returns: Summary value of this reduction.
-    static func reduceMap<A, B: Semigroup>(_ fa: Kind<Self, A>, _ f: (A) -> B) -> B {
-        return reduceLeftTo(fa, f, { b, a in b.combine(f(a)) })
+    static func reduceMap<A, B: Semigroup>(
+        _ fa: Kind<Self, A>,
+        _ f: (A) -> B) -> B {
+        reduceLeftTo(fa, f, { b, a in b.combine(f(a)) })
     }
 }
 
@@ -114,8 +132,10 @@ public extension Kind where F: Reducible {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Summary value of this reduction.
-    func reduceLeftTo<B>(_ f: (A) -> B, _ g: (B, A) -> B) -> B {
-        return F.reduceLeftTo(self, f, g)
+    func reduceLeftTo<B>(
+        _ f: (A) -> B,
+        _ g: (B, A) -> B) -> B {
+        F.reduceLeftTo(self, f, g)
     }
 
     /// Lazily reduces this structure of values from right to left, also performing a transformation of values.
@@ -124,8 +144,10 @@ public extension Kind where F: Reducible {
     ///   - f: Transforming function.
     ///   - g: Folding function.
     /// - Returns: Potentially lazy summary value of this reduction.
-    func reduceRightTo<B>(_ f : (A) -> B, _ g : (A, Eval<B>) -> Eval<B>) -> Eval<B> {
-        return F.reduceRightTo(self, f, g)
+    func reduceRightTo<B>(
+        _ f: (A) -> B,
+        _ g: (A, Eval<B>) -> Eval<B>) -> Eval<B> {
+        F.reduceRightTo(self, f, g)
     }
 
     /// Reduces this structure of values by mapping them to a type with a `Semigroup` instance, and using its combination capabilities.
@@ -133,8 +155,8 @@ public extension Kind where F: Reducible {
     /// - Parameters:
     ///   - f: Mapping function.
     /// - Returns: Summary value of this reduction.
-    func reduceMap<B: Semigroup>(_ f : (A) -> B) -> B {
-        return F.reduceMap(self, f)
+    func reduceMap<B: Semigroup>(_ f: (A) -> B) -> B {
+        F.reduceMap(self, f)
     }
 }
 
@@ -143,6 +165,6 @@ public extension Kind where F: Reducible, A: Semigroup {
     ///
     /// - Returns: Summary value of this reduction.
     func reduce() -> A {
-        return F.reduce(self)
+        F.reduce(self)
     }
 }
