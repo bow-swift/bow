@@ -9,10 +9,10 @@ extension StoreT: Arbitrary where S: CoArbitrary & Hashable & Arbitrary, W: Func
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Store`
+// MARK: Instance of ArbitraryK for Store
 
 extension StoreTPartial: ArbitraryK where S: CoArbitrary & Hashable & Arbitrary, W: Functor & ArbitraryK {
-    public static func generate<A: Arbitrary>() -> Kind<StoreTPartial<S, W>, A> {
+    public static func generate<A: Arbitrary>() -> StoreTOf<S, W, A> {
         StoreT(S.arbitrary.generate,
                KindOf<W, ArrowOf<S, A>>.arbitrary.generate.value.map { f in f.getArrow })
     }
