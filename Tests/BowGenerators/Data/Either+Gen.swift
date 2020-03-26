@@ -11,7 +11,7 @@ extension Either: Arbitrary where A: Arbitrary, B: Arbitrary {
     }
 }
 
-// MARK: Instance of `ArbitraryK` for `Either`
+// MARK: Instance of ArbitraryK for Either
 
 extension EitherPartial: ArbitraryK where L: Arbitrary {
     public static func generate<A: Arbitrary>() -> EitherOf<L, A> {
