@@ -7,7 +7,7 @@ public protocol ArbitraryK {
 
 public struct KindOf<F, A>: Arbitrary where F: ArbitraryK, A: Arbitrary {
     public static var arbitrary: Gen<KindOf<F, A>> {
-        return Gen.pure(()).map { _ in KindOf(F.generate()) }
+        Gen.from { KindOf(F.generate()) }
     }
     
     public let value: Kind<F, A>
@@ -19,6 +19,6 @@ public struct KindOf<F, A>: Arbitrary where F: ArbitraryK, A: Arbitrary {
 
 extension Gen {
     static func from(_ generator: @escaping () -> A) -> Gen<A> {
-        return Gen<()>.pure(()).map(generator)
+        Gen<Void>.pure(()).map(generator)
     }
 }
