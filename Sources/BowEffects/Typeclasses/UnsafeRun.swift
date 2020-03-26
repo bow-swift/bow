@@ -10,7 +10,9 @@ public protocol UnsafeRun: MonadError {
     ///   - fa: Computation to be run.
     /// - Returns: Result of running the computation.
     /// - Throws: Error happened during the execution of the computation, of the error type of the underlying `MonadError`.
-    static func runBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<Self, A>) throws -> A
+    static func runBlocking<A>(
+        on queue: DispatchQueue,
+        _ fa: @escaping () -> Kind<Self, A>) throws -> A
     
     /// Unsafely runs a computation in an asynchronous manner.
     ///
@@ -18,7 +20,10 @@ public protocol UnsafeRun: MonadError {
     ///   - queue: Dispatch queue used to run the computation.
     ///   - fa: Computation to be run.
     ///   - callback: Callback to report the result of the evaluation.
-    static func runNonBlocking<A>(on queue: DispatchQueue, _ fa: @escaping () -> Kind<Self, A>, _ callback: @escaping Callback<E, A>)
+    static func runNonBlocking<A>(
+        on queue: DispatchQueue,
+        _ fa: @escaping () -> Kind<Self, A>,
+        _ callback: @escaping Callback<E, A>)
 }
 
 // MARK: Syntax for UnsafeRun
@@ -31,7 +36,7 @@ public extension Kind where F: UnsafeRun {
     /// - Returns: Result of running the computation.
     /// - Throws: Error happened during the execution of the computation, of the error type of the underlying `MonadError`.
     func runBlocking(on queue: DispatchQueue = .main) throws -> A {
-        return try F.runBlocking(on: queue, { self })
+        try F.runBlocking(on: queue, { self })
     }
 
     /// Unsafely runs a computation in an asynchronous manner.
@@ -39,8 +44,10 @@ public extension Kind where F: UnsafeRun {
     /// - Parameters:
     ///   - queue: Dispatch queue used to run the computation. Defaults to the main queue.
     ///   - callback: Callback to report the result of the evaluation.
-    func runNonBlocking(on queue: DispatchQueue = .main, _ callback: @escaping Callback<F.E, A> = { _ in }) {
-        return F.runNonBlocking(on: queue, { self }, callback)
+    func runNonBlocking(
+        on queue: DispatchQueue = .main,
+        _ callback: @escaping Callback<F.E, A> = { _ in }) {
+        F.runNonBlocking(on: queue, { self }, callback)
     }
 }
 
@@ -52,8 +59,9 @@ public extension DispatchQueue {
     /// - Parameter fa: Computation to be run.
     /// - Returns: Result of running the computation.
     /// - Throws: Error happened during the execution of the computation, of the error type of the underlying `MonadError`.
-    func runBlocking<F: UnsafeRun, A>(_ fa: @escaping () -> Kind<F, A>) throws -> A {
-        return try F.runBlocking(on: self, fa)
+    func runBlocking<F: UnsafeRun, A>(
+        _ fa: @escaping () -> Kind<F, A>) throws -> A {
+        try F.runBlocking(on: self, fa)
     }
     
     /// Unsafely runs a computation in an asynchronous manner.
@@ -61,7 +69,9 @@ public extension DispatchQueue {
     /// - Parameters:
     ///   - fa: Computation to be run.
     ///   - callback: Callback to report the result of the evaluation.
-    func runNonBlocking<F: UnsafeRun, A>(_ fa: @escaping () -> Kind<F, A>, _ callback: @escaping Callback<F.E, A>) {
-        return F.runNonBlocking(on: self, fa, callback)
+    func runNonBlocking<F: UnsafeRun, A>(
+        _ fa: @escaping () -> Kind<F, A>,
+        _ callback: @escaping Callback<F.E, A> = { _ in }) {
+        F.runNonBlocking(on: self, fa, callback)
     }
 }
