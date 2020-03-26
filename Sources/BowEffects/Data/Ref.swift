@@ -97,7 +97,7 @@ public extension Ref where F: MonadDefer, A: Equatable {
     /// - Parameter f: Function providing the initial value for the reference.
     /// - Returns: A computation that provides the `Ref`.
     static func of(_ f: @autoclosure @escaping () -> A) -> Kind<F, Ref<F, A>> {
-        return F.later { unsafe(f()) }
+        F.later { unsafe(f()) }
     }
     
     /// Unsafely creates a `Ref`.
@@ -105,7 +105,7 @@ public extension Ref where F: MonadDefer, A: Equatable {
     /// - Parameter a: Initial value for the reference.
     /// - Returns: A `Ref` containing the initial value.
     static func unsafe(_ a: A) -> Ref<F, A> {
-        return MonadDeferRef(Atomic(a))
+        MonadDeferRef(Atomic(a))
     }
 }
 
@@ -117,31 +117,31 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func get() -> Kind<F, A> {
-        return F.later { self.atomic.value }
+        F.later { self.atomic.value }
     }
     
     override func set(_ a: A) -> Kind<F, ()> {
-        return F.later { self.atomic.value = a }
+        F.later { self.atomic.value = a }
     }
     
     override func getAndSet(_ a: A) -> Kind<F, A> {
-        return F.later { self.atomic.getAndSet(a) }
+        F.later { self.atomic.getAndSet(a) }
     }
     
     override func setAndGet(_ a: A) -> Kind<F, A> {
-        return set(a).flatMap { self.get() }
+        set(a).flatMap { self.get() }
     }
     
     override func update(_ f: @escaping (A) -> A) -> Kind<F, ()> {
-        return modify { a in (f(a), ()) }
+        modify { a in (f(a), ()) }
     }
     
     override func getAndUpdate(_ f: @escaping (A) -> A) -> Kind<F, A> {
-        return F.later { self.atomic.getAndUpdate(f) }
+        F.later { self.atomic.getAndUpdate(f) }
     }
     
     override func updateAndGet(_ f: @escaping (A) -> A) -> Kind<F, A> {
-        return F.later { self.atomic.updateAndGet(f) }
+        F.later { self.atomic.updateAndGet(f) }
     }
     
     override func modify<B>(_ f: @escaping (A) -> (A, B)) -> Kind<F, B> {
@@ -155,11 +155,11 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func tryUpdate(_ f: @escaping (A) -> A) -> Kind<F, Bool> {
-        return tryModify { a in (f(a), ()) }.map { x in x.isDefined }
+        tryModify { a in (f(a), ()) }.map { x in x.isDefined }
     }
     
     override func tryModify<B>(_ f: @escaping (A) -> (A, B)) -> Kind<F, Option<B>> {
-        return F.later {
+        F.later {
             let a = self.atomic.value
             let (u, b) = f(a)
             return self.atomic.compare(a, andSet: u) ? Option.some(b) : Option.none()
@@ -167,7 +167,7 @@ private class MonadDeferRef<F: MonadDefer, A: Equatable>: Ref<F, A> {
     }
     
     override func access() -> Kind<F, (A, (A) -> Kind<F, Bool>)> {
-        return F.later {
+        F.later {
             let snapshot = self.atomic.value
             let hasBeenCalled = Atomic(false)
             let setter = { (a: A) in F.later { hasBeenCalled.compare(false, andSet: true) && self.atomic.compare(snapshot, andSet: a) } }
