@@ -25,73 +25,73 @@ public class ComparableLaws<A: Comparable & Arbitrary> {
     
     private static func reflexivityOfLessThanOrEqual() {
         property("Reflexivity of <=") <~ forAll { (x: A) in
-            return x <= x
+            x <= x
         }
     }
     
     private static func antisymmetryOfLessThanOrEqual() {
         property("Antisymetry of <=") <~ forAll { (x: A, y: A) in
-            return (x <= y && y <= x && x == y) || x != y
+            (x <= y && y <= x && x == y) || x != y
         }
     }
     
     private static func transitivityOfLessThanOrEqual() {
         property("Transitivity of <=") <~ forAll { (x: A, y: A, z: A) in
-            return !(x <= y && y <= z) || x <= z
+            !(x <= y && y <= z) || x <= z
         }
     }
     
     private static func antireflexivityOfLessThan() {
         property("Antireflexivity of <") <~ forAll { (x: A) in
-            return !(x < x)
+            !(x < x)
         }
     }
     
     private static func asymmetryOfLessThan() {
         property("Asymmetry of <") <~ forAll { (x: A, y: A) in
-            return xor(x < y, y < x) || x == y
+            xor(x < y, y < x) || x == y
         }
     }
     
     private static func transitivityOfLessThan() {
         property("Transitivity of <") <~ forAll { (x: A, y: A, z: A) in
-            return !(x < y && y < z) || x < z
+            !(x < y && y < z) || x < z
         }
     }
     
     private static func reflexivityOfGreaterThanOrEqual() {
         property("Reflexivity of >=") <~ forAll { (x: A) in
-            return x >= x
+            x >= x
         }
     }
     
     private static func antisymmetryOfGreaterThanOrEqual() {
         property("Antisymetry of >=") <~ forAll { (x: A, y: A) in
-            return (x >= y && y >= x && x == y) || x != y
+            (x >= y && y >= x && x == y) || x != y
         }
     }
     
     private static func transitivityOfGreaterThanOrEqual() {
         property("Transitivity of >=") <~ forAll { (x: A, y: A, z: A) in
-            return !(x >= y && y >= z) || x >= z
+            !(x >= y && y >= z) || x >= z
         }
     }
     
     private static func antireflexivityOfGreaterThan() {
         property("Antireflexivity of >") <~ forAll { (x: A) in
-            return !(x > x)
+            !(x > x)
         }
     }
     
     private static func asymmetryOfGreaterThan() {
         property("Asymmetry of >") <~ forAll { (x: A, y: A) in
-            return xor(x > y, y > x) || x == y
+            xor(x > y, y > x) || x == y
         }
     }
     
     private static func transitivityOfGreaterThan() {
         property("Transitivity of >") <~ forAll { (x: A, y: A, z: A) in
-            return !(x > y && y > z) || x > z
+            !(x > y && y > z) || x > z
         }
     }
     
