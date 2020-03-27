@@ -10,15 +10,19 @@ public final class MonoidalLaws<F: Monoidal & ArbitraryK & EquatableK> {
     
     private static func leftIdentity(isEqual: @escaping (Kind<F, (Int, Int)>, Kind<F, Int>) -> Bool) {
         property("Monoidal left identity") <~ forAll { (fa: KindOf<F, Int>) in
-            isEqual(Kind<F, Int>.identity().product(fa.value),
-                    Kind<F, Int>.identity())
+            
+            isEqual(
+                Kind<F, Int>.identity().product(fa.value),
+                Kind<F, Int>.identity())
         }
     }
     
     private static func rightIdentity(isEqual: @escaping (Kind<F, (Int, Int)>, Kind<F, Int>) -> Bool) {
         property("Monoidal right identity") <~ forAll { (fa: KindOf<F, Int>) in
-            isEqual(fa.value.product(Kind<F, Int>.identity()),
-                    Kind<F, Int>.identity())
+            
+            isEqual(
+                fa.value.product(Kind<F, Int>.identity()),
+                Kind<F, Int>.identity())
         }
     }
 }

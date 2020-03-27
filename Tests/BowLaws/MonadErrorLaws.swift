@@ -11,13 +11,21 @@ public class MonadErrorLaws<F: MonadError & EquatableK & ArbitraryK> where F.E: 
     private static func leftZero() {
         property("Left zero") <~ forAll { (a: Int, g: ArrowOf<Int, Int>, error: F.E) in
             let f = g.getArrow >>> F.pure
-            return F.flatMap(F.raiseError(error), f) == F.raiseError(error)
+            
+            return F.raiseError(error).flatMap(f)
+                ==
+            F.raiseError(error)
         }
     }
     
     private static func ensureConsistency() {
         property("Ensure consistency") <~ forAll { (fa: KindOf<F, Int>, p: ArrowOf<Int, Bool>, error: F.E) in
-            return F.ensure(fa.value, constant(error), p.getArrow) == F.flatMap(fa.value, { a in p.getArrow(a) ? F.pure(a) : F.raiseError(error) })
+            
+            fa.value.ensure(constant(error), p.getArrow)
+                ==
+            fa.value.flatMap { a in
+                p.getArrow(a) ? F.pure(a) : F.raiseError(error)
+            }
         }
     }
 }

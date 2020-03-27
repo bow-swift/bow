@@ -10,15 +10,20 @@ public class InvariantLaws<F: Invariant & EquatableK & ArbitraryK> {
     
     private static func identity() {
         property("Identity") <~ forAll { (fa: KindOf<F, Int>) in
-            return F.imap(fa.value, id, id) == fa.value
+            fa.value.imap(id, id)
+                ==
+            fa.value
         }
     }
     
     private static func composition() {
         property("Composition") <~ forAll { (fa: KindOf<F, Int>, f1: ArrowOf<Int, Int>, f2: ArrowOf<Int, Int>, g1: ArrowOf<Int, Int>, g2: ArrowOf<Int, Int>) in
-            let left = F.imap(F.imap(fa.value, f1.getArrow, f2.getArrow), g1.getArrow, g2.getArrow)
-            let right = F.imap(fa.value, g1.getArrow <<< f1.getArrow, f2.getArrow <<< g2.getArrow)
-            return left == right
+            
+            fa.value.imap(f1.getArrow, f2.getArrow)
+                    .imap(g1.getArrow, g2.getArrow)
+                ==
+            fa.value.imap(g1.getArrow <<< f1.getArrow,
+                          f2.getArrow <<< g2.getArrow)
         }
     }
 }
