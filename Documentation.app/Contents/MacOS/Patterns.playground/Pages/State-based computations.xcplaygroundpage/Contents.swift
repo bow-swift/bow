@@ -346,7 +346,7 @@ func number_v2<A: Hashable>(tree: Tree<A>) -> State<Table<A>, Tree<Int>> {
     case let .node(value, left: leftTree, right: rightTree):
         return State.zip(
             process(value: value),
-            number(tree: leftTree),
+            number_v2(tree: leftTree),
             number_v2(tree: rightTree)).map(Tree.node)^
     }
 }
