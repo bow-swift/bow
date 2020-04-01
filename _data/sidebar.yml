@@ -73,6 +73,9 @@ options:
          - title: Tail recursion
            url: /docs/patterns/tail-recursion/
 
+         - title: State-based computations
+           url: /docs/patterns/state-based-computations/
+
          - title: Dependency injection
            url: /docs/patterns/dependency-injection/
 
