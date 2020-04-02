@@ -15,19 +15,19 @@ permalink: /docs/patterns/state-based-computations/
 var state: ProgramState
     
 func operation(input: Input) -> Output {
-    let result = doSomething(input: input, state: state)
-    state = newState
+    let result: Output = doSomething(input: input, state: state)
+    state = update(state: state, input: input)
     return result
 }
 ```
 
  However, this code has some problems:
  
- 1. It is using a hidden argument; it uses `state` under the hood, which makes the function impure, as the function `operation` may return different outputs for the same input.
+ - It is using a hidden argument; it uses `state` under the hood, which makes the function impure, as the function `operation` may return different outputs for the same input.
  
- 2. It mutates state, which is a side effect other than computing the result of the function.
+ - It mutates state, which is a side effect other than computing the result of the function.
  
- 3. It is difficult to test the function, as we may not be able to easily set the initial state or check its value after the function execution.
+ - It is difficult to test the function, as we may not be able to easily set the initial state or check its value after the function execution.
  
 ## Explicit parameters and return types
  
@@ -35,7 +35,8 @@ func operation(input: Input) -> Output {
 
 ```swift
 func operation(input: Input, state: ProgramState) -> (ProgramState, Output) {
-    let result = doSomething(input: input, state: state)
+    let result: Output = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
 ```
@@ -46,12 +47,14 @@ func operation(input: Input, state: ProgramState) -> (ProgramState, Output) {
 
 ```swift
 func operation(input: Input, state: ProgramState) -> (ProgramState, Intermediate) {
-    let result = doSomething(input: input, state: state)
+    let result: Intermediate = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
     
 func operation2(input: Intermediate, state: ProgramState) -> (ProgramState, Output) {
-    let result = doSomething(input: input, state: state)
+    let result: Output = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
     
@@ -69,11 +72,9 @@ func program(input: Input, state: ProgramState) -> (ProgramState, Output) {
 
 ```swift
 func operation(input: Input) -> (ProgramState) -> (ProgramState, Output) {
-```
-
-```swift
-    return { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
@@ -83,11 +84,9 @@ func operation(input: Input) -> (ProgramState) -> (ProgramState, Output) {
 
 ```swift
 func operation(input: Input) -> State<ProgramState, Output> {
-```
-
-```swift
-    return State<ProgramState, Output> { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Output> { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
@@ -97,21 +96,17 @@ func operation(input: Input) -> State<ProgramState, Output> {
 
 ```swift
 static func operation(input: Input) -> State<ProgramState, Intermediate> {
-```
-
-```swift
-    return State<ProgramState, Intermediate> { state -> (ProgramState, Intermediate) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Intermediate> { state -> (ProgramState, Intermediate) in
+        let result: Intermediate = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
     
 static func operation2(input: Intermediate) -> State<ProgramState, Output> {
-```
-
-```swift
-    return State<ProgramState, Output> { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Output> { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }

@@ -499,15 +499,15 @@
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">ProgramState</span>
     
 <span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Output</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">newState</span>
+    <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>However, this code has some problems:</p>
 
-<ol>
+<ul>
   <li>
     <p>It is using a hidden argument; it uses <code class="highlighter-rouge">state</code> under the hood, which makes the function impure, as the function <code class="highlighter-rouge">operation</code> may return different outputs for the same input.</p>
   </li>
@@ -517,14 +517,15 @@
   <li>
     <p>It is difficult to test the function, as we may not be able to easily set the initial state or check its value after the function execution.</p>
   </li>
-</ol>
+</ul>
 
 <h2 id="explicit-parameters-and-return-types">Explicit parameters and return types</h2>
 
 <p>The straightforward solution to this problem is to make everything explicit: the function receives the state as a parameter, and returns it when it is mutated.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">ProgramState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
     <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -534,12 +535,14 @@
 <p>However, it has a new, different problem. Its ergonomics are not very flexible. If we need to perform multiple state-based operations, we need to wire the state manually:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">ProgramState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Intermediate</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
     <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 <span class="p">}</span>
     
 <span class="kd">func</span> <span class="nf">operation2</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Intermediate</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">ProgramState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
     <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 <span class="p">}</span>
     
@@ -556,10 +559,9 @@
 <p>The problem mentioned above can be mitigated by using the State type, provided in Bow. The functions above can be curried, separating the inputs they need to perform their job, from the state they are based on.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="p">{</span>
-</code></pre></div></div>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">return</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
-        <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
         <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -568,10 +570,9 @@
 <p>And finally, wrap the returning function <code class="highlighter-rouge">(ProgramState) -&gt; (ProgramState, Output)</code> into <code class="highlighter-rouge">State&lt;ProgramState, Output&gt;</code>:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span>
-</code></pre></div></div>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">return</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
-        <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
         <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -580,19 +581,17 @@
 <p>With this change we achieved better ergonomics, as the state wiring now happens by using the <code class="highlighter-rouge">flatMap</code> operation:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">operation</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Input</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="o">&gt;</span> <span class="p">{</span>
-</code></pre></div></div>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">return</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="p">)</span> <span class="k">in</span>
-        <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Intermediate</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Intermediate</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
         <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
     
 <span class="kd">static</span> <span class="kd">func</span> <span class="nf">operation2</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">Intermediate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span>
-</code></pre></div></div>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">return</span> <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
-        <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+    <span class="kt">State</span><span class="o">&lt;</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="o">&gt;</span> <span class="p">{</span> <span class="n">state</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">ProgramState</span><span class="p">,</span> <span class="kt">Output</span><span class="p">)</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="nv">result</span><span class="p">:</span> <span class="kt">Output</span> <span class="o">=</span> <span class="nf">doSomething</span><span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">,</span> <span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">newState</span> <span class="o">=</span> <span class="nf">update</span><span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span> <span class="nv">input</span><span class="p">:</span> <span class="n">input</span><span class="p">)</span>
         <span class="nf">return</span> <span class="p">(</span><span class="n">newState</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
