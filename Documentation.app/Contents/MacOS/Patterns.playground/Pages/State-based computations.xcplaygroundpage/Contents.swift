@@ -7,6 +7,14 @@
 // nef:begin:hidden
 import Foundation
 import Bow
+
+func doSomething<A, B, C>(input: A, state: B) -> C {
+    fatalError()
+}
+
+func update<S, A>(state: S, input: A) -> S {
+    fatalError()
+}
 // nef:end
 /*:
  # State-based computations
@@ -18,34 +26,29 @@ import Bow
  */
 // nef:begin:hidden
 class Snippet1<ProgramState, Input, Output> {
-var newState: ProgramState
     
-init(state: ProgramState, newState: ProgramState) {
+init(state: ProgramState) {
     self.state = state
-    self.newState = newState
 }
 // nef:end
 var state: ProgramState
     
 func operation(input: Input) -> Output {
-    let result = doSomething(input: input, state: state)
-    state = newState
+    let result: Output = doSomething(input: input, state: state)
+    state = update(state: state, input: input)
     return result
 }
 // nef:begin:hidden
-func doSomething(input: Input, state: ProgramState) -> Output {
-    fatalError()
-}
 }
 // nef:end
 /*:
  However, this code has some problems:
  
- 1. It is using a hidden argument; it uses `state` under the hood, which makes the function impure, as the function `operation` may return different outputs for the same input.
+ - It is using a hidden argument; it uses `state` under the hood, which makes the function impure, as the function `operation` may return different outputs for the same input.
  
- 2. It mutates state, which is a side effect other than computing the result of the function.
+ - It mutates state, which is a side effect other than computing the result of the function.
  
- 3. It is difficult to test the function, as we may not be able to easily set the initial state or check its value after the function execution.
+ - It is difficult to test the function, as we may not be able to easily set the initial state or check its value after the function execution.
  
  ## Explicit parameters and return types
  
@@ -53,16 +56,14 @@ func doSomething(input: Input, state: ProgramState) -> Output {
  */
 // nef:begin:hidden
 struct Snippet2<ProgramState, Input, Output> {
-var newState: ProgramState
+
 // nef:end
 func operation(input: Input, state: ProgramState) -> (ProgramState, Output) {
-    let result = doSomething(input: input, state: state)
+    let result: Output = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
 // nef:begin:hidden
-func doSomething(input: Input, state: ProgramState) -> Output {
-    fatalError()
-}
 }
 // nef:end
 /*:
@@ -72,15 +73,16 @@ func doSomething(input: Input, state: ProgramState) -> Output {
 */
 // nef:begin:hidden
 struct Snippet3<ProgramState, Input, Intermediate, Output> {
-var newState: ProgramState
 // nef:end
 func operation(input: Input, state: ProgramState) -> (ProgramState, Intermediate) {
-    let result = doSomething(input: input, state: state)
+    let result: Intermediate = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
     
 func operation2(input: Intermediate, state: ProgramState) -> (ProgramState, Output) {
-    let result = doSomething(input: input, state: state)
+    let result: Output = doSomething(input: input, state: state)
+    let newState = update(state: state, input: input)
     return (newState, result)
 }
     
@@ -89,13 +91,6 @@ func program(input: Input, state: ProgramState) -> (ProgramState, Output) {
     return operation2(input: intermediate, state: state2)
 }
 // nef:begin:hidden
-func doSomething(input: Input, state: ProgramState) -> Intermediate {
-    fatalError()
-}
-    
-func doSomething(input: Intermediate, state: ProgramState) -> Output {
-    fatalError()
-}
 }
 // nef:end
 /*:
@@ -107,17 +102,11 @@ func doSomething(input: Intermediate, state: ProgramState) -> Output {
  */
 // nef:begin:hidden
 struct Snippet4<ProgramState, Input, Output> {
-
 // nef:end
 func operation(input: Input) -> (ProgramState) -> (ProgramState, Output) {
-    // nef:begin:hidden
-    var newState: ProgramState { fatalError() }
-    func doSomething(input: Input, state: ProgramState) -> Output {
-        fatalError()
-    }
-    // nef:end
-    return { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
@@ -131,14 +120,9 @@ func operation(input: Input) -> (ProgramState) -> (ProgramState, Output) {
 struct Snippet5<ProgramState, Input, Output> {
 // nef:end
 func operation(input: Input) -> State<ProgramState, Output> {
-// nef:begin:hidden
-    func doSomething(input: Input, state: ProgramState) -> Output {
-        fatalError()
-    }
-    var newState: ProgramState { fatalError() }
-// nef:end
-    return State<ProgramState, Output> { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Output> { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
@@ -152,27 +136,17 @@ func operation(input: Input) -> State<ProgramState, Output> {
 struct Snippet6<ProgramState, Input, Intermediate, Output> {
 // nef:end
 static func operation(input: Input) -> State<ProgramState, Intermediate> {
-// nef:begin:hidden
-    func doSomething(input: Input, state: ProgramState) -> Intermediate {
-        fatalError()
-    }
-    var newState: ProgramState { fatalError() }
-// nef:end
-    return State<ProgramState, Intermediate> { state -> (ProgramState, Intermediate) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Intermediate> { state -> (ProgramState, Intermediate) in
+        let result: Intermediate = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
     
 static func operation2(input: Intermediate) -> State<ProgramState, Output> {
-// nef:begin:hidden
-    func doSomething(input: Intermediate, state: ProgramState) -> Output {
-        fatalError()
-    }
-    var newState: ProgramState { fatalError() }
-// nef:end
-    return State<ProgramState, Output> { state -> (ProgramState, Output) in
-        let result = doSomething(input: input, state: state)
+    State<ProgramState, Output> { state -> (ProgramState, Output) in
+        let result: Output = doSomething(input: input, state: state)
+        let newState = update(state: state, input: input)
         return (newState, result)
     }
 }
