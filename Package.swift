@@ -23,7 +23,7 @@ let package = Package(
     ],
 
     dependencies: [
-        .package(url: "https://github.com/typelift/SwiftCheck.git",   from: "0.12.0"),
+        .package(url: "https://github.com/bow-swift/SwiftCheck.git",   from: "0.12.1"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git",     from: "5.0.1"),
     ],
 
