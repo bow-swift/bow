@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "BowLaws",              targets: ["BowLaws"]),
         .library(name: "BowOpticsLaws",        targets: ["BowOpticsLaws"]),
         .library(name: "BowEffectsLaws",       targets: ["BowEffectsLaws"]),
-        
+
         .library(name: "BowGenerators",        targets: ["BowGenerators"]),
         .library(name: "BowFreeGenerators",    targets: ["BowFreeGenerators"]),
         .library(name: "BowEffectsGenerators", targets: ["BowEffectsGenerators"]),
@@ -23,7 +23,7 @@ let package = Package(
     ],
 
     dependencies: [
-        .package(url: "https://github.com/truizlop/SwiftCheck.git",   from: "0.12.0"),
+        .package(url: "https://github.com/bow-swift/SwiftCheck.git",   from: "0.12.1"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git",     from: "5.0.1"),
     ],
 
