@@ -12,18 +12,18 @@ let package = Package(
         .library(name: "BowEffects",           targets: ["BowEffects"]),
         .library(name: "BowRx",                targets: ["BowRx"]),
 
-        // .library(name: "BowLaws",              targets: ["BowLaws"]),
-        // .library(name: "BowOpticsLaws",        targets: ["BowOpticsLaws"]),
-        // .library(name: "BowEffectsLaws",       targets: ["BowEffectsLaws"]),
-
-        // .library(name: "BowGenerators",        targets: ["BowGenerators"]),
-        // .library(name: "BowFreeGenerators",    targets: ["BowFreeGenerators"]),
-        // .library(name: "BowEffectsGenerators", targets: ["BowEffectsGenerators"]),
-        // .library(name: "BowRxGenerators",      targets: ["BowRxGenerators"])
+        .library(name: "BowLaws",              targets: ["BowLaws"]),
+        .library(name: "BowOpticsLaws",        targets: ["BowOpticsLaws"]),
+        .library(name: "BowEffectsLaws",       targets: ["BowEffectsLaws"]),
+        
+        .library(name: "BowGenerators",        targets: ["BowGenerators"]),
+        .library(name: "BowFreeGenerators",    targets: ["BowFreeGenerators"]),
+        .library(name: "BowEffectsGenerators", targets: ["BowEffectsGenerators"]),
+        .library(name: "BowRxGenerators",      targets: ["BowRxGenerators"])
     ],
 
     dependencies: [
-        .package(url: "https://github.com/typelift/SwiftCheck.git",   from: "0.12.0"),
+        .package(url: "https://github.com/truizlop/SwiftCheck.git",   from: "0.12.0"),
         .package(url: "https://github.com/ReactiveX/RxSwift.git",     from: "5.0.1"),
     ],
 
