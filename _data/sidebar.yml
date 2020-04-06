@@ -36,8 +36,8 @@ options:
 
      nested_options:
 
-         - title: Overview
-           url: /docs/composition/overview/
+         - title: Composition Overview
+           url: /docs/composition/composition-overview/
 
          - title: Composing functions
            url: /docs/composition/composing-functions/
@@ -86,8 +86,8 @@ options:
 
      nested_options:
 
-         - title: Overview
-           url: /docs/optics/overview/
+         - title: Optics Overview
+           url: /docs/optics/optics-overview/
 
          - title: Writing your own optics
            url: /docs/optics/writing-your-own-optics/
@@ -102,8 +102,8 @@ options:
 
      nested_options:
 
-         - title: Overview
-           url: /docs/effects/overview/
+         - title: Effects Overview
+           url: /docs/effects/effects-overview/
 
          - title: Suspending side effects
            url: /docs/effects/suspending-side-effects/

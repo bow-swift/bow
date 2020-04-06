@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="composition-the-essence-of-functional-programming">Composition: The essence of Functional Programming</h1>
+
+<p class="beginner">beginner</p>
+
+<p>The unit of work in Functional Programming is a function. It is the smallest building block that we can create to solve a programming problem. Functions, as they are understood in FP, must have the following characteristics:</p>
+
+<ul>
+  <li><strong>Total</strong>: they must be defined for every possible input.</li>
+  <li><strong>Deterministic</strong>: they must return the same output for a given input.</li>
+  <li><strong>Pure</strong>: the only observable effect of running them is their output.</li>
+</ul>
+
+<p>When we have these building blocks, we need to combine them somehow to solve bigger problems. This is done by <strong>composition</strong>. Composition is the cornerstone of FP - it lets us build entire functional applications from total, deterministic, pure functions.</p>
+
+<p>Nevertheless, composition can be tricky, especially when we start dealing with effectful and side effectful operations. In this section of the documentation, we will review different patterns for composition that you will encounter regularly.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>The following table summarizes typical use cases and lets you find which operation you will need to use to compose operations, and which type class provides it.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>I have…</th>
+      <th>I want to…</th>
+      <th>Function</th>
+      <th>Type class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>One or more elements of <code class="highlighter-rouge">A</code></td>
+      <td>Combine them into a single <code class="highlighter-rouge">A</code></td>
+      <td><code class="highlighter-rouge">combine</code> / <code class="highlighter-rouge">combineAll</code></td>
+      <td>Semigroup</td>
+    </tr>
+    <tr>
+      <td>Zero or more elements of <code class="highlighter-rouge">A</code></td>
+      <td>Combine them into a single <code class="highlighter-rouge">A</code></td>
+      <td><code class="highlighter-rouge">combine</code> / <code class="highlighter-rouge">combineAll</code> + <code class="highlighter-rouge">empty</code></td>
+      <td>Monoid</td>
+    </tr>
+    <tr>
+      <td>A value <code class="highlighter-rouge">F&lt;A&gt;</code> and a function <code class="highlighter-rouge">(A) -&gt; B</code></td>
+      <td>Obtain a value <code class="highlighter-rouge">F&lt;B&gt;</code></td>
+      <td><code class="highlighter-rouge">map</code></td>
+      <td>Functor</td>
+    </tr>
+    <tr>
+      <td>A value of <code class="highlighter-rouge">A</code></td>
+      <td>A value of <code class="highlighter-rouge">F&lt;A&gt;</code></td>
+      <td><code class="highlighter-rouge">pure</code></td>
+      <td>Applicative</td>
+    </tr>
+    <tr>
+      <td>Several values <code class="highlighter-rouge">F&lt;A1&gt; ... F&lt;An&gt;</code></td>
+      <td>Combine them into <code class="highlighter-rouge">F&lt;(A1, ..., An)&gt;</code></td>
+      <td><code class="highlighter-rouge">zip</code></td>
+      <td>Applicative</td>
+    </tr>
+    <tr>
+      <td>Several values <code class="highlighter-rouge">F&lt;A1&gt; ... F&lt;An&gt;</code> and a function <code class="highlighter-rouge">(A1 ... An) -&gt; B</code></td>
+      <td>Combine them into <code class="highlighter-rouge">F&lt;B&gt;</code></td>
+      <td><code class="highlighter-rouge">map</code></td>
+      <td>Applicative</td>
+    </tr>
+    <tr>
+      <td>A value <code class="highlighter-rouge">F&lt;A&gt;</code> and a function <code class="highlighter-rouge">(A) -&gt; F&lt;B&gt;</code></td>
+      <td>Obtain a value <code class="highlighter-rouge">F&lt;B&gt;</code></td>
+      <td><code class="highlighter-rouge">flatMap</code></td>
+      <td>Monad</td>
+    </tr>
+    <tr>
+      <td>A value <code class="highlighter-rouge">F&lt;A&gt;</code> and a function <code class="highlighter-rouge">(A) -&gt; G&lt;B&gt;</code></td>
+      <td>Obtain a value <code class="highlighter-rouge">F&lt;G&lt;B&gt;&gt;</code></td>
+      <td><code class="highlighter-rouge">map</code></td>
+      <td>Functor</td>
+    </tr>
+    <tr>
+      <td>A value <code class="highlighter-rouge">F&lt;A&gt;</code> and  a function <code class="highlighter-rouge">(A) -&gt; G&lt;B&gt;</code></td>
+      <td>Obtain a value <code class="highlighter-rouge">G&lt;F&lt;B&gt;&gt;</code></td>
+      <td><code class="highlighter-rouge">traverse</code></td>
+      <td>Traverse</td>
+    </tr>
+    <tr>
+      <td>A value <code class="highlighter-rouge">F&lt;G&lt;A&gt;&gt;</code></td>
+      <td>Flip the effects to get <code class="highlighter-rouge">G&lt;F&lt;A&gt;&gt;</code></td>
+      <td><code class="highlighter-rouge">sequence</code></td>
+      <td>Traverse</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

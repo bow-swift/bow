@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Overview
-permalink: /docs/effects/overview/
+permalink: /docs/effects/effects-overview/
 ---
 
 # Effects
