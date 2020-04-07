@@ -719,31 +719,27 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
     }
     
     override func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, Z>, Queue)> {
-        var a: Trampoline<(Either<E, A>, Queue)>?
-        var b: Trampoline<(Either<E, B>, Queue)>?
+        var a: (Either<E, A>, Queue)?
+        var b: (Either<E, B>, Queue)?
         let group = DispatchGroup()
         let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
         let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
-            a = self.fa._unsafeRunSyncEither(on: parQueue1)
+            a = self.fa._unsafeRunSyncEither(on: parQueue1).run()
             group.leave()
         }
         
         group.enter()
         parQueue2.async {
-            b = self.fb._unsafeRunSyncEither(on: parQueue2)
+            b = self.fb._unsafeRunSyncEither(on: parQueue2).run()
             group.leave()
         }
         
         group.wait()
         if let aa = a, let bb = b {
-            return aa.flatMap { a in
-                bb.map { b in
-                    (Either<E, Z>.map(a.0, b.0, self.f)^, queue)
-                }
-            }
+            return .done((Either.map(aa.0, bb.0, self.f)^, queue))
         } else {
             fatalError("An operation finished without producing a result.") // Should never happen
         }
