@@ -676,21 +676,21 @@ internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
     }
     
     override func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, Either<A, B>>, Queue)> {
-        let result = Atomic<Either<Trampoline<(Either<E, A>, Queue)>, Trampoline<(Either<E, B>, Queue)>>?>(nil)
+        let result = Atomic<Either<(Either<E, A>, Queue), (Either<E, B>, Queue)>?>(nil)
         let group = DispatchGroup()
         let parQueue1: Queue = .queue(label: queue.label + "raceA", qos: queue.qos)
         let parQueue2: Queue = .queue(label: queue.label + "raceB", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
-            let a = self.fa._unsafeRunSyncEither(on: parQueue1)
+            let a = self.fa._unsafeRunSyncEither(on: parQueue1).run()
             if result.setIfNil(.left(a)) {
                 group.leave()
             }
         }
         
         parQueue2.async {
-            let b = self.fb._unsafeRunSyncEither(on: parQueue2)
+            let b = self.fb._unsafeRunSyncEither(on: parQueue2).run()
             if result.setIfNil(.right(b)) {
                 group.leave()
             }
@@ -698,9 +698,9 @@ internal class Race<E: Error, A, B>: IO<E, Either<A, B>> {
         
         group.wait()
         if let value = result.value {
-            return value.fold(
-                { ta in ta.map { a in (a.0.map(Either.left)^, a.1) } },
-                { tb in tb.map { b in (b.0.map(Either.right)^, b.1) } })
+            return .done(value.fold(
+                { a in (a.0.map(Either.left)^, a.1) } ,
+                { b in (b.0.map(Either.right)^, b.1) }))
         } else {
             fatalError("Both operations failed to finish.") // Should never happen
         }
@@ -719,31 +719,27 @@ internal class ParMap2<E: Error, A, B, Z>: IO<E, Z> {
     }
     
     override func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, Z>, Queue)> {
-        var a: Trampoline<(Either<E, A>, Queue)>?
-        var b: Trampoline<(Either<E, B>, Queue)>?
+        var a: (Either<E, A>, Queue)?
+        var b: (Either<E, B>, Queue)?
         let group = DispatchGroup()
         let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
         let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
         
         group.enter()
         parQueue1.async {
-            a = self.fa._unsafeRunSyncEither(on: parQueue1)
+            a = self.fa._unsafeRunSyncEither(on: parQueue1).run()
             group.leave()
         }
         
         group.enter()
         parQueue2.async {
-            b = self.fb._unsafeRunSyncEither(on: parQueue2)
+            b = self.fb._unsafeRunSyncEither(on: parQueue2).run()
             group.leave()
         }
         
         group.wait()
         if let aa = a, let bb = b {
-            return aa.flatMap { a in
-                bb.map { b in
-                    (Either<E, Z>.map(a.0, b.0, self.f)^, queue)
-                }
-            }
+            return .done((Either.map(aa.0, bb.0, self.f)^, queue))
         } else {
             fatalError("An operation finished without producing a result.") // Should never happen
         }
@@ -764,9 +760,9 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
     }
     
     override func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, Z>, Queue)> {
-        var a: Trampoline<(Either<E, A>, Queue)>?
-        var b: Trampoline<(Either<E, B>, Queue)>?
-        var c: Trampoline<(Either<E, C>, Queue)>?
+        var a: (Either<E, A>, Queue)?
+        var b: (Either<E, B>, Queue)?
+        var c: (Either<E, C>, Queue)?
         let group = DispatchGroup()
         let parQueue1: Queue = .queue(label: queue.label + "parMap1", qos: queue.qos)
         let parQueue2: Queue = .queue(label: queue.label + "parMap2", qos: queue.qos)
@@ -774,31 +770,25 @@ internal class ParMap3<E: Error, A, B, C, Z>: IO<E, Z> {
         
         group.enter()
         parQueue1.async {
-            a = self.fa._unsafeRunSyncEither(on: parQueue1)
+            a = self.fa._unsafeRunSyncEither(on: parQueue1).run()
             group.leave()
         }
         
         group.enter()
         parQueue2.async {
-            b = self.fb._unsafeRunSyncEither(on: parQueue2)
+            b = self.fb._unsafeRunSyncEither(on: parQueue2).run()
             group.leave()
         }
         
         group.enter()
         parQueue3.async {
-            c = self.fc._unsafeRunSyncEither(on: parQueue3)
+            c = self.fc._unsafeRunSyncEither(on: parQueue3).run()
             group.leave()
         }
         
         group.wait()
         if let aa = a, let bb = b, let cc = c {
-            return aa.flatMap { a in
-                bb.flatMap { b in
-                    cc.map { c in
-                        (Either<E, Z>.map(a.0, b.0, c.0, self.f)^, queue)
-                    }
-                }
-            }
+            return .done((Either.map(aa.0, bb.0, cc.0, self.f)^, queue))
         } else {
             fatalError("An operation finished without producing a result.") // Should never happen
         }
