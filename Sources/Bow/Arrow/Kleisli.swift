@@ -92,6 +92,22 @@ public postfix func ^<F, D, A>(_ fa: KleisliOf<F, D, A>) -> Kleisli<F, D, A> {
 
 // MARK: Functions when F has an instance of Monad.
 extension Kleisli where F: Monad {
+    /// Accesses the environment to produce a pure value.
+    ///
+    /// - Parameter f: Function accessing the environment.
+    /// - Returns: A Kleisli function wrapping the produced value.
+    public static func access(_ f: @escaping (D) -> A) -> Kleisli<F, D, A> {
+        accessM(f >>> pure >>> fix)
+    }
+    
+    /// Accesses the environment to produce a Kleisli effect.
+    ///
+    /// - Parameter f: Function accessing the environment.
+    /// - Returns: A Kleisli function wraping the produced value.
+    public static func accessM(_ f: @escaping (D) -> Kleisli<F, D, A>) -> Kleisli<F, D, A> {
+        Kleisli<F, D, D>.ask().flatMap(f)^
+    }
+    
     /// Zips this Kleisli function with another one with the same input type.
     ///
     /// - Parameter o: Kleisli function to be zipped with this one.
