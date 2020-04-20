@@ -1,5 +1,11 @@
 import Bow
 
+/// IORef is an asynchronous, concurrent, mutable reference backed by IO, holding a value of type A. Provides safe concurrent access and modification of its content.
+public typealias IORef<E: Error, A> = Ref<IOPartial<E>, A>
+
+/// EnvIORef is an asynchronous, concurrent, mutable reference backed by EnvIO, holding a value of type A. Provides safe concurrent access and modification of its content.
+public typealias EnvIORef<D, E: Error, A> = Ref<EnvIOPartial<D, E>, A>
+
 /// Ref is an asynchronous, concurrent mutable reference in the context of `F` holding a value of type `A`. Provides safe concurrent access and modification of its content. `Ref`is a purely functional wrapper over an `Atomic<A>` in context `F` that is always initialized to a value.
 public class Ref<F, A> {
     /// Obtains the current value. Since `Ref` is always guaranteed to have a value, the returned action completes immetiately after being bound.
