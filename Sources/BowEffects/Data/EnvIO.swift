@@ -76,19 +76,6 @@ public extension Kleisli {
         self.run(d)^
     }
     
-    /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
-    ///
-    /// - Parameters:
-    ///   - f: Function to run in case of error.
-    ///   - g: Function to run in case of success.
-    /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
-    func foldM<B, E: Error>(
-        _ f: @escaping (E) -> EnvIO<D, E, B>,
-        _ g: @escaping (A) -> EnvIO<D, E, B>) -> EnvIO<D, E, B>
-        where F == IOPartial<E> {
-        self.flatMap(g).handleErrorWith(f)^
-    }
-    
     /// Retries this computation if it fails based on the provided retrial policy.
     ///
     /// This computation will be at least executed once, and if it fails, it will be retried according to the policy.

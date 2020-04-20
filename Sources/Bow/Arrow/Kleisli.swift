@@ -143,6 +143,21 @@ extension Kleisli where F: Monad {
     }
 }
 
+// MARK: Functions when F has an instance of Monad.
+extension Kleisli where F: MonadError {
+    /// Folds over the result of this computation by accepting an effect to execute in case of error, and another one in the case of success.
+    ///
+    /// - Parameters:
+    ///   - f: Function to run in case of error.
+    ///   - g: Function to run in case of success.
+    /// - Returns: A computation from the result of applying the provided functions to the result of this computation.
+    func foldM<B>(
+        _ f: @escaping (F.E) -> Kleisli<F, D, B>,
+        _ g: @escaping (A) -> Kleisli<F, D, B>) -> Kleisli<F, D, B> {
+        self.flatMap(g).handleErrorWith(f)^
+    }
+}
+
 // MARK: Instance of Invariant for Kleisli
 extension KleisliPartial: Invariant where F: Functor {}
 
