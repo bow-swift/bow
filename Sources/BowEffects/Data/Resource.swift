@@ -1,5 +1,8 @@
 import Bow
 
+/// A Resource backed by IO
+public typealias IOResource<E: Error, A> = Resource<IOPartial<E>, A>
+
 /// Witness for the `Resource<F, A>` type. To be used in simulated Higher Data Types.
 public final class ForResource {}
 
