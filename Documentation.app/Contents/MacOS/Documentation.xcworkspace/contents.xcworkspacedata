@@ -14,6 +14,9 @@
       location = "group:Composition.playground">
    </FileRef>
    <FileRef
+      location = "group:Dependency management.playground">
+   </FileRef>
+   <FileRef
       location = "group:Patterns.playground">
    </FileRef>
    <FileRef
