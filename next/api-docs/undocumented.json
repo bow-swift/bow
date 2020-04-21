@@ -149,14 +149,14 @@
     },
     {
       "file": "/Users/runner/runners/2.169.0/work/bow/bow/Sources/BowEffects/Data/Resource.swift",
-      "line": 86,
+      "line": 89,
       "symbol": "Resource.combine(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.169.0/work/bow/bow/Sources/BowEffects/Data/Resource.swift",
-      "line": 93,
+      "line": 96,
       "symbol": "Resource.empty()",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"

@@ -1690,6 +1690,9 @@
               <li class="nav-group-task" data-name="EnvIOPartial" data-url="Typealiases.html#/s:10BowEffects12EnvIOPartiala">
                 <a title="EnvIOPartial" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects12EnvIOPartiala">EnvIOPartial</a>
               </li>
+              <li class="nav-group-task" data-name="EnvIORef" data-url="Typealiases.html#/s:10BowEffects8EnvIORefa">
+                <a title="EnvIORef" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects8EnvIORefa">EnvIORef</a>
+              </li>
               <li class="nav-group-task" data-name="EnvOf" data-url="Typealiases.html#/s:3Bow5EnvOfa">
                 <a title="EnvOf" class="nav-group-task-link" href="Typealiases.html#/s:3Bow5EnvOfa">EnvOf</a>
               </li>
@@ -1809,6 +1812,12 @@
               </li>
               <li class="nav-group-task" data-name="IOOf" data-url="Typealiases.html#/s:10BowEffects4IOOfa">
                 <a title="IOOf" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects4IOOfa">IOOf</a>
+              </li>
+              <li class="nav-group-task" data-name="IORef" data-url="Typealiases.html#/s:10BowEffects5IORefa">
+                <a title="IORef" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects5IORefa">IORef</a>
+              </li>
+              <li class="nav-group-task" data-name="IOResource" data-url="Typealiases.html#/s:10BowEffects10IOResourcea">
+                <a title="IOResource" class="nav-group-task-link" href="Typealiases.html#/s:10BowEffects10IOResourcea">IOResource</a>
               </li>
               <li class="nav-group-task" data-name="IdOf" data-url="Typealiases.html#/s:3Bow4IdOfa">
                 <a title="IdOf" class="nav-group-task-link" href="Typealiases.html#/s:3Bow4IdOfa">IdOf</a>
@@ -4184,6 +4193,91 @@
             </div>
             <div class="task-group">
               <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10BowEffects5IORefa"></a>
+                    <a name="//apple_ref/swift/Alias/IORef" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10BowEffects5IORefa">
+                      <span class="token-name">IORef</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>IORef is an asynchronous, concurrent, mutable reference backed by IO, holding a value of type A. Provides safe concurrent access and modification of its content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">IORef</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt"><a href="Classes/Ref.html">Ref</a></span><span class="o">&lt;</span><span class="kt"><a href="Classes/IOPartial.html">IOPartial</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10BowEffects8EnvIORefa"></a>
+                    <a name="//apple_ref/swift/Alias/EnvIORef" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10BowEffects8EnvIORefa">
+                      <span class="token-name">EnvIORef</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>EnvIORef is an asynchronous, concurrent, mutable reference backed by EnvIO, holding a value of type A. Provides safe concurrent access and modification of its content.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">EnvIORef</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt"><a href="Classes/Ref.html">Ref</a></span><span class="o">&lt;</span><span class="kt"><a href="Typealiases.html#/s:10BowEffects12EnvIOPartiala">EnvIOPartial</a></span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10BowEffects10IOResourcea"></a>
+                    <a name="//apple_ref/swift/Alias/IOResource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10BowEffects10IOResourcea">
+                      <span class="token-name">IOResource</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>A Resource backed by IO</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">IOResource</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt"><a href="Classes/Resource.html">Resource</a></span><span class="o">&lt;</span><span class="kt"><a href="Classes/IOPartial.html">IOPartial</a></span><span class="o">&lt;</span><span class="kt">E</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">E</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -7443,7 +7537,7 @@ Classes that want to have HKT support must extend this class. Type parameter <co
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-04-17)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-04-21)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
