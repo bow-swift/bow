@@ -5,7 +5,6 @@
         <page name='Monad comprehensions'/>
         <page name='Tail recursion'/>
         <page name='State-based computations'/>
-        <page name='Dependency injection'/>
         <page name='Polymorphic programs'/>
     </pages>
 </playground>
