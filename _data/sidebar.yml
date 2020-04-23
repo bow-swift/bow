@@ -60,6 +60,25 @@ options:
          - title: Transforming multiple effects
            url: /docs/composition/transforming-multiple-effects/
 
+   - title: Dependency management
+
+     nested_options:
+
+         - title: Dependency management Overview
+           url: /docs/dependency-management/dependency-management-overview/
+
+         - title: Partial application
+           url: /docs/dependency-management/partial-application/
+
+         - title: Constructor-based dependency injection
+           url: /docs/dependency-management/constructor-based-dependency-injection/
+
+         - title: Reader
+           url: /docs/dependency-management/reader/
+
+         - title: Side-effectful dependency management
+           url: /docs/dependency-management/side-effectful-dependency-management/
+
    - title: Patterns
 
      nested_options:
@@ -75,9 +94,6 @@ options:
 
          - title: State-based computations
            url: /docs/patterns/state-based-computations/
-
-         - title: Dependency injection
-           url: /docs/patterns/dependency-injection/
 
          - title: Polymorphic programs
            url: /docs/patterns/polymorphic-programs/

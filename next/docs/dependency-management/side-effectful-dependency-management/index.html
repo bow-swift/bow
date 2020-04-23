@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="side-effectful-dependency-management">Side-effectful dependency management</h1>
+
+<p>Oftentimes, our dependencies will interact with the external world, thus causing side effects. Networking operations or persistence are some examples of these dependencies. We can deal with these cases using the Reader pattern. Nonetheless, Bow Effects provides a specific type with additional ergonomics: the <code class="highlighter-rouge">EnvIO</code> type.</p>
+
+<p><code class="highlighter-rouge">EnvIO&lt;D, E, A&gt;</code> is a type alias over <code class="highlighter-rouge">Kleisli</code>, that models a suspended, side-effectful operation, which has a dependency on <code class="highlighter-rouge">D</code>, could cause errors of type <code class="highlighter-rouge">E</code>, and returns values of type <code class="highlighter-rouge">A</code>. Therefore, it combines dependency management, error handling, and suspension of side effects.</p>
+
+<h2 id="constructing-values-of-envio">Constructing values of <code class="highlighter-rouge">EnvIO</code></h2>
+
+<p>We can create an <code class="highlighter-rouge">EnvIO</code> using the <code class="highlighter-rouge">invoke</code> method, which lets us pass a throwing function.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">envIO</span><span class="p">:</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Dependency</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">.</span><span class="n">invoke</span> <span class="p">{</span> <span class="n">dependency</span> <span class="k">in</span>
+    <span class="k">try</span> <span class="n">dependency</span><span class="o">.</span><span class="nf">doSomething</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The provided function will not be executed in the moment of creation; rather, it will be suspended until the moment we provide the dependency and then call the <code class="highlighter-rouge">unsafeRun</code> methods in <code class="highlighter-rouge">IO</code>.</p>
+
+<h2 id="modeling-dependencies-as-algebras">Modeling dependencies as algebras</h2>
+
+<p>A common approach to deal with dependencies is to abstract them in a protocol that contains a set of operations, often known as an algebra. Then, instead of using the concrete implementation as a dependency, we use the protocol, which would allow us to replace the dependency in other contexts, like testing.</p>
+
+<p>For instance, assuming our software needs to communicate with a backend and persist information, we can model these two dependencies as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">User</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span> <span class="kt">NetworkError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">usersNotFound</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">NetworkService</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">fetchUsers</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">NetworkError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span>
+<span class="p">}</span>
+
+<span class="kd">enum</span> <span class="kt">PersistenceError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nf">failedWriting</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="p">[</span><span class="kt">User</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">PersistenceService</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">save</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="p">[</span><span class="kt">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">PersistenceError</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Notice that both <code class="highlighter-rouge">fetchUsers</code> and <code class="highlighter-rouge">save(users:)</code> declare a generic <code class="highlighter-rouge">D</code> type for their dependencies. This is because they will not have additional dependencies to perform their job, but we still need some type for <code class="highlighter-rouge">EnvIO</code>. We could use <code class="highlighter-rouge">Any</code> to indicate an operation has no dependencies; however, using a generic type lets the compiler infer the dependency type we are using in the call site.</p>
+
+<h2 id="combining-dependencies">Combining dependencies</h2>
+
+<p>Consider now that we have to implement a workflow where we fetch the users, and then persist and return them. We will need to combine both dependencies into an environment that contains them:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Environment</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">network</span><span class="p">:</span> <span class="kt">NetworkService</span>
+    <span class="k">let</span> <span class="nv">persistence</span><span class="p">:</span> <span class="kt">PersistenceService</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In order to combine <code class="highlighter-rouge">EnvIO</code> operations, they need to use the same dependencies and error types. We can create a superset of the error type:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">EnvironmentError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nf">network</span><span class="p">(</span><span class="kt">NetworkError</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">persistence</span><span class="p">(</span><span class="kt">PersistenceError</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then, we can write the workflow:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">workflowAsk</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">environment</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="kt">Environment</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">users</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">environment</span> <span class="o">&lt;-</span> <span class="o">.</span><span class="nf">ask</span><span class="p">(),</span>
+        <span class="n">users</span> <span class="o">&lt;-</span> <span class="n">environment</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="nf">fetchUsers</span><span class="p">()</span>
+            <span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">network</span><span class="p">),</span>
+        <span class="o">|&lt;-</span><span class="n">environment</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">persistence</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="k">get</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">persistence</span><span class="p">),</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="k">get</span><span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can use the <code class="highlighter-rouge">ask</code> function to get access to the current environment, and then access its properties to invoke the dependencies. Notice that, after the invocation, we need to map the error into the more global error.</p>
+
+<p>There is an alternative way to do it:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">workflowAccess</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">fetchUsers</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kt">EnvIO</span><span class="o">.</span><span class="n">accessM</span> <span class="p">{</span> <span class="n">environment</span> <span class="k">in</span>
+            <span class="n">environment</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="nf">fetchUsers</span><span class="p">()</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">network</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">persist</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="p">[</span><span class="kt">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">Environment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kt">EnvIO</span><span class="o">.</span><span class="n">accessM</span> <span class="p">{</span> <span class="n">environment</span> <span class="k">in</span>
+            <span class="n">environment</span><span class="o">.</span><span class="n">persistence</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="n">users</span><span class="p">)</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">persistence</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="nf">fetchUsers</span><span class="p">()</span><span class="o">.</span><span class="n">flatTap</span> <span class="p">{</span> <span class="n">users</span> <span class="k">in</span>
+        <span class="nf">persist</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="n">users</span><span class="p">)</span>
+    <span class="p">}</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this version, we use the <code class="highlighter-rouge">accessM</code> function, which lets us access the current environment and return an <code class="highlighter-rouge">EnvIO</code> that continues operating in the same context. We have extracted the operations in auxiliary functions that adapt the dependency and error types. Finally, instead of using Monad Comprehensions, we can use <code class="highlighter-rouge">flatMap</code> / <code class="highlighter-rouge">flatTap</code> to sequence the operations.</p>
+
+<h2 id="towards-a-global-enviroment">Towards a global enviroment</h2>
+
+<p>Our workflow function works on <code class="highlighter-rouge">Environment</code>, but as we move towards other layers of our application, this environment will be more global, containing other dependencies. In order to compose the workflow with other operations, we have mentioned that it must have the same dependency and error type. We have seen we can adapt the error type with <code class="highlighter-rouge">mapError</code>; what about the dependency type?</p>
+
+<p>Let’s assume the enviroment type we have in the next layer of our software is <code class="highlighter-rouge">GlobalEnvironment</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">GlobalEnvironment</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">localEnviroment</span><span class="p">:</span> <span class="kt">Environment</span>
+    <span class="c1">// + other dependencies</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can use <code class="highlighter-rouge">contramap</code> in order to generalize the dependency type of an <code class="highlighter-rouge">EnvIO</code>. <code class="highlighter-rouge">contramap</code> is similar to <code class="highlighter-rouge">map</code>, but the function we apply is reversed. That is, if we have <code class="highlighter-rouge">EnvIO&lt;D1, E, A&gt;</code> and we need <code class="highlighter-rouge">EnvIO&lt;D2, E, A&gt;</code>, we need a function <code class="highlighter-rouge">(D2) -&gt; D1</code> for <code class="highlighter-rouge">contramap</code>.</p>
+
+<p>In this particular case, we can use:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">globalWorkflow1</span><span class="p">:</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">GlobalEnvironment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="o">=</span>
+    <span class="nf">workflowAccess</span><span class="p">()</span><span class="o">.</span><span class="n">contramap</span> <span class="p">{</span> <span class="n">globalEnvironment</span> <span class="k">in</span>
+        <span class="n">globalEnvironment</span><span class="o">.</span><span class="n">localEnviroment</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Or we can use a <code class="highlighter-rouge">KeyPath</code> to access the specific dependency we need:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">globalWorkflow2</span><span class="p">:</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">GlobalEnvironment</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="o">=</span>
+    <span class="nf">workflowAccess</span><span class="p">()</span><span class="o">.</span><span class="nf">contramap</span><span class="p">(\</span><span class="o">.</span><span class="n">localEnviroment</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="the-cake-pattern">The Cake Pattern</h2>
+
+<p>The approach above works nicely but has some drawbacks:</p>
+
+<ul>
+  <li>It imposes a rigid structure for grouping the dependencies, making it hard to replace it, especially when we have workflows that use different subsets of the dependencies contained in the environment.</li>
+  <li>It may expose all dependencies to a given workflow, where we may want to restrict the visibility of some of them.</li>
+</ul>
+
+<p>There is an alternative that is usually known as the Cake Pattern. In this case, we can model capabilities as additional protocols:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">HasNetwork</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">network</span><span class="p">:</span> <span class="kt">NetworkService</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">HasPersistence</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">persistence</span><span class="p">:</span> <span class="kt">PersistenceService</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Thus, we can rewrite our workflow as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">workflowCake</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">:</span> <span class="kt">HasNetwork</span> <span class="o">&amp;</span> <span class="kt">HasPersistence</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;</span> <span class="p">{</span>
+    
+    <span class="k">let</span> <span class="nv">environment</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">users</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">EnvironmentError</span><span class="p">,</span> <span class="p">[</span><span class="kt">User</span><span class="p">]</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">environment</span> <span class="o">&lt;-</span> <span class="o">.</span><span class="nf">ask</span><span class="p">(),</span>
+        <span class="n">users</span> <span class="o">&lt;-</span> <span class="n">environment</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="nf">fetchUsers</span><span class="p">()</span>
+            <span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">network</span><span class="p">),</span>
+        <span class="o">|&lt;-</span><span class="n">environment</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">persistence</span><span class="o">.</span><span class="nf">save</span><span class="p">(</span><span class="nv">users</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="k">get</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">mapError</span><span class="p">(</span><span class="kt">EnvironmentError</span><span class="o">.</span><span class="n">persistence</span><span class="p">),</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="n">users</span><span class="o">.</span><span class="k">get</span><span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>With this change, we can provide an environment with more dependencies, but the workflow has limited visibility of what it can use. In order to avoid long lists of protocols, we can group them using type aliases:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">WorkflowDependencies</span> <span class="o">=</span> <span class="kt">HasNetwork</span> <span class="o">&amp;</span> <span class="kt">HasPersistence</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Both approaches have benefits and drawbacks in dealing with dependencies. You can use them in combination with partial application or constructor-based dependency injection in order to address the specific problems you have in your case.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>
