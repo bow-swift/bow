@@ -60,8 +60,16 @@ internal extension DispatchQueue {
     }
 }
 
-fileprivate extension DispatchQueue {
+internal extension DispatchQueue {
     static var currentLabel: String {
-        String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
+        return DispatchQueue.main.label
+////        let old = String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
+//        let new = Thread.isMainThread ? DispatchQueue.main.label : Thread.current.name ?? ""
+////
+////        if (old != new) {
+////            print("OLD: \(old)\nNEW: \(new)")
+////        }
+//        
+//        return new
     }
 }

@@ -8,7 +8,6 @@ let package = Package(
         .library(name: "BowOptics",            targets: ["BowOptics"]),
         .library(name: "BowRecursionSchemes",  targets: ["BowRecursionSchemes"]),
         .library(name: "BowFree",              targets: ["BowFree"]),
-        .library(name: "BowGeneric",           targets: ["BowGeneric"]),
         .library(name: "BowEffects",           targets: ["BowEffects"]),
         .library(name: "BowRx",                targets: ["BowRx"]),
 
@@ -34,7 +33,7 @@ let package = Package(
         .target(name:"BowRecursionSchemes", dependencies: ["Bow"]),
         .target(name:"BowFree",             dependencies: ["Bow"]),
         .target(name:"BowGeneric",          dependencies: ["Bow"]),
-        .target(name:"BowEffects",          dependencies: ["Bow"]),
+        .target(name:"BowEffects", dependencies: ["Bow"], exclude: ["Foundation/FileManager+iOS+Mac.swift"]),
         .target(name:"BowRx",               dependencies: ["RxSwift", "RxCocoa", "Bow", "BowEffects"]),
 
         // Test targets
@@ -79,3 +78,14 @@ let package = Package(
                 path: "Tests/BowRxGenerators"),
     ]
 )
+
+
+extension Target {
+    static var BowEffects: Target {
+        #if os(Linux)
+        return .target(name:"BowEffects", dependencies: ["Bow"], exclude: ["Foundation/FileManager+iOS+Mac.swift"])
+        #else
+        return .target(name:"BowEffects", dependencies: ["Bow"])
+        #endif
+    }
+}

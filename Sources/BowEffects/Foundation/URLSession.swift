@@ -1,4 +1,10 @@
+#if os(Linux)
 import Foundation
+import FoundationNetworking
+#else
+import Foundation
+#endif
+
 import Bow
 
 /// Utilities to perform data, download and upload tasks in a functional manner.
