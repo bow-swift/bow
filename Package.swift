@@ -1,6 +1,17 @@
 // swift-tools-version:5.0
 import PackageDescription
 
+extension Target {
+    static var BowEffects: Target {
+        #if os(Linux)
+        return .target(name:"BowEffects", dependencies: ["Bow"], exclude: ["Foundation/FileManager+iOS+Mac.swift"])
+        #else
+        return .target(name:"BowEffects", dependencies: ["Bow"])
+        #endif
+    }
+}
+
+
 let package = Package(
     name: "Bow",
     products: [
@@ -33,24 +44,8 @@ let package = Package(
         .target(name:"BowRecursionSchemes", dependencies: ["Bow"]),
         .target(name:"BowFree",             dependencies: ["Bow"]),
         .target(name:"BowGeneric",          dependencies: ["Bow"]),
-        .target(name:"BowEffects", dependencies: ["Bow"], exclude: ["Foundation/FileManager+iOS+Mac.swift"]),
+        .BowEffects,
         .target(name:"BowRx",               dependencies: ["RxSwift", "RxCocoa", "Bow", "BowEffects"]),
-
-        // Test targets
-        .testTarget(name: "BowTests",
-                    dependencies: ["Bow", "BowLaws", "SwiftCheck"]),
-        .testTarget(name: "BowOpticsTests",
-                    dependencies: ["Bow", "BowOptics", "BowOpticsLaws", "SwiftCheck"]),
-        .testTarget(name: "BowRecursionSchemesTests",
-                    dependencies: ["Bow", "BowRecursionSchemes", "BowLaws", "SwiftCheck"]),
-        .testTarget(name: "BowFreeTests",
-                    dependencies: ["Bow", "BowFree", "BowFreeGenerators", "BowLaws", "SwiftCheck"]),
-        .testTarget(name: "BowGenericTests",
-                    dependencies: ["Bow", "BowGeneric"]),
-        .testTarget(name: "BowEffectsTests",
-                    dependencies: ["Bow", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowLaws", "SwiftCheck"]),
-        .testTarget(name: "BowRxTests",
-                    dependencies: ["Bow", "BowRx", "RxSwift", "RxCocoa", "BowLaws", "BowEffects", "BowEffectsLaws", "BowEffectsGenerators", "BowRxGenerators", "SwiftCheck"]),
 
         // Type class Laws
         .target(name:"BowLaws",
@@ -76,16 +71,21 @@ let package = Package(
         .target(name: "BowRxGenerators",
                 dependencies: ["BowRx", "BowGenerators"],
                 path: "Tests/BowRxGenerators"),
+        
+        // Test targets
+        .testTarget(name: "BowTests",
+                    dependencies: ["BowLaws"]),
+        .testTarget(name: "BowOpticsTests",
+                    dependencies: ["BowOpticsLaws"]),
+        .testTarget(name: "BowRecursionSchemesTests",
+                    dependencies: ["BowRecursionSchemes", "BowLaws"]),
+        .testTarget(name: "BowFreeTests",
+                    dependencies: ["BowFreeGenerators", "BowLaws"]),
+        .testTarget(name: "BowGenericTests",
+                    dependencies: ["BowGeneric"]),
+        .testTarget(name: "BowEffectsTests",
+                    dependencies: ["BowEffectsGenerators", "BowEffectsLaws"]),
+        .testTarget(name: "BowRxTests",
+                    dependencies: ["BowRxGenerators", "BowEffectsGenerators", "BowEffectsLaws"]),
     ]
 )
-
-
-extension Target {
-    static var BowEffects: Target {
-        #if os(Linux)
-        return .target(name:"BowEffects", dependencies: ["Bow"], exclude: ["Foundation/FileManager+iOS+Mac.swift"])
-        #else
-        return .target(name:"BowEffects", dependencies: ["Bow"])
-        #endif
-    }
-}

@@ -8,14 +8,14 @@ import BowLaws
 class SetterTest: XCTestCase {
     
     func testSetterLaws() {
-        SetterLaws.check(setter: tokenSetter)
+        SetterLaws.check(setter: Token.setter)
         SetterLaws.check(setter: Setter<String, String>.identity)
     }
     
     func testSetterProperties() {
         property("Joining two Setters together with same target should yield same result") <~ forAll { (value: String) in
-            let userTokenStringSetter = userSetter + tokenSetter
-            let joinedSetter = tokenSetter.choice(userTokenStringSetter)
+            let userTokenStringSetter = User.setter + Token.setter
+            let joinedSetter = Token.setter.choice(userTokenStringSetter)
             let oldValue = "Old value"
             let token = Token(value: oldValue)
             let user = User(token: token)
@@ -23,33 +23,33 @@ class SetterTest: XCTestCase {
         }
         
         property("Lifting a function should yield the same result as direct modify") <~ forAll { (token: Token, value: String) in
-            return tokenSetter.modify(token, constant(value)) == tokenSetter.lift(constant(value))(token)
+            return Token.setter.modify(token, constant(value)) == Token.setter.lift(constant(value))(token)
         }
     }
     
     func testSetterComposition() {
         property("Setter + Setter::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + Setter<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + Setter<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Iso::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + Iso<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + Iso<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Lens::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + Lens<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + Lens<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Prism::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + Prism<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + Prism<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Optional::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + BowOptics.Optional<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + BowOptics.Optional<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Traversal::identity") <~ forAll { (token: Token, value: String) in
-            return (tokenSetter + Traversal<String, String>.identity).set(token, value) == tokenSetter.set(token, value)
+            return (Token.setter + Traversal<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
     }
 }

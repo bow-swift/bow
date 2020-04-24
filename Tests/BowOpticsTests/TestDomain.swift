@@ -3,8 +3,15 @@ import SwiftCheck
 import Bow
 import BowOptics
 
+// MARK: - Token <testing>
 struct Token {
     let value : String
+    
+    // MARK: helpers
+    static let iso = Iso(get: { (token : Token) in token.value }, reverseGet: Token.init )
+    static let lens = Lens(get: { (token : Token) in token.value }, set: { (_ : Token, newValue : String) in Token(value: newValue) })
+    static let setter = Setter(modify: { s in { token in Token(value: s(token.value)) } })
+    static let getter = Getter(get: { (t : Token) in t.value })
 }
 
 extension Token : Equatable {}
@@ -19,13 +26,16 @@ extension Token : Arbitrary {
     }
 }
 
-let tokenIso = Iso(get: { (token : Token) in token.value }, reverseGet: Token.init )
-let tokenLens = Lens(get: { (token : Token) in token.value }, set: { (_ : Token, newValue : String) in Token(value: newValue) })
-let tokenSetter = Setter(modify: { s in { token in Token(value: s(token.value)) } })
-let tokenGetter = Getter(get: { (t : Token) in t.value })
 
+// MARK: - User <testing>
 struct User {
     let token : Token
+    
+    // MARK: helpers
+    static let iso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
+    static let lens = Lens<User, Token>(get: { user in user.token }, set: { user, newToken in User(token: newToken) })
+    static let getter = User.iso.asGetter
+    static let setter = Setter<User, Token>(modify: { f in { user in User(token: f(user.token)) } })
 }
 
 extension User : Arbitrary {
@@ -34,26 +44,32 @@ extension User : Arbitrary {
     }
 }
 
-let userIso = Iso<User, Token>(get: { user in user.token }, reverseGet: User.init)
-let userLens = Lens<User, Token>(get: { user in user.token }, set: { user, newToken in User(token: newToken) })
-let userGetter = userIso.asGetter
-let userSetter = Setter<User, Token>(modify: { f in { user in User(token: f(user.token)) } })
-let lengthGetter = Getter<String, Int>(get: { str in str.count })
-let upperGetter = Getter<String, String>(get: { str in str.uppercased() })
 
-let stringPrism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
-                        reverseGet: { (reversed : String) in String(reversed.reversed()) })
-
+// MARK: - SumType <testing>
 enum SumType {
     case a(String)
     case b(Int)
-    
+
     var isA : Bool {
         switch self {
         case .a(_): return true
         default: return false
         }
     }
+    
+    // MARK: helpers
+    static let prism = Prism<SumType, String>(getOrModify: { sum in
+        switch sum {
+        case let .a(str): return Either.right(str)
+        default: return Either.left(sum)
+        }
+    }, reverseGet: SumType.a)
+
+    static let optionalHead = BowOptics.Optional<Array<Int>, Int>(
+        set: { array, value in [value] + ((array.count > 1) ? Array(array.dropFirst()) : [])},
+        getOrModify: { array in Option.fromOptional(array.first).fold(constant(Either.left(array)), Either.right) })
+
+    static let defaultHead = BowOptics.Optional<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)
 }
 
 extension SumType : Equatable {}
@@ -72,15 +88,20 @@ extension SumType : Arbitrary {
     }
 }
 
-let sumPrism = Prism<SumType, String>(getOrModify: { sum in
-    switch sum {
-    case let .a(str): return Either.right(str)
-    default: return Either.left(sum)
-    }
-}, reverseGet: SumType.a)
 
-let optionalHead = BowOptics.Optional<Array<Int>, Int>(
-    set: { array, value in [value] + ((array.count > 1) ? Array(array.dropFirst()) : [])},
-    getOrModify: { array in Option.fromOptional(array.first).fold(constant(Either.left(array)), Either.right) })
+// MARK: - String <testing>
+enum StringStyle {
+    static let lengthGetter = Getter<String, Int>(get: { str in str.count })
+    static let upperGetter = Getter<String, String>(get: { str in str.uppercased() })
+    static let prism = Prism(getOrModify: { (str : String) in Either<String, String>.right(String(str.reversed())) },
+                              reverseGet: { (reversed : String) in String(reversed.reversed()) })
+}
 
-let defaultHead = BowOptics.Optional<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)
+
+// MARK: - Authentication <testing>
+enum Authentication: AutoPrism {
+    case unathorized(String)
+    case authorized(Int, String)
+    case requested(Int, info: String)
+    case unkown
+}
