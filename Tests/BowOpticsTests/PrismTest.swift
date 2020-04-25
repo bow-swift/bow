@@ -154,5 +154,9 @@ class PrismTest: XCTestCase {
         XCTAssertEqual(labelResult, "7")
         XCTAssertNil(anotherLabelResult)
     }
+    #else
+    func testAutoDerivatePrism_SameCaseName_DifferentLabeledAssociatedTypes() {
+        XCTAssertTrue(true)
+    }
     #endif
 }
