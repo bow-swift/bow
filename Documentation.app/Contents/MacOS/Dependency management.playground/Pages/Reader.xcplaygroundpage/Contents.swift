@@ -10,6 +10,9 @@ import Bow
 /*:
  # Reader
  
+ {:.beginner}
+ beginner
+ 
  The Reader pattern is a fancy name for returning functions as part of other functions. That is, `Reader<A, B>` corresponds to a function `(A) -> B`.
  
  Even these two constructions are equivalent, they have different semantics. `Reader` wraps a function, but thanks to being a nominal type, we can add methods that work with the underlying function in an easier way. This is something we cannot do with a plain function `(A) -> B`, as functions are not nominal types and therefore cannot be extended.

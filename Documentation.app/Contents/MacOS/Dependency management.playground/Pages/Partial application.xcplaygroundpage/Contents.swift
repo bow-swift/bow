@@ -10,6 +10,9 @@ import Bow
 /*:
  # Partial application
  
+ {:.beginner}
+ beginner
+ 
  Partial application is perhaps the most simple technique to handle dependencies. It is based on making the dependencies explicit as parameters to the function that uses them. Later, different versions of the function can be obtained by fixing the parameters corresponding to the dependencies to specific values.
  
  For instance, consider the following function:
