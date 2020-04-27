@@ -10,9 +10,10 @@
 <a href="https://gitter.im/bowswift/bow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
 <img src="https://badges.gitter.im/bowswift/bow.svg">
 </a>
+<img src="https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-success">
 </p>
 
-Bow is a library for Typed Functional Programming in Swift.
+Bow is a cross-platform library for Typed Functional Programming in Swift.
 
 ## Documentation
 
@@ -152,7 +153,7 @@ For further information, refer to our [Contribution guidelines](CONTRIBUTING.md)
 
 ## How to create a new release
 
-You can create a new release by running `bundle exec fastlane release version_number:`. For example, `bundle exec fastlane release version_number: 0.6.0`.
+You can create a new release by running `bundle exec fastlane release version_number:`. For example, `bundle exec fastlane release version_number: 0.7.0`.
 
 The following steps would be run:
 
@@ -162,7 +163,7 @@ The following steps would be run:
 
 # License
 
-    Copyright (C) 2018-2019 The Bow Authors
+    Copyright (C) 2018-2020 The Bow Authors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -2,7 +2,7 @@ import Foundation
 import SwiftCheck
 import Bow
 import BowLaws
-import BowEffects
+@testable import BowEffects
 
 public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
     
@@ -36,9 +36,9 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             
             return F.pure(())
                 .continueOn(queue1)
-                .map { _ in QueueLabel.get }
+                .map { _ in DispatchQueue.currentLabel }
                 .continueOn(queue2)
-                .map { x in x + QueueLabel.get } == F.pure(id1 + id2)
+                .map { x in x + DispatchQueue.currentLabel } == F.pure(id1 + id2)
         }
     }
 
@@ -47,8 +47,8 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             let queue1 = DispatchQueue(label: id1)
             let queue2 = DispatchQueue(label: id2)
 
-            return F.later(queue1) { QueueLabel.get }
-                .flatMap { x in F.later(queue2) { x + QueueLabel.get } }
+            return F.later(queue1) { DispatchQueue.currentLabel }
+                .flatMap { x in F.later(queue2) { x + DispatchQueue.currentLabel } }
                 == F.pure(id1 + id2)
         }
     }
@@ -62,9 +62,9 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
             
             return binding(
                 continueOn(queue1),
-                l1 <-- F.pure(QueueLabel.get),
+                l1 <-- F.pure(DispatchQueue.currentLabel),
                 continueOn(queue2),
-                l2 <-- F.pure(QueueLabel.get),
+                l2 <-- F.pure(DispatchQueue.currentLabel),
                 yield: l1.get + l2.get) == F.pure(id1 + id2)
         }
     }
@@ -76,12 +76,5 @@ public class AsyncLaws<F: Async & EquatableK> where F.E: Arbitrary {
 
             return F.async(k) == F.asyncF { cb in F.later { k(cb) } }
         }
-    }
-}
-
-
-private struct QueueLabel {
-    static var get: String {
-        String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
     }
 }

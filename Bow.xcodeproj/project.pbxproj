@@ -240,7 +240,7 @@
 		11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0367E2327D08900B39A80 /* EffectComprehensions.swift */; };
 		11F036822327D4AC00B39A80 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036812327D4AC00B39A80 /* URLSession.swift */; };
 		11F036842327E1C900B39A80 /* ConsoleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036832327E1C900B39A80 /* ConsoleIO.swift */; };
-		11F036862327EA1F00B39A80 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036852327EA1F00B39A80 /* FileManager.swift */; };
+		11F036862327EA1F00B39A80 /* FileManager+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F036852327EA1F00B39A80 /* FileManager+Common.swift */; };
 		11F0F8DD23C725C500B2EA2E /* Co+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0F8D923C7248E00B2EA2E /* Co+Gen.swift */; };
 		11F0F8DE23C725D100B2EA2E /* CoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0F8DB23C724A900B2EA2E /* CoTest.swift */; };
 		11F41C9A231816D800BD1E87 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41C91231816AD00BD1E87 /* Ref.swift */; };
@@ -264,6 +264,7 @@
 		720C1DFF23FD804E001C5B7D /* Endo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1DFE23FD804E001C5B7D /* Endo.swift */; };
 		720C1E0223FD808F001C5B7D /* Endo+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1E0023FD8079001C5B7D /* Endo+Gen.swift */; };
 		720C1E0423FD80AC001C5B7D /* EndoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1E0323FD80AB001C5B7D /* EndoTest.swift */; };
+		8B79462624531CFE00547771 /* FileManager+iOS+Mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79462524531CFE00547771 /* FileManager+iOS+Mac.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
 		8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38F217E2DEF00969984 /* Function1Test.swift */; };
@@ -710,6 +711,104 @@
 			remoteGlobalIDString = 117DC0DC22AE4D6C00EF65F0;
 			remoteInfo = "Bow-RxGenerators";
 		};
+		8BB80F9C2456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Bow::Bow";
+			remoteInfo = Bow;
+		};
+		8BB80F9E2456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112296D7219DC4B3006D66C5;
+			remoteInfo = "Bow-Effects";
+		};
+		8BB80FA02456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC0B222AE492700EF65F0;
+			remoteInfo = "Bow-EffectsGenerators";
+		};
+		8BB80FA22456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11D97EC3219EBAA1008FC004;
+			remoteInfo = "Bow-EffectsLaws";
+		};
+		8BB80FA42456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11E71817219D81B300B94845;
+			remoteInfo = "Bow-Free";
+		};
+		8BB80FA62456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC10E22AE563900EF65F0;
+			remoteInfo = "Bow-FreeGenerators";
+		};
+		8BB80FA82456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1120978222A7EBC7007F3D9C;
+			remoteInfo = "Bow-Generators";
+		};
+		8BB80FAA2456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1122957A219D94C9006D66C5;
+			remoteInfo = "Bow-Generic";
+		};
+		8BB80FAC2456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11E71683219D704F00B94845;
+			remoteInfo = "Bow-Optics";
+		};
+		8BB80FAE2456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1160D0BD22D38CEC0010323A;
+			remoteInfo = "Bow-OpticsLaws";
+		};
+		8BB80FB02456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11229480219D8EF4006D66C5;
+			remoteInfo = "Bow-RecursionSchemes";
+		};
+		8BB80FB22456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11229791219DCE76006D66C5;
+			remoteInfo = "Bow-Rx";
+		};
+		8BB80FB42456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 117DC0DC22AE4D6C00EF65F0;
+			remoteInfo = "Bow-RxGenerators";
+		};
+		8BB80FB62456D00E00843023 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 112293AD219D8B86006D66C5;
+			remoteInfo = BowLaws;
+		};
 		D653FC452067C58D00535EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -742,7 +841,6 @@
 		111F84FA234DBF95003FE646 /* Set.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		111F84FC234DC00C003FE646 /* SetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTest.swift; sourceTree = "<group>"; };
 		112097A922A7EBC7007F3D9C /* BowGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		112097AE22A7EE46007F3D9C /* Either+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Either+Gen.swift"; sourceTree = "<group>"; };
 		112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrayK+Gen.swift"; sourceTree = "<group>"; };
 		112097B222A7F17F007F3D9C /* Const+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Const+Gen.swift"; sourceTree = "<group>"; };
@@ -769,24 +867,16 @@
 		1122941B219D8B86006D66C5 /* BowLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1122947B219D8DF3006D66C5 /* BowFreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowFreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112294EE219D8EF4006D66C5 /* BowRecursionSchemes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRecursionSchemes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RecursionSchemes-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-RecursionSchemes-Info.plist"; sourceTree = "<absolute>"; };
-		11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RecursionSchemesTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-RecursionSchemesTests-Info.plist"; sourceTree = "<absolute>"; };
 		11229539219D90C5006D66C5 /* RecursionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursionTest.swift; sourceTree = "<group>"; };
 		11229577219D9186006D66C5 /* BowRecursionSchemesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRecursionSchemesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		112295E1219D94C9006D66C5 /* BowGeneric.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowGeneric.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		112295E2219D94C9006D66C5 /* Bow-Generic-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Generic-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Generic-Info.plist"; sourceTree = "<absolute>"; };
 		11229623219D9593006D66C5 /* BowGenericTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowGenericTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11229624219D9593006D66C5 /* Bow-GenericTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-GenericTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-GenericTests-Info.plist"; sourceTree = "<absolute>"; };
 		11229626219D95E5006D66C5 /* GenericTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTest.swift; sourceTree = "<group>"; };
 		112296D3219DC1EF006D66C5 /* ResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTest.swift; sourceTree = "<group>"; };
 		1122973A219DC4B3006D66C5 /* BowEffects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Effects-Info.plist"; sourceTree = "<absolute>"; };
 		11229782219DC88F006D66C5 /* BowEffectsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowEffectsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-EffectsTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-EffectsTests-Info.plist"; sourceTree = "<absolute>"; };
 		112297A9219DCE76006D66C5 /* BowRx.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRx.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Rx-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Rx-Info.plist"; sourceTree = "<absolute>"; };
 		112297CD219DCFDE006D66C5 /* BowRxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowRxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-RxTests-Info.plist"; sourceTree = "<absolute>"; };
 		1123686E240FC316005D4CF4 /* Puller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puller.swift; sourceTree = "<group>"; };
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
 		1126CA8922B1144200F840CB /* AutoOptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptics.swift; sourceTree = "<group>"; };
@@ -821,7 +911,6 @@
 		115488CE23BF9FEF00A6DE92 /* ComonadTrans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTrans.swift; sourceTree = "<group>"; };
 		115488D023BFA0CC00A6DE92 /* EnvT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvT.swift; sourceTree = "<group>"; };
 		1160D0E622D38CEC0010323A /* BowOpticsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOpticsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-OpticsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		1165E1A823F414350052F0C7 /* Trampoline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trampoline.swift; sourceTree = "<group>"; };
 		1165E1AA23F414540052F0C7 /* TrampolineTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrampolineTest.swift; sourceTree = "<group>"; };
 		1166A07822119E640032CD4E /* EqualityFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualityFunctions.swift; sourceTree = "<group>"; };
@@ -835,15 +924,12 @@
 		1171ED5D23C62C5E005362E0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
 		1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Zipper+Gen.swift"; sourceTree = "<group>"; };
 		117DC0D322AE492700EF65F0 /* BowEffectsGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Effects-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Effects-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0D622AE49C200EF65F0 /* IO+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IO+Gen.swift"; sourceTree = "<group>"; };
 		117DC0EC22AE4D6C00EF65F0 /* BowRxGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowRxGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		117DC0ED22AE4D6C00EF65F0 /* Bow-RxGenerators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-RxGenerators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-RxGenerators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC0F122AE4E1C00EF65F0 /* SingleK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SingleK+Gen.swift"; sourceTree = "<group>"; };
 		117DC0F322AE4F3500EF65F0 /* MaybeK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MaybeK+Gen.swift"; sourceTree = "<group>"; };
 		117DC0F522AE504500EF65F0 /* ObservableK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableK+Gen.swift"; sourceTree = "<group>"; };
 		117DC12F22AE563900EF65F0 /* BowFreeGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowFreeGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		117DC13022AE563900EF65F0 /* Bow-Free-Generators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Generators-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Bow-Free-Generators-Info.plist"; sourceTree = "<absolute>"; };
 		117DC13622AE578A00EF65F0 /* Free+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Free+Gen.swift"; sourceTree = "<group>"; };
 		1186E14E22BA38CD001F8A5D /* Index+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Index+Optics.swift"; sourceTree = "<group>"; };
 		1186E15622BA8A77001F8A5D /* Cons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cons.swift; sourceTree = "<group>"; };
@@ -869,7 +955,6 @@
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11D97EEB219EBAA1008FC004 /* Bow-EffectsLaws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-EffectsLaws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-EffectsLaws-Info.plist"; sourceTree = "<absolute>"; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
 		11DDCD22217F1E2B00844D9D /* Reverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reverse.swift; sourceTree = "<group>"; };
@@ -878,21 +963,14 @@
 		11E4190E22B91169009BDFB3 /* AutoSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSetter.swift; sourceTree = "<group>"; };
 		11E4191022B93596009BDFB3 /* Kind+Optics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kind+Optics.swift"; sourceTree = "<group>"; };
 		11E71712219D704F00B94845 /* BowOptics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowOptics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11E71713219D705000B94845 /* Bow-Optics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Optics-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Optics-Info.plist"; sourceTree = "<absolute>"; };
 		11E71802219D7D5900B94845 /* BowOpticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowOpticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-OpticsTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-OpticsTests-Info.plist"; sourceTree = "<absolute>"; };
-		11E71804219D7D9500B94845 /* Bow-Test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Test-Info.plist"; sourceTree = "<group>"; };
 		11E71889219D81B300B94845 /* BowFree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowFree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11E7188A219D81B300B94845 /* Bow-Free-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Free-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Free-Info.plist"; sourceTree = "<absolute>"; };
-		11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-FreeTests-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-FreeTests-Info.plist"; sourceTree = "<absolute>"; };
-		11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bow-Laws-Info.plist"; path = "/Users/tomasruizlopez/Development/bow/Support Files/Bow-Laws-Info.plist"; sourceTree = "<absolute>"; };
 		11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Eval+Gen.swift"; sourceTree = "<group>"; };
 		11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TraverseConcurrent.swift"; sourceTree = "<group>"; };
-		11ED7A2D226E0E7600C27994 /* Bow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
 		11F0367E2327D08900B39A80 /* EffectComprehensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectComprehensions.swift; sourceTree = "<group>"; };
 		11F036812327D4AC00B39A80 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
 		11F036832327E1C900B39A80 /* ConsoleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleIO.swift; sourceTree = "<group>"; };
-		11F036852327EA1F00B39A80 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		11F036852327EA1F00B39A80 /* FileManager+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Common.swift"; sourceTree = "<group>"; };
 		11F0F8D923C7248E00B2EA2E /* Co+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Co+Gen.swift"; sourceTree = "<group>"; };
 		11F0F8DB23C724A900B2EA2E /* CoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoTest.swift; sourceTree = "<group>"; };
 		11F41C91231816AD00BD1E87 /* Ref.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
@@ -916,6 +994,7 @@
 		720C1DFE23FD804E001C5B7D /* Endo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endo.swift; sourceTree = "<group>"; };
 		720C1E0023FD8079001C5B7D /* Endo+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Endo+Gen.swift"; sourceTree = "<group>"; };
 		720C1E0323FD80AB001C5B7D /* EndoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndoTest.swift; sourceTree = "<group>"; };
+		8B79462524531CFE00547771 /* FileManager+iOS+Mac.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+iOS+Mac.swift"; sourceTree = "<group>"; };
 		8BA0F366217E2CB100969984 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8BA0F367217E2CB100969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		8BA0F36E217E2CBF00969984 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
@@ -1113,10 +1192,31 @@
 		8BA0F4D0217E2E9200969984 /* At+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "At+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D1217E2E9200969984 /* Each+Optics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Each+Optics.swift"; sourceTree = "<group>"; };
 		8BA0F4D2217E2E9200969984 /* Lens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		8BB80F702456CF9900843023 /* Bow-Laws-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Laws-Info.plist"; sourceTree = "<group>"; };
+		8BB80F712456CF9900843023 /* Bow-Generators-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Generators-Info.plist"; sourceTree = "<group>"; };
+		8BB80F722456CF9900843023 /* Bow-OpticsLaws-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-OpticsLaws-Info.plist"; sourceTree = "<group>"; };
+		8BB80F732456CF9900843023 /* Bow-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Info.plist"; sourceTree = "<group>"; };
+		8BB80F742456CF9900843023 /* Bow-Rx-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Rx-Info.plist"; sourceTree = "<group>"; };
+		8BB80F752456CF9A00843023 /* Bow-RxGenerators-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-RxGenerators-Info.plist"; sourceTree = "<group>"; };
+		8BB80F762456CF9A00843023 /* Bow-Free-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Free-Info.plist"; sourceTree = "<group>"; };
+		8BB80F772456CF9A00843023 /* Bow-Effects-Generators-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Effects-Generators-Info.plist"; sourceTree = "<group>"; };
+		8BB80F782456CF9A00843023 /* Bow-OpticsTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-OpticsTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F792456CF9A00843023 /* Bow-RecursionSchemesTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-RecursionSchemesTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7A2456CF9A00843023 /* Bow-GenericTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-GenericTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7B2456CF9A00843023 /* Bow-RecursionSchemes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-RecursionSchemes-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7C2456CF9A00843023 /* Bow-Generic-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Generic-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7D2456CF9A00843023 /* Bow-Free-Generators-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Free-Generators-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7E2456CF9A00843023 /* Bow-Optics-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Optics-Info.plist"; sourceTree = "<group>"; };
+		8BB80F7F2456CF9A00843023 /* Bow-Test-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Test-Info.plist"; sourceTree = "<group>"; };
+		8BB80F802456CF9A00843023 /* Bow-RxTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-RxTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F812456CF9A00843023 /* Bow-Effects-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-Effects-Info.plist"; sourceTree = "<group>"; };
+		8BB80F822456CF9A00843023 /* Bow-EffectsLaws-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-EffectsLaws-Info.plist"; sourceTree = "<group>"; };
+		8BB80F832456CF9A00843023 /* Bow-EffectsTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-EffectsTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F842456CF9A00843023 /* Bow-FreeTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-FreeTests-Info.plist"; sourceTree = "<group>"; };
+		8BB80F852456CF9A00843023 /* Bow-AllTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bow-AllTests-Info.plist"; sourceTree = "<group>"; };
 		8BB969AB239863F0005520D6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		8BD6974823F5AD2E000A512F /* BowTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BowTests.xctestplan; sourceTree = "<group>"; };
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BD6975123F5AE18000A512F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1687,27 +1787,28 @@
 		11ED7A2C226E0BF200C27994 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				117DC0D422AE492700EF65F0 /* Bow-Effects-Generators-Info.plist */,
-				1122973B219DC4B3006D66C5 /* Bow-Effects-Info.plist */,
-				11D97EEB219EBAA1008FC004 /* Bow-EffectsLaws-Info.plist */,
-				11229783219DC890006D66C5 /* Bow-EffectsTests-Info.plist */,
-				117DC13022AE563900EF65F0 /* Bow-Free-Generators-Info.plist */,
-				11E7188A219D81B300B94845 /* Bow-Free-Info.plist */,
-				11E718EE219D848F00B94845 /* Bow-FreeTests-Info.plist */,
-				112097AA22A7EBC7007F3D9C /* Bow-Generators-Info.plist */,
-				112295E2219D94C9006D66C5 /* Bow-Generic-Info.plist */,
-				11229624219D9593006D66C5 /* Bow-GenericTests-Info.plist */,
-				11ED7A2D226E0E7600C27994 /* Bow-Info.plist */,
-				11E719FC219D883D00B94845 /* Bow-Laws-Info.plist */,
-				11E71713219D705000B94845 /* Bow-Optics-Info.plist */,
-				1160D0E722D38CEC0010323A /* Bow-OpticsLaws-Info.plist */,
-				11E71803219D7D5A00B94845 /* Bow-OpticsTests-Info.plist */,
-				112294EF219D8EF5006D66C5 /* Bow-RecursionSchemes-Info.plist */,
-				11229535219D8FF2006D66C5 /* Bow-RecursionSchemesTests-Info.plist */,
-				112297AA219DCE76006D66C5 /* Bow-Rx-Info.plist */,
-				117DC0ED22AE4D6C00EF65F0 /* Bow-RxGenerators-Info.plist */,
-				112297CE219DCFDF006D66C5 /* Bow-RxTests-Info.plist */,
-				11E71804219D7D9500B94845 /* Bow-Test-Info.plist */,
+				8BB80F852456CF9A00843023 /* Bow-AllTests-Info.plist */,
+				8BB80F772456CF9A00843023 /* Bow-Effects-Generators-Info.plist */,
+				8BB80F812456CF9A00843023 /* Bow-Effects-Info.plist */,
+				8BB80F822456CF9A00843023 /* Bow-EffectsLaws-Info.plist */,
+				8BB80F832456CF9A00843023 /* Bow-EffectsTests-Info.plist */,
+				8BB80F7D2456CF9A00843023 /* Bow-Free-Generators-Info.plist */,
+				8BB80F762456CF9A00843023 /* Bow-Free-Info.plist */,
+				8BB80F842456CF9A00843023 /* Bow-FreeTests-Info.plist */,
+				8BB80F712456CF9900843023 /* Bow-Generators-Info.plist */,
+				8BB80F7C2456CF9A00843023 /* Bow-Generic-Info.plist */,
+				8BB80F7A2456CF9A00843023 /* Bow-GenericTests-Info.plist */,
+				8BB80F732456CF9900843023 /* Bow-Info.plist */,
+				8BB80F702456CF9900843023 /* Bow-Laws-Info.plist */,
+				8BB80F7E2456CF9A00843023 /* Bow-Optics-Info.plist */,
+				8BB80F722456CF9900843023 /* Bow-OpticsLaws-Info.plist */,
+				8BB80F782456CF9A00843023 /* Bow-OpticsTests-Info.plist */,
+				8BB80F7B2456CF9A00843023 /* Bow-RecursionSchemes-Info.plist */,
+				8BB80F792456CF9A00843023 /* Bow-RecursionSchemesTests-Info.plist */,
+				8BB80F742456CF9900843023 /* Bow-Rx-Info.plist */,
+				8BB80F752456CF9A00843023 /* Bow-RxGenerators-Info.plist */,
+				8BB80F802456CF9A00843023 /* Bow-RxTests-Info.plist */,
+				8BB80F7F2456CF9A00843023 /* Bow-Test-Info.plist */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1716,7 +1817,8 @@
 			isa = PBXGroup;
 			children = (
 				11F036832327E1C900B39A80 /* ConsoleIO.swift */,
-				11F036852327EA1F00B39A80 /* FileManager.swift */,
+				11F036852327EA1F00B39A80 /* FileManager+Common.swift */,
+				8B79462524531CFE00547771 /* FileManager+iOS+Mac.swift */,
 				11F036812327D4AC00B39A80 /* URLSession.swift */,
 			);
 			path = Foundation;
@@ -2060,7 +2162,6 @@
 			isa = PBXGroup;
 			children = (
 				8BD6974823F5AD2E000A512F /* BowTests.xctestplan */,
-				8BD6975123F5AE18000A512F /* Info.plist */,
 			);
 			path = BowAllTests;
 			sourceTree = "<group>";
@@ -2537,6 +2638,20 @@
 			buildRules = (
 			);
 			dependencies = (
+				8BB80F9D2456D00E00843023 /* PBXTargetDependency */,
+				8BB80F9F2456D00E00843023 /* PBXTargetDependency */,
+				8BB80FA12456D00E00843023 /* PBXTargetDependency */,
+				8BB80FA32456D00E00843023 /* PBXTargetDependency */,
+				8BB80FA52456D00E00843023 /* PBXTargetDependency */,
+				8BB80FA72456D00E00843023 /* PBXTargetDependency */,
+				8BB80FA92456D00E00843023 /* PBXTargetDependency */,
+				8BB80FAB2456D00E00843023 /* PBXTargetDependency */,
+				8BB80FAD2456D00E00843023 /* PBXTargetDependency */,
+				8BB80FAF2456D00E00843023 /* PBXTargetDependency */,
+				8BB80FB12456D00E00843023 /* PBXTargetDependency */,
+				8BB80FB32456D00E00843023 /* PBXTargetDependency */,
+				8BB80FB52456D00E00843023 /* PBXTargetDependency */,
+				8BB80FB72456D00E00843023 /* PBXTargetDependency */,
 			);
 			name = BowAllTests;
 			productName = BowAllTests;
@@ -2843,7 +2958,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11F036862327EA1F00B39A80 /* FileManager.swift in Sources */,
+				8B79462624531CFE00547771 /* FileManager+iOS+Mac.swift in Sources */,
+				11F036862327EA1F00B39A80 /* FileManager+Common.swift in Sources */,
 				1104BEEA22C25AAF002C3F78 /* Resource.swift in Sources */,
 				1104BEDC22C22DEC002C3F78 /* IO.swift in Sources */,
 				11F036822327D4AC00B39A80 /* URLSession.swift in Sources */,
@@ -3456,6 +3572,76 @@
 			target = 117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */;
 			targetProxy = 11E978AE233A74C9002AAC60 /* PBXContainerItemProxy */;
 		};
+		8BB80F9D2456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Bow::Bow" /* Bow */;
+			targetProxy = 8BB80F9C2456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80F9F2456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112296D7219DC4B3006D66C5 /* Bow-Effects */;
+			targetProxy = 8BB80F9E2456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FA12456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC0B222AE492700EF65F0 /* Bow-EffectsGenerators */;
+			targetProxy = 8BB80FA02456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FA32456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11D97EC3219EBAA1008FC004 /* Bow-EffectsLaws */;
+			targetProxy = 8BB80FA22456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FA52456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11E71817219D81B300B94845 /* Bow-Free */;
+			targetProxy = 8BB80FA42456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FA72456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC10E22AE563900EF65F0 /* Bow-FreeGenerators */;
+			targetProxy = 8BB80FA62456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FA92456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1120978222A7EBC7007F3D9C /* Bow-Generators */;
+			targetProxy = 8BB80FA82456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FAB2456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1122957A219D94C9006D66C5 /* Bow-Generic */;
+			targetProxy = 8BB80FAA2456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FAD2456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11E71683219D704F00B94845 /* Bow-Optics */;
+			targetProxy = 8BB80FAC2456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FAF2456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1160D0BD22D38CEC0010323A /* Bow-OpticsLaws */;
+			targetProxy = 8BB80FAE2456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FB12456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11229480219D8EF4006D66C5 /* Bow-RecursionSchemes */;
+			targetProxy = 8BB80FB02456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FB32456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11229791219DCE76006D66C5 /* Bow-Rx */;
+			targetProxy = 8BB80FB22456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FB52456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 117DC0DC22AE4D6C00EF65F0 /* Bow-RxGenerators */;
+			targetProxy = 8BB80FB42456D00E00843023 /* PBXContainerItemProxy */;
+		};
+		8BB80FB72456D00E00843023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 112293AD219D8B86006D66C5 /* BowLaws */;
+			targetProxy = 8BB80FB62456D00E00843023 /* PBXContainerItemProxy */;
+		};
 		OBJ_299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "Bow::Bow" /* Bow */;
@@ -3472,7 +3658,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -3497,7 +3683,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -3929,7 +4115,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-OpticsLaws-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-OpticsLaws-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -3951,7 +4137,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-OpticsLaws-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-OpticsLaws-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -3975,7 +4161,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Effects-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Effects-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4000,7 +4186,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Effects-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Effects-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4024,7 +4210,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-RxGenerators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-RxGenerators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4049,7 +4235,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-RxGenerators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-RxGenerators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4073,7 +4259,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Free-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Free-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4098,7 +4284,7 @@
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Bow-Free-Generators-Info.plist";
+				INFOPLIST_FILE = "Support Files/Bow-Free-Generators-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@loader_path/Frameworks",
@@ -4309,7 +4495,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = BowAllTests/Info.plist;
+				INFOPLIST_FILE = "Support Files/Bow-AllTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -4347,7 +4533,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = BowAllTests/Info.plist;
+				INFOPLIST_FILE = "Support Files/Bow-AllTests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

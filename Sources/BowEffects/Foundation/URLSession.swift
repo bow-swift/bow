@@ -1,4 +1,8 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 import Bow
 
 /// Utilities to perform data, download and upload tasks in a functional manner.

@@ -266,8 +266,14 @@ extension CoTPartial: MonadWriter where W: ComonadTraced {
     }
     
     public static func listen<A>(_ fa: CoTOf<W, M, A>) -> CoTOf<W, M, (W.M, A)> {
-        CoT { wa in
-            let listened = wa.listen().map { tuple in { a in tuple.1((tuple.0, a)) } }
+        func f<A>(_ x: W.M, _ g: @escaping ((W.M, A)) -> Kind<M, Any>) -> (A) -> Kind<M, Any> {
+            { a in
+                g((x, a))
+            }
+        }
+        
+        return CoT { wa in
+            let listened = wa.listen().map(f)
             return fa^.runT(listened)
         }
     }

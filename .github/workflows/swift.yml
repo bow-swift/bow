@@ -7,7 +7,12 @@ jobs:
 
     runs-on: macOS-latest
 
+    env:
+      XCODE_VERSION: ${{ '11.4.1' }}
+
     steps:
+    - name: Switch Xcode version
+      run: "sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app"
     - uses: actions/checkout@v2
     - name: Run tests
       run: swift test
