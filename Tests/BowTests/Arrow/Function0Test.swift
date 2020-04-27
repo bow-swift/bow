@@ -2,7 +2,7 @@ import XCTest
 import BowLaws
 import Bow
 
-final class Function0Test: XCTestCase {
+class Function0Test: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<Function0Partial, Int>.check()
     }

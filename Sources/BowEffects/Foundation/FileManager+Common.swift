@@ -102,7 +102,7 @@ public extension FileManager {
         }
     }
     
-    // MARK: Moving and Copying Items
+    // MARK: - Moving and Copying Items
     
     /// IO suspended version of `FileManager.copyItem(at:to:)`. Refer to that method for further documentation.
     func copyItemIO(
@@ -140,27 +140,7 @@ public extension FileManager {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: Creating Symbolic and Hard Links
+    // MARK: - Creating Symbolic and Hard Links
     
     /// IO suspended version of `FileManager.createSymbolicLink(at:withDestinationPath:)`. Refer to that method for further documentation.
     func createSymbolicLinkIO(
@@ -244,7 +224,7 @@ public extension FileManager {
         }
     }
     
-    // MARK: Getting and Comparing File Contents
+    // MARK: - Getting and Comparing File Contents
     
     /// IO suspended version of `FileManager.contents(atPath:)`. Refer to that method for further documentation.
     func contentsIO(atPath path: String) -> IO<Error, Data?> {
@@ -262,7 +242,7 @@ public extension FileManager {
         }
     }
     
-    // MARK: Managing the Current Directory
+    // MARK: - Managing the Current Directory
     
     /// IO suspended version of `FileManager.changeCurrentDirectoryPath(_:)`. Refer to that method for further documentation.
     func changeCurrentDirectoryPathIO(_ path: String) -> IO<Error, Bool> {
