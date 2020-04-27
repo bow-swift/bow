@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.1
 import PackageDescription
 
 extension Target {
@@ -20,16 +20,16 @@ extension Target {
             .bowRx,
         ]
     }
-    
+
     static var bow: Target {
         .target(name: "Bow")
     }
-    
+
     static var bowOptics: Target {
         .target(name: "BowOptics",
                 dependencies: [Target.bow.asDependency])
     }
-    
+
     static var bowEffects: Target {
         #if os(Linux)
         return .target(name: "BowEffects",
@@ -40,22 +40,22 @@ extension Target {
                        dependencies: [Target.bow.asDependency])
         #endif
     }
-    
+
     static var bowRecursionSchemes: Target {
         .target(name: "BowRecursionSchemes",
                 dependencies: [Target.bow.asDependency])
     }
-    
+
     static var bowFree: Target {
         .target(name: "BowFree",
                 dependencies: [Target.bow.asDependency])
     }
-    
+
     static var bowGeneric: Target {
         .target(name: "BowGeneric",
                 dependencies: [Target.bow.asDependency])
     }
-    
+
     static var bowRx: Target {
         .target(name: "BowRx",
                 dependencies: [Target.bow.asDependency,
@@ -74,26 +74,26 @@ extension Target {
             .bowOpticsLaws,
         ]
     }
-    
+
     static var bowLaws: Target {
         .target(name:"BowLaws",
                 dependencies: [Target.bowGenerators.asDependency],
                 path: "Tests/BowLaws")
     }
-    
+
     static var bowEffectsLaws: Target {
         .target(name:"BowEffectsLaws",
                 dependencies: [Target.bowEffects.asDependency,
                                Target.bowLaws.asDependency],
                 path: "Tests/BowEffectsLaws")
     }
-    
+
     static var bowOpticsLaws: Target {
         .target(name:"BowOpticsLaws",
                 dependencies: [Target.bowOptics.asDependency,
                                Target.bowLaws.asDependency],
                 path: "Tests/BowOpticsLaws")
-        
+
     }
 }
 
@@ -107,28 +107,28 @@ extension Target {
             .bowRxGenerators,
         ]
     }
-    
+
     static var bowGenerators: Target {
         .target(name: "BowGenerators",
                 dependencies: [Target.bow.asDependency,
                                .product(name: "SwiftCheck", package: "SwiftCheck")],
                 path: "Tests/BowGenerators")
     }
-    
+
     static var bowFreeGenerators: Target {
         .target(name: "BowFreeGenerators",
                 dependencies: [Target.bowFree.asDependency,
                                Target.bowGenerators.asDependency],
                 path: "Tests/BowFreeGenerators")
     }
-    
+
     static var bowEffectsGenerators: Target {
         .target(name: "BowEffectsGenerators",
                 dependencies: [Target.bowEffects.asDependency,
                                Target.bowGenerators.asDependency],
                 path: "Tests/BowEffectsGenerators")
     }
-    
+
     static var bowRxGenerators: Target {
         .target(name: "BowRxGenerators",
                 dependencies: [Target.bowRx.asDependency,
@@ -150,40 +150,40 @@ extension Target {
             .bowRxTests,
         ]
     }
-    
+
     static var bowTests: Target {
         .testTarget(name: "BowTests",
                     dependencies: [Target.bowLaws.asDependency])
     }
-    
+
     static var bowOpticsTests: Target {
         .testTarget(name: "BowOpticsTests",
                     dependencies: [Target.bowOpticsLaws.asDependency])
     }
-    
+
     static var bowRecursionSchemesTests: Target {
         .testTarget(name: "BowRecursionSchemesTests",
                     dependencies: [Target.bowRecursionSchemes.asDependency,
                                    Target.bowLaws.asDependency])
     }
-    
+
     static var bowFreeTests: Target {
         .testTarget(name: "BowFreeTests",
                     dependencies: [Target.bowFreeGenerators.asDependency,
                                    Target.bowLaws.asDependency])
     }
-    
+
     static var bowGenericTests: Target {
         .testTarget(name: "BowGenericTests",
                     dependencies: [Target.bowGeneric.asDependency])
     }
-    
+
     static var bowEffectsTests: Target {
         .testTarget(name: "BowEffectsTests",
                     dependencies: [Target.bowEffectsGenerators.asDependency,
                                    Target.bowEffectsLaws.asDependency])
     }
-    
+
     static var bowRxTests: Target {
         .testTarget(name: "BowRxTests",
                     dependencies: [Target.bowRxGenerators.asDependency,
@@ -196,7 +196,7 @@ extension Target {
 // MARK: - Package
 let package = Package(
     name: "Bow",
-    
+
     products: [
         .library(name: Target.bow.name,                  targets: [Target.bow.name]),
         .library(name: Target.bowOptics.name,            targets: [Target.bowOptics.name]),
@@ -204,7 +204,7 @@ let package = Package(
         .library(name: Target.bowFree.name,              targets: [Target.bowFree.name]),
         .library(name: Target.bowEffects.name,           targets: [Target.bowEffects.name]),
         .library(name: Target.bowRx.name,                targets: [Target.bowRx.name]),
-        
+
         .library(name: Target.bowLaws.name,              targets: [Target.bowLaws.name]),
         .library(name: Target.bowOpticsLaws.name,        targets: [Target.bowOpticsLaws.name]),
         .library(name: Target.bowEffectsLaws.name,       targets: [Target.bowEffectsLaws.name]),
