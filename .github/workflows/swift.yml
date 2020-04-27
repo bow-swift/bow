@@ -39,14 +39,8 @@ jobs:
         path: Tests
     - name: Run tests
       run: swift test
-
-  clean:
-    name: Remove generated artifact
-    needs: linux
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: geekyeggo/delete-artifact@v1
+    - name: Remove generated artifact
+      uses: geekyeggo/delete-artifact@v1
       with:
         name: generate-linuxmain
         failOnError: false
