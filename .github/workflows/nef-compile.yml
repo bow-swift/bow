@@ -5,13 +5,9 @@ on: [pull_request]
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      XCODE_VERSION: ${{ '11.4.1' }}
 
     steps:
     - uses: actions/checkout@v2
-    - name: Switch Xcode version
-      run: "sudo xcode-select -s /Applications/Xcode_$XCODE_VERSION.app"
     - name: Compile documentation
       run: |
         brew install nef
