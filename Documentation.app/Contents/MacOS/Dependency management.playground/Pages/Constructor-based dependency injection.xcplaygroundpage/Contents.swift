@@ -7,6 +7,9 @@
 /*:
  # Constructor-based dependency injection
  
+ {:.beginner}
+ beginner
+ 
  Constructor-based dependency injection is a familiar technique for most Object-Oriented developers that can as well be used in Functional Programming. It consists on providing dependencies of a module on its initializer, in such a way it has all dependencies it needs, and its methods only receive the parameters they need to do their job.
  
  Consider the following code:

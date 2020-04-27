@@ -9,4 +9,6 @@ target 'Documentation' do
   pod "BowGeneric", :path => '../../..'
   pod "BowRecursionSchemes", :path => '../../..'
   pod "BowFree", :path => '../../..'
+  pod "BowGenerators", :path => '../../..'
+  pod "BowLaws", :path => '../../..'
 end
