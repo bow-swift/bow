@@ -198,21 +198,21 @@ let package = Package(
     name: "Bow",
     
     products: [
-        .library(name: "Bow",                  targets: ["Bow"]),
-        .library(name: "BowOptics",            targets: ["BowOptics"]),
-        .library(name: "BowRecursionSchemes",  targets: ["BowRecursionSchemes"]),
-        .library(name: "BowFree",              targets: ["BowFree"]),
-        .library(name: "BowEffects",           targets: ["BowEffects"]),
-        .library(name: "BowRx",                targets: ["BowRx"]),
+        .library(name: Target.bow.name,                  targets: [Target.bow.name]),
+        .library(name: Target.bowOptics.name,            targets: [Target.bowOptics.name]),
+        .library(name: Target.bowRecursionSchemes.name,  targets: [Target.bowRecursionSchemes.name]),
+        .library(name: Target.bowFree.name,              targets: [Target.bowFree.name]),
+        .library(name: Target.bowEffects.name,           targets: [Target.bowEffects.name]),
+        .library(name: Target.bowRx.name,                targets: [Target.bowRx.name]),
         
-        .library(name: "BowLaws",              targets: ["BowLaws"]),
-        .library(name: "BowOpticsLaws",        targets: ["BowOpticsLaws"]),
-        .library(name: "BowEffectsLaws",       targets: ["BowEffectsLaws"]),
+        .library(name: Target.bowLaws.name,              targets: [Target.bowLaws.name]),
+        .library(name: Target.bowOpticsLaws.name,        targets: [Target.bowOpticsLaws.name]),
+        .library(name: Target.bowEffectsLaws.name,       targets: [Target.bowEffectsLaws.name]),
 
-        .library(name: "BowGenerators",        targets: ["BowGenerators"]),
-        .library(name: "BowFreeGenerators",    targets: ["BowFreeGenerators"]),
-        .library(name: "BowEffectsGenerators", targets: ["BowEffectsGenerators"]),
-        .library(name: "BowRxGenerators",      targets: ["BowRxGenerators"])
+        .library(name: Target.bowGenerators.name,        targets: [Target.bowGenerators.name]),
+        .library(name: Target.bowFreeGenerators.name,    targets: [Target.bowFreeGenerators.name]),
+        .library(name: Target.bowEffectsGenerators.name, targets: [Target.bowEffectsGenerators.name]),
+        .library(name: Target.bowRxGenerators.name,      targets: [Target.bowRxGenerators.name])
     ],
 
     dependencies: [

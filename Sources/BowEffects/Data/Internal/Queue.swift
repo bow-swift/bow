@@ -1,37 +1,53 @@
 import Foundation
 
-internal enum Queue {
-    case queue(DispatchQueue = .main)
-    case current
+internal struct Queue {
+//    case queue(DispatchQueue)
+//    case current
+    
+    static func queue(_ queue: DispatchQueue = .main) -> Queue {
+        queue.setSpecific(key: Key.threadLabel, value: queue.label)
+        return .init(queue: ._queue(queue))
+    }
+    
+    /* convenience */ static func queue(label: String, qos: DispatchQoS = .default) -> Queue {
+        queue(DispatchQueue(label: label, qos: qos))
+    }
+    
+    static var current: Queue {
+        .init(queue: ._current)
+    }
+    
+    // MARK: cases
+    private let queue: _Queue
+    
+    private enum _Queue {
+        case _queue(DispatchQueue)
+        case _current
+    }
     
     // MARK: properties
     var label: String {
-        switch self {
-        case .queue(let queue):
+        switch queue {
+        case ._queue(let queue):
             return queue.label
-        case .current:
+        case ._current:
             return DispatchQueue.currentLabel
         }
     }
     
     var qos: DispatchQoS {
-        switch self {
-        case .queue(let queue):
+        switch queue {
+        case ._queue(let queue):
             return queue.qos
-        case .current:
+        case ._current:
             return .default
         }
     }
     
-    // Mark: constructors
-    static func queue(label: String, qos: DispatchQoS = .default) -> Queue {
-        .queue(DispatchQueue(label: label, qos: qos))
-    }
-    
     // MARK: operations
     func async(execute work: @escaping () -> Void) {
-        switch self {
-        case .queue(let queue):
+        switch queue {
+        case ._queue(let queue):
             queue.async(execute: work)
         default:
             fatalError("can not execute async work in current queue")
@@ -39,16 +55,21 @@ internal enum Queue {
     }
     
     func sync<T>(execute work: () throws -> T) rethrows -> T {
-        switch self {
-        case .queue(let queue):
+        switch queue {
+        case ._queue(let queue):
             if DispatchQueue.currentLabel == queue.label {
                 return try work()
             } else {
                 return try queue.sync(execute: work)
             }
-        case .current:
+        case ._current:
             return try work()
         }
+    }
+    
+    
+    fileprivate enum Key {
+        static let threadLabel = DispatchSpecificKey<String>()
     }
 }
 
@@ -62,14 +83,10 @@ internal extension DispatchQueue {
 
 internal extension DispatchQueue {
     static var currentLabel: String {
-        return DispatchQueue.main.label
-////        let old = String(validatingUTF8: __dispatch_queue_get_label(nil)) ?? ""
-//        let new = Thread.isMainThread ? DispatchQueue.main.label : Thread.current.name ?? ""
-////
-////        if (old != new) {
-////            print("OLD: \(old)\nNEW: \(new)")
-////        }
-//        
-//        return new
+        guard let label = DispatchQueue.getSpecific(key: Queue.Key.threadLabel) else {
+            fatalError("BowEffects must use internally 'Queue' instead of 'DispatchQueue'")
+        }
+        
+        return label
     }
 }
