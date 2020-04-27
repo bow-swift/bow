@@ -6,7 +6,6 @@ jobs:
   macos:
     name: macos | Compile and test
     runs-on: macos-latest
-
     env:
       XCODE_VERSION: ${{ '11.4.1' }}
 
