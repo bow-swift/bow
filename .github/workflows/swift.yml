@@ -9,6 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Run tests
+      run: swift test
     - name: Generate linux tests
       run: swift test --generate-linuxmain
     - name: Cached auto-generate linux tests
@@ -16,8 +18,6 @@ jobs:
       with:
         name: generate-linuxmain
         path: Tests
-    - name: Run tests
-      run: swift test
 
   linux:
     name: linux | Compile and test
@@ -33,10 +33,10 @@ jobs:
       with:
         name: generate-linuxmain
         path: Tests
-    - name: Run tests
-      run: swift test
     - name: Remove generated artifact
       uses: geekyeggo/delete-artifact@v1
       with:
         name: generate-linuxmain
         failOnError: false
+    - name: Run tests
+      run: swift test
