@@ -26,6 +26,9 @@
       location = "group:Effects.playground">
    </FileRef>
    <FileRef
+      location = "group:Testing.playground">
+   </FileRef>
+   <FileRef
       location = "group:Integrations.playground">
    </FileRef>
    <FileRef

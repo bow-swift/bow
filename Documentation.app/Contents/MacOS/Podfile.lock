@@ -4,8 +4,15 @@ PODS:
     - Bow (~> 0.7.0)
   - BowFree (0.7.0):
     - Bow (~> 0.7.0)
+  - BowGenerators (0.7.0):
+    - Bow (~> 0.7.0)
+    - SwiftCheck (~> 0.12.0)
   - BowGeneric (0.7.0):
     - Bow (~> 0.7.0)
+  - BowLaws (0.7.0):
+    - Bow (~> 0.7.0)
+    - BowGenerators (~> 0.7.0)
+    - SwiftCheck (~> 0.12.0)
   - BowOptics (0.7.0):
     - Bow (~> 0.7.0)
   - BowRecursionSchemes (0.7.0):
@@ -15,12 +22,15 @@ PODS:
     - BowEffects (~> 0.7.0)
     - RxSwift (~> 5.0.0)
   - RxSwift (5.0.1)
+  - SwiftCheck (0.12.0)
 
 DEPENDENCIES:
   - Bow (from `../../..`)
   - BowEffects (from `../../..`)
   - BowFree (from `../../..`)
+  - BowGenerators (from `../../..`)
   - BowGeneric (from `../../..`)
+  - BowLaws (from `../../..`)
   - BowOptics (from `../../..`)
   - BowRecursionSchemes (from `../../..`)
   - BowRx (from `../../..`)
@@ -28,6 +38,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - RxSwift
+    - SwiftCheck
 
 EXTERNAL SOURCES:
   Bow:
@@ -36,7 +47,11 @@ EXTERNAL SOURCES:
     :path: "../../.."
   BowFree:
     :path: "../../.."
+  BowGenerators:
+    :path: "../../.."
   BowGeneric:
+    :path: "../../.."
+  BowLaws:
     :path: "../../.."
   BowOptics:
     :path: "../../.."
@@ -49,12 +64,15 @@ SPEC CHECKSUMS:
   Bow: 3561cae6b993e4c37f507e03dd89859538d8ec12
   BowEffects: 235d503f2e438ab9fdf84e074f586c806d8dec31
   BowFree: 2c0ef44f40bf12f63edc8b60ec881fada1145dfd
+  BowGenerators: 479762cf6c53823839c94064030c6c1b3a422000
   BowGeneric: 8ad67728410b2a50cf681b3bfbf92b86b6b8a07b
+  BowLaws: f19bd7a14facb1a244f27ae6a682a070830adcf4
   BowOptics: 1d6c742c8144117b7ff76d2ce14839aac2619d82
   BowRecursionSchemes: a62b201be5440e95e2e514b08c163e55e5dc9195
   BowRx: 9b0e395c92f47f2c7f6f8b4a42adf37ffd5c897a
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  SwiftCheck: d1dd04d955cc76620b0f84e087536bd059a11c24
 
-PODFILE CHECKSUM: c776910e1659fef526505f3385fe27e8c3a2e42d
+PODFILE CHECKSUM: efc76df00ffc116ebc2aec3dee074047d2d970d0
 
 COCOAPODS: 1.9.1
