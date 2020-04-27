@@ -4,7 +4,7 @@ on: [pull_request]
 
 jobs:
   macos:
-    name: macos | Compile and test
+    name: macos
     runs-on: macos-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
         path: Tests
 
   linux:
-    name: linux | Compile and test
+    name: linux
     needs: macos
     runs-on: ubuntu-latest
 
