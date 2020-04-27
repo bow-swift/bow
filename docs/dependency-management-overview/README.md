@@ -6,6 +6,9 @@ permalink: /docs/dependency-management/dependency-management-overview/
 
 # Dependency management Overview
  
+ {:.beginner}
+ beginner
+ 
  In order to handle complexity in our code, we tend to divide it into different modules or layers, which we assemble and compose to solve the problem we are addressing. Oftentimes, we refer to these as dependencies that need to be provided to a certain module, so that it can perform its tasks.
  
  Dependencies can be modeled as a protocol which accepts different implementations. We can supply, for instance, one instance for production and another one that we can control for testing.

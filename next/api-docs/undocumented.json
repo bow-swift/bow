@@ -170,14 +170,14 @@
     },
     {
       "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Foundation/URLSession.swift",
-      "line": 6,
+      "line": 10,
       "symbol": "URLSession.DataIO",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Foundation/URLSession.swift",
-      "line": 7,
+      "line": 11,
       "symbol": "URLSession.DownloadIO",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"

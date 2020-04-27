@@ -145,6 +145,19 @@ options:
          - title: Foundation extensions
            url: /docs/effects/foundation-extensions/
 
+   - title: Testing
+
+     nested_options:
+
+         - title: Testing Overview
+           url: /docs/testing/testing-overview/
+
+         - title: Testing type class instances
+           url: /docs/testing/testing-type-class-instances/
+
+         - title: Testing side effectful code
+           url: /docs/testing/testing-side-effectful-code/
+
    - title: Integrations
 
      nested_options:

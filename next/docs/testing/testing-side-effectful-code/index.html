@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.7.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="testing-side-effectful-code">Testing side effectful code</h1>
+
+<p class="intermediate">intermediate</p>
+
+<p>Although functional code is testable by definition, testing side effects is always a tricky task, as side effects are difficult to track and check. In order to address this challenge, we can replace the side effectful dependencies of our code by controllable ones where we can track the side effects that have happened.</p>
+
+<h2 id="abstracting-over-side-effectful-dependencies">Abstracting over side-effectful dependencies</h2>
+
+<p>Consider the following side-effectful operations, described in the APIs of some dependencies:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">UserID</span> <span class="o">=</span> <span class="kt">String</span>
+
+<span class="kd">struct</span> <span class="kt">User</span><span class="p">:</span> <span class="kt">Equatable</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">UserID</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">DatabaseService</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">lookUp</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span>
+    <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">profile</span><span class="p">:</span> <span class="kt">User</span><span class="p">,</span> <span class="n">forId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">LoggerService</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">info</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Side-effectful dependencies are abstracted with these protocols, allowing us to replace them by controllable ones during testing. We can use these dependencies to write the following workflow:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">HasDatabase</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">db</span><span class="p">:</span> <span class="kt">DatabaseService</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">HasLogger</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">logger</span><span class="p">:</span> <span class="kt">LoggerService</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="n">workflow</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">:</span> <span class="kt">HasDatabase</span> <span class="o">&amp;</span> <span class="kt">HasLogger</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">env</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">user</span> <span class="o">=</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">env</span> <span class="o">&lt;-</span> <span class="o">.</span><span class="nf">ask</span><span class="p">(),</span>
+        <span class="n">user</span> <span class="o">&lt;-</span> <span class="n">env</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="nf">lookUp</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="s">"abc"</span><span class="p">),</span>
+        <span class="o">|&lt;-</span><span class="n">env</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="nf">info</span><span class="p">(</span><span class="s">"Obtained: </span><span class="se">\(</span><span class="n">user</span><span class="o">.</span><span class="k">get</span><span class="se">)</span><span class="s">"</span><span class="p">),</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="k">get</span><span class="p">)</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="tracking-side-effects">Tracking side effects</h2>
+
+<p>Our next step is to create testing implementations for the protocols we have defined above.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">TestDatabaseService</span><span class="p">:</span> <span class="kt">DatabaseService</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<p>They need to track all side effects in a way that is safe for multiple concurrent processes using this dependency. We can create a data structure to collect operations invoked in each dependency:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">struct</span> <span class="kt">State</span><span class="p">:</span> <span class="kt">Equatable</span> <span class="p">{</span>
+        <span class="c1">// Contains initial DB for testing and tracks updates</span>
+        <span class="k">let</span> <span class="nv">map</span><span class="p">:</span> <span class="p">[</span><span class="kt">UserID</span><span class="p">:</span> <span class="kt">User</span><span class="p">]</span>
+        <span class="c1">// Contains operations invoked in this dependency</span>
+        <span class="k">let</span> <span class="nv">ops</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+        
+        <span class="kd">private</span> <span class="kd">func</span> <span class="nf">log</span><span class="p">(</span><span class="n">_</span> <span class="nv">op</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
+            <span class="kt">State</span><span class="p">(</span><span class="nv">map</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">map</span><span class="p">,</span> <span class="nv">ops</span><span class="p">:</span> <span class="n">ops</span> <span class="o">+</span> <span class="p">[</span><span class="n">op</span><span class="p">])</span>
+        <span class="p">}</span>
+        
+        <span class="kd">func</span> <span class="nf">lookUp</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">State</span><span class="p">,</span> <span class="kt">User</span><span class="p">?)</span> <span class="p">{</span>
+            <span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="s">"Look up: </span><span class="se">\(</span><span class="n">id</span><span class="se">)</span><span class="s">"</span><span class="p">),</span> <span class="n">map</span><span class="p">[</span><span class="n">id</span><span class="p">])</span>
+        <span class="p">}</span>
+        
+        <span class="kd">func</span> <span class="nf">set</span><span class="p">(</span><span class="nv">profile</span><span class="p">:</span> <span class="kt">User</span><span class="p">,</span> <span class="n">forId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">State</span> <span class="p">{</span>
+            <span class="k">var</span> <span class="nv">newMap</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">map</span>
+            <span class="n">newMap</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">profile</span>
+            <span class="k">return</span> <span class="kt">State</span><span class="p">(</span><span class="nv">map</span><span class="p">:</span> <span class="n">newMap</span><span class="p">,</span> <span class="nv">ops</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">ops</span><span class="p">)</span>
+                <span class="o">.</span><span class="nf">log</span><span class="p">(</span><span class="s">"Update: </span><span class="se">\(</span><span class="n">id</span><span class="se">)</span><span class="s"> - </span><span class="se">\(</span><span class="n">profile</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can use <code class="highlighter-rouge">IORef</code>, a type that models an asynchronous, concurrent mutable reference providing safe functional access and modification of its content. This reference will provide safe access to the <code class="highlighter-rouge">State</code> created above, while keeping track of all side effects:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">let</span> <span class="nv">ref</span><span class="p">:</span> <span class="kt">IORef</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">State</span><span class="o">&gt;</span>
+    
+    <span class="kd">func</span> <span class="n">lookUp</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="n">ref</span><span class="o">.</span><span class="n">modify</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
+            <span class="n">state</span><span class="o">.</span><span class="nf">lookUp</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span>
+        <span class="p">}</span><span class="o">^.</span><span class="nf">env</span><span class="p">()</span><span class="o">.</span><span class="n">flatMap</span> <span class="p">{</span> <span class="n">user</span> <span class="nf">in</span>
+            <span class="p">(</span><span class="n">user</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span>
+                <span class="p">?</span> <span class="kt">EnvIO</span><span class="o">.</span><span class="nf">raiseError</span><span class="p">(</span><span class="kt">DatabaseError</span><span class="o">.</span><span class="nf">userNotFound</span><span class="p">(</span><span class="n">id</span><span class="p">))</span>
+                <span class="p">:</span> <span class="kt">EnvIO</span><span class="o">.</span><span class="nf">pure</span><span class="p">(</span><span class="n">user</span><span class="o">!</span><span class="p">)</span>
+        <span class="p">}</span><span class="o">^</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="k">set</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">profile</span><span class="p">:</span> <span class="kt">User</span><span class="p">,</span> <span class="n">forId</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">UserID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="n">ref</span><span class="o">.</span><span class="n">update</span> <span class="p">{</span> <span class="n">state</span> <span class="k">in</span>
+            <span class="n">state</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">profile</span><span class="p">:</span> <span class="n">profile</span><span class="p">,</span> <span class="nv">forId</span><span class="p">:</span> <span class="n">id</span><span class="p">)</span>
+        <span class="p">}</span><span class="o">^.</span><span class="nf">env</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We can proceed similarly to implement the test logger:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">TestLoggerService</span><span class="p">:</span> <span class="kt">LoggerService</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">ref</span><span class="p">:</span> <span class="kt">IORef</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span><span class="o">&gt;</span>
+    
+    <span class="kd">func</span> <span class="n">info</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">EnvIO</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Void</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="n">ref</span><span class="o">.</span><span class="n">update</span> <span class="p">{</span> <span class="n">logs</span> <span class="k">in</span>
+            <span class="n">logs</span> <span class="o">+</span> <span class="p">[</span><span class="n">message</span><span class="p">]</span>
+        <span class="p">}</span><span class="o">^.</span><span class="nf">env</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="testing-environment">Testing environment</h2>
+
+<p>We need to create an environment that we can supply to the workflow. This is straighforward:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">TestEnvironment</span><span class="p">:</span> <span class="kt">HasDatabase</span><span class="p">,</span> <span class="kt">HasLogger</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">db</span><span class="p">:</span> <span class="kt">DatabaseService</span>
+    <span class="k">let</span> <span class="nv">logger</span><span class="p">:</span> <span class="kt">LoggerService</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="writing-the-test-scenario">Writing the test scenario</h2>
+
+<p>Our next step is to create a test scenario. The purpose of this function is that, given an initial database (represented as a dictionary), it will return an <code class="highlighter-rouge">IO</code> with the result of the workflow (the <code class="highlighter-rouge">User</code> that needs to be found), together with all tracked side effects (the <code class="highlighter-rouge">State</code> of the database, and the logged messages).</p>
+
+<p>In order to do so, we need to perform the following steps:</p>
+
+<ul>
+  <li>Create the <code class="highlighter-rouge">IORef</code> that we are providing to the test dependencies.</li>
+  <li>Run the workflow, providing the test environment with the corresponding dependencies.</li>
+  <li>Extract the values stored in the <code class="highlighter-rouge">IORef</code> to get the tracked side effects.</li>
+</ul>
+
+<p>The implementation of this scenario is:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">testScenario</span><span class="p">(</span><span class="nv">initialDB</span><span class="p">:</span> <span class="p">[</span><span class="kt">UserID</span><span class="p">:</span> <span class="kt">User</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">(</span><span class="kt">User</span><span class="p">,</span> <span class="kt">TestDatabaseService</span><span class="o">.</span><span class="kt">State</span><span class="p">,</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">dbRef</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">IORef</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">TestDatabaseService</span><span class="o">.</span><span class="kt">State</span><span class="o">&gt;&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">logRef</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">IORef</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span><span class="o">&gt;&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">user</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">User</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">state</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="kt">TestDatabaseService</span><span class="o">.</span><span class="kt">State</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    <span class="k">let</span> <span class="nv">logs</span> <span class="o">=</span> <span class="kt">IO</span><span class="o">&lt;</span><span class="kt">Error</span><span class="p">,</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span><span class="o">&gt;.</span><span class="k">var</span><span class="p">()</span>
+    
+    <span class="k">let</span> <span class="nv">initialState</span> <span class="o">=</span> <span class="kt">TestDatabaseService</span><span class="o">.</span><span class="kt">State</span><span class="p">(</span><span class="nv">map</span><span class="p">:</span> <span class="n">initialDB</span><span class="p">,</span> <span class="nv">ops</span><span class="p">:</span> <span class="p">[])</span>
+    
+    <span class="k">return</span> <span class="nf">binding</span><span class="p">(</span>
+        <span class="n">dbRef</span> <span class="o">&lt;-</span> <span class="kt">IORef</span><span class="o">.</span><span class="nf">of</span><span class="p">(</span><span class="n">initialState</span><span class="p">),</span>
+        <span class="n">logRef</span> <span class="o">&lt;-</span> <span class="kt">IORef</span><span class="o">.</span><span class="nf">of</span><span class="p">([]),</span>
+        <span class="n">user</span> <span class="o">&lt;-</span> <span class="nf">workflow</span><span class="p">()</span><span class="o">.</span><span class="nf">provide</span><span class="p">(</span>
+            <span class="kt">TestEnvironment</span><span class="p">(</span>
+                <span class="nv">db</span><span class="p">:</span> <span class="kt">TestDatabaseService</span><span class="p">(</span><span class="nv">ref</span><span class="p">:</span> <span class="n">dbRef</span><span class="o">.</span><span class="k">get</span><span class="p">),</span>
+                <span class="nv">logger</span><span class="p">:</span> <span class="kt">TestLoggerService</span><span class="p">(</span><span class="nv">ref</span><span class="p">:</span> <span class="n">logRef</span><span class="o">.</span><span class="k">get</span><span class="p">)</span>
+        <span class="p">)),</span>
+        <span class="n">state</span> <span class="o">&lt;-</span> <span class="n">dbRef</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="nf">get</span><span class="p">(),</span>
+        <span class="n">logs</span> <span class="o">&lt;-</span> <span class="n">logRef</span><span class="o">.</span><span class="k">get</span><span class="o">.</span><span class="nf">get</span><span class="p">(),</span>
+        <span class="nv">yield</span><span class="p">:</span> <span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="k">get</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="k">get</span><span class="p">,</span> <span class="n">logs</span><span class="o">.</span><span class="k">get</span><span class="p">))</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="performing-assertions">Performing assertions</h2>
+
+<p>Finally, we can write tests changing the initial database in order to verify different behaviors of our workflow:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">testUserFound</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">db</span> <span class="o">=</span> <span class="p">[</span><span class="s">"abc"</span><span class="p">:</span> <span class="kt">User</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Tomás"</span><span class="p">),</span>
+              <span class="s">"def"</span><span class="p">:</span> <span class="kt">User</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Migue"</span><span class="p">)]</span>
+    <span class="k">let</span> <span class="p">(</span><span class="nv">user</span><span class="p">,</span> <span class="nv">state</span><span class="p">,</span> <span class="nv">logs</span><span class="p">)</span> <span class="o">=</span> <span class="k">try!</span> <span class="nf">testScenario</span><span class="p">(</span><span class="nv">initialDB</span><span class="p">:</span> <span class="n">db</span><span class="p">)</span><span class="o">.</span><span class="nf">unsafeRunSync</span><span class="p">()</span>
+    
+    <span class="c1">// Assert on user, state and logs</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">testUserNotFound</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="nf">testScenario</span><span class="p">(</span><span class="nv">initialDB</span><span class="p">:</span> <span class="p">[:])</span><span class="o">.</span><span class="nf">unsafeRunSyncEither</span><span class="p">()</span>
+    
+    <span class="c1">// Assert on error</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>Wrapping side-effects into replaceable dependencies lets us write code in a pure funcional way. We can write test-only implementations that track side effects and let us perform assertions, giving us enough flexibility to determine the granularity of effects that we need to track.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

@@ -475,6 +475,41 @@
         
         <li class="sidebar-nav-item">
             <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
                 <span>Integrations</span>
                 
                 <i class="fa fa-angle-right"></i>
@@ -533,6 +568,8 @@
     </div>
     <div class="doc-content">
         <h1 id="side-effectful-dependency-management">Side-effectful dependency management</h1>
+
+<p class="beginner">beginner</p>
 
 <p>Oftentimes, our dependencies will interact with the external world, thus causing side effects. Networking operations or persistence are some examples of these dependencies. We can deal with these cases using the Reader pattern. Nonetheless, Bow Effects provides a specific type with additional ergonomics: the <code class="highlighter-rouge">EnvIO</code> type.</p>
 
