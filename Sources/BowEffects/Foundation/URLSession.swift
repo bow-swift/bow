@@ -1,8 +1,6 @@
-#if os(Linux)
 import Foundation
+#if canImport(FoundationNetworking)
 import FoundationNetworking
-#else
-import Foundation
 #endif
 
 import Bow
