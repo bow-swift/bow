@@ -234,7 +234,6 @@
 		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
 		11E8E07A2395580F0029BC92 /* Array+TraverseConcurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8E0792395580F0029BC92 /* Array+TraverseConcurrent.swift */; };
 		11E9788E233A7123002AAC60 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11E9788D233A7123002AAC60 /* RxSwift */; };
-		11E97895233A720A002AAC60 /* SwiftCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 11E97894233A720A002AAC60 /* SwiftCheck */; };
 		11ED7A2A226E094C00C27994 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F482217E2E9200969984 /* Result.swift */; };
 		11ED7A2B226E0A1F00C27994 /* ResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112296D3219DC1EF006D66C5 /* ResultTest.swift */; };
 		11F0367F2327D08900B39A80 /* EffectComprehensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0367E2327D08900B39A80 /* EffectComprehensions.swift */; };
@@ -264,6 +263,7 @@
 		720C1DFF23FD804E001C5B7D /* Endo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1DFE23FD804E001C5B7D /* Endo.swift */; };
 		720C1E0223FD808F001C5B7D /* Endo+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1E0023FD8079001C5B7D /* Endo+Gen.swift */; };
 		720C1E0423FD80AC001C5B7D /* EndoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720C1E0323FD80AB001C5B7D /* EndoTest.swift */; };
+		8B1AC5012458755D00EAC18E /* SwiftCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 8B1AC5002458755D00EAC18E /* SwiftCheck */; };
 		8B79462624531CFE00547771 /* FileManager+iOS+Mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B79462524531CFE00547771 /* FileManager+iOS+Mac.swift */; };
 		8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38A217E2DEF00969984 /* BooleanFunctionsTest.swift */; };
 		8BA0F3E9217E2DEF00969984 /* PartialApplicationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F38B217E2DEF00969984 /* PartialApplicationTest.swift */; };
@@ -1230,7 +1230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11E97895233A720A002AAC60 /* SwiftCheck in Frameworks */,
+				8B1AC5012458755D00EAC18E /* SwiftCheck in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2260,7 +2260,7 @@
 			);
 			name = "Bow-Generators";
 			packageProductDependencies = (
-				11E97894233A720A002AAC60 /* SwiftCheck */,
+				8B1AC5002458755D00EAC18E /* SwiftCheck */,
 			);
 			productName = Bow;
 			productReference = 112097A922A7EBC7007F3D9C /* BowGenerators.framework */;
@@ -2773,7 +2773,7 @@
 			mainGroup = OBJ_5;
 			packageReferences = (
 				11E9788C233A7123002AAC60 /* XCRemoteSwiftPackageReference "RxSwift" */,
-				11E97891233A71E1002AAC60 /* XCRemoteSwiftPackageReference "SwiftCheck" */,
+				8B1AC4FF2458755D00EAC18E /* XCRemoteSwiftPackageReference "SwiftCheck" */,
 			);
 			productRefGroup = OBJ_218 /* Products */;
 			projectDirPath = "";
@@ -4612,6 +4612,7 @@
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4703,6 +4704,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -4942,15 +4944,15 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.1;
+				version = 5.1.1;
 			};
 		};
-		11E97891233A71E1002AAC60 /* XCRemoteSwiftPackageReference "SwiftCheck" */ = {
+		8B1AC4FF2458755D00EAC18E /* XCRemoteSwiftPackageReference "SwiftCheck" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/typelift/SwiftCheck";
+			repositoryURL = "https://github.com/bow-swift/SwiftCheck.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.0;
+				minimumVersion = 0.12.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -4961,9 +4963,9 @@
 			package = 11E9788C233A7123002AAC60 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		11E97894233A720A002AAC60 /* SwiftCheck */ = {
+		8B1AC5002458755D00EAC18E /* SwiftCheck */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 11E97891233A71E1002AAC60 /* XCRemoteSwiftPackageReference "SwiftCheck" */;
+			package = 8B1AC4FF2458755D00EAC18E /* XCRemoteSwiftPackageReference "SwiftCheck" */;
 			productName = SwiftCheck;
 		};
 /* End XCSwiftPackageProductDependency section */
