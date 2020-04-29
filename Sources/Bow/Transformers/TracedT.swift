@@ -66,6 +66,14 @@ extension TracedT where W == ForId {
     public convenience init(_ f: @escaping (M) -> A) {
         self.init(Id(f))
     }
+    
+    /// Invokes this function.
+    ///
+    /// - Parameter input: Input to the function.
+    /// - Returns: Output of the function.
+    public func callAsFunction(_ input: M) -> A {
+        self.value^.value(input)
+    }
 }
 
 // MARK: Instance of Invariant for TracedT

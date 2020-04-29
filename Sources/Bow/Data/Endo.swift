@@ -25,6 +25,14 @@ public final class Endo<A>: EndoOf<A> {
     public init(_ run: @escaping (A) -> A) {
         self.run = run
     }
+    
+    /// Invokes this endo-function.
+    ///
+    /// - Parameter value: Input to the function.
+    /// - Returns: Output of the function.
+    public func callAsFunction(_ value: A) -> A {
+        run(value)
+    }
 }
 
 // MARK: Instance of `Semigroup` for `Endo`

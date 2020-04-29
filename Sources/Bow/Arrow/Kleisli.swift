@@ -50,12 +50,20 @@ public final class Kleisli<F, D, A>: KleisliOf<F, D, A> {
         f(value)
     }
     
+    /// Inkoves this Kleisli function with an input value.
+    ///
+    /// - Parameter value: Input to the function.
+    /// - Returns: Output of the Kleisli.
+    public func callAsFunction(_ value: D) -> Kind<F, A> {
+        f(value)
+    }
+    
     /// Pre-composes this Kleisli function with a function transforming the input type.
     ///
     /// - Parameter f: Transforming function.
     /// - Returns: Composition of the two functions.
     public func contramap<DD>(_ f: @escaping (DD) -> D) -> Kleisli<F, DD, A> {
-        Kleisli<F, DD, A> { d in self.run(f(d)) }
+        Kleisli<F, DD, A> { d in self(f(d)) }
     }
     
     /// Narrows the scope of the context of this Kleisli from `Any` to a concrete type

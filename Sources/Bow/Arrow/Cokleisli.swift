@@ -38,6 +38,14 @@ public class Cokleisli<F, A, B>: CokleisliOf<F, A, B> {
     public func contramapValue<C>(_ f: @escaping (Kind<F, C>) -> Kind<F, A>) -> Cokleisli<F, C, B> {
         Cokleisli<F, C, B> { fc in self.run(f(fc)) }
     }
+    
+    /// Invokes this function.
+    ///
+    /// - Parameter value: Input to the function.
+    /// - Returns: Output of the function.
+    public func callAsFunction(_ value: Kind<F, A>) -> B {
+        run(value)
+    }
 }
 
 /// Safe downcast.
