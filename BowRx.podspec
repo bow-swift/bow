@@ -24,8 +24,9 @@ Pod::Spec.new do |s|
   #s.watchos.deployment_target = "3.0"
   s.source   = { :git => "https://github.com/bow-swift/bow.git", :tag => "#{s.version}" }
   s.source_files = "Sources/BowRx/**/*.swift"
-  s.dependency "RxSwift", "~> 5.0.0"
+  s.dependency "RxSwift", "~> 5.1.1"
   s.dependency "Bow", "~> #{s.version}"
   s.dependency "BowEffects", "~> #{s.version}"
-  s.swift_versions = ["5.0", "5.1"]
+  s.swift_versions = ["5.2"]
+  s.pod_target_xcconfig = { 'ENABLE_TESTING_SEARCH_PATHS' => 'YES' }
 end

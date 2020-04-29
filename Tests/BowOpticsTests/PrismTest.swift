@@ -133,6 +133,13 @@ class PrismTest: XCTestCase {
         let result = prism.getOption(.authorized(8, "information")).toOptional() ?? (0, "")
         XCTAssertTrue(result == (8, "information"))
     }
+    
+    func testAutoDerivatePrism_WithComplexAssociatedTypes() {
+        let auto = ParentAction.prism(for: ParentAction.child)
+        let action = ParentAction.child(child: .changeColor)
+        let c1 = auto.getOptional(action)
+        XCTAssertEqual(c1, .changeColor)
+    }
 
     func testAutoDerivatePrism_WithLabeledAssociatedTypes() {
         let prism = Authentication.prism(for: Authentication.requested)

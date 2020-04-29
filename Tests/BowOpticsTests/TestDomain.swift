@@ -98,10 +98,17 @@ enum StringStyle {
 }
 
 
-// MARK: - Authentication <testing>
+// MARK: - Prism models <testing>
 enum Authentication: AutoPrism {
     case unathorized(String)
     case authorized(Int, String)
     case requested(Int, info: String)
     case unkown
+}
+
+enum ChildAction {
+    case changeColor
+}
+enum ParentAction: AutoPrism {
+    case child(child: ChildAction)
 }
