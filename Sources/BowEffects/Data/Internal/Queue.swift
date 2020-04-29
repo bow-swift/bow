@@ -83,10 +83,6 @@ internal extension DispatchQueue {
 
 internal extension DispatchQueue {
     static var currentLabel: String {
-        guard let label = DispatchQueue.getSpecific(key: Queue.Key.threadLabel) else {
-            fatalError("BowEffects must use internally 'Queue' instead of 'DispatchQueue'")
-        }
-        
-        return label
+        DispatchQueue.getSpecific(key: Queue.Key.threadLabel) ?? "unknown-\(Date().timeIntervalSince1970)"
     }
 }
