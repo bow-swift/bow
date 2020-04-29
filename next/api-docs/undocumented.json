@@ -148,6 +148,20 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Internal/Dictionary+Extensions.swift",
+      "line": 16,
+      "symbol": "Dictionary.arrayValues",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Internal/DispatchTimeInterval+Extensions.swift",
+      "line": 4,
+      "symbol": "DispatchTimeInterval.toDouble()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Resource.swift",
       "line": 89,
       "symbol": "Resource.combine(_:)",
@@ -166,6 +180,13 @@
       "line": 6,
       "symbol": "Unit.unit",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Schedule.swift",
+      "line": 765,
+      "symbol": "Kleisli.unitError()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -208,6 +229,20 @@
       "line": 42,
       "symbol": "==(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Typeclasses/ConcurrentTraverse.swift",
+      "line": 94,
+      "symbol": "ParApplicativePartial",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Typeclasses/ConcurrentTraverse.swift",
+      "line": 102,
+      "symbol": "ParApplicativePartial",
+      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -1696,9 +1731,23 @@
     },
     {
       "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowRx/ObservableK.swift",
+      "line": 25,
+      "symbol": "Observable.blockingGet()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowRx/ObservableK.swift",
       "line": 242,
       "symbol": "ObservableKPartial.runAsync(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowRx/SingleK.swift",
+      "line": 25,
+      "symbol": "PrimitiveSequence.blockingGet()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
