@@ -34,6 +34,13 @@ public final class Function0<A>: Function0Of<A> {
     public func invoke() -> A {
         f()
     }
+    
+    /// Invokes the function.
+    ///
+    /// - Returns: Value produced by this function.
+    public func callAsFunction() -> A {
+        f()
+    }
 }
 
 /// Safe downcast.

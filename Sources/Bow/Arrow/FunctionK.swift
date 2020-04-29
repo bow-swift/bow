@@ -14,6 +14,14 @@ open class FunctionK<F, G> {
     open func invoke<A>(_ fa: Kind<F, A>) -> Kind<G, A> {
         fatalError("FunctionK.invoke must be implemented in subclasses")
     }
+    
+    /// Invokes this transformation.
+    ///
+    /// - Parameter fa: Input to this function
+    /// - Returns: Transformed input.
+    public func callAsFunction<A>(_ fa: Kind<F, A>) -> Kind<G, A> {
+        invoke(fa)
+    }
 
     /// Composes this function with another one.
     ///
