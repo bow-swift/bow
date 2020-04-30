@@ -1,9 +1,7 @@
 options:
 
    - title: Quick start
-
      nested_options:
-
          - title: Getting started
            url: /docs/quick-start/getting-started/
 
@@ -14,9 +12,7 @@ options:
            url: /docs/quick-start/resources/
 
    - title: FP concepts
-
      nested_options:
-
          - title: Glossary
            url: /docs/fp-concepts/glossary/
 
@@ -33,9 +29,7 @@ options:
            url: /docs/fp-concepts/data-types/
 
    - title: Composition
-
      nested_options:
-
          - title: Composition Overview
            url: /docs/composition/composition-overview/
 
@@ -61,9 +55,7 @@ options:
            url: /docs/composition/transforming-multiple-effects/
 
    - title: Dependency management
-
      nested_options:
-
          - title: Dependency management Overview
            url: /docs/dependency-management/dependency-management-overview/
 
@@ -80,9 +72,7 @@ options:
            url: /docs/dependency-management/side-effectful-dependency-management/
 
    - title: Patterns
-
      nested_options:
-
          - title: Error handling
            url: /docs/patterns/error-handling/
 
@@ -99,9 +89,7 @@ options:
            url: /docs/patterns/polymorphic-programs/
 
    - title: Optics
-
      nested_options:
-
          - title: Optics Overview
            url: /docs/optics/optics-overview/
 
@@ -115,9 +103,7 @@ options:
            url: /docs/optics/composition/
 
    - title: Effects
-
      nested_options:
-
          - title: Effects Overview
            url: /docs/effects/effects-overview/
 
@@ -146,9 +132,7 @@ options:
            url: /docs/effects/foundation-extensions/
 
    - title: Testing
-
      nested_options:
-
          - title: Testing Overview
            url: /docs/testing/testing-overview/
 
@@ -159,16 +143,12 @@ options:
            url: /docs/testing/testing-side-effectful-code/
 
    - title: Integrations
-
      nested_options:
-
          - title: RxSwift streams
            url: /docs/integrations/rxswift-streams/
 
    - title: Legal
-
      nested_options:
-
          - title: Credits
            url: /docs/legal/credits/
 
