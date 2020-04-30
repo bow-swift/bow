@@ -22,8 +22,8 @@ All documentation and API reference is published in [our website](https://bow-sw
 - [Higher Kinded Type emulation](https://bow-swift.io/next/docs/fp-concepts/higher-kinded-types/)
 - [Type classes](https://bow-swift.io/next/docs/fp-concepts/type-classes/)
 - [Data types](https://bow-swift.io/next/docs/fp-concepts/data-types/)
-- [Optics](https://bow-swift.io/next/docs/optics/overview/)
-- [Effects](https://bow-swift.io/next/docs/effects/overview/)
+- [Optics](https://bow-swift.io/next/docs/optics/optics-overview/)
+- [Effects](https://bow-swift.io/next/docs/effects/effects-overview/)
 - [Streams](https://bow-swift.io/next/docs/integrations/rxswift-streams/)
 
 ## Modules
@@ -153,7 +153,7 @@ For further information, refer to our [Contribution guidelines](CONTRIBUTING.md)
 
 ## How to create a new release
 
-You can create a new release by running `bundle exec fastlane release version_number:`. For example, `bundle exec fastlane release version_number: 0.7.0`.
+You can create a new release by running `bundle exec fastlane release version_number:`. For example, `bundle exec fastlane ios release version_number: "0.8.0"`.
 
 The following steps would be run:
 
