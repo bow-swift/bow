@@ -162,6 +162,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Internal/Queue.swift",
+      "line": 85,
+      "symbol": "DispatchQueue.currentLabel",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/runners/2.169.1/work/bow/bow/Sources/BowEffects/Data/Resource.swift",
       "line": 89,
       "symbol": "Resource.combine(_:)",
