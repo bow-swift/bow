@@ -81,7 +81,7 @@ internal extension DispatchQueue {
     }
 }
 
-internal extension DispatchQueue {
+public extension DispatchQueue {
     static var currentLabel: String {
         DispatchQueue.getSpecific(key: Queue.Key.threadLabel) ?? "unknown-\(Date().timeIntervalSince1970)"
     }
