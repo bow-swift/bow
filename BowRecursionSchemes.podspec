@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = "BowRecursionSchemes"
-  s.version     = "0.7.0"
+  s.version     = "0.8.0"
   s.summary     = "Bow is a library for Typed Functional Programming in Swift. BowRecursionSchemes provides classes to work with recursion schemes in Swift."
   s.homepage    = "https://github.com/bow-swift/bow"
   s.license      = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
