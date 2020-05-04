@@ -71,7 +71,7 @@ public extension Foldable {
                 option^.fold({ Eval.later({ Option.some(f(a)) }) },
                              { b in g(a, Eval.now(b)).map(Option.some)^ })
             })^
-        }).map { x in x^ }^
+        }).map { x in Option.fix(x) }^
     }
 
     /// Reduces the elements of a structure down to a single value by applying the provided aggregation function in a left-associative manner.
