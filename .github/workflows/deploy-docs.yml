@@ -15,7 +15,8 @@ jobs:
       run: sudo xcode-select -s /Applications/Xcode_11.4.1.app/Contents/Developer
     - name: Generate microsite
       run: |
-        brew install https://raw.githubusercontent.com/bow-swift/homebrew-nef/master/nef.rb
+        brew update
+        brew install nef
         brew install sourcekitten
         gem install bundler -v 2.0.2
         gem install cocoapods -v 1.9.1
