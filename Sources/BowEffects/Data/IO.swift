@@ -653,7 +653,8 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
                 { res in
                     do {
                         return try self.use(res)
-                            .flatTap { _ in self.release(res, .completed) }^
+                            .flatTap { _ in self.release(res, .completed) }
+                            .flatTapError { e in self.release(res, .error(e)) }^
                             ._unsafeRunSyncEither(on: queue)
                     } catch let error as E {
                         let _ = self.release(res, .error(error))^._unsafeRunSyncEither(on: queue)
