@@ -652,9 +652,10 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
                 { e in Trampoline.done((.left(e), ioRes.1)) },
                 { res in
                     do {
-                        let useResult = try self.use(res)^._unsafeRunSyncEither(on: queue)
-                        let _ = self.release(res, .completed)^._unsafeRunSyncEither(on: queue)
-                        return useResult
+                        return try self.use(res)
+                            .flatTap { _ in self.release(res, .completed) }
+                            .flatTapError { e in self.release(res, .error(e)) }^
+                            ._unsafeRunSyncEither(on: queue)
                     } catch let error as E {
                         let _ = self.release(res, .error(error))^._unsafeRunSyncEither(on: queue)
                         return .done((.left(error), queue))

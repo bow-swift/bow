@@ -1,9 +1,6 @@
 ![](https://github.com/bow-swift/bow-art/blob/master/assets/bow-header-github.png?raw=true)
 
 <p align="center">
-<a href="https://travis-ci.org/bow-swift/bow">
-<img src="https://travis-ci.org/bow-swift/bow.svg?branch=master">
-</a>
 <a href="https://codecov.io/gh/bow-swift/bow">
 <img src="https://codecov.io/gh/bow-swift/bow/branch/master/graph/badge.svg">
 </a>

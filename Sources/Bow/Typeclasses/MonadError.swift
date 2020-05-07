@@ -21,6 +21,21 @@ public extension MonadError {
             predicate(a) ? pure(a) : raiseError(error())
         })
     }
+    
+    /// Applies a monadic function to an effect discarding the output.
+    ///
+    /// - Parameters:
+    ///   - fa: A computation.
+    ///   - f: A monadic function which result will be discarded.
+    /// - Returns: A computation with the effect of the initial computation.
+    static func flatTapError<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (E) -> Kind<Self, B>) -> Kind<Self, A> {
+        handleErrorWith(fa) { e in
+            f(e).handleErrorWith { _ in raiseError(e) }
+                .followedBy(.raiseError(e))
+        }
+    }
 }
 
 // MARK: Syntax for MonadError
@@ -38,5 +53,14 @@ public extension Kind where F: MonadError {
         _ error: @escaping () -> F.E,
         _ predicate: @escaping (A) -> Bool) -> Kind<F, A> {
         F.ensure(self, error, predicate)
+    }
+    
+    /// Applies a monadic function to an effect discarding the output.
+    ///
+    /// - Parameters:
+    ///   - f: A monadic function which result will be discarded.
+    /// - Returns: A computation with the effect of the initial computation.
+    func flatTapError<B>(_ f: @escaping (F.E) -> Kind<F, B>) -> Kind<F, A> {
+        F.flatTapError(self, f)
     }
 }
