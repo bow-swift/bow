@@ -449,6 +449,18 @@ public extension Prism where S == T, A == B {
             getOrModify: { s in extract(s).flatMap(Either.right) ?? .left(s) },
             reverseGet: embed)
     }
+
+    /// Extract a value from the source.
+    var extract: (S) -> A? {
+        getOrModify >>> \.orNil
+    }
+
+    /// Embed a value into the source
+    ///
+    /// This is equivalent to `reverseGet`
+    var embed: (A) -> S {
+        reverseGet
+    }
 }
 
 public extension Prism where A: Equatable {
