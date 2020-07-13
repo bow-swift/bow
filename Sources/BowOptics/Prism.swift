@@ -333,6 +333,23 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
         })
     }
 
+    /// Creates a `PPrism` that defaults to `other` if this `PPrism` has no focus.
+    /// - Parameter other: Value to default to when this `PPrism` has no focus.
+    /// - Returns: A `PPrism` that will try to focus on the focus of this `PPrism` and
+    ///            will try to focus on the focus of `other` if this `PPrism` has no focus.
+    func or<C, D>(_ other: PPrism<S, T, C, D>) -> PPrism<S, T, Either<A, C>, Either<B, D>> {
+        PPrism<S, T, Either<A, C>, Either<B, D>>(
+            getOrModify: { s in
+                self.getOrModify(s)
+                    .mapLeft { _ in other.getOrModify(s) }
+                    .swap()
+                    .sequence()
+                    .map { $0^ }^
+        },
+            reverseGet: { $0.fold(self.reverseGet, other.reverseGet) }
+        )
+    }
+
     /// Composes this value with a `PPrism`.
     ///
     /// - Parameter other: Value to compose with.
