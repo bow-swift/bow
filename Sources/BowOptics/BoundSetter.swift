@@ -43,11 +43,11 @@ public class BoundSetter<S, A> {
         return BoundSetter<S, T>(value: value, setter: setter + other)
     }
     
-    /// Composes with an `Optional`.
+    /// Composes with an `AffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
     /// - Returns: A `BoundSetter` with the same bound source and a `Setter` resulting from the sequential application of the two optics.
-    public func compose<T>(_ other: Optional<A, T>) -> BoundSetter<S, T> {
+    public func compose<T>(_ other: AffineTraversal<A, T>) -> BoundSetter<S, T> {
         return BoundSetter<S, T>(value: value, setter: setter + other)
     }
     

@@ -26,8 +26,8 @@ public extension Prism where A: Each {
 }
 
 // MARK: Extension when focus has `Each` instance
-public extension Optional where A: Each {
-    /// Provides a traversal over all elements of the focus of this optional.
+public extension AffineTraversal where A: Each {
+    /// Provides a traversal over all elements of the focus of this AffineTraversal.
     var every: Traversal<S, A.EachFoci> {
         return self.fix + A.each
     }

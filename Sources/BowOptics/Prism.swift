@@ -61,18 +61,18 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PPrism<S, T, A, B>, rhs: PLens<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `AffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PPrism<S, T, A, B>, rhs: PLens<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
 
-    /// Composes a `PPrism` with a `POptional`.
+    /// Composes a `PPrism` with a `AffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PPrism<S, T, A, B>, rhs: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `AffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PPrism<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
 
@@ -373,17 +373,17 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
     /// Composes this value with a `PLens`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: PLens<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional.compose(other)
+    /// - Returns: A `AffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PLens<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.asAffineTraversal.compose(other)
     }
 
-    /// Composes this value with a `POptional`.
+    /// Composes this value with a `AffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional.compose(other)
+    /// - Returns: A `AffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.asAffineTraversal.compose(other)
     }
 
     /// Composes this value with a `PSetter`.
@@ -410,9 +410,9 @@ public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
         return self.asTraversal.compose(other)
     }
 
-    /// Converts this value into a POptional.
-    public var asOptional: POptional<S, T, A, B> {
-        return POptional(set: self.set, getOrModify: self.getOrModify)
+    /// Converts this value into a AffineTraversal.
+    public var asAffineTraversal: PAffineTraversal<S, T, A, B> {
+        return PAffineTraversal(set: self.set, getOrModify: self.getOrModify)
     }
 
     /// Converts this value into a PSetter.

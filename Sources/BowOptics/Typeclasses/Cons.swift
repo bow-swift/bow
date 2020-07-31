@@ -10,13 +10,13 @@ public protocol Cons {
 
 // MARK: Related functions
 public extension Cons {
-    /// Provides an `Optional` between this structure and its first element.
-    static var firstOption: Optional<Self, First> {
+    /// Provides an `AffineTraversal` between this structure and its first element.
+    static var firstOption: AffineTraversal<Self, First> {
         return cons + Tuple2._0
     }
     
-    /// Provides an `Optional` between this structure and its tail.
-    static var tailOption: Optional<Self, Self> {
+    /// Provides an `AffineTraversal` between this structure and its tail.
+    static var tailOption: AffineTraversal<Self, Self> {
         return cons + Tuple2._1
     }
     

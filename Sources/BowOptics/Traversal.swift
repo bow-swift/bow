@@ -45,7 +45,7 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
     
     /// Provides a Traversal with no focus.
     public static var void: Traversal<S, A> {
-        return Optional<S, A>.void.asTraversal
+        return AffineTraversal<S, A>.void.asTraversal
     }
     
     /// Provides a Traversal based on the implementation of `Traverse` for `F`.
@@ -289,13 +289,13 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `PTraversal` with a `POptional`.
+    /// Composes a `PTraversal` with a `PAffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `PTraversal` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PTraversal<S, T, A, B>, rhs: POptional<A, B, C, D>) -> PTraversal<S, T, C, D>{
+    public static func +<C, D>(lhs: PTraversal<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PTraversal<S, T, C, D>{
         return lhs.compose(rhs)
     }
     
@@ -445,11 +445,11 @@ open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
         return self.asFold.compose(other)
     }
     
-    /// Composes this with a `POptional`.
+    /// Composes this with a `PAffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
     /// - Returns: A `PTraversal` resulting from the sequential application of the two optics.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> PTraversal<S, T, C, D> {
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
         return self.compose(other.asTraversal)
     }
     

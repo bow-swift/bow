@@ -10,13 +10,13 @@ public protocol Snoc {
 
 // MARK: Related functions
 public extension Snoc {
-    /// Provides an `Optional` between this structure and its initial part (all elements but the last one).
-    static var initialOption: Optional<Self, Self> {
+    /// Provides an `AffineTraversal` between this structure and its initial part (all elements but the last one).
+    static var initialOption: AffineTraversal<Self, Self> {
         return snoc + Tuple2._0
     }
     
-    /// Provides an `Optional` between this structure and its last element.
-    static var lastOption: Optional<Self, Last> {
+    /// Provides an `AffineTraversal` between this structure and its last element.
+    static var lastOption: AffineTraversal<Self, Last> {
         return snoc + Tuple2._1
     }
     

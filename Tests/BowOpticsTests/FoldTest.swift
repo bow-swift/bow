@@ -75,8 +75,8 @@ class FoldTest: XCTestCase {
             return (ArrayK<Int>.foldK + Getter<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
-        property("Fold + Optional::identity") <~ forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.foldK + BowOptics.Optional<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
+        property("Fold + AffineTraversal::identity") <~ forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.foldK + AffineTraversal<Int, Int>.identity).getAll(array) == ArrayK<Int>.foldK.getAll(array)
         }
         
         property("Fold + Traversal::identity") <~ forAll { (array: ArrayK<Int>) in

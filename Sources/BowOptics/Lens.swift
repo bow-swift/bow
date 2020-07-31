@@ -71,18 +71,18 @@ public class PLens<S, T, A, B>: PLensOf<S, T, A, B> {
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PLens<S, T, A, B>, rhs: PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PLens<S, T, A, B>, rhs: PPrism<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `PLens` with a `POptional`.
+    /// Composes a `PLens` with a `PAffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PLens<S, T, A, B>, rhs: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PLens<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
@@ -229,17 +229,17 @@ public class PLens<S, T, A, B>: PLensOf<S, T, A, B> {
     /// Composes this lens with a `PPrism`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two optics.
-    public func compose<C, D>(_ other: PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional.compose(other)
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two optics.
+    public func compose<C, D>(_ other: PPrism<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.asAffineTraversal.compose(other)
     }
     
-    /// Composes this lens with a `POptional`.
+    /// Composes this lens with a `PAffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two optics.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional.compose(other)
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two optics.
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.asAffineTraversal.compose(other)
     }
     
     /// Composes this lens with a `PSetter`.
@@ -271,9 +271,9 @@ public class PLens<S, T, A, B>: PLensOf<S, T, A, B> {
         return Getter(get: self.get)
     }
     
-    /// Obtains a `POptional` from this lens.
-    public var asOptional: POptional<S, T, A, B> {
-        return POptional(
+    /// Obtains a `PAffineTraversal` from this lens.
+    public var asAffineTraversal: PAffineTraversal<S, T, A, B> {
+        return PAffineTraversal(
             set: self.set,
             getOrModify: self.get >>> Either.right)
     }

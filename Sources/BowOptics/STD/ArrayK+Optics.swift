@@ -21,13 +21,13 @@ public extension ArrayK {
         return toPOptionNEA()
     }
     
-    /// Provides an optional to retreieve the first element of an ArrayK
-    static var head: Optional<ArrayK<A>, A> {
+    /// Provides an AffineTraversal to retrieve the first element of an ArrayK
+    static var head: AffineTraversal<ArrayK<A>, A> {
         return firstOption
     }
     
-    /// Provides an optional to retrieve the tail of an ArrayK
-    static var tail: Optional<ArrayK<A>, ArrayK<A>> {
+    /// Provides an AffineTraversal to retrieve the tail of an ArrayK
+    static var tail: AffineTraversal<ArrayK<A>, ArrayK<A>> {
         return tailOption
     }
 }
@@ -48,13 +48,13 @@ public extension Array {
         return toPArrayK()
     }
     
-    /// Provides an Optional to retrieve the first element of an Array
-    static var head: Optional<Array<Element>, Element> {
+    /// Provides an AffineTraversal to retrieve the first element of an Array
+    static var head: AffineTraversal<Array<Element>, Element> {
         return firstOption
     }
     
-    /// Provides an Optional to retrieve the tail of an Array.
-    static var tail: Optional<Array<Element>, Array<Element>> {
+    /// Provides an AffineTraversal to retrieve the tail of an Array.
+    static var tail: AffineTraversal<Array<Element>, Array<Element>> {
         return tailOption
     }
 }
