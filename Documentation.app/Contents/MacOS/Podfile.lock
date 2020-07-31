@@ -1,24 +1,24 @@
 PODS:
-  - Bow (0.7.0)
-  - BowEffects (0.7.0):
-    - Bow (~> 0.7.0)
-  - BowFree (0.7.0):
-    - Bow (~> 0.7.0)
-  - BowGenerators (0.7.0):
-    - Bow (~> 0.7.0)
+  - Bow (0.8.0)
+  - BowEffects (0.8.0):
+    - Bow (~> 0.8.0)
+  - BowFree (0.8.0):
+    - Bow (~> 0.8.0)
+  - BowGenerators (0.8.0):
+    - Bow (~> 0.8.0)
     - SwiftCheck (~> 0.12.0)
-  - BowGeneric (0.7.0):
-    - Bow (~> 0.7.0)
-  - BowLaws (0.7.0):
-    - Bow (~> 0.7.0)
-    - BowGenerators (~> 0.7.0)
-  - BowOptics (0.7.0):
-    - Bow (~> 0.7.0)
-  - BowRecursionSchemes (0.7.0):
-    - Bow (~> 0.7.0)
-  - BowRx (0.7.0):
-    - Bow (~> 0.7.0)
-    - BowEffects (~> 0.7.0)
+  - BowGeneric (0.8.0):
+    - Bow (~> 0.8.0)
+  - BowLaws (0.8.0):
+    - Bow (~> 0.8.0)
+    - BowGenerators (~> 0.8.0)
+  - BowOptics (0.8.0):
+    - Bow (~> 0.8.0)
+  - BowRecursionSchemes (0.8.0):
+    - Bow (~> 0.8.0)
+  - BowRx (0.8.0):
+    - Bow (~> 0.8.0)
+    - BowEffects (~> 0.8.0)
     - RxSwift (~> 5.1.1)
   - RxSwift (5.1.1)
   - SwiftCheck (0.12.0)
@@ -60,18 +60,18 @@ EXTERNAL SOURCES:
     :path: "../../.."
 
 SPEC CHECKSUMS:
-  Bow: 127c3610954b35c8c6ce658c7a848e9531ca21c7
-  BowEffects: 07cd4ea94b5dbe5099cff4b38e65d3166964a1b5
-  BowFree: fa1dde3f87dac4f4cae04d2edcdc1f1c104b17ab
-  BowGenerators: ef32524d1b7a50b8a81811dddcfe9396a71b1a45
-  BowGeneric: c98295526a7b343bc54e983e84f726f60072fd94
-  BowLaws: 610f7b92204521645ef7ff32908f21698f1a3bff
-  BowOptics: f5852ef0b4f1a150462e73719d4f06d57c2e2389
-  BowRecursionSchemes: dbb39bf4cb2366abe57f63726381f93a98faf591
-  BowRx: 11afda46a34f1aa65e84134e7828d70df8fe862a
+  Bow: a709b8d14ac59d7f1d2f8388891c8632628e7575
+  BowEffects: 16ba770445cbbd0f58c5c9f53edfa3c63098d49e
+  BowFree: 881cb50d812942e9a79db8411f4dff6df5d7c566
+  BowGenerators: 4b0f0ed7ac85a3d8309e163f4784d417e7576269
+  BowGeneric: 6692347e82564a922f1e8db3fcd3dbf08e889514
+  BowLaws: bb97611bf259710403ad0bf38e0578a9f1f027cc
+  BowOptics: 2b5801dc9ab7532098cc47d5f2cc38635def9b16
+  BowRecursionSchemes: 0ed89b19d3f04ad05b35478df035697bad1dfb60
+  BowRx: 336e4129a12ebe99a822ae8c3c86dc4f15a57c92
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftCheck: d1dd04d955cc76620b0f84e087536bd059a11c24
 
 PODFILE CHECKSUM: efc76df00ffc116ebc2aec3dee074047d2d970d0
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

@@ -142,9 +142,9 @@ Open `Bow.xcodeproj` in Xcode 11 (or newer) and you are ready to go. Bow uses th
 
 ### How to run the documentation project
 
-- Go to the directory `contents/Documentation`.
-- Run `pod install` to get all dependencies.
-- Open `Documentation.xcworkspace` and run the project.
+- Go to the root directory.
+- Run `nef compile --project Documentation.app` to get all dependencies.
+- Open `Documentation.app` and run the project.
 
 For further information, refer to our [Contribution guidelines](CONTRIBUTING.md).
 
