@@ -8,6 +8,7 @@
 <img src="https://badges.gitter.im/bowswift/bow.svg">
 </a>
 <img src="https://img.shields.io/badge/platform-macos%20%7C%20ios%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-success">
+<a href="https://badge.bow-swift.io/recipe?name=bow&description=Bow%20is%20a%20cross-platform%20library%20for%20Typed%20Functional%20Programming%20in%20Swift&url=https://github.com/bow-swift/bow&owner=bow-swift&avatar=https://avatars3.githubusercontent.com/u/44965417?v=4&tag=0.8.0"><img src="https://raw.githubusercontent.com/bow-swift/bow-art/master/badges/nef-playgrounds-badge.svg" alt="bow Playground" style="height:20px"></a>
 </p>
 
 Bow is a cross-platform library for Typed Functional Programming in Swift.
