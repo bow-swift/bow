@@ -39,7 +39,7 @@ public final class Option<A>: OptionOf<A> {
         Option(a)
     }
 
-    private init(_ value: A?) {
+    fileprivate init(_ value: A?) {
         self.value = value
     }
 
@@ -429,4 +429,10 @@ extension BidirectionalCollection {
     public func singleOrNone(_ predicate: (Element) -> Bool) -> Option<Element> {
         self.filter(predicate).singleOrNone
     }
+}
+
+extension Option: ExpressibleByNilLiteral {
+   public convenience init(nilLiteral: ()) {
+      self.init(nil)
+   }
 }

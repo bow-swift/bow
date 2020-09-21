@@ -110,4 +110,47 @@ class OptionTest: XCTestCase {
             option.exists(predicate.getArrow) == option.forall(predicate.getArrow) || option.isEmpty
         }
     }
+   
+   func testExpressibleByNilLiteralDirectNilAssignmentForLet() {
+      let none: Option<Int> = nil
+      XCTAssertEqual(none, Option<Int>.none())
+   }
+   
+   func testExpressibleByNilLiteralDirectNilAssignmentForVar() {
+      var none: Option<String> = nil
+      XCTAssertEqual(none, Option<String>.none())
+   }
+   
+   func testExpressibleByNilLiteralDefaultInitializationForEmbeddedOption() {
+      // This test is primarily for the type checker
+      let noneLet: Option<Option<[Int]>>
+      if (constant(true)()) {
+         noneLet = Option.some(Option.some([10]))
+      } else {
+         noneLet = nil
+      }
+      XCTAssertEqual(noneLet, Option.some(Option.some([10])))
+   }
+   
+   func testExpressibleByNilLiteralEquality() {
+      var optionInt: Option<Int> = nil
+      XCTAssertEqual(optionInt, nil)
+      optionInt = .some(10)
+      XCTAssertEqual(optionInt, .some(10))
+   }
+   
+   func testExpressibleByNilLiteralSwitch() {
+      let optionInt: Option<Int> = nil
+      switch optionInt {
+      case Option.some(10): XCTFail("Should not match Option.some(10)")
+      case nil: XCTAssert(true)
+      default: break
+      }
+   }
+   
+   func testExpressibleByNilLiteralInFunctionArguments() {
+      func testFn<A, B>(_ a: Option<A>, _ b: Option<B> = nil) -> Option<(A,B)> { Option.zip(a, b)^ }
+      let result: Option<(Int, String)> = testFn(nil)
+      XCTAssertEqual(result.map { (a,b) in "\(a)\(b)" }, Option<String>.none())
+   }
 }
