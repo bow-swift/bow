@@ -127,6 +127,20 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/bow/bow/Sources/Bow/Typeclasses/MonadComprehensions/MonadComprenhensions.swift",
+      "line": 44,
+      "symbol": "BindingsBuilder",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/bow/bow/Sources/Bow/Typeclasses/MonadComprehensions/MonadComprenhensions.swift",
+      "line": 45,
+      "symbol": "BindingsBuilder.buildBlock(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/bow/bow/Sources/Bow/Typeclasses/Monoidal.swift",
       "line": 18,
       "symbol": "Kind.identity()",
