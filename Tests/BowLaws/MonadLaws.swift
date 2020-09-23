@@ -112,12 +112,12 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
             let z = Kind<F, Int>.var()
             let w = Kind<F, Int>.var()
 
-            let result = binding {
+            let result = binding({
                 x <-- fa
                 y <-- fb
                 z <-- fc
                 w <-- fd
-            } yield: {
+            }) {
                 x.get + y.get + z.get + w.get
             }
 
@@ -156,11 +156,11 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
             let y = F.var(Double.self)
             let z = F.var(String.self)
 
-            let r2 = binding {
+            let r2 = binding({
                 x <-- fa.value
                 y <-- fb.value
                 z <-- fc.value
-            } yield: {
+            }) {
                 "\(x.get), \(y.get), \(z.get)"
             }
 
