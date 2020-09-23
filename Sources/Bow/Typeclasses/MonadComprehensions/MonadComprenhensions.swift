@@ -41,8 +41,8 @@ public func binding<F: Monad, A>(
 }
 
 @_functionBuilder
-struct BindingsBuilder {
-    static func buildBlock<F>(_ instructions: BindingExpression<F>...) -> [BindingExpression<F>] {
+public struct BindingsBuilder {
+    public static func buildBlock<F>(_ instructions: BindingExpression<F>...) -> [BindingExpression<F>] {
         instructions
     }
 }
