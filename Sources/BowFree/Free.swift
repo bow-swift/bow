@@ -2,57 +2,43 @@ import Foundation
 import Bow
 
 public final class ForFree {}
-public final class FreePartial<S>: Kind<ForFree, S> {}
-public typealias FreeOf<S, A> = Kind<FreePartial<S>, A>
+public final class FreePartial<F: Functor>: Kind<ForFree, F> {}
+public typealias FreeOf<F: Functor, A> = Kind<FreePartial<F>, A>
 
-public class Free<S, A>: FreeOf<S, A> {
-    public static func liftF(_ fa: Kind<S, A>) -> Free<S, A> {
-        return Suspend(fa)
+public final class Free<F: Functor, A>: FreeOf<F, A> {
+    public enum _Free<F: Functor, A> {
+        case pure(A)
+        case free(Kind<F, Free<F, A>>)
+    }
+    
+    public let value: _Free<F, A>
+    
+    fileprivate init(_ value: _Free<F, A>) {
+        self.value = value
+    }
+    
+    public static func free(_ fa: Kind<F, Free<F, A>>) -> Free<F, A> {
+        Free(.free(fa))
+    }
+    
+    public static func liftF(_ fa: Kind<F, A>) -> Free<F, A> {
+        Free(.free(fa.map { a in Free.pure(a)^ }))
     }
 
-    public static func deferFree(_ value: @escaping () -> Free<S, A>) -> Free<S, A> {
-        return Free.fix(Free<S, ()>.pure(unit).flatMap { _ in value() })
+    public static func fix(_ fa: FreeOf<F, A>) -> Free<F, A> {
+        fa as! Free<F, A>
     }
 
-    internal static func functionKF() -> FunctionKFree<S> {
-        return FunctionKFree<S>()
-    }
-
-    public static func fix(_ fa: FreeOf<S, A>) -> Free<S, A> {
-        return fa as! Free<S, A>
-    }
-
-    public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
-        fatalError("Free.transform must be implemented by subclass")
-    }
-
-    public func step() -> Free<S, A> {
-        if self is FlatMapped<S, A, A> && (self as! FlatMapped<S, A, A>).c is FlatMapped<S, A, A> {
-            let flatMappedSelf = self as! FlatMapped<S, A, A>
-            let g = flatMappedSelf.f
-            let flatMappedC = flatMappedSelf.c as! FlatMapped<S, A, A>
-            let c = flatMappedC.c
-            let f = flatMappedC.f
-            return Free.fix(c.flatMap { cc in f(cc).flatMap(g) }).step()
-        } else if self is FlatMapped<S, A, A> && (self as! FlatMapped<S, A, A>).c is Pure<S, A> {
-            let flatMappedSelf = self as! FlatMapped<S, A, A>
-            let flatMappedC = flatMappedSelf.c as! Pure<S, A>
-            let a = flatMappedC.a
-            let f = flatMappedSelf.f
-            return f(a).step()
-        } else {
-            return self
+    public func foldMapK<M: Monad>(_ f: FunctionK<F, M>) -> Kind<M, A> {
+        return M.tailRecM(self) { free in
+            switch free.value {
+            case .pure(let a):
+                return M.pure(.right(a))
+                
+            case .free(let fa):
+                return f.invoke(fa.map(Either.left))
+            }
         }
-    }
-
-    public func foldMapK<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, A> {
-        return M.tailRecM(self) { freeSA in
-            return freeSA.step().foldMapChild(f)
-        }
-    }
-
-    fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>,A>> {
-        fatalError("foldMapChild must be implemented by subclasses")
     }
 }
 
@@ -61,97 +47,78 @@ public class Free<S, A>: FreeOf<S, A> {
 /// - Parameter fa: Value in higher-kind form.
 /// - Returns: Value cast to Free.
 public postfix func ^<S, A>(_ fa: FreeOf<S, A>) -> Free<S, A> {
-    return Free.fix(fa)
+    Free.fix(fa)
 }
 
-public extension Free where S: Monad {
-    func run() -> Kind<S, A> {
-        return self.foldMapK(FunctionK<S, S>.id)
-    }
-}
-
-private class Pure<S, A>: Free<S, A> {
-    fileprivate let a: A
-
-    init(_ a: A) {
-        self.a = a
-    }
-
-    override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
-        return M.pure(Either.right(self.a))
-    }
-
-    override public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
-        return Free.fix(Free.pure(f(a)))
+public extension Free where F: Monad {
+    func run() -> Kind<F, A> {
+        self.foldMapK(FunctionK<F, F>.id)
     }
 }
 
-private class Suspend<S, A>: Free<S, A> {
-    fileprivate let a: Kind<S, A>
-    
-    init(_ a: Kind<S, A>) {
-        self.a = a
-    }
-
-    override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
-        return M.map(f.invoke(self.a), { a in Either.right(a) })
-    }
-
-    override public func transform<B, S, O>(_ f: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
-        return Free.fix(Free<O, A>.liftF(fs.invoke(a as! Kind<S, A>)).map(f))
-    }
-}
-
-private class FlatMapped<S, A, C>: Free<S, A> {
-    fileprivate let c: Free<S, C>
-    fileprivate let f: (C) -> Free<S, A>
-
-    init(_ c: Free<S, C>, _ f: @escaping (C) -> Free<S, A>) {
-        self.c = c
-        self.f = f
-    }
-
-    override fileprivate func foldMapChild<M: Monad>(_ f: FunctionK<S, M>) -> Kind<M, Either<Free<S, A>, A>> {
-        let g = self.f
-        let c = self.c
-        return M.map(c.foldMapK(f), { cc in Either.left(g(cc)) })
-    }
-
-    override public func transform<B, S, O>(_ fm: @escaping (A) -> B, _ fs: FunctionK<S, O>) -> Free<O, B> {
-        return FlatMapped<O, B, C>(c.transform(id, fs), { _ in Free.fix(self.c.flatMap(self.f)).transform(fm, fs) })
-    }
-}
-
-internal class FunctionKFree<S>: FunctionK<S, FreePartial<S>> {
-    override func invoke<A>(_ fa: Kind<S, A>) -> Kind<FreePartial<S>, A> {
-        return Free.liftF(fa)
-    }
-}
-
+// MARK: Instance of Functor for Free
 extension FreePartial: Functor {
-    public static func map<A, B>(_ fa: Kind<FreePartial<S>, A>, _ f: @escaping (A) -> B) -> Kind<FreePartial<S>, B> {
-        return Free.fix(fa).flatMap { a in Free<S, B>.pure(f(a)) }
+    public static func map<A, B>(
+        _ fa: FreeOf<F, A>,
+        _ f: @escaping (A) -> B
+    ) -> FreeOf<F, B> {
+        switch fa^.value {
+        case .pure(let a):
+            return Free.pure(f(a))
+        case .free(let fa):
+            return Free(.free(fa.map { free in free.map(f)^ }))
+        }
     }
 }
 
+// MARK: Instance of Applicative for Free
 extension FreePartial: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<FreePartial<S>, A> {
-        return Pure(a)
+    public static func pure<A>(_ a: A) -> FreeOf<F, A> {
+        Free(.pure(a))
     }
 }
 
-// MARK: Instance of `Selective` for `Free`
+// MARK: Instance of Selective for Free
 extension FreePartial: Selective {}
 
+// MARK: Instance of Monad for Free
 extension FreePartial: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<FreePartial<S>, A>, _ f: @escaping (A) -> Kind<FreePartial<S>, B>) -> Kind<FreePartial<S>, B> {
-        return FlatMapped(Free.fix(fa), { a in Free.fix(f(a)) })
+    public static func flatMap<A, B>(
+        _ fa: FreeOf<F, A>,
+        _ f: @escaping (A) -> FreeOf<F, B>
+    ) -> FreeOf<F, B> {
+        switch fa^.value {
+        
+        case .pure(let a):
+            return f(a)
+        
+        case .free(let fa):
+            return Free(.free(fa.map { free in free.flatMap(f)^ }))
+        }
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<FreePartial<S>, Either<A, B>>) -> Kind<FreePartial<S>, B> {
-        return flatMap(f(a)) { either in
-            either.fold({ left in tailRecM(left, f) },
-                        { right in pure(right) })
+    public static func tailRecM<A, B>(
+        _ a: A,
+        _ f: @escaping (A) -> FreeOf<F, Either<A, B>>
+    ) -> FreeOf<F, B> {
+        _tailRecM(f(a), f).run()
+    }
+    
+    private static func _tailRecM<A, B>(
+        _ fa: FreeOf<F, Either<A, B>>,
+        _ f: @escaping (A) -> FreeOf<F, Either<A, B>>
+    ) -> Trampoline<FreeOf<F, B>> {
+        switch fa^.value {
+        
+        case .pure(let either):
+            return either.fold(
+                { a in .defer { _tailRecM(f(a), f) } },
+                { b in .done(.pure(b)) })
+            
+        case .free(let fa):
+            return .done(Free(.free(fa.map { free in
+                _tailRecM(free, f).run()^
+            })))
         }
     }
 }
