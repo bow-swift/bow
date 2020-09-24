@@ -1,11 +1,18 @@
 import Foundation
 import Bow
 
+/// Witness for the `Free<F, A>` data type. To be used in simulated Higher Kinded Types.
 public final class ForFree {}
+
+/// Partial application of the Free type constructor, omitting the last parameter.
 public final class FreePartial<F: Functor>: Kind<ForFree, F> {}
+
+/// Higher Kinded Type alias to improve readability.
 public typealias FreeOf<F: Functor, A> = Kind<FreePartial<F>, A>
 
+/// Free is a type that, given any Functor, is able to provide a Monad instance, that can be interpreted into a more restrictive one.
 public final class Free<F: Functor, A>: FreeOf<F, A> {
+    /// Internal representation of a Free value
     public enum _Free<F: Functor, A> {
         case pure(A)
         case free(Kind<F, Free<F, A>>)
@@ -17,18 +24,34 @@ public final class Free<F: Functor, A>: FreeOf<F, A> {
         self.value = value
     }
     
+    /// Creates a Free value.
+    ///
+    /// - Parameter fa: Value to be embedded in Free.
+    /// - Returns: A Free value.
     public static func free(_ fa: Kind<F, Free<F, A>>) -> Free<F, A> {
         Free(.free(fa))
     }
     
+    /// Lifts a value in the context of the Functor into the Free context.
+    ///
+    /// - Parameter fa: A value in the context of the provided Functor.
+    /// - Returns: A Free value.
     public static func liftF(_ fa: Kind<F, A>) -> Free<F, A> {
         Free(.free(fa.map { a in Free.pure(a)^ }))
     }
-
+    
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to Free.
     public static func fix(_ fa: FreeOf<F, A>) -> Free<F, A> {
         fa as! Free<F, A>
     }
-
+    
+    /// Interprets this Free value into the provided Monad.
+    ///
+    /// - Parameter f: A natural transformation from the internal Functor into the desired Monad.
+    /// - Returns: A value in the interpreted Monad.
     public func foldMapK<M: Monad>(_ f: FunctionK<F, M>) -> Kind<M, A> {
         return M.tailRecM(self) { free in
             switch free.value {
@@ -51,6 +74,9 @@ public postfix func ^<S, A>(_ fa: FreeOf<S, A>) -> Free<S, A> {
 }
 
 public extension Free where F: Monad {
+    /// Folds this free structure using the same Monad.
+    ///
+    /// - Returns: Folded value.
     func run() -> Kind<F, A> {
         self.foldMapK(FunctionK<F, F>.id)
     }
