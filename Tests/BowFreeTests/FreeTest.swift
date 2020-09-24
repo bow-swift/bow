@@ -4,121 +4,110 @@ import BowFree
 import BowFreeGenerators
 import BowLaws
 
-fileprivate final class ForOps {}
+fileprivate final class ForOpsF {}
+fileprivate typealias OpsFPartial = ForOpsF
+fileprivate typealias OpsFOf<A> = Kind<ForOpsF, A>
 
-extension ForOps: EquatableK {
-    static func eq<A: Equatable>(_ lhs: Kind<ForOps, A>, _ rhs: Kind<ForOps, A>) -> Bool {
-        let x = lhs^
-        let y = rhs^
-        switch (x, y) {
-        case (let vx as Value, let vy as Value): return vx.a == vy.a
-        case (let ax as Add, let ay as Add): return ax.a == ay.a && ax.b == ay.b
-        case (let ox as Subtract, let oy as Subtract): return ox.a == oy.a && ox.b == oy.b
-        default:
-            return false
+fileprivate class OpsF<A>: OpsFOf<A> {
+    enum _OpsF {
+        case read((String) -> A)
+        case write(String, A)
+    }
+    
+    let value: _OpsF
+    
+    private init(_ value: _OpsF) {
+        self.value = value
+    }
+    
+    static func read(_ callback: @escaping (String) -> A) -> OpsF<A> {
+        OpsF(.read(callback))
+    }
+    
+    static func write(_ content: String, _ next: A) -> OpsF<A> {
+        OpsF(.write(content, next))
+    }
+}
+
+fileprivate postfix func ^<A>(_ value: OpsFOf<A>) -> OpsF<A> {
+    value as! OpsF<A>
+}
+
+extension OpsFPartial: Functor {
+    static func map<A, B>(
+        _ fa: OpsFOf<A>,
+        _ f: @escaping (A) -> B
+    ) -> OpsFOf<B> {
+        switch fa^.value {
+        
+        case .read(let callback):
+            return OpsF.read(callback >>> f)
+        case .write(let content, let next):
+            return OpsF.write(content, f(next))
         }
     }
 }
 
-private class Ops<A>: Kind<ForOps, A> {
-    fileprivate static func fix(_ fa: Kind<ForOps, A>) -> Ops<A> {
-        return fa as! Ops<A>
-    }
-    
-    fileprivate static func value(_ n: Int) -> Free<ForOps, Int> {
-        return Free.liftF(Value(n))
-    }
-    
-    fileprivate static func add(_ a: Int, _ b: Int) -> Free<ForOps, Int> {
-        return Free.liftF(Add(a, b))
-    }
-    
-    fileprivate static func subtract(_ a: Int, _ b: Int) -> Free<ForOps, Int> {
-        return Free.liftF(Subtract(a, b))
-    }
+fileprivate typealias Ops<A> = Free<OpsFPartial, A>
+
+fileprivate func read() -> Ops<String> {
+    Ops.liftF(OpsF.read(id))
 }
 
-fileprivate postfix func ^<A>(_ fa: Kind<ForOps, A>) -> Ops<A> {
-    return Ops.fix(fa)
+fileprivate func write(content: String) -> Ops<Void> {
+    Ops.liftF(OpsF.write(content, ()))
 }
 
-private class Value: Ops<Int> {
-    let a: Int
+fileprivate func program() -> Ops<Void> {
+    let name = Ops<String>.var()
     
-    init(_ a: Int) {
-        self.a = a
-    }
-}
-
-private class Add: Ops<Int> {
-    let a: Int
-    let b: Int
-    
-    init(_ a: Int, _ b: Int) {
-        self.a = a
-        self.b = b
-    }
-}
-
-private class Subtract: Ops<Int> {
-    let a: Int
-    let b: Int
-    
-    init(_ a: Int, _ b: Int) {
-        self.a = a
-        self.b = b
-    }
-}
-
-fileprivate func program() -> Free<ForOps, Int> {
-    let value = FreePartial<ForOps>.var(Int.self)
-    let added = FreePartial<ForOps>.var(Int.self)
-    let subtracted = FreePartial<ForOps>.var(Int.self)
     return binding(
-        value <- Ops<Any>.value(10),
-        added <- Ops<Any>.add(value.get, 10),
-        subtracted <- Ops<Any>.subtract(added.get, 50),
-        yield: subtracted.get)^
+        |<-write(content: "What's your name?"),
+        name <- read(),
+        |<-write(content: "Hello \(name.get)!"),
+        yield: ()
+    )^
 }
 
-private class OptionInterpreter: FunctionK<ForOps, ForOption> {
-    override func invoke<A>(_ fa: Kind<ForOps, A>) -> OptionOf<A> {
-        let op = Ops.fix(fa)
-        switch op {
-        case let value as Value: return Option<Int>.pure(value.a) as! Kind<ForOption, A>
-        case let add as Add: return Option<Int>.pure(add.a + add.b) as! Kind<ForOption, A>
-        case let subtract as Subtract: return Option<Int>.pure(subtract.a - subtract.b) as! Kind<ForOption, A>
-        default:
-            fatalError("No other options")
+fileprivate class StateInterpreter: FunctionK<OpsFPartial, StatePartial<([String], [String])>> {
+    
+    override func invoke<A>(
+        _ fa: OpsFOf<A>
+    ) -> StateOf<([String], [String]), A> {
+        switch fa^.value {
+        
+        case .read(let callback):
+            return State { state -> (([String], [String]), A) in
+                let input = state.0[0]
+                let remaining = Array(state.0.dropFirst())
+                return ((remaining, state.1), callback(input))
+            }
+            
+        case .write(let content, let next):
+            return State { state -> (([String], [String]), A) in
+                let outputs = state.1 + [content]
+                return ((state.0, outputs), next)
+            }
         }
     }
 }
 
-private class IdInterpreter: FunctionK<ForOps, ForId> {
-    override func invoke<A>(_ fa: Kind<ForOps, A>) -> IdOf<A> {
-        let op = Ops.fix(fa)
-        switch op {
-        case let value as Value: return Id<Int>.pure(value.a) as! IdOf<A>
-        case let add as Add: return Id<Int>.pure(add.a + add.b) as! IdOf<A>
-        case let subtract as Subtract: return Id<Int>.pure(subtract.a - subtract.b) as! IdOf<A>
-        default:
-            fatalError("No other options")
-        }
-    }
-}
-
-extension FreePartial: EquatableK where S: Monad & EquatableK {
-    public static func eq<A>(_ lhs: Kind<FreePartial<S>, A>, _ rhs: Kind<FreePartial<S>, A>) -> Bool where A : Equatable {
-        return Free.fix(lhs).run() == Free.fix(rhs).run()
+extension FreePartial: EquatableK where F: Monad & EquatableK {
+    public static func eq<A>(
+        _ lhs: FreeOf<F, A>,
+        _ rhs: FreeOf<F, A>
+    ) -> Bool where A: Equatable {
+        lhs^.run() == rhs^.run()
     }
 }
 
 class FreeTest: XCTestCase {
     func testInterpretsFreeProgram() {
-        let x = program().foldMapK(OptionInterpreter())
-        let y = program().foldMapK(IdInterpreter())
-        XCTAssertEqual(x, Option.some(-30))
-        XCTAssertEqual(y, Id.pure(-30))
+        let state = program().foldMapK(StateInterpreter())^
+        let final = state.runS((["Bow"], []))
+        let outputs = ["What's your name?", "Hello Bow!"]
+        XCTAssertEqual(final.0, [String]())
+        XCTAssertEqual(final.1, outputs)
     }
     
     func testFunctorLaws() {
