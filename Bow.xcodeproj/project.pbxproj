@@ -180,6 +180,7 @@
 		11BA21C523D83EA100F3EE78 /* Zipper+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */; };
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
+		11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D894FB251CEB58006A65EC /* FunctionK+Free.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
 		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
@@ -954,6 +955,7 @@
 		11BA21C123D75B5200F3EE78 /* ZipperTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipperTest.swift; sourceTree = "<group>"; };
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
+		11D894FB251CEB58006A65EC /* FunctionK+Free.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Free.swift"; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
@@ -1727,6 +1729,7 @@
 				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
 				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
+				11D894FB251CEB58006A65EC /* FunctionK+Free.swift */,
 			);
 			path = BowFree;
 			sourceTree = "<group>";
@@ -3152,6 +3155,7 @@
 				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
+				11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
