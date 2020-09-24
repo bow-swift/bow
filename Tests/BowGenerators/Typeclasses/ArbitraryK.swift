@@ -17,7 +17,7 @@ public struct KindOf<F, A>: Arbitrary where F: ArbitraryK, A: Arbitrary {
     }
 }
 
-extension Gen {
+public extension Gen {
     static func from(_ generator: @escaping () -> A) -> Gen<A> {
         Gen<Void>.pure(()).map(generator)
     }
