@@ -9,6 +9,15 @@ public extension FunctionK where F: Functor, G: Functor {
     }
 }
 
+public extension FunctionK where F == FreePartial<G>, G: Monad {
+    /// Obtains a natural transformation from a Free Monad to the underlying Monad.
+    ///
+    /// - Returns: A natural transformation from a Free Monad to its underlying Monad.
+    static func monad() -> FunctionK<FreePartial<G>, G> {
+        MonadFunctionK()
+    }
+}
+
 private class FreeFunctionK<F: Functor, G: Functor>: FunctionK<FreePartial<F>, FreePartial<G>> {
     private let f: FunctionK<F, G>
     
@@ -26,6 +35,19 @@ private class FreeFunctionK<F: Functor, G: Functor>: FunctionK<FreePartial<F>, F
             return Free<G, A>.free(f.invoke(fa.map { free in
                 self.invoke(free)^
             }))
+        }
+    }
+}
+
+private class MonadFunctionK<F: Monad>: FunctionK<FreePartial<F>, F> {
+    override func invoke<A>(
+        _ fa: FreeOf<F, A>
+    ) -> Kind<F, A> {
+        switch fa^.value {
+        case let .pure(a):
+            return F.pure(a)
+        case let .free(fa):
+            return fa.flatMap(self.invoke)
         }
     }
 }
