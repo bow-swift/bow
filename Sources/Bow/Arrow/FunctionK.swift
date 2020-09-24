@@ -40,6 +40,16 @@ open class FunctionK<F, G> {
     }
 }
 
+public extension FunctionK {
+    /// Combines this natural transformation with another one targetting the same Functor.
+    ///
+    /// - Parameter h: Natural transformation to be combined.
+    /// - Returns: A natural transformation that goes from the sum of both Functors into the same target Functor.
+    func sum<H: Functor>(_ h: FunctionK<H, G>) -> FunctionK<EitherKPartial<F, H>, G> {
+        SumFunctionK(self, h)
+    }
+}
+
 // MARK: Identity FunctionK
 
 public extension FunctionK where F == G {
@@ -70,5 +80,21 @@ private class ComposedFunctionK<F, G, H>: FunctionK<F, H> {
 
     override func invoke<A>(_ fa: Kind<F, A>) -> Kind<H, A> {
         g.invoke(f.invoke(fa))
+    }
+}
+
+private class SumFunctionK<F, H, G>: FunctionK<EitherKPartial<F, H>, G> {
+    private let f: FunctionK<F, G>
+    private let h: FunctionK<H, G>
+    
+    init(_ f: FunctionK<F, G>, _ h: FunctionK<H, G>) {
+        self.f = f
+        self.h = h
+    }
+    
+    override func invoke<A>(
+        _ fa: EitherKOf<F, H, A>
+    ) -> Kind<G, A> {
+        fa^.fold(f, h)
     }
 }
