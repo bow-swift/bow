@@ -18,6 +18,15 @@ public extension FunctionK where F == FreePartial<G>, G: Monad {
     }
 }
 
+public extension FunctionK where F: Functor, G: Monad {
+    /// Obtains an interpreter for Free Monads from this Natural Transformation.
+    ///
+    /// - Returns: A Natural Transformation to interpret the Free Monad given by the Functor `F`, into the Monad `G`.
+    func interpreter() -> FunctionK<FreePartial<F>, G> {
+        InterpreterFunctionK(self)
+    }
+}
+
 private class FreeFunctionK<F: Functor, G: Functor>: FunctionK<FreePartial<F>, FreePartial<G>> {
     private let f: FunctionK<F, G>
     
@@ -49,5 +58,20 @@ private class MonadFunctionK<F: Monad>: FunctionK<FreePartial<F>, F> {
         case let .free(fa):
             return fa.flatMap(self.invoke)
         }
+    }
+}
+
+private class InterpreterFunctionK<F: Functor, G: Monad>: FunctionK<FreePartial<F>, G> {
+    private let f: FunctionK<F, G>
+    
+    init(_ f: FunctionK<F, G>) {
+        self.f = f
+    }
+    
+    override func invoke<A>(
+        _ fa: FreeOf<F, A>
+    ) -> Kind<G, A> {
+        FunctionK<FreePartial<G>, G>.monad()
+            .invoke(f.free().invoke(fa))
     }
 }

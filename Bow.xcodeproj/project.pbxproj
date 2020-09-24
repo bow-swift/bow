@@ -1728,8 +1728,8 @@
 				8BA0F440217E2E9200969984 /* Cofree.swift */,
 				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
-				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
 				11D894FB251CEB58006A65EC /* FunctionK+Free.swift */,
+				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
 			);
 			path = BowFree;
 			sourceTree = "<group>";
