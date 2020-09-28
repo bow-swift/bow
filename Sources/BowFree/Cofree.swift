@@ -97,7 +97,7 @@ extension CofreePartial: Comonad {
         Cofree<F, B>(
             f(fa),
             fa^.tail.map { co in
-                co.map { _ in fa^.coflatMap(f)^ }
+                co.map { x in x.coflatMap(f)^ }
             }^
         )
     }

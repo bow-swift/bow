@@ -1627,8 +1627,8 @@
 		117DC13522AE570E00EF65F0 /* BowFreeGenerators */ = {
 			isa = PBXGroup;
 			children = (
-				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
 				11D895552521DC63006A65EC /* Cofree+Gen.swift */,
+				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
 			);
 			path = BowFreeGenerators;
 			sourceTree = "<group>";
@@ -1738,6 +1738,7 @@
 		11E718F1219D84EB00B94845 /* BowFreeTests */ = {
 			isa = PBXGroup;
 			children = (
+				11D8956D2521DE77006A65EC /* CofreeTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 			);
 			path = BowFreeTests;
@@ -2906,6 +2907,7 @@
 			buildActionMask = 0;
 			files = (
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
+				11D895B12521DEA6006A65EC /* CofreeTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
