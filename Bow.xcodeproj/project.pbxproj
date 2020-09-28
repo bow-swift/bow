@@ -1628,6 +1628,7 @@
 			isa = PBXGroup;
 			children = (
 				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
+				11D895552521DC63006A65EC /* Cofree+Gen.swift */,
 			);
 			path = BowFreeGenerators;
 			sourceTree = "<group>";
@@ -3051,6 +3052,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11D895562521DC63006A65EC /* Cofree+Gen.swift in Sources */,
 				117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
