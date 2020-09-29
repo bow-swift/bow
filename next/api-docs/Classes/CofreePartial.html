@@ -65,7 +65,7 @@
             <img style="height: 18px;" class="header-icon" src="../img/bow-logo.png" alt="Bow Docs"/>
             <span class="header-title">Bow</span>
           </a>
-          <span class="header-tag"> 93% documented</span>
+          <span class="header-tag"> 94% documented</span>
         </p>
     
           <p class="header-col header-col--secondary">
@@ -1062,8 +1062,8 @@
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_GAF7FunctorRzr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
-              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
-                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
+              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
+                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
@@ -1632,9 +1632,6 @@
               <li class="nav-group-task" data-name="Coalgebra" data-url="Typealiases.html#/s:19BowRecursionSchemes9Coalgebraa">
                 <a title="Coalgebra" class="nav-group-task-link" href="../Typealiases.html#/s:19BowRecursionSchemes9Coalgebraa">Coalgebra</a>
               </li>
-              <li class="nav-group-task" data-name="CofreeEval" data-url="Typealiases.html#/s:7BowFree10CofreeEvala">
-                <a title="CofreeEval" class="nav-group-task-link" href="../Typealiases.html#/s:7BowFree10CofreeEvala">CofreeEval</a>
-              </li>
               <li class="nav-group-task" data-name="CofreeOf" data-url="Typealiases.html#/s:7BowFree8CofreeOfa">
                 <a title="CofreeOf" class="nav-group-task-link" href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a>
               </li>
@@ -2150,11 +2147,11 @@
             <a href="#/CofreePartial"><h1 id="CofreePartial">CofreePartial<span class="anchor-icon" /></h1></a>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree9ForCofreeC">ForCofree</a></span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree9ForCofreeC">ForCofree</a></span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Partial application of the Cofree type constructor, omitting the last parameter.</p>
 
           </div>
         </section>
@@ -2162,6 +2159,13 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Functor%20for%20Cofree"></a>
+                <a name="//apple_ref/swift/Section/Instance of Functor for Cofree" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Functor%20for%20Cofree">
+                  <h3 id="Instance%20of%20Functor%20for%20Cofree" class="section-name">Instance of Functor for Cofree<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2182,7 +2186,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2192,6 +2199,13 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Comonad%20for%20Cofree"></a>
+                <a name="//apple_ref/swift/Section/Instance of Comonad for Cofree" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Comonad%20for%20Cofree">
+                  <h3 id="Instance%20of%20Comonad%20for%20Cofree" class="section-name">Instance of Comonad for Cofree<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2212,7 +2226,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">coflatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">coflatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2238,7 +2255,9 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">extract</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">CofreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">extract</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8CofreeOfa">CofreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
 
                         </div>
                       </div>
