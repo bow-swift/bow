@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift",
+        "state": {
+          "branch": null,
+          "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
+          "version": "5.1.1"
+        }
+      },
+      {
+        "package": "SwiftCheck",
+        "repositoryURL": "https://github.com/bow-swift/SwiftCheck.git",
+        "state": {
+          "branch": null,
+          "revision": "748359f9a95edf94d0c4664102f104f56b1ff1fb",
+          "version": "0.12.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
