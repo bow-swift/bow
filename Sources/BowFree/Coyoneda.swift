@@ -43,21 +43,21 @@ public postfix func ^<F, P, A>(_ fa: CoyonedaOf<F, P, A>) -> Coyoneda<F, P, A> {
     return Coyoneda.fix(fa)
 }
 
-public extension Coyoneda where F: Functor {
-    func lower() -> Kind<F, A> {
-        return F.map(pivot, transform())
-    }
-
-    func toYoneda() -> Yoneda<F, A> {
-        return YonedaFromCoyoneda<F, A>()
-    }
-}
-
-private class YonedaFromCoyoneda<F: Functor, A>: Yoneda<F, A> {
-    override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
-        return Yoneda.fix(self.map(f)).lower()
-    }
-}
+//public extension Coyoneda where F: Functor {
+//    func lower() -> Kind<F, A> {
+//        return F.map(pivot, transform())
+//    }
+//
+//    func toYoneda() -> Yoneda<F, A> {
+//        return YonedaFromCoyoneda<F, A>()
+//    }
+//}
+//
+//private class YonedaFromCoyoneda<F: Functor, A>: Yoneda<F, A> {
+//    override public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
+//        return Yoneda.fix(self.map(f)).lower()
+//    }
+//}
 
 extension CoyonedaPartial: Functor {
     public static func map<A, B>(_ fa: Kind<CoyonedaPartial<F, P>, A>, _ f: @escaping (A) -> B) -> Kind<CoyonedaPartial<F, P>, B> {
