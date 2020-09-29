@@ -513,107 +513,23 @@
     },
     {
       "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 4,
-      "symbol": "ForFree",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "line": 17,
+      "symbol": "Free._Free.pure(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 5,
-      "symbol": "FreePartial",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 6,
-      "symbol": "FreeOf",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 8,
-      "symbol": "Free",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 9,
-      "symbol": "Free.liftF(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 13,
-      "symbol": "Free.deferFree(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "line": 18,
+      "symbol": "Free._Free.free(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
       "line": 21,
-      "symbol": "Free.fix(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 25,
-      "symbol": "Free.transform(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 29,
-      "symbol": "Free.step()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 48,
-      "symbol": "Free.foldMapK(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 67,
-      "symbol": "Free",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 68,
-      "symbol": "Free.run()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 131,
-      "symbol": "FreePartial",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 137,
-      "symbol": "FreePartial",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Free.swift",
-      "line": 146,
-      "symbol": "FreePartial",
-      "symbol_kind": "source.lang.swift.decl.extension",
+      "symbol": "Free.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {

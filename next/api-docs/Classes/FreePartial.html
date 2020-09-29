@@ -421,6 +421,9 @@
               <li class="nav-group-task" data-name="Free" data-url="Classes/Free.html">
                 <a title="Free" class="nav-group-task-link" href="../Classes/Free.html">Free</a>
               </li>
+              <li class="nav-group-task" data-name="– _Free" data-url="Classes/Free/_Free.html">
+                <a title="– _Free" class="nav-group-task-link" href="../Classes/Free/_Free.html">– _Free</a>
+              </li>
               <li class="nav-group-task" data-name="FreePartial" data-url="Classes/FreePartial.html">
                 <a title="FreePartial" class="nav-group-task-link" href="../Classes/FreePartial.html">FreePartial</a>
               </li>
@@ -1056,8 +1059,8 @@
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:5BowRx1xoPyAA7SingleKCyxG0A04KindCyAA03ForC1KCxGlF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:5BowRx1xoPyAA7SingleKCyxG0A04KindCyAA03ForC1KCxGlF">^(_:)</a>
               </li>
-              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_Gr0_lF">
-                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_Gr0_lF">^(_:)</a>
+              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_GAF7FunctorRzr0_lF">
+                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA0B0Cyxq_G0A04KindCyAA0B7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
@@ -2147,11 +2150,11 @@
             <a href="#/FreePartial"><h1 id="FreePartial">FreePartial<span class="anchor-icon" /></h1></a>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree03ForB0C">ForFree</a></span><span class="p">,</span> <span class="kt">S</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree03ForB0C">ForFree</a></span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Partial application of the Free type constructor, omitting the last parameter.</p>
 
           </div>
         </section>
@@ -2159,6 +2162,13 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Functor%20for%20Free"></a>
+                <a name="//apple_ref/swift/Section/Instance of Functor for Free" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Functor%20for%20Free">
+                  <h3 id="Instance%20of%20Functor%20for%20Free" class="section-name">Instance of Functor for Free<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2179,7 +2189,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2189,6 +2202,13 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Applicative%20for%20Free"></a>
+                <a name="//apple_ref/swift/Section/Instance of Applicative for Free" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Applicative%20for%20Free">
+                  <h3 id="Instance%20of%20Applicative%20for%20Free" class="section-name">Instance of Applicative for Free<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2209,7 +2229,7 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">pure</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">pure</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2220,10 +2240,10 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Instance%20of%20%60Selective%60%20for%20%60Free%60"></a>
-                <a name="//apple_ref/swift/Section/Instance of `Selective` for `Free`" class="dashAnchor"></a>
-                <a href="#/Instance%20of%20%60Selective%60%20for%20%60Free%60">
-                  <h3 id="Instance%20of%20%60Selective%60%20for%20%60Free%60" class="section-name">Instance of `Selective` for `Free`<span class="anchor-icon" /></h3>
+                <a name="/Instance%20of%20Monad%20for%20Free"></a>
+                <a name="//apple_ref/swift/Section/Instance of Monad for Free" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Monad%20for%20Free">
+                  <h3 id="Instance%20of%20Monad%20for%20Free" class="section-name">Instance of Monad for Free<span class="anchor-icon" /></h3>
                 </a>
               </div>
               <ul class="item-container">
@@ -2246,7 +2266,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2272,7 +2295,10 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">tailRecM</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">FreePartial</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">tailRecM</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree0B2Ofa">FreeOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
