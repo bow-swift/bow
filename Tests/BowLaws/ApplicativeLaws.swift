@@ -89,77 +89,77 @@ public class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
         property("Map with 5 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int) in
             
             Kind<F, Int>.map(
-                .pure(a),
-                .pure(b),
-                .pure(c),
-                .pure(d),
-                .pure(e)) { a1, b1, c1, d1, e1 in
+                Kind<F, Int>.pure(a),
+                Kind<F, Int>.pure(b),
+                Kind<F, Int>.pure(c),
+                Kind<F, Int>.pure(d),
+                Kind<F, Int>.pure(e)) { a1, b1, c1, d1, e1 in
                     a1 + b1 + c1 + d1 + e1
             }
                 ==
             Kind<F, Int>.pure(a + b + c + d + e)
         }
 
-        property("Map with 6 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) in
+        property("Map with 6 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int) -> Bool in
             
             Kind<F, Int>.map(
-                .pure(a),
-                .pure(b),
-                .pure(c),
-                .pure(d),
-                .pure(e),
-                .pure(f)) { a1, b1, c1, d1, e1, f1 in
+                Kind<F, Int>.pure(a),
+                Kind<F, Int>.pure(b),
+                Kind<F, Int>.pure(c),
+                Kind<F, Int>.pure(d),
+                Kind<F, Int>.pure(e),
+                Kind<F, Int>.pure(f)) { (a1: Int, b1: Int, c1: Int, d1: Int, e1: Int, f1: Int) -> Int in
                     a1 + b1 + c1 + d1 + e1 + f1
             }
                 ==
             Kind<F, Int>.pure(a + b + c + d + e + f)
         }
         
-        property("Map with 7 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int) in
+        property("Map with 7 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int) -> Bool in
             
             Kind<F, Int>.map(
-                .pure(a),
-                .pure(b),
-                .pure(c),
-                .pure(d),
-                .pure(e),
-                .pure(f),
-                .pure(g)) { a1, b1, c1, d1, e1, f1, g1 in
+                Kind<F, Int>.pure(a),
+                Kind<F, Int>.pure(b),
+                Kind<F, Int>.pure(c),
+                Kind<F, Int>.pure(d),
+                Kind<F, Int>.pure(e),
+                Kind<F, Int>.pure(f),
+                Kind<F, Int>.pure(g)) { (a1: Int, b1: Int, c1: Int, d1: Int, e1: Int, f1: Int, g1: Int) -> Int in
                     a1 + b1 + c1 + d1 + e1 + f1 + g1
             }
                 ==
             Kind<F, Int>.pure(a + b + c + d + e + f + g)
         }
         
-        property("Map with 8 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int, h: Int) in
+        property("Map with 8 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int, h: Int) -> Bool in
             
             Kind<F, Int>.map(
-                .pure(a),
-                .pure(b),
-                .pure(c),
-                .pure(d),
-                .pure(e),
-                .pure(f),
-                .pure(g),
-                .pure(h)) { a1, b1, c1, d1, e1, f1, g1, h1 in
+                Kind<F, Int>.pure(a),
+                Kind<F, Int>.pure(b),
+                Kind<F, Int>.pure(c),
+                Kind<F, Int>.pure(d),
+                Kind<F, Int>.pure(e),
+                Kind<F, Int>.pure(f),
+                Kind<F, Int>.pure(g),
+                Kind<F, Int>.pure(h)) { (a1: Int, b1: Int, c1: Int, d1: Int, e1: Int, f1: Int, g1: Int, h1: Int) -> Int in
                     a1 + b1 + c1 + d1 + e1 + f1 + g1 + h1
             }
                 ==
             Kind<F, Int>.pure(a + b + c + d + e + f + g + h)
         }
         
-        property("Map with 9 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int, h: Int) in
+        property("Map with 9 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int, f: Int, g: Int, h: Int) -> Bool in
             
             Kind<F, Int>.map(
-                .pure(a),
-                .pure(b),
-                .pure(c),
-                .pure(d),
-                .pure(e),
-                .pure(f),
-                .pure(g),
-                .pure(h),
-                .pure(a)) { a1, b1, c1, d1, e1, f1, g1, h1, i1 in
+                Kind<F, Int>.pure(a),
+                Kind<F, Int>.pure(b),
+                Kind<F, Int>.pure(c),
+                Kind<F, Int>.pure(d),
+                Kind<F, Int>.pure(e),
+                Kind<F, Int>.pure(f),
+                Kind<F, Int>.pure(g),
+                Kind<F, Int>.pure(h),
+                Kind<F, Int>.pure(a)) { (a1: Int, b1: Int, c1: Int, d1: Int, e1: Int, f1: Int, g1: Int, h1: Int, i1: Int) -> Int in
                     a1 + b1 + c1 + d1 + e1 + f1 + g1 + h1 + i1
             }
                 ==
