@@ -1,5 +1,33 @@
 import Bow
 
+public extension FunctionK where G: Functor {
+    func coyoneda() -> FunctionK<CoyonedaPartial<F>, G> {
+        CoyonedaFunctionK(f: self)
+    }
+
+    // forall T. Coyoneda<F, T> -> G<T>
+    private class CoyonedaFunctionK<F, G>: FunctionK<CoyonedaPartial<F>, G> where G: Functor {
+        internal init(f: FunctionK<F, G>) {
+            self.f = f
+        }
+
+        private let f: FunctionK<F, G>
+        override func invoke<A>(_ fa: Kind<CoyonedaPartial<F>, A>) -> Kind<G, A> {
+            fa^.coyonedaF.run(Invoke(f: f))
+        }
+
+        private class Invoke<F, G: Functor, A>: CokleisliK<CoyonedaFPartial<F, A>, Kind<G, A>> {
+            internal init(f: FunctionK<F, G>) {
+                self.f = f
+            }
+            let f: FunctionK<F, G>
+            override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> Kind<G, A> {
+                f.invoke(fa^.pivot).map(fa^.f)
+            }
+        }
+    }
+}
+
 public extension FunctionK where F: Functor, G: Functor {
     /// Obtains a natural transformation for the Free Monads of the Functors from this natural transformation.
     ///
