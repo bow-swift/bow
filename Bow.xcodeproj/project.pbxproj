@@ -181,6 +181,8 @@
 		11D36A19223261EC00CBD85F /* Selective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A18223261EC00CBD85F /* Selective.swift */; };
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D894FB251CEB58006A65EC /* FunctionK+Free.swift */; };
+		11D8967D2523763A006A65EC /* Cofree+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967C2523763A006A65EC /* Cofree+Gen.swift */; };
+		11D8967F25237642006A65EC /* CofreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967E25237642006A65EC /* CofreeTest.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
 		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
@@ -956,6 +958,8 @@
 		11D36A18223261EC00CBD85F /* Selective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selective.swift; sourceTree = "<group>"; };
 		11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectiveLaws.swift; sourceTree = "<group>"; };
 		11D894FB251CEB58006A65EC /* FunctionK+Free.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Free.swift"; sourceTree = "<group>"; };
+		11D8967C2523763A006A65EC /* Cofree+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Cofree+Gen.swift"; sourceTree = "<group>"; };
+		11D8967E25237642006A65EC /* CofreeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CofreeTest.swift; sourceTree = "<group>"; };
 		11D97EEA219EBAA1008FC004 /* BowEffectsLaws.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BowEffectsLaws.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DDCD1B217F171900844D9D /* Memoization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		11DDCD20217F194B00844D9D /* MemoizationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoizationTest.swift; sourceTree = "<group>"; };
@@ -1627,6 +1631,7 @@
 		117DC13522AE570E00EF65F0 /* BowFreeGenerators */ = {
 			isa = PBXGroup;
 			children = (
+				11D8967C2523763A006A65EC /* Cofree+Gen.swift */,
 				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
 			);
 			path = BowFreeGenerators;
@@ -1737,6 +1742,7 @@
 		11E718F1219D84EB00B94845 /* BowFreeTests */ = {
 			isa = PBXGroup;
 			children = (
+				11D8967E25237642006A65EC /* CofreeTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 			);
 			path = BowFreeTests;
@@ -3051,6 +3057,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11D8967F25237642006A65EC /* CofreeTest.swift in Sources */,
+				11D8967D2523763A006A65EC /* Cofree+Gen.swift in Sources */,
 				117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
