@@ -1,30 +1,59 @@
 import Foundation
 import Bow
 
+/// Witness for the Yoneda<F, A> data type. To be used in simulated Higher Kinded Types.
 public final class ForYoneda {}
+
+/// Partial application of the Yoneda type constructor, omitting the last parameter.
 public final class YonedaPartial<F: Functor>: Kind<ForYoneda, F> {}
+
+/// Higher Kinded Type alias to improve readability-
 public typealias YonedaOf<F: Functor, A> = Kind<YonedaPartial<F>, A>
 
+/// This type implements the covariant form of the Yoneda lemma, stating that F is naturally isomorphic to Yoneda<F>.
+///
+/// Yoneda can be viewed as the partial application of the `map` function, where the first argument is fixed:
+///
+/// `map :: (F<A>, (A) -> B) -> F<B>`
+/// `Yoneda :: ((A) -> B) -> F<B>`
 public final class Yoneda<F: Functor, A>: YonedaOf<F, A> {
     // forall b. (a -> b) -> f b
     internal let function: (@escaping (A) -> Any) -> Kind<F, Any>
     
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to Yoneda.
     public static func fix(_ fa: YonedaOf<F, A>) -> Yoneda<F, A> {
         fa as! Yoneda<F, A>
     }
     
+    /// Lifts a value to a Yoneda value.
+    ///
+    /// - Parameter fa: Functorial value.
+    /// - Returns: Yoneda value.
     public static func liftYoneda(_ fa: Kind<F, A>) -> Yoneda<F, A> {
         Yoneda { f in fa.map(f) }
     }
     
+    /// Initializes a Yoneda value.
+    ///
+    /// - Parameter f: Function describing the natural isomorphism.
     public init(_ f: @escaping (@escaping (A) -> /*B*/Any) -> Kind<F, /*B*/Any>) {
         self.function = f
     }
-
+    
+    /// Applies a function to this Yoneda value.
+    ///
+    /// - Parameter f: Transforming function.
+    /// - Returns: A value in the functorial context wrapped in this Yoneda value.
     public func apply<B>(_ f: @escaping (A) -> B) -> Kind<F, B> {
         self.function(f).map { x in x as! B }
     }
-
+    
+    /// Obtains the value yielding the Yoneda isomorphism.
+    ///
+    /// - Returns: A value in the functorial context.
     public func lower() -> Kind<F, A> {
         apply(id)
     }
