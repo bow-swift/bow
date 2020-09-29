@@ -1633,6 +1633,7 @@
 			children = (
 				11D8967C2523763A006A65EC /* Cofree+Gen.swift */,
 				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
+				11D895DE25232F1E006A65EC /* Yoneda+Gen.swift */,
 			);
 			path = BowFreeGenerators;
 			sourceTree = "<group>";
@@ -1744,6 +1745,7 @@
 			children = (
 				11D8967E25237642006A65EC /* CofreeTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
+				11D895F625233020006A65EC /* YonedaTest.swift */,
 			);
 			path = BowFreeTests;
 			sourceTree = "<group>";
@@ -2911,6 +2913,7 @@
 			buildActionMask = 0;
 			files = (
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
+				11D895F725233020006A65EC /* YonedaTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
