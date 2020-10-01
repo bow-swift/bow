@@ -1,5 +1,6 @@
 import XCTest
 import Bow
+import BowFree
 
 
 public final class ForStream {}
