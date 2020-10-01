@@ -5,7 +5,7 @@ public final class ForCoyoneda {}
 public final class CoyonedaPartial<F>: Kind<ForCoyoneda, F> {}
 public typealias CoyonedaOf<F, A> = Kind<CoyonedaPartial<F>, A>
 
-public class Coyoneda<F, A>: CoyonedaOf<F, A> {
+public final class Coyoneda<F, A>: CoyonedaOf<F, A> {
     internal let pivot: Kind<F, /*B*/Any>
     internal let function: (/*B*/Any) -> A
     
