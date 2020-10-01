@@ -1,14 +1,27 @@
 import Foundation
 import Bow
 
+/// Witness for the Coyoneda<F, A> data type. To be used in simulated Higher Kinded Types.
 public final class ForCoyoneda {}
+
+/// Partial application of the Coyoneda type constructor, omitting the last parameter.
 public final class CoyonedaPartial<F>: Kind<ForCoyoneda, F> {}
+
+/// Higher Kinded Type alias to improve readability.
 public typealias CoyonedaOf<F, A> = Kind<CoyonedaPartial<F>, A>
 
+/// This type implements the dual version of the Yoneda lemma, stating that F is naturally isomorphic to Coyoneda<F>.
+///
+/// Coyoneda can be viewed as the arguments that we need for the `map` function.
 public final class Coyoneda<F, A>: CoyonedaOf<F, A> {
     internal let pivot: Kind<F, /*B*/Any>
     internal let function: (/*B*/Any) -> A
     
+    /// Initializes a Coyoneda value.
+    ///
+    /// - Parameters:
+    ///   - pivot: A value in the context of `F`.
+    ///   - function: A function transforming the type parameter into a new type.
     public init(
         _ pivot: Kind<F, Any>,
         _ function: @escaping (Any) -> A
@@ -17,16 +30,27 @@ public final class Coyoneda<F, A>: CoyonedaOf<F, A> {
         self.function = function
     }
     
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in higher-kind form.
+    /// - Returns: Value cast to Coyoneda.
     public static func fix(_ fa: CoyonedaOf<F, A>) -> Coyoneda<F, A> {
         fa as! Coyoneda<F, A>
     }
 }
 
 public extension Coyoneda where F: Functor {
+    /// Lifts a value in the functorial context into a Coyoneda.
+    ///
+    /// - Parameter fa: Value in the functorial context.
+    /// - Returns: A Coyoneda value.
     static func liftCoyoneda(_ fa: Kind<F, A>) -> Coyoneda<F, A> {
         Coyoneda(fa.map { a in a as Any }, { x in x as! A })
     }
     
+    /// Reduces the Coyoneda value into the functorial context.
+    ///
+    /// - Returns: A value in the functorial context.
     func lower() -> Kind<F, A> {
         self.pivot.map { a in self.function(a) }
     }
