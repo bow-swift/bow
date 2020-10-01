@@ -172,6 +172,10 @@
 		11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */; };
 		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
+		11B6FD7D2525C37F00A5AD54 /* CoyonedaGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */; };
+		11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */; };
+		11B6FDC22525C48200A5AD54 /* CofreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967E25237642006A65EC /* CofreeTest.swift */; };
+		11B6FDEF2525C49000A5AD54 /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
 		11BA21BE23D6F74F00F3EE78 /* ComonadStoreLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */; };
 		11BA21C023D6FA3600F3EE78 /* ComonadTracedLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */; };
@@ -182,9 +186,7 @@
 		11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D36A1A2232787A00CBD85F /* SelectiveLaws.swift */; };
 		11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D894FB251CEB58006A65EC /* FunctionK+Free.swift */; };
 		11D8967D2523763A006A65EC /* Cofree+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967C2523763A006A65EC /* Cofree+Gen.swift */; };
-		11D8967F25237642006A65EC /* CofreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967E25237642006A65EC /* CofreeTest.swift */; };
 		11D896C325237A6D006A65EC /* Yoneda+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C225237A6D006A65EC /* Yoneda+Gen.swift */; };
-		11D896C625237A7D006A65EC /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		11D97EF2219EBC0F008FC004 /* AsyncLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3A2217E2DEF00969984 /* AsyncLaws.swift */; };
 		11DDCD1C217F171900844D9D /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD1B217F171900844D9D /* Memoization.swift */; };
 		11DDCD21217F194B00844D9D /* MemoizationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DDCD20217F194B00844D9D /* MemoizationTest.swift */; };
@@ -953,6 +955,8 @@
 		11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBindingExpression.swift; sourceTree = "<group>"; };
 		11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterBindingExpression.swift; sourceTree = "<group>"; };
+		11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaGen.swift; sourceTree = "<group>"; };
+		11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaTest.swift; sourceTree = "<group>"; };
 		11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadEnvLaws.swift; sourceTree = "<group>"; };
 		11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadStoreLaws.swift; sourceTree = "<group>"; };
 		11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTracedLaws.swift; sourceTree = "<group>"; };
@@ -1636,6 +1640,7 @@
 			isa = PBXGroup;
 			children = (
 				11D8967C2523763A006A65EC /* Cofree+Gen.swift */,
+				11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */,
 				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
 				11D896C225237A6D006A65EC /* Yoneda+Gen.swift */,
 			);
@@ -1748,6 +1753,7 @@
 			isa = PBXGroup;
 			children = (
 				11D8967E25237642006A65EC /* CofreeTest.swift */,
+				11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 				11D896C525237A7D006A65EC /* YonedaTest.swift */,
 			);
@@ -2916,7 +2922,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11B6FDC22525C48200A5AD54 /* CofreeTest.swift in Sources */,
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
+				11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */,
+				11B6FDEF2525C49000A5AD54 /* YonedaTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3063,9 +3072,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				11B6FD7D2525C37F00A5AD54 /* CoyonedaGen.swift in Sources */,
 				11D896C325237A6D006A65EC /* Yoneda+Gen.swift in Sources */,
-				11D896C625237A7D006A65EC /* YonedaTest.swift in Sources */,
-				11D8967F25237642006A65EC /* CofreeTest.swift in Sources */,
 				11D8967D2523763A006A65EC /* Cofree+Gen.swift in Sources */,
 				117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */,
 			);
