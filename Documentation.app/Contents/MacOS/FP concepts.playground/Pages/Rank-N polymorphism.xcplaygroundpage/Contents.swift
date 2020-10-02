@@ -85,7 +85,7 @@ struct RandomWordGenerator {
     let length: Int
 
     func callAsFunction() -> String {
-        (0..<length).forEach { _ in .random(in: "a"..."z")
+        (0..<length).forEach { _ in .random(in: "a"..."z") }
     }
 }
 /*:
