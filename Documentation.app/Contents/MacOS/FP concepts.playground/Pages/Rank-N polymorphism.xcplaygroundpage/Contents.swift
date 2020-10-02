@@ -161,5 +161,5 @@ final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
  Now we can express our `callTwice` function with regular Swift syntax:
  */
 func callTwice<A, B>(_ f: FunctionK<ForId, ForArrayK>, _ a: A, _ b: B) -> ([A], [B]) {
-    (f(a), f(b))
+    (f(Id(a)).asArray, f(Id(b)).asArray)
 }
