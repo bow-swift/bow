@@ -13,6 +13,10 @@ class YonedaTest: XCTestCase {
         ApplicativeLaws<YonedaPartial<IdPartial>>.check()
     }
     
+    func testSelectiveLaws() {
+        SelectiveLaws<YonedaPartial<IdPartial>>.check()
+    }
+    
     func testMonadLaws() {
         MonadLaws<YonedaPartial<IdPartial>>.check(withStackSafety: false)
     }
