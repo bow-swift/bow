@@ -150,7 +150,9 @@ print(anotherRandomWordGenerator())
 
  Specific functions are expressed as a subclass of `FunctionK`. Thus, if we have a function `f` that takes a parameter of type `FunctionK<F, G>`, we can to `f` any function from `Kind<F, T>` to `Kind<G, T>` that is polymorphic. Subclasses of `FunctionK` only need to override the generic method `invoke`, which represents the actual body of our function. `callAsFunction` is implemented automatically, so we can always call a `FunctionK` as it was a regular function.
 
- Our `SingletonArrayFunction` defined earlier can be seen as a `FunctionK<ForId, ForArrayK>.`
+ Our `SingletonArrayFunction` defined earlier has signature (expressed in our made up syntax)`<T>(T) -> [T]`. `[T]` is equivalent to Bow's `ArrayK<T>`, i.e. `ArrayKOf<T>`. What about the type of the input? It's a simple type that is not wrapped with any type constructor! Worry not, we can use `IdOf<A>`, which is a type constructor that simply wraps a value of type `A` without adding any additional behaviour or transformation. This is to say, `IdOf<A>` is isomorphic to `A` we can convert a value back and forth between `IdOf<A>` and `A` without losing any information.
+
+ With all this in mind, we now can see that our `SingletonArrayFunction` can be seen as a `FunctionK<ForId, ForArrayK>`:
  */
 final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
     override func invoke<A>(_ fa: IdOf<A>) -> ArrayKOf<A> {
@@ -158,8 +160,14 @@ final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
     }
 }
 /*:
+ Note that in order to be able to construct an array of `A`, we need to convert from `IdOf<A>` to `A` by calling the property `value` of `IdOf<A>`. Similarly, we need to wrap the array we construct by calling the `ArrayK` constructor.
+
  Now we can express our `callTwice` function with regular Swift syntax:
  */
 func callTwice<A, B>(_ f: FunctionK<ForId, ForArrayK>, _ a: A, _ b: B) -> ([A], [B]) {
     (f(Id(a)).asArray, f(Id(b)).asArray)
 }
+/*:
+ Here we needed to perform the opposite conversion, from `A` to `Id<A>` by passing `a` to the constructor of `Id`, same for `B`.
+ We also had to convert from `ArrayK<A>` to `[A]` by calling the property `asArray` of `ArrayK`.
+ */
