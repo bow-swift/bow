@@ -33,7 +33,7 @@ func singletonArray<T>(_ v: T) -> [T] {
      (f(a), f(b)) // `f` really needs to be polymorphic, because we call it twice with inputs of different types.
  }
  ```
- Notice that we included `<T>` in front of the type signature of the parameter of our function `callTwice`. With this, we want to express that the parameter `f` must be a function polymorphic over one type parameter we called `T`. This is a made up syntax, don't try to write this in your swift program because it won't compile.
+ Notice that we included `<T>` in front of the type signature of the parameter of our function `callTwice`. With this, we want to express that the parameter `f` must be a function polymorphic over one type parameter we called `T`. This is a made up syntax, don't try to write this in your Swift program because it won't compile.
 
  If we could write such a function, we could pass our `singletonArray` function to it, along with a value of any type we want:
  ```
@@ -52,28 +52,36 @@ func singletonArray<T>(_ v: T) -> [T] {
 
  For example, the function `randomWordGenerator` below returns a random word of length `n`. As you can see `n` is a random number that is generated once each time you execute this program. `randomWordGenerator` captures the value of `n`, which means that the strings returned by `randomWordGenerator` will all have the same length during the execution of the program. Each time you call `randomWordGenerator` you will get a different word, but all of them will have the same length. If you re-run the program a second time, `n` will probably get a different value and the length of the words returned by `randomWordGenerator` will be different.
 */
-let n: Int = .random(in: 0..<10)
-let randomWordGenerator: () -> String = { (0..<n).forEach { _ in .random(in: "a"..."z") } }
+let n: Int = .random(in: 0 ..< 10)
+let randomWordGenerator: () -> String = { 
+    (0 ..< n).forEach { _ in 
+        .random(in: "a" ... "z") 
+    }
+}
 /*:
  In the example above we only got one `randomWordGenerator` function per program execution: if we want a different `randomWordGenerator` function with a different `n` we need to re-run the program. Let's create a function that returns a different `randomWordGenerator` function each time we call it. This is an example of a higher-order function, since it returns another function.
  */
 func makeRandomWordGenerator() -> () -> String {
-    let length: Int = .random(in: 0..<10)
-    return { (0..<length).forEach { _ in .random(in: "a"..."z") } }
+    let length: Int = .random(in: 0 ..< 10)
+    return { 
+        (0 ..< length).forEach { _ in 
+            .random(in: "a" ... "z") 
+        }
+    }
 }
 /*:
  The body of `makeRandomWordGenerator` is basically the same code we had before (we renamed `n` to `length` to stress the fact that `makeRandomWordGenerator` doesn't use any variables from outside its body). But now, each time we call `makeRandomWordGenerator` a different `length` is generated, and thus we get a different `randomWordGenerator` function each time.
 
  We check this by creating 3 different functions with `makeRandomWordGenerator` and generating one word with each. We should see that each function prints words of different length (unless we are a bit unlucky).
  */
-for i in 0..<3 {
+for _ in 0 ..< 3 {
     let f = makeRandomWordGenerator()
     print(f())
 }
 /*:
  An important thing to realise is that we cannot just generate the random `length` value inside the body of the closure returned from `makeRandomWordGenerator`. If we did so, a `randomWordGenerator` would return strings of different length each time we call it, and this is not what we want. We want each `randomWordGenerator` function to always return strings of the same length.
 
- This little example demonstrates that closures indeed capture values from their environment. Sine we define `length` inside `makeRandomWordGenerator`,
+ This little example demonstrates that closures indeed capture values from their environment. Since we define `length` inside `makeRandomWordGenerator`,
  there's no way it can be accessed from outside its body. This means that the closures returned from `makeRandomWordGenerator` indeed carry a copy of `length` with them, because otherwise they couldn't know what length the words they generate are supposed to be.
 
  ## What exactly is a closure?
@@ -85,12 +93,14 @@ struct RandomWordGenerator {
     let length: Int
 
     func callAsFunction() -> String {
-        (0..<length).forEach { _ in .random(in: "a"..."z") }
+        (0 ..< length).forEach { _ in 
+            .random(in: "a" ... "z")
+        }
     }
 }
 /*:
 */
-let anotherRandomWordGenerator = RandomWordGenerator(k: 6)
+let anotherRandomWordGenerator = RandomWordGenerator(length: 6)
 /*:
  Since Swift 5.2, because we called the function in our struct `callAsFunction` we are able to call an instance of our struct as it were a function:
  */
@@ -143,7 +153,7 @@ print(anotherRandomWordGenerator())
  Our `SingletonArrayFunction` defined earlier can be seen as a `FunctionK<ForId, ForArrayK>.`
  */
 final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
-    override func invoke<A>(_ fa: Kind<ForId, A>) -> Kind<ForArrayK, A> {
+    override func invoke<A>(_ fa: IdOf<A>) -> ArrayKOf<A> {
         ArrayK([fa^.value])
     }
 }
