@@ -134,7 +134,7 @@ print(anotherRandomWordGenerator())
 /*:
  Well, now we can only pass a value of `SingletonArrayFunction`, which is to say that we can only pass one specific function. This is not what we wanted, we wanted to be able to pass any polymorphic function with this signature `<T>(T) -> [T]`. We must find another way.
 
- ## Introducing FunctionK
+ ## Introducing FunctionK
 
  `FunctionK` is a class found in Bow that represents any polymorphic function. `FunctionK` takes two type parameters that represent type constructors. Specifically, `FunctionK` represents functions from `Kind<F, T>` to `Kind<G, T>` that is polymorphic on `T`, or expressed with the made up notation we introduced earlier: `<T>Kind<F, T> -> Kind<G, T>`.
 
@@ -147,7 +147,6 @@ final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
         ArrayK([fa^.value])
     }
 }
-
 /*:
  Now we can express our `callTwice` function with regular Swift syntax:
  */
