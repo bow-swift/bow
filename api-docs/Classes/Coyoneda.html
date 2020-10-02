@@ -1068,8 +1068,8 @@
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
-              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">
-                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">^(_:)</a>
+              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
+                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
               </li>
               <li class="nav-group-task" data-name="and(_:_:)" data-url="Functions.html#/s:3Bow3andyS2b_SbtF">
                 <a title="and(_:_:)" class="nav-group-task-link" href="../Functions.html#/s:3Bow3andyS2b_SbtF">and(_:_:)</a>
@@ -1586,9 +1586,6 @@
               </li>
               <li class="nav-group-task" data-name="Algebra" data-url="Typealiases.html#/s:19BowRecursionSchemes7Algebraa">
                 <a title="Algebra" class="nav-group-task-link" href="../Typealiases.html#/s:19BowRecursionSchemes7Algebraa">Algebra</a>
-              </li>
-              <li class="nav-group-task" data-name="AnyFunc" data-url="Typealiases.html#/s:7BowFree7AnyFunca">
-                <a title="AnyFunc" class="nav-group-task-link" href="../Typealiases.html#/s:7BowFree7AnyFunca">AnyFunc</a>
               </li>
               <li class="nav-group-task" data-name="ArrayKOf" data-url="Typealiases.html#/s:3Bow8ArrayKOfa">
                 <a title="ArrayKOf" class="nav-group-task-link" href="../Typealiases.html#/s:3Bow8ArrayKOfa">ArrayKOf</a>
@@ -2147,11 +2144,13 @@
             <a href="#/Coyoneda"><h1 id="Coyoneda">Coyoneda<span class="anchor-icon" /></h1></a>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree10CoyonedaOfa">CoyonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree10CoyonedaOfa">CoyonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>This type implements the dual version of the Yoneda lemma, stating that F is naturally isomorphic to Coyoneda<F>.</p>
+
+<p>Coyoneda can be viewed as the arguments that we need for the <code>map</code> function.</p>
 
           </div>
         </section>
@@ -2163,90 +2162,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:7BowFree8CoyonedaC5applyyACyxq_q0_G0A04KindCyxq_G_q0_q_ctFZ"></a>
-                    <a name="//apple_ref/swift/Method/apply(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree8CoyonedaC5applyyACyxq_q0_G0A04KindCyxq_G_q0_q_ctFZ">
-                      <span class="token-name">apply(_:_:)</span>
-                      <span class="token-icon" /></a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <section class="section">
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language key-main">
-                          <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">apply</span><span class="p">(</span><span class="n">_</span> <span class="nv">fp</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span> <span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">P</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7BowFree8CoyonedaC11unsafeApplyyACyxq_q0_G0A04KindCyxq_G_SayyXlyXlcGtFZ"></a>
-                    <a name="//apple_ref/swift/Method/unsafeApply(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree8CoyonedaC11unsafeApplyyACyxq_q0_G0A04KindCyxq_G_SayyXlyXlcGtFZ">
-                      <span class="token-name">unsafeApply(_:_:)</span>
-                      <span class="token-icon" /></a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <section class="section">
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language key-main">
-                          <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">unsafeApply</span><span class="p">(</span><span class="n">_</span> <span class="nv">fp</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">fs</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:7BowFree7AnyFunca">AnyFunc</a></span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7BowFree8CoyonedaC3fixyACyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_GFZ"></a>
-                    <a name="//apple_ref/swift/Method/fix(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree8CoyonedaC3fixyACyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_GFZ">
-                      <span class="token-name">fix(_:)</span>
-                      <span class="token-icon" /></a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <section class="section">
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language key-main">
-                          <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree10CoyonedaOfa">CoyonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7BowFree8CoyonedaCyACyxq_q0_G0A04KindCyxq_G_SayyXlyXlcGtcfc"></a>
+                    <a name="/s:7BowFree8CoyonedaCyACyxq_G0A04KindCyxypG_q_ypctcfc"></a>
                     <a name="//apple_ref/swift/Method/init(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree8CoyonedaCyACyxq_q0_G0A04KindCyxq_G_SayyXlyXlcGtcfc">
+                    <a class="token" href="#/s:7BowFree8CoyonedaCyACyxq_G0A04KindCyxypG_q_ypctcfc">
                       <span class="token-name">init(_:_:)</span>
                       <span class="token-icon" /></a>
                     </code>
@@ -2254,16 +2172,185 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Initializes a Coyoneda value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">pivot</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">P</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">ks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:7BowFree7AnyFunca">AnyFunc</a></span><span class="p">])</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">pivot</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Any</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">function</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span>
+<span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  pivot
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value in the context of <code>F</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  function
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function transforming the type parameter into a new type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7BowFree8CoyonedaC3fixyACyxq_G0A04KindCyAA0C7PartialCyxGq_GFZ"></a>
+                    <a name="//apple_ref/swift/Method/fix(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7BowFree8CoyonedaC3fixyACyxq_G0A04KindCyAA0C7PartialCyxGq_GFZ">
+                      <span class="token-name">fix(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Safe downcast.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree10CoyonedaOfa">CoyonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Coyoneda.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7BowFree8CoyonedaCAA0A07FunctorRzrlE04liftC0yACyxq_GAD4KindCyxq_GFZ"></a>
+                    <a name="//apple_ref/swift/Method/liftCoyoneda(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7BowFree8CoyonedaCAA0A07FunctorRzrlE04liftC0yACyxq_GAD4KindCyxq_GFZ">
+                      <span class="token-name">liftCoyoneda(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Lifts a value in the functorial context into a Coyoneda.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">liftCoyoneda</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Coyoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the functorial context.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Coyoneda value.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7BowFree8CoyonedaCAA0A07FunctorRzrlE5lowerAD4KindCyxq_GyF"></a>
+                    <a name="//apple_ref/swift/Method/lower()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7BowFree8CoyonedaCAA0A07FunctorRzrlE5lowerAD4KindCyxq_GyF">
+                      <span class="token-name">lower()</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Reduces the Coyoneda value into the functorial context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">lower</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value in the functorial context.</p>
                       </div>
                     </section>
                   </div>
