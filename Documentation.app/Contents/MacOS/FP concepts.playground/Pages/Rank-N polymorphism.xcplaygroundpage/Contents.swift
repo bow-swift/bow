@@ -13,7 +13,7 @@ import Bow
  {:.intermediate}
  intermediate
 
- Swift does not support Rank-N polymorphism yet. However, Rank-N polymorphism unlocks some interesting patterns and techniques. For this reason, Bow provides some helper classes that allow you to emulate Rank-N polymorphism. This document introduces Rank-N polymorphism, provides an alternative approach starting from the basics of closures and presents some motivating examples.
+ Swift does not support Rank-N polymorphism yet. However, Rank-N polymorphism unlocks some interesting patterns and techniques. For this reason, Bow provides some helper classes that allow you to emulate Rank-N polymorphism. This document introduces Rank-N polymorphism and Bow's alternative approach starting from the basics of closures.
 
  ## What is Rank-N polymorphism?
 
