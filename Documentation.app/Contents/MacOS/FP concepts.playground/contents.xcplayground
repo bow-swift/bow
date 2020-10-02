@@ -6,5 +6,6 @@
         <page name='Higher Kinded Types'/>
         <page name='Type classes'/>
         <page name='Data types'/>
+        <page name='Rank-N polymorphism'/>
     </pages>
 </playground>
