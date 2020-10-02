@@ -37,9 +37,9 @@ func singletonArray<T>(_ v: T) -> [T] {
 
  If we could write such a function, we could pass our `singletonArray` function to it, along with a value of any type we want:
  ```
- let a = callTwice(singletonArray, 0) // == [0]
- let b = callTwice(singletonArray, "b") // == ["b"]
- let c = callTwice(singletonArray, [0]) // == [[0]]
+ let a = callTwice(singletonArray, 0, "a") // == ([0], ["a"])
+ let b = callTwice(singletonArray, "b1", "b2") // == (["b1"], ["b2"])
+ let c = callTwice(singletonArray, "c", [0]) // == (["c"], [[0]])
  ```
  Notice how at each call of `callTwice` we are passing a value of different type, yet we always pass the same function `singletonArray` which is called with each type with a value of different type. With the syntax we made up, this is possible because we are able to say that the function we pass to `callTwice` must be a polymorphic function, in other words a function that can work with inputs of any type.
 
