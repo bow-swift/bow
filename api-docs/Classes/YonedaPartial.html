@@ -1065,8 +1065,8 @@
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
-              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
-                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
+              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
+                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">^(_:)</a>
@@ -2147,11 +2147,11 @@
             <a href="#/YonedaPartial"><h1 id="YonedaPartial">YonedaPartial<span class="anchor-icon" /></h1></a>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">YonedaPartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree9ForYonedaC">ForYoneda</a></span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">YonedaPartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:7BowFree9ForYonedaC">ForYoneda</a></span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Partial application of the Yoneda type constructor, omitting the last parameter.</p>
 
           </div>
         </section>
@@ -2159,6 +2159,13 @@
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Functor%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Functor for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Functor%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Functor%20for%20Yoneda" class="section-name">Instance of Functor for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
@@ -2179,7 +2186,364 @@
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">YonedaPartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">YonedaPartial</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Applicative%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Applicative for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Applicative%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Applicative%20for%20Yoneda" class="section-name">Instance of Applicative for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow11ApplicativeP4pureyAA4KindCyxqd__Gqd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/pure(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow11ApplicativeP4pureyAA4KindCyxqd__Gqd__lFZ">
+                      <span class="token-name">pure(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">pure</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow11ApplicativeP2apyAA4KindCyxqd_0_GAFyxqd_0_qd__cG_AFyxqd__Gtr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/ap(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow11ApplicativeP2apyAA4KindCyxqd_0_GAFyxqd_0_qd__cG_AFyxqd__Gtr0_lFZ">
+                      <span class="token-name">ap(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">ap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Monad%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Monad for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Monad%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Monad%20for%20Yoneda" class="section-name">Instance of Monad for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow5MonadP7flatMapyAA4KindCyxqd_0_GAFyxqd__G_AGqd__ctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/flatMap(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow5MonadP7flatMapyAA4KindCyxqd_0_GAFyxqd__G_AGqd__ctr0_lFZ">
+                      <span class="token-name">flatMap(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow5MonadP8tailRecMyAA4KindCyxqd_0_Gqd___AFyxAA6EitherCyqd__qd_0_GGqd__ctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/tailRecM(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow5MonadP8tailRecMyAA4KindCyxqd_0_Gqd___AFyxAA6EitherCyqd__qd_0_GGqd__ctr0_lFZ">
+                      <span class="token-name">tailRecM(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">tailRecM</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Comonad%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Comonad for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Comonad%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Comonad%20for%20Yoneda" class="section-name">Instance of Comonad for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow7ComonadP9coflatMapyAA4KindCyxqd_0_GAFyxqd__G_qd_0_AHctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/coflatMap(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow7ComonadP9coflatMapyAA4KindCyxqd_0_GAFyxqd__G_qd_0_AHctr0_lFZ">
+                      <span class="token-name">coflatMap(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">coflatMap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow7ComonadP7extractyqd__AA4KindCyxqd__GlFZ"></a>
+                    <a name="//apple_ref/swift/Method/extract(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow7ComonadP7extractyqd__AA4KindCyxqd__GlFZ">
+                      <span class="token-name">extract(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">extract</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">A</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20EquatableK%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of EquatableK for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20EquatableK%20for%20Yoneda">
+                  <h3 id="Instance%20of%20EquatableK%20for%20Yoneda" class="section-name">Instance of EquatableK for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow10EquatableKP2eqySbAA4KindCyxqd__G_AGtSQRd__lFZ"></a>
+                    <a name="//apple_ref/swift/Method/eq(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow10EquatableKP2eqySbAA4KindCyxqd__G_AGtSQRd__lFZ">
+                      <span class="token-name">eq(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">eq</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">lhs</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Foldable%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Foldable for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Foldable%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Foldable%20for%20Yoneda" class="section-name">Instance of Foldable for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow8FoldableP8foldLeftyqd_0_AA4KindCyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/foldLeft(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8FoldableP8foldLeftyqd_0_AA4KindCyxqd__G_qd_0_qd_0_qd_0__qd__tctr0_lFZ">
+                      <span class="token-name">foldLeft(_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldLeft</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow8FoldableP9foldRightyAA4EvalCyqd_0_GAA4KindCyxqd__G_A2Gqd___AGtctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/foldRight(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8FoldableP9foldRightyAA4EvalCyqd_0_GAA4KindCyxqd__G_A2Gqd___AGtctr0_lFZ">
+                      <span class="token-name">foldRight(_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">foldRight</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Eval.html">Eval</a></span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Instance%20of%20Traverse%20for%20Yoneda"></a>
+                <a name="//apple_ref/swift/Section/Instance of Traverse for Yoneda" class="dashAnchor"></a>
+                <a href="#/Instance%20of%20Traverse%20for%20Yoneda">
+                  <h3 id="Instance%20of%20Traverse%20for%20Yoneda" class="section-name">Instance of Traverse for Yoneda<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow8TraverseP8traverseyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_1_Gqd_0_ctAA11ApplicativeRd__r1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/traverse(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow8TraverseP8traverseyAA4KindCyqd__AFyxqd_1_GGAFyxqd_0_G_AFyqd__qd_1_Gqd_0_ctAA11ApplicativeRd__r1_lFZ">
+                      <span class="token-name">traverse(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">traverse</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Applicative.html">Applicative</a></span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -2199,7 +2563,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-09-29)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-02)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>

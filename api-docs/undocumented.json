@@ -331,27 +331,6 @@
     },
     {
       "file": "/Users/runner/work/bow/bow/Sources/BowFree/Coyoneda.swift",
-      "line": 46,
-      "symbol": "Coyoneda",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Coyoneda.swift",
-      "line": 47,
-      "symbol": "Coyoneda.lower()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Coyoneda.swift",
-      "line": 51,
-      "symbol": "Coyoneda.toYoneda()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Coyoneda.swift",
       "line": 62,
       "symbol": "CoyonedaPartial",
       "symbol_kind": "source.lang.swift.decl.extension",
@@ -376,83 +355,6 @@
       "line": 21,
       "symbol": "Free.value",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 4,
-      "symbol": "ForYoneda",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 5,
-      "symbol": "YonedaPartial",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 6,
-      "symbol": "YonedaOf",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 8,
-      "symbol": "Yoneda",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 9,
-      "symbol": "Yoneda.fix(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 13,
-      "symbol": "Yoneda.apply(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 17,
-      "symbol": "Yoneda.lower()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 21,
-      "symbol": "Yoneda.toCoyoneda()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 34,
-      "symbol": "Yoneda",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 35,
-      "symbol": "Yoneda.apply(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 66,
-      "symbol": "YonedaPartial",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {

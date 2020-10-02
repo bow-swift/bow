@@ -1065,8 +1065,8 @@
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6CofreeCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
-              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">
-                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_Gr0_lF">^(_:)</a>
+              <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">
+                <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA6YonedaCyxq_G0A04KindCyAA0C7PartialCyxGq_GAF7FunctorRzr0_lF">^(_:)</a>
               </li>
               <li class="nav-group-task" data-name="^(_:)" data-url="Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">
                 <a title="^(_:)" class="nav-group-task-link" href="../Functions.html#/s:7BowFree1xoPyAA8CoyonedaCyxq_q0_G0A04KindCyAA0C7PartialCyxq_Gq0_Gr1_lF">^(_:)</a>
@@ -2147,11 +2147,16 @@
             <a href="#/Yoneda"><h1 id="Yoneda">Yoneda<span class="anchor-icon" /></h1></a>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">Yoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Yoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">F</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Functor.html">Functor</a></span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>This type implements the covariant form of the Yoneda lemma, stating that F is naturally isomorphic to Yoneda<F>.</p>
+
+<p>Yoneda can be viewed as the partial application of the <code>map</code> function, where the first argument is fixed:</p>
+
+<p><code>map :: (F&lt;A&gt;, (A) -&gt; B) -&gt; F&lt;B&gt;</code>
+<code>Yoneda :: ((A) -&gt; B) -&gt; F&lt;B&gt;</code></p>
 
           </div>
         </section>
@@ -2173,7 +2178,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Safe downcast.</p>
 
                       </div>
                       <div class="declaration">
@@ -2183,6 +2188,125 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">fix</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:7BowFree8YonedaOfa">YonedaOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Yoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value in the higher-kind form.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value cast to Yoneda.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7BowFree6YonedaC04liftC0yACyxq_G0A04KindCyxq_GFZ"></a>
+                    <a name="//apple_ref/swift/Method/liftYoneda(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7BowFree6YonedaC04liftC0yACyxq_G0A04KindCyxq_GFZ">
+                      <span class="token-name">liftYoneda(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Lifts a value to a Yoneda value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">liftYoneda</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Yoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Functorial value.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Yoneda value.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7BowFree6YonedaCyACyxq_G0A04KindCyxypGypq_cccfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7BowFree6YonedaCyACyxq_G0A04KindCyxypGypq_cccfc">
+                      <span class="token-name">init(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Initializes a Yoneda value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="cm">/*B*/</span><span class="kt">Any</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function describing the natural isomorphism.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -2200,16 +2324,39 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Applies a function to this Yoneda value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">apply</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span> <span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">apply</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value in the functorial context wrapped in this Yoneda value.</p>
                       </div>
                     </section>
                   </div>
@@ -2227,7 +2374,7 @@
                   <div class="height-container">
                     <section class="section">
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Obtains the value yielding the Yoneda isomorphism.</p>
 
                       </div>
                       <div class="declaration">
@@ -2238,63 +2385,9 @@
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7BowFree6YonedaC10toCoyonedaAA0E0Cyxq_q_GyF"></a>
-                    <a name="//apple_ref/swift/Method/toCoyoneda()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree6YonedaC10toCoyonedaAA0E0Cyxq_q_GyF">
-                      <span class="token-name">toCoyoneda()</span>
-                      <span class="token-icon" /></a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <section class="section">
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language key-main">
-                          <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toCoyoneda</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Coyoneda.html">Coyoneda</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:7BowFree6YonedaCAA0A07FunctorRzrlE5applyyACyxq_GAD4KindCyxq_GFZ"></a>
-                    <a name="//apple_ref/swift/Method/apply(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:7BowFree6YonedaCAA0A07FunctorRzrlE5applyyACyxq_GAD4KindCyxq_GFZ">
-                      <span class="token-name">apply(_:)</span>
-                      <span class="token-icon" /></a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <section class="section">
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language key-main">
-                          <p class="aside-title key-main-text">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">apply</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Yoneda</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">A</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value in the functorial context.</p>
                       </div>
                     </section>
                   </div>
@@ -2312,7 +2405,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-09-29)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-02)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
