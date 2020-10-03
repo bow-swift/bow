@@ -3,55 +3,36 @@ import Bow
 
 public final class Exists<F> {
     public init<A>(_ fa: Kind<F, A>) {
+        self.fa = ExistsPrivate(fa)
+    }
+    private let fa: AnyExistsPrivate<F>
+
+    public func run<R>(_ f: CokleisliK<F, R>) -> R {
+        fa.run(f)
+    }
+}
+
+/// `AnyExistsPrivate` represents a `ExistsPrivate<F, A>` for which we have forgotten its specific type `A`.
+///
+/// AnyExistsPrivate needs to be a class because a protocol with an associated type F
+/// couldn't be stored inside Exists as an existential.
+/// We'll be able to use a protocol when this gets done:
+/// https://forums.swift.org/t/lifting-the-self-or-associated-type-constraint-on-existentials/18025
+private class AnyExistsPrivate<F> {
+    open func run<R>(_ f: CokleisliK<F, R>) -> R {
+        fatalError("This method should be implemented by ExistsPrivate")
+    }
+}
+
+/// We use this class to "remember" how to call a `CokleisliK<F, R>` with our `Kind<F, A>` once we have erased the type parameter `A` under `AnyExistsPrivate<F>`
+private final class ExistsPrivate<F, A>: AnyExistsPrivate<F> {
+    init(_ fa: Kind<F, A>) {
         self.fa = fa
     }
-    let fa: Any
 
-    // (∀X. F<X> -> R) -> R
-    public func run<R>(_ f: CokleisliK<F, R>) -> R {
-        switch fa {
-        case let fi as Kind<F, Int>:
-            return f.invoke(fi)
-        case let fi as Kind<F, (Int) -> Int>:
-            return f.invoke(fi)
-        case let fi as Kind<F, (@escaping (Int) -> (Int)) -> Int>:
-            return f.invoke(fi)
-        case let fi as Kind<F, (Int, Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int, Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int, Int, Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int, Int, Int, Int, Int, Int, Int, Int), Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Kind<CoyonedaPartial<ForId>, Int>>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Double>:
-            return f.invoke(fi)
-        case let fi as Kind<F, String>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Either<Int, Int>>:
-            return f.invoke(fi)
-        case let fi as Kind<F, ((Int) -> Int, (Int) -> Int)>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Either<Int, (Int) -> Int>>:
-            return f.invoke(fi)
-        case let fi as Kind<F, (Int) -> (Int) -> Int>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Either<(Int, Int), Int>>:
-            return f.invoke(fi)
-        case let fi as Kind<F, Id<Int>>:
-            return f.invoke(fi)
-        default:
-            fatalError()
-        }
+    let fa: Kind<F, A>
+
+    public override func run<R>(_ f: CokleisliK<F, R>) -> R {
+        f.invoke(fa)
     }
 }
