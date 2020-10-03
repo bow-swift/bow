@@ -1,10 +1,10 @@
 import Foundation
 import Bow
 
-public final class ForCoyonedaF {}
-public final class CoyonedaFPartial<F, A>: Kind2<ForCoyonedaF, F, A> {}
-public typealias CoyonedaFOf<F, A, P> = Kind<CoyonedaFPartial<F, A>, P>
-public final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
+internal final class ForCoyonedaF {}
+internal final class CoyonedaFPartial<F, A>: Kind2<ForCoyonedaF, F, A> {}
+internal typealias CoyonedaFOf<F, A, P> = Kind<CoyonedaFPartial<F, A>, P>
+internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     init(pivot: Kind<F, P>, f: @escaping (P) -> A) {
         self.pivot = pivot
         self.f = f
@@ -18,7 +18,7 @@ public final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     }
 }
 
-public postfix func ^<F, A, P>(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
+internal  postfix func ^<F, A, P>(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
     CoyonedaF.fix(fa)
 }
 
@@ -37,7 +37,7 @@ public typealias CoyonedaOf<F, A> = Kind<CoyonedaPartial<F>, A>
 public final class Coyoneda<F, A>: CoyonedaOf<F, A> {
     internal let coyonedaF: Exists<CoyonedaFPartial<F, A>>
     
-    public init(coyonedaF: Exists<CoyonedaFPartial<F, A>>) {
+    init(coyonedaF: Exists<CoyonedaFPartial<F, A>>) {
         self.coyonedaF = coyonedaF
     }
 
