@@ -16,7 +16,7 @@ extension FunctionK where G: Functor {
     /// The natural transformation from `Coyoneda<F>` to a functor `G`
     /// works by transforming `Coyoneda<F>` to `Coyoneda<G>` and then reducing the
     /// new coyoneda value.
-    public func transformAndReduce() -> FunctionK<CoyonedaPartial<F>, G> {
+    public var transformAndReduce: FunctionK<CoyonedaPartial<F>, G> {
         CoyonedaFToGNaturalTransformation(f: self)
     }
 }
