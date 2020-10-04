@@ -10,7 +10,7 @@ extension FunctionK {
 
 extension FunctionK where G: Functor {
 
-    /// Obtains a natural transofrmation that reduces a coyoneda value of a type constructor F
+    /// Obtains a natural transformation that reduces a coyoneda value of a type constructor F
     /// even if F is not a functor, provided that you have a way to transform `F` into a functor `G`.
     ///
     /// The natural transformation from `Coyoneda<F>` to a functor `G`
