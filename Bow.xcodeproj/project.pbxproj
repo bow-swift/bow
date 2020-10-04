@@ -364,6 +364,7 @@
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
 		B522DCC125262DF40098D7AF /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
 		B55C0B1F2525E1E700A30AD2 /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
+		B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */; };
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
@@ -1236,6 +1237,7 @@
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
 		B55F52B125247256001979EE /* ExistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistsTests.swift; sourceTree = "<group>"; };
+		B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Coyoneda.swift"; sourceTree = "<group>"; };
 		B56A08622525C39600869FCD /* CokleisliK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CokleisliK.swift; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
@@ -1751,6 +1753,7 @@
 				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
 				11D894FB251CEB58006A65EC /* FunctionK+Free.swift */,
+				B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */,
 				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
 			);
 			path = BowFree;
@@ -3187,6 +3190,7 @@
 			files = (
 				11E7188E219D82BD00B94845 /* Cofree.swift in Sources */,
 				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
+				B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
 				B55C0B1F2525E1E700A30AD2 /* Exists.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,

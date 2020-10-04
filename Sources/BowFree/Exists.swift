@@ -5,6 +5,7 @@ public final class Exists<F> {
     public init<A>(_ fa: Kind<F, A>) {
         self.fa = ExistsPrivate(fa)
     }
+
     private let fa: AnyExistsPrivate<F>
 
     public func run<R>(_ f: CokleisliK<F, R>) -> R {
@@ -12,7 +13,7 @@ public final class Exists<F> {
     }
 }
 
-/// `AnyExistsPrivate` represents a `ExistsPrivate<F, A>` for which we have forgotten its specific type `A`.
+/// `AnyExistsPrivate` represents an `ExistsPrivate<F, A>` for which we have forgotten its specific type `A`.
 ///
 /// AnyExistsPrivate needs to be a class because a protocol with an associated type F
 /// couldn't be stored inside Exists as an existential.

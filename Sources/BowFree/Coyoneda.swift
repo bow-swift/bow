@@ -16,6 +16,12 @@ internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     static func fix(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
         fa as! CoyonedaF<F, A, P>
     }
+
+    /// Lifts a `FunctionK<F, G>` into a natural transformation from `CoyonedaF<F, A, P>` to `CoyonedaF<G, A, P>`
+    /// and applies it to self.
+    func transform<G>(_ transform: FunctionK<F, G>) -> CoyonedaF<G, A, P> {
+        CoyonedaF<G, A, P>(pivot: transform(pivot), f: f)
+    }
 }
 
 internal  postfix func ^<F, A, P>(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
@@ -57,9 +63,7 @@ public final class Coyoneda<F, A>: CoyonedaOf<F, A> {
     public static func fix(_ fa: CoyonedaOf<F, A>) -> Coyoneda<F, A> {
         fa as! Coyoneda<F, A>
     }
-}
 
-extension Coyoneda {
     /// Lifts a value in the F context into a Coyoneda.
     ///
     /// - Parameter fa: Value in the F context.
