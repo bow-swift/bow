@@ -362,9 +362,9 @@
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
-		B522DCC125262DF40098D7AF /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
-		B55C0B1F2525E1E700A30AD2 /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
 		B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */; };
+		B568E5EC2529DCC200AD334B /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
+		B568E6032529DCD200AD334B /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
@@ -1748,7 +1748,6 @@
 		11E7188B219D825200B94845 /* BowFree */ = {
 			isa = PBXGroup;
 			children = (
-				B52120FE2523AC2300705BCD /* Exists.swift */,
 				8BA0F440217E2E9200969984 /* Cofree.swift */,
 				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
@@ -1766,7 +1765,6 @@
 				11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 				11D896C525237A7D006A65EC /* YonedaTest.swift */,
-				B55F52B125247256001979EE /* ExistsTests.swift */,
 			);
 			path = BowFreeTests;
 			sourceTree = "<group>";
@@ -1942,6 +1940,7 @@
 				8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */,
 				8BA0F3AB217E2DEF00969984 /* EitherTest.swift */,
 				720C1E0323FD80AB001C5B7D /* EndoTest.swift */,
+				B55F52B125247256001979EE /* ExistsTests.swift */,
 				8BA0F3AF217E2DEF00969984 /* EvalTest.swift */,
 				8BA0F3B0217E2DEF00969984 /* IdTest.swift */,
 				8BA0F3B2217E2DEF00969984 /* IorTest.swift */,
@@ -2064,6 +2063,7 @@
 				8BA0F474217E2E9200969984 /* Either.swift */,
 				8BA0F47A217E2E9200969984 /* EitherK.swift */,
 				720C1DFE23FD804E001C5B7D /* Endo.swift */,
+				B52120FE2523AC2300705BCD /* Exists.swift */,
 				8BA0F47E217E2E9200969984 /* Eval.swift */,
 				8BA0F475217E2E9200969984 /* Id.swift */,
 				8BA0F477217E2E9200969984 /* Ior.swift */,
@@ -2938,7 +2938,6 @@
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
 				11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */,
 				11B6FDEF2525C49000A5AD54 /* YonedaTest.swift in Sources */,
-				B522DCC125262DF40098D7AF /* ExistsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3192,7 +3191,6 @@
 				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
 				B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
-				B55C0B1F2525E1E700A30AD2 /* Exists.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
 				11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */,
 			);
@@ -3216,6 +3214,7 @@
 				8BA0F3F3217E2DEF00969984 /* OptionTTest.swift in Sources */,
 				8BA0F40A217E2DEF00969984 /* OptionTest.swift in Sources */,
 				8BA0F3FF217E2DEF00969984 /* MooreTest.swift in Sources */,
+				B568E6032529DCD200AD334B /* ExistsTests.swift in Sources */,
 				8BA0F3F5217E2DEF00969984 /* StringInstancesTest.swift in Sources */,
 				8BA0F404217E2DEF00969984 /* EvalTest.swift in Sources */,
 				8BA0F40E217E2DEF00969984 /* ConstTest.swift in Sources */,
@@ -3312,6 +3311,7 @@
 				11ED7A2A226E094C00C27994 /* Result.swift in Sources */,
 				8BA0F5BF217E2E9200969984 /* Coreader.swift in Sources */,
 				1171ED4B23C48985005362E0 /* StoreT.swift in Sources */,
+				B568E5EC2529DCC200AD334B /* Exists.swift in Sources */,
 				118C35DD240E5C2200113C66 /* CoSum.swift in Sources */,
 				11DDCD23217F1E2B00844D9D /* Reverse.swift in Sources */,
 				609CC1472364F9A200096D5D /* Divisible.swift in Sources */,
