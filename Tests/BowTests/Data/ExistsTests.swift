@@ -1,4 +1,6 @@
 import XCTest
+import SwiftCheck
+import BowLaws
 import Bow
 import BowFree
 
@@ -67,7 +69,7 @@ class EnumerateF<A>: CokleisliK<StreamFPartial<A>, [A]> {
         let f: State<P, Void> = StatePartial<P>.tailRecM(n) { (i: Int) -> State<P, Either<Int, Void>> in
             let r = State<P, A>.var()
             return binding(
-                r <- next,
+                r <-- next,
                 |<-StatePartial<P>.modify { oldState in
                     (oldState.s, oldState.aa + [r.get])
                 },
@@ -84,8 +86,23 @@ func enumerate<R>(_ s: Stream<R>, n: Int) -> [R] {
 
 class ExistsTests: XCTestCase {
 
-    func test() {
+    func testImplementationOfDataTypeBasedOnExists() {
         XCTAssertEqual(head(nats), "0")
         XCTAssertEqual(enumerate(nats, n: 4), ["0", "1", "2", "3"])
+    }
+
+    /// Given a function `f: Kind<F, A> -> R` polymorphic on `A`,
+    /// assert that wrapping a value `fa: Kind<F, A>` in an `Exists<F>`
+    /// does not change the result of `f`, i.e `f(fa) == Exists(fa).run(f)`.
+    func testFunctionApplicationTransparency() {
+        property("Function application transparency") <~ forAll { (fa: ArrayK<Int>) in
+            Exists(fa).run(F()) == F()(fa)
+        }
+    }
+
+    class F: CokleisliK<ArrayKPartial, Int64> {
+        override func invoke<A>(_ fa: ArrayKOf<A>) -> Int64 {
+            fa^.count
+        }
     }
 }
