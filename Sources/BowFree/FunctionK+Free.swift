@@ -5,7 +5,8 @@ public extension FunctionK where G: Functor {
         CoyonedaFunctionK(f: self)
     }
 
-    // forall T. Coyoneda<F, T> -> G<T>
+    /// CoyonedaFunctionK represents a function with the signature `Coyoneda<F, T> -> G<T>`
+    /// that is polymorphic on T, where F and G are fixed.
     private class CoyonedaFunctionK<F, G>: FunctionK<CoyonedaPartial<F>, G> where G: Functor {
         internal init(f: FunctionK<F, G>) {
             self.f = f
