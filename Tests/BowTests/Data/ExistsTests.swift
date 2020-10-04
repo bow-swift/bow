@@ -2,8 +2,6 @@ import XCTest
 import SwiftCheck
 import BowLaws
 import Bow
-import BowFree
-
 
 public final class ForStream {}
 public final class StreamFPartial<A>: Kind<ForStream, A> {}

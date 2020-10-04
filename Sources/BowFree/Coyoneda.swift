@@ -24,7 +24,7 @@ internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     }
 }
 
-internal  postfix func ^<F, A, P>(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
+internal postfix func ^<F, A, P>(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
     CoyonedaF.fix(fa)
 }
 

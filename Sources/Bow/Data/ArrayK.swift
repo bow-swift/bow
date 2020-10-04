@@ -152,6 +152,21 @@ extension ArrayK: CustomDebugStringConvertible where A: CustomDebugStringConvert
     }
 }
 
+// MARK: ArrayK Natural transformations
+
+extension ArrayKPartial {
+    /// A natural transformation that obtains the first element of an array, or `Option.none` if it is empty.
+    public static var firstOrNone: FunctionK<ArrayKPartial, OptionPartial> {
+        return FirstOrNone()
+    }
+
+    private class FirstOrNone: FunctionK<ArrayKPartial, OptionPartial> {
+        override func invoke<T>(_ fa: ArrayKOf<T>) -> OptionOf<T> {
+            fa^.firstOrNone()
+        }
+    }
+}
+
 // MARK: Instance of EquatableK for ArrayK
 extension ArrayKPartial: EquatableK {
     public static func eq<A: Equatable>(

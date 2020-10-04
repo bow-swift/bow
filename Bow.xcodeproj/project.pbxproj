@@ -362,6 +362,7 @@
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
+		B507D2BE252A347A002541E4 /* CoyonedaNaturalTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */; };
 		B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */; };
 		B568E5EC2529DCC200AD334B /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
 		B568E6032529DCD200AD334B /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
@@ -1235,6 +1236,7 @@
 		8BB969AB239863F0005520D6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		8BD6974823F5AD2E000A512F /* BowTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BowTests.xctestplan; sourceTree = "<group>"; };
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaNaturalTransformationTests.swift; sourceTree = "<group>"; };
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
 		B55F52B125247256001979EE /* ExistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistsTests.swift; sourceTree = "<group>"; };
 		B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Coyoneda.swift"; sourceTree = "<group>"; };
@@ -1765,6 +1767,7 @@
 				11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 				11D896C525237A7D006A65EC /* YonedaTest.swift */,
+				B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */,
 			);
 			path = BowFreeTests;
 			sourceTree = "<group>";
@@ -2934,6 +2937,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				B507D2BE252A347A002541E4 /* CoyonedaNaturalTransformationTests.swift in Sources */,
 				11B6FDC22525C48200A5AD54 /* CofreeTest.swift in Sources */,
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
 				11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */,
