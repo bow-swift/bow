@@ -17,8 +17,10 @@ internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
         fa as! CoyonedaF<F, A, P>
     }
 
-    /// Lifts a `FunctionK<F, G>` into a natural transformation from `CoyonedaF<F, A, P>` to `CoyonedaF<G, A, P>`
+    /// Lifts a `FunctionK<F, G>` `transform` into a natural transformation from `CoyonedaF<F, A, P>` to `CoyonedaF<G, A, P>`
     /// and applies it to self.
+    ///
+    /// The resulting natural transformation applies `transform` to the pivot of the input.
     func transform<G>(_ transform: FunctionK<F, G>) -> CoyonedaF<G, A, P> {
         CoyonedaF<G, A, P>(pivot: transform(pivot), f: f)
     }
