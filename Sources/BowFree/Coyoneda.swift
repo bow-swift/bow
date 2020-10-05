@@ -7,11 +7,16 @@ internal typealias CoyonedaFOf<F, A, P> = Kind<CoyonedaFPartial<F, A>, P>
 internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     init(pivot: Kind<F, P>, f: @escaping (P) -> A) {
         self.pivot = pivot
+        self.f = Function1LazyComposition(f)
+    }
+
+    init(pivot: Kind<F, P>, f: Function1LazyComposition<P, A>) {
+        self.pivot = pivot
         self.f = f
     }
 
     let pivot: Kind<F, P>
-    let f: (P) -> A
+    let f: Function1LazyComposition<P, A>
 
     static func fix(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
         fa as! CoyonedaF<F, A, P>
@@ -85,7 +90,7 @@ extension Coyoneda where F: Functor {
 
     private class Lower<F: Functor, A>: CokleisliK<CoyonedaFPartial<F, A>, Kind<F, A>> {
         public override func invoke<T>(_ fa: CoyonedaFOf<F, A, T>) -> Kind<F, A> {
-            fa^.pivot.map(fa^.f)
+            fa^.pivot.map(fa^.f.run)
         }
     }
 }
@@ -116,7 +121,7 @@ extension CoyonedaPartial: Functor {
         let f: (A) -> B
 
         override func invoke<T>(_ fa: CoyonedaFOf<F, A, T>) -> CoyonedaOf<F, B> {
-            Coyoneda(pivot: fa^.pivot, f: f <<< fa^.f)
+            Coyoneda(pivot: fa^.pivot, f: f <<< fa^.f.run)
         }
     }
 }
@@ -161,7 +166,7 @@ extension CoyonedaPartial: Monad where F: Monad {
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> CoyonedaOf<F, B> {
             Coyoneda.liftCoyoneda(
-                F.flatMap(fa^.pivot) { (self.f <<< fa^.f)($0)^.lower() }
+                F.flatMap(fa^.pivot) { (self.f <<< fa^.f.run)($0)^.lower() }
             )
         }
     }
@@ -198,7 +203,7 @@ extension CoyonedaPartial: Comonad where F: Comonad {
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> CoyonedaOf<F, B> {
             Coyoneda.liftCoyoneda(
-                fa^.pivot.coflatMap { self.f(Coyoneda(pivot: $0, f: fa^.f)) }
+                fa^.pivot.coflatMap { self.f(Coyoneda(pivot: $0, f: fa^.f.run)) }
             )
         }
     }
@@ -213,7 +218,7 @@ extension CoyonedaPartial: Comonad where F: Comonad {
         internal override init() {}
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> A {
-            fa^.f(fa^.pivot.extract())
+            fa^.f.run(fa^.pivot.extract())
         }
     }
 }
@@ -240,7 +245,7 @@ extension CoyonedaPartial: Foldable where F: Foldable {
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> B {
             fa^.pivot.foldLeft(b) { b, t in
-                self.f(b, fa^.f(t))
+                self.f(b, fa^.f.run(t))
             }
         }
     }
@@ -264,7 +269,7 @@ extension CoyonedaPartial: Foldable where F: Foldable {
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> Eval<B> {
             fa^.pivot.foldRight(b) { t, b in
-                self.f(fa^.f(t), b)
+                self.f(fa^.f.run(t), b)
             }
         }
     }
@@ -288,7 +293,7 @@ extension CoyonedaPartial: Traverse where F: Traverse {
         let f: (A) -> Kind<G, B>
 
         override func invoke<T>(_ fa: Kind<CoyonedaFPartial<F, A>, T>) -> Kind<G, CoyonedaOf<F, B>> {
-            fa^.pivot.traverse(f <<< fa^.f)
+            fa^.pivot.traverse(f <<< fa^.f.run)
                 .map(Coyoneda.liftCoyoneda)
         }
     }
