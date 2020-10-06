@@ -276,7 +276,7 @@ extension IorPartial: Monad where L: Semigroup {
                     { left, right in
                         right.fold({ a in
                             f(a).fold({ aLeft in .done(.left(aLeft.combine(left))) },
-                                      { aRight in loop(.both(left, aRight), f) },
+                                      { aRight in loop(.right(aRight), f) },
                                       { aLeft, aRight in loop(.both(left.combine(aLeft), aRight), f) })
                         },
                                    { b in .done(.both(left, b)) })
