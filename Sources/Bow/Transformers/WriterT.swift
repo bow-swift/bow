@@ -286,10 +286,26 @@ extension WriterTPartial: Monad where F: Monad, W: Monoid {
     public static func tailRecM<A, B>(
         _ a: A,
         _ f: @escaping (A) -> WriterTOf<F, W, Either<A, B>>) -> WriterTOf<F, W, B> {
-        WriterT(F.tailRecM(a, { inA in
-            f(inA)^.value.map { pair in
+
+        _tailRecM((.empty(), a)) { a in
+            let fa = f(a)^.value.map { (arg: (W, Either<A, B>)) -> (W, Either<(W, A), B>) in
+                arg.1.fold({
+                    (arg.0, .left((arg.0, $0)))
+                }) {
+                    (arg.0, .right($0))
+                }
+            }
+            return WriterT(fa)
+        }
+    }
+
+    private static func _tailRecM<A, B>(
+        _ a: (W, A),
+        _ f: @escaping (A) -> WriterTOf<F, W, Either<(W, A), B>>) -> WriterTOf<F, W, B> {
+        WriterT(F.tailRecM(a, { inWa in
+            f(inWa.1)^.value.map { pair in
                 pair.1.fold(Either.left,
-                            { b in Either.right((pair.0, b)) })
+                            { b in Either.right((inWa.0.combine(pair.0), b)) })
             }
         }))
     }
