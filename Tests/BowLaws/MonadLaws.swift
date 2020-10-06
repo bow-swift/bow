@@ -14,6 +14,7 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
             stackSafety()
         }
         tailRecMConsistentFlatMap()
+        tailRecMConsistentFlatMapAndMap()
         monadComprehensions()
         flatten()
     }
@@ -96,12 +97,28 @@ public class MonadLaws<F: Monad & EquatableK & ArbitraryK> {
         /// or we compute it with plain `flatMap`.
         /// We test only for 3 `flatMap` calls, but since `bounce(n) = bounce(n-1).flatMap(f)` we deduce by induction
         /// that the `tailRecM` and the plain `flatMap` computations are equivalent for any `n`.
-        property("tailRecMConsistentFlatMap") <~ forAll { (a: Int, f: ArrowOf<Int, KindOf<F, Int>>) in
+        property("tailRecM is consistent with flatMap") <~ forAll { (a: Int, f: ArrowOf<Int, KindOf<F, Int>>) in
             let f = { f.getArrow($0).value }
             let bounce1 = bounce(n: 1, a: a, f: f)
             let bounce0 = bounce(n: 0, a: a, f: f).flatMap(f)
             let flat = F.pure(a).flatMap(f).flatMap(f)
             return bounce1 == bounce0 && bounce0 == flat
+        }
+    }
+
+    /// It is possible to implement flatMap from tailRecM and map
+    /// and it should agree with the flatMap implementation.
+    private static func tailRecMConsistentFlatMapAndMap() {
+        property("tailRecM is consistent with flatMap and map") <~ forAll { (fa: KindOf<F, Int>, f: ArrowOf<Int, KindOf<F, String>>) in
+            let f = { f.getArrow($0).value }
+            let tailRecAndMap = F.tailRecM(Option<Int>.empty()) { (w: Option<Int>) -> Kind<F, Either<Option<Int>, String>> in
+                w.fold({
+                    F.map(fa.value) { .left(.some($0)) }
+                }) { i in
+                    F.map(f(i)) { .right($0) }
+                }
+            }
+            return F.flatMap(fa.value, f) == tailRecAndMap
         }
     }
 
