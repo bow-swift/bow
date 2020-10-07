@@ -32,10 +32,22 @@ public final class Tree<A>: TreeOf<A> {
         self.subForest = subForest
     }
 
+    /// Adds a tree as a subtree of `self`.
+    ///
+    /// The root of `tree` will be place directly under the root of `self`.
+    ///
+    /// - Parameter tree: The tree to add under `self.root`.
+    /// - Returns: <#description#>
     public func appendSubTree(_ tree: Tree<A>) -> Tree<A> {
         appendSubForest([tree])
     }
 
+    /// Adds a collection of trees as subtrees of `self`.
+    ///
+    /// The root of each subtree will be place directly under the root of `self`.
+    ///
+    /// - Parameter subForest: A collection of trees to add under `self.root`
+    /// - Returns: A tree with the same elements as self with the trees of `subForest` added as subtrees.
     public func appendSubForest(_ subForest: [Tree<A>]) -> Tree<A> {
         Tree(root: root, subForest: self.subForest + subForest)
     }
