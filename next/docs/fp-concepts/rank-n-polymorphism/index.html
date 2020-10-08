@@ -594,17 +594,21 @@
 <p>We say that such a function is <em>polymorphic</em> over the <em>type parameter</em> <code class="highlighter-rouge">T</code>, or alternatively that the function is <em>generic</em> over the type parameter <code class="highlighter-rouge">T</code>. Notice that we don’t refer to <code class="highlighter-rouge">T</code> as a type. <code class="highlighter-rouge">T</code> is more like a placeholder for a type that will be determined when the function is called.</p>
 
 <p>Imagine we want to write a function <code class="highlighter-rouge">callTwice</code> that is generic over two type parameter <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code> and accepts our <code class="highlighter-rouge">singletonArray</code> above as a parameter. Our function <code class="highlighter-rouge">callTwice</code> will execute the polymorphic function we pass to it with a value of type <code class="highlighter-rouge">A</code> and a second time with a value of type <code class="highlighter-rouge">B</code>. We need to express that <code class="highlighter-rouge">callTwice</code> takes a parameter that is a function polymorphic on a type parameter <code class="highlighter-rouge">T</code>. The function could look something like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> func callTwice&lt;A, B&gt;(_ f: &lt;T&gt;(T) -&gt; [T], _ a: A, _ b: B) -&gt; ([A], [B]) {
-     (f(a), f(b)) // `f` really needs to be polymorphic, because we call it twice with inputs of different types.
- }
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+     <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="c1">// `f` really needs to be polymorphic, because we call it twice with inputs of different types.</span>
+ <span class="p">}</span>
 </code></pre></div></div>
+
 <p>Notice that we included <code class="highlighter-rouge">&lt;T&gt;</code> in front of the type signature of the parameter of our function <code class="highlighter-rouge">callTwice</code>. With this, we want to express that the parameter <code class="highlighter-rouge">f</code> must be a function polymorphic over one type parameter we called <code class="highlighter-rouge">T</code>. This is a made up syntax, don’t try to write this in your Swift program because it won’t compile.</p>
 
 <p>If we could write such a function, we could pass our <code class="highlighter-rouge">singletonArray</code> function to it, along with a value of any type we want:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> let a = callTwice(singletonArray, 0, "a") // == ([0], ["a"])
- let b = callTwice(singletonArray, "b1", "b2") // == (["b1"], ["b2"])
- let c = callTwice(singletonArray, "c", [0]) // == (["c"], [[0]])
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="c1">// == ([0], ["a"])</span>
+ <span class="k">let</span> <span class="nv">b</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="s">"b1"</span><span class="p">,</span> <span class="s">"b2"</span><span class="p">)</span> <span class="c1">// == (["b1"], ["b2"])</span>
+ <span class="k">let</span> <span class="nv">c</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">// == (["c"], [[0]])</span>
 </code></pre></div></div>
+
 <p>Notice how at each call of <code class="highlighter-rouge">callTwice</code> we are passing a value of different type, yet we always pass the same function <code class="highlighter-rouge">singletonArray</code> which is called with each type with a value of different type. With the syntax we made up, this is possible because we are able to say that the function we pass to <code class="highlighter-rouge">callTwice</code> must be a polymorphic function, in other words a function that can work with inputs of any type.</p>
 
 <p>The reason we needed to use a made up syntax for this example is because Swift doesn’t allow us to write a function that requires a polymorphic function as a parameter. This feature is called <em>Rank-N polymorphism</em> and it’s supported on some languages like Haskell.</p>
@@ -617,10 +621,11 @@
 <p>For example, the function <code class="highlighter-rouge">randomWordGenerator</code> below returns a random word of length <code class="highlighter-rouge">n</code>. As you can see <code class="highlighter-rouge">n</code> is a random number that is generated once each time you execute this program. <code class="highlighter-rouge">randomWordGenerator</code> captures the value of <code class="highlighter-rouge">n</code>, which means that the strings returned by <code class="highlighter-rouge">randomWordGenerator</code> will all have the same length during the execution of the program. Each time you call <code class="highlighter-rouge">randomWordGenerator</code> you will get a different word, but all of them will have the same length. If you re-run the program a second time, <code class="highlighter-rouge">n</code> will probably get a different value and the length of the words returned by <code class="highlighter-rouge">randomWordGenerator</code> will be different.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="mi">10</span><span class="p">)</span>
+
 <span class="k">let</span> <span class="nv">randomWordGenerator</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="p">{</span> 
-    <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> 
-        <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> 
-    <span class="p">}</span>
+    <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+        <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+    <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -628,10 +633,10 @@
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">makeRandomWordGenerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span> 
-        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> 
-            <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> 
-        <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+            <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -660,9 +665,9 @@
     <span class="k">let</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span>
 
     <span class="kd">func</span> <span class="nf">callAsFunction</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
-        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> 
-            <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span>
-        <span class="p">}</span>
+        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+            <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -680,29 +685,34 @@
 <h2 id="generic-closures">Generic closures</h2>
 
 <p>Recall the <code class="highlighter-rouge">singletonArray</code> function we defined earlier:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> func singletonArray&lt;T&gt;(_ v: T) -&gt; [T] {
-     [v]
- }
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">singletonArray</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">v</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+<span class="p">}</span>
 </code></pre></div></div>
+
 <p>Can we write this function as a struct, like we explained in the previous section? Sure thing!</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> struct SingletonArrayFunction {
-     func callAsFunction&lt;T&gt;(_ v: T) -&gt; [T] {
-         [v]
-     }
- }
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">SingletonArrayFunction</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">callAsFunction</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">v</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> <span class="p">{</span>
+        <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>We just expressed a polymorphic function as a struct!</p>
 
 <p>Recall the function <code class="highlighter-rouge">callTwice</code> we defined earlier with our made up syntax:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> func callTwice&lt;A, B&gt;(_ f: &lt;T&gt;(T) -&gt; [T], _ a: A, _ b: B) -&gt; ([A], [B]) {
-     (f(a), f(b))
- }
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+     <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+ <span class="p">}</span>
 </code></pre></div></div>
+
 <p>Now that we have expressed a polymorphic function as a struct, can we express this function with valid Swift syntax? Maybe something like this?</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> func callTwice&lt;A, B&gt;(_ f: SingletonArrayFunction, _ a: A, _ b: B) -&gt; ([A], [B]) {
-     (f(a), f(b))
- }
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">SingletonArrayFunction</span><span class="p">,</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+    <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>Well, now we can only pass a value of <code class="highlighter-rouge">SingletonArrayFunction</code>, which is to say that we can only pass one specific function. This is not what we wanted, we wanted to be able to pass any polymorphic function with this signature <code class="highlighter-rouge">&lt;T&gt;(T) -&gt; [T]</code>. We must find another way.</p>
@@ -729,7 +739,7 @@
 <p>Now we can express our <code class="highlighter-rouge">callTwice</code> function with regular Swift syntax:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">FunctionK</span><span class="o">&lt;</span><span class="kt">ForId</span><span class="p">,</span> <span class="kt">ForArrayK</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
-    <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">.</span><span class="n">asArray</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">.</span><span class="n">asArray</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">^.</span><span class="n">asArray</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">^.</span><span class="n">asArray</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
