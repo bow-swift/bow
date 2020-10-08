@@ -362,6 +362,9 @@
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
+		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
+		B5618757252CC2D2002717B1 /* TreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5618756252CC2D2002717B1 /* TreeTest.swift */; };
+		B5618785252CC3EA002717B1 /* Tree+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5618784252CC3EA002717B1 /* Tree+Gen.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
@@ -1231,6 +1234,9 @@
 		8BB969AB239863F0005520D6 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		8BD6974823F5AD2E000A512F /* BowTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BowTests.xctestplan; sourceTree = "<group>"; };
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
+		B5618756252CC2D2002717B1 /* TreeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTest.swift; sourceTree = "<group>"; };
+		B5618784252CC3EA002717B1 /* Tree+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tree+Gen.swift"; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1443,6 +1449,7 @@
 				112097BA22A7FC86007F3D9C /* NonEmptyArray+Gen.swift */,
 				112097BC22A7FD6F007F3D9C /* Option+Gen.swift */,
 				112097D522A904AC007F3D9C /* Sum+Gen.swift */,
+				B5618784252CC3EA002717B1 /* Tree+Gen.swift */,
 				112097BE22A7FDEF007F3D9C /* Try+Gen.swift */,
 				112097C022A7FF37007F3D9C /* Validated+Gen.swift */,
 				1171ED5F23C636A9005362E0 /* Zipper+Gen.swift */,
@@ -1943,6 +1950,7 @@
 				111F84FC234DC00C003FE646 /* SetTest.swift */,
 				8BA0F3AD217E2DEF00969984 /* SumTest.swift */,
 				1165E1AA23F414540052F0C7 /* TrampolineTest.swift */,
+				B5618756252CC2D2002717B1 /* TreeTest.swift */,
 				8BA0F3B4217E2DEF00969984 /* TryTest.swift */,
 				8BA0F3B3217E2DEF00969984 /* ValidatedTest.swift */,
 				11BA21C123D75B5200F3EE78 /* ZipperTest.swift */,
@@ -2069,6 +2077,7 @@
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
 				1171ED5D23C62C5E005362E0 /* Zipper.swift */,
+				B53F8C08251A5F8000468947 /* Tree.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2841,6 +2850,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				B5618785252CC3EA002717B1 /* Tree+Gen.swift in Sources */,
 				1171ED5423C4E4B0005362E0 /* TracedT+Gen.swift in Sources */,
 				112097D822A90644007F3D9C /* Kleisli+Gen.swift in Sources */,
 				720C1E0223FD808F001C5B7D /* Endo+Gen.swift in Sources */,
@@ -3229,6 +3239,7 @@
 				8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */,
 				1171ED5C23C62134005362E0 /* (null) in Sources */,
 				720C1E0423FD80AC001C5B7D /* EndoTest.swift in Sources */,
+				B5618757252CC2D2002717B1 /* TreeTest.swift in Sources */,
 				8BA0F3FE217E2DEF00969984 /* EitherKTest.swift in Sources */,
 				8BA0F3F2217E2DEF00969984 /* EitherTTest.swift in Sources */,
 				1137469C234345F400D9C1AD /* ArrayTest.swift in Sources */,
@@ -3285,6 +3296,7 @@
 				8BA0F5B7217E2E9200969984 /* Sum.swift in Sources */,
 				8BA0F613217E2E9200969984 /* Traverse.swift in Sources */,
 				8BA0F5E3217E2E9200969984 /* MonoidK.swift in Sources */,
+				B53F8C09251A5F8000468947 /* Tree.swift in Sources */,
 				11DDCD1C217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F513217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61B217E2E9200969984 /* Reducible.swift in Sources */,
