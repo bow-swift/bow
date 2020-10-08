@@ -6,6 +6,7 @@
 // nef:end
 // nef:begin:hidden
 import Bow
+import Darwin
 // nef:end
 /*:
  # Rank-N polymorphism
@@ -57,13 +58,22 @@ func singletonArray<T>(_ v: T) -> [T] {
  For example, the function `randomWordGenerator` below returns a random word of length `n`. As you can see `n` is a random number that is generated once each time you execute this program. `randomWordGenerator` captures the value of `n`, which means that the strings returned by `randomWordGenerator` will all have the same length during the execution of the program. Each time you call `randomWordGenerator` you will get a different word, but all of them will have the same length. If you re-run the program a second time, `n` will probably get a different value and the length of the words returned by `randomWordGenerator` will be different.
 */
 // nef:begin:hidden
-let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+extension Character {
+    static func random(in range: ClosedRange<Character>) -> Character {
+        guard let lowerBound = range.lowerBound.asciiValue, let upperBound = range.upperBound.asciiValue else {
+            fatalError()
+        }
+        
+        let randomElement = UInt8.random(in: lowerBound ... upperBound)
+        return Character(Unicode.Scalar(randomElement))
+    }
+}
 // nef:end
 let n: Int = .random(in: 0 ..< 10)
 
 let randomWordGenerator: () -> String = { 
     (0 ..< n).map { _ in
-        "\(letters.randomElement()!)"
+        Character.random(in: "a" ... "z") |> String.init
     }.joined()
 }
 /*:
@@ -73,7 +83,7 @@ func makeRandomWordGenerator() -> () -> String {
     let length: Int = .random(in: 0 ..< 10)
     return {
         (0 ..< length).map { _ in
-            "\(letters.randomElement()!)"
+            Character.random(in: "a" ... "z") |> String.init
         }.joined()
     }
 }
@@ -102,7 +112,7 @@ struct RandomWordGenerator {
 
     func callAsFunction() -> String {
         (0 ..< length).map { _ in
-            "\(letters.randomElement()!)"
+            Character.random(in: "a" ... "z") |> String.init
         }.joined()
     }
 }
