@@ -28,19 +28,23 @@ func singletonArray<T>(_ v: T) -> [T] {
  We say that such a function is *polymorphic* over the *type parameter* `T`, or alternatively that the function is *generic* over the type parameter `T`. Notice that we don't refer to `T` as a type. `T` is more like a placeholder for a type that will be determined when the function is called.
 
  Imagine we want to write a function `callTwice` that is generic over two type parameter `A` and `B` and accepts our `singletonArray` above as a parameter. Our function `callTwice` will execute the polymorphic function we pass to it with a value of type `A` and a second time with a value of type `B`. We need to express that `callTwice` takes a parameter that is a function polymorphic on a type parameter `T`. The function could look something like this:
- ```
+ 
+ ```swift
  func callTwice<A, B>(_ f: <T>(T) -> [T], _ a: A, _ b: B) -> ([A], [B]) {
      (f(a), f(b)) // `f` really needs to be polymorphic, because we call it twice with inputs of different types.
  }
  ```
+ 
  Notice that we included `<T>` in front of the type signature of the parameter of our function `callTwice`. With this, we want to express that the parameter `f` must be a function polymorphic over one type parameter we called `T`. This is a made up syntax, don't try to write this in your Swift program because it won't compile.
 
  If we could write such a function, we could pass our `singletonArray` function to it, along with a value of any type we want:
- ```
+ 
+ ```swift
  let a = callTwice(singletonArray, 0, "a") // == ([0], ["a"])
  let b = callTwice(singletonArray, "b1", "b2") // == (["b1"], ["b2"])
  let c = callTwice(singletonArray, "c", [0]) // == (["c"], [[0]])
  ```
+ 
  Notice how at each call of `callTwice` we are passing a value of different type, yet we always pass the same function `singletonArray` which is called with each type with a value of different type. With the syntax we made up, this is possible because we are able to say that the function we pass to `callTwice` must be a polymorphic function, in other words a function that can work with inputs of any type.
 
  The reason we needed to use a made up syntax for this example is because Swift doesn't allow us to write a function that requires a polymorphic function as a parameter. This feature is called *Rank-N polymorphism* and it's supported on some languages like Haskell.
@@ -52,21 +56,34 @@ func singletonArray<T>(_ v: T) -> [T] {
 
  For example, the function `randomWordGenerator` below returns a random word of length `n`. As you can see `n` is a random number that is generated once each time you execute this program. `randomWordGenerator` captures the value of `n`, which means that the strings returned by `randomWordGenerator` will all have the same length during the execution of the program. Each time you call `randomWordGenerator` you will get a different word, but all of them will have the same length. If you re-run the program a second time, `n` will probably get a different value and the length of the words returned by `randomWordGenerator` will be different.
 */
-let n: Int = .random(in: 0 ..< 10)
-let randomWordGenerator: () -> String = { 
-    (0 ..< n).forEach { _ in 
-        .random(in: "a" ... "z") 
+// nef:begin:hidden
+extension Character {
+    static func random(in range: ClosedRange<Character>) -> Character {
+        guard let lowerBound = range.lowerBound.asciiValue, let upperBound = range.upperBound.asciiValue else {
+            fatalError()
+        }
+        
+        let randomElement = UInt8.random(in: lowerBound ... upperBound)
+        return Character(Unicode.Scalar(randomElement))
     }
+}
+// nef:end
+let n: Int = .random(in: 0 ..< 10)
+
+let randomWordGenerator: () -> String = { 
+    (0 ..< n).map { _ in
+        Character.random(in: "a" ... "z") |> String.init
+    }.joined()
 }
 /*:
  In the example above we only got one `randomWordGenerator` function per program execution: if we want a different `randomWordGenerator` function with a different `n` we need to re-run the program. Let's create a function that returns a different `randomWordGenerator` function each time we call it. This is an example of a higher-order function, since it returns another function.
  */
 func makeRandomWordGenerator() -> () -> String {
     let length: Int = .random(in: 0 ..< 10)
-    return { 
-        (0 ..< length).forEach { _ in 
-            .random(in: "a" ... "z") 
-        }
+    return {
+        (0 ..< length).map { _ in
+            Character.random(in: "a" ... "z") |> String.init
+        }.joined()
     }
 }
 /*:
@@ -93,9 +110,9 @@ struct RandomWordGenerator {
     let length: Int
 
     func callAsFunction() -> String {
-        (0 ..< length).forEach { _ in 
-            .random(in: "a" ... "z")
-        }
+        (0 ..< length).map { _ in
+            Character.random(in: "a" ... "z") |> String.init
+        }.joined()
     }
 }
 /*:
@@ -111,36 +128,41 @@ print(anotherRandomWordGenerator())
  ## Generic closures
 
  Recall the `singletonArray` function we defined earlier:
- ```
- func singletonArray<T>(_ v: T) -> [T] {
-     [v]
- }
- ```
- Can we write this function as a struct, like we explained in the previous section? Sure thing!
- ```
- struct SingletonArrayFunction {
-     func callAsFunction<T>(_ v: T) -> [T] {
-         [v]
-     }
- }
- ```
  */
+// nef:begin:hidden
+enum GenericClosures {
+// nef:end
+func singletonArray<T>(_ v: T) -> [T] {
+    [v]
+}
+// nef:begin:hidden
+}
+// nef:end
+
+//: Can we write this function as a struct, like we explained in the previous section? Sure thing!
+
+struct SingletonArrayFunction {
+    func callAsFunction<T>(_ v: T) -> [T] {
+        [v]
+    }
+}
+
 /*:
  We just expressed a polymorphic function as a struct!
 
  Recall the function `callTwice` we defined earlier with our made up syntax:
- ```
+ ```swift
  func callTwice<A, B>(_ f: <T>(T) -> [T], _ a: A, _ b: B) -> ([A], [B]) {
      (f(a), f(b))
  }
  ```
- Now that we have expressed a polymorphic function as a struct, can we express this function with valid Swift syntax? Maybe something like this?
- ```
- func callTwice<A, B>(_ f: SingletonArrayFunction, _ a: A, _ b: B) -> ([A], [B]) {
-     (f(a), f(b))
- }
- ```
  */
+//: Now that we have expressed a polymorphic function as a struct, can we express this function with valid Swift syntax? Maybe something like this?
+
+func callTwice<A, B>(_ f: SingletonArrayFunction, _ a: A, _ b: B) -> ([A], [B]) {
+    (f(a), f(b))
+}
+
 /*:
  Well, now we can only pass a value of `SingletonArrayFunction`, which is to say that we can only pass one specific function. This is not what we wanted, we wanted to be able to pass any polymorphic function with this signature `<T>(T) -> [T]`. We must find another way.
 
@@ -154,18 +176,25 @@ print(anotherRandomWordGenerator())
 
  With all this in mind, we now can see that our `SingletonArrayFunction` can be seen as a `FunctionK<ForId, ForArrayK>`:
  */
+// nef:begin:hidden
+extension FunctionK {
+// nef:end
 final class SingletonArrayFunction: FunctionK<ForId, ForArrayK> {
     override func invoke<A>(_ fa: IdOf<A>) -> ArrayKOf<A> {
         ArrayK([fa^.value])
     }
 }
+// nef:begin:hidden
+}
+// nef:end
+        
 /*:
  Note that in order to be able to construct an array of `A`, we need to convert from `IdOf<A>` to `A` by calling the property `value` of `IdOf<A>`. Similarly, we need to wrap the array we construct by calling the `ArrayK` constructor.
 
  Now we can express our `callTwice` function with regular Swift syntax:
  */
 func callTwice<A, B>(_ f: FunctionK<ForId, ForArrayK>, _ a: A, _ b: B) -> ([A], [B]) {
-    (f(Id(a)).asArray, f(Id(b)).asArray)
+    (f(Id(a))^.asArray, f(Id(b))^.asArray)
 }
 /*:
  Here we needed to perform the opposite conversion, from `A` to `Id<A>` by passing `a` to the constructor of `Id`, same for `B`.
