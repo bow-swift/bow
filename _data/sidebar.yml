@@ -28,6 +28,9 @@ options:
          - title: Data types
            url: /docs/fp-concepts/data-types/
 
+         - title: Rank-N polymorphism
+           url: /docs/fp-concepts/rank-n-polymorphism/
+
    - title: Composition
      nested_options:
          - title: Composition Overview
