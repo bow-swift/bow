@@ -235,7 +235,6 @@
 		11E7180F219D7ECC00B94845 /* TestDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E7217E2DEF00969984 /* TestDomain.swift */; };
 		11E71810219D7ECC00B94845 /* TraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E2217E2DEF00969984 /* TraversalTest.swift */; };
 		11E7188E219D82BD00B94845 /* Cofree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F440217E2E9200969984 /* Cofree.swift */; };
-		11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		11E71890219D82BD00B94845 /* Free.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F441217E2E9200969984 /* Free.swift */; };
 		11E71891219D82BD00B94845 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
 		11E7F5ED22D8C83800C78F06 /* Eval+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */; };
@@ -370,6 +369,7 @@
 		B5618785252CC3EA002717B1 /* Tree+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5618784252CC3EA002717B1 /* Tree+Gen.swift */; };
 		B568E6032529DCD200AD334B /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
+		B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
@@ -1758,7 +1758,6 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F440217E2E9200969984 /* Cofree.swift */,
-				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
 				11D894FB251CEB58006A65EC /* FunctionK+Free.swift */,
 				B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */,
@@ -2068,6 +2067,7 @@
 				8BA0F489217E2E9200969984 /* Const.swift */,
 				8BA0F485217E2E9200969984 /* Coreader.swift */,
 				118C35DC240E5C2200113C66 /* CoSum.swift */,
+				8BA0F43F217E2E9200969984 /* Coyoneda.swift */,
 				8BA0F47B217E2E9200969984 /* Day.swift */,
 				1137469D2343592300D9C1AD /* Dictionary.swift */,
 				8BA0F476217E2E9200969984 /* DictionaryK.swift */,
@@ -3202,7 +3202,6 @@
 			buildActionMask = 0;
 			files = (
 				11E7188E219D82BD00B94845 /* Cofree.swift in Sources */,
-				11E7188F219D82BD00B94845 /* Coyoneda.swift in Sources */,
 				B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
@@ -3343,6 +3342,7 @@
 				110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */,
 				606B29EA23607607002334B2 /* Divide.swift in Sources */,
 				8BA0F5AF217E2E9200969984 /* Try.swift in Sources */,
+				B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */,
 				8BA0F62B217E2E9200969984 /* NonEmptyReducible.swift in Sources */,
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,

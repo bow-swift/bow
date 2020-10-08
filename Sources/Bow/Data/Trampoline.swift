@@ -1,11 +1,25 @@
+/// Witness for the `Trampoline<A>` data type. To be used in simulated Higher Kinded Types.
+public final class ForTrampoline {}
+
+/// Partial application of the Trampoline type constructor, omitting the last type parameter.
+public typealias TrampolinePartial = ForTrampoline
+
+/// Higher Kinded Type alias to improve readability over `Kind<ForTrampoline, A>`
+public typealias TrampolineOf<A> = Kind<ForTrampoline, A>
+
 /// The Trampoline type helps us overcome stack safety issues of recursive calls by transforming them into loops.
-public class Trampoline<A> {
+public final class Trampoline<A>: TrampolineOf<A> {
+    fileprivate init(_ value: _Trampoline<A>) {
+        self.value = value
+    }
+
+    fileprivate let value: _Trampoline<A>
     /// Creates a Trampoline that does not need to recurse and provides the final result.
     ///
     /// - Parameter value: Result of the computation.
     /// - Returns: A Trampoline that provides a value and stops recursing.
     public static func done(_ value: A) -> Trampoline<A> {
-        Done(value)
+        Trampoline(.done(value))
     }
     
     /// Creates a Trampoline that performs a computation and needs to recurse.
@@ -13,7 +27,7 @@ public class Trampoline<A> {
     /// - Parameter f: Function describing the recursive step.
     /// - Returns: A Trampoline that describes a recursive step.
     public static func `defer`(_ f: @escaping () -> Trampoline<A>) -> Trampoline<A> {
-        Defer(f)
+        Trampoline(.defer(f))
     }
     
     /// Creates a Trampoline that performs a computation in a moment in the future.
@@ -40,7 +54,7 @@ public class Trampoline<A> {
     }
 
     internal func step() -> Either<() -> Trampoline<A>, A> {
-        fatalError("Implement step in subclasses")
+        value.step()
     }
     
     /// Composes this trampoline with another one that depends on the output of this one.
@@ -48,7 +62,7 @@ public class Trampoline<A> {
     /// - Parameter f: Function to compute a Trampoline based on the value of this one.
     /// - Returns: A Trampoline describing the sequential application of both.
     public func flatMap<B>(_ f: @escaping (A) -> Trampoline<B>) -> Trampoline<B> {
-        FlatMap(self, f)
+        Trampoline<B>(.flatMap(Coyoneda(pivot: self, f: f)))
     }
     
     /// Transforms the eventual value provided by this Trampoline.
@@ -58,60 +72,88 @@ public class Trampoline<A> {
     public func map<B>(_ f: @escaping (A) -> B) -> Trampoline<B> {
         flatMap { a in .done(f(a)) }
     }
-}
 
-private final class Done<A>: Trampoline<A> {
-    let result: A
-
-    init(_ result: A) {
-        self.result = result
-    }
-
-    override func step() -> Either<() -> Trampoline<A>, A> {
-        .right(result)
+    /// Safe downcast.
+    ///
+    /// - Parameter fa: Value in the higher-kind form.
+    /// - Returns: Value cast to Trampoline.
+    public static func fix(_ fa: TrampolineOf<A>) -> Trampoline<A> {
+        fa as! Trampoline<A>
     }
 }
 
-private final class Defer<A>: Trampoline<A> {
-    let deferred: () -> Trampoline<A>
-
-    init(_ deferred: @escaping () -> Trampoline<A>) {
-        self.deferred = deferred
-    }
-
-    override func step() -> Either<() -> Trampoline<A>, A> {
-        .left(deferred)
-    }
+/// Safe downcast.
+///
+/// - Parameter fa: Value in higher-kind form.
+/// - Returns: Value cast to Trampoline.
+public postfix func ^<A>(_ fa: TrampolineOf<A>) -> Trampoline<A> {
+    Trampoline.fix(fa)
 }
 
-private final class FlatMap<A, B>: Trampoline<B> {
-    let trampoline: Trampoline<A>
-    let continuation: (A) -> Trampoline<B>
+private enum _Trampoline<A> {
+    case done(A)
+    case `defer`(() -> Trampoline<A>)
+    case flatMap(Coyoneda<ForTrampoline, Trampoline<A>>)
 
-    init(_ trampoline: Trampoline<A>, _ continuation: @escaping (A) -> Trampoline<B>) {
-        self.trampoline = trampoline
-        self.continuation = continuation
-    }
-
-    override func flatMap<C>(_ f: @escaping (B) -> Trampoline<C>) -> Trampoline<C> {
-        let continuation = self.continuation
-        return FlatMap<A, C>(trampoline) { a in
-            continuation(a).flatMap(f)
+    func step() -> Either<() -> Trampoline<A>, A> {
+        switch self {
+        case .done(let a):
+            return .right(a)
+        case .defer(let deferred):
+            return .left(deferred)
+        case .flatMap(let coyoneda):
+            return coyoneda.coyonedaF.run(FlatMapStep())
         }
     }
 
-    override func step() -> Either<() -> Trampoline<B>, B> {
-        switch trampoline {
-        case let done as Done<A>:
-            return .left { [continuation] in
-                continuation(done.result)
+    public func flatMap<B>(_ f: @escaping (A) -> Trampoline<B>) -> Trampoline<B> {
+        switch self {
+        case .done, .defer:
+            return Trampoline(.flatMap(Coyoneda(pivot: Trampoline(self), f: f)))
+        case .flatMap(let coyoneda):
+            return coyoneda.coyonedaF.run(FlatMapFlatMap(f))
+        }
+    }
+}
+
+private final class FlatMapStep<A>: CokleisliK<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, Either<() -> Trampoline<A>, A>> {
+    override init() {}
+
+    override func invoke<X>(_ fa: Kind<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, X>) -> Either<() -> Trampoline<A>, A> {
+        let pivot = fa^.pivot^
+        let f = fa^.f
+
+        switch pivot.value {
+        case .done(let x):
+            return .left { [f] in
+                f(x)
             }
-        case let next as Defer<A>:
-            return .left { [continuation] in
-                next.deferred().flatMap(continuation)
+        case .defer(let deferred):
+            return .left { [f] in
+                deferred().flatMap(f)
             }
         default:
             fatalError("Invalid Trampoline case")
         }
+    }
+}
+
+private final class FlatMapFlatMap<A, B>: CokleisliK<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, Trampoline<B>> {
+    init(_ g: @escaping (A) -> Trampoline<B>) {
+        self.g = g
+    }
+
+    let g: (A) -> Trampoline<B>
+
+    override func invoke<X>(_ fa: Kind<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, X>) -> Trampoline<B> {
+        let pivot = fa^.pivot^
+        let f = fa^.f
+        return Trampoline(
+            .flatMap(
+                Coyoneda(
+                    pivot: pivot,
+                    f: { [g] a in f(a).flatMap(g) })
+            )
+        )
     }
 }

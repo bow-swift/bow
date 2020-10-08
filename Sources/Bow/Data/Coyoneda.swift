@@ -1,5 +1,4 @@
 import Foundation
-import Bow
 
 internal final class ForCoyonedaF {}
 internal final class CoyonedaFPartial<F, A>: Kind2<ForCoyonedaF, F, A> {}
