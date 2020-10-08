@@ -6,7 +6,6 @@
 // nef:end
 // nef:begin:hidden
 import Bow
-import Darwin
 // nef:end
 /*:
  # Rank-N polymorphism
