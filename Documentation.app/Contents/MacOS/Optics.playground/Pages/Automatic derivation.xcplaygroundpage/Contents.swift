@@ -62,15 +62,15 @@ extension Article: AutoLens {}
  */
 let titleLens = Article.lens(for: \.title)
 /*:
- ## Optional
+ ## AffineTraversal
  
- For those fields which may or may not be present, we can create an `Optional` in an automatic way by conforming to `AutoOptional`:
+ For those fields which may or may not be present, we can create an `AffineTraversal` in an automatic way by conforming to `AutoAffineTraversal`:
  */
-extension Article: AutoOptional {}
+extension Article: AutoAffineTraversal {}
 /*:
- And using a key path to an optional field, we can obtain its associated `Optional` optic:
+ And using a key path to an optional field, we can obtain its associated `AffineTraversal` optic:
  */
-let subtitleOptional = Article.optional(for: \.subtitle)
+let subtitleAffineTraversal = Article.affineTraversal(for: \.subtitle)
 /*:
  ## Fold
  
