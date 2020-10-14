@@ -33,7 +33,7 @@ import BowOptics
  | Getter    | An optic that can focus into a structure and get its focus |
  | Setter    | An optic that can focus into a structure and set or modify its focus |
  | Lens      | An optic that can focus into a structure and get, set or modify its focus |
- | Optional  | An optic whose focus is optional and can get, set or modify it |
+ | AffineTraversal  | An optic whose focus is optional and can get, set or modify it |
  | Prism     | An optic whose focus is present only in some cases (of a sum type) and can get, set or modify it |
  | Fold      | An optic that can have multiple foci and is able to fold them into a single value |
  | Traversal | An optic that can have multiple foci and get, set or modify them |
@@ -49,6 +49,6 @@ import BowOptics
  | Cons        | Splits a structure into its first element and the rest |
  | Snoc        | Splits a structure into a prefix with all elements but the last, and the last |
  | At          | Provides a Lens at a given index |
- | Index       | Provides an Optional at a given index |
+ | Index       | Provides an AffineTraversal at a given index |
  | FilterIndex | Provides a Traversal of elements whose index fulfils a predicate |
  | Each        | Provides a Traversal that can focus into a structure to see all foci |
