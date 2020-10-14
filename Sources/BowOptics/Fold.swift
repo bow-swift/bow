@@ -20,7 +20,7 @@ public typealias FoldOf<S, A> = Kind<FoldPartial<S>, A>
 open class Fold<S, A>: FoldOf<S, A> {
     /// Creates a Fold that has no focus.
     public static var void: Fold<S, A> {
-        return Optional<S, A>.void.asFold
+        return AffineTraversal<S, A>.void.asFold
     }
 
     /// Creates a Fold based on the instance of `Foldable` for `F`.
@@ -80,13 +80,13 @@ open class Fold<S, A>: FoldOf<S, A> {
         return lhs.compose(rhs)
     }
 
-    /// Composes a `Fold` with an `Optional`.
+    /// Composes a `Fold` with an `AffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left hand side of the composition.
     ///   - rhs: Right hand side of the composition.
     /// - Returns: A `Fold` resulting from the sequential application of the two provided optics.
-    public static func +<C>(lhs: Fold<S, A>, rhs: Optional<A, C>) -> Fold<S, C> {
+    public static func +<C>(lhs: Fold<S, A>, rhs: AffineTraversal<A, C>) -> Fold<S, C> {
         return lhs.compose(rhs)
     }
 
@@ -246,11 +246,11 @@ open class Fold<S, A>: FoldOf<S, A> {
         return ComposeFold(first: self, second: other.asFold)
     }
 
-    /// Composes this `Fold` with an `Optional`.
+    /// Composes this `Fold` with an `AffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
     /// - Returns: A `Fold` resulting from the sequential application of the two optics.
-    public func compose<C>(_ other: Optional<A, C>) -> Fold<S, C> {
+    public func compose<C>(_ other: AffineTraversal<A, C>) -> Fold<S, C> {
         return ComposeFold(first: self, second: other.asFold)
     }
 

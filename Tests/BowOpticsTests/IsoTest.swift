@@ -19,8 +19,8 @@ class IsoTest: XCTestCase {
         LensLaws.check(lens: Token.iso.asLens)
     }
     
-    func testOptionalLaws() {
-        OptionalLaws.check(optional: Token.iso.asOptional)
+    func testAffineTraversalLaws() {
+        AffineTraversalLaws.check(affineTraversal: Token.iso.asAffineTraversal)
     }
     
     func testSetterLaws() {
@@ -160,8 +160,8 @@ class IsoTest: XCTestCase {
             return (Token.iso + Setter<String, String>.identity).set(token, "Any") == Token.iso.set("Any")
         }
         
-        property("Iso + Optional::identity") <~ forAll { (token: Token) in
-            return (Token.iso + BowOptics.Optional<String, String>.identity).getOption(token).getOrElse("") == Token.iso.get(token)
+        property("Iso + AffineTraversal::identity") <~ forAll { (token: Token) in
+            return (Token.iso + AffineTraversal<String, String>.identity).getOption(token).getOrElse("") == Token.iso.get(token)
         }
         
         property("Iso + Fold::identity") <~ forAll { (token: Token) in

@@ -29,18 +29,18 @@ public extension Prism where A: At {
     ///
     /// - Parameter i: Index to focus.
     /// - Returns: An optional from this structure to the focused index.
-    func at(_ i: A.AtIndex) -> Optional<S, A.AtFoci> {
+    func at(_ i: A.AtIndex) -> AffineTraversal<S, A.AtFoci> {
         return self.fix + A.at(i)
     }
 }
 
 // MARK: Extension when focus has `At` Instance
-public extension Optional where A: At {
-    /// Focuses on a specific index of this optional.
+public extension AffineTraversal where A: At {
+    /// Focuses on a specific index of this AffineTraversal.
     ///
     /// - Parameter i: Index to focus.
-    /// - Returns: An optional from this structure to the focused index.
-    func at(_ i: A.AtIndex) -> Optional<S, A.AtFoci> {
+    /// - Returns: An AffineTraversal from this structure to the focused index.
+    func at(_ i: A.AtIndex) -> AffineTraversal<S, A.AtFoci> {
         return self.fix + A.at(i)
     }
 }

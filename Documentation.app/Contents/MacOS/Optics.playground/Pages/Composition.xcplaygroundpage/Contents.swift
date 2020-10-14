@@ -16,12 +16,12 @@ import BowOptics
  
  Optics can compose to create more powerful optics and access deeply nested data structures in an seamless manner. The result of the composition of the 8 pairs of optics that are included in Bow is shown in the following table. Notice that not all combinations are possible for composition, and that some times the resulting optic is not the same as the optics that were composed.
  
- |               | **Iso**   | **Lens**  | **Prism** | **Optional** | **Getter** | **Setter** | **Fold** | **Traversal** |
+ |               | **Iso**   | **Lens**  | **Prism** | **AffineTraversal** | **Getter** | **Setter** | **Fold** | **Traversal** |
  | ------------- | --------- | --------- | --------- | ------------ | ---------- | ---------- | -------- | ------------- |
- | **Iso**       | Iso       | Lens      | Prism     | Optional     | Getter     | Setter     | Fold     | Traversal     |
- | **Lens**      | Lens      | Lens      | Optional  | Optional     | Getter     | Setter     | Fold     | Traversal     |
- | **Prism**     | Prism     | Optional  | Prism     | Optional     | 🚫         | Setter     | Fold     | Traversal     |
- | **Optional**  | Optional  | Optional  | Optional  | Optional     | Fold       | Setter     | Fold     | Traversal     |
+ | **Iso**       | Iso       | Lens      | Prism     | AffineTraversal     | Getter     | Setter     | Fold     | Traversal     |
+ | **Lens**      | Lens      | Lens      | AffineTraversal  | AffineTraversal     | Getter     | Setter     | Fold     | Traversal     |
+ | **Prism**     | Prism     | AffineTraversal  | Prism     | AffineTraversal     | 🚫         | Setter     | Fold     | Traversal     |
+ | **AffineTraversal**  | AffineTraversal  | AffineTraversal  | AffineTraversal  | AffineTraversal     | Fold       | Setter     | Fold     | Traversal     |
  | **Getter**    | Getter    | Getter    | 🚫        | 🚫           | Getter     | 🚫         | Fold     | 🚫            |
  | **Setter**    | Setter    | Setter    | Setter    | Setter       | 🚫         | Setter     | 🚫       | Setter        |
  | **Fold**      | Fold      | Fold      | Fold      | Fold         | Fold       | 🚫         | Fold     | Fold          |
@@ -54,16 +54,16 @@ func nodePrism<A>() -> Prism<NTree<A>, (A, NEA<NTree<A>>)> {
  
  Fortunately, Bow already provides these utilities. In particular, given that tuples are product types, it seems we would need a `Lens` to focus on the second component of the tuple. To do so, we can get the `Lens` from `Tuple2._1`. There are utilities like this from `Tuple2` to `Tuple10`, to focus on every component of the tuples.
  
- Then, we can compose the previous `Prism` with this `Lens` to get an `Optional` (see table above) that focuses only on the branches of a node:
+ Then, we can compose the previous `Prism` with this `Lens` to get an `AffineTraversal` (see table above) that focuses only on the branches of a node:
  */
-func branchesOptional<A>() -> Optional<NTree<A>, NEA<NTree<A>>> {
+func branchesAffineTraversal<A>() -> AffineTraversal<NTree<A>, NEA<NTree<A>>> {
     nodePrism() + Tuple2._1
 }
 /*:
- Now, we would like to be able to traverse each individual branch and modify them in isolation. This would give us a way of visiting the branches under the first level of the tree. If we look into the focus of the `branchesOptional` we can see that it is a `NonEmptyArray`, which already has a `Traversal` to visit each element. Therefore, if we compose them, we can get a `Traversal` with foci in each node of the first level under the provided node:
+ Now, we would like to be able to traverse each individual branch and modify them in isolation. This would give us a way of visiting the branches under the first level of the tree. If we look into the focus of the `branchesAffineTraversal` we can see that it is a `NonEmptyArray`, which already has a `Traversal` to visit each element. Therefore, if we compose them, we can get a `Traversal` with foci in each node of the first level under the provided node:
  */
 func levelTraversal<A>() -> Traversal<NTree<A>, NTree<A>> {
-    branchesOptional() + NEA.traversal
+    branchesAffineTraversal() + NEA.traversal
 }
 /*:
  Looking at `levelTraversal` we can see that its source and focus types match. That means we can compose with itself in order to go further down in the tree structure, level by level. We can write a function that gets us a `Traversal` focused on the nodes of the `m` level, just by composing the `levelTraversal` with itself `m` times:

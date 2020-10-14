@@ -33,8 +33,8 @@ extension ArrayK: Index {
     public typealias IndexType = Int
     public typealias IndexFoci = A
     
-    public static func index(_ i: Int) -> Optional<ArrayK<A>, A> {
-        return Optional(
+    public static func index(_ i: Int) -> AffineTraversal<ArrayK<A>, A> {
+        return AffineTraversal(
             set: { arrayK, e in arrayK.asArray.enumerated().map { x in (x.offset == i) ? e : x.element }.k()
         }, getOrModify: { array in
             array.getOrNone(i).fold({ Either.left(array) }, Either.right)

@@ -33,8 +33,8 @@ extension NonEmptyArray: Index {
     public typealias IndexType = Int
     public typealias IndexFoci = A
     
-    public static func index(_ i: Int) -> Optional<NonEmptyArray<A>, A> {
-        return Optional(
+    public static func index(_ i: Int) -> AffineTraversal<NonEmptyArray<A>, A> {
+        return AffineTraversal(
             set: { nea, e in NEA.fromArrayUnsafe(nea.all().enumerated().map { x in (x.offset == i) ? x.element : e })},
             getOrModify: { nea in nea.getOrNone(i).fold({ Either.left(nea) }, Either.right) })
     }
