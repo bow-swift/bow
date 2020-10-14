@@ -10,9 +10,11 @@ public typealias TreePartial = ForTree
 public typealias TreeOf<A> = Kind<ForTree, A>
 
 /// `Tree` represents a non-empty tree that allows node to have an arbitrary number of children.
+///
+/// The `Foldable` instance walks through the tree in depth-first order.
 public final class Tree<A>: TreeOf<A> {
-    let root: A
-    let subForest: [Tree<A>]
+    public let root: A
+    public let subForest: [Tree<A>]
 
     /// Safe downcast.
     ///
@@ -37,7 +39,7 @@ public final class Tree<A>: TreeOf<A> {
     /// The root of `tree` will be place directly under the root of `self`.
     ///
     /// - Parameter tree: The tree to add under `self.root`.
-    /// - Returns: <#description#>
+    /// - Returns: A tree with the same elements as self with `tree` added as subtree.
     public func appendSubTree(_ tree: Tree<A>) -> Tree<A> {
         appendSubForest([tree])
     }
@@ -159,8 +161,8 @@ extension TreePartial: Foldable {
 // MARK: Instance of Traverse for Tree
 extension TreePartial: Traverse {
     public static func traverse<G, A, B>(_ fa: TreeOf<A>, _ f: @escaping (A) -> Kind<G, B>) -> Kind<G, TreeOf<B>> where G : Applicative {
-        let lifterRoot = f(fa^.root)
+        let liftedRoot = f(fa^.root)
         let liftedSubForest = fa^.subForest.traverse { t in t.traverse(f).map { $0^ } }
-        return G.map(lifterRoot, liftedSubForest, Tree.init)
+        return G.map(liftedRoot, liftedSubForest, Tree.init)
     }
 }
