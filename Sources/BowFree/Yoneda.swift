@@ -43,6 +43,10 @@ public final class Yoneda<F: Functor, A>: YonedaOf<F, A> {
         self.function = f
     }
     
+    public func toCoyoneda() -> Coyoneda<F, A> {
+        Coyoneda(pivot: lower(), f: id)
+    }
+    
     /// Applies a function to this Yoneda value.
     ///
     /// - Parameter f: Transforming function.
