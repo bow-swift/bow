@@ -136,6 +136,9 @@
               <li class="nav-group-task" data-name="Cokleisli" data-url="Classes/Cokleisli.html">
                 <a title="Cokleisli" class="nav-group-task-link" href="Classes/Cokleisli.html">Cokleisli</a>
               </li>
+              <li class="nav-group-task" data-name="CokleisliK" data-url="Classes/CokleisliK.html">
+                <a title="CokleisliK" class="nav-group-task-link" href="Classes/CokleisliK.html">CokleisliK</a>
+              </li>
               <li class="nav-group-task" data-name="CokleisliPartial" data-url="Classes/CokleisliPartial.html">
                 <a title="CokleisliPartial" class="nav-group-task-link" href="Classes/CokleisliPartial.html">CokleisliPartial</a>
               </li>
@@ -222,6 +225,9 @@
               </li>
               <li class="nav-group-task" data-name="Eval" data-url="Classes/Eval.html">
                 <a title="Eval" class="nav-group-task-link" href="Classes/Eval.html">Eval</a>
+              </li>
+              <li class="nav-group-task" data-name="Exists" data-url="Classes/Exists.html">
+                <a title="Exists" class="nav-group-task-link" href="Classes/Exists.html">Exists</a>
               </li>
               <li class="nav-group-task" data-name="First" data-url="Classes.html#/s:3Bow5FirstC">
                 <a title="First" class="nav-group-task-link" href="Classes.html#/s:3Bow5FirstC">First</a>
@@ -5634,6 +5640,40 @@ Classes that want to have HKT support must extend this class. Type parameter <co
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:3Bow10CokleisliKC"></a>
+                    <a name="//apple_ref/swift/Class/CokleisliK" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow10CokleisliKC">
+                      <span class="token-name">CokleisliK</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>CokleisliK represents a function with the signature <code>(Kind&lt;F, A&gt;) -&gt; B</code>
+that is polymorphic on A, where F and B are fixed.
+Subclasses of <code>CokleisliK</code> need to implement <code>invoke</code>.</p>
+
+                        <a href="Classes/CokleisliK.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">CokleisliK</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:3Bow12ForFunction0C"></a>
                     <a name="//apple_ref/swift/Class/ForFunction0" class="dashAnchor"></a>
                     <a class="token" href="#/s:3Bow12ForFunction0C">
@@ -6189,6 +6229,43 @@ In other words, an explorer for the state space given by W. It can also provide:
                         <div class="language key-main">
                           <p class="aside-title key-main-text">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Eval</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Typealiases.html#/s:3Bow6EvalOfa">EvalOf</a></span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow6ExistsC"></a>
+                    <a name="//apple_ref/swift/Class/Exists" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow6ExistsC">
+                      <span class="token-name">Exists</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Encodes the notion of existential type. <code>Exists&lt;F&gt;</code> is a wrapper around a <code>Kind&lt;F, X&gt;</code> value, where <code>X</code> is some type that is not exposed on <code>Exists</code> signature.</p>
+
+<p>You provide a value of type <code>Kind&lt;F, X&gt;</code> when constructing an <code>Exists&lt;F&gt;</code>instance but the specific type <code>X</code> that you provide is hidden inside <code>Exists</code>.
+The only way to interact with the content of <code>Exists&lt;F&gt;</code> is with a function of type <code>Kind&lt;F, X&gt; -&gt; R</code> that is polymorphic on <code>X</code> (represented by the <code>CokleisliK&lt;F, R</code> class).
+You pass a <code>CokleisliK&lt;F, R&gt;</code> to an <code>Exists&lt;F&gt;</code> and the function is called with the specific type that is hidden inside the <code>Exists</code>.
+This is done with the <code>run</code> method.</p>
+
+                        <a href="Classes/Exists.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Exists</span><span class="o">&lt;</span><span class="kt">F</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -7386,7 +7463,7 @@ monadic effect that we want to bind to the variable.</p>
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-08)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-14)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>

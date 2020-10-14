@@ -288,6 +288,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
+      "line": 46,
+      "symbol": "Yoneda.toCoyoneda()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/bow/bow/Sources/BowGeneric/Generic.swift",
       "line": 3,
       "symbol": "Generic",
