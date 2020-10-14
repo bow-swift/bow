@@ -86,14 +86,14 @@ public class ApplicativeLaws<F: Applicative & EquatableK & ArbitraryK> {
             Kind<F, Int>.pure(a + b + c + d)
         }
         
-        property("Map with 5 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int) in
+        property("Map with 5 inputs") <~ forAll { (a: Int, b: Int, c: Int, d: Int, e: Int) -> Bool in
             
             Kind<F, Int>.map(
                 Kind<F, Int>.pure(a),
                 Kind<F, Int>.pure(b),
                 Kind<F, Int>.pure(c),
                 Kind<F, Int>.pure(d),
-                Kind<F, Int>.pure(e)) { a1, b1, c1, d1, e1 in
+                Kind<F, Int>.pure(e)) { (a1: Int, b1: Int, c1: Int, d1: Int, e1: Int) -> Int in
                     a1 + b1 + c1 + d1 + e1
             }
                 ==

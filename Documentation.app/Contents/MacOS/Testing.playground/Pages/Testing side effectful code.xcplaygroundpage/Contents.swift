@@ -101,7 +101,7 @@ struct TestDatabaseService: DatabaseService {
     func lookUp<D>(id: UserID) -> EnvIO<D, Error, User> {
         ref.modify { state in
             state.lookUp(id: id)
-        }^.env().flatMap { user in
+        }^.env().flatMap { (user: User?) in
             (user == nil)
                 ? EnvIO.raiseError(DatabaseError.userNotFound(id))
                 : EnvIO.pure(user!)
@@ -114,6 +114,7 @@ struct TestDatabaseService: DatabaseService {
         }^.env()
     }
 }
+
 /*:
  We can proceed similarly to implement the test logger:
  */

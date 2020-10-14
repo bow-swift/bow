@@ -38,7 +38,7 @@ class IorTest: XCTestCase {
         }
     }
     
-    func testBimapConsitent() {
+    func testBimapConsistent() {
         property("bimap is equivalent to map and mapLeft") <~ forAll { (input: Ior<Int, Int>, f: ArrowOf<Int, Int>, g: ArrowOf<Int, Int>) in
             return input.bimap(f.getArrow, g.getArrow) == Ior.fix(input.map(g.getArrow)).mapLeft(f.getArrow)
         }

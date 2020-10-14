@@ -268,19 +268,25 @@ extension IorPartial: Monad where L: Semigroup {
         _ v: Ior<L, Either<A, B>>,
         _ f: @escaping (A) -> Ior<L, Either<A, B>>) -> Trampoline<Ior<L, B>> {
         .defer {
-             v.fold({ left in .done(.left(left)) },
-                    { right in
-                        right.fold({ a in loop(f(a), f) },
-                                   { b in .done(.right(b)) })
-             },
-                    { left, right in
-                        right.fold({ a in
-                            f(a).fold({ aLeft in .done(.left(aLeft.combine(left))) },
-                                      { aRight in loop(.both(left, aRight), f) },
-                                      { aLeft, aRight in loop(.both(left.combine(aLeft), aRight), f) })
+            v.fold(
+                { left in .done(.left(left)) },
+                { right in
+                    right.fold({ a in loop(f(a), f) },
+                               { b in .done(.right(b)) })
+                },
+                { left, right in
+                    right.fold(
+                        { a in
+                            f(a).fold(
+                                { aLeft in .done(.left(aLeft.combine(left))) },
+                                { aRight in loop(.right(aRight), f) },
+                                { aLeft, aRight in loop(.both(left.combine(aLeft), aRight), f) }
+                            )
                         },
-                                   { b in .done(.both(left, b)) })
-            })
+                        { b in .done(.both(left, b)) }
+                    )
+                }
+            )
         }
     }
 
