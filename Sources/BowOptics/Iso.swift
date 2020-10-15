@@ -74,13 +74,13 @@ public class PIso<S, T, A, B>: PIsoOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
 
-    /// Composes a `PIso` with a `POptional`.
+    /// Composes a `PIso` with a `PAffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PIso<S, T, A, B>, rhs: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PIso<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
 
@@ -275,12 +275,12 @@ public class PIso<S, T, A, B>: PIsoOf<S, T, A, B> {
         return self.asPrism.compose(other)
     }
 
-    /// Composes this with a `POptional`.
+    /// Composes this with a `PAffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from applying the two optics sequentially.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.asOptional.compose(other)
+    /// - Returns: A `PAffineTraversal` resulting from applying the two optics sequentially.
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.asAffineTraversal.compose(other)
     }
 
     /// Composes this with a `PSetter`.
@@ -322,9 +322,9 @@ public class PIso<S, T, A, B>: PIsoOf<S, T, A, B> {
         return PPrism(getOrModify: { s in Either.right(self.get(s)) }, reverseGet: self.reverseGet)
     }
 
-    /// Converts this into a `POptional`.
-    public var asOptional: POptional<S, T, A, B> {
-        return POptional(set: { _, b in self.set(b) }, getOrModify: self.get >>> Either.right)
+    /// Converts this into a `PAffineTraversal`.
+    public var asAffineTraversal: PAffineTraversal<S, T, A, B> {
+        return PAffineTraversal(set: { _, b in self.set(b) }, getOrModify: self.get >>> Either.right)
     }
 
     /// Converts this into a `PSetter`.

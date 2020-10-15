@@ -97,8 +97,8 @@ class TraversalTest: XCTestCase {
                 ArrayK<Int>.traversal.getAll(array)
         }
 
-        property("Traversal + Optional::identity") <~ forAll { (array: ArrayK<Int>) in
-            return (ArrayK<Int>.traversal + BowOptics.Optional<Int, Int>.identity).getAll(array) ==
+        property("Traversal + AffineTraversal::identity") <~ forAll { (array: ArrayK<Int>) in
+            return (ArrayK<Int>.traversal + AffineTraversal<Int, Int>.identity).getAll(array) ==
                 ArrayK<Int>.traversal.getAll(array)
         }
 

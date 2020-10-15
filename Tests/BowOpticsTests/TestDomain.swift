@@ -65,11 +65,11 @@ enum SumType {
         }
     }, reverseGet: SumType.a)
 
-    static let optionalHead = BowOptics.Optional<Array<Int>, Int>(
+    static let optionalHead = AffineTraversal<Array<Int>, Int>(
         set: { array, value in [value] + ((array.count > 1) ? Array(array.dropFirst()) : [])},
         getOrModify: { array in Option.fromOptional(array.first).fold(constant(Either.left(array)), Either.right) })
 
-    static let defaultHead = BowOptics.Optional<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)
+    static let defaultHead = AffineTraversal<Int, Int>(set: { a, _ in a }, getOrModify: Either.right)
 }
 
 extension SumType : Equatable {}

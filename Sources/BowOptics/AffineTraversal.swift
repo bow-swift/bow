@@ -1,127 +1,127 @@
 import Foundation
 import Bow
 
-/// Witness for the `POptional<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPOptional {}
+/// Witness for the `PAffineTraversal<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
+public final class ForPAffineTraversal {}
 
-/// Partial application of the POptional type constructor, omitting the last parameter.
-public final class POptionalPartial<S, T, A>: Kind3<ForPOptional, S, T, A> {}
+/// Partial application of the PAffineTraversal type constructor, omitting the last parameter.
+public final class PAffineTraversalPartial<S, T, A>: Kind3<ForPAffineTraversal, S, T, A> {}
 
-/// Higher Kinded Type alias to improve readability over `Kind4<ForPLens, S, T, A, B>`
-public typealias POptionalOf<S, T, A, B> = Kind<POptionalPartial<S, T, A>, B>
+/// Higher Kinded Type alias to improve readability over `Kind4<ForPAffineTraversal, S, T, A, B>`
+public typealias PAffineTraversalOf<S, T, A, B> = Kind<PAffineTraversalPartial<S, T, A>, B>
 
-/// Optional is a type alias for `POptional` which fixes the type arguments and restricts the `POptional` to monomorphic updates.
-public typealias Optional<S, A> = POptional<S, S, A, A>
+/// AffineTraversal is a type alias for `PAffineTraversal` which fixes the type arguments and restricts the `PAffineTraversal` to monomorphic updates.
+public typealias AffineTraversal<S, A> = PAffineTraversal<S, S, A, A>
 
-/// Witness for the `Optional<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForOptional = ForPOptional
+/// Witness for the `AffineTraversal<S, A>` data type. To be used in simulated Higher Kinded Types.
+public typealias ForAffineTraversal = ForPAffineTraversal
 
-/// Partial application of the Optional type constructor, omitting the last parameter.
-public typealias OptionalPartial<S> = Kind<ForOptional, S>
+/// Partial application of the AffineTraversal type constructor, omitting the last parameter.
+public typealias AffineTraversalPartial<S> = Kind<ForAffineTraversal, S>
 
-/// An Optional is an optic that allows to see into a structure and getting, setting or modifying an optional focus.
+/// An AffineTraversal is an optic that allows to see into a structure and getting, setting or modifying an optional focus.
 ///
-/// A (polymorphic) POptional is useful when setting or modifying a value for a type with an optional polymorphic focus.
+/// A (polymorphic) PAffineTraversal is useful when setting or modifying a value for a type with an optional polymorphic focus.
 ///
-/// A POptional can be seen as a weaker `Lens` and `Prism` and combines their weakest functions:
+/// A PAffineTraversal can be seen as a weaker `Lens` and `Prism` and combines their weakest functions:
 ///     - `set` meaning we can focus into an `S` and set a value `B` for a target `A` and obtain a modified source `T`.
-///     - `getOrModify` meaning it returns the focus of a `POptional` (if present) or the original value.
+///     - `getOrModify` meaning it returns the focus of a `PAffineTraversal` (if present) or the original value.
 ///
 /// Type parameters:
 ///     - `S`: Source.
 ///     - `T`: Modified source.
 ///     - `A`: Focus.
 ///     - `B`: Modified focus.
-public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
+public class PAffineTraversal<S, T, A, B>: PAffineTraversalOf<S, T, A, B> {
     private let setFunc: (S, B) -> T
     private let getOrModifyFunc: (S) -> Either<T, A>
     
-    /// Composes a `POptional` with a `POptional`.
+    /// Composes a `PAffineTraversal` with a `PAffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `PPrism`.
+    /// Composes a `PAffineTraversal` with a `PPrism`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PPrism<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `PLens`.
+    /// Composes a `PAffineTraversal` with a `PLens`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: PLens<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PLens<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `PIso`.
+    /// Composes a `PAffineTraversal` with a `PIso`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: PIso<A, B, C, D>) -> POptional<S, T, C, D> {
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PIso<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `PSetter`.
+    /// Composes a `PAffineTraversal` with a `PSetter`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `PSetter` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PSetter<A, B, C, D>) -> PSetter<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `Getter`.
+    /// Composes a `PAffineTraversal` with a `Getter`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `Fold` resulting from the sequential application of the two provided optics.
-    public static func +<C>(lhs: POptional<S, T, A, B>, rhs: Getter<A, C>) -> Fold<S, C> {
+    public static func +<C>(lhs: PAffineTraversal<S, T, A, B>, rhs: Getter<A, C>) -> Fold<S, C> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `Fold`.
+    /// Composes a `PAffineTraversal` with a `Fold`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `Fold` resulting from the sequential application of the two provided optics.
-    public static func +<C>(lhs: POptional<S, T, A, B>, rhs: Fold<A, C>) -> Fold<S, C> {
+    public static func +<C>(lhs: PAffineTraversal<S, T, A, B>, rhs: Fold<A, C>) -> Fold<S, C> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `POptional` with a `PTraversal`.
+    /// Composes a `PAffineTraversal` with a `PTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `PTraversal` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: POptional<S, T, A, B>, rhs: PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
+    public static func +<C, D>(lhs: PAffineTraversal<S, T, A, B>, rhs: PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
-    /// Provides an Optional that never sees its focus.
-    public static var void: Optional<S, A> {
-        return Optional(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
+    /// Provides an AffineTraversal that never sees its focus.
+    public static var void: AffineTraversal<S, A> {
+        return AffineTraversal(set: { s, _ in s }, getOrModify: { s in Either<S, A>.left(s) })
     }
     
-    /// Initializes a POptional.
+    /// Initializes a PAffineTraversal.
     ///
     /// - Parameters:
     ///   - set: Setter function.
@@ -149,7 +149,7 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
         return getOrModifyFunc(s)
     }
     
-    /// Modifies the focus of a POptional with an `Applicative` function.
+    /// Modifies the focus of a PAffineTraversal with an `Applicative` function.
     ///
     /// - Parameters:
     ///   - s: Source.
@@ -219,12 +219,12 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
         return getOption(s).fold(constant(false), constant(true))
     }
     
-    /// Joins with a POptional with the same focus.
+    /// Joins with a PAffineTraversal with the same focus.
     ///
     /// - Parameter other: Value to join with.
-    /// - Returns: A POptional that operates in either of the original sources.
-    public func choice<S1, T1>(_ other: POptional<S1, T1, A, B>) -> POptional<Either<S, S1>, Either<T, T1>, A, B> {
-        return POptional<Either<S, S1>, Either<T, T1>, A, B>(set: { either, b in
+    /// - Returns: A PAffineTraversal that operates in either of the original sources.
+    public func choice<S1, T1>(_ other: PAffineTraversal<S1, T1, A, B>) -> PAffineTraversal<Either<S, S1>, Either<T, T1>, A, B> {
+        return PAffineTraversal<Either<S, S1>, Either<T, T1>, A, B>(set: { either, b in
             either.bimap({ s in self.set(s, b) }, { s in other.set(s, b) })
         }, getOrModify: { either in
             either.fold({ s in self.getOrModify(s).bimap(Either.left, id) },
@@ -232,20 +232,20 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
         })
     }
     
-    /// Pairs this `POptional` with another type, placing this as the first element.
+    /// Pairs this `PAffineTraversal` with another type, placing this as the first element.
     ///
-    /// - Returns: A `POptional` that operates on tuples where the second argument remains unchanged.
-    public func first<C>() -> POptional<(S, C), (T, C), (A, C), (B, C)> {
-        return POptional<(S, C), (T, C), (A, C), (B, C)>(
+    /// - Returns: A `PAffineTraversal` that operates on tuples where the second argument remains unchanged.
+    public func first<C>() -> PAffineTraversal<(S, C), (T, C), (A, C), (B, C)> {
+        return PAffineTraversal<(S, C), (T, C), (A, C), (B, C)>(
             set: { sc, bc in self.setOption(sc.0, bc.0).fold({ (self.set(sc.0, bc.0), bc.1) }, { t in (t, sc.1) }) },
             getOrModify: { s, c in self.getOrModify(s).bimap({ t in (t, c) }, { a in (a, c) }) })
     }
     
-    /// Pairs this `POptional` with another type, placing this as the second element.
+    /// Pairs this `PAffineTraversal` with another type, placing this as the second element.
     ///
-    /// - Returns: A `POptional` that operates on tuples where the first argument remains unchanged.
-    public func second<C>() -> POptional<(C, S), (C, T), (C, A), (C, B)> {
-        return POptional<(C, S), (C, T), (C, A), (C, B)>(
+    /// - Returns: A `PAffineTraversal` that operates on tuples where the first argument remains unchanged.
+    public func second<C>() -> PAffineTraversal<(C, S), (C, T), (C, A), (C, B)> {
+        return PAffineTraversal<(C, S), (C, T), (C, A), (C, B)>(
             set: { cs, cb in self.setOption(cs.1, cb.1).fold({ (cs.0, self.set(cs.1, cb.1)) }, { t in (cb.0, t)}) },
             getOrModify: { c, s in self.getOrModify(s).bimap({ t in (c, t) }, { a in (c, a) })
         })
@@ -309,12 +309,12 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
         return getOption(s).fold(constant(true), predicate)
     }
     
-    /// Composes this value with a `POptional`.
+    /// Composes this value with a `PAffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> POptional<S, T, C, D> {
-        return POptional<S, T, C, D>(
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return PAffineTraversal<S, T, C, D>(
             set: { s, d in
                 self.modify(s){ a in other.set(a, d) }
         },
@@ -326,25 +326,25 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     /// Composes this value with a `PPrism`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: PPrism<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional)
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PPrism<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.compose(other.asAffineTraversal)
     }
     
     /// Composes this value with a `PLens`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: PLens<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional)
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PLens<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.compose(other.asAffineTraversal)
     }
     
     /// Composes this value with a `PIso`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
-    public func compose<C, D>(_ other: PIso<A, B, C, D>) -> POptional<S, T, C, D> {
-        return self.compose(other.asOptional)
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
+    public func compose<C, D>(_ other: PIso<A, B, C, D>) -> PAffineTraversal<S, T, C, D> {
+        return self.compose(other.asAffineTraversal)
     }
     
     /// Composes this value with a `PSetter`.
@@ -366,7 +366,7 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     /// Composes this value with a `PPrism`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
     public func compose<C>(_ other: Fold<A, C>) -> Fold<S, C> {
         return self.asFold.compose(other)
     }
@@ -374,7 +374,7 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     /// Composes this value with a `PTraversal`.
     ///
     /// - Parameter other: Value to compose with.
-    /// - Returns: A `POptional` resulting from the sequential application of the two provided optics.
+    /// - Returns: A `PAffineTraversal` resulting from the sequential application of the two provided optics.
     public func compose<C, D>(_ other: PTraversal<A, B, C, D>) -> PTraversal<S, T, C, D> {
         return self.asTraversal.compose(other)
     }
@@ -386,29 +386,29 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     
     /// Converts this value as a `Fold`.
     public var asFold: Fold<S, A> {
-        return OptionalFold(optional: self)
+        return AffineTraversalFold(affineTraversal: self)
     }
     
     /// Converts this value as a `PTraversal`.
     public var asTraversal: PTraversal<S, T, A, B> {
-        return OptionalTraversal(optional: self)
+        return AffineTraversalTraversal(affineTraversal: self)
     }
     
-    /// Extracts the focus viewed through the `POptional`.
+    /// Extracts the focus viewed through the `PAffineTraversal`.
     ///
     /// - Returns: A `State` of the source and target.
     public func extract() -> State<S, Option<A>> {
         return State { s in (s, self.getOption(s)) }
     }
     
-    /// Extracts the focus viewed through the `POptional`.
+    /// Extracts the focus viewed through the `PAffineTraversal`.
     ///
     /// - Returns: A `State` of the source and target.
     public func toState() -> State<S, Option<A>> {
         return extract()
     }
     
-    /// Extracts the focus viewed through the `POptional` and applies the provided function to it.
+    /// Extracts the focus viewed through the `PAffineTraversal` and applies the provided function to it.
     ///
     /// - Returns: A `State` of the source and target, modified by the provided function.
     public func extractMap<C>(_ f: @escaping (A) -> C) -> State<S, Option<C>> {
@@ -416,8 +416,8 @@ public class POptional<S, T, A, B>: POptionalOf<S, T, A, B> {
     }
 }
 
-public extension Optional where S == T, A == B {
-    /// Updates the focus viewed through the `Optional` and returns its new value.
+public extension AffineTraversal where S == T, A == B {
+    /// Updates the focus viewed through the `AffineTraversal` and returns its new value.
     ///
     /// - Parameter f: Updating function.
     /// - Returns: A `State` with the new value.
@@ -425,7 +425,7 @@ public extension Optional where S == T, A == B {
         return updateOld(f).map { x in x.map(f)^ }^
     }
     
-    /// Updates the focus viewed through the `Optional` and returns its old value.
+    /// Updates the focus viewed through the `AffineTraversal` and returns its old value.
     ///
     /// - Parameter f: Updating function.
     /// - Returns: A `State` with the old value.
@@ -433,7 +433,7 @@ public extension Optional where S == T, A == B {
         return State { s in (self.modify(s, f), self.getOption(s)) }
     }
     
-    /// Updates the focus viewed through the `Optional`, ignoring the result.
+    /// Updates the focus viewed through the `AffineTraversal`, ignoring the result.
     ///
     /// - Parameter f: Updating function.
     /// - Returns: A `State` ignoring the result.
@@ -441,7 +441,7 @@ public extension Optional where S == T, A == B {
         return State { s in (self.modify(s, f), ()) }
     }
     
-    /// Assigns the focus viewed through the `Optional` and returns its new value.
+    /// Assigns the focus viewed through the `AffineTraversal` and returns its new value.
     ///
     /// - Parameter a: Value to assign the focus.
     /// - Returns: A `State` with the new value.
@@ -449,7 +449,7 @@ public extension Optional where S == T, A == B {
         return update(constant(a))
     }
     
-    /// Assigns the focus viewed through the `Optional` and returns its old value.
+    /// Assigns the focus viewed through the `AffineTraversal` and returns its old value.
     ///
     /// - Parameter a: Value to assign the focus.
     /// - Returns: A `State` with the old value.
@@ -457,7 +457,7 @@ public extension Optional where S == T, A == B {
         return updateOld(constant(a))
     }
     
-    /// Assigns the focus viewed through the `Optional`, ignoring the result.
+    /// Assigns the focus viewed through the `AffineTraversal`, ignoring the result.
     ///
     /// - Parameter a: Value to assign the focus.
     /// - Returns: A `State` ignoring the result.
@@ -466,46 +466,46 @@ public extension Optional where S == T, A == B {
     }
 }
 
-public extension Optional where S == A, S == T, A == B {
-    /// Obtains an identity Optional.
-    static var identity: Optional<S, S> {
-        return Iso<S, S>.identity.asOptional
+public extension AffineTraversal where S == A, S == T, A == B {
+    /// Obtains an identity AffineTraversal.
+    static var identity: AffineTraversal<S, S> {
+        return Iso<S, S>.identity.asAffineTraversal
     }
     
-    /// Obtains an Optional that takes either an `S` or an `S` and strips the choice of `S`.
-    static var codiagonal: Optional<Either<S, S>, S> {
-        return Optional<Either<S, S>, S>(
+    /// Obtains an AffineTraversal that takes either an `S` or an `S` and strips the choice of `S`.
+    static var codiagonal: AffineTraversal<Either<S, S>, S> {
+        return AffineTraversal<Either<S, S>, S>(
             set: { ess, s in ess.bimap(constant(s), constant(s)) },
             getOrModify: { ess in ess.fold(Either.right, Either.right) })
     }
 }
 
-private class OptionalFold<S, T, A, B> : Fold<S, A> {
-    private let optional: POptional<S, T, A, B>
+private class AffineTraversalFold<S, T, A, B> : Fold<S, A> {
+    private let affineTraversal: PAffineTraversal<S, T, A, B>
     
-    init(optional: POptional<S, T, A, B>) {
-        self.optional = optional
+    init(affineTraversal: PAffineTraversal<S, T, A, B>) {
+        self.affineTraversal = affineTraversal
     }
     
     override func foldMap<R: Monoid>(_ s: S, _ f: @escaping (A) -> R) -> R {
-        return Option.fix(optional.getOption(s).map(f)).getOrElse(R.empty())
+        return Option.fix(affineTraversal.getOption(s).map(f)).getOrElse(R.empty())
     }
 }
 
-private class OptionalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
-    private let optional: POptional<S, T, A, B>
+private class AffineTraversalTraversal<S, T, A, B> : PTraversal<S, T, A, B> {
+    private let affineTraversal: PAffineTraversal<S, T, A, B>
     
-    init(optional: POptional<S, T, A, B>) {
-        self.optional = optional
+    init(affineTraversal: PAffineTraversal<S, T, A, B>) {
+        self.affineTraversal = affineTraversal
     }
     
     override func modifyF<F: Applicative>(_ s: S, _ f: @escaping (A) -> Kind<F, B>) -> Kind<F, T> {
-        return self.optional.modifyF(s, f)
+        return self.affineTraversal.modifyF(s, f)
     }
 }
 
-extension Optional {
-    internal var fix: Optional<S, A> {
-        return self as! Optional<S, A>
+extension AffineTraversal {
+    internal var fix: AffineTraversal<S, A> {
+        return self as! AffineTraversal<S, A>
     }
 }

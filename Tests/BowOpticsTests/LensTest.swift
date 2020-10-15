@@ -11,8 +11,8 @@ class LensTest: XCTestCase {
         LensLaws.check(lens: Token.lens)
     }
     
-    func testOptionalLaws() {
-        OptionalLaws.check(optional: Token.lens.asOptional)
+    func testAffineTraversalLaws() {
+        AffineTraversalLaws.check(affineTraversal: Token.lens.asAffineTraversal)
     }
     
     func testSetterLaws() {
@@ -128,8 +128,8 @@ class LensTest: XCTestCase {
             return (Token.lens + Prism<String, String>.identity).getOption(token).getOrElse("") == Token.lens.get(token)
         }
         
-        property("Lens + Optional::identity") <~ forAll { (token: Token) in
-            return (Token.lens + BowOptics.Optional<String, String>.identity).getOption(token).getOrElse("") == Token.lens.get(token)
+        property("Lens + AffineTraversal::identity") <~ forAll { (token: Token) in
+            return (Token.lens + AffineTraversal<String, String>.identity).getOption(token).getOrElse("") == Token.lens.get(token)
         }
         
         property("Lens + Setter::identity") <~ forAll { (token: Token, value: String) in

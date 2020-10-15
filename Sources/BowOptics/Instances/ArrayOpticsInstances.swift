@@ -28,7 +28,7 @@ extension Array: Index {
     public typealias IndexType = Int
     public typealias IndexFoci = Element
     
-    public static func index(_ i: Int) -> Optional<Array<Element>, Element> {
+    public static func index(_ i: Int) -> AffineTraversal<Array<Element>, Element> {
         return ArrayK<Element>.index(i, iso: toArrayK)
     }
 }
