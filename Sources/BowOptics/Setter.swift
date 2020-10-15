@@ -44,13 +44,13 @@ public class PSetter<S, T, A, B>: PSetterOf<S, T, A, B> {
         return lhs.compose(rhs)
     }
     
-    /// Composes a `PSetter` with a `POptional`.
+    /// Composes a `PSetter` with a `PAffineTraversal`.
     ///
     /// - Parameters:
     ///   - lhs: Left side of the composition.
     ///   - rhs: Right side of the composition.
     /// - Returns: A `PSetter` resulting from the sequential application of the two provided optics.
-    public static func +<C, D>(lhs: PSetter<S, T, A, B>, rhs: POptional<A, B, C, D>) -> PSetter<S, T, C, D> {
+    public static func +<C, D>(lhs: PSetter<S, T, A, B>, rhs: PAffineTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
         return lhs.compose(rhs)
     }
     
@@ -173,11 +173,11 @@ public class PSetter<S, T, A, B>: PSetterOf<S, T, A, B> {
         })
     }
     
-    /// Composes this `PSetter` with a `POptional`.
+    /// Composes this `PSetter` with a `PAffineTraversal`.
     ///
     /// - Parameter other: Value to compose with.
     /// - Returns: A `PSetter` resulting from the sequential application of the two optics.
-    public func compose<C, D>(_ other: POptional<A, B, C, D>) -> PSetter<S, T, C, D> {
+    public func compose<C, D>(_ other: PAffineTraversal<A, B, C, D>) -> PSetter<S, T, C, D> {
         return self.compose(other.asSetter)
     }
     

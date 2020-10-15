@@ -5,65 +5,65 @@ import BowOptics
 import BowOpticsLaws
 import BowLaws
 
-class OptionalTest: XCTestCase {
+class AffineTraversalTest: XCTestCase {
 
-    func testOptionalLaws() {
-        OptionalLaws.check(optional: BowOptics.Optional<String, String>.identity)
+    func testAffineTraversalLaws() {
+        AffineTraversalLaws.check(affineTraversal: AffineTraversal<String, String>.identity)
     }
 
     func testSetterLaws() {
-        SetterLaws.check(setter: BowOptics.Optional<String, String>.identity.asSetter)
+        SetterLaws.check(setter: AffineTraversal<String, String>.identity.asSetter)
     }
 
     func testTraversalLaws() {
-        TraversalLaws.check(traversal: BowOptics.Optional<String, String>.identity.asTraversal)
+        TraversalLaws.check(traversal: AffineTraversal<String, String>.identity.asTraversal)
     }
 
-    func testOptionalAsFold() {
-        property("Optional as Fold: size") <~ forAll { (ints: Array<Int>) in
+    func testAffineTraversalAsFold() {
+        property("AffineTraversal as Fold: size") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.size(ints) == Option.fix(Option.fromOptional(ints.first).map(constant(1))).getOrElse(0)
         }
 
-        property("Optional as Fold: nonEmpty") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: nonEmpty") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.nonEmpty(ints) == Option.fromOptional(ints.first).isDefined
         }
 
-        property("Optional as Fold: isEmpty") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: isEmpty") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.isEmpty(ints) == Option.fromOptional(ints.first).isEmpty
         }
 
-        property("Optional as Fold: getAll") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: getAll") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.getAll(ints) ==
                 Option.fromOptional(ints.first).toArray().k()
         }
 
-        property("Optional as Fold: combineAll") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: combineAll") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.combineAll(ints) == Option.fromOptional(ints.first).fold(constant(Int.empty()), id)
         }
 
-        property("Optional as Fold: fold") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: fold") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.fold(ints) == Option.fromOptional(ints.first).fold(constant(Int.empty()), id)
         }
 
-        property("Optional as Fold: headOption") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: headOption") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.headOption(ints) ==
                 Option.fromOptional(ints.first)
         }
 
-        property("Optional as Fold: lastOption") <~ forAll { (ints: Array<Int>) in
+        property("AffineTraversal as Fold: lastOption") <~ forAll { (ints: Array<Int>) in
             return SumType.optionalHead.asFold.lastOption(ints) ==
                 Option.fromOptional(ints.first)
         }
     }
 
-    func testOptionalProperties() {
+    func testAffineTraversalProperties() {
         property("void should always return none") <~ forAll { (value: String) in
-            let void = BowOptics.Optional<String, Int>.void
+            let void = AffineTraversal<String, Int>.void
             return void.getOption(value) == Option<Int>.none()
         }
 
         property("void should return source when setting target") <~ forAll { (str: String, int: Int) in
-            let void = BowOptics.Optional<String, Int>.void
+            let void = AffineTraversal<String, Int>.void
             return void.set(str, int) == str
         }
 
@@ -103,37 +103,37 @@ class OptionalTest: XCTestCase {
         }
     }
 
-    func testOptionalComposition() {
-        property("Optional + Optional::identity") <~ forAll { (array: Array<Int>, def: Int) in
-            return (SumType.optionalHead + BowOptics.Optional<Int, Int>.identity).getOption(array).getOrElse(def) == SumType.optionalHead.getOption(array).getOrElse(def)
+    func testAffineTraversalComposition() {
+        property("AffineTraversal + AffineTraversal::identity") <~ forAll { (array: Array<Int>, def: Int) in
+            return (SumType.optionalHead + AffineTraversal<Int, Int>.identity).getOption(array).getOrElse(def) == SumType.optionalHead.getOption(array).getOrElse(def)
         }
 
-        property("Optional + Iso::identity") <~ forAll { (array: Array<Int>, def: Int) in
+        property("AffineTraversal + Iso::identity") <~ forAll { (array: Array<Int>, def: Int) in
             return (SumType.optionalHead + Iso<Int, Int>.identity).getOption(array).getOrElse(def) == SumType.optionalHead.getOption(array).getOrElse(def)
         }
 
-        property("Optional + Lens::identity") <~ forAll { (array: Array<Int>, def: Int) in
+        property("AffineTraversal + Lens::identity") <~ forAll { (array: Array<Int>, def: Int) in
             return (SumType.optionalHead + Lens<Int, Int>.identity).getOption(array).getOrElse(def) == SumType.optionalHead.getOption(array).getOrElse(def)
         }
 
-        property("Optional + Prism::identity") <~ forAll { (array: Array<Int>, def: Int) in
+        property("AffineTraversal + Prism::identity") <~ forAll { (array: Array<Int>, def: Int) in
             return (SumType.optionalHead + Prism<Int, Int>.identity).getOption(array).getOrElse(def) == SumType.optionalHead.getOption(array).getOrElse(def)
         }
 
-        property("Optional + Getter::identity") <~ forAll { (array: Array<Int>) in
+        property("AffineTraversal + Getter::identity") <~ forAll { (array: Array<Int>) in
             return (SumType.optionalHead + Getter<Int, Int>.identity).getAll(array).asArray == SumType.optionalHead.getOption(array).fold(constant([]), { x in [x] })
         }
 
         let nonEmptyGenerator = Array<Int>.arbitrary.suchThat { array in array.count > 0 }
-        property("Optional + Setter::identity") <~ forAll(nonEmptyGenerator, Int.arbitrary) { (array: Array<Int>, def: Int) in
+        property("AffineTraversal + Setter::identity") <~ forAll(nonEmptyGenerator, Int.arbitrary) { (array: Array<Int>, def: Int) in
             return (SumType.optionalHead + Setter<Int, Int>.identity).set(array, def) == SumType.optionalHead.set(array, def)
         }
 
-        property("Optional + Fold::identity") <~ forAll { (array: Array<Int>) in
+        property("AffineTraversal + Fold::identity") <~ forAll { (array: Array<Int>) in
             return (SumType.optionalHead + Fold<Int, Int>.identity).getAll(array).asArray == SumType.optionalHead.getOption(array).fold(constant([]), { x in [x] })
         }
 
-        property("Optional + Traversal::identity") <~ forAll { (array: Array<Int>) in
+        property("AffineTraversal + Traversal::identity") <~ forAll { (array: Array<Int>) in
             return (SumType.optionalHead + Traversal<Int, Int>.identity).getAll(array).asArray == SumType.optionalHead.getOption(array).fold(constant([]), { x in [x] })
         }
     }

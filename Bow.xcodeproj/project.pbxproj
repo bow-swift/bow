@@ -104,7 +104,7 @@
 		1125054D220DD92B00861131 /* EquatableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125054C220DD92B00861131 /* EquatableK.swift */; };
 		1126CA8A22B1144200F840CB /* AutoOptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8922B1144200F840CB /* AutoOptics.swift */; };
 		1126CA8C22B115E100F840CB /* AutoLens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8B22B115E100F840CB /* AutoLens.swift */; };
-		1126CA8E22B1253D00F840CB /* AutoOptional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8D22B1253D00F840CB /* AutoOptional.swift */; };
+		1126CA8E22B1253D00F840CB /* AutoAffineTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8D22B1253D00F840CB /* AutoAffineTraversal.swift */; };
 		1126CA9022B1262F00F840CB /* AutoPrism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA8F22B1262F00F840CB /* AutoPrism.swift */; };
 		1126CA9322B12D9700F840CB /* Tuple2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9222B12D9700F840CB /* Tuple2.swift */; };
 		1126CA9622B12EC400F840CB /* Tuple3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1126CA9522B12EC400F840CB /* Tuple3.swift */; };
@@ -135,7 +135,7 @@
 		115488D123BFA0CC00A6DE92 /* EnvT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115488D023BFA0CC00A6DE92 /* EnvT.swift */; };
 		1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */; };
 		1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DB217E2DEF00969984 /* LensLaws.swift */; };
-		1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */; };
+		1160D0EB22D38DC40010323A /* AffineTraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DC217E2DEF00969984 /* AffineTraversalLaws.swift */; };
 		1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */; };
 		1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */; };
 		1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */; };
@@ -201,7 +201,7 @@
 		11E71717219D722900B94845 /* Getter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B3217E2E9200969984 /* Getter.swift */; };
 		11E71718219D722900B94845 /* Iso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4BF217E2E9200969984 /* Iso.swift */; };
 		11E71719219D722900B94845 /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4D2217E2E9200969984 /* Lens.swift */; };
-		11E7171A219D722900B94845 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4C8217E2E9200969984 /* Optional.swift */; };
+		11E7171A219D722900B94845 /* AffineTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4C8217E2E9200969984 /* AffineTraversal.swift */; };
 		11E7171B219D722900B94845 /* Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4C9217E2E9200969984 /* Prism.swift */; };
 		11E7171C219D722900B94845 /* Setter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4C0217E2E9200969984 /* Setter.swift */; };
 		11E7171D219D722900B94845 /* Traversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4B4217E2E9200969984 /* Traversal.swift */; };
@@ -229,7 +229,7 @@
 		11E71809219D7ECC00B94845 /* GetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E4217E2DEF00969984 /* GetterTest.swift */; };
 		11E7180A219D7ECC00B94845 /* IsoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3D9217E2DEF00969984 /* IsoTest.swift */; };
 		11E7180B219D7ECC00B94845 /* LensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E6217E2DEF00969984 /* LensTest.swift */; };
-		11E7180C219D7ECC00B94845 /* OptionalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E5217E2DEF00969984 /* OptionalTest.swift */; };
+		11E7180C219D7ECC00B94845 /* AffineTraversalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E5217E2DEF00969984 /* AffineTraversalTest.swift */; };
 		11E7180D219D7ECC00B94845 /* PrismTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E3217E2DEF00969984 /* PrismTest.swift */; };
 		11E7180E219D7ECC00B94845 /* SetterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E1217E2DEF00969984 /* SetterTest.swift */; };
 		11E7180F219D7ECC00B94845 /* TestDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F3E7217E2DEF00969984 /* TestDomain.swift */; };
@@ -899,7 +899,7 @@
 		1125054C220DD92B00861131 /* EquatableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableK.swift; sourceTree = "<group>"; };
 		1126CA8922B1144200F840CB /* AutoOptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptics.swift; sourceTree = "<group>"; };
 		1126CA8B22B115E100F840CB /* AutoLens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLens.swift; sourceTree = "<group>"; };
-		1126CA8D22B1253D00F840CB /* AutoOptional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoOptional.swift; sourceTree = "<group>"; };
+		1126CA8D22B1253D00F840CB /* AutoAffineTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoAffineTraversal.swift; sourceTree = "<group>"; };
 		1126CA8F22B1262F00F840CB /* AutoPrism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPrism.swift; sourceTree = "<group>"; };
 		1126CA9222B12D9700F840CB /* Tuple2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple2.swift; sourceTree = "<group>"; };
 		1126CA9522B12EC400F840CB /* Tuple3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple3.swift; sourceTree = "<group>"; };
@@ -1093,7 +1093,7 @@
 		8BA0F3D8217E2DEF00969984 /* FoldTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldTest.swift; sourceTree = "<group>"; };
 		8BA0F3D9217E2DEF00969984 /* IsoTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsoTest.swift; sourceTree = "<group>"; };
 		8BA0F3DB217E2DEF00969984 /* LensLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LensLaws.swift; sourceTree = "<group>"; };
-		8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalLaws.swift; sourceTree = "<group>"; };
+		8BA0F3DC217E2DEF00969984 /* AffineTraversalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineTraversalLaws.swift; sourceTree = "<group>"; };
 		8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsoLaws.swift; sourceTree = "<group>"; };
 		8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraversalLaws.swift; sourceTree = "<group>"; };
 		8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetterLaws.swift; sourceTree = "<group>"; };
@@ -1102,7 +1102,7 @@
 		8BA0F3E2217E2DEF00969984 /* TraversalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraversalTest.swift; sourceTree = "<group>"; };
 		8BA0F3E3217E2DEF00969984 /* PrismTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrismTest.swift; sourceTree = "<group>"; };
 		8BA0F3E4217E2DEF00969984 /* GetterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetterTest.swift; sourceTree = "<group>"; };
-		8BA0F3E5217E2DEF00969984 /* OptionalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalTest.swift; sourceTree = "<group>"; };
+		8BA0F3E5217E2DEF00969984 /* AffineTraversalTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineTraversalTest.swift; sourceTree = "<group>"; };
 		8BA0F3E6217E2DEF00969984 /* LensTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LensTest.swift; sourceTree = "<group>"; };
 		8BA0F3E7217E2DEF00969984 /* TestDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDomain.swift; sourceTree = "<group>"; };
 		8BA0F43C217E2E9200969984 /* Curry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
@@ -1208,7 +1208,7 @@
 		8BA0F4C5217E2E9200969984 /* EitherOpticsInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherOpticsInstances.swift; sourceTree = "<group>"; };
 		8BA0F4C6217E2E9200969984 /* ArrayKOpticsInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayKOpticsInstances.swift; sourceTree = "<group>"; };
 		8BA0F4C7217E2E9200969984 /* TryOpticsInstances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TryOpticsInstances.swift; sourceTree = "<group>"; };
-		8BA0F4C8217E2E9200969984 /* Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		8BA0F4C8217E2E9200969984 /* AffineTraversal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffineTraversal.swift; sourceTree = "<group>"; };
 		8BA0F4C9217E2E9200969984 /* Prism.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prism.swift; sourceTree = "<group>"; };
 		8BA0F4CB217E2E9200969984 /* Each.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Each.swift; sourceTree = "<group>"; };
 		8BA0F4CC217E2E9200969984 /* Index.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
@@ -1597,7 +1597,7 @@
 				11E4190A22B90FE2009BDFB3 /* AutoGetter.swift */,
 				1126CA8B22B115E100F840CB /* AutoLens.swift */,
 				1126CA8922B1144200F840CB /* AutoOptics.swift */,
-				1126CA8D22B1253D00F840CB /* AutoOptional.swift */,
+				1126CA8D22B1253D00F840CB /* AutoAffineTraversal.swift */,
 				1126CA8F22B1262F00F840CB /* AutoPrism.swift */,
 				11E4190E22B91169009BDFB3 /* AutoSetter.swift */,
 				112D0CF522BBC17C0032F675 /* AutoTraversal.swift */,
@@ -1626,7 +1626,7 @@
 			children = (
 				8BA0F3DD217E2DEF00969984 /* IsoLaws.swift */,
 				8BA0F3DB217E2DEF00969984 /* LensLaws.swift */,
-				8BA0F3DC217E2DEF00969984 /* OptionalLaws.swift */,
+				8BA0F3DC217E2DEF00969984 /* AffineTraversalLaws.swift */,
 				8BA0F3E0217E2DEF00969984 /* PrismLaws.swift */,
 				8BA0F3DF217E2DEF00969984 /* SetterLaws.swift */,
 				8BA0F3DE217E2DEF00969984 /* TraversalLaws.swift */,
@@ -1730,7 +1730,7 @@
 				8BA0F4B3217E2E9200969984 /* Getter.swift */,
 				8BA0F4BF217E2E9200969984 /* Iso.swift */,
 				8BA0F4D2217E2E9200969984 /* Lens.swift */,
-				8BA0F4C8217E2E9200969984 /* Optional.swift */,
+				8BA0F4C8217E2E9200969984 /* AffineTraversal.swift */,
 				8BA0F4C9217E2E9200969984 /* Prism.swift */,
 				8BA0F4C0217E2E9200969984 /* Setter.swift */,
 				8BA0F4B4217E2E9200969984 /* Traversal.swift */,
@@ -1752,7 +1752,7 @@
 				8BA0F3E4217E2DEF00969984 /* GetterTest.swift */,
 				8BA0F3D9217E2DEF00969984 /* IsoTest.swift */,
 				8BA0F3E6217E2DEF00969984 /* LensTest.swift */,
-				8BA0F3E5217E2DEF00969984 /* OptionalTest.swift */,
+				8BA0F3E5217E2DEF00969984 /* AffineTraversalTest.swift */,
 				8BA0F3E3217E2DEF00969984 /* PrismTest.swift */,
 				8BA0F3E1217E2DEF00969984 /* SetterTest.swift */,
 				8BA0F3E7217E2DEF00969984 /* TestDomain.swift */,
@@ -3079,7 +3079,7 @@
 			files = (
 				1160D0EA22D38DC40010323A /* LensLaws.swift in Sources */,
 				1160D0E922D38DC40010323A /* IsoLaws.swift in Sources */,
-				1160D0EB22D38DC40010323A /* OptionalLaws.swift in Sources */,
+				1160D0EB22D38DC40010323A /* AffineTraversalLaws.swift in Sources */,
 				1160D0EC22D38DC40010323A /* PrismLaws.swift in Sources */,
 				1160D0ED22D38DC40010323A /* SetterLaws.swift in Sources */,
 				1160D0EE22D38DC40010323A /* TraversalLaws.swift in Sources */,
@@ -3137,7 +3137,7 @@
 				1126CAA422B132CA00F840CB /* Tuple10.swift in Sources */,
 				11E71718219D722900B94845 /* Iso.swift in Sources */,
 				11E71719219D722900B94845 /* Lens.swift in Sources */,
-				11E7171A219D722900B94845 /* Optional.swift in Sources */,
+				11E7171A219D722900B94845 /* AffineTraversal.swift in Sources */,
 				112D0CF622BBC17C0032F675 /* AutoTraversal.swift in Sources */,
 				11E7171B219D722900B94845 /* Prism.swift in Sources */,
 				11E7171C219D722900B94845 /* Setter.swift in Sources */,
@@ -3150,7 +3150,7 @@
 				112D0CF422BBC0390032F675 /* AutoFold.swift in Sources */,
 				1126CA9A22B1301100F840CB /* Tuple5.swift in Sources */,
 				11E71720219D722900B94845 /* EitherOpticsInstances.swift in Sources */,
-				1126CA8E22B1253D00F840CB /* AutoOptional.swift in Sources */,
+				1126CA8E22B1253D00F840CB /* AutoAffineTraversal.swift in Sources */,
 				11E71721219D722900B94845 /* ArrayKOpticsInstances.swift in Sources */,
 				11E71722219D722900B94845 /* OptionOpticsInstances.swift in Sources */,
 				11E71723219D722900B94845 /* NonEmptyArrayOpticsInstances.swift in Sources */,
@@ -3199,7 +3199,7 @@
 				11E71809219D7ECC00B94845 /* GetterTest.swift in Sources */,
 				11E7180A219D7ECC00B94845 /* IsoTest.swift in Sources */,
 				11E7180B219D7ECC00B94845 /* LensTest.swift in Sources */,
-				11E7180C219D7ECC00B94845 /* OptionalTest.swift in Sources */,
+				11E7180C219D7ECC00B94845 /* AffineTraversalTest.swift in Sources */,
 				11E7180D219D7ECC00B94845 /* PrismTest.swift in Sources */,
 				11E7180E219D7ECC00B94845 /* SetterTest.swift in Sources */,
 				11E7180F219D7ECC00B94845 /* TestDomain.swift in Sources */,

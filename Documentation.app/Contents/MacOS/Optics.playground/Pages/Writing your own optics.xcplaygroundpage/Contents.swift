@@ -142,27 +142,27 @@ titleLens.set(article, "All about Optics")
 // Modifies the existing title
 titleLens.modify(article, { str in str.uppercased() })
 /*:
- ## Optional
+ ## AffineTraversal
  
  In the previous optics, title is always present in an `Article`. However, if we focus on its subtitle, we can see it is an `Option<String>`. We can still write a `Lens` whose focus is `Option<String>`, but for the sake of composition, it would be better to remove that optionality.
  
- To do so, we can use the `Optional<S, A>`, which lets us focus on a value `A` that may be absent in a structure `S`, just like the case of the article subtitle. An `Optional` needs two functions to be initialized. The setter function just needs to make a copy of the article with the new value. The getter function is a bit trickier. It returns an `Either`; if the focus is present in the structure, it returns an `Either.right` containing it; otherwise, it returns an `Either.left` with the original article.
+ To do so, we can use the `AffineTraversal<S, A>`, which lets us focus on a value `A` that may be absent in a structure `S`, just like the case of the article subtitle. An `AffineTraversal` needs two functions to be initialized. The setter function just needs to make a copy of the article with the new value. The getter function is a bit trickier. It returns an `Either`; if the focus is present in the structure, it returns an `Either.right` containing it; otherwise, it returns an `Either.left` with the original article.
  */
-let subtitleOptional = Optional<Article, String>(
+let subtitleAffineTraversal = AffineTraversal<Article, String>(
     set: { article, newSubtitle in article.copy(withSubtitle: .some(newSubtitle)) },
     getOrModify: { article in article.subtitle.fold({ Either.left(article) }, Either.right) })
 /*:
- #### Using Optional
+ #### Using AffineTraversal
  
- Using Optional is quite similar to using a Lens. We can get an Option of the focus or set it to a new value:
+ Using AffineTraversal is quite similar to using a Lens. We can get an Option of the focus or set it to a new value:
  */
-subtitleOptional.getOption(article) // Returns .some("Learn to use BowOptics")
-subtitleOptional.set(article, "") // Returns Article(title: "Working with optics in Swift", subtitle: .some(""), state: .draft, tags: ["fp", "swift", "bow"])
+subtitleAffineTraversal.getOption(article) // Returns .some("Learn to use BowOptics")
+subtitleAffineTraversal.set(article, "") // Returns Article(title: "Working with optics in Swift", subtitle: .some(""), state: .draft, tags: ["fp", "swift", "bow"])
 /*:
  If we try to modify an article, it will return a new article with the modified subtitle, or the original article if the subtitle was not present.
  */
 let articleWithoutSubtitle = Article(title: "Not interesing", subtitle: .none(), state: .draft, tags: [])
-subtitleOptional.modify(articleWithoutSubtitle, { str in str.lowercased() }) // Returns the same article as it does not have a subtitle
+subtitleAffineTraversal.modify(articleWithoutSubtitle, { str in str.lowercased() }) // Returns the same article as it does not have a subtitle
 /*:
  ## Prism
  

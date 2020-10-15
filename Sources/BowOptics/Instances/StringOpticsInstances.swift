@@ -23,7 +23,7 @@ extension String: Index {
     public typealias IndexType = Int
     public typealias IndexFoci = Character
     
-    public static func index(_ i: Int) -> Optional<String, Character> {
+    public static func index(_ i: Int) -> AffineTraversal<String, Character> {
         return Array<Character>.index(i, iso: String.toArray)
     }
 }

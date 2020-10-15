@@ -15,8 +15,8 @@ class PrismTest: XCTestCase {
         SetterLaws.check(setter: StringStyle.prism.asSetter)
     }
     
-    func testOptionalLaws() {
-        OptionalLaws.check(optional: StringStyle.prism.asOptional)
+    func testAffineTraversalLaws() {
+        AffineTraversalLaws.check(affineTraversal: StringStyle.prism.asAffineTraversal)
     }
     
     func testTraversalLaws() {
@@ -106,8 +106,8 @@ class PrismTest: XCTestCase {
             return (SumType.prism + Lens<String, String>.identity).getOption(sum).getOrElse(def) == SumType.prism.getOption(sum).getOrElse(def)
         }
 
-        property("Prism + Optional::identity") <~ forAll { (sum: SumType, def: String) in
-            return (SumType.prism + BowOptics.Optional<String, String>.identity).getOption(sum).getOrElse(def) == SumType.prism.getOption(sum).getOrElse(def)
+        property("Prism + AffineTraversal::identity") <~ forAll { (sum: SumType, def: String) in
+            return (SumType.prism + AffineTraversal<String, String>.identity).getOption(sum).getOrElse(def) == SumType.prism.getOption(sum).getOrElse(def)
         }
 
         property("Prism + Fold::identity") <~ forAll { (sum: SumType) in

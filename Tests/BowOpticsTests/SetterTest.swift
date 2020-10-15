@@ -44,8 +44,8 @@ class SetterTest: XCTestCase {
             return (Token.setter + Prism<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
-        property("Setter + Optional::identity") <~ forAll { (token: Token, value: String) in
-            return (Token.setter + BowOptics.Optional<String, String>.identity).set(token, value) == Token.setter.set(token, value)
+        property("Setter + AffineTraversal::identity") <~ forAll { (token: Token, value: String) in
+            return (Token.setter + AffineTraversal<String, String>.identity).set(token, value) == Token.setter.set(token, value)
         }
         
         property("Setter + Traversal::identity") <~ forAll { (token: Token, value: String) in
