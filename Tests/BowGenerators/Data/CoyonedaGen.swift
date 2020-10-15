@@ -1,6 +1,4 @@
 import Bow
-import BowFree
-import BowGenerators
 import SwiftCheck
 
 // MARK: Instance of Arbitrary for Coyoneda

@@ -172,8 +172,6 @@
 		11A5FDD422E5CF1600FF7821 /* StateBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD322E5CF1600FF7821 /* StateBindingExpression.swift */; };
 		11A5FDD622E5ECB300FF7821 /* ReaderBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD522E5ECB300FF7821 /* ReaderBindingExpression.swift */; };
 		11A5FDD822E5F0C300FF7821 /* WriterBindingExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A5FDD722E5F0C300FF7821 /* WriterBindingExpression.swift */; };
-		11B6FD7D2525C37F00A5AD54 /* CoyonedaGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */; };
-		11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */; };
 		11B6FDC22525C48200A5AD54 /* CofreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8967E25237642006A65EC /* CofreeTest.swift */; };
 		11B6FDEF2525C49000A5AD54 /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		11BA21BC23D5EF4E00F3EE78 /* ComonadEnvLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BA21BB23D5EF4E00F3EE78 /* ComonadEnvLaws.swift */; };
@@ -361,12 +359,14 @@
 		8BA0F657217E2E9200969984 /* MonadCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AD217E2E9200969984 /* MonadCombine.swift */; };
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
-		B507D2BE252A347A002541E4 /* CoyonedaNaturalTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */; };
-		B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */; };
-		B568E5EC2529DCC200AD334B /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
 		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
+		B558FBDE25385D7F00790229 /* CoyonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */; };
+		B558FBDF25385D7F00790229 /* CoyonedaNaturalTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */; };
+		B558FC0C25385D9300790229 /* FunctionK+Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */; };
+		B558FC2325385DA700790229 /* CoyonedaGen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */; };
 		B5618757252CC2D2002717B1 /* TreeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5618756252CC2D2002717B1 /* TreeTest.swift */; };
 		B5618785252CC3EA002717B1 /* Tree+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5618784252CC3EA002717B1 /* Tree+Gen.swift */; };
+		B568E5EC2529DCC200AD334B /* Exists.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52120FE2523AC2300705BCD /* Exists.swift */; };
 		B568E6032529DCD200AD334B /* ExistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F52B125247256001979EE /* ExistsTests.swift */; };
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
 		B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
@@ -1241,8 +1241,8 @@
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaNaturalTransformationTests.swift; sourceTree = "<group>"; };
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
-		B55F52B125247256001979EE /* ExistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistsTests.swift; sourceTree = "<group>"; };
 		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
+		B55F52B125247256001979EE /* ExistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistsTests.swift; sourceTree = "<group>"; };
 		B5618756252CC2D2002717B1 /* TreeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeTest.swift; sourceTree = "<group>"; };
 		B5618784252CC3EA002717B1 /* Tree+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tree+Gen.swift"; sourceTree = "<group>"; };
 		B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Coyoneda.swift"; sourceTree = "<group>"; };
@@ -1447,6 +1447,7 @@
 				112097B022A7F0E6007F3D9C /* ArrayK+Gen.swift */,
 				11F0F8D923C7248E00B2EA2E /* Co+Gen.swift */,
 				112097B222A7F17F007F3D9C /* Const+Gen.swift */,
+				11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */,
 				112097CB22A819E9007F3D9C /* Day+Gen.swift */,
 				113746A523435C0B00D9C1AD /* DictionaryK+Gen.swift */,
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
@@ -1657,7 +1658,6 @@
 			isa = PBXGroup;
 			children = (
 				11D8967C2523763A006A65EC /* Cofree+Gen.swift */,
-				11B6FD7C2525C37F00A5AD54 /* CoyonedaGen.swift */,
 				117DC13622AE578A00EF65F0 /* Free+Gen.swift */,
 				11D896C225237A6D006A65EC /* Yoneda+Gen.swift */,
 			);
@@ -1760,7 +1760,6 @@
 				8BA0F440217E2E9200969984 /* Cofree.swift */,
 				8BA0F441217E2E9200969984 /* Free.swift */,
 				11D894FB251CEB58006A65EC /* FunctionK+Free.swift */,
-				B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */,
 				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
 			);
 			path = BowFree;
@@ -1770,10 +1769,8 @@
 			isa = PBXGroup;
 			children = (
 				11D8967E25237642006A65EC /* CofreeTest.swift */,
-				11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */,
 				8BA0F38D217E2DEF00969984 /* FreeTest.swift */,
 				11D896C525237A7D006A65EC /* YonedaTest.swift */,
-				B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */,
 			);
 			path = BowFreeTests;
 			sourceTree = "<group>";
@@ -1943,6 +1940,8 @@
 				1137469A234345EE00D9C1AD /* ArrayTest.swift */,
 				8BA0F3B9217E2DEF00969984 /* ConstTest.swift */,
 				11F0F8DB23C724A900B2EA2E /* CoTest.swift */,
+				11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */,
+				B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */,
 				8BA0F3B7217E2DEF00969984 /* DayTest.swift */,
 				113746A223435BA300D9C1AD /* DictionaryKTest.swift */,
 				1137469F234359C000D9C1AD /* DictionaryTest.swift */,
@@ -1990,6 +1989,7 @@
 				8BA0F445217E2E9200969984 /* Function0.swift */,
 				8BA0F446217E2E9200969984 /* Function1.swift */,
 				8BA0F443217E2E9200969984 /* FunctionK.swift */,
+				B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */,
 				8BA0F444217E2E9200969984 /* Kleisli.swift */,
 				B56A08622525C39600869FCD /* CokleisliK.swift */,
 			);
@@ -2888,6 +2888,7 @@
 				112097CC22A819E9007F3D9C /* Day+Gen.swift in Sources */,
 				112097B522A7F21F007F3D9C /* Id+Gen.swift in Sources */,
 				112097D422A9029B007F3D9C /* StoreT+Gen.swift in Sources */,
+				B558FC2325385DA700790229 /* CoyonedaGen.swift in Sources */,
 				112097DB22A9078B007F3D9C /* EitherT+Gen.swift in Sources */,
 				112097B322A7F17F007F3D9C /* Const+Gen.swift in Sources */,
 				1171ED5223C4E20A005362E0 /* EnvT+Gen.swift in Sources */,
@@ -2947,10 +2948,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				B507D2BE252A347A002541E4 /* CoyonedaNaturalTransformationTests.swift in Sources */,
 				11B6FDC22525C48200A5AD54 /* CofreeTest.swift in Sources */,
 				1122947F219D8E25006D66C5 /* FreeTest.swift in Sources */,
-				11B6FDAB2525C47600A5AD54 /* CoyonedaTest.swift in Sources */,
 				11B6FDEF2525C49000A5AD54 /* YonedaTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3098,7 +3097,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				11B6FD7D2525C37F00A5AD54 /* CoyonedaGen.swift in Sources */,
 				11D896C325237A6D006A65EC /* Yoneda+Gen.swift in Sources */,
 				11D8967D2523763A006A65EC /* Cofree+Gen.swift in Sources */,
 				117DC13722AE578A00EF65F0 /* Free+Gen.swift in Sources */,
@@ -3202,7 +3200,6 @@
 			buildActionMask = 0;
 			files = (
 				11E7188E219D82BD00B94845 /* Cofree.swift in Sources */,
-				B568E5BF2529D1A200AD334B /* FunctionK+Coyoneda.swift in Sources */,
 				11E71890219D82BD00B94845 /* Free.swift in Sources */,
 				11E71891219D82BD00B94845 /* Yoneda.swift in Sources */,
 				11D894FC251CEB58006A65EC /* FunctionK+Free.swift in Sources */,
@@ -3251,6 +3248,7 @@
 				8BA0F400217E2DEF00969984 /* EitherTest.swift in Sources */,
 				8BA0F408217E2DEF00969984 /* ValidatedTest.swift in Sources */,
 				111F84FE234DC00F003FE646 /* SetTest.swift in Sources */,
+				B558FBDE25385D7F00790229 /* CoyonedaTest.swift in Sources */,
 				8BA0F3EB217E2DEF00969984 /* Function1Test.swift in Sources */,
 				8BA0F3EC217E2DEF00969984 /* Function0Test.swift in Sources */,
 				8BA0F3F0217E2DEF00969984 /* WriterTTest.swift in Sources */,
@@ -3261,6 +3259,7 @@
 				8BA0F3F2217E2DEF00969984 /* EitherTTest.swift in Sources */,
 				1137469C234345F400D9C1AD /* ArrayTest.swift in Sources */,
 				8BA0F3ED217E2DEF00969984 /* KleisliTest.swift in Sources */,
+				B558FBDF25385D7F00790229 /* CoyonedaNaturalTransformationTests.swift in Sources */,
 				8BA0F40D217E2DEF00969984 /* NonEmptyArrayTest.swift in Sources */,
 				8BA0F40B217E2DEF00969984 /* ArrayKTest.swift in Sources */,
 				11BA21C323D83DA200F3EE78 /* ZipperTest.swift in Sources */,
@@ -3318,6 +3317,7 @@
 				8BA0F513217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61B217E2E9200969984 /* Reducible.swift in Sources */,
 				600D30432352C08F00F7B64B /* Semigroupal.swift in Sources */,
+				B558FC0C25385D9300790229 /* FunctionK+Coyoneda.swift in Sources */,
 				11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */,
 				8BA0F507217E2E9200969984 /* EitherT.swift in Sources */,
 				8BA0F643217E2E9200969984 /* Applicative.swift in Sources */,

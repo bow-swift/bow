@@ -1,7 +1,5 @@
 import XCTest
 import Bow
-import BowFree
-import BowFreeGenerators
 import BowLaws
 
 extension CoyonedaPartial: EquatableK where F: EquatableK & Functor {
