@@ -56,22 +56,6 @@ public final class Trampoline<A>: TrampolineOf<A> {
     internal func step() -> Either<() -> Trampoline<A>, A> {
         value.step()
     }
-    
-    /// Composes this trampoline with another one that depends on the output of this one.
-    ///
-    /// - Parameter f: Function to compute a Trampoline based on the value of this one.
-    /// - Returns: A Trampoline describing the sequential application of both.
-    public func flatMap<B>(_ f: @escaping (A) -> Trampoline<B>) -> Trampoline<B> {
-        Trampoline<B>(.flatMap(Coyoneda(pivot: self, f: f)))
-    }
-    
-    /// Transforms the eventual value provided by this Trampoline.
-    ///
-    /// - Parameter f: Transforming function.
-    /// - Returns: A Trampoline that behaves as the original one but its result is transformed.
-    public func map<B>(_ f: @escaping (A) -> B) -> Trampoline<B> {
-        flatMap { a in .done(f(a)) }
-    }
 
     /// Safe downcast.
     ///
@@ -90,6 +74,7 @@ public postfix func ^<A>(_ fa: TrampolineOf<A>) -> Trampoline<A> {
     Trampoline.fix(fa)
 }
 
+/// Internal representation of `Trampoline`
 private enum _Trampoline<A> {
     case done(A)
     case `defer`(() -> Trampoline<A>)
@@ -106,7 +91,18 @@ private enum _Trampoline<A> {
         }
     }
 
-    public func flatMap<B>(_ f: @escaping (A) -> Trampoline<B>) -> Trampoline<B> {
+    func map<B>(_ g: @escaping (A) -> B) -> Trampoline<B> {
+        switch self {
+        case .done(let a):
+            return .later { g(a) }
+        case .defer(let f):
+            return .defer { f().map(g)^ }
+        case .flatMap:
+            return flatMap(Trampoline.done <<< g)
+        }
+    }
+
+    func flatMap<B>(_ f: @escaping (A) -> Trampoline<B>) -> Trampoline<B> {
         switch self {
         case .done, .defer:
             return Trampoline(.flatMap(Coyoneda(pivot: Trampoline(self), f: f)))
@@ -130,7 +126,7 @@ private final class FlatMapStep<A>: CokleisliK<CoyonedaFPartial<ForTrampoline, T
             }
         case .defer(let deferred):
             return .left { [f] in
-                deferred().flatMap(f)
+                deferred().flatMap(f)^
             }
         default:
             fatalError("Invalid Trampoline case")
@@ -145,15 +141,49 @@ private final class FlatMapFlatMap<A, B>: CokleisliK<CoyonedaFPartial<ForTrampol
 
     let g: (A) -> Trampoline<B>
 
-    override func invoke<X>(_ fa: Kind<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, X>) -> Trampoline<B> {
+    override func invoke<X>(_ fa: CoyonedaFOf<ForTrampoline, Trampoline<A>, X>) -> Trampoline<B> {
         let pivot = fa^.pivot^
         let f = fa^.f
         return Trampoline(
             .flatMap(
                 Coyoneda(
                     pivot: pivot,
-                    f: { [g] a in f(a).flatMap(g) })
+                    f: { [g] a in f(a).flatMap(g)^ })
             )
         )
+    }
+}
+
+// MARK: Instance of Functor for Trampoline
+extension TrampolinePartial: Functor {
+    public static func map<A, B>(_ fa: TrampolineOf<A>, _ f: @escaping (A) -> B) -> TrampolineOf<B> {
+        fa^.value.map(f)
+    }
+}
+
+// MARK: Instance of Applicative for Trampoline
+extension TrampolinePartial: Applicative {
+    public static func pure<A>(_ a: A) -> TrampolineOf<A> {
+        Trampoline.done(a)
+    }
+}
+
+// MARK: Instance of Selective for Trampoline
+extension TrampolinePartial: Selective {}
+
+// MARK: Instance of Monad for Trampoline
+extension TrampolinePartial: Monad {
+    public static func flatMap<A, B>(_ fa: TrampolineOf<A>, _ f: @escaping (A) -> TrampolineOf<B>) -> TrampolineOf<B> {
+        fa^.value.flatMap { f($0)^ }
+    }
+
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> TrampolineOf<Either<A, B>>) -> TrampolineOf<B> {
+        f(a)^.flatMap { e in
+            e.fold { a in
+                return tailRecM(a, f)
+            } _: { b in
+                return Trampoline.done(b)
+            }
+        }
     }
 }

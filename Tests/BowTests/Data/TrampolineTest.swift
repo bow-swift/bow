@@ -1,7 +1,31 @@
 import XCTest
+import SwiftCheck
+import BowLaws
 import Bow
 
+extension TrampolinePartial: EquatableK {
+    public static func eq<A>(_ lhs: TrampolineOf<A>, _ rhs: TrampolineOf<A>) -> Bool where A : Equatable {
+        lhs^.run() == rhs^.run()
+    }
+}
+
 class TrampolineTest: XCTestCase {
+    func testFunctorLaws() {
+        FunctorLaws<TrampolinePartial>.check()
+    }
+
+    func testApplicativeLaws() {
+        ApplicativeLaws<TrampolinePartial>.check()
+    }
+
+    func testSelectiveLaws() {
+        SelectiveLaws<TrampolinePartial>.check()
+    }
+
+    func testMonadLaws() {
+        MonadLaws<TrampolinePartial>.check()
+    }
+    
     func testDoesNotCrashStack() {
         XCTAssert(isEven(200000))
     }
