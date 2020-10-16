@@ -35,7 +35,7 @@ public final class Function1<I, O>: Function1Of<I, O> {
     public func invoke(_ value: I) -> O {
         f(value)
     }
-    
+
     /// Invokes this function.
     ///
     /// - Parameter value: Input to the function.
