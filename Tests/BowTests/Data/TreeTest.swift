@@ -32,6 +32,16 @@ class TreeTest: XCTestCase {
         FoldableLaws<TreePartial>.check()
     }
 
+    func testFoldableIsDepthFirst() {
+        //      0
+        //    /   \
+        //   1     3
+        //  /
+        // 2
+        let tree = Tree(root: 0, subForest: [Tree(root: 1, subForest: [Tree(root: 2, subForest: [])]), Tree(root: 3, subForest: [])])
+        XCTAssertEqual(tree.foldMap { ArrayK($0).asArray }, [0, 1, 2, 3])
+    }
+
     func testTraverseLaws() {
         TraverseLaws<TreePartial>.check()
     }
