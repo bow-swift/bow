@@ -15,9 +15,11 @@ public typealias ProgramOf<F, A> = Kind<ProgramPartial<F>, A>
 /// As opposed to `Free`, `Program` does not require `F` to be a functor, which means that evaluation of `map` calls are deferred
 /// and left for the later interpretation in another monad.
 public final class Program<F, A>: ProgramOf<F, A> {
-    let asFree: Free<CoyonedaPartial<F>, A>
+    /// Internal representation of `Program`
+    public let asFree: Free<CoyonedaPartial<F>, A>
 
-    init(asFree: Free<CoyonedaPartial<F>, A>) {
+    /// Initializes a `Program` instance from the corresponding `Free<CoyonedaPartial<F>>`.
+    public init(asFree: Free<CoyonedaPartial<F>, A>) {
         self.asFree = asFree
     }
 
