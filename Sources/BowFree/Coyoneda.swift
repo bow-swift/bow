@@ -7,16 +7,16 @@ internal typealias CoyonedaFOf<F, A, P> = Kind<CoyonedaFPartial<F, A>, P>
 internal final class CoyonedaF<F, A, P>: CoyonedaFOf<F, A, P> {
     init(pivot: Kind<F, P>, f: @escaping (P) -> A) {
         self.pivot = pivot
-        self.f = Function1LazyComposition(f)
+        self.f = LazyFunction1(f)
     }
 
-    init(pivot: Kind<F, P>, f: Function1LazyComposition<P, A>) {
+    init(pivot: Kind<F, P>, f: LazyFunction1<P, A>) {
         self.pivot = pivot
         self.f = f
     }
 
     let pivot: Kind<F, P>
-    let f: Function1LazyComposition<P, A>
+    let f: LazyFunction1<P, A>
 
     static func fix(_ fa: CoyonedaFOf<F, A, P>) -> CoyonedaF<F, A, P> {
         fa as! CoyonedaF<F, A, P>
