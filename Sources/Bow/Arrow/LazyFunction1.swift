@@ -47,7 +47,7 @@ public postfix func ^<I, O>(_ fa: LazyFunction1Of<I, O>) -> LazyFunction1<I, O> 
     LazyFunction1.fix(fa)
 }
 
-// MARK: Instance of Functor for Function1LazyComposition
+// MARK: Instance of Functor for LazyFunction1
 extension LazyFunction1Partial: Functor {
     public static func map<A, B>(
         _ fa: LazyFunction1Of<I, A>,

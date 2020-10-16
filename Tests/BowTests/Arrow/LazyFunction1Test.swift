@@ -4,7 +4,7 @@ import SwiftCheck
 import Bow
 
 extension LazyFunction1Partial: EquatableK where I == Int {
-    public static func eq<A>(_ lhs: Kind<LazyFunction1Partial<I>, A>, _ rhs: Kind<LazyFunction1Partial<I>, A>) -> Bool where A : Equatable {
+    public static func eq<A: Equatable>(_ lhs: LazyFunction1Of<I, A>, _ rhs: LazyFunction1Of<I, A>) -> Bool {
         LazyFunction1.fix(lhs).run(1)
             ==
         LazyFunction1.fix(rhs).run(1)

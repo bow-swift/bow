@@ -11,7 +11,7 @@ extension LazyFunction1: Arbitrary where I: CoArbitrary & Hashable, O: Arbitrary
     }
 }
 
-// MARK: Instance of ArbitraryK for Function1
+// MARK: Instance of ArbitraryK for LazyFunction1
 
 extension LazyFunction1Partial: ArbitraryK where I: CoArbitrary & Hashable {
     public static func generate<A: Arbitrary>() -> LazyFunction1Of<I, A> {
