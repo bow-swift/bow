@@ -271,6 +271,14 @@ public extension Foldable {
         where B: Kind<G, A> {
         foldLeft(fga, Kind<G, A>.emptyK(), { b, a in b.combineK(a) })
     }
+
+    /// Combines the elements of a structure into an `ArrayK`.
+    ///
+    /// - Parameter fa: Structure to be converted to an `ArrayK`.
+    /// - Returns: An array with the elements of `fa`.
+    static func asArray<A>(_ fa: Kind<Self, A>) -> ArrayK<A> {
+        foldMap(fa, { ArrayK($0) })^
+    }
 }
 
 // MARK: Syntax for Foldable
@@ -455,6 +463,13 @@ public extension Kind where F: Foldable {
     func reduceK<G: MonoidK, B>() -> Kind<G, B>
         where A: Kind<G, B> {
         F.reduceK(self)
+    }
+
+    /// Combines the elements of this structure into an `ArrayK`.
+    ///
+    /// - Returns: An array with the elements of `fa`.
+    func asArray() -> ArrayK<A> {
+        F.asArray(self)
     }
 }
 
