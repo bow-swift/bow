@@ -66,27 +66,27 @@ public extension Program where F: Monad {
 }
 
 extension ProgramPartial: Functor {
-    public static func map<A, B>(_ fa: Kind<ProgramPartial<F>, A>, _ f: @escaping (A) -> B) -> Kind<ProgramPartial<F>, B> {
+    public static func map<A, B>(_ fa: ProgramOf<F, A>, _ f: @escaping (A) -> B) -> ProgramOf<F, B> {
         Program(asFree: fa^.asFree.map(f)^)
     }
 }
 
 extension ProgramPartial: Applicative {
-    public static func pure<A>(_ a: A) -> Kind<ProgramPartial<F>, A> {
+    public static func pure<A>(_ a: A) -> ProgramOf<F, A> {
         Program(asFree: Free<CoyonedaPartial<F>, A>.pure(a)^)
     }
 
-    public static func ap<A, B>(_ ff: Kind<ProgramPartial<F>, (A) -> B>, _ fa: Kind<ProgramPartial<F>, A>) -> Kind<ProgramPartial<F>, B> {
+    public static func ap<A, B>(_ ff: ProgramOf<F, (A) -> B>, _ fa: ProgramOf<F, A>) -> ProgramOf<F, B> {
         Program(asFree: ff^.asFree.ap(fa^.asFree)^)
     }
 }
 
 extension ProgramPartial: Monad {
-    public static func flatMap<A, B>(_ fa: Kind<ProgramPartial<F>, A>, _ f: @escaping (A) -> Kind<ProgramPartial<F>, B>) -> Kind<ProgramPartial<F>, B> {
+    public static func flatMap<A, B>(_ fa: ProgramOf<F, A>, _ f: @escaping (A) -> ProgramOf<F, B>) -> ProgramOf<F, B> {
         Program(asFree: fa^.asFree.flatMap { f($0)^.asFree }^)
     }
 
-    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> Kind<ProgramPartial<F>, Either<A, B>>) -> Kind<ProgramPartial<F>, B> {
+    public static func tailRecM<A, B>(_ a: A, _ f: @escaping (A) -> ProgramOf<F, Either<A, B>>) -> ProgramOf<F, B> {
         Program(asFree: Free.tailRecM(a, { f($0)^.asFree })^)
     }
 }
