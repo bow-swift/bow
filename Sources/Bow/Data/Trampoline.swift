@@ -126,7 +126,7 @@ private final class FlatMapStep<A>: CokleisliK<CoyonedaFPartial<ForTrampoline, T
             }
         case .defer(let deferred):
             return .left { [f] in
-                deferred().flatMap(f)^
+                deferred().flatMap(f.invoke)^
             }
         default:
             fatalError("Invalid Trampoline case")
