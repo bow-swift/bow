@@ -156,4 +156,10 @@ class ArrayKTest: XCTestCase {
 
         XCTAssertEqual(expected, result)
     }
+
+    func testFoldableAsArrayReturnsSelf()  {
+        property("Foldable.asArray returns self") <~ forAll { (a: ArrayK<Int>) in
+            ArrayKPartial.asArray(a) == a
+        }
+    }
 }

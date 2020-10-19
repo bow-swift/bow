@@ -65,6 +65,13 @@ public final class ArrayK<A>: ArrayKOf<A> {
         self.array = values
     }
 
+    /// Initialises an `ArrayK` with the elements of a `Foldable` structure.
+    ///
+    /// - Parameter fa: The foldable structure whose elements will be added to this array.
+    public init<F>(_ fa: Kind<F, A>) where F: Foldable {
+        self.array = F.asArray(fa).array
+    }
+
     /// Obtains the wrapped array.
     public var asArray: [A] {
         array
