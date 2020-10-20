@@ -115,7 +115,7 @@ private enum _Trampoline<A> {
 private final class FlatMapStep<A>: CokleisliK<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, Either<() -> Trampoline<A>, A>> {
     override init() {}
 
-    override func invoke<X>(_ fa: Kind<CoyonedaFPartial<ForTrampoline, Trampoline<A>>, X>) -> Either<() -> Trampoline<A>, A> {
+    override func invoke<X>(_ fa: CoyonedaFOf<ForTrampoline, Trampoline<A>, X>) -> Either<() -> Trampoline<A>, A> {
         let pivot = fa^.pivot^
         let f = fa^.f
 
