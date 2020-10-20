@@ -15,7 +15,7 @@ $current_branch_path = "next"
 # This is a list to filter -out- tags we know are not valuable to generate docs
 # for. If you set one tag in the default_version, you can add it here, so it's
 # not generated twice. Unless you want to have the same content at two paths.
-$invalid_tags = ["0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.5.0", "0.8.0"]
+$invalid_tags = ["0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.5.0", "0.6.0", "0.7.0", "0.8.0"]
 
 # This is a list to filter -in- tags. Unless it's empty, where it will be ignored.
 # If you want an empty tags list in the end (for some reason ¯\_(ツ)_/¯)
@@ -68,26 +68,43 @@ def join_json(version)
   end
 end
 
-# Generate the Jekyll site through nef based on the contents source.
+# Generate the nef site based on the contents source.
 #
 # @param version [String] The version for which the nef docs site will be generated.
 # @param versions_list [Array] The list of versions available to select in the whole project.
 # @return [nil] nil.
-def generate_nef_site(version, versions_list)
+def generate_nef_site(title, version, versions_list)
   system "echo == Generating nef site for #{version}"
+  `mkdir -p #{$source_dir}/_data`
   this_versions = versions_list.dup;
-  this_versions[versions_list.find_index("title" => version)] = {
-    "title" => version,
+  version_index = versions_list.index { |s| s["title"] == "#{title}" }
+  this_version = this_versions[version_index]
+  this_versions[version_index] = {
+    "title" => "#{title}",
+    "version" => "#{version}",
     "this" => true
   };
-  `mkdir -p #{$source_dir}/_data`
   File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
+
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
   system "nef jekyll --project Documentation.app --output #{$source_dir} --main-page Documentation.app/Jekyll/Home.md"
-  system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s #{$source_dir} -d #{$gen_docs_dir}/#{version} -b #{version}"
-  system "rm -rf #{$source_dir}/docs"
-  system "ls -la #{$source_dir}"
+end
+
+# Generate the Jekyll site.
+#
+# @param version [String] The version for which the nef docs site will be generated.
+# @param is_default [Bool] Given version is the default.
+def render_jekyll(version, is_default)
+  if is_default
+      `mkdir -p #{$gen_docs_dir}/#{version}`
+      system "rm -rf #{$source_dir}/vendor"
+      system "mv #{$source_dir}/* #{$gen_docs_dir}/#{version}/"
+  else
+      system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s ./#{$source_dir} -d ./#{$gen_docs_dir}/#{version} -b #{version}"
+      system "rm -rf #{$source_dir}/docs"
+  end
+
   system "ls -la #{$gen_docs_dir}/#{version}"
 end
 
@@ -99,8 +116,7 @@ def generate_api_site(version)
   system "echo == Generating API site for #{version}"
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
-  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o #{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --module Bow --root-url https://bow-swift.io/#{version}/api-docs/ --github_url https://github.com/bow-swift/bow --theme docs/extra/bow-jazzy-theme"
-  system "ls -la #{$source_dir}"
+  system "BUNDLE_GEMFILE=#{$source_dir}/Gemfile bundle exec jazzy -o ./#{$gen_docs_dir}/#{version}/api-docs --sourcekitten-sourcefile #{$json_files_dir}/#{version}/all.json --author Bow --author_url https://bow-swift.io --module Bow --root-url https://bow-swift.io/#{version}/api-docs/ --github_url https://github.com/bow-swift/bow --theme docs/extra/bow-jazzy-theme"
   system "ls -la #{$gen_docs_dir}/#{version}"
 end
 
@@ -111,14 +127,16 @@ system "echo == Current branch/tag is #{current_branch_tag}"
 #This is the list of versions that will be built, and used, as part of the process
 versions = []
 versions.unshift({
-  "title" => $default_version,
+  "title" => "#{$default_version}",
+  "version" => "#{$default_version}",
 })
 
 # Besides default, another version that will be available to select will be
 # the current branch/tag, if desired through the use of $current_branch_path
 if !$current_branch_path.to_s.empty?
   versions.push({
-    "title" => $current_branch_path,
+    "title" => "#{$current_branch_path}",
+    "version" => "#{current_branch_tag}",
   })
 end
 
@@ -149,82 +167,44 @@ if tags.any?
   # First iteration is done to have the list of versions available
   filtered_tags.each { |t|
                         versions.push({
-                          "title" => t,
+                          "title" => "#{t}",
+                          "version" => "#{t}",
                         })
                       }
-  filtered_tags.each { |t|
-                        system "git checkout -f #{t}"
-                        system "echo == Current branch/tag is now #{t}"
-                        system "echo == Compiling the library in #{t}"
-                        system "swift package clean"
-                        system "swift build"
-                        generate_nef_site("#{t}", versions)
-                        generate_json("#{t}")
-                        join_json("#{t}")
-                        generate_api_site("#{t}")
-                      }
 
-  if filtered_tags.any?
-    if $default_version.to_s.empty?
+  if $default_version.to_s.empty?
+    if filtered_tags.any?
       $default_version = filtered_tags.last
+    else
+      $default_version = "master"
     end
-  else
-    $default_version = "master"
   end
 end
 
 
-# Now, we generate the content available at the initial branch (master?)
-# to be at $current_branch_path (/next?) path
-if !$current_branch_path.to_s.empty?
-  `git checkout -f #{current_branch_tag}`
-  system "echo == Current branch/tag is now #{current_branch_tag}"
-  system "echo == Compiling the library in #{current_branch_tag}"
-  system "swift package clean"
-  system "swift build"
-  generate_nef_site($current_branch_path, versions)
-  generate_json($current_branch_path)
-  join_json($current_branch_path)
-  generate_api_site($current_branch_path)
-end
+# Now, we generate the content available at the initial branch (master?) + default_version
+versions.each { |this_version|
+    title = this_version["title"]
+    version = this_version["version"]
 
-# Finally, we generate the docs for the default version
-`git checkout -f #{$default_version}`
-system "echo == Current branch/tag is now #{$default_version}"
-system "echo == Compiling the library in #{current_branch_tag}"
-system "swift package clean"
-system "swift build"
+    if !"#{version}".to_s.empty?
+      `git checkout -f '#{version}'`
+      system "echo == Current branch/tag is now #{version}"
+      system "echo == Compiling the library in #{version}"
+      system "swift package clean"
+      system "swift build"
+      generate_nef_site("#{title}", "#{version}", versions)
+      render_jekyll("#{title}", "#{version}" == "#{$default_version}")
+      generate_json("#{title}")
+      join_json("#{title}")
+      generate_api_site("#{title}")
+    end
+}
 
-system "echo == Generating nef site for #{$default_version}"
-# Let's create the versions file for the default version
-`mkdir -p #{$source_dir}/_data`
-this_versions = versions.dup;
-this_versions[this_versions.find_index("title" => $default_version)] = {
-  "title" => $default_version,
-  "this" => true
-};
-File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
-
-system "nef jekyll --project Documentation.app --output docs --main-page Documentation.app/Jekyll/Home.md"
-# The content available in the default branch will be generated by GH Pages itself
-system "ls -la #{$source_dir}"
-
-# And then, we need to generate the API docs for the default version
-generate_json("#{$default_version}")
-join_json("#{$default_version}")
-generate_api_site("#{$default_version}")
-system "ls -la #{$source_dir}"
-system "ls -la #{$gen_docs_dir}/#{$default_version}"
 
 # Now we need to move default API docs to the default publishing location too.
-`mv #{$gen_docs_dir}/#{$default_version}/api-docs #{$gen_docs_dir}/`
+`mv #{$gen_docs_dir}/#{$default_version}/* #{$gen_docs_dir}/`
+`rm -rf #{$gen_docs_dir}/#{$default_version}`
 
 # We also move the rest of version generated sites to its publishing destination
 `mv #{$gen_docs_dir}/* #{$publishing_dir}/`
-
-# We need to remove dependencies dir, as it's unnecessary, and it messes GH Pages
-`rm -rf #{$source_dir}/vendor`
-
-# And finally we move the source to the directory that will be published.
-# Remember that this should be the same directory set in GH Pages/Travis.
-`mv #{$source_dir}/* #{$publishing_dir}/`
