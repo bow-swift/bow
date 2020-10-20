@@ -98,8 +98,8 @@ end
 def render_jekyll(version, is_default)
   if is_default
       `mkdir -p #{$gen_docs_dir}/#{version}`
-      system "rm -rf #{$source_dir}/vendor"
-      system "mv #{$source_dir}/* #{$gen_docs_dir}/#{version}/"
+      system "cp -R #{$source_dir}/ #{$gen_docs_dir}/#{version}/"
+      system "rm -rf #{$gen_docs_dir}/#{version}/vendor"
   else
       system "JEKYLL_ENV=production BUNDLE_GEMFILE=./#{$source_dir}/Gemfile bundle exec jekyll build -s ./#{$source_dir} -d ./#{$gen_docs_dir}/#{version} -b #{version}"
       system "rm -rf #{$source_dir}/docs"
@@ -136,7 +136,7 @@ versions.unshift({
 if !$current_branch_path.to_s.empty?
   versions.push({
     "title" => "#{$current_branch_path}",
-    "version" => "#{current_branch_tag}",
+    "version" => "#{current_branch_tag.rstrip()}",
   })
 end
 
@@ -188,7 +188,7 @@ versions.each { |this_version|
     version = this_version["version"]
 
     if !"#{version}".to_s.empty?
-      `git checkout -f '#{version}'`
+      `git checkout -f #{version}`
       system "echo == Current branch/tag is now #{version}"
       system "echo == Compiling the library in #{version}"
       system "swift package clean"
