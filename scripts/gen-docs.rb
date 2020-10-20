@@ -85,6 +85,7 @@ def generate_nef_site(title, version, versions_list)
     "this" => true
   };
   File.write("#{$source_dir}/_data/versions.json", JSON.pretty_generate(this_versions))
+
   # Removing lockfile to avoid conflict in case it differs between versions
   system "rm #{$source_dir}/Gemfile.lock"
   system "nef jekyll --project Documentation.app --output #{$source_dir} --main-page Documentation.app/Jekyll/Home.md"
@@ -173,7 +174,7 @@ versions.each { |this_version|
     version = this_version["version"]
 
     if !"#{version}".to_s.empty?
-      `git checkout -f #{version}`
+      `git checkout -f '#{version}'`
       system "echo == Current branch/tag is now #{version}"
       system "echo == Compiling the library in #{version}"
       system "swift package clean"
@@ -192,10 +193,3 @@ versions.each { |this_version|
 
 # We also move the rest of version generated sites to its publishing destination
 `mv #{$gen_docs_dir}/* #{$publishing_dir}/`
-
-# We need to remove dependencies dir, as it's unnecessary, and it messes GH Pages
-`rm -rf #{$source_dir}/vendor`
-
-# And finally we move the source to the directory that will be published.
-# Remember that this should be the same directory set in GH Pages/Travis.
-`mv #{$source_dir}/* #{$publishing_dir}/`
