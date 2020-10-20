@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.8.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/rank-n-polymorphism/">
+                        <i class="fa fa-circle"></i>
+                        <span>Rank-N polymorphism</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="data-types">Data types</h1>
+
+<p class="beginner">beginner</p>
+
+<p>A data type is an abstraction that encapsulates a reusable coding pattern. Data types are generalized by one or more type parameters. Data types in Bow have Higher Kinded Type support by extending <code class="highlighter-rouge">Kind</code>.</p>
+
+<p>All data types included in Bow are immutable; that is, you can only set their state during the initialization of the value. Whenever one of the methods need to change the state of the receiving value, a new copy of that value is returned. This way, we can easily reason about the behavior of our code.</p>
+
+<h2 id="data-types-in-bow">Data types in Bow</h2>
+
+<p>The following tables summarize some of the data types included in Bow, together with a short description of their purpose.</p>
+
+<h3 id="function-like-types">Function-like types</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Function0&lt;A&gt;</td>
+      <td>Represents a constant function; one that does not receive any parameters and produces a constant value of type <code class="highlighter-rouge">A</code>.</td>
+    </tr>
+    <tr>
+      <td>Function1&lt;I, O&gt;</td>
+      <td>Represents a function that receives values of type <code class="highlighter-rouge">I</code> and produces values of type <code class="highlighter-rouge">O</code>.</td>
+    </tr>
+    <tr>
+      <td>Kleisli&lt;F, D, A&gt;</td>
+      <td>Represents a function that receives values of type <code class="highlighter-rouge">D</code> and produces values of type <code class="highlighter-rouge">A</code> wrapped in an effect <code class="highlighter-rouge">F</code> (namely, <code class="highlighter-rouge">Kind&lt;F, A&gt;</code>). Dual of Cokleisli.</td>
+    </tr>
+    <tr>
+      <td>ReaderT&lt;F, D, A&gt;</td>
+      <td>Equivalent to <code class="highlighter-rouge">Kleisli&lt;F, D, A&gt;</code>.</td>
+    </tr>
+    <tr>
+      <td>Reader&lt;D, A&gt;</td>
+      <td>Represents a ReaderT where the effect is Id.</td>
+    </tr>
+    <tr>
+      <td>Cokleisli&lt;F, D, A&gt;</td>
+      <td>Represents a function that receives values of type <code class="highlighter-rouge">A</code> wrapped in an effect <code class="highlighter-rouge">F</code> (namely, <code class="highlighter-rouge">Kind&lt;F, A&gt;</code>), and produces values of type <code class="highlighter-rouge">D</code>. Dual of Kleisli.</td>
+    </tr>
+    <tr>
+      <td>CoreaderT&lt;F, D, A&gt;</td>
+      <td>Equivalent to <code class="highlighter-rouge">Cokleisli&lt;F, D, A&gt;</code>.</td>
+    </tr>
+    <tr>
+      <td>Coreader&lt;F, D, A&gt;</td>
+      <td>Represents a CoreaderT where the effect is Id.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="core-types">Core types</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Action&lt;A&gt;</td>
+      <td>Represents an input on a Moore machine.</td>
+    </tr>
+    <tr>
+      <td>ArrayK&lt;A&gt;</td>
+      <td>Represents an array of values of type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Array&lt;A&gt;;</code> or <code class="highlighter-rouge">[A]</code>, but with HKT support.</td>
+    </tr>
+    <tr>
+      <td>Const&lt;A, T&gt;</td>
+      <td>Represents a constant value of type <code class="highlighter-rouge">A</code> and a phantom type <code class="highlighter-rouge">T</code>.</td>
+    </tr>
+    <tr>
+      <td>CoSum&lt;F, G, A&gt;</td>
+      <td>Represents an action to change the selected content in a <code class="highlighter-rouge">Sum</code> value.</td>
+    </tr>
+    <tr>
+      <td>Day&lt;F, G, A&gt;</td>
+      <td>Represents the Day convolution of functors <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code>.</td>
+    </tr>
+    <tr>
+      <td>DictionaryK&lt;K, A&gt;</td>
+      <td>Represents a dictionary where keys have type <code class="highlighter-rouge">K</code> and values have type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Dictionary&lt;K, A&gt;</code> or <code class="highlighter-rouge">[K: A]</code>, but with HKT support.</td>
+    </tr>
+    <tr>
+      <td>Either&lt;A, B&gt;</td>
+      <td>Represents the sum type of <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code>; i.e., it holds a value of either one of those types.</td>
+    </tr>
+    <tr>
+      <td>Endo&lt;A&gt;</td>
+      <td>Represents an endomorphism on type <code class="highlighter-rouge">A</code>; i.e. a function where the input and output have the same type.</td>
+    </tr>
+    <tr>
+      <td>Eval&lt;A&gt;</td>
+      <td>Represents a potentially lazy value of type <code class="highlighter-rouge">A</code>.</td>
+    </tr>
+    <tr>
+      <td>Id&lt;A&gt;</td>
+      <td>Represents a value of type <code class="highlighter-rouge">A</code> with no further context.</td>
+    </tr>
+    <tr>
+      <td>Ior&lt;A, B&gt;</td>
+      <td>Represents a value of either <code class="highlighter-rouge">A</code> or <code class="highlighter-rouge">B</code>, or both values at the same time.</td>
+    </tr>
+    <tr>
+      <td>Moore&lt;E, V&gt;</td>
+      <td>Represents a Moore machine rendering items of type <code class="highlighter-rouge">V</code> and handling inputs of type <code class="highlighter-rouge">E</code>.</td>
+    </tr>
+    <tr>
+      <td>NonEmptyArray&lt;A&gt;</td>
+      <td>Represents an array of one or more elements of type <code class="highlighter-rouge">A</code>.</td>
+    </tr>
+    <tr>
+      <td>Option&lt;A&gt;</td>
+      <td>Represents a value of type <code class="highlighter-rouge">A</code> that may or may not be present. It is like <code class="highlighter-rouge">Optional&lt;A&gt;</code> or <code class="highlighter-rouge">A?</code>, but with HKT support.</td>
+    </tr>
+    <tr>
+      <td>Pairing&lt;F, G&gt;</td>
+      <td>Represents a relationship between Functors <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code> where they can annihilate each other to yield a value.</td>
+    </tr>
+    <tr>
+      <td>Puller&lt;A&gt;</td>
+      <td>Represents an action to move the focus of a <code class="highlighter-rouge">Zipper</code>.</td>
+    </tr>
+    <tr>
+      <td>SetK&lt;A&gt;</td>
+      <td>Represents an unordered collection of unique values of type <code class="highlighter-rouge">A</code>. It is like <code class="highlighter-rouge">Set&lt;A&gt;</code> but with HKT support.</td>
+    </tr>
+    <tr>
+      <td>Sum&lt;F, G, A&gt;</td>
+      <td>Represents two values in the contexts of <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">G</code>, where only one of them is selected.</td>
+    </tr>
+    <tr>
+      <td>Trampoline&lt;A&gt;</td>
+      <td>Represents a recursive computation that can be converted into a loop.</td>
+    </tr>
+    <tr>
+      <td>Try&lt;A&gt;</td>
+      <td>Represents a computation that may have provided a value of type <code class="highlighter-rouge">A</code> or thrown an error.</td>
+    </tr>
+    <tr>
+      <td>Validated&lt;A, B&gt;</td>
+      <td>Represents a value that may be invalid, with an error value of type <code class="highlighter-rouge">A</code>, or a valid value of type <code class="highlighter-rouge">B</code>.</td>
+    </tr>
+    <tr>
+      <td>Zipper&lt;A&gt;</td>
+      <td>Represents an array of values that is focused at a specific position.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="transformers">Transformers</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CoT&lt;W, M, A&gt;</td>
+      <td>Represents the dual MonadTransformer of the <code class="highlighter-rouge">W</code> Comonad, with <code class="highlighter-rouge">M</code> as the base Monad.</td>
+    </tr>
+    <tr>
+      <td>Co&lt;W, A&gt;</td>
+      <td>Represents a CoT where the base Monad is Id.</td>
+    </tr>
+    <tr>
+      <td>EitherT&lt;F, A, B&gt;</td>
+      <td>Represents an <code class="highlighter-rouge">Either&lt;A, B&gt;</code> nested in an arbitrary effect <code class="highlighter-rouge">F</code>.</td>
+    </tr>
+    <tr>
+      <td>EnvT&lt;E, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended with a global environment.</td>
+    </tr>
+    <tr>
+      <td>Env&lt;E, A&gt;</td>
+      <td>Represents an EnvT where the base Comonad is Id.</td>
+    </tr>
+    <tr>
+      <td>OptionT&lt;F, A&gt;</td>
+      <td>Represents an <code class="highlighter-rouge">Option&lt;A&gt;</code> nested in an arbitrary effect <code class="highlighter-rouge">F</code>.</td>
+    </tr>
+    <tr>
+      <td>StateT&lt;F, S, A&gt;</td>
+      <td>Represents a function that receives an effect of type <code class="highlighter-rouge">S</code> and produces a new state of the same type and an output value of type <code class="highlighter-rouge">A</code>, all wrapped in an effect of type <code class="highlighter-rouge">F</code>.</td>
+    </tr>
+    <tr>
+      <td>State&lt;S, A&gt;</td>
+      <td>Represents a StateT where the effect is Id.</td>
+    </tr>
+    <tr>
+      <td>StoreT&lt;S, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended with a focus of type <code class="highlighter-rouge">S</code>.</td>
+    </tr>
+    <tr>
+      <td>Store&lt;S, A&gt;</td>
+      <td>Represents a StoreT where the base Comonad is Id.</td>
+    </tr>
+    <tr>
+      <td>TracedT&lt;M, W, A&gt;</td>
+      <td>Represents a Comonadic value that is extended to depend in a monoidal position.</td>
+    </tr>
+    <tr>
+      <td>Traced&lt;M, A&gt;</td>
+      <td>Represents a TracedT where the base Comonad is Id.</td>
+    </tr>
+    <tr>
+      <td>WriterT&lt;F, W, A&gt;</td>
+      <td>Represents a value of type <code class="highlighter-rouge">A</code> under the effect <code class="highlighter-rouge">F</code> that produces a side stream of data of type <code class="highlighter-rouge">W</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

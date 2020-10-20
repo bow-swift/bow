@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.8.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/rank-n-polymorphism/">
+                        <i class="fa fa-circle"></i>
+                        <span>Rank-N polymorphism</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="automatic-derivation-of-optics">Automatic derivation of optics</h1>
+
+<p class="beginner">beginner</p>
+
+<p>Writing optics for each data type may involve a lot of boilerplate. In some cases, Bow can help you generate the optics for your data types. This page will go through each optic that can be automatically generated for your data types. Nonetheless, you should read the section on <em>Writing your own optics</em> to get familiar with each optic and how they are implemented.</p>
+
+<p>As a running example, consider the following data types:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">PublicationState</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">draft</span>
+    <span class="k">case</span> <span class="nf">published</span><span class="p">(</span><span class="kt">Date</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">Article</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">subtitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">PublicationState</span>
+    <span class="k">var</span> <span class="nv">tags</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Note</strong>: If you take a close look, you will notice that each field in <code class="highlighter-rouge">Article</code> is declared as <code class="highlighter-rouge">var</code> instead of <code class="highlighter-rouge">let</code>. This is necessary for the automatic generation of optics. If you don’t declare your fields as <code class="highlighter-rouge">var</code>, you will start getting compilation errors when you try to generate your optics and, unfortunately, the error messages will not be descriptive about this being the reason.</p>
+
+<h2 id="getter">Getter</h2>
+
+<p>In order to get a <code class="highlighter-rouge">Getter</code>, we need to make our type conform to the <code class="highlighter-rouge">AutoGetter</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoGetter</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>From there, we can use a key path to a field to obtain its associated <code class="highlighter-rouge">Getter</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">titleGetter</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">getter</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="setter">Setter</h2>
+
+<p>Similarly, to get a <code class="highlighter-rouge">Setter</code>, we need to make our type conform to the <code class="highlighter-rouge">AutoSetter</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoSetter</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>Using a key path to a field, we can get its associated <code class="highlighter-rouge">Setter</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">titleSetter</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">setter</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="lens">Lens</h2>
+
+<p>If we can get a <code class="highlighter-rouge">Getter</code> and a <code class="highlighter-rouge">Setter</code>, we can as well get a <code class="highlighter-rouge">Lens</code>. We need to make our type conform to the <code class="highlighter-rouge">AutoLens</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoLens</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>And similarly, using a key path to a field, we can get its associated <code class="highlighter-rouge">Lens</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">titleLens</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">lens</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="affinetraversal">AffineTraversal</h2>
+
+<p>For those fields which may or may not be present, we can create an <code class="highlighter-rouge">AffineTraversal</code> in an automatic way by conforming to <code class="highlighter-rouge">AutoAffineTraversal</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoAffineTraversal</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>And using a key path to an optional field, we can obtain its associated <code class="highlighter-rouge">AffineTraversal</code> optic:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">subtitleAffineTraversal</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">affineTraversal</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">subtitle</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="fold">Fold</h2>
+
+<p>For fields that are <code class="highlighter-rouge">Array</code> or <code class="highlighter-rouge">ArrayK</code> of values, or any structure that is <code class="highlighter-rouge">Foldable</code>, we can obtain their associated <code class="highlighter-rouge">Fold</code> automatically by conforming to the <code class="highlighter-rouge">AutoFold</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoFold</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>Using a key path to an <code class="highlighter-rouge">Array</code> or <code class="highlighter-rouge">ArrayK</code> field, or a field whose type is <code class="highlighter-rouge">Foldable</code>, we can get its associated <code class="highlighter-rouge">Fold</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">tagsFold</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">fold</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="traversal">Traversal</h2>
+
+<p>Similar to <code class="highlighter-rouge">Fold</code>, for those fields that are <code class="highlighter-rouge">Array</code> or <code class="highlighter-rouge">ArrayK</code> of values, or any structure that is <code class="highlighter-rouge">Traverse</code>, we can obtain their associated <code class="highlighter-rouge">Traversal</code> automatically by conforming to the <code class="highlighter-rouge">AutoTraversal</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">Article</span><span class="p">:</span> <span class="kt">AutoTraversal</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>Using a key path to an <code class="highlighter-rouge">Array</code> or <code class="highlighter-rouge">ArrayK</code> field, or a field whose type is <code class="highlighter-rouge">Traverse</code>, we can get its associated <code class="highlighter-rouge">Traversal</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">tagsTraversal</span> <span class="o">=</span> <span class="kt">Article</span><span class="o">.</span><span class="nf">traversal</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">\</span><span class="o">.</span><span class="n">tags</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="prism">Prism</h2>
+
+<p>The optics above work mainly in product types. For sum types, we can try to derive <code class="highlighter-rouge">Prism</code> in an automatic manner by conforming to the <code class="highlighter-rouge">AutoPrism</code> protocol:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">PublicationState</span><span class="p">:</span> <span class="kt">AutoPrism</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>At this point, there are two possible situations: the case of the enum we want to focus with our prism does not have associated values, or does have them.</p>
+
+<p>If the focus of the <code class="highlighter-rouge">Prism</code> does not have any associated value, like <code class="highlighter-rouge">PublicationState.draft</code>, we can obtain it seamlessly:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">draftPrism</span> <span class="o">=</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="nf">prism</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">draft</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In case the focus has associated values, it works the same. Bow will auto extract for you the associated values:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">publishedPrism</span> <span class="o">=</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="nf">prism</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="kt">PublicationState</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>Using the <code class="highlighter-rouge">Auto-</code> protocols let us reduce the boilerplate associated to generating many of the optics, thus making it much easier and more seamless to work with optics.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

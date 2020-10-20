@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.8.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/rank-n-polymorphism/">
+                        <i class="fa fa-circle"></i>
+                        <span>Rank-N polymorphism</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="rank-n-polymorphism">Rank-N polymorphism</h1>
+
+<p class="intermediate">intermediate</p>
+
+<p>Swift does not support Rank-N polymorphism yet. However, Rank-N polymorphism unlocks some interesting patterns and techniques. For this reason, Bow provides some helper classes that allow you to emulate Rank-N polymorphism. This document introduces Rank-N polymorphism and Bow’s alternative approach starting from the basics of closures.</p>
+
+<h2 id="what-is-rank-n-polymorphism">What is Rank-N polymorphism?</h2>
+
+<p>Swift allows us to write generic functions: functions that abstract over what specific types they operate on.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">singletonArray</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">v</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here <code class="highlighter-rouge">singletonArray</code> is a function that can operate on any type we want. Specifically, the caller of the function decides what type to pass to the function.</p>
+
+<p>We say that such a function is <em>polymorphic</em> over the <em>type parameter</em> <code class="highlighter-rouge">T</code>, or alternatively that the function is <em>generic</em> over the type parameter <code class="highlighter-rouge">T</code>. Notice that we don’t refer to <code class="highlighter-rouge">T</code> as a type. <code class="highlighter-rouge">T</code> is more like a placeholder for a type that will be determined when the function is called.</p>
+
+<p>Imagine we want to write a function <code class="highlighter-rouge">callTwice</code> that is generic over two type parameter <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code> and accepts our <code class="highlighter-rouge">singletonArray</code> above as a parameter. Our function <code class="highlighter-rouge">callTwice</code> will execute the polymorphic function we pass to it with a value of type <code class="highlighter-rouge">A</code> and a second time with a value of type <code class="highlighter-rouge">B</code>. We need to express that <code class="highlighter-rouge">callTwice</code> takes a parameter that is a function polymorphic on a type parameter <code class="highlighter-rouge">T</code>. The function could look something like this:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+     <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="c1">// `f` really needs to be polymorphic, because we call it twice with inputs of different types.</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Notice that we included <code class="highlighter-rouge">&lt;T&gt;</code> in front of the type signature of the parameter of our function <code class="highlighter-rouge">callTwice</code>. With this, we want to express that the parameter <code class="highlighter-rouge">f</code> must be a function polymorphic over one type parameter we called <code class="highlighter-rouge">T</code>. This is a made up syntax, don’t try to write this in your Swift program because it won’t compile.</p>
+
+<p>If we could write such a function, we could pass our <code class="highlighter-rouge">singletonArray</code> function to it, along with a value of any type we want:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="c1">// == ([0], ["a"])</span>
+ <span class="k">let</span> <span class="nv">b</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="s">"b1"</span><span class="p">,</span> <span class="s">"b2"</span><span class="p">)</span> <span class="c1">// == (["b1"], ["b2"])</span>
+ <span class="k">let</span> <span class="nv">c</span> <span class="o">=</span> <span class="nf">callTwice</span><span class="p">(</span><span class="n">singletonArray</span><span class="p">,</span> <span class="s">"c"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">// == (["c"], [[0]])</span>
+</code></pre></div></div>
+
+<p>Notice how at each call of <code class="highlighter-rouge">callTwice</code> we are passing a value of different type, yet we always pass the same function <code class="highlighter-rouge">singletonArray</code> which is called with each type with a value of different type. With the syntax we made up, this is possible because we are able to say that the function we pass to <code class="highlighter-rouge">callTwice</code> must be a polymorphic function, in other words a function that can work with inputs of any type.</p>
+
+<p>The reason we needed to use a made up syntax for this example is because Swift doesn’t allow us to write a function that requires a polymorphic function as a parameter. This feature is called <em>Rank-N polymorphism</em> and it’s supported on some languages like Haskell.</p>
+
+<p>In the following sections we develop a technique to simulate Rank-N polymorphism. We start by reviewing the basics of closures. We then provide an alternative but equivalent way to encode closures that we will be able to generalise into something that approaches Rank-N polymorphism.</p>
+
+<h2 id="the-basics-of-closures">The basics of closures</h2>
+<p>Swift supports higher-order functions, which means that we can pass a function as an argument to another function or return a function as the result of another function. Furthermore, we can define <em>closures</em> which are functions that capture some data from its environment.</p>
+
+<p>For example, the function <code class="highlighter-rouge">randomWordGenerator</code> below returns a random word of length <code class="highlighter-rouge">n</code>. As you can see <code class="highlighter-rouge">n</code> is a random number that is generated once each time you execute this program. <code class="highlighter-rouge">randomWordGenerator</code> captures the value of <code class="highlighter-rouge">n</code>, which means that the strings returned by <code class="highlighter-rouge">randomWordGenerator</code> will all have the same length during the execution of the program. Each time you call <code class="highlighter-rouge">randomWordGenerator</code> you will get a different word, but all of them will have the same length. If you re-run the program a second time, <code class="highlighter-rouge">n</code> will probably get a different value and the length of the words returned by <code class="highlighter-rouge">randomWordGenerator</code> will be different.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">randomWordGenerator</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+        <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+    <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In the example above we only got one <code class="highlighter-rouge">randomWordGenerator</code> function per program execution: if we want a different <code class="highlighter-rouge">randomWordGenerator</code> function with a different <code class="highlighter-rouge">n</code> we need to re-run the program. Let’s create a function that returns a different <code class="highlighter-rouge">randomWordGenerator</code> function each time we call it. This is an example of a higher-order function, since it returns another function.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">makeRandomWordGenerator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+            <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The body of <code class="highlighter-rouge">makeRandomWordGenerator</code> is basically the same code we had before (we renamed <code class="highlighter-rouge">n</code> to <code class="highlighter-rouge">length</code> to stress the fact that <code class="highlighter-rouge">makeRandomWordGenerator</code> doesn’t use any variables from outside its body). But now, each time we call <code class="highlighter-rouge">makeRandomWordGenerator</code> a different <code class="highlighter-rouge">length</code> is generated, and thus we get a different <code class="highlighter-rouge">randomWordGenerator</code> function each time.</p>
+
+<p>We check this by creating 3 different functions with <code class="highlighter-rouge">makeRandomWordGenerator</code> and generating one word with each. We should see that each function prints words of different length (unless we are a bit unlucky).</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">0</span> <span class="o">..&lt;</span> <span class="mi">3</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">f</span> <span class="o">=</span> <span class="nf">makeRandomWordGenerator</span><span class="p">()</span>
+    <span class="nf">print</span><span class="p">(</span><span class="nf">f</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>An important thing to realise is that we cannot just generate the random <code class="highlighter-rouge">length</code> value inside the body of the closure returned from <code class="highlighter-rouge">makeRandomWordGenerator</code>. If we did so, a <code class="highlighter-rouge">randomWordGenerator</code> would return strings of different length each time we call it, and this is not what we want. We want each <code class="highlighter-rouge">randomWordGenerator</code> function to always return strings of the same length.</p>
+
+<p>This little example demonstrates that closures indeed capture values from their environment. Since we define <code class="highlighter-rouge">length</code> inside <code class="highlighter-rouge">makeRandomWordGenerator</code>,
+ there’s no way it can be accessed from outside its body. This means that the closures returned from <code class="highlighter-rouge">makeRandomWordGenerator</code> indeed carry a copy of <code class="highlighter-rouge">length</code> with them, because otherwise they couldn’t know what length the words they generate are supposed to be.</p>
+
+<h2 id="what-exactly-is-a-closure">What exactly is a closure?</h2>
+<p>Now, imagine for a moment that Swift doesn’t allow closures to capture values from their environment. Now we can’t just simply pass our <code class="highlighter-rouge">randomWordGenerator</code> functions around, because they cannot carry the value for <code class="highlighter-rouge">length</code> they need. Is there any way we can achieve a similar behaviour?</p>
+
+<p>Well, if we have our function inside a struct, it can access all the members of the struct, just like our <code class="highlighter-rouge">randomWordGenerator</code> body accessed the variable <code class="highlighter-rouge">length</code>.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">RandomWordGenerator</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">length</span><span class="p">:</span> <span class="kt">Int</span>
+
+    <span class="kd">func</span> <span class="nf">callAsFunction</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="p">(</span><span class="mi">0</span> <span class="o">..&lt;</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span>
+            <span class="kt">Character</span><span class="o">.</span><span class="nf">random</span><span class="p">(</span><span class="nv">in</span><span class="p">:</span> <span class="s">"a"</span> <span class="o">...</span> <span class="s">"z"</span><span class="p">)</span> <span class="o">|&gt;</span> <span class="kt">String</span><span class="o">.</span><span class="kd">init</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">joined</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">anotherRandomWordGenerator</span> <span class="o">=</span> <span class="kt">RandomWordGenerator</span><span class="p">(</span><span class="nv">length</span><span class="p">:</span> <span class="mi">6</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Since Swift 5.2, because we called the function in our struct <code class="highlighter-rouge">callAsFunction</code> we are able to call an instance of our struct as it were a function:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">anotherRandomWordGenerator</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>And we can obviously pass a value of <code class="highlighter-rouge">RandomWordGenerator</code> around, which will always hold the <code class="highlighter-rouge">length</code> variable it needs. So we see that our struct behaves very much like a closure. Indeed, when the Swift compiler finds a closure definition in your code, it creates something similar to this struct under the hood.</p>
+
+<h2 id="generic-closures">Generic closures</h2>
+
+<p>Recall the <code class="highlighter-rouge">singletonArray</code> function we defined earlier:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">singletonArray</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">v</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Can we write this function as a struct, like we explained in the previous section? Sure thing!</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">SingletonArrayFunction</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="n">callAsFunction</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">v</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span> <span class="p">{</span>
+        <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We just expressed a polymorphic function as a struct!</p>
+
+<p>Recall the function <code class="highlighter-rouge">callTwice</code> we defined earlier with our made up syntax:</p>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">],</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+     <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+ <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now that we have expressed a polymorphic function as a struct, can we express this function with valid Swift syntax? Maybe something like this?</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">SingletonArrayFunction</span><span class="p">,</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+    <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nf">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Well, now we can only pass a value of <code class="highlighter-rouge">SingletonArrayFunction</code>, which is to say that we can only pass one specific function. This is not what we wanted, we wanted to be able to pass any polymorphic function with this signature <code class="highlighter-rouge">&lt;T&gt;(T) -&gt; [T]</code>. We must find another way.</p>
+
+<h2 id="introducing-functionk">Introducing FunctionK</h2>
+
+<p><code class="highlighter-rouge">FunctionK</code> is a class found in Bow that represents any polymorphic function. <code class="highlighter-rouge">FunctionK</code> takes two type parameters that represent type constructors. Specifically, <code class="highlighter-rouge">FunctionK</code> represents functions from <code class="highlighter-rouge">Kind&lt;F, T&gt;</code> to <code class="highlighter-rouge">Kind&lt;G, T&gt;</code> that is polymorphic on <code class="highlighter-rouge">T</code>, or expressed with the made up notation we introduced earlier: <code class="highlighter-rouge">&lt;T&gt;Kind&lt;F, T&gt; -&gt; Kind&lt;G, T&gt;</code>.</p>
+
+<p>Specific functions are expressed as a subclass of <code class="highlighter-rouge">FunctionK</code>. Thus, if we have a function <code class="highlighter-rouge">f</code> that takes a parameter of type <code class="highlighter-rouge">FunctionK&lt;F, G&gt;</code>, we can to <code class="highlighter-rouge">f</code> any function from <code class="highlighter-rouge">Kind&lt;F, T&gt;</code> to <code class="highlighter-rouge">Kind&lt;G, T&gt;</code> that is polymorphic. Subclasses of <code class="highlighter-rouge">FunctionK</code> only need to override the generic method <code class="highlighter-rouge">invoke</code>, which represents the actual body of our function. <code class="highlighter-rouge">callAsFunction</code> is implemented automatically, so we can always call a <code class="highlighter-rouge">FunctionK</code> as it was a regular function.</p>
+
+<p>Our <code class="highlighter-rouge">SingletonArrayFunction</code> defined earlier has signature (expressed in our made up syntax)<code class="highlighter-rouge">&lt;T&gt;(T) -&gt; [T]</code>. <code class="highlighter-rouge">[T]</code> is equivalent to Bow’s <code class="highlighter-rouge">ArrayK&lt;T&gt;</code>, i.e. <code class="highlighter-rouge">ArrayKOf&lt;T&gt;</code>. What about the type of the input? It’s a simple type that is not wrapped with any type constructor! Worry not, we can use <code class="highlighter-rouge">IdOf&lt;A&gt;</code>, which is a type constructor that simply wraps a value of type <code class="highlighter-rouge">A</code> without adding any additional behaviour or transformation. This is to say, <code class="highlighter-rouge">IdOf&lt;A&gt;</code> is isomorphic to <code class="highlighter-rouge">A</code> we can convert a value back and forth between <code class="highlighter-rouge">IdOf&lt;A&gt;</code> and <code class="highlighter-rouge">A</code> without losing any information.</p>
+
+<p>With all this in mind, we now can see that our <code class="highlighter-rouge">SingletonArrayFunction</code> can be seen as a <code class="highlighter-rouge">FunctionK&lt;ForId, ForArrayK&gt;</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">SingletonArrayFunction</span><span class="p">:</span> <span class="kt">FunctionK</span><span class="o">&lt;</span><span class="kt">ForId</span><span class="p">,</span> <span class="kt">ForArrayK</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="kd">func</span> <span class="n">invoke</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">IdOf</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ArrayKOf</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="kt">ArrayK</span><span class="p">([</span><span class="n">fa</span><span class="o">^.</span><span class="n">value</span><span class="p">])</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that in order to be able to construct an array of <code class="highlighter-rouge">A</code>, we need to convert from <code class="highlighter-rouge">IdOf&lt;A&gt;</code> to <code class="highlighter-rouge">A</code> by calling the property <code class="highlighter-rouge">value</code> of <code class="highlighter-rouge">IdOf&lt;A&gt;</code>. Similarly, we need to wrap the array we construct by calling the <code class="highlighter-rouge">ArrayK</code> constructor.</p>
+
+<p>Now we can express our <code class="highlighter-rouge">callTwice</code> function with regular Swift syntax:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">callTwice</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kt">FunctionK</span><span class="o">&lt;</span><span class="kt">ForId</span><span class="p">,</span> <span class="kt">ForArrayK</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">_</span> <span class="nv">a</span><span class="p">:</span> <span class="kt">A</span><span class="p">,</span> <span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">([</span><span class="kt">A</span><span class="p">],</span> <span class="p">[</span><span class="kt">B</span><span class="p">])</span> <span class="p">{</span>
+    <span class="p">(</span><span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">^.</span><span class="n">asArray</span><span class="p">,</span> <span class="nf">f</span><span class="p">(</span><span class="kt">Id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="o">^.</span><span class="n">asArray</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we needed to perform the opposite conversion, from <code class="highlighter-rouge">A</code> to <code class="highlighter-rouge">Id&lt;A&gt;</code> by passing <code class="highlighter-rouge">a</code> to the constructor of <code class="highlighter-rouge">Id</code>, same for <code class="highlighter-rouge">B</code>.
+ We also had to convert from <code class="highlighter-rouge">ArrayK&lt;A&gt;</code> to <code class="highlighter-rouge">[A]</code> by calling the property <code class="highlighter-rouge">asArray</code> of <code class="highlighter-rouge">ArrayK</code>.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>

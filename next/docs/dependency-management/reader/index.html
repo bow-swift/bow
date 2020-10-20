@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bow is a library for Typed Functional Programming in Swift">
+    <meta name="keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory">
+
+    <meta property="og:image" content="" />
+    <meta property="og:title" content="Bow" />
+    <meta property="og:site_name" content="Bow" />
+    <meta property="og:url" content="https://bow-swift.io" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta property="og:keywords" content="functional-programming, swift-library, monads, monad-transformers, functional-data-structure, swift, fp-types, adt, free-monads, tagless-final, mtl, for-comprehension, category-theory" />
+
+    <meta name="twitter:text:description" content="Bow is a library for Typed Functional Programming in Swift" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@bow_swift">
+    <meta name="twitter:creator" content="@bow_swift">
+    <meta name="twitter:image" content="https://bow-swift.io/img/twitter-card.png" />
+
+    <!-- Bow version metadata -->
+    
+    <meta name="bow-version" data-title="next" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/next/img/favicon.png">
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="/next/css/docs.css">
+    <!-- Highlighting css -->
+    <link rel="stylesheet" type="text/css" href="/next/api-docs/css/highlight.css">
+
+    <!-- Code to manage version information -->
+    <script src="/next/js/doc-versions.js" defer></script>
+
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-18433785-19"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-18433785-19');
+</script>
+
+    
+
+</head>
+
+<body id="doc-body">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+    <div class="sidebar-brand">
+        <a class="brand" href="/next/">
+            <img src="/next/img/icon.svg" alt="Bow logo">
+            <span>Bow</span>
+        </a>
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <span class="close"></span>
+        </button>
+    </div>
+
+    <div id="version-dropdown">
+
+    <button class="button link-like" onclick="displayToggle(event)" title="Documentation">
+      <span>Bow version</span>
+      <span id="bow-version">
+        
+        next
+      </span>
+    </button>
+
+    <ul class="dropdown dropdown-content">
+
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/docs">
+            <span>
+              0.8.0
+            </span>
+        </a>
+      </li>
+
+      
+      <li class="dropdown-item">
+        <a class="dropdown-item-link" href="/next/docs">
+            <span>
+              next
+            </span>
+        </a>
+      </li>
+      
+    </ul>
+</div>
+
+
+    <ul class="sidebar-nav">
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Quick start</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/quick-start/getting-started/">
+                        <i class="fa fa-circle"></i>
+                        <span>Getting started</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/modules/">
+                        <i class="fa fa-circle"></i>
+                        <span>Modules</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/quick-start/resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Resources</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>FP concepts</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/glossary/">
+                        <i class="fa fa-circle"></i>
+                        <span>Glossary</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/functions-vs-procedures/">
+                        <i class="fa fa-circle"></i>
+                        <span>Functions vs Procedures</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/higher-kinded-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Higher Kinded Types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/type-classes/">
+                        <i class="fa fa-circle"></i>
+                        <span>Type classes</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/data-types/">
+                        <i class="fa fa-circle"></i>
+                        <span>Data types</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/fp-concepts/rank-n-polymorphism/">
+                        <i class="fa fa-circle"></i>
+                        <span>Rank-N polymorphism</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Composition</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/composition/composition-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/composing-functions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composing functions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-values-of-the-same-type/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining values of the same type</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-data/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming data</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/lifting-values-to-an-effect/">
+                        <i class="fa fa-circle"></i>
+                        <span>Lifting values to an effect</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/combining-independent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Combining independent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/sequencing-dependent-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>Sequencing dependent computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/composition/transforming-multiple-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Transforming multiple effects</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Dependency management</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/dependency-management-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Dependency management Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/partial-application/">
+                        <i class="fa fa-circle"></i>
+                        <span>Partial application</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/constructor-based-dependency-injection/">
+                        <i class="fa fa-circle"></i>
+                        <span>Constructor-based dependency injection</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/reader/">
+                        <i class="fa fa-circle"></i>
+                        <span>Reader</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/dependency-management/side-effectful-dependency-management/">
+                        <i class="fa fa-circle"></i>
+                        <span>Side-effectful dependency management</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Patterns</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/patterns/error-handling/">
+                        <i class="fa fa-circle"></i>
+                        <span>Error handling</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/monad-comprehensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Monad comprehensions</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/tail-recursion/">
+                        <i class="fa fa-circle"></i>
+                        <span>Tail recursion</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/state-based-computations/">
+                        <i class="fa fa-circle"></i>
+                        <span>State-based computations</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/patterns/polymorphic-programs/">
+                        <i class="fa fa-circle"></i>
+                        <span>Polymorphic programs</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Optics</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/optics/optics-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Optics Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/writing-your-own-optics/">
+                        <i class="fa fa-circle"></i>
+                        <span>Writing your own optics</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/automatic-derivation/">
+                        <i class="fa fa-circle"></i>
+                        <span>Automatic derivation</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/optics/composition/">
+                        <i class="fa fa-circle"></i>
+                        <span>Composition</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Effects</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/effects/effects-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Effects Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/suspending-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Suspending side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/manipulating-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Manipulating side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-errors/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling errors</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/concurrency/">
+                        <i class="fa fa-circle"></i>
+                        <span>Concurrency</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/running-side-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Running side effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/retrying-and-repeating-effects/">
+                        <i class="fa fa-circle"></i>
+                        <span>Retrying and repeating effects</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/handling-resources/">
+                        <i class="fa fa-circle"></i>
+                        <span>Handling resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/effects/foundation-extensions/">
+                        <i class="fa fa-circle"></i>
+                        <span>Foundation extensions</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Testing</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-overview/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing Overview</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-type-class-instances/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing type class instances</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/testing/testing-side-effectful-code/">
+                        <i class="fa fa-circle"></i>
+                        <span>Testing side effectful code</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Integrations</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/integrations/rxswift-streams/">
+                        <i class="fa fa-circle"></i>
+                        <span>RxSwift streams</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="sidebar-nav-item">
+            <a href="#">
+                <span>Legal</span>
+                
+                <i class="fa fa-angle-right"></i>
+                
+            </a>
+            
+            <ul>
+                
+                <li>
+                    <a href="/next/docs/legal/credits/">
+                        <i class="fa fa-circle"></i>
+                        <span>Credits</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/next/docs/legal/license/">
+                        <i class="fa fa-circle"></i>
+                        <span>License</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+</div>
+
+    <div id="doc-wrapper">
+    <div class="doc-header">
+        <button type="button" id="main-toggle" class="sidebar-toggle">
+            <i class="fa fa-lg fa-bars menu-icon"></i>
+        </button>
+    </div>
+    <div class="doc-content">
+        <h1 id="reader">Reader</h1>
+
+<p class="beginner">beginner</p>
+
+<p>The Reader pattern is a fancy name for returning functions as part of other functions. That is, <code class="highlighter-rouge">Reader&lt;A, B&gt;</code> corresponds to a function <code class="highlighter-rouge">(A) -&gt; B</code>.</p>
+
+<p>Even these two constructions are equivalent, they have different semantics. <code class="highlighter-rouge">Reader</code> wraps a function, but thanks to being a nominal type, we can add methods that work with the underlying function in an easier way. This is something we cannot do with a plain function <code class="highlighter-rouge">(A) -&gt; B</code>, as functions are not nominal types and therefore cannot be extended.</p>
+
+<p>Let’s introduce an example to illustrate the usage of <code class="highlighter-rouge">Reader</code>. Consider the following code:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showTotal</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">formatter</span> <span class="o">=</span> <span class="kt">MoneyFormatter</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">amount</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This function has a hidden dependency on <code class="highlighter-rouge">MoneyFormatter</code> that cannot be controlled from the outside. We can make it explicit by passing the dependency as a parameter:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showTotal</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">,</span> <span class="n">using</span> <span class="nv">formatter</span><span class="p">:</span> <span class="kt">Formatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">amount</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This lets us control the dependency by supplying it as an argument to the function. However, we could have more functions using the same dependency:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showLines</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">,</span> <span class="n">using</span> <span class="nv">formatter</span><span class="p">:</span> <span class="kt">Formatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">lines</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In these situations, we would like to guarantee that the same dependency is supplied to all the functions. This is where the <code class="highlighter-rouge">Reader</code> can be useful. The first step we can do is to curry our functions:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showTotalCurried</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Formatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="n">formatter</span> <span class="k">in</span>
+        <span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">amount</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">showLinesCurried</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Formatter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="p">{</span> <span class="n">formatter</span> <span class="k">in</span>
+        <span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">lines</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">lines</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The output of these functions is, itself, a function <code class="highlighter-rouge">(Formatter) -&gt; String</code>. We have mentioned above that this is equivalent to <code class="highlighter-rouge">Reader&lt;Formatter, String&gt;</code>; therefore, we can perform that change:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showTotal</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reader</span><span class="o">&lt;</span><span class="kt">Formatter</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">Reader</span> <span class="p">{</span> <span class="n">formatter</span> <span class="k">in</span>
+        <span class="kt">Id</span><span class="p">(</span><span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">amount</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">amount</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">showLines</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reader</span><span class="o">&lt;</span><span class="kt">Formatter</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">Reader</span> <span class="p">{</span> <span class="n">formatter</span> <span class="k">in</span>
+        <span class="kt">Id</span><span class="p">(</span><span class="n">formatter</span><span class="o">.</span><span class="nf">format</span><span class="p">(</span><span class="nv">lines</span><span class="p">:</span> <span class="n">invoice</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>These functions return computations where supplying the dependencies is postponed to a later moment. This way, we can compose operations with the same dependencies using combinators like <code class="highlighter-rouge">map</code>, <code class="highlighter-rouge">zip</code> or <code class="highlighter-rouge">flatMap</code>:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">showReport</span><span class="p">(</span><span class="k">for</span> <span class="nv">invoice</span><span class="p">:</span> <span class="kt">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reader</span><span class="o">&lt;</span><span class="kt">Formatter</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">Reader</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span>
+        <span class="nf">showLines</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">invoice</span><span class="p">),</span>
+        <span class="nf">showTotal</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">invoice</span><span class="p">))</span> <span class="p">{</span> <span class="n">lines</span><span class="p">,</span> <span class="n">total</span> <span class="k">in</span>
+            <span class="s">"""
+            </span><span class="se">\(</span><span class="n">lines</span><span class="se">)</span><span class="s">
+            ------------------
+            Total: </span><span class="se">\(</span><span class="n">total</span><span class="se">)</span><span class="s">
+            """</span>
+    <span class="p">}</span><span class="o">^</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Finally, we can invoke the function and supply the dependency as:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In production:</span>
+<span class="nf">showReport</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">invoice</span><span class="p">)</span><span class="o">.</span><span class="nf">run</span><span class="p">(</span><span class="kt">MoneyFormatter</span><span class="p">())</span>
+
+<span class="c1">// In testing:</span>
+<span class="nf">showReport</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">invoice</span><span class="p">)</span><span class="o">.</span><span class="nf">run</span><span class="p">(</span><span class="kt">TestFormatter</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Note that, even though both <code class="highlighter-rouge">showTotal</code> and <code class="highlighter-rouge">showLines</code> need to receive an <code class="highlighter-rouge">Invoice</code>, we are not moving it to the <code class="highlighter-rouge">Reader</code> input type. We have to differentiate between data that a function receives to compute its output, and dependencies that a function needs to do its job. Generally, there would be a single instance of a dependency (in this case, the <code class="highlighter-rouge">Formatter</code>), whereas we can invoke this function with multiple different invoices.</p>
+
+<p>This approach lets us work with multiple functions and guarantee that all of them will receive the same dependencies. It provides a rich API to enable powerful composition in the same way we do with other types. The Reader pattern can be generalized to effectful functions using <code class="highlighter-rouge">Kleisli</code> or <code class="highlighter-rouge">ReaderT</code>, which model effectful functions <code class="highlighter-rouge">(A) -&gt; F&lt;B&gt;</code>, where <code class="highlighter-rouge">F</code> is the effect type. The behavior is equivalent to what was shown above; in fact, <code class="highlighter-rouge">Reader</code> is a specific case of <code class="highlighter-rouge">Kleisli</code>, where the effect is the <code class="highlighter-rouge">Id</code> type.</p>
+
+    </div>
+</div>
+
+</div>
+<!-- Custom scripts for this template -->
+<script src="/next/js/docs.js"></script>
+<!-- Gitter -->
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'bowswift/bow'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+</body>
+</html>
