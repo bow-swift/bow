@@ -14,9 +14,9 @@ public typealias ValidatedNEA<E, A> = Validated<NEA<E>, A>
 
 /// Validated is a data type to represent valid and invalid values. It is similar to `Either`, but with error accumulation in the invalid case.
 public final class Validated<E, A>: ValidatedOf<E, A> {
-    fileprivate let value: Either<E, A>
-    
-    private init(_ value: Either<E, A>) {
+    private let value: _Validated<E, A>
+
+    private init(_ value: _Validated<E, A>) {
         self.value = value
     }
     
@@ -25,7 +25,7 @@ public final class Validated<E, A>: ValidatedOf<E, A> {
     /// - Parameter value: Valid value to be wrapped in this validated.
     /// - Returns: A `Validated` value wrapping the parameter.
     public static func valid(_ value: A) -> Validated<E, A> {
-        Validated<E, A>(.right(value))
+        Validated<E, A>(.valid(value))
     }
     
     /// Constructs an invalid value.
@@ -33,7 +33,7 @@ public final class Validated<E, A>: ValidatedOf<E, A> {
     /// - Parameter value: Invalid value to be wrapped in this validated.
     /// - Returns: A `Validated` value wrapping the parameter.
     public static func invalid(_ value: E) -> Validated<E, A> {
-        Validated<E, A>(.left(value))
+        Validated<E, A>(.invalid(value))
     }
     
     /// Constructs a `Validated` from a `Try` value.
@@ -71,7 +71,10 @@ public final class Validated<E, A>: ValidatedOf<E, A> {
     ///   - fa: Closure to apply if the contained value is valid.
     /// - Returns: Result of applying the corresponding closure to the contained value.
     public func fold<C>(_ fe: (E) -> C, _ fa: (A) -> C) -> C {
-        value.fold(fe, fa)
+        switch value {
+            case let .invalid(value): return fe(value)
+            case let .valid(value): return fa(value)
+        }
     }
     
     /// Checks if this value is valid.
@@ -181,6 +184,11 @@ public postfix func ^<E, A>(_ fa: ValidatedOf<E, A>) -> Validated<E, A> {
     Validated.fix(fa)
 }
 
+private enum _Validated<A, B> {
+    case invalid(A)
+    case valid(B)
+}
+
 // MARK: Conformance of Validated to CustomStringConvertible
 extension Validated: CustomStringConvertible where E: CustomStringConvertible, A: CustomStringConvertible {
     public var description: String {
@@ -203,14 +211,14 @@ extension ValidatedPartial: EquatableK where I: Equatable {
         _ lhs: ValidatedOf<I, A>,
         _ rhs: ValidatedOf<I, A>) -> Bool {
 
-        lhs^.value == rhs^.value
+        lhs^.toEither() == rhs^.toEither()
     }
 }
 
 // MARK: Instance of HashableK for Validated
 extension ValidatedPartial: HashableK where I: Hashable {
     public static func hash<A>(_ fa: ValidatedOf<I, A>, into hasher: inout Hasher) where A : Hashable {
-        hasher.combine(fa^.value)
+        hasher.combine(fa^.toEither())
     }
 }
 
