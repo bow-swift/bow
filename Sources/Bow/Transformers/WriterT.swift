@@ -180,12 +180,14 @@ extension WriterT where F: Applicative, W: Monoid {
     public static func value(_ a: A) -> WriterT<F, W, A> {
         WriterT.put(a, W.empty())
     }
-    
+}
+
+extension WriterTPartial where F: Applicative, W: Monoid {
     /// Lifts an effect using empty value of the Monoid.
     ///
     /// - Parameter fb: Effect to be lifted.
     /// - Returns: A `WriterT` wrapping the value contained in the effect parameter and using the empty accumulator.
-    public static func liftF(_ fb: Kind<F, A>) -> WriterT<F, W, A> {
+    public static func liftF<A>(_ fb: Kind<F, A>) -> WriterTOf<F, W, A> {
         WriterT(fb.map { x in (W.empty(), x) })
     }
 }
@@ -355,6 +357,9 @@ extension WriterTPartial: Monad where F: Monad, W: Monoid {
         }))
     }
 }
+
+// MARK: Instance of MonadTrans for WriterT
+extension WriterTPartial: MonadTrans where F: Monad, W: Monoid {}
 
 // MARK: Instance of FunctorFilter for WriterT
 extension WriterTPartial: FunctorFilter where F: MonadFilter, W: Monoid {}

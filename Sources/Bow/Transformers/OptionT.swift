@@ -59,14 +59,6 @@ extension OptionT where F: Functor {
         fold(ifEmpty, f)
     }
 
-    /// Lifts a value by wrapping the contained value in the effect into an `Option.some` value.
-    ///
-    /// - Parameter fb: Value to be lifted.
-    /// - Returns: A present `Option` wrapped in the effect.
-    public static func liftF(_ fb: Kind<F, A>) -> OptionT<F, A> {
-        OptionT(fb.map(Option.some))
-    }
-
     /// Obtains the value of the nested `Option` or a default value, wrapped in the effect.
     ///
     /// - Parameter defaultValue: Value for the absent case in the nested `Option`.
@@ -134,6 +126,16 @@ extension OptionT where F: Functor {
     /// - Returns: Returns: An `EitherT` containing the value as right or as left with the default value if the `OptionT` contains a none.
     public func toRight<L>(_ defaultLeft: @autoclosure @escaping () -> L) -> EitherT<F, L, A> {
         EitherT(cata(.left(defaultLeft()), Either.right))
+    }
+}
+
+extension OptionTPartial where F: Functor {
+    /// Lifts a value by wrapping the contained value in the effect into an `Option.some` value.
+    ///
+    /// - Parameter fb: Value to be lifted.
+    /// - Returns: A present `Option` wrapped in the effect.
+    public static func liftF<A>(_ fb: Kind<F, A>) -> OptionTOf<F, A> {
+        OptionT(fb.map(Option.some))
     }
 }
 
@@ -277,6 +279,9 @@ extension OptionTPartial: Monad where F: Monad {
         }))
     }
 }
+
+// MARK: Instance of MonadTrans for OptionT
+extension OptionTPartial: MonadTrans where F: Monad {}
 
 // MARK: Instance of SemigroupK for OptionT
 extension OptionTPartial: SemigroupK where F: Monad {
