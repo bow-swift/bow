@@ -6,6 +6,10 @@ class EitherTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<EitherPartial<Int>, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<EitherPartial<Int>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<EitherPartial<Int>>.check()

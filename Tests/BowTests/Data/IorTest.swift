@@ -7,6 +7,10 @@ class IorTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<IorPartial<Int>, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<IorPartial<Int>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<IorPartial<Int>>.check()

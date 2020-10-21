@@ -124,6 +124,14 @@ extension DictionaryKPartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for DictionaryK
+
+extension DictionaryKPartial: HashableK {
+    public static func hash<A>(_ fa: DictionaryKOf<K, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.asDictionary())
+    }
+}
+
 // MARK: Instance of Functor for DictionaryK
 
 extension DictionaryKPartial: Functor {

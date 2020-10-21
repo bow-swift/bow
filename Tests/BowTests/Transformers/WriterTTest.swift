@@ -6,6 +6,10 @@ class WriterTTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<WriterTPartial<ForId, Int>, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<WriterTPartial<ForId, Int>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<WriterTPartial<ForId, Int>>.check()

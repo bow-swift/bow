@@ -68,6 +68,13 @@ extension ConstPartial: EquatableK where A: Equatable {
     }
 }
 
+// MARK: Instance of HashableK for Const
+extension ConstPartial: HashableK where A: Hashable {
+    public static func hash<T>(_ fa: ConstOf<A, T>, into hasher: inout Hasher) where T: Hashable {
+        hasher.combine(fa^.value)
+    }
+}
+
 // MARK: Instance of Functor for Const
 extension ConstPartial: Functor {
     public static func map<C, B>(

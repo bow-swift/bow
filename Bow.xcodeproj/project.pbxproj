@@ -363,6 +363,8 @@
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
 		B507D2BE252A347A002541E4 /* CoyonedaNaturalTransformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */; };
+		B53976272540113100D8ECB8 /* HashableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976262540113100D8ECB8 /* HashableK.swift */; };
+		B53976552540116A00D8ECB8 /* HashableKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976542540116A00D8ECB8 /* HashableKLaws.swift */; };
 		B55BE657252332BA005297CA /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55BE656252332BA005297CA /* Program.swift */; };
 		B55BE68525234AD1005297CA /* ProgramTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55BE68425234AD1005297CA /* ProgramTest.swift */; };
 		B55F53BC2524D7F3001979EE /* Program+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55F53BB2524D7F3001979EE /* Program+Gen.swift */; };
@@ -1247,6 +1249,8 @@
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaNaturalTransformationTests.swift; sourceTree = "<group>"; };
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
+		B53976262540113100D8ECB8 /* HashableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableK.swift; sourceTree = "<group>"; };
+		B53976542540116A00D8ECB8 /* HashableKLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableKLaws.swift; sourceTree = "<group>"; };
 		B55BE656252332BA005297CA /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		B55BE68425234AD1005297CA /* ProgramTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTest.swift; sourceTree = "<group>"; };
 		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
@@ -1814,6 +1818,7 @@
 				609CC1482364FC5B00096D5D /* DivisibleLaws.swift */,
 				1166A07822119E640032CD4E /* EqualityFunctions.swift */,
 				8BA0F3BF217E2DEF00969984 /* EquatableKLaws.swift */,
+				B53976542540116A00D8ECB8 /* HashableKLaws.swift */,
 				11A435602212C59F000C5E31 /* EquatableLaws.swift */,
 				8BA0F3D6217E2DEF00969984 /* FoldableLaws.swift */,
 				8BA0F3C1217E2DEF00969984 /* FunctorFilterLaws.swift */,
@@ -2136,6 +2141,7 @@
 				8BA0F4A0217E2E9200969984 /* Foldable.swift */,
 				8BA0F4AB217E2E9200969984 /* Functor.swift */,
 				8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */,
+				B53976262540113100D8ECB8 /* HashableK.swift */,
 				8BA0F499217E2E9200969984 /* Invariant.swift */,
 				8BA0F4A4217E2E9200969984 /* Monad.swift */,
 				8BA0F4AD217E2E9200969984 /* MonadCombine.swift */,
@@ -2941,6 +2947,7 @@
 				606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */,
 				1122942D219D8BDE006D66C5 /* MonadErrorLaws.swift in Sources */,
 				606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */,
+				B53976552540116A00D8ECB8 /* HashableKLaws.swift in Sources */,
 				1122942E219D8BDE006D66C5 /* MonadFilterLaws.swift in Sources */,
 				1122942F219D8BDE006D66C5 /* MonadLaws.swift in Sources */,
 				11229430219D8BDE006D66C5 /* MonadStateLaws.swift in Sources */,
@@ -3369,6 +3376,7 @@
 				8BA0F62B217E2E9200969984 /* NonEmptyReducible.swift in Sources */,
 				8BA0F503217E2E9200969984 /* BooleanFunctions.swift in Sources */,
 				8BA0F4F3217E2E9200969984 /* Function1.swift in Sources */,
+				B53976272540113100D8ECB8 /* HashableK.swift in Sources */,
 				115488D123BFA0CC00A6DE92 /* EnvT.swift in Sources */,
 				8BA0F5CF217E2E9200969984 /* Const.swift in Sources */,
 				609CC14D2365410500096D5D /* Decidable.swift in Sources */,

@@ -7,6 +7,10 @@ class ArrayKTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<ArrayKPartial, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<ArrayKPartial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<ArrayKPartial>.check()

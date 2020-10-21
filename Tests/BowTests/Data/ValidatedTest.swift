@@ -7,6 +7,10 @@ class ValidatedTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<ValidatedPartial<Int>, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<ValidatedPartial<Int>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<ValidatedPartial<Int>>.check()

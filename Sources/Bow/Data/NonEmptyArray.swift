@@ -181,6 +181,14 @@ extension NonEmptyArrayPartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for NonEmptyArray
+extension NonEmptyArrayPartial: HashableK {
+    public static func hash<A>(_ fa: NonEmptyArrayOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.head)
+        hasher.combine(fa^.tail)
+    }
+}
+
 // MARK: Instance of Functor for NonEmptyArray
 extension NonEmptyArrayPartial: Functor {
     public static func map<A, B>(

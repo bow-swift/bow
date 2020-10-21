@@ -22,14 +22,14 @@ public typealias TryOf<A> = Kind<ForTry, A>
 
 /// Describes the result of an operation that may have thrown errors or succeeded. The type parameter corresponds to the result type of the operation.
 public final class Try<A>: TryOf<A> {
-    private let value: _Try<A>
+    fileprivate let value: Either<Error, A>
 
     /// Creates a successful Try value.
     ///
     /// - Parameter value: Value to be wrapped in a successful Try.
     /// - Returns: A `Try` value wrapping the successful value.
     public static func success(_ value: A) -> Try<A> {
-        Try(.success(value))
+        Try(.right(value))
     }
     
     /// Creates a failed Try value.
@@ -37,7 +37,7 @@ public final class Try<A>: TryOf<A> {
     /// - Parameter error: An error.
     /// - Returns: A `Try` value wrapping the error.
     public static func failure(_ error: Error) -> Try<A> {
-        Try(.failure(error))
+        Try(.left(error))
     }
 
     /// Creates a failed Try value.
@@ -61,7 +61,7 @@ public final class Try<A>: TryOf<A> {
         }
     }
 
-    private init(_ value: _Try<A>) {
+    private init(_ value: Either<Error, A>) {
         self.value = value
     }
 
@@ -80,15 +80,13 @@ public final class Try<A>: TryOf<A> {
     ///   - fa: Closure to apply if the contained value in this `Try` is a successful value.
     /// - Returns: Result of applying the corresponding closure to this value.
     public func fold<B>(_ fe: (Error) -> B, _ fa: (A) throws -> B) -> B {
-        switch value {
-        case let .success(a):
+        value.fold(fe, { a in
             do {
                 return try fa(a)
             } catch let error {
                 return fe(error)
             }
-        case let .failure(e): return fe(e)
-        }
+        })
     }
 
     /// Checks if this value is a failure.
@@ -189,11 +187,6 @@ public postfix func ^<A>(_ fa: TryOf<A>) -> Try<A> {
     Try.fix(fa)
 }
 
-private enum _Try<A> {
-    case success(A)
-    case failure(Error)
-}
-
 // MARK: Conformance of Try to CustomStringConvertible
 extension Try: CustomStringConvertible where A: CustomStringConvertible {
     public var description : String {
@@ -220,6 +213,14 @@ extension TryPartial: EquatableK {
                                   constant(false))},
             { a in rhs^.fold(constant(false),
                              { b in a == b }) })
+    }
+}
+
+// MARK: Instance of HashableK for Try
+extension TryPartial: HashableK {
+    public static func hash<A>(_ fa: TryOf<A>, into hasher: inout Hasher) where A : Hashable {
+        fa^.value.foldRun { hasher.combine("\($0)") }
+                       _: { hasher.combine($0) }
     }
 }
 

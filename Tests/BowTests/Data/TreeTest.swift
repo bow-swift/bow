@@ -11,6 +11,10 @@ class TreeTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<TreePartial, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<TreePartial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<TreePartial>.check()

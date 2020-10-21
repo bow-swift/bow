@@ -249,6 +249,16 @@ extension WriterTPartial: EquatableK where F: EquatableK & Functor, W: Equatable
     }
 }
 
+// MARK: Instance of HashableK for WriterT
+extension WriterTPartial: HashableK where F: HashableK & Functor, W: Hashable {
+    public static func hash<A>(_ fa: WriterTOf<F, W, A>, into hasher: inout Hasher) where A : Hashable {
+        let fa0 = fa^.value.map { t in t.0 }
+        let fa1 = fa^.value.map { t in t.1 }
+        hasher.combine(fa0)
+        hasher.combine(fa1)
+    }
+}
+
 // MARK: Instance of Invariant for WriterT
 extension WriterTPartial: Invariant where F: Functor {}
 
