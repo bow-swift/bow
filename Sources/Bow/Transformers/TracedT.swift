@@ -40,12 +40,12 @@ public final class TracedT<M, W, A>: TracedTOf<M, W, A> {
     }
 }
 
-extension TracedT where M: Monoid, W: Functor {
+extension TracedTPartial where M: Monoid, W: Functor {
     /// Obtains the comonadic value without the Traced support.
     ///
     /// - Returns: Comonadic value without Traced support.
-    public func lower() -> Kind<W, A> {
-        value.map { f in f(M.empty()) }
+    public static func lower<A>(_ twa: TracedTOf<M, W, A>) -> Kind<W, A> {
+        twa^.value.map { f in f(M.empty()) }
     }
 }
 
@@ -125,6 +125,9 @@ extension TracedTPartial: Comonad where W: Comonad, M: Monoid {
         fa^.value.extract()(M.empty())
     }
 }
+
+// MARK: Instance of ComonadTrans for TracedT
+extension TracedTPartial: ComonadTrans where M: Monoid, W: Comonad {}
 
 // MARK: Instance of ComonadTraced for TracedT
 

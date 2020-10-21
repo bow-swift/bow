@@ -377,6 +377,7 @@
 		B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA22540029F0099D426 /* MonadTrans.swift */; };
 		B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */; };
 		B58B9BD225481D93008BA4A7 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
+		B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2D16254005A60099D426 /* ComonadTransLaws.swift */; };
 		B58B9BE925481DB4008BA4A7 /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		B58B9C1625481DCF008BA4A7 /* Yoneda+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C225237A6D006A65EC /* Yoneda+Gen.swift */; };
 		B5BF5086252B0F4A0060AD0D /* LazyFunction1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */; };
@@ -1268,6 +1269,7 @@
 		B578BCA925385B9200B8FD42 /* Trampoline+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trampoline+Gen.swift"; sourceTree = "<group>"; };
 		B58D2CA22540029F0099D426 /* MonadTrans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTrans.swift; sourceTree = "<group>"; };
 		B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTransLaws.swift; sourceTree = "<group>"; };
+		B58D2D16254005A60099D426 /* ComonadTransLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTransLaws.swift; sourceTree = "<group>"; };
 		B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1.swift; sourceTree = "<group>"; };
 		B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1Test.swift; sourceTree = "<group>"; };
 		B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LazyFunction1+Gen.swift"; sourceTree = "<group>"; };
@@ -1814,6 +1816,7 @@
 				8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */,
 				11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */,
 				11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */,
+				B58D2D16254005A60099D426 /* ComonadTransLaws.swift */,
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
@@ -2958,6 +2961,7 @@
 				1122942B219D8BDE006D66C5 /* InvariantLaws.swift in Sources */,
 				1122942C219D8BDE006D66C5 /* MonadCombineLaws.swift in Sources */,
 				11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */,
+				B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */,
 				606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */,
 				1122942D219D8BDE006D66C5 /* MonadErrorLaws.swift in Sources */,
 				606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */,
