@@ -12,11 +12,20 @@ public typealias WriterTOf<F, W, A> = Kind<WriterTPartial<F, W>, A>
 /// Partial application of the Writer type constructor, omitting the last parameter.
 public typealias WriterPartial<W> = WriterTPartial<ForId, W>
 
-/// Higher Kinded Type alias to improve readability over `Kind<WriterTPartial<ForId, W>, A>`.
+/// Higher Kinded Type alias to improve readability over `Kind<WriterPartial<W>, A>`.
 public typealias WriterOf<W, A> = WriterTOf<ForId, W, A>
 
 /// Writer is a WriterT where the effect is `Id`.
 public typealias Writer<W, A> = WriterT<ForId, W, A>
+
+/// Partial application of the Pair type constructor, omitting the last parameter.
+public typealias PairPartial<A> = WriterPartial<A>
+
+/// Higher Kinded Type alias to improve readability over `Kind<PairPartial<W>, A>`.
+public typealias PairOf<A, B> = WriterOf<A, B>
+
+/// Product type of `A` and `B`. Hols a value of `A` and a value of `B`. `Pair` is a typealias of Writer.
+public typealias Pair<A, B> = Writer<A, B>
 
 /// WriterT transformer represents operations that accumulate values through a computation or effect, without reading them.
 public final class WriterT<F, W, A>: WriterTOf<F, W, A> {
@@ -53,9 +62,35 @@ public postfix func ^<F, W, A>(_ fa : WriterTOf<F, W, A>) -> WriterT<F, W, A> {
 
 // MARK: Functions for Writer
 extension WriterT where F == ForId {
+    /// Initializes a `Writer`.
+    ///
+    /// - Parameter value: A pair of accumulator and value.
+    public convenience init(_ value: (W, A)) {
+        self.init(Id(value))
+    }
+
+    /// Initializes a `Writer`.
+    ///
+    /// - Parameters:
+    ///   - w: The accumulator initial value.
+    ///   - a: The initial value.
+    public convenience init(_ w: W, _ a: A) {
+        self.init((w, a))
+    }
+
     /// Provides the values wrapped in this Writer
     public var run: (W, A) {
         value^.value
+    }
+
+    /// The first element of the pair.
+    public var first: W {
+        run.0
+    }
+
+    /// The second element of the pair.
+    public var second: A {
+        run.1
     }
 }
 
