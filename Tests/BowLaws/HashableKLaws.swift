@@ -9,7 +9,15 @@ public class HashableKLaws<F: HashableK & ArbitraryK, A: Arbitrary & Hashable> {
     }
     
     private static func coherenceWithEquality() {
-        property("Equal objects have equal hash") <~ forAll { (fa1: KindOf<F, A>, fa2: KindOf<F, A>) in
+        let generator: Gen<(KindOf<F, A>, KindOf<F, A>)> = {
+          let equal = KindOf<F, A>.arbitrary.map { fa in (fa, fa) }
+          let distinct = Gen.zip(KindOf<F, A>.arbitrary, KindOf<F, A>.arbitrary)
+          return Gen.one(of: [equal, distinct])
+        }()
+
+        property("Equal objects have equal hash") <~ forAllNoShrink(generator) { (tuple: (KindOf<F, A>, KindOf<F, A>)) in
+            let fa1 = tuple.0
+            let fa2 = tuple.1
             return (fa1.value == fa2.value) ==> {
                 var hasher1 = Hasher()
                 var hasher2 = Hasher()
