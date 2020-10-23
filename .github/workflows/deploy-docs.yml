@@ -12,10 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Switch to Xcode 12
-      run: sudo xcode-select -s /Applications/Xcode_12.0.0.app/Contents/Developer
+      run: sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
     - name: Generate microsite
       run: |
-        brew update
+        brew update-reset
         brew install nef
         brew install sourcekitten
         gem install bundler -v 2.0.2
