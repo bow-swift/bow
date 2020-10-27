@@ -530,7 +530,7 @@ internal class HandleErrorWith<E: Error, A>: IO<E, A> {
             self.fa._unsafeRunSyncEither(on: queue).flatMap { result in
                 result.0.fold({ e in self.f(e)._unsafeRunSyncEither(on: queue) },
                               { a in .done((.right(a), result.1)) })
-            }
+            }^
         }
     }
 }
@@ -548,7 +548,7 @@ internal class FMap<E: Error, A, B>: IO<E, B> {
         .defer {
             self.action._unsafeRunSyncEither(on: queue).map { result in
                 (self.on(queue: result.1) { result.0.map(self.f)^ }, result.1)
-            }
+            }^
         }
     }
 }
@@ -566,7 +566,7 @@ internal class FErrorMap<E: Error, A, EE: Error>: IO<EE, A> {
         .defer {
             self.action._unsafeRunSyncEither(on: queue).map { result in
                 (result.0.mapLeft(self.f), result.1)
-            }
+            }^
         }
     }
 }
@@ -583,7 +583,7 @@ internal class Join<E: Error, A>: IO<E, A> {
             self.io._unsafeRunSyncEither(on: queue).flatMap { result in
                 result.0.fold({ e in .done((.left(e), result.1)) },
                               { io in io._unsafeRunSyncEither(on: result.1) })
-            }
+            }^
         }
     }
 }
@@ -612,8 +612,8 @@ internal class AsyncIO<E: Error, A>: IO<E, A> {
         return procResult.flatMap { procRes in
             IO.fromEither(result!)^._unsafeRunSyncEither(on: procRes.1).map { res in
                 (res.0, procRes.1)
-            }
-        }
+            }^
+        }^
     }
 }
 
@@ -629,7 +629,7 @@ internal class ContinueOn<E: Error, A>: IO<E, A> {
     override internal func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, A>, Queue)> {
         self.io._unsafeRunSyncEither(on: queue).map { result in
             (result.0, .queue(self.queue))
-        }
+        }^
     }
 }
 
@@ -663,7 +663,7 @@ internal class BracketIO<E: Error, A, B>: IO<E, B> {
                         self.fail(error)
                     }
                 })
-        }
+        }^
     }
 }
 
@@ -808,7 +808,7 @@ internal class IOEffect<E: Error, A>: IO<E, ()> {
     override func _unsafeRunSyncEither(on queue: Queue = .queue()) -> Trampoline<(Either<E, Void>, Queue)> {
         self.io._unsafeRunSyncEither(on: queue).flatMap { result in
             return self.callback(result.0)^._unsafeRunSyncEither(on: result.1)
-        }
+        }^
     }
 }
 

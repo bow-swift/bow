@@ -1,5 +1,3 @@
-import Bow
-
 extension FunctionK {
 
     /// Obtain a natural transformation from `Coyoneda<F>` to `Coyoneda<G>`
