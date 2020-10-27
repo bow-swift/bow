@@ -6,6 +6,10 @@ class IdTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<IdPartial, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<IdPartial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<IdPartial>.check()

@@ -209,6 +209,13 @@ extension OptionTPartial: EquatableK where F: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for OptionT
+extension OptionTPartial: HashableK where F: HashableK {
+    public static func hash<A>(_ fa: OptionTOf<F, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
+    }
+}
+
 // MARK: Instance of Invariant for OptionT
 extension OptionTPartial: Invariant where F: Functor {}
 

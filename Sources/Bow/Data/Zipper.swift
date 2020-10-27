@@ -146,9 +146,16 @@ extension ZipperPartial: EquatableK {
     public static func eq<A: Equatable>(
         _ lhs: ZipperOf<A>,
         _ rhs: ZipperOf<A>) -> Bool {
-        lhs^.left == rhs^.left &&
-            lhs^.focus == rhs^.focus &&
-            lhs^.right == rhs^.right
+
+        lhs^.asArray() == rhs^.asArray()
+    }
+}
+
+// MARK: Instance of HashableK for Zipper
+
+extension ZipperPartial: HashableK {
+    public static func hash<A>(_ fa: ZipperOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.asArray())
     }
 }
 

@@ -11,7 +11,7 @@ public typealias EitherOf<A, B> = Kind<EitherPartial<A>, B>
 
 /// Sum type of types `A` and `B`. Represents a value of either one of those types, but not both at the same time. Values of type `A` are called `left`; values of type `B` are called right.
 public final class Either<A, B>: EitherOf<A, B> {
-    private let value: _Either<A, B>
+    fileprivate let value: _Either<A, B>
     
     private init(_ value: _Either<A, B>) {
         self.value = value
@@ -51,6 +51,19 @@ public final class Either<A, B>: EitherOf<A, B> {
         switch value {
             case let .left(a): return fa(a)
             case let .right(b): return fb(b)
+        }
+    }
+
+    /// Runs the provided closures based on the content of this `Either` value.
+    ///
+    /// - Parameters:
+    ///   - fa: Closure to run if the contained value in this `Either` is a member of the left type.
+    ///   - fb: Closure to run if the contained value in this `Either` is a member of the right type.
+    /// - Returns: Result of applying the corresponding closure to this value.
+    public func foldRun(_ fa: (A) -> Void, _ fb: (B) -> Void) {
+        switch value {
+            case let .left(a): fa(a)
+            case let .right(b): fb(b)
         }
     }
 
@@ -218,6 +231,9 @@ private enum _Either<A, B> {
     case right(B)
 }
 
+extension _Either: Equatable where A: Equatable, B: Equatable {}
+extension _Either: Hashable where A: Hashable, B: Hashable {}
+
 // MARK: Conformance of Either to CustomStringConvertible
 extension Either: CustomStringConvertible {
     public var description: String {
@@ -239,15 +255,14 @@ extension EitherPartial: EquatableK where L: Equatable {
     public static func eq<A: Equatable>(
         _ lhs: EitherOf<L, A>,
         _ rhs: EitherOf<L, A>) -> Bool {
-        lhs^.fold(
-            { la in rhs^.fold(
-                { lb in la == lb },
-                constant(false))
-            },
-            { ra in rhs^.fold(
-                constant(false),
-                { rb in ra == rb })
-        })
+
+        lhs^.value == rhs^.value
+    }
+}
+
+extension EitherPartial: HashableK where L: Hashable {
+    public static func hash<A>(_ fa: EitherOf<L, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
     }
 }
 

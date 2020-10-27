@@ -90,6 +90,13 @@ extension EitherKPartial: EquatableK where F: EquatableK, G: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for EitherK.
+extension EitherKPartial: HashableK where F: HashableK, G: HashableK {
+    public static func hash<A>(_ fa: EitherKOf<F, G, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.run)
+    }
+}
+
 // MARK: Instance of Invariant for EitherK.
 extension EitherKPartial: Invariant where F: Invariant, G: Invariant {
     public static func imap<A, B>(

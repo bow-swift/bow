@@ -7,6 +7,10 @@ class NonEmptyArrayTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<NonEmptyArrayPartial, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<NonEmptyArrayPartial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<NonEmptyArrayPartial>.check()

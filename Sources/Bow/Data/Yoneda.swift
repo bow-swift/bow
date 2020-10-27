@@ -164,6 +164,14 @@ extension YonedaPartial: EquatableK where F: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for Yoneda
+
+extension YonedaPartial: HashableK where F: HashableK {
+    public static func hash<A: Hashable>(_ fa: YonedaOf<F, A>, into hasher: inout Hasher) {
+        hasher.combine(fa^.lower())
+    }
+}
+
 // MARK: Instance of Foldable for Yoneda
 
 extension YonedaPartial: Foldable where F: Foldable {

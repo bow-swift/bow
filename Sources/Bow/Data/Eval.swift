@@ -284,3 +284,10 @@ extension EvalPartial: EquatableK {
         lhs^.value() == rhs^.value()
     }
 }
+
+// MARK: Instance of HashableK for Eval
+extension EvalPartial: HashableK {
+    public static func hash<A>(_ fa: EvalOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value())
+    }
+}

@@ -6,6 +6,10 @@ class Function0Test: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<Function0Partial, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<Function0Partial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<Function0Partial>.check()

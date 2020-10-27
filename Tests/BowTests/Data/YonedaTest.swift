@@ -4,6 +4,14 @@ import BowGenerators
 import BowLaws
 
 class YonedaTest: XCTestCase {
+    func testEquatableKLaws() {
+        EquatableKLaws<YonedaPartial<IdPartial>, Int>.check()
+    }
+
+    func testHashableKLaws() {
+        HashableKLaws<YonedaPartial<IdPartial>, Int>.check()
+    }
+
     func testFunctorLaws() {
         FunctorLaws<YonedaPartial<IdPartial>>.check()
     }

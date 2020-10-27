@@ -61,6 +61,13 @@ extension IdPartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for Id
+extension IdPartial: HashableK  {
+    public static func hash<A>(_ fa: IdOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
+    }
+}
+
 // MARK: Instance of Functor for Id
 extension IdPartial: Functor {
     public static func map<A, B>(

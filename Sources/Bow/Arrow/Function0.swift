@@ -60,6 +60,14 @@ extension Function0Partial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for Function0
+extension Function0Partial: HashableK {
+    public static func hash<A>(_ fa: Function0Of<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.invoke())
+    }
+}
+
+
 // MARK: Instance of Functor for Function0
 extension Function0Partial: Functor {
     public static func map<A, B>(

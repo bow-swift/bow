@@ -15,7 +15,7 @@ public typealias ValidatedNEA<E, A> = Validated<NEA<E>, A>
 /// Validated is a data type to represent valid and invalid values. It is similar to `Either`, but with error accumulation in the invalid case.
 public final class Validated<E, A>: ValidatedOf<E, A> {
     private let value: _Validated<E, A>
-    
+
     private init(_ value: _Validated<E, A>) {
         self.value = value
     }
@@ -210,8 +210,15 @@ extension ValidatedPartial: EquatableK where I: Equatable {
     public static func eq<A: Equatable>(
         _ lhs: ValidatedOf<I, A>,
         _ rhs: ValidatedOf<I, A>) -> Bool {
-        lhs^.fold({ le in rhs^.fold({ re in le == re }, constant(false)) },
-                  { la in rhs^.fold(constant(false), { ra in la == ra }) })
+
+        lhs^.toEither() == rhs^.toEither()
+    }
+}
+
+// MARK: Instance of HashableK for Validated
+extension ValidatedPartial: HashableK where I: Hashable {
+    public static func hash<A>(_ fa: ValidatedOf<I, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.toEither())
     }
 }
 

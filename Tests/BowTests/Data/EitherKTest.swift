@@ -8,6 +8,10 @@ class EitherKTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<EitherKPartial<ForId, ForId>, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<EitherKPartial<ForId, ForId>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<EitherKPartial<ForId, ForId>>.check()

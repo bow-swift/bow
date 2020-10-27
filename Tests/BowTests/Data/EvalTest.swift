@@ -30,4 +30,8 @@ class EvalTest: XCTestCase {
     func testEquatableKLaws() {
         EquatableKLaws<EvalPartial, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<EvalPartial, Int>.check()
+    }
 }
