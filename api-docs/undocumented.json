@@ -64,6 +64,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/runner/work/bow/bow/Sources/Bow/Data/Yoneda.swift",
+      "line": 45,
+      "symbol": "Yoneda.toCoyoneda()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/runner/work/bow/bow/Sources/Bow/Data/Zipper.swift",
       "line": 12,
       "symbol": "Zipper.left",
@@ -299,13 +306,6 @@
       "line": 21,
       "symbol": "Free.value",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/bow/bow/Sources/BowFree/Yoneda.swift",
-      "line": 46,
-      "symbol": "Yoneda.toCoyoneda()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
