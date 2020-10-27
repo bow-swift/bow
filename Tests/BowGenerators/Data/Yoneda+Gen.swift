@@ -1,6 +1,4 @@
 import Bow
-import BowFree
-import BowGenerators
 import SwiftCheck
 
 // MARK: Instance of Arbitrary for Yoneda
@@ -13,7 +11,7 @@ extension Yoneda: Arbitrary where F: ArbitraryK, A: Arbitrary {
     }
 }
 
-// MARK: Instance of ArbitrartK for Yoneda
+// MARK: Instance of ArbitraryK for Yoneda
 
 extension YonedaPartial: ArbitraryK where F: ArbitraryK {
     public static func generate<A: Arbitrary>() -> YonedaOf<F, A> {

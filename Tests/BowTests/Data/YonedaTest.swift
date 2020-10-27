@@ -1,7 +1,6 @@
 import XCTest
 import Bow
-import BowFree
-import BowFreeGenerators
+import BowGenerators
 import BowLaws
 
 class YonedaTest: XCTestCase {

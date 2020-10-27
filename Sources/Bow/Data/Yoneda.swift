@@ -1,5 +1,4 @@
 import Foundation
-import Bow
 
 /// Witness for the Yoneda<F, A> data type. To be used in simulated Higher Kinded Types.
 public final class ForYoneda {}
