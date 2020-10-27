@@ -11,7 +11,7 @@ public typealias OptionOf<A> = Kind<ForOption, A>
 
 /// Represents optional values. Instances of this type may represent the presence of a value (`some`) or absence of it (`none`). This type is isomorphic to native Swift `Optional<A>` (usually written `A?`), with the addition of behaving as a Higher Kinded Type.
 public final class Option<A>: OptionOf<A> {
-    private let value: A?
+    fileprivate let value: A?
     /// Constructs an instance of `Option` with presence of a value of the type parameter.
     ///
     /// It equivalent to `Option<A>.pure(_:)`.
@@ -156,8 +156,15 @@ extension OptionPartial: EquatableK {
     public static func eq<A: Equatable>(
         _ lhs: OptionOf<A>,
         _ rhs: OptionOf<A>) -> Bool {
-        lhs^.fold({ rhs^.fold(constant(true), constant(false)) },
-                  { a in rhs^.fold(constant(false), { b in a == b })})
+
+        lhs^.value == rhs^.value
+    }
+}
+
+// MARK: Instance of HashableK for Option
+extension OptionPartial: HashableK {
+    public static func hash<A>(_ fa: OptionOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
     }
 }
 

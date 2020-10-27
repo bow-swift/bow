@@ -183,6 +183,13 @@ extension ArrayKPartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for ArrayK
+extension ArrayKPartial: HashableK {
+    public static func hash<A>(_ fa: ArrayKOf<A>, into hasher: inout Hasher) where A : Hashable {
+        fa^.array.hash(into: &hasher)
+    }
+}
+
 // MARK: Instance of Functor for ArrayK
 extension ArrayKPartial: Functor {
     public static func map<A, B>(

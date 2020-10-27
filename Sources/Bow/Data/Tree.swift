@@ -70,6 +70,14 @@ extension TreePartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for Tree
+extension TreePartial: HashableK {
+    public static func hash<A>(_ fa: TreeOf<A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.root)
+        hasher.combine(fa^.subForest)
+    }
+}
+
 // MARK: Instance of Functor for Tree
 extension TreePartial: Functor {
     public static func map<A, B>(

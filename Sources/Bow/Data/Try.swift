@@ -223,6 +223,14 @@ extension TryPartial: EquatableK {
     }
 }
 
+// MARK: Instance of HashableK for Try
+extension TryPartial: HashableK {
+    public static func hash<A>(_ fa: TryOf<A>, into hasher: inout Hasher) where A : Hashable {
+        fa^.toEither().foldRun({ hasher.combine("\($0)") },
+                               { hasher.combine($0) })
+    }
+}
+
 // MARK: Instance of Functor for Try
 extension TryPartial: Functor {
     public static func map<A, B>(

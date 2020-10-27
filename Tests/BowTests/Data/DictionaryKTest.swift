@@ -14,6 +14,10 @@ class DictionaryKTest: XCTestCase {
     func testEquatableKLaws() {
         EquatableLaws<DictionaryK<String, Int>>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<DictionaryKPartial<String>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<DictionaryKPartial<String>>.check()

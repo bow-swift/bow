@@ -7,6 +7,10 @@ class OptionTTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<OptionTPartial<ForId>, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<OptionTPartial<ForId>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<OptionTPartial<ForId>>.check()

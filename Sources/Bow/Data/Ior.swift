@@ -11,7 +11,7 @@ public typealias IorOf<A, B> = Kind<IorPartial<A>, B>
 
 /// Ior represents an inclusive-or of two different types. It may have a value of the left type, the right type or both at the same time.
 public final class Ior<A, B>: IorOf<A, B> {
-    private let value: _Ior<A, B>
+    fileprivate let value: _Ior<A, B>
     
     private init(_ value: _Ior<A, B>) {
         self.value = value
@@ -189,6 +189,9 @@ private enum _Ior<A, B> {
     case both(A, B)
 }
 
+extension _Ior: Equatable where A: Equatable, B: Equatable {}
+extension _Ior: Hashable where A: Hashable, B: Hashable {}
+
 // MARK: Conformance to CustomStringConvertible
 extension Ior: CustomStringConvertible {
     public var description: String {
@@ -212,20 +215,14 @@ extension IorPartial: EquatableK where L: Equatable {
     public static func eq<A: Equatable>(
         _ lhs: IorOf<L, A>,
         _ rhs: IorOf<L, A>) -> Bool {
-        lhs^.fold(
-            { (la: L) -> Bool in
-                rhs^.fold({ ra in la == ra },
-                          constant(false),
-                          constant(false)) },
-            { (lb: A) -> Bool in
-                rhs^.fold(constant(false),
-                          { rb in lb == rb },
-                          constant(false)) },
-            { (la: L, lb: A) -> Bool in
-                rhs^.fold(constant(false),
-                          constant(false),
-                          { ra, rb in la == ra && lb == rb }) }
-        )
+        lhs^.value == rhs^.value
+    }
+}
+
+// MARK: Instance of HashableK for Ior
+extension IorPartial: HashableK where L: Hashable {
+    public static func hash<A>(_ fa: IorOf<L, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
     }
 }
 

@@ -7,6 +7,10 @@ class ZipperTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<ZipperPartial, Int>.check()
     }
+
+    func testHashableKLaws() {
+        HashableKLaws<ZipperPartial, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<ZipperPartial>.check()

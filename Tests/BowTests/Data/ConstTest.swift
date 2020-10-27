@@ -6,6 +6,10 @@ class ConstTest: XCTestCase {
     func testEquatableLaws() {
         EquatableKLaws<ConstPartial<Int>, Int>.check()
     }
+
+    func testHashableLaws() {
+        HashableKLaws<ConstPartial<Int>, Int>.check()
+    }
     
     func testFunctorLaws() {
         FunctorLaws<ConstPartial<Int>>.check()

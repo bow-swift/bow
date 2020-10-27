@@ -154,6 +154,13 @@ extension EitherTPartial: EquatableK where F: EquatableK, L: Equatable {
     }
 }
 
+// MARK: Instance of HashableK for EitherT
+extension EitherTPartial: HashableK where F: HashableK, L: Hashable {
+    public static func hash<A>(_ fa: EitherTOf<F, L, A>, into hasher: inout Hasher) where A : Hashable {
+        hasher.combine(fa^.value)
+    }
+}
+
 // MARK: Instance of Invariant for EitherT
 extension EitherTPartial: Invariant where F: Functor {}
 
