@@ -2,7 +2,6 @@ import XCTest
 import SwiftCheck
 import BowLaws
 import Bow
-import BowFree
 
 class CoyonedaNaturalTransformationTests: XCTestCase {
 

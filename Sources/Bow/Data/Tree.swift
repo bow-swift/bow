@@ -120,25 +120,12 @@ extension TreePartial: Monad {
                     .done(.pure(b))
                 }
             }
-
             let rootImageTrampoline = fLiftedToEither(a^.root)
+            let subForestImageTrampoline = a^.subForest.traverse { loop($0, f) }^
 
-            let subForestImagesTrampolines = a^.subForest.map { loop($0, f) }
-
-            // This is just traverse of Array over Trampoline
-            let subForestImageTrampoline: Trampoline<[Kind<ForTree, B>]> = subForestImagesTrampolines.reduce(Trampoline<[Kind<ForTree, B>]>.done([])) { (arrayTrampoline: Trampoline<[Kind<ForTree, B>]>, trampoline: Trampoline<Kind<ForTree, B>>) in
-                arrayTrampoline.flatMap { (array) in
-                    trampoline.flatMap { (tree) in
-                        .done(array + [tree])
-                    }
-                }
-            }
-
-            return rootImageTrampoline.flatMap { rootImage in
-                subForestImageTrampoline.flatMap { subForestImage in
-                    .done(rootImage^.appendSubForest(subForestImage.map { $0^ }))
-                }
-            }
+            return .map(rootImageTrampoline, subForestImageTrampoline) { (rootImage, subForestImage) in
+                rootImage^.appendSubForest(subForestImage.map { $0^ })
+            }^
         }
     }
 }
