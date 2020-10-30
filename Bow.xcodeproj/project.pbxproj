@@ -356,7 +356,6 @@
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
 		B53976272540113100D8ECB8 /* HashableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976262540113100D8ECB8 /* HashableK.swift */; };
-		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
 		B53976552540116A00D8ECB8 /* HashableKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976542540116A00D8ECB8 /* HashableKLaws.swift */; };
 		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
 		B558FBDE25385D7F00790229 /* CoyonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */; };
@@ -374,12 +373,12 @@
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
 		B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		B578BCAA25385B9200B8FD42 /* Trampoline+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578BCA925385B9200B8FD42 /* Trampoline+Gen.swift */; };
-		B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA22540029F0099D426 /* MonadTrans.swift */; };
-		B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */; };
 		B58B9BD225481D93008BA4A7 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
-		B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2D16254005A60099D426 /* ComonadTransLaws.swift */; };
 		B58B9BE925481DB4008BA4A7 /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		B58B9C1625481DCF008BA4A7 /* Yoneda+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C225237A6D006A65EC /* Yoneda+Gen.swift */; };
+		B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA22540029F0099D426 /* MonadTrans.swift */; };
+		B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */; };
+		B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2D16254005A60099D426 /* ComonadTransLaws.swift */; };
 		B5BF5086252B0F4A0060AD0D /* LazyFunction1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */; };
 		B5BF50F7252B24AF0060AD0D /* LazyFunction1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */; };
 		B5BF510F252B253D0060AD0D /* LazyFunction1+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */; };
@@ -1254,10 +1253,9 @@
 		8BD6974D23F5AE18000A512F /* BowAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BowAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B507D290252A315C002541E4 /* CoyonedaNaturalTransformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoyonedaNaturalTransformationTests.swift; sourceTree = "<group>"; };
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
-		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		B53976262540113100D8ECB8 /* HashableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableK.swift; sourceTree = "<group>"; };
-		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		B53976542540116A00D8ECB8 /* HashableKLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableKLaws.swift; sourceTree = "<group>"; };
+		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		B55BE656252332BA005297CA /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		B55BE68425234AD1005297CA /* ProgramTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTest.swift; sourceTree = "<group>"; };
 		B55F52B125247256001979EE /* ExistsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistsTests.swift; sourceTree = "<group>"; };
@@ -2020,13 +2018,13 @@
 			isa = PBXGroup;
 			children = (
 				8BA0F448217E2E9200969984 /* Cokleisli.swift */,
+				B56A08622525C39600869FCD /* CokleisliK.swift */,
 				8BA0F445217E2E9200969984 /* Function0.swift */,
 				8BA0F446217E2E9200969984 /* Function1.swift */,
-				B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */,
 				8BA0F443217E2E9200969984 /* FunctionK.swift */,
 				B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */,
 				8BA0F444217E2E9200969984 /* Kleisli.swift */,
-				B56A08622525C39600869FCD /* CokleisliK.swift */,
+				B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */,
 			);
 			path = Arrow;
 			sourceTree = "<group>";
@@ -2109,8 +2107,8 @@
 				8BA0F474217E2E9200969984 /* Either.swift */,
 				8BA0F47A217E2E9200969984 /* EitherK.swift */,
 				720C1DFE23FD804E001C5B7D /* Endo.swift */,
-				B52120FE2523AC2300705BCD /* Exists.swift */,
 				8BA0F47E217E2E9200969984 /* Eval.swift */,
+				B52120FE2523AC2300705BCD /* Exists.swift */,
 				8BA0F475217E2E9200969984 /* Id.swift */,
 				8BA0F477217E2E9200969984 /* Ior.swift */,
 				8BA0F47D217E2E9200969984 /* Moore.swift */,
@@ -2124,11 +2122,11 @@
 				8BA0F487217E2E9200969984 /* SetK.swift */,
 				8BA0F483217E2E9200969984 /* Sum.swift */,
 				1165E1A823F414350052F0C7 /* Trampoline.swift */,
+				B53F8C08251A5F8000468947 /* Tree.swift */,
 				8BA0F480217E2E9200969984 /* Try.swift */,
 				8BA0F484217E2E9200969984 /* Validated.swift */,
 				8BA0F43E217E2E9200969984 /* Yoneda.swift */,
 				1171ED5D23C62C5E005362E0 /* Zipper.swift */,
-				B53F8C08251A5F8000468947 /* Tree.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2784,7 +2782,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					1120978222A7EBC7007F3D9C = {
 						LastSwiftMigration = 1020;
@@ -4710,6 +4708,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -4804,6 +4803,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
