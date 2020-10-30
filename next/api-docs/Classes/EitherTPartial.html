@@ -1562,6 +1562,9 @@
               <li class="nav-group-task" data-name="MonadState" data-url="Protocols/MonadState.html">
                 <a title="MonadState" class="nav-group-task-link" href="../Protocols/MonadState.html">MonadState</a>
               </li>
+              <li class="nav-group-task" data-name="MonadTrans" data-url="Protocols/MonadTrans.html">
+                <a title="MonadTrans" class="nav-group-task-link" href="../Protocols/MonadTrans.html">MonadTrans</a>
+              </li>
               <li class="nav-group-task" data-name="MonadWriter" data-url="Protocols/MonadWriter.html">
                 <a title="MonadWriter" class="nav-group-task-link" href="../Protocols/MonadWriter.html">MonadWriter</a>
               </li>
@@ -2238,6 +2241,67 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/Functions%20for%20EitherT%20when%20the%20effect%20has%20an%20instance%20of%20Functor"></a>
+                <a name="//apple_ref/swift/Section/Functions for EitherT when the effect has an instance of Functor" class="dashAnchor"></a>
+                <a href="#/Functions%20for%20EitherT%20when%20the%20effect%20has%20an%20instance%20of%20Functor">
+                  <h3 id="Functions%20for%20EitherT%20when%20the%20effect%20has%20an%20instance%20of%20Functor" class="section-name">Functions for EitherT when the effect has an instance of Functor<span class="anchor-icon" /></h3>
+                </a>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:3Bow14EitherTPartialCA2A7FunctorRzrlE5liftFyAA4KindCyACyxq_Gqd__GAGyxqd__GlFZ"></a>
+                    <a name="//apple_ref/swift/Method/liftF(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:3Bow14EitherTPartialCA2A7FunctorRzrlE5liftFyAA4KindCyACyxq_Gqd__GAGyxqd__GlFZ">
+                      <span class="token-name">liftF(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Lifts a value by nesting the contained value in the effect into an <code>Either.right</code> value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">liftF</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt"><a href="../Classes/Kind.html">Kind</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Typealiases.html#/s:3Bow9EitherTOfa">EitherTOf</a></span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">L</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value to be lifted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A right <code><a href="../Classes/Either.html">Either</a></code> wrapped in the effect.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Instance%20of%20EquatableK%20for%20EitherT"></a>
                 <a name="//apple_ref/swift/Section/Instance of EquatableK for EitherT" class="dashAnchor"></a>
                 <a href="#/Instance%20of%20EquatableK%20for%20EitherT">
@@ -2732,7 +2796,7 @@
         <p>with support from <a href="https://47deg.com/">47 Degrees</a></p>
       </div>
       <div>
-        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-27)</p>
+        <p>&copy; 2020 <a class="link" href="https://bow-swift.io" target="_blank" rel="external">Bow</a>. All rights reserved. (Last updated: 2020-10-30)</p>
         <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
       </div>
     </section>
