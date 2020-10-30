@@ -21,6 +21,11 @@ class StoreTTest: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<StorePartial<Int>>.check()
     }
+
+    func testComonadTransLaws() {
+        ComonadTransLaws<StoreTPartial<Int, ForId>, String, Int>.check()
+        ComonadTransLaws<StoreTPartial<Int, ForFunction0>, String, Int>.check()
+    }
     
     func testComonadStoreLaws() {
         ComonadStoreLaws<StorePartial<Int>, Int>.check()

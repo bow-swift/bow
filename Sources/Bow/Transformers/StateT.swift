@@ -121,13 +121,6 @@ extension StateT where F: Functor {
 // MARK: Functions for StateT when the effect has an instance of Functor
 
 extension StateT where F: Functor {
-    /// Lifts an effect by wrapping the contained value into a function that depends on some state.
-    ///
-    /// - Parameter fa: Value to be lifted.
-    /// - Returns: A `StateT` that produces the contained value in the original effect, preserving the state.
-    public static func liftF(_ fa: Kind<F, A>) -> StateT<F, S, A> {
-        StateT { s in fa.map { a in (s, a) } }
-    }
 
     /// Runs this computation using the provided initial state.
     ///
@@ -167,6 +160,16 @@ extension StateT where F: Functor {
     /// - Returns: A StateT value with a modified state and unit as result value.
     public func setF(_ fs: Kind<F, S>) -> StateT<F, S, ()> {
         self.modifyF { _ in fs }
+    }
+}
+
+extension StateTPartial where F: Functor {
+    /// Lifts an effect by wrapping the contained value into a function that depends on some state.
+    ///
+    /// - Parameter fa: Value to be lifted.
+    /// - Returns: A `StateT` that produces the contained value in the original effect, preserving the state.
+    public static func liftF<A>(_ fa: Kind<F, A>) -> StateTOf<F, S, A> {
+        StateT { s in fa.map { a in (s, a) } }
     }
 }
 
@@ -235,6 +238,9 @@ extension StateTPartial: Monad where F: Monad {
         }
     }
 }
+
+// MARK: Instance of MonadTrans for StateT
+extension StateTPartial: MonadTrans where F: Monad {}
 
 // MARK: Instance of MonadState for StateT
 extension StateTPartial: MonadState where F: Monad {

@@ -356,6 +356,7 @@
 		8BA0F65B217E2E9200969984 /* FunctorFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F4AE217E2E9200969984 /* FunctorFilter.swift */; };
 		8BB969AD2398661D005520D6 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB969AB239863F0005520D6 /* Queue.swift */; };
 		B53976272540113100D8ECB8 /* HashableK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976262540113100D8ECB8 /* HashableK.swift */; };
+		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
 		B53976552540116A00D8ECB8 /* HashableKLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53976542540116A00D8ECB8 /* HashableKLaws.swift */; };
 		B53F8C09251A5F8000468947 /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F8C08251A5F8000468947 /* Tree.swift */; };
 		B558FBDE25385D7F00790229 /* CoyonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B6FDAA2525C47600A5AD54 /* CoyonedaTest.swift */; };
@@ -373,7 +374,10 @@
 		B56A08632525C39600869FCD /* CokleisliK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A08622525C39600869FCD /* CokleisliK.swift */; };
 		B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43F217E2E9200969984 /* Coyoneda.swift */; };
 		B578BCAA25385B9200B8FD42 /* Trampoline+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578BCA925385B9200B8FD42 /* Trampoline+Gen.swift */; };
+		B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA22540029F0099D426 /* MonadTrans.swift */; };
+		B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */; };
 		B58B9BD225481D93008BA4A7 /* Yoneda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0F43E217E2E9200969984 /* Yoneda.swift */; };
+		B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2D16254005A60099D426 /* ComonadTransLaws.swift */; };
 		B58B9BE925481DB4008BA4A7 /* YonedaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C525237A7D006A65EC /* YonedaTest.swift */; };
 		B58B9C1625481DCF008BA4A7 /* Yoneda+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D896C225237A6D006A65EC /* Yoneda+Gen.swift */; };
 		B5BF5086252B0F4A0060AD0D /* LazyFunction1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */; };
@@ -1252,6 +1256,7 @@
 		B52120FE2523AC2300705BCD /* Exists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exists.swift; sourceTree = "<group>"; };
 		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		B53976262540113100D8ECB8 /* HashableK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableK.swift; sourceTree = "<group>"; };
+		B53F8C08251A5F8000468947 /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		B53976542540116A00D8ECB8 /* HashableKLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableKLaws.swift; sourceTree = "<group>"; };
 		B55BE656252332BA005297CA /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		B55BE68425234AD1005297CA /* ProgramTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramTest.swift; sourceTree = "<group>"; };
@@ -1262,6 +1267,9 @@
 		B568E5BE2529D1A200AD334B /* FunctionK+Coyoneda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FunctionK+Coyoneda.swift"; sourceTree = "<group>"; };
 		B56A08622525C39600869FCD /* CokleisliK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CokleisliK.swift; sourceTree = "<group>"; };
 		B578BCA925385B9200B8FD42 /* Trampoline+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trampoline+Gen.swift"; sourceTree = "<group>"; };
+		B58D2CA22540029F0099D426 /* MonadTrans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTrans.swift; sourceTree = "<group>"; };
+		B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTransLaws.swift; sourceTree = "<group>"; };
+		B58D2D16254005A60099D426 /* ComonadTransLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTransLaws.swift; sourceTree = "<group>"; };
 		B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1.swift; sourceTree = "<group>"; };
 		B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1Test.swift; sourceTree = "<group>"; };
 		B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LazyFunction1+Gen.swift"; sourceTree = "<group>"; };
@@ -1808,6 +1816,7 @@
 				8BA0F3D2217E2DEF00969984 /* ComonadLaws.swift */,
 				11BA21BD23D6F74F00F3EE78 /* ComonadStoreLaws.swift */,
 				11BA21BF23D6FA3600F3EE78 /* ComonadTracedLaws.swift */,
+				B58D2D16254005A60099D426 /* ComonadTransLaws.swift */,
 				8BA0F3C2217E2DEF00969984 /* ComparableLaws.swift */,
 				8BA0F3C9217E2DEF00969984 /* ContravariantLaws.swift */,
 				8BA0F3D1217E2DEF00969984 /* CustomStringConvertibleLaws.swift */,
@@ -1826,6 +1835,7 @@
 				8BA0F3C7217E2DEF00969984 /* MonadFilterLaws.swift */,
 				8BA0F3C0217E2DEF00969984 /* MonadLaws.swift */,
 				8BA0F3CB217E2DEF00969984 /* MonadStateLaws.swift */,
+				B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */,
 				8BA0F3C5217E2DEF00969984 /* MonadWriterLaws.swift */,
 				606B29EF23607745002334B2 /* MonoidalLaws.swift */,
 				8BA0F3D4217E2DEF00969984 /* MonoidKLaws.swift */,
@@ -2152,6 +2162,7 @@
 				8BA0F490217E2E9200969984 /* MonadFilter.swift */,
 				8BA0F49C217E2E9200969984 /* MonadReader.swift */,
 				8BA0F491217E2E9200969984 /* MonadState.swift */,
+				B58D2CA22540029F0099D426 /* MonadTrans.swift */,
 				8BA0F497217E2E9200969984 /* MonadWriter.swift */,
 				8BA0F4A3217E2E9200969984 /* Monoid.swift */,
 				606B29F12360776A002334B2 /* Monoidal.swift */,
@@ -2950,6 +2961,7 @@
 				1122942B219D8BDE006D66C5 /* InvariantLaws.swift in Sources */,
 				1122942C219D8BDE006D66C5 /* MonadCombineLaws.swift in Sources */,
 				11D36A1C2232789900CBD85F /* SelectiveLaws.swift in Sources */,
+				B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */,
 				606B29EB2360763C002334B2 /* SemigroupalLaws.swift in Sources */,
 				1122942D219D8BDE006D66C5 /* MonadErrorLaws.swift in Sources */,
 				606B29EE2360765D002334B2 /* DivideLaws.swift in Sources */,
@@ -2966,6 +2978,7 @@
 				11229434219D8BDE006D66C5 /* ComparableLaws.swift in Sources */,
 				11229436219D8BDE006D66C5 /* SemigroupKLaws.swift in Sources */,
 				11229437219D8BDE006D66C5 /* SemigroupLaws.swift in Sources */,
+				B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */,
 				11229438219D8BDE006D66C5 /* CustomStringConvertibleLaws.swift in Sources */,
 				11229439219D8BDE006D66C5 /* TraverseFilterLaws.swift in Sources */,
 				1191BD1322D78F6D0052FEA8 /* PropertyOperatorOverload.swift in Sources */,
@@ -3350,6 +3363,7 @@
 				11DDCD1C217F171900844D9D /* Memoization.swift in Sources */,
 				8BA0F513217E2E9200969984 /* StateT.swift in Sources */,
 				8BA0F61B217E2E9200969984 /* Reducible.swift in Sources */,
+				B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */,
 				600D30432352C08F00F7B64B /* Semigroupal.swift in Sources */,
 				B558FC0C25385D9300790229 /* FunctionK+Coyoneda.swift in Sources */,
 				11A4356422131ACC000C5E31 /* BoolInstances.swift in Sources */,

@@ -25,6 +25,11 @@ class StateTTest: XCTestCase {
     func testMonadLaws() {
         MonadLaws<StateTPartial<ForId, Int>>.check()
     }
+
+    func testMonadTransLaws() {
+        MonadTransLaws<StateTPartial<ForId, Int>, String, Int>.check()
+        MonadTransLaws<StateTPartial<ForOption, Int>, String, Int>.check()
+    }
     
     func testApplicativeErrorLaws() {
         ApplicativeErrorLaws<StateTPartial<EitherPartial<CategoryError>, Int>>.check()

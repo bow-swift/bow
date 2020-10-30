@@ -23,6 +23,11 @@ class EnvTTest: XCTestCase {
     func testComonadLaws() {
         ComonadLaws<EnvPartial<Int>>.check()
     }
+
+    func testComonadTransLaws() {
+        ComonadTransLaws<EnvTPartial<Int, ForId>, String, Int>.check()
+        ComonadTransLaws<EnvTPartial<Int, ForFunction0>, String, Int>.check()
+    }
     
     func testFoldableLaws() {
         FoldableLaws<EnvTPartial<Int, NEAPartial>>.check()

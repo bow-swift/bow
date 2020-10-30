@@ -63,12 +63,14 @@ public final class EnvT<E, W, A>: EnvTOf<E, W, A> {
     public func local<EE>(_ f: @escaping (E) -> EE) -> EnvT<EE, W, A> {
         EnvT<EE, W, A>(f(e), wa)
     }
-    
+}
+
+extension EnvTPartial {
     /// Obtains the wrapped comonadic value without the environment.
     ///
     /// - Returns: Wrapped comonadic value without the environment.
-    public func lower() -> Kind<W, A> {
-        wa
+    public static func lower<A>(_ twa: EnvTOf<E, W, A>) -> Kind<W, A> {
+        twa^.wa
     }
 }
 
@@ -139,6 +141,10 @@ extension EnvTPartial: Comonad where W: Comonad {
         fa^.wa.extract()
     }
 }
+
+// MARK: Instance of ComonadTrans for EnvT
+
+extension EnvTPartial: ComonadTrans where W: Comonad {}
 
 // MARK: Instance of ComonadEnv for EnvT
 

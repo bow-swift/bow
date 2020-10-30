@@ -46,12 +46,12 @@ public final class StoreT<S, W, A>: StoreTOf<S, W, A> {
     }
 }
 
-extension StoreT where W: Functor {
+extension StoreTPartial where W: Functor {
     /// Obtains the comonadic value, removing the Store support.
     ///
     /// - Returns: Comonadic value without Store support.
-    public func lower() -> Kind<W, A> {
-        render.map { f in f(self.state) }
+    public static func lower<A>(_ twa: StoreTOf<S, W, A>) -> Kind<W, A> {
+        twa^.render.map { f in f(twa^.state) }
     }
 }
 
@@ -129,6 +129,10 @@ extension StoreTPartial: Comonad where W: Comonad {
         fa^.render.extract()(fa^.state)
     }
 }
+
+// MARK: Instance of ComonadTrans for StoreT
+
+extension StoreTPartial: ComonadTrans where W: Comonad {}
 
 // MARK: Instance of ComonadStore for StoreT
 

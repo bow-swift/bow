@@ -49,14 +49,6 @@ extension EitherT where F: Functor {
         value.map { either in either.fold(fa, fb) }
     }
 
-    /// Lifts a value by nesting the contained value in the effect into an `Either.right` value.
-    ///
-    /// - Parameter fc: Value to be lifted.
-    /// - Returns: A right `Either` wrapped in the effect.
-    public static func liftF(_ fc: Kind<F, B>) -> EitherT<F, A, B> {
-        EitherT(fc.map(Either.right))
-    }
-
     /// Applies the provided closures based on the content of the nested `Either` value.
     ///
     /// - Parameters:
@@ -104,6 +96,16 @@ extension EitherT where F: Functor {
     /// - Returns: An `EitherT` were the left type has been transformed.
     public func mapLeft<C>(_ f: @escaping (A) -> C) -> EitherT<F, C, B> {
         EitherT<F, C, B>(self.value.map { either in either.bimap(f, id) })
+    }
+}
+
+extension EitherTPartial where F: Functor {
+    /// Lifts a value by nesting the contained value in the effect into an `Either.right` value.
+    ///
+    /// - Parameter fc: Value to be lifted.
+    /// - Returns: A right `Either` wrapped in the effect.
+    public static func liftF<B>(_ fc: Kind<F, B>) -> EitherTOf<F, L, B> {
+        EitherT(fc.map(Either.right))
     }
 }
 
@@ -221,6 +223,9 @@ extension EitherTPartial: Monad where F: Monad {
         }))
     }
 }
+
+// MARK: Instance of MonadTrans for EitherT
+extension EitherTPartial: MonadTrans where F: Monad {}
 
 // MARK: Instance of ApplicativeError for EitherT
 extension EitherTPartial: ApplicativeError where F: Monad {
