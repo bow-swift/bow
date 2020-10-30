@@ -197,6 +197,15 @@ public extension Kind where F: Monad {
         F.tailRecM(a, f)
     }
 
+    /// A stack safe version of `flatMap`, based on `tailRecM`.
+    ///
+    /// - Parameters:
+    ///   - f: A function describing the second computation, which depends on the value of the first.
+    /// - Returns: Result of composing the two computations.
+    func stackSafeFlatMap<B>(_ f: @escaping (A) -> Kind<F, B>) -> Kind<F, B> {
+        F.stackSafeFlatMap(self, f)
+    }
+
     /// Flattens a nested structure of the context implementing this instance into a single layer.
     ///
     /// This is a convenience method to call `Monad.flatten` as a static method of this type.
