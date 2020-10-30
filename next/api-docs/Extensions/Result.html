@@ -2573,6 +2573,2871 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE4liftyAByqd__q_GAByxq_Gcqd__xclFZ"></a>
+                    <a name="//apple_ref/swift/Method/lift(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE4liftyAByqd__q_GAByxq_Gcqd__xclFZ">
+                      <span class="token-name">lift(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Given a function, provides a new function lifted to the context of this type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">lift</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Function to be lifted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Function in the context of this type.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE2asyAByqd__q_Gqd__lF"></a>
+                    <a name="//apple_ref/swift/Method/as(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE2asyAByqd__q_Gqd__lF">
+                      <span class="token-name">as(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the value type with a constant value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="p">`</span><span class="nv">as</span><span class="p">`</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Constant value to replace the value type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new value with the structure of the original value, with its value type transformed.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE4voidAByytq_GyF"></a>
+                    <a name="//apple_ref/swift/Method/void()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE4voidAByytq_GyF">
+                      <span class="token-name">void()</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Replaces the value type by the <code>Void</code> type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">void</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>New value in this context, with <code>Void</code> as value type, preserving the original structure.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE7productyAByx_qd__tq_Gqd__xclF"></a>
+                    <a name="//apple_ref/swift/Method/product(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE7productyAByx_qd__tq_Gqd__xclF">
+                      <span class="token-name">product(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the value type and pairs it with its original value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">product</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">B</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Transforming function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A pair with the original value and its transformation, with the structure of the original value.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE9tupleLeftyAByqd___xtq_Gqd__lF"></a>
+                    <a name="//apple_ref/swift/Method/tupleLeft(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE9tupleLeftyAByqd___xtq_Gqd__lF">
+                      <span class="token-name">tupleLeft(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the value type by making a tuple with a new constant value to the left of the original value type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">tupleLeft</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Success</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Constant value for the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new value with the structure of the original value, with a tuple in its value type.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE10tupleRightyAByx_qd__tq_Gqd__lF"></a>
+                    <a name="//apple_ref/swift/Method/tupleRight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE10tupleRightyAByx_qd__tq_Gqd__lF">
+                      <span class="token-name">tupleRight(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Transforms the value type by making a tuple with a new constant value to the right of the original value type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">tupleRight</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">b</span><span class="p">:</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">B</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Constant value for the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new value with the structure of the original value, with a tuple in its value type.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE4pureyAByxq_GxFZ"></a>
+                    <a name="//apple_ref/swift/Method/pure(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE4pureyAByxq_GxFZ">
+                      <span class="token-name">pure(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Lifts a value to the this context type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">pure</span><span class="p">(</span><span class="n">_</span> <span class="nv">wrapped</span><span class="p">:</span> <span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  wrapped
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Value to be lifted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Provided value in this context type.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_tq_GAByqd__q_G_AByqd_0_q_Gtqd___qd_0_tRszr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_tq_GAByqd__q_G_AByqd_0_q_Gtqd___qd_0_tRszr0_lFZ">
+                      <span class="token-name">zip(_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of two values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_Gtqd___qd_0_qd_1_tRszr1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_Gtqd___qd_0_qd_1_tRszr1_lFZ">
+                      <span class="token-name">zip(_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of three values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_Gtqd___qd_0_qd_1_qd_2_tRszr2_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_Gtqd___qd_0_qd_1_qd_2_tRszr2_lFZ">
+                      <span class="token-name">zip(_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of four values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_Gtqd___qd_0_qd_1_qd_2_qd_3_tRszr3_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_Gtqd___qd_0_qd_1_qd_2_qd_3_tRszr3_lFZ">
+                      <span class="token-name">zip(_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of five values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  e
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_tRszr4_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_tRszr4_lFZ">
+                      <span class="token-name">zip(_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of six values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  e
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tRszr5_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tRszr5_lFZ">
+                      <span class="token-name">zip(_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of seven values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  e
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  g
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tRszr6_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tRszr6_lFZ">
+                      <span class="token-name">zip(_:_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of eight values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fh</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">H</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  e
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  g
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  h
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>8th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_GAByqd_7_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tRszr7_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/zip(_:_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3zipyAByqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_GAByqd_7_q_Gtqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tRszr7_lFZ">
+                      <span class="token-name">zip(_:_:_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a tuple out of nine values in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">zip</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">I</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fh</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">H</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fi</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">I</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">I</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">I</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  a
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  b
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  c
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  d
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  e
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  g
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  h
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>8th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  i
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>9th value of the tuple.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_Gxqd___qd_0_tctr0_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_Gxqd___qd_0_tctr0_lFZ">
+                      <span class="token-name">map(_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of two computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_Gxqd___qd_0_qd_1_tctr1_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_Gxqd___qd_0_qd_1_tctr1_lFZ">
+                      <span class="token-name">map(_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of three computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_Gxqd___qd_0_qd_1_qd_2_tctr2_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_Gxqd___qd_0_qd_1_qd_2_tctr2_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of four computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_Gxqd___qd_0_qd_1_qd_2_qd_3_tctr3_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_Gxqd___qd_0_qd_1_qd_2_qd_3_tctr3_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of five computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fe
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_tctr4_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_tctr4_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of six computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fe
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  ff
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tctr5_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tctr5_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of seven computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fe
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  ff
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fg
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tctr6_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tctr6_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of eight computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fh</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">H</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fe
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  ff
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fg
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fh
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>8th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_GAByqd_7_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tctr7_lFZ"></a>
+                    <a name="//apple_ref/swift/Method/map(_:_:_:_:_:_:_:_:_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE3mapyAByxq_GAByqd__q_G_AByqd_0_q_GAByqd_1_q_GAByqd_2_q_GAByqd_3_q_GAByqd_4_q_GAByqd_5_q_GAByqd_6_q_GAByqd_7_q_Gxqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_qd_7_tctr7_lFZ">
+                      <span class="token-name">map(_:_:_:_:_:_:_:_:_:_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Combines the result of nine computations in this context, using the provided function.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">I</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fc</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">C</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fd</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">D</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fe</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">E</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">ff</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">F</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fg</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">G</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fh</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">H</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">fi</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">I</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="p">,</span> <span class="kt">C</span><span class="p">,</span> <span class="kt">D</span><span class="p">,</span> <span class="kt">E</span><span class="p">,</span> <span class="kt">F</span><span class="p">,</span> <span class="kt">G</span><span class="p">,</span> <span class="kt">H</span><span class="p">,</span> <span class="kt">I</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>1st computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fc
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>3rd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fd
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>4th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fe
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>5th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  ff
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>6th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fg
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>7th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fh
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>8th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  fi
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>9th computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Combination function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of combining the provided computations, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE2apyAByqd_0_q_GAByqd__q_Gqd_0_qd__cRszr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/ap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE2apyAByqd_0_q_GAByqd__q_Gqd_0_qd__cRszr0_lF">
+                      <span class="token-name">ap(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Sequential application.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">ap</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="p">(</span><span class="kt">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">B</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value in the context implementing this instance.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value in this context, resulting from the transformation of the contained original value with the contained function.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE8zipRightyAByqd__q_GAElF"></a>
+                    <a name="//apple_ref/swift/Method/zipRight(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE8zipRightyAByqd__q_GAElF">
+                      <span class="token-name">zipRight(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Sequentially compose two computations, discarding the value produced by the first.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">zipRight</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of running the second computation after the first one.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE7zipLeftyAByxq_GAByqd__q_GlF"></a>
+                    <a name="//apple_ref/swift/Method/zipLeft(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE7zipLeftyAByxq_GAByqd__q_GlF">
+                      <span class="token-name">zipLeft(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Sequentially compose two computations, discarding the value produced by the second.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">zipLeft</span><span class="o">&lt;</span><span class="kt">B</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fb</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">B</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fb
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result produced from the first computation after both are computed.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE7flattenAByqd__q_GyAERszlF"></a>
+                    <a name="//apple_ref/swift/Method/flatten()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE7flattenAByqd__q_GyAERszlF">
+                      <span class="token-name">flatten()</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Flattens this nested structure into a single layer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">flatten</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Value with a single context structure.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE10followedByyAByqd__q_GAElF"></a>
+                    <a name="//apple_ref/swift/Method/followedBy(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE10followedByyAByqd__q_GAElF">
+                      <span class="token-name">followedBy(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Sequentially compose two computations, discarding the value produced by the first.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">followedBy</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of running the second computation after the first one.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE9forEffectyAByxq_GAByqd__q_GlF"></a>
+                    <a name="//apple_ref/swift/Method/forEffect(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE9forEffectyAByxq_GAByqd__q_GlF">
+                      <span class="token-name">forEffect(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Sequentially compose two computations, discarding the value produced by the second.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">forEffect</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">fa</span><span class="p">:</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  fa
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>2nd computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result produced from the first computation after both are computed.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE8mproductyAByx_qd__tq_GAByqd__q_GxclF"></a>
+                    <a name="//apple_ref/swift/Method/mproduct(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE8mproductyAByx_qd__tq_GAByqd__q_GxclF">
+                      <span class="token-name">mproduct(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Pair the result of a computation with the result of applying a function to such result.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">mproduct</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="p">(</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">A</span><span class="p">),</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function to be applied to the result of the computation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A tuple of the result of the computation paired with the result of the function, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE2if4then4elseAByqd__q_GAGyc_AGyctSbRszlF"></a>
+                    <a name="//apple_ref/swift/Method/if(then:else:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE2if4then4elseAByqd__q_GAGyc_AGyctSbRszlF">
+                      <span class="token-name">if(then:else:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Conditionally apply a closure based on the boolean result of this computation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="p">`</span><span class="nv">if</span><span class="p">`</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">then</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="k">else</span> <span class="nv">g</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Success</span> <span class="o">==</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  then
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure to be applied if the computation evaluates to <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                  else
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Closure to be applied if the computation evaluates to <code>false</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Result of applying the corresponding closure based on the result of the computation.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE7flatTapyAByxq_GAByqd__q_GxclF"></a>
+                    <a name="//apple_ref/swift/Method/flatTap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE7flatTapyAByxq_GAByqd__q_GxclF">
+                      <span class="token-name">flatTap(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Applies a monadic function and discard the result while keeping the effect.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">flatTap</span><span class="o">&lt;</span><span class="kt">A</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">A</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A monadic function which result will be discarded.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A computation with the result of the initial computation and the effect caused by the function application.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE10raiseErroryAByxq_Gq_FZ"></a>
+                    <a name="//apple_ref/swift/Method/raiseError(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE10raiseErroryAByxq_Gq_FZ">
+                      <span class="token-name">raiseError(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Lifts an error to this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">raiseError</span><span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Failure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  error
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value of the error type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value representing the error in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE4from6eitherAByxq_GAC6EitherCyq_xG_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/from(either:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE4from6eitherAByxq_GAC6EitherCyq_xG_tFZ">
+                      <span class="token-name">from(either:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Creates a value of this type from an Either.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">static</span> <span class="kd">func</span> <span class="nf">from</span><span class="p">(</span><span class="nv">either</span><span class="p">:</span> <span class="kt"><a href="../Classes/Either.html">Either</a></span><span class="o">&lt;</span><span class="kt">Failure</span><span class="p">,</span> <span class="kt">Success</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  either
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Either value to convert to this type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value that represents the same content from Either, in this context.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE15handleErrorWithyAByxq_GAEq_cF"></a>
+                    <a name="//apple_ref/swift/Method/handleErrorWith(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE15handleErrorWithyAByxq_GAEq_cF">
+                      <span class="token-name">handleErrorWith(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Handles an error, potentially recovering from it by mapping it to a value in this context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">handleErrorWith</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Failure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recovery function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value where the possible errors have been recovered using the provided function.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s6ResultO3BowE11handleErroryAByxq_Gxq_cF"></a>
+                    <a name="//apple_ref/swift/Method/handleError(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s6ResultO3BowE11handleErroryAByxq_Gxq_cF">
+                      <span class="token-name">handleError(_:)</span>
+                      <span class="token-icon" /></a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <section class="section">
+                      <div class="abstract">
+                        <p>Handles an error, potentially recovering from it by mapping it to a value.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language key-main">
+                          <p class="aside-title key-main-text">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">handleError</span><span class="p">(</span><span class="n">_</span> <span class="nv">f</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Failure</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Success</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Success</span><span class="p">,</span> <span class="kt">Failure</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                  f
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recovery function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A value where the possible errors have been recovered using the provided function.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
