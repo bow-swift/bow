@@ -148,6 +148,25 @@ public extension Monad {
         _ f: @escaping (A) -> Kind<Self, B>) -> Kind<Self, A> {
         flatMap(fa) { a in f(a).as(a) }
     }
+
+    /// A stack safe version of `flatMap`, based on `tailRecM`.
+    ///
+    /// - Parameters:
+    ///   - fa: First computation.
+    ///   - f: A function describing the second computation, which depends on the value of the first.
+    /// - Returns: Result of composing the two computations.
+    static func stackSafeFlatMap<A, B>(
+        _ fa: Kind<Self, A>,
+        _ f: @escaping (A) -> Kind<Self, B>) -> Kind<Self, B> {
+
+        tailRecM(Option<A>.none()) { (w: Option<A>) -> Kind<Self, Either<Option<A>, B>> in
+            w.fold({
+                map(fa) { .left(.some($0)) }
+            }) { i in
+                map(f(i)) { .right($0) }
+            }
+        }
+    }
 }
 
 // MARK: Syntax for Monad
