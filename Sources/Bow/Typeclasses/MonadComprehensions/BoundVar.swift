@@ -21,10 +21,6 @@ public class BoundVar<F: Monad, A> {
     public var get: A {
         return value!
     }
-    
-    internal var erased: BoundVar<F, Any> {
-        ErasedBoundVar<F, A>(self)
-    }
 }
 
 // MARK: Creation of variables for Monad Comprehensions
@@ -45,18 +41,6 @@ public extension Kind where F: Monad {
     /// - Returns: A bound variable.
     static func `var`() -> BoundVar<F, A> {
         F.var(A.self)
-    }
-}
-
-private class ErasedBoundVar<F: Monad, A>: BoundVar<F, Any> {
-    private var boundVar: BoundVar<F, A>
-    
-    fileprivate init(_ boundVar: BoundVar<F, A>) {
-        self.boundVar = boundVar
-    }
-    
-    override func bind(_ value: Any) {
-        boundVar.bind(value as! A)
     }
 }
 
