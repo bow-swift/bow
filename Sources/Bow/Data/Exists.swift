@@ -56,3 +56,15 @@ extension ExistsPrivate: CustomStringConvertible {
         (fa as? CustomStringConvertible)?.description ?? "\(fa)"
     }
 }
+
+extension Exists: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        (fa as! CustomDebugStringConvertible).debugDescription
+    }
+}
+
+extension ExistsPrivate: CustomDebugStringConvertible {
+    var debugDescription: String {
+        (fa as? CustomDebugStringConvertible)?.debugDescription ?? "\(fa)"
+    }
+}
