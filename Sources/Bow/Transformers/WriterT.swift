@@ -425,7 +425,7 @@ extension WriterTPartial: ApplicativeError where F: MonadError, W: Monoid {
     }
 }
 
-// MARK: Instance of MonadError for WriterT`
+// MARK: Instance of MonadError for WriterT
 extension WriterTPartial: MonadError where F: MonadError, W: Monoid {}
 
 // MARK: Instance of MonadReader for WriterT
