@@ -82,7 +82,11 @@ extension PairKPartial: HashableK where F: HashableK, G: HashableK {
 }
 
 // MARK: Instance of Invariant for PairK.
-extension PairKPartial: Invariant where F: Functor, G: Functor {}
+extension PairKPartial: Invariant where F: Invariant, G: Invariant {
+    public static func imap<A, B>(_ fa: PairKOf<F, G, A>, _ f: @escaping (A) -> B, _ g: @escaping (B) -> A) -> PairKOf<F, G, B> {
+        PairK(fa^.run.bimap({ F.imap($0, f, g) }, { G.imap($0, f, g) }))
+    }
+}
 
 // MARK: Instance of Functor for PairK.
 extension PairKPartial: Functor where F: Functor, G: Functor {
@@ -106,7 +110,14 @@ extension PairKPartial: Applicative where F: Applicative, G: Applicative {
 }
 
 // MARK: Instance of Selective for PairK
-extension PairKPartial: Selective where F: Monad, G: Monad {}
+extension PairKPartial: Selective where F: Selective, G: Selective {
+    public static func select<A, B>(_ fab: PairKOf<F, G, Either<A, B>>, _ f: PairKOf<F, G, (A) -> B>) -> PairKOf<F, G, B> {
+        PairK(
+            F.select(fab^.first, f^.first),
+            G.select(fab^.second, f^.second)
+        )
+    }
+}
 
 // MARK: Instance of Monad for PairK
 extension PairKPartial: Monad where F: Monad, G: Monad {
@@ -126,7 +137,14 @@ extension PairKPartial: Monad where F: Monad, G: Monad {
 }
 
 // MARK: Instance of FunctorFilter for PairK
-extension PairKPartial: FunctorFilter where F: MonadFilter, G: MonadFilter {}
+extension PairKPartial: FunctorFilter where F: FunctorFilter, G: FunctorFilter {
+    public static func mapFilter<A, B>(_ fa: PairKOf<F, G, A>, _ f: @escaping (A) -> OptionOf<B>) -> PairKOf<F, G, B> {
+        PairK(
+            F.mapFilter(fa^.first, f),
+            G.mapFilter(fa^.second, f)
+        )
+    }
+}
 
 // MARK: Instance of MonadFilter for PairK
 extension PairKPartial: MonadFilter where F: MonadFilter, G: MonadFilter {
