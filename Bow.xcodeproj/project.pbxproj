@@ -383,6 +383,7 @@
 		B5BF50F7252B24AF0060AD0D /* LazyFunction1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */; };
 		B5BF510F252B253D0060AD0D /* LazyFunction1+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */; };
 		B5D4BF262550513600C1A661 /* MonadComprehensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BF252550513600C1A661 /* MonadComprehensionTest.swift */; };
+		B5DFCB512553FCD2008D3546 /* Exists+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DFCB502553FCD2008D3546 /* Exists+Gen.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
@@ -1273,6 +1274,7 @@
 		B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1Test.swift; sourceTree = "<group>"; };
 		B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LazyFunction1+Gen.swift"; sourceTree = "<group>"; };
 		B5D4BF252550513600C1A661 /* MonadComprehensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadComprehensionTest.swift; sourceTree = "<group>"; };
+		B5DFCB502553FCD2008D3546 /* Exists+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exists+Gen.swift"; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1479,6 +1481,7 @@
 				112097AE22A7EE46007F3D9C /* Either+Gen.swift */,
 				112097CD22A81BE8007F3D9C /* EitherK+Gen.swift */,
 				720C1E0023FD8079001C5B7D /* Endo+Gen.swift */,
+				B5DFCB502553FCD2008D3546 /* Exists+Gen.swift */,
 				11E7F5EB22D8C81B00C78F06 /* Eval+Gen.swift */,
 				112097B422A7F21F007F3D9C /* Id+Gen.swift */,
 				112097B822A7FAF6007F3D9C /* Ior+Gen.swift */,
@@ -2907,6 +2910,7 @@
 				B5618785252CC3EA002717B1 /* Tree+Gen.swift in Sources */,
 				1171ED5423C4E4B0005362E0 /* TracedT+Gen.swift in Sources */,
 				112097D822A90644007F3D9C /* Kleisli+Gen.swift in Sources */,
+				B5DFCB512553FCD2008D3546 /* Exists+Gen.swift in Sources */,
 				720C1E0223FD808F001C5B7D /* Endo+Gen.swift in Sources */,
 				B58B9C1625481DCF008BA4A7 /* Yoneda+Gen.swift in Sources */,
 				112097BB22A7FC86007F3D9C /* NonEmptyArray+Gen.swift in Sources */,
