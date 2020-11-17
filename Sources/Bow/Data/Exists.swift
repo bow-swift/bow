@@ -44,3 +44,27 @@ fileprivate final class ExistsPrivate<F, A>: AnyExistsPrivate<F> {
         f.invoke(fa)
     }
 }
+
+extension Exists: CustomStringConvertible {
+    public var description: String {
+        (fa as! CustomStringConvertible).description
+    }
+}
+
+extension ExistsPrivate: CustomStringConvertible {
+    var description: String {
+        (fa as? CustomStringConvertible)?.description ?? "\(fa)"
+    }
+}
+
+extension Exists: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        (fa as! CustomDebugStringConvertible).debugDescription
+    }
+}
+
+extension ExistsPrivate: CustomDebugStringConvertible {
+    var debugDescription: String {
+        (fa as? CustomDebugStringConvertible)?.debugDescription ?? "\(fa)"
+    }
+}

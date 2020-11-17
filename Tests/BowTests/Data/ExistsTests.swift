@@ -98,6 +98,51 @@ class ExistsTests: XCTestCase {
         }
     }
 
+    func testCustomStringConvertibleLaws() {
+        CustomStringConvertibleLaws<Exists<ForArrayK>>.check()
+        CustomStringConvertibleLaws<Exists<ForId>>.check()
+        CustomStringConvertibleLaws<Exists<ForOption>>.check()
+    }
+
+    func testDescriptionMatchesInnerTypeDescription() {
+        property("""
+            Description matches inner type's description
+            when the inner type conforms to CustomStringConvertible
+        """) <~ forAll { (array: ArrayK<Int>) in
+            
+            Exists(array).description == array.description
+        }
+    }
+
+    func testDescriptionDefaultsToStringInterpolation() {
+        property("""
+            Description defaults to string interpolation
+            when the inner type does not conform to CustomStringConvertible
+        """) <~ forAll { (array: ArrayK<Function0<Int>>) in
+
+            return Exists(array).description == "\(array)"
+        }
+    }
+
+    func testCustomDebugStringConvertibleWhenInnerTypeIs() {
+        property("""
+            Description matches inner type's description
+            when the inner type conforms to CustomStringConvertible
+        """) <~ forAll { (array: ArrayK<String>) in
+            return Exists(array).debugDescription == array.debugDescription
+        }
+    }
+
+    func testDebugDescriptionDefaultsToStringInterpolation() {
+        property("""
+            Description defaults to string interpolation
+            when the inner type does not conform to CustomStringConvertible
+        """) <~ forAll { (array: ArrayK<Function0<Int>>) in
+
+            return Exists(array).debugDescription == "\(array)"
+        }
+    }
+
     class F: CokleisliK<ArrayKPartial, Int64> {
         override func invoke<A>(_ fa: ArrayKOf<A>) -> Int64 {
             fa^.count
