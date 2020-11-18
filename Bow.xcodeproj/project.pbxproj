@@ -379,11 +379,14 @@
 		B58D2CA32540029F0099D426 /* MonadTrans.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA22540029F0099D426 /* MonadTrans.swift */; };
 		B58D2CFF254003900099D426 /* MonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */; };
 		B58D2D17254005A60099D426 /* ComonadTransLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D2D16254005A60099D426 /* ComonadTransLaws.swift */; };
+		B598643E2558768500784952 /* PairK.swift in Sources */ = {isa = PBXBuildFile; fileRef = B598643D2558768500784952 /* PairK.swift */; };
 		B5BF5086252B0F4A0060AD0D /* LazyFunction1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */; };
 		B5BF50F7252B24AF0060AD0D /* LazyFunction1Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */; };
 		B5BF510F252B253D0060AD0D /* LazyFunction1+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */; };
+		B5FD89342559382A0027C335 /* PairKTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD89332559382A0027C335 /* PairKTest.swift */; };
 		B5D4BF262550513600C1A661 /* MonadComprehensionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BF252550513600C1A661 /* MonadComprehensionTest.swift */; };
 		B5DFCB512553FCD2008D3546 /* Exists+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DFCB502553FCD2008D3546 /* Exists+Gen.swift */; };
+		B5FD894D255939F60027C335 /* PairK+Gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD894C255939F60027C335 /* PairK+Gen.swift */; };
 		B8B910C0234D7F2600E44271 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910BF234D7F2600E44271 /* Semiring.swift */; };
 		B8B910C4234D846900E44271 /* SemiringLaws.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C3234D846900E44271 /* SemiringLaws.swift */; };
 		B8B910C6234DDA4000E44271 /* BoolInstancesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */; };
@@ -1270,11 +1273,14 @@
 		B58D2CA22540029F0099D426 /* MonadTrans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTrans.swift; sourceTree = "<group>"; };
 		B58D2CA4254002AB0099D426 /* MonadTransLaws.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonadTransLaws.swift; sourceTree = "<group>"; };
 		B58D2D16254005A60099D426 /* ComonadTransLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComonadTransLaws.swift; sourceTree = "<group>"; };
+		B598643D2558768500784952 /* PairK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairK.swift; sourceTree = "<group>"; };
 		B5BF5085252B0F4A0060AD0D /* LazyFunction1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1.swift; sourceTree = "<group>"; };
 		B5BF509D252B23D30060AD0D /* LazyFunction1Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyFunction1Test.swift; sourceTree = "<group>"; };
 		B5BF510E252B253D0060AD0D /* LazyFunction1+Gen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LazyFunction1+Gen.swift"; sourceTree = "<group>"; };
+		B5FD89332559382A0027C335 /* PairKTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairKTest.swift; sourceTree = "<group>"; };
 		B5D4BF252550513600C1A661 /* MonadComprehensionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonadComprehensionTest.swift; sourceTree = "<group>"; };
 		B5DFCB502553FCD2008D3546 /* Exists+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exists+Gen.swift"; sourceTree = "<group>"; };
+		B5FD894C255939F60027C335 /* PairK+Gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PairK+Gen.swift"; sourceTree = "<group>"; };
 		B8B910BF234D7F2600E44271 /* Semiring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Semiring.swift; sourceTree = "<group>"; };
 		B8B910C3234D846900E44271 /* SemiringLaws.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiringLaws.swift; sourceTree = "<group>"; };
 		B8B910C5234DDA4000E44271 /* BoolInstancesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolInstancesTest.swift; sourceTree = "<group>"; };
@@ -1488,6 +1494,7 @@
 				112097D122A8FFC0007F3D9C /* Moore+Gen.swift */,
 				112097BA22A7FC86007F3D9C /* NonEmptyArray+Gen.swift */,
 				112097BC22A7FD6F007F3D9C /* Option+Gen.swift */,
+				B5FD894C255939F60027C335 /* PairK+Gen.swift */,
 				112097D522A904AC007F3D9C /* Sum+Gen.swift */,
 				B578BCA925385B9200B8FD42 /* Trampoline+Gen.swift */,
 				B5618784252CC3EA002717B1 /* Tree+Gen.swift */,
@@ -1983,6 +1990,7 @@
 				113746A223435BA300D9C1AD /* DictionaryKTest.swift */,
 				1137469F234359C000D9C1AD /* DictionaryTest.swift */,
 				8BA0F3A9217E2DEF00969984 /* EitherKTest.swift */,
+				B5FD89332559382A0027C335 /* PairKTest.swift */,
 				8BA0F3AB217E2DEF00969984 /* EitherTest.swift */,
 				720C1E0323FD80AB001C5B7D /* EndoTest.swift */,
 				B55F52B125247256001979EE /* ExistsTests.swift */,
@@ -2121,6 +2129,7 @@
 				8BA0F479217E2E9200969984 /* NonEmptyArray.swift */,
 				8BA0F478217E2E9200969984 /* Option.swift */,
 				09CEF850236E28680070CF43 /* Pairing.swift */,
+				B598643D2558768500784952 /* PairK.swift */,
 				1123686E240FC316005D4CF4 /* Puller.swift */,
 				8BA0F473217E2E9200969984 /* Reader.swift */,
 				8BA0F482217E2E9200969984 /* Result.swift */,
@@ -2929,6 +2938,7 @@
 				112097DD22A90899007F3D9C /* OptionT+Gen.swift in Sources */,
 				B578BCAA25385B9200B8FD42 /* Trampoline+Gen.swift in Sources */,
 				112097B122A7F0E6007F3D9C /* ArrayK+Gen.swift in Sources */,
+				B5FD894D255939F60027C335 /* PairK+Gen.swift in Sources */,
 				112097BF22A7FDEF007F3D9C /* Try+Gen.swift in Sources */,
 				112097D222A8FFC0007F3D9C /* Moore+Gen.swift in Sources */,
 				112097CC22A819E9007F3D9C /* Day+Gen.swift in Sources */,
@@ -3317,6 +3327,7 @@
 				8BA0F3E8217E2DEF00969984 /* BooleanFunctionsTest.swift in Sources */,
 				B58B9BE925481DB4008BA4A7 /* YonedaTest.swift in Sources */,
 				8BA0F3FD217E2DEF00969984 /* CurryTest.swift in Sources */,
+				B5FD89342559382A0027C335 /* PairKTest.swift in Sources */,
 				119D053323D9E8B400F0D559 /* PairingTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3394,6 +3405,7 @@
 				115488CF23BF9FEF00A6DE92 /* ComonadTrans.swift in Sources */,
 				8BA0F5A3217E2E9200969984 /* Moore.swift in Sources */,
 				110DE5CC23ACE29D00E5DB36 /* ComonadStore.swift in Sources */,
+				B598643E2558768500784952 /* PairK.swift in Sources */,
 				606B29EA23607607002334B2 /* Divide.swift in Sources */,
 				8BA0F5AF217E2E9200969984 /* Try.swift in Sources */,
 				B57738FD252F21CC003B3EBF /* Coyoneda.swift in Sources */,
