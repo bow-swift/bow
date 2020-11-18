@@ -1,15 +1,6 @@
 import Foundation
 import Bow
 
-/// Witness for the `Fold<S, A>` data type. To be used in simulated Higher Kinded Types.
-public final class ForFold {}
-
-/// Partial application of the Fold type constructor, omitting the last parameter.
-public final class FoldPartial<S>: Kind<ForFold, S> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind2<ForFold, S, A>`.
-public typealias FoldOf<S, A> = Kind<FoldPartial<S>, A>
-
 /// A Fold is an optic that allows to focus into a structure and get multiple results.
 ///
 /// Fold is a generalization of an instance of `Foldable` and it is implemented in terms of `foldMap`.
@@ -17,7 +8,7 @@ public typealias FoldOf<S, A> = Kind<FoldPartial<S>, A>
 /// Type parameters:
 ///     - `S`: Source.
 ///     - `A`: Focus.
-open class Fold<S, A>: FoldOf<S, A> {
+open class Fold<S, A> {
     /// Creates a Fold that has no focus.
     public static var void: Fold<S, A> {
         return AffineTraversal<S, A>.void.asFold

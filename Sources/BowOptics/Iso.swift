@@ -1,26 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PIso<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPIso {}
-
-/// Partial application of the PIso type constructor, omitting the last parameter.
-public final class PIsoPartial<S, T, A>: Kind3<ForPIso, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over Kind4<ForPIso, S, T, A, B>
-public typealias PIsoOf<S, T, A, B> = Kind<PIsoPartial<S, T, A>, B>
-
 /// `Iso` is a type alias for `PIso` which fixes the type arguments and restricts the `PIso` to monomorphic updates.
 public typealias Iso<S, A> = PIso<S, S, A, A>
-
-/// Witness for the `Iso<S, A>`data type. To be used in simulated Higher Kinded Types.
-public typealias ForIso = ForPIso
-
-/// Higher Kinded Type alias to improve readability over Kind4<ForPIso, S, S, A, A>
-public typealias IsoOf<S, A> = PIsoOf<S, S, A, A>
-
-/// Partial application of the Iso type constructor, omitting the last parameter.
-public typealias IsoPartial<S> = Kind<ForIso, S>
 
 /// An Iso is a loss less invertible optic that defines an isomorphism between a type `S` and `A`.
 ///
@@ -30,7 +12,7 @@ public typealias IsoPartial<S> = Kind<ForIso, S>
 /// - `T`: Modified source of a `PIso`.
 /// - `A`: Focus of a `PIso`.
 /// - `B`: Modified target of a `PIso`.
-public class PIso<S, T, A, B>: PIsoOf<S, T, A, B> {
+public class PIso<S, T, A, B> {
     private let getFunc: (S) -> A
     private let reverseGetFunc: (B) -> T
 

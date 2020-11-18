@@ -1,23 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PAffineTraversal<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPAffineTraversal {}
-
-/// Partial application of the PAffineTraversal type constructor, omitting the last parameter.
-public final class PAffineTraversalPartial<S, T, A>: Kind3<ForPAffineTraversal, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind4<ForPAffineTraversal, S, T, A, B>`
-public typealias PAffineTraversalOf<S, T, A, B> = Kind<PAffineTraversalPartial<S, T, A>, B>
-
 /// AffineTraversal is a type alias for `PAffineTraversal` which fixes the type arguments and restricts the `PAffineTraversal` to monomorphic updates.
 public typealias AffineTraversal<S, A> = PAffineTraversal<S, S, A, A>
-
-/// Witness for the `AffineTraversal<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForAffineTraversal = ForPAffineTraversal
-
-/// Partial application of the AffineTraversal type constructor, omitting the last parameter.
-public typealias AffineTraversalPartial<S> = Kind<ForAffineTraversal, S>
 
 /// An AffineTraversal is an optic that allows to see into a structure and getting, setting or modifying an optional focus.
 ///
@@ -32,7 +17,7 @@ public typealias AffineTraversalPartial<S> = Kind<ForAffineTraversal, S>
 ///     - `T`: Modified source.
 ///     - `A`: Focus.
 ///     - `B`: Modified focus.
-public class PAffineTraversal<S, T, A, B>: PAffineTraversalOf<S, T, A, B> {
+public class PAffineTraversal<S, T, A, B> {
     private let setFunc: (S, B) -> T
     private let getOrModifyFunc: (S) -> Either<T, A>
     
