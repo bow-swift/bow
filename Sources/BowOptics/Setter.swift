@@ -1,23 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PSetter<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPSetter {}
-
-/// Partial application of the PSetter type constructor, omitting the last parameter.
-public final class PSetterPartial<S, T, A>: Kind3<ForPSetter, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind4<ForPSetter, S, T, A, B>`.
-public typealias PSetterOf<S, T, A, B> = Kind<PSetterPartial<S, T, A>, B>
-
 /// Setter is a type alias for `PSetter` which fixes the type arguments and restricts the `PSetter` to monomorphic updates.
 public typealias Setter<S, A> = PSetter<S, S, A, A>
-
-/// Witness for the `Setter<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForSetter = ForPSetter
-
-/// Higher Kinded Type alias to improve readability over `Kind2<ForSetter, S, A>`.
-public typealias SetterPartial<S> = Kind<ForSetter, S>
 
 /// A Setter is an optic that allows to see into a structure and set or modify its focus.
 ///
@@ -30,7 +15,7 @@ public typealias SetterPartial<S> = Kind<ForSetter, S>
 ///     - `T`: Modified source of the PSetter.
 ///     - `A`: Focus of the PSetter.
 ///     - `B`: Modified focus of the PSetter.
-public class PSetter<S, T, A, B>: PSetterOf<S, T, A, B> {
+public class PSetter<S, T, A, B> {
     private let modifyFunc: (S, @escaping (A) -> B) -> T
     private let setFunc: (S, B) -> T
     

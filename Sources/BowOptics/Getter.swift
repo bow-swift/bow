@@ -1,15 +1,6 @@
 import Foundation
 import Bow
 
-/// Witness for the `Getter<S, A>` data type. To be used in simulated Higher Kinded Types.
-public final class ForGetter {}
-
-/// Partial application of the Getter type constructor, omitting the last parameter.
-public final class GetterPartial<S>: Kind<ForGetter, S> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind2<ForGetter, S, A>`
-public typealias GetterOf<S, A> = Kind<GetterPartial<S>, A>
-
 /// A `Getter` is an optic that allows to see into a structure and getting a focus.
 ///
 /// It can be seen as a function `(S) -> A` meaning that we can look into an `S` and get an `A`.
@@ -17,7 +8,7 @@ public typealias GetterOf<S, A> = Kind<GetterPartial<S>, A>
 /// Parameters:
 ///     - `S`: source of the `Getter`.
 ///     - `A`: focus of the `Getter`.
-public class Getter<S, A>: GetterOf<S, A> {
+public class Getter<S, A> {
     private let getFunc: (S) -> A
     
     /// Composes a `Getter` with another `Getter`.

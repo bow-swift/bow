@@ -1,26 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PTraversal<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPTraversal {}
-
-/// Partial application of the PTraversal type constructor, omitting the last parameter.
-public final class PTraversalPartial<S, T, A>: Kind3<ForPTraversal, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over Kind4<ForPIso, S, T, A, B>.
-public typealias PTraversalOf<S, T, A, B> = Kind<PTraversalPartial<S, T, A>, B>
-
 /// Traversal is a type alias for PTraversal which fixes the type arguments and restricts the PTraversal to monomorphic updates.
 public typealias Traversal<S, A> = PTraversal<S, S, A, A>
-
-/// Witness for the `Traversal<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForTraversal = ForPTraversal
-
-/// Higher Kinded Type alias to imprope readability over Kind4<ForPTraversal, S, S, A, A>
-public typealias TraversalOf<S, A> = PTraversalOf<S, S, A, A>
-
-/// Partial application of the Traversal type constructor, omitting the last parameter.
-public typealias TraversalPartial<S> = Kind<ForPTraversal, S>
 
 /// A Traversal is an optic that allows to see into a structure with 0 to N foci.
 ///
@@ -31,9 +13,9 @@ public typealias TraversalPartial<S> = Kind<ForPTraversal, S>
 ///     - `T`: Modified source.
 ///     - `A`: Focus.
 ///     - `B`: Modified focus.
-open class PTraversal<S, T, A, B>: PTraversalOf<S, T, A, B> {
+open class PTraversal<S, T, A, B> {
     
-    /// Modifies the source wiht an `Applicative` function.
+    /// Modifies the source with an `Applicative` function.
     ///
     /// - Parameters:
     ///   - s: Source.

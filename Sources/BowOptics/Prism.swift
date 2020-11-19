@@ -1,23 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PPrism<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPPrism {}
-
-/// Partial application of the PPrism type constructor, omitting the last parameter.
-public final class PPrismPartial<S, T, A>: Kind3<ForPPrism, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind4<ForPPrism, S, T, A, B>`.
-public typealias PPrismOf<S, T, A, B> = Kind<PPrismPartial<S, T, A>, B>
-
 /// Prism is a type alias for PPrism which fixes the type arguments and restricts the PPrism to monomorphic updates.
 public typealias Prism<S, A> = PPrism<S, S, A, A>
-
-/// Witness for the `Prism<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForPrism = ForPPrism
-
-/// Partial application of the `Prism` type constructor, omitting the last parameter.
-public typealias PrismPartial<S> = Kind<ForPrism, S>
 
 /// A Prism is a loss less invertible optic that can look into a structure and optionally find its focus. It is mostly used for finding a focus that is only present under certain conditions, like in a sum type.
 ///
@@ -32,7 +17,7 @@ public typealias PrismPartial<S> = Kind<ForPrism, S>
 ///     - `T`: Modified source.
 ///     - `A`: Focus.
 ///     - `B`: Modified focus.
-public class PPrism<S, T, A, B>: PPrismOf<S, T, A, B> {
+public class PPrism<S, T, A, B> {
     private let getOrModifyFunc: (S) -> Either<T, A>
     private let reverseGetFunc: (B) -> T
 

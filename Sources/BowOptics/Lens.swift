@@ -1,23 +1,8 @@
 import Foundation
 import Bow
 
-/// Witness for the `PLens<S, T, A, B>` data type. To be used in simulated Higher Kinded Types.
-public final class ForPLens {}
-
-/// Partial application of the PLens type constructor, omitting the last parameter.
-public final class PLensPartial<S, T, A>: Kind3<ForPLens, S, T, A> {}
-
-/// Higher Kinded Type alias to improve readability over `Kind4<ForPLens, S, T, A, B>`
-public typealias PLensOf<S, T, A, B> = Kind<PLensPartial<S, T, A>, B>
-
 /// Lens is a type alias for `PLens` which fixes the type arguments and restricts the `PLens` to monomorphic updates.
 public typealias Lens<S, A> = PLens<S, S, A, A>
-
-/// Witness for the `Lens<S, A>` data type. To be used in simulated Higher Kinded Types.
-public typealias ForLens = ForPLens
-
-/// Partial application of the Lens type constructor, omitting the last parameter.
-public typealias LensPartial<S> = Kind<ForLens, S>
 
 /// A Lens (or Functional Reference) is an optic that can focus into a structure for getting, setting or modifying the focus (target).
 ///
@@ -32,7 +17,7 @@ public typealias LensPartial<S> = Kind<ForLens, S>
 ///     - `T` is the modified source of a PLens.
 ///     - `A` is the focus of a PLens.
 ///     - `B` is the modified focus of a PLens.
-public class PLens<S, T, A, B>: PLensOf<S, T, A, B> {
+public class PLens<S, T, A, B> {
     private let getFunc: (S) -> A
     private let setFunc: (S, B) -> T
     
