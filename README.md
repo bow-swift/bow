@@ -161,7 +161,7 @@ The following steps would be run:
 
 # License
 
-    Copyright (C) 2018-2020 The Bow Authors
+    Copyright (C) 2018-2021 The Bow Authors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
