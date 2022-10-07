@@ -40,7 +40,7 @@ public func binding<F: Monad, A>(
     MonadComprehension<F>.buildBlock(instructions(), yield: value)
 }
 
-@_functionBuilder
+@resultBuilder
 public struct BindingsBuilder {
     public static func buildBlock<F>(_ instructions: BindingExpression<F>...) -> [BindingExpression<F>] {
         instructions
