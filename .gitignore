@@ -43,8 +43,6 @@ Carthage/
 #
 Pods/
 
-Bow\.xcodeproj/project\.xcworkspace/xcshareddata/IDEWorkspaceChecks\.plist
-
 ## Docs
 /docs/*/api-docs
 /docs-json
