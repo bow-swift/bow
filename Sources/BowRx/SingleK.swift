@@ -150,7 +150,7 @@ extension SingleKPartial: ApplicativeError {
     public static func handleErrorWith<A>(
         _ fa: SingleKOf<A>,
         _ f: @escaping (Error) -> SingleKOf<A>) -> SingleKOf<A> {
-        fa^.value.catchError { e in f(e)^.value }.k()
+          fa^.value.catch { e in f(e)^.value }.k()
     }
 }
 
@@ -170,21 +170,21 @@ extension SingleKPartial: Async {
         Single.create { emitter in
             procf { either in
                 either.fold(
-                    { error in emitter(.error(error)) },
+                    { error in emitter(.failure(error)) },
                     { value in emitter(.success(value)) })
-            }^.value.subscribe(onError: { e in emitter(.error(e)) })
+            }^.value.subscribe(onFailure: { e in emitter(.failure(e)) })
         }.k()
     }
 
     public static func continueOn<A>(_ fa: SingleKOf<A>, _ queue: DispatchQueue) -> SingleKOf<A> {
-        fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
+      fa^.value.observe(on: SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
 
     public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Void) throws -> Void) -> SingleKOf<A> {
         Single<A>.create { emitter in
             do {
                 try fa { (either: Either<Error, A>) in
-                    either.fold({ e in emitter(.error(e)) },
+                    either.fold({ e in emitter(.failure(e)) },
                                 { a in emitter(.success(a)) })
                 }
             } catch {}
@@ -199,7 +199,7 @@ extension SingleKPartial: Effect {
         _ fa: SingleKOf<A>,
         _ callback: @escaping (Either<Error, A>) -> SingleKOf<Void>) -> SingleKOf<Void> {
         fa^.value.flatMap { a in callback(Either.right(a))^.value }
-            .catchError{ e in callback(Either.left(e))^.value }.k()
+            .catch{ e in callback(Either.left(e))^.value }.k()
     }
 }
 
@@ -247,18 +247,18 @@ extension SingleKPartial: Bracket {
         release: @escaping (A, ExitCase<Error>) -> SingleKOf<Void>,
         use: @escaping (A) throws -> SingleKOf<B>) -> SingleKOf<B> {
         Single.create { emitter in
-            fa.handleErrorWith { t in SingleK.from { emitter(.error(t)) }.value.flatMap { _ in Single.error(t) }.k() }
+            fa.handleErrorWith { t in SingleK.from { emitter(.failure(t)) }.value.flatMap { _ in Single.error(t) }.k() }
                 .flatMap { a in
                     SingleK.invoke { try use(a) }^
                         .value
                         .do(afterSuccess: { _ in
                                 _ = SingleK.defer { release(a, .completed) }^.value
-                                    .subscribe(onError: { e in emitter(.error(e)) })
+                                    .subscribe(onFailure: { e in emitter(.failure(e)) })
                             },
                             onError: { e in
                                 _ = SingleK.defer { release(a, .error(e)) }^.value
-                                    .subscribe(onSuccess: { emitter(.error(e)) },
-                                               onError: { t in emitter(.error(t)) })
+                                    .subscribe(onSuccess: { emitter(.failure(e)) },
+                                               onFailure: { t in emitter(.failure(t)) })
                             },
                             onDispose: {
                                 _ = SingleK.defer { release(a, .canceled) }^.value.subscribe()

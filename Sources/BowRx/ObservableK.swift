@@ -169,7 +169,7 @@ extension ObservableKPartial: ApplicativeError {
     public static func handleErrorWith<A>(
         _ fa: ObservableKOf<A>,
         _ f: @escaping (Error) -> ObservableKOf<A>) -> ObservableKOf<A> {
-        fa^.value.catchError { e in f(e)^.value }.k()
+          fa^.value.catch { e in f(e)^.value }.k()
     }
 }
 
@@ -236,7 +236,7 @@ extension ObservableKPartial: Async {
     }
 
     public static func continueOn<A>(_ fa: ObservableKOf<A>, _ queue: DispatchQueue) -> ObservableKOf<A> {
-        fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
+      fa^.value.observe(on: SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
 
     public static func runAsync<A>(_ fa: @escaping ((Either<ForObservableK.E, A>) -> Void) throws -> Void) -> ObservableKOf<A> {
@@ -259,7 +259,7 @@ extension ObservableKPartial: Effect {
         _ callback: @escaping (Either<Error, A>) -> ObservableKOf<Void>)
         -> ObservableKOf<Void> {
         fa^.value.flatMap { a in callback(Either.right(a))^.value }
-            .catchError { e in callback(Either.left(e))^.value }.k()
+            .catch { e in callback(Either.left(e))^.value }.k()
     }
 }
 
