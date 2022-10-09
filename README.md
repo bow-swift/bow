@@ -46,45 +46,50 @@ There are also some modules for testing:
 - `BowEffectsGenerators`: generators for Property-based Testing for data types in BowEffects.
 - `BowRxGenerators`: generators for Property-based Testing for data types in BowRx.
 
-Bow is available using Swift Package Manager, CocoaPods, and Carthage.
+Since version 0.9.0, Bow is only available using Swift Package Manager.
 
 ### Swift Package Manager
 
 Starting on Xcode 11, you can use the integration in the IDE with Swift Package manager to bring the dependencies into your project. You only need the repository URL: [https://github.com/bow-swift/bow.git](https://github.com/bow-swift/bow.git). For earlier versions of Xcode, create a `Package.swift` file similar to the next one and use the dependencies at your convenience.
 
 ```swift
-// swift-tools-version:5.0
-
+// swift-tools-version:5.6
 import PackageDescription
 
 let package = Package(
-    name: "BowTestProject",
-    dependencies: [
-        .package(url: "https://github.com/bow-swift/bow.git", from: "{version}")
-    ],
-    targets: [
-        .target(name: "BowTestProject",
-                dependencies: [
-                    "Bow",
-                    "BowOptics",
-                    "BowRecursionSchemes",
-                    "BowFree",
-                    "BowGeneric",
-                    "BowEffects",
-                    "BowRx"]),
-        .testTarget(name: "BowTestProjectTests",
-                    dependencies: [
-                        // Type class laws
-                        "BowLaws",
-                        "BowOpticsLaws",
-                        "BowEffectsLaws",
+  name: "MyBowProject",
+  dependencies: [
+    .package(url: "https://github.com/bow-swift/bow.git", from: "{version}")
+  ],
+  targets: [
+    .target(
+      name: "MyBowProject",
+      dependencies: [
+        "Bow",
+        "BowOptics",
+        "BowRecursionSchemes",
+        "BowFree",
+        "BowGeneric",
+        "BowEffects",
+        "BowRx"
+      ]
+    ),
+    .testTarget(
+      name: "MyBowProjectTests",
+      dependencies: [
+        // Type class laws
+        "BowLaws",
+        "BowOpticsLaws",
+        "BowEffectsLaws",
 
-                        // Generators for PBT with SwiftCheck
-                        "BowGenerators",
-                        "BowFreeGenerators",
-                        "BowEffectsGenerators",
-                        "BowRxGenerators"])
-    ]
+        // Generators for PBT with SwiftCheck
+        "BowGenerators",
+        "BowFreeGenerators",
+        "BowEffectsGenerators",
+        "BowRxGenerators"
+      ]
+    )
+  ]
 )
 ```
 
@@ -94,52 +99,29 @@ To build it, just run:
 $ swift build
 ```
 
-### CocoaPods
-
-You can consume each Bow module as a separate pod. You can add these lines to your Podfile at your convenience:
-
-```ruby
-pod "Bow",                 "~> {version}"
-pod "BowOptics",           "~> {version}"
-pod "BowRecursionSchemes", "~> {version}"
-pod "BowFree",             "~> {version}"
-pod "BowGeneric",          "~> {version}"
-pod "BowEffects",          "~> {version}"
-pod "BowRx",               "~> {version}"
-```
-
-Testing laws:
-
-```ruby
-pod "BowLaws",        "~> {version}"
-pod "BowOpticsLaws",  "~> {version}"
-pod "BowEffectsLaws", "~> {version}"
-```
-
-Generators for property-based testing with SwiftCheck:
-
-```ruby
-pod "BowGenerators",              "~> {version}"
-pod "BowFreeGenerators",          "~> {version}"
-pod "BowEffectsGenerators",       "~> {version}"
-pod "BowRxGenerators",            "~> {version}"
-```
-
-### Carthage
-
-Carthage will download the whole Bow project, but it will compile individual frameworks for each module that you can use separately. Add this line to your Cartfile:
-
-```
-github "bow-swift/Bow" ~> {version}
-```
-
 ## Contributing
 
-If you want to contribute to this library, you can check the [Issues](https://github.com/arrow-kt/bow/issues) to see some of the pending tasks.
+If you want to contribute to this library, you can check the [Issues](https://github.com/bow-swift/bow/issues) to see some of the pending tasks.
 
 ### How to run the project
 
-Open `Bow.xcodeproj` in Xcode 11 (or newer) and you are ready to go. Bow uses the Swift Package Manager to handle its dependencies.
+Open `Package.swift` in Xcode 11 (or newer) and you are ready to go. Bow uses the Swift Package Manager to handle its dependencies.
+
+### How run the tests
+
+Use the standard command line interface:
+
+```console
+$ swift test
+```
+
+When you're in a hurry, it's useful to skip some longer tests:
+
+```console
+$ swift --skip testStackSafety
+```
+
+Check `swift help test` for details.
 
 ### How to run the documentation project
 
@@ -161,7 +143,7 @@ The following steps would be run:
 
 # License
 
-    Copyright (C) 2018-2021 The Bow Authors
+    Copyright (C) 2018-2022 The Bow Authors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

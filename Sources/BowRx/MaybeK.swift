@@ -169,7 +169,7 @@ extension MaybeKPartial: ApplicativeError {
     public static func handleErrorWith<A>(
         _ fa: MaybeKOf<A>,
         _ f: @escaping (Error) -> MaybeKOf<A>) -> MaybeKOf<A> {
-        fa^.value.catchError { e in f(e)^.value }.k()
+          fa^.value.catch { e in f(e)^.value }.k()
     }
 }
 
@@ -198,7 +198,7 @@ extension MaybeKPartial: Async {
     public static func continueOn<A>(
         _ fa: MaybeKOf<A>,
         _ queue: DispatchQueue) -> MaybeKOf<A> {
-        fa^.value.observeOn(SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
+          fa^.value.observe(on: SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: queue.label)).k()
     }
     
     public static func runAsync<A>(_ fa: @escaping ((Either<Error, A>) -> Void) throws -> ()) -> MaybeKOf<A> {
@@ -220,7 +220,7 @@ extension MaybeKPartial: Effect {
         _ fa: MaybeKOf<A>,
         _ callback: @escaping (Either<ForMaybeK.E, A>) -> MaybeKOf<Void>) -> MaybeKOf<Void> {
         fa^.value.flatMap { a in MaybeK<()>.fix(callback(Either.right(a))).value }
-            .catchError { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
+            .catch { e in MaybeK<()>.fix(callback(Either.left(e))).value }.k()
     }
 }
 

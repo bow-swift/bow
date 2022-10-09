@@ -62,7 +62,8 @@ nef jekyll --project Documentation.app --output docs --main-page Documentation.a
 - You can install the dependencies you need with:
 
 ```
-bundle install --gemfile docs/Gemfile --path vendor/bundle
+bundle config set path 'vendor/bundle'
+bundle install --gemfile docs/Gemfile
 ```
 
 - If you also want to render the API reference, run:
